@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BirdieBuddy Masters 2026 | Pantheon Command Center</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#0a0a0f;color:#e5e7eb;line-height:1.5;height:100vh;overflow:hidden}
+.app{display:flex;flex-direction:column;height:100vh}
+header{background:linear-gradient(135deg,#111827,#0f172a);border-bottom:1px solid #1f2937;padding:0.5rem 1.25rem;flex-shrink:0}
+.hdr-row{display:flex;justify-content:space-between;align-items:center;gap:0.75rem}
+.logo{display:flex;align-items:baseline;gap:0.5rem}
+.logo-text{font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#d4a843,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.3px}
+.logo-sub{font-size:0.6rem;text-transform:uppercase;letter-spacing:1.5px;color:#6b7280;font-weight:600}
+.badges{display:flex;gap:0.35rem;flex-wrap:wrap;align-items:center}
+.badge{padding:0.2rem 0.55rem;background:rgba(31,41,55,0.5);border:1px solid #374151;border-radius:1rem;font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;color:#9ca3af;white-space:nowrap}
+.badge.live{border-color:#ef4444;color:#fca5a5}
+.pulse{width:5px;height:5px;background:#ef4444;border-radius:50%;display:inline-block;margin-right:3px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.wx{display:flex;gap:1rem;align-items:center;margin-top:0.35rem;padding-top:0.35rem;border-top:1px solid #1f2937;font-size:0.65rem}
+.wx-item{display:flex;align-items:center;gap:0.35rem}
+.wx-lbl{color:#6b7280;text-transform:uppercase;letter-spacing:0.3px}
+.wx-val{font-weight:600;color:#d4a843}
+.wx-sum{margin-left:auto;padding:0.25rem 0.6rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:4px;color:#86efac;font-weight:500;font-size:0.6rem}
+nav{display:flex;gap:0.25rem;padding:0 1rem;border-bottom:1px solid #1f2937;background:#111827;flex-shrink:0;overflow-x:auto}
+nav::-webkit-scrollbar{height:3px}nav::-webkit-scrollbar-thumb{background:#374151;border-radius:2px}
+.tab{padding:0.5rem 0.7rem;background:none;border:none;color:#6b7280;font-size:0.65rem;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.tab:hover{color:#d4a843}.tab.on{color:#d4a843;border-bottom-color:#d4a843}
+.view{flex:1;overflow-y:auto;overflow-x:hidden}.view::-webkit-scrollbar{width:6px}.view::-webkit-scrollbar-thumb{background:#374151;border-radius:3px}
+.pane{display:none;padding:1rem 1.25rem;animation:fadeIn .2s}.pane.on{display:block}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.6rem;margin-bottom:0.75rem}
+.card{background:#111827;border:1px solid #1f2937;border-radius:6px;padding:0.6rem;position:relative;overflow:hidden;transition:all .2s}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#d4a843,#fbbf24);opacity:0;transition:opacity .2s}
+.card:hover{border-color:#374151;transform:translateY(-1px)}.card:hover::before{opacity:1}
+.card-lbl{font-size:0.55rem;text-transform:uppercase;letter-spacing:0.4px;color:#6b7280;margin-bottom:0.25rem}
+.card-val{font-size:1.25rem;font-weight:700;color:#d4a843;font-family:'JetBrains Mono',monospace}
+.card-sub{font-size:0.6rem;color:#4b5563;margin-top:0.15rem}
+.tbl-wrap{background:#111827;border:1px solid #1f2937;border-radius:6px;overflow:hidden;margin-bottom:0.75rem}
+table{width:100%;border-collapse:collapse;font-size:0.68rem}
+thead{background:#0f172a}
+th{padding:0.4rem 0.45rem;text-align:left;font-weight:600;color:#d4a843;text-transform:uppercase;letter-spacing:0.3px;font-size:0.58rem;cursor:pointer;user-select:none;white-space:nowrap;transition:all .2s;position:relative}
+th:hover{background:#1f2937;color:#fbbf24}
+th .sa{font-size:0.5rem;margin-left:2px;opacity:0.4}
+th.sorted .sa{opacity:1;color:#fbbf24}
+td{padding:0.35rem 0.45rem;border-bottom:1px solid rgba(31,41,55,0.5);white-space:nowrap}
+tbody tr{transition:background .15s}tbody tr:hover{background:rgba(212,168,67,0.04)}
+.mono{font-family:'JetBrains Mono',monospace}
+.gold{color:#d4a843}.green{color:#22c55e}.blue{color:#60a5fa}.cyan{color:#06b6d4}.red{color:#ef4444}.dim{color:#6b7280}
+.tier{display:inline-block;padding:0.12rem 0.4rem;border-radius:1rem;font-size:0.52rem;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.tier-ELITE{background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25)}
+.tier-CONTENDER{background:rgba(59,130,246,0.12);color:#60a5fa;border:1px solid rgba(59,130,246,0.25)}
+.tier-SOLID{background:rgba(6,182,212,0.12);color:#06b6d4;border:1px solid rgba(6,182,212,0.25)}
+.tier-SLEEPER{background:rgba(107,114,128,0.12);color:#9ca3af;border:1px solid rgba(107,114,128,0.25)}
+.search-row{display:flex;gap:0.5rem;margin-bottom:0.6rem;align-items:center}
+.search{flex:1;padding:0.35rem 0.6rem;background:#111827;border:1px solid #1f2937;border-radius:4px;color:#e5e7eb;font-size:0.68rem}
+.search::placeholder{color:#4b5563}.search:focus{outline:none;border-color:#d4a843;box-shadow:0 0 0 2px rgba(212,168,67,0.1)}
+.btn{padding:0.3rem 0.55rem;background:#1f2937;border:1px solid #374151;border-radius:4px;color:#9ca3af;font-size:0.58rem;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;cursor:pointer;transition:all .2s}
+.btn:hover{background:#374151;color:#d4a843;border-color:#d4a843}.btn.on{background:#d4a843;color:#0a0a0f;border-color:#d4a843}
+.chart-box{background:#111827;border:1px solid #1f2937;border-radius:6px;padding:0.75rem;margin-bottom:0.75rem}
+.chart-title{font-size:0.7rem;font-weight:700;color:#d4a843;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:0.6rem}
+canvas{max-width:100%}
+.tooltip{position:fixed;background:#1f2937;border:1px solid #4b5563;border-radius:4px;padding:0.45rem 0.6rem;font-size:0.62rem;pointer-events:none;z-index:999;display:none;box-shadow:0 8px 16px rgba(0,0,0,0.4);min-width:170px}
+.tooltip.vis{display:block}
+.tt-row{display:flex;justify-content:space-between;gap:0.6rem;margin-bottom:0.2rem}.tt-row:last-child{margin-bottom:0}
+.tt-lbl{color:#9ca3af}.tt-val{color:#d4a843;font-family:'JetBrains Mono',monospace;font-weight:600}
+.lu-card{background:#111827;border:1px solid #1f2937;border-radius:6px;padding:0.6rem;margin-bottom:0.6rem;transition:all .2s}
+.lu-card:hover{border-color:#374151;background:#141b2d}
+.lu-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;padding-bottom:0.4rem;border-bottom:1px solid #1f2937}
+.lu-type{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.3px;color:#d4a843}
+.lu-stats{display:flex;gap:0.8rem;font-size:0.58rem}
+.lu-stat-lbl{color:#6b7280;text-transform:uppercase;letter-spacing:0.3px}.lu-stat-val{color:#d4a843;font-weight:600;font-family:'JetBrains Mono',monospace}
+.exp-item{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.4rem}
+.exp-name{width:100px;font-size:0.62rem;font-weight:600;color:#d1d5db}
+.exp-bar{flex:1;height:16px;background:#1f2937;border-radius:3px;overflow:hidden}
+.exp-fill{height:100%;background:linear-gradient(90deg,#d4a843,#22c55e);display:flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#0a0a0f}
+.exp-pct{width:40px;text-align:right;font-family:'JetBrains Mono',monospace;color:#d4a843;font-weight:600;font-size:0.62rem}
+.section{margin-bottom:1rem}
+.section-title{font-size:0.75rem;font-weight:700;color:#d4a843;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:0.6rem;padding-bottom:0.3rem;border-bottom:1px solid #1f2937}
+.model-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.6rem}
+.model-card{background:#111827;border:1px solid #1f2937;border-radius:6px;padding:0.75rem}
+.model-card h3{font-size:0.65rem;font-weight:700;color:#d4a843;text-transform:uppercase;letter-spacing:0.3px;margin-bottom:0.4rem}
+.model-card p,.model-card li{font-size:0.62rem;color:#d1d5db;line-height:1.55}
+.model-card ul{padding-left:0.8rem;margin-top:0.3rem}
+.model-card li{margin-bottom:0.15rem}
+.factor-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.4rem;margin-top:0.4rem}
+.factor-cell{background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.15);border-radius:4px;padding:0.4rem;text-align:center}
+.factor-cell .f-name{font-size:0.5rem;text-transform:uppercase;letter-spacing:0.3px;color:#9ca3af;margin-bottom:0.15rem}
+.factor-cell .f-pool,.factor-cell .f-dfs{font-size:0.55rem;font-family:'JetBrains Mono',monospace}
+.factor-cell .f-pool{color:#d4a843}.factor-cell .f-dfs{color:#60a5fa}
+.agent-card{background:#0f172a;border:1px solid #1f2937;border-radius:4px;padding:0.5rem;margin-bottom:0.4rem}
+.agent-card .agent-name{font-size:0.62rem;font-weight:700;color:#fbbf24;margin-bottom:0.15rem}
+.agent-card .agent-desc{font-size:0.58rem;color:#9ca3af;line-height:1.5}
+.callout{background:rgba(6,182,212,0.05);border-left:3px solid #06b6d4;padding:0.5rem 0.65rem;border-radius:3px;margin-bottom:0.6rem;font-size:0.62rem;color:#a5f3fc}
+.perf-table td,.perf-table th{padding:0.3rem 0.45rem;font-size:0.62rem}
+.progress-bar{width:100%;height:4px;background:#1f2937;border-radius:2px;overflow:hidden;margin-top:0.3rem}
+.progress-fill{height:100%;background:linear-gradient(90deg,#d4a843,#22c55e);border-radius:2px}
+.bookmark{cursor:pointer;opacity:0.3;transition:opacity .2s;font-size:0.7rem}.bookmark:hover,.bookmark.on{opacity:1}
+.tier-filter{display:flex;gap:0.2rem;margin-left:auto}
+.kbd{display:inline-block;padding:0.08rem 0.25rem;background:#1f2937;border:1px solid #374151;border-radius:3px;font-size:0.5rem;font-family:'JetBrains Mono',monospace;color:#6b7280}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="hdr-row">
+<div class="logo">
+<span class="logo-text">BirdieBuddy v4.0</span>
+<span class="logo-sub">Pantheon Command Center</span>
+</div>
+<div class="badges">
+<span class="badge">Masters 2026</span>
+<span class="badge">v8.5</span>
+<span class="badge">Augusta National</span>
+<span class="badge">Apr 9-12</span>
+<span class="badge live"><span class="pulse"></span>PRE-TOURNAMENT</span>
+</div>
+</div>
+<div class="wx">
+<div class="wx-item"><span class="wx-lbl">R1:</span><span class="wx-val">46-71°F 9.9mph NE</span></div>
+<div class="wx-item"><span class="wx-lbl">R2:</span><span class="wx-val">53-78°F 7.2mph S</span></div>
+<div class="wx-item"><span class="wx-lbl">R3:</span><span class="wx-val">59-82°F 5.1mph SW</span></div>
+<div class="wx-item"><span class="wx-lbl">R4:</span><span class="wx-val">61-84°F 4.8mph S</span></div>
+<div class="wx-sum">LOW WIND · Scoring Conditions · Ball-Strikers Favored</div>
+</div>
+</header>
+<nav id="tabs">
+<button class="tab on" data-t="rankings">Rankings</button>
+<button class="tab" data-t="augusta">Augusta Form</button>
+<button class="tab" data-t="charts">Charts</button>
+<button class="tab" data-t="compare">Compare</button>
+<button class="tab" data-t="lineups">DFS Lineups</button>
+<button class="tab" data-t="performance">Performance</button>
+<button class="tab" data-t="training">Model Training</button>
+</nav>
+<div class="view">
+
+<!-- RANKINGS -->
+<div class="pane on" id="rankings">
+<div class="search-row">
+<input class="search" id="searchBox" placeholder="Search players... (Ctrl+K)" autocomplete="off">
+<div class="tier-filter">
+<button class="btn tier-f on" data-tier="ALL">All</button>
+<button class="btn tier-f" data-tier="ELITE">Elite</button>
+<button class="btn tier-f" data-tier="CONTENDER">Contender</button>
+<button class="btn tier-f" data-tier="SOLID">Solid</button>
+</div>
+</div>
+<div class="tbl-wrap"><table id="rankTable">
+<thead><tr>
+<th data-col="r" data-type="n" class="sorted"># <span class="sa">▲</span></th>
+<th data-col="a" data-type="s">Player <span class="sa">▲</span></th>
+<th data-col="pb" data-type="n">Pool BBI <span class="sa">▲</span></th>
+<th data-col="db" data-type="n">DFS BBI <span class="sa">▲</span></th>
+<th data-col="pt" data-type="s">Tier <span class="sa">▲</span></th>
+<th data-col="w" data-type="n">Win% <span class="sa">▲</span></th>
+<th data-col="t5" data-type="n">T5% <span class="sa">▲</span></th>
+<th data-col="t10" data-type="n">T10% <span class="sa">▲</span></th>
+<th data-col="mc" data-type="n">Cut% <span class="sa">▲</span></th>
+<th data-col="sal" data-type="n">Salary <span class="sa">▲</span></th>
+<th data-col="own" data-type="n">Own% <span class="sa">▲</span></th>
+<th data-col="asg" data-type="n">Aug SG <span class="sa">▲</span></th>
+<th data-col="ast" data-type="n">Starts <span class="sa">▲</span></th>
+<th data-col="dgr" data-type="n">DG# <span class="sa">▲</span></th>
+<th>Tee</th>
+</tr></thead>
+<tbody id="rankBody"></tbody>
+</table></div>
+</div>
+
+<!-- AUGUSTA -->
+<div class="pane" id="augusta">
+<div class="section">
+<div class="section-title">Augusta National Course Profile</div>
+<div class="cards">
+<div class="card"><div class="card-lbl">Yards</div><div class="card-val">7,545</div><div class="card-sub">Par 72</div></div>
+<div class="card"><div class="card-lbl">Key Stat</div><div class="card-val">APP</div><div class="card-sub">1.30x SG Weight</div></div>
+<div class="card"><div class="card-lbl">Greens</div><div class="card-val">Fastest</div><div class="card-sub">On Tour</div></div>
+<div class="card"><div class="card-lbl">Cut Line</div><div class="card-val">Top 50</div><div class="card-sub">~58% Make Rate</div></div>
+<div class="card"><div class="card-lbl">SG Priority</div><div class="card-val">Tiered</div><div class="card-sub">APP > PUTT > ARG > OTT</div></div>
+<div class="card"><div class="card-lbl">History</div><div class="card-val">6 Yrs</div><div class="card-sub">2019-2025 (excl. 2021)</div></div>
+</div>
+</div>
+<div class="section">
+<div class="section-title">Augusta Form Premium Tiers</div>
+<div class="callout"><strong>Course Fit is king at Augusta.</strong> courseFit weight boosted from 0.18 to 0.22. Players with strong Augusta SG history receive multiplied courseFit scores: SPECIALIST 1.25x, COMFORTABLE 1.15x, NEUTRAL+ 1.05x.</div>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Player</th><th>Aug SG</th><th>Starts</th><th>Tier</th><th>Mult</th><th>Pool BBI</th></tr></thead>
+<tbody id="augBody"></tbody>
+</table></div>
+</div>
+</div>
+
+<!-- CHARTS -->
+<div class="pane" id="charts">
+<div class="chart-box"><div class="chart-title">BBI Score Distribution (Top 25)</div><canvas id="bbiChart" height="250"></canvas></div>
+<div class="chart-box"><div class="chart-title">Salary vs BBI — Value Identification</div><canvas id="scatterChart" height="300"></canvas></div>
+<div id="scatterTooltip" class="tooltip"></div>
+</div>
+
+<!-- COMPARE -->
+<div class="pane" id="compare">
+<div class="search-row">
+<input class="search" id="compareSearch" placeholder="Filter players..." autocomplete="off">
+</div>
+<div class="tbl-wrap"><table id="compareTable">
+<thead><tr>
+<th data-col="r" data-type="n" class="sorted"># <span class="sa">▲</span></th>
+<th data-col="a" data-type="s">Player <span class="sa">▲</span></th>
+<th data-col="pb" data-type="n">Pool <span class="sa">▲</span></th>
+<th data-col="db" data-type="n">DFS <span class="sa">▲</span></th>
+<th data-col="w" data-type="n">Win% <span class="sa">▲</span></th>
+<th data-col="t5" data-type="n">T5 <span class="sa">▲</span></th>
+<th data-col="t10" data-type="n">T10 <span class="sa">▲</span></th>
+<th data-col="t20" data-type="n">T20 <span class="sa">▲</span></th>
+<th data-col="mc" data-type="n">Cut% <span class="sa">▲</span></th>
+<th data-col="sal" data-type="n">Sal <span class="sa">▲</span></th>
+<th data-col="own" data-type="n">Own% <span class="sa">▲</span></th>
+<th data-col="asg" data-type="n">AugSG <span class="sa">▲</span></th>
+<th data-col="dgr" data-type="n">DG# <span class="sa">▲</span></th>
+<th>Factors</th>
+</tr></thead>
+<tbody id="compareBody"></tbody>
+</table></div>
+</div>
+
+<!-- DFS LINEUPS -->
+<div class="pane" id="lineups">
+<div class="section">
+<div class="section-title">ODYSSEUS DFS Optimizer — 12 Lineups (70-90% Ownership)</div>
+<div class="cards">
+<div class="card"><div class="card-lbl">Total</div><div class="card-val">12</div><div class="card-sub">4 Core · 4 S&S · 4 Leverage</div></div>
+<div class="card"><div class="card-lbl">Own Range</div><div class="card-val">70-87%</div><div class="card-sub">Constrained 70-90%</div></div>
+<div class="card"><div class="card-lbl">Top Exposure</div><div class="card-val">McNealy</div><div class="card-sub">100% (12/12)</div></div>
+<div class="card"><div class="card-lbl">Avg Proj</div><div class="card-val">399.4</div><div class="card-sub">DK Fantasy Pts</div></div>
+</div>
+</div>
+<div class="search-row">
+<button class="btn lu-filter on" data-lutype="ALL">All (12)</button>
+<button class="btn lu-filter" data-lutype="CORE">Core (4)</button>
+<button class="btn lu-filter" data-lutype="STARS & SCRUBS">Stars&Scrubs (4)</button>
+<button class="btn lu-filter" data-lutype="LEVERAGE">Leverage (4)</button>
+</div>
+<div id="lineupCards"></div>
+<div class="section" style="margin-top:0.75rem">
+<div class="section-title">Player Exposure</div>
+<div id="exposureChart"></div>
+</div>
+</div>
+
+<!-- PERFORMANCE -->
+<div class="pane" id="performance">
+<div class="section">
+<div class="section-title">Spearman Rank Correlation Tracker (v3.0)</div>
+<div class="cards">
+<div class="card"><div class="card-lbl">Season Avg</div><div class="card-val">0.475</div><div class="card-sub">Target: 0.40 (+19%)</div><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div></div>
+<div class="card"><div class="card-lbl">Events</div><div class="card-val">3</div><div class="card-sub">Valspar · Houston · Valero</div></div>
+<div class="card"><div class="card-lbl">Best</div><div class="card-val">0.574</div><div class="card-sub">Valero Texas Open</div></div>
+<div class="card"><div class="card-lbl">Tier 2</div><div class="card-val">ON TRACK</div><div class="card-sub">Elite >0.40 avg</div></div>
+</div>
+</div>
+<div class="tbl-wrap perf-table"><table>
+<thead><tr><th>Event</th><th>Wk</th><th>Spearman</th><th>Z</th><th>vs Target</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Valspar Championship</td><td class="mono">7</td><td class="mono">0.3994</td><td class="mono">4.86</td><td class="mono red">-0.001</td><td><span class="tier tier-CONTENDER">MISS</span></td></tr>
+<tr><td>Houston Open</td><td class="mono">8</td><td class="mono">0.4529</td><td class="mono">5.61</td><td class="mono green">+0.053</td><td><span class="tier tier-ELITE">BEAT</span></td></tr>
+<tr><td>Valero Texas Open</td><td class="mono">9</td><td class="mono gold">0.5736</td><td class="mono gold">7.41</td><td class="mono green">+0.174</td><td><span class="tier tier-ELITE">BEAT</span></td></tr>
+</tbody>
+</table></div>
+<div class="section" style="margin-top:0.75rem">
+<div class="section-title">Goal Framework</div>
+<div class="model-grid">
+<div class="model-card"><h3>Tier 1: Beat DataGolf</h3><p>Head-to-head Spearman vs DG pre-tournament rankings. Tracking begins this week — Masters is the first DG H2H event.</p></div>
+<div class="model-card"><h3>Tier 2: Elite (&gt;0.40)</h3><p>Current avg: <strong class="gold">0.4753</strong> — 119% of target. Need to sustain across 25+ events.</p><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div></div>
+<div class="model-card"><h3>Tier 3: Best in World (&gt;0.50)</h3><p>Need 22+ more events at current pace. Valero 0.574 shows ceiling exists.</p><div class="progress-bar"><div class="progress-fill" style="width:78%"></div></div></div>
+</div>
+</div>
+<div class="section" style="margin-top:0.75rem">
+<div class="section-title">Pre-Registered Hypotheses — Masters 2026</div>
+<div class="callout"><strong>H1:</strong> If PUTT correlation drops below 0.15, consider reducing PUTT weight for fast-green courses.</div>
+<div class="callout"><strong>H2:</strong> If ARG correlation exceeds 0.30, boost ARG weight for severe miss-penalty courses.</div>
+<div class="callout"><strong>H3:</strong> SPECIALIST tier players (Scheffler, Aberg) should finish top-10 if courseFit premium is calibrated correctly.</div>
+<div class="callout"><strong>H4:</strong> BBI Spearman should exceed 0.35 at Masters despite smaller field (91 players).</div>
+</div>
+</div>
+
+<!-- MODEL TRAINING -->
+<div class="pane" id="training">
+<div class="section">
+<div class="section-title">What is BirdieBuddy?</div>
+<div class="model-grid">
+<div class="model-card"><h3>The BirdieBuddy Index (BBI)</h3><p>BirdieBuddy is a proprietary golf analytics engine that combines DataGolf's statistical projections with a custom 10-factor scoring model, course-specific adjustments, and ownership intelligence to produce superior player rankings for both season-long pools and daily fantasy sports (DFS). Unlike raw projection models, BBI layers strategic context — ownership leverage, course history multipliers, form trending, and contrarian signals — on top of pure skill metrics.</p></div>
+<div class="model-card"><h3>Why BBI is Different</h3><p>DataGolf provides the best raw statistical projections available. BBI doesn't try to beat DG at pure skill estimation — instead, it transforms DG's output into actionable intelligence by answering the question traditional models ignore: <em>"Given the competitive landscape, which players offer the best risk-adjusted value?"</em> This is the gap between having data and having an edge.</p></div>
+</div>
+</div>
+<div class="section">
+<div class="section-title">The 10-Factor BBI Scoring Engine</div>
+<div class="factor-grid">
+<div class="factor-cell"><div class="f-name">Talent</div><div class="f-pool">Pool: 0.20</div><div class="f-dfs">DFS: 0.14</div></div>
+<div class="factor-cell"><div class="f-name">Course Fit</div><div class="f-pool">Pool: 0.22</div><div class="f-dfs">DFS: 0.17</div></div>
+<div class="factor-cell"><div class="f-name">Form</div><div class="f-pool">Pool: 0.13</div><div class="f-dfs">DFS: 0.11</div></div>
+<div class="factor-cell"><div class="f-name">Cut Safety</div><div class="f-pool">Pool: 0.12</div><div class="f-dfs">DFS: 0.08</div></div>
+<div class="factor-cell"><div class="f-name">Floor</div><div class="f-pool">Pool: 0.05</div><div class="f-dfs">DFS: 0.05</div></div>
+<div class="factor-cell"><div class="f-name">Ceiling</div><div class="f-pool">Pool: 0.05</div><div class="f-dfs">DFS: 0.12</div></div>
+<div class="factor-cell"><div class="f-name">Leverage</div><div class="f-pool">Pool: 0.10</div><div class="f-dfs">DFS: 0.08</div></div>
+<div class="factor-cell"><div class="f-name">Contrarian</div><div class="f-pool">Pool: 0.06</div><div class="f-dfs">DFS: 0.06</div></div>
+<div class="factor-cell"><div class="f-name">DFS Value</div><div class="f-pool">Pool: 0.02</div><div class="f-dfs">DFS: 0.14</div></div>
+<div class="factor-cell"><div class="f-name">Strategic</div><div class="f-pool">Pool: 0.05</div><div class="f-dfs">DFS: 0.05</div></div>
+</div>
+<div class="callout" style="margin-top:0.6rem"><strong>Masters Weight Shift:</strong> courseFit boosted 0.18 → 0.22, talent reduced 0.22 → 0.20, form reduced 0.15 → 0.13. Augusta's course history is the #1 predictor.</div>
+</div>
+<div class="section">
+<div class="section-title">Data Pipeline — 5 API Endpoints</div>
+<div class="model-grid">
+<div class="model-card"><h3>1. Pre-Tournament Predictions</h3><p>Win/Top-5/10/20/MC probabilities for full field. Source: DataGolf predictive model with 7-day recency weighting.</p></div>
+<div class="model-card"><h3>2. DraftKings Projections</h3><p>Salary, projected fantasy points, projected ownership. Powers DFS value composite and lineup optimization.</p></div>
+<div class="model-card"><h3>3. Betting Market Odds</h3><p>13 sportsbooks aggregated. Pinnacle as sharp book baseline. Three probability surfaces: DG Historical, DG Baseline, Market consensus.</p></div>
+<div class="model-card"><h3>4. Course History Rounds</h3><p>7 years of round-level scores + full SG decomposition (OTT/APP/ARG/PUTT) at the specific course. Powers courseFit factor.</p></div>
+<div class="model-card"><h3>5. Recent Form Rounds</h3><p>Last 6-9 completed PGA Tour events. Per-start SG decomposition enables form trending and category-level analysis.</p></div>
+</div>
+</div>
+<div class="section">
+<div class="section-title">Agent Architecture — 4 Scheduled Agents</div>
+<div class="agent-card"><div class="agent-name">TUESDAY PHASE 1.5 — Pre-Build</div><div class="agent-desc">Runs Tuesday evening. Pulls initial field data, builds skeleton BBI rankings, identifies early ownership reads. Sets up the week's analytical framework.</div></div>
+<div class="agent-card"><div class="agent-name">WEDNESDAY PIPELINE — Data Refresh</div><div class="agent-desc">Runs Wednesday pre-dawn. Full data pull from all 5 DataGolf endpoints. Computes fresh BBI scores with latest projections. Generates dashboard and strategy guide.</div></div>
+<div class="agent-card"><div class="agent-name">WEDNESDAY PHASE 2 — Intelligence</div><div class="agent-desc">Runs Wednesday morning. Enhances dashboard with ownership intelligence, DFS lineups (ODYSSEUS optimizer), narrative strings, and course-specific adjustments. Produces final pre-tournament deliverable.</div></div>
+<div class="agent-card"><div class="agent-name">MONDAY MNEMOSYNE v3.0 — Learning</div><div class="agent-desc">Runs post-tournament Monday. Calculates Spearman rank correlation vs actual results. Runs DG head-to-head comparison. Updates improvement engine with layer-level diagnostics. Persists learnings.</div></div>
+</div>
+<div class="section">
+<div class="section-title">DFS Value Composite</div>
+<div class="model-grid">
+<div class="model-card"><h3>Rank Gap (40%)</h3><p>Compares DataGolf skill rank vs DraftKings salary rank. Underpriced players relative to expected performance get boosted.</p><p class="dim" style="margin-top:0.25rem;font-size:0.55rem">Formula: (salaryRank - dgRank + 30) / 60</p></div>
+<div class="model-card"><h3>Points per $1K (30%)</h3><p>Expected fantasy output per salary dollar. Favors mid-range players with strong projected points relative to cost.</p><p class="dim" style="margin-top:0.25rem;font-size:0.55rem">Formula: composite_score / (salary/1000)</p></div>
+<div class="model-card"><h3>Ownership Efficiency (30%)</h3><p>Upside potential per ownership percentage point. Identifies contrarian edge — ceiling disproportionate to projected ownership.</p><p class="dim" style="margin-top:0.25rem;font-size:0.55rem">Formula: (winPct + t5Pct × 0.5) / max(ownDfs, 0.5)</p></div>
+</div>
+</div>
+<div class="section">
+<div class="section-title">BBI vs DataGolf Comparison</div>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Capability</th><th>DataGolf</th><th>BirdieBuddy</th></tr></thead>
+<tbody>
+<tr><td>Skill Estimation</td><td class="green">Best in class</td><td>Uses DG as input</td></tr>
+<tr><td>Ownership Intelligence</td><td class="dim">None</td><td class="gold">Full leverage + contrarian</td></tr>
+<tr><td>DFS Optimization</td><td class="dim">Basic projections</td><td class="gold">ODYSSEUS optimizer + value composite</td></tr>
+<tr><td>Course Adjustments</td><td>Generic SG</td><td class="gold">Augusta Form Premium + SG weights</td></tr>
+<tr><td>Pool Strategy</td><td class="dim">None</td><td class="gold">ATHENA pool picks + tracking</td></tr>
+<tr><td>Model Learning</td><td class="dim">None</td><td class="gold">MNEMOSYNE weekly Spearman</td></tr>
+<tr><td>Automation</td><td>Manual lookup</td><td class="gold">4 scheduled agents</td></tr>
+</tbody>
+</table></div>
+</div>
+<div class="section">
+<div class="section-title">Technical Specs</div>
+<div class="cards">
+<div class="card"><div class="card-lbl">Model</div><div class="card-val" style="font-size:1rem">v8.5</div><div class="card-sub">APOLLO+ATLAS</div></div>
+<div class="card"><div class="card-lbl">Field</div><div class="card-val" style="font-size:1rem">91</div><div class="card-sub">Full Masters</div></div>
+<div class="card"><div class="card-lbl">Data Pts</div><div class="card-val" style="font-size:1rem">50K+</div><div class="card-sub">Per tournament</div></div>
+<div class="card"><div class="card-lbl">Factors</div><div class="card-val" style="font-size:1rem">10</div><div class="card-sub">Dual-weighted</div></div>
+<div class="card"><div class="card-lbl">APIs</div><div class="card-val" style="font-size:1rem">5</div><div class="card-sub">DataGolf</div></div>
+<div class="card"><div class="card-lbl">History</div><div class="card-val" style="font-size:1rem">7 Yrs</div><div class="card-sub">Course SG data</div></div>
+<div class="card"><div class="card-lbl">Spearman</div><div class="card-val" style="font-size:1rem">0.475</div><div class="card-sub">Season avg</div></div>
+<div class="card"><div class="card-lbl">Agents</div><div class="card-val" style="font-size:1rem">4</div><div class="card-sub">Scheduled weekly</div></div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+const P = [{"r":1,"n":"Scheffler, Scottie","a":"S. Scheffler","pb":78.83,"db":72.84,"pt":"ELITE","dt":"ELITE","w":10.22,"t5":31.75,"t10":48.08,"t20":67.57,"mc":90.1,"sal":14000,"own":25.81,"asg":2.981,"ast":5,"dgr":1,"tt":"1:44 pm","wv":"PM","f":{"tal":100.0,"crs":100,"frm":63.8,"cut":89.9,"flr":67.6,"cel":100.0,"lev":45.5,"con":0.0,"dfs":15.8,"str":50.0}},{"r":2,"n":"Aberg, Ludvig","a":"L. Aberg","pb":72.5,"db":68.84,"pt":"ELITE","dt":"ELITE","w":4.06,"t5":17.01,"t10":29.41,"t20":48.31,"mc":82.0,"sal":9800,"own":17.34,"asg":2.875,"ast":2,"dgr":6,"tt":"1:08 pm","wv":"PM","f":{"tal":39.7,"crs":100,"frm":92.0,"cut":82.0,"flr":96.7,"cel":83.3,"lev":43.8,"con":2.3,"dfs":48.7,"str":50.0}},{"r":3,"n":"Morikawa, Collin","a":"C. Morikawa","pb":67.74,"db":65.43,"pt":"ELITE","dt":"ELITE","w":2.22,"t5":11.24,"t10":21.41,"t20":39.37,"mc":78.1,"sal":9500,"own":5.83,"asg":1.781,"ast":5,"dgr":14,"tt":"10:19 am","wv":"AM","f":{"tal":21.7,"crs":100,"frm":87.7,"cut":78.1,"flr":94.4,"cel":72.0,"lev":54.9,"con":13.6,"dfs":44.8,"str":50.0}},{"r":4,"n":"Young, Cameron","a":"C. Young","pb":67.43,"db":64.45,"pt":"ELITE","dt":"ELITE","w":4.02,"t5":16.47,"t10":28.82,"t20":47.85,"mc":82.0,"sal":9200,"own":16.03,"asg":0.586,"ast":4,"dgr":7,"tt":"10:31 am","wv":"AM","f":{"tal":39.3,"crs":66.05,"frm":100.0,"cut":81.7,"flr":97.2,"cel":84.0,"lev":59.9,"con":2.3,"dfs":54.7,"str":50.0}},{"r":5,"n":"Schauffele, Xander","a":"X. Schauffele","pb":67.27,"db":64.89,"pt":"ELITE","dt":"ELITE","w":4.5,"t5":18.12,"t10":31.06,"t20":50.25,"mc":83.3,"sal":9600,"own":20.27,"asg":1.76,"ast":6,"dgr":4,"tt":"10:07 am","wv":"AM","f":{"tal":44.0,"crs":88.74,"frm":80.0,"cut":83.0,"flr":67.6,"cel":85.9,"lev":44.3,"con":1.1,"dfs":54.3,"str":50.0}},{"r":6,"n":"Lee, Min Woo","a":"M. Lee","pb":61.93,"db":62.04,"pt":"ELITE","dt":"ELITE","w":3.39,"t5":14.6,"t10":26.18,"t20":44.84,"mc":80.7,"sal":7700,"own":14.97,"asg":0.074,"ast":4,"dgr":10,"tt":"12:15 pm","wv":"PM","f":{"tal":33.1,"crs":59.26,"frm":82.2,"cut":80.5,"flr":74.4,"cel":80.0,"lev":85.5,"con":2.6,"dfs":70.2,"str":50.0}},{"r":7,"n":"Fitzpatrick, Matt","a":"M. Fitzpatrick","pb":60.96,"db":60.12,"pt":"ELITE","dt":"ELITE","w":3.58,"t5":15.48,"t10":27.93,"t20":47.62,"mc":82.0,"sal":8700,"own":16.72,"asg":0.779,"ast":6,"dgr":9,"tt":"10:07 am","wv":"AM","f":{"tal":35.0,"crs":73.96,"frm":82.5,"cut":81.9,"flr":43.7,"cel":82.3,"lev":50.3,"con":2.4,"dfs":60.8,"str":50.0}},{"r":8,"n":"Fleetwood, Tommy","a":"T. Fleetwood","pb":60.91,"db":60.88,"pt":"ELITE","dt":"ELITE","w":3.8,"t5":16.72,"t10":29.94,"t20":50.25,"mc":84.0,"sal":9300,"own":14.13,"asg":1.196,"ast":6,"dgr":8,"tt":"9:55 am","wv":"AM","f":{"tal":37.1,"crs":85.74,"frm":64.7,"cut":83.7,"flr":32.4,"cel":81.2,"lev":61.8,"con":3.0,"dfs":53.5,"str":50.0}},{"r":9,"n":"MacIntyre, Robert","a":"R. MacIntyre","pb":60.08,"db":59.52,"pt":"ELITE","dt":"ELITE","w":3.29,"t5":15.48,"t10":28.17,"t20":48.31,"mc":82.6,"sal":8600,"own":12.14,"asg":0.114,"ast":2,"dgr":11,"tt":"1:44 pm","wv":"PM","f":{"tal":32.1,"crs":55.26,"frm":84.4,"cut":82.8,"flr":67.6,"cel":81.9,"lev":76.4,"con":4.5,"dfs":58.2,"str":50.0}},{"r":10,"n":"McIlroy, Rory","a":"R. McIlroy","pb":59.73,"db":58.32,"pt":"ELITE","dt":"ELITE","w":4.87,"t5":19.19,"t10":32.57,"t20":51.81,"mc":83.3,"sal":11600,"own":14.86,"asg":1.922,"ast":6,"dgr":3,"tt":"10:31 am","wv":"AM","f":{"tal":47.6,"crs":92.78,"frm":66.8,"cut":83.5,"flr":0.0,"cel":67.7,"lev":49.5,"con":3.1,"dfs":35.1,"str":50.0}},{"r":11,"n":"Rahm, Jon","a":"J. Rahm","pb":59.32,"db":57.05,"pt":"ELITE","dt":"ELITE","w":5.86,"t5":22.52,"t10":37.17,"t20":57.47,"mc":86.2,"sal":10000,"own":25.15,"asg":1.738,"ast":6,"dgr":2,"tt":"1:08 pm","wv":"PM","f":{"tal":57.3,"crs":87.69,"frm":45.0,"cut":86.4,"flr":30.0,"cel":54.8,"lev":46.1,"con":0.3,"dfs":53.1,"str":50.0}},{"r":12,"n":"Kim, Si Woo","a":"S. Kim","pb":56.92,"db":57.72,"pt":"ELITE","dt":"ELITE","w":2.3,"t5":11.96,"t10":23.15,"t20":42.37,"mc":80.0,"sal":7800,"own":11.15,"asg":0.55,"ast":5,"dgr":13,"tt":"1:56 pm","wv":"PM","f":{"tal":22.4,"crs":68.88,"frm":65.2,"cut":80.2,"flr":59.5,"cel":72.5,"lev":78.4,"con":3.5,"dfs":64.2,"str":50.0}},{"r":13,"n":"Bhatia, Akshay","a":"A. Bhatia","pb":55.75,"db":54.36,"pt":"ELITE","dt":"ELITE","w":1.38,"t5":7.84,"t10":16.31,"t20":32.89,"mc":74.1,"sal":7800,"own":11.78,"asg":0.0,"ast":2,"dgr":22,"tt":"9:55 am","wv":"AM","f":{"tal":13.5,"crs":54.45,"frm":90.3,"cut":73.9,"flr":90.1,"cel":69.4,"lev":57.7,"con":5.0,"dfs":55.2,"str":50.0}},{"r":14,"n":"McNealy, Maverick","a":"M. McNealy","pb":55.56,"db":56.91,"pt":"ELITE","dt":"ELITE","w":1.91,"t5":9.78,"t10":19.19,"t20":36.5,"mc":76.3,"sal":7200,"own":9.32,"asg":0.429,"ast":1,"dgr":16,"tt":"12:56 pm","wv":"PM","f":{"tal":18.6,"crs":59.4,"frm":65.4,"cut":76.2,"flr":74.4,"cel":64.1,"lev":96.5,"con":6.2,"dfs":68.2,"str":50.0}},{"r":15,"n":"Matsuyama, Hideki","a":"H. Matsuyama","pb":54.84,"db":54.32,"pt":"ELITE","dt":"ELITE","w":2.32,"t5":11.66,"t10":22.22,"t20":40.49,"mc":78.7,"sal":8900,"own":12.66,"asg":1.071,"ast":6,"dgr":12,"tt":"10:19 am","wv":"AM","f":{"tal":22.7,"crs":82.54,"frm":60.2,"cut":78.5,"flr":43.7,"cel":67.3,"lev":42.1,"con":3.7,"dfs":55.2,"str":50.0}},{"r":16,"n":"Hojgaard, Nicolai","a":"N. Hojgaard","pb":52.85,"db":53.74,"pt":"ELITE","dt":"ELITE","w":1.65,"t5":8.33,"t10":16.78,"t20":32.79,"mc":73.5,"sal":7500,"own":10.31,"asg":0.259,"ast":2,"dgr":18,"tt":"11:39 am","wv":"PM","f":{"tal":16.1,"crs":57.99,"frm":70.5,"cut":73.8,"flr":59.7,"cel":69.8,"lev":72.6,"con":5.2,"dfs":62.3,"str":50.0}},{"r":17,"n":"Henley, Russell","a":"R. Henley","pb":52.17,"db":54.63,"pt":"ELITE","dt":"ELITE","w":1.96,"t5":10.45,"t10":20.37,"t20":39.22,"mc":78.1,"sal":7900,"own":9.2,"asg":0.93,"ast":4,"dgr":15,"tt":"10:19 am","wv":"AM","f":{"tal":19.2,"crs":76.97,"frm":63.3,"cut":78.3,"flr":0.0,"cel":69.9,"lev":70.8,"con":6.4,"dfs":61.9,"str":50.0}},{"r":18,"n":"Bridgeman, Jacob","a":"J. Bridgeman","pb":50.97,"db":51.71,"pt":"ELITE","dt":"ELITE","w":1.48,"t5":7.92,"t10":16.39,"t20":32.79,"mc":74.1,"sal":7400,"own":12.15,"asg":0,"ast":0,"dgr":21,"tt":"12:27 pm","wv":"PM","f":{"tal":14.5,"crs":40.0,"frm":73.8,"cut":74.3,"flr":76.1,"cel":67.7,"lev":86.9,"con":3.6,"dfs":60.4,"str":50.0}},{"r":19,"n":"DeChambeau, Bryson","a":"B. DeChambeau","pb":50.6,"db":48.46,"pt":"ELITE","dt":"ELITE","w":4.43,"t5":17.42,"t10":29.33,"t20":47.62,"mc":80.7,"sal":10200,"own":20.4,"asg":0.665,"ast":6,"dgr":5,"tt":"10:07 am","wv":"AM","f":{"tal":43.3,"crs":69.16,"frm":45.0,"cut":80.8,"flr":30.0,"cel":46.2,"lev":39.8,"con":1.4,"dfs":46.2,"str":50.0}},{"r":20,"n":"Knapp, Jake","a":"J. Knapp","pb":49.83,"db":48.35,"pt":"ELITE","dt":"ELITE","w":1.7,"t5":8.7,"t10":17.09,"t20":32.89,"mc":73.0,"sal":7400,"own":13.18,"asg":0,"ast":0,"dgr":17,"tt":"9:19 am","wv":"AM","f":{"tal":48.5,"crs":40.0,"frm":31.0,"cut":73.0,"flr":94.2,"cel":34.6,"lev":63.9,"con":17.1,"dfs":76.8,"str":50.0}},{"r":21,"n":"Cantlay, Patrick","a":"P. Cantlay","pb":48.59,"db":51.02,"pt":"ELITE","dt":"ELITE","w":1.35,"t5":7.73,"t10":16.03,"t20":32.26,"mc":74.1,"sal":7900,"own":6.85,"asg":1.113,"ast":6,"dgr":23,"tt":"10:43 am","wv":"AM","f":{"tal":13.2,"crs":77.45,"frm":56.4,"cut":74.0,"flr":0.0,"cel":66.7,"lev":60.6,"con":9.7,"dfs":54.9,"str":50.0}},{"r":22,"n":"Spieth, Jordan","a":"J. Spieth","pb":48.4,"db":47.84,"pt":"ELITE","dt":"ELITE","w":1.07,"t5":6.58,"t10":14.01,"t20":29.33,"mc":71.9,"sal":8400,"own":11.3,"asg":0.647,"ast":6,"dgr":25,"tt":"1:20 pm","wv":"PM","f":{"tal":10.5,"crs":71.47,"frm":57.3,"cut":71.7,"flr":52.7,"cel":63.1,"lev":31.4,"con":5.1,"dfs":49.2,"str":50.0}},{"r":23,"n":"Conners, Corey","a":"C. Conners","pb":48.33,"db":47.5,"pt":"ELITE","dt":"ELITE","w":0.57,"t5":4.12,"t10":9.45,"t20":21.79,"mc":66.2,"sal":7700,"own":9.94,"asg":0.876,"ast":6,"dgr":43,"tt":"12:44 pm","wv":"PM","f":{"tal":5.6,"crs":72.97,"frm":67.4,"cut":66.1,"flr":54.9,"cel":57.7,"lev":36.0,"con":5.2,"dfs":39.1,"str":50.0}},{"r":24,"n":"Burns, Sam","a":"S. Burns","pb":48.03,"db":47.6,"pt":"ELITE","dt":"ELITE","w":1.01,"t5":6.53,"t10":13.76,"t20":28.49,"mc":70.4,"sal":7400,"own":5.98,"asg":0,"ast":0,"dgr":26,"tt":"9:19 am","wv":"AM","f":{"tal":44.9,"crs":40.0,"frm":21.1,"cut":70.4,"flr":92.8,"cel":24.6,"lev":84.1,"con":35.0,"dfs":67.4,"str":50.0}},{"r":25,"n":"Hovland, Viktor","a":"V. Hovland","pb":47.1,"db":48.54,"pt":"ELITE","dt":"ELITE","w":1.24,"t5":7.16,"t10":14.88,"t20":30.21,"mc":71.9,"sal":8800,"own":8.24,"asg":0.931,"ast":5,"dgr":24,"tt":"10:43 am","wv":"AM","f":{"tal":12.1,"crs":78.49,"frm":57.7,"cut":72.2,"flr":0.0,"cel":62.7,"lev":50.1,"con":7.9,"dfs":42.8,"str":50.0}},{"r":26,"n":"Spaun, J.J.","a":"J. Spaun","pb":46.81,"db":51.1,"pt":"ELITE","dt":"ELITE","w":1.58,"t5":8.47,"t10":17.36,"t20":34.36,"mc":75.2,"sal":7200,"own":7.4,"asg":0.017,"ast":2,"dgr":19,"tt":"12:56 pm","wv":"PM","f":{"tal":15.5,"crs":53.52,"frm":56.1,"cut":75.4,"flr":0.0,"cel":70.5,"lev":97.8,"con":10.2,"dfs":64.5,"str":50.0}},{"r":27,"n":"Noren, Alex","a":"A. Noren","pb":46.63,"db":46.32,"pt":"ELITE","dt":"ELITE","w":0.84,"t5":5.36,"t10":11.81,"t20":26.04,"mc":69.4,"sal":7000,"own":4.8,"asg":0,"ast":0,"dgr":34,"tt":"10:43 am","wv":"AM","f":{"tal":42.3,"crs":40.0,"frm":17.4,"cut":69.4,"flr":92.7,"cel":20.3,"lev":87.3,"con":38.0,"dfs":63.0,"str":50.0}},{"r":28,"n":"Gotterup, Chris","a":"C. Gotterup","pb":46.45,"db":47.07,"pt":"ELITE","dt":"ELITE","w":1.5,"t5":8.2,"t10":16.31,"t20":31.25,"mc":72.5,"sal":8000,"own":9.92,"asg":0,"ast":0,"dgr":20,"tt":"1:08 pm","wv":"PM","f":{"tal":14.7,"crs":40.0,"frm":65.9,"cut":72.3,"flr":54.5,"cel":67.9,"lev":65.0,"con":5.2,"dfs":54.3,"str":50.0}},{"r":29,"n":"Griffin, Ben","a":"B. Griffin","pb":46.41,"db":45.82,"pt":"ELITE","dt":"ELITE","w":0.82,"t5":5.36,"t10":12.18,"t20":26.95,"mc":71.4,"sal":7600,"own":4.29,"asg":0,"ast":0,"dgr":35,"tt":"1:32 pm","wv":"PM","f":{"tal":40.5,"crs":40.0,"frm":17.3,"cut":71.4,"flr":94.3,"cel":20.2,"lev":88.8,"con":39.3,"dfs":55.4,"str":50.0}},{"r":30,"n":"Scott, Adam","a":"A. Scott","pb":46.08,"db":46.15,"pt":"ELITE","dt":"ELITE","w":0.98,"t5":6.08,"t10":13.35,"t20":28.01,"mc":70.9,"sal":7200,"own":10.79,"asg":-0.034,"ast":6,"dgr":29,"tt":"12:03 pm","wv":"PM","f":{"tal":9.6,"crs":55.1,"frm":60.9,"cut":71.1,"flr":54.5,"cel":58.5,"lev":45.1,"con":5.9,"dfs":57.6,"str":50.0}},{"r":31,"n":"Gerard, Ryan","a":"R. Gerard","pb":45.93,"db":46.25,"pt":"ELITE","dt":"ELITE","w":0.98,"t5":5.96,"t10":12.97,"t20":27.78,"mc":70.4,"sal":6800,"own":5.56,"asg":0,"ast":0,"dgr":28,"tt":"9:31 am","wv":"AM","f":{"tal":34.5,"crs":40.0,"frm":19.7,"cut":70.4,"flr":93.2,"cel":22.8,"lev":85.3,"con":36.1,"dfs":72.6,"str":50.0}},{"r":32,"n":"Straka, Sepp","a":"S. Straka","pb":45.59,"db":44.91,"pt":"ELITE","dt":"CONTENDER","w":0.94,"t5":5.89,"t10":12.92,"t20":27.25,"mc":70.4,"sal":8000,"own":5.91,"asg":0,"ast":0,"dgr":31,"tt":"1:32 pm","wv":"PM","f":{"tal":37.7,"crs":40.0,"frm":19.3,"cut":70.4,"flr":92.9,"cel":22.4,"lev":84.2,"con":35.2,"dfs":53.2,"str":50.0}},{"r":33,"n":"English, Harris","a":"H. English","pb":44.89,"db":47.81,"pt":"CONTENDER","dt":"ELITE","w":0.98,"t5":6.21,"t10":13.59,"t20":29.07,"mc":72.5,"sal":7300,"own":8.14,"asg":0.67,"ast":3,"dgr":27,"tt":"1:56 pm","wv":"PM","f":{"tal":9.6,"crs":73.66,"frm":45.4,"cut":72.7,"flr":0.0,"cel":58.3,"lev":65.0,"con":8.2,"dfs":57.6,"str":50.0}},{"r":34,"n":"Kitayama, Kurt","a":"K. Kitayama","pb":44.8,"db":45.25,"pt":"CONTENDER","dt":"ELITE","w":0.97,"t5":5.87,"t10":12.59,"t20":26.81,"mc":69.4,"sal":6800,"own":6.89,"asg":0,"ast":0,"dgr":30,"tt":"8:50 am","wv":"AM","f":{"tal":31.3,"crs":40.0,"frm":19.5,"cut":69.4,"flr":92.0,"cel":22.5,"lev":81.3,"con":32.8,"dfs":75.8,"str":50.0}},{"r":35,"n":"Hall, Harry","a":"H. Hall","pb":44.79,"db":44.5,"pt":"CONTENDER","dt":"CONTENDER","w":0.66,"t5":4.59,"t10":10.74,"t20":24.81,"mc":69.4,"sal":6900,"own":6.74,"asg":0,"ast":0,"dgr":41,"tt":"12:44 pm","wv":"PM","f":{"tal":38.4,"crs":40.0,"frm":14.4,"cut":69.4,"flr":92.6,"cel":17.1,"lev":81.1,"con":33.1,"dfs":68.3,"str":50.0}},{"r":36,"n":"Stevens, Sam","a":"S. Stevens","pb":44.62,"db":45.51,"pt":"CONTENDER","dt":"ELITE","w":0.86,"t5":5.67,"t10":12.61,"t20":27.32,"mc":70.4,"sal":6400,"own":6.03,"asg":0,"ast":0,"dgr":33,"tt":"11:03 am","wv":"PM","f":{"tal":28.4,"crs":40.0,"frm":18.2,"cut":70.4,"flr":93.3,"cel":21.3,"lev":83.6,"con":34.9,"dfs":82.1,"str":50.0}},{"r":37,"n":"Thomas, Justin","a":"J. Thomas","pb":44.08,"db":43.61,"pt":"CONTENDER","dt":"CONTENDER","w":0.92,"t5":5.67,"t10":11.98,"t20":25.45,"mc":68.5,"sal":8300,"own":6.8,"asg":0,"ast":0,"dgr":32,"tt":"1:32 pm","wv":"PM","f":{"tal":33.7,"crs":40.0,"frm":18.7,"cut":68.5,"flr":91.0,"cel":21.6,"lev":81.5,"con":33.0,"dfs":53.9,"str":50.0}},{"r":38,"n":"Lowry, Shane","a":"S. Lowry","pb":44.01,"db":45.83,"pt":"CONTENDER","dt":"ELITE","w":0.82,"t5":5.07,"t10":11.64,"t20":26.11,"mc":69.9,"sal":8200,"own":5.84,"asg":0.613,"ast":6,"dgr":36,"tt":"9:43 am","wv":"AM","f":{"tal":8.0,"crs":75.32,"frm":49.7,"cut":70.0,"flr":0.0,"cel":64.3,"lev":44.6,"con":10.9,"dfs":40.8,"str":50.0}},{"r":39,"n":"Im, Sungjae","a":"S. Im","pb":43.32,"db":44.67,"pt":"CONTENDER","dt":"CONTENDER","w":0.27,"t5":2.36,"t10":6.06,"t20":15.95,"mc":60.2,"sal":7500,"own":7.11,"asg":1.991,"ast":5,"dgr":61,"tt":"11:03 am","wv":"PM","f":{"tal":2.7,"crs":92.12,"frm":46.2,"cut":60.3,"flr":0.0,"cel":58.9,"lev":29.6,"con":11.2,"dfs":28.0,"str":50.0}},{"r":40,"n":"Day, Jason","a":"J. Day","pb":43.06,"db":42.87,"pt":"CONTENDER","dt":"CONTENDER","w":0.71,"t5":4.84,"t10":11.01,"t20":24.33,"mc":67.6,"sal":7600,"own":7.84,"asg":0,"ast":0,"dgr":39,"tt":"9:43 am","wv":"AM","f":{"tal":32.8,"crs":40.0,"frm":15.3,"cut":67.6,"flr":90.7,"cel":18.0,"lev":77.9,"con":30.4,"dfs":64.0,"str":50.0}},{"r":41,"n":"Reed, Patrick","a":"P. Reed","pb":43.06,"db":40.7,"pt":"CONTENDER","dt":"CONTENDER","w":0.52,"t5":4.01,"t10":9.59,"t20":22.62,"mc":67.6,"sal":9000,"own":13.13,"asg":1.654,"ast":6,"dgr":45,"tt":"9:55 am","wv":"AM","f":{"tal":5.0,"crs":94.91,"frm":45.0,"cut":67.6,"flr":30.0,"cel":23.5,"lev":11.0,"con":4.4,"dfs":26.2,"str":50.0}},{"r":42,"n":"Rose, Justin","a":"J. Rose","pb":42.71,"db":41.57,"pt":"CONTENDER","dt":"CONTENDER","w":0.79,"t5":5.15,"t10":11.33,"t20":24.45,"mc":67.6,"sal":9100,"own":9.99,"asg":0,"ast":0,"dgr":38,"tt":"1:20 pm","wv":"PM","f":{"tal":35.2,"crs":40.0,"frm":16.6,"cut":67.6,"flr":90.0,"cel":19.4,"lev":71.6,"con":25.0,"dfs":51.5,"str":50.0}},{"r":43,"n":"Taylor, Nick","a":"N. Taylor","pb":41.98,"db":42.43,"pt":"CONTENDER","dt":"CONTENDER","w":0.47,"t5":3.28,"t10":8.33,"t20":20.37,"mc":65.4,"sal":6500,"own":5.42,"asg":0,"ast":0,"dgr":47,"tt":"9:31 am","wv":"AM","f":{"tal":31.2,"crs":40.0,"frm":10.3,"cut":65.4,"flr":89.7,"cel":12.2,"lev":84.7,"con":36.5,"dfs":66.9,"str":50.0}},{"r":44,"n":"Bradley, Keegan","a":"K. Bradley","pb":41.49,"db":42.42,"pt":"CONTENDER","dt":"CONTENDER","w":0.44,"t5":3.31,"t10":7.84,"t20":18.8,"mc":63.3,"sal":7000,"own":3.09,"asg":0,"ast":0,"dgr":48,"tt":"9:31 am","wv":"AM","f":{"tal":28.5,"crs":40.0,"frm":10.2,"cut":63.3,"flr":87.6,"cel":12.2,"lev":91.6,"con":42.3,"dfs":61.5,"str":50.0}},{"r":45,"n":"Hojgaard, Rasmus","a":"R. Hojgaard","pb":40.78,"db":41.54,"pt":"CONTENDER","dt":"CONTENDER","w":0.58,"t5":3.84,"t10":8.83,"t20":20.33,"mc":63.3,"sal":6900,"own":6.31,"asg":0,"ast":0,"dgr":42,"tt":"8:38 am","wv":"AM","f":{"tal":26.1,"crs":40.0,"frm":12.3,"cut":63.3,"flr":87.2,"cel":14.4,"lev":82.2,"con":34.2,"dfs":66.6,"str":50.0}},{"r":46,"n":"Penge, Marco","a":"M. Penge","pb":40.6,"db":41.57,"pt":"CONTENDER","dt":"CONTENDER","w":0.8,"t5":4.85,"t10":10.52,"t20":22.99,"mc":66.2,"sal":7300,"own":5.29,"asg":0,"ast":0,"dgr":37,"tt":"1:56 pm","wv":"PM","f":{"tal":17.9,"crs":40.0,"frm":16.1,"cut":66.2,"flr":89.4,"cel":18.5,"lev":85.7,"con":36.8,"dfs":60.9,"str":50.0}},{"r":47,"n":"Reitan, Kristoffer","a":"K. Reitan","pb":39.74,"db":41.92,"pt":"CONTENDER","dt":"CONTENDER","w":0.51,"t5":3.5,"t10":8.3,"t20":19.27,"mc":62.5,"sal":6300,"own":2.84,"asg":0,"ast":0,"dgr":46,"tt":"8:50 am","wv":"AM","f":{"tal":16.4,"crs":40.0,"frm":11.1,"cut":62.5,"flr":86.8,"cel":13.1,"lev":92.5,"con":42.9,"dfs":74.5,"str":50.0}},{"r":48,"n":"Berger, Daniel","a":"D. Berger","pb":39.57,"db":39.92,"pt":"CONTENDER","dt":"CONTENDER","w":0.43,"t5":3.43,"t10":8.15,"t20":19.38,"mc":63.7,"sal":7100,"own":6.17,"asg":0,"ast":0,"dgr":49,"tt":"12:03 pm","wv":"PM","f":{"tal":23.9,"crs":40.0,"frm":10.3,"cut":63.7,"flr":88.0,"cel":12.5,"lev":82.4,"con":34.6,"dfs":55.0,"str":50.0}},{"r":49,"n":"Jarvis, Casey","a":"C. Jarvis","pb":38.95,"db":40.04,"pt":"CONTENDER","dt":"CONTENDER","w":0.36,"t5":2.76,"t10":6.94,"t20":17.45,"mc":61.4,"sal":6600,"own":3.97,"asg":0,"ast":0,"dgr":51,"tt":"8:50 am","wv":"AM","f":{"tal":21.4,"crs":40.0,"frm":8.4,"cut":61.4,"flr":86.5,"cel":10.1,"lev":88.8,"con":40.1,"dfs":57.8,"str":50.0}},{"r":50,"n":"McCarty, Matt","a":"M. McCarty","pb":38.52,"db":39.83,"pt":"CONTENDER","dt":"CONTENDER","w":0.3,"t5":2.85,"t10":7.12,"t20":17.86,"mc":62.5,"sal":6500,"own":4.33,"asg":0,"ast":0,"dgr":59,"tt":"8:38 am","wv":"AM","f":{"tal":18.1,"crs":40.0,"frm":8.1,"cut":62.5,"flr":87.4,"cel":10.1,"lev":87.6,"con":39.2,"dfs":63.0,"str":50.0}},{"r":51,"n":"Hatton, Tyrrell","a":"T. Hatton","pb":38.4,"db":38.19,"pt":"CONTENDER","dt":"CONTENDER","w":0.54,"t5":3.7,"t10":8.69,"t20":20.45,"mc":64.5,"sal":8100,"own":6.64,"asg":0,"ast":0,"dgr":44,"tt":"12:56 pm","wv":"PM","f":{"tal":19.8,"crs":40.0,"frm":11.7,"cut":64.5,"flr":88.4,"cel":13.8,"lev":81.2,"con":33.4,"dfs":38.7,"str":50.0}},{"r":52,"n":"Ortiz, Carlos","a":"C. Ortiz","pb":38.05,"db":39.18,"pt":"CONTENDER","dt":"CONTENDER","w":0.34,"t5":2.55,"t10":6.44,"t20":15.9,"mc":59.2,"sal":6600,"own":4.79,"asg":0,"ast":0,"dgr":53,"tt":"7:50 am","wv":"AM","f":{"tal":20.6,"crs":40.0,"frm":7.9,"cut":59.2,"flr":84.6,"cel":9.4,"lev":86.3,"con":38.0,"dfs":57.7,"str":50.0}},{"r":53,"n":"Kim, Michael","a":"M. Kim","pb":37.85,"db":38.81,"pt":"CONTENDER","dt":"CONTENDER","w":0.31,"t5":2.5,"t10":6.41,"t20":16.69,"mc":61.0,"sal":6700,"own":5.23,"asg":0,"ast":0,"dgr":57,"tt":"11:39 am","wv":"PM","f":{"tal":19.3,"crs":40.0,"frm":7.4,"cut":61.0,"flr":86.2,"cel":9.0,"lev":84.9,"con":36.9,"dfs":57.2,"str":50.0}},{"r":54,"n":"Woodland, Gary","a":"G. Woodland","pb":37.57,"db":38.4,"pt":"CONTENDER","dt":"CONTENDER","w":0.37,"t5":2.77,"t10":6.89,"t20":16.84,"mc":61.0,"sal":7300,"own":4.55,"asg":0,"ast":0,"dgr":50,"tt":"1:44 pm","wv":"PM","f":{"tal":17.6,"crs":40.0,"frm":8.5,"cut":61.0,"flr":85.9,"cel":10.1,"lev":87.1,"con":38.6,"dfs":48.2,"str":50.0}},{"r":55,"n":"Fox, Ryan","a":"R. Fox","pb":37.14,"db":37.92,"pt":"CONTENDER","dt":"CONTENDER","w":0.25,"t5":2.05,"t10":5.39,"t20":14.45,"mc":58.5,"sal":7100,"own":5.12,"asg":0,"ast":0,"dgr":65,"tt":"8:26 am","wv":"AM","f":{"tal":20.7,"crs":40.0,"frm":6.2,"cut":58.5,"flr":84.1,"cel":7.4,"lev":85.2,"con":37.2,"dfs":50.1,"str":50.0}},{"r":56,"n":"Novak, Andrew","a":"A. Novak","pb":36.94,"db":38.88,"pt":"CONTENDER","dt":"CONTENDER","w":0.31,"t5":2.42,"t10":6.01,"t20":15.41,"mc":59.2,"sal":6400,"own":2.89,"asg":0,"ast":0,"dgr":58,"tt":"11:15 am","wv":"PM","f":{"tal":12.7,"crs":40.0,"frm":7.3,"cut":59.2,"flr":84.6,"cel":8.8,"lev":91.9,"con":42.8,"dfs":60.0,"str":50.0}},{"r":57,"n":"Rai, Aaron","a":"A. Rai","pb":36.82,"db":37.56,"pt":"CONTENDER","dt":"CONTENDER","w":0.25,"t5":1.99,"t10":5.41,"t20":14.84,"mc":59.9,"sal":6800,"own":3.59,"asg":0,"ast":0,"dgr":64,"tt":"12:27 pm","wv":"PM","f":{"tal":17.4,"crs":40.0,"frm":6.0,"cut":59.9,"flr":86.0,"cel":7.2,"lev":89.7,"con":41.0,"dfs":41.5,"str":50.0}},{"r":58,"n":"Koepka, Brooks","a":"B. Koepka","pb":36.73,"db":37.2,"pt":"CONTENDER","dt":"CONTENDER","w":0.68,"t5":4.04,"t10":9.12,"t20":20.7,"mc":63.7,"sal":8500,"own":7.46,"asg":0,"ast":0,"dgr":40,"tt":"1:20 pm","wv":"PM","f":{"tal":10.2,"crs":40.0,"frm":13.5,"cut":63.7,"flr":87.2,"cel":15.5,"lev":79.0,"con":31.4,"dfs":44.5,"str":50.0}},{"r":59,"n":"Clark, Wyndham","a":"W. Clark","pb":36.62,"db":38.08,"pt":"CONTENDER","dt":"CONTENDER","w":0.34,"t5":2.64,"t10":6.53,"t20":16.18,"mc":59.2,"sal":7100,"own":2.99,"asg":0,"ast":0,"dgr":54,"tt":"11:27 am","wv":"PM","f":{"tal":12.7,"crs":40.0,"frm":8.0,"cut":59.2,"flr":84.6,"cel":9.6,"lev":91.7,"con":42.5,"dfs":48.1,"str":50.0}},{"r":60,"n":"Li, Haotong","a":"H. Li","pb":36.57,"db":38.81,"pt":"CONTENDER","dt":"CONTENDER","w":0.34,"t5":2.32,"t10":5.87,"t20":15.04,"mc":58.5,"sal":6300,"own":2.69,"asg":0,"ast":0,"dgr":52,"tt":"7:40 am","wv":"AM","f":{"tal":10.4,"crs":40.0,"frm":7.4,"cut":58.5,"flr":84.2,"cel":8.7,"lev":92.6,"con":43.3,"dfs":62.8,"str":50.0}},{"r":61,"n":"Harman, Brian","a":"B. Harman","pb":36.48,"db":37.77,"pt":"CONTENDER","dt":"CONTENDER","w":0.3,"t5":2.25,"t10":5.89,"t20":15.65,"mc":60.6,"sal":6500,"own":4.88,"asg":0,"ast":0,"dgr":60,"tt":"12:03 pm","wv":"PM","f":{"tal":13.1,"crs":40.0,"frm":6.9,"cut":60.6,"flr":86.2,"cel":8.2,"lev":86.0,"con":37.8,"dfs":56.1,"str":50.0}},{"r":62,"n":"Greyserman, Max","a":"M. Greyserman","pb":35.85,"db":37.85,"pt":"CONTENDER","dt":"CONTENDER","w":0.26,"t5":1.93,"t10":5.0,"t20":13.37,"mc":55.9,"sal":6600,"own":3.64,"asg":0,"ast":0,"dgr":62,"tt":"8:26 am","wv":"AM","f":{"tal":12.8,"crs":40.0,"frm":6.0,"cut":55.9,"flr":81.7,"cel":7.1,"lev":89.6,"con":40.9,"dfs":59.5,"str":50.0}},{"r":63,"n":"Echavarria, Nico","a":"N. Echavarria","pb":35.7,"db":37.15,"pt":"CONTENDER","dt":"CONTENDER","w":0.17,"t5":1.65,"t10":4.43,"t20":12.27,"mc":55.2,"sal":6700,"own":2.22,"asg":0,"ast":0,"dgr":71,"tt":"9:02 am","wv":"AM","f":{"tal":15.3,"crs":40.0,"frm":4.7,"cut":55.2,"flr":82.0,"cel":5.8,"lev":93.7,"con":44.5,"dfs":42.7,"str":50.0}},{"r":64,"n":"Valimaki, Sami","a":"S. Valimaki","pb":35.66,"db":37.61,"pt":"CONTENDER","dt":"CONTENDER","w":0.24,"t5":1.66,"t10":4.46,"t20":12.12,"mc":55.2,"sal":6500,"own":1.47,"asg":0,"ast":0,"dgr":66,"tt":"8:14 am","wv":"AM","f":{"tal":12.3,"crs":40.0,"frm":5.2,"cut":55.2,"flr":82.1,"cel":6.2,"lev":96.1,"con":46.3,"dfs":48.2,"str":50.0}},{"r":65,"n":"Brennan, Michael","a":"M. Brennan","pb":35.64,"db":37.76,"pt":"CONTENDER","dt":"CONTENDER","w":0.31,"t5":2.18,"t10":5.64,"t20":14.33,"mc":57.1,"sal":6600,"own":1.66,"asg":0,"ast":0,"dgr":56,"tt":"12:44 pm","wv":"PM","f":{"tal":8.5,"crs":40.0,"frm":6.9,"cut":57.1,"flr":83.1,"cel":8.1,"lev":95.7,"con":45.9,"dfs":50.7,"str":50.0}},{"r":66,"n":"McKibbin, Tom","a":"T. McKibbin","pb":35.62,"db":37.03,"pt":"CONTENDER","dt":"CONTENDER","w":0.26,"t5":2.02,"t10":5.26,"t20":13.97,"mc":58.1,"sal":6900,"own":2.38,"asg":0,"ast":0,"dgr":63,"tt":"11:15 am","wv":"PM","f":{"tal":11.1,"crs":40.0,"frm":6.1,"cut":58.1,"flr":84.2,"cel":7.4,"lev":93.4,"con":44.0,"dfs":41.9,"str":50.0}},{"r":67,"n":"Keefer, Johnny","a":"J. Keefer","pb":35.38,"db":37.54,"pt":"CONTENDER","dt":"CONTENDER","w":0.32,"t5":2.22,"t10":5.58,"t20":14.39,"mc":57.1,"sal":6700,"own":1.53,"asg":0,"ast":0,"dgr":55,"tt":"7:40 am","wv":"AM","f":{"tal":7.1,"crs":40.0,"frm":7.0,"cut":57.1,"flr":83.0,"cel":8.3,"lev":96.0,"con":46.2,"dfs":49.4,"str":50.0}},{"r":68,"n":"Neergaard-Petersen, Rasmus","a":"R. Neergaard-Petersen","pb":34.8,"db":36.47,"pt":"SOLID","dt":"CONTENDER","w":0.21,"t5":1.76,"t10":4.67,"t20":12.63,"mc":55.9,"sal":6700,"own":2.69,"asg":0,"ast":0,"dgr":67,"tt":"8:02 am","wv":"AM","f":{"tal":9.8,"crs":40.0,"frm":5.2,"cut":55.9,"flr":82.5,"cel":6.3,"lev":92.4,"con":43.3,"dfs":44.4,"str":50.0}},{"r":69,"n":"Smith, Cameron","a":"C. Smith","pb":33.95,"db":34.87,"pt":"SOLID","dt":"SOLID","w":0.21,"t5":1.8,"t10":4.84,"t20":13.12,"mc":55.9,"sal":7500,"own":8.27,"asg":0,"ast":0,"dgr":68,"tt":"9:19 am","wv":"AM","f":{"tal":12.2,"crs":40.0,"frm":5.3,"cut":55.9,"flr":81.7,"cel":6.5,"lev":75.6,"con":29.3,"dfs":51.6,"str":50.0}},{"r":70,"n":"Homa, Max","a":"M. Homa","pb":33.21,"db":34.4,"pt":"SOLID","dt":"SOLID","w":0.18,"t5":1.67,"t10":4.54,"t20":12.33,"mc":54.6,"sal":7300,"own":5.53,"asg":0,"ast":0,"dgr":69,"tt":"7:50 am","wv":"AM","f":{"tal":8.4,"crs":40.0,"frm":4.8,"cut":54.6,"flr":81.1,"cel":5.9,"lev":83.8,"con":36.2,"dfs":40.2,"str":50.0}},{"r":71,"n":"Garcia, Sergio","a":"S. Garcia","pb":33.16,"db":34.77,"pt":"SOLID","dt":"SOLID","w":0.17,"t5":1.59,"t10":4.28,"t20":11.72,"mc":54.6,"sal":7100,"own":2.26,"asg":0,"ast":0,"dgr":70,"tt":"12:27 pm","wv":"PM","f":{"tal":5.1,"crs":40.0,"frm":4.5,"cut":54.6,"flr":81.7,"cel":5.6,"lev":93.6,"con":44.4,"dfs":33.2,"str":50.0}},{"r":72,"n":"Potgieter, Aldrich","a":"A. Potgieter","pb":31.5,"db":34.31,"pt":"SOLID","dt":"SOLID","w":0.14,"t5":1.38,"t10":3.6,"t20":9.86,"mc":49.3,"sal":6200,"own":3.25,"asg":0,"ast":0,"dgr":72,"tt":"8:02 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":3.9,"cut":49.3,"flr":77.0,"cel":4.8,"lev":90.5,"con":41.9,"dfs":51.2,"str":50.0}},{"r":73,"n":"Schwartzel, Charl","a":"C. Schwartzel","pb":30.67,"db":33.9,"pt":"SOLID","dt":"SOLID","w":0.06,"t5":0.69,"t10":2.07,"t20":6.58,"mc":44.8,"sal":6300,"own":1.38,"asg":0,"ast":0,"dgr":74,"tt":"8:26 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":1.8,"cut":44.8,"flr":73.9,"cel":2.4,"lev":96.0,"con":46.5,"dfs":47.2,"str":50.0}},{"r":74,"n":"Johnson, Dustin","a":"D. Johnson","pb":30.55,"db":33.06,"pt":"SOLID","dt":"SOLID","w":0.11,"t5":0.98,"t10":2.77,"t20":8.4,"mc":47.2,"sal":7000,"own":3.07,"asg":0,"ast":0,"dgr":73,"tt":"9:43 am","wv":"AM","f":{"tal":0.3,"crs":40.0,"frm":2.8,"cut":47.2,"flr":75.0,"cel":3.5,"lev":91.0,"con":42.3,"dfs":40.0,"str":50.0}},{"r":75,"n":"Johnson, Zach","a":"Z. Johnson","pb":29.73,"db":32.26,"pt":"SOLID","dt":"SOLID","w":0.04,"t5":0.51,"t10":1.65,"t20":5.87,"mc":44.2,"sal":6300,"own":2.42,"asg":0,"ast":0,"dgr":75,"tt":"11:39 am","wv":"PM","f":{"tal":0.2,"crs":40.0,"frm":1.3,"cut":44.2,"flr":74.2,"cel":1.7,"lev":92.8,"con":44.0,"dfs":34.0,"str":50.0}},{"r":76,"n":"Watson, Bubba","a":"B. Watson","pb":29.45,"db":32.62,"pt":"SOLID","dt":"SOLID","w":0.03,"t5":0.56,"t10":1.59,"t20":5.15,"mc":40.8,"sal":6300,"own":2.34,"asg":0,"ast":0,"dgr":77,"tt":"9:02 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":1.4,"cut":40.8,"flr":70.8,"cel":1.8,"lev":93.0,"con":44.1,"dfs":42.6,"str":50.0}},{"r":77,"n":"Riley, Davis","a":"D. Riley","pb":27.94,"db":30.92,"pt":"SOLID","dt":"SOLID","w":0.03,"t5":0.33,"t10":1.08,"t20":3.64,"mc":35.1,"sal":6400,"own":1.64,"asg":0,"ast":0,"dgr":76,"tt":"11:51 am","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.9,"cut":35.1,"flr":67.0,"cel":1.1,"lev":95.1,"con":45.9,"dfs":25.0,"str":50.0}},{"r":78,"n":"Willett, Danny","a":"D. Willett","pb":27.01,"db":30.3,"pt":"SOLID","dt":"SOLID","w":0.01,"t5":0.15,"t10":0.55,"t20":2.22,"mc":30.2,"sal":6200,"own":1.65,"asg":0,"ast":0,"dgr":81,"tt":"11:51 am","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.3,"cut":30.2,"flr":63.5,"cel":0.5,"lev":95.1,"con":45.9,"dfs":24.5,"str":50.0}},{"r":79,"n":"Campbell, Brian","a":"B. Campbell","pb":26.13,"db":29.0,"pt":"SOLID","dt":"SOLID","w":0.01,"t5":0.09,"t10":0.34,"t20":1.49,"mc":27.1,"sal":6200,"own":0.37,"asg":0,"ast":0,"dgr":82,"tt":"11:15 am","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.2,"cut":27.1,"flr":62.7,"cel":0.3,"lev":98.9,"con":49.1,"dfs":3.9,"str":50.0}},{"r":80,"n":"Howell, Mason","a":"M. Howell","pb":25.88,"db":29.24,"pt":"SOLID","dt":"SOLID","w":0.01,"t5":0.1,"t10":0.36,"t20":1.4,"mc":24.0,"sal":6000,"own":0.3,"asg":0,"ast":0,"dgr":78,"tt":"10:31 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":0.3,"cut":24.0,"flr":59.8,"cel":0.4,"lev":99.1,"con":49.2,"dfs":10.0,"str":50.0}},{"r":81,"n":"Kataoka, Naoyuki","a":"N. Kataoka","pb":25.56,"db":28.73,"pt":"SOLID","dt":"SOLID","w":0.01,"t5":0.05,"t10":0.21,"t20":1.07,"mc":23.3,"sal":6200,"own":0.07,"asg":0,"ast":0,"dgr":80,"tt":"7:50 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":0.1,"cut":23.3,"flr":59.8,"cel":0.2,"lev":99.8,"con":49.8,"dfs":3.5,"str":50.0}},{"r":82,"n":"Fang, Ethan","a":"E. Fang","pb":25.55,"db":28.75,"pt":"SOLID","dt":"SOLID","w":0.01,"t5":0.09,"t10":0.29,"t20":1.2,"mc":22.9,"sal":6100,"own":0.0,"asg":0,"ast":0,"dgr":79,"tt":"11:51 am","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.2,"cut":22.9,"flr":59.6,"cel":0.3,"lev":100,"con":50.0,"dfs":3.1,"str":50.0}},{"r":83,"n":"Laopakdee, Fifa","a":"F. Laopakdee","pb":24.8,"db":28.14,"pt":"SLEEPER","dt":"SOLID","w":0.0,"t5":0.04,"t10":0.15,"t20":0.72,"mc":19.1,"sal":6100,"own":0.0,"asg":0,"ast":0,"dgr":85,"tt":"12:15 pm","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.1,"cut":19.1,"flr":57.0,"cel":0.1,"lev":100,"con":50.0,"dfs":0,"str":50.0}},{"r":84,"n":"Singh, Vijay","a":"V. Singh","pb":24.67,"db":28.03,"pt":"SLEEPER","dt":"SOLID","w":0.0,"t5":0.03,"t10":0.12,"t20":0.63,"mc":18.6,"sal":6100,"own":0.11,"asg":0,"ast":0,"dgr":84,"tt":"8:38 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":0.1,"cut":18.6,"flr":56.5,"cel":0.1,"lev":99.7,"con":49.7,"dfs":0,"str":50.0}},{"r":85,"n":"Cabrera, Angel","a":"A. Cabrera","pb":24.22,"db":27.98,"pt":"SLEEPER","dt":"SOLID","w":0.0,"t5":0.03,"t10":0.1,"t20":0.42,"mc":15.4,"sal":6100,"own":0.33,"asg":0,"ast":0,"dgr":83,"tt":"8:14 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":0.1,"cut":15.4,"flr":53.3,"cel":0.1,"lev":99.0,"con":49.2,"dfs":4.6,"str":50.0}},{"r":86,"n":"Herrington, Jackson","a":"J. Herrington","pb":24.05,"db":27.79,"pt":"SLEEPER","dt":"SOLID","w":0.1,"t5":0.01,"t10":0.06,"t20":0.33,"mc":13.2,"sal":6200,"own":0.0,"asg":0,"ast":0,"dgr":87,"tt":"8:14 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":0.8,"cut":13.2,"flr":53.2,"cel":0.5,"lev":100,"con":50.0,"dfs":0,"str":50.0}},{"r":87,"n":"Couples, Fred","a":"F. Couples","pb":23.99,"db":27.73,"pt":"SLEEPER","dt":"SOLID","w":0.1,"t5":0.01,"t10":0.07,"t20":0.37,"mc":13.7,"sal":6000,"own":0.29,"asg":0,"ast":0,"dgr":88,"tt":"12:15 pm","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.8,"cut":13.7,"flr":52.4,"cel":0.5,"lev":99.3,"con":49.3,"dfs":0.9,"str":50.0}},{"r":88,"n":"Weir, Mike","a":"M. Weir","pb":23.38,"db":27.42,"pt":"SLEEPER","dt":"SOLID","w":0.1,"t5":0.0,"t10":0.02,"t20":0.12,"mc":9.1,"sal":6000,"own":0.0,"asg":0,"ast":0,"dgr":89,"tt":"11:27 am","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.8,"cut":9.1,"flr":50.1,"cel":0.5,"lev":100,"con":50.0,"dfs":0,"str":50.0}},{"r":89,"n":"Pulcini, Mateo","a":"M. Pulcini","pb":23.25,"db":27.35,"pt":"SLEEPER","dt":"SOLID","w":0.1,"t5":0.0,"t10":0.02,"t20":0.11,"mc":8.0,"sal":6000,"own":0.0,"asg":0,"ast":0,"dgr":86,"tt":"11:27 am","wv":"PM","f":{"tal":0,"crs":40.0,"frm":0.8,"cut":8.0,"flr":49.9,"cel":0.5,"lev":100,"con":50.0,"dfs":0,"str":50.0}},{"r":90,"n":"Holtz, Brandon","a":"B. Holtz","pb":23.22,"db":27.34,"pt":"SLEEPER","dt":"SOLID","w":0.1,"t5":0.01,"t10":0.04,"t20":0.18,"mc":7.9,"sal":6100,"own":0.0,"asg":0,"ast":0,"dgr":91,"tt":"9:02 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":0.8,"cut":7.9,"flr":49.6,"cel":0.5,"lev":100,"con":50.0,"dfs":0,"str":50.0}},{"r":91,"n":"Olazabal, Jose Maria","a":"J. Olazabal","pb":22.41,"db":26.93,"pt":"SLEEPER","dt":"SOLID","w":0.1,"t5":0.1,"t10":0.0,"t20":0.01,"mc":1.9,"sal":6000,"own":0.0,"asg":0,"ast":0,"dgr":90,"tt":"8:02 am","wv":"AM","f":{"tal":0,"crs":40.0,"frm":1.0,"cut":1.9,"flr":46.4,"cel":0.8,"lev":100,"con":50.0,"dfs":0,"str":50.0}}];
+const LU = [{"num":1,"type":"CORE","sal":49800,"own":81.6,"proj":413.3,"players":[{"n":"L. Aberg","fn":"Aberg, Ludvig","sal":9800,"bbi":68.84,"own":17.34,"aug":"SPECIALIST","sg":2.875},{"n":"M. Fitzpatrick","fn":"Fitzpatrick, Matt","sal":8700,"bbi":60.12,"own":16.72,"aug":"NEUTRAL+","sg":0.779},{"n":"R. MacIntyre","fn":"MacIntyre, Robert","sal":8600,"bbi":59.52,"own":12.14,"aug":"NEUTRAL+","sg":0.114},{"n":"S. Kim","fn":"Kim, Si Woo","sal":7800,"bbi":57.72,"own":11.15,"aug":"NEUTRAL+","sg":0.55},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]},{"num":2,"type":"CORE","sal":50000,"own":82.2,"proj":410.9,"players":[{"n":"L. Aberg","fn":"Aberg, Ludvig","sal":9800,"bbi":68.84,"own":17.34,"aug":"SPECIALIST","sg":2.875},{"n":"X. Schauffele","fn":"Schauffele, Xander","sal":9600,"bbi":64.89,"own":20.27,"aug":"COMFORTABLE","sg":1.76},{"n":"R. Henley","fn":"Henley, Russell","sal":7900,"bbi":54.63,"own":9.2,"aug":"NEUTRAL+","sg":0.93},{"n":"S. Kim","fn":"Kim, Si Woo","sal":7800,"bbi":57.72,"own":11.15,"aug":"NEUTRAL+","sg":0.55},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]},{"num":3,"type":"CORE","sal":50000,"own":80.1,"proj":406.4,"players":[{"n":"L. Aberg","fn":"Aberg, Ludvig","sal":9800,"bbi":68.84,"own":17.34,"aug":"SPECIALIST","sg":2.875},{"n":"C. Young","fn":"Young, Cameron","sal":9200,"bbi":64.45,"own":16.03,"aug":"NEUTRAL+","sg":0.586},{"n":"R. MacIntyre","fn":"MacIntyre, Robert","sal":8600,"bbi":59.52,"own":12.14,"aug":"NEUTRAL+","sg":0.114},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"N. Hojgaard","fn":"Hojgaard, Nicolai","sal":7500,"bbi":53.74,"own":10.31,"aug":"NEUTRAL+","sg":0.259},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]},{"num":4,"type":"CORE","sal":50000,"own":86.5,"proj":409.3,"players":[{"n":"L. Aberg","fn":"Aberg, Ludvig","sal":9800,"bbi":68.84,"own":17.34,"aug":"SPECIALIST","sg":2.875},{"n":"C. Young","fn":"Young, Cameron","sal":9200,"bbi":64.45,"own":16.03,"aug":"NEUTRAL+","sg":0.586},{"n":"M. Fitzpatrick","fn":"Fitzpatrick, Matt","sal":8700,"bbi":60.12,"own":16.72,"aug":"NEUTRAL+","sg":0.779},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"J. Bridgeman","fn":"Bridgeman, Jacob","sal":7400,"bbi":51.71,"own":12.15,"aug":"NO_HISTORY","sg":0},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]},{"num":5,"type":"STARS & SCRUBS","sal":50000,"own":73.8,"proj":394.7,"players":[{"n":"S. Scheffler","fn":"Scheffler, Scottie","sal":14000,"bbi":72.84,"own":25.81,"aug":"SPECIALIST","sg":2.981},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"N. Hojgaard","fn":"Hojgaard, Nicolai","sal":7500,"bbi":53.74,"own":10.31,"aug":"NEUTRAL+","sg":0.259},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429},{"n":"J. Spaun","fn":"Spaun, J.J.","sal":7200,"bbi":51.1,"own":7.4,"aug":"NEUTRAL+","sg":0.017},{"n":"S. Stevens","fn":"Stevens, Sam","sal":6400,"bbi":45.51,"own":6.03,"aug":"NO_HISTORY","sg":0}]},{"num":6,"type":"STARS & SCRUBS","sal":49900,"own":72.8,"proj":394.3,"players":[{"n":"S. Scheffler","fn":"Scheffler, Scottie","sal":14000,"bbi":72.84,"own":25.81,"aug":"SPECIALIST","sg":2.981},{"n":"S. Kim","fn":"Kim, Si Woo","sal":7800,"bbi":57.72,"own":11.15,"aug":"NEUTRAL+","sg":0.55},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429},{"n":"R. Gerard","fn":"Gerard, Ryan","sal":6800,"bbi":46.25,"own":5.56,"aug":"NO_HISTORY","sg":0},{"n":"S. Stevens","fn":"Stevens, Sam","sal":6400,"bbi":45.51,"own":6.03,"aug":"NO_HISTORY","sg":0}]},{"num":7,"type":"STARS & SCRUBS","sal":50000,"own":76.4,"proj":392.4,"players":[{"n":"S. Scheffler","fn":"Scheffler, Scottie","sal":14000,"bbi":72.84,"own":25.81,"aug":"SPECIALIST","sg":2.981},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"J. Bridgeman","fn":"Bridgeman, Jacob","sal":7400,"bbi":51.71,"own":12.15,"aug":"NO_HISTORY","sg":0},{"n":"H. English","fn":"English, Harris","sal":7300,"bbi":47.81,"own":8.14,"aug":"NEUTRAL+","sg":0.67},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429},{"n":"S. Stevens","fn":"Stevens, Sam","sal":6400,"bbi":45.51,"own":6.03,"aug":"NO_HISTORY","sg":0}]},{"num":8,"type":"STARS & SCRUBS","sal":50000,"own":72.9,"proj":391.6,"players":[{"n":"S. Scheffler","fn":"Scheffler, Scottie","sal":14000,"bbi":72.84,"own":25.81,"aug":"SPECIALIST","sg":2.981},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"N. Hojgaard","fn":"Hojgaard, Nicolai","sal":7500,"bbi":53.74,"own":10.31,"aug":"NEUTRAL+","sg":0.259},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429},{"n":"R. Gerard","fn":"Gerard, Ryan","sal":6800,"bbi":46.25,"own":5.56,"aug":"NO_HISTORY","sg":0},{"n":"K. Kitayama","fn":"Kitayama, Kurt","sal":6800,"bbi":45.25,"own":6.89,"aug":"NO_HISTORY","sg":0}]},{"num":9,"type":"LEVERAGE","sal":49700,"own":71.1,"proj":396.6,"players":[{"n":"L. Aberg","fn":"Aberg, Ludvig","sal":9800,"bbi":68.84,"own":17.34,"aug":"SPECIALIST","sg":2.875},{"n":"X. Schauffele","fn":"Schauffele, Xander","sal":9600,"bbi":64.89,"own":20.27,"aug":"COMFORTABLE","sg":1.76},{"n":"R. Henley","fn":"Henley, Russell","sal":7900,"bbi":54.63,"own":9.2,"aug":"NEUTRAL+","sg":0.93},{"n":"P. Cantlay","fn":"Cantlay, Patrick","sal":7900,"bbi":51.02,"own":6.85,"aug":"COMFORTABLE","sg":1.113},{"n":"H. English","fn":"English, Harris","sal":7300,"bbi":47.81,"own":8.14,"aug":"NEUTRAL+","sg":0.67},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]},{"num":10,"type":"LEVERAGE","sal":49700,"own":73.4,"proj":395.5,"players":[{"n":"L. Aberg","fn":"Aberg, Ludvig","sal":9800,"bbi":68.84,"own":17.34,"aug":"SPECIALIST","sg":2.875},{"n":"X. Schauffele","fn":"Schauffele, Xander","sal":9600,"bbi":64.89,"own":20.27,"aug":"COMFORTABLE","sg":1.76},{"n":"C. Gotterup","fn":"Gotterup, Chris","sal":8000,"bbi":47.07,"own":9.92,"aug":"NO_HISTORY","sg":0},{"n":"R. Henley","fn":"Henley, Russell","sal":7900,"bbi":54.63,"own":9.2,"aug":"NEUTRAL+","sg":0.93},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429},{"n":"J. Spaun","fn":"Spaun, J.J.","sal":7200,"bbi":51.1,"own":7.4,"aug":"NEUTRAL+","sg":0.017}]},{"num":11,"type":"LEVERAGE","sal":49700,"own":70.2,"proj":389.1,"players":[{"n":"X. Schauffele","fn":"Schauffele, Xander","sal":9600,"bbi":64.89,"own":20.27,"aug":"COMFORTABLE","sg":1.76},{"n":"C. Morikawa","fn":"Morikawa, Collin","sal":9500,"bbi":65.43,"own":5.83,"aug":"COMFORTABLE","sg":1.781},{"n":"C. Gotterup","fn":"Gotterup, Chris","sal":8000,"bbi":47.07,"own":9.92,"aug":"NO_HISTORY","sg":0},{"n":"M. Lee","fn":"Lee, Min Woo","sal":7700,"bbi":62.04,"own":14.97,"aug":"NEUTRAL+","sg":0.074},{"n":"C. Conners","fn":"Conners, Corey","sal":7700,"bbi":47.5,"own":9.94,"aug":"NEUTRAL+","sg":0.876},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]},{"num":12,"type":"LEVERAGE","sal":50000,"own":70.2,"proj":391.6,"players":[{"n":"X. Schauffele","fn":"Schauffele, Xander","sal":9600,"bbi":64.89,"own":20.27,"aug":"COMFORTABLE","sg":1.76},{"n":"C. Morikawa","fn":"Morikawa, Collin","sal":9500,"bbi":65.43,"own":5.83,"aug":"COMFORTABLE","sg":1.781},{"n":"M. Fitzpatrick","fn":"Fitzpatrick, Matt","sal":8700,"bbi":60.12,"own":16.72,"aug":"NEUTRAL+","sg":0.779},{"n":"C. Conners","fn":"Conners, Corey","sal":7700,"bbi":47.5,"own":9.94,"aug":"NEUTRAL+","sg":0.876},{"n":"H. English","fn":"English, Harris","sal":7300,"bbi":47.81,"own":8.14,"aug":"NEUTRAL+","sg":0.67},{"n":"M. McNealy","fn":"McNealy, Maverick","sal":7200,"bbi":56.91,"own":9.32,"aug":"NEUTRAL+","sg":0.429}]}];
+const EXP = {"M. McNealy":{"count":12,"pct":100.0},"M. Lee":{"count":9,"pct":75.0},"L. Aberg":{"count":6,"pct":50.0},"X. Schauffele":{"count":5,"pct":41.7},"S. Scheffler":{"count":4,"pct":33.3},"M. Fitzpatrick":{"count":3,"pct":25.0},"S. Kim":{"count":3,"pct":25.0},"R. Henley":{"count":3,"pct":25.0},"N. Hojgaard":{"count":3,"pct":25.0},"S. Stevens":{"count":3,"pct":25.0},"H. English":{"count":3,"pct":25.0},"R. MacIntyre":{"count":2,"pct":16.7},"C. Young":{"count":2,"pct":16.7},"J. Bridgeman":{"count":2,"pct":16.7},"J. Spaun":{"count":2,"pct":16.7},"R. Gerard":{"count":2,"pct":16.7},"C. Gotterup":{"count":2,"pct":16.7},"C. Morikawa":{"count":2,"pct":16.7},"C. Conners":{"count":2,"pct":16.7},"K. Kitayama":{"count":1,"pct":8.3},"P. Cantlay":{"count":1,"pct":8.3}};
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('on'); });
+    document.querySelectorAll('.pane').forEach(function(p) { p.classList.remove('on'); });
+    b.classList.add('on');
+    document.getElementById(b.dataset.t).classList.add('on');
+    if (b.dataset.t === 'charts') setTimeout(drawCharts, 50);
+  });
+});
+
+function bbiColor(v) {
+  if (v >= 65) return '#d4a843';
+  if (v >= 55) return '#22c55e';
+  if (v >= 45) return '#60a5fa';
+  if (v >= 35) return '#06b6d4';
+  return '#6b7280';
+}
+function ownColor(v) {
+  if (v > 20) return '#ef4444';
+  if (v > 10) return '#d4a843';
+  return '#22c55e';
+}
+function mcColor(v) {
+  if (v >= 80) return '#22c55e';
+  if (v >= 70) return '#d4a843';
+  return '#ef4444';
+}
+function sgColor(v) {
+  if (v >= 2.0) return '#d4a843';
+  if (v >= 1.0) return '#22c55e';
+  if (v > 0) return '#06b6d4';
+  return '#6b7280';
+}
+function salFmt(s) {
+  return s >= 10000 ? '$' + s/1000 + 'K' : '$' + (s/1000).toFixed(1) + 'K';
+}
+
+var bookmarks = {};
+function toggleBookmark(name) {
+  if (bookmarks[name]) delete bookmarks[name];
+  else bookmarks[name] = true;
+  renderRankings();
+}
+
+var sortCol = 'r', sortDir = 'asc';
+var compareSortCol = 'r', compareSortDir = 'asc';
+var tierFilter = 'ALL';
+
+function sortPlayers(players, col, dir) {
+  return players.slice().sort(function(a, b) {
+    var va = a[col], vb = b[col];
+    if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+    if (va < vb) return dir === 'asc' ? -1 : 1;
+    if (va > vb) return dir === 'asc' ? 1 : -1;
+    return 0;
+  });
+}
+
+function renderRankings() {
+  var q = document.getElementById('searchBox').value.toLowerCase();
+  var filtered = P.filter(function(p) {
+    if (q && p.n.toLowerCase().indexOf(q) === -1 && p.a.toLowerCase().indexOf(q) === -1) return false;
+    if (tierFilter !== 'ALL' && p.pt !== tierFilter) return false;
+    return true;
+  });
+  filtered = sortPlayers(filtered, sortCol, sortDir);
+  var html = '';
+  for (var i = 0; i < filtered.length; i++) {
+    var p = filtered[i];
+    var bk = bookmarks[p.n] ? 'on' : '';
+    var bkChar = bookmarks[p.n] ? '★' : '☆';
+    html += '<tr>' +
+      '<td class="mono gold">' + p.r + '</td>' +
+      '<td style="font-weight:600;color:#f3f4f6"><span class="bookmark ' + bk + '" onclick="toggleBookmark(\'' + p.n.replace(/'/g, "\\'") + '\')" title="Bookmark">' + bkChar + '</span> ' + p.a + '</td>' +
+      '<td class="mono" style="color:' + bbiColor(p.pb) + ';font-weight:700">' + p.pb.toFixed(1) + '</td>' +
+      '<td class="mono" style="color:' + bbiColor(p.db) + '">' + p.db.toFixed(1) + '</td>' +
+      '<td><span class="tier tier-' + p.pt + '">' + p.pt + '</span></td>' +
+      '<td class="mono" style="color:' + (p.w>=4?'#d4a843':p.w>=2?'#22c55e':'#6b7280') + '">' + p.w.toFixed(1) + '%</td>' +
+      '<td class="mono">' + p.t5.toFixed(1) + '%</td>' +
+      '<td class="mono">' + p.t10.toFixed(1) + '%</td>' +
+      '<td class="mono" style="color:' + mcColor(p.mc) + '">' + p.mc.toFixed(0) + '%</td>' +
+      '<td class="mono" style="color:#10b981">' + salFmt(p.sal) + '</td>' +
+      '<td class="mono" style="color:' + ownColor(p.own) + '">' + p.own.toFixed(1) + '%</td>' +
+      '<td class="mono" style="color:' + sgColor(p.asg) + '">' + (p.asg>0?'+':'') + p.asg.toFixed(2) + '</td>' +
+      '<td class="mono">' + p.ast + '</td>' +
+      '<td class="mono">' + p.dgr + '</td>' +
+      '<td style="font-size:0.55rem;color:#6b7280">' + p.tt + ' ' + p.wv + '</td>' +
+    '</tr>';
+  }
+  document.getElementById('rankBody').innerHTML = html;
+}
+
+// Column sort for rankings
+document.querySelectorAll('#rankTable th[data-col]').forEach(function(th) {
+  th.addEventListener('click', function() {
+    var col = th.dataset.col;
+    if (sortCol === col) {
+      sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortCol = col;
+      sortDir = th.dataset.type === 'n' ? 'desc' : 'asc';
+    }
+    document.querySelectorAll('#rankTable th').forEach(function(h) {
+      h.classList.remove('sorted');
+      var arr = h.querySelector('.sa');
+      if (arr) arr.textContent = '▲';
+    });
+    th.classList.add('sorted');
+    var arr = th.querySelector('.sa');
+    if (arr) arr.textContent = sortDir === 'asc' ? '▲' : '▼';
+    renderRankings();
+  });
+});
+
+// Tier filter
+document.querySelectorAll('.tier-f').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.tier-f').forEach(function(x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    tierFilter = b.dataset.tier;
+    renderRankings();
+  });
+});
+
+document.getElementById('searchBox').addEventListener('input', renderRankings);
+
+// Compare table
+function renderCompare() {
+  var q = document.getElementById('compareSearch').value.toLowerCase();
+  var filtered = P.filter(function(p) {
+    return !q || p.n.toLowerCase().indexOf(q) !== -1 || p.a.toLowerCase().indexOf(q) !== -1;
+  });
+  filtered = sortPlayers(filtered, compareSortCol, compareSortDir);
+  var html = '';
+  for (var i = 0; i < filtered.length; i++) {
+    var p = filtered[i];
+    html += '<tr>' +
+      '<td class="mono gold">' + p.r + '</td>' +
+      '<td style="font-weight:600">' + p.a + '</td>' +
+      '<td class="mono" style="color:' + bbiColor(p.pb) + ';font-weight:700">' + p.pb.toFixed(1) + '</td>' +
+      '<td class="mono" style="color:' + bbiColor(p.db) + '">' + p.db.toFixed(1) + '</td>' +
+      '<td class="mono">' + p.w.toFixed(1) + '%</td>' +
+      '<td class="mono">' + p.t5.toFixed(1) + '%</td>' +
+      '<td class="mono">' + p.t10.toFixed(1) + '%</td>' +
+      '<td class="mono">' + p.t20.toFixed(1) + '%</td>' +
+      '<td class="mono" style="color:' + mcColor(p.mc) + '">' + p.mc.toFixed(0) + '%</td>' +
+      '<td class="mono" style="color:#10b981">' + salFmt(p.sal) + '</td>' +
+      '<td class="mono" style="color:' + ownColor(p.own) + '">' + p.own.toFixed(1) + '%</td>' +
+      '<td class="mono" style="color:' + sgColor(p.asg) + '">' + (p.asg>0?'+':'') + p.asg.toFixed(2) + '</td>' +
+      '<td class="mono">' + p.dgr + '</td>' +
+      '<td class="mono" style="font-size:0.5rem;color:#9ca3af">' + p.f.tal.toFixed(0) + '/' + (typeof p.f.crs==='number'?p.f.crs.toFixed(0):p.f.crs) + '/' + p.f.frm.toFixed(0) + '/' + p.f.cut.toFixed(0) + '/' + p.f.lev.toFixed(0) + '</td>' +
+    '</tr>';
+  }
+  document.getElementById('compareBody').innerHTML = html;
+}
+
+document.querySelectorAll('#compareTable th[data-col]').forEach(function(th) {
+  th.addEventListener('click', function() {
+    var col = th.dataset.col;
+    if (compareSortCol === col) compareSortDir = compareSortDir === 'asc' ? 'desc' : 'asc';
+    else { compareSortCol = col; compareSortDir = th.dataset.type === 'n' ? 'desc' : 'asc'; }
+    document.querySelectorAll('#compareTable th').forEach(function(h) {
+      h.classList.remove('sorted');
+      var arr = h.querySelector('.sa');
+      if (arr) arr.textContent = '▲';
+    });
+    th.classList.add('sorted');
+    var arr = th.querySelector('.sa');
+    if (arr) arr.textContent = compareSortDir === 'asc' ? '▲' : '▼';
+    renderCompare();
+  });
+});
+document.getElementById('compareSearch').addEventListener('input', renderCompare);
+
+// Augusta Form
+function renderAugusta() {
+  var aug = P.slice().filter(function(p) { return p.ast > 0 || p.asg !== 0; }).sort(function(a,b) { return b.asg - a.asg; });
+  var html = '';
+  for (var i = 0; i < aug.length; i++) {
+    var p = aug[i];
+    var tier = 'NO HISTORY', mult = '1.00x';
+    if (p.asg >= 2.0) { tier = 'SPECIALIST'; mult = '1.25x'; }
+    else if (p.asg >= 1.0) { tier = 'COMFORTABLE'; mult = '1.15x'; }
+    else if (p.asg >= 0) { tier = 'NEUTRAL+'; mult = '1.05x'; }
+    var tc = p.asg>=2?'ELITE':p.asg>=1?'CONTENDER':p.asg>=0?'SOLID':'SLEEPER';
+    html += '<tr>' +
+      '<td style="font-weight:600">' + p.a + '</td>' +
+      '<td class="mono" style="color:' + sgColor(p.asg) + '">' + (p.asg>0?'+':'') + p.asg.toFixed(3) + '</td>' +
+      '<td class="mono">' + p.ast + '</td>' +
+      '<td><span class="tier tier-' + tc + '">' + tier + '</span></td>' +
+      '<td class="mono gold">' + mult + '</td>' +
+      '<td class="mono" style="color:' + bbiColor(p.pb) + ';font-weight:700">' + p.pb.toFixed(1) + '</td>' +
+    '</tr>';
+  }
+  document.getElementById('augBody').innerHTML = html;
+}
+
+// DFS Lineups
+var luFilter = 'ALL';
+function renderLineups() {
+  var filtered = luFilter === 'ALL' ? LU : LU.filter(function(l) { return l.type === luFilter; });
+  var typeColors = {'CORE':'#d4a843','STARS & SCRUBS':'#a78bfa','LEVERAGE':'#22c55e'};
+  var html = '';
+  for (var li = 0; li < filtered.length; li++) {
+    var l = filtered[li];
+    var rows = '';
+    for (var pi = 0; pi < l.players.length; pi++) {
+      var pl = l.players[pi];
+      var augTier = pl.aug==='SPECIALIST'?'ELITE':pl.aug==='COMFORTABLE'?'CONTENDER':pl.aug==='NEUTRAL+'?'SOLID':'SLEEPER';
+      rows += '<tr>' +
+        '<td style="font-weight:600">' + pl.n + '</td>' +
+        '<td class="mono" style="color:#10b981">' + salFmt(pl.sal) + '</td>' +
+        '<td class="mono" style="color:' + bbiColor(pl.bbi) + '">' + pl.bbi.toFixed(1) + '</td>' +
+        '<td class="mono" style="color:' + ownColor(pl.own) + '">' + pl.own.toFixed(1) + '%</td>' +
+        '<td><span class="tier tier-' + augTier + '">' + pl.aug + '</span></td>' +
+      '</tr>';
+    }
+    html += '<div class="lu-card">' +
+      '<div class="lu-hdr">' +
+        '<span class="lu-type" style="color:' + (typeColors[l.type]||'#d4a843') + '">' + l.type + ' #' + l.num + '</span>' +
+        '<div class="lu-stats">' +
+          '<div><span class="lu-stat-lbl">Sal </span><span class="lu-stat-val">' + salFmt(l.sal) + '</span></div>' +
+          '<div><span class="lu-stat-lbl">Own </span><span class="lu-stat-val" style="color:' + (l.own>85?'#ef4444':l.own>75?'#d4a843':'#22c55e') + '">' + l.own.toFixed(1) + '%</span></div>' +
+          '<div><span class="lu-stat-lbl">Proj </span><span class="lu-stat-val">' + l.proj.toFixed(1) + '</span></div>' +
+        '</div>' +
+      '</div>' +
+      '<table style="width:100%"><thead><tr><th>Player</th><th>Sal</th><th>BBI</th><th>Own%</th><th>Augusta</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table>' +
+    '</div>';
+  }
+  document.getElementById('lineupCards').innerHTML = html;
+
+  // Exposure chart
+  var sorted = Object.entries(EXP).sort(function(a,b) { return b[1].pct - a[1].pct; });
+  var expHtml = '';
+  for (var ei = 0; ei < sorted.length; ei++) {
+    var name = sorted[ei][0], data = sorted[ei][1];
+    expHtml += '<div class="exp-item">' +
+      '<div class="exp-name">' + name + '</div>' +
+      '<div class="exp-bar"><div class="exp-fill" style="width:' + data.pct + '%">' + data.count + '/12</div></div>' +
+      '<div class="exp-pct">' + data.pct.toFixed(0) + '%</div>' +
+    '</div>';
+  }
+  document.getElementById('exposureChart').innerHTML = expHtml;
+}
+
+document.querySelectorAll('.lu-filter').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.lu-filter').forEach(function(x) { x.classList.remove('on'); });
+    b.classList.add('on');
+    luFilter = b.dataset.lutype;
+    renderLineups();
+  });
+});
+
+// Charts
+function drawCharts() {
+  var canvas1 = document.getElementById('bbiChart');
+  if (!canvas1) return;
+  var ctx1 = canvas1.getContext('2d');
+  var top25 = P.slice(0, 25);
+  var cw = canvas1.parentElement.clientWidth - 24;
+  canvas1.width = cw; canvas1.height = 250;
+  ctx1.clearRect(0, 0, cw, 250);
+  var barW = (cw - 100) / 25;
+  var maxBBI = 80;
+  for (var i = 0; i < top25.length; i++) {
+    var p = top25[i];
+    var h = (p.pb / maxBBI) * 200;
+    var x = 70 + i * barW;
+    var y = 220 - h;
+    var grad = ctx1.createLinearGradient(x, y, x, 220);
+    grad.addColorStop(0, bbiColor(p.pb));
+    grad.addColorStop(1, 'rgba(10,10,15,0.8)');
+    ctx1.fillStyle = grad;
+    ctx1.fillRect(x + 2, y, barW - 4, h);
+    ctx1.save();
+    ctx1.translate(x + barW / 2, 232);
+    ctx1.rotate(-Math.PI / 4);
+    ctx1.fillStyle = '#9ca3af';
+    ctx1.font = '8px Inter, system-ui';
+    ctx1.textAlign = 'right';
+    ctx1.fillText(p.a, 0, 0);
+    ctx1.restore();
+    ctx1.fillStyle = bbiColor(p.pb);
+    ctx1.font = '600 8px JetBrains Mono, monospace';
+    ctx1.textAlign = 'center';
+    ctx1.fillText(p.pb.toFixed(0), x + barW / 2, y - 3);
+  }
+
+  // Scatter
+  var canvas2 = document.getElementById('scatterChart');
+  var ctx2 = canvas2.getContext('2d');
+  canvas2.width = cw; canvas2.height = 300;
+  ctx2.clearRect(0, 0, cw, 300);
+  var pad = {l:55, r:15, t:15, b:35};
+  var pw = cw - pad.l - pad.r, ph = 300 - pad.t - pad.b;
+  var salMin = 5500, salMax = 15000, bbiMin = 20, bbiMax2 = 80;
+  ctx2.strokeStyle = '#1f2937'; ctx2.lineWidth = 1;
+  for (var s = 6000; s <= 14000; s += 2000) {
+    var gx = pad.l + (s - salMin) / (salMax - salMin) * pw;
+    ctx2.beginPath(); ctx2.moveTo(gx, pad.t); ctx2.lineTo(gx, pad.t + ph); ctx2.stroke();
+    ctx2.fillStyle = '#6b7280'; ctx2.font = '8px JetBrains Mono'; ctx2.textAlign = 'center';
+    ctx2.fillText('$' + s/1000 + 'K', gx, pad.t + ph + 12);
+  }
+  for (var b = 30; b <= 80; b += 10) {
+    var gy = pad.t + ph - (b - bbiMin) / (bbiMax2 - bbiMin) * ph;
+    ctx2.beginPath(); ctx2.moveTo(pad.l, gy); ctx2.lineTo(pad.l + pw, gy); ctx2.stroke();
+    ctx2.fillStyle = '#6b7280'; ctx2.font = '8px JetBrains Mono'; ctx2.textAlign = 'right';
+    ctx2.fillText(b.toString(), pad.l - 6, gy + 3);
+  }
+  var pointData = [];
+  for (var i = 0; i < P.length; i++) {
+    var p = P[i];
+    var px = pad.l + (p.sal - salMin) / (salMax - salMin) * pw;
+    var py = pad.t + ph - (p.pb - bbiMin) / (bbiMax2 - bbiMin) * ph;
+    var pr = 2.5 + p.own / 9;
+    ctx2.beginPath(); ctx2.arc(px, py, pr, 0, Math.PI * 2);
+    ctx2.fillStyle = bbiColor(p.pb) + '99';
+    ctx2.fill();
+    ctx2.strokeStyle = bbiColor(p.pb); ctx2.lineWidth = 0.8; ctx2.stroke();
+    pointData.push({x:px, y:py, r:pr, p:p});
+  }
+  for (var i = 0; i < Math.min(15, P.length); i++) {
+    var p = P[i];
+    var lx = pad.l + (p.sal - salMin) / (salMax - salMin) * pw;
+    var ly = pad.t + ph - (p.pb - bbiMin) / (bbiMax2 - bbiMin) * ph;
+    ctx2.fillStyle = '#e5e7eb'; ctx2.font = '7px Inter, system-ui'; ctx2.textAlign = 'left';
+    ctx2.fillText(p.a, lx + 5, ly - 5);
+  }
+
+  var tt = document.getElementById('scatterTooltip');
+  canvas2.onmousemove = function(e) {
+    var rect = canvas2.getBoundingClientRect();
+    var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    var found = null;
+    for (var j = 0; j < pointData.length; j++) {
+      var pt = pointData[j];
+      var dx = mx - pt.x, dy = my - pt.y;
+      if (dx*dx + dy*dy < (pt.r+4)*(pt.r+4)) { found = pt; break; }
+    }
+    if (found) {
+      var fp = found.p;
+      tt.innerHTML = '<div class="tt-row"><span class="tt-lbl">Player</span><span class="tt-val" style="color:#f3f4f6">' + fp.a + '</span></div>' +
+        '<div class="tt-row"><span class="tt-lbl">Pool BBI</span><span class="tt-val">' + fp.pb.toFixed(1) + '</span></div>' +
+        '<div class="tt-row"><span class="tt-lbl">DFS BBI</span><span class="tt-val" style="color:#60a5fa">' + fp.db.toFixed(1) + '</span></div>' +
+        '<div class="tt-row"><span class="tt-lbl">Salary</span><span class="tt-val" style="color:#10b981">' + salFmt(fp.sal) + '</span></div>' +
+        '<div class="tt-row"><span class="tt-lbl">Win%</span><span class="tt-val">' + fp.w.toFixed(1) + '%</span></div>' +
+        '<div class="tt-row"><span class="tt-lbl">Own%</span><span class="tt-val" style="color:' + ownColor(fp.own) + '">' + fp.own.toFixed(1) + '%</span></div>' +
+        '<div class="tt-row"><span class="tt-lbl">Aug SG</span><span class="tt-val" style="color:' + sgColor(fp.asg) + '">' + (fp.asg>0?'+':'') + fp.asg.toFixed(2) + '</span></div>';
+      tt.style.left = (e.clientX + 12) + 'px';
+      tt.style.top = (e.clientY - 10) + 'px';
+      tt.classList.add('vis');
+    } else {
+      tt.classList.remove('vis');
+    }
+  };
+  canvas2.onmouseleave = function() { tt.classList.remove('vis'); };
+}
+
+// Keyboard shortcut: Ctrl+K to focus search
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('searchBox').focus();
+    document.querySelector('.tab[data-t="rankings"]').click();
+  }
+});
+
+// Initial render
+renderRankings();
+renderCompare();
+renderAugusta();
+renderLineups();
+</script>
+</body>
+</html>
