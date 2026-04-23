@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THEMIS Simulator · BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    /* =========================================================
+       SIMULATOR — PAGE-SPECIFIC STYLES
+       (page-head, page-head-meta, .seg, .page-toolbar live in components.css)
+       ========================================================= */
+
+    /* ---------- SECTION FRAMING ---------- */
+    .sim-section { margin-bottom: var(--space-10); }
+    .sim-section-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px dashed var(--border-soft);
+    }
+    .sim-section-head h2 {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+    .sim-section-head .section-num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-500);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .sim-section-hint {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      max-width: 48ch;
+      text-align: right;
+      line-height: 1.55;
+    }
+
+    /* ---------- SECTION 1: BUILDER ---------- */
+    .builder-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 400px;
+      gap: var(--space-5);
+      align-items: start;
+    }
+    @media (max-width: 1100px) { .builder-grid { grid-template-columns: 1fr; } }
+
+    .builder-card {
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.03), transparent 40%), var(--surface-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      position: relative;
+      overflow: hidden;
+    }
+    .builder-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-400), transparent);
+      opacity: 0.7;
+    }
+    .builder-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .builder-head h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.015em;
+    }
+    .builder-filled {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+    .builder-filled strong { color: var(--gold-300); }
+
+    /* Lineup slots */
+    .slots {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+    .slot {
+      display: grid;
+      grid-template-columns: 28px 1fr 80px 56px 50px 28px;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3);
+      border-top: 1px solid var(--border-soft);
+      background: var(--surface-3);
+      font-size: var(--fs-sm);
+      transition: background var(--dur-fast);
+    }
+    .slot:first-child { border-top: 0; }
+    .slot.filled { background: linear-gradient(90deg, rgba(212, 168, 67, 0.05), transparent 30%), var(--surface-3); }
+    .slot.empty {
+      color: var(--text-dimmed);
+      background: var(--surface-2);
+      cursor: default;
+    }
+    .slot-num {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-wide);
+    }
+    .slot.filled .slot-num { color: var(--gold-300); }
+    .slot-name { font-weight: 600; color: var(--text-primary); font-size: var(--fs-sm); }
+    .slot.empty .slot-name { color: var(--text-dimmed); font-weight: 400; font-style: italic; }
+    .slot-tier { font-size: 9px; padding: 2px 5px; border-radius: 3px; display: inline-block; margin-left: 6px; letter-spacing: var(--tracking-wide); vertical-align: 2px; }
+    .slot-salary, .slot-bbi, .slot-proj {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      font-size: var(--fs-xs);
+    }
+    .slot-bbi { color: var(--gold-300); font-weight: 600; }
+    .slot-proj { color: var(--text-body); }
+    .slot-remove {
+      background: var(--surface-5);
+      border: 1px solid var(--border-base);
+      color: var(--text-muted);
+      width: 22px; height: 22px;
+      border-radius: var(--radius-sm);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all var(--dur-fast);
+      font-size: 12px;
+      line-height: 1;
+    }
+    .slot-remove:hover { background: rgba(248, 113, 113, 0.18); color: var(--negative); border-color: rgba(248, 113, 113, 0.35); }
+
+    /* Cap bar */
+    .cap-wrap { margin-bottom: var(--space-4); }
+    .cap-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .cap-row strong { color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
+    .cap-row .used { color: var(--gold-300); }
+    .cap-row .over { color: var(--negative); }
+    .cap-bar {
+      height: 8px;
+      background: var(--surface-1);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .cap-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold-600), var(--gold-400));
+      transition: width var(--dur-base) var(--ease-out);
+    }
+    .cap-bar.over .cap-bar-fill { background: linear-gradient(90deg, var(--negative), #fca5a5); }
+
+    /* KPI strip */
+    .builder-kpis {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+    .bkpi {
+      background: var(--surface-3);
+      padding: var(--space-3) var(--space-2);
+      text-align: center;
+    }
+    .bkpi .lbl {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .bkpi .val {
+      font-family: var(--font-mono);
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+    .bkpi .val.gold { color: var(--gold-300); }
+    .bkpi .val.negative { color: var(--negative); }
+    .bkpi .val.positive { color: var(--positive); }
+
+    /* Distribution mini chart */
+    .dist-card {
+      padding: var(--space-4);
+      background: var(--surface-1);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-4);
+    }
+    .dist-card-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: var(--space-3);
+    }
+    .dist-card-head h4 {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .dist-card-head .dist-span {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+      font-variant-numeric: tabular-nums;
+    }
+    .dist-svg { width: 100%; height: 90px; display: block; }
+    .dist-svg .band     { fill: rgba(212, 168, 67, 0.10); }
+    .dist-svg .band-mid { fill: rgba(212, 168, 67, 0.20); }
+    .dist-svg .median   { stroke: var(--gold-500); stroke-width: 2; }
+    .dist-svg .axis-tick { stroke: var(--border-soft); stroke-width: 1; }
+    .dist-svg .axis-label { fill: var(--text-dimmed); font-family: var(--font-mono); font-size: 9px; }
+    .dist-svg .marker-label { fill: var(--text-muted); font-family: var(--font-mono); font-size: 9px; }
+
+    /* Builder actions */
+    .builder-actions {
+      display: flex; gap: var(--space-2); flex-wrap: wrap;
+    }
+    .preset-select {
+      flex: 1; min-width: 160px;
+      padding: 7px 10px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      font-size: var(--fs-xs);
+      cursor: pointer;
+      transition: border-color var(--dur-fast);
+    }
+    .preset-select:hover { border-color: var(--border-strong); }
+    .preset-select:focus { border-color: var(--border-gold); outline: none; }
+
+    /* ---------- PLAYER POOL ---------- */
+    .pool-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      display: flex; flex-direction: column;
+      max-height: 720px;
+    }
+    .pool-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: var(--space-3);
+    }
+    .pool-head h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .pool-head small { font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-muted); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+    .pool-filters { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-3); }
+    .pool-list {
+      overflow-y: auto;
+      flex: 1;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      background: var(--surface-1);
+      min-height: 300px;
+    }
+    .pool-row {
+      display: grid;
+      grid-template-columns: 1fr 58px 42px 42px 32px;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 7px var(--space-3);
+      border-top: 1px solid var(--border-soft);
+      font-size: var(--fs-xs);
+      cursor: pointer;
+      transition: background var(--dur-fast);
+    }
+    .pool-row:first-child { border-top: 0; }
+    .pool-row:hover { background: var(--surface-3); }
+    .pool-row.taken { opacity: 0.35; cursor: not-allowed; }
+    .pool-row.taken:hover { background: var(--surface-1); }
+    .pool-row .pn {
+      font-weight: 500; color: var(--text-primary);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .pool-row .ps, .pool-row .pb, .pool-row .pv {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: var(--text-body);
+    }
+    .pool-row .pb { color: var(--gold-300); font-weight: 600; }
+    .pool-row .add-btn {
+      background: var(--surface-5);
+      border: 1px solid var(--border-base);
+      color: var(--text-muted);
+      width: 22px; height: 22px;
+      border-radius: var(--radius-sm);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+      transition: all var(--dur-fast);
+    }
+    .pool-row:hover .add-btn { background: rgba(212, 168, 67, 0.18); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
+    .pool-row.taken .add-btn { opacity: 0.3; }
+
+    .pool-empty {
+      padding: var(--space-6);
+      text-align: center;
+      color: var(--text-dimmed);
+      font-size: var(--fs-xs);
+    }
+
+    /* ---------- SECTION 2: WEIGHTS ---------- */
+    .weights-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 420px;
+      gap: var(--space-5);
+      align-items: start;
+    }
+    @media (max-width: 1100px) { .weights-grid { grid-template-columns: 1fr; } }
+
+    .sliders-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+    }
+    .sliders-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: var(--space-4);
+    }
+    .sliders-head h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .sliders-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 58px;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-2) 0;
+      border-top: 1px dashed var(--border-subtle);
+    }
+    .sliders-row:first-child { border-top: 0; padding-top: 0; }
+    .sliders-row:last-child { padding-bottom: 0; }
+    .slider-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+      letter-spacing: var(--tracking-wide);
+    }
+    .slider-label small { display: block; color: var(--text-dimmed); font-size: 9px; letter-spacing: var(--tracking-widest); text-transform: uppercase; margin-top: 1px; }
+    .slider-input {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px;
+      background: var(--surface-1);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold-400);
+      border: 2px solid var(--surface-1);
+      box-shadow: 0 0 0 1px var(--gold-600), 0 2px 4px rgba(0,0,0,0.4);
+      cursor: grab;
+    }
+    .slider-input::-moz-range-thumb {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold-400);
+      border: 2px solid var(--surface-1);
+      box-shadow: 0 0 0 1px var(--gold-600);
+      cursor: grab;
+    }
+    .slider-input::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.15); }
+    .slider-value {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--gold-300);
+      font-weight: 600;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .sliders-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: var(--space-4);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-soft);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+    }
+    .sliders-sum { color: var(--text-muted); }
+    .sliders-sum strong { color: var(--text-primary); }
+    .sliders-sum.warn strong { color: var(--warning); }
+
+    /* Weight playground re-ranked board */
+    .rerank-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      max-height: 580px;
+      display: flex; flex-direction: column;
+    }
+    .rerank-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: var(--space-3);
+    }
+    .rerank-head h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .rerank-head small { font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--gold-300); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+    .rerank-list {
+      flex: 1;
+      overflow-y: auto;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      background: var(--surface-1);
+    }
+    .rerank-row {
+      display: grid;
+      grid-template-columns: 36px 1fr 54px 40px;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 6px var(--space-3);
+      border-top: 1px solid var(--border-subtle);
+      font-size: var(--fs-xs);
+    }
+    .rerank-row:first-child { border-top: 0; }
+    .rerank-row .rr-rank {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .rerank-row .rr-rank.gold { color: var(--gold-300); }
+    .rerank-row .rr-name {
+      font-weight: 500; color: var(--text-primary);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .rerank-row .rr-bbi {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--gold-300);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    .rerank-row .rr-delta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .rerank-row .rr-delta.up { color: var(--positive); }
+    .rerank-row .rr-delta.down { color: var(--negative); }
+    .rerank-row .rr-delta.flat { color: var(--text-dimmed); }
+
+    /* Info / how-it-works callouts */
+    .sim-note {
+      padding: var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-left: 2px solid var(--gold-500);
+      border-radius: var(--radius-lg);
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-top: var(--space-4);
+    }
+    .sim-note strong { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <!-- PAGE HEAD -->
+    <header class="page-head">
+      <div class="eyebrow">THEMIS sandbox · BBI v8.5</div>
+      <h1>Build lineups. Tune the model.</h1>
+      <p>A live sandbox backed by the THEMIS per-player distribution layer. Draft any 6 golfers, and the tool reprices the lineup against 10,000 simulated tournaments. Tune the 10 BBI factor weights and watch the top of the field re-sort in real time.</p>
+      <div class="page-head-meta">
+        <span>Salary cap <strong id="simCap">$50,000</strong></span>
+        <span>Roster <strong>6 golfers</strong></span>
+        <span>Field <strong id="simField">—</strong></span>
+        <span>Per-player σ sourced from <strong class="gold">THEMIS</strong></span>
+      </div>
+    </header>
+
+    <!-- ========== SECTION 1: LINEUP BUILDER ========== -->
+    <section class="sim-section">
+      <div class="sim-section-head">
+        <div>
+          <span class="section-num">01 · Lineup builder</span>
+          <h2>Draft a lineup, see the distribution</h2>
+        </div>
+        <p class="sim-section-hint">Add players from the pool until all six slots are filled. The band chart below samples convolved Gaussian distributions for a fast approximation of THEMIS Monte Carlo.</p>
+      </div>
+
+      <div class="builder-grid">
+        <!-- LEFT: BUILDER -->
+        <div class="builder-card">
+          <div class="builder-head">
+            <h3>Your lineup</h3>
+            <div class="builder-filled"><strong id="slotsFilled">0</strong> of 6 slots</div>
+          </div>
+
+          <div class="slots" id="slots"></div>
+
+          <!-- Cap bar -->
+          <div class="cap-wrap">
+            <div class="cap-row">
+              <span>Salary used <strong class="used" id="capUsed">$0</strong></span>
+              <span>Remaining <strong id="capLeft">$50,000</strong></span>
+            </div>
+            <div class="cap-bar" id="capBar"><div class="cap-bar-fill" id="capFill"></div></div>
+          </div>
+
+          <!-- KPIs -->
+          <div class="builder-kpis">
+            <div class="bkpi"><div class="lbl">Sum BBI</div><div class="val gold" id="kpiBBI">—</div></div>
+            <div class="bkpi"><div class="lbl">Mean proj</div><div class="val" id="kpiMean">—</div></div>
+            <div class="bkpi"><div class="lbl">p5 floor</div><div class="val" id="kpiP5">—</div></div>
+            <div class="bkpi"><div class="lbl">p95 ceil</div><div class="val" id="kpiP95">—</div></div>
+            <div class="bkpi"><div class="lbl">Avg own</div><div class="val" id="kpiOwn">—</div></div>
+          </div>
+
+          <!-- Distribution chart -->
+          <div class="dist-card">
+            <div class="dist-card-head">
+              <h4>Lineup points distribution</h4>
+              <span class="dist-span" id="distSpan">—</span>
+            </div>
+            <svg class="dist-svg" id="distSvg" viewBox="0 0 600 90" preserveAspectRatio="none" aria-label="Lineup points distribution"></svg>
+          </div>
+
+          <!-- Actions -->
+          <div class="builder-actions">
+            <select class="preset-select" id="presetSelect">
+              <option value="">Load preset lineup…</option>
+            </select>
+            <button class="btn btn-sm" id="btnClear">Clear</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: PLAYER POOL -->
+        <aside class="pool-card">
+          <div class="pool-head">
+            <h3>Player pool</h3>
+            <small id="poolCount">0 players</small>
+          </div>
+          <div class="pool-filters">
+            <label class="search-input" style="min-width: unset; width: 100%;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="poolSearch" placeholder="Search players…" aria-label="Search player pool"/>
+            </label>
+            <div class="seg" role="radiogroup" aria-label="Sort pool">
+              <button class="active" data-sort="bbi">BBI</button>
+              <button data-sort="salary">$</button>
+              <button data-sort="p95">p95</button>
+              <button data-sort="own">Own</button>
+              <button data-sort="name">A–Z</button>
+            </div>
+          </div>
+          <div class="pool-list" id="poolList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ========== SECTION 2: WEIGHT PLAYGROUND ========== -->
+    <section class="sim-section">
+      <div class="sim-section-head">
+        <div>
+          <span class="section-num">02 · Weight playground</span>
+          <h2>Tune the 10 factors. Re-rank the field.</h2>
+        </div>
+        <p class="sim-section-hint">Adjust any factor weight to interrogate its impact. The top-20 board on the right resorts in real time. Your weights don't have to sum to 1 — the model normalizes internally.</p>
+      </div>
+
+      <div class="weights-grid">
+        <!-- LEFT: sliders -->
+        <div class="sliders-card">
+          <div class="sliders-head">
+            <h3>Factor weights</h3>
+            <div class="seg" role="radiogroup" aria-label="Weight preset">
+              <button class="active" data-preset="pool">Pool</button>
+              <button data-preset="dfs">DFS</button>
+            </div>
+          </div>
+          <div id="slidersList"></div>
+          <div class="sliders-footer">
+            <span class="sliders-sum" id="sumLabel">Σ weights = <strong>1.00</strong></span>
+            <button class="btn btn-sm" id="btnResetWeights">Reset to preset</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: re-ranked leaderboard -->
+        <aside class="rerank-card">
+          <div class="rerank-head">
+            <h3>Top 20 — re-ranked</h3>
+            <small>Live</small>
+          </div>
+          <div class="rerank-list" id="rerankList"></div>
+        </aside>
+      </div>
+
+      <div class="sim-note">
+        <strong>How this works.</strong> BBI is a weighted sum of ten normalized factor scores.
+        The sliders override the weight vector, and the top-20 board is resorted on every change.
+        The lineup distribution model assumes per-player independence — true THEMIS samples 10,000
+        tournaments with correlation between players in the same tee group, so this sandbox
+        slightly under-estimates variance at the extremes.
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+
+  <script>
+    // ===================================================================
+    // SIMULATOR — state machine
+    // ===================================================================
+    const FACTORS = ['talent','courseFit','form','cutSafety','floor','ceiling','leverage','contrarian','dfsValue','strategic'];
+    const FACTOR_LABELS = {
+      talent: 'Talent', courseFit: 'Course fit', form: 'Form',
+      cutSafety: 'Cut safety', floor: 'Floor', ceiling: 'Ceiling',
+      leverage: 'Leverage', contrarian: 'Contrarian',
+      dfsValue: 'DFS value', strategic: 'Strategic'
+    };
+    const FACTOR_HINT = {
+      talent: 'baseline skill', courseFit: 'course-specific fit',
+      form: 'recent rounds (8wk)', cutSafety: 'weekend odds',
+      floor: '25th pct expected', ceiling: '75th pct expected',
+      leverage: 'ownership leverage', contrarian: 'field contrarian',
+      dfsValue: 'points-per-$1k', strategic: 'manual override'
+    };
+    const ROSTER = 6;
+
+    const state = {
+      players: [],           // enriched players (bbi + themis joined)
+      playersById: new Map(),
+      lineup: [],            // array of dg_ids (up to 6)
+      weightsBase: null,     // baseline (pool or dfs defaults)
+      weights: null,         // current slider positions
+      preset: 'pool',
+      poolSort: 'bbi',
+      poolSearch: '',
+      defaultBBI: new Map(), // baseline BBI for rank-delta display
+      cap: 50000,
+      presets: []            // preset lineups from dfs_lineups
+    };
+
+    (async function init() {
+      await window.BBI.renderHeader('simulator.html');
+      await window.BBI.renderFooter();
+
+      const [ev, rk, th, lu] = await Promise.all([
+        window.BBI.data.load(window.BBI.data.paths.currentEvent),
+        window.BBI.data.load(window.BBI.data.paths.bbiRankings),
+        window.BBI.data.load(window.BBI.data.paths.themis),
+        window.BBI.data.load(window.BBI.data.paths.dfsLineups),
+      ]);
+
+      if (lu?.salary_cap) state.cap = lu.salary_cap;
+      const field = rk?.players?.length || 0;
+      const simField = document.getElementById('simField');
+      const simCap = document.getElementById('simCap');
+      if (simField) simField.textContent = field ? `${field} players` : '—';
+      if (simCap) simCap.textContent = `$${state.cap.toLocaleString()}`;
+
+      // Build enriched player list
+      const themisPer = th?.per_player || {};
+      const wp = rk?.weights_pool || {};
+      const wd = rk?.weights_dfs || {};
+      state.players = (rk?.players || []).map(p => {
+        const td = themisPer[p.dg_id] || {};
+        // Recover raw factor values from pool_decomp / weight
+        const raw = {};
+        FACTORS.forEach(f => {
+          const contrib = p.pool_decomp?.[f];
+          const w = wp[f];
+          raw[f] = (contrib != null && w > 0) ? contrib / w : 0;
+        });
+        return {
+          dg_id: p.dg_id,
+          name: p.name,
+          tier: p.tier,
+          salary: p.salary,
+          bbi_pool: p.bbi_pool,
+          bbi_dfs: p.bbi_dfs,
+          proj_own: p.proj_own,
+          raw,                            // raw factor values for recomputation
+          mean: td.mean_points ?? p.proj_total ?? 0,
+          std:  td.points_std ?? p.std_dev ?? 0,
+          p5:  td.p5  ?? 0,
+          p25: td.p25 ?? 0,
+          p50: td.p50 ?? 0,
+          p75: td.p75 ?? 0,
+          p95: td.p95 ?? 0,
+        };
+      });
+      state.players.forEach(p => state.playersById.set(p.dg_id, p));
+
+      // Baseline BBI for rank-delta
+      state.players.forEach(p => state.defaultBBI.set(p.dg_id, p.bbi_pool));
+
+      // Weights
+      state.weightsBase = { pool: { ...wp }, dfs: { ...wd } };
+      state.weights = { ...wp };
+
+      // Presets
+      state.presets = (lu?.lineups || []).slice(0, 12);
+      const sel = document.getElementById('presetSelect');
+      if (sel) {
+        state.presets.forEach((L, i) => {
+          const opt = document.createElement('option');
+          opt.value = String(i);
+          opt.textContent = L.label || `Lineup ${i + 1}`;
+          sel.appendChild(opt);
+        });
+        sel.addEventListener('change', (e) => {
+          const idx = parseInt(e.target.value, 10);
+          if (!isNaN(idx) && state.presets[idx]) loadPreset(state.presets[idx]);
+          e.target.value = '';
+        });
+      }
+
+      // Sliders
+      renderSliders();
+      // Pool events
+      wireToolbars();
+      // Initial renders
+      renderSlots();
+      renderPool();
+      renderReranked();
+      recomputeLineup();
+      window.observeAnimations?.(document);
+    })();
+
+    // ---------- Slot rendering ----------
+    function renderSlots() {
+      const mount = document.getElementById('slots');
+      if (!mount) return;
+      mount.innerHTML = '';
+      for (let i = 0; i < ROSTER; i++) {
+        const dg = state.lineup[i];
+        const p = dg ? state.playersById.get(dg) : null;
+        const row = document.createElement('div');
+        row.className = 'slot ' + (p ? 'filled' : 'empty');
+        if (p) {
+          row.innerHTML = `
+            <span class="slot-num">G${i+1}</span>
+            <span class="slot-name">${fmt.abbrevName(p.name)}<span class="slot-tier tier tier-${(p.tier||'').toLowerCase()}">${(p.tier||'').slice(0,4)}</span></span>
+            <span class="slot-salary">$${p.salary?.toLocaleString?.() || '—'}</span>
+            <span class="slot-bbi">${p.bbi_pool?.toFixed(1) ?? '—'}</span>
+            <span class="slot-proj">${p.mean?.toFixed(1) ?? '—'}</span>
+            <button class="slot-remove" data-remove="${p.dg_id}" title="Remove">×</button>`;
+        } else {
+          row.innerHTML = `
+            <span class="slot-num">G${i+1}</span>
+            <span class="slot-name">Click a player in the pool →</span>
+            <span class="slot-salary">—</span>
+            <span class="slot-bbi">—</span>
+            <span class="slot-proj">—</span>
+            <span></span>`;
+        }
+        mount.appendChild(row);
+      }
+      mount.querySelectorAll('[data-remove]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = parseInt(btn.getAttribute('data-remove'), 10);
+          state.lineup = state.lineup.filter(x => x !== id);
+          renderSlots(); renderPool(); recomputeLineup();
+        });
+      });
+      const filled = document.getElementById('slotsFilled');
+      if (filled) filled.textContent = String(state.lineup.length);
+    }
+
+    // ---------- Pool rendering ----------
+    function wireToolbars() {
+      const search = document.getElementById('poolSearch');
+      if (search) {
+        search.addEventListener('input', (e) => {
+          state.poolSearch = (e.target.value || '').trim().toLowerCase();
+          renderPool();
+        });
+      }
+      document.querySelectorAll('.seg[aria-label="Sort pool"] button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.seg[aria-label="Sort pool"] button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.poolSort = btn.getAttribute('data-sort');
+          renderPool();
+        });
+      });
+      document.querySelectorAll('.seg[aria-label="Weight preset"] button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.seg[aria-label="Weight preset"] button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.preset = btn.getAttribute('data-preset');
+          state.weights = { ...state.weightsBase[state.preset] };
+          renderSliders();
+          renderReranked();
+        });
+      });
+      const clr = document.getElementById('btnClear');
+      if (clr) clr.addEventListener('click', () => {
+        state.lineup = [];
+        renderSlots(); renderPool(); recomputeLineup();
+      });
+      const rst = document.getElementById('btnResetWeights');
+      if (rst) rst.addEventListener('click', () => {
+        state.weights = { ...state.weightsBase[state.preset] };
+        renderSliders(); renderReranked();
+      });
+    }
+
+    function renderPool() {
+      const mount = document.getElementById('poolList');
+      const countEl = document.getElementById('poolCount');
+      if (!mount) return;
+
+      const filterText = state.poolSearch;
+      let list = state.players.filter(p => !filterText || p.name.toLowerCase().includes(filterText));
+
+      const sortKey = state.poolSort;
+      list.sort((a, b) => {
+        if (sortKey === 'name') return a.name.localeCompare(b.name);
+        const av = sortKey === 'own' ? (a.proj_own || 0)
+                  : sortKey === 'salary' ? (a.salary || 0)
+                  : sortKey === 'p95' ? (a.p95 || 0)
+                  : (a.bbi_pool || 0);
+        const bv = sortKey === 'own' ? (b.proj_own || 0)
+                  : sortKey === 'salary' ? (b.salary || 0)
+                  : sortKey === 'p95' ? (b.p95 || 0)
+                  : (b.bbi_pool || 0);
+        return bv - av; // desc
+      });
+
+      if (countEl) countEl.textContent = `${list.length} player${list.length === 1 ? '' : 's'}`;
+
+      if (!list.length) {
+        mount.innerHTML = `<div class="pool-empty">No players match your filter.</div>`;
+        return;
+      }
+      const inLineup = new Set(state.lineup);
+      const atCap = state.lineup.length >= ROSTER;
+      mount.innerHTML = list.map(p => {
+        const taken = inLineup.has(p.dg_id) || atCap;
+        return `
+          <div class="pool-row ${taken ? 'taken' : ''}" data-id="${p.dg_id}">
+            <span class="pn">${fmt.abbrevName(p.name)}</span>
+            <span class="ps">$${(p.salary || 0).toLocaleString()}</span>
+            <span class="pb">${(p.bbi_pool || 0).toFixed(1)}</span>
+            <span class="pv">${(p.p95 || 0).toFixed(0)}</span>
+            <span class="add-btn">+</span>
+          </div>`;
+      }).join('');
+
+      mount.querySelectorAll('.pool-row').forEach(row => {
+        row.addEventListener('click', () => {
+          if (row.classList.contains('taken')) return;
+          const id = parseInt(row.getAttribute('data-id'), 10);
+          if (state.lineup.length < ROSTER && !state.lineup.includes(id)) {
+            state.lineup.push(id);
+            renderSlots(); renderPool(); recomputeLineup();
+          }
+        });
+      });
+    }
+
+    // ---------- Lineup recomputation ----------
+    function recomputeLineup() {
+      const players = state.lineup.map(id => state.playersById.get(id)).filter(Boolean);
+      const sumSalary = players.reduce((a, p) => a + (p.salary || 0), 0);
+      const sumBBI    = players.reduce((a, p) => a + (p.bbi_pool || 0), 0);
+      const sumMean   = players.reduce((a, p) => a + (p.mean || 0), 0);
+      const avgOwn    = players.length ? players.reduce((a, p) => a + (p.proj_own || 0), 0) / players.length : 0;
+
+      // Convolve independent Gaussians → sum std is sqrt(Σσ²)
+      const sumVar = players.reduce((a, p) => a + Math.pow(p.std || 0, 2), 0);
+      const sumStd = Math.sqrt(sumVar);
+      // Approximate percentiles from Normal(sumMean, sumStd)
+      const Z = (pct) => { // inverse CDF approximation
+        const Zmap = { 0.05: -1.6449, 0.25: -0.6745, 0.50: 0, 0.75: 0.6745, 0.95: 1.6449 };
+        return Zmap[pct];
+      };
+      const p = (pct) => sumMean + Z(pct) * sumStd;
+      const p5 = p(0.05), p25 = p(0.25), p50 = p(0.50), p75 = p(0.75), p95 = p(0.95);
+
+      // KPIs
+      const capUsed = document.getElementById('capUsed');
+      const capLeft = document.getElementById('capLeft');
+      const capBar  = document.getElementById('capBar');
+      const capFill = document.getElementById('capFill');
+      if (capUsed) capUsed.textContent = '$' + sumSalary.toLocaleString();
+      if (capLeft) {
+        const left = state.cap - sumSalary;
+        capLeft.textContent = '$' + left.toLocaleString();
+        capLeft.classList.toggle('over', left < 0);
+      }
+      if (capBar) capBar.classList.toggle('over', sumSalary > state.cap);
+      if (capFill) capFill.style.width = `${Math.min(100, (sumSalary / state.cap) * 100)}%`;
+
+      document.getElementById('kpiBBI').textContent = players.length ? sumBBI.toFixed(0) : '—';
+      document.getElementById('kpiMean').textContent = players.length ? sumMean.toFixed(1) : '—';
+      document.getElementById('kpiP5').textContent = players.length ? p5.toFixed(0) : '—';
+      document.getElementById('kpiP95').textContent = players.length ? p95.toFixed(0) : '—';
+      const ownEl = document.getElementById('kpiOwn');
+      if (ownEl) ownEl.textContent = players.length ? avgOwn.toFixed(1) + '%' : '—';
+
+      // Distribution visual
+      renderDist(players.length ? { p5, p25, p50, p75, p95, mean: sumMean, std: sumStd } : null);
+    }
+
+    function renderDist(dist) {
+      const svg = document.getElementById('distSvg');
+      const spanEl = document.getElementById('distSpan');
+      if (!svg) return;
+      const W = 600, H = 90;
+      if (!dist) {
+        svg.innerHTML = `<text x="${W/2}" y="${H/2}" text-anchor="middle" class="axis-label" dominant-baseline="middle">Add players to see distribution</text>`;
+        if (spanEl) spanEl.textContent = '—';
+        return;
+      }
+      // Choose a domain roughly [p5 - 0.6σ, p95 + 0.6σ]
+      const pad = dist.std * 0.6;
+      const xmin = dist.p5 - pad;
+      const xmax = dist.p95 + pad;
+      const range = xmax - xmin || 1;
+      const x = (v) => ((v - xmin) / range) * (W - 40) + 20;
+
+      const y0 = 14, yTop = 42, yBot = 62;
+      const yAxis = 74;
+
+      // 90% band p5→p95
+      const bandLeft  = x(dist.p5);
+      const bandRight = x(dist.p95);
+      // 50% band p25→p75
+      const midLeft  = x(dist.p25);
+      const midRight = x(dist.p75);
+      // median line
+      const mx = x(dist.p50);
+
+      // Build tick labels
+      const ticks = [
+        { label: 'p5',  val: dist.p5,  x: bandLeft },
+        { label: 'p25', val: dist.p25, x: midLeft },
+        { label: 'p50', val: dist.p50, x: mx },
+        { label: 'p75', val: dist.p75, x: midRight },
+        { label: 'p95', val: dist.p95, x: bandRight },
+      ];
+
+      svg.innerHTML = `
+        <rect class="band"     x="${bandLeft}" y="${yTop}" width="${bandRight - bandLeft}" height="${yBot - yTop}" rx="2" />
+        <rect class="band-mid" x="${midLeft}"  y="${yTop}" width="${midRight - midLeft}"  height="${yBot - yTop}" rx="2" />
+        <line class="median"   x1="${mx}" y1="${yTop - 4}" x2="${mx}" y2="${yBot + 4}" />
+        <line class="axis-tick" x1="20" y1="${yAxis}" x2="${W - 20}" y2="${yAxis}" />
+        ${ticks.map(t => `
+          <g>
+            <line class="axis-tick" x1="${t.x}" y1="${yAxis - 3}" x2="${t.x}" y2="${yAxis + 3}" />
+            <text class="marker-label" x="${t.x}" y="${y0}" text-anchor="middle">${t.label}</text>
+            <text class="axis-label"  x="${t.x}" y="${yAxis + 13}" text-anchor="middle">${t.val.toFixed(0)}</text>
+          </g>
+        `).join('')}
+      `;
+      if (spanEl) {
+        spanEl.innerHTML = `
+          p5 <strong style="color: var(--text-primary);">${dist.p5.toFixed(0)}</strong>
+          · p50 <strong style="color: var(--gold-300);">${dist.p50.toFixed(0)}</strong>
+          · p95 <strong style="color: var(--text-primary);">${dist.p95.toFixed(0)}</strong>
+        `;
+      }
+    }
+
+    // ---------- Weight sliders ----------
+    function renderSliders() {
+      const mount = document.getElementById('slidersList');
+      if (!mount) return;
+      mount.innerHTML = FACTORS.map(f => {
+        const v = state.weights[f] ?? 0;
+        return `
+          <div class="sliders-row">
+            <div class="slider-label">${FACTOR_LABELS[f]}<small>${FACTOR_HINT[f]}</small></div>
+            <input class="slider-input" type="range" min="0" max="0.50" step="0.005" value="${v}" data-factor="${f}" aria-label="${FACTOR_LABELS[f]} weight"/>
+            <div class="slider-value" data-factor-v="${f}">${(v * 100).toFixed(1)}%</div>
+          </div>
+        `;
+      }).join('');
+      mount.querySelectorAll('input.slider-input').forEach(inp => {
+        inp.addEventListener('input', (e) => {
+          const f = e.target.getAttribute('data-factor');
+          const v = parseFloat(e.target.value);
+          state.weights[f] = v;
+          const label = mount.querySelector(`[data-factor-v="${f}"]`);
+          if (label) label.textContent = `${(v * 100).toFixed(1)}%`;
+          updateSum();
+          renderRerankedDebounced();
+        });
+      });
+      updateSum();
+    }
+
+    function updateSum() {
+      const sum = FACTORS.reduce((a, f) => a + (state.weights[f] || 0), 0);
+      const el = document.getElementById('sumLabel');
+      if (!el) return;
+      el.innerHTML = `Σ weights = <strong>${sum.toFixed(2)}</strong>`;
+      el.classList.toggle('warn', Math.abs(sum - 1) > 0.05);
+    }
+
+    // ---------- Re-rank with custom weights ----------
+    let rerankTimer = null;
+    function renderRerankedDebounced() {
+      if (rerankTimer) cancelAnimationFrame(rerankTimer);
+      rerankTimer = requestAnimationFrame(renderReranked);
+    }
+
+    function renderReranked() {
+      const mount = document.getElementById('rerankList');
+      if (!mount) return;
+      const w = state.weights;
+      // new BBI per player = Σ weights[f] * raw[f]
+      const scored = state.players.map(p => {
+        let s = 0;
+        for (const f of FACTORS) s += (w[f] || 0) * (p.raw[f] || 0);
+        return { id: p.dg_id, name: p.name, new_bbi: s };
+      });
+      scored.sort((a, b) => b.new_bbi - a.new_bbi);
+      // Precompute default rank by bbi_pool
+      const defaultOrder = [...state.players].sort((a, b) => (b.bbi_pool || 0) - (a.bbi_pool || 0));
+      const defaultRank = new Map(defaultOrder.map((p, i) => [p.dg_id, i + 1]));
+
+      const top20 = scored.slice(0, 20);
+      mount.innerHTML = top20.map((p, i) => {
+        const origRank = defaultRank.get(p.id);
+        const delta = origRank != null ? (origRank - (i + 1)) : 0;
+        const cls = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
+        const sym = delta > 0 ? '▲' : delta < 0 ? '▼' : '—';
+        return `
+          <div class="rerank-row">
+            <span class="rr-rank ${i < 3 ? 'gold' : ''}">${i + 1}</span>
+            <span class="rr-name">${fmt.abbrevName(p.name)}</span>
+            <span class="rr-bbi">${p.new_bbi.toFixed(1)}</span>
+            <span class="rr-delta ${cls}" title="From default rank ${origRank}">${sym}${delta ? ' ' + Math.abs(delta) : ''}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ---------- Load preset lineup ----------
+    function loadPreset(lu) {
+      const ids = (lu.players || []).map(pl => pl.dg_id).filter(x => state.playersById.has(x)).slice(0, ROSTER);
+      state.lineup = ids;
+      renderSlots(); renderPool(); recomputeLineup();
+    }
+  </script>
+</body>
+</html>

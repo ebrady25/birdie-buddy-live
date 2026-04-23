@@ -1,0 +1,47 @@
+{
+  "updated_at": "2026-04-22",
+  "entries": [
+    {
+      "date": "2026-04-22",
+      "title": "Orchestrator era begins",
+      "category": "infra",
+      "summary": "New operating model: 10+ improvements shipped per day across model, site, content, and infrastructure. Every public change gets a receipt here."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Public changelog launched",
+      "category": "infra",
+      "summary": "You're reading it. From now on, every shipped change to BirdieBuddy is logged here, reverse chronologically, with a category badge."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Methodology page: plain-English Brier explainer",
+      "category": "site",
+      "summary": "Rewrote the Brier score section for golf fans without a stats background. Added a concrete 10%-win example and tightened the surrounding math block. Performance numbers unchanged."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Methodology page: typography + hierarchy pass",
+      "category": "site",
+      "summary": "Refined heading scale, vertical rhythm, and section breaks using design-system tokens only. Cleaner read, no copy changes."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Landing page: typography + agent grid polish",
+      "category": "site",
+      "summary": "Hero line tuned, section padding lifted, agent grid cards given crisper borders and clearer Sonnet/Opus differentiation."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Site data synced with latest tracker state",
+      "category": "infra",
+      "summary": "Week 11 RBC Heritage results (BBI 0.3437 vs DG 0.3770 Spearman) and Week 12 Zurich Classic deferral now reflected in the site's data layer."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "10-page site verified (0 JS errors)",
+      "category": "infra",
+      "summary": "New jsdom harness confirms all 10 pages parse cleanly and every data path resolves. Gates every future site edit."
+    }
+  ]
+}

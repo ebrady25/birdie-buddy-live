@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Performance — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* =========================================================
+       PERFORMANCE — PAGE-SPECIFIC STYLES
+       (page-head, page-head-meta live in components.css)
+       ========================================================= */
+
+    /* KPI strip */
+    .kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); margin-bottom: var(--space-10); }
+    @media (max-width: 1200px) { .kpi-strip { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 760px) { .kpi-strip { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Performance chart */
+    .perf-card {
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      margin-bottom: var(--space-8);
+    }
+    .perf-card-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+      flex-wrap: wrap;
+    }
+    .perf-card-head h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xl); color: var(--text-primary); letter-spacing: -0.02em; }
+    .perf-legend { display: flex; gap: var(--space-4); font-size: var(--fs-xs); font-family: var(--font-mono); color: var(--text-muted); flex-wrap: wrap; }
+    .perf-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .legend-dot.bbi { background: var(--gold-500); box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15); }
+    .legend-dot.dg  { background: var(--info); box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15); }
+    .legend-line { width: 14px; height: 2px; border-radius: 2px; }
+    .legend-line.target { background: var(--positive); }
+    .legend-line.aspire { background: var(--gold-300); border-top: 1px dashed var(--gold-300); }
+
+    .chart-svg { width: 100%; height: 340px; display: block; }
+    .chart-axis text { fill: var(--text-dimmed); font-family: var(--font-mono); font-size: 10px; font-weight: 500; }
+    .chart-axis line, .chart-axis path { stroke: var(--border-soft); }
+    .chart-gridline { stroke: rgba(255,255,255,0.04); stroke-dasharray: 1 3; }
+    .chart-target-line { stroke-dasharray: 4 4; stroke-width: 1; }
+    .chart-series path.area { fill-opacity: 0.16; }
+    .chart-series circle:hover { r: 5; filter: drop-shadow(0 0 6px currentColor); }
+
+    /* Event table */
+    .event-table { font-size: var(--fs-xs); }
+    .event-table td, .event-table th { padding: var(--space-2) var(--space-3); }
+    .event-table .delta-up   { color: var(--positive); }
+    .event-table .delta-down { color: var(--negative); }
+    .event-table .beat-dg    { background: rgba(74, 222, 128, 0.09); }
+
+    /* Shadow bars */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+    @media (max-width: 900px) { .shadow-grid { grid-template-columns: 1fr; } }
+    .shadow-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      transition: transform var(--dur-base), border-color var(--dur-base);
+    }
+    .shadow-card:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+    .shadow-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-3); }
+    .shadow-name { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-md); color: var(--text-primary); }
+    .shadow-id { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); }
+    .shadow-stat-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-3); }
+    .shadow-stat-label { font-size: var(--fs-xs); color: var(--text-muted); }
+    .shadow-stat-value { font-family: var(--font-mono); font-size: var(--fs-2xl); font-weight: 600; color: var(--gold-300); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .shadow-weights { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; font-family: var(--font-mono); font-size: 9px; margin-top: var(--space-3); }
+    .shadow-w-cell {
+      background: var(--surface-3);
+      padding: 5px;
+      border-radius: 3px;
+      text-align: center;
+      color: var(--text-dimmed);
+      letter-spacing: 0.04em;
+    }
+    .shadow-w-cell strong { display: block; color: var(--text-primary); font-weight: 600; font-size: 11px; margin-top: 2px; }
+    .shadow-w-cell.highlight { background: rgba(212, 168, 67, 0.14); color: var(--gold-400); }
+    .shadow-w-cell.highlight strong { color: var(--gold-200); }
+    .shadow-bar { height: 4px; background: var(--surface-4); border-radius: 999px; overflow: hidden; margin-top: var(--space-3); }
+    .shadow-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold-600), var(--gold-400)); border-radius: 999px; }
+
+    /* Calibration */
+    .calib-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-3);
+    }
+    @media (max-width: 1100px) { .calib-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px) { .calib-grid { grid-template-columns: repeat(2, 1fr); } }
+    .calib-market {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      text-align: center;
+    }
+    .calib-market .mkt-label { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-muted); }
+    .calib-market .mkt-val { font-family: var(--font-mono); font-size: var(--fs-xl); font-weight: 600; color: var(--text-primary); margin: 4px 0; font-variant-numeric: tabular-nums; }
+    .calib-market .mkt-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-dimmed); }
+    .calib-market .skill { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; padding-top: 4px; }
+    .calib-market .skill.positive { color: var(--positive); }
+    .calib-market .skill.negative { color: var(--negative); }
+
+    /* Backtest / competition rows */
+    .backtest-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+    }
+    @media (max-width: 900px) { .backtest-grid { grid-template-columns: 1fr; } }
+
+    .layer-row { display: grid; grid-template-columns: 110px 1fr 56px; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-xs); border-top: 1px solid var(--border-soft); }
+    .layer-row:first-child { border-top: none; }
+    .layer-row .layer-label { font-family: var(--font-mono); color: var(--text-body); letter-spacing: 0.02em; }
+    .layer-row .layer-bar { height: 6px; background: var(--surface-3); border-radius: 999px; overflow: hidden; }
+    .layer-row .layer-bar-fill { height: 100%; background: linear-gradient(90deg, var(--info), var(--gold-400)); border-radius: 999px; }
+    .layer-row .layer-val { font-family: var(--font-mono); text-align: right; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+
+    /* Anchor offsets for in-page nav */
+    section.section[id] { scroll-margin-top: calc(var(--nav-h) + var(--status-h) + 20px); }
+
+    /* Weekly Recaps */
+    .recap-card {
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    .recap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-4);
+      cursor: pointer;
+      user-select: none;
+      padding: 0;
+      margin-bottom: var(--space-4);
+      border: none;
+      background: none;
+      color: inherit;
+      width: 100%;
+      text-align: left;
+    }
+    .recap-header:hover {
+      opacity: 0.9;
+    }
+    .recap-header-info h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-xl);
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .recap-header-meta {
+      display: flex;
+      gap: var(--space-3);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      margin-top: var(--space-2);
+    }
+    .recap-header-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .recap-summary {
+      color: var(--text-body);
+      line-height: 1.6;
+      font-size: var(--fs-sm);
+      margin: 0;
+    }
+    .recap-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-md);
+      background: var(--surface-3);
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all var(--dur-base);
+      font-size: var(--fs-lg);
+    }
+    .recap-card.open .recap-toggle {
+      background: rgba(212, 168, 67, 0.15);
+      color: var(--gold-300);
+      transform: rotate(180deg);
+    }
+    .recap-body {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height var(--dur-base), opacity var(--dur-base);
+    }
+    .recap-card.open .recap-body {
+      max-height: 2000px;
+      opacity: 1;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-soft);
+    }
+    .weekly-recap-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+    .weekly-recap-body section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .weekly-recap-body h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-lg);
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .weekly-recap-body p {
+      margin: 0;
+      color: var(--text-body);
+      line-height: 1.6;
+      font-size: var(--fs-sm);
+    }
+    .weekly-recap-body ul {
+      margin: 0;
+      padding-left: var(--space-5);
+      color: var(--text-body);
+      line-height: 1.6;
+      font-size: var(--fs-sm);
+    }
+    .weekly-recap-body li {
+      margin-bottom: var(--space-2);
+    }
+    .weekly-recap-body strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .weekly-recap-body em {
+      color: var(--text-body);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <!-- PAGE HEAD -->
+    <header class="page-head">
+      <div class="eyebrow">Model performance · BBI <span class="gold">v8.5</span></div>
+      <h1>How the model actually performs.</h1>
+      <p>Every prediction BBI makes is scored against the truth. We track Spearman rank correlation vs. DataGolf baseline, Brier-score calibration across five markets, and run four shadow variants every week competing against the champion. This page is the model's report card.</p>
+      <div class="page-head-meta">
+        <span>Season <strong>2026</strong></span>
+        <span>Events tracked <strong id="pmEvents">0</strong></span>
+        <span>Season avg ρ <strong class="gold" id="pmSeasonAvg">—</strong></span>
+        <span>Target ρ <strong class="positive">0.40</strong></span>
+        <span>Aspirational <strong class="gold">0.50</strong></span>
+      </div>
+    </header>
+
+    <!-- KPI STRIP -->
+    <div class="kpi-strip">
+      <div class="stat">
+        <div class="stat-label">Season Spearman</div>
+        <div class="stat-value stat-value-gold"><span id="kpiSeasonSpear">0</span></div>
+        <div class="stat-sub"><span id="kpiSpearTrend" class="stat-delta stat-delta-flat">—</span> vs 2025 backtest</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Best event</div>
+        <div class="stat-value"><span id="kpiBestEv">0</span></div>
+        <div class="stat-sub"><span id="kpiBestEvName">—</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Beat DG</div>
+        <div class="stat-value"><span id="kpiBeatDg">0</span>/<span id="kpiTotalEv">0</span></div>
+        <div class="stat-sub">Head-to-head record</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Events ≥ 0.40</div>
+        <div class="stat-value"><span id="kpiAbove40">0</span>/<span id="kpiTotalEv2">0</span></div>
+        <div class="stat-sub">Target tier</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Top-10 winner hits</div>
+        <div class="stat-value"><span id="kpiWinHits">0</span>/<span id="kpiWinHitsTotal">0</span></div>
+        <div class="stat-sub">Winners ranked top-10 BBI</div>
+      </div>
+    </div>
+
+    <!-- SPEARMAN CHART -->
+    <section class="section" id="spearman">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Spearman over time</span>
+          <h2>Rank correlation, week by week.</h2>
+          <p>Spearman ρ measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against DataGolf's baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
+        </div>
+      </div>
+      <div class="perf-card">
+        <div class="perf-card-head">
+          <h3 id="chartTitle">2026 season · weekly rank correlation</h3>
+          <div class="perf-legend">
+            <span class="perf-legend-item"><span class="legend-dot bbi"></span>BBI v8.5</span>
+            <span class="perf-legend-item"><span class="legend-dot dg"></span>DataGolf</span>
+            <span class="perf-legend-item"><span class="legend-line target"></span>Target (0.40)</span>
+            <span class="perf-legend-item"><span class="legend-line aspire"></span>Aspirational (0.50)</span>
+          </div>
+        </div>
+        <svg class="chart-svg" id="spearmanChart" viewBox="0 0 1000 340" preserveAspectRatio="none"></svg>
+      </div>
+
+      <!-- Event table -->
+      <div class="table-wrap" style="border-radius: var(--radius-lg);">
+        <table class="table event-table">
+          <thead>
+            <tr>
+              <th>Wk</th>
+              <th>Event</th>
+              <th>Winner</th>
+              <th class="num">Field</th>
+              <th class="num">BBI ρ</th>
+              <th class="num">DG ρ</th>
+              <th class="num">Δ</th>
+              <th class="num">Top-5</th>
+              <th class="num">Top-20</th>
+              <th class="num">Winner BBI</th>
+              <th>Beat DG</th>
+              <th>Target</th>
+            </tr>
+          </thead>
+          <tbody id="eventBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- WEEKLY RECAPS -->
+    <section class="section" id="recaps">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Deep dives · Weekly analysis</span>
+          <h2>What happened — and why.</h2>
+          <p>Each week after scoring, we publish a postmortem recap analyzing what worked, what missed, and what the data tells us about model health. These recaps tie the numbers back to real patterns and lessons for the week ahead.</p>
+        </div>
+      </div>
+      <div id="recapsMount"></div>
+    </section>
+
+    <!-- SHADOW VARIANTS -->
+    <section class="section" id="shadow">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Shadow models · HEPHAESTUS</span>
+          <h2>Four challengers. Every week.</h2>
+          <p>Every Monday, HEPHAESTUS runs four alternative weight configurations against the v8.5 champion. Top-20 Spearman agreement is the similarity metric. Any variant beating baseline by ≥0.03 Spearman and ≥5% Brier for 3+ consecutive weeks across 8+ events gets flagged for promotion.</p>
+        </div>
+      </div>
+      <div class="shadow-grid" id="shadowGrid"></div>
+    </section>
+
+    <!-- CALIBRATION -->
+    <section class="section" id="calibration">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Probability calibration · Brier score</span>
+          <h2>How accurate the probabilities really are.</h2>
+          <p>For each market, Brier score measures how close predicted probabilities land to observed outcomes (lower is better). Skill % is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
+        </div>
+      </div>
+      <div class="perf-card">
+        <div class="perf-card-head">
+          <h3><span id="calibEvent">—</span></h3>
+          <div class="perf-legend">
+            <span class="perf-legend-item"><span class="muted">Lower Brier = sharper predictions</span></span>
+          </div>
+        </div>
+        <div class="calib-grid" id="calibGrid"></div>
+      </div>
+    </section>
+
+    <!-- BACKTEST / LAYER HEALTH -->
+    <section class="section" id="backtest">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">2025 backtest · PROMETHEUS</span>
+          <h2>47 events of ground truth.</h2>
+          <p>PROMETHEUS replays the 2025 season using the DataGolf pre-tournament baseline as the apples-to-apples benchmark. These are the numbers BBI has to beat, event over event, to claim skill.</p>
+        </div>
+      </div>
+      <div class="backtest-grid">
+        <div class="card">
+          <div class="card-title">Aggregate — 2025 DG baseline</div>
+          <div style="margin-top: var(--space-4);">
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
+              <span class="muted">Events scored</span>
+              <span class="num-display" id="btEvents" style="font-size: var(--fs-lg);">—</span>
+            </div>
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
+              <span class="muted">Mean Spearman</span>
+              <span class="num-display" id="btMeanSp" style="font-size: var(--fs-lg); color: var(--gold-300);">—</span>
+            </div>
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
+              <span class="muted">Median Spearman</span>
+              <span class="num-display" id="btMedSp" style="font-size: var(--fs-lg);">—</span>
+            </div>
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
+              <span class="muted">Brier · win</span>
+              <span class="num-display" id="btBrierWin" style="font-size: var(--fs-lg);">—</span>
+            </div>
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
+              <span class="muted">Brier · top-5</span>
+              <span class="num-display" id="btBrierT5" style="font-size: var(--fs-lg);">—</span>
+            </div>
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
+              <span class="muted">Brier · top-10</span>
+              <span class="num-display" id="btBrierT10" style="font-size: var(--fs-lg);">—</span>
+            </div>
+            <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0;">
+              <span class="muted">Brier · make cut</span>
+              <span class="num-display" id="btBrierMC" style="font-size: var(--fs-lg);">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Layer correlations — most recent event</div>
+          <p class="muted" style="font-size: var(--fs-xs); margin-top: var(--space-2);">Correlation between each Strokes Gained layer's season score and actual finishing position. SG Total should dominate on major-style courses; specialists may rely on one or two layers.</p>
+          <div id="layerHealth" style="margin-top: var(--space-4);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETITION STATUS -->
+    <section class="section" id="competition">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Model competition · MNEMOSYNE</span>
+          <h2>Promotion rules and current leader.</h2>
+          <p>Every week Mnemosyne snapshots the 5-way race (v8.5 baseline + 4 shadow variants). A variant becomes a promotion candidate only after sustained dominance — the bar is deliberately high.</p>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-title">Current leader</div>
+          <div style="margin-top: var(--space-4); padding: var(--space-5); background: linear-gradient(135deg, rgba(212, 168, 67, 0.08), rgba(212, 168, 67, 0.02)); border: 1px solid rgba(212, 168, 67, 0.25); border-radius: var(--radius-lg);">
+            <div class="eyebrow">Incumbent champion</div>
+            <div style="font-family: var(--font-display); font-weight: 800; font-size: var(--fs-3xl); color: var(--gold-300); letter-spacing: -0.02em; margin-top: var(--space-2);" id="currentLeader">v8.5</div>
+            <p class="muted" style="margin-top: var(--space-2); font-size: var(--fs-sm); line-height: 1.5;">
+              The baseline holds the throne. No shadow variant has yet met the full 3-week / 8-event promotion threshold.
+            </p>
+            <div style="margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px dashed var(--border-soft);">
+              <div class="row-tight" style="font-family: var(--font-mono); font-size: var(--fs-xs);">
+                <span class="muted">Last refreshed</span>
+                <strong class="gold" id="competitionUpdated">—</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Promotion rules</div>
+          <div style="margin-top: var(--space-3);">
+            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm);">
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Spearman</span>
+              <span style="color: var(--text-body); line-height: 1.5;">Variant must beat baseline by ≥ <strong>0.03 ρ</strong> average.</span>
+            </div>
+            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Brier</span>
+              <span style="color: var(--text-body); line-height: 1.5;">Must reduce Brier score by ≥ <strong>5%</strong> across markets.</span>
+            </div>
+            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Duration</span>
+              <span style="color: var(--text-body); line-height: 1.5;">Maintained over <strong>3+ consecutive weeks</strong>.</span>
+            </div>
+            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Volume</span>
+              <span style="color: var(--text-body); line-height: 1.5;">Across at least <strong>8 events</strong>.</span>
+            </div>
+            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Review</span>
+              <span style="color: var(--text-body); line-height: 1.5;">Manual promotion after threshold flag — no automatic takeover.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('performance.html');
+      await BBI.renderFooter();
+
+      const [spear, calib, comp, shadow, prom, recaps] = await Promise.all([
+        BBI.data.load(BBI.data.paths.spearman),
+        BBI.data.load(BBI.data.paths.calibration),
+        BBI.data.load(BBI.data.paths.modelCompetition),
+        BBI.data.load(BBI.data.paths.shadowModels),
+        BBI.data.load(BBI.data.paths.prometheus),
+        BBI.data.load(BBI.data.paths.performanceWeeklyRecaps)
+      ]);
+
+      const events = (spear?.events || []).slice().sort((a, b) => (a.week || 0) - (b.week || 0));
+      const rolling = spear?.rolling_metrics || {};
+
+      // ---------- WEEKLY RECAPS ----------
+      const recapList = (recaps?.recaps || []).slice().reverse();
+      const recapsMount = $('#recapsMount');
+      if (recapList.length > 0) {
+        recapsMount.innerHTML = recapList.map((recap, idx) => `
+          <div class="recap-card" data-reveal data-delay="${Math.min(3, idx+1)}">
+            <button class="recap-header" onclick="this.closest('.recap-card').classList.toggle('open'); event.preventDefault();">
+              <div class="recap-header-info">
+                <h3>Week ${recap.week} · ${recap.event}</h3>
+                <div class="recap-header-meta">
+                  <span>${recap.date || ''}</span>
+                  <span>Completed</span>
+                </div>
+                <p class="recap-summary">${recap.summary || ''}</p>
+              </div>
+              <div class="recap-toggle">▼</div>
+            </button>
+            <div class="recap-body">
+              ${recap.body_html || ''}
+            </div>
+          </div>
+        `).join('');
+        window.observeAnimations?.(recapsMount);
+      }
+
+      // ---------- KPI STRIP ----------
+      $('#pmEvents').textContent = events.length;
+      $('#pmSeasonAvg').textContent = fmt.num(rolling.season_avg_bbi_spearman, 3);
+
+      $('#kpiSeasonSpear').textContent = fmt.num(rolling.season_avg_bbi_spearman, 3);
+      const seasonVsBacktest = (rolling.season_avg_bbi_spearman || 0) - (prom?.aggregate?.mean_spearman || 0);
+      const trendEl = $('#kpiSpearTrend');
+      if (trendEl) {
+        trendEl.textContent = (seasonVsBacktest >= 0 ? '+' : '') + fmt.num(seasonVsBacktest, 3);
+        trendEl.classList.remove('stat-delta-flat');
+        trendEl.classList.add(seasonVsBacktest >= 0 ? 'stat-delta-up' : 'stat-delta-down');
+      }
+
+      const best = rolling.best_bbi_spearman || {};
+      $('#kpiBestEv').textContent = fmt.num(best.value, 3);
+      $('#kpiBestEvName').textContent = best.event || '—';
+
+      $('#kpiBeatDg').textContent = rolling.events_bbi_beat_dg ?? 0;
+      $('#kpiTotalEv').textContent = rolling.total_events_tracked ?? events.length;
+      $('#kpiTotalEv2').textContent = rolling.total_events_tracked ?? events.length;
+      $('#kpiAbove40').textContent = rolling.events_above_040 ?? events.filter(e => e.spearman_bbi >= 0.4).length;
+      $('#kpiWinHits').textContent = rolling.winners_from_top10_bbi ?? 0;
+      $('#kpiWinHitsTotal').textContent = rolling.winners_from_top10_bbi_total ?? events.length;
+
+      // ---------- SPEARMAN CHART ----------
+      const W = 1000, H = 340;
+      const m = { t: 26, r: 18, b: 40, l: 48 };
+      const iw = W - m.l - m.r;
+      const ih = H - m.t - m.b;
+      const x = (i) => m.l + (events.length <= 1 ? iw / 2 : (i * iw) / (events.length - 1));
+      const y = (v) => m.t + (1 - v) * ih;  // 0..1 clamp; we'll clamp input
+
+      const svg = $('#spearmanChart');
+      let markup = '';
+
+      // Gridlines + y labels 0, 0.25, 0.5, 0.75, 1.0
+      markup += '<g class="chart-axis">';
+      [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+        markup += `<line class="chart-gridline" x1="${m.l}" y1="${y(v)}" x2="${W - m.r}" y2="${y(v)}"/>`;
+        markup += `<text x="${m.l - 8}" y="${y(v) + 3}" text-anchor="end">${v.toFixed(2)}</text>`;
+      });
+      // x labels = event short names
+      events.forEach((e, i) => {
+        const short = (e.event || '').replace('Tournament', '').slice(0, 12);
+        markup += `<text x="${x(i)}" y="${H - m.b + 18}" text-anchor="middle">${short}</text>`;
+        markup += `<text x="${x(i)}" y="${H - m.b + 30}" text-anchor="middle" style="fill: var(--text-muted);">W${e.week}</text>`;
+      });
+      markup += '</g>';
+
+      // Target lines 0.40 and 0.50
+      markup += `<line class="chart-target-line" x1="${m.l}" y1="${y(0.40)}" x2="${W - m.r}" y2="${y(0.40)}" stroke="var(--positive)"/>`;
+      markup += `<line class="chart-target-line" x1="${m.l}" y1="${y(0.50)}" x2="${W - m.r}" y2="${y(0.50)}" stroke="var(--gold-300)" stroke-dasharray="2 4"/>`;
+
+      const buildPath = (key) => {
+        const pts = events.map((e, i) => ({ px: x(i), py: y(clamp(e[key] ?? 0, 0, 1)) }));
+        if (!pts.length) return '';
+        return pts.map((p, i) => `${i ? 'L' : 'M'}${p.px.toFixed(1)} ${p.py.toFixed(1)}`).join(' ');
+      };
+
+      const buildArea = (key) => {
+        const base = H - m.b;
+        const pts = events.map((e, i) => ({ px: x(i), py: y(clamp(e[key] ?? 0, 0, 1)) }));
+        if (pts.length < 2) return '';
+        const line = pts.map((p, i) => `${i ? 'L' : 'M'}${p.px.toFixed(1)} ${p.py.toFixed(1)}`).join(' ');
+        return `${line} L ${pts[pts.length-1].px.toFixed(1)} ${base} L ${pts[0].px.toFixed(1)} ${base} Z`;
+      };
+
+      // DG series (first — underneath)
+      markup += `<g class="chart-series" id="dgSeries">`;
+      markup += `<path class="area" d="${buildArea('spearman_dg')}" fill="var(--info)"/>`;
+      markup += `<path d="${buildPath('spearman_dg')}" fill="none" stroke="var(--info)" stroke-width="1.75"/>`;
+      events.forEach((e, i) => {
+        if (e.spearman_dg == null) return;
+        markup += `<circle cx="${x(i).toFixed(1)}" cy="${y(e.spearman_dg).toFixed(1)}" r="3.5" fill="var(--info)" stroke="var(--surface-1)" stroke-width="1.5">
+          <title>${e.event} — DG ρ ${fmt.num(e.spearman_dg, 3)}</title></circle>`;
+      });
+      markup += `</g>`;
+
+      // BBI series
+      markup += `<g class="chart-series" id="bbiSeries">`;
+      markup += `<path class="area" d="${buildArea('spearman_bbi')}" fill="var(--gold-500)"/>`;
+      markup += `<path d="${buildPath('spearman_bbi')}" fill="none" stroke="var(--gold-500)" stroke-width="2"/>`;
+      events.forEach((e, i) => {
+        markup += `<circle cx="${x(i).toFixed(1)}" cy="${y(e.spearman_bbi).toFixed(1)}" r="4" fill="var(--gold-500)" stroke="var(--surface-1)" stroke-width="1.5">
+          <title>${e.event} — BBI ρ ${fmt.num(e.spearman_bbi, 3)}</title></circle>`;
+      });
+      markup += `</g>`;
+
+      svg.innerHTML = markup;
+
+      // ---------- EVENT TABLE ----------
+      const tbody = $('#eventBody');
+      tbody.innerHTML = events.map(e => {
+        const dmark = e.spearman_delta;
+        const dcls = dmark > 0 ? 'delta-up' : (dmark < 0 ? 'delta-down' : 'muted');
+        const sign = dmark > 0 ? '+' : '';
+        const top5acc = (e.top5_total || 5) ? `${e.top5_hits || 0}/${e.top5_total || 5}` : '—';
+        const top20acc = (e.top20_total || 20) ? `${e.top20_hits || 0}/${e.top20_total || 20}` : '—';
+        return `
+          <tr data-row class="${e.beat_dg ? 'beat-dg' : ''}">
+            <td><strong>W${e.week}</strong></td>
+            <td><strong>${e.event}</strong><div class="muted" style="font-size: 10px;">${e.date || ''}</div></td>
+            <td>${e.winner ? fmt.abbrevName(e.winner) : '—'}</td>
+            <td class="num">${e.field_size || '—'}</td>
+            <td class="num"><strong class="gold">${fmt.num(e.spearman_bbi, 3)}</strong></td>
+            <td class="num">${fmt.num(e.spearman_dg, 3)}</td>
+            <td class="num ${dcls}">${dmark == null ? '—' : sign + fmt.num(dmark, 3)}</td>
+            <td class="num">${top5acc}</td>
+            <td class="num">${top20acc}</td>
+            <td class="num">${e.winner_bbi_rank ?? '—'}</td>
+            <td>${e.beat_dg ? '<span class="badge badge-positive">Beat</span>' : '<span class="badge">—</span>'}</td>
+            <td>${e.beat_target ? '<span class="badge badge-gold">Hit</span>' : '<span class="badge">—</span>'}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // ---------- SHADOW VARIANTS ----------
+      const variants = shadow?.variants || {};
+      const varEntries = Object.entries(variants);
+      const baselineSorted = varEntries.sort((a, b) => (b[1].spearman_vs_baseline_top20 || 0) - (a[1].spearman_vs_baseline_top20 || 0));
+
+      const shadowMount = $('#shadowGrid');
+      shadowMount.innerHTML = baselineSorted.map(([id, v], i) => {
+        const sp = v.spearman_vs_baseline_top20 ?? 0;
+        const spPct = Math.max(0, Math.min(100, sp * 100));
+        const weightsDisp = v.weights_used?.pool || {};
+        const weightKeys = ['talent','courseFit','form','cutSafety','ceiling'];
+        const highlightKey = id.split('-')[1]; // e.g. cf, tal, form, dyn
+        const highlightMap = { cf: 'courseFit', tal: 'talent', form: 'form', dyn: 'ceiling' };
+        const highlight = highlightMap[highlightKey];
+
+        const weightsHTML = weightKeys.map(k => `
+          <div class="shadow-w-cell ${k === highlight ? 'highlight' : ''}">
+            ${k.slice(0,4)}<strong>${fmt.num((weightsDisp[k] || 0) * 100, 0)}</strong>
+          </div>
+        `).join('');
+
+        return `
+          <div class="shadow-card" data-reveal data-delay="${Math.min(6, i+1)}">
+            <div class="shadow-head">
+              <div>
+                <div class="shadow-name">${v.variant_name || id}</div>
+                <div class="shadow-id">${id}</div>
+              </div>
+              <span class="badge ${i === 0 ? 'badge-gold' : ''}">#${i+1}</span>
+            </div>
+            <div class="shadow-stat-row">
+              <span class="shadow-stat-label">Top-20 ρ vs baseline</span>
+              <span class="shadow-stat-value">${fmt.num(sp, 3)}</span>
+            </div>
+            <div class="shadow-bar"><div class="shadow-bar-fill" style="width: ${spPct.toFixed(1)}%"></div></div>
+            <div class="shadow-weights">
+              ${weightsHTML}
+            </div>
+          </div>
+        `;
+      }).join('');
+      window.observeAnimations?.(shadowMount);
+
+      // ---------- CALIBRATION ----------
+      const calibHist = (calib?.history || []).slice().reverse();
+      const latestCalib = calibHist[0];
+      if (latestCalib) {
+        $('#calibEvent').textContent = `${latestCalib.event} · Wk ${latestCalib.week}`;
+        const markets = latestCalib.markets || {};
+        const mktOrder = ['win', 'top_5', 'top_10', 'top_20', 'make_cut'];
+        const mktLabel = { win: 'Win', top_5: 'Top 5', top_10: 'Top 10', top_20: 'Top 20', make_cut: 'Make Cut' };
+        const mount = $('#calibGrid');
+        mount.innerHTML = mktOrder.map(k => {
+          const m = markets[k];
+          if (!m) return '';
+          const skillCls = m.skill_pct > 10 ? 'positive' : (m.skill_pct < 0 ? 'negative' : '');
+          const skillSign = m.skill_pct > 0 ? '+' : '';
+          return `
+            <div class="calib-market">
+              <div class="mkt-label">${mktLabel[k]}</div>
+              <div class="mkt-val">${fmt.num(m.brier, 4)}</div>
+              <div class="mkt-meta">Brier · ${fmt.num(m.log_loss, 3)} log-loss</div>
+              <div class="skill ${skillCls}">${skillSign}${fmt.num(m.skill_pct, 1)}% vs naive</div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        $('#calibEvent').textContent = 'No calibration history yet';
+      }
+
+      // ---------- BACKTEST AGGREGATE ----------
+      if (prom?.aggregate) {
+        const a = prom.aggregate;
+        $('#btEvents').textContent = a.n_events ?? '—';
+        $('#btMeanSp').textContent = fmt.num(a.mean_spearman, 4);
+        $('#btMedSp').textContent = fmt.num(a.median_spearman, 4);
+        $('#btBrierWin').textContent = fmt.num(a.mean_brier_win, 4);
+        $('#btBrierT5').textContent = fmt.num(a.mean_brier_top_5, 4);
+        $('#btBrierT10').textContent = fmt.num(a.mean_brier_top_10, 4);
+        $('#btBrierMC').textContent = fmt.num(a.mean_brier_make_cut, 4);
+      }
+
+      // ---------- LAYER HEALTH from most recent event ----------
+      const latestEv = events[events.length - 1];
+      if (latestEv?.layer_correlations) {
+        const layers = latestEv.layer_correlations;
+        const order = ['sg_ott', 'sg_app', 'sg_arg', 'sg_putt', 'sg_total'];
+        const labels = { sg_ott: 'Off-the-tee', sg_app: 'Approach', sg_arg: 'Around green', sg_putt: 'Putting', sg_total: 'Total' };
+        const mount = $('#layerHealth');
+        mount.innerHTML = order.filter(k => layers[k] != null).map(k => {
+          const v = layers[k];
+          return `
+            <div class="layer-row">
+              <span class="layer-label">${labels[k]}</span>
+              <div class="layer-bar"><div class="layer-bar-fill" style="width: ${clamp(v*100, 0, 100).toFixed(1)}%"></div></div>
+              <span class="layer-val">${fmt.num(v, 3)}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // ---------- COMPETITION ----------
+      const leader = comp?.current_leader || comp?.baseline_variant_id || 'v8.5';
+      $('#currentLeader').textContent = leader;
+      $('#competitionUpdated').textContent = comp?.last_updated ? fmt.date(comp.last_updated) : '—';
+
+      // Count-up entries visible above the fold
+      window.observeAnimations?.(document);
+    });
+  </script>
+</body>
+</html>

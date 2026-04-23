@@ -1,0 +1,799 @@
+{
+  "event": "RBC Heritage",
+  "site": "DraftKings",
+  "contest": "Main Slate",
+  "salary_cap": 50000,
+  "roster": "6 golfers",
+  "n_lineups": 12,
+  "lineups": [
+    {
+      "label": "Core #1 \u2014 Scheffler + Harbour Town Specialists",
+      "total_salary": 48200,
+      "players": [
+        {
+          "name": "Scheffler, Scottie",
+          "salary": 13500,
+          "dg_id": 18417,
+          "zeus_dfs": 100.0,
+          "hermes_own": 23.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Harman, Brian",
+          "salary": 7000,
+          "dg_id": 8825,
+          "zeus_dfs": 65.0,
+          "hermes_own": 13.55,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        },
+        {
+          "name": "Im, Sungjae",
+          "salary": 6700,
+          "dg_id": 17488,
+          "zeus_dfs": 70.4,
+          "hermes_own": 9.33,
+          "tier": "SPECIALIST"
+        }
+      ],
+      "sum_zeus": 473.1,
+      "sum_hermes_own": 70.9,
+      "avg_bbi_dfs": 65.56
+    },
+    {
+      "label": "Core #2 \u2014 Scheffler + Contrarian Value Stack",
+      "total_salary": 48100,
+      "players": [
+        {
+          "name": "Scheffler, Scottie",
+          "salary": 13500,
+          "dg_id": 18417,
+          "zeus_dfs": 100.0,
+          "hermes_own": 23.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Conners, Corey",
+          "salary": 7000,
+          "dg_id": 17576,
+          "zeus_dfs": 72.0,
+          "hermes_own": 8.21,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Bradley, Keegan",
+          "salary": 6900,
+          "dg_id": 13872,
+          "zeus_dfs": 69.1,
+          "hermes_own": 5.02,
+          "tier": "NEUTRAL"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        },
+        {
+          "name": "Im, Sungjae",
+          "salary": 6700,
+          "dg_id": 17488,
+          "zeus_dfs": 70.4,
+          "hermes_own": 9.33,
+          "tier": "SPECIALIST"
+        }
+      ],
+      "sum_zeus": 461.6,
+      "sum_hermes_own": 63.1,
+      "avg_bbi_dfs": 64.78
+    },
+    {
+      "label": "Core #3 \u2014 Scheffler + 5 Low-Owned Specialists",
+      "total_salary": 48800,
+      "players": [
+        {
+          "name": "Scheffler, Scottie",
+          "salary": 13500,
+          "dg_id": 18417,
+          "zeus_dfs": 100.0,
+          "hermes_own": 23.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Harman, Brian",
+          "salary": 7000,
+          "dg_id": 8825,
+          "zeus_dfs": 65.0,
+          "hermes_own": 13.55,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        }
+      ],
+      "sum_zeus": 473.9,
+      "sum_hermes_own": 72.5,
+      "avg_bbi_dfs": 65.61
+    },
+    {
+      "label": "Core #4 \u2014 Elite Chalk No-Scheffler",
+      "total_salary": 49800,
+      "players": [
+        {
+          "name": "Fitzpatrick, Matt",
+          "salary": 10000,
+          "dg_id": 17646,
+          "zeus_dfs": 78.3,
+          "hermes_own": 20.72,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Henley, Russell",
+          "salary": 9600,
+          "dg_id": 14578,
+          "zeus_dfs": 73.7,
+          "hermes_own": 23.39,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Cantlay, Patrick",
+          "salary": 9200,
+          "dg_id": 15466,
+          "zeus_dfs": 72.8,
+          "hermes_own": 20.12,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        }
+      ],
+      "sum_zeus": 462.5,
+      "sum_hermes_own": 88.9,
+      "avg_bbi_dfs": 64.85
+    },
+    {
+      "label": "Core #5 \u2014 Henley/Cantlay/McNealy Specialist Core",
+      "total_salary": 48300,
+      "players": [
+        {
+          "name": "Henley, Russell",
+          "salary": 9600,
+          "dg_id": 14578,
+          "zeus_dfs": 73.7,
+          "hermes_own": 23.39,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Cantlay, Patrick",
+          "salary": 9200,
+          "dg_id": 15466,
+          "zeus_dfs": 72.8,
+          "hermes_own": 20.12,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "McNealy, Maverick",
+          "salary": 8500,
+          "dg_id": 18634,
+          "zeus_dfs": 76.9,
+          "hermes_own": 12.43,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Conners, Corey",
+          "salary": 7000,
+          "dg_id": 17576,
+          "zeus_dfs": 72.0,
+          "hermes_own": 8.21,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        }
+      ],
+      "sum_zeus": 445.5,
+      "sum_hermes_own": 81.4,
+      "avg_bbi_dfs": 63.7
+    },
+    {
+      "label": "Leverage #1 \u2014 Scheffler/Cantlay + Contrarians",
+      "total_salary": 50000,
+      "players": [
+        {
+          "name": "Scheffler, Scottie",
+          "salary": 13500,
+          "dg_id": 18417,
+          "zeus_dfs": 100.0,
+          "hermes_own": 23.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Cantlay, Patrick",
+          "salary": 9200,
+          "dg_id": 15466,
+          "zeus_dfs": 72.8,
+          "hermes_own": 20.12,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        },
+        {
+          "name": "Im, Sungjae",
+          "salary": 6700,
+          "dg_id": 17488,
+          "zeus_dfs": 70.4,
+          "hermes_own": 9.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "McCarty, Matt",
+          "salary": 6800,
+          "dg_id": 28635,
+          "zeus_dfs": 65.0,
+          "hermes_own": 4.33,
+          "tier": "NO_HISTORY"
+        }
+      ],
+      "sum_zeus": 475.2,
+      "sum_hermes_own": 72.4,
+      "avg_bbi_dfs": 65.7
+    },
+    {
+      "label": "Leverage #2 \u2014 Scheffler + Thomas Pivot",
+      "total_salary": 49800,
+      "players": [
+        {
+          "name": "Scheffler, Scottie",
+          "salary": 13500,
+          "dg_id": 18417,
+          "zeus_dfs": 100.0,
+          "hermes_own": 23.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Thomas, Justin",
+          "salary": 8300,
+          "dg_id": 14139,
+          "zeus_dfs": 70.2,
+          "hermes_own": 15.29,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Harman, Brian",
+          "salary": 7000,
+          "dg_id": 8825,
+          "zeus_dfs": 65.0,
+          "hermes_own": 13.55,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        }
+      ],
+      "sum_zeus": 472.9,
+      "sum_hermes_own": 76.8,
+      "avg_bbi_dfs": 65.55
+    },
+    {
+      "label": "Leverage #3 \u2014 No Scheffler, Fitzpatrick Stack",
+      "total_salary": 49200,
+      "players": [
+        {
+          "name": "Fitzpatrick, Matt",
+          "salary": 10000,
+          "dg_id": 17646,
+          "zeus_dfs": 78.3,
+          "hermes_own": 20.72,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Cantlay, Patrick",
+          "salary": 9200,
+          "dg_id": 15466,
+          "zeus_dfs": 72.8,
+          "hermes_own": 20.12,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "McNealy, Maverick",
+          "salary": 8500,
+          "dg_id": 18634,
+          "zeus_dfs": 76.9,
+          "hermes_own": 12.43,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Conners, Corey",
+          "salary": 7000,
+          "dg_id": 17576,
+          "zeus_dfs": 72.0,
+          "hermes_own": 8.21,
+          "tier": "SPECIALIST"
+        }
+      ],
+      "sum_zeus": 441.9,
+      "sum_hermes_own": 81.8,
+      "avg_bbi_dfs": 63.45
+    },
+    {
+      "label": "GPP #1 \u2014 Scheffler + Thomas + Value Trio",
+      "total_salary": 49700,
+      "players": [
+        {
+          "name": "Scheffler, Scottie",
+          "salary": 13500,
+          "dg_id": 18417,
+          "zeus_dfs": 100.0,
+          "hermes_own": 23.33,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Thomas, Justin",
+          "salary": 8300,
+          "dg_id": 14139,
+          "zeus_dfs": 70.2,
+          "hermes_own": 15.29,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        },
+        {
+          "name": "Im, Sungjae",
+          "salary": 6700,
+          "dg_id": 17488,
+          "zeus_dfs": 70.4,
+          "hermes_own": 9.33,
+          "tier": "SPECIALIST"
+        }
+      ],
+      "sum_zeus": 461.4,
+      "sum_hermes_own": 74.6,
+      "avg_bbi_dfs": 64.77
+    },
+    {
+      "label": "GPP #2 \u2014 Specialist Upside Stack",
+      "total_salary": 48600,
+      "players": [
+        {
+          "name": "Henley, Russell",
+          "salary": 9600,
+          "dg_id": 14578,
+          "zeus_dfs": 73.7,
+          "hermes_own": 23.39,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Cantlay, Patrick",
+          "salary": 9200,
+          "dg_id": 15466,
+          "zeus_dfs": 72.8,
+          "hermes_own": 20.12,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "McNealy, Maverick",
+          "salary": 8500,
+          "dg_id": 18634,
+          "zeus_dfs": 76.9,
+          "hermes_own": 12.43,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Poston, J.T.",
+          "salary": 7200,
+          "dg_id": 21554,
+          "zeus_dfs": 70.7,
+          "hermes_own": 9.37,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Conners, Corey",
+          "salary": 7000,
+          "dg_id": 17576,
+          "zeus_dfs": 72.0,
+          "hermes_own": 8.21,
+          "tier": "SPECIALIST"
+        }
+      ],
+      "sum_zeus": 454.2,
+      "sum_hermes_own": 82.5,
+      "avg_bbi_dfs": 64.28
+    },
+    {
+      "label": "GPP #3 \u2014 Fitzpatrick/Henley + Straka/Noren",
+      "total_salary": 48600,
+      "players": [
+        {
+          "name": "Fitzpatrick, Matt",
+          "salary": 10000,
+          "dg_id": 17646,
+          "zeus_dfs": 78.3,
+          "hermes_own": 20.72,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Henley, Russell",
+          "salary": 9600,
+          "dg_id": 14578,
+          "zeus_dfs": 73.7,
+          "hermes_own": 23.39,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Straka, Sepp",
+          "salary": 7900,
+          "dg_id": 17511,
+          "zeus_dfs": 60.8,
+          "hermes_own": 15.55,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Novak, Andrew",
+          "salary": 6700,
+          "dg_id": 23475,
+          "zeus_dfs": 78.9,
+          "hermes_own": 6.31,
+          "tier": "COMFORTABLE"
+        }
+      ],
+      "sum_zeus": 451.0,
+      "sum_hermes_own": 85.9,
+      "avg_bbi_dfs": 64.08
+    },
+    {
+      "label": "GPP #4 \u2014 Fitzpatrick/McNealy + Spieth Leverage",
+      "total_salary": 48400,
+      "players": [
+        {
+          "name": "Fitzpatrick, Matt",
+          "salary": 10000,
+          "dg_id": 17646,
+          "zeus_dfs": 78.3,
+          "hermes_own": 20.72,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "McNealy, Maverick",
+          "salary": 8500,
+          "dg_id": 18634,
+          "zeus_dfs": 76.9,
+          "hermes_own": 12.43,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Spieth, Jordan",
+          "salary": 8800,
+          "dg_id": 14636,
+          "zeus_dfs": 50.3,
+          "hermes_own": 22.18,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Noren, Alex",
+          "salary": 7100,
+          "dg_id": 10419,
+          "zeus_dfs": 88.1,
+          "hermes_own": 9.0,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Berger, Daniel",
+          "salary": 7300,
+          "dg_id": 17606,
+          "zeus_dfs": 71.2,
+          "hermes_own": 10.93,
+          "tier": "SPECIALIST"
+        },
+        {
+          "name": "Im, Sungjae",
+          "salary": 6700,
+          "dg_id": 17488,
+          "zeus_dfs": 70.4,
+          "hermes_own": 9.33,
+          "tier": "SPECIALIST"
+        }
+      ],
+      "sum_zeus": 435.2,
+      "sum_hermes_own": 84.6,
+      "avg_bbi_dfs": 63.01
+    }
+  ],
+  "exposure": {
+    "Novak, Andrew": 75.0,
+    "Noren, Alex": 66.7,
+    "Poston, J.T.": 58.3,
+    "Berger, Daniel": 58.3,
+    "Scheffler, Scottie": 50.0,
+    "Im, Sungjae": 41.7,
+    "Cantlay, Patrick": 41.7,
+    "Conners, Corey": 33.3,
+    "Fitzpatrick, Matt": 33.3,
+    "Henley, Russell": 33.3,
+    "McNealy, Maverick": 33.3,
+    "Harman, Brian": 25.0,
+    "Thomas, Justin": 16.7,
+    "Bradley, Keegan": 8.3,
+    "McCarty, Matt": 8.3,
+    "Straka, Sepp": 8.3,
+    "Spieth, Jordan": 8.3
+  },
+  "hermes_own_projections": {
+    "Scheffler, Scottie": 23.33,
+    "Noren, Alex": 9.0,
+    "Fitzpatrick, Matt": 20.72,
+    "Novak, Andrew": 6.31,
+    "Cantlay, Patrick": 20.12,
+    "McNealy, Maverick": 12.43,
+    "Morikawa, Collin": 11.06,
+    "Fleetwood, Tommy": 16.58,
+    "Thomas, Justin": 15.29,
+    "Henley, Russell": 23.39,
+    "Schauffele, Xander": 20.33,
+    "Young, Cameron": 16.46,
+    "Berger, Daniel": 10.93,
+    "Poston, J.T.": 9.37,
+    "Burns, Sam": 9.62,
+    "Griffin, Ben": 6.91,
+    "Conners, Corey": 8.21,
+    "Aberg, Ludvig": 15.5,
+    "Kim, Si Woo": 11.94,
+    "Gerard, Ryan": 7.2,
+    "Valimaki, Sami": 2.39,
+    "Vegas, Jhonattan": 0.82,
+    "Im, Sungjae": 9.33,
+    "Hovland, Viktor": 15.56,
+    "Lowry, Shane": 8.93,
+    "English, Harris": 5.5,
+    "Hojgaard, Nicolai": 3.97,
+    "Spaun, J.J.": 6.65,
+    "Harman, Brian": 13.55,
+    "Hisatsune, Ryo": 10.07,
+    "Bradley, Keegan": 5.02,
+    "Straka, Sepp": 15.55,
+    "Kitayama, Kurt": 3.32,
+    "Rodgers, Patrick": 2.96,
+    "Fowler, Rickie": 4.99,
+    "Finau, Tony": 4.16,
+    "Clark, Wyndham": 5.74,
+    "Bhatia, Akshay": 9.62,
+    "McCarty, Matt": 4.33,
+    "Smith, Jordan": 3.16,
+    "Gotterup, Chris": 9.7,
+    "Hall, Harry": 4.14,
+    "McCarthy, Denny": 4.21,
+    "Day, Jason": 7.31,
+    "Lee, Min Woo": 7.81,
+    "Theegala, Sahith": 9.68,
+    "Cauley, Bud": 4.03,
+    "Spieth, Jordan": 22.18,
+    "Brennan, Michael": 2.76,
+    "MacIntyre, Robert": 7.67,
+    "Castillo, Ricky": 2.34,
+    "Penge, Marco": 2.08,
+    "Coody, Pierceson": 2.68,
+    "Stevens, Sam": 4.46,
+    "Fox, Ryan": 2.09,
+    "Taylor, Nick": 5.76,
+    "Horschel, Billy": 2.54,
+    "Woodland, Gary": 2.96,
+    "Mouw, William": 1.36,
+    "Blanchet, Chandler": 1.84,
+    "Keefer, Johnny": 1.33,
+    "Knapp, Jake": 10.57,
+    "Echavarria, Nico": 2.4,
+    "Yellamaraju, Sudarshan": 6.3,
+    "Pendrith, Taylor": 1.01,
+    "Fisk, Steven": 0.78,
+    "Lipsky, David": 3.79,
+    "Bridgeman, Jacob": 12.33,
+    "Putnam, Andrew": 7.22,
+    "Glover, Lucas": 2.18,
+    "Kim, Michael": 3.08,
+    "Homa, Max": 6.61,
+    "Wallace, Matt": 3.71,
+    "Potgieter, Aldrich": 0.66,
+    "Campbell, Brian": 4.34,
+    "Smotherman, Austin": 5.39,
+    "Vilips, Karl": 1.35,
+    "Hoge, Tom": 3.65,
+    "Higgo, Garrick": 0.34,
+    "Thorbjornsen, Michael": 3.69,
+    "Schenk, Adam": 0.8,
+    "Highsmith, Joe": 0.56
+  },
+  "generated_at": "2026-04-15T17:59:00Z",
+  "note": "Wednesday Final Lock \u2014 Thorbjornsen reinstated, full ownership refresh DG 17:59 UTC"
+}
