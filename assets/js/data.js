@@ -104,6 +104,7 @@ window.BBI = window.BBI || {};
     const navLinks = [
       ['index.html', 'Overview'],
       ['rankings.html', 'Rankings'],
+      ['compare.html', 'Compare'],
       ['lineups.html', 'DFS Lineups'],
       ['performance.html', 'Performance'],
       ['simulator.html', 'Simulator'],

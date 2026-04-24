@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compare — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* ===== COMPARE PAGE ===== */
+    :root {
+      --p1: var(--gold-400);
+      --p2: #60a5fa;
+      --p3: #4ade80;
+    }
+
+    /* Toolbar */
+    .cmp-toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+    }
+
+    .cmp-search {
+      position: relative;
+    }
+
+    .cmp-search input {
+      width: 100%;
+      padding: 9px 12px 9px 32px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      outline: none;
+      transition: border-color var(--dur-fast) var(--ease-out);
+    }
+
+    .cmp-search input:focus {
+      border-color: var(--border-gold);
+      box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12);
+    }
+
+    .cmp-search input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .cmp-search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .cmp-search-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      max-height: 320px;
+      overflow-y: auto;
+      background: var(--surface-4);
+      border: 1px solid var(--border-base);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      z-index: var(--z-elevated);
+      display: none;
+    }
+
+    .cmp-search-menu.open { display: block; }
+
+    .cmp-search-item {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: var(--text-body);
+      font-size: var(--fs-sm);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .cmp-search-item:last-child { border-bottom: none; }
+    .cmp-search-item:hover,
+    .cmp-search-item.active {
+      background: var(--surface-5);
+      color: var(--text-primary);
+    }
+
+    .cmp-search-item .rank {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--gold-300);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+    }
+
+    .cmp-search-item.taken {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .cmp-search-item.taken .rank::after {
+      content: ' · already added';
+      color: var(--text-dimmed);
+      font-weight: 400;
+    }
+
+    .cmp-clear-btn {
+      padding: 9px 14px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+      white-space: nowrap;
+    }
+
+    .cmp-clear-btn:hover:not([disabled]) {
+      background: var(--surface-5);
+      color: var(--text-primary);
+    }
+
+    .cmp-clear-btn[disabled] { opacity: 0.3; cursor: not-allowed; }
+
+    /* Player chips row */
+    .cmp-chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+
+    .cmp-chip {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-left: 4px solid var(--p1);
+      border-radius: var(--radius-md);
+    }
+
+    .cmp-chip.p2 { border-left-color: var(--p2); }
+    .cmp-chip.p3 { border-left-color: var(--p3); }
+
+    .cmp-chip-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--p1);
+      flex-shrink: 0;
+    }
+    .cmp-chip.p2 .cmp-chip-dot { background: var(--p2); }
+    .cmp-chip.p3 .cmp-chip-dot { background: var(--p3); }
+
+    .cmp-chip-body {
+      min-width: 0;
+    }
+
+    .cmp-chip-name {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cmp-chip-name a {
+      color: inherit;
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+    .cmp-chip-name a:hover { color: var(--gold-300); }
+
+    .cmp-chip-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .cmp-chip-remove {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+
+    .cmp-chip-remove:hover {
+      background: var(--negative-soft);
+      border-color: var(--negative);
+      color: var(--negative);
+    }
+
+    /* Empty state */
+    .cmp-empty {
+      background: var(--surface-2);
+      border: 1px dashed var(--border-base);
+      border-radius: var(--radius-lg);
+      padding: var(--space-12) var(--space-6);
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .cmp-empty h2 {
+      font-size: var(--fs-2xl);
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+    }
+    .cmp-empty p {
+      color: var(--text-body);
+      max-width: 48ch;
+      margin: 0 auto var(--space-5);
+    }
+
+    /* Probability comparison grid */
+    .cmp-prob-grid {
+      display: grid;
+      grid-template-columns: 140px repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--space-px);
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--space-8);
+    }
+
+    .cmp-prob-cell {
+      background: var(--surface-3);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .cmp-prob-cell.header {
+      background: var(--surface-2);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .cmp-prob-cell.row-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+    }
+
+    .cmp-prob-cell.val {
+      font-family: var(--font-mono);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cmp-prob-cell.val.leader {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.14) 0%, var(--surface-3) 70%);
+    }
+    .cmp-prob-cell.val.p1.leader { background: linear-gradient(135deg, rgba(230, 185, 78, 0.18) 0%, var(--surface-3) 70%); }
+    .cmp-prob-cell.val.p2.leader { background: linear-gradient(135deg, rgba(96, 165, 250, 0.18) 0%, var(--surface-3) 70%); }
+    .cmp-prob-cell.val.p3.leader { background: linear-gradient(135deg, rgba(74, 222, 128, 0.18) 0%, var(--surface-3) 70%); }
+
+    .cmp-prob-player-head {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .cmp-prob-player-head .name {
+      font-family: var(--font-body);
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .cmp-prob-player-head .swatch {
+      width: 14px; height: 3px;
+      border-radius: var(--radius-full);
+      margin-bottom: 4px;
+    }
+    .cmp-prob-player-head.p1 .swatch { background: var(--p1); }
+    .cmp-prob-player-head.p2 .swatch { background: var(--p2); }
+    .cmp-prob-player-head.p3 .swatch { background: var(--p3); }
+
+    /* Overlaid SG Fingerprint chart */
+    .cmp-fingerprint-section {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .cmp-fingerprint-wrap {
+      display: flex;
+      justify-content: center;
+      margin: var(--space-4) 0;
+    }
+
+    .cmp-fingerprint-legend {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-5);
+      flex-wrap: wrap;
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .cmp-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+    }
+
+    .cmp-legend-swatch {
+      width: 14px;
+      height: 3px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Factor comparison table */
+    .cmp-factor-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-sm);
+    }
+
+    .cmp-factor-table th {
+      padding: var(--space-3) var(--space-3);
+      background: var(--surface-2);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: right;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-base);
+    }
+
+    .cmp-factor-table th:first-child { text-align: left; }
+
+    .cmp-factor-table td {
+      padding: var(--space-3);
+      border-bottom: 1px solid var(--border-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cmp-factor-table td:first-child {
+      font-weight: 500;
+      color: var(--text-body);
+    }
+
+    .cmp-factor-table td.val {
+      font-family: var(--font-mono);
+      text-align: right;
+      color: var(--text-primary);
+    }
+
+    .cmp-factor-table td.val.leader {
+      font-weight: 700;
+      color: var(--gold-300);
+    }
+
+    .cmp-factor-wrap {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: var(--space-8);
+    }
+
+    .cmp-factor-head {
+      padding: var(--space-4) var(--space-5);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .cmp-factor-head h3 {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .cmp-factor-head p {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      line-height: var(--lh-snug);
+    }
+
+    /* Market/form strip */
+    .cmp-strips {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+      margin-bottom: var(--space-8);
+    }
+    @media (max-width: 880px) {
+      .cmp-strips { grid-template-columns: 1fr; }
+    }
+
+    .cmp-strip-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    .cmp-strip-title {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .cmp-strip-row {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .cmp-strip-row:first-of-type { border-top: none; padding-top: 0; }
+
+    .cmp-strip-name {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cmp-strip-row.p1 { border-left: 3px solid var(--p1); padding-left: var(--space-3); margin-left: -var(--space-3); }
+    .cmp-strip-row.p2 { border-left: 3px solid var(--p2); padding-left: var(--space-3); margin-left: -var(--space-3); }
+    .cmp-strip-row.p3 { border-left: 3px solid var(--p3); padding-left: var(--space-3); margin-left: -var(--space-3); }
+
+    .cmp-strip-detail {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cmp-strip-detail .muted { color: var(--text-muted); }
+
+    .cmp-strip-value {
+      font-family: var(--font-mono);
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .cmp-sparkline {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 20px;
+    }
+
+    .cmp-sparkline-bar {
+      flex: 1;
+      min-width: 3px;
+      border-radius: 1px;
+      background: var(--surface-5);
+    }
+    .cmp-sparkline-bar.pos { background: var(--positive); }
+    .cmp-sparkline-bar.neg { background: var(--negative); }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <header class="page-head">
+      <div class="eyebrow">Head-to-head</div>
+      <h1 class="h-1">Compare players</h1>
+      <p class="lede" style="max-width: 62ch; margin-top: var(--space-3);">
+        Overlay up to three players' SG fingerprints, probabilities, 10-factor breakdowns, and course/form evidence at this week's event. Pick from the current field — add via search or the <strong>Compare to…</strong> button on any player profile.
+      </p>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="cmp-toolbar">
+      <div class="cmp-search">
+        <svg class="cmp-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" id="cmpSearchInput" placeholder="Add player to comparison…" autocomplete="off"/>
+        <div class="cmp-search-menu" id="cmpSearchMenu" role="listbox"></div>
+      </div>
+      <button class="cmp-clear-btn" id="cmpClearBtn">Clear all</button>
+    </div>
+
+    <!-- Player chips -->
+    <div class="cmp-chips" id="cmpChips"></div>
+
+    <!-- Dynamic comparison panels -->
+    <div id="cmpBody"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('compare.html');
+      await BBI.renderFooter();
+
+      const [rankings, currentEvent, tourBaselines, courseHistory, recentForm] = await Promise.all([
+        BBI.data.load(BBI.data.paths.bbiRankings),
+        BBI.data.load(BBI.data.paths.currentEvent),
+        BBI.data.load(BBI.data.paths.tourSgBaselines),
+        BBI.data.load(BBI.data.paths.playerCourseHistory),
+        BBI.data.load(BBI.data.paths.playerRecentForm)
+      ]);
+
+      if (!rankings || !rankings.players) {
+        $('#cmpBody').innerHTML = renderEmpty('Rankings unavailable', 'The current rankings data did not load. Try refreshing.');
+        return;
+      }
+
+      const MAX = 3;
+      const players = rankings.players;
+      const weights = rankings.weights_dfs || {};
+      const PRIMARY = ['talent', 'courseFit', 'form', 'cutSafety', 'floor', 'ceiling', 'dfsValue', 'strategic'];
+      const ADJUST = ['leverage', 'contrarian'];
+      const ALL_FACTORS = [...PRIMARY, ...ADJUST];
+
+      // Parse ?ids=... from URL
+      const parseIds = () => {
+        const p = new URLSearchParams(window.location.search);
+        const raw = p.get('ids') || '';
+        return raw.split(',').map(s => s.trim()).filter(Boolean).map(s => parseInt(s, 10)).filter(Number.isFinite).slice(0, MAX);
+      };
+
+      let selectedIds = parseIds();
+
+      // Persist to URL without reload
+      const updateUrl = () => {
+        const url = new URL(window.location.href);
+        if (selectedIds.length) url.searchParams.set('ids', selectedIds.join(','));
+        else url.searchParams.delete('ids');
+        window.history.replaceState({}, '', url.toString());
+      };
+
+      // Resolve players by dg_id
+      const resolvePlayers = () => selectedIds
+        .map(id => players.find(p => p.dg_id === id))
+        .filter(Boolean);
+
+      // ---------- Chips ----------
+      function renderChips() {
+        const mount = $('#cmpChips');
+        const resolved = resolvePlayers();
+        if (!resolved.length) {
+          mount.innerHTML = '';
+          return;
+        }
+        mount.innerHTML = resolved.map((p, i) => {
+          const rank = players.findIndex(x => x.dg_id === p.dg_id) + 1;
+          return `
+            <div class="cmp-chip p${i+1}">
+              <span class="cmp-chip-dot" aria-hidden="true"></span>
+              <div class="cmp-chip-body">
+                <div class="cmp-chip-name">${playerLink(p.dg_id, p.name)}</div>
+                <div class="cmp-chip-sub">#${rank} · Composite ${fmt.num(p.bbi_dfs, 2)}</div>
+              </div>
+              <button class="cmp-chip-remove" data-remove="${p.dg_id}" aria-label="Remove ${p.name} from comparison">×</button>
+            </div>
+          `;
+        }).join('');
+
+        // Wire remove buttons
+        mount.querySelectorAll('[data-remove]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = parseInt(btn.dataset.remove, 10);
+            selectedIds = selectedIds.filter(x => x !== id);
+            updateUrl();
+            render();
+          });
+        });
+      }
+
+      // ---------- Search combobox ----------
+      const searchInput = $('#cmpSearchInput');
+      const searchMenu = $('#cmpSearchMenu');
+
+      function renderSearchMenu(filter) {
+        const q = (filter || '').trim().toLowerCase();
+        const matches = q
+          ? players.map((p, i) => ({ p, i })).filter(({ p }) => p.name.toLowerCase().includes(q)).slice(0, 18)
+          : players.map((p, i) => ({ p, i })).slice(0, 10);
+
+        if (!matches.length) {
+          searchMenu.innerHTML = `<div style="padding: var(--space-4); text-align: center; color: var(--text-muted); font-size: var(--fs-sm);">No matches for "${q}".</div>`;
+          searchMenu.classList.add('open');
+          return;
+        }
+
+        searchMenu.innerHTML = matches.map(({ p, i }) => {
+          const taken = selectedIds.includes(p.dg_id);
+          return `
+            <div class="cmp-search-item ${taken ? 'taken' : ''}" data-dg-id="${p.dg_id}" role="option">
+              <span class="rank">#${i+1}</span>
+              <span>${p.name}</span>
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-muted);">${p.tier || 'NEUTRAL'}</span>
+            </div>
+          `;
+        }).join('');
+        searchMenu.classList.add('open');
+      }
+
+      searchInput.addEventListener('focus', () => renderSearchMenu(searchInput.value));
+      searchInput.addEventListener('input', () => renderSearchMenu(searchInput.value));
+      searchInput.addEventListener('blur', () => setTimeout(() => searchMenu.classList.remove('open'), 150));
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { searchInput.blur(); }
+      });
+
+      searchMenu.addEventListener('mousedown', (e) => {
+        const item = e.target.closest('.cmp-search-item');
+        if (!item || item.classList.contains('taken')) return;
+        e.preventDefault();
+        const id = parseInt(item.dataset.dgId, 10);
+        if (selectedIds.length >= MAX) {
+          selectedIds = [...selectedIds.slice(1), id]; // drop oldest if full
+        } else {
+          selectedIds = [...selectedIds, id];
+        }
+        updateUrl();
+        searchInput.value = '';
+        searchMenu.classList.remove('open');
+        render();
+      });
+
+      // ---------- Clear all ----------
+      $('#cmpClearBtn').addEventListener('click', () => {
+        selectedIds = [];
+        updateUrl();
+        render();
+      });
+
+      // ---------- Empty state ----------
+      function renderEmpty(heading, text) {
+        return `
+          <div class="cmp-empty">
+            <h2>${heading}</h2>
+            <p>${text}</p>
+            <a href="rankings.html" class="btn btn-lg" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 10px 18px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); color: var(--text-on-gold); border-radius: var(--radius-md); font-weight: 600; font-size: var(--fs-sm); text-decoration: none;">Browse rankings →</a>
+          </div>
+        `;
+      }
+
+      // ---------- Probability grid ----------
+      function renderProbGrid(list) {
+        const probs = [
+          { key: 'win_pct', label: 'Win', dec: 2 },
+          { key: 'top_5',   label: 'Top 5', dec: 1 },
+          { key: 'top_10',  label: 'Top 10', dec: 1 },
+          { key: 'top_20',  label: 'Top 20', dec: 1 },
+          { key: 'make_cut', label: 'Make Cut', dec: 0 }
+        ];
+
+        const headerCells = ['<div class="cmp-prob-cell header">Probability</div>']
+          .concat(list.map((p, i) => `
+            <div class="cmp-prob-cell header">
+              <div class="cmp-prob-player-head p${i+1}">
+                <div class="swatch"></div>
+                <div class="name">${fmt.abbrevName(p.name)}</div>
+              </div>
+            </div>
+          `));
+
+        const rows = probs.map(prob => {
+          const values = list.map(p => p[prob.key] ?? null);
+          const maxVal = Math.max(...values.filter(v => v != null));
+          const cells = values.map((v, i) => {
+            const isLeader = v != null && Math.abs(v - maxVal) < 0.001 && values.length > 1;
+            return `
+              <div class="cmp-prob-cell val p${i+1} ${isLeader ? 'leader' : ''}">
+                ${v == null ? '—' : fmt.pct(v, prob.dec)}
+              </div>
+            `;
+          });
+          return `<div class="cmp-prob-cell row-label">${prob.label}</div>` + cells.join('');
+        });
+
+        return `
+          <div class="cmp-prob-grid" style="grid-template-columns: 140px repeat(${list.length}, minmax(120px, 1fr));">
+            ${headerCells.join('')}
+            ${rows.join('')}
+          </div>
+        `;
+      }
+
+      // ---------- Overlaid SG Fingerprint ----------
+      function renderOverlaidFingerprint(list) {
+        if (!tourBaselines || !tourBaselines.sg_ott) return '';
+
+        const size = 320, cx = size / 2, cy = size / 2, ringMax = 100;
+
+        const pt = (angle, dist) => {
+          const rad = (angle - 90) * Math.PI / 180;
+          return [cx + dist * Math.cos(rad), cy + dist * Math.sin(rad)];
+        };
+
+        const computePct = (value, baseline) => {
+          if (!baseline) return 50;
+          const { min, max } = baseline;
+          const span = max - min || 1;
+          return Math.min(100, Math.max(0, ((value - min) / span) * 100));
+        };
+
+        // Tour-average shape (50th percentile all around)
+        const tourAvgShape = [pt(0, 0.5*ringMax), pt(90, 0.5*ringMax), pt(180, 0.5*ringMax), pt(270, 0.5*ringMax)]
+          .map(p => p.join(',')).join(' ');
+
+        // Player polygons
+        const colors = ['var(--p1)', 'var(--p2)', 'var(--p3)'];
+        const polygons = list.map((p, i) => {
+          const sgOtt = p.sg_ott ?? p.hist_sg_ott ?? 0;
+          const sgApp = p.sg_app ?? p.hist_sg_app ?? 0;
+          const sgArg = p.sg_arg ?? p.hist_sg_arg ?? 0;
+          const sgPutt = p.sg_putt ?? p.hist_sg_putt ?? 0;
+          const r1 = computePct(sgOtt, tourBaselines.sg_ott) / 100;
+          const r2 = computePct(sgApp, tourBaselines.sg_app) / 100;
+          const r3 = computePct(sgArg, tourBaselines.sg_arg) / 100;
+          const r4 = computePct(sgPutt, tourBaselines.sg_putt) / 100;
+          const points = [pt(0, r1*ringMax), pt(90, r2*ringMax), pt(180, r3*ringMax), pt(270, r4*ringMax)]
+            .map(pp => pp.join(',')).join(' ');
+          const color = colors[i];
+          const delay = 0.3 + i * 0.15;
+          return `
+            <polygon points="${points}" fill="${color}" fill-opacity="0.12" stroke="${color}" stroke-width="2.5"
+                     style="animation: fadeIn ${delay + 0.6}s var(--ease-out) both; animation-delay: ${delay}s;">
+              <animate attributeName="points" from="${tourAvgShape}" to="${points}"
+                       dur="1s" fill="freeze" begin="${delay}s" />
+            </polygon>
+          `;
+        });
+
+        // Legend
+        const legend = list.map((p, i) => `
+          <div class="cmp-legend-item">
+            <span class="cmp-legend-swatch" style="background: ${colors[i]};"></span>
+            ${fmt.abbrevName(p.name)}
+          </div>
+        `).join('') + `
+          <div class="cmp-legend-item">
+            <span class="cmp-legend-swatch" style="background: var(--text-muted); opacity: 0.4;"></span>
+            Tour avg
+          </div>
+        `;
+
+        return `
+          <div class="cmp-fingerprint-section">
+            <h3 style="font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">SG Fingerprint overlay</h3>
+            <p style="font-size: var(--fs-xs); color: var(--text-muted); line-height: var(--lh-snug);">Each player's SG strengths plotted against the tour-wide field on four axes. Larger area = more total strokes gained.</p>
+
+            <div class="cmp-fingerprint-wrap">
+              <svg width="100%" height="360" viewBox="0 0 ${size} ${size}" style="max-width: 440px;">
+                <!-- Reference rings -->
+                <circle cx="${cx}" cy="${cy}" r="25" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
+                <circle cx="${cx}" cy="${cy}" r="50" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.6"/>
+                <circle cx="${cx}" cy="${cy}" r="75" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
+                <circle cx="${cx}" cy="${cy}" r="100" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.3"/>
+
+                <!-- Ghost tour avg -->
+                <polygon points="${tourAvgShape}" fill="none" stroke="var(--text-muted)" stroke-width="1.5"
+                         stroke-dasharray="3,4" opacity="0.35"/>
+
+                <!-- Axis labels -->
+                <text x="${cx}" y="18" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text-primary)">OTT</text>
+                <text x="${size - 4}" y="${cy+4}" text-anchor="end" font-size="12" font-weight="600" fill="var(--text-primary)">APP</text>
+                <text x="${cx}" y="${size - 8}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text-primary)">ARG</text>
+                <text x="4" y="${cy+4}" text-anchor="start" font-size="12" font-weight="600" fill="var(--text-primary)">PUTT</text>
+
+                ${polygons.join('')}
+              </svg>
+            </div>
+
+            <div class="cmp-fingerprint-legend">${legend}</div>
+          </div>
+        `;
+      }
+
+      // ---------- Factor comparison table ----------
+      function renderFactorTable(list) {
+        const prettyFactor = k => ({
+          talent: 'Talent', courseFit: 'Course Fit', form: 'Form', cutSafety: 'Cut Safety',
+          floor: 'Floor', ceiling: 'Ceiling', leverage: 'Leverage', contrarian: 'Contrarian',
+          dfsValue: 'DFS Value', strategic: 'Strategic'
+        }[k] || k);
+
+        const headerCols = list.map((p, i) => `
+          <th class="p${i+1}">
+            <div class="cmp-prob-player-head p${i+1}" style="text-align: right; align-items: flex-end;">
+              <div class="swatch"></div>
+              <div class="name">${fmt.abbrevName(p.name)}</div>
+            </div>
+          </th>
+        `).join('');
+
+        const rows = ALL_FACTORS.map(key => {
+          const values = list.map(p => (p.dfs_decomp || {})[key] ?? 0);
+          const maxVal = Math.max(...values);
+          const cells = values.map((v, i) => {
+            const isLeader = values.length > 1 && Math.abs(v - maxVal) < 0.001 && v > 0;
+            return `<td class="val ${isLeader ? 'leader' : ''}">${fmt.num(v, 2)}</td>`;
+          }).join('');
+          const cap = ((weights[key] || 0) * 100).toFixed(1);
+          return `
+            <tr>
+              <td>${prettyFactor(key)}<span style="display: block; font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-dimmed);">max ${cap}</span></td>
+              ${cells}
+            </tr>
+          `;
+        }).join('');
+
+        // Composite total row
+        const composites = list.map(p => p.bbi_dfs ?? 0);
+        const maxComposite = Math.max(...composites);
+        const compositeCells = composites.map((v, i) => {
+          const isLeader = composites.length > 1 && Math.abs(v - maxComposite) < 0.001;
+          return `<td class="val ${isLeader ? 'leader' : ''}" style="font-weight: 700; font-size: var(--fs-md);">${fmt.num(v, 2)}</td>`;
+        }).join('');
+
+        return `
+          <div class="cmp-factor-wrap">
+            <div class="cmp-factor-head">
+              <h3>10-factor decomposition</h3>
+              <p>Points contribution per factor. Leader in each row highlighted gold. Sum of bars = composite score.</p>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="cmp-factor-table">
+                <thead>
+                  <tr>
+                    <th>Factor</th>
+                    ${headerCols}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rows}
+                </tbody>
+                <tfoot>
+                  <tr style="background: var(--surface-2); border-top: 2px solid var(--border-base);">
+                    <td style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-muted);">Composite</td>
+                    ${compositeCells}
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        `;
+      }
+
+      // ---------- Recent form strip ----------
+      function renderRecentFormStrip(list) {
+        if (!recentForm) return '';
+        const rows = list.map((p, i) => {
+          const form = (recentForm[p.dg_id] || []).slice(0, 8);
+          if (!form.length) {
+            return `
+              <div class="cmp-strip-row p${i+1}">
+                <span class="cmp-strip-name">${fmt.abbrevName(p.name)}</span>
+                <span class="cmp-strip-detail muted">No recent tournament data</span>
+                <span class="cmp-strip-value muted">—</span>
+              </div>
+            `;
+          }
+          const maxAbs = Math.max(...form.map(e => Math.abs(e.sg_total || 0)), 1);
+          const bars = form.map(e => {
+            const pct = Math.max(10, (Math.abs(e.sg_total || 0) / maxAbs) * 100);
+            const cls = e.sg_total > 0 ? 'pos' : e.sg_total < 0 ? 'neg' : '';
+            return `<span class="cmp-sparkline-bar ${cls}" style="height: ${pct}%;" title="${e.event_name}: ${e.sg_total > 0 ? '+' : ''}${fmt.num(e.sg_total, 2)} SG (finished ${e.finish})"></span>`;
+          }).join('');
+          const avg = form.reduce((a, b) => a + (b.sg_total || 0), 0) / form.length;
+          return `
+            <div class="cmp-strip-row p${i+1}">
+              <span class="cmp-strip-name">${fmt.abbrevName(p.name)}</span>
+              <div class="cmp-sparkline">${bars}</div>
+              <span class="cmp-strip-value ${avg > 0 ? 'positive' : avg < 0 ? 'negative' : ''}">${avg > 0 ? '+' : ''}${fmt.num(avg, 2)}</span>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="cmp-strip-card">
+            <h3 class="cmp-strip-title">Recent form</h3>
+            <div style="font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--space-4); line-height: var(--lh-snug);">Last ~8 events, SG:Total per event. Bar height = magnitude, value = 8-event average.</div>
+            ${rows}
+          </div>
+        `;
+      }
+
+      // ---------- Course history strip ----------
+      function renderCourseStrip(list) {
+        if (!courseHistory) return '';
+        const course = currentEvent?.course || rankings?.course || 'this venue';
+        const rows = list.map((p, i) => {
+          const data = courseHistory[p.dg_id];
+          if (!data || !data.aggregate || !data.aggregate.starts) {
+            return `
+              <div class="cmp-strip-row p${i+1}">
+                <span class="cmp-strip-name">${fmt.abbrevName(p.name)}</span>
+                <span class="cmp-strip-detail muted">First start here</span>
+                <span class="cmp-strip-value muted">—</span>
+              </div>
+            `;
+          }
+          const agg = data.aggregate;
+          const sg = agg.sg_total != null ? `${agg.sg_total > 0 ? '+' : ''}${fmt.num(agg.sg_total, 2)}` : '—';
+          const cls = agg.sg_total > 0 ? 'positive' : agg.sg_total < 0 ? 'negative' : '';
+          return `
+            <div class="cmp-strip-row p${i+1}">
+              <span class="cmp-strip-name">${fmt.abbrevName(p.name)}</span>
+              <div class="cmp-strip-detail">
+                <strong>${agg.starts}</strong> starts · <strong>${agg.rounds}</strong> rounds${agg.avg_finish != null ? ` · avg finish ${fmt.num(agg.avg_finish, 1)}` : ''}
+              </div>
+              <span class="cmp-strip-value ${cls}">${sg}</span>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="cmp-strip-card">
+            <h3 class="cmp-strip-title">Course history · ${course}</h3>
+            <div style="font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--space-4); line-height: var(--lh-snug);">Historical SG:Total per round at this venue, over the full lookback window.</div>
+            ${rows}
+          </div>
+        `;
+      }
+
+      // ---------- Main render ----------
+      function render() {
+        renderChips();
+        $('#cmpClearBtn').toggleAttribute('disabled', selectedIds.length === 0);
+        searchInput.disabled = selectedIds.length >= MAX;
+        searchInput.placeholder = selectedIds.length >= MAX
+          ? `Max ${MAX} players — remove one to add another`
+          : 'Add player to comparison…';
+
+        const list = resolvePlayers();
+        const body = $('#cmpBody');
+
+        if (list.length === 0) {
+          body.innerHTML = renderEmpty(
+            'Pick 2–3 players to compare',
+            'Use the search above or start from the rankings page. Share the URL and the same comparison loads for whoever clicks it.'
+          );
+          return;
+        }
+
+        if (list.length === 1) {
+          body.innerHTML = renderEmpty(
+            'Add at least one more player',
+            `${list[0].name} is loaded. Add another player to start comparing side-by-side.`
+          );
+          return;
+        }
+
+        body.innerHTML = `
+          ${renderProbGrid(list)}
+          ${renderOverlaidFingerprint(list)}
+          ${renderFactorTable(list)}
+          <div class="cmp-strips">
+            ${renderRecentFormStrip(list)}
+            ${renderCourseStrip(list)}
+          </div>
+        `;
+
+        window.observeAnimations?.(body);
+      }
+
+      render();
+    });
+  </script>
+</body>
+</html>
