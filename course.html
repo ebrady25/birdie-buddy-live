@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* ===== COURSE DETAIL PAGE ===== */
+
+    /* Back link */
+    .course-back {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 6px 10px;
+      margin-bottom: var(--space-4);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .course-back:hover {
+      background: var(--surface-5);
+      color: var(--text-primary);
+    }
+
+    /* Hero */
+    .course-hero {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.06) 0%, transparent 45%), var(--surface-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+    .course-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-500), transparent);
+      opacity: 0.6;
+    }
+
+    .course-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .course-hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: var(--lh-tight);
+      margin-bottom: var(--space-2);
+      letter-spacing: var(--tracking-tight);
+    }
+
+    .course-hero-event {
+      font-size: var(--fs-lg);
+      color: var(--text-body);
+      margin-bottom: var(--space-5);
+    }
+
+    .course-hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: var(--space-3);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .course-hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .course-hero-stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .course-hero-stat-value {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+
+    .course-hero-tags {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-top: var(--space-4);
+    }
+
+    .course-tag {
+      padding: 4px 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-body);
+    }
+
+    .course-tag.difficulty-easy      { border-color: rgba(74, 222, 128, 0.3); color: var(--positive); }
+    .course-tag.difficulty-moderate  { border-color: var(--border-base); color: var(--text-body); }
+    .course-tag.difficulty-hard      { border-color: rgba(251, 191, 36, 0.35); color: var(--warning); }
+    .course-tag.difficulty-very_hard,
+    .course-tag.difficulty-elite     { border-color: rgba(248, 113, 113, 0.35); color: var(--negative); }
+
+    /* Section heads on this page use the standard .section-head / .section-title classes */
+
+    /* Approach profile big viz */
+    .dna-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .dna-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .dna-type {
+      color: var(--gold-500);
+      font-weight: 600;
+    }
+
+    .dna-bar {
+      display: flex;
+      height: 40px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: var(--space-3);
+    }
+
+    .dna-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      color: rgba(10, 10, 15, 0.75);
+      letter-spacing: var(--tracking-wide);
+      transition: filter var(--dur-fast) var(--ease-out);
+      cursor: default;
+    }
+    .dna-seg:hover { filter: brightness(1.25); }
+
+    .dna-seg.seg-50_100_fw   { background: var(--gold-700); }
+    .dna-seg.seg-100_150_fw  { background: var(--gold-600); }
+    .dna-seg.seg-150_200_fw  { background: var(--gold-500); color: var(--text-on-gold); }
+    .dna-seg.seg-over_200_fw { background: var(--gold-400); color: var(--text-on-gold); }
+    .dna-seg.seg-under_150_rgh { background: rgba(248,113,113,0.45); color: var(--text-primary); }
+    .dna-seg.seg-over_150_rgh  { background: rgba(248,113,113,0.70); color: var(--text-primary); }
+
+    .dna-legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .dna-legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+    }
+
+    .dna-legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .dna-takeaway {
+      margin-top: var(--space-5);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--border-subtle);
+      font-size: var(--fs-md);
+      line-height: var(--lh-relaxed);
+      color: var(--text-body);
+    }
+
+    /* Venue leaders table */
+    .leaders-wrap {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .leaders-table {
+      width: 100%;
+      font-size: var(--fs-sm);
+      border-collapse: collapse;
+    }
+
+    .leaders-table th {
+      background: var(--surface-2);
+      padding: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-align: right;
+    }
+    .leaders-table th:first-child { text-align: left; }
+
+    .leaders-table td {
+      padding: var(--space-3);
+      border-bottom: 1px solid var(--border-subtle);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .leaders-table td:first-child { color: var(--text-primary); font-weight: 500; }
+
+    .leaders-table td.num {
+      text-align: right;
+      font-family: var(--font-mono);
+    }
+
+    .leaders-table tbody tr:hover { background: var(--surface-5); }
+    .leaders-table tbody tr:last-child td { border-bottom: none; }
+
+    .leader-rank {
+      display: inline-block;
+      width: 22px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--gold-300);
+      font-weight: 700;
+      margin-right: var(--space-2);
+    }
+
+    /* Similar courses grid */
+    .similar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .similar-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      transition: all var(--dur-base) var(--ease-out);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .similar-card:hover {
+      border-color: var(--border-gold);
+      background: var(--surface-4);
+      transform: translateY(-1px);
+    }
+
+    .similar-card-event {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .similar-card-name {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+      line-height: var(--lh-snug);
+    }
+
+    .similar-card-stats {
+      display: flex;
+      gap: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .similar-card-sim {
+      display: inline-block;
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      padding: 2px 7px;
+      background: rgba(212, 168, 67, 0.14);
+      color: var(--gold-300);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+
+    .similar-card-mini-bar {
+      display: flex;
+      height: 6px;
+      margin-top: var(--space-2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    /* Empty states */
+    .course-empty {
+      text-align: center;
+      padding: var(--space-12);
+      background: var(--surface-2);
+      border: 1px dashed var(--border-base);
+      border-radius: var(--radius-lg);
+    }
+
+    .course-empty h2 {
+      font-size: var(--fs-xl);
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .course-empty p {
+      color: var(--text-body);
+      max-width: 48ch;
+      margin: 0 auto var(--space-5);
+    }
+
+    .leaders-empty-note {
+      padding: var(--space-5);
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      font-style: italic;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <a href="courses.html" class="course-back">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      All courses
+    </a>
+
+    <div id="courseContent"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('courses.html');
+      await BBI.renderFooter();
+
+      const [library, currentEvent, rankings, courseHistory] = await Promise.all([
+        BBI.data.load(BBI.data.paths.courseLibrary),
+        BBI.data.load(BBI.data.paths.currentEvent),
+        BBI.data.load(BBI.data.paths.bbiRankings),
+        BBI.data.load(BBI.data.paths.playerCourseHistory)
+      ]);
+
+      const mount = $('#courseContent');
+      if (!library || !library.profiles) {
+        mount.innerHTML = renderEmpty('Course library unavailable', 'Try reloading or open /courses.html to browse.');
+        return;
+      }
+
+      const courses = Object.entries(library.profiles).map(([eid, c]) => ({ ...c, event_id: parseInt(eid, 10) }));
+      const coursesById = Object.fromEntries(courses.map(c => [c.event_id, c]));
+
+      // URL param
+      const idParam = parseInt(new URLSearchParams(window.location.search).get('id'), 10);
+      const course = !isNaN(idParam) ? coursesById[idParam] : null;
+
+      if (!course) {
+        mount.innerHTML = renderEmpty(
+          'Course not found',
+          `No venue with event_id ${isNaN(idParam) ? '—' : idParam} in the DNA library. Browse all 48 courses instead.`
+        );
+        return;
+      }
+
+      const isCurrentEvent = currentEvent?.event_id === course.event_id;
+
+      mount.innerHTML = renderCourse(course, courses, coursesById, isCurrentEvent, rankings, courseHistory);
+    });
+
+    function renderEmpty(heading, text) {
+      return `
+        <div class="course-empty">
+          <h2>${heading}</h2>
+          <p>${text}</p>
+          <a href="courses.html" class="btn" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 10px 18px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); color: var(--text-on-gold); border-radius: var(--radius-md); font-weight: 600; font-size: var(--fs-sm); text-decoration: none;">Browse courses →</a>
+        </div>
+      `;
+    }
+
+    function prettyLabel(v) {
+      if (!v) return '';
+      return String(v).replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
+
+    function approachTakeaway(w) {
+      if (!w) return '';
+      const rough = (w.under_150_rgh || 0) + (w.over_150_rgh || 0);
+      const longFw = (w.over_200_fw || 0);
+      const shortFw = (w['50_100_fw'] || 0);
+      const midFw = (w['150_200_fw'] || 0);
+      if (rough > 0.30) return "Rough severity is the dominant dimension — expect wedge-from-rough recoveries to be the separator. Players with strong SG: around-the-green and short-game discipline gain here; bombers who miss fairways bleed strokes.";
+      if (longFw > 0.25) return "A long-iron course — the approach-weight distribution skews heavily to 200+ yards from the fairway. Expect SG: approach leaders with strong 4-iron through 6-iron metrics to separate.";
+      if (shortFw > 0.22) return "Wedge-friendly venue. Short-iron and scoring-club players have outsized edge because a majority of approaches land inside 150 yards from the fairway.";
+      if (midFw > 0.25) return "Mid-iron test. The 150-200 yard fairway bucket dominates the approach profile — SG: approach players with good ball-striking in that range are the natural fits.";
+      return "Balanced approach profile — no single shot type dominates. This favors well-rounded ball-strikers who don't have a glaring weakness across distance buckets.";
+    }
+
+    // Similarity: Euclidean distance across the 6 weight buckets + normalized par/yardage/rough
+    function similarity(a, b) {
+      const keys = ['50_100_fw', '100_150_fw', '150_200_fw', 'over_200_fw', 'under_150_rgh', 'over_150_rgh'];
+      let sumSq = 0;
+      keys.forEach(k => {
+        const d = (a.w?.[k] || 0) - (b.w?.[k] || 0);
+        sumSq += d * d;
+      });
+      // Add normalized yardage diff (max range ~945) and rough diff
+      sumSq += Math.pow(((a.yardage || 7000) - (b.yardage || 7000)) / 1500, 2);
+      sumSq += Math.pow(((a.rough || 1) - (b.rough || 1)) / 0.6, 2);
+      return Math.sqrt(sumSq); // lower = more similar
+    }
+
+    function renderCourse(course, allCourses, coursesById, isCurrentEvent, rankings, courseHistory) {
+      const w = course.w || {};
+      const difficultyLbl = prettyLabel(course.difficulty).toLowerCase();
+      const greensLbl = prettyLabel(course.greens);
+
+      const segs = [
+        ['50_100_fw',   '50-100 fwy',    w['50_100_fw']],
+        ['100_150_fw',  '100-150 fwy',   w['100_150_fw']],
+        ['150_200_fw',  '150-200 fwy',   w['150_200_fw']],
+        ['over_200_fw', '200+ fwy',      w['over_200_fw']],
+        ['under_150_rgh','<150 rough',   w['under_150_rgh']],
+        ['over_150_rgh', '>150 rough',   w['over_150_rgh']]
+      ];
+
+      // Auto-label dominant shot type
+      let dnaType = 'balanced approach';
+      const rough = (w.under_150_rgh || 0) + (w.over_150_rgh || 0);
+      if (rough > 0.30) dnaType = 'rough-penalty heavy';
+      else if (w.over_200_fw > 0.25) dnaType = 'long-iron heavy';
+      else if (w['50_100_fw'] > 0.22) dnaType = 'wedge-friendly';
+      else if (w['150_200_fw'] > 0.25) dnaType = 'mid-iron heavy';
+
+      // Similar courses: compute distance to every other course, take nearest 6
+      const others = allCourses.filter(c => c.event_id !== course.event_id);
+      const withDist = others.map(c => ({ c, d: similarity(course, c) })).sort((a, b) => a.d - b.d).slice(0, 6);
+
+      // Venue leaders — only if this is the current event (we only have course history for the current venue)
+      const leadersSection = isCurrentEvent && courseHistory
+        ? renderLeaders(courseHistory, rankings, course)
+        : `<section class="section">
+             <div class="section-head">
+               <h2 class="section-title">Course leaders</h2>
+               <p class="section-subtitle">Historical SG:Total per round at this venue, ranked across the current field.</p>
+             </div>
+             <div class="leaders-wrap">
+               <div class="leaders-empty-note">
+                 Course history is only compiled for the week's active event.<br/>
+                 This page will light up fully when the pipeline rolls to <strong>${course.event_name}</strong> week.
+               </div>
+             </div>
+           </section>`;
+
+      // Current field summary (only shown for current event)
+      const fieldSummary = isCurrentEvent && rankings?.players
+        ? renderFieldSummary(rankings, course)
+        : '';
+
+      return `
+        <div class="course-hero">
+          <div class="course-hero-eyebrow">${course.event_name || 'Course DNA'}</div>
+          <h1 class="course-hero-name">${course.course_name || '—'}</h1>
+          ${isCurrentEvent ? `<div class="course-hero-event" style="color: var(--gold-300);"><span class="pulse-dot"></span> Active this week</div>` : ''}
+          <div class="course-hero-stats">
+            <div class="course-hero-stat">
+              <div class="course-hero-stat-label">Par</div>
+              <div class="course-hero-stat-value">${course.par ?? '—'}</div>
+            </div>
+            <div class="course-hero-stat">
+              <div class="course-hero-stat-label">Yardage</div>
+              <div class="course-hero-stat-value">${course.yardage ? course.yardage.toLocaleString() : '—'}</div>
+            </div>
+            <div class="course-hero-stat">
+              <div class="course-hero-stat-label">Stimp</div>
+              <div class="course-hero-stat-value">${course.stimpmeter != null ? course.stimpmeter.toFixed(1) : '—'}</div>
+            </div>
+            <div class="course-hero-stat">
+              <div class="course-hero-stat-label">Rough</div>
+              <div class="course-hero-stat-value">${course.rough != null ? course.rough.toFixed(2) + '×' : '—'}</div>
+            </div>
+          </div>
+          <div class="course-hero-tags">
+            <span class="course-tag difficulty-${course.difficulty}">${difficultyLbl}</span>
+            <span class="course-tag">${greensLbl} greens</span>
+            <span class="course-tag">${dnaType}</span>
+          </div>
+        </div>
+
+        <!-- DNA PROFILE -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Approach-shot DNA</h2>
+            <p class="section-subtitle">Where the approach shots land, bucketed from 50 yards out to 200+ yards, fairway vs rough. These weights drive the Course Fit factor in weekly BBI rankings.</p>
+          </div>
+          <div class="dna-card">
+            <div class="dna-label-row">
+              <span>Approach weight distribution</span>
+              <span class="dna-type">${dnaType}</span>
+            </div>
+            <div class="dna-bar">
+              ${segs.map(([key, lbl, val]) => {
+                const pct = (val || 0) * 100;
+                const show = pct >= 9; // only label segments ≥9%
+                return `<div class="dna-seg seg-${key}" style="width: ${pct}%;" title="${lbl}: ${fmt.num(pct, 0)}%">${show ? fmt.num(pct, 0) + '%' : ''}</div>`;
+              }).join('')}
+            </div>
+            <div class="dna-legend">
+              ${segs.map(([key, lbl, val]) => `
+                <div class="dna-legend-item">
+                  <span class="dna-legend-swatch" style="background: ${segSwatch(key)};"></span>
+                  <span>${lbl}</span>
+                  <span style="margin-left: auto; font-family: var(--font-mono); color: var(--text-muted);">${fmt.num((val || 0) * 100, 0)}%</span>
+                </div>
+              `).join('')}
+            </div>
+            <div class="dna-takeaway">
+              <strong style="color: var(--text-primary);">Takeaway:</strong> ${approachTakeaway(w)}
+            </div>
+          </div>
+        </section>
+
+        ${fieldSummary}
+
+        ${leadersSection}
+
+        <!-- SIMILAR COURSES -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Similar DNA</h2>
+            <p class="section-subtitle">Six nearest venues by approach-shot profile, yardage, and rough severity. Useful for transferring course-fit insights to predict performance here.</p>
+          </div>
+          <div class="similar-grid">
+            ${withDist.map(({ c, d }) => renderSimilarCard(c, d)).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderFieldSummary(rankings, course) {
+      const total = rankings.players?.length || 0;
+      // Count specialists vs comfortables vs struggles
+      const tiers = { SPECIALIST: 0, COMFORTABLE: 0, NEUTRAL: 0, STRUGGLE: 0 };
+      rankings.players.forEach(p => { tiers[p.tier || 'NEUTRAL']++; });
+      return `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">This week's field</h2>
+            <p class="section-subtitle">Tier distribution of the ${total} players BBI is tracking at ${course.course_name}.</p>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-3);">
+            ${Object.entries(tiers).map(([tier, count]) => `
+              <div style="background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4);">
+                <div style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px;">${tier.toLowerCase()}</div>
+                <div style="font-family: var(--font-mono); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums;">${count}</div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderLeaders(courseHistory, rankings, course) {
+      if (!rankings?.players) {
+        return '';
+      }
+      // Aggregate: for each player who has history at this venue, get their aggregate SG:Total per round
+      // Filter to current field
+      const fieldIds = new Set(rankings.players.map(p => p.dg_id));
+      const withHistory = [];
+      Object.entries(courseHistory).forEach(([dg_id, data]) => {
+        const id = parseInt(dg_id, 10);
+        if (!fieldIds.has(id)) return;
+        if (!data.aggregate || !data.aggregate.starts) return;
+        const player = rankings.players.find(p => p.dg_id === id);
+        if (!player) return;
+        withHistory.push({
+          dg_id: id,
+          name: player.name,
+          starts: data.aggregate.starts,
+          rounds: data.aggregate.rounds || 0,
+          sg_total: data.aggregate.sg_total ?? 0,
+          sg_app: data.aggregate.sg_app ?? 0,
+          sg_putt: data.aggregate.sg_putt ?? 0,
+          avg_finish: data.aggregate.avg_finish ?? null
+        });
+      });
+
+      // Require at least 2 starts to rank — filters out sample size of 1 noise
+      const eligible = withHistory.filter(p => p.starts >= 2);
+      eligible.sort((a, b) => (b.sg_total ?? -999) - (a.sg_total ?? -999));
+      const top = eligible.slice(0, 12);
+
+      if (top.length === 0) {
+        return `
+          <section class="section">
+            <div class="section-head">
+              <h2 class="section-title">Course leaders</h2>
+              <p class="section-subtitle">Historical SG:Total per round at this venue.</p>
+            </div>
+            <div class="leaders-wrap">
+              <div class="leaders-empty-note">No players in the current field have 2+ starts at ${course.course_name}.</div>
+            </div>
+          </section>
+        `;
+      }
+
+      const signNum = v => v > 0 ? `+${fmt.num(v, 2)}` : fmt.num(v, 2);
+      const signClass = v => v > 0 ? 'positive' : v < 0 ? 'negative' : '';
+
+      return `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Course leaders · current field</h2>
+            <p class="section-subtitle">Top 12 players in this week's field by historical SG:Total per round at ${course.course_name}. Minimum 2 starts.</p>
+          </div>
+          <div class="leaders-wrap">
+            <table class="leaders-table">
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th class="num">Starts</th>
+                  <th class="num">Rounds</th>
+                  <th class="num">Avg Finish</th>
+                  <th class="num">SG: App</th>
+                  <th class="num">SG: Putt</th>
+                  <th class="num">SG: Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${top.map((p, i) => `
+                  <tr>
+                    <td>
+                      <span class="leader-rank">#${i + 1}</span>
+                      ${playerLink(p.dg_id, p.name)}
+                    </td>
+                    <td class="num">${p.starts}</td>
+                    <td class="num">${p.rounds}</td>
+                    <td class="num">${p.avg_finish != null ? fmt.num(p.avg_finish, 1) : '—'}</td>
+                    <td class="num ${signClass(p.sg_app)}">${signNum(p.sg_app)}</td>
+                    <td class="num ${signClass(p.sg_putt)}">${signNum(p.sg_putt)}</td>
+                    <td class="num ${signClass(p.sg_total)}" style="font-weight: 600;">${signNum(p.sg_total)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSimilarCard(c, distance) {
+      const w = c.w || {};
+      const segs = [
+        ['50_100_fw', w['50_100_fw']],
+        ['100_150_fw', w['100_150_fw']],
+        ['150_200_fw', w['150_200_fw']],
+        ['over_200_fw', w['over_200_fw']],
+        ['under_150_rgh', w['under_150_rgh']],
+        ['over_150_rgh', w['over_150_rgh']]
+      ];
+      // Similarity score: transform distance to 0-100%. distance 0 = perfect match; cap at ~0.5 for display.
+      const simPct = Math.max(0, Math.min(100, (1 - distance / 0.5) * 100));
+      return `
+        <a class="similar-card" href="course.html?id=${c.event_id}">
+          <div class="similar-card-event">${c.event_name || ''}</div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2);">
+            <div class="similar-card-name">${c.course_name || '—'}</div>
+            <span class="similar-card-sim" title="DNA similarity (0-100)">${fmt.num(simPct, 0)}%</span>
+          </div>
+          <div class="similar-card-stats">
+            <span>par ${c.par}</span>
+            <span>${c.yardage ? c.yardage.toLocaleString() : '—'} yds</span>
+            <span>stimp ${c.stimpmeter != null ? c.stimpmeter.toFixed(1) : '—'}</span>
+          </div>
+          <div class="similar-card-mini-bar">
+            ${segs.map(([key, val]) => `<div class="dna-seg seg-${key}" style="width: ${(val || 0) * 100}%;"></div>`).join('')}
+          </div>
+        </a>
+      `;
+    }
+
+    function segSwatch(key) {
+      const map = {
+        '50_100_fw':    'var(--gold-700)',
+        '100_150_fw':   'var(--gold-600)',
+        '150_200_fw':   'var(--gold-500)',
+        'over_200_fw':  'var(--gold-400)',
+        'under_150_rgh': 'rgba(248,113,113,0.45)',
+        'over_150_rgh':  'rgba(248,113,113,0.70)'
+      };
+      return map[key] || 'var(--surface-5)';
+    }
+  </script>
+</body>
+</html>

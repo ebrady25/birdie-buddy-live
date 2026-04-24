@@ -149,6 +149,26 @@
       border-color: var(--border-gold);
       transform: translateY(-2px);
       box-shadow: var(--shadow-gold-sm);
+      cursor: pointer;
+    }
+
+    /* Invisible click overlay — click anywhere on card to open detail page */
+    .course-card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      text-decoration: none;
+    }
+    .course-card > *:not(.course-card-link) {
+      position: relative;
+      z-index: 2;
+    }
+    /* Hover-state gold name when clicking through */
+    .course-card:hover .course-name {
+      color: var(--gold-300);
+    }
+    .course-name {
+      transition: color var(--dur-fast) var(--ease-out);
     }
 
     /* Focused card via ?focus=<event_id> from a player-profile deep link */
@@ -466,6 +486,7 @@
         const greensLbl = prettyLabel(c.greens);
         return `
           <article class="course-card" data-event-id="${c.event_id}">
+            <a href="course.html?id=${c.event_id}" class="course-card-link" aria-label="Open ${c.course_name} detail page"></a>
             <div class="course-event">${c.event_name || ''}</div>
             <h3 class="course-name">${c.course_name || '—'}</h3>
             <div class="course-stats">

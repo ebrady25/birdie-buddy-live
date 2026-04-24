@@ -1834,7 +1834,7 @@
       // Determine this week's event_id so we can link back to /courses.html
       const eventId = currentEvent?.event_id ?? rankings?.event_id ?? null;
       const courseLink = eventId
-        ? `<a href="courses.html?focus=${eventId}" class="course-dna-link" title="Open this venue's DNA profile">
+        ? `<a href="course.html?id=${eventId}" class="course-dna-link" title="Open this venue's DNA detail page">
              View course DNA
              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
            </a>`
