@@ -275,6 +275,14 @@
             btn.classList.toggle('active', on);
           });
         });
+        // Bind player links (fallback delegator for click navigation)
+        $$('.player-link', rb).forEach(link => {
+          link.addEventListener('click', e => {
+            if (!e.defaultPrevented) {
+              window.location.assign(link.href);
+            }
+          });
+        });
         // Bind expanders
         $$('[data-expand]', rb).forEach(btn => {
           btn.addEventListener('click', e => {

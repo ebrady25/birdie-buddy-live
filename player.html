@@ -403,6 +403,27 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* ===== SG FINGERPRINT ===== */
+    @keyframes fingerprint-draw {
+      from {
+        opacity: 0;
+        stroke-dasharray: 500;
+        stroke-dashoffset: 500;
+      }
+      to {
+        opacity: 1;
+        stroke-dasharray: 500;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      @keyframes fingerprint-draw {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    }
+
     @media (max-width: 768px) {
       .player-full-name { font-size: var(--fs-3xl); }
       .snapshot-rank { font-size: var(--fs-4xl); }
@@ -435,10 +456,15 @@
       const dg_id = params.get('id');
       const slug = params.get('slug');
 
-      // Load rankings
-      const rankings = await BBI.data.load(BBI.data.paths.bbiRankings);
-      const currentEvent = await BBI.data.load(BBI.data.paths.currentEvent);
-      const dfsData = await BBI.data.load(BBI.data.paths.dfsLineups);
+      // Load rankings and supporting data
+      const [rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines] = await Promise.all([
+        BBI.data.load(BBI.data.paths.bbiRankings),
+        BBI.data.load(BBI.data.paths.currentEvent),
+        BBI.data.load(BBI.data.paths.dfsLineups),
+        BBI.data.load(BBI.data.paths.playerCourseHistory),
+        BBI.data.load(BBI.data.paths.playerRecentForm),
+        BBI.data.load(BBI.data.paths.tourSgBaselines)
+      ]);
 
       if (!rankings || !rankings.players) {
         mount.innerHTML = renderEmptyState('Data loading error', 'Unable to load player rankings.');
@@ -468,7 +494,7 @@
 
       // Build content
       const playerRank = rankings.players.findIndex(p => p.dg_id === player.dg_id) + 1;
-      const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData);
+      const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines);
       mount.innerHTML = html;
     });
 
@@ -483,7 +509,7 @@
       `;
     }
 
-    function renderPlayer(player, rank, rankings, currentEvent, dfsData) {
+    function renderPlayer(player, rank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines) {
       const mode = 'pool'; // Default to pool mode
       const bbi = mode === 'pool' ? player.bbi_pool : player.bbi_dfs;
       const decomp = mode === 'pool' ? player.pool_decomp : player.dfs_decomp;
@@ -507,8 +533,14 @@
 
       const tierClass = (player.tier || 'NEUTRAL').toLowerCase();
 
+      // SG Fingerprint
+      const fingerprintHtml = buildSgFingerprint(player, tourBaselines);
+
+      // Recent form
+      const recentFormHtml = buildRecentForm(player, recentForm);
+
       // Course history
-      const courseHistHtml = buildCourseHistory(player);
+      const courseHistHtml = buildCourseHistory(player, courseHistory);
 
       // Market positioning
       const marketHtml = player.salary ? `
@@ -611,6 +643,12 @@
           </div>
         </div>
 
+        <!-- SG FINGERPRINT -->
+        ${fingerprintHtml}
+
+        <!-- RECENT FORM -->
+        ${recentFormHtml}
+
         <!-- COURSE HISTORY -->
         ${courseHistHtml}
 
@@ -627,14 +665,81 @@
       `;
     }
 
-    function buildCourseHistory(player) {
-      if (!player.course_hist_rounds || player.course_hist_rounds === 0) {
+    function buildCourseHistory(player, courseHistory) {
+      const playerData = courseHistory && courseHistory[player.dg_id];
+      if (!playerData || playerData.years.length === 0) {
         return `
           <section class="section">
             <div class="section-head">
               <h2 class="section-title">Course History</h2>
             </div>
-            <p style="color: var(--text-body);">Limited historical starts at this venue.</p>
+            <div class="empty-state" style="padding: var(--space-8);">
+              <div class="empty-icon">○</div>
+              <div class="empty-heading">No prior starts at this venue</div>
+            </div>
+          </section>
+        `;
+      }
+
+      const agg = playerData.aggregate || {};
+      const years = playerData.years || [];
+
+      return `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Course History</h2>
+            <p class="section-subtitle">${agg.starts || 0} starts, ${agg.rounds || 0} rounds at this venue.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 80px;">Year</th>
+                  <th style="width: 100px;">Finish</th>
+                  <th class="num">SG: Tee</th>
+                  <th class="num">SG: App</th>
+                  <th class="num">SG: Arg</th>
+                  <th class="num">SG: Putt</th>
+                  <th class="num">SG: Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="background: rgba(212, 168, 67, 0.06); border-top: 2px solid var(--border-soft);">
+                  <td><strong>Avg</strong></td>
+                  <td colspan="1"></td>
+                  <td class="num ${agg.sg_ott > 0 ? 'positive' : agg.sg_ott < 0 ? 'negative' : ''}">${agg.sg_ott > 0 ? '+' : ''}${fmt.num(agg.sg_ott, 2)}</td>
+                  <td class="num ${agg.sg_app > 0 ? 'positive' : agg.sg_app < 0 ? 'negative' : ''}">${agg.sg_app > 0 ? '+' : ''}${fmt.num(agg.sg_app, 2)}</td>
+                  <td class="num ${agg.sg_arg > 0 ? 'positive' : agg.sg_arg < 0 ? 'negative' : ''}">${agg.sg_arg > 0 ? '+' : ''}${fmt.num(agg.sg_arg, 2)}</td>
+                  <td class="num ${agg.sg_putt > 0 ? 'positive' : agg.sg_putt < 0 ? 'negative' : ''}">${agg.sg_putt > 0 ? '+' : ''}${fmt.num(agg.sg_putt, 2)}</td>
+                  <td class="num" style="font-weight: 600; ${agg.sg_total > 0 ? 'color: var(--positive)' : agg.sg_total < 0 ? 'color: var(--negative)' : ''}">${agg.sg_total > 0 ? '+' : ''}${fmt.num(agg.sg_total, 2)}</td>
+                </tr>
+                ${years.map(y => `
+                  <tr>
+                    <td><strong>${y.year}</strong></td>
+                    <td>${y.finish}</td>
+                    <td class="num ${y.sg_ott > 0 ? 'positive' : y.sg_ott < 0 ? 'negative' : ''}">${y.sg_ott > 0 ? '+' : ''}${fmt.num(y.sg_ott, 2)}</td>
+                    <td class="num ${y.sg_app > 0 ? 'positive' : y.sg_app < 0 ? 'negative' : ''}">${y.sg_app > 0 ? '+' : ''}${fmt.num(y.sg_app, 2)}</td>
+                    <td class="num ${y.sg_arg > 0 ? 'positive' : y.sg_arg < 0 ? 'negative' : ''}">${y.sg_arg > 0 ? '+' : ''}${fmt.num(y.sg_arg, 2)}</td>
+                    <td class="num ${y.sg_putt > 0 ? 'positive' : y.sg_putt < 0 ? 'negative' : ''}">${y.sg_putt > 0 ? '+' : ''}${fmt.num(y.sg_putt, 2)}</td>
+                    <td class="num ${y.sg_total > 0 ? 'positive' : y.sg_total < 0 ? 'negative' : ''}">${y.sg_total > 0 ? '+' : ''}${fmt.num(y.sg_total, 2)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    }
+
+    function buildRecentForm(player, recentForm) {
+      const playerForm = recentForm && recentForm[player.dg_id];
+      if (!playerForm || playerForm.length === 0) {
+        return `
+          <section class="section">
+            <div class="section-head">
+              <h2 class="section-title">Recent Form</h2>
+            </div>
+            <p style="color: var(--text-body);">No recent tournament data available.</p>
           </section>
         `;
       }
@@ -642,45 +747,167 @@
       return `
         <section class="section">
           <div class="section-head">
-            <h2 class="section-title">Course History</h2>
-            <p class="section-subtitle">${player.course_hist_rounds} rounds played at this venue.</p>
+            <h2 class="section-title">Recent Form</h2>
+            <p class="section-subtitle">Last 10 completed tournaments.</p>
           </div>
           <div class="table-wrap">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Avg SG</th>
-                  <th>SG: OTT</th>
-                  <th>SG: APP</th>
-                  <th>SG: ARG</th>
-                  <th>SG: Putt</th>
-                  <th>Rounds</th>
+                  <th style="flex: 1;">Event</th>
+                  <th style="width: 80px;">Date</th>
+                  <th style="width: 70px;">Finish</th>
+                  <th class="num">SG: Total</th>
+                  <th style="width: 110px;">Top Stat</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="num ${player.course_hist_sg > 0 ? 'positive' : player.course_hist_sg < 0 ? 'negative' : ''}">
-                    ${player.course_hist_sg > 0 ? '+' : ''}${fmt.num(player.course_hist_sg, 2)}
-                  </td>
-                  <td class="num ${player.hist_sg_ott > 0 ? 'positive' : player.hist_sg_ott < 0 ? 'negative' : ''}">
-                    ${player.hist_sg_ott > 0 ? '+' : ''}${fmt.num(player.hist_sg_ott, 2)}
-                  </td>
-                  <td class="num ${player.hist_sg_app > 0 ? 'positive' : player.hist_sg_app < 0 ? 'negative' : ''}">
-                    ${player.hist_sg_app > 0 ? '+' : ''}${fmt.num(player.hist_sg_app, 2)}
-                  </td>
-                  <td class="num ${player.hist_sg_arg > 0 ? 'positive' : player.hist_sg_arg < 0 ? 'negative' : ''}">
-                    ${player.hist_sg_arg > 0 ? '+' : ''}${fmt.num(player.hist_sg_arg, 2)}
-                  </td>
-                  <td class="num ${player.hist_sg_putt > 0 ? 'positive' : player.hist_sg_putt < 0 ? 'negative' : ''}">
-                    ${player.hist_sg_putt > 0 ? '+' : ''}${fmt.num(player.hist_sg_putt, 2)}
-                  </td>
-                  <td class="num">${player.course_hist_rounds}</td>
-                </tr>
+                ${playerForm.map(e => `
+                  <tr>
+                    <td title="${e.event_name}">${e.event_name.length > 30 ? e.event_name.substring(0, 27) + '...' : e.event_name}</td>
+                    <td>${fmt.date(e.date)}</td>
+                    <td><strong>${e.finish}</strong></td>
+                    <td class="num ${e.sg_total > 0 ? 'positive' : e.sg_total < 0 ? 'negative' : ''}">${e.sg_total > 0 ? '+' : ''}${fmt.num(e.sg_total, 2)}</td>
+                    <td style="font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; ${e.top_sg_value > 0 ? 'color: var(--positive)' : e.top_sg_value < 0 ? 'color: var(--negative)' : 'color: var(--text-body)'}">
+                      ${e.top_sg_category.replace('OTT', 'Tee').replace('APP', 'App').replace('ARG', 'Arg').replace('PUTT', 'Putt')}
+                      ${e.top_sg_value > 0 ? '+' : ''}${fmt.num(e.top_sg_value, 2)}
+                    </td>
+                  </tr>
+                `).join('')}
               </tbody>
             </table>
           </div>
         </section>
       `;
+    }
+
+    function buildSgFingerprint(player, tourBaselines) {
+      if (!tourBaselines || !tourBaselines.sg_ott) {
+        return ''; // Skip if no baselines
+      }
+
+      // Get player's current season SG values (use historical if available, else tour avg)
+      const tourOtt = (tourBaselines.sg_ott.min + tourBaselines.sg_ott.max) / 2;
+      const tourApp = (tourBaselines.sg_app.min + tourBaselines.sg_app.max) / 2;
+      const tourArg = (tourBaselines.sg_arg.min + tourBaselines.sg_arg.max) / 2;
+      const tourPutt = (tourBaselines.sg_putt.min + tourBaselines.sg_putt.max) / 2;
+
+      const sgOtt = player.sg_ott || (player.hist_sg_ott || 0);
+      const sgApp = player.sg_app || (player.hist_sg_app || 0);
+      const sgArg = player.sg_arg || (player.hist_sg_arg || 0);
+      const sgPutt = player.sg_putt || (player.hist_sg_putt || 0);
+
+      // Compute percentiles (0-100 scale based on tour)
+      const computePercentile = (value, baseline) => {
+        if (!baseline) return 50;
+        const { min, max } = baseline;
+        const span = max - min || 1;
+        return Math.min(100, Math.max(0, ((value - min) / span) * 100));
+      };
+
+      const pctOtt = computePercentile(sgOtt, tourBaselines.sg_ott);
+      const pctApp = computePercentile(sgApp, tourBaselines.sg_app);
+      const pctArg = computePercentile(sgArg, tourBaselines.sg_arg);
+      const pctPutt = computePercentile(sgPutt, tourBaselines.sg_putt);
+
+      // Normalize to 0-1 for radial distance (50% = center, 0% = inner, 100% = outer)
+      const r1 = pctOtt / 100;
+      const r2 = pctApp / 100;
+      const r3 = pctArg / 100;
+      const r4 = pctPutt / 100;
+
+      // SVG params
+      const size = 280;
+      const centerX = size / 2;
+      const centerY = size / 2;
+      const radius = 80;
+      const ringMax = 100;
+
+      // Compute polygon points (starting at 12 o'clock, going clockwise)
+      // Axes: OTT (top), APP (right), ARG (bottom), PUTT (left)
+      const pt = (angle, dist) => {
+        const rad = (angle - 90) * Math.PI / 180;
+        return [centerX + dist * Math.cos(rad), centerY + dist * Math.sin(rad)];
+      };
+
+      const p1 = pt(0, r1 * ringMax);    // OTT
+      const p2 = pt(90, r2 * ringMax);   // APP
+      const p3 = pt(180, r3 * ringMax);  // ARG
+      const p4 = pt(270, r4 * ringMax);  // PUTT
+
+      const polyPoints = [p1, p2, p3, p4].map(p => p.join(',')).join(' ');
+
+      return `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">SG Fingerprint</h2>
+            <p class="section-subtitle">Elite dimensions vs. PGA Tour. Higher = better.</p>
+          </div>
+          <div style="display: flex; justify-content: center; margin-bottom: var(--space-6);">
+            <svg width="100%" height="320" viewBox="0 0 280 280" style="max-width: 420px; margin: 0 auto;">
+              <!-- Reference rings -->
+              <circle cx="140" cy="140" r="20" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
+              <circle cx="140" cy="140" r="40" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.6"/>
+              <text x="148" y="144" font-size="10" fill="var(--text-muted)" font-family="var(--font-mono)">Tour avg</text>
+              <circle cx="140" cy="140" r="60" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
+              <circle cx="140" cy="140" r="80" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
+
+              <!-- Axes labels -->
+              <text x="140" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="var(--text-primary)">OTT</text>
+              <text x="140" y="45" text-anchor="middle" font-size="11" font-family="var(--font-mono)" fill="var(--text-muted)">${fmt.num(sgOtt, 2)}</text>
+
+              <text x="255" y="147" text-anchor="start" font-size="12" font-weight="500" fill="var(--text-primary)">APP</text>
+              <text x="255" y="165" text-anchor="start" font-size="11" font-family="var(--font-mono)" fill="var(--text-muted)">${fmt.num(sgApp, 2)}</text>
+
+              <text x="140" y="270" text-anchor="middle" font-size="12" font-weight="500" fill="var(--text-primary)">ARG</text>
+              <text x="140" y="288" text-anchor="middle" font-size="11" font-family="var(--font-mono)" fill="var(--text-muted)">${fmt.num(sgArg, 2)}</text>
+
+              <text x="25" y="147" text-anchor="end" font-size="12" font-weight="500" fill="var(--text-primary)">PUTT</text>
+              <text x="25" y="165" text-anchor="end" font-size="11" font-family="var(--font-mono)" fill="var(--text-muted)">${fmt.num(sgPutt, 2)}</text>
+
+              <!-- Polygon -->
+              <polygon points="${polyPoints}" fill="var(--gold-400)" fill-opacity="0.15" stroke="var(--gold-400)" stroke-width="2" style="animation: fingerprint-draw 600ms ease-out forwards; opacity: 0;">
+                <style>
+                  @keyframes fingerprint-draw {
+                    to { opacity: 1; }
+                  }
+                </style>
+              </polygon>
+
+              <!-- Vertex dots -->
+              <circle cx="${p1[0]}" cy="${p1[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
+              <circle cx="${p2[0]}" cy="${p2[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
+              <circle cx="${p3[0]}" cy="${p3[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
+              <circle cx="${p4[0]}" cy="${p4[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
+            </svg>
+          </div>
+          <div style="font-size: var(--fs-sm); color: var(--text-body); text-align: center; line-height: var(--lh-relaxed);">
+            <p>${getFingerPrintNarrative(pctOtt, pctApp, pctArg, pctPutt)}</p>
+          </div>
+        </section>
+      `;
+    }
+
+    function getFingerPrintNarrative(pctOtt, pctApp, pctArg, pctPutt) {
+      const strengths = [];
+      const weaknesses = [];
+
+      if (pctOtt > 65) strengths.push('elite driving accuracy');
+      else if (pctOtt < 35) weaknesses.push('below-avg driving accuracy');
+
+      if (pctApp > 65) strengths.push('elite approach play');
+      else if (pctApp < 35) weaknesses.push('below-avg approach play');
+
+      if (pctArg > 65) strengths.push('elite course management');
+      else if (pctArg < 35) weaknesses.push('below-avg course management');
+
+      if (pctPutt > 65) strengths.push('elite putting');
+      else if (pctPutt < 35) weaknesses.push('below-avg putting');
+
+      const strengthText = strengths.length > 0 ? `${strengths.join(' and ')}` : 'balanced play';
+      const weaknessText = weaknesses.length > 0 ? ` but struggles with ${weaknesses.join(' and ')}` : '';
+
+      return `This shape shows ${strengthText}${weaknessText}.`;
     }
 
     function getInitials(name) {

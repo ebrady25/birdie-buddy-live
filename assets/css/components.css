@@ -372,10 +372,18 @@
 .table th.sticky-col, .table td.sticky-col {
   position: sticky; left: 0;
   background: var(--surface-3);
-  z-index: 1;
+  z-index: 2;
 }
 .table th.sticky-col { background: var(--surface-2); }
 .table tbody tr:hover .sticky-col { background: var(--surface-4); }
+
+/* Ensure player links in sticky cells are clickable and frontmost */
+.table .sticky-col .player-link {
+  position: relative;
+  z-index: 3;
+  display: block;
+  padding: 2px 0;
+}
 
 /* Compact variant */
 .table-compact th { padding: 6px var(--space-3); }

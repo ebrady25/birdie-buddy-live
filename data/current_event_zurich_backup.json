@@ -1,0 +1,33 @@
+{
+  "event_id": 18,
+  "event_name": "Zurich Classic of New Orleans",
+  "event_slug": "Zurich_Classic_of_New_Orleans",
+  "event_snake": "zurich_classic",
+  "course": "TPC Louisiana",
+  "course_slug": "tpc_louisiana",
+  "start_date": "2026-04-23",
+  "week_num": 12,
+  "year": 2026,
+  "par": 72,
+  "yardage": 7425,
+  "team_event": true,
+  "team_format": "Two-player teams. R1/R3 alternate shot (foursomes), R2/R4 best ball (four-ball).",
+  "sg_weights": {
+    "sg_app": 1.0,
+    "sg_putt": 1.0,
+    "sg_arg": 1.0,
+    "sg_ott": 1.0
+  },
+  "course_weight_override": {
+    "courseFit_pool": 0.0,
+    "courseFit_dfs": 0.0,
+    "_note": "Team event \u2014 individual course fit does not apply. BBI v8.5 individual model is paused for this week."
+  },
+  "course_form_name": "TPC Louisiana Form (individual, pre-2017 Team switch)",
+  "course_notes": "Pete Dye design. Water on 14 holes. Team-format event since 2017. Heavy wind potential.",
+  "winner_archetype": "Two-player teams \u2014 chemistry matters more than individual profile. Recent winners: Riley/Hardy (2025), Hojgaard/Hojgaard (2024), Lipsky/Holmberg-Mikkelsen (2023).",
+  "auto_detected_at": "2026-04-21T04:16:36.580175Z",
+  "detected_by": "mnemosyne_manual_catchup_2026-04-21",
+  "pipeline_mode": "paused_team_event",
+  "bbi_pipeline_action": "DEFER \u2014 individual BBI v8.5 rankings not meaningful for team-format. Phase 1/THEMIS/OMNIA will log status files but not publish ranked outputs. Pool/DFS operations skipped. Resume Week 13 (Miami Championship, Trump National Doral, 2026-04-30)."
+}

@@ -50,7 +50,10 @@ window.BBI = window.BBI || {};
       changelog:      './data/changelog.json',
       performanceWeeklyRecaps: './data/performance_weekly_recaps.json',
       performanceAttribution: './data/performance_attribution.json',
-      playerLookup:   './data/player_lookup.json'
+      playerLookup:   './data/player_lookup.json',
+      playerCourseHistory: './data/player_course_history.json',
+      playerRecentForm: './data/player_recent_form.json',
+      tourSgBaselines: './data/tour_sg_baselines.json'
     }
   };
 
