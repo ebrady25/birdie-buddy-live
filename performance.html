@@ -360,7 +360,7 @@
     <header class="page-head">
       <div class="eyebrow">Model performance · BBI <span class="gold">v8.5</span></div>
       <h1>How the model actually performs.</h1>
-      <p>Every prediction BBI makes is scored against the truth. We track Spearman rank correlation vs. DataGolf baseline, Brier-score calibration across five markets, and run four shadow variants every week competing against the champion. This page is the model's report card.</p>
+      <p>Every prediction BBI makes is scored against the truth. We track Spearman rank correlation vs. the published industry baseline, Brier-score calibration across five markets, and run four shadow variants every week competing against the champion. This page is the model's report card.</p>
       <div class="page-head-meta">
         <span>Season <strong>2026</strong></span>
         <span>Events tracked <strong id="pmEvents">0</strong></span>
@@ -383,7 +383,7 @@
         <div class="stat-sub"><span id="kpiBestEvName">—</span></div>
       </div>
       <div class="stat">
-        <div class="stat-label">Beat DG</div>
+        <div class="stat-label">Beat baseline</div>
         <div class="stat-value"><span id="kpiBeatDg">0</span>/<span id="kpiTotalEv">0</span></div>
         <div class="stat-sub">Head-to-head record</div>
       </div>
@@ -405,7 +405,7 @@
         <div class="section-head-text">
           <span class="eyebrow">Spearman over time</span>
           <h2>Rank correlation, week by week.</h2>
-          <p>Spearman ρ measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against DataGolf's baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
+          <p>Spearman ρ measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against the published industry baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
         </div>
       </div>
       <div class="perf-card">
@@ -413,7 +413,7 @@
           <h3 id="chartTitle">2026 season · weekly rank correlation</h3>
           <div class="perf-legend">
             <span class="perf-legend-item"><span class="legend-dot bbi"></span>BBI v8.5</span>
-            <span class="perf-legend-item"><span class="legend-dot dg"></span>DataGolf</span>
+            <span class="perf-legend-item"><span class="legend-dot dg"></span>Baseline</span>
             <span class="perf-legend-item"><span class="legend-line target"></span>Target (0.40)</span>
             <span class="perf-legend-item"><span class="legend-line aspire"></span>Aspirational (0.50)</span>
           </div>
@@ -431,12 +431,12 @@
               <th>Winner</th>
               <th class="num">Field</th>
               <th class="num">BBI ρ</th>
-              <th class="num">DG ρ</th>
+              <th class="num">Base ρ</th>
               <th class="num">Δ</th>
               <th class="num">Top-5</th>
               <th class="num">Top-20</th>
               <th class="num">Winner BBI</th>
-              <th>Beat DG</th>
+              <th>Beat base</th>
               <th>Target</th>
             </tr>
           </thead>
@@ -535,12 +535,12 @@
         <div class="section-head-text">
           <span class="eyebrow">2025 backtest · PROMETHEUS</span>
           <h2>47 events of ground truth.</h2>
-          <p>PROMETHEUS replays the 2025 season using the DataGolf pre-tournament baseline as the apples-to-apples benchmark. These are the numbers BBI has to beat, event over event, to claim skill.</p>
+          <p>PROMETHEUS replays the 2025 season using the published industry pre-tournament baseline as the apples-to-apples benchmark. These are the numbers BBI has to beat, event over event, to claim skill.</p>
         </div>
       </div>
       <div class="backtest-grid">
         <div class="card">
-          <div class="card-title">Aggregate — 2025 DG baseline</div>
+          <div class="card-title">Aggregate — 2025 industry baseline</div>
           <div style="margin-top: var(--space-4);">
             <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
               <span class="muted">Events scored</span>
@@ -811,7 +811,7 @@
       events.forEach((e, i) => {
         if (e.spearman_dg == null) return;
         markup += `<circle cx="${x(i).toFixed(1)}" cy="${y(e.spearman_dg).toFixed(1)}" r="3.5" fill="var(--info)" stroke="var(--surface-1)" stroke-width="1.5">
-          <title>${e.event} — DG ρ ${fmt.num(e.spearman_dg, 3)}</title></circle>`;
+          <title>${e.event} — baseline ρ ${fmt.num(e.spearman_dg, 3)}</title></circle>`;
       });
       markup += `</g>`;
 

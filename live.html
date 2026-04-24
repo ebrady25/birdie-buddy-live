@@ -531,7 +531,7 @@
     <div class="live-banner">
       <span class="live-dot"></span>
       <span class="live-label">Live</span>
-      <span class="live-meta">PERSEPHONE polling DataGolf · <strong id="liveRound">Round —</strong> · <strong id="liveCourse">—</strong></span>
+      <span class="live-meta">PERSEPHONE polling tour live feed · <strong id="liveRound">Round —</strong> · <strong id="liveCourse">—</strong></span>
       <span class="live-fresh" id="liveFresh">—</span>
     </div>
 
@@ -654,7 +654,7 @@
     </div>
 
     <div class="sim-note">
-      <strong>How to read this page.</strong> The probability shift is BBI's pre-tournament win probability minus DataGolf's live Monte Carlo — positive means the player has dramatically outperformed expectations. Hole heat map sums morning + afternoon waves and colors by score-to-par. Lineup health is a hard-rule check: <em>green</em> = all six golfers active and inside the projected cut, <em>amber</em> = at least one withdrawal, <em>red</em> = at least one missed cut. Updates every 30 minutes during play.
+      <strong>How to read this page.</strong> The probability shift is BBI's pre-tournament win probability minus the live-Monte-Carlo baseline — positive means the player has dramatically outperformed expectations. Hole heat map sums morning + afternoon waves and colors by score-to-par. Lineup health is a hard-rule check: <em>green</em> = all six golfers active and inside the projected cut, <em>amber</em> = at least one withdrawal, <em>red</em> = at least one missed cut. Updates every 30 minutes during play.
     </div>
   </main>
 
@@ -700,7 +700,7 @@
       if (!pers) {
         document.querySelector('main.container').insertAdjacentHTML('beforeend',
           `<div class="sim-note" style="margin-top: var(--space-4);">
-             <strong>No live data yet.</strong> PERSEPHONE will start polling DataGolf every 30 minutes when Round 1 tees off Thursday. Come back here once play begins.
+             <strong>No live data yet.</strong> PERSEPHONE will start polling the tour live feed every 30 minutes when Round 1 tees off Thursday. Come back here once play begins.
            </div>`);
         return;
       }

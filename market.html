@@ -870,7 +870,7 @@
           <tr data-id="${r.dg_id}" class="${inSlip ? 'slip-added' : ''}">
             <td class="td-name">
               ${r.name || '—'}
-              <span class="dg-id">DG ${r.dg_id} · ${r.n_books || 0} books</span>
+              <span class="dg-id">ID ${r.dg_id} · ${r.n_books || 0} books</span>
             </td>
             <td>${r.bbi_prob != null ? (r.bbi_prob * 100).toFixed(2) + '%' : '—'}</td>
             <td class="val-dim">${r.market_prob != null ? (r.market_prob * 100).toFixed(2) + '%' : '—'}</td>

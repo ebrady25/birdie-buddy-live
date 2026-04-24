@@ -335,7 +335,7 @@
             </div>
             <div class="step">
               <div class="step-title">Calibrate weekly against reality</div>
-              <div class="step-body">The PROMETHEUS backtest scored BBI against 47 completed 2025 events. We track Spearman and Brier every week against the DataGolf baseline. If we don't beat it, we publish that too.</div>
+              <div class="step-body">The PROMETHEUS backtest scored BBI against 47 completed 2025 events. We track Spearman and Brier every week against a published industry baseline. If we don't beat it, we publish that too.</div>
             </div>
             <div class="step">
               <div class="step-title">Keep shadow models running</div>
@@ -432,7 +432,7 @@
 <span class="var">P(top10)</span><sub>i</sub> <span class="op">=</span> #{s : <span class="var">finish</span><sub>i,s</sub> ≤ 10} <span class="op">/</span> 10,000
 <span class="var">P(cut)</span><sub>i</sub>   <span class="op">=</span> #{s : <span class="var">total</span><sub>i,1..2</sub> ≤ cut<sub>s</sub>} <span class="op">/</span> 10,000</div>
 
-          <p>μ<sub>i</sub> (mean strokes-gained per round) is anchored to DataGolf's skill predictions plus BBI's course-fit adjustment. σ<sub>i</sub> is the player's own round variance from trailing 12 events. σ<sub>c</sub> captures whole-field shocks — weather, green speeds, wind. The shock η<sub>s</sub> is <strong>shared across players within a sim</strong>, which is why a windy Thursday moves everyone down together.</p>
+          <p>μ<sub>i</sub> (mean strokes-gained per round) is anchored to tour-wide skill predictions plus BBI's course-fit adjustment. σ<sub>i</sub> is the player's own round variance from trailing 12 events. σ<sub>c</sub> captures whole-field shocks — weather, green speeds, wind. The shock η<sub>s</sub> is <strong>shared across players within a sim</strong>, which is why a windy Thursday moves everyone down together.</p>
 
           <div class="callout">
             <div class="c-icon">?</div>
@@ -487,7 +487,7 @@
           <div class="steps">
             <div class="step">
               <div class="step-title">Ingest live round state</div>
-              <div class="step-body">Four DataGolf endpoints feed PERSEPHONE: live stats, live score, live predictions, and hole-by-hole scoring. Polled every 30 minutes from Thursday 2pm through Sunday 7pm ET.</div>
+              <div class="step-body">Four live tour-data endpoints feed PERSEPHONE: live stats, live score, live predictions, and hole-by-hole scoring. Polled every 30 minutes from Thursday 2pm through Sunday 7pm ET.</div>
             </div>
             <div class="step">
               <div class="step-title">Recompute with remaining variance</div>
@@ -551,7 +551,7 @@
           <p class="lede">Three metrics decide whether BBI is <em>actually predictive</em> or just confident-looking. We publish all three on the Performance page — no cherry-picking.</p>
 
           <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text-primary); margin-top: var(--space-5); margin-bottom: var(--space-2);">Spearman rank correlation</h3>
-          <p>For each completed event, we correlate BBI's <em>predicted</em> finishing order with the <em>actual</em> finishing order. Perfect = 1.0. Random = 0.0. DataGolf's own published prediction baseline on 2025 events was <strong>ρ = 0.393</strong> — that's our benchmark.</p>
+          <p>For each completed event, we correlate BBI's <em>predicted</em> finishing order with the <em>actual</em> finishing order. Perfect = 1.0. Random = 0.0. The best-published industry prediction baseline on 2025 events was <strong>ρ = 0.393</strong> — that's our benchmark.</p>
 
           <h3>Brier score</h3>
           <p>Brier measures how well our probability forecasts match reality. Think of it as a penalty for being wrong, weighted by how confident you were.</p>
@@ -665,8 +665,8 @@
 
     // ============ THE 15 AGENTS ============
     const AGENTS = [
-      { name: 'ARGUS',       tier: 'sonnet', desc: 'Pre-flight system check. Validates all 26 DataGolf endpoints and 14 scheduled pipelines before event week starts.',                      cadence: 'Mon 08:00 ET' },
-      { name: 'MNEMOSYNE',   tier: 'opus',   desc: 'Event detection + data hydration. Picks up next PGA event from DG schedule, seeds CURRENT_EVENT, and triggers downstream agents.',      cadence: 'Mon 08:15 ET' },
+      { name: 'ARGUS',       tier: 'sonnet', desc: 'Pre-flight system check. Validates all 26 tour-data endpoints and 14 scheduled pipelines before event week starts.',                       cadence: 'Mon 08:00 ET' },
+      { name: 'MNEMOSYNE',   tier: 'opus',   desc: 'Event detection + data hydration. Picks up next PGA event from the live schedule feed, seeds CURRENT_EVENT, and triggers downstream agents.', cadence: 'Mon 08:15 ET' },
       { name: 'ATHENA',      tier: 'sonnet', desc: 'Rankings builder. Computes BBI from 10 factors for every player in the field, tuned to the active course DNA profile.',                  cadence: 'Mon 10:00 ET' },
       { name: 'APOLLO',      tier: 'sonnet', desc: 'DFS lineup constructor. Generates 12 optimized DraftKings lineups with salary, leverage, and ownership constraints.',                    cadence: 'Mon 10:30 ET' },
       { name: 'HEPHAESTUS',  tier: 'opus',   desc: 'Shadow-model competition. Runs 4 candidate weight configs alongside baseline; tracks Spearman / Brier deltas weekly.',                   cadence: 'Mon 12:32 ET' },
@@ -674,7 +674,7 @@
       { name: 'OMNIA',       tier: 'sonnet', desc: 'Market scanner. Pulls odds from 15 sportsbooks, devigs, computes edge vs. BBI, applies Kelly sizing.',                                    cadence: 'Tue 07:51 ET' },
       { name: 'PREVIEW',     tier: 'opus',   desc: 'Event preview writer. Generates the long-form course + field narrative that sits behind the landing page.',                              cadence: 'Tue 14:00 ET' },
       { name: 'NIKE',        tier: 'sonnet', desc: 'Bankroll tracker. Logs every recommended bet, actual stake, and settles P&L by event. Feeds the Performance tiles.',                      cadence: 'Tue 14:30 ET' },
-      { name: 'PERSEPHONE',  tier: 'sonnet', desc: 'Live in-round agent. Re-simulates tournament every 30 min using DataGolf live endpoints. Thursday 2pm through Sunday 7pm ET.',           cadence: 'Thu–Sun 14:00 / 19:00' },
+      { name: 'PERSEPHONE',  tier: 'sonnet', desc: 'Live in-round agent. Re-simulates tournament every 30 min using live tour-data endpoints. Thursday 2pm through Sunday 7pm ET.',            cadence: 'Thu–Sun 14:00 / 19:00' },
       { name: 'ORION',       tier: 'sonnet', desc: 'DFS late-swap optimizer. Recomputes optimal roster after Thursday tee-offs given actual morning scores.',                                 cadence: 'Thu 11:30 ET' },
       { name: 'HERMES',      tier: 'sonnet', desc: 'Notifications router. Pushes lineup updates, cut-line alerts, and weather shocks to configured channels.',                                cadence: 'Event-driven' },
       { name: 'PROMETHEUS',  tier: 'sonnet', desc: 'Post-event backtest scorer. Scores BBI predictions against actual finish; updates Brier, Spearman, calibration bins.',                    cadence: 'Sun 23:04 ET' },
