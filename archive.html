@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="prefetch" href="methodology.html">
   <link rel="stylesheet" href="assets/css/design-system.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <style>
@@ -142,6 +143,7 @@
     table.events tbody tr { cursor: pointer; transition: background var(--dur-fast); }
     table.events tbody tr:hover { background: var(--surface-3); }
     table.events tbody tr.active { background: rgba(212, 168, 67, 0.08); }
+    table.events tbody tr.most-recent::before { content: '★'; position: absolute; left: var(--space-2); color: var(--gold-400); font-size: 12px; }
     table.events tbody td {
       padding: var(--space-3);
       border-bottom: 1px solid rgba(255,255,255,0.04);
@@ -565,8 +567,12 @@
         spearman: e.spearman_dg_baseline,
         brier_top10: e.calibration?.top_10?.brier ?? null,
         skill_top10: e.calibration?.top_10?.skill_pct ?? null,
-        cal: e.calibration || {}
+        cal: e.calibration || {},
+        completed_date: e.completed_date || null
       }));
+      // Find most recent event by event_id (proxy for recency in 2025 season)
+      const maxId = Math.max(...state.events.map(e => e.event_id));
+      state.mostRecentId = maxId;
 
       // ---- Sort events table & wire interactions
       document.querySelectorAll('#eventsTable thead th[data-sort]').forEach(th => {
@@ -624,8 +630,9 @@
         const skillCls = skill == null ? 'dim' : skill > 0 ? 'pos' : 'neg';
         const skillStr = skill == null ? '—' : `${skill > 0 ? '+' : ''}${skill.toFixed(1)}%`;
         const isActive = state.activeId === e.event_id;
+        const isRecent = state.mostRecentId && e.event_id === state.mostRecentId;
         return `
-          <tr data-id="${e.event_id}" class="${isActive ? 'active' : ''}">
+          <tr data-id="${e.event_id}" class="${isActive ? 'active' : ''} ${isRecent ? 'most-recent' : ''}">
             <td class="td-name">${e.event_name}<small>${e.year} · ev ${e.event_id}</small></td>
             <td>${e.field_size ?? '—'}</td>
             <td>${e.made_cut ?? '—'}</td>

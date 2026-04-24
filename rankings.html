@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="prefetch" href="performance.html" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
   <style>
@@ -14,8 +15,8 @@
 
     /* TABLE SPECIFICS */
     .ranktable { font-size: var(--fs-xs); }
-    .ranktable th { padding: var(--space-2) var(--space-2); font-size: var(--fs-3xs); }
-    .ranktable td { padding: var(--space-2) var(--space-2); }
+    .ranktable th { padding: var(--space-3) var(--space-2); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); }
+    .ranktable td { padding: var(--space-2); font-variant-numeric: tabular-nums; }
     .ranktable thead { top: calc(var(--nav-h) + var(--status-h) + var(--page-toolbar-h)); }
 
     .expand-grid {
@@ -49,6 +50,10 @@
     .key-stat .lbl { color: var(--text-muted); font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
     .key-stat .val { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; font-size: var(--fs-md); }
     .expand-empty { color: var(--text-dimmed); font-size: var(--fs-xs); padding: var(--space-3); text-align: center; }
+
+    .ranktable tbody tr { transition: background var(--dur-fast); }
+    .ranktable tbody tr:hover { background: rgba(212, 168, 67, 0.04); }
+    .ranktable tbody tr.expanded { background: rgba(212, 168, 67, 0.08); }
 
     .expand-toggle {
       background: var(--surface-5);

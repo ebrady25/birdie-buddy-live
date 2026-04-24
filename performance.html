@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="prefetch" href="methodology.html" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
   <style>
@@ -134,6 +135,25 @@
 
     /* Anchor offsets for in-page nav */
     section.section[id] { scroll-margin-top: calc(var(--nav-h) + var(--status-h) + 20px); }
+
+    /* Factor attribution chart */
+    .attr-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    .attr-table { width: 100%; font-size: var(--fs-xs); border-collapse: separate; border-spacing: 0; }
+    .attr-table thead { background: var(--surface-3); }
+    .attr-table th { padding: var(--space-3); text-align: right; color: var(--text-muted); font-weight: 600; font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+    .attr-table th:first-child { text-align: left; }
+    .attr-table td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .attr-table tr:hover { background: rgba(212, 168, 67, 0.04); }
+    .attr-name { font-family: var(--font-body); font-weight: 600; color: var(--text-primary); }
+    .attr-factor { font-family: var(--font-mono); font-weight: 500; color: var(--text-body); }
+    .attr-pct { font-family: var(--font-mono); text-align: right; color: var(--gold-400); font-weight: 600; }
+    .attr-narrative { font-size: var(--fs-sm); color: var(--text-body); line-height: 1.6; margin-bottom: var(--space-4); }
 
     /* Weekly Recaps */
     .recap-card {
@@ -365,6 +385,37 @@
       <div id="recapsMount"></div>
     </section>
 
+    <!-- FACTOR ATTRIBUTION -->
+    <section class="section" id="attribution">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Per-factor analysis · Week 11</span>
+          <h2>What drives every finish.</h2>
+          <p>Factor attribution shows how each of the 10 BBI scoring dimensions contributed to the final composite score for the most recent event's top finishers. Talent drives baseline player quality; course fit captures venue-specific edge; form captures momentum.</p>
+        </div>
+      </div>
+      <div class="attr-card">
+        <div class="attr-narrative" id="attrNarrative">Loading attribution data…</div>
+        <table class="attr-table" id="attrTable">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Finish</th>
+              <th>BBI Rank</th>
+              <th>Talent %</th>
+              <th>Course Fit %</th>
+              <th>Form %</th>
+              <th>Cut Safety %</th>
+              <th>Floor %</th>
+              <th>Ceiling %</th>
+              <th>Other %</th>
+            </tr>
+          </thead>
+          <tbody id="attrBody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- SHADOW VARIANTS -->
     <section class="section" id="shadow">
       <div class="section-head">
@@ -516,13 +567,14 @@
       await BBI.renderHeader('performance.html');
       await BBI.renderFooter();
 
-      const [spear, calib, comp, shadow, prom, recaps] = await Promise.all([
+      const [spear, calib, comp, shadow, prom, recaps, attr] = await Promise.all([
         BBI.data.load(BBI.data.paths.spearman),
         BBI.data.load(BBI.data.paths.calibration),
         BBI.data.load(BBI.data.paths.modelCompetition),
         BBI.data.load(BBI.data.paths.shadowModels),
         BBI.data.load(BBI.data.paths.prometheus),
-        BBI.data.load(BBI.data.paths.performanceWeeklyRecaps)
+        BBI.data.load(BBI.data.paths.performanceWeeklyRecaps),
+        BBI.data.load(BBI.data.paths.performanceAttribution)
       ]);
 
       const events = (spear?.events || []).slice().sort((a, b) => (a.week || 0) - (b.week || 0));
@@ -551,6 +603,39 @@
           </div>
         `).join('');
         window.observeAnimations?.(recapsMount);
+      }
+
+      // ---------- FACTOR ATTRIBUTION ----------
+      if (attr && attr.players && attr.players.length > 0) {
+        const meta = attr.metadata || {};
+        document.getElementById('attrNarrative').textContent =
+          `Factor attribution for the ${meta.event || 'most recent event'} top-10 finishers shows the relative contribution of each BBI component. Course fit and talent typically dominate; form and cut safety provide secondary weight. Understanding these breakdowns helps explain why certain players rise or fall from their baseline rankings.`;
+
+        const tbody = document.getElementById('attrBody');
+        tbody.innerHTML = attr.players.map(p => {
+          const factors = p.factors || {};
+          const talentPct = factors.talent?.pct || 0;
+          const cfPct = factors.courseFit?.pct || 0;
+          const formPct = factors.form?.pct || 0;
+          const csPct = factors.cutSafety?.pct || 0;
+          const floorPct = factors.floor?.pct || 0;
+          const ceilPct = factors.ceiling?.pct || 0;
+          const otherPct = Math.max(0, 100 - (talentPct + cfPct + formPct + csPct + floorPct + ceilPct));
+          return `
+            <tr>
+              <td><span class="attr-name">${p.name}</span></td>
+              <td class="num">#${p.finish_pos}</td>
+              <td class="num">#${p.bbi_rank}</td>
+              <td class="attr-pct">${talentPct.toFixed(1)}%</td>
+              <td class="attr-pct">${cfPct.toFixed(1)}%</td>
+              <td class="attr-pct">${formPct.toFixed(1)}%</td>
+              <td class="attr-pct">${csPct.toFixed(1)}%</td>
+              <td class="attr-pct">${floorPct.toFixed(1)}%</td>
+              <td class="attr-pct">${ceilPct.toFixed(1)}%</td>
+              <td class="attr-pct">${otherPct.toFixed(1)}%</td>
+            </tr>
+          `;
+        }).join('');
       }
 
       // ---------- KPI STRIP ----------
@@ -669,7 +754,8 @@
         `;
       }).join('');
 
-      // ---------- SHADOW VARIANTS ----------
+      // ---------- SHADOW VARIANTS (deferred to avoid first-paint blocking) ----------
+      const renderShadowVariants = () => {
       const variants = shadow?.variants || {};
       const varEntries = Object.entries(variants);
       const baselineSorted = varEntries.sort((a, b) => (b[1].spearman_vs_baseline_top20 || 0) - (a[1].spearman_vs_baseline_top20 || 0));
@@ -711,6 +797,10 @@
         `;
       }).join('');
       window.observeAnimations?.(shadowMount);
+      };
+
+      // Defer shadow rendering to next task to avoid blocking first paint
+      setTimeout(renderShadowVariants, 0);
 
       // ---------- CALIBRATION ----------
       const calibHist = (calib?.history || []).slice().reverse();

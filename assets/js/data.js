@@ -48,7 +48,8 @@ window.BBI = window.BBI || {};
       athenaPool:     './data/athena_pool.json',
       nikeBankroll:   './data/nike_bankroll.json',
       changelog:      './data/changelog.json',
-      performanceWeeklyRecaps: './data/performance_weekly_recaps.json'
+      performanceWeeklyRecaps: './data/performance_weekly_recaps.json',
+      performanceAttribution: './data/performance_attribution.json'
     }
   };
 

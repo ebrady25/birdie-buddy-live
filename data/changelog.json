@@ -3,9 +3,27 @@
   "entries": [
     {
       "date": "2026-04-22",
-      "title": "Orchestrator era begins",
+      "title": "Site goes live at ebrady25.github.io/birdie-buddy-live",
       "category": "infra",
-      "summary": "New operating model: 10+ improvements shipped per day across model, site, content, and infrastructure. Every public change gets a receipt here."
+      "summary": "First-time-live push. 10 pages, 14 JSON data sources, shared component system, jsdom-verified. Every future change from this point forward will be logged here."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Landing page hero: measured-accuracy framing",
+      "category": "site",
+      "summary": "Replaced rotating live-edge line with a single durable promise: 'One model. Forty-seven weeks of measured accuracy.' Proof callout cites Week 11 Spearman 0.344. No comparisons, no claims we can't back with data already on the site."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Performance page: Weekly Recaps section",
+      "category": "site",
+      "summary": "New expandable cards between the Spearman chart and Shadow Variants. Week 11 RBC Heritage seeded with an honest head-to-head recap — BBI 0.344 vs DG 0.377, Fitzpatrick #3/#4, what we got right, what we missed."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Shadow variant v8.7-cfgate added to the A/B slate",
+      "category": "model",
+      "summary": "Course-fit lifted (+0.02) and a new gating rule caps the SG multiplier at 1.05x for players with fewer than 4 starts at a venue. Targets the Aberg-style Masters over-ranking without punishing true specialists. Runs in shadow only — zero production risk."
     },
     {
       "date": "2026-04-22",
@@ -29,19 +47,25 @@
       "date": "2026-04-22",
       "title": "Landing page: typography + agent grid polish",
       "category": "site",
-      "summary": "Hero line tuned, section padding lifted, agent grid cards given crisper borders and clearer Sonnet/Opus differentiation."
+      "summary": "Section padding lifted, agent grid cards given crisper borders and clearer Sonnet/Opus differentiation."
     },
     {
       "date": "2026-04-22",
       "title": "Site data synced with latest tracker state",
       "category": "infra",
-      "summary": "Week 11 RBC Heritage results (BBI 0.3437 vs DG 0.3770 Spearman) and Week 12 Zurich Classic deferral now reflected in the site's data layer."
+      "summary": "Week 11 RBC Heritage results (BBI 0.3437 vs 0.3770 Spearman) and Week 12 Zurich Classic deferral now reflected in the site's data layer."
     },
     {
       "date": "2026-04-22",
       "title": "10-page site verified (0 JS errors)",
       "category": "infra",
       "summary": "New jsdom harness confirms all 10 pages parse cleanly and every data path resolves. Gates every future site edit."
+    },
+    {
+      "date": "2026-04-22",
+      "title": "Orchestrator era begins",
+      "category": "infra",
+      "summary": "New operating model: 10+ improvements shipped per day across model, site, content, and infrastructure. Every public change gets a receipt here."
     }
   ]
 }
