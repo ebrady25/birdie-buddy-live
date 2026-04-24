@@ -100,20 +100,25 @@ window.BBI = window.BBI || {};
     const leader = shadow?.variants ? Object.entries(shadow.variants).reduce((acc, [k, v]) =>
       (acc == null || (v.spearman_vs_baseline_top20 || 0) > (acc[1].spearman_vs_baseline_top20 || 0)) ? [k, v] : acc, null) : null;
 
-    // Assemble nav
-    const navLinks = [
-      ['index.html', 'Overview'],
-      ['rankings.html', 'Rankings'],
-      ['compare.html', 'Compare'],
-      ['lineups.html', 'DFS Lineups'],
-      ['performance.html', 'Performance'],
-      ['recap.html', 'Recaps'],
-      ['simulator.html', 'Simulator'],
-      ['market.html', 'Market'],
-      ['live.html', 'Live'],
-      ['courses.html', 'Courses'],
-      ['archive.html', 'Archive'],
-      ['changelog.html', 'Changelog']
+    // Grouped nav: top-level flat items + dropdown groups.
+    // Each group has: label, items[{href, label, sub?}].
+    // Flat items are rendered as .nav-link; groups as .nav-group with .nav-group-menu.
+    const navSchema = [
+      { type: 'group', id: 'predict', label: 'Predict', items: [
+        { href: 'rankings.html',   label: 'Rankings',    sub: 'Full field' },
+        { href: 'compare.html',    label: 'Compare',     sub: 'Head-to-head' },
+        { href: 'lineups.html',    label: 'DFS Lineups', sub: '12 optimized' },
+        { href: 'live.html',       label: 'Live pivots', sub: 'Thu–Sun' },
+        { href: 'simulator.html',  label: 'Simulator',   sub: '10k Monte Carlo' }
+      ]},
+      { type: 'group', id: 'measure', label: 'Measure', items: [
+        { href: 'performance.html', label: 'Performance', sub: 'Season report card' },
+        { href: 'recap.html',       label: 'Event recaps', sub: 'Weekly grade' },
+        { href: 'archive.html',     label: 'Archive',      sub: '47 scored events' },
+        { href: 'methodology.html', label: 'Methodology',  sub: 'How BBI scores' }
+      ]},
+      { type: 'link', href: 'courses.html', label: 'Courses' },
+      { type: 'link', href: 'market.html',  label: 'Market' }
     ];
 
     mount.innerHTML = `
@@ -126,11 +131,37 @@ window.BBI = window.BBI || {};
               <small>PANTHEON · v8.5</small>
             </span>
           </a>
-          <div class="nav-links">
-            ${navLinks.map(([href, label, locked]) => `
-              <a class="nav-link ${activeKey && href === activeKey ? 'active' : ''}" href="${href}">
-                ${label}${locked ? ` <span class="lock" title="Coming soon">⋯</span>` : ''}
-              </a>`).join('')}
+          <div class="nav-links" id="navLinks">
+            ${navSchema.map(entry => {
+              if (entry.type === 'link') {
+                const isActive = activeKey === entry.href;
+                return `
+                  <a class="nav-link ${isActive ? 'active' : ''}" href="${entry.href}">
+                    ${entry.label}
+                  </a>`;
+              }
+              // group
+              const anyActive = entry.items.some(it => activeKey === it.href);
+              return `
+                <div class="nav-group" data-group="${entry.id}" aria-expanded="false">
+                  <button type="button" class="nav-group-trigger ${anyActive ? 'has-active' : ''}" aria-haspopup="true" aria-expanded="false">
+                    ${entry.label}
+                    <svg class="nav-group-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5l3 3 3-3" stroke-linecap="round"/></svg>
+                  </button>
+                  <div class="nav-group-menu" role="menu">
+                    ${entry.items.map(it => {
+                      const isActive = activeKey === it.href;
+                      return `
+                        <a class="nav-group-item ${isActive ? 'active' : ''}" href="${it.href}" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>${it.label}</span>
+                            ${it.sub ? `<span class="item-sub">${it.sub}</span>` : ''}
+                          </span>
+                        </a>`;
+                    }).join('')}
+                  </div>
+                </div>`;
+            }).join('')}
           </div>
           <div class="row-tight">
             <label class="search-input" title="Search (⌘K)">
@@ -172,6 +203,100 @@ window.BBI = window.BBI || {};
       const html = tickerItems.map(t => `<span class="marquee-item">${t}</span>`).join('');
       track.innerHTML = html + html;
     }
+
+    // ---------- Nav group dropdown interactions ----------
+    const groups = document.querySelectorAll('.nav-group');
+    if (!groups.length) return;
+
+    const closeAllGroups = (except) => {
+      groups.forEach(g => {
+        if (g !== except) {
+          g.setAttribute('aria-expanded', 'false');
+          g.querySelector('.nav-group-trigger')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    };
+
+    const openGroup = (g) => {
+      g.setAttribute('aria-expanded', 'true');
+      g.querySelector('.nav-group-trigger')?.setAttribute('aria-expanded', 'true');
+    };
+
+    const isTouch = typeof window.matchMedia === 'function'
+      ? window.matchMedia('(hover: none), (max-width: 880px)').matches
+      : false;
+
+    groups.forEach(g => {
+      const trigger = g.querySelector('.nav-group-trigger');
+      if (!trigger) return;
+
+      // Desktop: hover opens, leave closes (with short delay so user can move to menu)
+      let leaveTimer = null;
+      const onEnter = () => {
+        if (isTouch) return;
+        clearTimeout(leaveTimer);
+        closeAllGroups(g);
+        openGroup(g);
+      };
+      const onLeave = () => {
+        if (isTouch) return;
+        leaveTimer = setTimeout(() => {
+          g.setAttribute('aria-expanded', 'false');
+          trigger.setAttribute('aria-expanded', 'false');
+        }, 180);
+      };
+      g.addEventListener('mouseenter', onEnter);
+      g.addEventListener('mouseleave', onLeave);
+
+      // Click / keyboard (touch + a11y): toggle
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = g.getAttribute('aria-expanded') === 'true';
+        closeAllGroups();
+        if (!isOpen) openGroup(g);
+      });
+
+      // Keyboard: Escape closes; ArrowDown opens + focuses first item
+      trigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          g.setAttribute('aria-expanded', 'false');
+          trigger.setAttribute('aria-expanded', 'false');
+          trigger.blur();
+        } else if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          closeAllGroups();
+          openGroup(g);
+          g.querySelector('.nav-group-item')?.focus();
+        }
+      });
+
+      // Arrow navigation within menu
+      g.querySelectorAll('.nav-group-item').forEach((item, idx, arr) => {
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            g.setAttribute('aria-expanded', 'false');
+            trigger.setAttribute('aria-expanded', 'false');
+            trigger.focus();
+          } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            arr[(idx + 1) % arr.length].focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            arr[(idx - 1 + arr.length) % arr.length].focus();
+          }
+        });
+      });
+    });
+
+    // Click outside closes any open group
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.nav-group')) closeAllGroups();
+    });
+
+    // Escape from anywhere closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAllGroups();
+    });
   };
 
   // ---------- FOOTER ----------

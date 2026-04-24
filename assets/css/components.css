@@ -611,6 +611,157 @@
   vertical-align: middle;
 }
 
+/* ---------- Nav groups (dropdown menus) ---------- */
+.nav-group {
+  position: relative;
+}
+
+.nav-group-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+  position: relative;
+}
+
+.nav-group-trigger:hover,
+.nav-group[aria-expanded="true"] .nav-group-trigger {
+  color: var(--text-primary);
+  background: var(--surface-3);
+}
+
+.nav-group-trigger.has-active {
+  color: var(--gold-300);
+}
+
+.nav-group-trigger.has-active::after {
+  content: '';
+  position: absolute;
+  left: 10px; right: 10px; bottom: -9px;
+  height: 2px;
+  background: var(--gold-500);
+  border-radius: 1px;
+}
+
+.nav-group-chevron {
+  width: 10px;
+  height: 10px;
+  transition: transform var(--dur-fast) var(--ease-out);
+  opacity: 0.65;
+}
+
+.nav-group[aria-expanded="true"] .nav-group-chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.nav-group-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 240px;
+  background: var(--surface-4);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-2);
+  z-index: var(--z-nav);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.nav-group[aria-expanded="true"] .nav-group-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Bridge gap so hover doesn't break between trigger and menu */
+.nav-group-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: 0; right: 0;
+  height: 8px;
+}
+
+.nav-group-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-3);
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-body);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.nav-group-item:hover {
+  background: var(--surface-5);
+  color: var(--text-primary);
+}
+
+.nav-group-item.active {
+  background: var(--gold-900);
+  color: var(--gold-300);
+}
+
+.nav-group-item .item-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.nav-group-item:hover .item-icon,
+.nav-group-item.active .item-icon {
+  color: var(--gold-400);
+  opacity: 1;
+}
+
+.nav-group-item .item-sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  color: var(--text-dimmed);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.nav-group-item.active .item-sub {
+  color: var(--gold-500);
+}
+
+/* Mobile: collapse dropdowns to stacked lists inside an expanded nav */
+@media (max-width: 880px) {
+  .nav-group-menu {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    display: none;
+    box-shadow: none;
+    padding: 4px 0 4px var(--space-4);
+    margin-top: 2px;
+  }
+  .nav-group[aria-expanded="true"] .nav-group-menu {
+    display: block;
+  }
+}
+
 .event-pill {
   display: inline-flex; align-items: center; gap: var(--space-2);
   padding: 4px 10px;
