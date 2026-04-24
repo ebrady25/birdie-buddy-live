@@ -155,6 +155,78 @@
     .attr-pct { font-family: var(--font-mono); text-align: right; color: var(--gold-400); font-weight: 600; }
     .attr-narrative { font-size: var(--fs-sm); color: var(--text-body); line-height: 1.6; margin-bottom: var(--space-4); }
 
+    /* Queued backfill strip */
+    .attr-queue {
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px dashed var(--border-subtle);
+    }
+    .attr-queue-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-3);
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .attr-queue-title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .attr-queue-note {
+      font-size: var(--fs-xs);
+      color: var(--text-dimmed);
+      max-width: 60ch;
+      line-height: var(--lh-snug);
+    }
+    .attr-queue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-3);
+    }
+    .attr-queue-card {
+      background: var(--surface-3);
+      border: 1px dashed var(--border-base);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      opacity: 0.8;
+    }
+    .attr-queue-week {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--gold-500);
+      margin-bottom: 2px;
+    }
+    .attr-queue-event {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: var(--lh-snug);
+      margin-bottom: 2px;
+    }
+    .attr-queue-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+    }
+    .attr-queue-status {
+      display: inline-block;
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 2px 6px;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+    }
+
     /* Weekly Recaps */
     .recap-card {
       background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
@@ -413,6 +485,15 @@
           </thead>
           <tbody id="attrBody"></tbody>
         </table>
+
+        <!-- Queued backfill: prior events pending attribution -->
+        <div class="attr-queue" id="attrQueue" hidden>
+          <div class="attr-queue-head">
+            <span class="attr-queue-title">Queued backfill</span>
+            <span class="attr-queue-note" id="attrQueueNote"></span>
+          </div>
+          <div class="attr-queue-grid" id="attrQueueGrid"></div>
+        </div>
       </div>
     </section>
 
@@ -636,6 +717,24 @@
             </tr>
           `;
         }).join('');
+
+        // Queued backfill strip — prior events awaiting per-factor attribution
+        const queue = attr.queued_backfill;
+        if (queue && Array.isArray(queue.events) && queue.events.length > 0) {
+          const qMount = document.getElementById('attrQueue');
+          const qNote = document.getElementById('attrQueueNote');
+          const qGrid = document.getElementById('attrQueueGrid');
+          qMount.removeAttribute('hidden');
+          qNote.textContent = queue.note || '';
+          qGrid.innerHTML = queue.events.map(e => `
+            <div class="attr-queue-card">
+              <div class="attr-queue-week">Week ${e.week} · ${e.year}</div>
+              <div class="attr-queue-event">${e.event}</div>
+              <div class="attr-queue-sub">${e.course || ''}${e.winner ? ` · won by ${fmt.abbrevName(e.winner)}` : ''}</div>
+              <span class="attr-queue-status">${(e.status || 'pending').replace(/_/g, ' ')}</span>
+            </div>
+          `).join('');
+        }
       }
 
       // ---------- KPI STRIP ----------

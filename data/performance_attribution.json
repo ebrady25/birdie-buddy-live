@@ -21,6 +21,16 @@
       }
     }
   },
+  "queued_backfill": {
+    "note": "Historical BBI output files from prior 2026 events don't preserve per-player factor decomposition. Backfill requires replaying the engine against preserved DG inputs. Forward-run events (Week 12 onward) will populate automatically via the PROMETHEUS weekly hook.",
+    "events": [
+      { "week": 10, "year": 2026, "event": "Masters Tournament", "course": "Augusta National", "completed": "2026-04-12", "status": "pending", "winner": "McIlroy, Rory" },
+      { "week":  9, "year": 2026, "event": "Valero Texas Open", "course": "TPC San Antonio",  "completed": "2026-04-05", "status": "pending", "winner": "Theegala, Sahith" },
+      { "week":  8, "year": 2026, "event": "Texas Children's Houston Open", "course": "Memorial Park", "completed": "2026-03-29", "status": "pending", "winner": "Henley, Russell" },
+      { "week":  7, "year": 2026, "event": "Valspar Championship", "course": "Innisbrook Copperhead", "completed": "2026-03-22", "status": "pending" },
+      { "week":  6, "year": 2026, "event": "THE PLAYERS Championship", "course": "TPC Sawgrass", "completed": "2026-03-15", "status": "pending" }
+    ]
+  },
   "players": [
     {
       "rank": 1,
