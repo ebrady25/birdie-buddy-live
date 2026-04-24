@@ -3,6 +3,18 @@
   "entries": [
     {
       "date": "2026-04-24",
+      "title": "Player Profile pages are live",
+      "category": "site",
+      "summary": "Every player name on rankings, lineups, and weekly recaps now links to a dedicated profile at /player.html?id=... Each profile shows the 10-factor decomposition, current-event snapshot, course history, and market positioning. Mobile-first. 82 players indexed."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "Rankings: type-to-filter search",
+      "category": "site",
+      "summary": "New search input alongside the tier chips. Type a partial name; the table filters instantly. Combines with the existing tier filter using AND logic."
+    },
+    {
+      "date": "2026-04-24",
       "title": "Performance page: per-factor attribution chart",
       "category": "site",
       "summary": "New section shows how the 10 BBI factors contributed to each top-10 finisher's score in Week 11 RBC Heritage. Reader can see at a glance whether talent, course fit, or form drove each ranking."
