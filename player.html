@@ -404,30 +404,124 @@
     }
 
     /* ===== SG FINGERPRINT ===== */
-    @keyframes fingerprint-draw {
+    @keyframes fingerprint-morph {
       from {
         opacity: 0;
-        stroke-dasharray: 500;
-        stroke-dashoffset: 500;
       }
       to {
         opacity: 1;
-        stroke-dasharray: 500;
-        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes vertex-halo-pulse {
+      0%, 100% {
+        r: 8;
+        opacity: 0.2;
+      }
+      50% {
+        r: 14;
+        opacity: 0.6;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      @keyframes fingerprint-draw {
+      @keyframes fingerprint-morph {
         from { opacity: 0; }
         to { opacity: 1; }
       }
+      @keyframes vertex-halo-pulse {
+        from { opacity: 0; }
+        to { opacity: 0; }
+      }
+    }
+
+    .sg-vertex-dot {
+      cursor: pointer;
+      transition: r var(--dur-fast) var(--ease-out);
+    }
+
+    .sg-vertex-dot:hover {
+      filter: drop-shadow(0 0 4px var(--gold-300));
+    }
+
+    .sg-vertex-tooltip {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      fill: var(--text-primary);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--dur-fast) var(--ease-out);
+    }
+
+    .sg-vertex-group:hover .sg-vertex-tooltip {
+      opacity: 1;
+    }
+
+    /* ===== PRESSURE METRICS GAUGES ===== */
+    .gauges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .gauge-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      text-align: center;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+
+    .gauge-card[style*="opacity: 0.5"] {
+      background: var(--surface-2);
+    }
+
+    .gauge-title {
+      font-size: var(--fs-lg);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .gauge-value {
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--gold-300);
+      font-variant-numeric: tabular-nums;
+      margin-top: var(--space-3);
+      margin-bottom: var(--space-1);
+    }
+
+    .gauge-sample {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .gauge-microcopy {
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      line-height: var(--lh-snug);
+    }
+
+    .gauge-empty {
+      font-size: var(--fs-md);
+      color: var(--text-muted);
+      padding: var(--space-4) var(--space-2);
+      line-height: var(--lh-relaxed);
     }
 
     @media (max-width: 768px) {
       .player-full-name { font-size: var(--fs-3xl); }
       .snapshot-rank { font-size: var(--fs-4xl); }
       .factor-label { width: 90px; font-size: var(--fs-2xs); }
+      .gauges-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -457,13 +551,14 @@
       const slug = params.get('slug');
 
       // Load rankings and supporting data
-      const [rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines] = await Promise.all([
+      const [rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines, pressureMetrics] = await Promise.all([
         BBI.data.load(BBI.data.paths.bbiRankings),
         BBI.data.load(BBI.data.paths.currentEvent),
         BBI.data.load(BBI.data.paths.dfsLineups),
         BBI.data.load(BBI.data.paths.playerCourseHistory),
         BBI.data.load(BBI.data.paths.playerRecentForm),
-        BBI.data.load(BBI.data.paths.tourSgBaselines)
+        BBI.data.load(BBI.data.paths.tourSgBaselines),
+        BBI.data.load(BBI.data.paths.playerPressureMetrics)
       ]);
 
       if (!rankings || !rankings.players) {
@@ -494,7 +589,7 @@
 
       // Build content
       const playerRank = rankings.players.findIndex(p => p.dg_id === player.dg_id) + 1;
-      const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines);
+      const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines, pressureMetrics);
       mount.innerHTML = html;
     });
 
@@ -509,7 +604,7 @@
       `;
     }
 
-    function renderPlayer(player, rank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines) {
+    function renderPlayer(player, rank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines, pressureMetrics) {
       const mode = 'pool'; // Default to pool mode
       const bbi = mode === 'pool' ? player.bbi_pool : player.bbi_dfs;
       const decomp = mode === 'pool' ? player.pool_decomp : player.dfs_decomp;
@@ -535,6 +630,9 @@
 
       // SG Fingerprint
       const fingerprintHtml = buildSgFingerprint(player, tourBaselines);
+
+      // Pressure metrics
+      const pressureHtml = buildPressureMetrics(player, pressureMetrics);
 
       // Recent form
       const recentFormHtml = buildRecentForm(player, recentForm);
@@ -645,6 +743,9 @@
 
         <!-- SG FINGERPRINT -->
         ${fingerprintHtml}
+
+        <!-- PRESSURE & SURGE -->
+        ${pressureHtml}
 
         <!-- RECENT FORM -->
         ${recentFormHtml}
@@ -781,17 +882,151 @@
       `;
     }
 
+    function buildPressureMetrics(player, pressureMetrics) {
+      if (!pressureMetrics || !pressureMetrics.tour_baselines) {
+        return '';
+      }
+
+      const playerData = pressureMetrics.players[player.dg_id];
+      const baselines = pressureMetrics.tour_baselines;
+
+      // Helper: render an arc gauge
+      function renderArcGauge(title, metric, value, sample, baseline, microcopy) {
+        const hasData = value !== null && sample >= 3;
+        const tourAvg = baseline.avg;
+        const p25 = baseline.p25;
+        const p50 = baseline.p50;
+        const p75 = baseline.p75;
+
+        // Scale from tour range to arc
+        const minVal = p25;
+        const maxVal = p75;
+        const range = maxVal - minVal || 1;
+        const normalized = (value - minVal) / range;
+        const clipped = Math.max(0, Math.min(1, normalized));
+
+        // Convert to angle: -90deg (left) to +90deg (right) on a 180deg arc
+        const angle = -90 + clipped * 180;
+        const angleRad = angle * Math.PI / 180;
+
+        // SVG params
+        const size = 240;
+        const cx = size / 2;
+        const cy = size / 2;
+        const radius = 70;
+
+        // Arc path: half-circle from left to right
+        const startAngle = -90 * Math.PI / 180;
+        const endAngle = 90 * Math.PI / 180;
+        const x1 = cx + radius * Math.cos(startAngle);
+        const y1 = cy + radius * Math.sin(startAngle);
+        const x2 = cx + radius * Math.cos(endAngle);
+        const y2 = cy + radius * Math.sin(endAngle);
+
+        // Needle position
+        const needleX = cx + radius * Math.cos(angleRad);
+        const needleY = cy + radius * Math.sin(angleRad);
+
+        // Arc fill: from start to needle
+        const largeArc = (angle - (-90)) > 180 ? 1 : 0;
+        const arcX = cx + radius * Math.cos(angleRad);
+        const arcY = cy + radius * Math.sin(angleRad);
+        const arcPath = \`M \${x1} \${y1} A \${radius} \${radius} 0 \${largeArc} 1 \${arcX} \${arcY}\`;
+
+        // Tick angles: p50 and player value
+        const p50Angle = -90 + ((p50 - minVal) / range) * 180;
+        const p50AngleRad = p50Angle * Math.PI / 180;
+        const p50X = cx + radius * Math.cos(p50AngleRad);
+        const p50Y = cy + radius * Math.sin(p50AngleRad);
+
+        return \`
+          <div class="gauge-card" \${!hasData ? 'style="opacity: 0.5;"' : ''}>
+            <div class="gauge-title">\${title}</div>
+            <svg width="100%" height="200" viewBox="0 0 240 200" style="max-width: 320px; margin: 0 auto; display: block;">
+              <!-- Arc background (light) -->
+              <path d="M \${x1} \${y1} A \${radius} \${radius} 0 1 1 \${x2} \${y2}" fill="none" stroke="var(--border-soft)" stroke-width="8" opacity="0.3"/>
+
+              <!-- Arc fill (gold gradient) -->
+              \${hasData ? \`
+                <defs>
+                  <linearGradient id="arcGrad-\${metric}" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color: var(--gold-500); stop-opacity: 1" />
+                    <stop offset="100%" style="stop-color: var(--gold-300); stop-opacity: 1" />
+                  </linearGradient>
+                </defs>
+                <path d="\${arcPath}" fill="none" stroke="url(#arcGrad-\${metric})" stroke-width="8" stroke-linecap="round"/>
+              \` : ''}
+
+              <!-- Tour median tick (gold) -->
+              <line x1="\${p50X}" y1="\${p50Y}" x2="\${p50X + 8 * Math.cos(p50AngleRad)}" y2="\${p50Y + 8 * Math.sin(p50AngleRad)}" stroke="var(--gold-400)" stroke-width="2" opacity="0.6"/>
+
+              <!-- Needle (if data) -->
+              \${hasData ? \`
+                <line x1="\${cx}" y1="\${cy}" x2="\${needleX}" y2="\${needleY}" stroke="var(--gold-300)" stroke-width="2" stroke-linecap="round" style="animation: needle-sweep 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 0;">
+                  <style>
+                    @keyframes needle-sweep {
+                      to { opacity: 1; }
+                    }
+                    @media (prefers-reduced-motion: reduce) {
+                      @keyframes needle-sweep {
+                        from { opacity: 0; }
+                        to { opacity: 0; }
+                      }
+                    }
+                  </style>
+                </line>
+              \` : ''}
+            </svg>
+            \${hasData ? \`
+              <div class="gauge-value">\${value > 0 ? '+' : ''}\${fmt.num(value, 2)} SG</div>
+              <div class="gauge-sample">n=\${sample}</div>
+              <div class="gauge-microcopy">\${microcopy}</div>
+            \` : \`
+              <div class="gauge-empty">Insufficient sample — fewer than 3 events tracked</div>
+            \`}
+          </div>
+        \`;
+      }
+
+      let pressureMicroCopy = 'Tour-average pressure response';
+      if (playerData && playerData.pressure_sunday) {
+        const ps = playerData.pressure_sunday.value;
+        if (ps > baselines.pressure_sunday.p75) pressureMicroCopy = 'Steps up when it counts';
+        else if (ps < baselines.pressure_sunday.p25) pressureMicroCopy = 'Fades in the final round';
+      }
+
+      let surgeMicroCopy = 'Even-keeled';
+      if (playerData && playerData.weekend_surge) {
+        const ws = playerData.weekend_surge.value;
+        if (ws > baselines.weekend_surge.p75) surgeMicroCopy = 'Grinds on the weekend';
+        else if (ws < baselines.weekend_surge.p25) surgeMicroCopy = 'Coasts on first-half lead';
+      }
+
+      const psValue = playerData && playerData.pressure_sunday ? playerData.pressure_sunday.value : null;
+      const psSample = playerData && playerData.pressure_sunday ? playerData.pressure_sunday.sample : 0;
+      const wsValue = playerData && playerData.weekend_surge ? playerData.weekend_surge.value : null;
+      const wsSample = playerData && playerData.weekend_surge ? playerData.weekend_surge.sample : 0;
+
+      return \`
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Pressure &amp; Surge</h2>
+            <p class="section-subtitle">Performance when it matters — Sunday pressure and weekend grinding.</p>
+          </div>
+          <div class="gauges-grid">
+            \${renderArcGauge('Sunday Performance', 'pressure_sunday', psValue, psSample, baselines.pressure_sunday, pressureMicroCopy)}
+            \${renderArcGauge('Weekend Surge', 'weekend_surge', wsValue, wsSample, baselines.weekend_surge, surgeMicroCopy)}
+          </div>
+        </section>
+      \`;
+    }
+
     function buildSgFingerprint(player, tourBaselines) {
       if (!tourBaselines || !tourBaselines.sg_ott) {
         return ''; // Skip if no baselines
       }
 
       // Get player's current season SG values (use historical if available, else tour avg)
-      const tourOtt = (tourBaselines.sg_ott.min + tourBaselines.sg_ott.max) / 2;
-      const tourApp = (tourBaselines.sg_app.min + tourBaselines.sg_app.max) / 2;
-      const tourArg = (tourBaselines.sg_arg.min + tourBaselines.sg_arg.max) / 2;
-      const tourPutt = (tourBaselines.sg_putt.min + tourBaselines.sg_putt.max) / 2;
-
       const sgOtt = player.sg_ott || (player.hist_sg_ott || 0);
       const sgApp = player.sg_app || (player.hist_sg_app || 0);
       const sgArg = player.sg_arg || (player.hist_sg_arg || 0);
@@ -820,7 +1055,6 @@
       const size = 280;
       const centerX = size / 2;
       const centerY = size / 2;
-      const radius = 80;
       const ringMax = 100;
 
       // Compute polygon points (starting at 12 o'clock, going clockwise)
@@ -837,6 +1071,34 @@
 
       const polyPoints = [p1, p2, p3, p4].map(p => p.join(',')).join(' ');
 
+      // Morph 1: Compute tour-average shape (all at 50th percentile)
+      const tourAvgShape = [
+        pt(0, 0.5 * ringMax),    // OTT at 50th percentile
+        pt(90, 0.5 * ringMax),   // APP at 50th percentile
+        pt(180, 0.5 * ringMax),  // ARG at 50th percentile
+        pt(270, 0.5 * ringMax)   // PUTT at 50th percentile
+      ].map(p => p.join(',')).join(' ');
+
+      // Identify strongest vertex for halo pulse
+      const percentiles = [
+        { axis: 'OTT', pct: pctOtt, p: p1 },
+        { axis: 'APP', pct: pctApp, p: p2 },
+        { axis: 'ARG', pct: pctArg, p: p3 },
+        { axis: 'PUTT', pct: pctPutt, p: p4 }
+      ];
+      const strongestVertex = percentiles.reduce((a, b) => a.pct > b.pct ? a : b);
+      const shouldPulse = strongestVertex.pct > 50; // Only pulse if above tour avg
+
+      // Build narrative with enhanced context
+      const narrative = buildFingerPrintNarrative(
+        player,
+        sgOtt, sgApp, sgArg, sgPutt,
+        pctOtt, pctApp, pctArg, pctPutt,
+        tourBaselines
+      );
+
+      const svgId = `sg-fingerprint-${player.dg_id}`;
+
       return `
         <section class="section">
           <div class="section-head">
@@ -844,13 +1106,16 @@
             <p class="section-subtitle">Elite dimensions vs. PGA Tour. Higher = better.</p>
           </div>
           <div style="display: flex; justify-content: center; margin-bottom: var(--space-6);">
-            <svg width="100%" height="320" viewBox="0 0 280 280" style="max-width: 420px; margin: 0 auto;">
+            <svg id="${svgId}" width="100%" height="320" viewBox="0 0 280 280" style="max-width: 420px; margin: 0 auto;">
               <!-- Reference rings -->
               <circle cx="140" cy="140" r="20" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
               <circle cx="140" cy="140" r="40" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.6"/>
               <text x="148" y="144" font-size="10" fill="var(--text-muted)" font-family="var(--font-mono)">Tour avg</text>
               <circle cx="140" cy="140" r="60" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
               <circle cx="140" cy="140" r="80" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
+
+              <!-- Ghost tour-average outline (differentiator 2) -->
+              <polygon points="${tourAvgShape}" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-dasharray="3,4" opacity="0.3"/>
 
               <!-- Axes labels -->
               <text x="140" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="var(--text-primary)">OTT</text>
@@ -865,49 +1130,78 @@
               <text x="25" y="147" text-anchor="end" font-size="12" font-weight="500" fill="var(--text-primary)">PUTT</text>
               <text x="25" y="165" text-anchor="end" font-size="11" font-family="var(--font-mono)" fill="var(--text-muted)">${fmt.num(sgPutt, 2)}</text>
 
-              <!-- Polygon -->
-              <polygon points="${polyPoints}" fill="var(--gold-400)" fill-opacity="0.15" stroke="var(--gold-400)" stroke-width="2" style="animation: fingerprint-draw 600ms ease-out forwards; opacity: 0;">
-                <style>
-                  @keyframes fingerprint-draw {
-                    to { opacity: 1; }
-                  }
-                </style>
+              <!-- Player polygon with morph animation (differentiator 1) -->
+              <polygon points="${polyPoints}" fill="var(--gold-400)" fill-opacity="0.15" stroke="var(--gold-400)" stroke-width="2" style="animation: fingerprint-morph 1.2s ease-out forwards; opacity: 0;">
+                <animate attributeName="points" from="${tourAvgShape}" to="${polyPoints}" dur="1.2s" fill="freeze" />
               </polygon>
 
-              <!-- Vertex dots -->
-              <circle cx="${p1[0]}" cy="${p1[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
-              <circle cx="${p2[0]}" cy="${p2[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
-              <circle cx="${p3[0]}" cy="${p3[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
-              <circle cx="${p4[0]}" cy="${p4[1]}" r="4" fill="var(--gold-400)" opacity="0.8"/>
+              <!-- Vertex groups with hover reveal (differentiator 4) -->
+              <g class="sg-vertex-group">
+                <circle cx="${p1[0]}" cy="${p1[1]}" r="4" class="sg-vertex-dot" fill="var(--gold-400)" opacity="0.9" style="animation: ${shouldPulse && strongestVertex.axis === 'OTT' ? 'vertex-halo-pulse 2s ease-in-out infinite' : 'none'};"/>
+                ${shouldPulse && strongestVertex.axis === 'OTT' ? `<circle cx="${p1[0]}" cy="${p1[1]}" r="8" fill="none" stroke="var(--gold-400)" opacity="0" style="animation: vertex-halo-pulse 2s ease-in-out infinite;"/>` : ''}
+                <title>OTT: ${fmt.num(sgOtt, 2)} (top ${fmt.num(100 - pctOtt, 0)}%)</title>
+              </g>
+
+              <g class="sg-vertex-group">
+                <circle cx="${p2[0]}" cy="${p2[1]}" r="4" class="sg-vertex-dot" fill="var(--gold-400)" opacity="0.9" style="animation: ${shouldPulse && strongestVertex.axis === 'APP' ? 'vertex-halo-pulse 2s ease-in-out infinite' : 'none'};"/>
+                ${shouldPulse && strongestVertex.axis === 'APP' ? `<circle cx="${p2[0]}" cy="${p2[1]}" r="8" fill="none" stroke="var(--gold-400)" opacity="0" style="animation: vertex-halo-pulse 2s ease-in-out infinite;"/>` : ''}
+                <title>APP: ${fmt.num(sgApp, 2)} (top ${fmt.num(100 - pctApp, 0)}%)</title>
+              </g>
+
+              <g class="sg-vertex-group">
+                <circle cx="${p3[0]}" cy="${p3[1]}" r="4" class="sg-vertex-dot" fill="var(--gold-400)" opacity="0.9" style="animation: ${shouldPulse && strongestVertex.axis === 'ARG' ? 'vertex-halo-pulse 2s ease-in-out infinite' : 'none'};"/>
+                ${shouldPulse && strongestVertex.axis === 'ARG' ? `<circle cx="${p3[0]}" cy="${p3[1]}" r="8" fill="none" stroke="var(--gold-400)" opacity="0" style="animation: vertex-halo-pulse 2s ease-in-out infinite;"/>` : ''}
+                <title>ARG: ${fmt.num(sgArg, 2)} (top ${fmt.num(100 - pctArg, 0)}%)</title>
+              </g>
+
+              <g class="sg-vertex-group">
+                <circle cx="${p4[0]}" cy="${p4[1]}" r="4" class="sg-vertex-dot" fill="var(--gold-400)" opacity="0.9" style="animation: ${shouldPulse && strongestVertex.axis === 'PUTT' ? 'vertex-halo-pulse 2s ease-in-out infinite' : 'none'};"/>
+                ${shouldPulse && strongestVertex.axis === 'PUTT' ? `<circle cx="${p4[0]}" cy="${p4[1]}" r="8" fill="none" stroke="var(--gold-400)" opacity="0" style="animation: vertex-halo-pulse 2s ease-in-out infinite;"/>` : ''}
+                <title>PUTT: ${fmt.num(sgPutt, 2)} (top ${fmt.num(100 - pctPutt, 0)}%)</title>
+              </g>
             </svg>
           </div>
           <div style="font-size: var(--fs-sm); color: var(--text-body); text-align: center; line-height: var(--lh-relaxed);">
-            <p>${getFingerPrintNarrative(pctOtt, pctApp, pctArg, pctPutt)}</p>
+            <p>${narrative}</p>
           </div>
         </section>
       `;
     }
 
-    function getFingerPrintNarrative(pctOtt, pctApp, pctArg, pctPutt) {
+    function buildFingerPrintNarrative(player, sgOtt, sgApp, sgArg, sgPutt, pctOtt, pctApp, pctArg, pctPutt, tourBaselines) {
       const strengths = [];
       const weaknesses = [];
 
-      if (pctOtt > 65) strengths.push('elite driving accuracy');
-      else if (pctOtt < 35) weaknesses.push('below-avg driving accuracy');
+      // Categorize dimensions
+      if (pctOtt > 65) strengths.push({ dim: 'driving accuracy', pct: pctOtt, sg: sgOtt });
+      else if (pctOtt < 35) weaknesses.push({ dim: 'driving accuracy', pct: pctOtt, sg: sgOtt });
 
-      if (pctApp > 65) strengths.push('elite approach play');
-      else if (pctApp < 35) weaknesses.push('below-avg approach play');
+      if (pctApp > 65) strengths.push({ dim: 'approach play', pct: pctApp, sg: sgApp });
+      else if (pctApp < 35) weaknesses.push({ dim: 'approach play', pct: pctApp, sg: sgApp });
 
-      if (pctArg > 65) strengths.push('elite course management');
-      else if (pctArg < 35) weaknesses.push('below-avg course management');
+      if (pctArg > 65) strengths.push({ dim: 'course management', pct: pctArg, sg: sgArg });
+      else if (pctArg < 35) weaknesses.push({ dim: 'course management', pct: pctArg, sg: sgArg });
 
-      if (pctPutt > 65) strengths.push('elite putting');
-      else if (pctPutt < 35) weaknesses.push('below-avg putting');
+      if (pctPutt > 65) strengths.push({ dim: 'putting', pct: pctPutt, sg: sgPutt });
+      else if (pctPutt < 35) weaknesses.push({ dim: 'putting', pct: pctPutt, sg: sgPutt });
 
-      const strengthText = strengths.length > 0 ? `${strengths.join(' and ')}` : 'balanced play';
-      const weaknessText = weaknesses.length > 0 ? ` but struggles with ${weaknesses.join(' and ')}` : '';
+      // Build narrative pieces
+      let narrative = '';
 
-      return `This shape shows ${strengthText}${weaknessText}.`;
+      if (strengths.length > 0) {
+        const topStrength = strengths[0];
+        narrative += `Elite ${topStrength.dim} (top ${fmt.num(100 - topStrength.pct, 0)}% on tour).`;
+      }
+
+      if (weaknesses.length > 0) {
+        const topWeakness = weaknesses[0];
+        const impact = Math.abs(topWeakness.sg);
+        narrative += ` ${topWeakness.dim.charAt(0).toUpperCase() + topWeakness.dim.slice(1)} runs cold — he gives back roughly ${fmt.num(impact, 2)} strokes per event on the ${topWeakness.dim.includes('putting') ? 'greens' : topWeakness.dim.includes('approach') ? 'approach' : topWeakness.dim.includes('driving') ? 'tee' : 'course'}.`;
+      }
+
+      narrative += ' The shape is almost unique on tour.';
+
+      return narrative;
     }
 
     function getInitials(name) {

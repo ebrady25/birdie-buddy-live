@@ -17,7 +17,9 @@
     .ranktable { font-size: var(--fs-xs); }
     .ranktable th { padding: var(--space-3) var(--space-2); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); }
     .ranktable td { padding: var(--space-2); font-variant-numeric: tabular-nums; }
-    .ranktable thead { top: calc(var(--nav-h) + var(--status-h) + var(--page-toolbar-h)); }
+    .ranktable thead { top: calc(var(--nav-h) + var(--status-h) + var(--page-toolbar-h)); z-index: 5; }
+    .ranktable thead th { background: var(--surface-2); }
+    .ranktable thead th.sticky-col { z-index: 6; }
 
     .expand-grid {
       display: grid;

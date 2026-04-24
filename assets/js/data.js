@@ -53,6 +53,7 @@ window.BBI = window.BBI || {};
       playerLookup:   './data/player_lookup.json',
       playerCourseHistory: './data/player_course_history.json',
       playerRecentForm: './data/player_recent_form.json',
+      playerPressureMetrics: './data/player_pressure_metrics.json',
       tourSgBaselines: './data/tour_sg_baselines.json'
     }
   };
