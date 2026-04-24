@@ -15,6 +15,9 @@
        (page-head, page-toolbar, .seg, .toolbar-count live in components.css)
        ========================================================= */
 
+    /* DK export modal — the [hidden] attribute must win over inline display:flex */
+    #dkModal[hidden] { display: none !important; }
+
     /* ---------- SUMMARY STRIP ---------- */
     .summary-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); margin-bottom: var(--space-8); }
     @media (max-width: 1200px) { .summary-strip { grid-template-columns: repeat(3, 1fr); } }
