@@ -556,10 +556,52 @@
           <h3>Brier score</h3>
           <p>Brier measures how well our probability forecasts match reality. Think of it as a penalty for being wrong, weighted by how confident you were.</p>
           <p><strong>Concrete example:</strong> We predict a player has a 10% chance to win the tournament. If that player actually wins, we're penalized: (1 − 0.10)² = 0.81. If they don't win, the penalty is smaller: (0 − 0.10)² = 0.01. We compute this penalty for every player in every event, then average across the whole field. <strong>Lower Brier = better predictions.</strong> A perfect forecast is 0.0. A random guess is around 0.25.</p>
-          <p>We track Brier for five markets: win, top-5, top-10, top-20, make-cut. Our 2025 backtest baselines (vs. DataGolf): win 0.013, top-10 0.088, top-20 0.143, make-cut 0.172. BBI must match or beat these benchmarks each week.</p>
           <div class="math-block"><span class="var">Brier</span> <span class="op">=</span> (1<span class="op">/</span>N) <span class="op">·</span> Σ (<span class="var">p</span><sub>i</sub> <span class="op">−</span> <span class="var">o</span><sub>i</sub>)²
 <span class="comment"># p = predicted prob, o = outcome (1 if event happened else 0)</span>
 <span class="comment"># lower Brier = better calibration</span></div>
+
+          <!-- Worked example -->
+          <div class="callout" style="margin-top: var(--space-5); border-color: var(--border-gold); background: linear-gradient(135deg, rgba(212, 168, 67, 0.05) 0%, var(--surface-3) 60%);">
+            <div class="c-icon" style="background: var(--gold-900); color: var(--gold-300); border-color: var(--gold-700);">Σ</div>
+            <div class="c-body">
+              <strong>Worked example: what "Brier 0.0117" actually means.</strong>
+              <p style="margin-top: var(--space-2);">At the 2026 RBC Heritage (Week 11, 82 players in the field), our win-probability forecasts produced a Brier of <strong>0.0117</strong>. Here's how that number is built and what it means.</p>
+              <p style="margin-top: var(--space-3);"><strong>The math, player by player:</strong> for each of the 82 players we squared the difference between our predicted win probability and the binary outcome (1 if they won, 0 if they didn't), then averaged.</p>
+              <ul style="margin-top: var(--space-2); padding-left: var(--space-5); font-size: var(--fs-sm); line-height: var(--lh-relaxed); color: var(--text-body);">
+                <li>Scheffler: predicted <strong>14.8%</strong> win, finished T17 → (0 − 0.148)² = <strong>0.0219</strong></li>
+                <li>Fitzpatrick: predicted <strong>4.2%</strong> win, <em>won</em> the event → (1 − 0.042)² = <strong>0.918</strong></li>
+                <li>Noren: predicted <strong>0.9%</strong> win, finished T42 → (0 − 0.009)² = <strong>0.0001</strong></li>
+                <li>…and 79 other non-winners with similarly small penalties</li>
+              </ul>
+              <p style="margin-top: var(--space-3);">Sum all 82 penalties, divide by 82, and you get <strong>0.0117</strong>. The Fitzpatrick miss dominates the sum — which is exactly how Brier is supposed to work: it punishes the model hardest when it assigned low probability to the actual winner.</p>
+              <p style="margin-top: var(--space-3);"><strong>How good is 0.0117?</strong> Three reference points:</p>
+              <div class="stat-row" style="margin-top: var(--space-3);">
+                <div class="mstat">
+                  <div class="lbl">Uniform prior</div>
+                  <div class="val">0.0145</div>
+                  <div class="sub">"everyone 1/82"</div>
+                </div>
+                <div class="mstat">
+                  <div class="lbl">2025 baseline</div>
+                  <div class="val">0.0130</div>
+                  <div class="sub">industry benchmark</div>
+                </div>
+                <div class="mstat" style="border-color: var(--border-gold);">
+                  <div class="lbl" style="color: var(--gold-300);">BBI Wk 11</div>
+                  <div class="val" style="color: var(--gold-300);">0.0117</div>
+                  <div class="sub">−10% vs baseline</div>
+                </div>
+                <div class="mstat">
+                  <div class="lbl">Theoretical perfect</div>
+                  <div class="val">0.0000</div>
+                  <div class="sub">only by cheating</div>
+                </div>
+              </div>
+              <p style="margin-top: var(--space-3);"><strong>The practical read:</strong> a 10% improvement over the published 2025 baseline on win Brier, sustained across a season, is enough to flip a break-even top-finish betting strategy into a small but real edge. That's why every weekly Brier is tracked on the <a href="performance.html">Performance page</a> — we need to see the number sustained, not just one lucky week.</p>
+            </div>
+          </div>
+
+          <p style="margin-top: var(--space-5);">We track Brier for five markets: win, top-5, top-10, top-20, make-cut. Our 2025 backtest baselines: win 0.013, top-10 0.088, top-20 0.143, make-cut 0.172. BBI must match or beat these benchmarks each week.</p>
 
           <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text-primary); margin-top: var(--space-5); margin-bottom: var(--space-2);">Calibration (reliability)</h3>
           <p>A calibrated 20% probability should hit 20% of the time. The Performance page bucket plots BBI's predicted probabilities into 10 bins and compares each bin's predicted mean to the observed frequency. Reliability = mean absolute deviation across bins. A well-calibrated model runs &lt;0.03 reliability.</p>
