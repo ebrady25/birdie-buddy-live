@@ -743,6 +743,94 @@
       .factor-name { font-size: var(--fs-2xs); }
     }
 
+    /* ===== COURSE HISTORY AGGREGATE SUMMARY ===== */
+    .course-agg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+
+    .course-agg-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+    }
+
+    .course-agg-card.sg-total {
+      border-color: var(--border-gold);
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.06) 0%, var(--surface-3) 60%);
+    }
+
+    .course-agg-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .course-agg-value {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+
+    .course-agg-value.positive { color: var(--positive); }
+    .course-agg-value.negative { color: var(--negative); }
+    .course-agg-card.sg-total .course-agg-value { color: var(--gold-300); }
+
+    .course-agg-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      margin-top: 2px;
+    }
+
+    /* ===== TABLE SCROLL HINT (mobile) ===== */
+    .table-scroll {
+      position: relative;
+    }
+
+    .table-scroll-inner {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .table-scroll::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 32px;
+      pointer-events: none;
+      background: linear-gradient(to right, transparent, var(--surface-1) 80%);
+      opacity: 0;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+
+    @media (max-width: 720px) {
+      .table-scroll.has-overflow::after {
+        opacity: 1;
+      }
+      .table-scroll-hint-text {
+        display: block;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: var(--fs-3xs);
+        color: var(--text-dimmed);
+        padding: var(--space-2) 0 0;
+        letter-spacing: var(--tracking-wide);
+      }
+    }
+
+    .table-scroll-hint-text { display: none; }
+
     /* ===== COURSE HISTORY TABLE ===== */
     .section-title {
       font-size: var(--fs-2xl);
@@ -939,11 +1027,11 @@
       opacity: 1;
     }
 
-    /* ===== PRESSURE METRICS GAUGES ===== */
+    /* ===== PRESSURE METRICS GAUGES (Pass 3 — tightened) ===== */
     .gauges-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--space-6);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-4);
       margin-bottom: var(--space-6);
     }
 
@@ -951,7 +1039,7 @@
       background: var(--surface-3);
       border: 1px solid var(--border-soft);
       border-radius: var(--radius-lg);
-      padding: var(--space-5);
+      padding: var(--space-4);
       text-align: center;
       transition: opacity var(--dur-base) var(--ease-out);
     }
@@ -961,39 +1049,55 @@
     }
 
     .gauge-title {
-      font-size: var(--fs-lg);
+      font-size: var(--fs-md);
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-2);
+    }
+
+    .gauge-svg-wrap {
+      max-width: 220px;
+      margin: 0 auto;
     }
 
     .gauge-value {
-      font-size: var(--fs-2xl);
+      font-size: var(--fs-xl);
       font-weight: 700;
       color: var(--gold-300);
       font-variant-numeric: tabular-nums;
-      margin-top: var(--space-3);
-      margin-bottom: var(--space-1);
+      margin-top: var(--space-1);
+      margin-bottom: 2px;
+      line-height: 1.1;
     }
 
     .gauge-sample {
       font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-      margin-bottom: var(--space-3);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      margin-bottom: var(--space-2);
     }
 
     .gauge-microcopy {
       font-size: var(--fs-sm);
       color: var(--text-body);
       line-height: var(--lh-snug);
+      max-width: 22ch;
+      margin: 0 auto;
     }
 
     .gauge-empty {
-      font-size: var(--fs-md);
+      font-size: var(--fs-sm);
       color: var(--text-muted);
-      padding: var(--space-4) var(--space-2);
+      padding: var(--space-5) var(--space-2);
       line-height: var(--lh-relaxed);
+    }
+
+    .gauge-empty-hint {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      margin-top: var(--space-2);
     }
 
     @media (max-width: 768px) {
@@ -1075,6 +1179,18 @@
 
       // Wire up Pass 2 wayfinding interactions
       wireWayfinding(rankings, player, playerRank);
+
+      // Pass 3: detect overflowing tables for mobile scroll hint
+      const detectOverflow = () => {
+        document.querySelectorAll('.table-scroll').forEach(wrap => {
+          const inner = wrap.querySelector('.table-scroll-inner');
+          if (!inner) return;
+          const hasOverflow = inner.scrollWidth > inner.clientWidth + 2;
+          wrap.classList.toggle('has-overflow', hasOverflow);
+        });
+      };
+      detectOverflow();
+      window.addEventListener('resize', detectOverflow);
     });
 
     // ---------- Pass 2 wayfinding wiring ----------
@@ -1340,8 +1456,8 @@
           <a href="#sec-factors">Factors</a>
           <a href="#sec-pressure">Pressure</a>
           <a href="#sec-form">Recent Form</a>
-          <a href="#sec-course">Course History</a>
           ${player.salary ? `<a href="#sec-market">Market</a>` : ''}
+          <a href="#sec-course">Course History</a>
         </nav>
 
         <div class="player-header" id="playerMainHeader">
@@ -1395,11 +1511,11 @@
         <!-- RECENT FORM -->
         <div id="sec-form">${recentFormHtml}</div>
 
+        <!-- MARKET POSITIONING (lifted above Course History — decision-relevant) -->
+        <div id="sec-market">${marketHtml}</div>
+
         <!-- COURSE HISTORY -->
         <div id="sec-course">${courseHistHtml}</div>
-
-        <!-- MARKET POSITIONING -->
-        <div id="sec-market">${marketHtml}</div>
 
         <section class="section" style="margin-bottom: var(--space-12);">
           <div class="section-head">
@@ -1552,7 +1668,7 @@
 
     function buildCourseHistory(player, courseHistory) {
       const playerData = courseHistory && courseHistory[player.dg_id];
-      if (!playerData || playerData.years.length === 0) {
+      if (!playerData || !playerData.years || playerData.years.length === 0) {
         return `
           <section class="section">
             <div class="section-head">
@@ -1561,6 +1677,7 @@
             <div class="empty-state" style="padding: var(--space-8);">
               <div class="empty-icon">○</div>
               <div class="empty-heading">No prior starts at this venue</div>
+              <div class="empty-text">First visit — course fit here is inferred from course-DNA matching against similar venues.</div>
             </div>
           </section>
         `;
@@ -1569,48 +1686,89 @@
       const agg = playerData.aggregate || {};
       const years = playerData.years || [];
 
+      // Best finish: scan years for smallest numeric finish
+      const finishNum = f => {
+        if (!f) return Infinity;
+        const m = String(f).match(/\d+/);
+        return m ? parseInt(m[0], 10) : Infinity;
+      };
+      const bestYr = years.reduce((acc, y) => (!acc || finishNum(y.finish) < finishNum(acc.finish)) ? y : acc, null);
+
+      const signNum = (v, d = 2) => v > 0 ? `+${fmt.num(v, d)}` : fmt.num(v, d);
+      const signClass = v => v > 0 ? 'positive' : v < 0 ? 'negative' : '';
+
       return `
         <section class="section">
           <div class="section-head">
             <h2 class="section-title">Course History</h2>
-            <p class="section-subtitle">${agg.starts || 0} starts, ${agg.rounds || 0} rounds at this venue.</p>
+            <p class="section-subtitle">${agg.starts || 0} starts · ${agg.rounds || 0} rounds${bestYr ? ` · Best finish <strong>${bestYr.finish}</strong> in ${bestYr.year}` : ''}</p>
           </div>
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th style="width: 80px;">Year</th>
-                  <th style="width: 100px;">Finish</th>
-                  <th class="num">SG: Tee</th>
-                  <th class="num">SG: App</th>
-                  <th class="num">SG: Arg</th>
-                  <th class="num">SG: Putt</th>
-                  <th class="num">SG: Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="background: rgba(212, 168, 67, 0.06); border-top: 2px solid var(--border-soft);">
-                  <td><strong>Avg</strong></td>
-                  <td colspan="1"></td>
-                  <td class="num ${agg.sg_ott > 0 ? 'positive' : agg.sg_ott < 0 ? 'negative' : ''}">${agg.sg_ott > 0 ? '+' : ''}${fmt.num(agg.sg_ott, 2)}</td>
-                  <td class="num ${agg.sg_app > 0 ? 'positive' : agg.sg_app < 0 ? 'negative' : ''}">${agg.sg_app > 0 ? '+' : ''}${fmt.num(agg.sg_app, 2)}</td>
-                  <td class="num ${agg.sg_arg > 0 ? 'positive' : agg.sg_arg < 0 ? 'negative' : ''}">${agg.sg_arg > 0 ? '+' : ''}${fmt.num(agg.sg_arg, 2)}</td>
-                  <td class="num ${agg.sg_putt > 0 ? 'positive' : agg.sg_putt < 0 ? 'negative' : ''}">${agg.sg_putt > 0 ? '+' : ''}${fmt.num(agg.sg_putt, 2)}</td>
-                  <td class="num" style="font-weight: 600; ${agg.sg_total > 0 ? 'color: var(--positive)' : agg.sg_total < 0 ? 'color: var(--negative)' : ''}">${agg.sg_total > 0 ? '+' : ''}${fmt.num(agg.sg_total, 2)}</td>
-                </tr>
-                ${years.map(y => `
+
+          <!-- Aggregate summary cards -->
+          <div class="course-agg-grid">
+            <div class="course-agg-card">
+              <div class="course-agg-label">Starts</div>
+              <div class="course-agg-value">${agg.starts || 0}</div>
+              <div class="course-agg-sub">${agg.rounds || 0} rounds</div>
+            </div>
+            ${agg.cuts_made != null ? `
+              <div class="course-agg-card">
+                <div class="course-agg-label">Cuts Made</div>
+                <div class="course-agg-value">${agg.cuts_made}/${agg.starts || 0}</div>
+                <div class="course-agg-sub">${agg.starts ? fmt.num((agg.cuts_made / agg.starts) * 100, 0) : 0}% rate</div>
+              </div>` : ''}
+            ${agg.avg_finish != null ? `
+              <div class="course-agg-card">
+                <div class="course-agg-label">Avg Finish</div>
+                <div class="course-agg-value">${fmt.num(agg.avg_finish, 1)}</div>
+                ${bestYr ? `<div class="course-agg-sub">best ${bestYr.finish}</div>` : ''}
+              </div>` : ''}
+            <div class="course-agg-card">
+              <div class="course-agg-label">SG: App</div>
+              <div class="course-agg-value ${signClass(agg.sg_app)}">${signNum(agg.sg_app)}</div>
+            </div>
+            <div class="course-agg-card">
+              <div class="course-agg-label">SG: Putt</div>
+              <div class="course-agg-value ${signClass(agg.sg_putt)}">${signNum(agg.sg_putt)}</div>
+            </div>
+            <div class="course-agg-card sg-total">
+              <div class="course-agg-label">SG: Total avg</div>
+              <div class="course-agg-value">${signNum(agg.sg_total)}</div>
+              <div class="course-agg-sub">per round</div>
+            </div>
+          </div>
+
+          <!-- Year-by-year table -->
+          <div class="table-scroll">
+            <div class="table-scroll-inner table-wrap">
+              <table class="table">
+                <thead>
                   <tr>
-                    <td><strong>${y.year}</strong></td>
-                    <td>${y.finish}</td>
-                    <td class="num ${y.sg_ott > 0 ? 'positive' : y.sg_ott < 0 ? 'negative' : ''}">${y.sg_ott > 0 ? '+' : ''}${fmt.num(y.sg_ott, 2)}</td>
-                    <td class="num ${y.sg_app > 0 ? 'positive' : y.sg_app < 0 ? 'negative' : ''}">${y.sg_app > 0 ? '+' : ''}${fmt.num(y.sg_app, 2)}</td>
-                    <td class="num ${y.sg_arg > 0 ? 'positive' : y.sg_arg < 0 ? 'negative' : ''}">${y.sg_arg > 0 ? '+' : ''}${fmt.num(y.sg_arg, 2)}</td>
-                    <td class="num ${y.sg_putt > 0 ? 'positive' : y.sg_putt < 0 ? 'negative' : ''}">${y.sg_putt > 0 ? '+' : ''}${fmt.num(y.sg_putt, 2)}</td>
-                    <td class="num ${y.sg_total > 0 ? 'positive' : y.sg_total < 0 ? 'negative' : ''}">${y.sg_total > 0 ? '+' : ''}${fmt.num(y.sg_total, 2)}</td>
+                    <th style="width: 80px;">Year</th>
+                    <th style="width: 100px;">Finish</th>
+                    <th class="num">SG: Tee</th>
+                    <th class="num">SG: App</th>
+                    <th class="num">SG: Arg</th>
+                    <th class="num">SG: Putt</th>
+                    <th class="num">SG: Total</th>
                   </tr>
-                `).join('')}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  ${years.map(y => `
+                    <tr${bestYr && y.year === bestYr.year ? ' style="background: rgba(212, 168, 67, 0.05);"' : ''}>
+                      <td><strong>${y.year}</strong></td>
+                      <td>${y.finish}${bestYr && y.year === bestYr.year ? ' <span class="gold" style="font-size: var(--fs-3xs); font-family: var(--font-mono);" title="Best finish here">★</span>' : ''}</td>
+                      <td class="num ${signClass(y.sg_ott)}">${signNum(y.sg_ott)}</td>
+                      <td class="num ${signClass(y.sg_app)}">${signNum(y.sg_app)}</td>
+                      <td class="num ${signClass(y.sg_arg)}">${signNum(y.sg_arg)}</td>
+                      <td class="num ${signClass(y.sg_putt)}">${signNum(y.sg_putt)}</td>
+                      <td class="num ${signClass(y.sg_total)}">${signNum(y.sg_total)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+            <span class="table-scroll-hint-text">swipe →</span>
           </div>
         </section>
       `;
@@ -1633,34 +1791,37 @@
         <section class="section">
           <div class="section-head">
             <h2 class="section-title">Recent Form</h2>
-            <p class="section-subtitle">Last 10 completed tournaments.</p>
+            <p class="section-subtitle">Last ${playerForm.length} completed tournaments.</p>
           </div>
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th style="flex: 1;">Event</th>
-                  <th style="width: 80px;">Date</th>
-                  <th style="width: 70px;">Finish</th>
-                  <th class="num">SG: Total</th>
-                  <th style="width: 110px;">Top Stat</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${playerForm.map(e => `
+          <div class="table-scroll">
+            <div class="table-scroll-inner table-wrap">
+              <table class="table">
+                <thead>
                   <tr>
-                    <td title="${e.event_name}">${e.event_name.length > 30 ? e.event_name.substring(0, 27) + '...' : e.event_name}</td>
-                    <td>${fmt.date(e.date)}</td>
-                    <td><strong>${e.finish}</strong></td>
-                    <td class="num ${e.sg_total > 0 ? 'positive' : e.sg_total < 0 ? 'negative' : ''}">${e.sg_total > 0 ? '+' : ''}${fmt.num(e.sg_total, 2)}</td>
-                    <td style="font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; ${e.top_sg_value > 0 ? 'color: var(--positive)' : e.top_sg_value < 0 ? 'color: var(--negative)' : 'color: var(--text-body)'}">
-                      ${e.top_sg_category.replace('OTT', 'Tee').replace('APP', 'App').replace('ARG', 'Arg').replace('PUTT', 'Putt')}
-                      ${e.top_sg_value > 0 ? '+' : ''}${fmt.num(e.top_sg_value, 2)}
-                    </td>
+                    <th style="flex: 1;">Event</th>
+                    <th style="width: 80px;">Date</th>
+                    <th style="width: 70px;">Finish</th>
+                    <th class="num">SG: Total</th>
+                    <th style="width: 110px;">Top Stat</th>
                   </tr>
-                `).join('')}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  ${playerForm.map(e => `
+                    <tr>
+                      <td title="${e.event_name}">${e.event_name.length > 30 ? e.event_name.substring(0, 27) + '…' : e.event_name}</td>
+                      <td>${fmt.date(e.date)}</td>
+                      <td><strong>${e.finish}</strong></td>
+                      <td class="num ${e.sg_total > 0 ? 'positive' : e.sg_total < 0 ? 'negative' : ''}">${e.sg_total > 0 ? '+' : ''}${fmt.num(e.sg_total, 2)}</td>
+                      <td style="font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; ${e.top_sg_value > 0 ? 'color: var(--positive)' : e.top_sg_value < 0 ? 'color: var(--negative)' : 'color: var(--text-body)'}">
+                        ${e.top_sg_category.replace('OTT', 'Tee').replace('APP', 'App').replace('ARG', 'Arg').replace('PUTT', 'Putt')}
+                        ${e.top_sg_value > 0 ? '+' : ''}${fmt.num(e.top_sg_value, 2)}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+            <span class="table-scroll-hint-text">swipe →</span>
           </div>
         </section>
       `;
@@ -1726,7 +1887,8 @@
         return `
           <div class="gauge-card" ${!hasData ? 'style="opacity: 0.5;"' : ''}>
             <div class="gauge-title">${title}</div>
-            <svg width="100%" height="200" viewBox="0 0 240 200" style="max-width: 320px; margin: 0 auto; display: block;">
+            <div class="gauge-svg-wrap">
+            <svg width="100%" height="160" viewBox="0 0 240 200" preserveAspectRatio="xMidYMid meet" style="display: block;">
               <!-- Arc background (light) -->
               <path d="M ${x1} ${y1} A ${radius} ${radius} 0 1 1 ${x2} ${y2}" fill="none" stroke="var(--border-soft)" stroke-width="8" opacity="0.3"/>
 
@@ -1761,12 +1923,16 @@
                 </line>
               ` : ''}
             </svg>
+            </div>
             ${hasData ? `
               <div class="gauge-value">${value > 0 ? '+' : ''}${fmt.num(value, 2)} SG</div>
-              <div class="gauge-sample">n=${sample}</div>
+              <div class="gauge-sample">n=${sample} rounds</div>
               <div class="gauge-microcopy">${microcopy}</div>
             ` : `
-              <div class="gauge-empty">Insufficient sample — fewer than 3 events tracked</div>
+              <div class="gauge-empty">
+                Need a few more rounds before this metric lights up.
+                <span class="gauge-empty-hint">at least 3 events tracked</span>
+              </div>
             `}
           </div>
         `;
