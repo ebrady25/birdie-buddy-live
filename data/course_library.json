@@ -1,0 +1,948 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-03-24",
+    "profiles": 48,
+    "notes": "Approach bucket weights calibrated from historical shot distribution and SG correlation analysis"
+  },
+  "profiles": {
+    "2": {
+      "event_id": 2,
+      "event_name": "The American Express",
+      "course_name": "PGA West (Stadium Course)",
+      "par": 72,
+      "yardage": 7147,
+      "rough": 0.7,
+      "difficulty": "easy",
+      "greens": "bermuda_overseeded",
+      "stimpmeter": 11.5,
+      "w": {
+        "50_100_fw": 0.2,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.1,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "3": {
+      "event_id": 3,
+      "event_name": "WM Phoenix Open",
+      "course_name": "TPC Scottsdale (Stadium Course)",
+      "par": 71,
+      "yardage": 7261,
+      "rough": 0.85,
+      "difficulty": "moderate",
+      "greens": "bermuda_overseeded",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "4": {
+      "event_id": 4,
+      "event_name": "Farmers Insurance Open",
+      "course_name": "Torrey Pines (South Course)",
+      "par": 72,
+      "yardage": 7765,
+      "rough": 1.12,
+      "difficulty": "hard",
+      "greens": "poa_annua",
+      "stimpmeter": 11.5,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.14,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.28,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "5": {
+      "event_id": 5,
+      "event_name": "AT&T Pebble Beach Pro-Am",
+      "course_name": "Pebble Beach Golf Links",
+      "par": 72,
+      "yardage": 6972,
+      "rough": 0.88,
+      "difficulty": "moderate",
+      "greens": "poa_annua",
+      "stimpmeter": 11.0,
+      "w": {
+        "50_100_fw": 0.18,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "6": {
+      "event_id": 6,
+      "event_name": "Sony Open in Hawaii",
+      "course_name": "Waialae Country Club",
+      "par": 70,
+      "yardage": 7044,
+      "rough": 0.8,
+      "difficulty": "easy",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.18,
+        "100_150_fw": 0.24,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.1,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "7": {
+      "event_id": 7,
+      "event_name": "The Genesis Invitational",
+      "course_name": "Riviera Country Club",
+      "par": 71,
+      "yardage": 7322,
+      "rough": 1.08,
+      "difficulty": "hard",
+      "greens": "poa_annua",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.16,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.24,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "9": {
+      "event_id": 9,
+      "event_name": "Arnold Palmer Invitational",
+      "course_name": "Arnold Palmer's Bay Hill Club & Lodge",
+      "par": 72,
+      "yardage": 7466,
+      "rough": 1.14,
+      "difficulty": "hard",
+      "greens": "bermuda_overseeded",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.06,
+        "100_150_fw": 0.12,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.3,
+        "under_150_rgh": 0.08,
+        "over_150_rgh": 0.22
+      }
+    },
+    "10": {
+      "event_id": 10,
+      "event_name": "Cognizant Classic",
+      "course_name": "PGA National (Champion Course)",
+      "par": 70,
+      "yardage": 7125,
+      "rough": 1.08,
+      "difficulty": "very_hard",
+      "greens": "bermuda",
+      "stimpmeter": 12.5,
+      "w": {
+        "50_100_fw": 0.12,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.16,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "11": {
+      "event_id": 11,
+      "event_name": "THE PLAYERS Championship",
+      "course_name": "TPC Sawgrass (Stadium Course)",
+      "par": 72,
+      "yardage": 7245,
+      "rough": 1.05,
+      "difficulty": "hard",
+      "greens": "bermuda_overseeded",
+      "stimpmeter": 12.5,
+      "water_hazards": "severe",
+      "water_holes": 7,
+      "sg_component_importance": {
+        "sg_app": {
+          "correlation": 0.628,
+          "variance_contrib_pct": 36.5,
+          "rank": 1
+        },
+        "sg_putt": {
+          "correlation": 0.568,
+          "variance_contrib_pct": 31.5,
+          "rank": 2
+        },
+        "sg_ott": {
+          "correlation": 0.44,
+          "variance_contrib_pct": 17.9,
+          "rank": 3
+        },
+        "sg_arg": {
+          "correlation": 0.392,
+          "variance_contrib_pct": 14.1,
+          "rank": 4
+        }
+      },
+      "form_tournament": true,
+      "notes": "Form tournament \u2014 hottest players coming in perform best. Weight recent form more heavily than course history.",
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.24,
+        "150_200_fw": 0.28,
+        "over_200_fw": 0.14,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.08
+      }
+    },
+    "12": {
+      "event_id": 12,
+      "event_name": "RBC Heritage",
+      "course_name": "Harbour Town Golf Links",
+      "par": 71,
+      "yardage": 7099,
+      "rough": 0.9,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.24,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.1,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "14": {
+      "event_id": 14,
+      "event_name": "Masters Tournament",
+      "course_name": "Augusta National Golf Club",
+      "par": 72,
+      "yardage": 7545,
+      "rough": 0.95,
+      "difficulty": "elite",
+      "greens": "bentgrass",
+      "stimpmeter": 14.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.16,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.26,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "16": {
+      "event_id": 16,
+      "event_name": "The Sentry",
+      "course_name": "Kapalua Plantation Course",
+      "par": 73,
+      "yardage": 7596,
+      "rough": 0.75,
+      "difficulty": "easy",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.16,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.26,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.14
+      }
+    },
+    "20": {
+      "event_id": 20,
+      "event_name": "Texas Children's Houston Open",
+      "course_name": "Memorial Park Golf Course",
+      "par": 70,
+      "yardage": 7412,
+      "rough": 1.06,
+      "difficulty": "hard",
+      "greens": "bermuda",
+      "stimpmeter": 12.5,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.18,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.24,
+        "under_150_rgh": 0.08,
+        "over_150_rgh": 0.14
+      }
+    },
+    "26": {
+      "event_id": 26,
+      "event_name": "U.S. Open",
+      "course_name": "Varies by year",
+      "par": 70,
+      "yardage": 7500,
+      "rough": 1.25,
+      "difficulty": "elite",
+      "greens": "varies",
+      "stimpmeter": 13.5,
+      "w": {
+        "50_100_fw": 0.06,
+        "100_150_fw": 0.12,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.28,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.22
+      }
+    },
+    "33": {
+      "event_id": 33,
+      "event_name": "PGA Championship",
+      "course_name": "Varies by year",
+      "par": 70,
+      "yardage": 7400,
+      "rough": 1.1,
+      "difficulty": "hard",
+      "greens": "varies",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.16,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.26,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "41": {
+      "event_id": 41,
+      "event_name": "Valero Texas Open",
+      "course_name": "TPC San Antonio (Oaks Course)",
+      "par": 72,
+      "yardage": 7494,
+      "rough": 1.04,
+      "difficulty": "hard",
+      "greens": "bermuda",
+      "stimpmeter": 12.5,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.18,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.22,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.14
+      }
+    },
+    "100": {
+      "event_id": 100,
+      "event_name": "The Open Championship",
+      "course_name": "Varies by year",
+      "par": 72,
+      "yardage": 7300,
+      "rough": 1.18,
+      "difficulty": "hard",
+      "greens": "fescue",
+      "stimpmeter": 11.0,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.18,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.2,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "475": {
+      "event_id": 475,
+      "event_name": "Valspar Championship",
+      "course_name": "Innisbrook (Copperhead Course)",
+      "par": 71,
+      "yardage": 7340,
+      "rough": 1.1,
+      "difficulty": "hard",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.18,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.22,
+        "under_150_rgh": 0.08,
+        "over_150_rgh": 0.16
+      }
+    },
+    "13": {
+      "event_id": 13,
+      "event_name": "Wyndham Championship",
+      "course_name": "Sedgefield Country Club",
+      "par": 72,
+      "yardage": 7203,
+      "rough": 1.05,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.16,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.1
+      }
+    },
+    "18": {
+      "event_id": 18,
+      "event_name": "Zurich Classic of New Orleans",
+      "course_name": "TPC Louisiana",
+      "par": 72,
+      "yardage": 7425,
+      "rough": 1.06,
+      "difficulty": "hard",
+      "greens": "bermuda",
+      "stimpmeter": 12.5,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.18,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.24,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.12
+      }
+    },
+    "19": {
+      "event_id": 19,
+      "event_name": "THE CJ CUP Byron Nelson",
+      "course_name": "TPC Craig Ranch",
+      "par": 72,
+      "yardage": 7435,
+      "rough": 1.02,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "21": {
+      "event_id": 21,
+      "event_name": "Charles Schwab Challenge",
+      "course_name": "Colonial Country Club",
+      "par": 70,
+      "yardage": 7209,
+      "rough": 0.98,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "23": {
+      "event_id": 23,
+      "event_name": "The Memorial Tournament",
+      "course_name": "Muirfield Village Golf Club",
+      "par": 72,
+      "yardage": 7547,
+      "rough": 1.12,
+      "difficulty": "hard",
+      "greens": "bentgrass",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.14,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.26,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "27": {
+      "event_id": 27,
+      "event_name": "FedEx St. Jude Championship",
+      "course_name": "TPC Southwind",
+      "par": 70,
+      "yardage": 7244,
+      "rough": 1.04,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "28": {
+      "event_id": 28,
+      "event_name": "BMW Championship",
+      "course_name": "Bellerive Country Club",
+      "par": 72,
+      "yardage": 7614,
+      "rough": 1.1,
+      "difficulty": "hard",
+      "greens": "bentgrass",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.14,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.28,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "30": {
+      "event_id": 30,
+      "event_name": "John Deere Classic",
+      "course_name": "TPC Deere Run",
+      "par": 71,
+      "yardage": 7415,
+      "rough": 1.0,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "32": {
+      "event_id": 32,
+      "event_name": "RBC Canadian Open",
+      "course_name": "TPC Toronto at Osprey Valley",
+      "par": 71,
+      "yardage": 7397,
+      "rough": 1.02,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "34": {
+      "event_id": 34,
+      "event_name": "Travelers Championship",
+      "course_name": "TPC River Highlands",
+      "par": 70,
+      "yardage": 6820,
+      "rough": 0.95,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "60": {
+      "event_id": 60,
+      "event_name": "TOUR Championship",
+      "course_name": "East Lake Golf Club",
+      "par": 71,
+      "yardage": 7346,
+      "rough": 1.08,
+      "difficulty": "hard",
+      "greens": "bentgrass",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.16,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.24,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.14
+      }
+    },
+    "457": {
+      "event_id": 457,
+      "event_name": "World Wide Technology Championship",
+      "course_name": "El Cardonal at Diamante",
+      "par": 72,
+      "yardage": 7434,
+      "rough": 0.85,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "478": {
+      "event_id": 478,
+      "event_name": "Hero World Challenge",
+      "course_name": "Albany GC",
+      "par": 72,
+      "yardage": 7286,
+      "rough": 0.8,
+      "difficulty": "easy",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "480": {
+      "event_id": 480,
+      "event_name": "Truist Championship",
+      "course_name": "Quail Hollow Club",
+      "par": 72,
+      "yardage": 7535,
+      "rough": 1.06,
+      "difficulty": "hard",
+      "greens": "bentgrass",
+      "stimpmeter": 12.5,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.16,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.24,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.14
+      }
+    },
+    "483": {
+      "event_id": 483,
+      "event_name": "Puerto Rico Open",
+      "course_name": "Grand Reserve Golf Club",
+      "par": 72,
+      "yardage": 7468,
+      "rough": 0.92,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "493": {
+      "event_id": 493,
+      "event_name": "The RSM Classic",
+      "course_name": "Sea Island Golf Club",
+      "par": 72,
+      "yardage": 7460,
+      "rough": 0.95,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "500": {
+      "event_id": 500,
+      "event_name": "Presidents Cup",
+      "course_name": "Medinah Country Club (No. 3)",
+      "par": 72,
+      "yardage": 7621,
+      "rough": 1.1,
+      "difficulty": "hard",
+      "greens": "bentgrass",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.14,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.28,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "518": {
+      "event_id": 518,
+      "event_name": "ISCO Championship",
+      "course_name": "Hurstbourne Country Club",
+      "par": 72,
+      "yardage": 7336,
+      "rough": 1.02,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "522": {
+      "event_id": 522,
+      "event_name": "Corales Puntacana Championship",
+      "course_name": "Puntacana Resort & Club",
+      "par": 72,
+      "yardage": 7408,
+      "rough": 0.88,
+      "difficulty": "easy",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "524": {
+      "event_id": 524,
+      "event_name": "Rocket Classic",
+      "course_name": "Detroit Golf Club",
+      "par": 70,
+      "yardage": 6972,
+      "rough": 0.98,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.12
+      }
+    },
+    "525": {
+      "event_id": 525,
+      "event_name": "3M Open",
+      "course_name": "TPC Twin Cities",
+      "par": 71,
+      "yardage": 7327,
+      "rough": 1.0,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "527": {
+      "event_id": 527,
+      "event_name": "Baycurrent Classic",
+      "course_name": "Yokohama Country Club",
+      "par": 72,
+      "yardage": 7327,
+      "rough": 1.02,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "528": {
+      "event_id": 528,
+      "event_name": "Butterfield Bermuda Championship",
+      "course_name": "Port Royal Golf Course",
+      "par": 71,
+      "yardage": 6880,
+      "rough": 0.85,
+      "difficulty": "easy",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.24,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.1,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "540": {
+      "event_id": 540,
+      "event_name": "VidantaWorld Mexico Open",
+      "course_name": "Vidanta Vallarta",
+      "par": 72,
+      "yardage": 7343,
+      "rough": 0.86,
+      "difficulty": "easy",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.16,
+        "100_150_fw": 0.22,
+        "150_200_fw": 0.22,
+        "over_200_fw": 0.12,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "541": {
+      "event_id": 541,
+      "event_name": "Genesis Scottish Open",
+      "course_name": "The Renaissance Club",
+      "par": 72,
+      "yardage": 7427,
+      "rough": 1.15,
+      "difficulty": "hard",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.1,
+        "100_150_fw": 0.18,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.2,
+        "under_150_rgh": 0.14,
+        "over_150_rgh": 0.14
+      }
+    },
+    "553": {
+      "event_id": 553,
+      "event_name": "ONEflight Myrtle Beach Classic",
+      "course_name": "Dunes Golf and Beach Club",
+      "par": 72,
+      "yardage": 7335,
+      "rough": 0.92,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "554": {
+      "event_id": 554,
+      "event_name": "Bank of Utah Championship",
+      "course_name": "Black Desert Resort",
+      "par": 72,
+      "yardage": 7265,
+      "rough": 0.92,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "556": {
+      "event_id": 556,
+      "event_name": "Miami Championship",
+      "course_name": "Trump National Doral (Blue Monster)",
+      "par": 72,
+      "yardage": 7540,
+      "rough": 1.08,
+      "difficulty": "hard",
+      "greens": "bermuda",
+      "stimpmeter": 13.0,
+      "w": {
+        "50_100_fw": 0.08,
+        "100_150_fw": 0.14,
+        "150_200_fw": 0.26,
+        "over_200_fw": 0.26,
+        "under_150_rgh": 0.1,
+        "over_150_rgh": 0.16
+      }
+    },
+    "557": {
+      "event_id": 557,
+      "event_name": "Biltmore Championship Asheville",
+      "course_name": "The Cliffs at Walnut Cove",
+      "par": 71,
+      "yardage": 7362,
+      "rough": 1.04,
+      "difficulty": "moderate",
+      "greens": "bentgrass",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    },
+    "558": {
+      "event_id": 558,
+      "event_name": "Good Good Championship",
+      "course_name": "Omni Barton Creek Resort & Spa",
+      "par": 72,
+      "yardage": 7440,
+      "rough": 0.92,
+      "difficulty": "moderate",
+      "greens": "bermuda",
+      "stimpmeter": 12.0,
+      "w": {
+        "50_100_fw": 0.14,
+        "100_150_fw": 0.2,
+        "150_200_fw": 0.24,
+        "over_200_fw": 0.18,
+        "under_150_rgh": 0.12,
+        "over_150_rgh": 0.12
+      }
+    }
+  }
+}

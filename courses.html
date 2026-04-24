@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Courses — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* ===== COURSES PAGE ===== */
+    .courses-toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-5);
+    }
+
+    .courses-search {
+      position: relative;
+    }
+
+    .courses-search input {
+      width: 100%;
+      padding: 9px 36px 9px 32px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color var(--dur-fast) var(--ease-out);
+    }
+
+    .courses-search input:focus {
+      border-color: var(--border-gold);
+      box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12);
+    }
+
+    .courses-search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .courses-sort {
+      padding: 9px 14px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .courses-count {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-wide);
+      white-space: nowrap;
+    }
+
+    .courses-count strong { color: var(--gold-300); }
+
+    .filter-chip-row {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+      align-items: center;
+    }
+
+    .filter-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: var(--space-2);
+    }
+
+    .filter-chip {
+      padding: 6px 12px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-full);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+      font-family: var(--font-body);
+    }
+
+    .filter-chip:hover {
+      background: var(--surface-5);
+      color: var(--text-primary);
+    }
+
+    .filter-chip.active {
+      background: var(--gold-900);
+      border-color: var(--gold-700);
+      color: var(--gold-300);
+    }
+
+    .filter-chip .chip-count {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      margin-left: 4px;
+    }
+
+    .filter-chip.active .chip-count { color: var(--gold-500); }
+
+    /* ===== COURSE CARD GRID ===== */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-12);
+    }
+
+    .course-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      transition: all var(--dur-base) var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card:hover {
+      border-color: var(--border-gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold-sm);
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold-500), transparent);
+      opacity: 0;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+
+    .course-card:hover::before { opacity: 1; }
+
+    .course-event {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .course-name {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+      line-height: var(--lh-snug);
+    }
+
+    .course-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .course-stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .course-stat-value {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .course-tags {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+    }
+
+    .course-tag {
+      padding: 3px 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 500;
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-body);
+    }
+
+    .course-tag.difficulty-easy       { border-color: rgba(74,222,128,0.3); color: var(--positive); }
+    .course-tag.difficulty-moderate   { border-color: var(--border-base); color: var(--text-body); }
+    .course-tag.difficulty-hard       { border-color: rgba(251,191,36,0.35); color: var(--warning); }
+    .course-tag.difficulty-very_hard,
+    .course-tag.difficulty-elite      { border-color: rgba(248,113,113,0.35); color: var(--negative); }
+
+    /* Approach profile bar */
+    .approach-profile {
+      margin-top: var(--space-3);
+    }
+
+    .approach-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .approach-type {
+      color: var(--gold-500);
+      font-weight: 600;
+    }
+
+    .approach-bar {
+      display: flex;
+      height: 10px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .approach-seg {
+      height: 100%;
+      transition: filter var(--dur-fast) var(--ease-out);
+      position: relative;
+    }
+
+    .approach-seg:hover { filter: brightness(1.3); }
+
+    /* Fairway buckets = gold shades (ascending short→long) */
+    .approach-seg.seg-50_100_fw   { background: var(--gold-700); }
+    .approach-seg.seg-100_150_fw  { background: var(--gold-600); }
+    .approach-seg.seg-150_200_fw  { background: var(--gold-500); }
+    .approach-seg.seg-over_200_fw { background: var(--gold-400); }
+
+    /* Rough buckets = red-tinted */
+    .approach-seg.seg-under_150_rgh { background: rgba(248,113,113,0.45); }
+    .approach-seg.seg-over_150_rgh  { background: rgba(248,113,113,0.70); }
+
+    .approach-legend {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+    }
+
+    .empty-grid {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--space-12);
+      color: var(--text-muted);
+      background: var(--surface-2);
+      border: 1px dashed var(--border-base);
+      border-radius: var(--radius-lg);
+    }
+
+    @media (max-width: 640px) {
+      .courses-toolbar {
+        grid-template-columns: 1fr;
+      }
+      .courses-count { text-align: left; }
+      .course-stats { gap: var(--space-2); }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <header class="page-head">
+      <div class="eyebrow">The Library</div>
+      <h1 class="h-1">Course DNA</h1>
+      <p class="lede" style="max-width: 62ch; margin-top: var(--space-3);">
+        Profiles for every PGA Tour venue the BBI composite knows about. Approach-shot bucket weights are calibrated from the historical shot distribution and SG correlation at each course — they drive the <strong>Course Fit</strong> factor in every weekly ranking.
+      </p>
+    </header>
+
+    <!-- Toolbar: search + sort + count -->
+    <div class="courses-toolbar">
+      <div class="courses-search">
+        <svg class="courses-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" id="coursesSearch" placeholder="Search event or course name" aria-label="Search courses" autocomplete="off"/>
+      </div>
+      <select class="courses-sort" id="coursesSort" aria-label="Sort courses">
+        <option value="calendar">Calendar order</option>
+        <option value="yardage_desc">Longest → shortest</option>
+        <option value="yardage_asc">Shortest → longest</option>
+        <option value="stimp_desc">Fastest greens</option>
+        <option value="rough_desc">Thickest rough</option>
+        <option value="name_asc">Course name A→Z</option>
+      </select>
+      <div class="courses-count" id="coursesCount">— of — courses</div>
+    </div>
+
+    <!-- Filter chip rows -->
+    <div class="filter-chip-row" id="difficultyChips">
+      <span class="filter-label">Difficulty</span>
+    </div>
+    <div class="filter-chip-row" id="greensChips">
+      <span class="filter-label">Greens</span>
+    </div>
+
+    <!-- Card grid -->
+    <div class="courses-grid" id="coursesGrid"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('courses.html');
+      await BBI.renderFooter();
+
+      const library = await BBI.data.load(BBI.data.paths.courseLibrary);
+      if (!library || !library.profiles) {
+        $('#coursesGrid').innerHTML = `
+          <div class="empty-grid">
+            <div style="font-size: var(--fs-2xl); margin-bottom: var(--space-3);">○</div>
+            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-2);">Course library unavailable</div>
+            <div style="font-size: var(--fs-sm);">Check that /data/course_library.json is published.</div>
+          </div>
+        `;
+        return;
+      }
+
+      // Normalize: turn profiles map into an array
+      const courses = Object.entries(library.profiles).map(([eid, c]) => ({
+        ...c,
+        event_id: parseInt(eid, 10)
+      }));
+
+      // State
+      const state = {
+        search: '',
+        difficulty: 'all',
+        greens: 'all',
+        sort: 'calendar'
+      };
+
+      // Build filter chips from actual data
+      const difficulties = ['all', ...Array.from(new Set(courses.map(c => c.difficulty))).sort()];
+      const greensTypes = ['all', ...Array.from(new Set(courses.map(c => c.greens))).sort()];
+
+      const buildChips = (containerId, values, stateKey) => {
+        const container = document.getElementById(containerId);
+        const label = container.querySelector('.filter-label');
+        container.innerHTML = label.outerHTML;
+        values.forEach(v => {
+          const count = v === 'all' ? courses.length : courses.filter(c => c[stateKey] === v).length;
+          const chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'filter-chip' + (v === state[stateKey] ? ' active' : '');
+          chip.dataset.value = v;
+          chip.innerHTML = `${prettyLabel(v)} <span class="chip-count">${count}</span>`;
+          chip.addEventListener('click', () => {
+            state[stateKey] = v;
+            container.querySelectorAll('.filter-chip').forEach(c => c.classList.toggle('active', c.dataset.value === v));
+            render();
+          });
+          container.appendChild(chip);
+        });
+      };
+
+      const prettyLabel = (v) => {
+        if (v === 'all') return 'All';
+        return String(v).replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      };
+
+      const approachType = (w) => {
+        // Identify the dominant bucket
+        if (!w) return '';
+        const entries = [
+          ['50-100 fw',  w['50_100_fw']],
+          ['100-150 fw', w['100_150_fw']],
+          ['150-200 fw', w['150_200_fw']],
+          ['200+ fw',    w['over_200_fw']],
+          ['<150 rgh',   w['under_150_rgh']],
+          ['>150 rgh',   w['over_150_rgh']]
+        ];
+        const top = entries.reduce((a, b) => (b[1] || 0) > (a[1] || 0) ? b : a);
+        const roughTotal = (w.under_150_rgh || 0) + (w.over_150_rgh || 0);
+        if (roughTotal > 0.30) return 'rough-penalty heavy';
+        if (w.over_200_fw > 0.25) return 'long-iron heavy';
+        if (w['50_100_fw'] > 0.22) return 'wedge-friendly';
+        if (w['150_200_fw'] > 0.25) return 'mid-iron heavy';
+        return `${top[0]} dominant`;
+      };
+
+      const cardHtml = (c) => {
+        const w = c.w || {};
+        const segs = [
+          ['50_100_fw',   'fwy 50-100',    w['50_100_fw']],
+          ['100_150_fw',  'fwy 100-150',   w['100_150_fw']],
+          ['150_200_fw',  'fwy 150-200',   w['150_200_fw']],
+          ['over_200_fw', 'fwy 200+',      w['over_200_fw']],
+          ['under_150_rgh','rgh <150',     w['under_150_rgh']],
+          ['over_150_rgh', 'rgh >150',     w['over_150_rgh']]
+        ];
+        const difficultyLbl = prettyLabel(c.difficulty).toLowerCase();
+        const greensLbl = prettyLabel(c.greens);
+        return `
+          <article class="course-card" data-event-id="${c.event_id}">
+            <div class="course-event">${c.event_name || ''}</div>
+            <h3 class="course-name">${c.course_name || '—'}</h3>
+            <div class="course-stats">
+              <div>
+                <div class="course-stat-label">Par</div>
+                <div class="course-stat-value">${c.par ?? '—'}</div>
+              </div>
+              <div>
+                <div class="course-stat-label">Yardage</div>
+                <div class="course-stat-value">${c.yardage ? c.yardage.toLocaleString() : '—'}</div>
+              </div>
+              <div>
+                <div class="course-stat-label">Stimp</div>
+                <div class="course-stat-value">${c.stimpmeter != null ? c.stimpmeter.toFixed(1) : '—'}</div>
+              </div>
+            </div>
+            <div class="course-tags">
+              <span class="course-tag difficulty-${c.difficulty}">${difficultyLbl}</span>
+              <span class="course-tag">${greensLbl}</span>
+              <span class="course-tag">rough ${c.rough?.toFixed(2) ?? '—'}×</span>
+            </div>
+            <div class="approach-profile">
+              <div class="approach-label">
+                <span>Approach profile</span>
+                <span class="approach-type">${approachType(w)}</span>
+              </div>
+              <div class="approach-bar" role="img" aria-label="Approach shot bucket weights">
+                ${segs.map(([key, lbl, val]) => `
+                  <div class="approach-seg seg-${key}" style="width: ${(val || 0) * 100}%;" title="${lbl}: ${fmt.num((val || 0) * 100, 0)}%"></div>
+                `).join('')}
+              </div>
+              <div class="approach-legend">
+                <span>wedge ←</span>
+                <span>→ long iron ← rough →</span>
+              </div>
+            </div>
+          </article>
+        `;
+      };
+
+      const applyFilters = () => {
+        const q = state.search.trim().toLowerCase();
+        let list = courses.filter(c => {
+          if (state.difficulty !== 'all' && c.difficulty !== state.difficulty) return false;
+          if (state.greens !== 'all' && c.greens !== state.greens) return false;
+          if (q && !(`${c.event_name} ${c.course_name}`.toLowerCase().includes(q))) return false;
+          return true;
+        });
+
+        const sorts = {
+          calendar:     (a, b) => a.event_id - b.event_id,
+          yardage_desc: (a, b) => (b.yardage || 0) - (a.yardage || 0),
+          yardage_asc:  (a, b) => (a.yardage || 0) - (b.yardage || 0),
+          stimp_desc:   (a, b) => (b.stimpmeter || 0) - (a.stimpmeter || 0),
+          rough_desc:   (a, b) => (b.rough || 0) - (a.rough || 0),
+          name_asc:     (a, b) => (a.course_name || '').localeCompare(b.course_name || '')
+        };
+        list.sort(sorts[state.sort] || sorts.calendar);
+        return list;
+      };
+
+      const render = () => {
+        const list = applyFilters();
+        const grid = $('#coursesGrid');
+        if (!list.length) {
+          grid.innerHTML = `
+            <div class="empty-grid">
+              <div style="font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-2);">No courses match the filters</div>
+              <div style="font-size: var(--fs-sm);">Try clearing search or picking "All" in the chips above.</div>
+            </div>
+          `;
+        } else {
+          grid.innerHTML = list.map(cardHtml).join('');
+        }
+        $('#coursesCount').innerHTML = `<strong>${list.length}</strong> of ${courses.length} courses`;
+      };
+
+      // Initial chip builds
+      buildChips('difficultyChips', difficulties, 'difficulty');
+      buildChips('greensChips', greensTypes, 'greens');
+
+      // Wire search + sort
+      const searchInput = $('#coursesSearch');
+      let debounceT;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(debounceT);
+        debounceT = setTimeout(() => { state.search = searchInput.value; render(); }, 80);
+      });
+      $('#coursesSort').addEventListener('change', (e) => { state.sort = e.target.value; render(); });
+
+      render();
+    });
+  </script>
+</body>
+</html>

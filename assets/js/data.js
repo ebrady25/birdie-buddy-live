@@ -54,7 +54,8 @@ window.BBI = window.BBI || {};
       playerCourseHistory: './data/player_course_history.json',
       playerRecentForm: './data/player_recent_form.json',
       playerPressureMetrics: './data/player_pressure_metrics.json',
-      tourSgBaselines: './data/tour_sg_baselines.json'
+      tourSgBaselines: './data/tour_sg_baselines.json',
+      courseLibrary:  './data/course_library.json'
     }
   };
 
@@ -108,6 +109,7 @@ window.BBI = window.BBI || {};
       ['simulator.html', 'Simulator'],
       ['market.html', 'Market'],
       ['live.html', 'Live'],
+      ['courses.html', 'Courses'],
       ['archive.html', 'Archive'],
       ['changelog.html', 'Changelog']
     ];
