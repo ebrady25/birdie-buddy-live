@@ -1,6 +1,42 @@
 {
-  "updated_at": "2026-04-22",
+  "updated_at": "2026-04-24",
   "entries": [
+    {
+      "date": "2026-04-24",
+      "title": "Performance page: per-factor attribution chart",
+      "category": "site",
+      "summary": "New section shows how the 10 BBI factors contributed to each top-10 finisher's score in Week 11 RBC Heritage. Reader can see at a glance whether talent, course fit, or form drove each ranking."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "Archive page: most-recent event flagged",
+      "category": "site",
+      "summary": "Gold-star indicator now highlights the most recent scored event in the 47-event timeline. Week 11 RBC Heritage surfaces at the top of the list."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "Site performance pass",
+      "category": "site",
+      "summary": "Prefetch hints on primary navigation paths; heaviest chart renders deferred past first paint. Faster feel on every page-to-page jump."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "Rankings page typography polish",
+      "category": "site",
+      "summary": "Tighter header hierarchy, tabular numerals on numeric columns, clearer row-hover affordance. No data or behavior changes."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "Week 13 Miami Championship pre-event prep",
+      "category": "content",
+      "summary": "Full briefing for Trump National Doral Blue Monster (par 72, April 30 – May 3): course DNA, winner archetype, three-tier player pool, pipeline notes. The approach game is the single highest-weight factor at Doral."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "ARGUS preflight — 6 DataGolf endpoints probed",
+      "category": "infra",
+      "summary": "Health check on the data feeds Monday's pipeline depends on. Five of six endpoints green; one non-critical endpoint returning 404 is flagged for investigation."
+    },
     {
       "date": "2026-04-22",
       "title": "Site goes live at ebrady25.github.io/birdie-buddy-live",
@@ -11,19 +47,19 @@
       "date": "2026-04-22",
       "title": "Landing page hero: measured-accuracy framing",
       "category": "site",
-      "summary": "Replaced rotating live-edge line with a single durable promise: 'One model. Forty-seven weeks of measured accuracy.' Proof callout cites Week 11 Spearman 0.344. No comparisons, no claims we can't back with data already on the site."
+      "summary": "Replaced rotating live-edge line with a single durable promise: 'One model. Forty-seven weeks of measured accuracy.' Proof callout cites Week 11 Spearman 0.344."
     },
     {
       "date": "2026-04-22",
       "title": "Performance page: Weekly Recaps section",
       "category": "site",
-      "summary": "New expandable cards between the Spearman chart and Shadow Variants. Week 11 RBC Heritage seeded with an honest head-to-head recap — BBI 0.344 vs DG 0.377, Fitzpatrick #3/#4, what we got right, what we missed."
+      "summary": "Expandable cards between the Spearman chart and Shadow Variants. Week 11 RBC Heritage seeded with an honest head-to-head recap."
     },
     {
       "date": "2026-04-22",
       "title": "Shadow variant v8.7-cfgate added to the A/B slate",
       "category": "model",
-      "summary": "Course-fit lifted (+0.02) and a new gating rule caps the SG multiplier at 1.05x for players with fewer than 4 starts at a venue. Targets the Aberg-style Masters over-ranking without punishing true specialists. Runs in shadow only — zero production risk."
+      "summary": "Course-fit lifted (+0.02) and a new gating rule caps the SG multiplier at 1.05x for players with fewer than 4 starts at a venue. Runs in shadow only — zero production risk."
     },
     {
       "date": "2026-04-22",
@@ -35,13 +71,13 @@
       "date": "2026-04-22",
       "title": "Methodology page: plain-English Brier explainer",
       "category": "site",
-      "summary": "Rewrote the Brier score section for golf fans without a stats background. Added a concrete 10%-win example and tightened the surrounding math block. Performance numbers unchanged."
+      "summary": "Rewrote the Brier score section for golf fans without a stats background. Added a concrete 10%-win example."
     },
     {
       "date": "2026-04-22",
       "title": "Methodology page: typography + hierarchy pass",
       "category": "site",
-      "summary": "Refined heading scale, vertical rhythm, and section breaks using design-system tokens only. Cleaner read, no copy changes."
+      "summary": "Refined heading scale, vertical rhythm, and section breaks using design-system tokens only."
     },
     {
       "date": "2026-04-22",
