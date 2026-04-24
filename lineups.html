@@ -273,6 +273,50 @@
         </div>
 
         <div class="toolbar-count"><strong id="lcShown">12</strong> of <strong>12</strong></div>
+
+        <div class="divider-vertical"></div>
+
+        <button type="button" id="dkExportBtn" title="Download visible lineups as a DraftKings-ready CSV"
+                style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 7px 14px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); border: 1px solid var(--gold-500); color: var(--text-on-gold); border-radius: var(--radius-md); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; white-space: nowrap;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download DK CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- DK Export modal -->
+    <div id="dkModal" role="dialog" aria-modal="true" aria-labelledby="dkModalTitle" hidden
+         style="position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(8, 8, 12, 0.72); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: var(--space-5);">
+      <div style="background: var(--surface-3); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: var(--space-6); max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: start; gap: var(--space-4); margin-bottom: var(--space-4);">
+          <div>
+            <div class="eyebrow" style="margin-bottom: var(--space-2);">DraftKings export</div>
+            <h2 id="dkModalTitle" style="font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); line-height: var(--lh-tight);">Ready to upload</h2>
+          </div>
+          <button type="button" id="dkModalClose" aria-label="Close"
+                  style="width: 32px; height: 32px; background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; font-size: 18px;">×</button>
+        </div>
+
+        <div id="dkModalSummary" style="font-size: var(--fs-sm); color: var(--text-body); margin-bottom: var(--space-4); line-height: var(--lh-relaxed);"></div>
+
+        <div style="background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-3); margin-bottom: var(--space-5); max-height: 180px; overflow-y: auto;">
+          <pre id="dkModalPreview" style="font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--text-body); white-space: pre; margin: 0;"></pre>
+        </div>
+
+        <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap;">
+          <button type="button" id="dkDownload" style="flex: 1; min-width: 160px; padding: 10px 16px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); border: 1px solid var(--gold-500); color: var(--text-on-gold); border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            Download .csv
+          </button>
+          <button type="button" id="dkCopy" style="flex: 1; min-width: 160px; padding: 10px 16px; background: var(--surface-2); border: 1px solid var(--border-soft); color: var(--text-body); border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 600; cursor: pointer;">
+            Copy to clipboard
+          </button>
+        </div>
+
+        <div style="font-size: var(--fs-xs); color: var(--text-muted); line-height: var(--lh-relaxed); padding-top: var(--space-4); border-top: 1px solid var(--border-subtle);">
+          <strong style="color: var(--text-body);">How to upload:</strong>
+          Open the contest in DraftKings, choose <em>Upload CSV</em> on the lineup builder, and select this file. If DK can't auto-match a name, you'll get a manual-select prompt for that player. All lineups are validated against the <strong>$50,000 salary cap</strong> client-side before export.
+        </div>
       </div>
     </div>
 
@@ -497,6 +541,110 @@
           sortKey = btn.dataset.sort;
           applySortAndFilter();
         });
+      });
+
+      // ---------- DK CSV EXPORT ----------
+      // Convert "Last, First" (DG format) → "First Last" (DK format)
+      const toDkName = (name) => {
+        if (!name) return '';
+        if (name.includes(',')) {
+          const [last, first] = name.split(',').map(s => s.trim());
+          return `${first} ${last}`;
+        }
+        return name;
+      };
+
+      const currentlyVisibleLineups = () => {
+        let list = enriched.slice();
+        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind);
+        list.sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
+        return list;
+      };
+
+      const buildCsv = (list) => {
+        // DraftKings classic golf format: 6 G columns
+        const header = 'G,G,G,G,G,G';
+        const rows = list.map(l => {
+          const players = (l.players || []).slice(0, 6);
+          // Pad to 6 if needed
+          while (players.length < 6) players.push({ name: '' });
+          return players.map(p => {
+            const n = toDkName(p.name).replace(/,/g, ''); // strip any stray commas so CSV parses
+            return n;
+          }).join(',');
+        });
+        return [header, ...rows].join('\n');
+      };
+
+      // Cap validation — warn if any lineup blows the $50k cap
+      const CAP = 50000;
+      const capWarnings = (list) => list
+        .map((l, i) => ({ i, id: l.lineupId, over: (l.total_salary || 0) - CAP, salary: l.total_salary }))
+        .filter(x => x.over > 0);
+
+      const openModal = () => {
+        const list = currentlyVisibleLineups();
+        if (!list.length) {
+          alert('No lineups to export. Clear any active filters.');
+          return;
+        }
+        const csv = buildCsv(list);
+        const warnings = capWarnings(list);
+
+        const summary = `Exporting <strong>${list.length}</strong> lineup${list.length === 1 ? '' : 's'}` +
+          (activeKind !== 'all' ? ` (filter: <strong>${activeKind}</strong>)` : '') +
+          `. Total players across all rosters: <strong>${list.reduce((s, l) => s + (l.players?.length || 0), 0)}</strong>. ` +
+          (warnings.length
+            ? `<br/><span style="color: var(--negative);"><strong>Warning:</strong> ${warnings.length} lineup${warnings.length === 1 ? '' : 's'} over $50k cap (${warnings.map(w => w.id + ' $' + fmt.int(w.salary)).join(', ')}). DK will reject these on upload.</span>`
+            : `All lineups validate under the $50,000 cap.`);
+
+        $('#dkModalSummary').innerHTML = summary;
+        $('#dkModalPreview').textContent = csv;
+        $('#dkModal').removeAttribute('hidden');
+        $('#dkModal').dataset.csv = csv;
+      };
+
+      const closeModal = () => $('#dkModal').setAttribute('hidden', '');
+
+      const downloadCsv = () => {
+        const csv = $('#dkModal').dataset.csv || '';
+        const blob = new Blob([csv + '\n'], { type: 'text/csv;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const now = new Date();
+        const stamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+        const eventSlug = (dfs?.event || 'event').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        const filename = `bbi-dk-lineups_${eventSlug}_${stamp}.csv`;
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+
+      const copyToClipboard = async () => {
+        const csv = $('#dkModal').dataset.csv || '';
+        try {
+          await navigator.clipboard.writeText(csv);
+          const btn = $('#dkCopy');
+          const orig = btn.textContent;
+          btn.textContent = 'Copied ✓';
+          setTimeout(() => { btn.textContent = orig; }, 1400);
+        } catch (e) {
+          alert('Clipboard access blocked. Use the download button instead.');
+        }
+      };
+
+      $('#dkExportBtn').addEventListener('click', openModal);
+      $('#dkModalClose').addEventListener('click', closeModal);
+      $('#dkDownload').addEventListener('click', downloadCsv);
+      $('#dkCopy').addEventListener('click', copyToClipboard);
+      $('#dkModal').addEventListener('click', (e) => {
+        if (e.target.id === 'dkModal') closeModal(); // click backdrop closes
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !$('#dkModal').hasAttribute('hidden')) closeModal();
       });
 
       // Wire kind chips
