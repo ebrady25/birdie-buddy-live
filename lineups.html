@@ -415,7 +415,7 @@
         const playersHTML = l.players.map((p, i) => `
           <div class="lineup-player">
             <span class="lp-rank">${i+1}</span>
-            <span class="lp-name"><span class="dot"></span>${fmt.abbrevName(p.name)}</span>
+            <span class="lp-name"><span class="dot"></span>${playerLink(p.dg_id, fmt.abbrevName(p.name))}</span>
             <span class="lp-tier ${tierSlug(p.tier)}">${tierAbbrev(p.tier)}</span>
             <span class="lp-salary">$${(p.salary/1000).toFixed(1)}k</span>
             <span class="lp-zeus">${fmt.num(p.zeus_dfs, 1)}</span>
@@ -510,10 +510,18 @@
       });
 
       // ---------- EXPOSURE ----------
+      // Build name -> dg_id map from all lineup players
+      const nameToId = {};
+      (dfs?.lineups || []).forEach(l => {
+        l.players.forEach(p => {
+          nameToId[p.name] = p.dg_id;
+        });
+      });
+
       const exposure = dfs?.exposure || {};
       const projOwn = dfs?.hermes_own_projections || {};
       const exposureList = Object.entries(exposure).map(([name, pct]) => ({
-        name, pct,
+        name, pct, dg_id: nameToId[name],
         projected: projOwn[name] || 0,
         delta: pct - (projOwn[name] || 0)
       }));
@@ -527,7 +535,7 @@
         const widthPct = (e.pct / 100) * 100;
         return `
           <div class="exposure-row" data-reveal data-delay="${Math.min(6, Math.floor(i/3)+1)}">
-            <div class="exposure-name">${fmt.abbrevName(e.name)}</div>
+            <div class="exposure-name">${playerLink(e.dg_id, fmt.abbrevName(e.name))}</div>
             <div class="exposure-bar-track">
               <div class="exposure-bar-fill bar-fill" data-to="${widthPct}" style="width:0%"></div>
             </div>

@@ -623,7 +623,7 @@
           const otherPct = Math.max(0, 100 - (talentPct + cfPct + formPct + csPct + floorPct + ceilPct));
           return `
             <tr>
-              <td><span class="attr-name">${p.name}</span></td>
+              <td><span class="attr-name">${playerLink(p.dg_id, p.name)}</span></td>
               <td class="num">#${p.finish_pos}</td>
               <td class="num">#${p.bbi_rank}</td>
               <td class="attr-pct">${talentPct.toFixed(1)}%</td>

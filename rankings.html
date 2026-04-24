@@ -92,6 +92,10 @@
 
         <div class="divider-vertical"></div>
 
+        <input type="search" id="rankSearch" placeholder="Search player…" style="padding: 5px 10px; font-size: var(--fs-xs); border-radius: var(--radius-md); background: var(--surface-3); color: var(--text-body); border: 1px solid var(--border-soft); transition: all var(--dur-fast); min-width: 160px;" />
+
+        <div class="divider-vertical"></div>
+
         <div class="seg" role="radiogroup" aria-label="BBI Mode">
           <button class="active" data-mode="pool">Pool</button>
           <button data-mode="dfs">DFS</button>
@@ -212,6 +216,7 @@
         const mcColor = p.make_cut >= 80 ? 'positive' : (p.make_cut >= 60 ? '' : 'negative');
         const ownColor = p.proj_own > 20 ? 'negative' : (p.proj_own > 10 ? 'gold-bright' : 'positive');
         const courseClass = p.course_hist_sg > 0 ? 'positive' : (p.course_hist_sg < 0 ? 'negative' : 'dimmed');
+        const playerLinkHtml = playerLink(p.dg_id, fmt.abbrevName(p.name));
         return `
           <tr data-row
               data-rank="${i+1}"
@@ -236,7 +241,7 @@
             <td class="sticky-col">
               <span class="player-name">
                 <button class="star-btn ${bbiBookmarks.has(p.dg_id) ? 'active' : ''}" aria-label="Bookmark" data-star="${p.dg_id}">★</button>
-                <strong>${fmt.abbrevName(p.name)}</strong>
+                <strong>${playerLinkHtml}</strong>
               </span>
             </td>
             <td><span class="${tierClass(p.tier)}">${(p.tier || 'NEUTRAL').slice(0, 4)}</span></td>
@@ -391,25 +396,41 @@
         render();
       }));
 
-      // Chips filter
-      makeChips($('#tierChips'), { onChange: updateShown });
-      // Keyboard search already wired in core.js; hook its input to filter rows
-      const searchInput = document.querySelector('[data-search]');
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const q = searchInput.value.trim().toLowerCase();
-          $$('tr[data-row]', rb).forEach(row => {
-            if (!q) { row.style.display = ''; }
-            else {
-              const name = (row.dataset.name || '').toLowerCase();
-              row.style.display = name.includes(q) ? '' : 'none';
-              const ex = row.nextElementSibling;
-              if (ex && ex.classList.contains('table-row-expand') && row.style.display === 'none') ex.style.display = 'none';
-            }
-          });
-          updateShown();
+      // Chips filter + search with AND logic
+      const rankSearch = $('#rankSearch');
+
+      const applyFilters = () => {
+        const searchQ = rankSearch.value.trim().toLowerCase();
+        const activeTier = document.querySelector('[data-chips] [aria-pressed="true"]')?.dataset.filter;
+
+        $$('tr[data-row]', rb).forEach(row => {
+          const name = (row.dataset.name || '').toLowerCase();
+          const tier = row.dataset.tier || 'NEUTRAL';
+
+          // Search match (if search has text)
+          const searchMatch = !searchQ || name.includes(searchQ);
+
+          // Tier match (unless "all" is selected)
+          const tierMatch = activeTier === 'all' || tier === activeTier;
+
+          // Show only if both conditions met (AND logic)
+          const shouldShow = searchMatch && tierMatch;
+          row.style.display = shouldShow ? '' : 'none';
+
+          // Hide expansion row if parent is hidden
+          const ex = row.nextElementSibling;
+          if (ex && ex.classList.contains('table-row-expand')) {
+            ex.style.display = shouldShow ? '' : 'none';
+          }
         });
-      }
+        updateShown();
+      };
+
+      // Listen to search input
+      rankSearch.addEventListener('input', applyFilters);
+
+      // Wire chips with combined onChange handler
+      makeChips($('#tierChips'), { onChange: applyFilters });
 
       render();
 

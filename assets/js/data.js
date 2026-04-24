@@ -49,7 +49,8 @@ window.BBI = window.BBI || {};
       nikeBankroll:   './data/nike_bankroll.json',
       changelog:      './data/changelog.json',
       performanceWeeklyRecaps: './data/performance_weekly_recaps.json',
-      performanceAttribution: './data/performance_attribution.json'
+      performanceAttribution: './data/performance_attribution.json',
+      playerLookup:   './data/player_lookup.json'
     }
   };
 

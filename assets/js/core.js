@@ -130,6 +130,32 @@
     return map[t] || 'tier tier-neutral';
   };
 
+  // ---------- player link helper ----------
+  window.playerLink = (idOrObj, displayName) => {
+    // Accept either a player object ({dg_id, name, slug?}) or (id, name) args
+    let id, name, slug;
+
+    if (typeof idOrObj === 'object' && idOrObj !== null) {
+      // Object form: {dg_id, name, slug?}
+      id = idOrObj.dg_id;
+      name = idOrObj.name || displayName;
+      slug = idOrObj.slug;
+    } else {
+      // (id, name) form
+      id = idOrObj;
+      name = displayName;
+      slug = undefined;
+    }
+
+    // If no id, return just the name text
+    if (id == null) return String(name || '');
+
+    // Build URL with id or slug
+    const url = slug ? `player.html?slug=${encodeURIComponent(slug)}` : `player.html?id=${encodeURIComponent(id)}`;
+
+    return `<a href="${url}" class="player-link">${name}</a>`;
+  };
+
   // ---------- boot ----------
   document.addEventListener('DOMContentLoaded', () => {
     initNav();

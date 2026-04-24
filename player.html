@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Player Profile — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* ===== PLAYER PROFILE PAGE ===== */
+
+    .player-header {
+      display: flex;
+      gap: var(--space-6);
+      align-items: flex-start;
+      margin-bottom: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .player-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .player-headshot {
+      width: 100px;
+      height: 100px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, var(--gold-600) 0%, var(--gold-700) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--text-on-gold);
+      flex-shrink: 0;
+    }
+
+    .player-info {
+      flex: 1;
+    }
+
+    .player-name-section {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .player-full-name {
+      font-size: var(--fs-4xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: var(--lh-tight);
+      margin: 0;
+    }
+
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+    }
+
+    .tier-badge.specialist { background: rgba(212, 168, 67, 0.1); border-color: var(--gold-700); color: var(--gold-300); }
+    .tier-badge.comfortable { background: rgba(74, 222, 128, 0.1); border-color: var(--positive-deep); color: var(--positive); }
+    .tier-badge.neutral { background: var(--surface-3); border-color: var(--border-base); color: var(--text-muted); }
+    .tier-badge.struggle { background: rgba(248, 113, 113, 0.1); border-color: var(--negative-deep); color: var(--negative); }
+
+    .player-meta-row {
+      display: flex;
+      gap: var(--space-6);
+      font-size: var(--fs-md);
+      color: var(--text-body);
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .meta-label {
+      color: var(--text-muted);
+      font-size: var(--fs-xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ===== EVENT SNAPSHOT ===== */
+    .snapshot-card {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.06) 0%, transparent 45%), var(--surface-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .snapshot-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-500), transparent);
+      opacity: 0.6;
+    }
+
+    .snapshot-head {
+      margin-bottom: var(--space-5);
+    }
+
+    .snapshot-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .snapshot-rank {
+      font-size: var(--fs-5xl);
+      font-weight: 700;
+      color: var(--gold-300);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+      margin-bottom: var(--space-2);
+    }
+
+    .snapshot-score {
+      font-family: var(--font-mono);
+      font-size: var(--fs-lg);
+      color: var(--text-body);
+      margin-bottom: var(--space-4);
+    }
+
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .prob-cell {
+      background: var(--surface-2);
+      border: 1px solid var(--border-base);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+      text-align: center;
+    }
+
+    .prob-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .prob-value {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .snapshot-narrative {
+      margin-top: var(--space-5);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--border-soft);
+      font-size: var(--fs-md);
+      color: var(--text-body);
+      line-height: var(--lh-relaxed);
+    }
+
+    /* ===== FACTOR DECOMPOSITION ===== */
+    .factor-chart-wrapper {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    .factor-chart-head {
+      margin-bottom: var(--space-5);
+    }
+
+    .factor-chart-title {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .factor-chart-caption {
+      font-size: var(--fs-md);
+      color: var(--text-body);
+    }
+
+    .factor-bar-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .factor-label {
+      width: 100px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--text-body);
+      text-align: right;
+    }
+
+    .factor-bar-container {
+      flex: 1;
+      height: 24px;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .factor-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-600) 0%, var(--gold-300) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: var(--space-2);
+      transition: width var(--dur-base) var(--ease-out);
+    }
+
+    .factor-pct {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      color: var(--text-on-gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ===== COURSE HISTORY TABLE ===== */
+    .section-title {
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .section-subtitle {
+      font-size: var(--fs-md);
+      color: var(--text-body);
+      margin-bottom: var(--space-5);
+    }
+
+    .table-wrap {
+      margin-bottom: var(--space-8);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      overflow: hidden;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-xs);
+    }
+
+    .table th {
+      background: var(--surface-2);
+      padding: var(--space-3) var(--space-2);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      text-align: left;
+      border-bottom: 1px solid var(--border-base);
+    }
+
+    .table td {
+      padding: var(--space-3) var(--space-2);
+      border-bottom: 1px solid var(--border-soft);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .table tbody tr:hover {
+      background: var(--surface-5);
+    }
+
+    .table .num {
+      text-align: right;
+      font-family: var(--font-mono);
+    }
+
+    .table .positive {
+      color: var(--positive);
+    }
+
+    .table .negative {
+      color: var(--negative);
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-12);
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: var(--fs-5xl);
+      margin-bottom: var(--space-4);
+    }
+
+    .empty-heading {
+      font-size: var(--fs-xl);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .empty-text {
+      font-size: var(--fs-md);
+      color: var(--text-body);
+      margin-bottom: var(--space-6);
+      max-width: 50ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-browse {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%);
+      color: var(--text-on-gold);
+      border: 1px solid var(--gold-500);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: var(--fs-md);
+      text-decoration: none;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+
+    .btn-browse:hover {
+      background: linear-gradient(180deg, var(--gold-300) 0%, var(--gold-500) 100%);
+      border-color: var(--gold-400);
+      transform: translateY(-1px);
+    }
+
+    /* ===== MARKET POSITIONING ===== */
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .market-card {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+
+    .market-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .market-value {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 768px) {
+      .player-full-name { font-size: var(--fs-3xl); }
+      .snapshot-rank { font-size: var(--fs-4xl); }
+      .factor-label { width: 90px; font-size: var(--fs-2xs); }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <div id="playerContent"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('player.html');
+      await BBI.renderFooter();
+
+      const mount = $('#playerContent');
+
+      // Parse URL params: ?id=18417 or ?slug=scheffler-scottie
+      const params = new URLSearchParams(window.location.search);
+      const dg_id = params.get('id');
+      const slug = params.get('slug');
+
+      // Load rankings
+      const rankings = await BBI.data.load(BBI.data.paths.bbiRankings);
+      const currentEvent = await BBI.data.load(BBI.data.paths.currentEvent);
+      const dfsData = await BBI.data.load(BBI.data.paths.dfsLineups);
+
+      if (!rankings || !rankings.players) {
+        mount.innerHTML = renderEmptyState('Data loading error', 'Unable to load player rankings.');
+        return;
+      }
+
+      // Resolve player from id or slug
+      let player = null;
+      if (dg_id) {
+        player = rankings.players.find(p => String(p.dg_id) === String(dg_id));
+      } else if (slug) {
+        player = rankings.players.find(p => {
+          const playerSlug = p.name.toLowerCase().replace(/\s+/g, '-').replace(',', '');
+          return playerSlug === slug;
+        });
+      }
+
+      if (!player) {
+        mount.innerHTML = renderEmptyState(
+          'Player not found',
+          dg_id || slug
+            ? `Player "${dg_id || slug}" not in the current field.`
+            : 'No player selected. Use the rankings page to browse players.'
+        );
+        return;
+      }
+
+      // Build content
+      const playerRank = rankings.players.findIndex(p => p.dg_id === player.dg_id) + 1;
+      const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData);
+      mount.innerHTML = html;
+    });
+
+    function renderEmptyState(heading, message) {
+      return `
+        <div class="empty-state">
+          <div class="empty-icon">○</div>
+          <div class="empty-heading">${heading}</div>
+          <div class="empty-text">${message}</div>
+          <a href="rankings.html" class="btn-browse">Browse Rankings</a>
+        </div>
+      `;
+    }
+
+    function renderPlayer(player, rank, rankings, currentEvent, dfsData) {
+      const mode = 'pool'; // Default to pool mode
+      const bbi = mode === 'pool' ? player.bbi_pool : player.bbi_dfs;
+      const decomp = mode === 'pool' ? player.pool_decomp : player.dfs_decomp;
+
+      // Find DFS salary/ownership
+      const dfsRecord = dfsData && dfsData.lineups
+        ? dfsData.lineups.flatMap(l => l.lineup || []).find(p => p.dg_id === player.dg_id)
+        : null;
+
+      // Generate narrative from top 2-3 factors
+      const factorEntries = Object.entries(decomp || {})
+        .filter(([k, v]) => k !== 'leverage' && k !== 'contrarian' && v > 0)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3);
+
+      const narrative = factorEntries.length > 0
+        ? `BBI ranks ${player.name.split(',')[1]?.trim() || player.name} #${rank} because ${
+            factorEntries.map(([k, v]) => `${k} (${fmt.num(v, 0)}%)`).join(' and ')
+          } drive the composite at ${rankings.course || 'this venue'}.`
+        : `#${rank} ranking reflects ${bbi?.toFixed(2)} composite score.`;
+
+      const tierClass = (player.tier || 'NEUTRAL').toLowerCase();
+
+      // Course history
+      const courseHistHtml = buildCourseHistory(player);
+
+      // Market positioning
+      const marketHtml = player.salary ? `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Market Positioning</h2>
+            <p class="section-subtitle">DraftKings salary, projected ownership, and implied value.</p>
+          </div>
+          <div class="market-grid">
+            <div class="market-card">
+              <div class="market-label">Salary</div>
+              <div class="market-value">$${(player.salary / 1000).toFixed(1)}k</div>
+            </div>
+            <div class="market-card">
+              <div class="market-label">Proj. Ownership</div>
+              <div class="market-value">${fmt.pct(player.proj_own, 1)}</div>
+            </div>
+            <div class="market-card">
+              <div class="market-label">Implied Value</div>
+              <div class="market-value">${fmt.num(player.value, 2)}</div>
+            </div>
+          </div>
+        </section>
+      ` : '';
+
+      return `
+        <header class="page-head">
+          <div class="eyebrow">Player Profile</div>
+          <h1>Deep Dive</h1>
+        </header>
+
+        <div class="player-header">
+          <div class="player-headshot">
+            ${getInitials(player.name)}
+          </div>
+          <div class="player-info">
+            <div class="player-name-section">
+              <h2 class="player-full-name">${player.name}</h2>
+              <span class="tier-badge ${tierClass}">${player.tier || 'NEUTRAL'}</span>
+            </div>
+            <div class="player-meta-row">
+              ${player.owgr ? `<div class="meta-item"><span class="meta-label">OWGR</span><span class="meta-value">#${player.owgr}</span></div>` : ''}
+              ${player.age ? `<div class="meta-item"><span class="meta-label">Age</span><span class="meta-value">${player.age}</span></div>` : ''}
+              ${player.country ? `<div class="meta-item"><span class="meta-label">Country</span><span class="meta-value">${player.country}</span></div>` : ''}
+            </div>
+          </div>
+        </div>
+
+        <!-- EVENT SNAPSHOT -->
+        <div class="snapshot-card">
+          <div class="snapshot-head">
+            <div class="snapshot-eyebrow">${rankings.event || 'Current Event'}</div>
+            <div class="snapshot-rank">#${rank}</div>
+            <div class="snapshot-score">Composite: ${fmt.num(bbi, 2)}</div>
+          </div>
+          <div class="prob-grid">
+            <div class="prob-cell">
+              <div class="prob-label">Win</div>
+              <div class="prob-value">${fmt.pct(player.win_pct, 1)}</div>
+            </div>
+            <div class="prob-cell">
+              <div class="prob-label">Top 5</div>
+              <div class="prob-value">${fmt.pct(player.top_5, 1)}</div>
+            </div>
+            <div class="prob-cell">
+              <div class="prob-label">Top 10</div>
+              <div class="prob-value">${fmt.pct(player.top_10, 1)}</div>
+            </div>
+            <div class="prob-cell">
+              <div class="prob-label">Top 20</div>
+              <div class="prob-value">${fmt.pct(player.top_20, 1)}</div>
+            </div>
+            <div class="prob-cell">
+              <div class="prob-label">Make Cut</div>
+              <div class="prob-value">${fmt.pct(player.make_cut, 1)}</div>
+            </div>
+          </div>
+          <div class="snapshot-narrative">${narrative}</div>
+        </div>
+
+        <!-- FACTOR DECOMPOSITION -->
+        <div class="factor-chart-wrapper">
+          <div class="factor-chart-head">
+            <h3 class="factor-chart-title">10-Factor Decomposition (${mode.toUpperCase()})</h3>
+            <p class="factor-chart-caption">How each factor contributes to the BBI composite score.</p>
+          </div>
+          <div>
+            ${Object.entries(decomp || {})
+              .map(([factor, pct]) => `
+                <div class="factor-bar-row">
+                  <div class="factor-label">${factor}</div>
+                  <div class="factor-bar-container">
+                    <div class="factor-bar" style="width: ${Math.min(pct, 100)}%">
+                      <span class="factor-pct">${fmt.num(pct, 1)}%</span>
+                    </div>
+                  </div>
+                </div>
+              `)
+              .join('')}
+          </div>
+        </div>
+
+        <!-- COURSE HISTORY -->
+        ${courseHistHtml}
+
+        <!-- MARKET POSITIONING -->
+        ${marketHtml}
+
+        <section class="section" style="margin-bottom: var(--space-12);">
+          <div class="section-head">
+            <h2 class="section-title">View in Rankings</h2>
+          </div>
+          <p style="color: var(--text-body); margin-bottom: var(--space-4);">Browse the full field with detailed comparisons and expansions.</p>
+          <a href="rankings.html" class="btn-browse">Open Rankings</a>
+        </section>
+      `;
+    }
+
+    function buildCourseHistory(player) {
+      if (!player.course_hist_rounds || player.course_hist_rounds === 0) {
+        return `
+          <section class="section">
+            <div class="section-head">
+              <h2 class="section-title">Course History</h2>
+            </div>
+            <p style="color: var(--text-body);">Limited historical starts at this venue.</p>
+          </section>
+        `;
+      }
+
+      return `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Course History</h2>
+            <p class="section-subtitle">${player.course_hist_rounds} rounds played at this venue.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Avg SG</th>
+                  <th>SG: OTT</th>
+                  <th>SG: APP</th>
+                  <th>SG: ARG</th>
+                  <th>SG: Putt</th>
+                  <th>Rounds</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num ${player.course_hist_sg > 0 ? 'positive' : player.course_hist_sg < 0 ? 'negative' : ''}">
+                    ${player.course_hist_sg > 0 ? '+' : ''}${fmt.num(player.course_hist_sg, 2)}
+                  </td>
+                  <td class="num ${player.hist_sg_ott > 0 ? 'positive' : player.hist_sg_ott < 0 ? 'negative' : ''}">
+                    ${player.hist_sg_ott > 0 ? '+' : ''}${fmt.num(player.hist_sg_ott, 2)}
+                  </td>
+                  <td class="num ${player.hist_sg_app > 0 ? 'positive' : player.hist_sg_app < 0 ? 'negative' : ''}">
+                    ${player.hist_sg_app > 0 ? '+' : ''}${fmt.num(player.hist_sg_app, 2)}
+                  </td>
+                  <td class="num ${player.hist_sg_arg > 0 ? 'positive' : player.hist_sg_arg < 0 ? 'negative' : ''}">
+                    ${player.hist_sg_arg > 0 ? '+' : ''}${fmt.num(player.hist_sg_arg, 2)}
+                  </td>
+                  <td class="num ${player.hist_sg_putt > 0 ? 'positive' : player.hist_sg_putt < 0 ? 'negative' : ''}">
+                    ${player.hist_sg_putt > 0 ? '+' : ''}${fmt.num(player.hist_sg_putt, 2)}
+                  </td>
+                  <td class="num">${player.course_hist_rounds}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    }
+
+    function getInitials(name) {
+      if (!name) return '?';
+      const parts = name.split(',').map(p => p.trim());
+      if (parts.length >= 2) {
+        return (parts[1][0] + parts[0][0]).toUpperCase();
+      }
+      return name.split(' ').map(p => p[0]).join('').toUpperCase().slice(0, 2);
+    }
+  </script>
+</body>
+</html>
