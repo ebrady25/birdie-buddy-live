@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Watchlist — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* ===== WATCHLIST PAGE ===== */
+
+    /* Import banner */
+    .wl-import-banner {
+      background: linear-gradient(135deg, rgba(74, 222, 128, 0.08) 0%, var(--surface-3) 60%);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+    }
+    .wl-import-banner strong { color: var(--positive); }
+    .wl-import-banner .icon { color: var(--positive); }
+    .wl-import-banner button {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 2px 6px;
+    }
+    .wl-import-banner button:hover { color: var(--text-primary); }
+
+    /* Toolbar */
+    .wl-toolbar {
+      display: grid;
+      grid-template-columns: auto auto 1fr auto auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-3);
+    }
+
+    @media (max-width: 720px) {
+      .wl-toolbar {
+        grid-template-columns: 1fr 1fr;
+      }
+      .wl-toolbar .count-strip { grid-column: 1 / -1; text-align: left; order: 99; }
+    }
+
+    .wl-select {
+      padding: 8px 12px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-family: var(--font-body);
+      outline: none;
+      cursor: pointer;
+      transition: all var(--dur-fast);
+    }
+    .wl-select:hover { background: var(--surface-5); color: var(--text-primary); }
+
+    .wl-btn {
+      padding: 8px 14px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--dur-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      white-space: nowrap;
+    }
+
+    .wl-btn:hover:not([disabled]) {
+      background: var(--surface-5);
+      color: var(--text-primary);
+    }
+
+    .wl-btn[disabled] { opacity: 0.35; cursor: not-allowed; }
+
+    .wl-btn.primary {
+      background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%);
+      border-color: var(--gold-500);
+      color: var(--text-on-gold);
+    }
+
+    .wl-btn.primary:hover:not([disabled]) {
+      background: linear-gradient(180deg, var(--gold-300) 0%, var(--gold-500) 100%);
+    }
+
+    .wl-btn.danger:hover:not([disabled]) {
+      background: var(--negative-soft);
+      border-color: var(--negative);
+      color: var(--negative);
+    }
+
+    .count-strip {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .count-strip strong { color: var(--gold-300); }
+
+    /* Section headers */
+    .wl-section {
+      margin-bottom: var(--space-6);
+    }
+
+    .wl-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .wl-section-title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .wl-section-title.active-week { color: var(--gold-300); }
+
+    .wl-section-count {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-dimmed);
+    }
+
+    /* Player row — card-like */
+    .wl-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .wl-row {
+      display: grid;
+      grid-template-columns: auto auto 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+
+    .wl-row:hover {
+      background: var(--surface-4);
+      border-color: var(--border-base);
+    }
+
+    .wl-row.is-selected {
+      border-color: var(--border-gold);
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.06) 0%, var(--surface-3) 60%);
+    }
+
+    .wl-row.out-of-field {
+      opacity: 0.55;
+    }
+
+    .wl-row.out-of-field:hover {
+      opacity: 0.85;
+    }
+
+    .wl-check {
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--border-base);
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur-fast);
+      appearance: none;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .wl-check:hover {
+      border-color: var(--border-gold);
+    }
+
+    .wl-check:checked {
+      background: var(--gold-500);
+      border-color: var(--gold-500);
+    }
+
+    .wl-check:checked::after {
+      content: '';
+      width: 4px;
+      height: 8px;
+      border: solid var(--text-on-gold);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-top: -2px;
+    }
+
+    .wl-check[disabled] {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .wl-rank {
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--gold-300);
+      font-variant-numeric: tabular-nums;
+      min-width: 36px;
+      text-align: right;
+    }
+
+    .wl-out-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .wl-player-main {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .wl-player-name {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .wl-player-name a {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color var(--dur-fast);
+    }
+
+    .wl-player-name a:hover { color: var(--gold-300); }
+
+    .wl-tier-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .wl-tier-chip.tier-specialist  { background: rgba(212, 168, 67, 0.15); color: var(--gold-300); border: 1px solid rgba(212, 168, 67, 0.35); }
+    .wl-tier-chip.tier-comfortable { background: rgba(74, 222, 128, 0.12); color: var(--positive); border: 1px solid rgba(74, 222, 128, 0.3); }
+    .wl-tier-chip.tier-neutral     { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border-soft); }
+    .wl-tier-chip.tier-struggle    { background: rgba(248, 113, 113, 0.12); color: var(--negative); border: 1px solid rgba(248, 113, 113, 0.3); }
+
+    .wl-player-stats {
+      display: flex;
+      gap: var(--space-4);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      flex-wrap: wrap;
+    }
+
+    .wl-player-stats .stat strong {
+      color: var(--text-body);
+      font-weight: 500;
+    }
+
+    .wl-player-stats .stat.win strong { color: var(--gold-300); font-weight: 600; }
+
+    .wl-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      flex-shrink: 0;
+    }
+
+    .wl-icon-btn {
+      width: 32px;
+      height: 32px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--dur-fast);
+    }
+
+    .wl-icon-btn:hover {
+      background: var(--surface-5);
+      color: var(--text-primary);
+      border-color: var(--border-base);
+    }
+
+    .wl-icon-btn.star {
+      color: var(--gold-400);
+    }
+
+    .wl-icon-btn.star:hover {
+      background: var(--negative-soft);
+      color: var(--negative);
+      border-color: var(--negative);
+    }
+
+    /* Empty state */
+    .wl-empty {
+      text-align: center;
+      padding: var(--space-16) var(--space-6);
+      background: var(--surface-2);
+      border: 1px dashed var(--border-base);
+      border-radius: var(--radius-lg);
+    }
+
+    .wl-empty-icon {
+      font-size: 48px;
+      color: var(--text-dimmed);
+      margin-bottom: var(--space-4);
+      line-height: 1;
+    }
+
+    .wl-empty h2 {
+      font-size: var(--fs-2xl);
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .wl-empty p {
+      color: var(--text-body);
+      max-width: 52ch;
+      margin: 0 auto var(--space-5);
+      line-height: var(--lh-relaxed);
+    }
+
+    .wl-empty .hint {
+      font-size: var(--fs-sm);
+      color: var(--text-muted);
+      margin-top: var(--space-4);
+    }
+
+    /* Floating selection bar (when rows are selected) */
+    .wl-selection-bar {
+      position: sticky;
+      bottom: var(--space-5);
+      margin: var(--space-5) auto 0;
+      max-width: 560px;
+      background: var(--surface-4);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-gold-md);
+      padding: var(--space-3) var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      justify-content: space-between;
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+      z-index: var(--z-sticky);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    }
+
+    .wl-selection-bar.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .wl-selection-bar .sel-count {
+      font-family: var(--font-mono);
+      color: var(--gold-300);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <header class="page-head">
+      <div class="eyebrow">Watchlist</div>
+      <h1 class="h-1">Your starred players</h1>
+      <p class="lede" style="max-width: 62ch; margin-top: var(--space-3);">
+        Every player you've starred across the site, joined against this week's field. Stars persist on this device; share a list to another device or teammate with the <strong>Share list</strong> button.
+      </p>
+    </header>
+
+    <div id="wlContent"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('watchlist.html');
+      await BBI.renderFooter();
+
+      const [rankings, currentEvent, dfsData, courseHistory, recentForm] = await Promise.all([
+        BBI.data.load(BBI.data.paths.bbiRankings),
+        BBI.data.load(BBI.data.paths.currentEvent),
+        BBI.data.load(BBI.data.paths.dfsLineups),
+        BBI.data.load(BBI.data.paths.playerCourseHistory),
+        BBI.data.load(BBI.data.paths.playerRecentForm)
+      ]);
+
+      const mount = $('#wlContent');
+
+      if (!rankings || !rankings.players) {
+        mount.innerHTML = `<div class="wl-empty"><h2>Rankings unavailable</h2><p>Try reloading. If it persists, /rankings.html should confirm whether the data loaded at all.</p></div>`;
+        return;
+      }
+
+      // ---------- Handle ?add= merge (shared-list import) ----------
+      const urlParams = new URLSearchParams(window.location.search);
+      const addRaw = urlParams.get('add');
+      let importedCount = 0;
+      if (addRaw) {
+        const currentSet = bbiBookmarks.load();
+        const beforeSize = currentSet.size;
+        const toAdd = addRaw.split(',').map(s => s.trim()).filter(Boolean);
+        toAdd.forEach(id => currentSet.add(String(id)));
+        bbiBookmarks.save(currentSet);
+        importedCount = currentSet.size - beforeSize;
+        // Clean up URL so refresh doesn't re-trigger (wrap in try/catch for env-stricter hosts)
+        try {
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.searchParams.delete('add');
+          window.history.replaceState({}, '', cleanUrl.pathname + (cleanUrl.search || '') + (cleanUrl.hash || ''));
+        } catch (_e) { /* non-fatal */ }
+        // Sync header badge since renderHeader already ran
+        const badge = document.getElementById('navWatchBadge');
+        const pill = document.getElementById('navWatchPill');
+        if (badge && pill) {
+          badge.textContent = currentSet.size;
+          pill.style.display = currentSet.size > 0 ? 'inline-flex' : 'none';
+        }
+      }
+
+      // ---------- State ----------
+      const state = {
+        sort: 'bbi_rank',
+        filter: 'all',     // all | in_field | out_of_field
+        selected: new Set()
+      };
+
+      const playersById = new Map(rankings.players.map(p => [String(p.dg_id), p]));
+
+      function getBookmarks() {
+        return bbiBookmarks.load();
+      }
+
+      function resolveBookmarks() {
+        const bookmarkIds = [...getBookmarks()];
+        return bookmarkIds.map(id => {
+          const player = playersById.get(String(id));
+          if (player) {
+            const fieldRank = rankings.players.findIndex(p => p.dg_id === player.dg_id) + 1;
+            return { id, inField: true, player, rank: fieldRank };
+          }
+          return { id, inField: false, player: null, rank: null };
+        });
+      }
+
+      // ---------- Render ----------
+      function render() {
+        const resolved = resolveBookmarks();
+        const total = resolved.length;
+        const inField = resolved.filter(r => r.inField);
+        const outOfField = resolved.filter(r => !r.inField);
+
+        if (total === 0) {
+          mount.innerHTML = renderEmpty();
+          return;
+        }
+
+        mount.innerHTML = `
+          ${importedCount > 0 ? `
+            <div class="wl-import-banner" id="importBanner">
+              <span class="icon">✓</span>
+              <span>Imported <strong>${importedCount}</strong> player${importedCount === 1 ? '' : 's'} from shared link. Watchlist now has ${total}.</span>
+              <button type="button" aria-label="Dismiss" onclick="document.getElementById('importBanner').remove();">×</button>
+            </div>
+          ` : ''}
+
+          ${renderToolbar(total, inField.length, outOfField.length)}
+
+          ${state.filter !== 'out_of_field' && inField.length > 0 ? renderSection("In this week's field", inField, currentEvent?.event_name || 'the active event', 'active-week') : ''}
+          ${state.filter !== 'in_field' && outOfField.length > 0 ? renderSection('Sitting out', outOfField, 'Not in current field', 'out') : ''}
+
+          ${(state.filter === 'in_field' && inField.length === 0) || (state.filter === 'out_of_field' && outOfField.length === 0)
+            ? `<div class="wl-empty" style="padding: var(--space-10);"><p>No starred players match this filter. Try <button type="button" class="wl-btn" style="display: inline-flex;" onclick="document.querySelector('#filterSelect').value='all';document.querySelector('#filterSelect').dispatchEvent(new Event('change'))">showing all</button>.</p></div>`
+            : ''}
+
+          <div class="wl-selection-bar ${state.selected.size >= 2 ? 'visible' : ''}" id="selectionBar">
+            <span><span class="sel-count" id="selCount">${state.selected.size}</span> player${state.selected.size === 1 ? '' : 's'} selected</span>
+            <div style="display: flex; gap: var(--space-2);">
+              <button type="button" class="wl-btn" id="selClear">Clear selection</button>
+              <button type="button" class="wl-btn primary" id="selCompare" ${state.selected.size < 2 || state.selected.size > 3 ? 'disabled' : ''}>
+                Compare ${state.selected.size} player${state.selected.size === 1 ? '' : 's'} →
+              </button>
+            </div>
+          </div>
+        `;
+
+        wireInteractions();
+      }
+
+      function renderToolbar(total, inFieldCount, outCount) {
+        return `
+          <div class="wl-toolbar">
+            <select class="wl-select" id="sortSelect" aria-label="Sort by">
+              <option value="bbi_rank" ${state.sort === 'bbi_rank' ? 'selected' : ''}>Sort: BBI rank</option>
+              <option value="win_pct" ${state.sort === 'win_pct' ? 'selected' : ''}>Sort: Win %</option>
+              <option value="top_10" ${state.sort === 'top_10' ? 'selected' : ''}>Sort: Top 10 %</option>
+              <option value="salary" ${state.sort === 'salary' ? 'selected' : ''}>Sort: Salary</option>
+              <option value="value" ${state.sort === 'value' ? 'selected' : ''}>Sort: Value</option>
+              <option value="name" ${state.sort === 'name' ? 'selected' : ''}>Sort: Name A–Z</option>
+            </select>
+            <select class="wl-select" id="filterSelect" aria-label="Filter">
+              <option value="all" ${state.filter === 'all' ? 'selected' : ''}>All (${total})</option>
+              <option value="in_field" ${state.filter === 'in_field' ? 'selected' : ''}>In field (${inFieldCount})</option>
+              <option value="out_of_field" ${state.filter === 'out_of_field' ? 'selected' : ''}>Sitting out (${outCount})</option>
+            </select>
+            <div class="count-strip">
+              <strong>${total}</strong> starred · <strong>${inFieldCount}</strong> in field · <strong>${outCount}</strong> sitting out
+            </div>
+            <button type="button" class="wl-btn" id="shareBtn" title="Copy a URL that pre-loads this list on another device">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg>
+              Share list
+            </button>
+            <button type="button" class="wl-btn danger" id="clearAllBtn" ${total === 0 ? 'disabled' : ''}>
+              Clear all
+            </button>
+          </div>
+        `;
+      }
+
+      function renderSection(title, rows, subtitle, variant) {
+        const sorted = sortRows(rows);
+        return `
+          <section class="wl-section">
+            <div class="wl-section-head">
+              <span class="wl-section-title ${variant === 'active-week' ? 'active-week' : ''}">${title}</span>
+              <span class="wl-section-count">${rows.length} · ${subtitle}</span>
+            </div>
+            <div class="wl-list">
+              ${sorted.map(r => renderRow(r, variant === 'active-week')).join('')}
+            </div>
+          </section>
+        `;
+      }
+
+      function sortRows(rows) {
+        // Spec: bbi_rank sorts ascending (lower number = better rank).
+        // All other numeric sorts descending (higher number = better).
+        const numeric = (getter, ascending) => rows.slice().sort((a, b) => {
+          const av = getter(a);
+          const bv = getter(b);
+          if (av == null) return 1;
+          if (bv == null) return -1;
+          return ascending ? (av - bv) : (bv - av);
+        });
+
+        switch (state.sort) {
+          case 'bbi_rank':
+            return numeric(r => r.rank ?? 9999, true);
+          case 'win_pct':
+            return numeric(r => r.player?.win_pct ?? null, false);
+          case 'top_10':
+            return numeric(r => r.player?.top_10 ?? null, false);
+          case 'salary':
+            return numeric(r => r.player?.salary ?? null, false);
+          case 'value':
+            return numeric(r => r.player?.value ?? null, false);
+          case 'name':
+            return rows.slice().sort((a, b) => {
+              const an = (a.player?.name || `Unknown (id ${a.id})`).toLowerCase();
+              const bn = (b.player?.name || `Unknown (id ${b.id})`).toLowerCase();
+              return an > bn ? 1 : an < bn ? -1 : 0;
+            });
+          default:
+            return rows;
+        }
+      }
+
+      function renderRow(r, isActive) {
+        if (!r.inField) {
+          // Out-of-field: minimal data, dimmed
+          return `
+            <div class="wl-row out-of-field" data-id="${r.id}">
+              <input type="checkbox" class="wl-check" disabled title="Only players in the current field can be compared" />
+              <span class="wl-out-label">—</span>
+              <div class="wl-player-main">
+                <div class="wl-player-name">
+                  <a href="player.html?id=${r.id}">Player dg_id ${r.id}</a>
+                  <span class="wl-tier-chip tier-neutral">Not in field</span>
+                </div>
+                <div class="wl-player-stats">
+                  <span class="stat">Not playing Week ${currentEvent?.week_num || '—'}${currentEvent?.event_name ? ` · ${currentEvent.event_name}` : ''}</span>
+                </div>
+              </div>
+              <div class="wl-actions">
+                <button class="wl-icon-btn star" data-unstar="${r.id}" title="Remove from watchlist">★</button>
+              </div>
+            </div>
+          `;
+        }
+
+        const p = r.player;
+        const isSelected = state.selected.has(String(p.dg_id));
+        const tier = (p.tier || 'NEUTRAL').toLowerCase();
+
+        // Course history aggregate if available
+        const courseAgg = courseHistory?.[p.dg_id]?.aggregate;
+        const courseChip = courseAgg && courseAgg.starts >= 1
+          ? `<span class="stat">Course: ${courseAgg.starts} start${courseAgg.starts === 1 ? '' : 's'}${courseAgg.sg_total != null ? ` · <strong>${courseAgg.sg_total > 0 ? '+' : ''}${fmt.num(courseAgg.sg_total, 2)}</strong> SG` : ''}</span>`
+          : '';
+
+        // Recent form trend — last-event SG
+        const form = recentForm?.[p.dg_id];
+        const lastForm = form?.[0];
+        const formChip = lastForm
+          ? `<span class="stat">Last: <strong>${lastForm.finish}</strong> · ${lastForm.sg_total > 0 ? '+' : ''}${fmt.num(lastForm.sg_total, 2)} SG</span>`
+          : '';
+
+        return `
+          <div class="wl-row ${isSelected ? 'is-selected' : ''}" data-id="${p.dg_id}">
+            <input type="checkbox" class="wl-check" data-select="${p.dg_id}" ${isSelected ? 'checked' : ''} aria-label="Select ${p.name} for comparison" />
+            <span class="wl-rank">#${r.rank}</span>
+            <div class="wl-player-main">
+              <div class="wl-player-name">
+                <a href="player.html?id=${p.dg_id}">${p.name}</a>
+                <span class="wl-tier-chip tier-${tier}">${p.tier || 'NEUTRAL'}</span>
+              </div>
+              <div class="wl-player-stats">
+                <span class="stat win">Win <strong>${fmt.pct(p.win_pct, 1)}</strong></span>
+                <span class="stat">T10 <strong>${fmt.pct(p.top_10, 1)}</strong></span>
+                <span class="stat">MC <strong>${fmt.pct(p.make_cut, 0)}</strong></span>
+                ${p.salary ? `<span class="stat">$<strong>${(p.salary / 1000).toFixed(1)}k</strong>${p.value != null ? ` · val ${fmt.num(p.value, 1)}` : ''}${p.proj_own != null ? ` · ${fmt.num(p.proj_own, 0)}% own` : ''}</span>` : ''}
+                ${courseChip}
+                ${formChip}
+              </div>
+            </div>
+            <div class="wl-actions">
+              <a href="player.html?id=${p.dg_id}" class="wl-icon-btn" title="Open profile">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+              <button class="wl-icon-btn star" data-unstar="${p.dg_id}" title="Remove from watchlist">★</button>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderEmpty() {
+        return `
+          <div class="wl-empty">
+            <div class="wl-empty-icon">☆</div>
+            <h2>No players starred yet</h2>
+            <p>Open the rankings page and click the ★ next to any player's name to add them here. Your watchlist persists across sessions on this device, and you can share it to another device with the <strong>Share list</strong> button once you've starred someone.</p>
+            <a href="rankings.html" class="wl-btn primary" style="display: inline-flex;">
+              Browse rankings →
+            </a>
+            <div class="hint">Tip: ⌘+K opens the global search from any page.</div>
+          </div>
+        `;
+      }
+
+      function wireInteractions() {
+        $('#sortSelect')?.addEventListener('change', (e) => {
+          state.sort = e.target.value;
+          render();
+        });
+        $('#filterSelect')?.addEventListener('change', (e) => {
+          state.filter = e.target.value;
+          render();
+        });
+        $('#clearAllBtn')?.addEventListener('click', () => {
+          const count = getBookmarks().size;
+          if (!count) return;
+          const ok = confirm(`Remove all ${count} players from your watchlist? This can't be undone.`);
+          if (!ok) return;
+          bbiBookmarks.save(new Set());
+          state.selected.clear();
+          updateHeaderBadge();
+          render();
+        });
+        $('#shareBtn')?.addEventListener('click', async () => {
+          const ids = [...getBookmarks()];
+          if (!ids.length) return;
+          const url = `${window.location.origin}${window.location.pathname}?add=${ids.join(',')}`;
+          try {
+            await navigator.clipboard.writeText(url);
+            const btn = $('#shareBtn');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> URL copied';
+            setTimeout(() => { btn.innerHTML = orig; }, 1600);
+          } catch (e) {
+            prompt('Copy this URL manually:', url);
+          }
+        });
+        document.querySelectorAll('[data-unstar]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = btn.dataset.unstar;
+            bbiBookmarks.toggle(id);
+            state.selected.delete(String(id));
+            updateHeaderBadge();
+            render();
+          });
+        });
+        document.querySelectorAll('[data-select]').forEach(cb => {
+          cb.addEventListener('change', () => {
+            const id = String(cb.dataset.select);
+            if (cb.checked) {
+              if (state.selected.size >= 3) {
+                cb.checked = false;
+                return;
+              }
+              state.selected.add(id);
+            } else {
+              state.selected.delete(id);
+            }
+            render();
+          });
+        });
+        $('#selClear')?.addEventListener('click', () => {
+          state.selected.clear();
+          render();
+        });
+        $('#selCompare')?.addEventListener('click', () => {
+          if (state.selected.size < 2 || state.selected.size > 3) return;
+          window.location.href = `compare.html?ids=${[...state.selected].join(',')}`;
+        });
+      }
+
+      // Update the header star-count badge after bookmark mutations
+      function updateHeaderBadge() {
+        const count = bbiBookmarks.load().size;
+        const badge = document.getElementById('navWatchBadge');
+        if (badge) {
+          badge.textContent = count;
+          badge.style.display = count > 0 ? 'inline-flex' : 'none';
+        }
+      }
+
+      render();
+    });
+  </script>
+</body>
+</html>

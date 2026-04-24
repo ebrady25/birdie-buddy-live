@@ -762,6 +762,29 @@
   }
 }
 
+.nav-watch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  background: var(--surface-3);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-full);
+  color: var(--gold-400);
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  transition: all var(--dur-fast);
+}
+
+.nav-watch-pill:hover {
+  background: var(--surface-5);
+  border-color: var(--border-gold);
+  color: var(--gold-300);
+}
+
 .event-pill {
   display: inline-flex; align-items: center; gap: var(--space-2);
   padding: 4px 10px;

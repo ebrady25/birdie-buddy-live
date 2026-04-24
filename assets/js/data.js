@@ -107,6 +107,7 @@ window.BBI = window.BBI || {};
       { type: 'group', id: 'predict', label: 'Predict', items: [
         { href: 'rankings.html',   label: 'Rankings',    sub: 'Full field' },
         { href: 'compare.html',    label: 'Compare',     sub: 'Head-to-head' },
+        { href: 'watchlist.html',  label: 'Watchlist',   sub: 'Your starred players' },
         { href: 'lineups.html',    label: 'DFS Lineups', sub: '12 optimized' },
         { href: 'live.html',       label: 'Live pivots', sub: 'Thu–Sun' },
         { href: 'simulator.html',  label: 'Simulator',   sub: '10k Monte Carlo' }
@@ -164,6 +165,10 @@ window.BBI = window.BBI || {};
             }).join('')}
           </div>
           <div class="row-tight">
+            <a href="watchlist.html" class="nav-watch-pill" id="navWatchPill" title="Your watchlist" aria-label="Open watchlist" style="display: none;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.3l-6.16 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63L22 9.24l-5.48 4.76 1.64 7.03z"/></svg>
+              <span id="navWatchBadge">0</span>
+            </a>
             <label class="search-input" title="Search (⌘K)">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <input type="text" placeholder="Search players…" data-search aria-label="Search"/>
@@ -203,6 +208,17 @@ window.BBI = window.BBI || {};
       const html = tickerItems.map(t => `<span class="marquee-item">${t}</span>`).join('');
       track.innerHTML = html + html;
     }
+
+    // Hydrate star-count badge from localStorage
+    try {
+      const pill = document.getElementById('navWatchPill');
+      const badge = document.getElementById('navWatchBadge');
+      if (pill && badge && window.bbiBookmarks) {
+        const count = window.bbiBookmarks.load().size;
+        badge.textContent = count;
+        pill.style.display = count > 0 ? 'inline-flex' : 'none';
+      }
+    } catch (e) { /* localStorage may be unavailable */ }
 
     // ---------- Nav group dropdown interactions ----------
     const groups = document.querySelectorAll('.nav-group');
