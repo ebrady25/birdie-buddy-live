@@ -535,7 +535,8 @@
 .site-nav {
   position: sticky; top: 0;
   z-index: var(--z-nav);
-  background: rgba(10, 10, 15, 0.75);
+  /* Near-opaque — content should never bleed through the nav. Keep subtle frost. */
+  background: rgba(10, 10, 15, 0.95);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--border-soft);
@@ -809,10 +810,13 @@
 .event-pill .pulse-dot { width: 6px; height: 6px; }
 .event-pill strong { color: var(--text-primary); font-weight: 600; }
 
-/* Status bar */
+/* Status bar — sticky below nav so they scroll as a unit (no 32px gap opening below nav) */
 .status-bar {
   height: var(--status-h);
   display: flex; align-items: center;
+  position: sticky;
+  top: var(--nav-h);
+  z-index: calc(var(--z-nav) - 1);
   background: var(--surface-2);
   border-bottom: 1px solid var(--border-subtle);
   font-family: var(--font-mono);
@@ -1009,7 +1013,8 @@
 .page-toolbar {
   position: sticky; top: calc(var(--nav-h) + var(--status-h));
   z-index: var(--z-sticky);
-  background: rgba(10, 10, 15, 0.85);
+  /* Near-opaque so scrolling content can't bleed through. Subtle frost via backdrop-filter. */
+  background: rgba(10, 10, 15, 0.97);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   padding: var(--space-3) 0;
