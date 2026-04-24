@@ -12,6 +12,275 @@
   <style>
     /* ===== PLAYER PROFILE PAGE ===== */
 
+    /* ===== WAYFINDING: toolbar, combobox, anchor nav, mini-strip ===== */
+    .player-toolbar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-5);
+    }
+
+    .player-nav-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 8px 12px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .player-nav-arrow:hover:not([disabled]) {
+      background: var(--surface-5);
+      border-color: var(--border-base);
+      color: var(--text-primary);
+    }
+
+    .player-nav-arrow[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .player-nav-arrow .arrow-sub {
+      color: var(--text-dimmed);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+    }
+
+    .player-combobox {
+      position: relative;
+    }
+
+    .player-combobox-input {
+      width: 100%;
+      padding: 9px 36px 9px 32px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color var(--dur-fast) var(--ease-out);
+    }
+
+    .player-combobox-input:focus {
+      border-color: var(--border-gold);
+      box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12);
+    }
+
+    .player-combobox-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .player-combobox-kbd {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xs);
+      padding: 2px 6px;
+      pointer-events: none;
+    }
+
+    .player-combobox-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      max-height: 300px;
+      overflow-y: auto;
+      background: var(--surface-4);
+      border: 1px solid var(--border-base);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      z-index: var(--z-elevated);
+      display: none;
+    }
+
+    .player-combobox-menu.open { display: block; }
+
+    .player-combobox-item {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: 8px 12px;
+      cursor: pointer;
+      color: var(--text-body);
+      font-size: var(--fs-sm);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background var(--dur-fast) var(--ease-out);
+    }
+
+    .player-combobox-item:last-child { border-bottom: none; }
+    .player-combobox-item:hover,
+    .player-combobox-item.active {
+      background: var(--surface-5);
+      color: var(--text-primary);
+    }
+
+    .player-combobox-item .rank {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--gold-300);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+    }
+
+    .player-combobox-item .tier-mini {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .player-combobox-empty {
+      padding: var(--space-4);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+    }
+
+    /* Mobile anchor nav */
+    .player-anchor-nav {
+      display: flex;
+      gap: var(--space-1);
+      padding: var(--space-2) var(--space-1);
+      margin-bottom: var(--space-5);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .player-anchor-nav::-webkit-scrollbar { display: none; }
+
+    .player-anchor-nav a {
+      flex: 0 0 auto;
+      padding: 6px 12px;
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--radius-full);
+      transition: all var(--dur-fast) var(--ease-out);
+      white-space: nowrap;
+    }
+
+    .player-anchor-nav a:hover {
+      color: var(--text-primary);
+      background: var(--surface-3);
+    }
+
+    /* Sticky mini-strip: appears when main player header scrolls off */
+    .player-mini-strip {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--status-h));
+      z-index: var(--z-sticky);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: 10px var(--space-4);
+      background: rgba(16, 16, 23, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-base);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-4);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    }
+
+    .player-mini-strip.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mini-rank {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--gold-300);
+    }
+
+    .mini-name {
+      font-size: var(--fs-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mini-tier {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .mini-strip-nav {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .mini-strip-nav button {
+      padding: 4px 8px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      cursor: pointer;
+    }
+
+    .mini-strip-nav button:hover:not([disabled]) {
+      background: var(--surface-5);
+    }
+    .mini-strip-nav button[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+    @media (max-width: 640px) {
+      .player-toolbar {
+        grid-template-columns: auto 1fr auto;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-3);
+      }
+      .player-nav-arrow {
+        padding: 6px 8px;
+        font-size: var(--fs-2xs);
+      }
+      .player-nav-arrow .arrow-label { display: none; }
+      .player-combobox-kbd { display: none; }
+    }
+
     .player-header {
       display: flex;
       gap: var(--space-6);
@@ -803,7 +1072,135 @@
       const playerRank = rankings.players.findIndex(p => p.dg_id === player.dg_id) + 1;
       const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines, pressureMetrics);
       mount.innerHTML = html;
+
+      // Wire up Pass 2 wayfinding interactions
+      wireWayfinding(rankings, player, playerRank);
     });
+
+    // ---------- Pass 2 wayfinding wiring ----------
+    function wireWayfinding(rankings, currentPlayer, currentRank) {
+      const players = rankings.players || [];
+      const totalPlayers = players.length;
+      const prevPlayer = currentRank > 1 ? players[currentRank - 2] : null;
+      const nextPlayer = currentRank < totalPlayers ? players[currentRank] : null;
+
+      // --- Sticky mini-strip: reveal when main player-header scrolls out of view ---
+      const mainHeader = document.getElementById('playerMainHeader');
+      const miniStrip = document.getElementById('playerMiniStrip');
+      if (mainHeader && miniStrip && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              miniStrip.classList.remove('visible');
+              miniStrip.setAttribute('aria-hidden', 'true');
+            } else {
+              miniStrip.classList.add('visible');
+              miniStrip.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }, { rootMargin: '-80px 0px 0px 0px', threshold: 0 });
+        observer.observe(mainHeader);
+      }
+
+      // --- Mini-strip prev/next buttons ---
+      const miniPrev = miniStrip?.querySelector('[data-nav="prev"]');
+      const miniNext = miniStrip?.querySelector('[data-nav="next"]');
+      if (miniPrev && prevPlayer) miniPrev.addEventListener('click', () => { location.href = `player.html?id=${prevPlayer.dg_id}`; });
+      if (miniNext && nextPlayer) miniNext.addEventListener('click', () => { location.href = `player.html?id=${nextPlayer.dg_id}`; });
+
+      // --- Keyboard: ← → cycle players, / focuses search ---
+      document.addEventListener('keydown', (e) => {
+        // Ignore when typing in an input/textarea
+        const activeTag = document.activeElement?.tagName;
+        const isTyping = activeTag === 'INPUT' || activeTag === 'TEXTAREA';
+
+        if (e.key === '/' && !isTyping && !e.metaKey && !e.ctrlKey) {
+          e.preventDefault();
+          const input = document.getElementById('playerComboboxInput');
+          if (input) { input.focus(); input.select(); }
+        }
+        if (!isTyping && !e.metaKey && !e.ctrlKey && !e.altKey) {
+          if (e.key === 'ArrowLeft' && prevPlayer) {
+            e.preventDefault();
+            location.href = `player.html?id=${prevPlayer.dg_id}`;
+          } else if (e.key === 'ArrowRight' && nextPlayer) {
+            e.preventDefault();
+            location.href = `player.html?id=${nextPlayer.dg_id}`;
+          }
+        }
+      });
+
+      // --- Combobox: filter + navigate to selected player ---
+      const input = document.getElementById('playerComboboxInput');
+      const menu = document.getElementById('playerComboboxMenu');
+      if (!input || !menu) return;
+
+      let activeIdx = -1;
+      let currentMatches = [];
+
+      const render = (filter) => {
+        const q = filter.trim().toLowerCase();
+        const matches = q
+          ? players.map((p, i) => ({ p, i })).filter(({ p }) => p.name.toLowerCase().includes(q)).slice(0, 20)
+          : players.map((p, i) => ({ p, i })).slice(0, 10);
+
+        currentMatches = matches;
+        activeIdx = matches.length ? 0 : -1;
+
+        if (!matches.length) {
+          menu.innerHTML = `<div class="player-combobox-empty">No players match "${q}".</div>`;
+          menu.classList.add('open');
+          return;
+        }
+
+        menu.innerHTML = matches.map(({ p, i }, mIdx) => `
+          <div class="player-combobox-item ${mIdx === activeIdx ? 'active' : ''}" data-dg-id="${p.dg_id}" role="option" tabindex="-1">
+            <span class="rank">#${i + 1}</span>
+            <span>${p.name}</span>
+            <span class="tier-mini">${p.tier || 'NEUTRAL'}</span>
+          </div>
+        `).join('');
+        menu.classList.add('open');
+      };
+
+      const setActive = (idx) => {
+        activeIdx = Math.max(0, Math.min(currentMatches.length - 1, idx));
+        menu.querySelectorAll('.player-combobox-item').forEach((el, i) => {
+          el.classList.toggle('active', i === activeIdx);
+          if (i === activeIdx) el.scrollIntoView({ block: 'nearest' });
+        });
+      };
+
+      input.addEventListener('focus', () => render(input.value));
+      input.addEventListener('input', (e) => {
+        let t = input._debounce;
+        clearTimeout(t);
+        input._debounce = setTimeout(() => render(input.value), 80);
+      });
+      input.addEventListener('blur', () => {
+        // Delay so clicks on menu items register before close
+        setTimeout(() => menu.classList.remove('open'), 150);
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); setActive(activeIdx + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(activeIdx - 1); }
+        else if (e.key === 'Enter' && activeIdx >= 0 && currentMatches[activeIdx]) {
+          e.preventDefault();
+          location.href = `player.html?id=${currentMatches[activeIdx].p.dg_id}`;
+        } else if (e.key === 'Escape') {
+          input.blur();
+          menu.classList.remove('open');
+        }
+      });
+
+      menu.addEventListener('mousedown', (e) => {
+        const item = e.target.closest('.player-combobox-item');
+        if (!item) return;
+        e.preventDefault(); // prevent blur from closing menu before click
+        const dgId = item.getAttribute('data-dg-id');
+        location.href = `player.html?id=${dgId}`;
+      });
+    }
 
     function renderEmptyState(heading, message) {
       return `
@@ -881,13 +1278,73 @@
         </section>
       ` : '';
 
+      // Prev/next computation — cycle by BBI rank within current field
+      const totalPlayers = rankings.players.length;
+      const prevRank = rank > 1 ? rank - 1 : null;
+      const nextRank = rank < totalPlayers ? rank + 1 : null;
+      const prevPlayer = prevRank ? rankings.players[prevRank - 1] : null;
+      const nextPlayer = nextRank ? rankings.players[nextRank - 1] : null;
+
       return `
         <header class="page-head">
           <div class="eyebrow">Player Profile</div>
           <h1>Deep Dive</h1>
         </header>
 
-        <div class="player-header">
+        <!-- WAYFINDING: sticky mini-strip (hidden until main header scrolls off) -->
+        <div class="player-mini-strip" id="playerMiniStrip" aria-hidden="true">
+          <span class="mini-rank">#${rank}</span>
+          <div>
+            <div class="mini-name">${player.name}</div>
+            <span class="mini-tier">${player.tier || 'NEUTRAL'} · Composite ${fmt.num(bbi, 2)}</span>
+          </div>
+          <div class="mini-strip-nav">
+            <button type="button" data-nav="prev" ${!prevPlayer ? 'disabled' : ''} title="${prevPlayer ? `#${prevRank} ${fmt.abbrevName(prevPlayer.name)}` : 'No previous'}">←</button>
+            <button type="button" data-nav="next" ${!nextPlayer ? 'disabled' : ''} title="${nextPlayer ? `#${nextRank} ${fmt.abbrevName(nextPlayer.name)}` : 'No next'}">→</button>
+          </div>
+        </div>
+
+        <!-- WAYFINDING: toolbar with prev/next + combobox -->
+        <div class="player-toolbar" id="playerToolbar">
+          <a class="player-nav-arrow" id="prevPlayerBtn" ${prevPlayer ? `href="player.html?id=${prevPlayer.dg_id}"` : 'role="button" disabled'}>
+            <span aria-hidden="true">←</span>
+            <span class="arrow-label">
+              <span class="arrow-sub">#${prevRank || '—'}</span>
+              ${prevPlayer ? fmt.abbrevName(prevPlayer.name) : 'Start of field'}
+            </span>
+          </a>
+          <div class="player-combobox">
+            <svg class="player-combobox-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="search" class="player-combobox-input" id="playerComboboxInput"
+                   placeholder="Switch player — ${totalPlayers} in the field"
+                   aria-label="Search and switch player"
+                   autocomplete="off" />
+            <span class="player-combobox-kbd">/ to focus</span>
+            <div class="player-combobox-menu" id="playerComboboxMenu" role="listbox"></div>
+          </div>
+          <a class="player-nav-arrow" id="nextPlayerBtn" ${nextPlayer ? `href="player.html?id=${nextPlayer.dg_id}"` : 'role="button" disabled'}>
+            <span class="arrow-label">
+              <span class="arrow-sub">#${nextRank || '—'}</span>
+              ${nextPlayer ? fmt.abbrevName(nextPlayer.name) : 'End of field'}
+            </span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <!-- WAYFINDING: mobile-friendly anchor nav -->
+        <nav class="player-anchor-nav" aria-label="Profile sections">
+          <a href="#sec-snapshot">Snapshot</a>
+          <a href="#sec-sg">SG Fingerprint</a>
+          <a href="#sec-factors">Factors</a>
+          <a href="#sec-pressure">Pressure</a>
+          <a href="#sec-form">Recent Form</a>
+          <a href="#sec-course">Course History</a>
+          ${player.salary ? `<a href="#sec-market">Market</a>` : ''}
+        </nav>
+
+        <div class="player-header" id="playerMainHeader">
           <div class="player-headshot">
             ${getInitials(player.name)}
           </div>
@@ -905,7 +1362,7 @@
         </div>
 
         <!-- EVENT SNAPSHOT -->
-        <div class="snapshot-card">
+        <div class="snapshot-card" id="sec-snapshot">
           <div class="snapshot-eyebrow">${rankings.event || 'Current Event'}</div>
           <div class="snapshot-hero">
             <div>
@@ -927,22 +1384,22 @@
         </div>
 
         <!-- SG FINGERPRINT (signature chart — moved above factor decomp) -->
-        ${fingerprintHtml}
+        <div id="sec-sg">${fingerprintHtml}</div>
 
         <!-- FACTOR DECOMPOSITION v2 — sorted, color-coded, grouped -->
-        ${renderFactorDecomp(decomp, weights, mode, bbi, fieldMedians)}
+        <div id="sec-factors">${renderFactorDecomp(decomp, weights, mode, bbi, fieldMedians)}</div>
 
         <!-- PRESSURE & SURGE -->
-        ${pressureHtml}
+        <div id="sec-pressure">${pressureHtml}</div>
 
         <!-- RECENT FORM -->
-        ${recentFormHtml}
+        <div id="sec-form">${recentFormHtml}</div>
 
         <!-- COURSE HISTORY -->
-        ${courseHistHtml}
+        <div id="sec-course">${courseHistHtml}</div>
 
         <!-- MARKET POSITIONING -->
-        ${marketHtml}
+        <div id="sec-market">${marketHtml}</div>
 
         <section class="section" style="margin-bottom: var(--space-12);">
           <div class="section-head">
