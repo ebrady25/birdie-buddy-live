@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive · BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="prefetch" href="methodology.html">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    /* =============================================================
+       ARCHIVE — PROMETHEUS 47-event back-test
+       ============================================================= */
+    .arch-hero {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    @media (max-width: 900px) { .arch-hero { grid-template-columns: repeat(2, 1fr); } }
+    .arch-kpi {
+      position: relative;
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.05), transparent 60%), var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      overflow: hidden;
+    }
+    .arch-kpi::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-400), transparent);
+      opacity: 0.55;
+    }
+    .arch-kpi .k-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-500);
+      margin-bottom: var(--space-2);
+    }
+    .arch-kpi .k-value {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    .arch-kpi .k-sub {
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--fs-2xs);
+      color: var(--text-muted);
+    }
+    .arch-kpi .k-sub strong { color: var(--text-body); font-weight: 500; }
+
+    /* ---------- SEASON ARC CHART ---------- */
+    .arc-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      margin-bottom: var(--space-8);
+    }
+    .arc-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px dashed var(--border-soft);
+    }
+    .arc-head h2 {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+    .arc-head .panel-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-500);
+      display: block; margin-bottom: 2px;
+    }
+    .arc-svg {
+      width: 100%;
+      height: 220px;
+      display: block;
+    }
+    .arc-svg .grid-line { stroke: var(--border-soft); stroke-width: 1; opacity: 0.5; }
+    .arc-svg .axis-label { fill: var(--text-dimmed); font-family: var(--font-mono); font-size: 10px; }
+    .arc-svg .arc-line { fill: none; stroke: var(--gold-400); stroke-width: 1.5; }
+    .arc-svg .arc-fill { fill: var(--gold-400); fill-opacity: 0.10; }
+    .arc-svg .mean-line { stroke: var(--gold-300); stroke-width: 1; stroke-dasharray: 4 4; }
+    .arc-svg .pt { fill: var(--gold-400); cursor: pointer; transition: fill var(--dur-fast), r var(--dur-fast); }
+    .arc-svg .pt:hover, .arc-svg .pt.active { fill: var(--gold-200); r: 5; }
+
+    /* ---------- TWO-COL: EVENTS TABLE + DRILL-IN PANEL ---------- */
+    .arch-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 460px;
+      gap: var(--space-5);
+      align-items: start;
+      margin-bottom: var(--space-8);
+    }
+    @media (max-width: 1200px) { .arch-grid { grid-template-columns: 1fr; } }
+
+    .events-card { background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: var(--radius-xl); overflow: hidden; }
+    .events-table-wrap { max-height: 720px; overflow-y: auto; }
+    table.events {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+    }
+    table.events thead th {
+      position: sticky; top: 0; z-index: 1;
+      background: var(--surface-3);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      font-size: var(--fs-3xs);
+      padding: var(--space-3);
+      text-align: right;
+      border-bottom: 1px solid var(--border-soft);
+      cursor: pointer;
+      user-select: none;
+      transition: color var(--dur-fast), background var(--dur-fast);
+    }
+    table.events thead th:first-child { text-align: left; }
+    table.events thead th:hover { color: var(--gold-300); background: var(--surface-4); }
+    table.events thead th.sort-asc::after  { content: ' ▲'; color: var(--gold-300); font-size: 10px; }
+    table.events thead th.sort-desc::after { content: ' ▼'; color: var(--gold-300); font-size: 10px; }
+
+    table.events tbody tr { cursor: pointer; transition: background var(--dur-fast); }
+    table.events tbody tr:hover { background: var(--surface-3); }
+    table.events tbody tr.active { background: rgba(212, 168, 67, 0.08); }
+    table.events tbody tr.most-recent::before { content: '★'; position: absolute; left: var(--space-2); color: var(--gold-400); font-size: 12px; }
+    table.events tbody td {
+      padding: var(--space-3);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      text-align: right;
+      vertical-align: middle;
+    }
+    table.events tbody td.td-name {
+      text-align: left;
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    table.events tbody td.td-name small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      font-weight: 500;
+      margin-top: 1px;
+    }
+    table.events tbody td.skill-cell { font-weight: 700; }
+    table.events tbody td.skill-cell.pos { color: var(--positive); }
+    table.events tbody td.skill-cell.neg { color: var(--negative); }
+    table.events tbody td.skill-cell.dim { color: var(--text-dimmed); }
+
+    /* ---------- DRILL-IN ---------- */
+    .drill-card {
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.04), transparent 40%), var(--surface-2);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      position: sticky;
+      top: calc(var(--nav-h) + var(--status-h) + var(--space-4));
+    }
+    .drill-head { margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 1px dashed var(--border-soft); }
+    .drill-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-500);
+      margin-bottom: var(--space-2);
+    }
+    .drill-head h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.015em;
+      margin-bottom: var(--space-1);
+    }
+    .drill-head .drill-meta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+    }
+    .drill-meta strong { color: var(--text-body); font-weight: 500; }
+    .drill-meta .gold { color: var(--gold-300); }
+
+    .market-tabs {
+      display: inline-flex;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 2px;
+      margin-bottom: var(--space-4);
+    }
+    .market-tabs button {
+      padding: 5px 10px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-muted);
+      border-radius: 4px;
+      transition: all var(--dur-fast);
+    }
+    .market-tabs button.active {
+      background: rgba(212, 168, 67, 0.18);
+      color: var(--gold-300);
+      box-shadow: 0 0 0 1px var(--border-gold);
+    }
+
+    .drill-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .drill-stat {
+      padding: var(--space-3);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+    }
+    .drill-stat .ds-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .drill-stat .ds-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-xl);
+      color: var(--text-primary);
+      line-height: 1.05;
+    }
+    .drill-stat .ds-value.pos { color: var(--positive); }
+    .drill-stat .ds-value.neg { color: var(--negative); }
+    .drill-stat .ds-sub {
+      margin-top: 4px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+    }
+
+    /* Calibration bins viz */
+    .bins-head {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-500);
+      margin-bottom: var(--space-2);
+    }
+    .bins-table {
+      width: 100%;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    .bins-table th, .bins-table td {
+      padding: 6px var(--space-3);
+      text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .bins-table th { text-align: left; color: var(--text-muted); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--fs-3xs); font-weight: 600; }
+    .bins-table th:first-child, .bins-table td:first-child { text-align: left; }
+    .bins-table td.bin-bin { color: var(--text-primary); font-weight: 600; }
+    .bins-table td.diff.pos { color: var(--positive); }
+    .bins-table td.diff.neg { color: var(--negative); }
+    .bins-table td.bin-bar-cell { padding: 4px var(--space-3); width: 70px; }
+    .bin-bar {
+      position: relative;
+      height: 6px;
+      background: var(--surface-3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .bin-bar .pred { position: absolute; left:0; top:0; bottom: 0; background: rgba(160, 160, 180, 0.5); border-radius: 3px; }
+    .bin-bar .actual { position: absolute; left:0; top:0; bottom: 0; background: linear-gradient(to right, var(--gold-400), var(--gold-300)); border-radius: 3px; }
+    .bins-empty { padding: var(--space-4); text-align: center; color: var(--text-muted); font-size: var(--fs-xs); }
+
+    /* ---------- ARCHIVED DASHBOARDS ---------- */
+    .archived-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    .archived-head { margin-bottom: var(--space-4); padding-bottom: var(--space-3); border-bottom: 1px dashed var(--border-soft); display: flex; justify-content: space-between; align-items: baseline; }
+    .archived-head h2 { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; letter-spacing: -0.015em; color: var(--text-primary); }
+    .archived-head .panel-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-500);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .archived-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-3);
+    }
+    .archived-link {
+      padding: var(--space-4);
+      background: var(--surface-1);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      transition: border-color var(--dur-fast), transform var(--dur-fast);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .archived-link:hover { border-color: var(--border-gold); transform: translateY(-2px); }
+    .archived-link .arr {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--gold-500);
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .archived-link .name {
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      letter-spacing: -0.005em;
+    }
+    .archived-link .open {
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+    }
+
+    .sim-note {
+      padding: var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-left: 2px solid var(--gold-500);
+      border-radius: var(--radius-lg);
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-top: var(--space-6);
+    }
+    .sim-note strong { color: var(--text-primary); }
+    .sim-note em { color: var(--gold-300); font-style: normal; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <!-- PAGE HEAD -->
+    <header class="page-head">
+      <div class="eyebrow">PROMETHEUS · 2025 backtest</div>
+      <h1>The receipts.</h1>
+      <p>BBI's pre-tournament probabilities replayed against the entire 2025 PGA Tour season — every event, every player, every bin. This is the auditable track record behind every number on the rest of the site.</p>
+      <div class="page-head-meta">
+        <span>Events scored <strong id="aEvents">—</strong></span>
+        <span>Model source <strong class="gold" id="aSource">—</strong></span>
+        <span>Backtest run <strong id="aRun">—</strong></span>
+      </div>
+    </header>
+
+    <!-- ========== AGGREGATE KPIs ========== -->
+    <div class="arch-hero">
+      <div class="arch-kpi">
+        <div class="k-label">Mean Spearman ρ</div>
+        <div class="k-value" id="kSpear">—</div>
+        <div class="k-sub">predictive ordering vs DataGolf result. <strong>Higher is better.</strong></div>
+      </div>
+      <div class="arch-kpi">
+        <div class="k-label">Brier · top-10</div>
+        <div class="k-value" id="kBrier">—</div>
+        <div class="k-sub">probabilistic accuracy on top-10 finish. <strong>Lower is better.</strong></div>
+      </div>
+      <div class="arch-kpi">
+        <div class="k-label">Brier · win</div>
+        <div class="k-value" id="kBrierWin">—</div>
+        <div class="k-sub">outright winner Brier — <strong>tiny because winners are rare</strong>.</div>
+      </div>
+      <div class="arch-kpi">
+        <div class="k-label">Make-cut Brier</div>
+        <div class="k-value" id="kBrierMC">—</div>
+        <div class="k-sub">most volatile signal — Friday is brutal.</div>
+      </div>
+    </div>
+
+    <!-- ========== SEASON ARC CHART ========== -->
+    <div class="arc-card">
+      <div class="arc-head">
+        <div>
+          <span class="panel-eyebrow">01 · Season arc</span>
+          <h2>Spearman ρ across 47 events</h2>
+        </div>
+        <span class="panel-meta" style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted);">Hover any dot for the event · click to drill in</span>
+      </div>
+      <svg class="arc-svg" id="arcSvg" viewBox="0 0 900 220" preserveAspectRatio="none"></svg>
+    </div>
+
+    <!-- ========== EVENTS TABLE + DRILL ========== -->
+    <div class="arch-grid">
+      <div class="events-card">
+        <div class="events-table-wrap">
+          <table class="events" id="eventsTable">
+            <thead>
+              <tr>
+                <th data-sort="event_id" class="sort-asc">Event</th>
+                <th data-sort="field_size">Field</th>
+                <th data-sort="made_cut">MC</th>
+                <th data-sort="spearman">Spearman ρ</th>
+                <th data-sort="brier_top10">Brier T10</th>
+                <th data-sort="skill_top10">Skill T10</th>
+              </tr>
+            </thead>
+            <tbody id="eventsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <aside class="drill-card" id="drillCard">
+        <div class="drill-head">
+          <div class="drill-eyebrow">02 · Event deep-dive</div>
+          <h3 id="drillName">Select an event →</h3>
+          <div class="drill-meta" id="drillMeta">click any row in the table to inspect calibration bins</div>
+        </div>
+
+        <div class="market-tabs" id="marketTabs">
+          <button data-mk="win" class="active">Win</button>
+          <button data-mk="top_5">T5</button>
+          <button data-mk="top_10">T10</button>
+          <button data-mk="top_20">T20</button>
+          <button data-mk="make_cut">Cut</button>
+        </div>
+
+        <div class="drill-stats">
+          <div class="drill-stat">
+            <div class="ds-label">Brier</div>
+            <div class="ds-value" id="dBrier">—</div>
+            <div class="ds-sub" id="dBrierSub">—</div>
+          </div>
+          <div class="drill-stat">
+            <div class="ds-label">Skill vs naive</div>
+            <div class="ds-value" id="dSkill">—</div>
+            <div class="ds-sub">% improvement over field-mean</div>
+          </div>
+          <div class="drill-stat">
+            <div class="ds-label">Log-loss</div>
+            <div class="ds-value" id="dLog">—</div>
+            <div class="ds-sub">probabilistic surprise per pick</div>
+          </div>
+          <div class="drill-stat">
+            <div class="ds-label">Mean predicted</div>
+            <div class="ds-value" id="dMean">—</div>
+            <div class="ds-sub" id="dMeanSub">vs <strong id="dActual">—</strong> actual</div>
+          </div>
+        </div>
+
+        <div class="bins-head">Reliability — predicted vs actual rate by bin</div>
+        <table class="bins-table" id="binsTable">
+          <thead>
+            <tr><th>Bin</th><th>n</th><th>Pred</th><th>Actual</th><th>Δ</th><th></th></tr>
+          </thead>
+          <tbody id="binsBody"><tr><td colspan="6" class="bins-empty">Pick an event to see calibration bins.</td></tr></tbody>
+        </table>
+      </aside>
+    </div>
+
+    <!-- ========== ARCHIVED DASHBOARDS ========== -->
+    <div class="archived-card">
+      <div class="archived-head">
+        <div>
+          <span class="panel-eyebrow">03 · Past dashboards</span>
+          <h2>Archived BBI event reports</h2>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted);"><strong style="color: var(--text-body);" id="aDashCount">—</strong> archived</span>
+      </div>
+      <div class="archived-grid" id="archivedGrid"></div>
+    </div>
+
+    <div class="sim-note">
+      <strong>How to read this page.</strong> Spearman ρ measures how well BBI's predicted finish order matches the actual finish — 1.0 is perfect, 0 is random, –1.0 is anti-correlated. Brier is the average squared error between BBI's probability and the actual binary outcome — lower is better. <em>Skill %</em> is BBI's Brier improvement over a naive "everyone gets the same field-mean probability" baseline; positive skill means the model adds information.
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+
+  <script>
+    const state = {
+      pro: null,            // prometheus_backtest.json
+      archive: null,        // archive_index.json
+      events: [],
+      sort: { key: 'event_id', dir: 'asc' },
+      activeId: null,
+      activeMarket: 'win'
+    };
+
+    (async function init() {
+      await window.BBI.renderHeader('archive.html');
+      await window.BBI.renderFooter();
+
+      const [pro, archive] = await Promise.all([
+        window.BBI.data.load(window.BBI.data.paths.prometheus),
+        window.BBI.data.load(window.BBI.data.paths.archiveIndex)
+      ]);
+      state.pro = pro;
+      state.archive = archive;
+
+      if (!pro) {
+        document.getElementById('eventsBody').innerHTML =
+          `<tr><td colspan="6" style="padding: var(--space-6); text-align: center; color: var(--text-muted);">PROMETHEUS backtest unavailable.</td></tr>`;
+        return;
+      }
+
+      // ---- Header
+      document.getElementById('aEvents').textContent = pro.n_events_scored ? `${pro.n_events_scored}` : '—';
+      document.getElementById('aSource').textContent = pro.model_source || '—';
+      document.getElementById('aRun').textContent = fmt.date(pro.run_at_utc);
+
+      // ---- KPIs
+      const ag = pro.aggregate || {};
+      document.getElementById('kSpear').textContent  = ag.mean_spearman?.toFixed(3) ?? '—';
+      document.getElementById('kBrier').textContent  = ag.mean_brier_top_10?.toFixed(4) ?? '—';
+      document.getElementById('kBrierWin').textContent = ag.mean_brier_win?.toFixed(4) ?? '—';
+      document.getElementById('kBrierMC').textContent  = ag.mean_brier_make_cut?.toFixed(3) ?? '—';
+
+      // ---- Build flat events array
+      state.events = (pro.per_event || []).map(e => ({
+        event_id: e.event_id,
+        event_name: e.event_name,
+        year: e.year,
+        field_size: e.field_size,
+        made_cut: e.made_cut,
+        spearman: e.spearman_dg_baseline,
+        brier_top10: e.calibration?.top_10?.brier ?? null,
+        skill_top10: e.calibration?.top_10?.skill_pct ?? null,
+        cal: e.calibration || {},
+        completed_date: e.completed_date || null
+      }));
+      // Find most recent event by event_id (proxy for recency in 2025 season)
+      const maxId = Math.max(...state.events.map(e => e.event_id));
+      state.mostRecentId = maxId;
+
+      // ---- Sort events table & wire interactions
+      document.querySelectorAll('#eventsTable thead th[data-sort]').forEach(th => {
+        th.addEventListener('click', () => {
+          const key = th.getAttribute('data-sort');
+          if (state.sort.key === key) state.sort.dir = state.sort.dir === 'asc' ? 'desc' : 'asc';
+          else state.sort = { key, dir: (key === 'event_id' ? 'asc' : 'desc') };
+          updateSortIndicator();
+          renderEvents();
+        });
+      });
+      document.querySelectorAll('#marketTabs button').forEach(b => {
+        b.addEventListener('click', () => {
+          document.querySelectorAll('#marketTabs button').forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+          state.activeMarket = b.getAttribute('data-mk');
+          if (state.activeId != null) renderDrill();
+        });
+      });
+
+      renderEvents();
+      renderArc();
+      renderArchive();
+
+      // Auto-select the first event on load
+      if (state.events.length) selectEvent(state.events[0].event_id);
+
+      window.observeAnimations?.(document);
+    })();
+
+    function updateSortIndicator() {
+      document.querySelectorAll('#eventsTable thead th').forEach(th => {
+        th.classList.remove('sort-asc', 'sort-desc');
+        if (th.getAttribute('data-sort') === state.sort.key) {
+          th.classList.add(state.sort.dir === 'asc' ? 'sort-asc' : 'sort-desc');
+        }
+      });
+    }
+
+    // ---------- Events table ----------
+    function renderEvents() {
+      const body = document.getElementById('eventsBody');
+      let rows = state.events.slice();
+      const { key, dir } = state.sort;
+      const mul = dir === 'asc' ? 1 : -1;
+      rows.sort((a, b) => {
+        const av = a[key] == null ? -Infinity : a[key];
+        const bv = b[key] == null ? -Infinity : b[key];
+        if (typeof av === 'string') return av.localeCompare(bv) * mul;
+        return (av - bv) * mul;
+      });
+
+      body.innerHTML = rows.map(e => {
+        const skill = e.skill_top10;
+        const skillCls = skill == null ? 'dim' : skill > 0 ? 'pos' : 'neg';
+        const skillStr = skill == null ? '—' : `${skill > 0 ? '+' : ''}${skill.toFixed(1)}%`;
+        const isActive = state.activeId === e.event_id;
+        const isRecent = state.mostRecentId && e.event_id === state.mostRecentId;
+        return `
+          <tr data-id="${e.event_id}" class="${isActive ? 'active' : ''} ${isRecent ? 'most-recent' : ''}">
+            <td class="td-name">${e.event_name}<small>${e.year} · ev ${e.event_id}</small></td>
+            <td>${e.field_size ?? '—'}</td>
+            <td>${e.made_cut ?? '—'}</td>
+            <td>${e.spearman != null ? e.spearman.toFixed(3) : '—'}</td>
+            <td>${e.brier_top10 != null ? e.brier_top10.toFixed(4) : '—'}</td>
+            <td class="skill-cell ${skillCls}">${skillStr}</td>
+          </tr>
+        `;
+      }).join('');
+
+      body.querySelectorAll('tr[data-id]').forEach(tr => {
+        tr.addEventListener('click', () => selectEvent(parseInt(tr.getAttribute('data-id'), 10)));
+      });
+    }
+
+    function selectEvent(id) {
+      state.activeId = id;
+      // Highlight active row
+      document.querySelectorAll('#eventsBody tr').forEach(tr => {
+        tr.classList.toggle('active', parseInt(tr.getAttribute('data-id'), 10) === id);
+      });
+      // Highlight active arc point
+      document.querySelectorAll('#arcSvg .pt').forEach(p => {
+        p.classList.toggle('active', parseInt(p.getAttribute('data-id'), 10) === id);
+      });
+      renderDrill();
+    }
+
+    // ---------- Drill-in ----------
+    function renderDrill() {
+      const ev = state.events.find(e => e.event_id === state.activeId);
+      if (!ev) return;
+      document.getElementById('drillName').textContent = ev.event_name;
+      document.getElementById('drillMeta').innerHTML =
+        `<span>${ev.year}</span> · <span>Field <strong>${ev.field_size}</strong></span> · <span>MC <strong>${ev.made_cut}</strong></span> · <span class="gold">ρ ${ev.spearman != null ? ev.spearman.toFixed(3) : '—'}</span>`;
+
+      const cal = ev.cal[state.activeMarket];
+      if (!cal) {
+        document.getElementById('dBrier').textContent = '—';
+        document.getElementById('dBrierSub').textContent = 'no calibration data';
+        document.getElementById('dSkill').textContent = '—';
+        document.getElementById('dLog').textContent = '—';
+        document.getElementById('dMean').textContent = '—';
+        document.getElementById('dMeanSub').innerHTML = 'vs <strong id="dActual">—</strong> actual';
+        document.getElementById('binsBody').innerHTML = `<tr><td colspan="6" class="bins-empty">No bins for this market in this event.</td></tr>`;
+        return;
+      }
+
+      document.getElementById('dBrier').textContent = cal.brier?.toFixed(4) ?? '—';
+      document.getElementById('dBrierSub').textContent = `n=${cal.n ?? '—'} · naive ${cal.naive_brier?.toFixed(4) ?? '—'}`;
+      const sk = cal.skill_pct;
+      const dSkill = document.getElementById('dSkill');
+      dSkill.textContent = sk == null ? '—' : `${sk >= 0 ? '+' : ''}${sk.toFixed(1)}%`;
+      dSkill.classList.remove('pos', 'neg');
+      if (sk != null) dSkill.classList.add(sk >= 0 ? 'pos' : 'neg');
+      document.getElementById('dLog').textContent = cal.log_loss?.toFixed(4) ?? '—';
+      document.getElementById('dMean').textContent = cal.mean_pred != null ? `${(cal.mean_pred * 100).toFixed(2)}%` : '—';
+      document.getElementById('dMeanSub').innerHTML = `vs <strong>${cal.mean_actual != null ? (cal.mean_actual * 100).toFixed(2) + '%' : '—'}</strong> actual`;
+
+      // Bins
+      const bins = (cal.bins || []).filter(Boolean);
+      const body = document.getElementById('binsBody');
+      if (!bins.length) {
+        body.innerHTML = `<tr><td colspan="6" class="bins-empty">No bin data for this market.</td></tr>`;
+        return;
+      }
+      body.innerHTML = bins.map(b => {
+        const pred = b.mean_pred ?? 0;
+        const actual = b.actual_rate ?? 0;
+        const diff = actual - pred;
+        const diffCls = Math.abs(diff) < 0.02 ? '' : diff > 0 ? 'pos' : 'neg';
+        const max = Math.max(pred, actual, 0.01);
+        const predW = (pred / max) * 100;
+        const actW  = (actual / max) * 100;
+        return `
+          <tr>
+            <td class="bin-bin">${b.bin}</td>
+            <td>${b.n}</td>
+            <td>${(pred * 100).toFixed(1)}%</td>
+            <td>${(actual * 100).toFixed(1)}%</td>
+            <td class="diff ${diffCls}">${diff >= 0 ? '+' : ''}${(diff * 100).toFixed(1)}pp</td>
+            <td class="bin-bar-cell">
+              <div class="bin-bar" title="pred ${(pred*100).toFixed(1)}% vs actual ${(actual*100).toFixed(1)}%">
+                <div class="pred" style="width:${predW.toFixed(1)}%"></div>
+                <div class="actual" style="width:${actW.toFixed(1)}%; opacity: 0.85;"></div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // ---------- Season arc SVG ----------
+    function renderArc() {
+      const svg = document.getElementById('arcSvg');
+      const pts = state.events.slice().sort((a, b) => a.event_id - b.event_id);
+      if (!pts.length) { svg.innerHTML = ''; return; }
+
+      const W = 900, H = 220;
+      const PL = 50, PR = 20, PT = 24, PB = 30;
+      const xs = (i) => PL + (i / Math.max(1, pts.length - 1)) * (W - PL - PR);
+
+      // Y range for spearman
+      const vals = pts.map(p => p.spearman).filter(v => v != null);
+      const yMin = Math.min(...vals, 0);
+      const yMax = Math.max(...vals, 0.6);
+      const ys = (v) => PT + (1 - (v - yMin) / (yMax - yMin || 1)) * (H - PT - PB);
+
+      // Build path
+      const linePts = pts.map((p, i) => `${xs(i)},${ys(p.spearman ?? 0)}`).join(' ');
+      const fillPts = `${PL},${ys(0)} ${linePts} ${xs(pts.length - 1)},${ys(0)}`;
+
+      // Mean line
+      const mean = vals.reduce((a, v) => a + v, 0) / vals.length;
+      const meanY = ys(mean);
+
+      // Y-axis grid
+      const yTicks = [0, 0.2, 0.4, 0.6];
+
+      svg.innerHTML = `
+        ${yTicks.map(t => `
+          <line class="grid-line" x1="${PL}" y1="${ys(t)}" x2="${W - PR}" y2="${ys(t)}"/>
+          <text class="axis-label" x="${PL - 8}" y="${ys(t) + 3}" text-anchor="end">${t.toFixed(1)}</text>
+        `).join('')}
+        <polygon class="arc-fill" points="${fillPts}"/>
+        <polyline class="arc-line" points="${linePts}"/>
+        <line class="mean-line" x1="${PL}" y1="${meanY}" x2="${W - PR}" y2="${meanY}"/>
+        <text class="axis-label" x="${W - PR}" y="${meanY - 5}" text-anchor="end" style="fill: var(--gold-300);">mean ρ ${mean.toFixed(3)}</text>
+        ${pts.map((p, i) => `
+          <circle class="pt" data-id="${p.event_id}" cx="${xs(i)}" cy="${ys(p.spearman ?? 0)}" r="3.5">
+            <title>${p.event_name} (ρ ${p.spearman != null ? p.spearman.toFixed(3) : '—'})</title>
+          </circle>
+        `).join('')}
+        <text class="axis-label" x="${PL}" y="${H - 8}" text-anchor="start">event 1</text>
+        <text class="axis-label" x="${W - PR}" y="${H - 8}" text-anchor="end">event ${pts.length}</text>
+      `;
+      svg.querySelectorAll('.pt').forEach(c => {
+        c.addEventListener('click', () => selectEvent(parseInt(c.getAttribute('data-id'), 10)));
+      });
+    }
+
+    // ---------- Archived dashboards ----------
+    function renderArchive() {
+      const mount = document.getElementById('archivedGrid');
+      const evs = state.archive?.events || [];
+      document.getElementById('aDashCount').textContent = evs.length;
+      if (!evs.length) {
+        mount.innerHTML = `<div style="color: var(--text-muted); padding: var(--space-4);">No archived dashboards yet.</div>`;
+        return;
+      }
+      // Linked into the legacy birdie-buddy GitHub Pages domain
+      const base = 'https://ebrady25.github.io/birdie-buddy/site/';
+      mount.innerHTML = evs.map(e => `
+        <a class="archived-link" href="${base}${e.file}" target="_blank" rel="noopener">
+          <div class="arr">↗ ${e.slug.split('_')[0] || ''}</div>
+          <div class="name">${e.name}</div>
+          <div class="open">Open archived dashboard →</div>
+        </a>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DFS Lineups — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* =========================================================
+       LINEUPS — PAGE-SPECIFIC STYLES
+       (page-head, page-toolbar, .seg, .toolbar-count live in components.css)
+       ========================================================= */
+
+    /* ---------- SUMMARY STRIP ---------- */
+    .summary-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); margin-bottom: var(--space-8); }
+    @media (max-width: 1200px) { .summary-strip { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 760px) { .summary-strip { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ---------- LINEUP CARD ---------- */
+    .lineup-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-5);
+    }
+    @media (max-width: 1000px) { .lineup-grid { grid-template-columns: 1fr; } }
+
+    .lineup-card {
+      position: relative;
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+      overflow: hidden;
+    }
+    .lineup-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(1200px 220px at 0% 0%, rgba(212, 168, 67, 0.045), transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--dur-base);
+    }
+    .lineup-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(212, 168, 67, 0.08);
+    }
+    .lineup-card:hover::before { opacity: 1; }
+
+    .lineup-card-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .lineup-kind {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-soft);
+    }
+    .lineup-kind[data-kind="Core"]      { background: rgba(96, 165, 250, 0.10); color: var(--info);     border-color: rgba(96, 165, 250, 0.32); }
+    .lineup-kind[data-kind="Leverage"]  { background: rgba(212, 168, 67, 0.12); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
+    .lineup-kind[data-kind="GPP"]       { background: rgba(248, 113, 113, 0.10); color: var(--negative); border-color: rgba(248, 113, 113, 0.3); }
+    .lineup-kind[data-kind="Contrarian"]{ background: rgba(168, 85, 247, 0.10); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
+
+    .lineup-title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-md); color: var(--text-primary); letter-spacing: -0.01em; line-height: 1.25; }
+    .lineup-id { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); }
+
+    /* KPIs */
+    .lineup-kpis {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+      background: var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: var(--space-4);
+    }
+    .lineup-kpi {
+      background: var(--surface-3);
+      padding: var(--space-3);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .lineup-kpi .k-label { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-muted); }
+    .lineup-kpi .k-value { font-family: var(--font-mono); font-weight: 600; font-size: var(--fs-sm); color: var(--text-primary); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+    .lineup-kpi .k-value.gold { color: var(--gold-300); }
+    .lineup-kpi .k-value.positive { color: var(--positive); }
+    .lineup-kpi .k-value.negative { color: var(--negative); }
+
+    /* PLAYER ROWS */
+    .lineup-players { display: flex; flex-direction: column; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow: hidden; }
+    .lineup-player {
+      display: grid;
+      grid-template-columns: 22px 1fr 70px 54px 54px 52px;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      border-top: 1px solid var(--border-soft);
+      background: var(--surface-1);
+      transition: background var(--dur-fast);
+    }
+    .lineup-player:first-child { border-top: none; }
+    .lineup-player:hover { background: var(--surface-3); }
+    .lineup-player .lp-rank { color: var(--text-dimmed); font-size: var(--fs-3xs); }
+    .lineup-player .lp-name { display: flex; align-items: center; gap: var(--space-2); color: var(--text-primary); font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-sm); }
+    .lineup-player .lp-name .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-dimmed); flex-shrink: 0; }
+    .lineup-player .lp-tier {
+      font-size: 9px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      letter-spacing: var(--tracking-wide);
+    }
+    .lineup-player .lp-salary { text-align: right; color: var(--text-body); font-variant-numeric: tabular-nums; }
+    .lineup-player .lp-zeus { text-align: right; color: var(--gold-300); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .lineup-player .lp-own { text-align: right; font-variant-numeric: tabular-nums; }
+    .lineup-player .lp-own.high { color: var(--negative); }
+    .lineup-player .lp-own.med { color: var(--gold-400); }
+    .lineup-player .lp-own.low { color: var(--positive); }
+
+    /* DIST BAR (ceiling distribution mini chart) */
+    .themis-bar {
+      display: flex; align-items: flex-end;
+      gap: 3px;
+      height: 36px;
+      margin-top: var(--space-4);
+      padding: var(--space-3);
+      background: var(--surface-1);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+    .themis-bar-label { position: absolute; top: 4px; left: 8px; font-family: var(--font-mono); font-size: 9px; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-dimmed); }
+    .themis-bar-stat { position: absolute; top: 4px; right: 8px; font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-muted); }
+    .themis-bar-stat .pct { color: var(--gold-300); font-weight: 600; }
+    .themis-slot {
+      flex: 1;
+      background: rgba(212, 168, 67, 0.18);
+      border-radius: 1px;
+      position: relative;
+      align-self: flex-end;
+    }
+    .themis-slot.p5  { background: rgba(248, 113, 113, 0.3); }
+    .themis-slot.p25 { background: rgba(251, 191, 36, 0.25); }
+    .themis-slot.p50 { background: rgba(212, 168, 67, 0.35); }
+    .themis-slot.p75 { background: rgba(74, 222, 128, 0.28); }
+    .themis-slot.p95 { background: rgba(74, 222, 128, 0.45); box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.2) inset; }
+
+    /* ---------- EXPOSURE CHART ---------- */
+    .exposure-panel {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: var(--space-6);
+    }
+    @media (max-width: 1100px) { .exposure-panel { grid-template-columns: 1fr; } }
+
+    .exposure-list { display: flex; flex-direction: column; gap: 1px; background: var(--border-soft); border-radius: var(--radius-md); overflow: hidden; }
+    .exposure-row {
+      display: grid; grid-template-columns: 170px 1fr 72px;
+      align-items: center; gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+      background: var(--surface-2);
+      font-size: var(--fs-xs);
+    }
+    .exposure-row:hover { background: var(--surface-3); }
+    .exposure-name { font-weight: 500; color: var(--text-primary); }
+    .exposure-bar-track {
+      height: 10px; background: var(--surface-1); border-radius: 999px;
+      overflow: hidden; position: relative;
+    }
+    .exposure-bar-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold-600), var(--gold-400));
+      transition: width 900ms cubic-bezier(.2,.8,.2,1);
+    }
+    .exposure-meta { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--text-body); font-size: var(--fs-xs); }
+    .exposure-meta .tgt { color: var(--text-dimmed); }
+    .exposure-meta .delta { font-size: var(--fs-3xs); }
+    .exposure-meta .delta.up { color: var(--negative); }
+    .exposure-meta .delta.down { color: var(--positive); }
+
+    .exposure-aside { display: flex; flex-direction: column; gap: var(--space-4); }
+    .exposure-note {
+      padding: var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      border-left: 2px solid var(--gold-500);
+    }
+    .exposure-note .eyebrow { margin-bottom: var(--space-2); }
+    .exposure-note p { font-size: var(--fs-sm); color: var(--text-body); line-height: 1.6; }
+
+    /* CONSTRUCTION LOGIC */
+    .rules-card .rule-line { display: flex; gap: var(--space-3); padding: var(--space-2) 0; border-top: 1px solid var(--border-soft); font-size: var(--fs-xs); }
+    .rules-card .rule-line:first-child { border-top: none; padding-top: 0; }
+    .rules-card .rule-tag { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 66px; padding-top: 2px; }
+    .rules-card .rule-text { color: var(--text-body); line-height: 1.5; }
+
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <!-- PAGE HEAD -->
+    <header class="page-head">
+      <div class="eyebrow">DraftKings main slate · <span id="lineupEvent">—</span></div>
+      <h1>Twelve lineups. One optimal grid.</h1>
+      <p>Each lineup is sourced from ODYSSEUS (composition search) then re-scored by THEMIS against 10,000 Monte Carlo tournaments. Ownership projections from HERMES determine leverage. Salaries pulled live from DraftKings. Sort by mean projection, ceiling, ownership, or BBI.</p>
+      <div class="page-head-meta">
+        <span>Contest <strong>Main Slate</strong></span>
+        <span>Salary cap <strong>$50,000</strong></span>
+        <span>Roster <strong>6 golfers</strong></span>
+        <span>Generated <span class="gold" id="lineupGen">—</span></span>
+        <span>Sims per lineup <strong>10,000</strong></span>
+      </div>
+    </header>
+
+    <!-- SUMMARY STRIP -->
+    <div class="summary-strip">
+      <div class="stat">
+        <div class="stat-label">Lineups generated</div>
+        <div class="stat-value"><span data-countup="12" data-dur="500">0</span></div>
+        <div class="stat-sub">Core · Leverage · GPP</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Unique players</div>
+        <div class="stat-value"><span id="kpiUnique">0</span></div>
+        <div class="stat-sub">Across all 12 builds</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Best p95 ceiling</div>
+        <div class="stat-value stat-value-gold"><span id="kpiP95">0</span></div>
+        <div class="stat-sub"><span id="kpiP95Name">—</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Avg projection</div>
+        <div class="stat-value"><span id="kpiAvgProj">0</span></div>
+        <div class="stat-sub">THEMIS mean across 12</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Avg ownership</div>
+        <div class="stat-value"><span id="kpiAvgOwn">0</span></div>
+        <div class="stat-sub">Cumulative HERMES</div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="page-toolbar">
+      <div class="page-toolbar-row">
+        <div class="chip-row" id="kindChips">
+          <button class="chip" data-filter="all" aria-pressed="true">All <span class="count" id="cAll">12</span></button>
+          <button class="chip" data-filter="Core" aria-pressed="false">Core <span class="count" id="cCore">0</span></button>
+          <button class="chip" data-filter="Leverage" aria-pressed="false">Leverage <span class="count" id="cLev">0</span></button>
+          <button class="chip" data-filter="GPP" aria-pressed="false">GPP <span class="count" id="cGpp">0</span></button>
+        </div>
+
+        <div class="divider-vertical"></div>
+
+        <div class="seg" role="radiogroup" aria-label="Sort lineups by">
+          <button class="active" data-sort="mean">Mean proj</button>
+          <button data-sort="p95">p95 ceiling</button>
+          <button data-sort="own">Ownership</button>
+          <button data-sort="bbi">Avg BBI</button>
+          <button data-sort="salary">Salary</button>
+        </div>
+
+        <div class="toolbar-count"><strong id="lcShown">12</strong> of <strong>12</strong></div>
+      </div>
+    </div>
+
+    <!-- LINEUP GRID -->
+    <div class="lineup-grid" id="lineupGrid"></div>
+
+    <!-- EXPOSURE + CONSTRUCTION -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Portfolio exposure</span>
+          <h2>Where the money goes.</h2>
+          <p>Aggregate roster exposure across the 12 lineups vs. field-wide ownership projections. Positive deltas (red) indicate overweights; negative (green) are underweights. Target zone marked by HERMES.</p>
+        </div>
+      </div>
+      <div class="exposure-panel">
+        <div class="exposure-list" id="exposureList"></div>
+        <div class="exposure-aside">
+          <div class="exposure-note">
+            <div class="eyebrow">Leverage read</div>
+            <p id="leverageNote">Exposure is calibrated against projected ownership so every overweight is a conscious bet. Red deltas mark players the portfolio leans into against the field; green deltas mark deliberate fades.</p>
+          </div>
+          <div class="card rules-card">
+            <div class="card-title">Construction rules (v8.5)</div>
+            <div style="margin-top: var(--space-3);">
+              <div class="rule-line"><span class="rule-tag">Salary</span><span class="rule-text">Target $48,000–$50,000 ceiling; minimum $47,500.</span></div>
+              <div class="rule-line"><span class="rule-tag">Chalk</span><span class="rule-text">At most one player above 22% projected ownership per lineup.</span></div>
+              <div class="rule-line"><span class="rule-tag">Stacks</span><span class="rule-text">At least three Harbour Town specialists in every build.</span></div>
+              <div class="rule-line"><span class="rule-tag">Leverage</span><span class="rule-text">Leverage/GPP lineups must fade one top-5 owned player vs. Cores.</span></div>
+              <div class="rule-line"><span class="rule-tag">Overlap</span><span class="rule-text">Maximum 80% overlap between any two lineups.</span></div>
+              <div class="rule-line"><span class="rule-tag">Floor</span><span class="rule-text">Every lineup must project ≥ 440 Zeus points mean.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('lineups.html');
+      await BBI.renderFooter();
+
+      const [ev, dfs, themis] = await Promise.all([
+        BBI.data.load(BBI.data.paths.currentEvent),
+        BBI.data.load(BBI.data.paths.dfsLineups),
+        BBI.data.load(BBI.data.paths.themis)
+      ]);
+
+      $('#lineupEvent').textContent = ev?.event_name || 'RBC Heritage';
+      $('#lineupGen').textContent = dfs?.generated_at ? fmt.ago(dfs.generated_at) : 'Live';
+
+      const lineups = dfs?.lineups || [];
+      const themisDist = themis?.lineup_distributions || [];
+      const themisMap = new Map();
+      themisDist.forEach(d => themisMap.set(d.label, d));
+
+      // ---------- ENRICH LINEUPS ----------
+      const enriched = lineups.map((l, idx) => {
+        const t = themisMap.get(l.label) || {};
+        const kind = l.label.startsWith('Core') ? 'Core'
+                    : l.label.startsWith('Leverage') ? 'Leverage'
+                    : l.label.startsWith('GPP') ? 'GPP'
+                    : 'Core';
+        const idMatch = l.label.match(/#(\d+)/);
+        const lineupId = idMatch ? `${kind.slice(0,1)}${idMatch[1]}` : `L${idx+1}`;
+        const titleText = l.label.split(' — ')[1] || l.label;
+        return {
+          idx,
+          lineupId,
+          kind,
+          label: l.label,
+          title: titleText,
+          players: l.players || [],
+          total_salary: l.total_salary,
+          sum_zeus: l.sum_zeus,
+          sum_hermes_own: l.sum_hermes_own,
+          avg_bbi_dfs: l.avg_bbi_dfs,
+          mean: t.mean ?? l.sum_zeus,
+          p5: t.p5 ?? null,
+          p25: t.p25 ?? null,
+          p50: t.p50 ?? null,
+          p75: t.p75 ?? null,
+          p95: t.p95 ?? null,
+          std: t.std ?? null
+        };
+      });
+
+      // ---------- SUMMARY STATS ----------
+      const uniquePlayers = new Set();
+      lineups.forEach(l => l.players.forEach(p => uniquePlayers.add(p.name)));
+      $('#kpiUnique').textContent = uniquePlayers.size;
+
+      const bestCeiling = enriched.reduce((best, l) => (l.p95 != null && (best == null || l.p95 > best.p95)) ? l : best, null);
+      if (bestCeiling) {
+        $('#kpiP95').textContent = fmt.num(bestCeiling.p95, 0);
+        $('#kpiP95Name').textContent = bestCeiling.lineupId + ' · ' + bestCeiling.title.slice(0, 38);
+      }
+
+      const avgMean = enriched.reduce((s, l) => s + (l.mean || 0), 0) / (enriched.length || 1);
+      $('#kpiAvgProj').textContent = fmt.num(avgMean, 0);
+
+      const avgOwn = enriched.reduce((s, l) => s + (l.sum_hermes_own || 0), 0) / (enriched.length || 1);
+      $('#kpiAvgOwn').textContent = fmt.num(avgOwn, 0) + '%';
+
+      // ---------- KIND COUNTS ----------
+      const kindCounts = { Core: 0, Leverage: 0, GPP: 0 };
+      enriched.forEach(l => kindCounts[l.kind] = (kindCounts[l.kind] || 0) + 1);
+      $('#cCore').textContent = kindCounts.Core || 0;
+      $('#cLev').textContent = kindCounts.Leverage || 0;
+      $('#cGpp').textContent = kindCounts.GPP || 0;
+      $('#cAll').textContent = enriched.length;
+
+      // ---------- RENDER LINEUP CARDS ----------
+      const grid = $('#lineupGrid');
+
+      const ownClass = (own) => own > 18 ? 'high' : (own > 10 ? 'med' : 'low');
+      const tierSlug = (t) => {
+        const s = (t || 'NEUTRAL').toLowerCase();
+        if (s.includes('spec')) return 'tier tier-specialist';
+        if (s.includes('comf')) return 'tier tier-comfortable';
+        if (s.includes('stru')) return 'tier tier-struggle';
+        return 'tier tier-neutral';
+      };
+      const tierAbbrev = (t) => (t || 'NEUT').slice(0, 4);
+
+      // Find global max for THEMIS bar scaling (anchor to p95 across all lineups)
+      const globalCeiling = Math.max(...enriched.map(l => l.p95 || 0), 1);
+      const globalFloor   = Math.min(...enriched.map(l => l.p5 || 0), 0);
+      const globalSpan = globalCeiling - globalFloor || 1;
+      const scaleH = (v) => Math.max(6, Math.min(26, ((v - globalFloor) / globalSpan) * 26 + 4));
+
+      const cardHTML = (l, pos) => {
+        const playersHTML = l.players.map((p, i) => `
+          <div class="lineup-player">
+            <span class="lp-rank">${i+1}</span>
+            <span class="lp-name"><span class="dot"></span>${playerLink(p.dg_id, fmt.abbrevName(p.name))}</span>
+            <span class="lp-tier ${tierSlug(p.tier)}">${tierAbbrev(p.tier)}</span>
+            <span class="lp-salary">$${(p.salary/1000).toFixed(1)}k</span>
+            <span class="lp-zeus">${fmt.num(p.zeus_dfs, 1)}</span>
+            <span class="lp-own ${ownClass(p.hermes_own)}">${fmt.num(p.hermes_own, 1)}%</span>
+          </div>
+        `).join('');
+
+        const themisHTML = (l.p5 != null) ? `
+          <div class="themis-bar" title="THEMIS Monte Carlo distribution: p5 ${fmt.num(l.p5,0)} / p50 ${fmt.num(l.p50,0)} / p95 ${fmt.num(l.p95,0)}">
+            <span class="themis-bar-label">THEMIS · 10k sims</span>
+            <span class="themis-bar-stat">p95 <span class="pct">${fmt.num(l.p95, 0)}</span></span>
+            <div class="themis-slot p5"  style="height:${scaleH(l.p5)}px"></div>
+            <div class="themis-slot p25" style="height:${scaleH(l.p25)}px"></div>
+            <div class="themis-slot p50" style="height:${scaleH(l.p50)}px"></div>
+            <div class="themis-slot p75" style="height:${scaleH(l.p75)}px"></div>
+            <div class="themis-slot p95" style="height:${scaleH(l.p95)}px"></div>
+          </div>
+        ` : '';
+
+        return `
+          <article class="lineup-card" data-lineup data-kind="${l.kind}"
+            data-mean="${l.mean || 0}" data-p95="${l.p95 || 0}"
+            data-own="${l.sum_hermes_own || 0}" data-bbi="${l.avg_bbi_dfs || 0}"
+            data-salary="${l.total_salary || 0}"
+            data-reveal data-delay="${Math.min(6, pos+1)}">
+            <header class="lineup-card-head">
+              <div>
+                <div class="row-tight" style="gap: var(--space-2); margin-bottom: 4px;">
+                  <span class="lineup-kind" data-kind="${l.kind}">${l.kind}</span>
+                  <span class="lineup-id">${l.lineupId}</span>
+                </div>
+                <div class="lineup-title">${l.title}</div>
+              </div>
+              <div style="text-align: right;">
+                <div class="stat-label" style="font-size: var(--fs-3xs); margin-bottom: 2px;">Proj</div>
+                <div class="num-display" style="font-size: var(--fs-xl); color: var(--gold-300);">${fmt.num(l.mean, 0)}</div>
+              </div>
+            </header>
+
+            <div class="lineup-kpis">
+              <div class="lineup-kpi"><span class="k-label">Salary</span><span class="k-value">$${(l.total_salary/1000).toFixed(1)}k</span></div>
+              <div class="lineup-kpi"><span class="k-label">p95</span><span class="k-value gold">${fmt.num(l.p95, 0)}</span></div>
+              <div class="lineup-kpi"><span class="k-label">p5</span><span class="k-value">${fmt.num(l.p5, 0)}</span></div>
+              <div class="lineup-kpi"><span class="k-label">Own</span><span class="k-value ${l.sum_hermes_own > 80 ? 'negative' : (l.sum_hermes_own < 70 ? 'positive' : '')}">${fmt.num(l.sum_hermes_own, 1)}%</span></div>
+              <div class="lineup-kpi"><span class="k-label">Avg BBI</span><span class="k-value">${fmt.num(l.avg_bbi_dfs, 1)}</span></div>
+            </div>
+
+            <div class="lineup-players">
+              ${playersHTML}
+            </div>
+
+            ${themisHTML}
+          </article>
+        `;
+      };
+
+      const renderCards = (list) => {
+        grid.innerHTML = list.map((l, i) => cardHTML(l, i)).join('');
+        window.observeAnimations?.(grid);
+        $('#lcShown').textContent = list.length;
+      };
+
+      // ---------- SORT ----------
+      let sortKey = 'mean';
+      let activeKind = 'all';
+      const applySortAndFilter = () => {
+        let list = enriched.slice();
+        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind);
+        list.sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
+        renderCards(list);
+      };
+      applySortAndFilter();
+
+      // Wire sort buttons
+      $$('.seg[aria-label="Sort lineups by"] button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          $$('.seg[aria-label="Sort lineups by"] button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          sortKey = btn.dataset.sort;
+          applySortAndFilter();
+        });
+      });
+
+      // Wire kind chips
+      $$('#kindChips .chip').forEach(c => {
+        c.addEventListener('click', () => {
+          $$('#kindChips .chip').forEach(cc => cc.setAttribute('aria-pressed', 'false'));
+          c.setAttribute('aria-pressed', 'true');
+          activeKind = c.dataset.filter;
+          applySortAndFilter();
+        });
+      });
+
+      // ---------- EXPOSURE ----------
+      // Build name -> dg_id map from all lineup players
+      const nameToId = {};
+      (dfs?.lineups || []).forEach(l => {
+        l.players.forEach(p => {
+          nameToId[p.name] = p.dg_id;
+        });
+      });
+
+      const exposure = dfs?.exposure || {};
+      const projOwn = dfs?.hermes_own_projections || {};
+      const exposureList = Object.entries(exposure).map(([name, pct]) => ({
+        name, pct, dg_id: nameToId[name],
+        projected: projOwn[name] || 0,
+        delta: pct - (projOwn[name] || 0)
+      }));
+      exposureList.sort((a, b) => b.pct - a.pct);
+
+      const expoMount = $('#exposureList');
+      const maxPct = Math.max(...exposureList.map(e => e.pct), 1);
+      expoMount.innerHTML = exposureList.map((e, i) => {
+        const deltaClass = e.delta > 2 ? 'up' : (e.delta < -2 ? 'down' : '');
+        const deltaSign = e.delta > 0 ? '+' : '';
+        const widthPct = (e.pct / 100) * 100;
+        return `
+          <div class="exposure-row" data-reveal data-delay="${Math.min(6, Math.floor(i/3)+1)}">
+            <div class="exposure-name">${playerLink(e.dg_id, fmt.abbrevName(e.name))}</div>
+            <div class="exposure-bar-track">
+              <div class="exposure-bar-fill bar-fill" data-to="${widthPct}" style="width:0%"></div>
+            </div>
+            <div class="exposure-meta">
+              <div>${fmt.num(e.pct, 1)}% <span class="tgt">/ ${fmt.num(e.projected, 1)}%</span></div>
+              <div class="delta ${deltaClass}">${e.delta !== 0 ? deltaSign + fmt.num(e.delta, 1) + 'pp' : '—'}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      window.observeAnimations?.(expoMount);
+
+      // Build leverage note
+      const overweight = exposureList.filter(e => e.delta > 5).slice(0, 2);
+      const underweight = exposureList.filter(e => e.delta < -3 && e.pct === 0).slice(0, 2);
+      const ovNames = overweight.map(e => `<strong>${fmt.abbrevName(e.name)}</strong> (+${fmt.num(e.delta,1)}pp)`).join(', ');
+      const fadeNames = underweight.map(e => `<strong>${fmt.abbrevName(e.name)}</strong>`).join(', ');
+      if (ovNames) {
+        $('#leverageNote').innerHTML = `Portfolio leans heavily into ${ovNames} — deliberate overweights against field ownership. ${fadeNames ? `Fades include ${fadeNames}, giving room for leverage when the chalk falters.` : ''}`;
+      }
+
+      // Final pass to catch any late reveal triggers
+      window.observeAnimations?.(document);
+    });
+  </script>
+</body>
+</html>

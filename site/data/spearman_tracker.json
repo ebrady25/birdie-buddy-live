@@ -1,0 +1,327 @@
+{
+  "tracker_version": "3.0",
+  "created": "2026-04-06",
+  "last_updated": "2026-04-06",
+  "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
+  "goal_framework": {
+    "ultimate_goal": "Best-rated predictive golf model in the world",
+    "tiers": {
+      "tier_1_baseline": {
+        "label": "Beat DataGolf",
+        "threshold": "BBI Spearman > DG Spearman consistently",
+        "description": "Prove BBI adds value over a pure strokes-gained model by outperforming DG pre-tournament rankings week over week"
+      },
+      "tier_2_target": {
+        "label": "Elite Model",
+        "threshold": "Season avg Spearman > 0.40 across 20+ events",
+        "description": "Sustained 0.40+ across diverse courses and field sizes puts us in top-tier territory"
+      },
+      "tier_3_aspirational": {
+        "label": "Best in World",
+        "threshold": "Season avg Spearman > 0.50 across 25+ events",
+        "description": "Maintaining 0.50+ across a full season with head-to-head DG dominance is the ultimate claim"
+      }
+    },
+    "weekly_improvement_protocol": {
+      "enabled": true,
+      "description": "After each event, Mnemosyne analyzes what worked and what didn't, then suggests 1-3 specific weight or methodology changes for the following week",
+      "categories": [
+        "weight_adjustments",
+        "layer_recalibration",
+        "course_fit_refinement",
+        "ownership_leverage_tuning",
+        "new_factor_candidates"
+      ]
+    }
+  },
+  "target_spearman": 0.4,
+  "baseline_spearman": "dynamic \u2014 computed from DG each week",
+  "aspirational_spearman": 0.5,
+  "notes": "v3.0: Now tracking DG Spearman head-to-head each week. Baseline is no longer a static 0.269 estimate \u2014 Mnemosyne computes DG's actual rank correlation from their pre-tournament predictions vs actual results. Goal tiers: Beat DG \u2192 0.40 season avg \u2192 0.50 season avg.",
+  "normalization_method": {
+    "type": "fisher_z_transform",
+    "formula": "z = 0.5 * ln((1+\u03c1)/(1-\u03c1)) * sqrt(n-3)",
+    "description": "Fisher z-transform accounts for field-size differences. Larger fields (135) and smaller fields (85) produce different raw Spearman values for the same model quality. The z-score normalizes this so we can compare Masters (85 players) to Valero (132 players) fairly.",
+    "reference_field_size": 135,
+    "reference_note": "Standard PGA Tour field is ~135 players. Masters is ~85. z-scores allow direct comparison."
+  },
+  "season": "2026",
+  "events": [
+    {
+      "week": 10,
+      "event": "Masters Tournament",
+      "course": "Augusta National Golf Club",
+      "date": "2026-04-13",
+      "winner": "McIlroy, Rory",
+      "winner_dg_rank": 2,
+      "winner_bbi_rank": 9,
+      "field_size": 91,
+      "spearman_bbi": 0.3824,
+      "spearman_dg": 0.6659,
+      "spearman_delta": -0.2835,
+      "beat_dg": false,
+      "spearman_normalized_z": 3.779,
+      "dg_normalized_z": 7.536,
+      "beat_target": false,
+      "beat_baseline": true,
+      "layer_correlations": {
+        "sg_ott": 0.4968,
+        "sg_app": 0.618,
+        "sg_arg": 0.4944,
+        "sg_putt": 0.4995,
+        "sg_total": 0.9152
+      },
+      "top5_hits": 2,
+      "top5_total": 5,
+      "top20_hits": 10,
+      "top20_total": 20,
+      "winner_in_top10_bbi": true,
+      "model_version": "v8.5",
+      "dashboard_version": "v4.0",
+      "dg_note": "DG Spearman uses current global skill rankings as proxy \u2014 pre-tournament predictions unavailable post-event. DG ranks McIlroy #2 (winner), Scheffler #1 (2nd) \u2014 excellent calibration at top.",
+      "improvement_suggestions": [
+        {
+          "category": "course_fit_refinement",
+          "suggestion": "Impose minimum 4-start threshold for Augusta SG multiplier. Players with <4 Augusta starts (Aberg: 2 starts, 1.25x SPECIALIST multiplier) should be capped at NEUTRAL+ tier (1.05x). Expected: Reduces overrating of small-sample specialists like Aberg (#2 BBI \u2192 actual #21).",
+          "rationale": "Aberg had highest Augusta SG rate (2.875) but in only 2 starts. BBI assigned him SPECIALIST multiplier (1.25x) and #2 overall. He finished 21st. Rose (24 Augusta starts, unranked by BBI) finished T3 with sg_app=6.25. Small sample Augusta SG is noisy \u2014 depth of experience is the signal.",
+          "expected_impact": "Medium-high: Prevents future over-promotion of 1-3 start Augusta players. Would have moved Aberg from #2 to approximately #6-8 BBI, improving top-5 accuracy."
+        },
+        {
+          "category": "new_factor_candidates",
+          "suggestion": "Expand BBI ranked field from top-30 to top-55 for Major championships. Masters had 7 top-20 finishers outside BBI top-30: Rose (T3), Hatton (T3), Burns (T7), Homa (T9), Knapp (11), Day (T12), Koepka (T12). These were all assigned the generic MC-adjacent rank (61.0).",
+          "rationale": "Masters field is 91 players with many Augusta specialists and LIV veterans outside normal PGA field. Rose (24 Augusta starts), Koepka (6 starts), Reed (6 starts, 2018 champion) are legitimate Augusta factors. Field coverage gap was the single biggest driver of below-0.40 Spearman. Expanding to 55 would have captured all of the above.",
+          "expected_impact": "High: Estimated +0.04 to +0.07 Spearman improvement for Majors. Critical for Masters, US Open, Open Championship where field composition diverges from standard PGA Tour events."
+        },
+        {
+          "category": "weight_adjustments",
+          "suggestion": "For Augusta specifically, elevate ARG weight from 1.20x to 1.35x and reduce OTT distance bonus for non-top-20 drivers. McIlroy won with sg_arg=+5.574 (tournament's biggest factor). Six of top-9 finishers had positive ARG. Fleetwood (#7 BBI) had ARG=-4.04 and finished T33 despite 24 Augusta starts and positive OTT.",
+          "rationale": "Augusta ARG correlation this week: +0.494 (second-highest layer). ARG is heavily penalized by Augusta's approach zones, false fronts, and run-off areas. The BBI ARG premium (1.20x) is directionally correct but magnitude should increase. Meanwhile OTT long-distance bonus hurt: Lee Min Woo (MC), MacIntyre (MC), Bhatia (MC) all had OTT boosts but poor approach/scrambling.",
+          "expected_impact": "Medium: +0.02 to +0.04 Spearman at Augusta-type venues (firm, complex, penalty-heavy). Correlates with PUTT synergy \u2014 players who can scramble AND putt dominate Augusta."
+        }
+      ],
+      "notes": "First event below 0.40 target. Masters-specific challenge: 91-player invitational field including LIV veterans, past champions, and Augusta specialists outside normal PGA rankings. Winner McIlroy (BBI #9, ELITE tier) correctly identified. Key misses: Rose and Hatton (both T3, both unranked by BBI). Aberg (#2 BBI) dramatically over-ranked based on 2-start Augusta sample. APP layer correlation strongest of season at 0.618 \u2014 Augusta APP premium (1.30x) validated. DG proxy comparison uses current global rankings (post-event) vs pre-tournament BBI predictions \u2014 not a clean apples-to-apples, but logged for tracking purposes."
+    },
+    {
+      "week": 7,
+      "event": "Valspar Championship",
+      "course": "Innisbrook Resort (Copperhead)",
+      "date": "2026-03-19",
+      "winner": "Fitzpatrick, Matt",
+      "winner_dg_rank": 5,
+      "field_size": 135,
+      "spearman_bbi": 0.3994,
+      "spearman_dg": null,
+      "spearman_delta": null,
+      "beat_dg": null,
+      "spearman_normalized_z": 4.859,
+      "beat_target": true,
+      "beat_baseline": true,
+      "layer_correlations": {
+        "sg_ott": 0.2558,
+        "sg_app": 0.2905,
+        "sg_arg": 0.2204,
+        "sg_putt": 0.2426,
+        "sg_total": 0.3996
+      },
+      "top5_hits": 2,
+      "top5_total": 5,
+      "top20_hits": 8,
+      "top20_total": 20,
+      "winner_in_top10_bbi": true,
+      "model_version": "v8.5",
+      "dashboard_version": "v4.0",
+      "notes": "First tracked event. Fitzpatrick was a top-5 BBI pick."
+    },
+    {
+      "week": 8,
+      "event": "Texas Childrens Houston Open",
+      "course": "Memorial Park Golf Course",
+      "date": "2026-03-26",
+      "winner": "Woodland, Gary",
+      "winner_dg_rank": 88,
+      "field_size": 135,
+      "spearman_bbi": 0.4529,
+      "spearman_dg": null,
+      "spearman_delta": null,
+      "beat_dg": null,
+      "spearman_normalized_z": 5.611,
+      "beat_target": true,
+      "beat_baseline": true,
+      "layer_correlations": {
+        "sg_ott": 0.2376,
+        "sg_app": 0.3462,
+        "sg_arg": 0.1876,
+        "sg_putt": 0.3413,
+        "sg_total": 0.4529
+      },
+      "top5_hits": 2,
+      "top5_total": 5,
+      "top20_hits": 9,
+      "top20_total": 20,
+      "winner_in_top10_bbi": false,
+      "model_version": "v8.5",
+      "dashboard_version": "v4.0",
+      "notes": "Woodland win from rank #88 \u2014 deep field surprise. Model still ranked field well overall despite missing winner."
+    },
+    {
+      "week": 9,
+      "event": "Valero Texas Open",
+      "course": "TPC San Antonio (The Oaks)",
+      "date": "2026-04-02",
+      "winner": "Spaun, J.J.",
+      "winner_dg_rank": 23,
+      "field_size": 132,
+      "spearman_bbi": 0.5736,
+      "spearman_dg": null,
+      "spearman_delta": null,
+      "beat_dg": null,
+      "spearman_normalized_z": 7.407,
+      "beat_target": true,
+      "beat_baseline": true,
+      "layer_correlations": {
+        "sg_ott": 0.3477,
+        "sg_app": 0.214,
+        "sg_arg": 0.2226,
+        "sg_putt": 0.0547,
+        "sg_total": 0.5736
+      },
+      "top5_hits": 2,
+      "top5_total": 5,
+      "top20_hits": 8,
+      "top20_total": 20,
+      "winner_in_top10_bbi": true,
+      "model_version": "v8.5",
+      "dashboard_version": "v4.0",
+      "notes": "Best Spearman yet. APP layer validated (+2.19 for winner). Spaun was within BBI credible range."
+    }
+  ],
+  "rolling_metrics": {
+    "3_event_avg_bbi_spearman": 0.4696,
+    "3_event_avg_dg_spearman": 0.6659,
+    "3_event_avg_delta": null,
+    "3_event_avg_z": 5.566,
+    "season_avg_bbi_spearman": 0.4521,
+    "season_avg_dg_spearman": null,
+    "season_avg_z": 5.262,
+    "best_bbi_spearman": {
+      "event": "Valero Texas Open",
+      "value": 0.5736,
+      "z": 7.407
+    },
+    "worst_bbi_spearman": {
+      "event": "Masters Tournament",
+      "value": 0.3824,
+      "z": 3.779
+    },
+    "beat_dg_streak": 0,
+    "beat_dg_total": 0,
+    "total_events_tracked": 4,
+    "events_bbi_beat_dg": 0,
+    "events_dg_beat_bbi": 1,
+    "events_above_040": 2,
+    "events_above_050": 1,
+    "avg_top5_accuracy": 0.35,
+    "avg_top20_accuracy": 0.4125,
+    "winners_from_top10_bbi": 3,
+    "winners_from_top10_bbi_total": 4
+  },
+  "improvement_trend": {
+    "spearman_slope_per_week": 0.0248,
+    "z_slope_per_week": 0.241,
+    "direction": "stable (Masters dip from Masters-specific field challenge)",
+    "layer_trends": {
+      "sg_ott": "stable",
+      "sg_app": "improving (season-best 0.618 at Masters)",
+      "sg_arg": "improving",
+      "sg_putt": "stable (strong at Masters)"
+    }
+  },
+  "dg_head_to_head": {
+    "description": "Week-by-week comparison of BBI Spearman vs DataGolf pre-tournament ranking Spearman. DG Spearman computed by correlating DG pre-tournament rank order against actual finish positions.",
+    "methodology": "1. Fetch DG pre-tournament predictions (win probabilities). 2. Rank players by DG win prob (highest = rank 1). 3. Rank players by actual finish position. 4. Compute Spearman correlation between DG rank and actual rank. 5. Compare to BBI Spearman. NOTE: Week 10 uses DG global skill rankings as proxy (pre-tournament preds unavailable post-event).",
+    "season_record": {
+      "bbi_wins": 0,
+      "dg_wins": 1,
+      "ties": 0
+    },
+    "weekly_results": [
+      {
+        "week": 10,
+        "event": "Masters",
+        "bbi": 0.3824,
+        "dg": 0.6659,
+        "delta": -0.2835,
+        "winner": "BBI: DG (proxy)"
+      }
+    ],
+    "note": "Weeks 7-9: DG Spearman tracking not yet active. Week 10: DG uses global rankings proxy (pre-tournament predictions expired). Season record: BBI 0-1 vs DG proxy."
+  },
+  "weekly_improvement_suggestions": {
+    "description": "After each event, Mnemosyne analyzes performance gaps and suggests 1-3 specific improvements for the following week",
+    "history": [
+      {
+        "week": 10,
+        "event": "Masters Tournament",
+        "suggestions": [
+          {
+            "category": "course_fit_refinement",
+            "suggestion": "Impose minimum 4-start threshold for Augusta SG multiplier",
+            "rationale": "Aberg: 2 starts, 1.25x SPECIALIST \u2192 finished 21st. Rose: 24 starts, unranked \u2192 finished T3.",
+            "expected_impact": "Medium-high: Prevents over-promotion of small-sample Augusta players"
+          },
+          {
+            "category": "new_factor_candidates",
+            "suggestion": "Expand BBI field coverage from top-30 to top-55 for Major championships",
+            "rationale": "7 of top-20 Masters finishers were unranked by BBI (Rose, Hatton, Burns, Homa, Knapp, Day, Koepka)",
+            "expected_impact": "High: Estimated +0.04 to +0.07 Spearman improvement for Majors"
+          },
+          {
+            "category": "weight_adjustments",
+            "suggestion": "Increase Augusta ARG weight from 1.20x to 1.35x; reduce OTT distance bonus for non-elite ball-strikers",
+            "rationale": "McIlroy sg_arg=+5.574 won. ARG layer correlation: +0.494. Fleetwood (ARG=-4.04) bombed despite course history.",
+            "expected_impact": "Medium: +0.02 to +0.04 Spearman at Augusta-type venues"
+          }
+        ]
+      }
+    ],
+    "categories": {
+      "weight_adjustments": "Shift BBI factor weights based on which layers under/overperformed",
+      "layer_recalibration": "Tune SG sub-category weights based on Cassandra layer health",
+      "course_fit_refinement": "Improve course DNA matching based on what the winning profile looked like vs what we predicted",
+      "ownership_leverage_tuning": "Adjust how ownership data impacts DFS BBI scores",
+      "new_factor_candidates": "Propose new factors or data sources that could improve correlation"
+    }
+  },
+  "field_size_reference": {
+    "standard_pga": 135,
+    "masters": 85,
+    "players_championship": 144,
+    "invitational_avg": 90,
+    "note": "When comparing Spearman across events with different field sizes, use z-scores. Raw Spearman is still the primary display metric but z-scores are the apples-to-apples comparison."
+  },
+  "history": [
+    {
+      "year": 2026,
+      "week": 11,
+      "event": "RBC Heritage",
+      "event_id": 12,
+      "completed": "2026-04-19",
+      "spearman_bbi": 0.3437,
+      "spearman_dg": 0.377,
+      "diff_bbi_vs_dg": -0.0333,
+      "winner": "Fitzpatrick, Matt",
+      "winner_bbi_rank": 3,
+      "winner_dg_rank": 4,
+      "n_scored": 82,
+      "logged_utc": "2026-04-21T04:16:36.580175Z",
+      "notes": "manual catch-up run — scheduled Mnemosyne stalled Mon Apr 20"
+    }
+  ],
+  "summary": {
+    "events_scored": 1,
+    "mean_spearman_bbi": 0.3437,
+    "mean_spearman_dg": 0.377,
+    "mean_diff": -0.0333,
+    "last_updated": "2026-04-21T04:16:36.580175Z"
+  }
+}
