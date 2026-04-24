@@ -931,7 +931,7 @@
         const largeArc = (angle - (-90)) > 180 ? 1 : 0;
         const arcX = cx + radius * Math.cos(angleRad);
         const arcY = cy + radius * Math.sin(angleRad);
-        const arcPath = \`M \${x1} \${y1} A \${radius} \${radius} 0 \${largeArc} 1 \${arcX} \${arcY}\`;
+        const arcPath = `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${arcX} ${arcY}`;
 
         // Tick angles: p50 and player value
         const p50Angle = -90 + ((p50 - minVal) / range) * 180;
@@ -939,30 +939,30 @@
         const p50X = cx + radius * Math.cos(p50AngleRad);
         const p50Y = cy + radius * Math.sin(p50AngleRad);
 
-        return \`
-          <div class="gauge-card" \${!hasData ? 'style="opacity: 0.5;"' : ''}>
-            <div class="gauge-title">\${title}</div>
+        return `
+          <div class="gauge-card" ${!hasData ? 'style="opacity: 0.5;"' : ''}>
+            <div class="gauge-title">${title}</div>
             <svg width="100%" height="200" viewBox="0 0 240 200" style="max-width: 320px; margin: 0 auto; display: block;">
               <!-- Arc background (light) -->
-              <path d="M \${x1} \${y1} A \${radius} \${radius} 0 1 1 \${x2} \${y2}" fill="none" stroke="var(--border-soft)" stroke-width="8" opacity="0.3"/>
+              <path d="M ${x1} ${y1} A ${radius} ${radius} 0 1 1 ${x2} ${y2}" fill="none" stroke="var(--border-soft)" stroke-width="8" opacity="0.3"/>
 
               <!-- Arc fill (gold gradient) -->
-              \${hasData ? \`
+              ${hasData ? `
                 <defs>
-                  <linearGradient id="arcGrad-\${metric}" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient id="arcGrad-${metric}" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" style="stop-color: var(--gold-500); stop-opacity: 1" />
                     <stop offset="100%" style="stop-color: var(--gold-300); stop-opacity: 1" />
                   </linearGradient>
                 </defs>
-                <path d="\${arcPath}" fill="none" stroke="url(#arcGrad-\${metric})" stroke-width="8" stroke-linecap="round"/>
-              \` : ''}
+                <path d="${arcPath}" fill="none" stroke="url(#arcGrad-${metric})" stroke-width="8" stroke-linecap="round"/>
+              ` : ''}
 
               <!-- Tour median tick (gold) -->
-              <line x1="\${p50X}" y1="\${p50Y}" x2="\${p50X + 8 * Math.cos(p50AngleRad)}" y2="\${p50Y + 8 * Math.sin(p50AngleRad)}" stroke="var(--gold-400)" stroke-width="2" opacity="0.6"/>
+              <line x1="${p50X}" y1="${p50Y}" x2="${p50X + 8 * Math.cos(p50AngleRad)}" y2="${p50Y + 8 * Math.sin(p50AngleRad)}" stroke="var(--gold-400)" stroke-width="2" opacity="0.6"/>
 
               <!-- Needle (if data) -->
-              \${hasData ? \`
-                <line x1="\${cx}" y1="\${cy}" x2="\${needleX}" y2="\${needleY}" stroke="var(--gold-300)" stroke-width="2" stroke-linecap="round" style="animation: needle-sweep 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 0;">
+              ${hasData ? `
+                <line x1="${cx}" y1="${cy}" x2="${needleX}" y2="${needleY}" stroke="var(--gold-300)" stroke-width="2" stroke-linecap="round" style="animation: needle-sweep 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; opacity: 0;">
                   <style>
                     @keyframes needle-sweep {
                       to { opacity: 1; }
@@ -975,17 +975,17 @@
                     }
                   </style>
                 </line>
-              \` : ''}
+              ` : ''}
             </svg>
-            \${hasData ? \`
-              <div class="gauge-value">\${value > 0 ? '+' : ''}\${fmt.num(value, 2)} SG</div>
-              <div class="gauge-sample">n=\${sample}</div>
-              <div class="gauge-microcopy">\${microcopy}</div>
-            \` : \`
+            ${hasData ? `
+              <div class="gauge-value">${value > 0 ? '+' : ''}${fmt.num(value, 2)} SG</div>
+              <div class="gauge-sample">n=${sample}</div>
+              <div class="gauge-microcopy">${microcopy}</div>
+            ` : `
               <div class="gauge-empty">Insufficient sample — fewer than 3 events tracked</div>
-            \`}
+            `}
           </div>
-        \`;
+        `;
       }
 
       let pressureMicroCopy = 'Tour-average pressure response';
@@ -1007,18 +1007,18 @@
       const wsValue = playerData && playerData.weekend_surge ? playerData.weekend_surge.value : null;
       const wsSample = playerData && playerData.weekend_surge ? playerData.weekend_surge.sample : 0;
 
-      return \`
+      return `
         <section class="section">
           <div class="section-head">
             <h2 class="section-title">Pressure &amp; Surge</h2>
             <p class="section-subtitle">Performance when it matters — Sunday pressure and weekend grinding.</p>
           </div>
           <div class="gauges-grid">
-            \${renderArcGauge('Sunday Performance', 'pressure_sunday', psValue, psSample, baselines.pressure_sunday, pressureMicroCopy)}
-            \${renderArcGauge('Weekend Surge', 'weekend_surge', wsValue, wsSample, baselines.weekend_surge, surgeMicroCopy)}
+            ${renderArcGauge('Sunday Performance', 'pressure_sunday', psValue, psSample, baselines.pressure_sunday, pressureMicroCopy)}
+            ${renderArcGauge('Weekend Surge', 'weekend_surge', wsValue, wsSample, baselines.weekend_surge, surgeMicroCopy)}
           </div>
         </section>
-      \`;
+      `;
     }
 
     function buildSgFingerprint(player, tourBaselines) {
