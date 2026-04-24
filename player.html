@@ -1080,6 +1080,80 @@
       opacity: 1;
     }
 
+    /* ===== COMBINED SIGNALS SECTION ===== */
+    .signals-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    @media (max-width: 880px) {
+      .signals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .signals-col {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+
+    .signals-col-title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .signals-col-heading {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-1);
+      line-height: var(--lh-tight);
+    }
+
+    .signals-col-caption {
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      margin-bottom: var(--space-4);
+      line-height: var(--lh-snug);
+    }
+
+    /* SG Fingerprint chart inside its column */
+    .fingerprint-chart {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .fingerprint-narrative {
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      text-align: center;
+      line-height: var(--lh-relaxed);
+      margin-top: var(--space-4);
+      padding-top: var(--space-4);
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    /* Pressure gauges stacked vertically in the right column */
+    .gauges-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .gauges-stack .gauge-card {
+      background: var(--surface-2);
+    }
+
     /* ===== PRESSURE METRICS GAUGES (Pass 3 — tightened) ===== */
     .gauges-grid {
       display: grid;
@@ -1411,11 +1485,10 @@
 
       const tierClass = (player.tier || 'NEUTRAL').toLowerCase();
 
-      // SG Fingerprint
+      // Combined Signals section: SG Fingerprint (left) + Pressure/Surge stacked (right)
       const fingerprintHtml = buildSgFingerprint(player, tourBaselines);
-
-      // Pressure metrics
       const pressureHtml = buildPressureMetrics(player, pressureMetrics);
+      const signalsHtml = buildSignalsSection(fingerprintHtml, pressureHtml);
 
       // Recent form
       const recentFormHtml = buildRecentForm(player, recentForm);
@@ -1500,12 +1573,11 @@
         <!-- WAYFINDING: mobile-friendly anchor nav -->
         <nav class="player-anchor-nav" aria-label="Profile sections">
           <a href="#sec-snapshot">Snapshot</a>
-          <a href="#sec-sg">SG Fingerprint</a>
-          <a href="#sec-factors">Factors</a>
-          <a href="#sec-pressure">Pressure</a>
+          <a href="#sec-signals">SG Profile</a>
           <a href="#sec-form">Recent Form</a>
-          ${player.salary ? `<a href="#sec-market">Market</a>` : ''}
           <a href="#sec-course">Course History</a>
+          ${player.salary ? `<a href="#sec-market">Market</a>` : ''}
+          <a href="#sec-factors">Factors</a>
         </nav>
 
         <div class="player-header" id="playerMainHeader">
@@ -1547,23 +1619,20 @@
           </div>
         </div>
 
-        <!-- SG FINGERPRINT (signature chart — moved above factor decomp) -->
-        <div id="sec-sg">${fingerprintHtml}</div>
-
-        <!-- FACTOR DECOMPOSITION v2 — sorted, color-coded, grouped -->
-        <div id="sec-factors">${renderFactorDecomp(decomp, weights, mode, bbi, fieldMedians)}</div>
-
-        <!-- PRESSURE & SURGE -->
-        <div id="sec-pressure">${pressureHtml}</div>
+        <!-- COMBINED SIGNALS: SG Fingerprint (left) + Pressure/Surge stacked (right) -->
+        <div id="sec-signals">${signalsHtml}</div>
 
         <!-- RECENT FORM -->
         <div id="sec-form">${recentFormHtml}</div>
 
-        <!-- MARKET POSITIONING (lifted above Course History — decision-relevant) -->
-        <div id="sec-market">${marketHtml}</div>
-
         <!-- COURSE HISTORY -->
         <div id="sec-course">${courseHistHtml}</div>
+
+        <!-- MARKET POSITIONING (between performance evidence and model explanation) -->
+        <div id="sec-market">${marketHtml}</div>
+
+        <!-- FACTOR DECOMPOSITION v2 — model explanation, most detailed -->
+        <div id="sec-factors">${renderFactorDecomp(decomp, weights, mode, bbi, fieldMedians)}</div>
 
         <section class="section" style="margin-bottom: var(--space-12);">
           <div class="section-head">
@@ -1571,6 +1640,38 @@
           </div>
           <p style="color: var(--text-body); margin-bottom: var(--space-4);">Browse the full field with detailed comparisons and expansions.</p>
           <a href="rankings.html" class="btn-browse">Open Rankings</a>
+        </section>
+      `;
+    }
+
+    // ---------- Combined SG Fingerprint + Pressure/Surge section ----------
+    function buildSignalsSection(fingerprintInner, pressureInner) {
+      // If neither has content, skip entirely
+      if (!fingerprintInner && !pressureInner) return '';
+      return `
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">Strokes-Gained Profile</h2>
+            <p class="section-subtitle">How this player generates value — dimensional strengths and performance under pressure.</p>
+          </div>
+          <div class="signals-grid">
+            ${fingerprintInner ? `
+              <div class="signals-col">
+                <div class="signals-col-title">Fingerprint</div>
+                <div class="signals-col-heading">SG across four dimensions</div>
+                <div class="signals-col-caption">Radial distance to tour average on OTT, APP, ARG, PUTT. Morphs from tour baseline to the player's shape on load.</div>
+                ${fingerprintInner}
+              </div>
+            ` : '<div></div>'}
+            ${pressureInner ? `
+              <div class="signals-col">
+                <div class="signals-col-title">Context</div>
+                <div class="signals-col-heading">Pressure &amp; surge</div>
+                <div class="signals-col-caption">Sunday response and weekend grinding, measured against tour baselines.</div>
+                ${pressureInner}
+              </div>
+            ` : ''}
+          </div>
         </section>
       `;
     }
@@ -2027,17 +2128,12 @@
       const wsValue = playerData && playerData.weekend_surge ? playerData.weekend_surge.value : null;
       const wsSample = playerData && playerData.weekend_surge ? playerData.weekend_surge.sample : 0;
 
+      // Return the two gauges as a vertically-stacked pair (for the combined Signals section)
       return `
-        <section class="section">
-          <div class="section-head">
-            <h2 class="section-title">Pressure &amp; Surge</h2>
-            <p class="section-subtitle">Performance when it matters — Sunday pressure and weekend grinding.</p>
-          </div>
-          <div class="gauges-grid">
-            ${renderArcGauge('Sunday Performance', 'pressure_sunday', psValue, psSample, baselines.pressure_sunday, pressureMicroCopy)}
-            ${renderArcGauge('Weekend Surge', 'weekend_surge', wsValue, wsSample, baselines.weekend_surge, surgeMicroCopy)}
-          </div>
-        </section>
+        <div class="gauges-stack">
+          ${renderArcGauge('Sunday Performance', 'pressure_sunday', psValue, psSample, baselines.pressure_sunday, pressureMicroCopy)}
+          ${renderArcGauge('Weekend Surge', 'weekend_surge', wsValue, wsSample, baselines.weekend_surge, surgeMicroCopy)}
+        </div>
       `;
     }
 
@@ -2119,13 +2215,10 @@
 
       const svgId = `sg-fingerprint-${player.dg_id}`;
 
+      // Return just the inner chart HTML (section wrapping + subtitle handled by buildSignalsSection)
       return `
-        <section class="section">
-          <div class="section-head">
-            <h2 class="section-title">SG Fingerprint</h2>
-            <p class="section-subtitle">Elite dimensions vs. PGA Tour. Higher = better.</p>
-          </div>
-          <div style="display: flex; justify-content: center; margin-bottom: var(--space-6);">
+        <div class="fingerprint-chart">
+          <div style="display: flex; justify-content: center;">
             <svg id="${svgId}" width="100%" height="320" viewBox="0 0 280 280" style="max-width: 420px; margin: 0 auto;">
               <!-- Reference rings -->
               <circle cx="140" cy="140" r="20" fill="none" stroke="var(--border-soft)" stroke-width="1" opacity="0.4"/>
@@ -2181,10 +2274,10 @@
               </g>
             </svg>
           </div>
-          <div style="font-size: var(--fs-sm); color: var(--text-body); text-align: center; line-height: var(--lh-relaxed);">
+          <div class="fingerprint-narrative">
             <p>${narrative}</p>
           </div>
-        </section>
+        </div>
       `;
     }
 
