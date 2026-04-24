@@ -3,6 +3,24 @@
   "entries": [
     {
       "date": "2026-04-24",
+      "title": "Player Profile v2 — course history, recent form, pressure gauges",
+      "category": "site",
+      "summary": "Every player profile now shows 8 years of course history (aggregate plus year-by-year rows), their last ten completed events, and two new arc gauges — Sunday performance and weekend surge — computed from every round they've played this season."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "SG Fingerprint — animated radial signature",
+      "category": "site",
+      "summary": "On page load, the fingerprint morphs from the tour-average shape into the player's actual shape over 1.2 seconds. A ghost outline of the tour average stays behind for context, the strongest positive skill pulses quietly, and hovering any vertex reveals a percentile tooltip."
+    },
+    {
+      "date": "2026-04-24",
+      "title": "Rankings: sticky header fixed",
+      "category": "site",
+      "summary": "Column headers now stay properly pinned below the nav during scroll instead of getting hidden behind data rows."
+    },
+    {
+      "date": "2026-04-24",
       "title": "Player Profile pages are live",
       "category": "site",
       "summary": "Every player name on rankings, lineups, and weekly recaps now links to a dedicated profile at /player.html?id=... Each profile shows the 10-factor decomposition, current-event snapshot, course history, and market positioning. Mobile-first. 82 players indexed."
