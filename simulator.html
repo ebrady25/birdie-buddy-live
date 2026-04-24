@@ -248,21 +248,100 @@
     /* Builder actions */
     .builder-actions {
       display: flex; gap: var(--space-2); flex-wrap: wrap;
+      position: relative;
     }
-    .preset-select {
-      flex: 1; min-width: 160px;
-      padding: 7px 10px;
+    .preset-picker {
+      position: relative;
+      flex: 1;
+      min-width: 160px;
+    }
+    .preset-picker-trigger {
+      width: 100%;
+      padding: 8px 12px;
       background: var(--surface-3);
       border: 1px solid var(--border-soft);
       border-radius: var(--radius-md);
       color: var(--text-body);
       font-family: var(--font-body);
       font-size: var(--fs-xs);
+      font-weight: 500;
       cursor: pointer;
-      transition: border-color var(--dur-fast);
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      transition: all var(--dur-fast);
     }
-    .preset-select:hover { border-color: var(--border-strong); }
-    .preset-select:focus { border-color: var(--border-gold); outline: none; }
+    .preset-picker-trigger:hover { background: var(--surface-5); border-color: var(--border-gold); color: var(--gold-300); }
+    .preset-picker-trigger svg { transition: transform var(--dur-fast); opacity: 0.7; }
+    .preset-picker[aria-expanded="true"] .preset-picker-trigger svg { transform: rotate(180deg); opacity: 1; }
+
+    .preset-picker-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      max-height: 380px;
+      overflow-y: auto;
+      background: var(--surface-4);
+      border: 1px solid var(--border-base);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      z-index: var(--z-elevated);
+      display: none;
+      padding: var(--space-1);
+    }
+    .preset-picker[aria-expanded="true"] .preset-picker-menu { display: block; }
+
+    .preset-picker-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-2);
+      align-items: start;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background var(--dur-fast);
+    }
+    .preset-picker-item:hover { background: var(--surface-5); }
+    .preset-picker-item-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .preset-picker-kind {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      padding: 1px 6px;
+      border-radius: var(--radius-sm);
+    }
+    .preset-picker-kind[data-kind="Core"]     { background: rgba(96, 165, 250, 0.14); color: var(--info); }
+    .preset-picker-kind[data-kind="Leverage"] { background: rgba(212, 168, 67, 0.14); color: var(--gold-300); }
+    .preset-picker-kind[data-kind="GPP"]      { background: rgba(248, 113, 113, 0.14); color: var(--negative); }
+    .preset-picker-item-top {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .preset-picker-stats {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .preset-picker-stats .sal { color: var(--gold-300); font-weight: 600; }
 
     /* ---------- PLAYER POOL ---------- */
     .pool-card {
@@ -364,6 +443,17 @@
       font-size: var(--fs-md);
       font-weight: 700;
       color: var(--text-primary);
+    }
+    .sliders-head-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      padding: 3px 9px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-full);
     }
     .sliders-row {
       display: grid;
@@ -535,7 +625,41 @@
       font-weight: 700;
       color: var(--text-primary);
     }
-    .rerank-head small { font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--gold-300); letter-spacing: var(--tracking-widest); text-transform: uppercase; }
+    .rerank-head small {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--gold-300);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      background: rgba(212, 168, 67, 0.08);
+      border: 1px solid rgba(212, 168, 67, 0.25);
+      border-radius: var(--radius-full);
+      transition: background var(--dur-fast), border-color var(--dur-fast), box-shadow var(--dur-fast);
+    }
+    .rerank-head small::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold-400);
+      box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.55);
+    }
+    .rerank-head small.updating {
+      background: rgba(212, 168, 67, 0.2);
+      border-color: rgba(212, 168, 67, 0.55);
+      box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.08);
+    }
+    .rerank-head small.updating::before {
+      animation: rerank-pulse 1s ease-out;
+    }
+    @keyframes rerank-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.6); }
+      70%  { box-shadow: 0 0 0 6px rgba(212, 168, 67, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0); }
+    }
     .rerank-list {
       flex: 1;
       overflow-y: auto;
@@ -662,9 +786,13 @@
 
           <!-- Actions -->
           <div class="builder-actions">
-            <select class="preset-select" id="presetSelect">
-              <option value="">Load preset lineup…</option>
-            </select>
+            <div class="preset-picker" id="presetPicker" aria-expanded="false">
+              <button type="button" class="preset-picker-trigger" id="presetPickerTrigger" aria-haspopup="true" aria-expanded="false">
+                <span id="presetPickerLabel">Load preset lineup…</span>
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5l3 3 3-3" stroke-linecap="round"/></svg>
+              </button>
+              <div class="preset-picker-menu" role="listbox" id="presetPickerMenu"></div>
+            </div>
             <button class="btn btn-sm" id="btnClear">Clear</button>
           </div>
         </div>
@@ -708,10 +836,7 @@
         <div class="sliders-card">
           <div class="sliders-head">
             <h3>Factor weights</h3>
-            <div class="seg" role="radiogroup" aria-label="Weight preset">
-              <button class="active" data-preset="pool">Pool</button>
-              <button data-preset="dfs">DFS</button>
-            </div>
+            <span class="sliders-head-sub">DFS-calibrated defaults</span>
           </div>
           <div id="slidersList"></div>
           <div class="alloc-gauge" id="allocGauge">
@@ -739,7 +864,7 @@
         <aside class="rerank-card">
           <div class="rerank-head">
             <h3>Top 20 — re-ranked</h3>
-            <small>Live</small>
+            <small id="rerankLive">Live</small>
           </div>
           <div class="rerank-list" id="rerankList"></div>
         </aside>
@@ -788,9 +913,8 @@
       players: [],           // enriched players (bbi + themis joined)
       playersById: new Map(),
       lineup: [],            // array of dg_ids (up to 6)
-      weightsBase: null,     // baseline (pool or dfs defaults)
+      weightsBase: null,     // DFS defaults
       weights: null,         // current slider positions
-      preset: 'pool',
       poolSort: 'bbi',
       poolSearch: '',
       defaultBBI: new Map(), // baseline BBI for rank-delta display
@@ -822,11 +946,11 @@
       const wd = rk?.weights_dfs || {};
       state.players = (rk?.players || []).map(p => {
         const td = themisPer[p.dg_id] || {};
-        // Recover raw factor values from pool_decomp / weight
+        // Recover raw factor values from dfs_decomp / weight (DFS-only positioning)
         const raw = {};
         FACTORS.forEach(f => {
-          const contrib = p.pool_decomp?.[f];
-          const w = wp[f];
+          const contrib = p.dfs_decomp?.[f];
+          const w = wd[f];
           raw[f] = (contrib != null && w > 0) ? contrib / w : 0;
         });
         return {
@@ -834,7 +958,6 @@
           name: p.name,
           tier: p.tier,
           salary: p.salary,
-          bbi_pool: p.bbi_pool,
           bbi_dfs: p.bbi_dfs,
           proj_own: p.proj_own,
           raw,                            // raw factor values for recomputation
@@ -849,29 +972,17 @@
       });
       state.players.forEach(p => state.playersById.set(p.dg_id, p));
 
-      // Baseline BBI for rank-delta
-      state.players.forEach(p => state.defaultBBI.set(p.dg_id, p.bbi_pool));
+      // Baseline BBI for rank-delta (uses DFS composite per site positioning)
+      state.players.forEach(p => state.defaultBBI.set(p.dg_id, p.bbi_dfs));
 
-      // Weights
-      state.weightsBase = { pool: { ...wp }, dfs: { ...wd } };
-      state.weights = { ...wp };
+      // Weights — DFS-only
+      state.weightsBase = { ...wd };
+      state.weights = { ...wd };
 
-      // Presets
+      // Preset picker — replaces the old <select>. Shows archetype chip, title,
+      // top 3 player names, total salary, p95 ceiling so users can preview before loading.
       state.presets = (lu?.lineups || []).slice(0, 12);
-      const sel = document.getElementById('presetSelect');
-      if (sel) {
-        state.presets.forEach((L, i) => {
-          const opt = document.createElement('option');
-          opt.value = String(i);
-          opt.textContent = L.label || `Lineup ${i + 1}`;
-          sel.appendChild(opt);
-        });
-        sel.addEventListener('change', (e) => {
-          const idx = parseInt(e.target.value, 10);
-          if (!isNaN(idx) && state.presets[idx]) loadPreset(state.presets[idx]);
-          e.target.value = '';
-        });
-      }
+      wirePresetPicker();
 
       // Sliders
       renderSliders();
@@ -900,7 +1011,7 @@
             <span class="slot-num">G${i+1}</span>
             <span class="slot-name">${fmt.abbrevName(p.name)}<span class="slot-tier tier tier-${(p.tier||'').toLowerCase()}">${(p.tier||'').slice(0,4)}</span></span>
             <span class="slot-salary">$${p.salary?.toLocaleString?.() || '—'}</span>
-            <span class="slot-bbi">${p.bbi_pool?.toFixed(1) ?? '—'}</span>
+            <span class="slot-bbi">${p.bbi_dfs?.toFixed(1) ?? '—'}</span>
             <span class="slot-proj">${p.mean?.toFixed(1) ?? '—'}</span>
             <button class="slot-remove" data-remove="${p.dg_id}" title="Remove">×</button>`;
         } else {
@@ -942,16 +1053,7 @@
           renderPool();
         });
       });
-      document.querySelectorAll('.seg[aria-label="Weight preset"] button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.seg[aria-label="Weight preset"] button').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          state.preset = btn.getAttribute('data-preset');
-          state.weights = { ...state.weightsBase[state.preset] };
-          renderSliders();
-          renderReranked();
-        });
-      });
+      // Pool/DFS toggle removed — DFS-only per site positioning
       const clr = document.getElementById('btnClear');
       if (clr) clr.addEventListener('click', () => {
         state.lineup = [];
@@ -959,7 +1061,7 @@
       });
       const rst = document.getElementById('btnResetWeights');
       if (rst) rst.addEventListener('click', () => {
-        state.weights = { ...state.weightsBase[state.preset] };
+        state.weights = { ...state.weightsBase };
         renderSliders(); renderReranked();
       });
     }
@@ -978,11 +1080,11 @@
         const av = sortKey === 'own' ? (a.proj_own || 0)
                   : sortKey === 'salary' ? (a.salary || 0)
                   : sortKey === 'p95' ? (a.p95 || 0)
-                  : (a.bbi_pool || 0);
+                  : (a.bbi_dfs || 0);
         const bv = sortKey === 'own' ? (b.proj_own || 0)
                   : sortKey === 'salary' ? (b.salary || 0)
                   : sortKey === 'p95' ? (b.p95 || 0)
-                  : (b.bbi_pool || 0);
+                  : (b.bbi_dfs || 0);
         return bv - av; // desc
       });
 
@@ -1000,7 +1102,7 @@
           <div class="pool-row ${taken ? 'taken' : ''}" data-id="${p.dg_id}">
             <span class="pn">${fmt.abbrevName(p.name)}</span>
             <span class="ps">$${(p.salary || 0).toLocaleString()}</span>
-            <span class="pb">${(p.bbi_pool || 0).toFixed(1)}</span>
+            <span class="pb">${(p.bbi_dfs || 0).toFixed(1)}</span>
             <span class="pv">${(p.p95 || 0).toFixed(0)}</span>
             <span class="add-btn">+</span>
           </div>`;
@@ -1022,7 +1124,7 @@
     function recomputeLineup() {
       const players = state.lineup.map(id => state.playersById.get(id)).filter(Boolean);
       const sumSalary = players.reduce((a, p) => a + (p.salary || 0), 0);
-      const sumBBI    = players.reduce((a, p) => a + (p.bbi_pool || 0), 0);
+      const sumBBI    = players.reduce((a, p) => a + (p.bbi_dfs || 0), 0);
       const sumMean   = players.reduce((a, p) => a + (p.mean || 0), 0);
       const avgOwn    = players.length ? players.reduce((a, p) => a + (p.proj_own || 0), 0) / players.length : 0;
 
@@ -1182,9 +1284,19 @@
       rerankTimer = requestAnimationFrame(renderReranked);
     }
 
+    let rerankPulseTimer = null;
+    function pulseRerankLive() {
+      const live = document.getElementById('rerankLive');
+      if (!live) return;
+      live.classList.add('updating');
+      if (rerankPulseTimer) clearTimeout(rerankPulseTimer);
+      rerankPulseTimer = setTimeout(() => live.classList.remove('updating'), 900);
+    }
+
     function renderReranked() {
       const mount = document.getElementById('rerankList');
       if (!mount) return;
+      pulseRerankLive();
       const w = state.weights;
       // new BBI per player = Σ weights[f] * raw[f]
       const scored = state.players.map(p => {
@@ -1193,8 +1305,8 @@
         return { id: p.dg_id, name: p.name, new_bbi: s };
       });
       scored.sort((a, b) => b.new_bbi - a.new_bbi);
-      // Precompute default rank by bbi_pool
-      const defaultOrder = [...state.players].sort((a, b) => (b.bbi_pool || 0) - (a.bbi_pool || 0));
+      // Precompute default rank by bbi_dfs (DFS-only positioning)
+      const defaultOrder = [...state.players].sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
       const defaultRank = new Map(defaultOrder.map((p, i) => [p.dg_id, i + 1]));
 
       const top20 = scored.slice(0, 20);
@@ -1212,6 +1324,71 @@
           </div>
         `;
       }).join('');
+    }
+
+    // ---------- Preset picker ----------
+    function wirePresetPicker() {
+      const picker = document.getElementById('presetPicker');
+      const trigger = document.getElementById('presetPickerTrigger');
+      const menu = document.getElementById('presetPickerMenu');
+      if (!picker || !trigger || !menu) return;
+
+      // Build menu items
+      menu.innerHTML = state.presets.map((L, i) => {
+        const kind = (L.label || '').startsWith('Core') ? 'Core'
+                  : (L.label || '').startsWith('Leverage') ? 'Leverage'
+                  : (L.label || '').startsWith('GPP') ? 'GPP'
+                  : 'Core';
+        const idMatch = (L.label || '').match(/#(\d+)/);
+        const shortId = idMatch ? `${kind[0]}${idMatch[1]}` : `L${i+1}`;
+        const top3 = (L.players || []).slice(0, 3).map(p => fmt.abbrevName(p.name)).join(' · ');
+        const sal = (L.players || []).reduce((s, p) => s + (p.salary || 0), 0);
+        return `
+          <div class="preset-picker-item" data-idx="${i}" role="option">
+            <div>
+              <div class="preset-picker-item-head">
+                <span class="preset-picker-kind" data-kind="${kind}">${shortId}</span>
+                <span>${L.label?.split(' — ')[1] || `Lineup ${i+1}`}</span>
+              </div>
+              <div class="preset-picker-item-top">${top3}</div>
+            </div>
+            <div class="preset-picker-stats">
+              <span class="sal">$${sal.toLocaleString()}</span>
+              <span>6 slots</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const setOpen = (open) => {
+        picker.setAttribute('aria-expanded', open ? 'true' : 'false');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = picker.getAttribute('aria-expanded') === 'true';
+        setOpen(!open);
+      });
+
+      menu.addEventListener('click', (e) => {
+        const item = e.target.closest('.preset-picker-item');
+        if (!item) return;
+        const idx = parseInt(item.getAttribute('data-idx'), 10);
+        if (!isNaN(idx) && state.presets[idx]) {
+          loadPreset(state.presets[idx]);
+          document.getElementById('presetPickerLabel').textContent = state.presets[idx].label?.split(' — ')[1] || `Lineup ${idx+1}`;
+          setOpen(false);
+        }
+      });
+
+      // Close on outside click + Escape
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#presetPicker')) setOpen(false);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
     }
 
     // ---------- Load preset lineup ----------
