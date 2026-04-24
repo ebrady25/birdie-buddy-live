@@ -416,17 +416,105 @@
       text-align: right;
       font-variant-numeric: tabular-nums;
     }
-    .sliders-footer {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: var(--space-4);
-      padding-top: var(--space-3);
+    /* Allocation gauge (replaced the bare sum + reset footer) */
+    .alloc-gauge {
+      margin-top: var(--space-5);
+      padding-top: var(--space-4);
       border-top: 1px solid var(--border-soft);
+    }
+    .alloc-gauge-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-3);
+    }
+    .alloc-gauge-label {
       font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .alloc-gauge-readout {
+      font-family: var(--font-mono);
+      font-size: var(--fs-md);
+      font-variant-numeric: tabular-nums;
+      color: var(--text-primary);
+    }
+    .alloc-gauge-readout strong {
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      transition: color var(--dur-base) var(--ease-out);
+    }
+    .alloc-gauge-readout .alloc-gauge-of {
+      color: var(--text-dimmed);
+      margin-left: var(--space-2);
       font-size: var(--fs-xs);
     }
-    .sliders-sum { color: var(--text-muted); }
-    .sliders-sum strong { color: var(--text-primary); }
-    .sliders-sum.warn strong { color: var(--warning); }
+
+    .alloc-gauge-track {
+      position: relative;
+      height: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    /* Target band (0.95-1.05 window = 95-105% of half-scale). Track max = 2.0, center = 1.0 at 50% */
+    .alloc-gauge-band {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 47.5%;
+      width: 5%;
+      background: rgba(212, 168, 67, 0.2);
+      pointer-events: none;
+    }
+    .alloc-gauge-fill {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 0;
+      background: linear-gradient(90deg, var(--gold-700) 0%, var(--gold-500) 100%);
+      border-radius: var(--radius-full);
+      transition: width var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
+    }
+    .alloc-gauge-marker {
+      position: absolute;
+      top: -2px; bottom: -2px;
+      width: 2px;
+      background: var(--gold-300);
+      border-radius: 1px;
+      pointer-events: none;
+    }
+    /* State variants on fill */
+    .alloc-gauge[data-state="ok"] .alloc-gauge-fill     { background: linear-gradient(90deg, var(--gold-500) 0%, var(--gold-300) 100%); }
+    .alloc-gauge[data-state="warn"] .alloc-gauge-fill   { background: linear-gradient(90deg, var(--warning) 0%, rgba(251, 191, 36, 0.8) 100%); }
+    .alloc-gauge[data-state="over"] .alloc-gauge-fill   { background: linear-gradient(90deg, var(--negative) 0%, rgba(248, 113, 113, 0.75) 100%); }
+    .alloc-gauge[data-state="under"] .alloc-gauge-fill  { background: linear-gradient(90deg, var(--info) 0%, rgba(96, 165, 250, 0.8) 100%); }
+
+    .alloc-gauge[data-state="ok"]    .alloc-gauge-readout strong { color: var(--gold-300); }
+    .alloc-gauge[data-state="warn"]  .alloc-gauge-readout strong { color: var(--warning); }
+    .alloc-gauge[data-state="over"]  .alloc-gauge-readout strong { color: var(--negative); }
+    .alloc-gauge[data-state="under"] .alloc-gauge-readout strong { color: var(--info); }
+
+    .alloc-gauge-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-3);
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .alloc-gauge-status {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-muted);
+      transition: color var(--dur-base) var(--ease-out);
+    }
+    .alloc-gauge[data-state="ok"]    .alloc-gauge-status { color: var(--gold-300); }
+    .alloc-gauge[data-state="warn"]  .alloc-gauge-status { color: var(--warning); }
+    .alloc-gauge[data-state="over"]  .alloc-gauge-status { color: var(--negative); }
+    .alloc-gauge[data-state="under"] .alloc-gauge-status { color: var(--info); }
 
     /* Weight playground re-ranked board */
     .rerank-card {
@@ -626,9 +714,24 @@
             </div>
           </div>
           <div id="slidersList"></div>
-          <div class="sliders-footer">
-            <span class="sliders-sum" id="sumLabel">Σ weights = <strong>1.00</strong></span>
-            <button class="btn btn-sm" id="btnResetWeights">Reset to preset</button>
+          <div class="alloc-gauge" id="allocGauge">
+            <div class="alloc-gauge-head">
+              <span class="alloc-gauge-label">Allocation</span>
+              <span class="alloc-gauge-readout">
+                <strong id="allocValue">1.00</strong>
+                <span class="alloc-gauge-of">/ 1.00 target</span>
+              </span>
+            </div>
+            <div class="alloc-gauge-track">
+              <!-- Target band 0.95-1.05 -->
+              <div class="alloc-gauge-band"></div>
+              <div class="alloc-gauge-fill" id="allocFill" style="width: 50%;"></div>
+              <div class="alloc-gauge-marker" style="left: 50%;" title="Target = 1.00"></div>
+            </div>
+            <div class="alloc-gauge-footer">
+              <span id="allocStatus" class="alloc-gauge-status ok">Balanced — within 5% of target</span>
+              <button class="btn btn-sm" id="btnResetWeights">Reset to preset</button>
+            </div>
           </div>
         </div>
 
@@ -1049,10 +1152,27 @@
 
     function updateSum() {
       const sum = FACTORS.reduce((a, f) => a + (state.weights[f] || 0), 0);
-      const el = document.getElementById('sumLabel');
-      if (!el) return;
-      el.innerHTML = `Σ weights = <strong>${sum.toFixed(2)}</strong>`;
-      el.classList.toggle('warn', Math.abs(sum - 1) > 0.05);
+      const gauge  = document.getElementById('allocGauge');
+      const value  = document.getElementById('allocValue');
+      const fill   = document.getElementById('allocFill');
+      const status = document.getElementById('allocStatus');
+      if (!gauge) return;
+
+      // Width: sum mapped to 0-100% of track with 1.0 at midpoint (track scales to 2.0 max)
+      const widthPct = Math.max(0, Math.min(100, (sum / 2.0) * 100));
+
+      // State classification
+      let stateKey, msg;
+      if (Math.abs(sum - 1) <= 0.05)        { stateKey = 'ok';    msg = 'Balanced — within 5% of target.'; }
+      else if (sum > 1.05 && sum <= 1.20)   { stateKey = 'warn';  msg = `Over-allocated by ${((sum - 1) * 100).toFixed(0)}% — re-rankings skew toward high-weight factors.`; }
+      else if (sum > 1.20)                  { stateKey = 'over';  msg = `Heavily over-allocated (+${((sum - 1) * 100).toFixed(0)}%) — results will look noisy.`; }
+      else if (sum >= 0.80 && sum < 0.95)   { stateKey = 'warn';  msg = `Under-allocated by ${((1 - sum) * 100).toFixed(0)}% — raw BBI scores will compress.`; }
+      else                                   { stateKey = 'under'; msg = `Heavily under-allocated (${((1 - sum) * 100).toFixed(0)}% short) — raw scores lose separation.`; }
+
+      if (value)  value.textContent = sum.toFixed(2);
+      if (fill)   fill.style.width = widthPct + '%';
+      if (status) status.textContent = msg;
+      gauge.setAttribute('data-state', stateKey);
     }
 
     // ---------- Re-rank with custom weights ----------

@@ -785,6 +785,17 @@
   color: var(--gold-300);
 }
 
+/* ---------- Shared KPI strip (top-of-page 5-up stat tiles) ---------- */
+/* Used by performance.html, lineups.html; simulator uses its own .builder-kpis. */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+@media (max-width: 1200px) { .kpi-strip { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .kpi-strip { grid-template-columns: repeat(2, 1fr); } }
+
 .event-pill {
   display: inline-flex; align-items: center; gap: var(--space-2);
   padding: 4px 10px;

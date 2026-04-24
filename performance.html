@@ -17,9 +17,8 @@
        ========================================================= */
 
     /* KPI strip */
-    .kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); margin-bottom: var(--space-10); }
-    @media (max-width: 1200px) { .kpi-strip { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 760px) { .kpi-strip { grid-template-columns: repeat(2, 1fr); } }
+    /* .kpi-strip lives in components.css — this page used margin-bottom: var(--space-10); override kept here. */
+    .kpi-strip { margin-bottom: var(--space-10); }
 
     /* Performance chart */
     .perf-card {
@@ -145,8 +144,8 @@
       margin-bottom: var(--space-6);
     }
     .attr-table { width: 100%; font-size: var(--fs-xs); border-collapse: separate; border-spacing: 0; }
-    .attr-table thead { background: var(--surface-3); }
-    .attr-table th { padding: var(--space-3); text-align: right; color: var(--text-muted); font-weight: 600; font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+    .attr-table thead { background: var(--surface-3); position: sticky; top: calc(var(--nav-h) + var(--status-h)); z-index: 2; }
+    .attr-table th { padding: var(--space-3); text-align: right; color: var(--text-muted); font-weight: 600; font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; background: var(--surface-3); }
     .attr-table th:first-child { text-align: left; }
     .attr-table td { padding: var(--space-2) var(--space-3); border-bottom: 1px solid rgba(255,255,255,0.04); }
     .attr-table tr:hover { background: rgba(212, 168, 67, 0.04); }

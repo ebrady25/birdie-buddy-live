@@ -18,10 +18,7 @@
     /* DK export modal — the [hidden] attribute must win over inline display:flex */
     #dkModal[hidden] { display: none !important; }
 
-    /* ---------- SUMMARY STRIP ---------- */
-    .summary-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-4); margin-bottom: var(--space-8); }
-    @media (max-width: 1200px) { .summary-strip { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 760px) { .summary-strip { grid-template-columns: repeat(2, 1fr); } }
+    /* .kpi-strip used here (shared in components.css) — was .summary-strip previously. */
 
     /* ---------- LINEUP CARD ---------- */
     .lineup-grid {
@@ -227,7 +224,7 @@
     </header>
 
     <!-- SUMMARY STRIP -->
-    <div class="summary-strip">
+    <div class="kpi-strip">
       <div class="stat">
         <div class="stat-label">Lineups generated</div>
         <div class="stat-value"><span data-countup="12" data-dur="500">0</span></div>
