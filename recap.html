@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event recap — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* ===== RECAP PAGE ===== */
+    .recap-toolbar {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) var(--space-4);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+    }
+
+    .recap-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 8px 12px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .recap-nav-btn:hover:not([disabled]) { background: var(--surface-5); color: var(--text-primary); }
+    .recap-nav-btn[disabled] { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    .recap-nav-btn .sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+    }
+
+    .recap-week-select {
+      padding: 9px 14px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: var(--fs-sm);
+      outline: none;
+      cursor: pointer;
+      text-align: center;
+      text-align-last: center;
+    }
+
+    /* Hero */
+    .recap-hero {
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.05) 0%, transparent 50%), var(--surface-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      position: relative;
+      overflow: hidden;
+    }
+    .recap-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-500), transparent);
+      opacity: 0.55;
+    }
+
+    .recap-hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .recap-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(var(--fs-2xl), 4vw, var(--fs-4xl));
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--space-1);
+    }
+
+    .recap-hero-course {
+      font-size: var(--fs-md);
+      color: var(--text-body);
+      margin-bottom: var(--space-3);
+    }
+
+    .recap-verdict {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .recap-verdict.beat  { background: var(--positive-soft); color: var(--positive); border: 1px solid rgba(74, 222, 128, 0.3); }
+    .recap-verdict.tie   { background: rgba(212, 168, 67, 0.1); color: var(--gold-300); border: 1px solid var(--border-gold); }
+    .recap-verdict.lost  { background: var(--negative-soft); color: var(--negative); border: 1px solid rgba(248, 113, 113, 0.3); }
+    .recap-verdict.solo  { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border-soft); }
+
+    .recap-hero-meta {
+      display: flex;
+      gap: var(--space-5);
+      flex-wrap: wrap;
+      margin-top: var(--space-5);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-subtle);
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+    }
+
+    .recap-hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .recap-hero-meta-item .lbl {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .recap-hero-meta-item .val { color: var(--text-primary); font-weight: 600; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+    /* Scoreboard — 4 stat tiles */
+    .recap-scoreboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-8);
+    }
+
+    .recap-stat-tile {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+    .recap-stat-tile.highlight {
+      border-color: var(--border-gold);
+      background: linear-gradient(135deg, rgba(212, 168, 67, 0.06) 0%, var(--surface-3) 60%);
+    }
+
+    .recap-stat-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .recap-stat-value {
+      font-family: var(--font-display);
+      font-size: var(--fs-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+    .recap-stat-value.positive { color: var(--positive); }
+    .recap-stat-value.negative { color: var(--negative); }
+    .recap-stat-value.gold     { color: var(--gold-300); }
+
+    .recap-stat-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      margin-top: 3px;
+    }
+
+    /* Card wrapper for larger panels */
+    .recap-panel {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+
+    .recap-panel h3 {
+      font-size: var(--fs-lg);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .recap-panel-sub {
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      line-height: var(--lh-snug);
+      margin-bottom: var(--space-4);
+    }
+
+    .recap-empty-inline {
+      padding: var(--space-5);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: var(--fs-sm);
+      font-style: italic;
+    }
+
+    /* Brier row */
+    .brier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--space-3);
+    }
+
+    .brier-cell {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+    }
+
+    .brier-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .brier-val {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+
+    .brier-val.positive { color: var(--positive); }
+    .brier-val.negative { color: var(--negative); }
+
+    .brier-delta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      margin-top: 3px;
+    }
+    .brier-delta.positive { color: var(--positive); }
+    .brier-delta.negative { color: var(--negative); }
+    .brier-delta.muted { color: var(--text-dimmed); }
+
+    /* Layer correlations bars */
+    .layer-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 60px;
+      gap: var(--space-3);
+      align-items: center;
+      padding: 7px 0;
+    }
+
+    .layer-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      color: var(--text-body);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+
+    .layer-track {
+      position: relative;
+      height: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .layer-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-600) 0%, var(--gold-300) 100%);
+      transition: width var(--dur-base) var(--ease-out);
+    }
+
+    .layer-val {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      text-align: right;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Narrative body */
+    .recap-narrative-body {
+      font-size: var(--fs-md);
+      line-height: var(--lh-relaxed);
+      color: var(--text-body);
+    }
+
+    .recap-narrative-body h3 {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: var(--space-5);
+      margin-bottom: var(--space-2);
+      letter-spacing: var(--tracking-wide);
+    }
+
+    .recap-narrative-body h3:first-child { margin-top: 0; }
+
+    .recap-narrative-body section {
+      margin-bottom: var(--space-4);
+    }
+
+    .recap-narrative-body p + p {
+      margin-top: var(--space-3);
+    }
+
+    .recap-narrative-body strong { color: var(--text-primary); }
+
+    /* Attribution table (compact) */
+    .recap-attribution {
+      margin-bottom: var(--space-8);
+    }
+
+    /* Empty global state */
+    .recap-empty {
+      background: var(--surface-2);
+      border: 1px dashed var(--border-base);
+      border-radius: var(--radius-lg);
+      padding: var(--space-12);
+      text-align: center;
+    }
+    .recap-empty h2 { font-size: var(--fs-2xl); color: var(--text-primary); margin-bottom: var(--space-3); }
+    .recap-empty p  { color: var(--text-body); max-width: 52ch; margin: 0 auto var(--space-5); }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <header class="page-head">
+      <div class="eyebrow">Event recap</div>
+      <h1 class="h-1">Weekly report card</h1>
+      <p class="lede" style="max-width: 62ch; margin-top: var(--space-3);">
+        The model's grade, one week at a time. Spearman vs the industry baseline, Brier across five markets, which SG dimensions correlated with BBI's rankings, and a plain-English narrative of what we got right and wrong.
+      </p>
+    </header>
+
+    <div id="recapContent"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script>
+    // Sanitize any DG/DataGolf mentions from recap narrative body (per site-wide DG sweep)
+    const sanitize = (html) => {
+      if (!html) return '';
+      return String(html)
+        .replace(/\bDataGolf\b/g, 'industry baseline')
+        .replace(/\bDG Spearman\b/g, 'baseline Spearman')
+        .replace(/\bDG's\b/g, "the baseline's")
+        .replace(/\bDG(?=[\s,.)])/g, 'the baseline');
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('recap.html');
+      await BBI.renderFooter();
+
+      const [spearman, calibration, attribution, weeklyRecaps] = await Promise.all([
+        BBI.data.load(BBI.data.paths.spearman),
+        BBI.data.load(BBI.data.paths.calibration),
+        BBI.data.load(BBI.data.paths.performanceAttribution),
+        BBI.data.load(BBI.data.paths.performanceWeeklyRecaps)
+      ]);
+
+      const mount = $('#recapContent');
+
+      // Build a unified per-week map: pull from events[] + history[] + dg_head_to_head.weekly_results + calibration.history + weekly_recaps.recaps
+      const weeks = {};
+      const addWeek = (w, entry) => {
+        if (!w) return;
+        if (!weeks[w]) weeks[w] = { week: w };
+        Object.entries(entry).forEach(([k, v]) => {
+          if (v != null && weeks[w][k] == null) weeks[w][k] = v;
+        });
+      };
+
+      (spearman?.events || []).forEach(e => addWeek(e.week, e));
+      (spearman?.history || []).forEach(e => addWeek(e.week, e));
+      (spearman?.dg_head_to_head?.weekly_results || []).forEach(e => addWeek(e.week, { h2h: e }));
+      (calibration?.history || []).forEach(e => addWeek(e.week, { brier: e.brier, markets: e.markets, calib_field_size: e.field_size, calib_date: e.date }));
+      (weeklyRecaps?.recaps || []).forEach(r => addWeek(r.week, { summary: r.summary, body_html: r.body_html, recap_date: r.date, recap_year: r.year }));
+
+      const sortedWeeks = Object.values(weeks)
+        .filter(w => w.week != null)
+        .sort((a, b) => a.week - b.week);
+
+      if (sortedWeeks.length === 0) {
+        mount.innerHTML = `
+          <div class="recap-empty">
+            <h2>No recaps scored yet</h2>
+            <p>Recaps light up weekly after PROMETHEUS scores each event. Come back after the first completed event of the 2026 season.</p>
+            <a href="performance.html" class="btn" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 10px 18px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); color: var(--text-on-gold); border-radius: var(--radius-md); font-weight: 600; font-size: var(--fs-sm); text-decoration: none;">Performance page →</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Parse ?week= param; default to latest
+      const params = new URLSearchParams(window.location.search);
+      let weekParam = parseInt(params.get('week'), 10);
+      if (isNaN(weekParam)) weekParam = sortedWeeks[sortedWeeks.length - 1].week;
+
+      const currentIdx = sortedWeeks.findIndex(w => w.week === weekParam);
+      if (currentIdx === -1) {
+        mount.innerHTML = `
+          <div class="recap-empty">
+            <h2>Week ${weekParam} not scored</h2>
+            <p>No recap data for Week ${weekParam} yet. Available weeks: ${sortedWeeks.map(w => w.week).join(', ')}.</p>
+            <a href="recap.html?week=${sortedWeeks[sortedWeeks.length - 1].week}" class="btn" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 10px 18px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); color: var(--text-on-gold); border-radius: var(--radius-md); font-weight: 600; font-size: var(--fs-sm); text-decoration: none;">Latest recap →</a>
+          </div>
+        `;
+        return;
+      }
+
+      const cur = sortedWeeks[currentIdx];
+      const prev = currentIdx > 0 ? sortedWeeks[currentIdx - 1] : null;
+      const next = currentIdx < sortedWeeks.length - 1 ? sortedWeeks[currentIdx + 1] : null;
+
+      // Attribution matches this week only if metadata.week == weekParam
+      const attrForWeek = (attribution?.metadata?.week === cur.week) ? attribution : null;
+
+      mount.innerHTML = renderRecap(cur, prev, next, sortedWeeks, attrForWeek);
+
+      // Wire week selector
+      const sel = document.getElementById('weekSelect');
+      if (sel) sel.addEventListener('change', () => {
+        window.location.search = `?week=${sel.value}`;
+      });
+    });
+
+    function renderRecap(cur, prev, next, allWeeks, attr) {
+      const verdict = getVerdict(cur);
+      const bbi = cur.spearman_bbi;
+      const base = cur.spearman_dg;
+      const delta = cur.spearman_delta ?? (bbi != null && base != null ? bbi - base : null);
+
+      const prevBtn = prev
+        ? `<a class="recap-nav-btn" href="recap.html?week=${prev.week}">
+             ← <span><span class="sub">Week ${prev.week}</span><br>${shortEvent(prev.event)}</span>
+           </a>`
+        : `<span class="recap-nav-btn" disabled>← Earliest</span>`;
+
+      const nextBtn = next
+        ? `<a class="recap-nav-btn" href="recap.html?week=${next.week}">
+             <span style="text-align: right;"><span class="sub">Week ${next.week}</span><br>${shortEvent(next.event)}</span> →
+           </a>`
+        : `<span class="recap-nav-btn" disabled>Latest →</span>`;
+
+      const options = allWeeks.map(w => `<option value="${w.week}" ${w.week === cur.week ? 'selected' : ''}>Week ${w.week} · ${shortEvent(w.event)}</option>`).join('');
+
+      return `
+        <div class="recap-toolbar">
+          ${prevBtn}
+          <select class="recap-week-select" id="weekSelect" aria-label="Jump to week">
+            ${options}
+          </select>
+          ${nextBtn}
+        </div>
+
+        <!-- HERO -->
+        <div class="recap-hero">
+          <div class="recap-hero-eyebrow">Week ${cur.week}${cur.year ? ` · ${cur.year}` : ''}${cur.recap_year ? ` · ${cur.recap_year}` : ''}</div>
+          <h2 class="recap-hero-title">${cur.event || 'Unnamed event'}</h2>
+          ${cur.course ? `<div class="recap-hero-course">${cur.course}</div>` : ''}
+          <span class="recap-verdict ${verdict.cls}">${verdict.label}</span>
+
+          <div class="recap-hero-meta">
+            ${cur.winner ? `
+              <div class="recap-hero-meta-item">
+                <span class="lbl">Winner</span>
+                <span class="val">${cur.winner}</span>
+              </div>
+              ${cur.winner_bbi_rank ? `
+                <div class="recap-hero-meta-item">
+                  <span class="lbl">BBI Rank of Winner</span>
+                  <span class="val">#${cur.winner_bbi_rank}${cur.winner_dg_rank ? ` · baseline #${cur.winner_dg_rank}` : ''}</span>
+                </div>` : ''}
+            ` : ''}
+            ${cur.field_size ? `
+              <div class="recap-hero-meta-item">
+                <span class="lbl">Field Size</span>
+                <span class="val">${cur.field_size}</span>
+              </div>` : ''}
+            ${cur.date || cur.completed || cur.recap_date ? `
+              <div class="recap-hero-meta-item">
+                <span class="lbl">Completed</span>
+                <span class="val">${cur.date || cur.completed || cur.recap_date}</span>
+              </div>` : ''}
+          </div>
+        </div>
+
+        <!-- SCOREBOARD -->
+        ${renderScoreboard(bbi, base, delta, cur)}
+
+        <!-- BRIER -->
+        ${renderBrier(cur.brier)}
+
+        <!-- LAYER CORRELATIONS -->
+        ${renderLayerCorrelations(cur.layer_correlations)}
+
+        <!-- NARRATIVE -->
+        ${renderNarrative(cur)}
+
+        <!-- ATTRIBUTION (Week 11 only for now) -->
+        ${attr ? renderAttribution(attr) : ''}
+      `;
+    }
+
+    function shortEvent(name) {
+      if (!name) return '—';
+      // Shorten common long names
+      return String(name).replace(/Tournament$/, '').replace(/\bChampionship\b/, 'Champ.').trim();
+    }
+
+    function getVerdict(cur) {
+      const bbi = cur.spearman_bbi;
+      const base = cur.spearman_dg;
+      if (bbi != null && base != null) {
+        const d = bbi - base;
+        // Within ~0.04 is a statistical tie at typical field sizes (standard error dominates)
+        if (Math.abs(d) < 0.04) return { label: 'Near tie', cls: 'tie' };
+        if (d > 0) return { label: 'Beat baseline', cls: 'beat' };
+        return { label: 'Lost to baseline', cls: 'lost' };
+      }
+      if (bbi != null) return { label: 'Scored (baseline unavailable)', cls: 'solo' };
+      return { label: 'Partial recap', cls: 'solo' };
+    }
+
+    function renderScoreboard(bbi, base, delta, cur) {
+      const tiles = [];
+
+      tiles.push(`
+        <div class="recap-stat-tile highlight">
+          <div class="recap-stat-label">BBI Spearman ρ</div>
+          <div class="recap-stat-value gold">${bbi != null ? fmt.num(bbi, 3) : '—'}</div>
+          <div class="recap-stat-sub">rank correlation vs actual finish</div>
+        </div>
+      `);
+
+      tiles.push(`
+        <div class="recap-stat-tile">
+          <div class="recap-stat-label">Baseline ρ</div>
+          <div class="recap-stat-value">${base != null ? fmt.num(base, 3) : '—'}</div>
+          <div class="recap-stat-sub">${base != null ? 'industry benchmark' : 'not scored'}</div>
+        </div>
+      `);
+
+      tiles.push(`
+        <div class="recap-stat-tile">
+          <div class="recap-stat-label">Δ vs baseline</div>
+          <div class="recap-stat-value ${delta == null ? '' : delta > 0 ? 'positive' : delta < 0 ? 'negative' : ''}">${delta != null ? `${delta > 0 ? '+' : ''}${fmt.num(delta, 3)}` : '—'}</div>
+          <div class="recap-stat-sub">${delta == null ? 'not applicable' : delta > 0.04 ? 'clean win' : delta < -0.04 ? 'clean loss' : 'within noise'}</div>
+        </div>
+      `);
+
+      tiles.push(`
+        <div class="recap-stat-tile">
+          <div class="recap-stat-label">Beat Target (0.40)</div>
+          <div class="recap-stat-value ${bbi != null && bbi >= 0.4 ? 'positive' : ''}">${bbi == null ? '—' : bbi >= 0.4 ? 'Yes' : 'No'}</div>
+          <div class="recap-stat-sub">season target ρ ≥ 0.40</div>
+        </div>
+      `);
+
+      return `<div class="recap-scoreboard">${tiles.join('')}</div>`;
+    }
+
+    function renderBrier(brier) {
+      if (!brier) {
+        return `
+          <div class="recap-panel">
+            <h3>Probability calibration — Brier</h3>
+            <p class="recap-panel-sub">Lower = better. Brier = (1/N) · Σ (predicted − outcome)² across all players in the field.</p>
+            <div class="recap-empty-inline">Calibration data not yet scored for this event.</div>
+          </div>
+        `;
+      }
+
+      const markets = [
+        ['Win', 'win', 0.013],
+        ['Top 5', 'top5', 0.04],
+        ['Top 10', 'top10', 0.088],
+        ['Top 20', 'top20', 0.143],
+        ['Make Cut', 'make_cut', 0.172]
+      ];
+
+      const cells = markets.map(([label, key, baseline]) => {
+        const v = brier[key];
+        if (v == null) return `
+          <div class="brier-cell">
+            <div class="brier-label">${label}</div>
+            <div class="brier-val">—</div>
+            <div class="brier-delta muted">not scored</div>
+          </div>
+        `;
+        const pct = (v - baseline) / baseline * 100;
+        const cls = v < baseline - 0.0005 ? 'positive' : v > baseline + 0.0005 ? 'negative' : 'muted';
+        return `
+          <div class="brier-cell">
+            <div class="brier-label">${label}</div>
+            <div class="brier-val ${v < baseline ? 'positive' : v > baseline ? 'negative' : ''}">${fmt.num(v, 4)}</div>
+            <div class="brier-delta ${cls}">${pct > 0 ? '+' : ''}${fmt.num(pct, 0)}% vs baseline ${fmt.num(baseline, 3)}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="recap-panel">
+          <h3>Probability calibration — Brier</h3>
+          <p class="recap-panel-sub">Lower = better. Green = beat the 2025 industry baseline; red = missed it.</p>
+          <div class="brier-grid">${cells}</div>
+        </div>
+      `;
+    }
+
+    function renderLayerCorrelations(layers) {
+      if (!layers || Object.keys(layers).length === 0) {
+        return `
+          <div class="recap-panel">
+            <h3>Which SG layers correlated with BBI's rankings</h3>
+            <p class="recap-panel-sub">Per-dimension rank correlation between BBI's pre-tournament ranking and each SG category's finishing impact.</p>
+            <div class="recap-empty-inline">Layer correlations not logged for this event.</div>
+          </div>
+        `;
+      }
+
+      const pretty = { sg_ott: 'SG: OTT', sg_app: 'SG: APP', sg_arg: 'SG: ARG', sg_putt: 'SG: PUTT', sg_total: 'SG: Total' };
+      const entries = Object.entries(layers)
+        .map(([k, v]) => ({ key: k, label: pretty[k] || k, value: v }))
+        .sort((a, b) => b.value - a.value);
+
+      const rows = entries.map(e => {
+        const pct = Math.max(0, Math.min(100, e.value * 100));
+        return `
+          <div class="layer-row">
+            <div class="layer-label">${e.label}</div>
+            <div class="layer-track"><div class="layer-fill" style="width: ${pct}%;"></div></div>
+            <div class="layer-val">${fmt.num(e.value, 3)}</div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="recap-panel">
+          <h3>Which SG layers correlated with BBI's rankings</h3>
+          <p class="recap-panel-sub">The closer to 1.0, the more that dimension's strokes-gained actually predicted finish position. Weak correlations on a layer = the model weighted that factor when the event didn't reward it.</p>
+          ${rows}
+        </div>
+      `;
+    }
+
+    function renderNarrative(cur) {
+      const html = cur.body_html ? sanitize(cur.body_html) : null;
+      if (!html && !cur.summary) return '';
+
+      if (html) {
+        return `
+          <div class="recap-panel">
+            <h3>What we're grading</h3>
+            <p class="recap-panel-sub">${cur.summary ? sanitize(cur.summary) : 'Model self-assessment for the week.'}</p>
+            <div class="recap-narrative-body">${html}</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="recap-panel">
+          <h3>Summary</h3>
+          <div class="recap-narrative-body"><p>${sanitize(cur.summary)}</p></div>
+        </div>
+      `;
+    }
+
+    function renderAttribution(attr) {
+      const players = attr.players || [];
+      if (!players.length) return '';
+      return `
+        <div class="recap-panel recap-attribution">
+          <h3>Top-10 factor attribution</h3>
+          <p class="recap-panel-sub">How each factor contributed to BBI's composite score for this event's top finishers.</p>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; font-size: var(--fs-sm); border-collapse: collapse;">
+              <thead>
+                <tr style="background: var(--surface-2);">
+                  <th style="padding: var(--space-3); text-align: left; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">Player</th>
+                  <th style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">Finish</th>
+                  <th style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">BBI Rank</th>
+                  <th style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">Talent %</th>
+                  <th style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">Course Fit %</th>
+                  <th style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">Form %</th>
+                  <th style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); font-size: var(--fs-3xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-muted);">Ceiling %</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${players.map(p => {
+                  const f = p.factors || {};
+                  return `
+                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                      <td style="padding: var(--space-3); font-weight: 600;">${playerLink(p.dg_id, p.name)}</td>
+                      <td style="padding: var(--space-3); text-align: right; font-family: var(--font-mono);">#${p.finish_pos}</td>
+                      <td style="padding: var(--space-3); text-align: right; font-family: var(--font-mono);">#${p.bbi_rank}</td>
+                      <td style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); color: var(--gold-300);">${(f.talent?.pct || 0).toFixed(1)}%</td>
+                      <td style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); color: var(--gold-300);">${(f.courseFit?.pct || 0).toFixed(1)}%</td>
+                      <td style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); color: var(--gold-300);">${(f.form?.pct || 0).toFixed(1)}%</td>
+                      <td style="padding: var(--space-3); text-align: right; font-family: var(--font-mono); color: var(--gold-300);">${(f.ceiling?.pct || 0).toFixed(1)}%</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -107,6 +107,7 @@ window.BBI = window.BBI || {};
       ['compare.html', 'Compare'],
       ['lineups.html', 'DFS Lineups'],
       ['performance.html', 'Performance'],
+      ['recap.html', 'Recaps'],
       ['simulator.html', 'Simulator'],
       ['market.html', 'Market'],
       ['live.html', 'Live'],
@@ -217,7 +218,7 @@ window.BBI = window.BBI || {};
             <div class="footer-heading">System</div>
             <div class="footer-links">
               <span class="footer-link"><span class="pulse-dot"></span> 15 agents nominal</span>
-              <span class="footer-link">DataGolf · 26 endpoints</span>
+              <span class="footer-link">Tour-wide data · 26 endpoints</span>
               <span class="footer-link">10,000 sims / event</span>
               <span class="footer-link">Updated ${updated ? fmt.ago(updated) : 'Live'}</span>
             </div>

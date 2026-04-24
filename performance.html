@@ -663,6 +663,13 @@
 
       // ---------- WEEKLY RECAPS ----------
       const recapList = (recaps?.recaps || []).slice().reverse();
+      // Sanitize DG mentions (site-wide branding policy)
+      const sanitizeDG = (html) => String(html || '')
+        .replace(/\bDataGolf\b/g, 'industry baseline')
+        .replace(/\bDG Spearman\b/g, 'baseline Spearman')
+        .replace(/\bDG's\b/g, "the baseline's")
+        .replace(/\bDG(?=[\s,.)])/g, 'the baseline');
+
       const recapsMount = $('#recapsMount');
       if (recapList.length > 0) {
         recapsMount.innerHTML = recapList.map((recap, idx) => `
@@ -674,12 +681,17 @@
                   <span>${recap.date || ''}</span>
                   <span>Completed</span>
                 </div>
-                <p class="recap-summary">${recap.summary || ''}</p>
+                <p class="recap-summary">${sanitizeDG(recap.summary || '')}</p>
               </div>
               <div class="recap-toggle">▼</div>
             </button>
             <div class="recap-body">
-              ${recap.body_html || ''}
+              ${sanitizeDG(recap.body_html || '')}
+              <div style="margin-top: var(--space-5); padding-top: var(--space-4); border-top: 1px solid var(--border-subtle);">
+                <a href="recap.html?week=${recap.week}" class="btn" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 8px 14px; background: var(--surface-3); border: 1px solid var(--border-gold); border-radius: var(--radius-md); color: var(--gold-300); font-size: var(--fs-xs); font-weight: 600; text-decoration: none;">
+                  Full recap & scoreboard →
+                </a>
+              </div>
             </div>
           </div>
         `).join('');
