@@ -96,13 +96,6 @@
 
         <input type="search" id="rankSearch" placeholder="Search player…" style="padding: 5px 10px; font-size: var(--fs-xs); border-radius: var(--radius-md); background: var(--surface-3); color: var(--text-body); border: 1px solid var(--border-soft); transition: all var(--dur-fast); min-width: 160px;" />
 
-        <div class="divider-vertical"></div>
-
-        <div class="seg" role="radiogroup" aria-label="BBI Mode">
-          <button class="active" data-mode="pool">Pool</button>
-          <button data-mode="dfs">DFS</button>
-        </div>
-
         <div class="toolbar-count"><strong id="fsShown">0</strong> of <strong id="fsTotal">0</strong> players</div>
       </div>
     </div>
@@ -142,18 +135,12 @@
         <div class="section-head-text">
           <span class="eyebrow">How BBI scores</span>
           <h2>Ten factors. One composite.</h2>
-          <p>Each factor is normalized against the field, weighted by event type, and combined into the final composite. Pool and DFS use different weight vectors — Pool weights cut-safety and talent heavier; DFS shifts into ceiling and value.</p>
+          <p>Each factor is normalized against the field, weighted by event type, and combined into the final composite. Weights favor ceiling, course fit, and value — the dimensions that matter for DFS lineup building and top-finish props.</p>
         </div>
       </div>
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="card-title">Pool weights (v8.5)</div>
-          <div id="poolWeights" style="margin-top: var(--space-3);"></div>
-        </div>
-        <div class="card">
-          <div class="card-title">DFS weights (v8.5)</div>
-          <div id="dfsWeights" style="margin-top: var(--space-3);"></div>
-        </div>
+      <div class="card">
+        <div class="card-title">BBI weights (v8.5)</div>
+        <div id="dfsWeights" style="margin-top: var(--space-3);"></div>
       </div>
     </section>
   </main>
@@ -206,12 +193,11 @@
       };
 
       // ---------- RENDER ROWS ----------
-      let mode = 'pool';
       const rb = $('#rankBody');
 
       const rowHTML = (p, i) => {
-        const bbi = mode === 'pool' ? p.bbi_pool : p.bbi_dfs;
-        const bbiHeat = heat(bbi, mode === 'pool' ? 'bbi_pool' : 'bbi_dfs').toFixed(3);
+        const bbi = p.bbi_dfs;
+        const bbiHeat = heat(bbi, 'bbi_dfs').toFixed(3);
         const winHeat = heat(p.win_pct, 'win_pct').toFixed(3);
         const valHeat = heat(p.value, 'value').toFixed(3);
         const rankClass = i < 3 ? 'player-rank-gold' : '';
@@ -303,7 +289,7 @@
             tr.innerHTML = `<td colspan="18">${expandHTML(p)}</td>`;
             row.parentNode.insertBefore(tr, row.nextSibling);
             // Inject factor bars + sparkline
-            const decomp = mode === 'pool' ? p.pool_decomp : p.dfs_decomp;
+            const decomp = p.dfs_decomp;
             const fbHost = tr.querySelector('.factor-host');
             if (fbHost && decomp) fbHost.append(makeFactorBars(decomp));
             const spHost = tr.querySelector('.spark-host');
@@ -339,7 +325,7 @@
           <div class="expand-grid">
             <!-- Factor decomposition -->
             <div class="expand-block">
-              <div class="expand-title">${mode === 'pool' ? 'Pool' : 'DFS'} factor decomposition</div>
+              <div class="expand-title">Factor decomposition</div>
               <div class="factor-host"></div>
             </div>
 
@@ -396,16 +382,6 @@
         $('#fsShown').textContent = shown;
       };
 
-      // Mode toggle
-      $$('.seg[aria-label="BBI Mode"] button').forEach(btn => btn.addEventListener('click', () => {
-        $$('.seg[aria-label="BBI Mode"] button').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        mode = btn.dataset.mode;
-        // re-sort by current mode's default
-        // rebuild but preserve expansion state is complex — just rebuild fresh
-        render();
-      }));
-
       // Chips filter + search with AND logic
       const rankSearch = $('#rankSearch');
 
@@ -450,7 +426,6 @@
         arr.sort((a, b) => b.value - a.value);
         host.append(makeFactorBars(arr));
       };
-      if (ev?.weights_pool) renderWeights($('#poolWeights'), ev.weights_pool);
       if (ev?.weights_dfs)  renderWeights($('#dfsWeights'),  ev.weights_dfs);
     });
   </script>

@@ -644,7 +644,7 @@
       <div class="panel">
         <div class="panel-head">
           <div>
-            <span class="panel-eyebrow">05 · Pool pivots</span>
+            <span class="panel-eyebrow">05 · Leverage watch</span>
             <h2 id="pivotsTitle">Surgers &amp; faders</h2>
           </div>
           <span class="panel-meta"><strong id="pivotsCount">—</strong> tracked</span>
@@ -787,7 +787,7 @@
       // ---- SG separation
       renderSG(sec.sg_trends || {});
 
-      // ---- Pool pivots
+      // ---- Leverage watch (surge/fade pivots)
       renderPivots(sec.pool_pivots || {});
 
       window.observeAnimations?.(document);
@@ -930,7 +930,7 @@
       }).join('');
     }
 
-    // ---------- Pool pivots ----------
+    // ---------- Leverage watch (in-round surge/fade) ----------
     function renderPivots(pp) {
       const mount = document.getElementById('pivotsList');
       const surgers = (pp.top_surgers || []).slice(0, 5);
@@ -938,14 +938,13 @@
       const total = surgers.length + faders.length;
       document.getElementById('pivotsCount').textContent = `${(pp.n_surging || 0)} surging · ${(pp.n_fading || 0)} fading`;
       if (!total) {
-        mount.innerHTML = `<div style="padding: var(--space-6); color: var(--text-muted); text-align: center; font-size: var(--fs-sm);">No live pivots yet.</div>`;
+        mount.innerHTML = `<div style="padding: var(--space-6); color: var(--text-muted); text-align: center; font-size: var(--fs-sm);">No live shifts yet.</div>`;
         return;
       }
       const renderRow = (p, isUp) => `
         <div class="pivot-row ${isUp ? 'up' : 'down'}">
           <div class="p-name">${fmt.abbrevName(p.name)}<small>Pos ${p.current_pos || '—'}</small></div>
           <span class="p-shift">${(p.win_shift_pp >= 0 ? '+' : '')}${(p.win_shift_pp || 0).toFixed(1)}pp</span>
-          <span class="p-tag ${p.in_pool ? 'pool' : ''}">${p.in_pool ? 'In pool' : 'Field'}</span>
         </div>
       `;
       mount.innerHTML =

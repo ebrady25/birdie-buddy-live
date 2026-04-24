@@ -776,7 +776,7 @@
           <p class="thesis-line reveal d-1"><span>Golf is the hardest sport</span></p>
           <p class="thesis-line muted-line reveal d-2"><span>to model.</span></p>
           <p class="thesis-line reveal d-3"><span class="thesis-punch" data-sweep>So we built a machine that never stops modeling it.</span></p>
-          <div class="thesis-meta reveal d-4">BBI v8.5 · 10-factor dual pool/DFS engine</div>
+          <div class="thesis-meta reveal d-4">BBI v8.5 · 10-factor predictive engine</div>
         </div>
       </div>
     </section>
@@ -1129,7 +1129,7 @@
           { id: 'THEMIS',     name: 'THEMIS',     sub: 'Simulator', day: 1, hour: 7.5 },
           { id: 'OMNIA',      name: 'OMNIA',     sub: 'Market',    day: 1, hour: 7.9 },
           { id: 'ODYSSEUS',   name: 'ODYS',       sub: 'Lineups',   day: 1, hour: 9.15 },
-          { id: 'ATHENA',     name: 'ATHENA',    sub: 'Pool',      day: 1, hour: 9.2 },
+          { id: 'ATHENA',     name: 'ATHENA',    sub: 'Rankings',  day: 1, hour: 9.2 },
           { id: 'NIKE',       name: 'NIKE',       sub: 'Bankroll',  day: 1, hour: 9.3 },
           { id: 'HERMES',     name: 'HERMES',    sub: 'Lock',      day: 2, hour: 5.1 },
           { id: 'PERSE',      name: 'PERSE',     sub: 'Live',      day: 3, hour: 14.0 },
@@ -1277,9 +1277,9 @@
         const players = (rankings && rankings.players) || [];
         const edges = (omnia && omnia.markets && omnia.markets.win && omnia.markets.win.top_10_edges) || [];
 
-        // Sort by BBI pool score descending; fallback to dg_id so output is deterministic
+        // Sort by BBI DFS score descending; fallback to dg_id so output is deterministic
         const ranked = players.slice().sort((a, b) => {
-          const dv = (b.bbi_pool || 0) - (a.bbi_pool || 0);
+          const dv = (b.bbi_dfs || 0) - (a.bbi_dfs || 0);
           return dv !== 0 ? dv : (a.dg_id || 0) - (b.dg_id || 0);
         });
 

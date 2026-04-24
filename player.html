@@ -194,7 +194,8 @@
       background: var(--surface-3);
     }
 
-    /* Sticky mini-strip: appears when main player header scrolls off */
+    /* Sticky mini-strip: appears when main player header scrolls off.
+       Uses max-height/padding collapse so hidden state doesn't occupy layout space. */
     .player-mini-strip {
       position: sticky;
       top: calc(var(--nav-h) + var(--status-h));
@@ -203,22 +204,32 @@
       grid-template-columns: auto 1fr auto;
       gap: var(--space-3);
       align-items: center;
-      padding: 10px var(--space-4);
       background: rgba(16, 16, 23, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-base);
       border-radius: var(--radius-md);
-      margin-bottom: var(--space-4);
+      /* Hidden state: zero height, zero padding, transparent border, no margin */
+      padding: 0 var(--space-4);
+      max-height: 0;
+      margin-bottom: 0;
+      border: 1px solid transparent;
       opacity: 0;
-      transform: translateY(-8px);
+      overflow: hidden;
       pointer-events: none;
-      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+      transition:
+        max-height var(--dur-base) var(--ease-out),
+        padding var(--dur-base) var(--ease-out),
+        margin-bottom var(--dur-base) var(--ease-out),
+        opacity var(--dur-base) var(--ease-out),
+        border-color var(--dur-base) var(--ease-out);
     }
 
     .player-mini-strip.visible {
+      max-height: 72px;
+      padding: 10px var(--space-4);
+      margin-bottom: var(--space-4);
+      border-color: var(--border-base);
       opacity: 1;
-      transform: translateY(0);
       pointer-events: auto;
     }
 
@@ -1330,10 +1341,10 @@
     }
 
     function renderPlayer(player, rank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines, pressureMetrics) {
-      const mode = 'pool'; // Default to pool mode
-      const bbi = mode === 'pool' ? player.bbi_pool : player.bbi_dfs;
-      const decomp = mode === 'pool' ? player.pool_decomp : player.dfs_decomp;
-      const weights = mode === 'pool' ? rankings.weights_pool : rankings.weights_dfs;
+      const mode = 'dfs';
+      const bbi = player.bbi_dfs;
+      const decomp = player.dfs_decomp;
+      const weights = rankings.weights_dfs;
 
       // Field maxes for prob mini-bars + field medians for factor baselines
       const fieldMaxes = computeFieldMaxes(rankings.players || []);
@@ -1402,11 +1413,6 @@
       const nextPlayer = nextRank ? rankings.players[nextRank - 1] : null;
 
       return `
-        <header class="page-head">
-          <div class="eyebrow">Player Profile</div>
-          <h1>Deep Dive</h1>
-        </header>
-
         <!-- WAYFINDING: sticky mini-strip (hidden until main header scrolls off) -->
         <div class="player-mini-strip" id="playerMiniStrip" aria-hidden="true">
           <span class="mini-rank">#${rank}</span>
@@ -1541,7 +1547,7 @@
     // Field-median utilization per factor (across all players) — baseline tick.
     function computeFactorFieldMedians(players, mode, weights) {
       if (!players.length || !weights) return {};
-      const decompKey = mode === 'pool' ? 'pool_decomp' : 'dfs_decomp';
+      const decompKey = 'dfs_decomp';
       const medians = {};
       Object.keys(weights).forEach(factor => {
         const cap = (weights[factor] || 0) * 100;
@@ -1633,7 +1639,7 @@
       return `
         <div class="factor-chart-wrapper">
           <div class="factor-chart-head">
-            <h3 class="factor-chart-title">Factor Decomposition — ${mode.toUpperCase()}</h3>
+            <h3 class="factor-chart-title">Factor Decomposition</h3>
             <p class="factor-chart-caption">Each bar shows what this factor contributed to the composite score, relative to its maximum possible weight. Tick mark = field median.</p>
           </div>
 

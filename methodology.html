@@ -293,7 +293,7 @@
         <span>TRUST &amp; TRANSPARENCY</span>
       </div>
       <h1>Methodology</h1>
-      <p>Every number on this site is traceable. BBI is a 10-factor score computed from DataGolf, OWGR, and course history. This page shows you the weights, the math, the 15 agents that run the pipeline, and the rules for when a shadow model gets promoted.</p>
+      <p>Every number on this site is traceable. BBI is a 10-factor score computed from tour data, OWGR, and course history. This page shows you the weights, the math, the 14 agents that run the pipeline, and the rules for when a shadow model gets promoted.</p>
       <div class="page-head-meta">
         <span>Version <strong class="gold" id="mVer">v8.5 Pantheon</strong></span>
         <span>Backtest — <strong id="mBack">47 events · 2025 season</strong></span>
@@ -309,8 +309,8 @@
         <div class="toc-title">On this page</div>
         <a href="#philosophy"><span class="mono">01</span>Philosophy</a>
         <a href="#factors"><span class="mono">02</span>The 10 factors</a>
-        <a href="#modes"><span class="mono">03</span>Pool vs. DFS modes</a>
-        <a href="#pipeline"><span class="mono">04</span>15-agent pipeline</a>
+        <a href="#modes"><span class="mono">03</span>Weight profile</a>
+        <a href="#pipeline"><span class="mono">04</span>14-agent pipeline</a>
         <a href="#simulation"><span class="mono">05</span>Monte Carlo (THEMIS)</a>
         <a href="#market"><span class="mono">06</span>Devigging &amp; Kelly</a>
         <a href="#live"><span class="mono">07</span>Live updates</a>
@@ -350,7 +350,7 @@
             <div class="tag">02 — THE 10 FACTORS</div>
             <h2>What BBI is measuring</h2>
           </div>
-          <p class="lede">Every player gets scored on 10 normalized factors (0–100). The BBI score is a weighted average. Weights differ between Pool mode (75% field win, 25% make-cut) and DFS mode (ceiling-heavy, ownership-aware).</p>
+          <p class="lede">Every player gets scored on 10 normalized factors (0–100). The BBI score is a weighted average — ceiling-heavy, value-aware, and tuned each week to the course DNA of the active event.</p>
 
           <div id="factorTable" style="margin-top: var(--space-5);"></div>
 
@@ -360,56 +360,56 @@
           </div>
         </section>
 
-        <!-- 03 MODES -->
+        <!-- 03 WEIGHT PROFILE -->
         <section class="m-section" id="modes">
           <div class="m-section-head">
-            <div class="tag">03 — POOL VS. DFS</div>
-            <h2>Two modes, one model</h2>
+            <div class="tag">03 — WEIGHT PROFILE</div>
+            <h2>What we pay for</h2>
           </div>
-          <p class="lede">The same 10 factors serve two objectives. A pool pick needs to <em>survive</em> (cut + top-20). A DFS lineup needs to <em>spike</em> (GPP equity). We change the weights, not the factors.</p>
+          <p class="lede">BBI is tuned for tournament equity and lineup value — the dimensions that matter for DFS GPPs and top-finish betting props. Course Fit is the largest weight, and shifts week to week based on course DNA.</p>
 
           <div class="stat-row">
             <div class="mstat">
-              <div class="lbl">Pool — course fit</div>
-              <div class="val">0.26</div>
-              <div class="sub">highest pool weight</div>
+              <div class="lbl">Course fit</div>
+              <div class="val">0.20</div>
+              <div class="sub">largest single weight</div>
             </div>
             <div class="mstat">
-              <div class="lbl">Pool — talent</div>
-              <div class="val">0.18</div>
+              <div class="lbl">Talent</div>
+              <div class="val">0.13</div>
               <div class="sub">raw SG:Total baseline</div>
             </div>
             <div class="mstat">
-              <div class="lbl">DFS — ceiling</div>
+              <div class="lbl">Ceiling</div>
               <div class="val">0.13</div>
-              <div class="sub">vs. 0.05 in pool</div>
+              <div class="sub">p95 tournament finish</div>
             </div>
             <div class="mstat">
-              <div class="lbl">DFS — DK value</div>
+              <div class="lbl">DK value</div>
               <div class="val">0.12</div>
-              <div class="sub">vs. 0.02 in pool</div>
+              <div class="sub">points per $1k</div>
             </div>
           </div>
 
-          <p>In pool mode, we pay for <strong>course fit and cut safety</strong>. You're building a team for a 4-round pool scoring system (best 3 scores count, Rule 4 replacements for missed cuts). Floor beats ceiling because one player making the cut in the 40s is worth more than one player finishing T4 and the rest missing the cut.</p>
-          <p>In DFS mode, we pay for <strong>ceiling and salary value</strong>. GPP equity comes from tournament wins, not make-cuts — and the DK salary divides everything. A 92 BBI player at $7,800 is almost always better than a 96 BBI at $11,200, because you need 5 more players in the lineup.</p>
+          <p>We pay for <strong>ceiling and salary value</strong>. GPP equity comes from tournament wins, not safe make-cuts — and in DFS, the DK salary divides everything. A 92 BBI player at $7,800 is almost always better than a 96 BBI at $11,200, because you need 5 more players to fit under the cap.</p>
+          <p><strong>Course Fit dominates the weekly shift.</strong> The 48-venue <a href="courses.html">Course DNA library</a> tells us whether a course rewards wedges, long irons, or rough-penalty survival — and the weights adjust before the model produces rankings. This is why a short-iron specialist can rank top-10 one week and top-40 the next.</p>
         </section>
 
         <!-- 04 PIPELINE -->
         <section class="m-section" id="pipeline">
           <div class="m-section-head">
-            <div class="tag">04 — 15-AGENT PIPELINE</div>
+            <div class="tag">04 — 14-AGENT PIPELINE</div>
             <h2>How the system thinks, Monday through Sunday</h2>
           </div>
-          <p class="lede">BBI is not a single model — it's a pipeline of 15 scheduled agents. Most run on Sonnet (fast, deterministic, structured). Three run on Opus (complex reasoning, preview generation, model-vs-model arbitration).</p>
+          <p class="lede">BBI is not a single model — it's a pipeline of 14 scheduled agents. Most run on Sonnet (fast, deterministic, structured). Three run on Opus (complex reasoning, preview generation, model-vs-model arbitration).</p>
 
           <div class="mode-row">
             <div class="seg" aria-label="Agent tier" role="tablist" id="tierSeg">
-              <button data-tier="all" class="active" role="tab">All 15</button>
+              <button data-tier="all" class="active" role="tab">All 14</button>
               <button data-tier="opus" role="tab">Opus (3)</button>
-              <button data-tier="sonnet" role="tab">Sonnet (12)</button>
+              <button data-tier="sonnet" role="tab">Sonnet (11)</button>
             </div>
-            <span class="toolbar-count"><strong id="agentCount">15</strong> agents total</span>
+            <span class="toolbar-count"><strong id="agentCount">14</strong> agents total</span>
           </div>
 
           <div class="agent-grid" id="agentGrid"></div>
@@ -482,7 +482,7 @@
             <div class="tag">07 — LIVE UPDATES</div>
             <h2>PERSEPHONE: re-scoring mid-round</h2>
           </div>
-          <p class="lede">Once Thursday tees off, a pre-tournament model is frozen. PERSEPHONE takes the baton — polling DataGolf's live endpoints every 30 minutes, recomputing win / top-10 / make-cut probabilities, and surfacing pool pivots.</p>
+          <p class="lede">Once Thursday tees off, a pre-tournament model is frozen. PERSEPHONE takes the baton — polling live endpoints every 30 minutes, recomputing win / top-10 / make-cut probabilities, and surfacing leverage shifts.</p>
 
           <div class="steps">
             <div class="step">
@@ -498,8 +498,8 @@
               <div class="step-body">Every lineup card gets a health indicator: <span style="color: var(--positive); font-weight: 600;">green</span> (on pace) / <span style="color: var(--warning); font-weight: 600;">amber</span> (cut bubble) / <span style="color: var(--negative); font-weight: 600;">red</span> (MDF risk or missed). Top-10 movers are ranked by live − pre probability delta.</div>
             </div>
             <div class="step">
-              <div class="step-title">Pool pivots</div>
-              <div class="step-body">For your 100-person pool, PERSEPHONE flags which players are most-owned and underperforming (pivot <em>away</em>) and which are low-owned and leveraged (pivot <em>to</em>, for next-week bounceback).</div>
+              <div class="step-title">Leverage watch</div>
+              <div class="step-body">PERSEPHONE flags which players are most-owned and underperforming (fade signal) and which are low-owned and surging (late-window leverage). Top-10 surgers and faders feed the Live page's Leverage Watch panel.</div>
             </div>
           </div>
         </section>
@@ -617,15 +617,15 @@
       ceiling:    { label: 'Ceiling',     desc: 'P(win) × P(top-5) composite. What happens when they go low.' },
       leverage:   { label: 'Leverage',    desc: 'BBI − DK salary rank. Tournament equity per roster slot.' },
       contrarian: { label: 'Contrarian',  desc: 'Ownership vs. BBI rank. Low-owned good players score high.' },
-      dfsValue:   { label: 'DFS Value',   desc: 'Expected DK points per $1k. Used in DFS mode, near-zero in pool.' },
-      strategic:  { label: 'Strategic',   desc: 'Pool-specific: pivot, Rule 4 safety, stack correlation.' }
+      dfsValue:   { label: 'DFS Value',   desc: 'Expected DraftKings points per $1,000 of salary. Largest weight after Course Fit for lineup construction.' },
+      strategic:  { label: 'Strategic',   desc: 'Stack correlation, round-1 tee-time blocks, and course-condition adjustments (wind, rain, morning/afternoon wave).' }
     };
 
     // ============ THE 15 AGENTS ============
     const AGENTS = [
       { name: 'ARGUS',       tier: 'sonnet', desc: 'Pre-flight system check. Validates all 26 DataGolf endpoints and 14 scheduled pipelines before event week starts.',                      cadence: 'Mon 08:00 ET' },
       { name: 'MNEMOSYNE',   tier: 'opus',   desc: 'Event detection + data hydration. Picks up next PGA event from DG schedule, seeds CURRENT_EVENT, and triggers downstream agents.',      cadence: 'Mon 08:15 ET' },
-      { name: 'ATHENA',      tier: 'sonnet', desc: 'Rankings builder. Computes BBI from 10 factors for every player in the field, Pool and DFS modes.',                                      cadence: 'Mon 10:00 ET' },
+      { name: 'ATHENA',      tier: 'sonnet', desc: 'Rankings builder. Computes BBI from 10 factors for every player in the field, tuned to the active course DNA profile.',                  cadence: 'Mon 10:00 ET' },
       { name: 'APOLLO',      tier: 'sonnet', desc: 'DFS lineup constructor. Generates 12 optimized DraftKings lineups with salary, leverage, and ownership constraints.',                    cadence: 'Mon 10:30 ET' },
       { name: 'HEPHAESTUS',  tier: 'opus',   desc: 'Shadow-model competition. Runs 4 candidate weight configs alongside baseline; tracks Spearman / Brier deltas weekly.',                   cadence: 'Mon 12:32 ET' },
       { name: 'THEMIS',      tier: 'sonnet', desc: '10,000-sim Monte Carlo tournament. Produces win/top10/cut probabilities and lineup distribution bands.',                                  cadence: 'Tue 07:33 ET' },
@@ -636,7 +636,6 @@
       { name: 'ORION',       tier: 'sonnet', desc: 'DFS late-swap optimizer. Recomputes optimal roster after Thursday tee-offs given actual morning scores.',                                 cadence: 'Thu 11:30 ET' },
       { name: 'HERMES',      tier: 'sonnet', desc: 'Notifications router. Pushes lineup updates, cut-line alerts, and weather shocks to configured channels.',                                cadence: 'Event-driven' },
       { name: 'PROMETHEUS',  tier: 'sonnet', desc: 'Post-event backtest scorer. Scores BBI predictions against actual finish; updates Brier, Spearman, calibration bins.',                    cadence: 'Sun 23:04 ET' },
-      { name: 'ATHENA-POOL', tier: 'sonnet', desc: 'Pool-specific pivot engine. Tracks your 100-person pool ownership and surfaces pivot candidates for next week.',                          cadence: 'Mon 07:00 ET' },
       { name: 'ATLAS',       tier: 'sonnet', desc: 'Archive writer. Snapshots every weekly dashboard, saves to immutable GitHub Pages archive. Credibility layer.',                           cadence: 'Mon 00:30 ET' },
     ];
 
@@ -661,17 +660,13 @@
       $('#mUpdated').textContent = current?.last_updated ? fmt.ago(current.last_updated) : 'Live';
 
       // ==== FACTOR TABLE ====
-      const weights_pool = rank?.weights_pool || {};
       const weights_dfs  = rank?.weights_dfs  || {};
       const factors = Object.keys(FACTOR_DESCRIPTIONS);
-      const maxPool = Math.max(...Object.values(weights_pool));
       const maxDfs  = Math.max(...Object.values(weights_dfs));
 
       const rows = factors.map(f => {
-        const wp = weights_pool[f] || 0;
         const wd = weights_dfs[f]  || 0;
         const meta = FACTOR_DESCRIPTIONS[f];
-        const pctPool = (wp / maxPool * 100).toFixed(0);
         const pctDfs  = (wd / maxDfs  * 100).toFixed(0);
         return `
           <tr>
@@ -680,17 +675,12 @@
               <div class="factor-desc">${meta.desc}</div>
             </td>
             <td class="num">
-              <span class="bar-mini"><span style="width: ${pctPool}%"></span></span>
-              ${wp.toFixed(2)}
-            </td>
-            <td class="num">
               <span class="bar-mini"><span style="width: ${pctDfs}%"></span></span>
               ${wd.toFixed(2)}
             </td>
           </tr>`;
       }).join('');
 
-      const total_pool = Object.values(weights_pool).reduce((a,b)=>a+b,0);
       const total_dfs  = Object.values(weights_dfs).reduce((a,b)=>a+b,0);
 
       $('#factorTable').innerHTML = `
@@ -699,15 +689,13 @@
             <thead>
               <tr>
                 <th>Factor</th>
-                <th style="text-align: right;">Pool weight</th>
-                <th style="text-align: right;">DFS weight</th>
+                <th style="text-align: right;">Weight</th>
               </tr>
             </thead>
             <tbody>
               ${rows}
               <tr style="background: var(--surface-2);">
                 <td style="font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-muted); letter-spacing: var(--tracking-widest); text-transform: uppercase;">Total</td>
-                <td class="num" style="color: var(--gold-300); font-weight: 600;">${total_pool.toFixed(2)}</td>
                 <td class="num" style="color: var(--gold-300); font-weight: 600;">${total_dfs.toFixed(2)}</td>
               </tr>
             </tbody>
