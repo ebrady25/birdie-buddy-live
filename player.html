@@ -767,6 +767,35 @@
       .factor-name { font-size: var(--fs-2xs); }
     }
 
+    /* ===== COURSE DNA LINKBACK ===== */
+    .course-dna-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      color: var(--text-body);
+      font-size: var(--fs-xs);
+      font-weight: 500;
+      transition: all var(--dur-fast) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .course-dna-link:hover {
+      background: var(--surface-5);
+      border-color: var(--border-gold);
+      color: var(--gold-300);
+    }
+
+    .course-dna-link svg {
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+
+    .course-dna-link:hover svg {
+      transform: translateX(2px);
+    }
+
     /* ===== COURSE HISTORY AGGREGATE SUMMARY ===== */
     .course-agg-grid {
       display: grid;
@@ -1392,7 +1421,7 @@
       const recentFormHtml = buildRecentForm(player, recentForm);
 
       // Course history
-      const courseHistHtml = buildCourseHistory(player, courseHistory);
+      const courseHistHtml = buildCourseHistory(player, courseHistory, rankings, currentEvent);
 
       // Market positioning
       const marketHtml = player.salary ? `
@@ -1692,13 +1721,25 @@
       `;
     }
 
-    function buildCourseHistory(player, courseHistory) {
+    function buildCourseHistory(player, courseHistory, rankings, currentEvent) {
+      // Determine this week's event_id so we can link back to /courses.html
+      const eventId = currentEvent?.event_id ?? rankings?.event_id ?? null;
+      const courseLink = eventId
+        ? `<a href="courses.html?focus=${eventId}" class="course-dna-link" title="Open this venue's DNA profile">
+             View course DNA
+             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px;"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+           </a>`
+        : '';
+
       const playerData = courseHistory && courseHistory[player.dg_id];
       if (!playerData || !playerData.years || playerData.years.length === 0) {
         return `
           <section class="section">
-            <div class="section-head">
-              <h2 class="section-title">Course History</h2>
+            <div class="section-head" style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;">
+              <div>
+                <h2 class="section-title">Course History</h2>
+              </div>
+              ${courseLink}
             </div>
             <div class="empty-state" style="padding: var(--space-8);">
               <div class="empty-icon">○</div>
@@ -1725,9 +1766,12 @@
 
       return `
         <section class="section">
-          <div class="section-head">
-            <h2 class="section-title">Course History</h2>
-            <p class="section-subtitle">${agg.starts || 0} starts · ${agg.rounds || 0} rounds${bestYr ? ` · Best finish <strong>${bestYr.finish}</strong> in ${bestYr.year}` : ''}</p>
+          <div class="section-head" style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;">
+            <div>
+              <h2 class="section-title">Course History</h2>
+              <p class="section-subtitle">${agg.starts || 0} starts · ${agg.rounds || 0} rounds${bestYr ? ` · Best finish <strong>${bestYr.finish}</strong> in ${bestYr.year}` : ''}</p>
+            </div>
+            ${courseLink}
           </div>
 
           <!-- Aggregate summary cards -->

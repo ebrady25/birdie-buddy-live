@@ -142,12 +142,30 @@
       transition: all var(--dur-base) var(--ease-out);
       position: relative;
       overflow: hidden;
+      scroll-margin-top: calc(var(--nav-h) + var(--status-h) + 40px);
     }
 
     .course-card:hover {
       border-color: var(--border-gold);
       transform: translateY(-2px);
       box-shadow: var(--shadow-gold-sm);
+    }
+
+    /* Focused card via ?focus=<event_id> from a player-profile deep link */
+    .course-card.is-focused {
+      border-color: var(--gold-500);
+      box-shadow: var(--shadow-gold-md);
+      animation: focus-flash 2.4s ease-out 1;
+    }
+    .course-card.is-focused::before {
+      opacity: 1;
+      background: linear-gradient(to right, transparent, var(--gold-300), transparent);
+    }
+    @keyframes focus-flash {
+      0%   { box-shadow: 0 0 0 0 rgba(212, 168, 67, 0.0); }
+      15%  { box-shadow: 0 0 0 6px rgba(212, 168, 67, 0.35); }
+      60%  { box-shadow: 0 0 0 10px rgba(212, 168, 67, 0.12); }
+      100% { box-shadow: var(--shadow-gold-md); }
     }
 
     .course-card::before {
@@ -509,6 +527,11 @@
         return list;
       };
 
+      // Check for ?focus=<event_id> deep link (from player profile Course History)
+      const focusId = parseInt(new URLSearchParams(window.location.search).get('focus'), 10);
+      const focusCourse = !isNaN(focusId) ? courses.find(c => c.event_id === focusId) : null;
+      let focusApplied = false;
+
       const render = () => {
         const list = applyFilters();
         const grid = $('#coursesGrid');
@@ -523,6 +546,17 @@
           grid.innerHTML = list.map(cardHtml).join('');
         }
         $('#coursesCount').innerHTML = `<strong>${list.length}</strong> of ${courses.length} courses`;
+
+        // Apply focus highlight + scroll on first render when a ?focus param matched
+        if (focusCourse && !focusApplied) {
+          const target = grid.querySelector(`.course-card[data-event-id="${focusCourse.event_id}"]`);
+          if (target) {
+            target.classList.add('is-focused');
+            // Delay scroll slightly so layout is stable
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 120);
+            focusApplied = true;
+          }
+        }
       };
 
       // Initial chip builds
