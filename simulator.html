@@ -177,39 +177,258 @@
     .cap-bar.over .cap-bar-fill { background: linear-gradient(90deg, var(--negative), #fca5a5); }
 
     /* KPI strip */
-    .builder-kpis {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1px;
-      background: var(--border-soft);
-      border-radius: var(--radius-md);
-      overflow: hidden;
+    /* ============================================================
+       BirdieBuddy Score — live lineup grade
+       ============================================================ */
+    .bbscore {
       margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+      transition: border-color var(--dur-base), box-shadow var(--dur-base);
     }
-    .bkpi {
-      background: var(--surface-3);
-      padding: var(--space-3) var(--space-2);
-      text-align: center;
+    .bbscore::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212, 168, 67, 0.4), transparent);
+      opacity: 0.6;
     }
-    .bkpi .lbl {
+    /* Elite-grade glow (A) */
+    .bbscore[data-grade="A"] {
+      border-color: rgba(212, 168, 67, 0.4);
+      box-shadow: 0 0 0 1px rgba(212, 168, 67, 0.1), 0 8px 24px -8px rgba(212, 168, 67, 0.3);
+    }
+    .bbscore[data-grade="A"]::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(1000px 200px at 50% -40%, rgba(212, 168, 67, 0.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .bbscore-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-3);
+    }
+    .bbscore-eyebrow {
       font-family: var(--font-mono);
       font-size: var(--fs-3xs);
       letter-spacing: var(--tracking-widest);
       text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .bkpi .val {
-      font-family: var(--font-mono);
-      font-size: var(--fs-md);
+      color: var(--gold-500);
       font-weight: 600;
+    }
+    .bbscore-mode {
+      display: inline-flex;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 2px;
+    }
+    .bbscore-mode button {
+      padding: 3px 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: all var(--dur-fast);
+    }
+    .bbscore-mode button.active {
+      background: var(--surface-5);
+      color: var(--gold-300);
+    }
+    .bbscore-mode button:hover:not(.active) { color: var(--text-body); }
+
+    .bbscore-hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .bbscore-grade {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--text-dimmed);
+      width: 64px;
+      text-align: center;
+      transition: color var(--dur-base), transform var(--dur-base);
+    }
+    .bbscore[data-grade="A"] .bbscore-grade { color: var(--gold-300); text-shadow: 0 0 18px rgba(212, 168, 67, 0.35); }
+    .bbscore[data-grade="B"] .bbscore-grade { color: var(--gold-500); }
+    .bbscore[data-grade="C"] .bbscore-grade { color: var(--warning); }
+    .bbscore[data-grade="D"] .bbscore-grade { color: #ff9966; }
+    .bbscore[data-grade="F"] .bbscore-grade { color: var(--negative); }
+    .bbscore-grade.grade-flash {
+      animation: grade-flash 800ms ease-out;
+    }
+    @keyframes grade-flash {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.18); filter: brightness(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    .bbscore-number-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .bbscore-number-row {
+      display: inline-flex;
+      align-items: baseline;
+      gap: var(--space-2);
+    }
+    .bbscore-number {
+      font-family: var(--font-display);
+      font-size: var(--fs-3xl);
+      font-weight: 800;
       color: var(--text-primary);
       font-variant-numeric: tabular-nums;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
+      line-height: 1;
     }
-    .bkpi .val.gold { color: var(--gold-300); }
-    .bkpi .val.negative { color: var(--negative); }
-    .bkpi .val.positive { color: var(--positive); }
+    .bbscore-delta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      opacity: 0;
+      transition: opacity var(--dur-base);
+    }
+    .bbscore-delta.visible { opacity: 1; }
+    .bbscore-delta.up   { background: var(--positive-soft); color: var(--positive); }
+    .bbscore-delta.down { background: var(--negative-soft); color: var(--negative); }
+    .bbscore-tagline {
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      font-weight: 500;
+    }
+    .bbscore[data-grade="A"] .bbscore-tagline { color: var(--gold-300); font-weight: 600; }
+
+    .bbscore-insight {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-dimmed);
+      margin-bottom: var(--space-3);
+      text-align: center;
+    }
+    .bbscore-insight .bbi-standout { color: var(--positive); }
+    .bbscore-insight .bbi-weakest { color: var(--warning); }
+    .bbscore-insight .bbi-sep { margin: 0 8px; color: var(--text-faint); }
+
+    .bbscore-subs {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .bbsub {
+      display: grid;
+      grid-template-columns: 74px 1fr 32px 110px;
+      gap: var(--space-3);
+      align-items: center;
+      font-size: var(--fs-xs);
+    }
+    .bbsub-name {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .bbsub-bar {
+      position: relative;
+      height: 6px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bbsub-bar i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold-700), var(--gold-400));
+      transition: width var(--dur-slow) var(--ease-out), background var(--dur-base);
+    }
+    .bbsub[data-tier="elite"] .bbsub-bar i { background: linear-gradient(90deg, var(--gold-500), var(--gold-300)); }
+    .bbsub[data-tier="strong"] .bbsub-bar i { background: linear-gradient(90deg, var(--gold-600), var(--gold-400)); }
+    .bbsub[data-tier="ok"] .bbsub-bar i { background: linear-gradient(90deg, var(--warning), rgba(251, 191, 36, 0.6)); }
+    .bbsub[data-tier="weak"] .bbsub-bar i { background: linear-gradient(90deg, var(--negative), rgba(248, 113, 113, 0.65)); }
+    .bbsub-value {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .bbsub-meta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bbscore-tip {
+      margin-top: var(--space-3);
+      padding: var(--space-3);
+      background: var(--surface-3);
+      border: 1px solid var(--border-subtle);
+      border-left: 2px solid var(--gold-500);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .bbscore-tip strong { color: var(--text-primary); }
+    .bbscore-tip::before {
+      content: '💡 ';
+      opacity: 0.9;
+    }
+
+    /* Empty / partial states */
+    .bbscore[data-state="empty"] .bbscore-hero,
+    .bbscore[data-state="partial"] .bbscore-hero {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .bbscore[data-state="empty"] .bbscore-subs,
+    .bbscore[data-state="empty"] .bbscore-insight { display: none; }
+    .bbscore[data-state="partial"] .bbscore-subs { opacity: 0.35; filter: saturate(0.4); pointer-events: none; }
+    .bbscore[data-state="partial"] .bbscore-insight { display: none; }
+
+    @media (max-width: 640px) {
+      .bbsub { grid-template-columns: 64px 1fr 28px; }
+      .bbsub-meta { grid-column: 2 / 4; text-align: left; margin-top: -2px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bbscore-grade.grade-flash { animation: none; }
+      .bbsub-bar i { transition: none; }
+      .bbscore-delta { transition: none; }
+    }
 
     /* Distribution mini chart */
     .dist-card {
@@ -766,13 +985,67 @@
             <div class="cap-bar" id="capBar"><div class="cap-bar-fill" id="capFill"></div></div>
           </div>
 
-          <!-- KPIs -->
-          <div class="builder-kpis">
-            <div class="bkpi"><div class="lbl">Sum BBI</div><div class="val gold" id="kpiBBI">—</div></div>
-            <div class="bkpi"><div class="lbl">Mean proj</div><div class="val" id="kpiMean">—</div></div>
-            <div class="bkpi"><div class="lbl">p5 floor</div><div class="val" id="kpiP5">—</div></div>
-            <div class="bkpi"><div class="lbl">p95 ceil</div><div class="val" id="kpiP95">—</div></div>
-            <div class="bkpi"><div class="lbl">Avg own</div><div class="val" id="kpiOwn">—</div></div>
+          <!-- BirdieBuddy Score — live lineup grade -->
+          <div class="bbscore" id="bbscore" data-state="empty" data-grade="F">
+            <div class="bbscore-head">
+              <span class="bbscore-eyebrow">BirdieBuddy Score</span>
+              <div class="bbscore-mode" role="radiogroup" aria-label="Contest mode">
+                <button class="active" type="button" data-bb-mode="gpp" aria-pressed="true">GPP</button>
+                <button type="button" data-bb-mode="cash" aria-pressed="false">Cash</button>
+              </div>
+            </div>
+
+            <div class="bbscore-hero">
+              <div class="bbscore-grade" id="bbGrade">—</div>
+              <div class="bbscore-number-col">
+                <div class="bbscore-number-row">
+                  <span class="bbscore-number" id="bbNumber">—</span>
+                  <span class="bbscore-delta" id="bbDelta" aria-hidden="true"></span>
+                </div>
+                <div class="bbscore-tagline" id="bbTagline">Build 6 players to reveal your grade</div>
+              </div>
+            </div>
+
+            <div class="bbscore-insight" id="bbInsight" hidden>
+              <span class="bbi-standout" id="bbStandout"></span>
+              <span class="bbi-sep">·</span>
+              <span class="bbi-weakest" id="bbWeakest"></span>
+            </div>
+
+            <div class="bbscore-subs" id="bbSubs">
+              <div class="bbsub" data-key="ceiling">
+                <span class="bbsub-name">Ceiling</span>
+                <span class="bbsub-bar"><i></i></span>
+                <span class="bbsub-value">—</span>
+                <span class="bbsub-meta" data-meta="ceiling">p95 sum —</span>
+              </div>
+              <div class="bbsub" data-key="leverage">
+                <span class="bbsub-name">Leverage</span>
+                <span class="bbsub-bar"><i></i></span>
+                <span class="bbsub-value">—</span>
+                <span class="bbsub-meta" data-meta="leverage">avg own —</span>
+              </div>
+              <div class="bbsub" data-key="value">
+                <span class="bbsub-name">Value</span>
+                <span class="bbsub-bar"><i></i></span>
+                <span class="bbsub-value">—</span>
+                <span class="bbsub-meta" data-meta="value">pts / $1k —</span>
+              </div>
+              <div class="bbsub" data-key="salary">
+                <span class="bbsub-name">Salary eff.</span>
+                <span class="bbsub-bar"><i></i></span>
+                <span class="bbsub-value">—</span>
+                <span class="bbsub-meta" data-meta="salary">cap used —</span>
+              </div>
+              <div class="bbsub" data-key="floor">
+                <span class="bbsub-name">Floor</span>
+                <span class="bbsub-bar"><i></i></span>
+                <span class="bbsub-value">—</span>
+                <span class="bbsub-meta" data-meta="floor">p5 preserved —</span>
+              </div>
+            </div>
+
+            <div class="bbscore-tip" id="bbTip" hidden></div>
           </div>
 
           <!-- Distribution chart -->
@@ -1153,16 +1426,280 @@
       if (capBar) capBar.classList.toggle('over', sumSalary > state.cap);
       if (capFill) capFill.style.width = `${Math.min(100, (sumSalary / state.cap) * 100)}%`;
 
-      document.getElementById('kpiBBI').textContent = players.length ? sumBBI.toFixed(0) : '—';
-      document.getElementById('kpiMean').textContent = players.length ? sumMean.toFixed(1) : '—';
-      document.getElementById('kpiP5').textContent = players.length ? p5.toFixed(0) : '—';
-      document.getElementById('kpiP95').textContent = players.length ? p95.toFixed(0) : '—';
-      const ownEl = document.getElementById('kpiOwn');
-      if (ownEl) ownEl.textContent = players.length ? avgOwn.toFixed(1) + '%' : '—';
+      // Update BirdieBuddy Score (replaces the old KPI readouts — same data now
+      // drives the meta labels under each sub-score)
+      updateBBScore({
+        players,
+        sumSalary,
+        sumMean,
+        avgOwn,
+        sumP5: players.reduce((a, p) => a + (p.p5 || 0), 0),
+        sumP95: players.reduce((a, p) => a + (p.p95 || 0), 0),
+      });
 
       // Distribution visual
       renderDist(players.length ? { p5, p25, p50, p75, p95, mean: sumMean, std: sumStd } : null);
     }
+
+    // =============================================================
+    // BirdieBuddy Score — live lineup grading
+    // =============================================================
+    const BB_WEIGHTS = {
+      gpp:  { ceiling: 0.30, leverage: 0.25, value: 0.20, salary: 0.15, floor: 0.10 },
+      cash: { ceiling: 0.15, leverage: 0.10, value: 0.25, salary: 0.20, floor: 0.30 }
+    };
+    const BB_TAGLINES = {
+      A: ['Elite lineup — ship it', 'Tournament-winning build', 'This one\'s a bullet'],
+      B: ['Strong construction', 'Solid GPP-grade lineup', 'Well-balanced build'],
+      C: ['Solid, room to optimize', 'Decent — small tweaks unlock more', 'Workable but not special'],
+      D: ['Meh — consider reworking', 'Some dimensions drag this down', 'Workable in cash, risky in GPP'],
+      F: ['Needs work', 'This build has holes', 'Try swapping a slot or two']
+    };
+    const bbState = { mode: 'gpp', lastScore: null, lastGrade: null };
+
+    function bbSubTier(score) {
+      if (score >= 85) return 'elite';
+      if (score >= 70) return 'strong';
+      if (score >= 55) return 'ok';
+      return 'weak';
+    }
+
+    function bbScoreCeiling(sumP95) {
+      // Piecewise: 500→0, 625→50, 750→100, clamp
+      return Math.max(0, Math.min(100, (sumP95 - 500) / 2.5));
+    }
+    function bbScoreLeverage(avgOwn) {
+      // Trapezoid peaking at 11–14%, drops off either side
+      if (avgOwn <= 0) return 0;
+      if (avgOwn < 5)  return 40 + (avgOwn / 5) * 20;        // 40→60
+      if (avgOwn < 11) return 60 + ((avgOwn - 5) / 6) * 35;  // 60→95
+      if (avgOwn < 14) return 95;                             // plateau
+      if (avgOwn < 20) return 95 - ((avgOwn - 14) / 6) * 40; // 95→55
+      if (avgOwn < 28) return 55 - ((avgOwn - 20) / 8) * 30; // 55→25
+      return 20;
+    }
+    function bbScoreValue(ppk) {
+      if (ppk < 4) return 0;
+      if (ppk < 5) return (ppk - 4) * 50;                    // 0→50
+      if (ppk < 6) return 50 + (ppk - 5) * 30;               // 50→80
+      if (ppk < 7) return 80 + (ppk - 6) * 15;               // 80→95
+      return Math.min(100, 95 + (ppk - 7) * 5);
+    }
+    function bbScoreSalary(pctUsed) {
+      if (pctUsed < 0.85) return 30 * (pctUsed / 0.85);
+      if (pctUsed < 0.90) return 30 + ((pctUsed - 0.85) / 0.05) * 30;  // 30→60
+      if (pctUsed < 0.95) return 60 + ((pctUsed - 0.90) / 0.05) * 25;  // 60→85
+      if (pctUsed < 0.99) return 85 + ((pctUsed - 0.95) / 0.04) * 14;  // 85→99
+      if (pctUsed <= 1.0) return 100;
+      return 40; // over cap
+    }
+    function bbScoreFloor(ratio) {
+      if (ratio < 0.55) return 0;
+      if (ratio < 0.65) return ((ratio - 0.55) / 0.10) * 40;            // 0→40
+      if (ratio < 0.75) return 40 + ((ratio - 0.65) / 0.10) * 30;       // 40→70
+      if (ratio < 0.85) return 70 + ((ratio - 0.75) / 0.10) * 25;       // 70→95
+      return Math.min(100, 95 + (ratio - 0.85) * 33);
+    }
+
+    function bbComputeGrade(score) {
+      if (score >= 90) return 'A';
+      if (score >= 80) return 'B';
+      if (score >= 70) return 'C';
+      if (score >= 60) return 'D';
+      return 'F';
+    }
+
+    function bbPickTip(subs, mode, sumSalary, cap, avgOwn, ppk) {
+      // Return the most useful gentle tip for the lowest sub-score
+      const sorted = Object.entries(subs).sort((a, b) => a[1] - b[1]);
+      const [lowestKey, lowestVal] = sorted[0];
+      if (lowestVal >= 75) return null; // don't nag when everything's fine
+
+      if (lowestKey === 'salary' && sumSalary < cap) {
+        const left = cap - sumSalary;
+        if (left >= 400) return `You have <strong>$${left.toLocaleString()}</strong> left on the cap. Consider upgrading a value play — even a $400 bump usually adds 3-5 points to your ceiling.`;
+      }
+      if (lowestKey === 'leverage' && avgOwn > 17) {
+        return `Average ownership is <strong>${avgOwn.toFixed(1)}%</strong> — on the chalky side. Consider swapping one pick for a sub-10% flyer to add GPP differentiation.`;
+      }
+      if (lowestKey === 'leverage' && avgOwn < 7) {
+        return `Average ownership is very low (<strong>${avgOwn.toFixed(1)}%</strong>). Very contrarian builds need everything to break right — consider anchoring with one chalky play.`;
+      }
+      if (lowestKey === 'ceiling') {
+        return `Ceiling is soft — consider a volatility pick to raise the p95. High-ceiling SPECIALISTs in the $8-10k range usually move this number most.`;
+      }
+      if (lowestKey === 'value') {
+        return `Points per $1k is <strong>${ppk.toFixed(2)}</strong>. A cheaper high-upside play would unlock salary for elsewhere.`;
+      }
+      if (lowestKey === 'floor' && mode === 'cash') {
+        return `Floor is thin for cash — a consistent make-cut SPECIALIST would stabilize this lineup.`;
+      }
+      if (lowestKey === 'floor') {
+        return `Floor is thin — fine for GPP, but risky if any picks miss the cut.`;
+      }
+      return null;
+    }
+
+    function updateBBScore(data) {
+      const root = document.getElementById('bbscore');
+      if (!root) return;
+
+      const players = data.players;
+      const n = players.length;
+
+      if (n === 0) {
+        root.setAttribute('data-state', 'empty');
+        root.setAttribute('data-grade', 'F');
+        document.getElementById('bbGrade').textContent = '—';
+        document.getElementById('bbNumber').textContent = '—';
+        document.getElementById('bbTagline').textContent = 'Build 6 players to reveal your grade';
+        document.getElementById('bbTip').hidden = true;
+        document.getElementById('bbInsight').hidden = true;
+        bbState.lastScore = null;
+        bbState.lastGrade = null;
+        return;
+      }
+
+      if (n < 6) {
+        root.setAttribute('data-state', 'partial');
+        root.setAttribute('data-grade', 'F');
+        document.getElementById('bbGrade').textContent = '—';
+        document.getElementById('bbNumber').textContent = '—';
+        document.getElementById('bbTagline').textContent = `${n} of 6 slots filled — keep going`;
+        document.getElementById('bbTip').hidden = true;
+        document.getElementById('bbInsight').hidden = true;
+        return;
+      }
+
+      // Full lineup — compute
+      const sumMean = data.sumMean;
+      const sumSalary = data.sumSalary;
+      const avgOwn = data.avgOwn;
+      const sumP5 = data.sumP5;
+      const sumP95 = data.sumP95;
+      const cap = state.cap || 50000;
+      const ppk = sumSalary > 0 ? sumMean / (sumSalary / 1000) : 0;
+      const pctUsed = sumSalary / cap;
+      const floorRatio = sumMean > 0 ? sumP5 / sumMean : 0;
+
+      const subs = {
+        ceiling:  bbScoreCeiling(sumP95),
+        leverage: bbScoreLeverage(avgOwn),
+        value:    bbScoreValue(ppk),
+        salary:   bbScoreSalary(pctUsed),
+        floor:    bbScoreFloor(floorRatio)
+      };
+
+      const w = BB_WEIGHTS[bbState.mode];
+      const composite = Math.round(
+        subs.ceiling  * w.ceiling +
+        subs.leverage * w.leverage +
+        subs.value    * w.value +
+        subs.salary   * w.salary +
+        subs.floor    * w.floor
+      );
+      const grade = bbComputeGrade(composite);
+
+      // State + grade attrs
+      root.setAttribute('data-state', 'filled');
+      root.setAttribute('data-grade', grade);
+
+      // Grade letter with flash on change
+      const gradeEl = document.getElementById('bbGrade');
+      gradeEl.textContent = grade;
+      if (bbState.lastGrade && bbState.lastGrade !== grade) {
+        gradeEl.classList.remove('grade-flash');
+        void gradeEl.offsetWidth; // restart animation
+        gradeEl.classList.add('grade-flash');
+      }
+
+      // Tagline pick from pool for variety
+      const pool = BB_TAGLINES[grade];
+      document.getElementById('bbTagline').textContent = pool[composite % pool.length];
+
+      // Number tween from last → new
+      const prev = bbState.lastScore == null ? 0 : bbState.lastScore;
+      tweenNumber(document.getElementById('bbNumber'), prev, composite, 400);
+
+      // Delta chip
+      const deltaEl = document.getElementById('bbDelta');
+      if (bbState.lastScore != null && composite !== prev) {
+        const diff = composite - prev;
+        deltaEl.textContent = (diff > 0 ? '+' : '') + diff;
+        deltaEl.className = 'bbscore-delta visible ' + (diff > 0 ? 'up' : 'down');
+        setTimeout(() => deltaEl.classList.remove('visible'), 1400);
+      } else {
+        deltaEl.className = 'bbscore-delta';
+      }
+
+      // Sub-score bars + meta
+      const metaStrings = {
+        ceiling:  `p95 sum ${sumP95.toFixed(0)}`,
+        leverage: `avg own ${avgOwn.toFixed(1)}%`,
+        value:    `${ppk.toFixed(2)} pts / $1k`,
+        salary:   `$${(sumSalary/1000).toFixed(1)}k / $${(cap/1000).toFixed(0)}k`,
+        floor:    `p5 preserves ${(floorRatio*100).toFixed(0)}%`
+      };
+      Object.entries(subs).forEach(([key, val]) => {
+        const row = root.querySelector(`.bbsub[data-key="${key}"]`);
+        if (!row) return;
+        row.setAttribute('data-tier', bbSubTier(val));
+        row.querySelector('.bbsub-bar i').style.width = Math.max(2, val) + '%';
+        row.querySelector('.bbsub-value').textContent = Math.round(val);
+        row.querySelector('.bbsub-meta').textContent = metaStrings[key];
+      });
+
+      // Insight: standout + weakest
+      const byKey = Object.entries(subs);
+      const best = byKey.reduce((a, b) => b[1] > a[1] ? b : a);
+      const worst = byKey.reduce((a, b) => b[1] < a[1] ? b : a);
+      const pretty = { ceiling: 'ceiling', leverage: 'ownership leverage', value: 'salary value', salary: 'cap efficiency', floor: 'floor safety' };
+      document.getElementById('bbStandout').textContent = `Standout: ${pretty[best[0]]}`;
+      document.getElementById('bbWeakest').textContent = `Weakest: ${pretty[worst[0]]}`;
+      document.getElementById('bbInsight').hidden = false;
+
+      // Tip
+      const tip = bbPickTip(subs, bbState.mode, sumSalary, cap, avgOwn, ppk);
+      const tipEl = document.getElementById('bbTip');
+      if (tip) {
+        tipEl.innerHTML = tip;
+        tipEl.hidden = false;
+      } else {
+        tipEl.hidden = true;
+      }
+
+      bbState.lastScore = composite;
+      bbState.lastGrade = grade;
+    }
+
+    function tweenNumber(el, from, to, duration) {
+      if (!el) return;
+      if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = Math.round(to);
+        return;
+      }
+      const start = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(from + (to - from) * eased);
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    // Wire mode toggle (GPP / Cash)
+    document.addEventListener('DOMContentLoaded', () => {
+      const modeBtns = document.querySelectorAll('.bbscore-mode button[data-bb-mode]');
+      modeBtns.forEach(btn => btn.addEventListener('click', () => {
+        modeBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        bbState.mode = btn.dataset.bbMode;
+        recomputeLineup();
+      }));
+    });
 
     function renderDist(dist) {
       const svg = document.getElementById('distSvg');
