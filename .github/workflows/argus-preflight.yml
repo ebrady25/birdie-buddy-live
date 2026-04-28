@@ -1,0 +1,92 @@
+name: ARGUS Preflight
+
+# Five preflight windows ahead of each downstream Claude phase.
+# Each cron tagged in the script via --phase so the JSON output records
+# which downstream consumer it was gating.
+#
+# UTC times below assume Eastern Daylight Time (EDT, UTC-4) — schedules
+# fire ~1 hour earlier in EST. Acceptable: ARGUS is a check, not the gate.
+
+on:
+  schedule:
+    - cron: '50 12 * * 1'   # Mon 08:50 ET → before MNEMOSYNE 09:05
+    - cron: '52 15 * * 1'   # Mon 11:52 ET → before Phase 1  12:02
+    - cron: '53 10 * * 2'   # Tue 06:53 ET → before Phase 1.5 07:00
+    - cron: '49 12 * * 2'   # Tue 08:49 ET → before Preview   09:09
+    - cron: '54 8 * * 3'    # Wed 04:54 ET → before Lock      05:08
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Manual phase override'
+        required: true
+        default: 'phase1'
+        type: choice
+        options:
+          - mnemosyne
+          - phase1
+          - phase15
+          - preview
+          - lock
+
+permissions:
+  contents: write
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Determine phase from cron
+        id: phase
+        run: |
+          if [ -n "${{ inputs.phase }}" ]; then
+            PHASE="${{ inputs.phase }}"
+          else
+            case "${{ github.event.schedule }}" in
+              '50 12 * * 1') PHASE=mnemosyne ;;
+              '52 15 * * 1') PHASE=phase1 ;;
+              '53 10 * * 2') PHASE=phase15 ;;
+              '49 12 * * 2') PHASE=preview ;;
+              '54 8 * * 3')  PHASE=lock ;;
+              *) echo "Unknown schedule '${{ github.event.schedule }}'"; exit 1 ;;
+            esac
+          fi
+          echo "phase=$PHASE" >> $GITHUB_OUTPUT
+          echo "Selected phase: $PHASE"
+
+      - name: Run ARGUS health check
+        id: argus
+        env:
+          DG_API_KEY: ${{ secrets.DG_API_KEY }}
+        # Capture exit code so we still commit the JSON on failure
+        run: |
+          set +e
+          python scripts/argus_health.py --phase ${{ steps.phase.outputs.phase }}
+          echo "exit=$?" >> $GITHUB_OUTPUT
+          set -e
+
+      - name: Commit and push the health JSON
+        if: always()
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add data/argus_health.json
+          git diff --staged --quiet && echo "No changes." || (
+            git commit -m "ARGUS: ${{ steps.phase.outputs.phase }} preflight $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          )
+
+      - name: Surface red status as a workflow failure
+        if: steps.argus.outputs.exit != '0'
+        run: |
+          echo "::error::ARGUS preflight reported red — downstream Claude tasks will cascade-abort."
+          exit 1
