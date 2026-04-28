@@ -179,6 +179,34 @@
     }
 
     /* =========================================================
+       SECTION ORNAMENTS — editorial dividers between sections
+       ========================================================= */
+    .section-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      margin: var(--space-9) 0 var(--space-3);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .section-ornament-line {
+      flex: 0 1 90px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-700) 50%, transparent);
+    }
+    .section-ornament-glyph {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--gold-500);
+      letter-spacing: 0.4em;
+      transform: translateY(-2px);
+      opacity: 0.7;
+    }
+    /* No ornament before the first section (hero already separates) */
+    main.container > .section-ornament:first-of-type { display: none; }
+
+    /* =========================================================
        WORLD RANKING — Global percentile section
        ========================================================= */
     .rank-card {
@@ -1300,6 +1328,12 @@
       <div id="recapsMount"></div>
     </section>
 
+    <div class="section-ornament" aria-hidden="true">
+      <span class="section-ornament-line"></span>
+      <span class="section-ornament-glyph">✦ ✦ ✦</span>
+      <span class="section-ornament-line"></span>
+    </div>
+
     <!-- FACTOR ATTRIBUTION -->
     <section class="section" id="attribution">
       <div class="section-head">
@@ -1345,6 +1379,12 @@
       </div>
     </section>
 
+    <div class="section-ornament" aria-hidden="true">
+      <span class="section-ornament-line"></span>
+      <span class="section-ornament-glyph">✦ ✦ ✦</span>
+      <span class="section-ornament-line"></span>
+    </div>
+
     <!-- SHADOW VARIANTS -->
     <section class="section" id="shadow">
       <div class="section-head">
@@ -1361,6 +1401,12 @@
       </div>
       <div class="shadow-grid" id="shadowGrid"></div>
     </section>
+
+    <div class="section-ornament" aria-hidden="true">
+      <span class="section-ornament-line"></span>
+      <span class="section-ornament-glyph">✦ ✦ ✦</span>
+      <span class="section-ornament-line"></span>
+    </div>
 
     <!-- CALIBRATION -->
     <section class="section" id="calibration">
