@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-04-28T04:12:06Z",
-  "phase_checked": "phase1",
-  "next_phase": "phase1_apollo_atlas",
+  "timestamp": "2026-04-28T12:17:41Z",
+  "phase_checked": "phase15",
+  "next_phase": "phase15_aeolus_zeus",
   "status": "green",
   "checks": {
     "current_event": {
@@ -16,13 +16,15 @@
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.33,
+      "duration_s": 0.42,
       "players_returned": 72,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "n/a",
-      "note": "phase1 has no prior-output gate (first or independent phase)."
+      "status": "pass",
+      "checked": [
+        "bbi_rankings.json (0.0h)"
+      ]
     }
   },
   "recommendations": [],
