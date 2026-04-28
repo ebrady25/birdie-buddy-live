@@ -14,19 +14,20 @@
   "team_event": false,
   "sg_weights": {
     "sg_app": 1.28,
-    "sg_ott": 1.12,
+    "sg_ott": 1.22,
     "sg_putt": 0.88,
-    "sg_arg": 0.72
+    "sg_arg": 0.62,
+    "_note": "sg_ott bumped 1.12→1.22 (2026-04-27): Hanse redesign added length and made bombing the specific differentiator. sg_arg trimmed 0.72→0.62 to keep total premium balanced — Doral data shows scrambling matters less than ball-striking."
   },
   "course_weight_override": {
-    "courseFit_pool": 0.24,
-    "courseFit_dfs": 0.18,
-    "_note": "Slightly elevated vs default (0.22/0.17): Blue Monster winner archetype is highly specific (bombers + iron accuracy). Limited course history (post-2020 return) caps leverage."
+    "courseFit_pool": 0.20,
+    "courseFit_dfs": 0.16,
+    "_note": "Reduced from 0.24/0.18 (2026-04-27): course returned to PGA Tour for first time since 2016 + Hanse redesign means 2011-2013 history is on a materially different course. Window narrowed to 2014-2016 only (3 years, ~200 player-rounds). Less confidence in courseFit → less weight."
   },
   "course_form_name": "Trump National Doral Form",
   "course_history_event_id_fallbacks": [473],
-  "course_history_year_range": [2011, 2016],
-  "course_history_note": "Cadillac Championship 2026 (event_id 556) is a brand-new return to Doral — DataGolf has no archive at this id. Pull WGC-Cadillac Championship history from event_id 473, years 2011-2016 (the prior PGA Tour era at Trump National Doral Blue Monster).",
+  "course_history_year_range": [2014, 2016],
+  "course_history_note": "Cadillac Championship 2026 (event_id 556) is a brand-new return to Doral — DataGolf has no archive at this id. Pull WGC-Cadillac Championship history from event_id 473, years 2014-2016 ONLY (post-Hanse redesign era — 2011-2013 played at the OLD shorter Blue Monster, where avg score was 71.3 vs 73.3 post-redesign with %under-par dropping from 53% to 28%). Window deliberately narrow to keep course identity stable.",
   "course_tier_thresholds": {
     "SPECIALIST": {
       "min_rounds": 8,
