@@ -1,0 +1,237 @@
+[
+  {
+    "event_id": 2,
+    "event_name": "The American Express",
+    "year": 2025
+  },
+  {
+    "event_id": 3,
+    "event_name": "WM Phoenix Open",
+    "year": 2025
+  },
+  {
+    "event_id": 4,
+    "event_name": "Farmers Insurance Open",
+    "year": 2025
+  },
+  {
+    "event_id": 5,
+    "event_name": "AT&T Pebble Beach Pro-Am",
+    "year": 2025
+  },
+  {
+    "event_id": 6,
+    "event_name": "Sony Open in Hawaii",
+    "year": 2025
+  },
+  {
+    "event_id": 7,
+    "event_name": "The Genesis Invitational",
+    "year": 2025
+  },
+  {
+    "event_id": 9,
+    "event_name": "Arnold Palmer Invitational presented by Mastercard",
+    "year": 2025
+  },
+  {
+    "event_id": 10,
+    "event_name": "Cognizant Classic in The Palm Beaches",
+    "year": 2025
+  },
+  {
+    "event_id": 11,
+    "event_name": "THE PLAYERS Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 12,
+    "event_name": "RBC Heritage",
+    "year": 2025
+  },
+  {
+    "event_id": 13,
+    "event_name": "Wyndham Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 14,
+    "event_name": "Masters Tournament",
+    "year": 2025
+  },
+  {
+    "event_id": 16,
+    "event_name": "The Sentry",
+    "year": 2025
+  },
+  {
+    "event_id": 19,
+    "event_name": "THE CJ CUP Byron Nelson",
+    "year": 2025
+  },
+  {
+    "event_id": 20,
+    "event_name": "Texas Children's Houston Open",
+    "year": 2025
+  },
+  {
+    "event_id": 21,
+    "event_name": "Charles Schwab Challenge",
+    "year": 2025
+  },
+  {
+    "event_id": 23,
+    "event_name": "the Memorial Tournament presented by Workday",
+    "year": 2025
+  },
+  {
+    "event_id": 26,
+    "event_name": "U.S. Open",
+    "year": 2025
+  },
+  {
+    "event_id": 27,
+    "event_name": "FedEx St. Jude Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 28,
+    "event_name": "BMW Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 30,
+    "event_name": "John Deere Classic",
+    "year": 2025
+  },
+  {
+    "event_id": 32,
+    "event_name": "RBC Canadian Open",
+    "year": 2025
+  },
+  {
+    "event_id": 33,
+    "event_name": "PGA Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 34,
+    "event_name": "Travelers Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 41,
+    "event_name": "Valero Texas Open",
+    "year": 2025
+  },
+  {
+    "event_id": 54,
+    "event_name": "Sanderson Farms Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 60,
+    "event_name": "TOUR Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 88,
+    "event_name": "PGA TOUR Q-School presented by Korn Ferry",
+    "year": 2025
+  },
+  {
+    "event_id": 100,
+    "event_name": "The Open Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 457,
+    "event_name": "World Wide Technology Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 464,
+    "event_name": "Procore Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 472,
+    "event_name": "Barracuda Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 475,
+    "event_name": "Valspar Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 478,
+    "event_name": "Hero World Challenge",
+    "year": 2025
+  },
+  {
+    "event_id": 480,
+    "event_name": "Truist Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 483,
+    "event_name": "Puerto Rico Open",
+    "year": 2025
+  },
+  {
+    "event_id": 493,
+    "event_name": "The RSM Classic",
+    "year": 2025
+  },
+  {
+    "event_id": 518,
+    "event_name": "ISCO Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 522,
+    "event_name": "Corales Puntacana Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 524,
+    "event_name": "Rocket Classic",
+    "year": 2025
+  },
+  {
+    "event_id": 525,
+    "event_name": "3M Open",
+    "year": 2025
+  },
+  {
+    "event_id": 527,
+    "event_name": "Baycurrent Classic",
+    "year": 2025
+  },
+  {
+    "event_id": 528,
+    "event_name": "Butterfield Bermuda Championship",
+    "year": 2025
+  },
+  {
+    "event_id": 540,
+    "event_name": "Mexico Open at VidantaWorld",
+    "year": 2025
+  },
+  {
+    "event_id": 541,
+    "event_name": "Genesis Scottish Open",
+    "year": 2025
+  },
+  {
+    "event_id": 553,
+    "event_name": "ONEflight Myrtle Beach Classic",
+    "year": 2025
+  },
+  {
+    "event_id": 554,
+    "event_name": "Bank of Utah Championship",
+    "year": 2025
+  }
+]

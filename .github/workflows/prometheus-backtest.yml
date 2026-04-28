@@ -1,0 +1,41 @@
+name: PROMETHEUS Backtest
+
+on:
+  schedule:
+    # Sunday 23:04 ET = Monday 03:04 UTC during EDT, 04:04 UTC during EST.
+    # GH cron is UTC; we pick 03:04 UTC Mon (works year-round, fires ~1h
+    # earlier in winter — close enough for an offline backtest).
+    - cron: '4 3 * * 1'
+  workflow_dispatch:           # Manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run PROMETHEUS backtest
+        env:
+          DG_API_KEY: ${{ secrets.DG_API_KEY }}
+        run: python scripts/refresh_prometheus.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add data/prometheus_backtest.json
+          git diff --staged --quiet && echo "No changes to commit." || (
+            git commit -m "Auto: prometheus backtest $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          )
