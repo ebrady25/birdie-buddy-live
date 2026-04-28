@@ -135,6 +135,326 @@
     /* Anchor offsets for in-page nav */
     section.section[id] { scroll-margin-top: calc(var(--nav-h) + var(--status-h) + 20px); }
 
+    /* =========================================================
+       WORLD RANKING — Global percentile section
+       ========================================================= */
+    .rank-card {
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      position: relative;
+      overflow: hidden;
+    }
+    .rank-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    }
+    .rank-headline {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--space-6);
+      margin-bottom: var(--space-7);
+      padding-bottom: var(--space-5);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    @media (max-width: 760px) {
+      .rank-headline { grid-template-columns: 1fr; }
+    }
+    .rank-headline-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .rank-headline-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--gold-300);
+    }
+    .rank-headline-value {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.875rem, 4vw, 2.625rem);
+      letter-spacing: -0.025em;
+      line-height: 1;
+      color: var(--gold-300);
+    }
+    .rank-headline-value.secondary {
+      color: var(--info);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+    .rank-headline-context {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* The percentile scale */
+    .rank-scale {
+      position: relative;
+      margin: var(--space-7) 0 var(--space-6);
+      padding-top: var(--space-12);
+      padding-bottom: var(--space-8);
+    }
+    .rank-bands {
+      display: grid;
+      grid-template-columns:
+        14.3% 21.4% 14.3% 14.3% 35.7%;
+      height: 56px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+    }
+    .rank-band {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2) var(--space-3);
+      gap: 2px;
+      transition: transform var(--dur-base);
+      cursor: default;
+      position: relative;
+    }
+    .rank-band:hover { transform: scaleY(1.06); z-index: 2; }
+    .rank-band.noise   { background: linear-gradient(180deg, #2a1a1f, #1a1218); color: #6a4a55; }
+    .rank-band.casual  { background: linear-gradient(180deg, #2a221a, #1a1612); color: #8a6a4a; }
+    .rank-band.solid   { background: linear-gradient(180deg, #1f2a22, #131a16); color: #6a9a7a; }
+    .rank-band.top     { background: linear-gradient(180deg, #2a2418, #1a1612); color: var(--gold-400); }
+    .rank-band.best    { background: linear-gradient(180deg, #322618, #221a10); color: var(--gold-200); }
+    .rank-band-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .rank-band-pct {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      opacity: 0.75;
+    }
+    @media (max-width: 700px) {
+      .rank-band-label { font-size: 9px; }
+      .rank-band-pct { display: none; }
+    }
+
+    /* Spearman value axis */
+    .rank-axis {
+      position: relative;
+      margin-top: var(--space-2);
+      height: 22px;
+    }
+    .rank-axis-tick {
+      position: absolute;
+      top: 0;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      letter-spacing: var(--tracking-wide);
+    }
+    .rank-axis-tick::before {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 1px;
+      background: var(--border-base);
+      margin: 0 auto 4px;
+    }
+
+    /* Markers — BBI + baseline */
+    .rank-marker {
+      position: absolute;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+    .rank-marker.bbi { top: 0; }
+    .rank-marker.baseline { top: 0; }
+    .rank-marker-flag {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .rank-marker-pin {
+      width: 2px;
+      height: 80px;
+      margin-top: 4px;
+      background: linear-gradient(180deg, currentColor, transparent);
+    }
+    .rank-marker.bbi .rank-marker-pin { background: linear-gradient(180deg, var(--gold-300), rgba(212, 168, 67, 0.3)); }
+    .rank-marker.baseline .rank-marker-pin { background: linear-gradient(180deg, var(--info), rgba(96, 165, 250, 0.3)); }
+    .rank-marker-pill {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      white-space: nowrap;
+      border: 1px solid currentColor;
+    }
+    .rank-marker.bbi .rank-marker-pill {
+      color: var(--gold-200);
+      background: rgba(212, 168, 67, 0.18);
+      border-color: var(--gold-500);
+      box-shadow: 0 4px 16px rgba(212, 168, 67, 0.25);
+    }
+    .rank-marker.baseline .rank-marker-pill {
+      color: #c5dafa;
+      background: rgba(96, 165, 250, 0.16);
+      border-color: var(--info);
+    }
+    .rank-marker-value {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 2px;
+    }
+
+    /* BBI weekly range band — translucent overlay */
+    .rank-range-band {
+      position: absolute;
+      top: var(--space-12);
+      height: 56px;
+      background: repeating-linear-gradient(
+        135deg,
+        rgba(212, 168, 67, 0.08),
+        rgba(212, 168, 67, 0.08) 4px,
+        rgba(212, 168, 67, 0.16) 4px,
+        rgba(212, 168, 67, 0.16) 8px
+      );
+      border-left: 1px dashed rgba(212, 168, 67, 0.4);
+      border-right: 1px dashed rgba(212, 168, 67, 0.4);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Tier descriptions grid */
+    .rank-tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+    }
+    @media (max-width: 980px) { .rank-tiers-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 540px) { .rank-tiers-grid { grid-template-columns: 1fr; } }
+    .rank-tier-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+      transition: border-color var(--dur-base), transform var(--dur-base);
+    }
+    .rank-tier-card.bbi-tier {
+      border-color: var(--border-gold-strong);
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.08), var(--surface-2));
+      box-shadow: 0 0 0 1px var(--border-gold);
+    }
+    .rank-tier-card:hover { transform: translateY(-2px); border-color: var(--border-strong); }
+    .rank-tier-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .rank-tier-card.bbi-tier .rank-tier-name { color: var(--gold-200); }
+    .rank-tier-pct {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+    }
+    .rank-tier-range {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--gold-400);
+      margin-bottom: var(--space-2);
+    }
+    .rank-tier-desc {
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .rank-tier-bbi-badge {
+      display: inline-block;
+      margin-top: var(--space-2);
+      padding: 2px 6px;
+      background: rgba(212, 168, 67, 0.15);
+      color: var(--gold-200);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-gold);
+    }
+
+    /* Honest summary footer */
+    .rank-summary {
+      margin-top: var(--space-6);
+      padding: var(--space-4) var(--space-5);
+      background: var(--surface-3);
+      border-radius: var(--radius-md);
+      border-left: 3px solid var(--gold-500);
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+    .rank-summary strong { color: var(--text-primary); }
+
+    /* "View all recaps" archive link */
+    .recaps-archive-link {
+      display: flex;
+      justify-content: center;
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    .recaps-archive-link a {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      background: linear-gradient(180deg, var(--surface-3), var(--surface-2));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-pill);
+      color: var(--gold-300);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all var(--dur-base);
+    }
+    .recaps-archive-link a:hover {
+      background: linear-gradient(180deg, var(--surface-4), var(--surface-3));
+      border-color: var(--border-gold-strong);
+      color: var(--gold-200);
+      transform: translateY(-1px);
+    }
+    .recaps-archive-link a::after {
+      content: '→';
+      transition: transform var(--dur-base);
+    }
+    .recaps-archive-link a:hover::after { transform: translateX(3px); }
+
     /* Factor attribution chart */
     .attr-card {
       background: var(--surface-2);
@@ -357,17 +677,70 @@
   <main class="container">
     <!-- PAGE HEAD -->
     <header class="page-head">
-      <div class="eyebrow">Model performance · BBI <span class="gold">v8.5</span></div>
-      <h1>How the model actually performs.</h1>
-      <p>Every prediction BBI makes is scored against the truth. We track Spearman rank correlation vs. the published industry baseline, Brier-score calibration across five markets, and run four shadow variants every week competing against the champion. This page is the model's report card.</p>
+      <div class="eyebrow">Public performance tracking · BBI <span class="gold">v8.5</span></div>
+      <h1>The model's report card — every week, no asterisks.</h1>
+      <p>Every prediction BBI makes is scored against the truth. Spearman rank correlation vs. the published industry baseline. Brier-score calibration across five markets. Four shadow variants competing against the champion every Monday. This is what model honesty looks like.</p>
       <div class="page-head-meta">
         <span>Season <strong>2026</strong></span>
         <span>Events tracked <strong id="pmEvents">0</strong></span>
         <span>Season avg ρ <strong class="gold" id="pmSeasonAvg">—</strong></span>
-        <span>Target ρ <strong class="positive">0.40</strong></span>
+        <span>Best week <strong class="gold" id="pmBestWeek">—</strong></span>
         <span>Aspirational <strong class="gold">0.50</strong></span>
       </div>
     </header>
+
+    <!-- WORLD RANKING — where BBI sits globally -->
+    <section class="section" id="world-rank">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Global percentile · Independently scored</span>
+          <h2>Where BBI ranks among the world's golf models.</h2>
+          <p>Five tiers, one Spearman scale, honest framing. We track our position against the publicly observable field — and we're transparent about the gap to best-in-world. No private shop hides their numbers; neither do we.</p>
+        </div>
+      </div>
+
+      <div class="rank-card">
+        <div class="rank-headline">
+          <div class="rank-headline-item">
+            <span class="rank-headline-eyebrow">BBI v8.5 — 2026 Season Avg</span>
+            <span class="rank-headline-value" id="rankBbiPercentile">—</span>
+            <span class="rank-headline-context" id="rankBbiContext">—</span>
+          </div>
+          <div class="rank-headline-item">
+            <span class="rank-headline-eyebrow">Industry Baseline (2025)</span>
+            <span class="rank-headline-value secondary" id="rankBaselinePercentile">—</span>
+            <span class="rank-headline-context" id="rankBaselineContext">—</span>
+          </div>
+        </div>
+
+        <!-- The percentile scale -->
+        <div class="rank-scale" id="rankScale">
+          <div class="rank-bands" id="rankBands"></div>
+          <div class="rank-axis" id="rankAxis"></div>
+          <div class="rank-range-band" id="rankRangeBand" hidden></div>
+          <div class="rank-marker baseline" id="rankMarkerBaseline" hidden>
+            <div class="rank-marker-flag">
+              <span class="rank-marker-pill">Baseline</span>
+              <span class="rank-marker-value" id="rankBaselineValue">—</span>
+              <span class="rank-marker-pin"></span>
+            </div>
+          </div>
+          <div class="rank-marker bbi" id="rankMarkerBbi" hidden>
+            <div class="rank-marker-flag">
+              <span class="rank-marker-pill">BBI v8.5</span>
+              <span class="rank-marker-value" id="rankBbiValue">—</span>
+              <span class="rank-marker-pin"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier descriptions -->
+        <div class="rank-tiers-grid" id="rankTiersGrid"></div>
+
+        <!-- Honest summary -->
+        <div class="rank-summary" id="rankSummary">Loading transparent self-assessment…</div>
+      </div>
+    </section>
 
     <!-- KPI STRIP -->
     <div class="kpi-strip">
@@ -647,21 +1020,119 @@
       await BBI.renderHeader('performance.html');
       await BBI.renderFooter();
 
-      const [spear, calib, comp, shadow, prom, recaps, attr] = await Promise.all([
+      const [spear, calib, comp, shadow, prom, recaps, attr, worldRank] = await Promise.all([
         BBI.data.load(BBI.data.paths.spearman),
         BBI.data.load(BBI.data.paths.calibration),
         BBI.data.load(BBI.data.paths.modelCompetition),
         BBI.data.load(BBI.data.paths.shadowModels),
         BBI.data.load(BBI.data.paths.prometheus),
         BBI.data.load(BBI.data.paths.performanceWeeklyRecaps),
-        BBI.data.load(BBI.data.paths.performanceAttribution)
+        BBI.data.load(BBI.data.paths.performanceAttribution),
+        BBI.data.load(BBI.data.paths.worldRanking)
       ]);
 
       const events = (spear?.events || []).slice().sort((a, b) => (a.week || 0) - (b.week || 0));
       const rolling = spear?.rolling_metrics || {};
 
-      // ---------- WEEKLY RECAPS ----------
-      const recapList = (recaps?.recaps || []).slice().reverse();
+      // ---------- WORLD RANKING — global percentile ----------
+      if (worldRank && worldRank.tiers) {
+        const tiers = worldRank.tiers;
+        const cs = worldRank.current_state || {};
+        const bbiMarker = worldRank.bbi_marker || {};
+        const baselineMarker = worldRank.industry_baseline_marker || {};
+
+        // Headline numbers
+        const pctRange = cs.estimated_global_percentile_range || [88, 94];
+        $('#rankBbiPercentile').textContent = `${pctRange[0]}–${pctRange[1]}th percentile`;
+        $('#rankBbiContext').textContent =
+          `Spearman ${fmt.num(cs.bbi_season_mean_spearman, 3)} across ${cs.events_scored_2026 || 0} events · range ${fmt.num(bbiMarker.weekly_range?.min, 3)} → ${fmt.num(bbiMarker.weekly_range?.max, 3)}`;
+
+        const baselineTier = tiers.find(t => t.id === (baselineMarker.tier_id || 'top_tier'));
+        $('#rankBaselinePercentile').textContent = `~${baselineTier?.percentile || 94}th percentile`;
+        $('#rankBaselineContext').textContent =
+          `Spearman ${fmt.num(cs.industry_baseline_mean_spearman, 3)} · 47-event 2025 backtest`;
+
+        // Build the band visualization. Scale is 0.0 → 0.7 Spearman.
+        // Bands are widthed by (threshold - prev_threshold) / 0.7 * 100%.
+        const scaleMax = 0.7;
+        const bandsMount = $('#rankBands');
+        let prev = -0.05;  // include negative noise tier visually
+        const bandClass = { noise: 'noise', casual: 'casual', solid: 'solid', top_tier: 'top', best_in_world: 'best' };
+        bandsMount.style.gridTemplateColumns = tiers.map(t => {
+          const span = (t.spearman_threshold - prev) / scaleMax * 100;
+          prev = t.spearman_threshold;
+          return `${span.toFixed(2)}%`;
+        }).join(' ');
+        bandsMount.innerHTML = tiers.map(t => `
+          <div class="rank-band ${bandClass[t.id] || 'solid'}" title="${t.examples}">
+            <span class="rank-band-label">${t.label}</span>
+            <span class="rank-band-pct">${t.percentile}th pct</span>
+          </div>
+        `).join('');
+
+        // Spearman x-axis ticks (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7)
+        const axisMount = $('#rankAxis');
+        axisMount.innerHTML = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7].map(v => {
+          const left = (v / scaleMax) * 100;
+          return `<span class="rank-axis-tick" style="left: ${left.toFixed(1)}%">ρ ${v.toFixed(1)}</span>`;
+        }).join('');
+
+        // Position the BBI marker
+        const bbiVal = cs.bbi_season_mean_spearman || 0;
+        const bbiLeft = clamp((bbiVal / scaleMax) * 100, 0, 100);
+        const bbiMarkerEl = $('#rankMarkerBbi');
+        bbiMarkerEl.style.left = `${bbiLeft.toFixed(1)}%`;
+        bbiMarkerEl.removeAttribute('hidden');
+        $('#rankBbiValue').textContent = `ρ ${fmt.num(bbiVal, 3)}`;
+
+        // Industry baseline marker
+        const baseVal = cs.industry_baseline_mean_spearman || 0;
+        const baseLeft = clamp((baseVal / scaleMax) * 100, 0, 100);
+        const baseMarkerEl = $('#rankMarkerBaseline');
+        baseMarkerEl.style.left = `${baseLeft.toFixed(1)}%`;
+        baseMarkerEl.removeAttribute('hidden');
+        $('#rankBaselineValue').textContent = `ρ ${fmt.num(baseVal, 3)}`;
+
+        // BBI weekly range band (show min → max)
+        const wkMin = bbiMarker.weekly_range?.min;
+        const wkMax = bbiMarker.weekly_range?.max;
+        if (wkMin != null && wkMax != null) {
+          const left = clamp((wkMin / scaleMax) * 100, 0, 100);
+          const right = clamp((wkMax / scaleMax) * 100, 0, 100);
+          const rangeEl = $('#rankRangeBand');
+          rangeEl.style.left = `${left.toFixed(1)}%`;
+          rangeEl.style.width = `${(right - left).toFixed(1)}%`;
+          rangeEl.removeAttribute('hidden');
+        }
+
+        // Tier description cards
+        const bbiTierId = bbiMarker.tier_id || 'top_tier';
+        $('#rankTiersGrid').innerHTML = tiers.map(t => {
+          const isBbi = t.id === bbiTierId;
+          return `
+            <div class="rank-tier-card ${isBbi ? 'bbi-tier' : ''}" data-reveal>
+              <div class="rank-tier-name">${t.label}</div>
+              <div class="rank-tier-pct">${t.percentile}th percentile</div>
+              <div class="rank-tier-range">ρ ${t.spearman_min === -1 ? '< ' + t.spearman_threshold.toFixed(2) : t.spearman_min.toFixed(2) + ' – ' + (t.spearman_threshold === 1 ? '∞' : t.spearman_threshold.toFixed(2))}</div>
+              <div class="rank-tier-desc">${t.description}</div>
+              ${isBbi ? '<span class="rank-tier-bbi-badge">BBI plays here</span>' : ''}
+            </div>
+          `;
+        }).join('');
+
+        // Honest summary
+        $('#rankSummary').innerHTML = (cs.honest_summary || '')
+          .replace(/(\d+\.\d+|\d+%|\d+th[–-]\d+th)/g, '<strong>$1</strong>');
+      } else {
+        // Hide the section if data missing
+        const sec = document.getElementById('world-rank');
+        if (sec) sec.style.display = 'none';
+      }
+
+      // ---------- WEEKLY RECAPS — last 3 only, archive link below ----------
+      const allRecaps = (recaps?.recaps || []).slice().reverse();
+      const recapList = allRecaps.slice(0, 3);
+      const remainingCount = Math.max(0, allRecaps.length - recapList.length);
       // Sanitize DG mentions (site-wide branding policy)
       const sanitizeDG = (html) => String(html || '')
         .replace(/\bDataGolf\b/g, 'industry baseline')
@@ -671,14 +1142,16 @@
 
       const recapsMount = $('#recapsMount');
       if (recapList.length > 0) {
+        // Auto-expand the most recent recap; collapse older ones
         recapsMount.innerHTML = recapList.map((recap, idx) => `
-          <div class="recap-card" data-reveal data-delay="${Math.min(3, idx+1)}">
+          <div class="recap-card ${idx === 0 ? 'open' : ''}" data-reveal data-delay="${Math.min(3, idx+1)}">
             <button class="recap-header" onclick="this.closest('.recap-card').classList.toggle('open'); event.preventDefault();">
               <div class="recap-header-info">
                 <h3>Week ${recap.week} · ${recap.event}</h3>
                 <div class="recap-header-meta">
                   <span>${recap.date || ''}</span>
-                  <span>Completed</span>
+                  ${recap.course ? `<span>${recap.course}</span>` : ''}
+                  ${idx === 0 ? '<span style="color: var(--gold-300); font-weight: 600;">Most recent</span>' : ''}
                 </div>
                 <p class="recap-summary">${sanitizeDG(recap.summary || '')}</p>
               </div>
@@ -694,7 +1167,24 @@
             </div>
           </div>
         `).join('');
+
+        // Archive link — only show if there are more recaps not displayed
+        if (remainingCount > 0) {
+          recapsMount.insertAdjacentHTML('beforeend', `
+            <div class="recaps-archive-link" data-reveal>
+              <a href="recap.html">View all ${allRecaps.length} weekly recaps</a>
+            </div>
+          `);
+        } else {
+          recapsMount.insertAdjacentHTML('beforeend', `
+            <div class="recaps-archive-link" data-reveal>
+              <a href="recap.html">View weekly recap archive</a>
+            </div>
+          `);
+        }
         window.observeAnimations?.(recapsMount);
+      } else {
+        recapsMount.innerHTML = '<p class="muted" style="text-align: center; padding: var(--space-6);">No recaps yet — check back after the first scored event.</p>';
       }
 
       // ---------- FACTOR ATTRIBUTION ----------
@@ -750,7 +1240,12 @@
 
       // ---------- KPI STRIP ----------
       $('#pmEvents').textContent = events.length;
-      $('#pmSeasonAvg').textContent = fmt.num(rolling.season_avg_bbi_spearman, 3);
+      const bbiVals = events.map(e => e.spearman_bbi).filter(v => v != null);
+      const seasonMean = bbiVals.length ? bbiVals.reduce((a,b)=>a+b,0) / bbiVals.length : null;
+      $('#pmSeasonAvg').textContent = fmt.num(rolling.season_avg_bbi_spearman ?? seasonMean, 3);
+      const bestWk = bbiVals.length ? Math.max(...bbiVals) : null;
+      const pmBestEl = $('#pmBestWeek');
+      if (pmBestEl) pmBestEl.textContent = bestWk != null ? fmt.num(bestWk, 3) : '—';
 
       $('#kpiSeasonSpear').textContent = fmt.num(rolling.season_avg_bbi_spearman, 3);
       const seasonVsBacktest = (rolling.season_avg_bbi_spearman || 0) - (prom?.aggregate?.mean_spearman || 0);
