@@ -85,9 +85,10 @@
       font-size: var(--fs-xs);
     }
     table.edges thead th {
-      position: sticky;
-      top: calc(var(--nav-h) + var(--status-h) + var(--page-toolbar-h));
+      /* position:sticky set via JS transform — CSS sticky blocked by overflow-x:auto parent */
+      position: relative;
       z-index: 1;
+      will-change: transform;
       background: var(--surface-3);
       color: var(--text-muted);
       font-weight: 600;
@@ -561,6 +562,7 @@
                 <th data-sort="market_prob" title="Consensus across all books, devigged">Market %</th>
                 <th data-sort="edge" class="sort-desc" title="BBI minus market consensus, in percentage points">Edge</th>
                 <th data-sort="dk" title="DraftKings decimal odds">DK</th>
+                <th data-sort="b365" title="Bet365 decimal odds">B365</th>
                 <th data-sort="pin" title="Pinnacle (sharps) devigged probability">Pinn %</th>
                 <th data-sort="kelly" title="Fractional Kelly stake as % of bankroll">Kelly</th>
                 <th data-sort="spread" title="Spread across the 15 books in decimal points — tighter = more efficient market">Spread</th>
@@ -568,7 +570,7 @@
               </tr>
             </thead>
             <tbody id="edgesBody">
-              <tr><td colspan="9" class="edges-empty">Loading market data…</td></tr>
+              <tr><td colspan="10" class="edges-empty">Loading market data…</td></tr>
             </tbody>
           </table>
         </div>
@@ -746,6 +748,24 @@
       loadMarket();
       renderSortIndicator();
       window.observeAnimations?.(document);
+
+      // Sticky column header — JS transform (CSS sticky blocked by overflow-x:auto parent)
+      (function stickyThead() {
+        const cs     = getComputedStyle(document.documentElement);
+        const offset = parseFloat(cs.getPropertyValue('--nav-h'))
+                     + parseFloat(cs.getPropertyValue('--status-h'))
+                     + parseFloat(cs.getPropertyValue('--page-toolbar-h'));
+        const tbl    = document.getElementById('edgesTable');
+        const thead  = tbl.querySelector('thead');
+        function tick() {
+          const r = tbl.getBoundingClientRect();
+          const h = thead.offsetHeight;
+          thead.style.transform = (r.top < offset && r.bottom > offset + h)
+            ? `translateY(${offset - r.top}px)` : '';
+        }
+        window.addEventListener('scroll', tick, { passive: true });
+        tick();
+      })();
     })();
 
     // ---------- Market loader ----------
@@ -760,6 +780,8 @@
         pin_prob:  r.pinnacle_prob_deviged,
         dk_dec:    r.draftkings_decimal,
         dk_prob:   r.draftkings_prob_raw,
+        b365_dec:  r.bet365_decimal,
+        b365_prob: r.bet365_prob_deviged,
         edge:      r.edge_consensus_pp,
         edge_pin:  r.edge_pinnacle_pp,
         kelly_pct: r.kelly_stake_pct_bankroll,
@@ -825,6 +847,7 @@
             case 'market_prob': return r.market_prob || 0;
             case 'edge': return r.edge == null ? -999 : r.edge;
             case 'dk': return r.dk_dec || 0;
+            case 'b365': return r.b365_dec || 0;
             case 'pin': return r.pin_prob || 0;
             case 'kelly': return r.kelly_pct || 0;
             case 'spread': return r.spread == null ? 999 : r.spread;
@@ -840,7 +863,7 @@
       document.getElementById('edgeCount').textContent = fmt.int(rows.length);
 
       if (!rows.length) {
-        body.innerHTML = `<tr><td colspan="9" class="edges-empty">No players match your filter in this market.</td></tr>`;
+        body.innerHTML = `<tr><td colspan="10" class="edges-empty">No players match your filter in this market.</td></tr>`;
         return;
       }
 
@@ -878,6 +901,7 @@
               <span>${edgeStr}</span>
             </td>
             <td class="val-book">${r.dk_dec != null ? r.dk_dec.toFixed(2) : '—'}</td>
+            <td class="val-book">${r.b365_dec != null ? r.b365_dec.toFixed(2) : '—'}</td>
             <td class="val-dim">${r.pin_prob != null && r.pin_prob > 0 && r.pin_prob < 1 ? (r.pin_prob * 100).toFixed(2) + '%' : '—'}</td>
             <td class="kelly-cell ${kellyHeavy}">${kellyChip}</td>
             <td>
