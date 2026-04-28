@@ -655,6 +655,38 @@
     .rank-summary strong { color: var(--text-primary); }
 
     /* =========================================================
+       SKELETON LOADERS — shimmer placeholders pre-data
+       ========================================================= */
+    @keyframes skeletonShimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton {
+      display: inline-block;
+      vertical-align: middle;
+      background: linear-gradient(
+        90deg,
+        var(--surface-3) 0%,
+        var(--surface-4) 35%,
+        rgba(212, 168, 67, 0.06) 50%,
+        var(--surface-4) 65%,
+        var(--surface-3) 100%
+      );
+      background-size: 200% 100%;
+      animation: skeletonShimmer 2.4s ease-in-out infinite;
+      border-radius: var(--radius-sm);
+      color: transparent !important;
+      pointer-events: none;
+      user-select: none;
+    }
+    .skeleton::selection { background: transparent; }
+    /* Hide the shimmer once data lands and the .skeleton class is removed */
+    body.data-loaded .skeleton {
+      animation: none;
+      background: transparent;
+    }
+
+    /* =========================================================
        STICKY MINI-SUMMARY — fades in once hero scrolls out of view
        ========================================================= */
     .perf-mini {
@@ -1472,9 +1504,9 @@
       <p>Every prediction BBI makes is scored against the truth. Spearman rank correlation vs. the published industry baseline. Brier-score calibration across five markets. Four shadow variants competing against the champion every Monday. This is what model honesty looks like.</p>
       <div class="page-head-meta">
         <span>Season <strong>2026</strong></span>
-        <span>Events tracked <strong id="pmEvents">0</strong></span>
-        <span>Season avg ρ <strong class="gold" id="pmSeasonAvg">—</strong></span>
-        <span>Best week <strong class="gold" id="pmBestWeek">—</strong></span>
+        <span>Events tracked <strong id="pmEvents" class="skeleton" style="min-width: 20px;">00</strong></span>
+        <span>Season avg ρ <strong class="gold skeleton" id="pmSeasonAvg" style="min-width: 38px;">0.000</strong></span>
+        <span>Best week <strong class="gold skeleton" id="pmBestWeek" style="min-width: 38px;">0.000</strong></span>
         <span>Aspirational <strong class="gold">0.50</strong></span>
       </div>
     </header>
@@ -1564,27 +1596,27 @@
     <div class="kpi-strip">
       <div class="stat">
         <div class="stat-label">Season Spearman</div>
-        <div class="stat-value stat-value-gold"><span id="kpiSeasonSpear">0</span></div>
-        <div class="stat-sub"><span id="kpiSpearTrend" class="stat-delta stat-delta-flat">—</span> vs 2025 backtest</div>
+        <div class="stat-value stat-value-gold"><span id="kpiSeasonSpear" class="skeleton" style="min-width: 60px;">0.000</span></div>
+        <div class="stat-sub"><span id="kpiSpearTrend" class="stat-delta stat-delta-flat skeleton" style="min-width: 40px;">—</span> vs 2025 backtest</div>
       </div>
       <div class="stat">
         <div class="stat-label">Best event</div>
-        <div class="stat-value"><span id="kpiBestEv">0</span></div>
-        <div class="stat-sub"><span id="kpiBestEvName">—</span></div>
+        <div class="stat-value"><span id="kpiBestEv" class="skeleton" style="min-width: 60px;">0.000</span></div>
+        <div class="stat-sub"><span id="kpiBestEvName" class="skeleton" style="min-width: 80px;">Loading event</span></div>
       </div>
       <div class="stat">
         <div class="stat-label">Beat baseline</div>
-        <div class="stat-value"><span id="kpiBeatDg">0</span>/<span id="kpiTotalEv">0</span></div>
+        <div class="stat-value"><span id="kpiBeatDg" class="skeleton" style="min-width: 12px;">0</span>/<span id="kpiTotalEv" class="skeleton" style="min-width: 12px;">0</span></div>
         <div class="stat-sub">Head-to-head record</div>
       </div>
       <div class="stat">
         <div class="stat-label">Events ≥ 0.40</div>
-        <div class="stat-value"><span id="kpiAbove40">0</span>/<span id="kpiTotalEv2">0</span></div>
+        <div class="stat-value"><span id="kpiAbove40" class="skeleton" style="min-width: 12px;">0</span>/<span id="kpiTotalEv2" class="skeleton" style="min-width: 12px;">0</span></div>
         <div class="stat-sub">Target tier</div>
       </div>
       <div class="stat">
         <div class="stat-label">Top-10 winner hits</div>
-        <div class="stat-value"><span id="kpiWinHits">0</span>/<span id="kpiWinHitsTotal">0</span></div>
+        <div class="stat-value"><span id="kpiWinHits" class="skeleton" style="min-width: 12px;">0</span>/<span id="kpiWinHitsTotal" class="skeleton" style="min-width: 12px;">0</span></div>
         <div class="stat-sub">Winners ranked top-10 BBI</div>
       </div>
     </div>
@@ -2749,6 +2781,10 @@
       tocStat('tocSpearmanStat', events.length ? String(events.length) : '');
       tocStat('tocRecapsStat', allRecaps.length ? String(allRecaps.length) : '');
       tocStat('tocBacktestStat', prom?.aggregate?.n_events ? String(prom.aggregate.n_events) : '');
+
+      // Clear skeleton placeholders now that all data has rendered
+      document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
+      document.body.classList.add('data-loaded');
 
       // Wire scroll-spy + recap sub-section folding now that DOM is populated
       initTocScrollSpy();
