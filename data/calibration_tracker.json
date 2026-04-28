@@ -104,6 +104,25 @@
         }
       ],
       "logged_utc": "2026-04-21T04:16:36.580175Z"
+    },
+    {
+      "year": 2026,
+      "week": 12,
+      "event": "Zurich Classic of New Orleans",
+      "event_id": 18,
+      "skipped": true,
+      "skip_reason": "team_event \u2014 calibration requires individual stroke-play results",
+      "brier": {
+        "win": null,
+        "top5": null,
+        "top10": null,
+        "top20": null,
+        "make_cut": null
+      },
+      "bbi_skill_top10_pct": null,
+      "winning_factors": [],
+      "underperforming_factors": [],
+      "logged_utc": "2026-04-27T13:10:00Z"
     }
   ]
 }

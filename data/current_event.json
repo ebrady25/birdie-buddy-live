@@ -1,25 +1,87 @@
 {
-  "event_id": 12,
-  "event_name": "RBC Heritage",
-  "event_slug": "RBC_Heritage",
-  "event_snake": "rbc_heritage",
-  "course": "Harbour Town Golf Links",
-  "course_slug": "harbour_town_golf_links",
-  "start_date": "2026-04-16",
-  "end_date": "2026-04-19",
-  "week_num": 11,
+  "event_id": 556,
+  "event_name": "Cadillac Championship",
+  "event_slug": "Cadillac_Championship",
+  "event_snake": "cadillac_championship",
+  "course": "Trump National Doral (Blue Monster)",
+  "course_slug": "trump_doral_blue_monster",
+  "location": "Miami, FL",
+  "start_date": "2026-04-30",
+  "week_num": 13,
   "year": 2026,
-  "par": 71,
-  "yardage": 7121,
+  "par": 72,
+  "yardage": 7425,
   "team_event": false,
-  "status": "completed",
-  "winner": "Fitzpatrick, Matt",
-  "sg_weights": {"sg_app": 1.0, "sg_ott": 1.0, "sg_arg": 1.0, "sg_putt": 1.0},
-  "course_form_name": "Harbour Town Form",
-  "course_notes": "Tight Pete Dye layout. Premium on accuracy off the tee and wedge play into small Bermuda greens. Veteran specialists dominate.",
-  "winner_archetype": "Course specialists who drive it straight and score with the wedges. Recent winners include Fitzpatrick (2026), Spieth (2022), Matsuyama (2021).",
-  "pipeline_mode": "display_only_harbour_town_anchor",
-  "bbi_pipeline_action": "Display anchor for player profile build. Will be overwritten Monday 2026-04-27 by MNEMOSYNE roll-forward to Miami Championship (Trump Doral, 2026-04-30).",
-  "set_by": "orchestrator 2026-04-24 — Ethan requested Harbour Town as initial UX anchor",
-  "stashed_zurich_at": "site/data/current_event_zurich_backup.json"
+  "sg_weights": {
+    "sg_app": 1.28,
+    "sg_ott": 1.12,
+    "sg_putt": 0.88,
+    "sg_arg": 0.72
+  },
+  "course_weight_override": {
+    "courseFit_pool": 0.24,
+    "courseFit_dfs": 0.18,
+    "_note": "Slightly elevated vs default (0.22/0.17): Blue Monster winner archetype is highly specific (bombers + iron accuracy). Limited course history (post-2020 return) caps leverage."
+  },
+  "course_form_name": "Trump National Doral Form",
+  "course_tier_thresholds": {
+    "SPECIALIST": {
+      "min_rounds": 8,
+      "min_sg": 0.5,
+      "mult": 1.25
+    },
+    "COMFORTABLE": {
+      "min_rounds": 4,
+      "min_sg": 0.0,
+      "mult": 1.15
+    },
+    "NEUTRAL": {
+      "min_rounds": 4,
+      "min_sg": -99,
+      "mult": 1.0
+    },
+    "LIMITED": {
+      "min_rounds": 1,
+      "mult": 0.95
+    },
+    "NO_HISTORY": {
+      "mult": 1.0
+    }
+  },
+  "course_notes": "Par-72, 7425y. Water in play on 14 holes. Narrow fairways with thick rough. Elevated greens require precise iron play. ESE trade winds 12-18 mph typical in late April \u2014 significant factor on approach shots. Bermuda greens, stimp ~13.0. Winner profile: long off tee AND elite iron accuracy. Course returned to PGA Tour 2020 (previously WGC Cadillac from 2007-2016). Historical specialists: Scheffler (2023), McIlroy (2022), Morikawa (2021), Johnson (2020).",
+  "winner_archetype": "Long-game dominator with elite iron play and course management. Must carry water on multiple holes. Wind management and fairway accuracy are differentiators. Above-average driving distance AND fairway hit % are both required \u2014 rare combination that limits the pool of true contenders.",
+  "course_dna": {
+    "sg_importance": {
+      "sg_app": 0.32,
+      "sg_ott": 0.28,
+      "sg_putt": 0.22,
+      "sg_arg": 0.18
+    },
+    "difficulty": "hard",
+    "greens": "bermuda",
+    "stimpmeter": 13.0,
+    "rough": 1.08,
+    "wind_profile": {
+      "prevailing": "ESE 12-18 mph",
+      "seasonal": "Strong trades in spring (Apr)",
+      "impact_notes": "Wind significantly affects approach shots and short game. Par-4s demand control off tee.",
+      "variability": "moderate_to_high"
+    },
+    "course_fit_leverage": {
+      "favors": [
+        "bombers_with_accuracy",
+        "water_carriers",
+        "iron_elite"
+      ],
+      "penalizes": [
+        "short_hitters",
+        "erratic_ball_strikers",
+        "weak_approach"
+      ]
+    }
+  },
+  "pipeline_mode": "active",
+  "bbi_pipeline_action": "FULL \u2014 Individual BBI v8.5 rankings active. Phase 1 / THEMIS / OMNIA all run normally. Pool + DFS outputs published.",
+  "auto_detected_at": "2026-04-27T13:10:00Z",
+  "detected_by": "mnemosyne_auto"
 }

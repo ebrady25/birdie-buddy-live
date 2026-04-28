@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-04-06",
+  "last_updated": "2026-04-27",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -314,7 +314,25 @@
       "winner_dg_rank": 4,
       "n_scored": 82,
       "logged_utc": "2026-04-21T04:16:36.580175Z",
-      "notes": "manual catch-up run — scheduled Mnemosyne stalled Mon Apr 20"
+      "notes": "manual catch-up run \u2014 scheduled Mnemosyne stalled Mon Apr 20"
+    },
+    {
+      "year": 2026,
+      "week": 12,
+      "event": "Zurich Classic of New Orleans",
+      "event_id": 18,
+      "completed": "2026-04-26",
+      "skipped": true,
+      "skip_reason": "team_event \u2014 individual BBI not computed",
+      "spearman_bbi": null,
+      "spearman_dg": null,
+      "diff_bbi_vs_dg": null,
+      "winner": "Fitzpatrick, Matt / Fitzpatrick, Alex",
+      "winner_bbi_rank": null,
+      "winner_dg_rank": null,
+      "n_scored": 0,
+      "logged_utc": "2026-04-27T13:10:00Z",
+      "notes": "Zurich Classic team format \u2014 paused_team_event mode"
     }
   ],
   "summary": {

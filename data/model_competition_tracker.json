@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "description": "Weekly scorecard for BBI v8.5 baseline vs 4 shadow variants. Appended by Mnemosyne each week. Promotion rule: any variant beating baseline by \u22650.03 Spearman AND \u22655% Brier for \u22653 consecutive weeks across \u22658 events gets flagged for manual promotion.",
+  "baseline_variant_id": "v8.5",
+  "variant_ids": [
+    "v8.5",
+    "v8.6-cf",
+    "v8.6-tal",
+    "v8.6-form",
+    "v8.6-dyn"
+  ],
+  "reference_benchmarks": {
+    "source": "PROMETHEUS 2025 backtest (47 events)",
+    "dg_baseline_mean_spearman": 0.393,
+    "dg_baseline_mean_brier_win": 0.013,
+    "dg_baseline_mean_brier_top_10": 0.088,
+    "dg_baseline_mean_brier_top_5": 0.055,
+    "dg_baseline_mean_brier_top_20": 0.143,
+    "dg_baseline_mean_brier_make_cut": 0.172,
+    "notes": "These are the numbers our BBI must match or beat to be a real predictor. Current BBI is computed on top of these DG inputs, so we expect similar or better Brier and hopefully better Spearman from course-weighted factor blending."
+  },
+  "history": [
+    {
+      "week": 12,
+      "event": "Zurich Classic of New Orleans",
+      "event_id": 18,
+      "date": "2026-04-26",
+      "skipped": true,
+      "skip_reason": "team_event \u2014 no individual baseline for shadow variant scoring",
+      "variants": null,
+      "current_leader": null,
+      "consecutive_weeks_leading": {}
+    }
+  ],
+  "current_leader": null,
+  "consecutive_weeks_leading": {},
+  "promotion_candidate": null,
+  "last_updated": "2026-04-27"
+}
