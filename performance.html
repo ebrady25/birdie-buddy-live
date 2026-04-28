@@ -655,11 +655,73 @@
     .rank-summary strong { color: var(--text-primary); }
 
     /* =========================================================
+       STICKY MINI-SUMMARY — fades in once hero scrolls out of view
+       ========================================================= */
+    .perf-mini {
+      position: fixed;
+      top: calc(var(--nav-h) + var(--status-h));
+      left: 0;
+      right: 0;
+      z-index: 60;
+      background: linear-gradient(180deg, rgba(10, 10, 15, 0.96), rgba(10, 10, 15, 0.88));
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 8px var(--space-6);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+    }
+    .perf-mini.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .perf-mini-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .perf-mini-brand {
+      color: var(--gold-300);
+      font-weight: 700;
+    }
+    .perf-mini-divider {
+      width: 1px;
+      height: 12px;
+      background: var(--border-soft);
+    }
+    .perf-mini-stat {
+      color: var(--text-body);
+    }
+    .perf-mini-stat strong {
+      color: var(--gold-200);
+      font-weight: 700;
+    }
+    .perf-mini .gloss { border-bottom: 1px dotted var(--gold-700); }
+    .perf-mini .gloss::after { font-size: 10px; }
+    @media (max-width: 720px) {
+      .perf-mini { padding: 6px var(--space-3); }
+      .perf-mini-stat:nth-of-type(n+3) { display: none; }
+    }
+
+    /* =========================================================
        STICKY IN-PAGE TOC NAV
        ========================================================= */
+    :root { --mini-h: 0px; }
+    body.mini-active { --mini-h: 38px; }
     .perf-toc {
       position: sticky;
-      top: calc(var(--nav-h) + var(--status-h));
+      top: calc(var(--nav-h) + var(--status-h) + var(--mini-h));
+      transition: top 200ms ease-in-out;
       z-index: 50;
       background: rgba(10, 10, 15, 0.92);
       backdrop-filter: saturate(180%) blur(10px);
@@ -1388,6 +1450,19 @@
 </head>
 <body>
   <div id="site-header"></div>
+
+  <!-- Sticky mini-summary: fades in once user scrolls past the hero -->
+  <div class="perf-mini" id="perfMini" aria-hidden="true">
+    <div class="perf-mini-inner">
+      <span class="perf-mini-brand">BBI v8.5</span>
+      <span class="perf-mini-divider"></span>
+      <span class="perf-mini-stat"><strong id="miniPercentile">—</strong> percentile</span>
+      <span class="perf-mini-divider"></span>
+      <span class="perf-mini-stat"><strong id="miniEvents">—</strong> events</span>
+      <span class="perf-mini-divider"></span>
+      <span class="perf-mini-stat"><strong id="miniSpearman">—</strong> avg <span class="gloss" tabindex="0" data-tip="Rank correlation between predicted and actual finishing order. Range −1 to +1; higher is better.">ρ</span></span>
+    </div>
+  </div>
 
   <main class="container">
     <!-- PAGE HEAD -->
@@ -2678,6 +2753,36 @@
       // Wire scroll-spy + recap sub-section folding now that DOM is populated
       initTocScrollSpy();
       initRecapSubFolding();
+
+      // ---------- STICKY MINI-SUMMARY ----------
+      // Populate with current values, then show/hide based on scroll past hero
+      (function initMiniSummary() {
+        const mini = document.getElementById('perfMini');
+        if (!mini) return;
+        // Populate
+        const pctRange = worldRank?.current_state?.estimated_global_percentile_range;
+        document.getElementById('miniPercentile').textContent =
+          pctRange ? `${pctRange[0]}–${pctRange[1]}th` : '—';
+        document.getElementById('miniEvents').textContent = events.length || '—';
+        const seasonAvg = rolling.season_avg_bbi_spearman ?? (events.length
+          ? events.reduce((a, e) => a + (e.spearman_bbi || 0), 0) / events.length
+          : null);
+        document.getElementById('miniSpearman').textContent = seasonAvg != null ? fmt.num(seasonAvg, 3) : '—';
+
+        // IntersectionObserver on the hero — when it leaves view, show mini
+        const hero = document.querySelector('.page-head');
+        if (!hero || !('IntersectionObserver' in window)) return;
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(en => {
+            // Show mini when hero is NOT intersecting (scrolled past)
+            const show = !en.isIntersecting;
+            mini.classList.toggle('visible', show);
+            mini.setAttribute('aria-hidden', show ? 'false' : 'true');
+            document.body.classList.toggle('mini-active', show);
+          });
+        }, { threshold: 0, rootMargin: '0px 0px -40% 0px' });
+        obs.observe(hero);
+      })();
 
       // Count-up entries visible above the fold
       window.observeAnimations?.(document);
