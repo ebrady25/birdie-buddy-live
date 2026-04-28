@@ -339,7 +339,7 @@
             </div>
             <div class="step">
               <div class="step-title">Keep shadow models running</div>
-              <div class="step-body">Four competing weight configurations run in the shadow each week. Promotion requires ≥0.03 Spearman lift and ≥5% Brier improvement sustained over 3+ weeks and 8+ events. No vibes-based weight changes.</div>
+              <div class="step-body">Multiple challenger weight configurations run alongside the champion every week. A challenger must demonstrate sustained dominance across both Spearman and Brier, over many events, before any promotion is considered — and even then, the call is made by a human, not the system. No vibes-based weight changes.</div>
             </div>
           </div>
         </section>
@@ -366,33 +366,34 @@
             <div class="tag">03 — WEIGHT PROFILE</div>
             <h2>What we pay for</h2>
           </div>
-          <p class="lede">BBI is tuned for tournament equity and lineup value — the dimensions that matter for DFS GPPs and top-finish betting props. Course Fit is the largest weight, and shifts week to week based on course DNA.</p>
+          <p class="lede">BBI is tuned for tournament equity and lineup value — the dimensions that matter for DFS GPPs and top-finish betting props. Course fit is the heaviest factor, and the weights shift week to week based on the venue.</p>
 
           <div class="stat-row">
             <div class="mstat">
               <div class="lbl">Course fit</div>
-              <div class="val">0.20</div>
-              <div class="sub">largest single weight</div>
+              <div class="val">★★★★</div>
+              <div class="sub">largest factor</div>
             </div>
             <div class="mstat">
               <div class="lbl">Talent</div>
-              <div class="val">0.13</div>
+              <div class="val">★★★</div>
               <div class="sub">raw SG:Total baseline</div>
             </div>
             <div class="mstat">
               <div class="lbl">Ceiling</div>
-              <div class="val">0.13</div>
+              <div class="val">★★★</div>
               <div class="sub">p95 tournament finish</div>
             </div>
             <div class="mstat">
               <div class="lbl">DK value</div>
-              <div class="val">0.12</div>
+              <div class="val">★★★</div>
               <div class="sub">points per $1k</div>
             </div>
           </div>
 
           <p>We pay for <strong>ceiling and salary value</strong>. GPP equity comes from tournament wins, not safe make-cuts — and in DFS, the DK salary divides everything. A 92 BBI player at $7,800 is almost always better than a 96 BBI at $11,200, because you need 5 more players to fit under the cap.</p>
-          <p><strong>Course Fit dominates the weekly shift.</strong> The 48-venue <a href="courses.html">Course DNA library</a> tells us whether a course rewards wedges, long irons, or rough-penalty survival — and the weights adjust before the model produces rankings. This is why a short-iron specialist can rank top-10 one week and top-40 the next.</p>
+          <p><strong>Course fit dominates the weekly shift.</strong> A proprietary venue library — built across years of tournament results — tells us whether a course rewards wedges, long irons, or rough-penalty survival. The factor mix adjusts before the model produces rankings. This is why a short-iron specialist can rank top-10 one week and top-40 the next.</p>
+          <p class="muted" style="font-size: var(--fs-xs); margin-top: var(--space-3);">Exact weights are tuned per course and reviewed weekly. Subscribers see the full per-event weight profile + course-fit overrides; the public methodology page describes the framework only.</p>
         </section>
 
         <!-- 04 PIPELINE -->
@@ -537,7 +538,7 @@
 
           <div class="callout">
             <div class="c-icon">↑</div>
-            <div class="c-body"><strong>Promotion rule:</strong> A shadow variant must beat baseline by <strong>≥0.03 Spearman</strong> AND <strong>≥5% Brier</strong> for <strong>≥3 consecutive weeks</strong> across <strong>≥8 events</strong> to be flagged for manual promotion. This filters out noise from small-sample wins at idiosyncratic venues.</div>
+            <div class="c-body"><strong>Promotion rule:</strong> A challenger must beat the champion by a meaningful margin across both Spearman and Brier, sustained over multiple consecutive weeks and a large enough event sample, before manual review fires. This filters out noise from small-sample wins at idiosyncratic venues — the bar is deliberately high.</div>
           </div>
           <p>Why manual promotion? Because a variant that over-fits to recent conditions — say, six straight windy coastal events — can look statistically dominant and then collapse on the first calm week. A human looks at <em>why</em> the variant is winning before it replaces the baseline.</p>
         </section>
@@ -601,7 +602,7 @@
             </div>
           </div>
 
-          <p style="margin-top: var(--space-5);">We track Brier for five markets: win, top-5, top-10, top-20, make-cut. Our 2025 backtest baselines: win 0.013, top-10 0.088, top-20 0.143, make-cut 0.172. BBI must match or beat these benchmarks each week.</p>
+          <p style="margin-top: var(--space-5);">We track Brier across five markets: win, top-5, top-10, top-20, make-cut. The published industry baseline averages from a multi-season backtest are our benchmark. Live BBI numbers — and the deltas vs that benchmark — are on the <a href="performance.html">Performance page</a>, refreshed every Monday.</p>
 
           <h3 style="font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text-primary); margin-top: var(--space-5); margin-bottom: var(--space-2);">Calibration (reliability)</h3>
           <p>A calibrated 20% probability should hit 20% of the time. The Performance page bucket plots BBI's predicted probabilities into 10 bins and compares each bin's predicted mean to the observed frequency. Reliability = mean absolute deviation across bins. A well-calibrated model runs &lt;0.03 reliability.</p>
@@ -659,7 +660,7 @@
       ceiling:    { label: 'Ceiling',     desc: 'P(win) × P(top-5) composite. What happens when they go low.' },
       leverage:   { label: 'Leverage',    desc: 'BBI − DK salary rank. Tournament equity per roster slot.' },
       contrarian: { label: 'Contrarian',  desc: 'Ownership vs. BBI rank. Low-owned good players score high.' },
-      dfsValue:   { label: 'DFS Value',   desc: 'Expected DraftKings points per $1,000 of salary. Largest weight after Course Fit for lineup construction.' },
+      dfsValue:   { label: 'DFS Value',   desc: 'Expected DraftKings points per $1,000 of salary. A core lineup-construction factor.' },
       strategic:  { label: 'Strategic',   desc: 'Stack correlation, round-1 tee-time blocks, and course-condition adjustments (wind, rain, morning/afternoon wave).' }
     };
 

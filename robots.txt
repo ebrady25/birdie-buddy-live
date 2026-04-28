@@ -1,0 +1,37 @@
+# BirdieBuddy public site
+# Slow casual scraping of model output files. Determined competitors will
+# bypass this — robots.txt is suggestive, not enforcing — but it raises the
+# bar for archive bots and AI training crawlers.
+
+User-agent: *
+Disallow: /data/
+Disallow: /scripts/
+
+# Standard well-behaved crawlers can still index the site itself.
+Allow: /
+Allow: /assets/
+
+# AI training crawlers — block by name (best-effort)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Sitemap (when published)
+# Sitemap: https://ebrady25.github.io/birdie-buddy-live/sitemap.xml
