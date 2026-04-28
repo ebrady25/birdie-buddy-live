@@ -404,6 +404,62 @@
     .edu-card h4 { font-family: var(--font-display); font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-2); letter-spacing: -0.01em; }
     .edu-card p { font-size: var(--fs-xs); color: var(--text-body); line-height: 1.6; }
 
+    /* ---------- PARLAY BOOK SELECTOR & SUGGESTION ---------- */
+    .parlay-book-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+    .parlay-book-row label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      white-space: nowrap;
+    }
+    .parlay-book-select {
+      flex: 1;
+      background: var(--surface-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      color: var(--gold-200);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .parlay-book-select:focus { outline: none; border-color: var(--gold-300); }
+
+    .slip-suggestion {
+      margin-top: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      background: rgba(74, 222, 128, 0.06);
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--positive);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-3);
+    }
+    .slip-suggestion .sug-label {
+      display: block;
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      margin-bottom: 1px;
+    }
+    .slip-suggestion .sug-val {
+      text-align: right;
+      white-space: nowrap;
+    }
+
     /* ---------- TOOLBAR EXTRAS ---------- */
     .toolbar-search {
       background: var(--surface-3);
@@ -534,10 +590,22 @@
           <input id="betSizeInput" class="bet-size-input" type="text" value="10" inputmode="numeric" placeholder="10"/>
         </div>
 
+        <!-- Parlay book selector — shown only when 2+ legs -->
+        <div class="parlay-book-row" id="parlayBookRow" style="display:none;">
+          <label for="parlayBookSel">Place at</label>
+          <select id="parlayBookSel" class="parlay-book-select"></select>
+        </div>
+
         <div class="slip-totals" id="slipTotals" style="display:none;">
           <div class="slip-total-row gold"><span class="lbl">Total odds</span><span class="val" id="totalOdds">—</span></div>
-          <div class="slip-total-row"><span class="lbl" id="bestBookLbl">Best book</span><span class="val" id="totalBestBook">—</span></div>
+          <div class="slip-total-row"><span class="lbl" id="bestBookLbl">Book</span><span class="val" id="totalBestBook">—</span></div>
           <div class="slip-total-row win"><span class="lbl">To win</span><span class="val" id="totalWin">—</span></div>
+        </div>
+
+        <!-- Best-book suggestion — shown when better book exists for parlay -->
+        <div class="slip-suggestion" id="slipSuggestion" style="display:none;">
+          <div><span class="sug-label">Best odds available</span><span id="sugBookName">—</span></div>
+          <div class="sug-val"><span id="sugOdds">—</span> · <span id="sugWin">—</span></div>
         </div>
 
         <div class="slip-actions">
@@ -623,8 +691,9 @@
       evOnly:        true,
       slip:          [],
       betSize:       10,
-      selectedBooks: ['draftkings', 'fanduel', 'bet365'],
-      availableBooks: [],  // [{key, label}] populated from feed
+      selectedBooks:  ['draftkings', 'fanduel', 'bet365'],
+      availableBooks: [],   // [{key, label}] populated from feed
+      parlayBook:     null, // which book the user is placing the parlay at
     };
 
     // ------------------------------------------------------------------ init
@@ -679,6 +748,12 @@
       });
       betInput.addEventListener('focus', () => {
         betInput.value = state.betSize || '';
+      });
+
+      // Parlay book selector
+      document.getElementById('parlayBookSel').addEventListener('change', e => {
+        state.parlayBook = e.target.value;
+        renderSlip();
       });
 
       // Slip clear / copy
@@ -977,50 +1052,32 @@
       renderRows();
     }
 
-    // ------------------------------------------------------------------ getBestParlayBook
-    // Returns { name, key, combinedDec } or null
-    function getBestParlayBook() {
-      if (!state.slip.length) return null;
-
-      if (state.slip.length === 1) {
-        const s = state.slip[0];
-        return {
-          name: s.best_book_name || '—',
-          key:  null,
-          combinedDec: s.best_book_dec,
-          perLegDecs: [s.best_book_dec],
-        };
-      }
-
-      // Find books that have odds for EVERY leg
-      const allBookKeys = Object.keys(state.slip[0].book_odds || {});
-      const commonKeys  = allBookKeys.filter(bk =>
+    // ------------------------------------------------------------------ getCommonBooks
+    // Returns array of {key, label, combinedDec} for books covering every leg, sorted best→worst
+    function getCommonBooks() {
+      if (state.slip.length < 2) return [];
+      const allKeys    = Object.keys(state.slip[0].book_odds || {});
+      const commonKeys = allKeys.filter(bk =>
         state.slip.every(s => s.book_odds?.[bk] != null && s.book_odds[bk] > 1)
       );
-
-      if (!commonKeys.length) return null;
-
-      let best = null;
-      for (const bk of commonKeys) {
-        const product = state.slip.reduce((p, s) => p * s.book_odds[bk], 1);
-        if (!best || product > best.product) {
-          best = {
-            bk,
-            product,
-            name: BOOK_LABELS[bk] || bk,
-            perLegDecs: state.slip.map(s => s.book_odds[bk]),
-          };
-        }
-      }
-      if (!best) return null;
-      return { name: best.name, key: best.bk, combinedDec: best.product, perLegDecs: best.perLegDecs };
+      return commonKeys
+        .map(bk => ({
+          key:         bk,
+          label:       BOOK_LABELS[bk] || bk,
+          combinedDec: state.slip.reduce((p, s) => p * s.book_odds[bk], 1),
+        }))
+        .sort((a, b) => b.combinedDec - a.combinedDec);
     }
 
     // ------------------------------------------------------------------ renderSlip
     function renderSlip() {
-      const mount   = document.getElementById('slipItems');
-      const totals  = document.getElementById('slipTotals');
-      const countEl = document.getElementById('slipCount');
+      const mount      = document.getElementById('slipItems');
+      const totals     = document.getElementById('slipTotals');
+      const countEl    = document.getElementById('slipCount');
+      const parlayRow  = document.getElementById('parlayBookRow');
+      const parlaySel  = document.getElementById('parlayBookSel');
+      const suggestion = document.getElementById('slipSuggestion');
+
       countEl.textContent = state.slip.length;
 
       if (!state.slip.length) {
@@ -1029,40 +1086,114 @@
             <strong>Build your slip</strong>
             Click + on any row to add a play. Single bets or multi-leg parlays.
           </div>`;
-        totals.style.display = 'none';
+        totals.style.display     = 'none';
+        parlayRow.style.display  = 'none';
+        suggestion.style.display = 'none';
         return;
       }
 
       totals.style.display = '';
+      const betSize  = state.betSize || 0;
+      const isSingle = state.slip.length === 1;
 
-      const bestBook   = getBestParlayBook();
-      const isSingle   = state.slip.length === 1;
-      const betSize    = state.betSize || 0;
-      const combinedDec = bestBook?.combinedDec;
-      const toWin      = combinedDec != null ? betSize * (combinedDec - 1) : null;
+      // ---- Single leg ----
+      if (isSingle) {
+        parlayRow.style.display  = 'none';
+        suggestion.style.display = 'none';
 
-      // Render leg items
-      mount.innerHTML = state.slip.map((s, i) => {
-        const edgeLine = s.edge != null ? ` · ${s.edge >= 0 ? '+' : ''}${s.edge.toFixed(2)}pp` : '';
-        // Per-leg odds at the recommended book
-        let oddsLine = '';
-        if (isSingle && s.best_book_name && s.best_book_dec) {
-          oddsLine = `${s.best_book_name} ${toAmerican(s.best_book_dec)}`;
-        } else if (!isSingle && bestBook?.key) {
-          const legDec = s.book_odds?.[bestBook.key];
-          if (legDec) oddsLine = `${bestBook.name} ${toAmerican(legDec)}`;
+        const s           = state.slip[0];
+        const combinedDec = s.best_book_dec;
+        const toWin       = combinedDec != null ? betSize * (combinedDec - 1) : null;
+        const oddsLine    = s.best_book_name && s.best_book_dec
+          ? `${s.best_book_name} ${toAmerican(s.best_book_dec)}` : '';
+
+        mount.innerHTML = `
+          <div class="slip-item">
+            <div>
+              <span class="si-name">${fmt.abbrevName(s.name)}</span>
+              <span class="si-market">${MARKETS[s.market].label}${s.edge != null ? ` · ${s.edge >= 0 ? '+' : ''}${s.edge.toFixed(2)}pp` : ''}</span>
+              ${oddsLine ? `<span class="si-odds">${oddsLine}</span>` : ''}
+            </div>
+            <button data-remove="${s.id}|${s.market}" title="Remove">×</button>
+          </div>`;
+
+        document.getElementById('totalOdds').textContent     = toAmerican(combinedDec);
+        document.getElementById('bestBookLbl').textContent   = 'Best book';
+        document.getElementById('totalBestBook').textContent = s.best_book_name || '—';
+        const winEl = document.getElementById('totalWin');
+        winEl.textContent = toWin != null
+          ? `+$${toWin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '—';
+        winEl.classList.toggle('neg', toWin != null && toWin < 0);
+
+      // ---- Parlay (2+ legs) ----
+      } else {
+        const commonBooks = getCommonBooks();
+
+        if (!commonBooks.length) {
+          // No single book covers all legs
+          parlayRow.style.display  = 'none';
+          suggestion.style.display = 'none';
+          document.getElementById('totalOdds').textContent     = '—';
+          document.getElementById('bestBookLbl').textContent   = 'Book';
+          document.getElementById('totalBestBook').textContent = 'No book covers all legs';
+          document.getElementById('totalWin').textContent      = '—';
+        } else {
+          parlayRow.style.display = '';
+
+          // Validate / default the selected book
+          if (!state.parlayBook || !commonBooks.find(b => b.key === state.parlayBook)) {
+            // Default: DraftKings if available, else best available
+            state.parlayBook = commonBooks.find(b => b.key === 'draftkings')?.key || commonBooks[0].key;
+          }
+
+          // Populate selector (preserve selection)
+          parlaySel.innerHTML = commonBooks.map(b =>
+            `<option value="${b.key}"${b.key === state.parlayBook ? ' selected' : ''}>${b.label}</option>`
+          ).join('');
+
+          const selectedBook = commonBooks.find(b => b.key === state.parlayBook) || commonBooks[0];
+          const bestBook     = commonBooks[0]; // sorted best→worst already
+          const selectedDec  = selectedBook.combinedDec;
+          const toWin        = betSize * (selectedDec - 1);
+
+          // Render legs — show per-leg odds at the selected book
+          mount.innerHTML = state.slip.map(s => {
+            const legDec   = s.book_odds?.[state.parlayBook];
+            const oddsLine = legDec ? `${selectedBook.label} ${toAmerican(legDec)}` : '';
+            const edgeLine = s.edge != null ? ` · ${s.edge >= 0 ? '+' : ''}${s.edge.toFixed(2)}pp` : '';
+            return `
+              <div class="slip-item">
+                <div>
+                  <span class="si-name">${fmt.abbrevName(s.name)}</span>
+                  <span class="si-market">${MARKETS[s.market].label}${edgeLine}</span>
+                  ${oddsLine ? `<span class="si-odds">${oddsLine}</span>` : ''}
+                </div>
+                <button data-remove="${s.id}|${s.market}" title="Remove">×</button>
+              </div>`;
+          }).join('');
+
+          // Totals from selected book
+          document.getElementById('totalOdds').textContent     = toAmerican(selectedDec);
+          document.getElementById('bestBookLbl').textContent   = 'Placing at';
+          document.getElementById('totalBestBook').textContent = selectedBook.label;
+          const winEl = document.getElementById('totalWin');
+          winEl.textContent = `+$${toWin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+          winEl.classList.toggle('neg', toWin < 0);
+
+          // Best-book suggestion (only if different from selected)
+          if (bestBook.key !== state.parlayBook) {
+            const bestToWin = betSize * (bestBook.combinedDec - 1);
+            suggestion.style.display = '';
+            document.getElementById('sugBookName').textContent = bestBook.label;
+            document.getElementById('sugOdds').textContent    = toAmerican(bestBook.combinedDec);
+            document.getElementById('sugWin').textContent     = `+$${bestToWin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+          } else {
+            suggestion.style.display = 'none';
+          }
         }
-        return `
-        <div class="slip-item">
-          <div>
-            <span class="si-name">${fmt.abbrevName(s.name)}</span>
-            <span class="si-market">${MARKETS[s.market].label}${edgeLine}</span>
-            ${oddsLine ? `<span class="si-odds">${oddsLine}</span>` : ''}
-          </div>
-          <button data-remove="${s.id}|${s.market}" title="Remove">×</button>
-        </div>`;
-      }).join('');
+      }
 
+      // Wire remove buttons (common to both branches)
       mount.querySelectorAll('[data-remove]').forEach(btn => {
         btn.addEventListener('click', () => {
           const k = btn.getAttribute('data-remove');
@@ -1070,35 +1201,34 @@
           renderSlip(); renderRows();
         });
       });
-
-      // Totals
-      const oddsEl = document.getElementById('totalOdds');
-      oddsEl.textContent = combinedDec != null ? toAmerican(combinedDec) : '—';
-
-      const bookEl = document.getElementById('totalBestBook');
-      document.getElementById('bestBookLbl').textContent = isSingle ? 'Best book' : 'Best parlay book';
-      bookEl.textContent = bestBook?.name || '—';
-
-      const winEl = document.getElementById('totalWin');
-      winEl.textContent  = toWin != null ? `+$${toWin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '—';
-      winEl.classList.toggle('neg', toWin != null && toWin < 0);
     }
 
     // ------------------------------------------------------------------ copySlip
     function copySlip() {
       if (!state.slip.length) return;
-      const bestBook = getBestParlayBook();
-      const isSingle = state.slip.length === 1;
-      const lines    = state.slip.map(s => {
+      const isSingle    = state.slip.length === 1;
+      const commonBooks = getCommonBooks();
+      const placedBook  = commonBooks.find(b => b.key === state.parlayBook) || commonBooks[0];
+
+      const lines = state.slip.map(s => {
         const book = isSingle
           ? `${s.best_book_name || ''} ${toAmerican(s.best_book_dec)}`
-          : (bestBook?.key ? `${bestBook.name} ${toAmerican(s.book_odds?.[bestBook.key])}` : '');
+          : (placedBook ? `${placedBook.label} ${toAmerican(s.book_odds?.[placedBook.key])}` : '');
         const edge = s.edge != null ? ` (+${s.edge.toFixed(2)}pp)` : '';
         return `${fmt.abbrevName(s.name)} · ${MARKETS[s.market].label} · ${book}${edge}`;
       });
-      const combined = bestBook?.combinedDec
-        ? `\nCombined odds: ${toAmerican(bestBook.combinedDec)} · To win $${((state.betSize || 0) * (bestBook.combinedDec - 1)).toFixed(2)} on $${state.betSize}`
-        : '';
+
+      let combined = '';
+      if (!isSingle && placedBook) {
+        const toWin = (state.betSize || 0) * (placedBook.combinedDec - 1);
+        combined = `\nPlacing at: ${placedBook.label} · Combined: ${toAmerican(placedBook.combinedDec)} · To win $${toWin.toFixed(2)} on $${state.betSize}`;
+        // Also note best book if different
+        const bestBook = commonBooks[0];
+        if (bestBook && bestBook.key !== placedBook.key) {
+          const bestToWin = (state.betSize || 0) * (bestBook.combinedDec - 1);
+          combined += `\nBest odds: ${bestBook.label} · ${toAmerican(bestBook.combinedDec)} · To win $${bestToWin.toFixed(2)}`;
+        }
+      }
       const text = `BirdieBuddy slip — ${state.omnia?.event || ''}\n` + lines.join('\n') + combined;
       try {
         navigator.clipboard?.writeText(text);
