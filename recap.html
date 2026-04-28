@@ -451,8 +451,17 @@
       const prev = currentIdx > 0 ? sortedWeeks[currentIdx - 1] : null;
       const next = currentIdx < sortedWeeks.length - 1 ? sortedWeeks[currentIdx + 1] : null;
 
-      // Attribution matches this week only if metadata.week == weekParam
-      const attrForWeek = (attribution?.metadata?.week === cur.week) ? attribution : null;
+      // Attribution lookup: support both new multi-event schema (events: [...])
+      // and legacy single-event schema (metadata + players at top level).
+      let attrForWeek = null;
+      if (attribution) {
+        if (Array.isArray(attribution.events)) {
+          const match = attribution.events.find(e => e?.metadata?.week === cur.week);
+          if (match) attrForWeek = match;
+        } else if (attribution.metadata?.week === cur.week) {
+          attrForWeek = attribution;
+        }
+      }
 
       mount.innerHTML = renderRecap(cur, prev, next, sortedWeeks, attrForWeek);
 
