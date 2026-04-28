@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-04-28T04:12:06Z",
+  "phase_checked": "phase1",
+  "next_phase": "phase1_apollo_atlas",
+  "status": "green",
+  "checks": {
+    "current_event": {
+      "status": "pass",
+      "event_id": 556,
+      "event_name": "Cadillac Championship",
+      "start_date": "2026-04-30",
+      "days_until_start": 1,
+      "team_event": false,
+      "required_fields_present": true
+    },
+    "datagolf_api": {
+      "status": "pass",
+      "http_code": 200,
+      "duration_s": 0.33,
+      "players_returned": 72,
+      "endpoint": "preds/pre-tournament"
+    },
+    "prior_outputs": {
+      "status": "n/a",
+      "note": "phase1 has no prior-output gate (first or independent phase)."
+    }
+  },
+  "recommendations": [],
+  "action_required": false,
+  "auto_generated_by": "github-actions / argus_health.py"
+}
