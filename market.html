@@ -561,8 +561,8 @@
                 <th data-sort="bbi_prob" title="BirdieBuddy predicted probability">BBI %</th>
                 <th data-sort="market_prob" title="Consensus across all books, devigged">Market %</th>
                 <th data-sort="edge" class="sort-desc" title="BBI minus market consensus, in percentage points">Edge</th>
-                <th data-sort="dk" title="DraftKings decimal odds">DK</th>
-                <th data-sort="b365" title="Bet365 decimal odds">B365</th>
+                <th data-sort="dk" title="DraftKings American odds">DK</th>
+                <th data-sort="b365" title="Bet365 American odds">B365</th>
                 <th data-sort="pin" title="Pinnacle (sharps) devigged probability">Pinn %</th>
                 <th data-sort="kelly" title="Fractional Kelly stake as % of bankroll">Kelly</th>
                 <th data-sort="spread" title="Spread across the 15 books in decimal points — tighter = more efficient market">Spread</th>
@@ -660,6 +660,15 @@
       top_10: { label: 'Top 10 Finish' },
       top_20: { label: 'Top 20 Finish' }
     };
+
+    // Convert decimal odds to American (+400 / -200 style)
+    function toAmerican(dec) {
+      if (dec == null || dec <= 1) return '—';
+      const am = dec >= 2
+        ? Math.round((dec - 1) * 100)
+        : Math.round(-100 / (dec - 1));
+      return am >= 0 ? `+${am}` : `${am}`;
+    }
 
     const state = {
       omnia: null,
@@ -808,7 +817,7 @@
 
       document.getElementById('kBest').textContent = best ? `+${best.edge.toFixed(2)}` : '—';
       document.getElementById('kBestSub').textContent = best
-        ? `${fmt.abbrevName(best.name)} · DK ${best.dk_dec?.toFixed(2) || '—'}`
+        ? `${fmt.abbrevName(best.name)} · DK ${toAmerican(best.dk_dec)}`
         : 'no +EV plays in this market';
       document.getElementById('kCount').textContent = pos.length ? `${pos.length}` : '0';
       document.getElementById('kCountSub').textContent = `of ${rows.length} players · ${MARKETS[state.market].label}`;
@@ -900,8 +909,8 @@
             <td class="edge-cell ${edgeSign}" style="--heat: ${edgeHeat.toFixed(3)};">
               <span>${edgeStr}</span>
             </td>
-            <td class="val-book">${r.dk_dec != null ? r.dk_dec.toFixed(2) : '—'}</td>
-            <td class="val-book">${r.b365_dec != null ? r.b365_dec.toFixed(2) : '—'}</td>
+            <td class="val-book">${toAmerican(r.dk_dec)}</td>
+            <td class="val-book">${toAmerican(r.b365_dec)}</td>
             <td class="val-dim">${r.pin_prob != null && r.pin_prob > 0 && r.pin_prob < 1 ? (r.pin_prob * 100).toFixed(2) + '%' : '—'}</td>
             <td class="kelly-cell ${kellyHeavy}">${kellyChip}</td>
             <td>
@@ -982,7 +991,7 @@
         <div class="slip-item">
           <div>
             <span class="si-name">${fmt.abbrevName(s.name)}</span>
-            <span class="si-market">${MARKETS[s.market].label} · DK ${s.dk_dec.toFixed(2)} · +${s.edge.toFixed(2)}pp</span>
+            <span class="si-market">${MARKETS[s.market].label} · DK ${toAmerican(s.dk_dec)} · +${s.edge.toFixed(2)}pp</span>
           </div>
           <div class="si-stake">$${s.stake.toFixed(2)}<small>${s.kellyApplied.toFixed(2)}%</small></div>
           <button data-remove="${s.id}|${s.market}" title="Remove">×</button>
@@ -1014,7 +1023,7 @@
       const lines = state.slip.map(s => {
         const pct = s.kelly_pct * state.kellyFraction;
         const stake = state.bankroll * (pct / 100);
-        return `${fmt.abbrevName(s.name)} · ${MARKETS[s.market].label} · DK ${s.dk_dec.toFixed(2)} · stake $${stake.toFixed(2)} (+${s.edge.toFixed(2)}pp)`;
+        return `${fmt.abbrevName(s.name)} · ${MARKETS[s.market].label} · DK ${toAmerican(s.dk_dec)} · stake $${stake.toFixed(2)} (+${s.edge.toFixed(2)}pp)`;
       });
       const text = `BirdieBuddy slip — ${state.omnia?.event || ''}\n` + lines.join('\n');
       try {
