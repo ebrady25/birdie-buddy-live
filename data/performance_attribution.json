@@ -1,236 +1,631 @@
 {
-  "metadata": {
-    "event": "RBC Heritage",
-    "week": 11,
-    "year": 2026,
-    "completed": "2026-04-19",
-    "event_id": 12,
-    "description": "Per-factor attribution for top-10 finishers in Week 11 RBC Heritage. Shows how each of the 10 BBI factors contributed to final composite scores.",
-    "weights_used": {
-      "pool": {
-        "talent": 0.18,
-        "courseFit": 0.26,
-        "form": 0.13,
-        "cutSafety": 0.12,
-        "floor": 0.05,
-        "ceiling": 0.05,
-        "leverage": 0.09,
-        "contrarian": 0.05,
-        "dfsValue": 0.02,
-        "strategic": 0.05
-      }
-    }
-  },
+  "schema_version": "2.0",
+  "description": "Per-factor attribution for top-10 finishers. One entry per completed event. Auto-appended each week by Mnemosyne.",
   "queued_backfill": {
     "note": "Historical BBI output files from prior 2026 events don't preserve per-player factor decomposition. Backfill requires replaying the engine against preserved DG inputs. Forward-run events (Week 12 onward) will populate automatically via the PROMETHEUS weekly hook.",
     "events": [
-      { "week": 10, "year": 2026, "event": "Masters Tournament", "course": "Augusta National", "completed": "2026-04-12", "status": "pending", "winner": "McIlroy, Rory" },
-      { "week":  9, "year": 2026, "event": "Valero Texas Open", "course": "TPC San Antonio",  "completed": "2026-04-05", "status": "pending", "winner": "Theegala, Sahith" },
-      { "week":  8, "year": 2026, "event": "Texas Children's Houston Open", "course": "Memorial Park", "completed": "2026-03-29", "status": "pending", "winner": "Henley, Russell" },
-      { "week":  7, "year": 2026, "event": "Valspar Championship", "course": "Innisbrook Copperhead", "completed": "2026-03-22", "status": "pending" },
-      { "week":  6, "year": 2026, "event": "THE PLAYERS Championship", "course": "TPC Sawgrass", "completed": "2026-03-15", "status": "pending" }
+      {
+        "week": 10,
+        "year": 2026,
+        "event": "Masters Tournament",
+        "course": "Augusta National",
+        "completed": "2026-04-12",
+        "status": "pending",
+        "winner": "McIlroy, Rory"
+      },
+      {
+        "week": 9,
+        "year": 2026,
+        "event": "Valero Texas Open",
+        "course": "TPC San Antonio",
+        "completed": "2026-04-05",
+        "status": "pending",
+        "winner": "Theegala, Sahith"
+      },
+      {
+        "week": 8,
+        "year": 2026,
+        "event": "Texas Children's Houston Open",
+        "course": "Memorial Park",
+        "completed": "2026-03-29",
+        "status": "pending",
+        "winner": "Henley, Russell"
+      },
+      {
+        "week": 7,
+        "year": 2026,
+        "event": "Valspar Championship",
+        "course": "Innisbrook Copperhead",
+        "completed": "2026-03-22",
+        "status": "pending"
+      },
+      {
+        "week": 6,
+        "year": 2026,
+        "event": "THE PLAYERS Championship",
+        "course": "TPC Sawgrass",
+        "completed": "2026-03-15",
+        "status": "pending"
+      }
     ]
   },
-  "players": [
+  "events": [
     {
-      "rank": 1,
-      "name": "Fitzpatrick, Matt",
-      "dg_id": 17646,
-      "finish_pos": 1,
-      "bbi_rank": 3,
-      "bbi_pool_score": 43.21,
-      "factors": {
-        "talent": { "raw": 9.36, "pct": 21.6 },
-        "courseFit": { "raw": 20.32, "pct": 47.0 },
-        "form": { "raw": 10.8, "pct": 25.0 },
-        "cutSafety": { "raw": 8.5, "pct": 19.7 },
-        "floor": { "raw": 2.1, "pct": 4.9 },
-        "ceiling": { "raw": 2.8, "pct": 6.5 },
-        "leverage": { "raw": 0.15, "pct": 0.3 },
-        "contrarian": { "raw": 0.08, "pct": 0.2 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 2.1, "pct": 4.9 }
-      }
-    },
-    {
-      "rank": 2,
-      "name": "Scheffler, Scottie",
-      "dg_id": 18417,
-      "finish_pos": 2,
-      "bbi_rank": 1,
-      "bbi_pool_score": 47.85,
-      "factors": {
-        "talent": { "raw": 18, "pct": 37.6 },
-        "courseFit": { "raw": 25.01, "pct": 52.2 },
-        "form": { "raw": 13, "pct": 27.2 },
-        "cutSafety": { "raw": 12, "pct": 25.1 },
-        "floor": { "raw": 5, "pct": 10.4 },
-        "ceiling": { "raw": 5, "pct": 10.4 },
-        "leverage": { "raw": 0.19, "pct": 0.4 },
-        "contrarian": { "raw": 0.11, "pct": 0.2 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 4.89, "pct": 10.2 }
-      }
-    },
-    {
-      "rank": 3,
-      "name": "McIlroy, Rory",
-      "dg_id": 16627,
-      "finish_pos": 3,
-      "bbi_rank": 5,
-      "bbi_pool_score": 42.15,
-      "factors": {
-        "talent": { "raw": 16.5, "pct": 39.1 },
-        "courseFit": { "raw": 18.9, "pct": 44.8 },
-        "form": { "raw": 9.2, "pct": 21.8 },
-        "cutSafety": { "raw": 10.2, "pct": 24.2 },
-        "floor": { "raw": 4.1, "pct": 9.7 },
-        "ceiling": { "raw": 4.5, "pct": 10.7 },
-        "leverage": { "raw": 0.12, "pct": 0.3 },
-        "contrarian": { "raw": 0.06, "pct": 0.1 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 3.45, "pct": 8.2 }
-      }
-    },
-    {
-      "rank": 4,
-      "name": "Rahm, Jon",
-      "dg_id": 18050,
-      "finish_pos": 4,
-      "bbi_rank": 2,
-      "bbi_pool_score": 46.32,
-      "factors": {
-        "talent": { "raw": 17.2, "pct": 37.1 },
-        "courseFit": { "raw": 22.4, "pct": 48.3 },
-        "form": { "raw": 11.5, "pct": 24.8 },
-        "cutSafety": { "raw": 11.1, "pct": 23.9 },
-        "floor": { "raw": 4.7, "pct": 10.1 },
-        "ceiling": { "raw": 4.9, "pct": 10.6 },
-        "leverage": { "raw": 0.18, "pct": 0.4 },
-        "contrarian": { "raw": 0.09, "pct": 0.2 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 4.22, "pct": 9.1 }
-      }
-    },
-    {
-      "rank": 5,
-      "name": "Zalatoris, Will",
-      "dg_id": 19081,
-      "finish_pos": 5,
-      "bbi_rank": 6,
-      "bbi_pool_score": 40.87,
-      "factors": {
-        "talent": { "raw": 14.8, "pct": 36.2 },
-        "courseFit": { "raw": 19.2, "pct": 47.0 },
-        "form": { "raw": 8.9, "pct": 21.8 },
-        "cutSafety": { "raw": 9.8, "pct": 24.0 },
-        "floor": { "raw": 3.5, "pct": 8.6 },
-        "ceiling": { "raw": 4.1, "pct": 10.0 },
-        "leverage": { "raw": 0.14, "pct": 0.3 },
-        "contrarian": { "raw": 0.07, "pct": 0.2 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 3.88, "pct": 9.5 }
-      }
-    },
-    {
-      "rank": 6,
-      "name": "Koepka, Brooks",
-      "dg_id": 17930,
-      "finish_pos": 6,
-      "bbi_rank": 8,
-      "bbi_pool_score": 39.45,
-      "factors": {
-        "talent": { "raw": 13.5, "pct": 34.2 },
-        "courseFit": { "raw": 17.8, "pct": 45.1 },
-        "form": { "raw": 7.6, "pct": 19.3 },
-        "cutSafety": { "raw": 8.9, "pct": 22.5 },
-        "floor": { "raw": 3.2, "pct": 8.1 },
-        "ceiling": { "raw": 3.8, "pct": 9.6 },
-        "leverage": { "raw": 0.11, "pct": 0.3 },
-        "contrarian": { "raw": 0.05, "pct": 0.1 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 3.45, "pct": 8.7 }
-      }
-    },
-    {
-      "rank": 7,
-      "name": "Ryder, Sam",
-      "dg_id": 18958,
-      "finish_pos": 7,
-      "bbi_rank": 10,
-      "bbi_pool_score": 38.92,
-      "factors": {
-        "talent": { "raw": 12.9, "pct": 33.1 },
-        "courseFit": { "raw": 17.2, "pct": 44.2 },
-        "form": { "raw": 7.8, "pct": 20.0 },
-        "cutSafety": { "raw": 8.6, "pct": 22.1 },
-        "floor": { "raw": 3.0, "pct": 7.7 },
-        "ceiling": { "raw": 3.6, "pct": 9.2 },
-        "leverage": { "raw": 0.1, "pct": 0.3 },
-        "contrarian": { "raw": 0.04, "pct": 0.1 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 3.22, "pct": 8.3 }
-      }
-    },
-    {
-      "rank": 8,
-      "name": "Noren, Alex",
-      "dg_id": 10419,
-      "finish_pos": 8,
-      "bbi_rank": 23,
-      "bbi_pool_score": 31.15,
-      "factors": {
-        "talent": { "raw": 6.1, "pct": 19.6 },
-        "courseFit": { "raw": 20.75, "pct": 66.6 },
-        "form": { "raw": 8.03, "pct": 25.8 },
-        "cutSafety": { "raw": 12, "pct": 38.5 },
-        "floor": { "raw": 2.63, "pct": 8.4 },
-        "ceiling": { "raw": 2.29, "pct": 7.4 },
-        "leverage": { "raw": 6.8, "pct": 21.8 },
-        "contrarian": { "raw": 2.01, "pct": 6.5 },
-        "dfsValue": { "raw": 1.95, "pct": 6.3 },
-        "strategic": { "raw": 4.39, "pct": 14.1 }
-      }
-    },
-    {
-      "rank": 9,
-      "name": "Day, Jason",
-      "dg_id": 17208,
-      "finish_pos": 9,
-      "bbi_rank": 15,
-      "bbi_pool_score": 35.68,
-      "factors": {
-        "talent": { "raw": 11.2, "pct": 31.4 },
-        "courseFit": { "raw": 16.5, "pct": 46.2 },
-        "form": { "raw": 6.9, "pct": 19.3 },
-        "cutSafety": { "raw": 8.2, "pct": 23.0 },
-        "floor": { "raw": 2.8, "pct": 7.8 },
-        "ceiling": { "raw": 3.2, "pct": 9.0 },
-        "leverage": { "raw": 0.09, "pct": 0.3 },
-        "contrarian": { "raw": 0.04, "pct": 0.1 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 2.88, "pct": 8.1 }
-      }
-    },
-    {
-      "rank": 10,
-      "name": "Hatton, Tyrrell",
-      "dg_id": 17873,
-      "finish_pos": 10,
-      "bbi_rank": 18,
-      "bbi_pool_score": 33.92,
-      "factors": {
-        "talent": { "raw": 10.5, "pct": 30.9 },
-        "courseFit": { "raw": 15.8, "pct": 46.6 },
-        "form": { "raw": 6.5, "pct": 19.1 },
-        "cutSafety": { "raw": 7.9, "pct": 23.3 },
-        "floor": { "raw": 2.5, "pct": 7.4 },
-        "ceiling": { "raw": 3.0, "pct": 8.8 },
-        "leverage": { "raw": 0.08, "pct": 0.2 },
-        "contrarian": { "raw": 0.03, "pct": 0.1 },
-        "dfsValue": { "raw": 0, "pct": 0 },
-        "strategic": { "raw": 2.65, "pct": 7.8 }
-      }
+      "metadata": {
+        "event": "RBC Heritage",
+        "week": 11,
+        "year": 2026,
+        "completed": "2026-04-19",
+        "event_id": 12,
+        "description": "Per-factor attribution for top-10 finishers in Week 11 RBC Heritage. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {
+          "pool": {
+            "talent": 0.18,
+            "courseFit": 0.26,
+            "form": 0.13,
+            "cutSafety": 0.12,
+            "floor": 0.05,
+            "ceiling": 0.05,
+            "leverage": 0.09,
+            "contrarian": 0.05,
+            "dfsValue": 0.02,
+            "strategic": 0.05
+          }
+        }
+      },
+      "players": [
+        {
+          "rank": 1,
+          "name": "Fitzpatrick, Matt",
+          "dg_id": 17646,
+          "finish_pos": 1,
+          "bbi_rank": 3,
+          "bbi_pool_score": 68.31,
+          "factors": {
+            "talent": {
+              "raw": 9.36,
+              "pct": 14.04
+            },
+            "courseFit": {
+              "raw": 20.32,
+              "pct": 30.47
+            },
+            "form": {
+              "raw": 10.8,
+              "pct": 16.19
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 17.99
+            },
+            "floor": {
+              "raw": 3.87,
+              "pct": 5.8
+            },
+            "ceiling": {
+              "raw": 3.76,
+              "pct": 5.64
+            },
+            "leverage": {
+              "raw": 1.03,
+              "pct": 1.54
+            },
+            "contrarian": {
+              "raw": 0.36,
+              "pct": 0.54
+            },
+            "dfsValue": {
+              "raw": 0.85,
+              "pct": 1.27
+            },
+            "strategic": {
+              "raw": 4.34,
+              "pct": 6.51
+            }
+          }
+        },
+        {
+          "rank": 1,
+          "name": "Scheffler, Scottie",
+          "dg_id": 18417,
+          "finish_pos": 1,
+          "bbi_rank": 1,
+          "bbi_pool_score": 82.92,
+          "factors": {
+            "talent": {
+              "raw": 18.0,
+              "pct": 21.63
+            },
+            "courseFit": {
+              "raw": 25.01,
+              "pct": 30.06
+            },
+            "form": {
+              "raw": 13.0,
+              "pct": 15.62
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 14.42
+            },
+            "floor": {
+              "raw": 5.0,
+              "pct": 6.01
+            },
+            "ceiling": {
+              "raw": 5.0,
+              "pct": 6.01
+            },
+            "leverage": {
+              "raw": 0.19,
+              "pct": 0.23
+            },
+            "contrarian": {
+              "raw": 0.11,
+              "pct": 0.13
+            },
+            "dfsValue": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "strategic": {
+              "raw": 4.89,
+              "pct": 5.88
+            }
+          }
+        },
+        {
+          "rank": 3,
+          "name": "Kim, Si Woo",
+          "dg_id": 14609,
+          "finish_pos": 3,
+          "bbi_rank": 19,
+          "bbi_pool_score": 61.09,
+          "factors": {
+            "talent": {
+              "raw": 6.88,
+              "pct": 11.85
+            },
+            "courseFit": {
+              "raw": 14.36,
+              "pct": 24.74
+            },
+            "form": {
+              "raw": 9.5,
+              "pct": 16.37
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 20.67
+            },
+            "floor": {
+              "raw": 3.27,
+              "pct": 5.63
+            },
+            "ceiling": {
+              "raw": 3.07,
+              "pct": 5.29
+            },
+            "leverage": {
+              "raw": 3.19,
+              "pct": 5.5
+            },
+            "contrarian": {
+              "raw": 1.0,
+              "pct": 1.72
+            },
+            "dfsValue": {
+              "raw": 1.12,
+              "pct": 1.93
+            },
+            "strategic": {
+              "raw": 3.66,
+              "pct": 6.3
+            }
+          }
+        },
+        {
+          "rank": 4,
+          "name": "Morikawa, Collin",
+          "dg_id": 22085,
+          "finish_pos": 4,
+          "bbi_rank": 7,
+          "bbi_pool_score": 66.08,
+          "factors": {
+            "talent": {
+              "raw": 8.07,
+              "pct": 13.02
+            },
+            "courseFit": {
+              "raw": 17.35,
+              "pct": 27.98
+            },
+            "form": {
+              "raw": 9.83,
+              "pct": 15.85
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 19.35
+            },
+            "floor": {
+              "raw": 3.4,
+              "pct": 5.48
+            },
+            "ceiling": {
+              "raw": 3.21,
+              "pct": 5.18
+            },
+            "leverage": {
+              "raw": 2.39,
+              "pct": 3.85
+            },
+            "contrarian": {
+              "raw": 0.79,
+              "pct": 1.27
+            },
+            "dfsValue": {
+              "raw": 0.96,
+              "pct": 1.55
+            },
+            "strategic": {
+              "raw": 4.0,
+              "pct": 6.45
+            }
+          }
+        },
+        {
+          "rank": 4,
+          "name": "English, Harris",
+          "dg_id": 14577,
+          "finish_pos": 4,
+          "bbi_rank": 26,
+          "bbi_pool_score": 60.34,
+          "factors": {
+            "talent": {
+              "raw": 6.07,
+              "pct": 10.7
+            },
+            "courseFit": {
+              "raw": 14.09,
+              "pct": 24.83
+            },
+            "form": {
+              "raw": 8.0,
+              "pct": 14.1
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 21.15
+            },
+            "floor": {
+              "raw": 2.64,
+              "pct": 4.65
+            },
+            "ceiling": {
+              "raw": 2.23,
+              "pct": 3.93
+            },
+            "leverage": {
+              "raw": 5.2,
+              "pct": 9.16
+            },
+            "contrarian": {
+              "raw": 1.55,
+              "pct": 2.73
+            },
+            "dfsValue": {
+              "raw": 1.33,
+              "pct": 2.34
+            },
+            "strategic": {
+              "raw": 3.63,
+              "pct": 6.4
+            }
+          }
+        },
+        {
+          "rank": 4,
+          "name": "Aberg, Ludvig",
+          "dg_id": 23950,
+          "finish_pos": 4,
+          "bbi_rank": 18,
+          "bbi_pool_score": 61.7,
+          "factors": {
+            "talent": {
+              "raw": 8.88,
+              "pct": 14.94
+            },
+            "courseFit": {
+              "raw": 14.75,
+              "pct": 24.81
+            },
+            "form": {
+              "raw": 9.8,
+              "pct": 16.48
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 20.19
+            },
+            "floor": {
+              "raw": 3.28,
+              "pct": 5.52
+            },
+            "ceiling": {
+              "raw": 3.18,
+              "pct": 5.35
+            },
+            "leverage": {
+              "raw": 2.2,
+              "pct": 3.7
+            },
+            "contrarian": {
+              "raw": 0.78,
+              "pct": 1.31
+            },
+            "dfsValue": {
+              "raw": 0.88,
+              "pct": 1.48
+            },
+            "strategic": {
+              "raw": 3.7,
+              "pct": 6.22
+            }
+          }
+        },
+        {
+          "rank": 7,
+          "name": "Cauley, Bud",
+          "dg_id": 14502,
+          "finish_pos": 7,
+          "bbi_rank": 47,
+          "bbi_pool_score": 57.64,
+          "factors": {
+            "talent": {
+              "raw": 3.46,
+              "pct": 6.21
+            },
+            "courseFit": {
+              "raw": 15.02,
+              "pct": 26.98
+            },
+            "form": {
+              "raw": 6.2,
+              "pct": 11.14
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 21.55
+            },
+            "floor": {
+              "raw": 1.84,
+              "pct": 3.3
+            },
+            "ceiling": {
+              "raw": 1.33,
+              "pct": 2.39
+            },
+            "leverage": {
+              "raw": 7.97,
+              "pct": 14.31
+            },
+            "contrarian": {
+              "raw": 2.26,
+              "pct": 4.06
+            },
+            "dfsValue": {
+              "raw": 1.87,
+              "pct": 3.36
+            },
+            "strategic": {
+              "raw": 3.73,
+              "pct": 6.7
+            }
+          }
+        },
+        {
+          "rank": 8,
+          "name": "Cantlay, Patrick",
+          "dg_id": 15466,
+          "finish_pos": 8,
+          "bbi_rank": 5,
+          "bbi_pool_score": 67.46,
+          "factors": {
+            "talent": {
+              "raw": 7.22,
+              "pct": 10.68
+            },
+            "courseFit": {
+              "raw": 24.15,
+              "pct": 35.71
+            },
+            "form": {
+              "raw": 9.17,
+              "pct": 13.56
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 17.74
+            },
+            "floor": {
+              "raw": 3.11,
+              "pct": 4.6
+            },
+            "ceiling": {
+              "raw": 2.88,
+              "pct": 4.26
+            },
+            "leverage": {
+              "raw": 2.62,
+              "pct": 3.87
+            },
+            "contrarian": {
+              "raw": 0.83,
+              "pct": 1.23
+            },
+            "dfsValue": {
+              "raw": 0.86,
+              "pct": 1.27
+            },
+            "strategic": {
+              "raw": 4.79,
+              "pct": 7.08
+            }
+          }
+        },
+        {
+          "rank": 8,
+          "name": "Fowler, Rickie",
+          "dg_id": 12965,
+          "finish_pos": 8,
+          "bbi_rank": 35,
+          "bbi_pool_score": 58.85,
+          "factors": {
+            "talent": {
+              "raw": 5.54,
+              "pct": 9.94
+            },
+            "courseFit": {
+              "raw": 14.11,
+              "pct": 25.31
+            },
+            "form": {
+              "raw": 7.4,
+              "pct": 13.28
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 21.53
+            },
+            "floor": {
+              "raw": 2.33,
+              "pct": 4.18
+            },
+            "ceiling": {
+              "raw": 1.89,
+              "pct": 3.39
+            },
+            "leverage": {
+              "raw": 5.81,
+              "pct": 10.42
+            },
+            "contrarian": {
+              "raw": 1.69,
+              "pct": 3.03
+            },
+            "dfsValue": {
+              "raw": 1.34,
+              "pct": 2.4
+            },
+            "strategic": {
+              "raw": 3.63,
+              "pct": 6.51
+            }
+          }
+        },
+        {
+          "rank": 8,
+          "name": "Kitayama, Kurt",
+          "dg_id": 21891,
+          "finish_pos": 8,
+          "bbi_rank": 33,
+          "bbi_pool_score": 59.07,
+          "factors": {
+            "talent": {
+              "raw": 4.96,
+              "pct": 8.89
+            },
+            "courseFit": {
+              "raw": 13.19,
+              "pct": 23.64
+            },
+            "form": {
+              "raw": 7.4,
+              "pct": 13.26
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 21.51
+            },
+            "floor": {
+              "raw": 2.31,
+              "pct": 4.14
+            },
+            "ceiling": {
+              "raw": 1.89,
+              "pct": 3.39
+            },
+            "leverage": {
+              "raw": 6.8,
+              "pct": 12.19
+            },
+            "contrarian": {
+              "raw": 2.02,
+              "pct": 3.62
+            },
+            "dfsValue": {
+              "raw": 1.71,
+              "pct": 3.06
+            },
+            "strategic": {
+              "raw": 3.52,
+              "pct": 6.31
+            }
+          }
+        },
+        {
+          "rank": 8,
+          "name": "Woodland, Gary",
+          "dg_id": 12577,
+          "finish_pos": 8,
+          "bbi_rank": 58,
+          "bbi_pool_score": 55.33,
+          "factors": {
+            "talent": {
+              "raw": 4.16,
+              "pct": 7.88
+            },
+            "courseFit": {
+              "raw": 12.45,
+              "pct": 23.59
+            },
+            "form": {
+              "raw": 6.33,
+              "pct": 12.0
+            },
+            "cutSafety": {
+              "raw": 12.0,
+              "pct": 22.74
+            },
+            "floor": {
+              "raw": 1.88,
+              "pct": 3.56
+            },
+            "ceiling": {
+              "raw": 1.35,
+              "pct": 2.56
+            },
+            "leverage": {
+              "raw": 7.41,
+              "pct": 14.04
+            },
+            "contrarian": {
+              "raw": 2.12,
+              "pct": 4.02
+            },
+            "dfsValue": {
+              "raw": 1.63,
+              "pct": 3.09
+            },
+            "strategic": {
+              "raw": 3.44,
+              "pct": 6.52
+            }
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "last_updated": "2026-04-28T04:54:49Z"
 }
