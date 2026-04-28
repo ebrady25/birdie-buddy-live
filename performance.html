@@ -204,6 +204,83 @@
     .calib-bar-labels .pred { color: var(--gold-400); }
     .calib-bar-labels .actual { color: var(--text-body); }
 
+    /* Best/worst events leaderboard */
+    .bt-leaderboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-5);
+      margin-top: var(--space-6);
+    }
+    @media (max-width: 760px) { .bt-leaderboard { grid-template-columns: 1fr; } }
+    .bt-leader-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+    }
+    .bt-leader-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .bt-leader-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--fs-md);
+      color: var(--text-primary);
+    }
+    .bt-leader-card.best .bt-leader-title { color: var(--positive); }
+    .bt-leader-card.worst .bt-leader-title { color: var(--negative); }
+    .bt-leader-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .bt-leader-row {
+      display: grid;
+      grid-template-columns: 24px 1fr auto auto;
+      gap: var(--space-2);
+      align-items: center;
+      padding: 6px 0;
+      font-size: var(--fs-xs);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .bt-leader-row:last-child { border-bottom: none; }
+    .bt-leader-rank {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      letter-spacing: 0.05em;
+    }
+    .bt-leader-event {
+      color: var(--text-body);
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .bt-leader-yr {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      padding: 2px 5px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-3);
+    }
+    .bt-leader-rho {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }
+    .bt-leader-card.best .bt-leader-rho { color: var(--positive); }
+    .bt-leader-card.worst .bt-leader-rho { color: var(--negative); }
+
     /* Backtest / competition rows */
     .backtest-grid {
       display: grid;
@@ -1655,6 +1732,24 @@
         </div>
       </div>
 
+      <!-- Best/worst events from the 62-event history -->
+      <div class="bt-leaderboard">
+        <div class="bt-leader-card best">
+          <div class="bt-leader-head">
+            <span class="bt-leader-title">Best 5 events</span>
+            <span class="bt-leader-sub">Highest baseline ρ</span>
+          </div>
+          <div id="btBestRows"></div>
+        </div>
+        <div class="bt-leader-card worst">
+          <div class="bt-leader-head">
+            <span class="bt-leader-title">Hardest 5 events</span>
+            <span class="bt-leader-sub">Lowest baseline ρ</span>
+          </div>
+          <div id="btWorstRows"></div>
+        </div>
+      </div>
+
       <div class="backtest-grid">
         <div class="card">
           <div class="card-title">Aggregate — industry baseline benchmark</div>
@@ -2341,6 +2436,32 @@
           const sign = delta >= 0 ? '+' : '';
           const cls = delta >= 0 ? 'var(--positive)' : 'var(--negative)';
           $('#btHeroDelta').innerHTML = `<span style="color: ${cls}; font-weight: 600;">${sign}${fmt.num(delta, 3)}</span> vs baseline`;
+        }
+
+        // Best/worst leaderboard from per_event array
+        const perEvent = (prom.per_event || [])
+          .filter(e => e.spearman_dg_baseline != null && !e.error)
+          .map(e => ({
+            name: (e.event_name || e.event_name_input || '').replace(/\s+\d{4}$/, ''),
+            year: e.year,
+            rho: e.spearman_dg_baseline,
+          }));
+        const sortedDesc = perEvent.slice().sort((a, b) => b.rho - a.rho);
+        const renderRow = (e, i) => `
+          <div class="bt-leader-row">
+            <span class="bt-leader-rank">${i + 1}</span>
+            <span class="bt-leader-event" title="${e.name}">${e.name}</span>
+            <span class="bt-leader-yr">${e.year}</span>
+            <span class="bt-leader-rho">${(e.rho >= 0 ? '+' : '') + e.rho.toFixed(3)}</span>
+          </div>
+        `;
+        const bestEl = $('#btBestRows');
+        const worstEl = $('#btWorstRows');
+        if (bestEl && sortedDesc.length) {
+          bestEl.innerHTML = sortedDesc.slice(0, 5).map(renderRow).join('');
+        }
+        if (worstEl && sortedDesc.length) {
+          worstEl.innerHTML = sortedDesc.slice(-5).reverse().map(renderRow).join('');
         }
 
         // Existing detail card
