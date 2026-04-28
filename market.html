@@ -545,6 +545,11 @@
           <input type="checkbox" id="evOnly" checked/>
           +EV only
         </label>
+        <div style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:var(--fs-3xs);color:var(--text-muted);white-space:nowrap;">
+          BOOKS
+          <select id="book1Sel" class="toolbar-search" style="min-width:110px;cursor:pointer;"></select>
+          <select id="book2Sel" class="toolbar-search" style="min-width:110px;cursor:pointer;"></select>
+        </div>
         <div class="toolbar-count"><strong id="edgeCount">—</strong> players</div>
       </div>
     </div>
@@ -561,16 +566,14 @@
                 <th data-sort="bbi_prob" title="BirdieBuddy predicted probability">BBI %</th>
                 <th data-sort="market_prob" title="Consensus across all books, devigged">Market %</th>
                 <th data-sort="edge" class="sort-desc" title="BBI minus market consensus, in percentage points">Edge</th>
-                <th data-sort="dk" title="DraftKings American odds">DK</th>
-                <th data-sort="b365" title="Bet365 American odds">B365</th>
+                <th data-sort="book1" id="thBook1" title="Selected book odds">DK</th>
+                <th data-sort="book2" id="thBook2" title="Selected book odds">B365</th>
                 <th data-sort="pin" title="Pinnacle (sharps) devigged probability">Pinn %</th>
-                <th data-sort="kelly" title="Fractional Kelly stake as % of bankroll">Kelly</th>
-                <th data-sort="spread" title="Spread across the 15 books in decimal points — tighter = more efficient market">Spread</th>
                 <th title="Add this play to your slip">Slip</th>
               </tr>
             </thead>
             <tbody id="edgesBody">
-              <tr><td colspan="10" class="edges-empty">Loading market data…</td></tr>
+              <tr><td colspan="8" class="edges-empty">Loading market data…</td></tr>
             </tbody>
           </table>
         </div>
@@ -661,6 +664,14 @@
       top_20: { label: 'Top 20 Finish' }
     };
 
+    const BOOK_LABELS = {
+      bet365:'Bet365', betcris:'BetCris', betmgm:'BetMGM',
+      betonline:'BetOnline', betway:'Betway', bovada:'Bovada',
+      caesars:'Caesars', draftkings:'DraftKings', fanduel:'FanDuel',
+      pointsbet:'PointsBet', skybet:'SkyBet', williamhill:'William Hill',
+      pinnacle:'Pinnacle',
+    };
+
     // Convert decimal odds to American (+400 / -200 style)
     function toAmerican(dec) {
       if (dec == null || dec <= 1) return '—';
@@ -677,9 +688,12 @@
       sort: { key: 'edge', dir: 'desc' },
       search: '',
       evOnly: true,
-      slip: [],              // array of { id, name, market, bbi_prob, market_prob, dk_dec, kelly_pct }
+      slip: [],              // array of slip items
       bankroll: 500,
-      kellyFraction: 0.5
+      kellyFraction: 0.5,
+      book1: 'draftkings',  // column 1 book key
+      book2: 'bet365',      // column 2 book key
+      availableBooks: [],   // [{key, label}] populated from omnia data
     };
 
     (async function init() {
@@ -782,21 +796,31 @@
       const market = state.omnia?.markets?.[state.market];
       if (!market) { state.rows = []; renderRows(); renderHero(); return; }
       const rows = (market.all_edges || []).map(r => ({
-        dg_id: r.dg_id,
-        name: r.name,
-        bbi_prob: r.bbi_prob,
-        market_prob: r.market_consensus_prob_deviged,
-        pin_prob:  r.pinnacle_prob_deviged,
-        dk_dec:    r.draftkings_decimal,
-        dk_prob:   r.draftkings_prob_raw,
-        b365_dec:  r.bet365_decimal,
-        b365_prob: r.bet365_prob_deviged,
-        edge:      r.edge_consensus_pp,
-        edge_pin:  r.edge_pinnacle_pp,
-        kelly_pct: r.kelly_stake_pct_bankroll,
-        n_books:   r.n_books,
-        spread:    r.book_spread_decimal
+        dg_id:          r.dg_id,
+        name:           r.name,
+        bbi_prob:       r.bbi_prob,
+        market_prob:    r.market_consensus_prob_deviged,
+        pin_prob:       r.pinnacle_prob_deviged,
+        dk_dec:         r.draftkings_decimal,
+        b365_dec:       r.bet365_decimal,
+        best_book_name: r.best_book_name,
+        best_book_dec:  r.best_book_decimal,
+        book_odds:      r.book_odds || {},
+        edge:           r.edge_consensus_pp,
+        edge_pin:       r.edge_pinnacle_pp,
+        kelly_pct:      r.kelly_stake_pct_bankroll,
+        n_books:        r.n_books,
       }));
+
+      // Build book selector options from feed
+      const bookKeys = state.omnia.available_books ||
+        [...new Set(rows.flatMap(r => Object.keys(r.book_odds)))].sort();
+      const bookLabelsData = state.omnia.book_labels || {};
+      state.availableBooks = bookKeys.map(k => ({
+        key: k, label: bookLabelsData[k] || BOOK_LABELS[k] || k.charAt(0).toUpperCase() + k.slice(1)
+      }));
+      populateBookSelectors();
+
       state.rows = rows;
       document.getElementById('mMatched').textContent = fmt.int(market.n_players_matched);
       // Books shown from the max n_books we observe in this market
@@ -806,6 +830,29 @@
       renderHero();
       renderRows();
     }
+
+    // ---------- Book selector ----------
+    function populateBookSelectors() {
+      ['book1Sel','book2Sel'].forEach((id, i) => {
+        const sel = document.getElementById(id);
+        const current = i === 0 ? state.book1 : state.book2;
+        sel.innerHTML = state.availableBooks.map(b =>
+          `<option value="${b.key}"${b.key === current ? ' selected' : ''}>${b.label}</option>`
+        ).join('');
+      });
+    }
+    document.getElementById('book1Sel').addEventListener('change', e => {
+      state.book1 = e.target.value;
+      document.getElementById('thBook1').textContent =
+        state.availableBooks.find(b => b.key === state.book1)?.label || state.book1;
+      renderRows();
+    });
+    document.getElementById('book2Sel').addEventListener('change', e => {
+      state.book2 = e.target.value;
+      document.getElementById('thBook2').textContent =
+        state.availableBooks.find(b => b.key === state.book2)?.label || state.book2;
+      renderRows();
+    });
 
     // ---------- Hero KPI bar ----------
     function renderHero() {
@@ -855,11 +902,9 @@
             case 'bbi_prob': return r.bbi_prob || 0;
             case 'market_prob': return r.market_prob || 0;
             case 'edge': return r.edge == null ? -999 : r.edge;
-            case 'dk': return r.dk_dec || 0;
-            case 'b365': return r.b365_dec || 0;
+            case 'book1': return r.book_odds?.[state.book1] || 0;
+            case 'book2': return r.book_odds?.[state.book2] || 0;
             case 'pin': return r.pin_prob || 0;
-            case 'kelly': return r.kelly_pct || 0;
-            case 'spread': return r.spread == null ? 999 : r.spread;
             default: return 0;
           }
         };
@@ -872,14 +917,18 @@
       document.getElementById('edgeCount').textContent = fmt.int(rows.length);
 
       if (!rows.length) {
-        body.innerHTML = `<tr><td colspan="10" class="edges-empty">No players match your filter in this market.</td></tr>`;
+        body.innerHTML = `<tr><td colspan="8" class="edges-empty">No players match your filter in this market.</td></tr>`;
         return;
       }
 
       // Precompute edge heat — normalize against max absolute edge in list
       const maxAbsEdge = rows.reduce((m, r) => Math.max(m, Math.abs(r.edge || 0)), 0.001);
       const slipIds = new Set(state.slip.map(s => `${s.id}|${s.market}`));
-      const maxSpread = rows.reduce((m, r) => Math.max(m, r.spread || 0), 0.001);
+      // Update dynamic column headers to match current book selection
+      document.getElementById('thBook1').textContent =
+        state.availableBooks.find(b => b.key === state.book1)?.label || state.book1;
+      document.getElementById('thBook2').textContent =
+        state.availableBooks.find(b => b.key === state.book2)?.label || state.book2;
 
       body.innerHTML = rows.map(r => {
         const edgeVal = r.edge;
@@ -888,39 +937,27 @@
         const edgeStr = edgeVal == null ? '—' : `${edgeVal >= 0 ? '+' : ''}${edgeVal.toFixed(2)}pp`;
         const edgeSign = edgeVal == null ? '' : edgeVal >= 0 ? 'pos' : 'neg';
 
-        const kelly = r.kelly_pct;
-        const kellyChip = kelly != null
-          ? `<span class="kelly-chip">${kelly.toFixed(2)}%</span>`
-          : '<span class="val-dim">—</span>';
-        const kellyHeavy = (kelly || 0) >= 1.5 ? 'heavy' : '';
-
         const inSlip = slipIds.has(`${r.dg_id}|${state.market}`);
-        const spreadRel = (r.spread || 0) / maxSpread;
-        const spreadClass = (r.spread || 0) > 4 ? 'wide' : '';
+        const b1dec = r.book_odds?.[state.book1];
+        const b2dec = r.book_odds?.[state.book2];
+        const hasOdds = b1dec != null || b2dec != null || r.best_book_dec != null;
 
         return `
           <tr data-id="${r.dg_id}" class="${inSlip ? 'slip-added' : ''}">
             <td class="td-name">
               ${r.name || '—'}
-              <span class="dg-id">ID ${r.dg_id} · ${r.n_books || 0} books</span>
+              <span class="dg-id">${r.n_books || 0} books</span>
             </td>
             <td>${r.bbi_prob != null ? (r.bbi_prob * 100).toFixed(2) + '%' : '—'}</td>
             <td class="val-dim">${r.market_prob != null ? (r.market_prob * 100).toFixed(2) + '%' : '—'}</td>
             <td class="edge-cell ${edgeSign}" style="--heat: ${edgeHeat.toFixed(3)};">
               <span>${edgeStr}</span>
             </td>
-            <td class="val-book">${toAmerican(r.dk_dec)}</td>
-            <td class="val-book">${toAmerican(r.b365_dec)}</td>
+            <td class="val-book">${toAmerican(b1dec)}</td>
+            <td class="val-book">${toAmerican(b2dec)}</td>
             <td class="val-dim">${r.pin_prob != null && r.pin_prob > 0 && r.pin_prob < 1 ? (r.pin_prob * 100).toFixed(2) + '%' : '—'}</td>
-            <td class="kelly-cell ${kellyHeavy}">${kellyChip}</td>
             <td>
-              <span class="spread-mini">
-                <span class="bar"><span class="bar-fill ${spreadClass}" style="width:${Math.min(100, spreadRel * 100)}%"></span></span>
-                <span>${r.spread != null ? r.spread.toFixed(2) : '—'}</span>
-              </span>
-            </td>
-            <td>
-              <button class="slip-btn ${inSlip ? 'added' : ''}" data-id="${r.dg_id}" ${edgeVal == null || edgeVal <= 0 || kelly == null ? 'disabled title="No +EV / Kelly stake"' : ''}>
+              <button class="slip-btn ${inSlip ? 'added' : ''}" data-id="${r.dg_id}" ${!hasOdds ? 'disabled title="No odds available"' : ''}>
                 ${inSlip ? '✓' : '+'}
               </button>
             </td>
@@ -946,16 +983,17 @@
       if (existing >= 0) {
         state.slip.splice(existing, 1);
       } else {
-        if (row.edge == null || row.edge <= 0 || row.kelly_pct == null) return;
         state.slip.push({
-          id: row.dg_id,
-          name: row.name,
-          market: state.market,
-          bbi_prob: row.bbi_prob,
-          market_prob: row.market_prob,
-          dk_dec: row.dk_dec,
-          kelly_pct: row.kelly_pct,
-          edge: row.edge
+          id:             row.dg_id,
+          name:           row.name,
+          market:         state.market,
+          bbi_prob:       row.bbi_prob,
+          market_prob:    row.market_prob,
+          dk_dec:         row.dk_dec,
+          kelly_pct:      row.kelly_pct,
+          edge:           row.edge,
+          best_book_name: row.best_book_name,
+          best_book_dec:  row.best_book_dec,
         });
       }
       renderSlip();
@@ -980,23 +1018,34 @@
 
       totals.style.display = '';
       const stakes = state.slip.map(s => {
-        const pct = s.kelly_pct * state.kellyFraction; // fractional Kelly
+        const pct   = s.kelly_pct != null ? s.kelly_pct * state.kellyFraction : 0;
         const stake = state.bankroll * (pct / 100);
-        const payoutIfWin = stake * (s.dk_dec - 1); // profit only
-        const ev = stake * ((s.bbi_prob * s.dk_dec) - 1); // expected profit
+        const dec   = s.best_book_dec || s.dk_dec || 2;
+        const payoutIfWin = stake * (dec - 1);
+        const ev = s.bbi_prob && dec ? stake * ((s.bbi_prob * dec) - 1) : 0;
         return { ...s, kellyApplied: pct, stake, payoutIfWin, ev };
       });
 
-      mount.innerHTML = stakes.map(s => `
+      mount.innerHTML = stakes.map(s => {
+        const bestIsHigher = s.best_book_dec && s.dk_dec && s.best_book_dec > s.dk_dec;
+        const bestLine = s.best_book_name
+          ? `<span style="color:${bestIsHigher ? 'var(--positive)' : 'var(--text-muted)'}">Best: ${s.best_book_name} ${toAmerican(s.best_book_dec)}</span>`
+          : '';
+        const edgeLine = s.edge != null ? ` · ${s.edge > 0 ? '+' : ''}${s.edge.toFixed(2)}pp` : '';
+        const stakeDisplay = s.stake > 0
+          ? `$${s.stake.toFixed(2)}<small>${s.kellyApplied.toFixed(2)}%</small>`
+          : `<small style="color:var(--text-dimmed)">parlay leg</small>`;
+        return `
         <div class="slip-item">
           <div>
             <span class="si-name">${fmt.abbrevName(s.name)}</span>
-            <span class="si-market">${MARKETS[s.market].label} · DK ${toAmerican(s.dk_dec)} · +${s.edge.toFixed(2)}pp</span>
+            <span class="si-market">${MARKETS[s.market].label}${edgeLine}</span>
+            <span class="si-market" style="margin-top:2px;">${bestLine}</span>
           </div>
-          <div class="si-stake">$${s.stake.toFixed(2)}<small>${s.kellyApplied.toFixed(2)}%</small></div>
+          <div class="si-stake">${stakeDisplay}</div>
           <button data-remove="${s.id}|${s.market}" title="Remove">×</button>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
       mount.querySelectorAll('[data-remove]').forEach(btn => {
         btn.addEventListener('click', () => {
           const k = btn.getAttribute('data-remove');
