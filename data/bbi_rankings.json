@@ -1,10 +1,9 @@
 {
   "event": "Cadillac Championship 2026",
-  "event_id": 556,
   "course": "Trump National Doral (Blue Monster)",
+  "event_id": 556,
   "start_date": "2026-04-30",
   "field_size": 72,
-  "generated_at": "2026-04-28T00:23:45.022060+00:00",
   "weights_pool": {
     "talent": 0.19999999999999984,
     "courseFit": 0.24,
@@ -6964,6 +6963,10 @@
       "wind_adj": null
     }
   ],
+  "zeus_computed": false,
+  "weather_summary": null,
+  "model_version": "8.5",
+  "generated_at": "2026-04-28T00:23:45.022060+00:00",
   "players": [
     {
       "dg_id": 18417,
@@ -13877,8 +13880,5 @@
       "zeus_dfs": null,
       "wind_adj": null
     }
-  ],
-  "zeus_computed": false,
-  "weather_summary": null,
-  "model_version": "8.5"
+  ]
 }
