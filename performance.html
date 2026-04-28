@@ -953,6 +953,12 @@
       box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
     }
     .section-refreshed strong { color: var(--text-body); font-weight: 600; }
+    /* When no eyebrow is present (e.g. world-rank), badge sits above the H2
+       with extra spacing so the title isn't cramped against it. */
+    .section-refreshed.no-eyebrow {
+      margin-top: 0;
+      margin-bottom: var(--space-5);
+    }
 
     /* Section at-a-glance stat (next to H2) */
     .section-glance {
@@ -1578,7 +1584,6 @@
     <section class="section zone-elevated" id="world-rank" data-reveal>
       <div class="section-head">
         <div class="section-head-text">
-          <span class="eyebrow">Global percentile · Independently scored</span>
           <h2>Where BBI ranks among the world's golf models.</h2>
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">Why this matters</button>
@@ -1633,10 +1638,7 @@
 
         <!-- Honest summary + methodology link -->
         <div class="rank-summary" id="rankSummary">Loading transparent self-assessment…</div>
-        <div style="margin-top: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; justify-content: space-between;">
-          <p class="muted" style="font-size: var(--fs-xs); margin: 0; max-width: 56ch; line-height: 1.5;">
-            Tier thresholds are estimates based on publicly observable forecasters. We refuse to make best-in-world claims we can't substantiate — every number on this page traces back to scored events.
-          </p>
+        <div style="margin-top: var(--space-4); display: flex; justify-content: flex-end;">
           <a href="methodology.html" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px 12px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-pill); color: var(--gold-300); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none; transition: all var(--dur-base);" onmouseover="this.style.borderColor='var(--border-gold)'" onmouseout="this.style.borderColor='var(--border-soft)'">
             How we score this →
           </a>
@@ -1706,7 +1708,6 @@
     <section class="section zone-elevated" id="recaps" data-reveal>
       <div class="section-head">
         <div class="section-head-text">
-          <span class="eyebrow">Deep dives · Weekly analysis</span>
           <h2>What happened — and why. <span class="section-glance" id="glanceRecaps"></span></h2>
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">Why we publish these</button>
@@ -2762,12 +2763,14 @@
         const badge = document.createElement('span');
         badge.className = 'section-refreshed' + (stale ? ' stale' : '');
         badge.innerHTML = `Refreshed <strong>${fmtRel()}</strong> · ${source}`;
-        // Insert after the eyebrow
+        // Insert after the eyebrow if one exists; otherwise prepend (badge sits
+        // above the H2 with extra bottom margin via .no-eyebrow class).
         const eyebrow = head.querySelector('.eyebrow');
         if (eyebrow && eyebrow.nextElementSibling) {
           head.insertBefore(badge, eyebrow.nextElementSibling);
         } else {
-          head.appendChild(badge);
+          badge.classList.add('no-eyebrow');
+          head.insertBefore(badge, head.firstChild);
         }
       };
       setRefresh('world-rank', worldRank?.asof + 'T00:00:00Z', 'world_ranking.json');
