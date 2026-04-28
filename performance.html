@@ -165,6 +165,44 @@
     .calib-market .skill { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; padding-top: 4px; }
     .calib-market .skill.positive { color: var(--positive); }
     .calib-market .skill.negative { color: var(--negative); }
+    /* Mini reliability bar — predicted vs actual rate */
+    .calib-bar {
+      position: relative;
+      height: 6px;
+      background: var(--surface-4);
+      border-radius: 999px;
+      margin: var(--space-2) 0 4px;
+      overflow: visible;
+    }
+    .calib-bar-pred {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-700), var(--gold-400));
+      border-radius: 999px;
+      transition: width var(--dur-base);
+    }
+    .calib-bar-actual {
+      position: absolute;
+      top: -2px;
+      width: 2px;
+      height: 10px;
+      background: var(--text-primary);
+      border-radius: 1px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+    }
+    .calib-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-dimmed);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .calib-bar-labels .pred { color: var(--gold-400); }
+    .calib-bar-labels .actual { color: var(--text-body); }
 
     /* Backtest / competition rows */
     .backtest-grid {
@@ -2253,11 +2291,26 @@
           if (!m) return '';
           const skillCls = m.skill_pct > 10 ? 'positive' : (m.skill_pct < 0 ? 'negative' : '');
           const skillSign = m.skill_pct > 0 ? '+' : '';
+          // Reliability bar: predicted rate (gold fill) vs actual rate (white tick)
+          // Scale to max(pred, actual) * 1.5 so the bar always shows reasonable proportion
+          const pred = m.mean_pred ?? 0;
+          const actual = m.mean_actual ?? 0;
+          const scale = Math.max(0.05, Math.max(pred, actual) * 1.6);
+          const predPct = clamp((pred / scale) * 100, 0, 100);
+          const actualPct = clamp((actual / scale) * 100, 0, 100);
           return `
             <div class="calib-market">
               <div class="mkt-label">${mktLabel[k]}</div>
               <div class="mkt-val">${fmt.num(m.brier, 4)}</div>
               <div class="mkt-meta">Brier · ${fmt.num(m.log_loss, 3)} log-loss</div>
+              <div class="calib-bar-labels">
+                <span class="pred">pred ${(pred*100).toFixed(1)}%</span>
+                <span class="actual">actual ${(actual*100).toFixed(1)}%</span>
+              </div>
+              <div class="calib-bar" title="Predicted ${(pred*100).toFixed(2)}% vs actual ${(actual*100).toFixed(2)}%">
+                <div class="calib-bar-pred" style="width: ${predPct.toFixed(1)}%"></div>
+                <div class="calib-bar-actual" style="left: calc(${actualPct.toFixed(1)}% - 1px)"></div>
+              </div>
               <div class="skill ${skillCls}">${skillSign}${fmt.num(m.skill_pct, 1)}% vs naive</div>
             </div>
           `;
