@@ -19,6 +19,22 @@
     /* KPI strip */
     /* .kpi-strip lives in components.css — this page used margin-bottom: var(--space-10); override kept here. */
     .kpi-strip { margin-bottom: var(--space-10); }
+    .kpi-strip .stat {
+      transition: transform var(--dur-base), border-color var(--dur-base), box-shadow var(--dur-base);
+      cursor: default;
+    }
+    .kpi-strip .stat:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-gold);
+      box-shadow: 0 8px 24px -8px rgba(212, 168, 67, 0.18), 0 0 0 1px rgba(212, 168, 67, 0.1) inset;
+    }
+    .kpi-strip .stat-delta::before {
+      font-size: 10px;
+      margin-right: 2px;
+    }
+    .kpi-strip .stat-delta-up::before   { content: '↑'; }
+    .kpi-strip .stat-delta-down::before { content: '↓'; }
+    .kpi-strip .stat-delta-flat::before { content: '→'; opacity: 0.7; }
 
     /* Performance chart */
     .perf-card {
