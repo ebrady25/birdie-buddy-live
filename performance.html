@@ -124,6 +124,8 @@
       gap: var(--space-5);
     }
     @media (max-width: 900px) { .backtest-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 880px) { .backtest-hero { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 480px) { .backtest-hero { grid-template-columns: 1fr !important; } }
 
     .layer-row { display: grid; grid-template-columns: 110px 1fr 56px; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-xs); border-top: 1px solid var(--border-soft); }
     .layer-row:first-child { border-top: none; }
@@ -913,14 +915,38 @@
     <section class="section" id="backtest">
       <div class="section-head">
         <div class="section-head-text">
-          <span class="eyebrow">2025 backtest · PROMETHEUS</span>
-          <h2>47 events of ground truth.</h2>
-          <p>PROMETHEUS replays the 2025 season using the published industry pre-tournament baseline as the apples-to-apples benchmark. These are the numbers BBI has to beat, event over event, to claim skill.</p>
+          <span class="eyebrow">Multi-season backtest · PROMETHEUS</span>
+          <h2><span id="btHeadlineCount">—</span> events of ground truth.</h2>
+          <p>PROMETHEUS replays every published industry pre-tournament baseline against actual finishing positions across <strong>2025 + completed 2026</strong>. Refreshed every Sunday night by an automated pipeline. These are the numbers BBI has to beat, event over event, to claim skill.</p>
         </div>
       </div>
+      <!-- Hero stat row above the cards — the big numbers -->
+      <div class="backtest-hero" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-6);">
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Events scored</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-300); letter-spacing: -0.02em; line-height: 1;" id="btHeroEvents">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px; letter-spacing: var(--tracking-wide);" id="btHeroSeasons">—</div>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Mean ρ</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--text-primary); letter-spacing: -0.02em; line-height: 1;" id="btHeroMean">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;">Industry baseline</div>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">BBI 2026 avg</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-300); letter-spacing: -0.02em; line-height: 1;" id="btHeroBbi">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;" id="btHeroDelta">—</div>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Refresh cadence</div>
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: clamp(1.25rem, 3vw, 1.625rem); color: var(--text-primary); letter-spacing: -0.02em; line-height: 1.1;">Weekly</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;">Sun 23:04 ET · automated</div>
+        </div>
+      </div>
+
       <div class="backtest-grid">
         <div class="card">
-          <div class="card-title">Aggregate — 2025 industry baseline</div>
+          <div class="card-title">Aggregate — industry baseline benchmark</div>
           <div style="margin-top: var(--space-4);">
             <div class="stat-row" style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft);">
               <span class="muted">Events scored</span>
@@ -1464,7 +1490,29 @@
       // ---------- BACKTEST AGGREGATE ----------
       if (prom?.aggregate) {
         const a = prom.aggregate;
-        $('#btEvents').textContent = a.n_events ?? '—';
+        // Headline + hero pillars
+        const nEvents = a.n_events ?? 0;
+        $('#btHeadlineCount').textContent = nEvents;
+        $('#btHeroEvents').textContent = nEvents;
+        const seasons = (prom.seasons_included || []).join(' + ') || '2025';
+        $('#btHeroSeasons').textContent = `${seasons} · all PGA fields`;
+        $('#btHeroMean').textContent = fmt.num(a.mean_spearman, 4);
+
+        // BBI 2026 avg vs baseline (already computed above)
+        const bbiSeasonAvg = (rolling.season_avg_bbi_spearman) || (function(){
+          const vals = events.map(e => e.spearman_bbi).filter(v => v != null);
+          return vals.length ? vals.reduce((x,y)=>x+y,0) / vals.length : null;
+        })();
+        $('#btHeroBbi').textContent = bbiSeasonAvg != null ? fmt.num(bbiSeasonAvg, 4) : '—';
+        if (bbiSeasonAvg != null && a.mean_spearman != null) {
+          const delta = bbiSeasonAvg - a.mean_spearman;
+          const sign = delta >= 0 ? '+' : '';
+          const cls = delta >= 0 ? 'var(--positive)' : 'var(--negative)';
+          $('#btHeroDelta').innerHTML = `<span style="color: ${cls}; font-weight: 600;">${sign}${fmt.num(delta, 3)}</span> vs baseline`;
+        }
+
+        // Existing detail card
+        $('#btEvents').textContent = nEvents;
         $('#btMeanSp').textContent = fmt.num(a.mean_spearman, 4);
         $('#btMedSp').textContent = fmt.num(a.median_spearman, 4);
         $('#btBrierWin').textContent = fmt.num(a.mean_brier_win, 4);
