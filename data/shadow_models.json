@@ -12,36 +12,11 @@
     "v8.6-dyn",
     "v8.7-cfgate"
   ],
+  "note": "Re-run after Phase 1 was rebuilt with post-Hanse-redesign-only Doral history (2014-2016) and reduced courseFit weight (0.20 pool / 0.16 dfs). All 5 shadow variants re-scored against the new baseline.",
   "variants": {
     "v8.6-cf": {
       "variant_id": "v8.6-cf",
       "variant_name": "Course Fit Maximalist",
-      "weights_used": {
-        "pool": {
-          "talent": 0.12,
-          "courseFit": 0.32,
-          "form": 0.13,
-          "cutSafety": 0.12,
-          "floor": 0.04,
-          "ceiling": 0.04,
-          "leverage": 0.08,
-          "contrarian": 0.05,
-          "dfsValue": 0.02,
-          "strategic": 0.08
-        },
-        "dfs": {
-          "talent": 0.08,
-          "courseFit": 0.25,
-          "form": 0.11,
-          "cutSafety": 0.08,
-          "floor": 0.05,
-          "ceiling": 0.13,
-          "leverage": 0.08,
-          "contrarian": 0.05,
-          "dfsValue": 0.12,
-          "strategic": 0.05
-        }
-      },
       "event_type_detected": "regular",
       "spearman_vs_baseline_top20": 0.8017,
       "gating_applied": false,
@@ -2715,32 +2690,6 @@
     "v8.6-tal": {
       "variant_id": "v8.6-tal",
       "variant_name": "Talent Pure",
-      "weights_used": {
-        "pool": {
-          "talent": 0.28,
-          "courseFit": 0.14,
-          "form": 0.13,
-          "cutSafety": 0.12,
-          "floor": 0.05,
-          "ceiling": 0.05,
-          "leverage": 0.09,
-          "contrarian": 0.05,
-          "dfsValue": 0.02,
-          "strategic": 0.07
-        },
-        "dfs": {
-          "talent": 0.2,
-          "courseFit": 0.11,
-          "form": 0.11,
-          "cutSafety": 0.08,
-          "floor": 0.05,
-          "ceiling": 0.13,
-          "leverage": 0.08,
-          "contrarian": 0.05,
-          "dfsValue": 0.12,
-          "strategic": 0.07
-        }
-      },
       "event_type_detected": "regular",
       "spearman_vs_baseline_top20": 0.9594,
       "gating_applied": false,
@@ -5414,32 +5363,6 @@
     "v8.6-form": {
       "variant_id": "v8.6-form",
       "variant_name": "Recent Form Heavy",
-      "weights_used": {
-        "pool": {
-          "talent": 0.15,
-          "courseFit": 0.18,
-          "form": 0.22,
-          "cutSafety": 0.1,
-          "floor": 0.05,
-          "ceiling": 0.05,
-          "leverage": 0.09,
-          "contrarian": 0.05,
-          "dfsValue": 0.02,
-          "strategic": 0.09
-        },
-        "dfs": {
-          "talent": 0.11,
-          "courseFit": 0.14,
-          "form": 0.2,
-          "cutSafety": 0.07,
-          "floor": 0.05,
-          "ceiling": 0.13,
-          "leverage": 0.08,
-          "contrarian": 0.05,
-          "dfsValue": 0.12,
-          "strategic": 0.05
-        }
-      },
       "event_type_detected": "regular",
       "spearman_vs_baseline_top20": 0.985,
       "gating_applied": false,
@@ -8113,32 +8036,6 @@
     "v8.6-dyn": {
       "variant_id": "v8.6-dyn",
       "variant_name": "Dynamic Event-Type",
-      "weights_used": {
-        "pool": {
-          "talent": 0.15,
-          "courseFit": 0.28,
-          "form": 0.13,
-          "cutSafety": 0.12,
-          "floor": 0.05,
-          "ceiling": 0.05,
-          "leverage": 0.09,
-          "contrarian": 0.05,
-          "dfsValue": 0.02,
-          "strategic": 0.06
-        },
-        "dfs": {
-          "talent": 0.11,
-          "courseFit": 0.22,
-          "form": 0.11,
-          "cutSafety": 0.08,
-          "floor": 0.05,
-          "ceiling": 0.13,
-          "leverage": 0.08,
-          "contrarian": 0.05,
-          "dfsValue": 0.12,
-          "strategic": 0.05
-        }
-      },
       "event_type_detected": "regular",
       "spearman_vs_baseline_top20": 0.9017,
       "gating_applied": false,
@@ -10812,32 +10709,6 @@
     "v8.7-cfgate": {
       "variant_id": "v8.7-cfgate",
       "variant_name": "Course Fit + Min-Event Gate",
-      "weights_used": {
-        "pool": {
-          "talent": 0.17,
-          "courseFit": 0.24,
-          "form": 0.13,
-          "cutSafety": 0.12,
-          "floor": 0.05,
-          "ceiling": 0.05,
-          "leverage": 0.09,
-          "contrarian": 0.05,
-          "dfsValue": 0.02,
-          "strategic": 0.08
-        },
-        "dfs": {
-          "talent": 0.12,
-          "courseFit": 0.19,
-          "form": 0.11,
-          "cutSafety": 0.08,
-          "floor": 0.05,
-          "ceiling": 0.13,
-          "leverage": 0.08,
-          "contrarian": 0.05,
-          "dfsValue": 0.12,
-          "strategic": 0.07
-        }
-      },
       "event_type_detected": "regular",
       "spearman_vs_baseline_top20": 0.947,
       "gating_applied": true,
@@ -13509,5 +13380,5 @@
       ]
     }
   },
-  "note": "Re-run after Phase 1 was rebuilt with post-Hanse-redesign-only Doral history (2014-2016) and reduced courseFit weight (0.20 pool / 0.16 dfs). All 5 shadow variants re-scored against the new baseline."
+  "_public_scrubbed": true
 }
