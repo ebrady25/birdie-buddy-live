@@ -67,6 +67,7 @@
       border: 1px solid var(--border-soft);
     }
     .lineup-kind[data-kind="Core"]      { background: rgba(96, 165, 250, 0.10); color: var(--info);     border-color: rgba(96, 165, 250, 0.32); }
+    .lineup-kind[data-kind="Safe"]      { background: rgba(74, 222, 128, 0.10); color: var(--positive); border-color: rgba(74, 222, 128, 0.30); }
     .lineup-kind[data-kind="Leverage"]  { background: rgba(212, 168, 67, 0.12); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
     .lineup-kind[data-kind="GPP"]       { background: rgba(248, 113, 113, 0.10); color: var(--negative); border-color: rgba(248, 113, 113, 0.3); }
     .lineup-kind[data-kind="Contrarian"]{ background: rgba(168, 85, 247, 0.10); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
@@ -228,7 +229,7 @@
       <div class="stat">
         <div class="stat-label">Lineups generated</div>
         <div class="stat-value"><span data-countup="12" data-dur="500">0</span></div>
-        <div class="stat-sub">Core · Leverage · GPP</div>
+        <div class="stat-sub">Core · Safe · Leverage</div>
       </div>
       <div class="stat">
         <div class="stat-label">Unique players</div>
@@ -258,8 +259,8 @@
         <div class="chip-row" id="kindChips">
           <button class="chip" data-filter="all" aria-pressed="true">All <span class="count" id="cAll">12</span></button>
           <button class="chip" data-filter="Core" aria-pressed="false">Core <span class="count" id="cCore">0</span></button>
+          <button class="chip" data-filter="Safe" aria-pressed="false">Safe <span class="count" id="cSafe">0</span></button>
           <button class="chip" data-filter="Leverage" aria-pressed="false">Leverage <span class="count" id="cLev">0</span></button>
-          <button class="chip" data-filter="GPP" aria-pressed="false">GPP <span class="count" id="cGpp">0</span></button>
         </div>
 
         <div class="divider-vertical"></div>
@@ -380,45 +381,91 @@
       const themisMap = new Map();
       themisDist.forEach(d => themisMap.set(d.label, d));
 
-      // ---------- ENRICH LINEUPS ----------
+      // ---------- ENRICH LINEUPS (handles both old + new schema) ----------
+      // New schema (2026-04+): { archetype: "CORE"|"SAFE"|"LEVERAGE", salary, proj_total, avg_own,
+      //   floor_score, ceiling_score, players: [{dg_id, name, salary, zeus_dfs, proj_own, leverage}] }
+      // Old schema: { label: "Core #1 — ...", total_salary, sum_zeus, sum_hermes_own, avg_bbi_dfs,
+      //   players: [{..., tier, hermes_own}] }
+      const KIND_FROM_ARCHETYPE = {
+        'CORE': 'Core', 'SAFE': 'Safe', 'LEVERAGE': 'Leverage',
+        'GPP': 'GPP', 'CONTRARIAN': 'Contrarian',
+      };
+      const kindCounters = { Core: 0, Safe: 0, Leverage: 0, GPP: 0, Contrarian: 0 };
       const enriched = lineups.map((l, idx) => {
-        const t = themisMap.get(l.label) || {};
-        const kind = l.label.startsWith('Core') ? 'Core'
-                    : l.label.startsWith('Leverage') ? 'Leverage'
-                    : l.label.startsWith('GPP') ? 'GPP'
-                    : 'Core';
-        const idMatch = l.label.match(/#(\d+)/);
-        const lineupId = idMatch ? `${kind.slice(0,1)}${idMatch[1]}` : `L${idx+1}`;
-        const titleText = l.label.split(' — ')[1] || l.label;
+        // Detect kind from archetype (new schema) or label prefix (old schema)
+        let kind;
+        if (l.archetype) {
+          kind = KIND_FROM_ARCHETYPE[String(l.archetype).toUpperCase()] || 'Core';
+        } else if (l.label) {
+          kind = l.label.startsWith('Core') ? 'Core'
+               : l.label.startsWith('Safe') ? 'Safe'
+               : l.label.startsWith('Leverage') ? 'Leverage'
+               : l.label.startsWith('GPP') ? 'GPP' : 'Core';
+        } else {
+          kind = 'Core';
+        }
+
+        // Sequential ID per kind (C1, C2, S1, ...)
+        kindCounters[kind] = (kindCounters[kind] || 0) + 1;
+        const lineupId = `${kind.slice(0, 1)}${kindCounters[kind]}`;
+
+        // Title: prefer old-schema "label — title", fallback to a derived archetype label
+        const titleText = (l.label && l.label.split(' — ')[1])
+          || (l.archetype ? `${kind} build #${kindCounters[kind]}` : `Lineup ${idx + 1}`);
+        const labelKey = l.label || `${kind} #${kindCounters[kind]}`;
+        const t = themisMap.get(labelKey) || {};
+
+        // Normalize salary / proj / ownership across schemas
+        const total_salary = l.total_salary ?? l.salary ?? 0;
+        const proj = l.sum_zeus ?? l.proj_total ?? 0;
+        const own = l.sum_hermes_own ?? l.avg_own ?? 0;
+        // bbi_dfs avg is missing in new schema — fall back to proj/6 (per-player avg)
+        const avg_bbi = l.avg_bbi_dfs ?? (proj / 6);
+
+        // Adapt players: new schema has proj_own (not hermes_own), no tier field
+        const players = (l.players || []).map(p => ({
+          ...p,
+          hermes_own: p.hermes_own ?? p.proj_own ?? 0,
+          tier: p.tier || (p.leverage ? 'LEV' : 'NEUT'),
+        }));
+
         return {
           idx,
           lineupId,
           kind,
-          label: l.label,
+          label: labelKey,
           title: titleText,
-          players: l.players || [],
-          total_salary: l.total_salary,
-          sum_zeus: l.sum_zeus,
-          sum_hermes_own: l.sum_hermes_own,
-          avg_bbi_dfs: l.avg_bbi_dfs,
-          mean: t.mean ?? l.sum_zeus,
+          players,
+          total_salary,
+          sum_zeus: proj,
+          sum_hermes_own: own,
+          avg_bbi_dfs: avg_bbi,
+          // THEMIS distribution stats — only show the per-lineup bar when real
+          // simulation totals exist. floor_score/ceiling_score in the new lineup
+          // file aren't projection percentiles (they're build-style characteristic
+          // scores), so don't use them as p5/p95.
+          mean: t.mean ?? proj,
           p5: t.p5 ?? null,
           p25: t.p25 ?? null,
-          p50: t.p50 ?? null,
+          p50: t.p50 ?? proj,
           p75: t.p75 ?? null,
           p95: t.p95 ?? null,
-          std: t.std ?? null
+          std: t.std ?? null,
         };
       });
 
       // ---------- SUMMARY STATS ----------
       const uniquePlayers = new Set();
-      lineups.forEach(l => l.players.forEach(p => uniquePlayers.add(p.name)));
+      enriched.forEach(l => l.players.forEach(p => uniquePlayers.add(p.name)));
       $('#kpiUnique').textContent = uniquePlayers.size;
 
-      const bestCeiling = enriched.reduce((best, l) => (l.p95 != null && (best == null || l.p95 > best.p95)) ? l : best, null);
+      // Best ceiling — prefer THEMIS p95, fall back to highest projected lineup
+      const hasP95 = enriched.some(l => l.p95 != null);
+      const bestCeiling = hasP95
+        ? enriched.reduce((best, l) => (l.p95 != null && (best == null || l.p95 > best.p95)) ? l : best, null)
+        : enriched.reduce((best, l) => (best == null || l.mean > best.mean) ? l : best, null);
       if (bestCeiling) {
-        $('#kpiP95').textContent = fmt.num(bestCeiling.p95, 0);
+        $('#kpiP95').textContent = fmt.num(hasP95 ? bestCeiling.p95 : bestCeiling.mean, 0);
         $('#kpiP95Name').textContent = bestCeiling.lineupId + ' · ' + bestCeiling.title.slice(0, 38);
       }
 
@@ -429,11 +476,14 @@
       $('#kpiAvgOwn').textContent = fmt.num(avgOwn, 0) + '%';
 
       // ---------- KIND COUNTS ----------
-      const kindCounts = { Core: 0, Leverage: 0, GPP: 0 };
+      const kindCounts = { Core: 0, Safe: 0, Leverage: 0, GPP: 0 };
       enriched.forEach(l => kindCounts[l.kind] = (kindCounts[l.kind] || 0) + 1);
       $('#cCore').textContent = kindCounts.Core || 0;
+      const safeEl = $('#cSafe');
+      if (safeEl) safeEl.textContent = kindCounts.Safe || 0;
       $('#cLev').textContent = kindCounts.Leverage || 0;
-      $('#cGpp').textContent = kindCounts.GPP || 0;
+      const gppEl = $('#cGpp');
+      if (gppEl) gppEl.textContent = kindCounts.GPP || 0;
       $('#cAll').textContent = enriched.length;
 
       // ---------- RENDER LINEUP CARDS ----------
