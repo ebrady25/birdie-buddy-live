@@ -1,0 +1,40 @@
+name: Daily Odds Refresh
+
+on:
+  schedule:
+    - cron: '0 12 * * 2-6'   # Tue–Sat at noon UTC (8am EDT)
+  workflow_dispatch:           # Manual "Run workflow" button in GitHub Actions UI
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Refresh odds from DataGolf
+        env:
+          DG_API_KEY: ${{ secrets.DG_API_KEY }}
+        run: python scripts/refresh_odds.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add data/omnia.json
+          git diff --staged --quiet && echo "No changes to commit." || (
+            git commit -m "Auto: odds refresh $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          )
