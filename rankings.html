@@ -17,7 +17,13 @@
     .ranktable { font-size: var(--fs-xs); }
     .ranktable th { padding: var(--space-3) var(--space-2); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); }
     .ranktable td { padding: var(--space-2); font-variant-numeric: tabular-nums; }
-    .ranktable thead { top: calc(var(--nav-h) + var(--status-h) + var(--page-toolbar-h)); z-index: 5; }
+    /* Fix: .table-wrap's overflow-x:auto breaks viewport-relative sticky.
+       Solution: make the wrapper the vertical scroll container too, then thead sticks at top:0 within it. */
+    #rankTableWrap {
+      overflow-y: auto;
+      max-height: calc(100vh - var(--nav-h) - var(--status-h) - var(--page-toolbar-h));
+    }
+    .ranktable thead { top: 0; z-index: 5; }
     .ranktable thead th { background: var(--surface-2); }
     .ranktable thead th.sticky-col { z-index: 6; }
 
@@ -133,7 +139,7 @@
     </div>
 
     <!-- FULL FIELD TABLE -->
-    <div class="table-wrap" style="border-radius: var(--radius-lg);">
+    <div id="rankTableWrap" class="table-wrap" style="border-radius: var(--radius-lg);">
       <table class="table ranktable" id="rankTable">
         <thead>
           <tr>
