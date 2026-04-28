@@ -737,8 +737,16 @@
         <!-- Tier descriptions -->
         <div class="rank-tiers-grid" id="rankTiersGrid"></div>
 
-        <!-- Honest summary -->
+        <!-- Honest summary + methodology link -->
         <div class="rank-summary" id="rankSummary">Loading transparent self-assessment…</div>
+        <div style="margin-top: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; justify-content: space-between;">
+          <p class="muted" style="font-size: var(--fs-xs); margin: 0; max-width: 56ch; line-height: 1.5;">
+            Tier thresholds are estimates based on publicly observable forecasters. We refuse to make best-in-world claims we can't substantiate — every number on this page traces back to scored events.
+          </p>
+          <a href="methodology.html" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px 12px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-pill); color: var(--gold-300); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none; transition: all var(--dur-base);" onmouseover="this.style.borderColor='var(--border-gold)'" onmouseout="this.style.borderColor='var(--border-soft)'">
+            How we score this →
+          </a>
+        </div>
       </div>
     </section>
 
@@ -833,7 +841,7 @@
     <section class="section" id="attribution">
       <div class="section-head">
         <div class="section-head-text">
-          <span class="eyebrow">Per-factor analysis · Week 11</span>
+          <span class="eyebrow" id="attrEyebrow">Per-factor analysis · Most recent event</span>
           <h2>What drives every finish.</h2>
           <p>Factor attribution shows how each of the 10 BBI scoring dimensions contributed to the final composite score for the most recent event's top finishers. Talent drives baseline player quality; course fit captures venue-specific edge; form captures momentum.</p>
         </div>
@@ -1190,13 +1198,30 @@
       }
 
       // ---------- FACTOR ATTRIBUTION ----------
-      if (attr && attr.players && attr.players.length > 0) {
-        const meta = attr.metadata || {};
+      // Support both new multi-event schema (events: [...]) and legacy single-event shape
+      let attrPayload = null;
+      if (attr) {
+        if (Array.isArray(attr.events) && attr.events.length > 0) {
+          // pick most recent event
+          const sorted = attr.events.slice().sort((a,b) => (b.metadata?.week || 0) - (a.metadata?.week || 0));
+          attrPayload = sorted[0];
+        } else if (attr.players) {
+          attrPayload = { metadata: attr.metadata || {}, players: attr.players };
+        }
+      }
+      if (attrPayload && attrPayload.players && attrPayload.players.length > 0) {
+        const meta = attrPayload.metadata || {};
+        const eyebrowEl = document.getElementById('attrEyebrow');
+        if (eyebrowEl) {
+          eyebrowEl.textContent = meta.week
+            ? `Per-factor analysis · Week ${meta.week} · ${meta.event || ''}`.trim()
+            : 'Per-factor analysis · Most recent event';
+        }
         document.getElementById('attrNarrative').textContent =
           `Factor attribution for the ${meta.event || 'most recent event'} top-10 finishers shows the relative contribution of each BBI component. Course fit and talent typically dominate; form and cut safety provide secondary weight. Understanding these breakdowns helps explain why certain players rise or fall from their baseline rankings.`;
 
         const tbody = document.getElementById('attrBody');
-        tbody.innerHTML = attr.players.map(p => {
+        tbody.innerHTML = attrPayload.players.map(p => {
           const factors = p.factors || {};
           const talentPct = factors.talent?.pct || 0;
           const cfPct = factors.courseFit?.pct || 0;
@@ -1222,7 +1247,7 @@
         }).join('');
 
         // Queued backfill strip — prior events awaiting per-factor attribution
-        const queue = attr.queued_backfill;
+        const queue = attr?.queued_backfill;
         if (queue && Array.isArray(queue.events) && queue.events.length > 0) {
           const qMount = document.getElementById('attrQueue');
           const qNote = document.getElementById('attrQueueNote');
