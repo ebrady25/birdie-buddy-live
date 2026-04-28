@@ -1053,14 +1053,16 @@
           `Spearman ${fmt.num(cs.industry_baseline_mean_spearman, 3)} · 47-event 2025 backtest`;
 
         // Build the band visualization. Scale is 0.0 → 0.7 Spearman.
-        // Bands are widthed by (threshold - prev_threshold) / 0.7 * 100%.
+        // Bands are widthed by (threshold - prev_threshold) / 0.7 * 100%, clamped.
         const scaleMax = 0.7;
         const bandsMount = $('#rankBands');
-        let prev = -0.05;  // include negative noise tier visually
+        let prev = 0;
         const bandClass = { noise: 'noise', casual: 'casual', solid: 'solid', top_tier: 'top', best_in_world: 'best' };
         bandsMount.style.gridTemplateColumns = tiers.map(t => {
-          const span = (t.spearman_threshold - prev) / scaleMax * 100;
-          prev = t.spearman_threshold;
+          // Clamp threshold to scaleMax so bands always sum to 100%
+          const effective = Math.min(t.spearman_threshold, scaleMax);
+          const span = Math.max(0, (effective - prev) / scaleMax * 100);
+          prev = effective;
           return `${span.toFixed(2)}%`;
         }).join(' ');
         bandsMount.innerHTML = tiers.map(t => `
