@@ -1,0 +1,69 @@
+name: THEMIS Monte Carlo
+
+# Two triggers:
+# 1. Cron Tue 07:33 ET (11:33 UTC) — backstop in case the push trigger missed
+# 2. Push to data/bbi_rankings.json — fires after every Phase 1 / 1.5 / Preview /
+#    Lock deploy, so any apply_overrides edit re-runs THEMIS automatically.
+#
+# THEMIS only writes data/themis.json, so it cannot loop on its own commits.
+
+on:
+  schedule:
+    - cron: '33 11 * * 2'   # Tue 07:33 ET (EDT) — cron backstop
+  push:
+    branches: [main]
+    paths:
+      - 'data/bbi_rankings.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Don't queue concurrent runs — newest input wins
+concurrency:
+  group: themis
+  cancel-in-progress: true
+
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Avoid trigger loop: skip if THIS push was the auto-bot's themis commit
+      - name: Skip if last commit was self-authored
+        id: gate
+        run: |
+          AUTHOR=$(git log -1 --format='%ae')
+          MSG=$(git log -1 --format='%s')
+          echo "Last commit: $AUTHOR — $MSG"
+          if [[ "$AUTHOR" == "github-actions[bot]@users.noreply.github.com" && "$MSG" == Auto:* ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Self-authored auto commit — skipping."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set up Python
+        if: steps.gate.outputs.skip == 'false'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run THEMIS Monte Carlo
+        if: steps.gate.outputs.skip == 'false'
+        run: python scripts/refresh_themis.py
+
+      - name: Commit and push if changed
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add data/themis.json
+          git diff --staged --quiet && echo "No changes to commit." || (
+            git commit -m "Auto: themis sims $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          )
