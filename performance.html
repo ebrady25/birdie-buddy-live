@@ -421,6 +421,390 @@
     }
     .rank-summary strong { color: var(--text-primary); }
 
+    /* =========================================================
+       STICKY IN-PAGE TOC NAV
+       ========================================================= */
+    .perf-toc {
+      position: sticky;
+      top: calc(var(--nav-h) + var(--status-h));
+      z-index: 50;
+      background: rgba(10, 10, 15, 0.92);
+      backdrop-filter: saturate(180%) blur(10px);
+      -webkit-backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--border-soft);
+      border-top: 1px solid var(--border-subtle);
+      margin: var(--space-4) calc(var(--space-6) * -1) var(--space-6);
+      padding: var(--space-2) var(--space-6);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .perf-toc::-webkit-scrollbar { display: none; }
+    .perf-toc-inner {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+      flex-wrap: nowrap;
+      min-width: max-content;
+    }
+    .perf-toc-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-right: var(--space-3);
+      border-right: 1px solid var(--border-soft);
+      white-space: nowrap;
+    }
+    .toc-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all var(--dur-base);
+    }
+    .toc-pill:hover {
+      color: var(--text-primary);
+      background: var(--surface-3);
+      border-color: var(--border-soft);
+    }
+    .toc-pill.active {
+      color: var(--gold-200);
+      background: rgba(212, 168, 67, 0.12);
+      border-color: var(--border-gold);
+    }
+    .toc-pill .toc-stat {
+      display: inline-flex;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 9px;
+      letter-spacing: 0;
+    }
+    .toc-pill.active .toc-stat {
+      background: rgba(212, 168, 67, 0.22);
+      color: var(--gold-200);
+    }
+    @media (max-width: 640px) {
+      .perf-toc-eyebrow { display: none; }
+    }
+
+    /* =========================================================
+       COLLAPSIBLE SECTION DESCRIPTION ("Why this matters")
+       ========================================================= */
+    .section-info {
+      margin-top: var(--space-3);
+      margin-bottom: var(--space-2);
+    }
+    .section-info-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px 6px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--dur-base);
+    }
+    .section-info-toggle:hover {
+      color: var(--gold-300);
+      border-color: var(--border-gold);
+      background: var(--surface-4);
+    }
+    .section-info-toggle::before {
+      content: '?';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(212, 168, 67, 0.15);
+      color: var(--gold-300);
+      font-weight: 700;
+      font-size: 9px;
+    }
+    .section-info-toggle::after {
+      content: '▼';
+      font-size: 8px;
+      transition: transform var(--dur-base);
+      opacity: 0.6;
+    }
+    .section-info.open .section-info-toggle::after { transform: rotate(180deg); }
+    .section-info.open .section-info-toggle {
+      color: var(--gold-200);
+      border-color: var(--border-gold);
+      background: var(--surface-4);
+    }
+    .section-info-body {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height var(--dur-base), opacity var(--dur-base), margin var(--dur-base);
+    }
+    .section-info.open .section-info-body {
+      max-height: 320px;
+      opacity: 1;
+      margin-top: var(--space-3);
+    }
+    .section-info-body p {
+      color: var(--text-body);
+      line-height: var(--lh-relaxed);
+      font-size: var(--fs-sm);
+      max-width: 70ch;
+      margin: 0;
+    }
+
+    /* Section at-a-glance stat (next to H2) */
+    .section-glance {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: var(--space-3);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      color: var(--text-body);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+    .section-glance strong {
+      color: var(--gold-300);
+      font-weight: 700;
+    }
+    @media (max-width: 600px) {
+      .section-glance { display: none; }
+    }
+
+    /* =========================================================
+       COMPACT EVENT TABLE (default 6 cols, expand to all)
+       ========================================================= */
+    .table-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+    .table-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--dur-base);
+    }
+    .table-toggle-btn:hover {
+      color: var(--gold-300);
+      border-color: var(--border-gold);
+    }
+    .event-table th.col-secondary,
+    .event-table td.col-secondary {
+      display: none;
+    }
+    .event-table.show-all th.col-secondary,
+    .event-table.show-all td.col-secondary {
+      display: table-cell;
+    }
+
+    /* =========================================================
+       RECAP SUB-SECTION FOLDING
+       ========================================================= */
+    .weekly-recap-body section {
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 0;
+      background: var(--surface-3);
+      transition: border-color var(--dur-base);
+    }
+    .weekly-recap-body section:hover {
+      border-color: var(--border-base);
+    }
+    .weekly-recap-body section h3 {
+      cursor: pointer;
+      user-select: none;
+      padding: var(--space-3) var(--space-4);
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--fs-md);
+      transition: color var(--dur-base);
+    }
+    .weekly-recap-body section h3::after {
+      content: '▼';
+      font-size: 10px;
+      color: var(--text-muted);
+      opacity: 0.7;
+      transition: transform var(--dur-base);
+      flex-shrink: 0;
+    }
+    .weekly-recap-body section h3:hover {
+      color: var(--gold-200);
+    }
+    .weekly-recap-body section.sub-open h3 { color: var(--gold-300); }
+    .weekly-recap-body section.sub-open h3::after { transform: rotate(180deg); color: var(--gold-300); opacity: 1; }
+    .weekly-recap-body section > :not(h3) {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin: 0;
+      padding: 0 var(--space-4);
+      transition: max-height var(--dur-base), opacity var(--dur-base), padding var(--dur-base);
+    }
+    .weekly-recap-body section.sub-open > :not(h3) {
+      max-height: 800px;
+      opacity: 1;
+      padding-top: var(--space-2);
+      padding-bottom: var(--space-4);
+    }
+    .weekly-recap-body section.sub-open > p:last-child,
+    .weekly-recap-body section.sub-open > ul:last-child {
+      padding-bottom: var(--space-4);
+    }
+
+    /* =========================================================
+       PROMOTION RULES CHECKLIST (live state)
+       ========================================================= */
+    .promo-card {
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+    }
+    .promo-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+    }
+    .promo-table thead th {
+      padding: var(--space-2) var(--space-3);
+      text-align: center;
+      font-size: var(--fs-3xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-soft);
+      white-space: nowrap;
+    }
+    .promo-table thead th:first-child {
+      text-align: left;
+    }
+    .promo-table tbody tr td {
+      padding: var(--space-3);
+      text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .promo-table tbody tr td:first-child {
+      text-align: left;
+    }
+    .promo-table tbody tr.baseline-row td:first-child {
+      color: var(--gold-300);
+      font-weight: 700;
+    }
+    .promo-variant-name {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .promo-variant-desc {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 2px;
+      letter-spacing: 0;
+    }
+    .promo-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .promo-status.met {
+      background: rgba(74, 222, 128, 0.15);
+      color: var(--positive);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+    .promo-status.close {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .promo-status.miss {
+      background: var(--surface-4);
+      color: var(--text-dimmed);
+      border: 1px solid var(--border-soft);
+    }
+    .promo-status.na {
+      color: var(--text-faint);
+      border: 1px dashed var(--border-soft);
+    }
+    .promo-detail {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: block;
+      letter-spacing: 0;
+    }
+    .promo-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      margin-top: var(--space-4);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-soft);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .promo-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     /* "View all recaps" archive link */
     .recaps-archive-link {
       display: flex;
@@ -691,13 +1075,33 @@
       </div>
     </header>
 
+    <!-- STICKY IN-PAGE TOC -->
+    <nav class="perf-toc" id="perfToc" aria-label="On-page navigation">
+      <div class="perf-toc-inner">
+        <span class="perf-toc-eyebrow">Jump to</span>
+        <a href="#world-rank" class="toc-pill" data-toc="world-rank">Global rank</a>
+        <a href="#spearman" class="toc-pill" data-toc="spearman">Spearman <span class="toc-stat" id="tocSpearmanStat"></span></a>
+        <a href="#recaps" class="toc-pill" data-toc="recaps">Recaps <span class="toc-stat" id="tocRecapsStat"></span></a>
+        <a href="#attribution" class="toc-pill" data-toc="attribution">Attribution</a>
+        <a href="#shadow" class="toc-pill" data-toc="shadow">Shadow models</a>
+        <a href="#calibration" class="toc-pill" data-toc="calibration">Calibration</a>
+        <a href="#backtest" class="toc-pill" data-toc="backtest">Backtest <span class="toc-stat" id="tocBacktestStat"></span></a>
+        <a href="#competition" class="toc-pill" data-toc="competition">Competition</a>
+      </div>
+    </nav>
+
     <!-- WORLD RANKING — where BBI sits globally -->
     <section class="section" id="world-rank">
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Global percentile · Independently scored</span>
-          <h2>Where BBI ranks among the world's golf models.</h2>
-          <p>Five tiers, one Spearman scale, honest framing. We track our position against the publicly observable field — and we're transparent about the gap to best-in-world. No private shop hides their numbers; neither do we.</p>
+          <h2>Where BBI ranks among the world's golf models. <span class="section-glance" id="glanceWorldRank"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">Why this matters</button>
+            <div class="section-info-body">
+              <p>Five tiers, one Spearman scale, honest framing. We track our position against the publicly observable field — and we're transparent about the gap to best-in-world. No private shop hides their numbers; neither do we.</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -786,8 +1190,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Spearman over time</span>
-          <h2>Rank correlation, week by week.</h2>
-          <p>Spearman ρ measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against the published industry baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
+          <h2>Rank correlation, week by week. <span class="section-glance" id="glanceSpearman"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Spearman ρ</button>
+            <div class="section-info-body">
+              <p>Spearman ρ measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against the published industry baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="perf-card">
@@ -803,23 +1212,29 @@
         <svg class="chart-svg" id="spearmanChart" viewBox="0 0 1000 340" preserveAspectRatio="none"></svg>
       </div>
 
+      <div class="table-toolbar">
+        <button type="button" class="table-toggle-btn" id="eventTableToggle" onclick="toggleEventTable()">
+          <span id="eventTableToggleLabel">Show all stats</span>
+        </button>
+      </div>
+
       <!-- Event table -->
       <div class="table-wrap" style="border-radius: var(--radius-lg);">
-        <table class="table event-table">
+        <table class="table event-table" id="eventTable">
           <thead>
             <tr>
               <th>Wk</th>
               <th>Event</th>
               <th>Winner</th>
-              <th class="num">Field</th>
+              <th class="num col-secondary">Field</th>
               <th class="num">BBI ρ</th>
-              <th class="num">Base ρ</th>
+              <th class="num col-secondary">Base ρ</th>
               <th class="num">Δ</th>
-              <th class="num">Top-5</th>
-              <th class="num">Top-20</th>
-              <th class="num">Winner BBI</th>
+              <th class="num col-secondary">Top-5</th>
+              <th class="num col-secondary">Top-20</th>
+              <th class="num col-secondary">Winner BBI</th>
               <th>Beat base</th>
-              <th>Target</th>
+              <th class="col-secondary">Target</th>
             </tr>
           </thead>
           <tbody id="eventBody"></tbody>
@@ -832,8 +1247,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Deep dives · Weekly analysis</span>
-          <h2>What happened — and why.</h2>
-          <p>Each week after scoring, we publish a postmortem recap analyzing what worked, what missed, and what the data tells us about model health. These recaps tie the numbers back to real patterns and lessons for the week ahead.</p>
+          <h2>What happened — and why. <span class="section-glance" id="glanceRecaps"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">Why we publish these</button>
+            <div class="section-info-body">
+              <p>Each week after scoring, we publish a postmortem recap analyzing what worked, what missed, and what the data tells us about model health. These recaps tie the numbers back to real patterns and lessons for the week ahead.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div id="recapsMount"></div>
@@ -844,8 +1264,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow" id="attrEyebrow">Per-factor analysis · Most recent event</span>
-          <h2>What drives every finish.</h2>
-          <p>Factor attribution shows how each of the 10 BBI scoring dimensions contributed to the final composite score for the most recent event's top finishers. Talent drives baseline player quality; course fit captures venue-specific edge; form captures momentum.</p>
+          <h2>What drives every finish. <span class="section-glance" id="glanceAttribution"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How attribution works</button>
+            <div class="section-info-body">
+              <p>Factor attribution shows how each of the 10 BBI scoring dimensions contributed to the final composite score for the most recent event's top finishers. Talent drives baseline player quality; course fit captures venue-specific edge; form captures momentum.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="attr-card">
@@ -884,8 +1309,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Shadow models · HEPHAESTUS</span>
-          <h2>Four challengers. Every week.</h2>
-          <p>Every Monday, HEPHAESTUS runs four alternative weight configurations against the v8.5 champion. Top-20 Spearman agreement is the similarity metric. Any variant beating baseline by ≥0.03 Spearman and ≥5% Brier for 3+ consecutive weeks across 8+ events gets flagged for promotion.</p>
+          <h2>Four challengers. Every week. <span class="section-glance" id="glanceShadow"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How HEPHAESTUS works</button>
+            <div class="section-info-body">
+              <p>Every Monday, HEPHAESTUS runs four alternative weight configurations against the v8.5 champion. Top-20 Spearman agreement is the similarity metric. Any variant beating baseline by ≥0.03 Spearman and ≥5% Brier for 3+ consecutive weeks across 8+ events gets flagged for promotion.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="shadow-grid" id="shadowGrid"></div>
@@ -896,8 +1326,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Probability calibration · Brier score</span>
-          <h2>How accurate the probabilities really are.</h2>
-          <p>For each market, Brier score measures how close predicted probabilities land to observed outcomes (lower is better). Skill % is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
+          <h2>How accurate the probabilities really are. <span class="section-glance" id="glanceCalibration"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Brier score</button>
+            <div class="section-info-body">
+              <p>For each market, Brier score measures how close predicted probabilities land to observed outcomes (lower is better). Skill % is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="perf-card">
@@ -916,8 +1351,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Multi-season backtest · PROMETHEUS</span>
-          <h2><span id="btHeadlineCount">—</span> events of ground truth.</h2>
-          <p>PROMETHEUS replays every published industry pre-tournament baseline against actual finishing positions across <strong>2025 + completed 2026</strong>. Refreshed every Sunday night by an automated pipeline. These are the numbers BBI has to beat, event over event, to claim skill.</p>
+          <h2><span id="btHeadlineCount">—</span> events of ground truth. <span class="section-glance" id="glanceBacktest"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How PROMETHEUS works</button>
+            <div class="section-info-body">
+              <p>PROMETHEUS replays every published industry pre-tournament baseline against actual finishing positions across <strong>2025 + completed 2026</strong>. Refreshed every Sunday night by an automated pipeline. These are the numbers BBI has to beat, event over event, to claim skill.</p>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Hero stat row above the cards — the big numbers -->
@@ -992,8 +1432,13 @@
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow">Model competition · MNEMOSYNE</span>
-          <h2>Promotion rules and current leader.</h2>
-          <p>Every week Mnemosyne snapshots the 5-way race (v8.5 baseline + 4 shadow variants). A variant becomes a promotion candidate only after sustained dominance — the bar is deliberately high.</p>
+          <h2>Promotion rules and current leader. <span class="section-glance" id="glanceCompetition"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How promotion works</button>
+            <div class="section-info-body">
+              <p>Every week Mnemosyne snapshots the 5-way race (v8.5 baseline + 4 shadow variants). A variant becomes a promotion candidate only after sustained dominance — the bar is deliberately high.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="grid grid-2">
@@ -1015,27 +1460,29 @@
         </div>
 
         <div class="card">
-          <div class="card-title">Promotion rules</div>
-          <div style="margin-top: var(--space-3);">
-            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm);">
-              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Spearman</span>
-              <span style="color: var(--text-body); line-height: 1.5;">Variant must beat baseline by ≥ <strong>0.03 ρ</strong> average.</span>
-            </div>
-            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
-              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Brier</span>
-              <span style="color: var(--text-body); line-height: 1.5;">Must reduce Brier score by ≥ <strong>5%</strong> across markets.</span>
-            </div>
-            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
-              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Duration</span>
-              <span style="color: var(--text-body); line-height: 1.5;">Maintained over <strong>3+ consecutive weeks</strong>.</span>
-            </div>
-            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
-              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Volume</span>
-              <span style="color: var(--text-body); line-height: 1.5;">Across at least <strong>8 events</strong>.</span>
-            </div>
-            <div class="rule-line" style="display: flex; gap: var(--space-3); padding: var(--space-2) 0; font-size: var(--fs-sm); border-top: 1px solid var(--border-soft);">
-              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 72px; padding-top: 2px;">Review</span>
-              <span style="color: var(--text-body); line-height: 1.5;">Manual promotion after threshold flag — no automatic takeover.</span>
+          <div class="card-title">Promotion checklist · Live state</div>
+          <p class="muted" style="font-size: var(--fs-xs); margin-top: var(--space-2); max-width: 60ch; line-height: 1.5;">
+            Five criteria. Each variant must satisfy all five before promotion review fires. ✓ met, ⚠ close, ○ not yet.
+          </p>
+          <div class="promo-card" style="margin-top: var(--space-3);">
+            <table class="promo-table" id="promoChecklist">
+              <thead>
+                <tr>
+                  <th>Variant</th>
+                  <th>ρ ≥ +0.03</th>
+                  <th>Brier ≥ 5%</th>
+                  <th>3+ wks</th>
+                  <th>8+ events</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="promoBody"></tbody>
+            </table>
+            <div class="promo-legend">
+              <span class="promo-legend-item"><span class="promo-status met">✓</span>Met</span>
+              <span class="promo-legend-item"><span class="promo-status close">⚠</span>Close (within 50% of threshold)</span>
+              <span class="promo-legend-item"><span class="promo-status miss">○</span>Not yet</span>
+              <span class="promo-legend-item"><span class="promo-status na">–</span>Insufficient data</span>
             </div>
           </div>
         </div>
@@ -1050,6 +1497,57 @@
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/data.js"></script>
   <script>
+    // ---- Global helpers for inline onclick handlers ----
+    function toggleSectionInfo(btn) {
+      const wrap = btn.closest('.section-info');
+      if (wrap) wrap.classList.toggle('open');
+    }
+
+    function toggleEventTable() {
+      const tbl = document.getElementById('eventTable');
+      const lbl = document.getElementById('eventTableToggleLabel');
+      const isAll = tbl.classList.toggle('show-all');
+      lbl.textContent = isAll ? 'Show essentials' : 'Show all stats';
+      try { sessionStorage.setItem('eventTableShowAll', isAll ? '1' : '0'); } catch {}
+    }
+
+    // Scroll-spy: highlight TOC pill matching the section nearest the top
+    function initTocScrollSpy() {
+      const sections = ['world-rank','spearman','recaps','attribution','shadow','calibration','backtest','competition'];
+      const pills = new Map(sections.map(id => [id, document.querySelector(`.toc-pill[data-toc="${id}"]`)]));
+      if (!('IntersectionObserver' in window)) return;
+      const observer = new IntersectionObserver((entries) => {
+        // Pick the entry that's most prominently in view
+        const visible = entries.filter(e => e.isIntersecting)
+                                .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length === 0) return;
+        const activeId = visible[0].target.id;
+        pills.forEach((pill, id) => {
+          if (!pill) return;
+          pill.classList.toggle('active', id === activeId);
+        });
+      }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.1, 0.3, 0.6, 1] });
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    }
+
+    // Recap sub-section folding — click any H3 inside a recap body to fold/unfold
+    function initRecapSubFolding() {
+      const subs = document.querySelectorAll('.weekly-recap-body section');
+      subs.forEach((sec, i) => {
+        if (i === 0) sec.classList.add('sub-open'); // first sub-section open by default
+        const h3 = sec.querySelector('h3');
+        if (h3) {
+          h3.addEventListener('click', (e) => {
+            e.stopPropagation(); // don't trigger parent recap-card toggle
+            sec.classList.toggle('sub-open');
+          });
+        }
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       await BBI.renderHeader('performance.html');
       await BBI.renderFooter();
@@ -1399,18 +1897,26 @@
             <td><strong>W${e.week}</strong></td>
             <td><strong>${e.event}</strong><div class="muted" style="font-size: 10px;">${e.date || ''}</div></td>
             <td>${e.winner ? fmt.abbrevName(e.winner) : '—'}</td>
-            <td class="num">${e.field_size || '—'}</td>
+            <td class="num col-secondary">${e.field_size || '—'}</td>
             <td class="num"><strong class="gold">${fmt.num(e.spearman_bbi, 3)}</strong></td>
-            <td class="num">${fmt.num(e.spearman_dg, 3)}</td>
+            <td class="num col-secondary">${fmt.num(e.spearman_dg, 3)}</td>
             <td class="num ${dcls}">${dmark == null ? '—' : sign + fmt.num(dmark, 3)}</td>
-            <td class="num">${top5acc}</td>
-            <td class="num">${top20acc}</td>
-            <td class="num">${e.winner_bbi_rank ?? '—'}</td>
+            <td class="num col-secondary">${top5acc}</td>
+            <td class="num col-secondary">${top20acc}</td>
+            <td class="num col-secondary">${e.winner_bbi_rank ?? '—'}</td>
             <td>${e.beat_dg ? '<span class="badge badge-positive">Beat</span>' : '<span class="badge">—</span>'}</td>
-            <td>${e.beat_target ? '<span class="badge badge-gold">Hit</span>' : '<span class="badge">—</span>'}</td>
+            <td class="col-secondary">${e.beat_target ? '<span class="badge badge-gold">Hit</span>' : '<span class="badge">—</span>'}</td>
           </tr>
         `;
       }).join('');
+
+      // Restore "show all stats" preference if user toggled previously
+      try {
+        if (sessionStorage.getItem('eventTableShowAll') === '1') {
+          document.getElementById('eventTable').classList.add('show-all');
+          document.getElementById('eventTableToggleLabel').textContent = 'Show essentials';
+        }
+      } catch {}
 
       // ---------- SHADOW VARIANTS (deferred to avoid first-paint blocking) ----------
       const renderShadowVariants = () => {
@@ -1544,6 +2050,146 @@
       const leader = comp?.current_leader || comp?.baseline_variant_id || 'v8.5';
       $('#currentLeader').textContent = leader;
       $('#competitionUpdated').textContent = comp?.last_updated ? fmt.date(comp.last_updated) : '—';
+
+      // ---------- PROMOTION CHECKLIST (live state vs each criterion) ----------
+      (function renderPromoChecklist() {
+        const body = $('#promoBody');
+        if (!body) return;
+        const variantNames = {
+          'v8.5':       { name: 'v8.5 · Baseline',       desc: 'Incumbent champion' },
+          'v8.6-cf':    { name: 'v8.6-cf',               desc: 'Course-fit boost' },
+          'v8.6-tal':   { name: 'v8.6-tal',              desc: 'Talent-weighted' },
+          'v8.6-form':  { name: 'v8.6-form',             desc: 'Form-emphasis' },
+          'v8.6-dyn':   { name: 'v8.6-dyn',              desc: 'Dynamic ceiling' },
+          'v8.7-cfgate':{ name: 'v8.7-cfgate',           desc: 'CourseFit + min-events gate' },
+        };
+        const variantIds = comp?.variant_ids || ['v8.5', 'v8.6-cf', 'v8.6-tal', 'v8.6-form', 'v8.6-dyn'];
+        const baselineId = comp?.baseline_variant_id || 'v8.5';
+        const history = (comp?.history || []).filter(h => !h.skipped && h.scorecard);
+
+        // For each variant, compute current state vs each criterion
+        const rows = variantIds.map(vid => {
+          const meta = variantNames[vid] || { name: vid, desc: '' };
+          if (vid === baselineId) {
+            // Baseline doesn't compete with itself
+            return `
+              <tr class="baseline-row">
+                <td>
+                  <span class="promo-variant-name">${meta.name}</span>
+                  <span class="promo-variant-desc">${meta.desc}</span>
+                </td>
+                <td colspan="4" style="color: var(--text-muted); font-style: italic; font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Champion — not subject to promotion criteria</td>
+                <td><span style="color: var(--gold-300); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 700; letter-spacing: var(--tracking-wide); text-transform: uppercase;">Holds throne</span></td>
+              </tr>
+            `;
+          }
+
+          // Spearman delta: avg(variant ρ - baseline ρ) over scored events where both exist
+          const deltas = [];
+          const brierImprovements = [];
+          let weeksLeading = 0;
+          let weeksLeadingStreak = 0;
+          let runningStreak = 0;
+          for (const h of history) {
+            const sc = h.scorecard || {};
+            const baseSp = sc[baselineId]?.spearman;
+            const varSp = sc[vid]?.spearman;
+            const baseBrierWin = sc[baselineId]?.brier_win;
+            const varBrierWin = sc[vid]?.brier_win;
+            if (baseSp != null && varSp != null) {
+              const d = varSp - baseSp;
+              deltas.push(d);
+              if (d >= 0.03) {
+                runningStreak++;
+                if (runningStreak > weeksLeadingStreak) weeksLeadingStreak = runningStreak;
+              } else {
+                runningStreak = 0;
+              }
+            }
+            if (baseBrierWin != null && varBrierWin != null && baseBrierWin > 0) {
+              brierImprovements.push((baseBrierWin - varBrierWin) / baseBrierWin);
+            }
+          }
+          const avgDelta = deltas.length ? deltas.reduce((a,b)=>a+b,0)/deltas.length : null;
+          const avgBrierImp = brierImprovements.length ? brierImprovements.reduce((a,b)=>a+b,0)/brierImprovements.length : null;
+          const eventCount = deltas.length;
+
+          // Status helpers
+          const sigFmt = v => v == null ? '—' : (v >= 0 ? '+' : '') + v.toFixed(3);
+
+          const spanCell = (status, detail) => {
+            const cls = status === 'met' ? 'met' : status === 'close' ? 'close' : status === 'miss' ? 'miss' : 'na';
+            const sym = status === 'met' ? '✓' : status === 'close' ? '⚠' : status === 'miss' ? '○' : '–';
+            return `<td><span class="promo-status ${cls}">${sym}</span>${detail ? `<span class="promo-detail">${detail}</span>` : ''}</td>`;
+          };
+
+          // 1. Spearman ≥ +0.03
+          let spStatus = 'na';
+          if (eventCount > 0) {
+            spStatus = avgDelta >= 0.03 ? 'met' : avgDelta >= 0.015 ? 'close' : 'miss';
+          }
+          // 2. Brier ≥ 5% reduction
+          let brStatus = 'na';
+          if (brierImprovements.length > 0) {
+            brStatus = avgBrierImp >= 0.05 ? 'met' : avgBrierImp >= 0.025 ? 'close' : 'miss';
+          }
+          // 3. 3+ consecutive weeks leading
+          let dwStatus = weeksLeadingStreak >= 3 ? 'met' : weeksLeadingStreak >= 2 ? 'close' : 'miss';
+          // 4. 8+ events
+          let evStatus = eventCount >= 8 ? 'met' : eventCount >= 4 ? 'close' : 'miss';
+
+          // Overall
+          const allMet = [spStatus, brStatus, dwStatus, evStatus].every(s => s === 'met');
+          const overallTxt = allMet ? '<strong style="color: var(--positive); font-weight: 700;">PROMOTION FLAG</strong>'
+                          : eventCount === 0 ? '<span class="muted">Awaiting data</span>'
+                          : `<span class="muted" style="font-size: 10px;">${[spStatus,brStatus,dwStatus,evStatus].filter(s=>s==='met').length}/4 met</span>`;
+
+          return `
+            <tr>
+              <td>
+                <span class="promo-variant-name">${meta.name}</span>
+                <span class="promo-variant-desc">${meta.desc}</span>
+              </td>
+              ${spanCell(spStatus, eventCount ? sigFmt(avgDelta) : '')}
+              ${spanCell(brStatus, brierImprovements.length ? (avgBrierImp >= 0 ? '+' : '') + (avgBrierImp * 100).toFixed(1) + '%' : '')}
+              ${spanCell(dwStatus, weeksLeadingStreak ? `${weeksLeadingStreak} wks` : '')}
+              ${spanCell(evStatus, eventCount ? `${eventCount} events` : '')}
+              <td>${overallTxt}</td>
+            </tr>
+          `;
+        });
+        body.innerHTML = rows.join('');
+      })();
+
+      // ---------- AT-A-GLANCE STATS (next to each section H2) ----------
+      const setGlance = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; };
+      setGlance('glanceWorldRank',
+        worldRank ? `<strong>${worldRank.current_state.estimated_global_percentile_range[0]}–${worldRank.current_state.estimated_global_percentile_range[1]}th</strong> percentile` : '');
+      setGlance('glanceSpearman',
+        events.length ? `<strong>${events.length}</strong> events · ρ <strong>${fmt.num(rolling.season_avg_bbi_spearman ?? (events.reduce((a,e)=>a+(e.spearman_bbi||0),0)/events.length), 3)}</strong> avg` : '');
+      setGlance('glanceRecaps',
+        allRecaps.length ? `<strong>${allRecaps.length}</strong> published` : '');
+      const meta = (attrPayload && attrPayload.metadata) || {};
+      setGlance('glanceAttribution',
+        meta.event ? `Wk <strong>${meta.week}</strong> · <strong>${attrPayload.players?.length || 0}</strong> finishers` : '');
+      setGlance('glanceShadow',
+        Object.keys(shadow?.variants || {}).length ? `<strong>${Object.keys(shadow.variants).length}</strong> variants live` : '');
+      const calibCount = (calib?.history || []).length;
+      setGlance('glanceCalibration', calibCount ? `<strong>${calibCount}</strong> events scored` : '');
+      setGlance('glanceBacktest',
+        prom?.aggregate?.n_events ? `<strong>${prom.aggregate.n_events}</strong> events · ρ <strong>${fmt.num(prom.aggregate.mean_spearman, 3)}</strong>` : '');
+      setGlance('glanceCompetition',
+        comp ? `Leader: <strong>${leader}</strong>` : '');
+
+      // TOC stat pills
+      const tocStat = (id, txt) => { const el = $(`#${id}`); if (el) el.textContent = txt; };
+      tocStat('tocSpearmanStat', events.length ? String(events.length) : '');
+      tocStat('tocRecapsStat', allRecaps.length ? String(allRecaps.length) : '');
+      tocStat('tocBacktestStat', prom?.aggregate?.n_events ? String(prom.aggregate.n_events) : '');
+
+      // Wire scroll-spy + recap sub-section folding now that DOM is populated
+      initTocScrollSpy();
+      initRecapSubFolding();
 
       // Count-up entries visible above the fold
       window.observeAnimations?.(document);
