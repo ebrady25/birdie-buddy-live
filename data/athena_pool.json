@@ -1,104 +1,173 @@
 {
-  "event": "RBC Heritage 2026",
-  "pool_size": 100,
-  "strategy": "Balanced \u2014 one elite anchor + high-BBI specialists with differentiated ownership",
-  "primary_picks": [
+  "event": "Cadillac Championship",
+  "event_slug": "Cadillac_Championship",
+  "year": 2026,
+  "week_num": 13,
+  "philosophy": "Cadillac Championship \u2014 first PGA return to Doral since 2016 + Hanse redesign. Course history weighted lighter (windowed 2014-2016 only). Wind 15-18mph S\u2192WSW will reward ball-striking specialists. Lean toward starters with strong sg_app + sg_ott; alternates from leverage bucket.",
+  "primary_pool": [
     {
+      "dg_id": 18417,
       "name": "Scheffler, Scottie",
-      "bbi_pool": 83.19,
-      "tier": "SPECIALIST",
-      "hist_rounds": 12,
-      "hist_sg": 2.21,
-      "pool_est_own_pct": 25.3,
-      "role": "ANCHOR \u2014 Chalk but justified; skip only if going full contrarian"
+      "rank_pool": 1,
+      "bbi_pool": 72.35,
+      "zeus_pool": 72.35,
+      "proj_own": 36.0,
+      "make_cut": 1.0,
+      "win_pct": 0.1923076923076923
     },
     {
+      "dg_id": 26651,
+      "name": "Young, Cameron",
+      "rank_pool": 2,
+      "bbi_pool": 51.36,
+      "zeus_pool": 51.36,
+      "proj_own": 34.0,
+      "make_cut": 1.0,
+      "win_pct": 0.06944444444444445
+    },
+    {
+      "dg_id": 22085,
+      "name": "Morikawa, Collin",
+      "rank_pool": 3,
+      "bbi_pool": 46.26,
+      "zeus_pool": 46.26,
+      "proj_own": 34.0,
+      "make_cut": 1.0,
+      "win_pct": 0.03825554705432287
+    },
+    {
+      "dg_id": 14609,
+      "name": "Kim, Si Woo",
+      "rank_pool": 4,
+      "bbi_pool": 43.4,
+      "zeus_pool": 43.4,
+      "proj_own": 22.0,
+      "make_cut": 1.0,
+      "win_pct": 0.027770063871146906
+    },
+    {
+      "dg_id": 15466,
       "name": "Cantlay, Patrick",
-      "bbi_pool": 67.63,
-      "tier": "SPECIALIST",
-      "hist_rounds": 22,
-      "hist_sg": 2.05,
-      "pool_est_own_pct": 19.1,
-      "role": "CORE \u2014 Undervalued specialist"
+      "rank_pool": 5,
+      "bbi_pool": 41.94,
+      "zeus_pool": 41.94,
+      "proj_own": 12.0,
+      "make_cut": 1.0,
+      "win_pct": 0.02735229759299781
     },
     {
-      "name": "Noren, Alex",
-      "bbi_pool": 66.94,
-      "tier": "SPECIALIST",
-      "hist_rounds": 16,
-      "hist_sg": 1.16,
-      "pool_est_own_pct": 11.9,
-      "role": "CORE \u2014 Tree-lined accuracy specialist"
-    },
-    {
-      "name": "Novak, Andrew",
-      "bbi_pool": 66.89,
-      "tier": "COMFORTABLE",
-      "hist_rounds": 4,
-      "hist_sg": 2.62,
-      "pool_est_own_pct": 9.7,
-      "role": "LEVERAGE \u2014 Low-owned with strong course fit"
-    },
-    {
-      "name": "Fitzpatrick, Matt",
-      "bbi_pool": 66.69,
-      "tier": "SPECIALIST",
-      "hist_rounds": 26,
-      "hist_sg": 1.27,
-      "pool_est_own_pct": 22.1,
-      "role": "CORE \u2014 26 Harbour Town rounds, ideal profile"
-    },
-    {
-      "name": "Henley, Russell",
-      "bbi_pool": 65.76,
-      "tier": "SPECIALIST",
-      "hist_rounds": 22,
-      "hist_sg": 1.03,
-      "pool_est_own_pct": 20.4,
-      "role": "CORE \u2014 Home-state specialist (UGA, Georgia-based)"
-    },
-    {
-      "name": "Thomas, Justin",
-      "bbi_pool": 65.75,
-      "tier": "SPECIALIST",
-      "hist_rounds": 20,
-      "hist_sg": 1.81,
-      "pool_est_own_pct": 15.5,
-      "role": "LEVERAGE \u2014 Specialist at moderate ownership"
+      "dg_id": 14577,
+      "name": "English, Harris",
+      "rank_pool": 6,
+      "bbi_pool": 41.52,
+      "zeus_pool": 42.15,
+      "proj_own": 19.0,
+      "make_cut": 1.0,
+      "win_pct": 0.014400921658986175
     }
   ],
-  "leverage_plays": [
+  "leverage_pool": [
     {
-      "name": "Berger, Daniel",
-      "bbi": 64.58,
-      "reason": "SPECIALIST, 20rds +1.80 SG, est 11.7% owned"
+      "dg_id": 18841,
+      "name": "Hovland, Viktor",
+      "rank_pool": 18,
+      "proj_own": 5.0,
+      "bbi_pool": 37.88,
+      "win_pct": 0.016983695652173912
     },
     {
-      "name": "Poston, J.T.",
-      "bbi": 62.78,
-      "reason": "SPECIALIST, 24rds +1.62 SG, est 11.1% owned"
+      "dg_id": 26096,
+      "name": "Bhatia, Akshay",
+      "rank_pool": 21,
+      "proj_own": 5.0,
+      "bbi_pool": 36.43,
+      "win_pct": 0.011816140848398913
     },
     {
-      "name": "Harman, Brian",
-      "bbi": 61.19,
-      "reason": "SPECIALIST, 26rds +1.28 SG, est 10.3% owned"
+      "dg_id": 6093,
+      "name": "Rose, Justin",
+      "rank_pool": 23,
+      "proj_own": 5.0,
+      "bbi_pool": 35.8,
+      "win_pct": 0.015167602002123463
     },
     {
-      "name": "Conners, Corey",
-      "bbi": 60.72,
-      "reason": "SPECIALIST, 26rds +0.67 SG, est 10.4% owned"
+      "dg_id": 24968,
+      "name": "Griffin, Ben",
+      "rank_pool": 27,
+      "proj_own": 5.0,
+      "bbi_pool": 34.98,
+      "win_pct": 0.010900370612600829
     },
     {
-      "name": "Im, Sungjae",
-      "bbi": 60.02,
-      "reason": "SPECIALIST, 24rds +0.98 SG, est 9.2% owned"
+      "dg_id": 9771,
+      "name": "Day, Jason",
+      "rank_pool": 28,
+      "proj_own": 5.0,
+      "bbi_pool": 34.73,
+      "win_pct": 0.00848320325755005
     },
     {
-      "name": "Vegas, Jhonattan",
-      "bbi": 59.05,
-      "reason": "COMFORTABLE, 4rds +1.70 SG, est 5.8% owned"
+      "dg_id": 14636,
+      "name": "Spieth, Jordan",
+      "rank_pool": 29,
+      "proj_own": 5.0,
+      "bbi_pool": 34.71,
+      "win_pct": 0.014249073810202335
+    },
+    {
+      "dg_id": 17511,
+      "name": "Straka, Sepp",
+      "rank_pool": 30,
+      "proj_own": 5.0,
+      "bbi_pool": 34.26,
+      "win_pct": 0.010599957600169598
     }
   ],
-  "hard_fades": [],
-  "differentiation_note": "With 100 entries, expect ~35-45% on Scheffler. Pair him with a specialist other entries will miss (Noren, Berger, Poston, Harman). The edge comes from picks 2-6, not the anchor."
+  "fade_pool": [
+    {
+      "dg_id": 12577,
+      "name": "Woodland, Gary",
+      "proj_own": 8.5,
+      "rank_pool": 26,
+      "bbi_pool": 35.37
+    },
+    {
+      "dg_id": 22760,
+      "name": "Hisatsune, Ryo",
+      "proj_own": 8.5,
+      "rank_pool": 31,
+      "bbi_pool": 33.45
+    },
+    {
+      "dg_id": 18474,
+      "name": "Smalley, Alex",
+      "proj_own": 8.5,
+      "rank_pool": 32,
+      "bbi_pool": 33.37
+    }
+  ],
+  "lineup_construction": {
+    "starters": [
+      "Scheffler, Scottie",
+      "Young, Cameron",
+      "Morikawa, Collin",
+      "Kim, Si Woo"
+    ],
+    "alternates": [
+      "Hovland, Viktor",
+      "Bhatia, Akshay"
+    ],
+    "rationale": "Top-3 BBI pool finishers as conviction starters. #4 starter from BBI top-5. Alternates from leverage list to capture upside if a starter fades."
+  },
+  "manual_overrides_applied": [
+    {
+      "name": "Fleetwood, Tommy",
+      "action": "min_rank=13 (MOMUS small-sample-fade flag)"
+    },
+    {
+      "name": "Scott, Adam",
+      "action": "max_rank=9 (MOMUS single-factor flag)"
+    }
+  ]
 }
