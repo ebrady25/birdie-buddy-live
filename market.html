@@ -63,7 +63,7 @@
     /* ---------- PAGE LAYOUT ---------- */
     .market-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 340px;
+      grid-template-columns: minmax(0, 1fr) 320px;
       gap: var(--space-5);
       align-items: start;
     }
@@ -85,7 +85,6 @@
       font-size: var(--fs-xs);
     }
     table.edges thead th {
-      /* position:sticky set via JS transform — CSS sticky blocked by overflow-x:auto parent */
       position: relative;
       z-index: 1;
       will-change: transform;
@@ -109,9 +108,7 @@
     table.edges thead th.sort-asc::after  { content: ' ▲'; color: var(--gold-300); font-size: 10px; }
     table.edges thead th.sort-desc::after { content: ' ▼'; color: var(--gold-300); font-size: 10px; }
 
-    table.edges tbody tr {
-      transition: background var(--dur-fast);
-    }
+    table.edges tbody tr { transition: background var(--dur-fast); }
     table.edges tbody tr:hover { background: var(--surface-3); }
     table.edges tbody tr.slip-added { background: rgba(212, 168, 67, 0.06); }
     table.edges tbody td {
@@ -126,7 +123,6 @@
       font-family: var(--font-body);
       font-weight: 600;
       color: var(--text-primary);
-      position: relative;
     }
     table.edges tbody td.td-name .dg-id {
       display: block;
@@ -139,12 +135,8 @@
     table.edges tbody td .val-pos { color: var(--positive); }
     table.edges tbody td .val-neg { color: var(--negative); }
     table.edges tbody td .val-dim { color: var(--text-dimmed); }
-    table.edges tbody td .val-book {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
+    table.edges tbody td .val-book { font-weight: 600; color: var(--text-primary); }
 
-    /* Edge cell has inline --heat for pos edges */
     td.edge-cell {
       font-weight: 700;
       font-family: var(--font-mono);
@@ -153,8 +145,7 @@
     }
     td.edge-cell::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(90deg,
         rgba(74, 222, 128, calc(var(--heat, 0) * 0.30)) 0%,
         rgba(40, 200, 100, calc(var(--heat, 0) * 0.15)) 100%);
@@ -169,26 +160,6 @@
     td.edge-cell.pos span { color: var(--positive); }
     td.edge-cell.neg span { color: var(--negative); }
 
-    /* Kelly cell */
-    td.kelly-cell {
-      font-weight: 600;
-    }
-    td.kelly-cell .kelly-chip {
-      display: inline-block;
-      font-size: var(--fs-3xs);
-      padding: 2px 6px;
-      border-radius: 3px;
-      background: rgba(212, 168, 67, 0.12);
-      color: var(--gold-300);
-      border: 1px solid rgba(212, 168, 67, 0.2);
-    }
-    td.kelly-cell.heavy .kelly-chip {
-      background: rgba(212, 168, 67, 0.28);
-      border-color: var(--gold-400);
-      color: var(--gold-200);
-    }
-
-    /* Slip button */
     .slip-btn {
       padding: 4px 10px;
       font-family: var(--font-mono);
@@ -203,49 +174,70 @@
       cursor: pointer;
       transition: all var(--dur-fast);
     }
-    .slip-btn:hover {
-      border-color: var(--border-gold);
-      color: var(--gold-300);
-    }
-    .slip-btn.added {
-      background: rgba(212, 168, 67, 0.18);
-      border-color: var(--border-gold);
-      color: var(--gold-200);
-    }
+    .slip-btn:hover { border-color: var(--border-gold); color: var(--gold-300); }
+    .slip-btn.added { background: rgba(212, 168, 67, 0.18); border-color: var(--border-gold); color: var(--gold-200); }
 
-    /* Book spread viz (inline mini-bar) */
-    .spread-mini {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: var(--fs-3xs);
-      color: var(--text-muted);
-    }
-    .spread-mini .bar {
-      height: 4px;
-      width: 32px;
-      background: var(--surface-3);
-      border-radius: 2px;
-      position: relative;
-      overflow: hidden;
-    }
-    .spread-mini .bar-fill {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, var(--gold-400), var(--gold-300));
-      border-radius: 2px;
-    }
-    .spread-mini .bar-fill.wide {
-      background: linear-gradient(to right, var(--negative), #f59e0b);
-    }
-
-    /* Empty + loading state */
     .edges-empty {
       padding: var(--space-10);
       text-align: center;
       color: var(--text-muted);
       font-size: var(--fs-sm);
     }
+
+    /* ---------- BOOK PICKER ---------- */
+    .book-picker { position: relative; display: inline-block; }
+    .book-picker-btn {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-primary);
+      cursor: pointer;
+      white-space: nowrap;
+      min-width: 190px;
+      text-align: left;
+      transition: border-color var(--dur-fast);
+    }
+    .book-picker-btn:hover, .book-picker-btn.open { border-color: var(--border-gold); color: var(--gold-300); }
+    .book-picker-panel {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 300;
+      background: var(--surface-3);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 6px 0 4px;
+      min-width: 190px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .book-picker-note {
+      padding: 3px 12px 6px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-dimmed);
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+    .book-picker-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-body);
+      transition: background var(--dur-fast);
+    }
+    .book-picker-option:hover { background: var(--surface-4); }
+    .book-picker-option input[type="checkbox"] { accent-color: var(--gold-500); cursor: pointer; }
+    .book-picker-option.checked { color: var(--gold-300); }
+    .book-picker-option.disabled-opt { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
     /* ---------- RIGHT RAIL: BET SLIP ---------- */
     .slip-card {
@@ -272,49 +264,8 @@
       letter-spacing: -0.015em;
       color: var(--text-primary);
     }
-    .slip-count {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-    }
+    .slip-count { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); }
     .slip-count strong { color: var(--gold-300); }
-
-    .bankroll-row {
-      display: flex; gap: var(--space-2); align-items: center;
-      margin-bottom: var(--space-4);
-    }
-    .bankroll-row label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: var(--tracking-wide);
-    }
-    .bankroll-input {
-      flex: 1;
-      background: var(--surface-3);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 6px 10px;
-      font-family: var(--font-mono);
-      font-size: var(--fs-sm);
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-    .bankroll-input:focus { outline: none; border-color: var(--border-gold); }
-
-    .kelly-fraction-row {
-      display: flex; align-items: center; gap: var(--space-3);
-      padding: var(--space-3);
-      background: var(--surface-3);
-      border-radius: var(--radius-md);
-      margin-bottom: var(--space-4);
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-    }
-    .kelly-fraction-row .seg { padding: 1px; }
-    .kelly-fraction-row .seg button { padding: 3px 7px; font-size: var(--fs-3xs); }
-    .kelly-fraction-row .label { color: var(--text-muted); margin-right: auto; }
 
     .slip-items { display: flex; flex-direction: column; gap: 6px; margin-bottom: var(--space-4); }
     .slip-empty {
@@ -327,21 +278,19 @@
       line-height: 1.6;
     }
     .slip-empty strong { color: var(--text-body); display: block; margin-bottom: 4px; }
+
     .slip-item {
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto;
       gap: var(--space-2);
-      align-items: center;
+      align-items: start;
       padding: 8px 10px;
       background: var(--surface-3);
       border: 1px solid var(--border-soft);
       border-radius: var(--radius-md);
       font-size: var(--fs-xs);
     }
-    .slip-item .si-name {
-      font-weight: 600;
-      color: var(--text-primary);
-    }
+    .slip-item .si-name { font-weight: 600; color: var(--text-primary); }
     .slip-item .si-market {
       display: block;
       font-family: var(--font-mono);
@@ -351,12 +300,13 @@
       letter-spacing: var(--tracking-wide);
       margin-top: 1px;
     }
-    .slip-item .si-stake {
+    .slip-item .si-odds {
+      display: block;
       font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--gold-300);
+      font-size: var(--fs-3xs);
+      color: var(--positive);
+      margin-top: 2px;
     }
-    .slip-item .si-stake small { display: block; color: var(--text-dimmed); font-weight: 500; }
     .slip-item button {
       background: transparent;
       border: 0;
@@ -365,8 +315,37 @@
       padding: 2px 6px;
       cursor: pointer;
       border-radius: 3px;
+      margin-top: 2px;
     }
     .slip-item button:hover { color: var(--negative); background: var(--surface-4); }
+
+    /* Bet size row */
+    .bet-size-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+    .bet-size-row label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      white-space: nowrap;
+    }
+    .bet-size-input {
+      flex: 1;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .bet-size-input:focus { outline: none; border-color: var(--border-gold); }
 
     .slip-totals {
       display: flex; flex-direction: column; gap: var(--space-2);
@@ -377,18 +356,14 @@
       font-family: var(--font-mono);
       font-size: var(--fs-xs);
     }
-    .slip-total-row {
-      display: flex; justify-content: space-between;
-    }
+    .slip-total-row { display: flex; justify-content: space-between; }
     .slip-total-row .lbl { color: var(--text-muted); text-transform: uppercase; letter-spacing: var(--tracking-wide); font-size: var(--fs-3xs); }
     .slip-total-row .val { color: var(--text-primary); font-weight: 700; }
     .slip-total-row.gold .val { color: var(--gold-300); }
-    .slip-total-row.ev .val { color: var(--positive); }
-    .slip-total-row.ev .val.neg { color: var(--negative); }
+    .slip-total-row.win .val { color: var(--positive); font-size: var(--fs-md); }
+    .slip-total-row.win .val.neg { color: var(--negative); }
 
-    .slip-actions {
-      display: flex; gap: var(--space-2); margin-top: var(--space-3);
-    }
+    .slip-actions { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
     .slip-actions button {
       flex: 1;
       padding: 8px;
@@ -401,17 +376,9 @@
       cursor: pointer;
       transition: all var(--dur-fast);
     }
-    .btn-copy {
-      background: var(--surface-3);
-      border: 1px solid var(--border-soft);
-      color: var(--text-muted);
-    }
+    .btn-copy { background: var(--surface-3); border: 1px solid var(--border-soft); color: var(--text-muted); }
     .btn-copy:hover { border-color: var(--border-gold); color: var(--gold-300); }
-    .btn-clear {
-      background: transparent;
-      border: 1px solid var(--border-soft);
-      color: var(--text-muted);
-    }
+    .btn-clear { background: transparent; border: 1px solid var(--border-soft); color: var(--text-muted); }
     .btn-clear:hover { border-color: var(--negative); color: var(--negative); }
 
     /* ---------- DISCLAIMER ---------- */
@@ -430,40 +397,12 @@
     .sim-note em { color: var(--gold-300); font-style: normal; }
 
     /* ---------- EDUCATION CALLOUTS ---------- */
-    .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-4);
-      margin-top: var(--space-6);
-    }
+    .edu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-top: var(--space-6); }
     @media (max-width: 900px) { .edu-grid { grid-template-columns: 1fr; } }
-    .edu-card {
-      padding: var(--space-4);
-      background: var(--surface-2);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-    }
-    .edu-card .edu-label {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      color: var(--gold-500);
-      margin-bottom: var(--space-2);
-    }
-    .edu-card h4 {
-      font-family: var(--font-display);
-      font-size: var(--fs-md);
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: var(--space-2);
-      letter-spacing: -0.01em;
-    }
-    .edu-card p {
-      font-size: var(--fs-xs);
-      color: var(--text-body);
-      line-height: 1.6;
-    }
+    .edu-card { padding: var(--space-4); background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); }
+    .edu-card .edu-label { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-500); margin-bottom: var(--space-2); }
+    .edu-card h4 { font-family: var(--font-display); font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-2); letter-spacing: -0.01em; }
+    .edu-card p { font-size: var(--fs-xs); color: var(--text-body); line-height: 1.6; }
 
     /* ---------- TOOLBAR EXTRAS ---------- */
     .toolbar-search {
@@ -487,7 +426,6 @@
     }
     .toolbar-ev-toggle input { accent-color: var(--gold-500); cursor: pointer; }
     .toolbar-ev-toggle.on { color: var(--gold-300); }
-
   </style>
 </head>
 <body>
@@ -498,7 +436,7 @@
     <header class="page-head">
       <div class="eyebrow">OMNIA · 15-book market engine</div>
       <h1>Find Vegas mistakes before tip-off.</h1>
-      <p>Every player price from 15 live sportsbooks is devigged, converted to a true probability, and diffed against BBI's predictive model. Where the market is wrong, OMNIA surfaces the edge — with Kelly-optimal stakes you can actually act on.</p>
+      <p>Every player price from 15 live sportsbooks is devigged, converted to a true probability, and diffed against BBI's predictive model. Where the market is wrong, OMNIA surfaces the edge — and the best book to act on it.</p>
       <div class="page-head-meta">
         <span>Event <strong id="mEvent">—</strong></span>
         <span>Players matched <strong id="mMatched">—</strong></span>
@@ -525,7 +463,7 @@
         <div class="k-sub">across positive edges in this market</div>
       </div>
       <div class="edge-kpi">
-        <div class="k-label">Top Kelly stake</div>
+        <div class="k-label">Best book odds</div>
         <div class="k-value" id="kKelly">—</div>
         <div class="k-sub" id="kKellySub">—</div>
       </div>
@@ -547,8 +485,13 @@
         </label>
         <div style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:var(--fs-3xs);color:var(--text-muted);white-space:nowrap;">
           BOOKS
-          <select id="book1Sel" class="toolbar-search" style="min-width:110px;cursor:pointer;"></select>
-          <select id="book2Sel" class="toolbar-search" style="min-width:110px;cursor:pointer;"></select>
+          <div class="book-picker">
+            <button class="book-picker-btn" id="bookPickerBtn">DK, FanDuel, Bet365 ▾</button>
+            <div class="book-picker-panel" id="bookPickerPanel" style="display:none;">
+              <div class="book-picker-note">Select up to 3</div>
+              <!-- populated dynamically -->
+            </div>
+          </div>
         </div>
         <div class="toolbar-count"><strong id="edgeCount">—</strong> players</div>
       </div>
@@ -561,15 +504,8 @@
         <div class="edges-table-wrap">
           <table class="edges" id="edgesTable">
             <thead>
-              <tr>
-                <th class="th-name" data-sort="name">Player</th>
-                <th data-sort="bbi_prob" title="BirdieBuddy predicted probability">BBI %</th>
-                <th data-sort="market_prob" title="Consensus across all books, devigged">Market %</th>
-                <th data-sort="edge" class="sort-desc" title="BBI minus market consensus, in percentage points">Edge</th>
-                <th data-sort="book1" id="thBook1" title="Selected book odds">DK</th>
-                <th data-sort="book2" id="thBook2" title="Selected book odds">B365</th>
-                <th data-sort="pin" title="Pinnacle (sharps) devigged probability">Pinn %</th>
-                <th title="Add this play to your slip">Slip</th>
+              <tr id="edgesTheadRow">
+                <!-- Populated by renderThead() -->
               </tr>
             </thead>
             <tbody id="edgesBody">
@@ -586,32 +522,22 @@
           <div class="slip-count"><strong id="slipCount">0</strong> legs</div>
         </div>
 
-        <div class="bankroll-row">
-          <label for="bankrollInput">Bankroll</label>
-          <input id="bankrollInput" class="bankroll-input" type="text" value="$500" inputmode="numeric"/>
-        </div>
-
-        <div class="kelly-fraction-row">
-          <span class="label">Kelly fraction</span>
-          <div class="seg" aria-label="Kelly fraction">
-            <button data-kfrac="0.25">¼</button>
-            <button data-kfrac="0.5" class="active">½</button>
-            <button data-kfrac="1">Full</button>
-          </div>
-        </div>
-
         <div class="slip-items" id="slipItems">
           <div class="slip-empty">
             <strong>Build your slip</strong>
-            Click + on any row to add the play here with a live Kelly-sized stake.
+            Click + on any row to add a play. Single bets or parlays.
           </div>
         </div>
 
+        <div class="bet-size-row">
+          <label for="betSizeInput">Bet $</label>
+          <input id="betSizeInput" class="bet-size-input" type="text" value="10" inputmode="numeric" placeholder="10"/>
+        </div>
+
         <div class="slip-totals" id="slipTotals" style="display:none;">
-          <div class="slip-total-row"><span class="lbl">Total staked</span><span class="val" id="totalStake">$0</span></div>
-          <div class="slip-total-row gold"><span class="lbl">% of bankroll</span><span class="val" id="totalPct">0%</span></div>
-          <div class="slip-total-row ev"><span class="lbl">Expected value</span><span class="val" id="totalEV">—</span></div>
-          <div class="slip-total-row"><span class="lbl">If all win</span><span class="val" id="totalWin">—</span></div>
+          <div class="slip-total-row gold"><span class="lbl">Total odds</span><span class="val" id="totalOdds">—</span></div>
+          <div class="slip-total-row"><span class="lbl" id="bestBookLbl">Best book</span><span class="val" id="totalBestBook">—</span></div>
+          <div class="slip-total-row win"><span class="lbl">To win</span><span class="val" id="totalWin">—</span></div>
         </div>
 
         <div class="slip-actions">
@@ -634,14 +560,14 @@
         <p>Pinnacle runs razor-thin margins and welcomes professional action, which means their line is the closest thing to an efficient market price. A gap between Pinnacle and DraftKings often signals an exploitable mispricing at the recreational book.</p>
       </div>
       <div class="edu-card">
-        <div class="edu-label">03 · Kelly sizing</div>
-        <h4>Bet the edge, not your gut.</h4>
-        <p>Kelly tells you the stake size that maximises long-run bankroll growth given a fixed edge. We publish fractional Kelly (½ default) — the full value is mathematically optimal but practically brutal, so half is the industry standard hedge against model error.</p>
+        <div class="edu-label">03 · Parlay shopping</div>
+        <h4>One book to rule them all.</h4>
+        <p>For parlays, decimal odds multiply — so small differences per leg compound dramatically. Add all your legs, and the slip will automatically find which book gives you the highest combined payout across the full ticket.</p>
       </div>
     </div>
 
     <div class="sim-note">
-      <strong>How to read this page.</strong> Green cells are where BBI thinks the book is too long; red cells are where the book is too tight. The <em>Edge</em> column is raw (BBI %) minus (market consensus %), so a +5.00pp edge means BBI says the player wins 5 points more often than the 15-book consensus implies. <strong>None of this is financial advice</strong> — models can be wrong, markets are smart, and variance is real. Never stake more than you can cheerfully lose.
+      <strong>How to read this page.</strong> Green cells are where BBI thinks the book is too long; red cells are where the book is too tight. The <em>Edge</em> column is raw (BBI %) minus (market consensus %), so a +5.00pp edge means BBI says the player wins 5 points more often than the consensus implies. <strong>None of this is financial advice</strong> — models can be wrong, markets are smart, and variance is real. Never stake more than you can cheerfully lose.
     </div>
   </main>
 
@@ -672,7 +598,14 @@
       pinnacle:'Pinnacle',
     };
 
-    // Convert decimal odds to American (+400 / -200 style)
+    // Short labels for the picker button display
+    const BOOK_SHORT = {
+      draftkings:'DK', fanduel:'FD', bet365:'B365', betmgm:'MGM',
+      caesars:'Czrs', betcris:'Cris', betonline:'BOL', betway:'BW',
+      bovada:'Bov', pointsbet:'PB', skybet:'Sky', williamhill:'WH',
+      pinnacle:'Pin',
+    };
+
     function toAmerican(dec) {
       if (dec == null || dec <= 1) return '—';
       const am = dec >= 2
@@ -682,20 +615,19 @@
     }
 
     const state = {
-      omnia: null,
-      market: 'win',
-      rows: [],              // all_edges for current market
-      sort: { key: 'edge', dir: 'desc' },
-      search: '',
-      evOnly: true,
-      slip: [],              // array of slip items
-      bankroll: 500,
-      kellyFraction: 0.5,
-      book1: 'draftkings',  // column 1 book key
-      book2: 'bet365',      // column 2 book key
-      availableBooks: [],   // [{key, label}] populated from omnia data
+      omnia:         null,
+      market:        'win',
+      rows:          [],
+      sort:          { key: 'edge', dir: 'desc' },
+      search:        '',
+      evOnly:        true,
+      slip:          [],
+      betSize:       10,
+      selectedBooks: ['draftkings', 'fanduel', 'bet365'],
+      availableBooks: [],  // [{key, label}] populated from feed
     };
 
+    // ------------------------------------------------------------------ init
     (async function init() {
       await window.BBI.renderHeader('market.html');
       await window.BBI.renderFooter();
@@ -703,15 +635,14 @@
       state.omnia = await window.BBI.data.load(window.BBI.data.paths.omnia);
       if (!state.omnia) {
         document.getElementById('edgesBody').innerHTML =
-          `<tr><td colspan="9" class="edges-empty">OMNIA data unavailable. Odds feed may be syncing — check back shortly.</td></tr>`;
+          `<tr><td colspan="8" class="edges-empty">OMNIA data unavailable. Odds feed may be syncing — check back shortly.</td></tr>`;
         return;
       }
 
-      // Populate meta
-      document.getElementById('mEvent').textContent = state.omnia.event || '—';
+      document.getElementById('mEvent').textContent   = state.omnia.event || '—';
       document.getElementById('mUpdated').textContent = fmt.ago(state.omnia.last_updated_book_odds) || '—';
 
-      // Wire events
+      // Market segment
       document.querySelectorAll('.seg[aria-label="Market"] button').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.seg[aria-label="Market"] button').forEach(b => b.classList.remove('active'));
@@ -720,20 +651,14 @@
           loadMarket();
         });
       });
-      document.querySelectorAll('#edgesTable thead th[data-sort]').forEach(th => {
-        th.addEventListener('click', () => {
-          const key = th.getAttribute('data-sort');
-          if (state.sort.key === key) state.sort.dir = state.sort.dir === 'desc' ? 'asc' : 'desc';
-          else state.sort = { key, dir: (key === 'name' ? 'asc' : 'desc') };
-          renderSortIndicator();
-          renderRows();
-        });
-      });
-      const search = document.getElementById('edgeSearch');
-      search.addEventListener('input', (e) => {
+
+      // Search
+      document.getElementById('edgeSearch').addEventListener('input', e => {
         state.search = (e.target.value || '').trim().toLowerCase();
         renderRows();
       });
+
+      // +EV toggle
       const evOnly = document.getElementById('evOnly');
       const evWrap = document.getElementById('evToggleWrap');
       evWrap.classList.toggle('on', state.evOnly);
@@ -743,24 +668,20 @@
         renderRows();
       });
 
-      // Bankroll / Kelly fraction
-      const bi = document.getElementById('bankrollInput');
-      bi.addEventListener('input', () => {
-        const num = parseFloat((bi.value || '').replace(/[^0-9.]/g, '')) || 0;
-        state.bankroll = num;
+      // Bet size input
+      const betInput = document.getElementById('betSizeInput');
+      betInput.addEventListener('input', () => {
+        state.betSize = parseFloat((betInput.value || '').replace(/[^0-9.]/g, '')) || 0;
         renderSlip();
       });
-      bi.addEventListener('blur', () => { bi.value = '$' + state.bankroll.toLocaleString(); });
-
-      document.querySelectorAll('.seg[aria-label="Kelly fraction"] button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.seg[aria-label="Kelly fraction"] button').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          state.kellyFraction = parseFloat(btn.getAttribute('data-kfrac'));
-          renderSlip();
-        });
+      betInput.addEventListener('blur', () => {
+        betInput.value = state.betSize > 0 ? '$' + state.betSize.toLocaleString() : '';
+      });
+      betInput.addEventListener('focus', () => {
+        betInput.value = state.betSize || '';
       });
 
+      // Slip clear / copy
       document.getElementById('btnClearSlip').addEventListener('click', () => {
         state.slip = [];
         renderSlip();
@@ -768,11 +689,25 @@
       });
       document.getElementById('btnCopy').addEventListener('click', copySlip);
 
+      // Book picker toggle
+      const pickerBtn   = document.getElementById('bookPickerBtn');
+      const pickerPanel = document.getElementById('bookPickerPanel');
+      pickerBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = pickerPanel.style.display === 'none';
+        pickerPanel.style.display = open ? '' : 'none';
+        pickerBtn.classList.toggle('open', open);
+      });
+      document.addEventListener('click', () => {
+        pickerPanel.style.display = 'none';
+        pickerBtn.classList.remove('open');
+      });
+      pickerPanel.addEventListener('click', e => e.stopPropagation());
+
       loadMarket();
-      renderSortIndicator();
       window.observeAnimations?.(document);
 
-      // Sticky column header — JS transform (CSS sticky blocked by overflow-x:auto parent)
+      // Sticky thead via JS transform (CSS sticky blocked by overflow-x:auto parent)
       (function stickyThead() {
         const cs     = getComputedStyle(document.documentElement);
         const offset = parseFloat(cs.getPropertyValue('--nav-h'))
@@ -791,103 +726,160 @@
       })();
     })();
 
-    // ---------- Market loader ----------
+    // ------------------------------------------------------------------ loadMarket
     function loadMarket() {
       const market = state.omnia?.markets?.[state.market];
-      if (!market) { state.rows = []; renderRows(); renderHero(); return; }
+      if (!market) { state.rows = []; renderThead(); renderRows(); renderHero(); return; }
+
       const rows = (market.all_edges || []).map(r => ({
         dg_id:          r.dg_id,
         name:           r.name,
         bbi_prob:       r.bbi_prob,
         market_prob:    r.market_consensus_prob_deviged,
-        pin_prob:       r.pinnacle_prob_deviged,
-        dk_dec:         r.draftkings_decimal,
-        b365_dec:       r.bet365_decimal,
+        book_odds:      r.book_odds || {},
         best_book_name: r.best_book_name,
         best_book_dec:  r.best_book_decimal,
-        book_odds:      r.book_odds || {},
         edge:           r.edge_consensus_pp,
-        edge_pin:       r.edge_pinnacle_pp,
-        kelly_pct:      r.kelly_stake_pct_bankroll,
         n_books:        r.n_books,
       }));
 
-      // Build book selector options from feed
-      const bookKeys = state.omnia.available_books ||
-        [...new Set(rows.flatMap(r => Object.keys(r.book_odds)))].sort();
+      // Build available books from feed, excluding pinnacle from columns
+      const bookKeys = (state.omnia.available_books || [...new Set(rows.flatMap(r => Object.keys(r.book_odds)))].sort())
+        .filter(k => k !== 'pinnacle');
       const bookLabelsData = state.omnia.book_labels || {};
       state.availableBooks = bookKeys.map(k => ({
-        key: k, label: bookLabelsData[k] || BOOK_LABELS[k] || k.charAt(0).toUpperCase() + k.slice(1)
+        key:   k,
+        label: bookLabelsData[k] || BOOK_LABELS[k] || k.charAt(0).toUpperCase() + k.slice(1),
+        short: BOOK_SHORT[k] || k.toUpperCase().slice(0, 4),
       }));
-      populateBookSelectors();
+
+      // Validate selectedBooks against what's actually available this week
+      const availKeys = new Set(state.availableBooks.map(b => b.key));
+      state.selectedBooks = state.selectedBooks.filter(k => availKeys.has(k));
+      if (!state.selectedBooks.length) {
+        state.selectedBooks = state.availableBooks.slice(0, 3).map(b => b.key);
+      }
 
       state.rows = rows;
+
       document.getElementById('mMatched').textContent = fmt.int(market.n_players_matched);
-      // Books shown from the max n_books we observe in this market
       const maxBooks = rows.reduce((m, r) => Math.max(m, r.n_books || 0), 0);
       document.getElementById('mBooks').textContent = maxBooks ? `${maxBooks}` : '—';
 
+      populateBookPicker();
+      renderThead();
       renderHero();
       renderRows();
     }
 
-    // ---------- Book selector ----------
-    function populateBookSelectors() {
-      ['book1Sel','book2Sel'].forEach((id, i) => {
-        const sel = document.getElementById(id);
-        const current = i === 0 ? state.book1 : state.book2;
-        sel.innerHTML = state.availableBooks.map(b =>
-          `<option value="${b.key}"${b.key === current ? ' selected' : ''}>${b.label}</option>`
-        ).join('');
-      });
-    }
-    document.getElementById('book1Sel').addEventListener('change', e => {
-      state.book1 = e.target.value;
-      document.getElementById('thBook1').textContent =
-        state.availableBooks.find(b => b.key === state.book1)?.label || state.book1;
-      renderRows();
-    });
-    document.getElementById('book2Sel').addEventListener('change', e => {
-      state.book2 = e.target.value;
-      document.getElementById('thBook2').textContent =
-        state.availableBooks.find(b => b.key === state.book2)?.label || state.book2;
-      renderRows();
-    });
+    // ------------------------------------------------------------------ Book picker
+    function populateBookPicker() {
+      const panel  = document.getElementById('bookPickerPanel');
+      const btn    = document.getElementById('bookPickerBtn');
+      const atMax  = state.selectedBooks.length >= 3;
 
-    // ---------- Hero KPI bar ----------
+      // Rebuild options (keep note at top)
+      const note = panel.querySelector('.book-picker-note');
+      panel.innerHTML = '';
+      if (note) panel.appendChild(note);
+
+      state.availableBooks.forEach(b => {
+        const checked  = state.selectedBooks.includes(b.key);
+        const disabled = !checked && atMax;
+        const opt = document.createElement('label');
+        opt.className = `book-picker-option${checked ? ' checked' : ''}${disabled ? ' disabled-opt' : ''}`;
+        opt.setAttribute('data-key', b.key);
+        opt.innerHTML = `<input type="checkbox"${checked ? ' checked' : ''}${disabled ? ' disabled' : ''} data-key="${b.key}"> ${b.label}`;
+        opt.querySelector('input').addEventListener('change', e => {
+          const key = e.target.getAttribute('data-key');
+          if (e.target.checked) {
+            if (state.selectedBooks.length < 3) state.selectedBooks.push(key);
+            else { e.target.checked = false; return; }
+          } else {
+            if (state.selectedBooks.length > 1) {
+              state.selectedBooks = state.selectedBooks.filter(k => k !== key);
+            } else {
+              e.target.checked = true; return; // must keep at least 1
+            }
+          }
+          populateBookPicker();
+          renderThead();
+          renderRows();
+        });
+        panel.appendChild(opt);
+      });
+
+      // Update button label using short names
+      const labels = state.selectedBooks.map(k => state.availableBooks.find(b => b.key === k)?.short || k);
+      btn.textContent = (labels.join(', ') || 'Select books') + ' ▾';
+    }
+
+    // ------------------------------------------------------------------ renderThead (dynamic book columns)
+    function renderThead() {
+      const row = document.getElementById('edgesTheadRow');
+      if (!row) return;
+      const bookCols = state.selectedBooks.map((bk, i) => {
+        const b = state.availableBooks.find(ab => ab.key === bk);
+        const label = b?.short || bk.toUpperCase().slice(0, 4);
+        return `<th data-sort="book_${i}">${label}</th>`;
+      }).join('');
+      row.innerHTML = `
+        <th class="th-name" data-sort="name">Player</th>
+        <th data-sort="bbi_prob" title="BirdieBuddy probability">BBI %</th>
+        <th data-sort="market_prob" title="Consensus devigged">Market %</th>
+        <th data-sort="edge" title="BBI − market consensus">Edge</th>
+        ${bookCols}
+        <th style="cursor:default;" title="Add to slip">Slip</th>
+      `;
+      // Wire sort handlers
+      row.querySelectorAll('th[data-sort]').forEach(th => {
+        th.addEventListener('click', () => {
+          const key = th.getAttribute('data-sort');
+          if (state.sort.key === key) state.sort.dir = state.sort.dir === 'desc' ? 'asc' : 'desc';
+          else state.sort = { key, dir: key === 'name' ? 'asc' : 'desc' };
+          renderSortIndicator();
+          renderRows();
+        });
+      });
+      renderSortIndicator();
+    }
+
+    // ------------------------------------------------------------------ renderHero
     function renderHero() {
       const rows = state.rows;
-      const pos = rows.filter(r => (r.edge || 0) > 0);
+      const pos  = rows.filter(r => (r.edge || 0) > 0);
       const best = pos.reduce((b, r) => (!b || r.edge > b.edge) ? r : b, null);
-      const avg = pos.length ? pos.reduce((a, r) => a + r.edge, 0) / pos.length : 0;
-      const topKelly = rows.reduce((b, r) => (!b || (r.kelly_pct || 0) > (b.kelly_pct || 0)) ? r : b, null);
+      const avg  = pos.length ? pos.reduce((a, r) => a + r.edge, 0) / pos.length : 0;
+      const bestOddsPlayer = rows.reduce((b, r) => {
+        const dec = r.best_book_dec || 0;
+        return (!b || dec > (b.best_book_dec || 0)) ? r : b;
+      }, null);
 
-      document.getElementById('kBest').textContent = best ? `+${best.edge.toFixed(2)}` : '—';
+      document.getElementById('kBest').textContent    = best ? `+${best.edge.toFixed(2)}` : '—';
       document.getElementById('kBestSub').textContent = best
-        ? `${fmt.abbrevName(best.name)} · DK ${toAmerican(best.dk_dec)}`
+        ? `${fmt.abbrevName(best.name)} · ${best.best_book_name || 'best book'} ${toAmerican(best.best_book_dec)}`
         : 'no +EV plays in this market';
-      document.getElementById('kCount').textContent = pos.length ? `${pos.length}` : '0';
+      document.getElementById('kCount').textContent    = pos.length ? `${pos.length}` : '0';
       document.getElementById('kCountSub').textContent = `of ${rows.length} players · ${MARKETS[state.market].label}`;
-      document.getElementById('kAvg').textContent = pos.length ? `+${avg.toFixed(2)}` : '—';
-      document.getElementById('kKelly').textContent = topKelly?.kelly_pct
-        ? `${topKelly.kelly_pct.toFixed(2)}%` : '—';
-      document.getElementById('kKellySub').textContent = topKelly?.kelly_pct
-        ? `${fmt.abbrevName(topKelly.name)} — full Kelly suggestion` : 'no Kelly-positive plays';
+      document.getElementById('kAvg').textContent      = pos.length ? `+${avg.toFixed(2)}` : '—';
+      document.getElementById('kKelly').textContent    = bestOddsPlayer?.best_book_dec
+        ? toAmerican(bestOddsPlayer.best_book_dec) : '—';
+      document.getElementById('kKellySub').textContent = bestOddsPlayer?.best_book_dec
+        ? `${fmt.abbrevName(bestOddsPlayer.name)} · ${bestOddsPlayer.best_book_name}` : '—';
     }
 
-    // ---------- Sort indicator ----------
+    // ------------------------------------------------------------------ renderSortIndicator
     function renderSortIndicator() {
       document.querySelectorAll('#edgesTable thead th').forEach(th => {
         th.classList.remove('sort-asc', 'sort-desc');
-        if (th.getAttribute('data-sort') === state.sort.key) {
+        if (th.getAttribute('data-sort') === state.sort.key)
           th.classList.add(state.sort.dir === 'asc' ? 'sort-asc' : 'sort-desc');
-        }
       });
     }
 
-    // ---------- Rows ----------
+    // ------------------------------------------------------------------ renderRows
     function renderRows() {
-      const body = document.getElementById('edgesBody');
+      const body   = document.getElementById('edgesBody');
       let rows = state.rows.slice();
 
       if (state.evOnly) rows = rows.filter(r => (r.edge || 0) > 0);
@@ -896,51 +888,43 @@
       const { key, dir } = state.sort;
       const mul = dir === 'asc' ? 1 : -1;
       rows.sort((a, b) => {
-        const getv = (r) => {
+        const getv = r => {
           switch (key) {
-            case 'name': return (r.name || '').toLowerCase();
-            case 'bbi_prob': return r.bbi_prob || 0;
+            case 'name':        return (r.name || '').toLowerCase();
+            case 'bbi_prob':    return r.bbi_prob || 0;
             case 'market_prob': return r.market_prob || 0;
-            case 'edge': return r.edge == null ? -999 : r.edge;
-            case 'book1': return r.book_odds?.[state.book1] || 0;
-            case 'book2': return r.book_odds?.[state.book2] || 0;
-            case 'pin': return r.pin_prob || 0;
-            default: return 0;
+            case 'edge':        return r.edge == null ? -999 : r.edge;
+            case 'book_0':      return r.book_odds?.[state.selectedBooks[0]] || 0;
+            case 'book_1':      return r.book_odds?.[state.selectedBooks[1]] || 0;
+            case 'book_2':      return r.book_odds?.[state.selectedBooks[2]] || 0;
+            default:            return 0;
           }
         };
         const av = getv(a), bv = getv(b);
-        if (av < bv) return -1 * mul;
-        if (av > bv) return  1 * mul;
-        return 0;
+        return av < bv ? -mul : av > bv ? mul : 0;
       });
 
       document.getElementById('edgeCount').textContent = fmt.int(rows.length);
+      const colCount = state.selectedBooks.length + 5;
 
       if (!rows.length) {
-        body.innerHTML = `<tr><td colspan="8" class="edges-empty">No players match your filter in this market.</td></tr>`;
+        body.innerHTML = `<tr><td colspan="${colCount}" class="edges-empty">No players match your filter in this market.</td></tr>`;
         return;
       }
 
-      // Precompute edge heat — normalize against max absolute edge in list
       const maxAbsEdge = rows.reduce((m, r) => Math.max(m, Math.abs(r.edge || 0)), 0.001);
-      const slipIds = new Set(state.slip.map(s => `${s.id}|${s.market}`));
-      // Update dynamic column headers to match current book selection
-      document.getElementById('thBook1').textContent =
-        state.availableBooks.find(b => b.key === state.book1)?.label || state.book1;
-      document.getElementById('thBook2').textContent =
-        state.availableBooks.find(b => b.key === state.book2)?.label || state.book2;
+      const slipIds    = new Set(state.slip.map(s => `${s.id}|${s.market}`));
 
       body.innerHTML = rows.map(r => {
-        const edgeVal = r.edge;
-        const edgeCls = edgeVal == null ? 'val-dim' : edgeVal >= 0 ? 'pos' : 'neg';
+        const edgeVal  = r.edge;
+        const edgeCls  = edgeVal == null ? 'val-dim' : edgeVal >= 0 ? 'pos' : 'neg';
         const edgeHeat = edgeVal == null ? 0 : Math.min(1, Math.abs(edgeVal) / maxAbsEdge);
-        const edgeStr = edgeVal == null ? '—' : `${edgeVal >= 0 ? '+' : ''}${edgeVal.toFixed(2)}pp`;
+        const edgeStr  = edgeVal == null ? '—' : `${edgeVal >= 0 ? '+' : ''}${edgeVal.toFixed(2)}pp`;
         const edgeSign = edgeVal == null ? '' : edgeVal >= 0 ? 'pos' : 'neg';
-
-        const inSlip = slipIds.has(`${r.dg_id}|${state.market}`);
-        const b1dec = r.book_odds?.[state.book1];
-        const b2dec = r.book_odds?.[state.book2];
-        const hasOdds = b1dec != null || b2dec != null || r.best_book_dec != null;
+        const inSlip   = slipIds.has(`${r.dg_id}|${state.market}`);
+        const bookCells = state.selectedBooks.map(bk =>
+          `<td class="val-book">${toAmerican(r.book_odds?.[bk])}</td>`
+        ).join('');
 
         return `
           <tr data-id="${r.dg_id}" class="${inSlip ? 'slip-added' : ''}">
@@ -950,14 +934,10 @@
             </td>
             <td>${r.bbi_prob != null ? (r.bbi_prob * 100).toFixed(2) + '%' : '—'}</td>
             <td class="val-dim">${r.market_prob != null ? (r.market_prob * 100).toFixed(2) + '%' : '—'}</td>
-            <td class="edge-cell ${edgeSign}" style="--heat: ${edgeHeat.toFixed(3)};">
-              <span>${edgeStr}</span>
-            </td>
-            <td class="val-book">${toAmerican(b1dec)}</td>
-            <td class="val-book">${toAmerican(b2dec)}</td>
-            <td class="val-dim">${r.pin_prob != null && r.pin_prob > 0 && r.pin_prob < 1 ? (r.pin_prob * 100).toFixed(2) + '%' : '—'}</td>
+            <td class="edge-cell ${edgeSign}" style="--heat: ${edgeHeat.toFixed(3)};"><span>${edgeStr}</span></td>
+            ${bookCells}
             <td>
-              <button class="slip-btn ${inSlip ? 'added' : ''}" data-id="${r.dg_id}" ${!hasOdds ? 'disabled title="No odds available"' : ''}>
+              <button class="slip-btn ${inSlip ? 'added' : ''}" data-id="${r.dg_id}">
                 ${inSlip ? '✓' : '+'}
               </button>
             </td>
@@ -966,19 +946,18 @@
       }).join('');
 
       body.querySelectorAll('.slip-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', e => {
           e.stopPropagation();
-          const id = parseInt(btn.getAttribute('data-id'), 10);
-          toggleSlip(id);
+          toggleSlip(parseInt(btn.getAttribute('data-id'), 10));
         });
       });
     }
 
-    // ---------- Slip ----------
+    // ------------------------------------------------------------------ toggleSlip
     function toggleSlip(id) {
       const row = state.rows.find(r => r.dg_id === id);
       if (!row) return;
-      const key = `${id}|${state.market}`;
+      const key      = `${id}|${state.market}`;
       const existing = state.slip.findIndex(s => `${s.id}|${s.market}` === key);
       if (existing >= 0) {
         state.slip.splice(existing, 1);
@@ -988,21 +967,59 @@
           name:           row.name,
           market:         state.market,
           bbi_prob:       row.bbi_prob,
-          market_prob:    row.market_prob,
-          dk_dec:         row.dk_dec,
-          kelly_pct:      row.kelly_pct,
           edge:           row.edge,
           best_book_name: row.best_book_name,
           best_book_dec:  row.best_book_dec,
+          book_odds:      row.book_odds,   // full dict for parlay logic
         });
       }
       renderSlip();
       renderRows();
     }
 
+    // ------------------------------------------------------------------ getBestParlayBook
+    // Returns { name, key, combinedDec } or null
+    function getBestParlayBook() {
+      if (!state.slip.length) return null;
+
+      if (state.slip.length === 1) {
+        const s = state.slip[0];
+        return {
+          name: s.best_book_name || '—',
+          key:  null,
+          combinedDec: s.best_book_dec,
+          perLegDecs: [s.best_book_dec],
+        };
+      }
+
+      // Find books that have odds for EVERY leg
+      const allBookKeys = Object.keys(state.slip[0].book_odds || {});
+      const commonKeys  = allBookKeys.filter(bk =>
+        state.slip.every(s => s.book_odds?.[bk] != null && s.book_odds[bk] > 1)
+      );
+
+      if (!commonKeys.length) return null;
+
+      let best = null;
+      for (const bk of commonKeys) {
+        const product = state.slip.reduce((p, s) => p * s.book_odds[bk], 1);
+        if (!best || product > best.product) {
+          best = {
+            bk,
+            product,
+            name: BOOK_LABELS[bk] || bk,
+            perLegDecs: state.slip.map(s => s.book_odds[bk]),
+          };
+        }
+      }
+      if (!best) return null;
+      return { name: best.name, key: best.bk, combinedDec: best.product, perLegDecs: best.perLegDecs };
+    }
+
+    // ------------------------------------------------------------------ renderSlip
     function renderSlip() {
-      const mount = document.getElementById('slipItems');
-      const totals = document.getElementById('slipTotals');
+      const mount   = document.getElementById('slipItems');
+      const totals  = document.getElementById('slipTotals');
       const countEl = document.getElementById('slipCount');
       countEl.textContent = state.slip.length;
 
@@ -1010,42 +1027,42 @@
         mount.innerHTML = `
           <div class="slip-empty">
             <strong>Build your slip</strong>
-            Click + on any row to add the play here with a live Kelly-sized stake.
+            Click + on any row to add a play. Single bets or multi-leg parlays.
           </div>`;
         totals.style.display = 'none';
         return;
       }
 
       totals.style.display = '';
-      const stakes = state.slip.map(s => {
-        const pct   = s.kelly_pct != null ? s.kelly_pct * state.kellyFraction : 0;
-        const stake = state.bankroll * (pct / 100);
-        const dec   = s.best_book_dec || s.dk_dec || 2;
-        const payoutIfWin = stake * (dec - 1);
-        const ev = s.bbi_prob && dec ? stake * ((s.bbi_prob * dec) - 1) : 0;
-        return { ...s, kellyApplied: pct, stake, payoutIfWin, ev };
-      });
 
-      mount.innerHTML = stakes.map(s => {
-        const bestIsHigher = s.best_book_dec && s.dk_dec && s.best_book_dec > s.dk_dec;
-        const bestLine = s.best_book_name
-          ? `<span style="color:${bestIsHigher ? 'var(--positive)' : 'var(--text-muted)'}">Best: ${s.best_book_name} ${toAmerican(s.best_book_dec)}</span>`
-          : '';
-        const edgeLine = s.edge != null ? ` · ${s.edge > 0 ? '+' : ''}${s.edge.toFixed(2)}pp` : '';
-        const stakeDisplay = s.stake > 0
-          ? `$${s.stake.toFixed(2)}<small>${s.kellyApplied.toFixed(2)}%</small>`
-          : `<small style="color:var(--text-dimmed)">parlay leg</small>`;
+      const bestBook   = getBestParlayBook();
+      const isSingle   = state.slip.length === 1;
+      const betSize    = state.betSize || 0;
+      const combinedDec = bestBook?.combinedDec;
+      const toWin      = combinedDec != null ? betSize * (combinedDec - 1) : null;
+
+      // Render leg items
+      mount.innerHTML = state.slip.map((s, i) => {
+        const edgeLine = s.edge != null ? ` · ${s.edge >= 0 ? '+' : ''}${s.edge.toFixed(2)}pp` : '';
+        // Per-leg odds at the recommended book
+        let oddsLine = '';
+        if (isSingle && s.best_book_name && s.best_book_dec) {
+          oddsLine = `${s.best_book_name} ${toAmerican(s.best_book_dec)}`;
+        } else if (!isSingle && bestBook?.key) {
+          const legDec = s.book_odds?.[bestBook.key];
+          if (legDec) oddsLine = `${bestBook.name} ${toAmerican(legDec)}`;
+        }
         return `
         <div class="slip-item">
           <div>
             <span class="si-name">${fmt.abbrevName(s.name)}</span>
             <span class="si-market">${MARKETS[s.market].label}${edgeLine}</span>
-            <span class="si-market" style="margin-top:2px;">${bestLine}</span>
+            ${oddsLine ? `<span class="si-odds">${oddsLine}</span>` : ''}
           </div>
-          <div class="si-stake">${stakeDisplay}</div>
           <button data-remove="${s.id}|${s.market}" title="Remove">×</button>
         </div>`;
       }).join('');
+
       mount.querySelectorAll('[data-remove]').forEach(btn => {
         btn.addEventListener('click', () => {
           const k = btn.getAttribute('data-remove');
@@ -1054,27 +1071,35 @@
         });
       });
 
-      const totalStake = stakes.reduce((a, s) => a + s.stake, 0);
-      const totalPct = state.bankroll > 0 ? (totalStake / state.bankroll) * 100 : 0;
-      const totalEV = stakes.reduce((a, s) => a + s.ev, 0);
-      const totalWin = stakes.reduce((a, s) => a + s.payoutIfWin, 0);
+      // Totals
+      const oddsEl = document.getElementById('totalOdds');
+      oddsEl.textContent = combinedDec != null ? toAmerican(combinedDec) : '—';
 
-      document.getElementById('totalStake').textContent = `$${totalStake.toFixed(2)}`;
-      document.getElementById('totalPct').textContent = `${totalPct.toFixed(1)}%`;
-      const evEl = document.getElementById('totalEV');
-      evEl.textContent = `${totalEV >= 0 ? '+' : ''}$${totalEV.toFixed(2)}`;
-      evEl.classList.toggle('neg', totalEV < 0);
-      document.getElementById('totalWin').textContent = `+$${totalWin.toFixed(2)}`;
+      const bookEl = document.getElementById('totalBestBook');
+      document.getElementById('bestBookLbl').textContent = isSingle ? 'Best book' : 'Best parlay book';
+      bookEl.textContent = bestBook?.name || '—';
+
+      const winEl = document.getElementById('totalWin');
+      winEl.textContent  = toWin != null ? `+$${toWin.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '—';
+      winEl.classList.toggle('neg', toWin != null && toWin < 0);
     }
 
+    // ------------------------------------------------------------------ copySlip
     function copySlip() {
       if (!state.slip.length) return;
-      const lines = state.slip.map(s => {
-        const pct = s.kelly_pct * state.kellyFraction;
-        const stake = state.bankroll * (pct / 100);
-        return `${fmt.abbrevName(s.name)} · ${MARKETS[s.market].label} · DK ${toAmerican(s.dk_dec)} · stake $${stake.toFixed(2)} (+${s.edge.toFixed(2)}pp)`;
+      const bestBook = getBestParlayBook();
+      const isSingle = state.slip.length === 1;
+      const lines    = state.slip.map(s => {
+        const book = isSingle
+          ? `${s.best_book_name || ''} ${toAmerican(s.best_book_dec)}`
+          : (bestBook?.key ? `${bestBook.name} ${toAmerican(s.book_odds?.[bestBook.key])}` : '');
+        const edge = s.edge != null ? ` (+${s.edge.toFixed(2)}pp)` : '';
+        return `${fmt.abbrevName(s.name)} · ${MARKETS[s.market].label} · ${book}${edge}`;
       });
-      const text = `BirdieBuddy slip — ${state.omnia?.event || ''}\n` + lines.join('\n');
+      const combined = bestBook?.combinedDec
+        ? `\nCombined odds: ${toAmerican(bestBook.combinedDec)} · To win $${((state.betSize || 0) * (bestBook.combinedDec - 1)).toFixed(2)} on $${state.betSize}`
+        : '';
+      const text = `BirdieBuddy slip — ${state.omnia?.event || ''}\n` + lines.join('\n') + combined;
       try {
         navigator.clipboard?.writeText(text);
         const btn = document.getElementById('btnCopy');
