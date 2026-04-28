@@ -17,13 +17,8 @@
     .ranktable { font-size: var(--fs-xs); }
     .ranktable th { padding: var(--space-3) var(--space-2); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); }
     .ranktable td { padding: var(--space-2); font-variant-numeric: tabular-nums; }
-    /* Fix: .table-wrap's overflow-x:auto breaks viewport-relative sticky.
-       Solution: make the wrapper the vertical scroll container too, then thead sticks at top:0 within it. */
-    #rankTableWrap {
-      overflow-y: auto;
-      max-height: calc(100vh - var(--nav-h) - var(--status-h) - var(--page-toolbar-h));
-    }
-    .ranktable thead { top: 0; z-index: 5; }
+    /* CSS sticky doesn't work on thead inside overflow-x:auto — use JS transform instead (see stickyThead below) */
+    .ranktable thead { position: relative; z-index: 5; will-change: transform; }
     .ranktable thead th { background: var(--surface-2); }
     .ranktable thead th.sticky-col { z-index: 6; }
 
@@ -457,6 +452,25 @@
       makeChips($('#tierChips'), { onChange: applyFilters });
 
       render();
+
+      // ---------- Sticky thead (JS transform — CSS sticky breaks inside overflow-x:auto) ----------
+      // translateY keeps the thead pinned just below nav+statusbar+toolbar as the page scrolls.
+      (function stickyThead() {
+        const cs     = getComputedStyle(document.documentElement);
+        const offset = parseFloat(cs.getPropertyValue('--nav-h'))
+                     + parseFloat(cs.getPropertyValue('--status-h'))
+                     + parseFloat(cs.getPropertyValue('--page-toolbar-h'));
+        const tbl    = $('#rankTable');
+        const thead  = tbl.querySelector('thead');
+        function tick() {
+          const r = tbl.getBoundingClientRect();
+          const h = thead.offsetHeight;
+          thead.style.transform = (r.top < offset && r.bottom > offset + h)
+            ? `translateY(${offset - r.top}px)` : '';
+        }
+        window.addEventListener('scroll', tick, { passive: true });
+        tick();
+      })();
 
       // ---------- Weights cards ----------
       const renderWeights = (host, weights) => {
