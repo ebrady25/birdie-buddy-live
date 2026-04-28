@@ -1,0 +1,72 @@
+{
+  "latitude": 25.823336,
+  "longitude": -80.33666,
+  "timezone": "America/New_York",
+  "elevation_m": 5.0,
+  "fetched_utc": "2026-04-28T11:01:00Z",
+  "event": "Cadillac Championship",
+  "event_snake": "cadillac_championship",
+  "course": "Trump National Doral (Blue Monster)",
+  "rounds": [
+    {
+      "date": "2026-04-30",
+      "round": 1,
+      "temp_max_f": 90.4,
+      "temp_min_f": 76.2,
+      "precip_in": 0.0,
+      "precip_prob_pct": 2,
+      "wind_mph": 17.8,
+      "gusts_mph": 16.3,
+      "wind_dir_deg": 187,
+      "wind_dir_label": "S"
+    },
+    {
+      "date": "2026-05-01",
+      "round": 2,
+      "temp_max_f": 90.1,
+      "temp_min_f": 76.6,
+      "precip_in": 0.0,
+      "precip_prob_pct": 1,
+      "wind_mph": 15.5,
+      "gusts_mph": 14.1,
+      "wind_dir_deg": 160,
+      "wind_dir_label": "SSE"
+    },
+    {
+      "date": "2026-05-02",
+      "round": 3,
+      "temp_max_f": 95.7,
+      "temp_min_f": 78.7,
+      "precip_in": 0.0,
+      "precip_prob_pct": 5,
+      "wind_mph": 16.7,
+      "gusts_mph": 19.7,
+      "wind_dir_deg": 187,
+      "wind_dir_label": "S"
+    },
+    {
+      "date": "2026-05-03",
+      "round": 4,
+      "temp_max_f": 93.5,
+      "temp_min_f": 79.1,
+      "precip_in": 0.024,
+      "precip_prob_pct": 41,
+      "wind_mph": 18.0,
+      "gusts_mph": 19.5,
+      "wind_dir_deg": 241,
+      "wind_dir_label": "WSW"
+    }
+  ],
+  "summary": {
+    "avg_wind_mph": 17.0,
+    "peak_wind_mph": 18.0,
+    "total_precip_in": 0.024,
+    "avg_temp_max_f": 92.4,
+    "wind_intensity": 0.6,
+    "rain_flag": false,
+    "firm_fast_flag": false,
+    "rain_rounds": [],
+    "severity": "MODERATE-HIGH",
+    "wave_notes": "Southerly/SSE winds Th-Sat, shifting WSW Sunday. Consistent 15-18 mph all week. High temps 90-95F. Minimal rain. Classic Doral wind-and-heat setup."
+  }
+}

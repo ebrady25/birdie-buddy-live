@@ -143,9 +143,12 @@
       "bbi_dfs": 67.58,
       "rank_pool": 1,
       "rank_dfs": 1,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 100.0,
+      "zeus_dfs": 100.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 1,
+      "zeus_rank_dfs": 1
     },
     {
       "dg_id": 26651,
@@ -239,9 +242,12 @@
       "bbi_dfs": 48.75,
       "rank_pool": 2,
       "rank_dfs": 2,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 66.2,
+      "zeus_dfs": 67.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 2,
+      "zeus_rank_dfs": 2
     },
     {
       "dg_id": 22085,
@@ -335,9 +341,12 @@
       "bbi_dfs": 41.89,
       "rank_pool": 3,
       "rank_dfs": 3,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 58.0,
+      "zeus_dfs": 55.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 3,
+      "zeus_rank_dfs": 3
     },
     {
       "dg_id": 14609,
@@ -431,9 +440,12 @@
       "bbi_dfs": 39.7,
       "rank_pool": 4,
       "rank_dfs": 5,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 53.4,
+      "zeus_dfs": 51.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 4,
+      "zeus_rank_dfs": 5
     },
     {
       "dg_id": 15466,
@@ -527,9 +539,12 @@
       "bbi_dfs": 37.82,
       "rank_pool": 5,
       "rank_dfs": 9,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 51.0,
+      "zeus_dfs": 47.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 6,
+      "zeus_rank_dfs": 12
     },
     {
       "dg_id": 14577,
@@ -623,9 +638,12 @@
       "bbi_dfs": 37.73,
       "rank_pool": 6,
       "rank_dfs": 10,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 51.4,
+      "zeus_dfs": 48.8,
+      "wind_adj": 0.627,
+      "condition_adj": 0,
+      "zeus_rank_pool": 5,
+      "zeus_rank_dfs": 10
     },
     {
       "dg_id": 13562,
@@ -719,9 +737,12 @@
       "bbi_dfs": 37.47,
       "rank_pool": 7,
       "rank_dfs": 14,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 50.5,
+      "zeus_dfs": 47.8,
+      "wind_adj": 0.288,
+      "condition_adj": 0,
+      "zeus_rank_pool": 7,
+      "zeus_rank_dfs": 13
     },
     {
       "dg_id": 18634,
@@ -815,9 +836,12 @@
       "bbi_dfs": 38.51,
       "rank_pool": 8,
       "rank_dfs": 7,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 49.1,
+      "zeus_dfs": 49.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 10,
+      "zeus_rank_dfs": 9
     },
     {
       "dg_id": 6430,
@@ -911,17 +935,20 @@
       "bbi_dfs": 37.68,
       "rank_pool": 9,
       "rank_dfs": 12,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null,
+      "zeus_pool": 50.5,
+      "zeus_dfs": 49.3,
+      "wind_adj": 0.933,
       "_override_applied": {
         "action": "max_rank",
         "value": 9,
         "reason": "MOMUS single-factor (courseFit 43.6%) \u2014 prime-era data at age 45",
         "original_bbi_pool": 45.92,
         "original_rank": 4,
-        "applied_at": "2026-04-28T01:48:00.304028+00:00"
-      }
+        "applied_at": "2026-04-28T11:01:55.665993+00:00"
+      },
+      "condition_adj": 0,
+      "zeus_rank_pool": 8,
+      "zeus_rank_dfs": 8
     },
     {
       "dg_id": 16841,
@@ -1015,9 +1042,12 @@
       "bbi_dfs": 40.87,
       "rank_pool": 10,
       "rank_dfs": 4,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 48.7,
+      "zeus_dfs": 53.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 11,
+      "zeus_rank_dfs": 4
     },
     {
       "dg_id": 27774,
@@ -1111,9 +1141,12 @@
       "bbi_dfs": 37.53,
       "rank_pool": 11,
       "rank_dfs": 13,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 47.9,
+      "zeus_dfs": 47.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 12,
+      "zeus_rank_dfs": 15
     },
     {
       "dg_id": 19483,
@@ -1207,9 +1240,12 @@
       "bbi_dfs": 35.89,
       "rank_pool": 12,
       "rank_dfs": 23,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 47.4,
+      "zeus_dfs": 44.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 13,
+      "zeus_rank_dfs": 23
     },
     {
       "dg_id": 12294,
@@ -1303,17 +1339,20 @@
       "bbi_dfs": 35.68,
       "rank_pool": 13,
       "rank_dfs": 25,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null,
+      "zeus_pool": 44.5,
+      "zeus_dfs": 41.3,
+      "wind_adj": -1.612,
       "_override_applied": {
         "action": "min_rank",
         "value": 13,
         "reason": "MOMUS small-sample-fade \u2014 4-round 2014 era at age 23, now world #8",
         "original_bbi_pool": 31.35,
         "original_rank": 41,
-        "applied_at": "2026-04-28T01:48:00.304002+00:00"
-      }
+        "applied_at": "2026-04-28T11:01:55.665948+00:00"
+      },
+      "condition_adj": 0,
+      "zeus_rank_pool": 16,
+      "zeus_rank_dfs": 30
     },
     {
       "dg_id": 19396,
@@ -1407,9 +1446,12 @@
       "bbi_dfs": 35.97,
       "rank_pool": 14,
       "rank_dfs": 22,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 47.1,
+      "zeus_dfs": 44.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 14,
+      "zeus_rank_dfs": 21
     },
     {
       "dg_id": 12965,
@@ -1503,9 +1545,12 @@
       "bbi_dfs": 37.33,
       "rank_pool": 15,
       "rank_dfs": 15,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 49.5,
+      "zeus_dfs": 49.8,
+      "wind_adj": 1.578,
+      "condition_adj": 0,
+      "zeus_rank_pool": 9,
+      "zeus_rank_dfs": 7
     },
     {
       "dg_id": 29433,
@@ -1599,9 +1644,12 @@
       "bbi_dfs": 37.73,
       "rank_pool": 16,
       "rank_dfs": 11,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 46.3,
+      "zeus_dfs": 47.7,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 15,
+      "zeus_rank_dfs": 14
     },
     {
       "dg_id": 14578,
@@ -1695,9 +1743,12 @@
       "bbi_dfs": 32.54,
       "rank_pool": 17,
       "rank_dfs": 41,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 43.1,
+      "zeus_dfs": 36.5,
+      "wind_adj": -1.214,
+      "condition_adj": 0,
+      "zeus_rank_pool": 20,
+      "zeus_rank_dfs": 46
     },
     {
       "dg_id": 18841,
@@ -1791,9 +1842,12 @@
       "bbi_dfs": 34.26,
       "rank_pool": 18,
       "rank_dfs": 29,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 44.5,
+      "zeus_dfs": 41.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 17,
+      "zeus_rank_dfs": 28
     },
     {
       "dg_id": 23602,
@@ -1887,9 +1941,12 @@
       "bbi_dfs": 39.37,
       "rank_pool": 19,
       "rank_dfs": 6,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 44.2,
+      "zeus_dfs": 50.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 18,
+      "zeus_rank_dfs": 6
     },
     {
       "dg_id": 17536,
@@ -1983,9 +2040,12 @@
       "bbi_dfs": 36.97,
       "rank_pool": 20,
       "rank_dfs": 16,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 43.8,
+      "zeus_dfs": 46.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 19,
+      "zeus_rank_dfs": 16
     },
     {
       "dg_id": 26096,
@@ -2079,9 +2139,12 @@
       "bbi_dfs": 34.4,
       "rank_pool": 21,
       "rank_dfs": 28,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 42.2,
+      "zeus_dfs": 41.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 21,
+      "zeus_rank_dfs": 27
     },
     {
       "dg_id": 13900,
@@ -2175,9 +2238,12 @@
       "bbi_dfs": 35.77,
       "rank_pool": 22,
       "rank_dfs": 24,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 41.6,
+      "zeus_dfs": 44.3,
+      "wind_adj": 0.036,
+      "condition_adj": 0,
+      "zeus_rank_pool": 22,
+      "zeus_rank_dfs": 24
     },
     {
       "dg_id": 6093,
@@ -2271,9 +2337,12 @@
       "bbi_dfs": 33.0,
       "rank_pool": 23,
       "rank_dfs": 40,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.9,
+      "zeus_dfs": 39.2,
+      "wind_adj": -0.155,
+      "condition_adj": 0,
+      "zeus_rank_pool": 23,
+      "zeus_rank_dfs": 39
     },
     {
       "dg_id": 29767,
@@ -2367,9 +2436,12 @@
       "bbi_dfs": 38.17,
       "rank_pool": 24,
       "rank_dfs": 8,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.9,
+      "zeus_dfs": 48.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 24,
+      "zeus_rank_dfs": 11
     },
     {
       "dg_id": 21891,
@@ -2463,9 +2535,12 @@
       "bbi_dfs": 36.06,
       "rank_pool": 25,
       "rank_dfs": 20,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.5,
+      "zeus_dfs": 44.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 25,
+      "zeus_rank_dfs": 19
     },
     {
       "dg_id": 12577,
@@ -2559,9 +2634,12 @@
       "bbi_dfs": 36.1,
       "rank_pool": 26,
       "rank_dfs": 19,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.2,
+      "zeus_dfs": 44.6,
+      "wind_adj": -0.131,
+      "condition_adj": 0,
+      "zeus_rank_pool": 26,
+      "zeus_rank_dfs": 22
     },
     {
       "dg_id": 24968,
@@ -2655,9 +2733,12 @@
       "bbi_dfs": 33.1,
       "rank_pool": 27,
       "rank_dfs": 39,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 39.8,
+      "zeus_dfs": 39.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 27,
+      "zeus_rank_dfs": 38
     },
     {
       "dg_id": 9771,
@@ -2751,9 +2832,12 @@
       "bbi_dfs": 33.39,
       "rank_pool": 28,
       "rank_dfs": 35,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 39.8,
+      "zeus_dfs": 40.5,
+      "wind_adj": 0.249,
+      "condition_adj": 0,
+      "zeus_rank_pool": 28,
+      "zeus_rank_dfs": 34
     },
     {
       "dg_id": 14636,
@@ -2847,9 +2931,12 @@
       "bbi_dfs": 33.26,
       "rank_pool": 29,
       "rank_dfs": 36,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 38.6,
+      "zeus_dfs": 39.0,
+      "wind_adj": -0.492,
+      "condition_adj": 0,
+      "zeus_rank_pool": 30,
+      "zeus_rank_dfs": 40
     },
     {
       "dg_id": 17511,
@@ -2943,9 +3030,12 @@
       "bbi_dfs": 33.21,
       "rank_pool": 30,
       "rank_dfs": 38,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 38.7,
+      "zeus_dfs": 39.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 29,
+      "zeus_rank_dfs": 37
     },
     {
       "dg_id": 22760,
@@ -3039,9 +3129,12 @@
       "bbi_dfs": 36.12,
       "rank_pool": 31,
       "rank_dfs": 18,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 37.4,
+      "zeus_dfs": 44.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 31,
+      "zeus_rank_dfs": 18
     },
     {
       "dg_id": 18474,
@@ -3135,9 +3228,12 @@
       "bbi_dfs": 36.01,
       "rank_pool": 32,
       "rank_dfs": 21,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 37.2,
+      "zeus_dfs": 44.7,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 32,
+      "zeus_rank_dfs": 20
     },
     {
       "dg_id": 17365,
@@ -3231,9 +3327,12 @@
       "bbi_dfs": 34.51,
       "rank_pool": 33,
       "rank_dfs": 27,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.8,
+      "zeus_dfs": 42.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 33,
+      "zeus_rank_dfs": 26
     },
     {
       "dg_id": 23014,
@@ -3327,9 +3426,12 @@
       "bbi_dfs": 33.47,
       "rank_pool": 34,
       "rank_dfs": 34,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.5,
+      "zeus_dfs": 40.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 34,
+      "zeus_rank_dfs": 35
     },
     {
       "dg_id": 13872,
@@ -3423,9 +3525,12 @@
       "bbi_dfs": 33.82,
       "rank_pool": 35,
       "rank_dfs": 32,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.2,
+      "zeus_dfs": 40.7,
+      "wind_adj": -0.067,
+      "condition_adj": 0,
+      "zeus_rank_pool": 35,
+      "zeus_rank_dfs": 32
     },
     {
       "dg_id": 18586,
@@ -3519,9 +3624,12 @@
       "bbi_dfs": 36.93,
       "rank_pool": 36,
       "rank_dfs": 17,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.2,
+      "zeus_dfs": 46.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 36,
+      "zeus_rank_dfs": 17
     },
     {
       "dg_id": 25569,
@@ -3615,9 +3723,12 @@
       "bbi_dfs": 34.17,
       "rank_pool": 37,
       "rank_dfs": 30,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.2,
+      "zeus_dfs": 41.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 37,
+      "zeus_rank_dfs": 29
     },
     {
       "dg_id": 27194,
@@ -3711,9 +3822,12 @@
       "bbi_dfs": 31.39,
       "rank_pool": 38,
       "rank_dfs": 46,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 35.1,
+      "zeus_dfs": 36.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 38,
+      "zeus_rank_dfs": 44
     },
     {
       "dg_id": 28635,
@@ -3807,9 +3921,12 @@
       "bbi_dfs": 34.74,
       "rank_pool": 39,
       "rank_dfs": 26,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 34.9,
+      "zeus_dfs": 42.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 39,
+      "zeus_rank_dfs": 25
     },
     {
       "dg_id": 28309,
@@ -3903,9 +4020,12 @@
       "bbi_dfs": 33.72,
       "rank_pool": 40,
       "rank_dfs": 33,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 34.4,
+      "zeus_dfs": 40.7,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 40,
+      "zeus_rank_dfs": 33
     },
     {
       "dg_id": 17576,
@@ -3999,9 +4119,12 @@
       "bbi_dfs": 33.25,
       "rank_pool": 41,
       "rank_dfs": 37,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 34.4,
+      "zeus_dfs": 39.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 41,
+      "zeus_rank_dfs": 36
     },
     {
       "dg_id": 10419,
@@ -4095,9 +4218,12 @@
       "bbi_dfs": 31.27,
       "rank_pool": 42,
       "rank_dfs": 48,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.8,
+      "zeus_dfs": 34.0,
+      "wind_adj": -1.384,
+      "condition_adj": 0,
+      "zeus_rank_pool": 44,
+      "zeus_rank_dfs": 56
     },
     {
       "dg_id": 17606,
@@ -4191,9 +4317,12 @@
       "bbi_dfs": 31.44,
       "rank_pool": 43,
       "rank_dfs": 45,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 31.8,
+      "zeus_dfs": 36.2,
+      "wind_adj": -0.287,
+      "condition_adj": 0,
+      "zeus_rank_pool": 42,
+      "zeus_rank_dfs": 47
     },
     {
       "dg_id": 13126,
@@ -4287,9 +4416,12 @@
       "bbi_dfs": 29.99,
       "rank_pool": 44,
       "rank_dfs": 57,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 31.8,
+      "zeus_dfs": 34.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 43,
+      "zeus_rank_dfs": 55
     },
     {
       "dg_id": 14139,
@@ -4383,9 +4515,12 @@
       "bbi_dfs": 30.26,
       "rank_pool": 45,
       "rank_dfs": 54,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.7,
+      "zeus_dfs": 33.9,
+      "wind_adj": -0.435,
+      "condition_adj": 0,
+      "zeus_rank_pool": 46,
+      "zeus_rank_dfs": 57
     },
     {
       "dg_id": 11889,
@@ -4479,9 +4614,12 @@
       "bbi_dfs": 31.69,
       "rank_pool": 46,
       "rank_dfs": 44,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.8,
+      "zeus_dfs": 37.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 45,
+      "zeus_rank_dfs": 43
     },
     {
       "dg_id": 27819,
@@ -4575,9 +4713,12 @@
       "bbi_dfs": 32.37,
       "rank_pool": 47,
       "rank_dfs": 42,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.6,
+      "zeus_dfs": 38.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 47,
+      "zeus_rank_dfs": 41
     },
     {
       "dg_id": 23475,
@@ -4671,9 +4812,12 @@
       "bbi_dfs": 33.96,
       "rank_pool": 48,
       "rank_dfs": 31,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.5,
+      "zeus_dfs": 41.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 48,
+      "zeus_rank_dfs": 31
     },
     {
       "dg_id": 14502,
@@ -4767,9 +4911,12 @@
       "bbi_dfs": 32.09,
       "rank_pool": 49,
       "rank_dfs": 43,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.4,
+      "zeus_dfs": 37.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 49,
+      "zeus_rank_dfs": 42
     },
     {
       "dg_id": 21554,
@@ -4863,9 +5010,12 @@
       "bbi_dfs": 30.97,
       "rank_pool": 50,
       "rank_dfs": 50,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 29.2,
+      "zeus_dfs": 35.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 50,
+      "zeus_rank_dfs": 48
     },
     {
       "dg_id": 29925,
@@ -4959,9 +5109,12 @@
       "bbi_dfs": 31.01,
       "rank_pool": 51,
       "rank_dfs": 49,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 29.1,
+      "zeus_dfs": 35.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 51,
+      "zeus_rank_dfs": 49
     },
     {
       "dg_id": 8825,
@@ -5055,9 +5208,12 @@
       "bbi_dfs": 30.25,
       "rank_pool": 52,
       "rank_dfs": 55,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 28.8,
+      "zeus_dfs": 34.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 52,
+      "zeus_rank_dfs": 53
     },
     {
       "dg_id": 25362,
@@ -5151,9 +5307,12 @@
       "bbi_dfs": 30.19,
       "rank_pool": 53,
       "rank_dfs": 56,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 28.2,
+      "zeus_dfs": 34.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 53,
+      "zeus_rank_dfs": 54
     },
     {
       "dg_id": 17538,
@@ -5247,9 +5406,12 @@
       "bbi_dfs": 31.38,
       "rank_pool": 54,
       "rank_dfs": 47,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.5,
+      "zeus_dfs": 36.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 54,
+      "zeus_rank_dfs": 45
     },
     {
       "dg_id": 17543,
@@ -5343,9 +5505,12 @@
       "bbi_dfs": 29.3,
       "rank_pool": 55,
       "rank_dfs": 60,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.1,
+      "zeus_dfs": 32.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 55,
+      "zeus_rank_dfs": 60
     },
     {
       "dg_id": 17780,
@@ -5439,9 +5604,12 @@
       "bbi_dfs": 30.7,
       "rank_pool": 56,
       "rank_dfs": 52,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.0,
+      "zeus_dfs": 35.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 56,
+      "zeus_rank_dfs": 51
     },
     {
       "dg_id": 20706,
@@ -5535,9 +5703,12 @@
       "bbi_dfs": 29.87,
       "rank_pool": 57,
       "rank_dfs": 58,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.0,
+      "zeus_dfs": 33.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 57,
+      "zeus_rank_dfs": 58
     },
     {
       "dg_id": 16283,
@@ -5631,9 +5802,12 @@
       "bbi_dfs": 30.81,
       "rank_pool": 58,
       "rank_dfs": 51,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.0,
+      "zeus_dfs": 35.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 58,
+      "zeus_rank_dfs": 50
     },
     {
       "dg_id": 19870,
@@ -5727,9 +5901,12 @@
       "bbi_dfs": 28.39,
       "rank_pool": 59,
       "rank_dfs": 61,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 26.0,
+      "zeus_dfs": 31.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 59,
+      "zeus_rank_dfs": 61
     },
     {
       "dg_id": 14704,
@@ -5823,9 +6000,12 @@
       "bbi_dfs": 26.92,
       "rank_pool": 60,
       "rank_dfs": 65,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 25.3,
+      "zeus_dfs": 28.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 60,
+      "zeus_rank_dfs": 65
     },
     {
       "dg_id": 22985,
@@ -5919,9 +6099,12 @@
       "bbi_dfs": 29.7,
       "rank_pool": 61,
       "rank_dfs": 59,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 24.1,
+      "zeus_dfs": 33.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 61,
+      "zeus_rank_dfs": 59
     },
     {
       "dg_id": 23465,
@@ -6015,9 +6198,12 @@
       "bbi_dfs": 30.36,
       "rank_pool": 62,
       "rank_dfs": 53,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 23.5,
+      "zeus_dfs": 34.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 62,
+      "zeus_rank_dfs": 52
     },
     {
       "dg_id": 17488,
@@ -6111,9 +6297,12 @@
       "bbi_dfs": 27.33,
       "rank_pool": 63,
       "rank_dfs": 64,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 22.8,
+      "zeus_dfs": 29.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 63,
+      "zeus_rank_dfs": 64
     },
     {
       "dg_id": 24956,
@@ -6207,9 +6396,12 @@
       "bbi_dfs": 27.66,
       "rank_pool": 64,
       "rank_dfs": 63,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 21.4,
+      "zeus_dfs": 30.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 64,
+      "zeus_rank_dfs": 63
     },
     {
       "dg_id": 27900,
@@ -6303,9 +6495,12 @@
       "bbi_dfs": 28.35,
       "rank_pool": 65,
       "rank_dfs": 62,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 17.9,
+      "zeus_dfs": 31.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 65,
+      "zeus_rank_dfs": 62
     },
     {
       "dg_id": 14509,
@@ -6399,9 +6594,12 @@
       "bbi_dfs": 25.02,
       "rank_pool": 66,
       "rank_dfs": 66,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 17.8,
+      "zeus_dfs": 25.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 66,
+      "zeus_rank_dfs": 66
     },
     {
       "dg_id": 22833,
@@ -6495,9 +6693,12 @@
       "bbi_dfs": 22.96,
       "rank_pool": 67,
       "rank_dfs": 67,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 16.2,
+      "zeus_dfs": 21.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 67,
+      "zeus_rank_dfs": 67
     },
     {
       "dg_id": 7399,
@@ -6591,9 +6792,12 @@
       "bbi_dfs": 21.46,
       "rank_pool": 68,
       "rank_dfs": 70,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 15.6,
+      "zeus_dfs": 19.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 68,
+      "zeus_rank_dfs": 70
     },
     {
       "dg_id": 15575,
@@ -6687,9 +6891,12 @@
       "bbi_dfs": 22.42,
       "rank_pool": 69,
       "rank_dfs": 68,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 13.9,
+      "zeus_dfs": 20.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 69,
+      "zeus_rank_dfs": 68
     },
     {
       "dg_id": 13508,
@@ -6783,9 +6990,12 @@
       "bbi_dfs": 21.5,
       "rank_pool": 70,
       "rank_dfs": 69,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 12.5,
+      "zeus_dfs": 19.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 70,
+      "zeus_rank_dfs": 69
     },
     {
       "dg_id": 15980,
@@ -6879,9 +7089,12 @@
       "bbi_dfs": 19.88,
       "rank_pool": 71,
       "rank_dfs": 71,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 8.2,
+      "zeus_dfs": 17.3,
+      "wind_adj": 0.512,
+      "condition_adj": 0,
+      "zeus_rank_pool": 71,
+      "zeus_rank_dfs": 71
     },
     {
       "dg_id": 18628,
@@ -6975,18 +7188,28 @@
       "bbi_dfs": 10.49,
       "rank_pool": 72,
       "rank_dfs": 72,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 0.0,
+      "zeus_dfs": 0.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 72,
+      "zeus_rank_dfs": 72
     }
   ],
-  "zeus_computed": false,
-  "weather_summary": null,
+  "zeus_computed": true,
+  "weather_summary": {
+    "avg_wind_mph": 17.0,
+    "wind_intensity": 0.6,
+    "total_precip_in": 0.024,
+    "rain_flag": false,
+    "firm_fast_flag": false,
+    "avg_temp_max_f": 92.4
+  },
   "model_version": "8.5",
   "generated_at": "2026-04-28T01:30:28.900251+00:00",
   "_overrides_applied": {
     "count": 2,
-    "last_applied_utc": "2026-04-28T01:48:00.304052+00:00",
+    "last_applied_utc": "2026-04-28T11:01:55.666018+00:00",
     "source": "Context/MANUAL_OVERRIDES.json"
   },
   "players": [
@@ -7082,9 +7305,12 @@
       "bbi_dfs": 67.58,
       "rank_pool": 1,
       "rank_dfs": 1,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 100.0,
+      "zeus_dfs": 100.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 1,
+      "zeus_rank_dfs": 1
     },
     {
       "dg_id": 26651,
@@ -7178,9 +7404,12 @@
       "bbi_dfs": 48.75,
       "rank_pool": 2,
       "rank_dfs": 2,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 66.2,
+      "zeus_dfs": 67.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 2,
+      "zeus_rank_dfs": 2
     },
     {
       "dg_id": 22085,
@@ -7274,9 +7503,12 @@
       "bbi_dfs": 41.89,
       "rank_pool": 3,
       "rank_dfs": 3,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 58.0,
+      "zeus_dfs": 55.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 3,
+      "zeus_rank_dfs": 3
     },
     {
       "dg_id": 14609,
@@ -7370,9 +7602,12 @@
       "bbi_dfs": 39.7,
       "rank_pool": 4,
       "rank_dfs": 5,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 53.4,
+      "zeus_dfs": 51.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 4,
+      "zeus_rank_dfs": 5
     },
     {
       "dg_id": 15466,
@@ -7466,9 +7701,12 @@
       "bbi_dfs": 37.82,
       "rank_pool": 5,
       "rank_dfs": 9,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 51.0,
+      "zeus_dfs": 47.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 6,
+      "zeus_rank_dfs": 12
     },
     {
       "dg_id": 14577,
@@ -7562,9 +7800,12 @@
       "bbi_dfs": 37.73,
       "rank_pool": 6,
       "rank_dfs": 10,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 51.4,
+      "zeus_dfs": 48.8,
+      "wind_adj": 0.627,
+      "condition_adj": 0,
+      "zeus_rank_pool": 5,
+      "zeus_rank_dfs": 10
     },
     {
       "dg_id": 13562,
@@ -7658,9 +7899,12 @@
       "bbi_dfs": 37.47,
       "rank_pool": 7,
       "rank_dfs": 14,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 50.5,
+      "zeus_dfs": 47.8,
+      "wind_adj": 0.288,
+      "condition_adj": 0,
+      "zeus_rank_pool": 7,
+      "zeus_rank_dfs": 13
     },
     {
       "dg_id": 18634,
@@ -7754,9 +7998,12 @@
       "bbi_dfs": 38.51,
       "rank_pool": 8,
       "rank_dfs": 7,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 49.1,
+      "zeus_dfs": 49.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 10,
+      "zeus_rank_dfs": 9
     },
     {
       "dg_id": 6430,
@@ -7850,17 +8097,20 @@
       "bbi_dfs": 37.68,
       "rank_pool": 9,
       "rank_dfs": 12,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null,
+      "zeus_pool": 50.5,
+      "zeus_dfs": 49.3,
+      "wind_adj": 0.933,
       "_override_applied": {
         "action": "max_rank",
         "value": 9,
         "reason": "MOMUS single-factor (courseFit 43.6%) \u2014 prime-era data at age 45",
         "original_bbi_pool": 45.92,
         "original_rank": 4,
-        "applied_at": "2026-04-28T01:48:00.304028+00:00"
-      }
+        "applied_at": "2026-04-28T11:01:55.665993+00:00"
+      },
+      "condition_adj": 0,
+      "zeus_rank_pool": 8,
+      "zeus_rank_dfs": 8
     },
     {
       "dg_id": 16841,
@@ -7954,9 +8204,12 @@
       "bbi_dfs": 40.87,
       "rank_pool": 10,
       "rank_dfs": 4,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 48.7,
+      "zeus_dfs": 53.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 11,
+      "zeus_rank_dfs": 4
     },
     {
       "dg_id": 27774,
@@ -8050,9 +8303,12 @@
       "bbi_dfs": 37.53,
       "rank_pool": 11,
       "rank_dfs": 13,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 47.9,
+      "zeus_dfs": 47.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 12,
+      "zeus_rank_dfs": 15
     },
     {
       "dg_id": 19483,
@@ -8146,9 +8402,12 @@
       "bbi_dfs": 35.89,
       "rank_pool": 12,
       "rank_dfs": 23,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 47.4,
+      "zeus_dfs": 44.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 13,
+      "zeus_rank_dfs": 23
     },
     {
       "dg_id": 12294,
@@ -8242,17 +8501,20 @@
       "bbi_dfs": 35.68,
       "rank_pool": 13,
       "rank_dfs": 25,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null,
+      "zeus_pool": 44.5,
+      "zeus_dfs": 41.3,
+      "wind_adj": -1.612,
       "_override_applied": {
         "action": "min_rank",
         "value": 13,
         "reason": "MOMUS small-sample-fade \u2014 4-round 2014 era at age 23, now world #8",
         "original_bbi_pool": 31.35,
         "original_rank": 41,
-        "applied_at": "2026-04-28T01:48:00.304002+00:00"
-      }
+        "applied_at": "2026-04-28T11:01:55.665948+00:00"
+      },
+      "condition_adj": 0,
+      "zeus_rank_pool": 16,
+      "zeus_rank_dfs": 30
     },
     {
       "dg_id": 19396,
@@ -8346,9 +8608,12 @@
       "bbi_dfs": 35.97,
       "rank_pool": 14,
       "rank_dfs": 22,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 47.1,
+      "zeus_dfs": 44.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 14,
+      "zeus_rank_dfs": 21
     },
     {
       "dg_id": 12965,
@@ -8442,9 +8707,12 @@
       "bbi_dfs": 37.33,
       "rank_pool": 15,
       "rank_dfs": 15,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 49.5,
+      "zeus_dfs": 49.8,
+      "wind_adj": 1.578,
+      "condition_adj": 0,
+      "zeus_rank_pool": 9,
+      "zeus_rank_dfs": 7
     },
     {
       "dg_id": 29433,
@@ -8538,9 +8806,12 @@
       "bbi_dfs": 37.73,
       "rank_pool": 16,
       "rank_dfs": 11,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 46.3,
+      "zeus_dfs": 47.7,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 15,
+      "zeus_rank_dfs": 14
     },
     {
       "dg_id": 14578,
@@ -8634,9 +8905,12 @@
       "bbi_dfs": 32.54,
       "rank_pool": 17,
       "rank_dfs": 41,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 43.1,
+      "zeus_dfs": 36.5,
+      "wind_adj": -1.214,
+      "condition_adj": 0,
+      "zeus_rank_pool": 20,
+      "zeus_rank_dfs": 46
     },
     {
       "dg_id": 18841,
@@ -8730,9 +9004,12 @@
       "bbi_dfs": 34.26,
       "rank_pool": 18,
       "rank_dfs": 29,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 44.5,
+      "zeus_dfs": 41.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 17,
+      "zeus_rank_dfs": 28
     },
     {
       "dg_id": 23602,
@@ -8826,9 +9103,12 @@
       "bbi_dfs": 39.37,
       "rank_pool": 19,
       "rank_dfs": 6,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 44.2,
+      "zeus_dfs": 50.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 18,
+      "zeus_rank_dfs": 6
     },
     {
       "dg_id": 17536,
@@ -8922,9 +9202,12 @@
       "bbi_dfs": 36.97,
       "rank_pool": 20,
       "rank_dfs": 16,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 43.8,
+      "zeus_dfs": 46.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 19,
+      "zeus_rank_dfs": 16
     },
     {
       "dg_id": 26096,
@@ -9018,9 +9301,12 @@
       "bbi_dfs": 34.4,
       "rank_pool": 21,
       "rank_dfs": 28,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 42.2,
+      "zeus_dfs": 41.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 21,
+      "zeus_rank_dfs": 27
     },
     {
       "dg_id": 13900,
@@ -9114,9 +9400,12 @@
       "bbi_dfs": 35.77,
       "rank_pool": 22,
       "rank_dfs": 24,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 41.6,
+      "zeus_dfs": 44.3,
+      "wind_adj": 0.036,
+      "condition_adj": 0,
+      "zeus_rank_pool": 22,
+      "zeus_rank_dfs": 24
     },
     {
       "dg_id": 6093,
@@ -9210,9 +9499,12 @@
       "bbi_dfs": 33.0,
       "rank_pool": 23,
       "rank_dfs": 40,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.9,
+      "zeus_dfs": 39.2,
+      "wind_adj": -0.155,
+      "condition_adj": 0,
+      "zeus_rank_pool": 23,
+      "zeus_rank_dfs": 39
     },
     {
       "dg_id": 29767,
@@ -9306,9 +9598,12 @@
       "bbi_dfs": 38.17,
       "rank_pool": 24,
       "rank_dfs": 8,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.9,
+      "zeus_dfs": 48.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 24,
+      "zeus_rank_dfs": 11
     },
     {
       "dg_id": 21891,
@@ -9402,9 +9697,12 @@
       "bbi_dfs": 36.06,
       "rank_pool": 25,
       "rank_dfs": 20,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.5,
+      "zeus_dfs": 44.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 25,
+      "zeus_rank_dfs": 19
     },
     {
       "dg_id": 12577,
@@ -9498,9 +9796,12 @@
       "bbi_dfs": 36.1,
       "rank_pool": 26,
       "rank_dfs": 19,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 40.2,
+      "zeus_dfs": 44.6,
+      "wind_adj": -0.131,
+      "condition_adj": 0,
+      "zeus_rank_pool": 26,
+      "zeus_rank_dfs": 22
     },
     {
       "dg_id": 24968,
@@ -9594,9 +9895,12 @@
       "bbi_dfs": 33.1,
       "rank_pool": 27,
       "rank_dfs": 39,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 39.8,
+      "zeus_dfs": 39.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 27,
+      "zeus_rank_dfs": 38
     },
     {
       "dg_id": 9771,
@@ -9690,9 +9994,12 @@
       "bbi_dfs": 33.39,
       "rank_pool": 28,
       "rank_dfs": 35,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 39.8,
+      "zeus_dfs": 40.5,
+      "wind_adj": 0.249,
+      "condition_adj": 0,
+      "zeus_rank_pool": 28,
+      "zeus_rank_dfs": 34
     },
     {
       "dg_id": 14636,
@@ -9786,9 +10093,12 @@
       "bbi_dfs": 33.26,
       "rank_pool": 29,
       "rank_dfs": 36,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 38.6,
+      "zeus_dfs": 39.0,
+      "wind_adj": -0.492,
+      "condition_adj": 0,
+      "zeus_rank_pool": 30,
+      "zeus_rank_dfs": 40
     },
     {
       "dg_id": 17511,
@@ -9882,9 +10192,12 @@
       "bbi_dfs": 33.21,
       "rank_pool": 30,
       "rank_dfs": 38,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 38.7,
+      "zeus_dfs": 39.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 29,
+      "zeus_rank_dfs": 37
     },
     {
       "dg_id": 22760,
@@ -9978,9 +10291,12 @@
       "bbi_dfs": 36.12,
       "rank_pool": 31,
       "rank_dfs": 18,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 37.4,
+      "zeus_dfs": 44.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 31,
+      "zeus_rank_dfs": 18
     },
     {
       "dg_id": 18474,
@@ -10074,9 +10390,12 @@
       "bbi_dfs": 36.01,
       "rank_pool": 32,
       "rank_dfs": 21,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 37.2,
+      "zeus_dfs": 44.7,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 32,
+      "zeus_rank_dfs": 20
     },
     {
       "dg_id": 17365,
@@ -10170,9 +10489,12 @@
       "bbi_dfs": 34.51,
       "rank_pool": 33,
       "rank_dfs": 27,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.8,
+      "zeus_dfs": 42.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 33,
+      "zeus_rank_dfs": 26
     },
     {
       "dg_id": 23014,
@@ -10266,9 +10588,12 @@
       "bbi_dfs": 33.47,
       "rank_pool": 34,
       "rank_dfs": 34,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.5,
+      "zeus_dfs": 40.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 34,
+      "zeus_rank_dfs": 35
     },
     {
       "dg_id": 13872,
@@ -10362,9 +10687,12 @@
       "bbi_dfs": 33.82,
       "rank_pool": 35,
       "rank_dfs": 32,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.2,
+      "zeus_dfs": 40.7,
+      "wind_adj": -0.067,
+      "condition_adj": 0,
+      "zeus_rank_pool": 35,
+      "zeus_rank_dfs": 32
     },
     {
       "dg_id": 18586,
@@ -10458,9 +10786,12 @@
       "bbi_dfs": 36.93,
       "rank_pool": 36,
       "rank_dfs": 17,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.2,
+      "zeus_dfs": 46.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 36,
+      "zeus_rank_dfs": 17
     },
     {
       "dg_id": 25569,
@@ -10554,9 +10885,12 @@
       "bbi_dfs": 34.17,
       "rank_pool": 37,
       "rank_dfs": 30,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 36.2,
+      "zeus_dfs": 41.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 37,
+      "zeus_rank_dfs": 29
     },
     {
       "dg_id": 27194,
@@ -10650,9 +10984,12 @@
       "bbi_dfs": 31.39,
       "rank_pool": 38,
       "rank_dfs": 46,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 35.1,
+      "zeus_dfs": 36.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 38,
+      "zeus_rank_dfs": 44
     },
     {
       "dg_id": 28635,
@@ -10746,9 +11083,12 @@
       "bbi_dfs": 34.74,
       "rank_pool": 39,
       "rank_dfs": 26,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 34.9,
+      "zeus_dfs": 42.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 39,
+      "zeus_rank_dfs": 25
     },
     {
       "dg_id": 28309,
@@ -10842,9 +11182,12 @@
       "bbi_dfs": 33.72,
       "rank_pool": 40,
       "rank_dfs": 33,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 34.4,
+      "zeus_dfs": 40.7,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 40,
+      "zeus_rank_dfs": 33
     },
     {
       "dg_id": 17576,
@@ -10938,9 +11281,12 @@
       "bbi_dfs": 33.25,
       "rank_pool": 41,
       "rank_dfs": 37,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 34.4,
+      "zeus_dfs": 39.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 41,
+      "zeus_rank_dfs": 36
     },
     {
       "dg_id": 10419,
@@ -11034,9 +11380,12 @@
       "bbi_dfs": 31.27,
       "rank_pool": 42,
       "rank_dfs": 48,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.8,
+      "zeus_dfs": 34.0,
+      "wind_adj": -1.384,
+      "condition_adj": 0,
+      "zeus_rank_pool": 44,
+      "zeus_rank_dfs": 56
     },
     {
       "dg_id": 17606,
@@ -11130,9 +11479,12 @@
       "bbi_dfs": 31.44,
       "rank_pool": 43,
       "rank_dfs": 45,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 31.8,
+      "zeus_dfs": 36.2,
+      "wind_adj": -0.287,
+      "condition_adj": 0,
+      "zeus_rank_pool": 42,
+      "zeus_rank_dfs": 47
     },
     {
       "dg_id": 13126,
@@ -11226,9 +11578,12 @@
       "bbi_dfs": 29.99,
       "rank_pool": 44,
       "rank_dfs": 57,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 31.8,
+      "zeus_dfs": 34.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 43,
+      "zeus_rank_dfs": 55
     },
     {
       "dg_id": 14139,
@@ -11322,9 +11677,12 @@
       "bbi_dfs": 30.26,
       "rank_pool": 45,
       "rank_dfs": 54,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.7,
+      "zeus_dfs": 33.9,
+      "wind_adj": -0.435,
+      "condition_adj": 0,
+      "zeus_rank_pool": 46,
+      "zeus_rank_dfs": 57
     },
     {
       "dg_id": 11889,
@@ -11418,9 +11776,12 @@
       "bbi_dfs": 31.69,
       "rank_pool": 46,
       "rank_dfs": 44,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.8,
+      "zeus_dfs": 37.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 45,
+      "zeus_rank_dfs": 43
     },
     {
       "dg_id": 27819,
@@ -11514,9 +11875,12 @@
       "bbi_dfs": 32.37,
       "rank_pool": 47,
       "rank_dfs": 42,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.6,
+      "zeus_dfs": 38.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 47,
+      "zeus_rank_dfs": 41
     },
     {
       "dg_id": 23475,
@@ -11610,9 +11974,12 @@
       "bbi_dfs": 33.96,
       "rank_pool": 48,
       "rank_dfs": 31,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.5,
+      "zeus_dfs": 41.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 48,
+      "zeus_rank_dfs": 31
     },
     {
       "dg_id": 14502,
@@ -11706,9 +12073,12 @@
       "bbi_dfs": 32.09,
       "rank_pool": 49,
       "rank_dfs": 43,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 30.4,
+      "zeus_dfs": 37.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 49,
+      "zeus_rank_dfs": 42
     },
     {
       "dg_id": 21554,
@@ -11802,9 +12172,12 @@
       "bbi_dfs": 30.97,
       "rank_pool": 50,
       "rank_dfs": 50,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 29.2,
+      "zeus_dfs": 35.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 50,
+      "zeus_rank_dfs": 48
     },
     {
       "dg_id": 29925,
@@ -11898,9 +12271,12 @@
       "bbi_dfs": 31.01,
       "rank_pool": 51,
       "rank_dfs": 49,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 29.1,
+      "zeus_dfs": 35.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 51,
+      "zeus_rank_dfs": 49
     },
     {
       "dg_id": 8825,
@@ -11994,9 +12370,12 @@
       "bbi_dfs": 30.25,
       "rank_pool": 52,
       "rank_dfs": 55,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 28.8,
+      "zeus_dfs": 34.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 52,
+      "zeus_rank_dfs": 53
     },
     {
       "dg_id": 25362,
@@ -12090,9 +12469,12 @@
       "bbi_dfs": 30.19,
       "rank_pool": 53,
       "rank_dfs": 56,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 28.2,
+      "zeus_dfs": 34.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 53,
+      "zeus_rank_dfs": 54
     },
     {
       "dg_id": 17538,
@@ -12186,9 +12568,12 @@
       "bbi_dfs": 31.38,
       "rank_pool": 54,
       "rank_dfs": 47,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.5,
+      "zeus_dfs": 36.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 54,
+      "zeus_rank_dfs": 45
     },
     {
       "dg_id": 17543,
@@ -12282,9 +12667,12 @@
       "bbi_dfs": 29.3,
       "rank_pool": 55,
       "rank_dfs": 60,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.1,
+      "zeus_dfs": 32.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 55,
+      "zeus_rank_dfs": 60
     },
     {
       "dg_id": 17780,
@@ -12378,9 +12766,12 @@
       "bbi_dfs": 30.7,
       "rank_pool": 56,
       "rank_dfs": 52,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.0,
+      "zeus_dfs": 35.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 56,
+      "zeus_rank_dfs": 51
     },
     {
       "dg_id": 20706,
@@ -12474,9 +12865,12 @@
       "bbi_dfs": 29.87,
       "rank_pool": 57,
       "rank_dfs": 58,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.0,
+      "zeus_dfs": 33.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 57,
+      "zeus_rank_dfs": 58
     },
     {
       "dg_id": 16283,
@@ -12570,9 +12964,12 @@
       "bbi_dfs": 30.81,
       "rank_pool": 58,
       "rank_dfs": 51,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 27.0,
+      "zeus_dfs": 35.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 58,
+      "zeus_rank_dfs": 50
     },
     {
       "dg_id": 19870,
@@ -12666,9 +13063,12 @@
       "bbi_dfs": 28.39,
       "rank_pool": 59,
       "rank_dfs": 61,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 26.0,
+      "zeus_dfs": 31.4,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 59,
+      "zeus_rank_dfs": 61
     },
     {
       "dg_id": 14704,
@@ -12762,9 +13162,12 @@
       "bbi_dfs": 26.92,
       "rank_pool": 60,
       "rank_dfs": 65,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 25.3,
+      "zeus_dfs": 28.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 60,
+      "zeus_rank_dfs": 65
     },
     {
       "dg_id": 22985,
@@ -12858,9 +13261,12 @@
       "bbi_dfs": 29.7,
       "rank_pool": 61,
       "rank_dfs": 59,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 24.1,
+      "zeus_dfs": 33.6,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 61,
+      "zeus_rank_dfs": 59
     },
     {
       "dg_id": 23465,
@@ -12954,9 +13360,12 @@
       "bbi_dfs": 30.36,
       "rank_pool": 62,
       "rank_dfs": 53,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 23.5,
+      "zeus_dfs": 34.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 62,
+      "zeus_rank_dfs": 52
     },
     {
       "dg_id": 17488,
@@ -13050,9 +13459,12 @@
       "bbi_dfs": 27.33,
       "rank_pool": 63,
       "rank_dfs": 64,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 22.8,
+      "zeus_dfs": 29.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 63,
+      "zeus_rank_dfs": 64
     },
     {
       "dg_id": 24956,
@@ -13146,9 +13558,12 @@
       "bbi_dfs": 27.66,
       "rank_pool": 64,
       "rank_dfs": 63,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 21.4,
+      "zeus_dfs": 30.1,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 64,
+      "zeus_rank_dfs": 63
     },
     {
       "dg_id": 27900,
@@ -13242,9 +13657,12 @@
       "bbi_dfs": 28.35,
       "rank_pool": 65,
       "rank_dfs": 62,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 17.9,
+      "zeus_dfs": 31.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 65,
+      "zeus_rank_dfs": 62
     },
     {
       "dg_id": 14509,
@@ -13338,9 +13756,12 @@
       "bbi_dfs": 25.02,
       "rank_pool": 66,
       "rank_dfs": 66,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 17.8,
+      "zeus_dfs": 25.5,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 66,
+      "zeus_rank_dfs": 66
     },
     {
       "dg_id": 22833,
@@ -13434,9 +13855,12 @@
       "bbi_dfs": 22.96,
       "rank_pool": 67,
       "rank_dfs": 67,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 16.2,
+      "zeus_dfs": 21.8,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 67,
+      "zeus_rank_dfs": 67
     },
     {
       "dg_id": 7399,
@@ -13530,9 +13954,12 @@
       "bbi_dfs": 21.46,
       "rank_pool": 68,
       "rank_dfs": 70,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 15.6,
+      "zeus_dfs": 19.2,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 68,
+      "zeus_rank_dfs": 70
     },
     {
       "dg_id": 15575,
@@ -13626,9 +14053,12 @@
       "bbi_dfs": 22.42,
       "rank_pool": 69,
       "rank_dfs": 68,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 13.9,
+      "zeus_dfs": 20.9,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 69,
+      "zeus_rank_dfs": 68
     },
     {
       "dg_id": 13508,
@@ -13722,9 +14152,12 @@
       "bbi_dfs": 21.5,
       "rank_pool": 70,
       "rank_dfs": 69,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 12.5,
+      "zeus_dfs": 19.3,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 70,
+      "zeus_rank_dfs": 69
     },
     {
       "dg_id": 15980,
@@ -13818,9 +14251,12 @@
       "bbi_dfs": 19.88,
       "rank_pool": 71,
       "rank_dfs": 71,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 8.2,
+      "zeus_dfs": 17.3,
+      "wind_adj": 0.512,
+      "condition_adj": 0,
+      "zeus_rank_pool": 71,
+      "zeus_rank_dfs": 71
     },
     {
       "dg_id": 18628,
@@ -13914,9 +14350,12 @@
       "bbi_dfs": 10.49,
       "rank_pool": 72,
       "rank_dfs": 72,
-      "zeus_pool": null,
-      "zeus_dfs": null,
-      "wind_adj": null
+      "zeus_pool": 0.0,
+      "zeus_dfs": 0.0,
+      "wind_adj": 0.0,
+      "condition_adj": 0,
+      "zeus_rank_pool": 72,
+      "zeus_rank_dfs": 72
     }
   ]
 }
