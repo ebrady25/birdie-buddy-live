@@ -658,6 +658,41 @@
       margin: 0;
     }
 
+    /* Refreshed-at badge (small timestamp under section eyebrow) */
+    .section-refreshed {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: var(--space-2);
+      padding: 3px 10px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .section-refreshed::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--positive);
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.18);
+      animation: refreshPulse 3s ease-in-out infinite;
+    }
+    @keyframes refreshPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .section-refreshed.stale::before {
+      background: var(--negative);
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
+    }
+    .section-refreshed strong { color: var(--text-body); font-weight: 600; }
+
     /* Section at-a-glance stat (next to H2) */
     .section-glance {
       display: inline-flex;
@@ -2263,6 +2298,47 @@
         });
         body.innerHTML = rows.join('');
       })();
+
+      // ---------- REFRESHED-AT BADGES per section ----------
+      const setRefresh = (parentId, sourceTs, source) => {
+        const sec = document.getElementById(parentId);
+        if (!sec || !sourceTs) return;
+        const head = sec.querySelector('.section-head-text');
+        if (!head) return;
+        // Don't double-mount if already added
+        if (head.querySelector('.section-refreshed')) return;
+        const ts = new Date(sourceTs);
+        const now = new Date();
+        const ageMs = now - ts;
+        const ageDays = ageMs / (1000 * 60 * 60 * 24);
+        const stale = ageDays > 8; // > 1 week is stale
+        const fmtRel = () => {
+          if (ageDays < 1) {
+            const hrs = Math.floor(ageMs / (1000 * 60 * 60));
+            return hrs <= 1 ? 'just now' : `${hrs}h ago`;
+          }
+          if (ageDays < 7) return `${Math.floor(ageDays)}d ago`;
+          return ts.toISOString().slice(0, 10);
+        };
+        const badge = document.createElement('span');
+        badge.className = 'section-refreshed' + (stale ? ' stale' : '');
+        badge.innerHTML = `Refreshed <strong>${fmtRel()}</strong> · ${source}`;
+        // Insert after the eyebrow
+        const eyebrow = head.querySelector('.eyebrow');
+        if (eyebrow && eyebrow.nextElementSibling) {
+          head.insertBefore(badge, eyebrow.nextElementSibling);
+        } else {
+          head.appendChild(badge);
+        }
+      };
+      setRefresh('world-rank', worldRank?.asof + 'T00:00:00Z', 'world_ranking.json');
+      setRefresh('spearman', spear?.last_updated, 'Mnemosyne');
+      setRefresh('recaps', recaps?.last_updated, 'postmortem_artifacts');
+      setRefresh('attribution', attr?.last_updated || (attrPayload?.metadata?.completed + 'T00:00:00Z'), 'postmortem_artifacts');
+      setRefresh('shadow', shadow?.generated_at, 'HEPHAESTUS');
+      setRefresh('calibration', calib?.last_updated, 'Mnemosyne');
+      setRefresh('backtest', prom?.run_at_utc, 'PROMETHEUS · GitHub Actions');
+      setRefresh('competition', comp?.last_updated, 'Mnemosyne');
 
       // ---------- AT-A-GLANCE STATS (next to each section H2) ----------
       const setGlance = (id, html) => { const el = $(`#${id}`); if (el) el.innerHTML = html; };
