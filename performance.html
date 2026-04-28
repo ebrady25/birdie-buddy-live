@@ -59,6 +59,39 @@
     .legend-line { width: 14px; height: 2px; border-radius: 2px; }
     .legend-line.target { background: var(--positive); }
     .legend-line.aspire { background: var(--gold-300); border-top: 1px dashed var(--gold-300); }
+    .legend-line.rolling {
+      width: 14px; height: 0; border-top: 1.5px dashed var(--gold-200);
+      align-self: center;
+    }
+    .rolling-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: var(--space-2);
+      padding: 4px 10px;
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--dur-base);
+    }
+    .rolling-toggle:hover { color: var(--gold-300); border-color: var(--border-gold); }
+    .rolling-toggle.active {
+      color: var(--gold-200);
+      border-color: var(--border-gold);
+      background: rgba(212, 168, 67, 0.12);
+    }
+    .rolling-toggle::before {
+      content: '';
+      width: 12px;
+      height: 0;
+      border-top: 1.5px dashed currentColor;
+    }
 
     .chart-svg { width: 100%; height: 340px; display: block; }
     .chart-axis text { fill: var(--text-dimmed); font-family: var(--font-mono); font-size: 10px; font-weight: 500; }
@@ -1388,6 +1421,7 @@
             <span class="perf-legend-item"><span class="legend-dot dg"></span>Baseline</span>
             <span class="perf-legend-item"><span class="legend-line target"></span>Target (0.40)</span>
             <span class="perf-legend-item"><span class="legend-line aspire"></span>Aspirational (0.50)</span>
+            <button type="button" class="rolling-toggle" id="rollingToggle" hidden>3-wk rolling avg</button>
           </div>
         </div>
         <svg class="chart-svg" id="spearmanChart" viewBox="0 0 1000 340" preserveAspectRatio="none"></svg>
@@ -2081,7 +2115,47 @@
       });
       markup += `</g>`;
 
+      // Rolling 3-week average overlay (only when 3+ events)
+      const rollingPoints = [];
+      for (let i = 0; i < events.length; i++) {
+        const window = [];
+        for (let j = Math.max(0, i - 2); j <= i; j++) {
+          if (events[j].spearman_bbi != null) window.push(events[j].spearman_bbi);
+        }
+        if (window.length >= 2) {
+          const avg = window.reduce((a, b) => a + b, 0) / window.length;
+          rollingPoints.push({ px: x(i), py: y(clamp(avg, 0, 1)), avg });
+        }
+      }
+      if (events.length >= 3 && rollingPoints.length >= 2) {
+        const rollingPath = rollingPoints
+          .map((p, i) => `${i ? 'L' : 'M'}${p.px.toFixed(1)} ${p.py.toFixed(1)}`)
+          .join(' ');
+        markup += `<g class="chart-series" id="rollingSeries" style="display: none;">`;
+        markup += `<path d="${rollingPath}" fill="none" stroke="var(--gold-200)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.85"/>`;
+        rollingPoints.forEach(p => {
+          markup += `<circle cx="${p.px.toFixed(1)}" cy="${p.py.toFixed(1)}" r="2.5" fill="var(--gold-200)" stroke="var(--surface-1)" stroke-width="1">
+            <title>3-week rolling avg ρ ${fmt.num(p.avg, 3)}</title></circle>`;
+        });
+        markup += `</g>`;
+      }
+
       svg.innerHTML = markup;
+
+      // Rolling-average toggle (defaults visible once 5+ events)
+      const rollingToggle = document.getElementById('rollingToggle');
+      const rollingSeries = document.getElementById('rollingSeries');
+      if (rollingToggle && rollingSeries) {
+        const showByDefault = events.length >= 5;
+        rollingSeries.style.display = showByDefault ? '' : 'none';
+        rollingToggle.classList.toggle('active', showByDefault);
+        rollingToggle.addEventListener('click', () => {
+          const visible = rollingSeries.style.display !== 'none';
+          rollingSeries.style.display = visible ? 'none' : '';
+          rollingToggle.classList.toggle('active', !visible);
+        });
+        rollingToggle.removeAttribute('hidden');
+      }
 
       // ---------- EVENT TABLE ----------
       const tbody = $('#eventBody');
