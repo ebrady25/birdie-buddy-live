@@ -925,6 +925,67 @@
       gap: 6px;
     }
 
+    /* =========================================================
+       GLOSSARY TOOLTIPS — dotted underline on technical terms
+       ========================================================= */
+    .gloss {
+      position: relative;
+      border-bottom: 1px dotted var(--gold-500);
+      cursor: help;
+      transition: color var(--dur-base);
+    }
+    .gloss:hover, .gloss:focus {
+      color: var(--gold-200);
+      outline: none;
+    }
+    .gloss::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      transform: translateX(-50%);
+      width: max-content;
+      max-width: 280px;
+      padding: 8px 12px;
+      background: var(--surface-5);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: var(--fs-xs);
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0;
+      text-transform: none;
+      line-height: 1.5;
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease-in-out, transform 180ms ease-in-out;
+      z-index: 100;
+      white-space: normal;
+      text-align: left;
+    }
+    .gloss:hover::after, .gloss:focus::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+    .gloss::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 2px);
+      transform: translateX(-50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      background: var(--surface-5);
+      border-right: 1px solid var(--border-gold);
+      border-bottom: 1px solid var(--border-gold);
+      opacity: 0;
+      transition: opacity 180ms ease-in-out;
+      z-index: 99;
+    }
+    .gloss:hover::before, .gloss:focus::before { opacity: 1; }
+
     /* "View all recaps" archive link */
     .recaps-archive-link {
       display: flex;
@@ -1314,7 +1375,7 @@
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Spearman ρ</button>
             <div class="section-info-body">
-              <p>Spearman ρ measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against the published industry baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
+              <p><span class="gloss" tabindex="0" data-tip="Rank correlation between predicted and actual finishing order. Range −1 to +1; higher is better. 0.40 = target, 0.50 = aspirational, 0.55+ = best-in-world.">Spearman ρ</span> measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against the published industry baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
             </div>
           </div>
         </div>
@@ -1445,7 +1506,7 @@
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How HEPHAESTUS works</button>
             <div class="section-info-body">
-              <p>Every Monday, HEPHAESTUS runs four alternative weight configurations against the v8.5 champion. Top-20 Spearman agreement is the similarity metric. Any variant beating baseline by ≥0.03 Spearman and ≥5% Brier for 3+ consecutive weeks across 8+ events gets flagged for promotion.</p>
+              <p>Every Monday, HEPHAESTUS runs four alternative weight configurations against the v8.5 champion. Top-20 <span class="gloss" tabindex="0" data-tip="Rank correlation restricted to the top 20 predicted players. Measures how similar two ranking systems are at the high-conviction end of the field.">Spearman agreement</span> is the similarity metric. Any variant beating baseline by ≥0.03 Spearman and ≥5% Brier for 3+ consecutive weeks across 8+ events gets flagged for <span class="gloss" tabindex="0" data-tip="A variant must clear all 4 promotion criteria to be flagged for human review. No automatic takeover — a person decides whether to promote.">promotion</span>.</p>
             </div>
           </div>
         </div>
@@ -1468,7 +1529,7 @@
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Brier score</button>
             <div class="section-info-body">
-              <p>For each market, Brier score measures how close predicted probabilities land to observed outcomes (lower is better). Skill % is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
+              <p>For each market, <span class="gloss" tabindex="0" data-tip="Mean squared error between predicted probability and binary outcome (0 or 1). Range 0 to 1; lower is better. A perfectly calibrated coin flip on 50/50 events scores 0.25.">Brier score</span> measures how close predicted probabilities land to observed outcomes (lower is better). <span class="gloss" tabindex="0" data-tip="Improvement over the naive baseline of predicting the field-average rate for everyone. 0% = no edge, 100% = perfect predictions.">Skill %</span> is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
             </div>
           </div>
         </div>
@@ -1493,7 +1554,7 @@
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How PROMETHEUS works</button>
             <div class="section-info-body">
-              <p>PROMETHEUS replays every published industry pre-tournament baseline against actual finishing positions across <strong>2025 + completed 2026</strong>. Refreshed every Sunday night by an automated pipeline. These are the numbers BBI has to beat, event over event, to claim skill.</p>
+              <p><span class="gloss" tabindex="0" data-tip="Offline backtest agent. Re-scores the industry baseline against actual finishing positions across every event with archived pre-tournament odds. Automated GH Action runs Sunday nights.">PROMETHEUS</span> replays every published industry pre-tournament baseline against actual finishing positions across <strong>2025 + completed 2026</strong>. Refreshed every Sunday night by an automated pipeline. These are the numbers BBI has to beat, event over event, to claim skill.</p>
             </div>
           </div>
         </div>
