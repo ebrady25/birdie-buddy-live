@@ -24,6 +24,9 @@
     "_note": "Slightly elevated vs default (0.22/0.17): Blue Monster winner archetype is highly specific (bombers + iron accuracy). Limited course history (post-2020 return) caps leverage."
   },
   "course_form_name": "Trump National Doral Form",
+  "course_history_event_id_fallbacks": [473],
+  "course_history_year_range": [2011, 2016],
+  "course_history_note": "Cadillac Championship 2026 (event_id 556) is a brand-new return to Doral — DataGolf has no archive at this id. Pull WGC-Cadillac Championship history from event_id 473, years 2011-2016 (the prior PGA Tour era at Trump National Doral Blue Monster).",
   "course_tier_thresholds": {
     "SPECIALIST": {
       "min_rounds": 8,
