@@ -46,16 +46,6 @@
       "win_pct": 0.027770063871146906
     },
     {
-      "dg_id": 15466,
-      "name": "Cantlay, Patrick",
-      "rank_pool": 5,
-      "bbi_pool": 41.94,
-      "zeus_pool": 41.94,
-      "proj_own": 12.0,
-      "make_cut": 1.0,
-      "win_pct": 0.02735229759299781
-    },
-    {
       "dg_id": 14577,
       "name": "English, Harris",
       "rank_pool": 6,
@@ -64,6 +54,17 @@
       "proj_own": 19.0,
       "make_cut": 1.0,
       "win_pct": 0.014400921658986175
+    },
+    {
+      "dg_id": 13562,
+      "name": "Matsuyama, Hideki",
+      "rank_pool": 7,
+      "bbi_pool": 41.3,
+      "zeus_pool": 41.3,
+      "proj_own": 16.19,
+      "make_cut": 1.0,
+      "win_pct": 0.021867483052700636,
+      "_note": "Cantlay WD replacement \u2014 Wednesday lock"
     }
   ],
   "leverage_pool": [
@@ -169,5 +170,10 @@
       "name": "Scott, Adam",
       "action": "max_rank=9 (MOMUS single-factor flag)"
     }
-  ]
+  ],
+  "_wednesday_lock_update": {
+    "cantlay_wd": true,
+    "primary_pool_updated": true,
+    "updated_at": "2026-04-29T13:27:31.229356+00:00"
+  }
 }
