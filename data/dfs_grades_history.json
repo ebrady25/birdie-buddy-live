@@ -6,7 +6,7 @@
       "event_id": 12,
       "year": 2026,
       "completed": "2026-04-19",
-      "graded_at_utc": "2026-04-29T00:47:48Z",
+      "graded_at_utc": "2026-04-29T01:37:25Z",
       "thresholds": {
         "cash_line": 340,
         "top_1_pct": 410,
@@ -15,16 +15,16 @@
       "portfolio": {
         "n_lineups": 12,
         "avg_proj": 459.03,
-        "avg_actual": 409.67,
+        "avg_actual": 488.46,
         "n_below_cash": 0,
-        "n_cash": 4,
-        "n_top_1pct": 8,
-        "n_top_001pct": 0,
+        "n_cash": 0,
+        "n_top_1pct": 9,
+        "n_top_001pct": 3,
         "best_lineup_id": "L1",
-        "best_lineup_actual": 438.0,
+        "best_lineup_actual": 513.0,
         "worst_lineup_id": "G2",
-        "worst_lineup_actual": 370.0,
-        "delta_pct": -10.75
+        "worst_lineup_actual": 444.5,
+        "delta_pct": 6.41
       },
       "lineups": [
         {
@@ -66,8 +66,8 @@
               "salary": 6700
             }
           ],
-          "actual_total": 410.0,
-          "delta_pct": -13.34,
+          "actual_total": 491.5,
+          "delta_pct": 3.89,
           "verdict": "top_1_pct"
         },
         {
@@ -109,8 +109,8 @@
               "salary": 6700
             }
           ],
-          "actual_total": 424.0,
-          "delta_pct": -8.15,
+          "actual_total": 497.0,
+          "delta_pct": 7.67,
           "verdict": "top_1_pct"
         },
         {
@@ -152,8 +152,8 @@
               "salary": 6700
             }
           ],
-          "actual_total": 410.0,
-          "delta_pct": -13.48,
+          "actual_total": 491.0,
+          "delta_pct": 3.61,
           "verdict": "top_1_pct"
         },
         {
@@ -195,9 +195,9 @@
               "salary": 6700
             }
           ],
-          "actual_total": 428.0,
-          "delta_pct": -7.46,
-          "verdict": "top_1_pct"
+          "actual_total": 512.5,
+          "delta_pct": 10.81,
+          "verdict": "top_001_pct"
         },
         {
           "lineup_id": "C5",
@@ -238,9 +238,9 @@
               "salary": 6700
             }
           ],
-          "actual_total": 390.0,
-          "delta_pct": -12.46,
-          "verdict": "cash"
+          "actual_total": 467.0,
+          "delta_pct": 4.83,
+          "verdict": "top_1_pct"
         },
         {
           "lineup_id": "L1",
@@ -281,9 +281,9 @@
               "salary": 6800
             }
           ],
-          "actual_total": 438.0,
-          "delta_pct": -7.83,
-          "verdict": "top_1_pct"
+          "actual_total": 513.0,
+          "delta_pct": 7.95,
+          "verdict": "top_001_pct"
         },
         {
           "lineup_id": "L2",
@@ -324,9 +324,9 @@
               "salary": 6700
             }
           ],
-          "actual_total": 392.0,
-          "delta_pct": -17.11,
-          "verdict": "cash"
+          "actual_total": 482.5,
+          "delta_pct": 2.03,
+          "verdict": "top_1_pct"
         },
         {
           "lineup_id": "L3",
@@ -367,9 +367,9 @@
               "salary": 7000
             }
           ],
-          "actual_total": 428.0,
-          "delta_pct": -3.15,
-          "verdict": "top_1_pct"
+          "actual_total": 505.0,
+          "delta_pct": 14.28,
+          "verdict": "top_001_pct"
         },
         {
           "lineup_id": "G1",
@@ -410,9 +410,9 @@
               "salary": 6700
             }
           ],
-          "actual_total": 396.0,
-          "delta_pct": -14.17,
-          "verdict": "cash"
+          "actual_total": 469.5,
+          "delta_pct": 1.76,
+          "verdict": "top_1_pct"
         },
         {
           "lineup_id": "G2",
@@ -453,9 +453,9 @@
               "salary": 7000
             }
           ],
-          "actual_total": 370.0,
-          "delta_pct": -18.54,
-          "verdict": "cash"
+          "actual_total": 444.5,
+          "delta_pct": -2.14,
+          "verdict": "top_1_pct"
         },
         {
           "lineup_id": "G3",
@@ -496,8 +496,8 @@
               "salary": 6700
             }
           ],
-          "actual_total": 416.0,
-          "delta_pct": -7.76,
+          "actual_total": 498.5,
+          "delta_pct": 10.53,
           "verdict": "top_1_pct"
         },
         {
@@ -539,18 +539,18 @@
               "salary": 6700
             }
           ],
-          "actual_total": 414.0,
-          "delta_pct": -4.87,
+          "actual_total": 489.5,
+          "delta_pct": 12.48,
           "verdict": "top_1_pct"
         }
       ],
       "hindsight_best": {
-        "total": 460.0,
-        "salary": 48100,
+        "total": 551.5,
+        "salary": 46600,
         "n_players": 6
       },
-      "vs_hindsight_pts_left": 22.0
+      "vs_hindsight_pts_left": 38.5
     }
   ],
-  "last_updated": "2026-04-29T00:47:48Z"
+  "last_updated": "2026-04-29T01:37:25Z"
 }

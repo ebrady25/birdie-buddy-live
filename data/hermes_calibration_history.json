@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "events": [
+    {
+      "event": "RBC Heritage",
+      "event_id": 12,
+      "year": 2026,
+      "completed": "2026-04-19",
+      "scored_at_utc": "2026-04-29T01:32:46Z",
+      "n_compared": 82,
+      "summary": {
+        "mae": 12.58,
+        "bias": 10.9,
+        "rmse": 33.46,
+        "clean_mae": 2.32,
+        "clean_bias": 0.44,
+        "clean_rmse": 4.65,
+        "n_suspect_excluded": 9,
+        "suspect_threshold_pct": 50.0
+      },
+      "by_tier": {
+        "studs": {
+          "n": 4,
+          "mae": 4.09,
+          "bias": 1.76
+        },
+        "anchors": {
+          "n": 12,
+          "mae": 1.87,
+          "bias": 1.29
+        },
+        "mid-tier": {
+          "n": 15,
+          "mae": 2.24,
+          "bias": -1.29
+        },
+        "value": {
+          "n": 30,
+          "mae": 5.05,
+          "bias": 2.9
+        },
+        "punt": {
+          "n": 21,
+          "mae": 38.45,
+          "bias": 38.27
+        }
+      }
+    }
+  ],
+  "season": {
+    "n_events": 1,
+    "mean_mae": 12.58,
+    "mean_bias": 10.9
+  },
+  "last_updated": "2026-04-29T01:32:46Z"
+}
