@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-04-28T15:10:47Z",
-  "phase_checked": "preview",
-  "next_phase": "phase2_preview",
+  "timestamp": "2026-04-29T10:33:10Z",
+  "phase_checked": "lock",
+  "next_phase": "phase2_lock",
   "status": "green",
   "checks": {
     "current_event": {
@@ -9,22 +9,22 @@
       "event_id": 556,
       "event_name": "Cadillac Championship",
       "start_date": "2026-04-30",
-      "days_until_start": 1,
+      "days_until_start": 0,
       "team_event": false,
       "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.24,
+      "duration_s": 0.28,
       "players_returned": 72,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "pass",
       "checked": [
-        "themis.json (0.0h)",
-        "bbi_rankings.json (0.0h)"
+        "bbi_rankings.json (0.0h)",
+        "themis.json (0.0h)"
       ]
     }
   },
