@@ -6,7 +6,7 @@
       "event_id": 12,
       "year": 2026,
       "completed": "2026-04-19",
-      "graded_at_utc": "2026-04-29T01:47:30Z",
+      "graded_at_utc": "2026-04-29T01:56:02Z",
       "thresholds": {
         "cash_line": 340,
         "top_1_pct": 410,
@@ -602,5 +602,5 @@
       "capture_rate_pct": 82.54
     }
   ],
-  "last_updated": "2026-04-29T01:47:30Z"
+  "last_updated": "2026-04-29T01:56:02Z"
 }

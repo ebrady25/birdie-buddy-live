@@ -390,11 +390,13 @@
       await BBI.renderHeader('recap.html');
       await BBI.renderFooter();
 
-      const [spearman, calibration, attribution, weeklyRecaps] = await Promise.all([
+      const [spearman, calibration, attribution, weeklyRecaps, dfsHistory, dfsOptimal] = await Promise.all([
         BBI.data.load(BBI.data.paths.spearman),
         BBI.data.load(BBI.data.paths.calibration),
         BBI.data.load(BBI.data.paths.performanceAttribution),
-        BBI.data.load(BBI.data.paths.performanceWeeklyRecaps)
+        BBI.data.load(BBI.data.paths.performanceWeeklyRecaps),
+        BBI.data.load(BBI.data.paths.dfsGradesHistory),
+        BBI.data.load(BBI.data.paths.dfsOptimalHistory)
       ]);
 
       const mount = $('#recapContent');
@@ -463,7 +465,11 @@
         }
       }
 
-      mount.innerHTML = renderRecap(cur, prev, next, sortedWeeks, attrForWeek);
+      // Find DFS grade entry for this week
+      const dfsForWeek = (dfsHistory?.events || []).find(e => e.event_id === cur.event_id) || null;
+      const dfsOptForWeek = (dfsOptimal?.events || []).find(e => e.event_id === cur.event_id) || null;
+
+      mount.innerHTML = renderRecap(cur, prev, next, sortedWeeks, attrForWeek, dfsForWeek, dfsOptForWeek);
 
       // Wire week selector
       const sel = document.getElementById('weekSelect');
@@ -472,7 +478,115 @@
       });
     });
 
-    function renderRecap(cur, prev, next, allWeeks, attr) {
+    function renderDfsBlock(cur, dfsGrade, dfsOpt) {
+      if (!dfsGrade) return '';
+      const p = dfsGrade.portfolio || {};
+      const opt = dfsOpt?.optimal;
+      const inPool = dfsOpt?.n_optimal_in_our_pool || 0;
+      const lineupRows = (dfsGrade.lineups || [])
+        .slice()
+        .sort((a, b) => (b.actual_total || 0) - (a.actual_total || 0))
+        .slice(0, 12)
+        .map(l => {
+          const dCls = (l.delta_pct || 0) > 0 ? 'positive' : ((l.delta_pct || 0) < 0 ? 'negative' : 'muted');
+          const verdictMap = {
+            'below_cash': ['muted','Below cash'],
+            'cash':       ['positive','Cashed'],
+            'top_1_pct':  ['gold','Top 1%'],
+            'top_001_pct':['gold','Top 0.01%'],
+          };
+          const [vCls, vLbl] = verdictMap[l.verdict] || ['muted','—'];
+          return `
+            <tr>
+              <td><strong>${l.lineup_id}</strong></td>
+              <td><span class="muted" style="font-size:10px;">${l.kind}</span></td>
+              <td class="num">$${(l.salary/1000).toFixed(1)}k</td>
+              <td class="num">${(l.proj_total||0).toFixed(0)}</td>
+              <td class="num"><strong>${(l.actual_total||0).toFixed(0)}</strong></td>
+              <td class="num ${dCls}">${(l.delta_pct||0)>0?'+':''}${(l.delta_pct||0).toFixed(1)}%</td>
+              <td><span class="${vCls}" style="font-size:10px; font-family:var(--font-mono); font-weight:700;">${vLbl}</span></td>
+            </tr>
+          `;
+        }).join('');
+
+      const optimalRows = opt ? opt.players.map(pl => `
+        <tr>
+          <td>${pl.in_our_pool ? '<span style="color: var(--gold-300);">★</span>' : ''}</td>
+          <td><strong>${pl.name}</strong></td>
+          <td class="num">$${pl.salary}</td>
+          <td class="num"><strong style="color: var(--positive);">${(pl.total_pts||0).toFixed(1)}</strong></td>
+          <td class="num"><span class="muted">${pl.ownership!=null ? (pl.ownership*100).toFixed(1)+'%' : '—'}</span></td>
+        </tr>
+      `).join('') : '';
+
+      return `
+        <section class="recap-section" style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-soft);">
+          <div class="section-head">
+            <div class="section-head-text">
+              <h2 style="margin: 0;">DFS report card</h2>
+              <p class="muted" style="font-size: var(--fs-sm); margin-top: var(--space-2);">12 lineups graded against actual DK contest results · capture rate vs theoretical max</p>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-top: var(--space-4); margin-bottom: var(--space-5);">
+            <div style="background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-md); padding: var(--space-3); text-align: center;">
+              <div class="eyebrow" style="font-size: 10px; margin-bottom: 4px;">Best lineup</div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: var(--fs-2xl); color: var(--gold-300);">${(p.best_lineup_actual||0).toFixed(0)}</div>
+              <div class="muted" style="font-size: 10px;">${p.best_lineup_id || ''}</div>
+            </div>
+            <div style="background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-md); padding: var(--space-3); text-align: center;">
+              <div class="eyebrow" style="font-size: 10px; margin-bottom: 4px;">Capture rate</div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: var(--fs-2xl); color: var(--text-primary);">${dfsGrade.capture_rate_pct != null ? dfsGrade.capture_rate_pct.toFixed(1)+'%' : '—'}</div>
+              <div class="muted" style="font-size: 10px;">vs field optimum</div>
+            </div>
+            <div style="background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-md); padding: var(--space-3); text-align: center;">
+              <div class="eyebrow" style="font-size: 10px; margin-bottom: 4px;">Cashed</div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: var(--fs-2xl); color: var(--positive);">${(p.n_cash||0)+(p.n_top_1pct||0)+(p.n_top_001pct||0)}/${p.n_lineups||12}</div>
+              <div class="muted" style="font-size: 10px;">cleared 340pt</div>
+            </div>
+            <div style="background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-md); padding: var(--space-3); text-align: center;">
+              <div class="eyebrow" style="font-size: 10px; margin-bottom: 4px;">Pool coverage</div>
+              <div style="font-family: var(--font-display); font-weight: 800; font-size: var(--fs-2xl); color: var(--text-primary);">${inPool}/6</div>
+              <div class="muted" style="font-size: 10px;">optimal players we rostered</div>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-bottom: var(--space-5);">
+            <table class="table" style="font-size: var(--fs-xs);">
+              <thead>
+                <tr>
+                  <th>ID</th><th>Build</th><th>Salary</th><th>Proj</th><th>Actual</th><th>Δ</th><th>Verdict</th>
+                </tr>
+              </thead>
+              <tbody>${lineupRows}</tbody>
+            </table>
+          </div>
+
+          ${opt ? `
+          <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid rgba(74, 222, 128, 0.20); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-3); padding-bottom: var(--space-2); border-bottom: 1px solid var(--border-soft);">
+              <span style="font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 700; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--positive);">Optimal lineup of the week</span>
+              <span class="muted" style="font-family: var(--font-mono); font-size: 10px;">${opt.total.toFixed(0)} pts · $${(opt.salary/1000).toFixed(1)}k of $50k</span>
+            </div>
+            <table class="table" style="font-size: var(--fs-xs); width: 100%;">
+              <thead>
+                <tr><th></th><th>Player</th><th>Salary</th><th>DK pts</th><th>Own</th></tr>
+              </thead>
+              <tbody>${optimalRows}</tbody>
+            </table>
+            <div class="muted" style="font-size: 10px; margin-top: var(--space-2); font-family: var(--font-mono);">★ = player was on at least one of our 12 lineups</div>
+          </div>
+          ` : ''}
+
+          <div style="margin-top: var(--space-4); display: flex; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;">
+            <a href="lineups.html" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px 12px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-pill); color: var(--gold-300); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none;">Live lineups page →</a>
+            <a href="performance.html#dfs" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px 12px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-pill); color: var(--gold-300); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none;">Season DFS trend →</a>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderRecap(cur, prev, next, allWeeks, attr, dfsGrade, dfsOpt) {
       const verdict = getVerdict(cur);
       const bbi = cur.spearman_bbi;
       const base = cur.spearman_dg;
@@ -547,6 +661,9 @@
 
         <!-- ATTRIBUTION (Week 11 only for now) -->
         ${attr ? renderAttribution(attr) : ''}
+
+        <!-- DFS REPORT CARD (when DFS grading completed for this event) -->
+        ${renderDfsBlock(cur, dfsGrade, dfsOpt)}
       `;
     }
 

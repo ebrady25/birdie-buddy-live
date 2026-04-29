@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "events": [
+    {
+      "event": "RBC Heritage",
+      "event_id": 12,
+      "year": 2026,
+      "completed": "2026-04-19",
+      "optimal": {
+        "total": 621.5,
+        "salary": 50000,
+        "players": [
+          {
+            "dg_id": 17646,
+            "name": "Fitzpatrick, Matt",
+            "salary": 10000,
+            "total_pts": 130.0,
+            "ownership": 0.1764,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 14609,
+            "name": "Kim, Si Woo",
+            "salary": 8900,
+            "total_pts": 106.5,
+            "ownership": 0.1263,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 22085,
+            "name": "Morikawa, Collin",
+            "salary": 9300,
+            "total_pts": 101.5,
+            "ownership": 0.1105,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 14577,
+            "name": "English, Harris",
+            "salary": 7900,
+            "total_pts": 97.0,
+            "ownership": 0.0506,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 21891,
+            "name": "Kitayama, Kurt",
+            "salary": 7100,
+            "total_pts": 93.5,
+            "ownership": 0.0538,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 12577,
+            "name": "Woodland, Gary",
+            "salary": 6800,
+            "total_pts": 93.0,
+            "ownership": 0.049699999999999994,
+            "in_our_pool": false
+          }
+        ]
+      },
+      "our_best_actual": 513.0,
+      "our_best_id": "L1",
+      "capture_rate_pct": 82.54,
+      "n_optimal_in_our_pool": 1
+    }
+  ],
+  "last_updated": "2026-04-29T01:56:02Z"
+}

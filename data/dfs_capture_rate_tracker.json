@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "events": [
+    {
+      "event": "RBC Heritage",
+      "event_id": 12,
+      "year": 2026,
+      "completed": "2026-04-19",
+      "our_best": 513.0,
+      "our_best_id": "L1",
+      "pool_hindsight": 551.5,
+      "field_optimal": 621.5,
+      "capture_rate_pct": 82.54,
+      "n_lineups": 12,
+      "n_cash": 0,
+      "n_top_1pct": 9,
+      "n_top_001pct": 3,
+      "cashed_total": 12,
+      "cash_rate_pct": 100.0
+    }
+  ],
+  "season": {
+    "n_events": 1,
+    "mean_capture_rate_pct": 82.54,
+    "mean_cash_rate_pct": 100.0,
+    "total_cashed": 12,
+    "total_lineups": 12
+  },
+  "last_updated": "2026-04-29T01:56:02Z"
+}

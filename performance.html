@@ -1576,6 +1576,7 @@
         <a href="#shadow" class="toc-pill" data-toc="shadow">Shadow models</a>
         <a href="#calibration" class="toc-pill" data-toc="calibration">Calibration</a>
         <a href="#backtest" class="toc-pill" data-toc="backtest">Backtest <span class="toc-stat" id="tocBacktestStat"></span></a>
+        <a href="#dfs" class="toc-pill" data-toc="dfs">DFS <span class="toc-stat" id="tocDfsStat"></span></a>
         <a href="#competition" class="toc-pill" data-toc="competition">Competition</a>
       </div>
     </nav>
@@ -1924,6 +1925,85 @@
       </div>
     </section>
 
+    <!-- DFS LINEUP PERFORMANCE -->
+    <section class="section zone-elevated" id="dfs" data-reveal>
+      <div class="section-head">
+        <div class="section-head-text">
+          <h2>DFS lineup performance. <span class="section-glance" id="glanceDfs"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How DFS grading works</button>
+            <div class="section-info-body">
+              <p>Every Monday, last week's 12 published lineups get scored against actual DraftKings results. We track <strong>capture rate</strong> (our best lineup vs the field-wide optimal lineup) and <strong>cash rate</strong> (% of our 12 lineups that cleared the contest cash line). All scoring uses exact DK total points sourced from <span class="gloss" tabindex="0" data-tip="DataGolf historical-dfs-data/points endpoint — published after each event with exact DK fantasy points + actual contest ownership.">verified post-event DK contest data</span>, not approximations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DFS hero pillars -->
+      <div class="backtest-hero" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-6);">
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Season capture rate</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-300); letter-spacing: -0.02em; line-height: 1;" id="dfsHeroCapture">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;">vs field-wide optimal</div>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Cash rate</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--text-primary); letter-spacing: -0.02em; line-height: 1;" id="dfsHeroCash">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;" id="dfsHeroCashSub">lineups clearing 340pt threshold</div>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Best week</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-300); letter-spacing: -0.02em; line-height: 1;" id="dfsHeroBest">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;" id="dfsHeroBestEvent">—</div>
+        </div>
+        <div style="background: linear-gradient(180deg, var(--surface-2), var(--surface-1)); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center;">
+          <div class="eyebrow" style="margin-bottom: var(--space-2);">Events graded</div>
+          <div style="font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--text-primary); letter-spacing: -0.02em; line-height: 1;" id="dfsHeroEvents">—</div>
+          <div class="muted" style="font-size: var(--fs-3xs); font-family: var(--font-mono); margin-top: 6px;">since season start</div>
+        </div>
+      </div>
+
+      <!-- Capture-rate trend chart -->
+      <div class="perf-card">
+        <div class="perf-card-head">
+          <h3>Capture rate, week by week</h3>
+          <div class="perf-legend">
+            <span class="perf-legend-item"><span class="legend-dot bbi"></span>BBI capture %</span>
+            <span class="perf-legend-item"><span class="legend-line target"></span>Target (75%)</span>
+            <span class="perf-legend-item"><span class="legend-line aspire"></span>Aspirational (90%)</span>
+          </div>
+        </div>
+        <svg class="chart-svg" id="dfsCaptureChart" viewBox="0 0 1000 280" preserveAspectRatio="none"></svg>
+      </div>
+
+      <!-- Per-event grade table -->
+      <div class="table-wrap" style="border-radius: var(--radius-lg);">
+        <table class="table event-table">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Our best</th>
+              <th>Pool max</th>
+              <th>Field optimal</th>
+              <th class="num">Capture</th>
+              <th class="num">Cashed</th>
+              <th>Top-1%</th>
+            </tr>
+          </thead>
+          <tbody id="dfsGradeBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Optimal lineup of latest event — narrative callout -->
+      <div class="rank-summary" id="dfsLatestSummary" style="margin-top: var(--space-5);"></div>
+
+      <div style="margin-top: var(--space-4); display: flex; justify-content: flex-end;">
+        <a href="lineups.html" style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px 12px; background: var(--surface-3); border: 1px solid var(--border-soft); border-radius: var(--radius-pill); color: var(--gold-300); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none; transition: all var(--dur-base);" onmouseover="this.style.borderColor='var(--border-gold)'" onmouseout="this.style.borderColor='var(--border-soft)'">
+          Live lineups page →
+        </a>
+      </div>
+    </section>
+
     <!-- COMPETITION STATUS -->
     <section class="section zone-elevated" id="competition" data-reveal>
       <div class="section-head">
@@ -2010,7 +2090,7 @@
 
     // Scroll-spy: highlight TOC pill matching the section nearest the top
     function initTocScrollSpy() {
-      const sections = ['world-rank','spearman','recaps','attribution','shadow','calibration','backtest','competition'];
+      const sections = ['world-rank','spearman','recaps','attribution','shadow','calibration','backtest','dfs','competition'];
       const pills = new Map(sections.map(id => [id, document.querySelector(`.toc-pill[data-toc="${id}"]`)]));
       if (!('IntersectionObserver' in window)) return;
       const observer = new IntersectionObserver((entries) => {
@@ -2049,7 +2129,7 @@
       await BBI.renderHeader('performance.html');
       await BBI.renderFooter();
 
-      const [spear, calib, comp, shadow, prom, recaps, attr, worldRank] = await Promise.all([
+      const [spear, calib, comp, shadow, prom, recaps, attr, worldRank, dfsCapture, dfsOptimal] = await Promise.all([
         BBI.data.load(BBI.data.paths.spearman),
         BBI.data.load(BBI.data.paths.calibration),
         BBI.data.load(BBI.data.paths.modelCompetition),
@@ -2057,7 +2137,9 @@
         BBI.data.load(BBI.data.paths.prometheus),
         BBI.data.load(BBI.data.paths.performanceWeeklyRecaps),
         BBI.data.load(BBI.data.paths.performanceAttribution),
-        BBI.data.load(BBI.data.paths.worldRanking)
+        BBI.data.load(BBI.data.paths.worldRanking),
+        BBI.data.load(BBI.data.paths.dfsCaptureRate),
+        BBI.data.load(BBI.data.paths.dfsOptimalHistory)
       ]);
 
       const events = (spear?.events || []).slice().sort((a, b) => (a.week || 0) - (b.week || 0));
@@ -2623,6 +2705,125 @@
           `;
         }).join('');
       }
+
+      // ---------- DFS LINEUP PERFORMANCE ----------
+      (function renderDfsSection() {
+        const dfsEvents = (dfsCapture?.events || []).slice().sort(
+          (a, b) => (a.year - b.year) || (a.event_id - b.event_id));
+        if (!dfsEvents.length) return;
+        const season = dfsCapture?.season || {};
+        const latest = dfsEvents[dfsEvents.length - 1];
+
+        const setT = (id, v) => { const el = $(`#${id}`); if (el) el.textContent = v; };
+
+        // Hero pillars
+        setT('dfsHeroCapture', season.mean_capture_rate_pct != null
+          ? fmt.num(season.mean_capture_rate_pct, 1) + '%' : '—');
+        const cashCount = season.total_cashed || 0;
+        const totalLU = season.total_lineups || 0;
+        setT('dfsHeroCash', totalLU ? `${cashCount}/${totalLU}` : '—');
+        setT('dfsHeroCashSub',
+          totalLU ? `${fmt.num((cashCount/totalLU)*100, 1)}% across all events` : 'lineups clearing 340pt');
+
+        const bestEvent = dfsEvents.reduce((best, e) =>
+          (e.our_best || 0) > (best?.our_best || 0) ? e : best, null);
+        if (bestEvent) {
+          setT('dfsHeroBest', fmt.num(bestEvent.our_best, 0));
+          setT('dfsHeroBestEvent', `${bestEvent.event} · ${bestEvent.our_best_id}`);
+        }
+        setT('dfsHeroEvents', dfsEvents.length);
+
+        // Glance pill + TOC count
+        const glance = $('#glanceDfs');
+        if (glance) glance.innerHTML = `<strong>${dfsEvents.length}</strong> events · capture <strong>${fmt.num(season.mean_capture_rate_pct, 1)}%</strong>`;
+        const tocStat = $('#tocDfsStat');
+        if (tocStat) tocStat.textContent = String(dfsEvents.length);
+
+        // ---- Capture-rate chart ----
+        const W = 1000, H = 280;
+        const m = { t: 24, r: 18, b: 38, l: 44 };
+        const iw = W - m.l - m.r;
+        const ih = H - m.t - m.b;
+        const x = (i) => m.l + (dfsEvents.length <= 1 ? iw / 2 : (i * iw) / (dfsEvents.length - 1));
+        const y = (v) => m.t + (1 - clamp(v, 0, 100) / 100) * ih;
+
+        const svg = $('#dfsCaptureChart');
+        let mk = '';
+        // Gridlines + y labels at 25/50/75/100%
+        mk += '<g class="chart-axis">';
+        [0, 25, 50, 75, 100].forEach(v => {
+          mk += `<line class="chart-gridline" x1="${m.l}" y1="${y(v)}" x2="${W - m.r}" y2="${y(v)}"/>`;
+          mk += `<text x="${m.l - 8}" y="${y(v) + 3}" text-anchor="end">${v}%</text>`;
+        });
+        dfsEvents.forEach((e, i) => {
+          const short = (e.event || '').replace('Tournament', '').slice(0, 12);
+          mk += `<text x="${x(i)}" y="${H - m.b + 18}" text-anchor="middle">${short}</text>`;
+        });
+        mk += '</g>';
+
+        // Target line 75%, aspirational 90%
+        mk += `<line class="chart-target-line" x1="${m.l}" y1="${y(75)}" x2="${W - m.r}" y2="${y(75)}" stroke="var(--positive)"/>`;
+        mk += `<line class="chart-target-line" x1="${m.l}" y1="${y(90)}" x2="${W - m.r}" y2="${y(90)}" stroke="var(--gold-300)" stroke-dasharray="2 4"/>`;
+
+        // Capture-rate line + dots
+        const pts = dfsEvents
+          .filter(e => e.capture_rate_pct != null)
+          .map((e, idx) => ({ px: x(idx), py: y(e.capture_rate_pct), e }));
+        if (pts.length >= 2) {
+          const path = pts.map((p, i) => `${i ? 'L' : 'M'}${p.px.toFixed(1)} ${p.py.toFixed(1)}`).join(' ');
+          mk += `<path d="${path}" fill="none" stroke="var(--gold-500)" stroke-width="2"/>`;
+        }
+        pts.forEach(p => {
+          mk += `<circle cx="${p.px.toFixed(1)}" cy="${p.py.toFixed(1)}" r="5" fill="var(--gold-500)" stroke="var(--surface-1)" stroke-width="1.5">
+            <title>${p.e.event} — capture ${fmt.num(p.e.capture_rate_pct, 1)}%</title></circle>`;
+        });
+        svg.innerHTML = mk;
+
+        // ---- Per-event table ----
+        const tbody = $('#dfsGradeBody');
+        tbody.innerHTML = dfsEvents.map(e => {
+          const cap = e.capture_rate_pct;
+          const capCls = cap >= 90 ? 'gold' : (cap >= 75 ? 'positive' : '');
+          return `
+            <tr>
+              <td><strong>${e.event}</strong><div class="muted" style="font-size: 10px;">${e.completed || ''}</div></td>
+              <td><strong>${fmt.num(e.our_best, 0)}</strong> <span class="muted">${e.our_best_id || ''}</span></td>
+              <td>${fmt.num(e.pool_hindsight, 0)}</td>
+              <td><strong>${fmt.num(e.field_optimal, 0)}</strong></td>
+              <td class="num ${capCls}">${cap != null ? fmt.num(cap, 1) + '%' : '—'}</td>
+              <td class="num">${e.cashed_total}/${e.n_lineups}</td>
+              <td>${e.n_top_1pct ? `<span class="badge badge-gold">${e.n_top_1pct}</span>` : '<span class="badge">0</span>'}</td>
+            </tr>
+          `;
+        }).join('');
+
+        // ---- Latest event narrative summary ----
+        const summaryEl = $('#dfsLatestSummary');
+        if (summaryEl && latest) {
+          const optimalEntry = (dfsOptimal?.events || []).find(e => e.event_id === latest.event_id);
+          const optimal = optimalEntry?.optimal;
+          const inOurPool = optimalEntry?.n_optimal_in_our_pool || 0;
+          const constructionGap = (latest.pool_hindsight || 0) - (latest.our_best || 0);
+          const selectionGap = (latest.field_optimal || 0) - (latest.pool_hindsight || 0);
+
+          let html = `<strong>Most recent — ${latest.event}.</strong> Our best lineup
+            <strong>${latest.our_best_id || ''}</strong> hit <strong>${fmt.num(latest.our_best, 0)}</strong> pts,
+            capturing <strong>${fmt.num(latest.capture_rate_pct, 1)}%</strong> of the field-wide optimum
+            (<strong>${fmt.num(latest.field_optimal, 0)}</strong>).`;
+          if (constructionGap > 0 || selectionGap > 0) {
+            html += ` The gap split: <strong>${fmt.num(constructionGap, 0)} pts</strong> construction
+              (which 6 of our shortlist) + <strong>${fmt.num(selectionGap, 0)} pts</strong> selection
+              (which players made our shortlist).`;
+          }
+          if (optimal && inOurPool != null) {
+            html += ` Our roster pool contained <strong>${inOurPool} of 6</strong> optimal-lineup players —
+              ${inOurPool >= 4 ? '<em>strong selection week.</em>'
+                : inOurPool >= 2 ? '<em>partial coverage — selection layer has room to grow.</em>'
+                : '<em>thin coverage — most of the gap is selection-side, worth a Course Fit + Talent audit.</em>'}`;
+          }
+          summaryEl.innerHTML = html;
+        }
+      })();
 
       // ---------- COMPETITION ----------
       const leader = comp?.current_leader || comp?.baseline_variant_id || 'v8.5';
