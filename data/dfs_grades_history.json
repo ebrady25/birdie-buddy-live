@@ -1,0 +1,556 @@
+{
+  "schema_version": "1.0",
+  "events": [
+    {
+      "event": "RBC Heritage",
+      "event_id": 12,
+      "year": 2026,
+      "completed": "2026-04-19",
+      "graded_at_utc": "2026-04-29T00:47:48Z",
+      "thresholds": {
+        "cash_line": 340,
+        "top_1_pct": 410,
+        "top_001_pct": 500
+      },
+      "portfolio": {
+        "n_lineups": 12,
+        "avg_proj": 459.03,
+        "avg_actual": 409.67,
+        "n_below_cash": 0,
+        "n_cash": 4,
+        "n_top_1pct": 8,
+        "n_top_001pct": 0,
+        "best_lineup_id": "L1",
+        "best_lineup_actual": 438.0,
+        "worst_lineup_id": "G2",
+        "worst_lineup_actual": 370.0,
+        "delta_pct": -10.75
+      },
+      "lineups": [
+        {
+          "lineup_id": "C1",
+          "kind": "Core",
+          "title": "Scheffler + Harbour Town Specialists",
+          "label": "Core #1 \u2014 Scheffler + Harbour Town Specialists",
+          "salary": 48200,
+          "proj_total": 473.1,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 8825,
+              "name": "Harman, Brian",
+              "salary": 7000
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            },
+            {
+              "dg_id": 17488,
+              "name": "Im, Sungjae",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 410.0,
+          "delta_pct": -13.34,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "C2",
+          "kind": "Core",
+          "title": "Scheffler + Contrarian Value Stack",
+          "label": "Core #2 \u2014 Scheffler + Contrarian Value Stack",
+          "salary": 48100,
+          "proj_total": 461.6,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 17576,
+              "name": "Conners, Corey",
+              "salary": 7000
+            },
+            {
+              "dg_id": 13872,
+              "name": "Bradley, Keegan",
+              "salary": 6900
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            },
+            {
+              "dg_id": 17488,
+              "name": "Im, Sungjae",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 424.0,
+          "delta_pct": -8.15,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "C3",
+          "kind": "Core",
+          "title": "Scheffler + 5 Low-Owned Specialists",
+          "label": "Core #3 \u2014 Scheffler + 5 Low-Owned Specialists",
+          "salary": 48800,
+          "proj_total": 473.9,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 8825,
+              "name": "Harman, Brian",
+              "salary": 7000
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 410.0,
+          "delta_pct": -13.48,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "C4",
+          "kind": "Core",
+          "title": "Elite Chalk No-Scheffler",
+          "label": "Core #4 \u2014 Elite Chalk No-Scheffler",
+          "salary": 49800,
+          "proj_total": 462.5,
+          "players": [
+            {
+              "dg_id": 17646,
+              "name": "Fitzpatrick, Matt",
+              "salary": 10000
+            },
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9600
+            },
+            {
+              "dg_id": 15466,
+              "name": "Cantlay, Patrick",
+              "salary": 9200
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 428.0,
+          "delta_pct": -7.46,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "C5",
+          "kind": "Core",
+          "title": "Henley/Cantlay/McNealy Specialist Core",
+          "label": "Core #5 \u2014 Henley/Cantlay/McNealy Specialist Core",
+          "salary": 48300,
+          "proj_total": 445.5,
+          "players": [
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9600
+            },
+            {
+              "dg_id": 15466,
+              "name": "Cantlay, Patrick",
+              "salary": 9200
+            },
+            {
+              "dg_id": 18634,
+              "name": "McNealy, Maverick",
+              "salary": 8500
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 17576,
+              "name": "Conners, Corey",
+              "salary": 7000
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 390.0,
+          "delta_pct": -12.46,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "L1",
+          "kind": "Leverage",
+          "title": "Scheffler/Cantlay + Contrarians",
+          "label": "Leverage #1 \u2014 Scheffler/Cantlay + Contrarians",
+          "salary": 50000,
+          "proj_total": 475.2,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 15466,
+              "name": "Cantlay, Patrick",
+              "salary": 9200
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            },
+            {
+              "dg_id": 17488,
+              "name": "Im, Sungjae",
+              "salary": 6700
+            },
+            {
+              "dg_id": 28635,
+              "name": "McCarty, Matt",
+              "salary": 6800
+            }
+          ],
+          "actual_total": 438.0,
+          "delta_pct": -7.83,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "L2",
+          "kind": "Leverage",
+          "title": "Scheffler + Thomas Pivot",
+          "label": "Leverage #2 \u2014 Scheffler + Thomas Pivot",
+          "salary": 49800,
+          "proj_total": 472.9,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 14139,
+              "name": "Thomas, Justin",
+              "salary": 8300
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 8825,
+              "name": "Harman, Brian",
+              "salary": 7000
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 392.0,
+          "delta_pct": -17.11,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "L3",
+          "kind": "Leverage",
+          "title": "No Scheffler, Fitzpatrick Stack",
+          "label": "Leverage #3 \u2014 No Scheffler, Fitzpatrick Stack",
+          "salary": 49200,
+          "proj_total": 441.9,
+          "players": [
+            {
+              "dg_id": 17646,
+              "name": "Fitzpatrick, Matt",
+              "salary": 10000
+            },
+            {
+              "dg_id": 15466,
+              "name": "Cantlay, Patrick",
+              "salary": 9200
+            },
+            {
+              "dg_id": 18634,
+              "name": "McNealy, Maverick",
+              "salary": 8500
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 17576,
+              "name": "Conners, Corey",
+              "salary": 7000
+            }
+          ],
+          "actual_total": 428.0,
+          "delta_pct": -3.15,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "G1",
+          "kind": "GPP",
+          "title": "Scheffler + Thomas + Value Trio",
+          "label": "GPP #1 \u2014 Scheffler + Thomas + Value Trio",
+          "salary": 49700,
+          "proj_total": 461.4,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 14139,
+              "name": "Thomas, Justin",
+              "salary": 8300
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            },
+            {
+              "dg_id": 17488,
+              "name": "Im, Sungjae",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 396.0,
+          "delta_pct": -14.17,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "G2",
+          "kind": "GPP",
+          "title": "Specialist Upside Stack",
+          "label": "GPP #2 \u2014 Specialist Upside Stack",
+          "salary": 48600,
+          "proj_total": 454.2,
+          "players": [
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9600
+            },
+            {
+              "dg_id": 15466,
+              "name": "Cantlay, Patrick",
+              "salary": 9200
+            },
+            {
+              "dg_id": 18634,
+              "name": "McNealy, Maverick",
+              "salary": 8500
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 21554,
+              "name": "Poston, J.T.",
+              "salary": 7200
+            },
+            {
+              "dg_id": 17576,
+              "name": "Conners, Corey",
+              "salary": 7000
+            }
+          ],
+          "actual_total": 370.0,
+          "delta_pct": -18.54,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "G3",
+          "kind": "GPP",
+          "title": "Fitzpatrick/Henley + Straka/Noren",
+          "label": "GPP #3 \u2014 Fitzpatrick/Henley + Straka/Noren",
+          "salary": 48600,
+          "proj_total": 451.0,
+          "players": [
+            {
+              "dg_id": 17646,
+              "name": "Fitzpatrick, Matt",
+              "salary": 10000
+            },
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9600
+            },
+            {
+              "dg_id": 17511,
+              "name": "Straka, Sepp",
+              "salary": 7900
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 23475,
+              "name": "Novak, Andrew",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 416.0,
+          "delta_pct": -7.76,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "G4",
+          "kind": "GPP",
+          "title": "Fitzpatrick/McNealy + Spieth Leverage",
+          "label": "GPP #4 \u2014 Fitzpatrick/McNealy + Spieth Leverage",
+          "salary": 48400,
+          "proj_total": 435.2,
+          "players": [
+            {
+              "dg_id": 17646,
+              "name": "Fitzpatrick, Matt",
+              "salary": 10000
+            },
+            {
+              "dg_id": 18634,
+              "name": "McNealy, Maverick",
+              "salary": 8500
+            },
+            {
+              "dg_id": 14636,
+              "name": "Spieth, Jordan",
+              "salary": 8800
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7100
+            },
+            {
+              "dg_id": 17606,
+              "name": "Berger, Daniel",
+              "salary": 7300
+            },
+            {
+              "dg_id": 17488,
+              "name": "Im, Sungjae",
+              "salary": 6700
+            }
+          ],
+          "actual_total": 414.0,
+          "delta_pct": -4.87,
+          "verdict": "top_1_pct"
+        }
+      ],
+      "hindsight_best": {
+        "total": 460.0,
+        "salary": 48100,
+        "n_players": 6
+      },
+      "vs_hindsight_pts_left": 22.0
+    }
+  ],
+  "last_updated": "2026-04-29T00:47:48Z"
+}

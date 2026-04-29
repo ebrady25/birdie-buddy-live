@@ -45,6 +45,7 @@ window.BBI = window.BBI || {};
       modelCompetition: './data/model_competition.json',
       prometheus:     './data/prometheus_backtest.json',
       worldRanking:   './data/world_ranking.json',
+      dfsGradesHistory: './data/dfs_grades_history.json',
       archiveIndex:   './data/archive_index.json',
       athenaPool:     './data/athena_pool.json',
       nikeBankroll:   './data/nike_bankroll.json',

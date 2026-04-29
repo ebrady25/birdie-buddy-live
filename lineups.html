@@ -204,6 +204,138 @@
     .rules-card .rule-tag { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 66px; padding-top: 2px; }
     .rules-card .rule-text { color: var(--text-body); line-height: 1.5; }
 
+    /* =========================================================
+       LAST WEEK'S REPORT CARD — DFS grading
+       ========================================================= */
+    .grade-card {
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      position: relative;
+    }
+    .grade-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    }
+    .grade-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: var(--space-4); flex-wrap: wrap;
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .grade-head h3 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: var(--fs-xl); color: var(--text-primary);
+      letter-spacing: -0.02em; margin: 0;
+    }
+    .grade-head .grade-event {
+      font-family: var(--font-mono); font-size: var(--fs-xs);
+      color: var(--text-muted); margin-top: 4px;
+    }
+    /* Top stats row */
+    .grade-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
+    }
+    @media (max-width: 800px) { .grade-pillars { grid-template-columns: repeat(2, 1fr); } }
+    .grade-pillar {
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      text-align: center;
+    }
+    .grade-pillar .lbl {
+      font-family: var(--font-mono); font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest); text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 4px;
+    }
+    .grade-pillar .val {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      letter-spacing: -0.02em; color: var(--text-primary);
+      line-height: 1;
+    }
+    .grade-pillar .val.gold { color: var(--gold-300); }
+    .grade-pillar .sub {
+      font-family: var(--font-mono); font-size: var(--fs-3xs);
+      color: var(--text-muted); margin-top: 4px;
+    }
+
+    /* Per-lineup grade table */
+    .grade-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-xs); }
+    .grade-table thead th {
+      padding: var(--space-2) var(--space-3); text-align: right;
+      font-family: var(--font-mono); font-size: var(--fs-3xs);
+      font-weight: 600; letter-spacing: var(--tracking-wide);
+      text-transform: uppercase; color: var(--text-muted);
+      border-bottom: 1px solid var(--border-soft);
+      background: var(--surface-3);
+    }
+    .grade-table thead th:first-child,
+    .grade-table thead th:nth-child(2) { text-align: left; }
+    .grade-table tbody td {
+      padding: var(--space-2) var(--space-3); text-align: right;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .grade-table tbody td:first-child,
+    .grade-table tbody td:nth-child(2) { text-align: left; }
+    .grade-table tbody tr:hover { background: rgba(212, 168, 67, 0.04); }
+    .grade-id {
+      display: inline-block; padding: 2px 8px;
+      border-radius: var(--radius-sm); font-family: var(--font-mono);
+      font-size: var(--fs-3xs); font-weight: 700;
+      background: var(--surface-4); color: var(--gold-200);
+      letter-spacing: 0.05em;
+    }
+    .verdict-pill {
+      display: inline-block; padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono); font-size: 10px;
+      font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      border: 1px solid currentColor;
+    }
+    .verdict-below { color: var(--text-dimmed); background: var(--surface-3); }
+    .verdict-cash  { color: var(--positive); background: rgba(74, 222, 128, 0.10); }
+    .verdict-top1  { color: var(--gold-300); background: rgba(212, 168, 67, 0.14); }
+    .verdict-top001{ color: #f4d97a; background: rgba(244, 217, 122, 0.16); border-color: var(--gold-400); }
+    .grade-delta-up   { color: var(--positive); }
+    .grade-delta-down { color: var(--negative); }
+
+    /* Hindsight callout */
+    .grade-hindsight {
+      margin-top: var(--space-5);
+      padding: var(--space-4) var(--space-5);
+      background: var(--surface-3);
+      border-left: 3px solid var(--gold-500);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      color: var(--text-body);
+      line-height: 1.5;
+    }
+    .grade-hindsight strong { color: var(--text-primary); }
+    .grade-hindsight .gold { color: var(--gold-300); font-weight: 700; }
+
+    .grade-empty {
+      padding: var(--space-6);
+      text-align: center;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .grade-note {
+      margin-top: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+      color: var(--text-dimmed);
+    }
   </style>
 </head>
 <body>
@@ -252,6 +384,63 @@
         <div class="stat-sub">Cumulative HERMES</div>
       </div>
     </div>
+
+    <!-- LAST WEEK'S REPORT CARD — DFS grade -->
+    <section id="gradeSection" hidden>
+      <div class="grade-card" data-reveal>
+        <div class="grade-head">
+          <div>
+            <h3>Last week's report card</h3>
+            <div class="grade-event" id="gradeEvent">—</div>
+          </div>
+          <a href="#lineupGrid" class="muted" style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none;">↓ This week's lineups</a>
+        </div>
+
+        <div class="grade-pillars">
+          <div class="grade-pillar">
+            <div class="lbl">Best lineup</div>
+            <div class="val gold" id="gradeBestVal">—</div>
+            <div class="sub" id="gradeBestId">—</div>
+          </div>
+          <div class="grade-pillar">
+            <div class="lbl">Portfolio avg</div>
+            <div class="val" id="gradeAvgVal">—</div>
+            <div class="sub">DK pts (estimated)</div>
+          </div>
+          <div class="grade-pillar">
+            <div class="lbl">Cashed</div>
+            <div class="val" id="gradeCashCount">—</div>
+            <div class="sub" id="gradeCashSub">of 12 lineups</div>
+          </div>
+          <div class="grade-pillar">
+            <div class="lbl">Hindsight max</div>
+            <div class="val gold" id="gradeHindVal">—</div>
+            <div class="sub" id="gradeHindSub">pts left on table</div>
+          </div>
+        </div>
+
+        <table class="grade-table" id="gradeTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Build</th>
+              <th>Salary</th>
+              <th>Proj</th>
+              <th>Actual</th>
+              <th>Δ</th>
+              <th>Verdict</th>
+            </tr>
+          </thead>
+          <tbody id="gradeBody"></tbody>
+        </table>
+
+        <div class="grade-hindsight" id="gradeHindsightBlock"></div>
+
+        <div class="grade-note" id="gradeApproxNote">
+          DK points approximated from per-round scores · cash thresholds: 340 / 410 / 500
+        </div>
+      </div>
+    </section>
 
     <!-- TOOLBAR -->
     <div class="page-toolbar">
@@ -367,11 +556,100 @@
       await BBI.renderHeader('lineups.html');
       await BBI.renderFooter();
 
-      const [ev, dfs, themis] = await Promise.all([
+      const [ev, dfs, themis, gradesHist] = await Promise.all([
         BBI.data.load(BBI.data.paths.currentEvent),
         BBI.data.load(BBI.data.paths.dfsLineups),
-        BBI.data.load(BBI.data.paths.themis)
+        BBI.data.load(BBI.data.paths.themis),
+        BBI.data.load(BBI.data.paths.dfsGradesHistory)
       ]);
+
+      // ---------- LAST WEEK'S REPORT CARD ----------
+      (function renderGradeReport() {
+        const events = gradesHist?.events || [];
+        if (!events.length) return;
+        // Pick most recent graded event
+        const latest = events.slice().sort((a, b) =>
+          (b.year || 0) - (a.year || 0) || (b.event_id || 0) - (a.event_id || 0)
+        )[0];
+        if (!latest || !latest.lineups) return;
+
+        const sec = document.getElementById('gradeSection');
+        if (sec) sec.removeAttribute('hidden');
+
+        const evEl = document.getElementById('gradeEvent');
+        if (evEl) {
+          const date = latest.completed || '';
+          evEl.textContent = `${latest.event}${date ? ' · completed ' + date : ''} · ${latest.lineups.length} lineups graded`;
+        }
+
+        const p = latest.portfolio || {};
+        const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        setT('gradeBestVal', fmt.num(p.best_lineup_actual, 0));
+        setT('gradeBestId', `${p.best_lineup_id || '—'} · ${fmt.num(p.delta_pct, 1)}% vs proj`);
+        setT('gradeAvgVal', fmt.num(p.avg_actual, 0));
+        const cashedTotal = (p.n_cash || 0) + (p.n_top_1pct || 0) + (p.n_top_001pct || 0);
+        setT('gradeCashCount', cashedTotal);
+        setT('gradeCashSub', `of ${p.n_lineups || 12} lineups`);
+
+        const hb = latest.hindsight_best;
+        if (hb && hb.total != null) {
+          setT('gradeHindVal', fmt.num(hb.total, 0));
+          setT('gradeHindSub',
+            latest.vs_hindsight_pts_left != null
+              ? `${fmt.num(latest.vs_hindsight_pts_left, 0)} pts left on table`
+              : 'best possible from our pool');
+        }
+
+        // Verdict pill helper
+        const verdictPill = (v) => {
+          const map = {
+            'below_cash':  ['verdict-below', 'Below cash'],
+            'cash':        ['verdict-cash',  'Cashed'],
+            'top_1_pct':   ['verdict-top1',  'Top 1%'],
+            'top_001_pct': ['verdict-top001','Top 0.01%'],
+          };
+          const [cls, lbl] = map[v] || ['verdict-below', '—'];
+          return `<span class="verdict-pill ${cls}">${lbl}</span>`;
+        };
+
+        // Table rows — sort best-actual first
+        const lineups = latest.lineups.slice().sort((a, b) => (b.actual_total || 0) - (a.actual_total || 0));
+        const body = document.getElementById('gradeBody');
+        if (body) {
+          body.innerHTML = lineups.map(l => {
+            const dCls = (l.delta_pct || 0) > 0 ? 'grade-delta-up' : ((l.delta_pct || 0) < 0 ? 'grade-delta-down' : '');
+            const dSign = (l.delta_pct || 0) > 0 ? '+' : '';
+            return `
+              <tr>
+                <td><span class="grade-id">${l.lineup_id}</span></td>
+                <td>${l.kind} · <span class="muted" style="font-size: var(--fs-3xs);">${l.title || ''}</span></td>
+                <td class="num">$${(l.salary / 1000).toFixed(1)}k</td>
+                <td class="num">${fmt.num(l.proj_total, 0)}</td>
+                <td class="num"><strong>${fmt.num(l.actual_total, 0)}</strong></td>
+                <td class="num ${dCls}">${dSign}${fmt.num(l.delta_pct, 1)}%</td>
+                <td>${verdictPill(l.verdict)}</td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        // Hindsight block
+        const hbBlock = document.getElementById('gradeHindsightBlock');
+        if (hbBlock && hb) {
+          const ours = p.best_lineup_actual || 0;
+          const optimal = hb.total || 0;
+          const gap = optimal - ours;
+          hbBlock.innerHTML = `
+            <strong>Hindsight check.</strong> The best 6-player combination from our roster pool
+            (${hb.n_players || '?'} unique players across all 12 builds) under the $50k cap would
+            have scored <span class="gold">${fmt.num(optimal, 0)}</span> pts. Our actual best lineup
+            (<strong>${p.best_lineup_id}</strong>) scored ${fmt.num(ours, 0)} —
+            ${gap < 5
+              ? '<strong>near-optimal selection</strong>. We picked nearly the right portfolio.'
+              : `we left <strong>${fmt.num(gap, 0)} pts</strong> on the table by spreading risk.`}
+          `;
+        }
+      })();
 
       $('#lineupEvent').textContent = ev?.event_name || 'RBC Heritage';
       $('#lineupGen').textContent = dfs?.generated_at ? fmt.ago(dfs.generated_at) : 'Live';
