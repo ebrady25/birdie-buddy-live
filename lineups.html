@@ -322,6 +322,143 @@
     .grade-hindsight strong { color: var(--text-primary); }
     .grade-hindsight .gold { color: var(--gold-300); font-weight: 700; }
 
+    /* 3-tier hindsight ladder */
+    .ladder {
+      margin-top: var(--space-5);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    .ladder-row {
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: var(--surface-3);
+      transition: transform var(--dur-base);
+    }
+    .ladder-row:hover { transform: translateX(2px); }
+    .ladder-row.our      { border-left: 3px solid var(--info); }
+    .ladder-row.pool     { border-left: 3px solid var(--gold-500); }
+    .ladder-row.optimal  { border-left: 3px solid var(--positive); background: linear-gradient(90deg, rgba(74, 222, 128, 0.06), var(--surface-3)); }
+    .ladder-icon {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .ladder-row.our .ladder-icon     { color: var(--info); }
+    .ladder-row.pool .ladder-icon    { color: var(--gold-300); }
+    .ladder-row.optimal .ladder-icon { color: var(--positive); }
+    .ladder-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .ladder-label-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--fs-sm);
+      color: var(--text-primary);
+    }
+    .ladder-label-sub {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+    .ladder-value {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .ladder-row.optimal .ladder-value { color: var(--positive); }
+
+    /* Field-wide optimal lineup display */
+    .optimal-lineup {
+      margin-top: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+      background: var(--surface-2);
+      border: 1px solid rgba(74, 222, 128, 0.20);
+      border-radius: var(--radius-md);
+    }
+    .optimal-lineup-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .optimal-lineup-head .title {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      font-weight: 700;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--positive);
+    }
+    .optimal-lineup-head .meta {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+    }
+    .optimal-lineup-players {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .optimal-player {
+      display: grid;
+      grid-template-columns: 56px 1fr auto auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: 4px 6px;
+      border-radius: var(--radius-sm);
+      font-size: var(--fs-xs);
+    }
+    .optimal-player:hover { background: rgba(74, 222, 128, 0.04); }
+    .optimal-player .salary {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+    }
+    .optimal-player .name {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .optimal-player .pts {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--positive);
+      font-variant-numeric: tabular-nums;
+    }
+    .optimal-player .own {
+      font-family: var(--font-mono);
+      font-size: var(--fs-3xs);
+      color: var(--text-muted);
+      min-width: 38px;
+      text-align: right;
+    }
+    .optimal-player.in-our-pool {
+      background: rgba(212, 168, 67, 0.05);
+    }
+    .optimal-player.in-our-pool::before {
+      content: '★';
+      color: var(--gold-300);
+      grid-column: 1;
+      font-size: 9px;
+      align-self: center;
+      margin-left: 2px;
+    }
+
     .grade-empty {
       padding: var(--space-6);
       text-align: center;
@@ -413,9 +550,9 @@
             <div class="sub" id="gradeCashSub">of 12 lineups</div>
           </div>
           <div class="grade-pillar">
-            <div class="lbl">Hindsight max</div>
-            <div class="val gold" id="gradeHindVal">—</div>
-            <div class="sub" id="gradeHindSub">pts left on table</div>
+            <div class="lbl">Capture rate</div>
+            <div class="val gold" id="gradeCaptureVal">—</div>
+            <div class="sub" id="gradeCaptureSub">vs theoretical max</div>
           </div>
         </div>
 
@@ -433,6 +570,21 @@
           </thead>
           <tbody id="gradeBody"></tbody>
         </table>
+
+        <!-- 3-tier hindsight ladder -->
+        <div class="ladder" id="gradeLadder"></div>
+
+        <!-- Field-wide optimal lineup, expanded -->
+        <div class="optimal-lineup" id="gradeOptimalBlock" hidden>
+          <div class="optimal-lineup-head">
+            <span class="title">Optimal lineup of the week</span>
+            <span class="meta" id="gradeOptimalMeta">—</span>
+          </div>
+          <div class="optimal-lineup-players" id="gradeOptimalPlayers"></div>
+          <div class="grade-note" style="margin-top: var(--space-3);">
+            ★ = player was on at least one of our 12 lineups
+          </div>
+        </div>
 
         <div class="grade-hindsight" id="gradeHindsightBlock"></div>
 
@@ -592,12 +744,105 @@
         setT('gradeCashSub', `of ${p.n_lineups || 12} lineups`);
 
         const hb = latest.hindsight_best;
-        if (hb && hb.total != null) {
-          setT('gradeHindVal', fmt.num(hb.total, 0));
-          setT('gradeHindSub',
+        const fo = latest.field_wide_optimal;
+        const captureRate = latest.capture_rate_pct;
+        if (captureRate != null) {
+          setT('gradeCaptureVal', fmt.num(captureRate, 1) + '%');
+          setT('gradeCaptureSub',
+            (p.best_lineup_actual && fo)
+              ? `${fmt.num(p.best_lineup_actual, 0)} of ${fmt.num(fo.total, 0)} max`
+              : 'vs theoretical max');
+        } else if (hb && hb.total != null) {
+          // Fallback: roster-pool hindsight only
+          setT('gradeCaptureVal', fmt.num(hb.total, 0));
+          setT('gradeCaptureSub',
             latest.vs_hindsight_pts_left != null
-              ? `${fmt.num(latest.vs_hindsight_pts_left, 0)} pts left on table`
-              : 'best possible from our pool');
+              ? `${fmt.num(latest.vs_hindsight_pts_left, 0)} pts left`
+              : 'best from our pool');
+        }
+
+        // ---- 3-tier hindsight ladder ----
+        const ladder = document.getElementById('gradeLadder');
+        if (ladder) {
+          const ours = p.best_lineup_actual || 0;
+          const poolBest = hb?.total || null;
+          const optimal = fo?.total || null;
+
+          const rows = [
+            {
+              cls: 'our',
+              icon: '01',
+              title: 'Our best lineup',
+              sub: `${p.best_lineup_id || '—'} · pre-tournament selection`,
+              value: fmt.num(ours, 0),
+            },
+          ];
+          if (poolBest != null) {
+            const gap = poolBest - ours;
+            rows.push({
+              cls: 'pool',
+              icon: '02',
+              title: 'Roster-pool hindsight',
+              sub: `Best 6 from our ${hb?.n_players || '?'}-player shortlist · construction layer cost ${fmt.num(gap, 0)} pts`,
+              value: fmt.num(poolBest, 0),
+            });
+          }
+          if (optimal != null) {
+            const selectionGap = poolBest != null ? optimal - poolBest : null;
+            const totalGap = optimal - ours;
+            rows.push({
+              cls: 'optimal',
+              icon: '03',
+              title: 'Field-wide optimal',
+              sub: selectionGap != null
+                ? `Best 6 from full field · selection layer cost ${fmt.num(selectionGap, 0)} pts · total gap ${fmt.num(totalGap, 0)}`
+                : `Best 6 from full field · total gap ${fmt.num(totalGap, 0)}`,
+              value: fmt.num(optimal, 0),
+            });
+          }
+          ladder.innerHTML = rows.map(r => `
+            <div class="ladder-row ${r.cls}">
+              <div class="ladder-icon">${r.icon}</div>
+              <div class="ladder-label">
+                <span class="ladder-label-title">${r.title}</span>
+                <span class="ladder-label-sub">${r.sub}</span>
+              </div>
+              <div class="ladder-value">${r.value}</div>
+            </div>
+          `).join('');
+        }
+
+        // ---- Field-wide optimal lineup details ----
+        if (fo && fo.players && fo.players.length) {
+          // Pool the dg_ids from our 12 lineups so we can star players we did roster
+          const ourPoolDgIds = new Set();
+          (latest.lineups || []).forEach(l => {
+            // The lineups in the history file don't have player_breakdown by default;
+            // fall back to checking against current dfs_lineups payload's pool
+          });
+          (dfs?.lineups || []).forEach(l => l.players.forEach(p => ourPoolDgIds.add(p.dg_id)));
+
+          const optBlock = document.getElementById('gradeOptimalBlock');
+          if (optBlock) optBlock.removeAttribute('hidden');
+          setT('gradeOptimalMeta',
+            `${fmt.num(fo.total, 0)} pts · $${(fo.salary/1000).toFixed(1)}k of $50k cap`);
+          const playersEl = document.getElementById('gradeOptimalPlayers');
+          if (playersEl) {
+            playersEl.innerHTML = fo.players.map(p => {
+              const inOurs = ourPoolDgIds.has(p.dg_id);
+              const ownStr = p.ownership != null
+                ? `${(p.ownership * 100).toFixed(1)}%`
+                : '—';
+              return `
+                <div class="optimal-player ${inOurs ? 'in-our-pool' : ''}">
+                  <span class="salary">$${p.salary}</span>
+                  <span class="name">${fmt.abbrevName(p.name)}</span>
+                  <span class="pts">${fmt.num(p.total_pts, 1)}</span>
+                  <span class="own">own ${ownStr}</span>
+                </div>
+              `;
+            }).join('');
+          }
         }
 
         // Verdict pill helper
@@ -633,21 +878,34 @@
           }).join('');
         }
 
-        // Hindsight block
+        // Concise summary callout — the 3-tier ladder above carries most of the story
         const hbBlock = document.getElementById('gradeHindsightBlock');
-        if (hbBlock && hb) {
+        if (hbBlock && (hb || fo)) {
           const ours = p.best_lineup_actual || 0;
-          const optimal = hb.total || 0;
+          const optimal = fo?.total || hb?.total || 0;
           const gap = optimal - ours;
-          hbBlock.innerHTML = `
-            <strong>Hindsight check.</strong> The best 6-player combination from our roster pool
-            (${hb.n_players || '?'} unique players across all 12 builds) under the $50k cap would
-            have scored <span class="gold">${fmt.num(optimal, 0)}</span> pts. Our actual best lineup
-            (<strong>${p.best_lineup_id}</strong>) scored ${fmt.num(ours, 0)} —
-            ${gap < 5
-              ? '<strong>near-optimal selection</strong>. We picked nearly the right portfolio.'
-              : `we left <strong>${fmt.num(gap, 0)} pts</strong> on the table by spreading risk.`}
-          `;
+          const cap = captureRate != null ? `<span class="gold">${fmt.num(captureRate, 1)}%</span> capture rate` : '';
+          if (fo && hb) {
+            const selectionGap = fo.total - hb.total;
+            const construction = hb.total - ours;
+            hbBlock.innerHTML = `
+              <strong>What this tells us.</strong> Our best lineup
+              (<strong>${p.best_lineup_id}</strong> = ${fmt.num(ours, 0)}) hit
+              ${cap} of the field-wide optimum. The gap splits into two parts:
+              <strong>~${fmt.num(construction, 0)} pts</strong> from construction
+              (which 6 of our shortlist's players to play together) and
+              <strong>~${fmt.num(selectionGap, 0)} pts</strong> from selection
+              (which players made our shortlist at all). The selection layer is
+              where deeper Course Fit reads + ownership leverage have the most room to grow.
+            `;
+          } else if (hb) {
+            hbBlock.innerHTML = `
+              <strong>Hindsight check.</strong> Best 6-player combo from our
+              ${hb.n_players}-player shortlist would have scored
+              <span class="gold">${fmt.num(hb.total, 0)}</span>. We hit ${fmt.num(ours, 0)},
+              leaving ${fmt.num(gap, 0)} pts to construction noise.
+            `;
+          }
         }
       })();
 

@@ -6,7 +6,7 @@
       "event_id": 12,
       "year": 2026,
       "completed": "2026-04-19",
-      "graded_at_utc": "2026-04-29T01:37:25Z",
+      "graded_at_utc": "2026-04-29T01:44:38Z",
       "thresholds": {
         "cash_line": 340,
         "top_1_pct": 410,
@@ -549,8 +549,58 @@
         "salary": 46600,
         "n_players": 6
       },
-      "vs_hindsight_pts_left": 38.5
+      "vs_hindsight_pts_left": 38.5,
+      "field_wide_optimal": {
+        "total": 621.5,
+        "salary": 50000,
+        "players": [
+          {
+            "dg_id": 17646,
+            "name": "Fitzpatrick, Matt",
+            "salary": 10000,
+            "total_pts": 130.0,
+            "ownership": 0.1764
+          },
+          {
+            "dg_id": 14609,
+            "name": "Kim, Si Woo",
+            "salary": 8900,
+            "total_pts": 106.5,
+            "ownership": 0.1263
+          },
+          {
+            "dg_id": 22085,
+            "name": "Morikawa, Collin",
+            "salary": 9300,
+            "total_pts": 101.5,
+            "ownership": 0.1105
+          },
+          {
+            "dg_id": 14577,
+            "name": "English, Harris",
+            "salary": 7900,
+            "total_pts": 97.0,
+            "ownership": 0.0506
+          },
+          {
+            "dg_id": 21891,
+            "name": "Kitayama, Kurt",
+            "salary": 7100,
+            "total_pts": 93.5,
+            "ownership": 0.0538
+          },
+          {
+            "dg_id": 12577,
+            "name": "Woodland, Gary",
+            "salary": 6800,
+            "total_pts": 93.0,
+            "ownership": 0.049699999999999994
+          }
+        ]
+      },
+      "vs_field_optimal_pts_left": 108.5,
+      "capture_rate_pct": 82.54
     }
   ],
-  "last_updated": "2026-04-29T01:37:25Z"
+  "last_updated": "2026-04-29T01:44:38Z"
 }
