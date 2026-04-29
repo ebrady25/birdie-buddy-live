@@ -546,7 +546,7 @@
         }
       },
       "leader_this_week": "v8.6-tal",
-      "logged_utc": "2026-04-28T04:54:49Z"
+      "logged_utc": "2026-04-28T22:10:06Z"
     },
     {
       "week": 12,
@@ -577,7 +577,7 @@
     "flagged_for": "MANUAL_REVIEW",
     "description": "Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events."
   },
-  "last_updated": "2026-04-28T04:54:49Z",
+  "last_updated": "2026-04-28T22:10:06Z",
   "numbering_scheme": "bbi_tracking_week",
   "numbering_notes": "Wk 1 = WM Phoenix Open 2026 (Feb 5-8, BBI tracking start). Cal-week entries before WM Phoenix were dropped 2026-04-28."
 }
