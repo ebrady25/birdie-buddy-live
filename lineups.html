@@ -66,9 +66,11 @@
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-soft);
     }
+    .lineup-kind[data-kind="Cash"]      { background: rgba(74, 222, 128, 0.10); color: var(--positive); border-color: rgba(74, 222, 128, 0.30); }
     .lineup-kind[data-kind="Core"]      { background: rgba(96, 165, 250, 0.10); color: var(--info);     border-color: rgba(96, 165, 250, 0.32); }
     .lineup-kind[data-kind="Safe"]      { background: rgba(74, 222, 128, 0.10); color: var(--positive); border-color: rgba(74, 222, 128, 0.30); }
     .lineup-kind[data-kind="Leverage"]  { background: rgba(212, 168, 67, 0.12); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
+    .lineup-kind[data-kind="Moonshot"]  { background: rgba(168, 85, 247, 0.10); color: #c084fc;         border-color: rgba(168, 85, 247, 0.30); }
     .lineup-kind[data-kind="GPP"]       { background: rgba(248, 113, 113, 0.10); color: var(--negative); border-color: rgba(248, 113, 113, 0.3); }
     .lineup-kind[data-kind="Contrarian"]{ background: rgba(168, 85, 247, 0.10); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
 
@@ -599,9 +601,10 @@
       <div class="page-toolbar-row">
         <div class="chip-row" id="kindChips">
           <button class="chip" data-filter="all" aria-pressed="true">All <span class="count" id="cAll">12</span></button>
+          <button class="chip" data-filter="Cash" aria-pressed="false">Cash <span class="count" id="cCash">0</span></button>
           <button class="chip" data-filter="Core" aria-pressed="false">Core <span class="count" id="cCore">0</span></button>
-          <button class="chip" data-filter="Safe" aria-pressed="false">Safe <span class="count" id="cSafe">0</span></button>
           <button class="chip" data-filter="Leverage" aria-pressed="false">Leverage <span class="count" id="cLev">0</span></button>
+          <button class="chip" data-filter="Moonshot" aria-pressed="false">Moonshot <span class="count" id="cMoon">0</span></button>
         </div>
 
         <div class="divider-vertical"></div>
@@ -923,10 +926,10 @@
       // Old schema: { label: "Core #1 — ...", total_salary, sum_zeus, sum_hermes_own, avg_bbi_dfs,
       //   players: [{..., tier, hermes_own}] }
       const KIND_FROM_ARCHETYPE = {
-        'CORE': 'Core', 'SAFE': 'Safe', 'LEVERAGE': 'Leverage',
-        'GPP': 'GPP', 'CONTRARIAN': 'Contrarian',
+        'CASH': 'Cash', 'CORE': 'Core', 'SAFE': 'Cash', 'LEVERAGE': 'Leverage',
+        'MOONSHOT': 'Moonshot', 'GPP': 'GPP', 'CONTRARIAN': 'Contrarian',
       };
-      const kindCounters = { Core: 0, Safe: 0, Leverage: 0, GPP: 0, Contrarian: 0 };
+      const kindCounters = { Cash: 0, Core: 0, Leverage: 0, Moonshot: 0, Safe: 0, GPP: 0, Contrarian: 0 };
       const enriched = lineups.map((l, idx) => {
         // Detect kind from archetype (new schema) or label prefix (old schema)
         let kind;
@@ -1012,14 +1015,16 @@
       $('#kpiAvgOwn').textContent = fmt.num(avgOwn, 0) + '%';
 
       // ---------- KIND COUNTS ----------
-      const kindCounts = { Core: 0, Safe: 0, Leverage: 0, GPP: 0 };
+      const kindCounts = { Cash: 0, Core: 0, Leverage: 0, Moonshot: 0, Safe: 0, GPP: 0 };
       enriched.forEach(l => kindCounts[l.kind] = (kindCounts[l.kind] || 0) + 1);
-      $('#cCore').textContent = kindCounts.Core || 0;
-      const safeEl = $('#cSafe');
-      if (safeEl) safeEl.textContent = kindCounts.Safe || 0;
-      $('#cLev').textContent = kindCounts.Leverage || 0;
-      const gppEl = $('#cGpp');
-      if (gppEl) gppEl.textContent = kindCounts.GPP || 0;
+      const setCount = (id, n) => { const el = $('#' + id); if (el) el.textContent = n || 0; };
+      // Cash chip absorbs the legacy Safe count for backward-compat
+      setCount('cCash', (kindCounts.Cash || 0) + (kindCounts.Safe || 0));
+      setCount('cCore', kindCounts.Core);
+      setCount('cLev',  kindCounts.Leverage);
+      setCount('cMoon', kindCounts.Moonshot);
+      setCount('cSafe', kindCounts.Safe);  // legacy chip if still in DOM
+      setCount('cGpp',  kindCounts.GPP);
       $('#cAll').textContent = enriched.length;
 
       // ---------- RENDER LINEUP CARDS ----------
@@ -1113,7 +1118,7 @@
       let activeKind = 'all';
       const applySortAndFilter = () => {
         let list = enriched.slice();
-        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind);
+        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind || (activeKind === 'Cash' && l.kind === 'Safe'));
         list.sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
         renderCards(list);
       };
@@ -1142,7 +1147,7 @@
 
       const currentlyVisibleLineups = () => {
         let list = enriched.slice();
-        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind);
+        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind || (activeKind === 'Cash' && l.kind === 'Safe'));
         list.sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
         return list;
       };
