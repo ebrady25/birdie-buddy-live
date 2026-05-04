@@ -58,13 +58,6 @@
       padding-top: clamp(var(--space-10), 10vh, var(--space-16));
       padding-bottom: clamp(var(--space-10), 10vh, var(--space-16));
     }
-    /* Stack hero children vertically so inline-flex pills (ctas, books, scroll cue)
-       don't collapse onto one line on wide viewports. */
-    .cine-hero .cine-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
     /* Warm gold halo behind the text — kept for legibility + atmosphere */
     .cine-hero::before {
       content: '';
@@ -223,7 +216,7 @@
       font-size: clamp(14px, 1.1vw, 17px);
       color: var(--text-body);
       max-width: 58ch;
-      margin: 0 auto var(--space-12);
+      margin: 0 auto var(--space-7);
       line-height: 1.55;
     }
 
@@ -407,7 +400,7 @@
     }
     .legend-dot { width: 10px; height: 2px; border-radius: 1px; display: inline-block; }
 
-    .proof-stats { display: flex; flex-direction: column; gap: var(--space-6); }
+    .proof-stats { display: flex; flex-direction: column; gap: var(--space-7); }
     .proof-stat-num {
       font-family: var(--font-display);
       font-weight: 800;
