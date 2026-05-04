@@ -9,7 +9,7 @@ name: ARGUS Preflight
 
 on:
   schedule:
-    - cron: '50 12 * * 1'   # Mon 08:50 ET → before MNEMOSYNE 09:05
+    - cron: '30 10 * * 1'   # Mon 06:30 ET → before MNEMOSYNE 09:05 (2hr buffer absorbs GH cron drift)
     - cron: '52 15 * * 1'   # Mon 11:52 ET → before Phase 1  12:02
     - cron: '53 10 * * 2'   # Tue 06:53 ET → before Phase 1.5 07:00
     - cron: '49 12 * * 2'   # Tue 08:49 ET → before Preview   09:09
@@ -52,7 +52,7 @@ jobs:
             PHASE="${{ inputs.phase }}"
           else
             case "${{ github.event.schedule }}" in
-              '50 12 * * 1') PHASE=mnemosyne ;;
+              '30 10 * * 1') PHASE=mnemosyne ;;
               '52 15 * * 1') PHASE=phase1 ;;
               '53 10 * * 2') PHASE=phase15 ;;
               '49 12 * * 2') PHASE=preview ;;
