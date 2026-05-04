@@ -1,0 +1,124 @@
+{
+  "state": "done",
+  "run_at": "2026-05-04T13:12:13.739934+00:00",
+  "agent": "mnemosyne_auto",
+  "argus_preflight": {
+    "status": "proceeded_with_warning",
+    "note": "argus_health.json was 9911 min old (pre-tournament run) \u2014 status=green. Mnemosyne is post-tournament; stale Argus is expected. Proceeded."
+  },
+  "last_event": {
+    "week": 13,
+    "event_id": 556,
+    "event_name": "Cadillac Championship",
+    "completed": "2026-05-03",
+    "team_event": false,
+    "pipeline_mode": "active",
+    "winner": "Young, Cameron",
+    "winner_score": -19,
+    "winner_rounds": [
+      64,
+      67,
+      70,
+      68
+    ]
+  },
+  "job_a_postmortem": {
+    "status": "done",
+    "file_written": "Outputs/postmortem_week13.md",
+    "n_scored": 70,
+    "no_missed_cuts": true,
+    "winner_bbi_rank": 2
+  },
+  "job_b_calibration": {
+    "status": "done",
+    "file_written": "Outputs/calibration_week13.json",
+    "CALIBRATION_TRACKER_updated": true,
+    "SPEARMAN_TRACKER_updated": true
+  },
+  "job_c_shadow_variants": {
+    "status": "done",
+    "shadow_variants_scored": {
+      "v8.6-cf": {
+        "spearman": 0.2835,
+        "brier_top10": 0.1047,
+        "delta_spearman": -0.0191,
+        "delta_brier_top10_pct": 0.0
+      },
+      "v8.6-tal": {
+        "spearman": 0.305,
+        "brier_top10": 0.1047,
+        "delta_spearman": 0.0024,
+        "delta_brier_top10_pct": 0.0
+      },
+      "v8.6-form": {
+        "spearman": 0.2958,
+        "brier_top10": 0.1047,
+        "delta_spearman": -0.0068,
+        "delta_brier_top10_pct": 0.0
+      },
+      "v8.6-dyn": {
+        "spearman": 0.2877,
+        "brier_top10": 0.1047,
+        "delta_spearman": -0.0149,
+        "delta_brier_top10_pct": 0.0
+      },
+      "v8.7-cfgate": {
+        "spearman": 0.295,
+        "brier_top10": 0.1047,
+        "delta_spearman": -0.0076,
+        "delta_brier_top10_pct": 0.0
+      }
+    },
+    "current_competition_leader": "v8.6-tal",
+    "consecutive_weeks_leading": {
+      "v8.6-tal": 1
+    },
+    "promotion_candidate": null,
+    "promotion_note": "Only 1 scored event in tracker; need 3+ consecutive + 8+ total events for promotion"
+  },
+  "job_d_next_event": {
+    "status": "done",
+    "next_event": {
+      "week": 14,
+      "event_id": 480,
+      "event_name": "Truist Championship",
+      "course": "Quail Hollow Club",
+      "start_date": "2026-05-07",
+      "pipeline_mode": "active",
+      "sg_weights": {
+        "sg_app": 1.2,
+        "sg_ott": 1.18,
+        "sg_putt": 0.95,
+        "sg_arg": 0.7
+      },
+      "course_weight_override": {
+        "courseFit_pool": 0.22,
+        "courseFit_dfs": 0.17
+      },
+      "course_in_dna_library": true,
+      "fallback_applied": false
+    }
+  },
+  "overrides_reset": {
+    "prior_event_id": 556,
+    "prior_count": 2
+  },
+  "spearman_bbi": 0.3026,
+  "spearman_bbi_dfs": 0.2423,
+  "brier_bbi_top10": 0.1047,
+  "brier_bbi_win": 0.0131,
+  "skill_top10_pct": 14.52,
+  "top10_overlap": 4,
+  "winning_factors": [
+    "ceiling",
+    "leverage",
+    "floor"
+  ],
+  "underperforming_factors": [
+    "courseFit",
+    "dfsValue"
+  ],
+  "rolling_spearman_avg": 0.3231,
+  "commit_hash": null,
+  "github_push": "pending"
+}

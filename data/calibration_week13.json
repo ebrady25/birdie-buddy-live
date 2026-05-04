@@ -1,0 +1,213 @@
+{
+  "event": "Cadillac Championship",
+  "event_id": 556,
+  "week": 13,
+  "year": 2026,
+  "markets": {
+    "top_20": {
+      "n": 70,
+      "scale_detected": "unit",
+      "brier": 0.1933,
+      "log_loss": 0.5835,
+      "mean_pred": 0.2732,
+      "mean_actual": 0.2714,
+      "naive_brier": 0.1978,
+      "skill_pct": 2.27,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 6,
+          "mean_pred": 0.0689,
+          "actual_rate": 0.1667
+        },
+        {
+          "bin": "10-20%",
+          "n": 16,
+          "mean_pred": 0.1604,
+          "actual_rate": 0.3125
+        },
+        {
+          "bin": "20-30%",
+          "n": 21,
+          "mean_pred": 0.2559,
+          "actual_rate": 0.1905
+        },
+        {
+          "bin": "30-40%",
+          "n": 17,
+          "mean_pred": 0.3398,
+          "actual_rate": 0.2941
+        },
+        {
+          "bin": "40-50%",
+          "n": 7,
+          "mean_pred": 0.4409,
+          "actual_rate": 0.2857
+        },
+        {
+          "bin": "50-60%",
+          "n": 2,
+          "mean_pred": 0.5519,
+          "actual_rate": 0.5
+        },
+        null,
+        null,
+        {
+          "bin": "80-90%",
+          "n": 1,
+          "mean_pred": 0.8065,
+          "actual_rate": 1.0
+        },
+        null
+      ]
+    },
+    "top_10": {
+      "n": 70,
+      "scale_detected": "unit",
+      "brier": 0.1047,
+      "log_loss": 0.3465,
+      "mean_pred": 0.1359,
+      "mean_actual": 0.1429,
+      "naive_brier": 0.1224,
+      "skill_pct": 14.52,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 28,
+          "mean_pred": 0.0597,
+          "actual_rate": 0.0
+        },
+        {
+          "bin": "10-20%",
+          "n": 29,
+          "mean_pred": 0.1438,
+          "actual_rate": 0.2414
+        },
+        {
+          "bin": "20-30%",
+          "n": 10,
+          "mean_pred": 0.2336,
+          "actual_rate": 0.1
+        },
+        {
+          "bin": "30-40%",
+          "n": 2,
+          "mean_pred": 0.3487,
+          "actual_rate": 0.5
+        },
+        null,
+        null,
+        {
+          "bin": "60-70%",
+          "n": 1,
+          "mean_pred": 0.6369,
+          "actual_rate": 1.0
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    "top_5": {
+      "error": "no joined players",
+      "n": 0
+    },
+    "win": {
+      "n": 70,
+      "scale_detected": "unit",
+      "brier": 0.0131,
+      "log_loss": 0.051,
+      "mean_pred": 0.0135,
+      "mean_actual": 0.0143,
+      "naive_brier": 0.0141,
+      "skill_pct": 7.21,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 69,
+          "mean_pred": 0.0109,
+          "actual_rate": 0.0145
+        },
+        {
+          "bin": "10-20%",
+          "n": 1,
+          "mean_pred": 0.1923,
+          "actual_rate": 0.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
+  "factor_attribution_top10": {
+    "talent": {
+      "topk_avg": 13.082,
+      "field_avg": 9.6846,
+      "ratio": 1.351
+    },
+    "courseFit": {
+      "topk_avg": 12.003,
+      "field_avg": 10.4372,
+      "ratio": 1.15
+    },
+    "form": {
+      "topk_avg": 7.703,
+      "field_avg": 5.8803,
+      "ratio": 1.31
+    },
+    "cutSafety": {
+      "topk_avg": 0.0,
+      "field_avg": 0.0,
+      "ratio": null
+    },
+    "floor": {
+      "topk_avg": 2.416,
+      "field_avg": 1.6376,
+      "ratio": 1.475
+    },
+    "ceiling": {
+      "topk_avg": 0.954,
+      "field_avg": 0.3546,
+      "ratio": 2.69
+    },
+    "leverage": {
+      "topk_avg": 1.718,
+      "field_avg": 0.6386,
+      "ratio": 2.69
+    },
+    "contrarian": {
+      "topk_avg": 0.0,
+      "field_avg": 0.0,
+      "ratio": null
+    },
+    "dfsValue": {
+      "topk_avg": 0.996,
+      "field_avg": 1.2039,
+      "ratio": 0.827
+    },
+    "strategic": {
+      "topk_avg": 2.5,
+      "field_avg": 2.5,
+      "ratio": 1.0
+    }
+  },
+  "spearman_pool": 0.3026,
+  "spearman_dfs": 0.2423,
+  "top10_overlap": 4,
+  "winning_factors": [
+    "ceiling",
+    "leverage",
+    "floor"
+  ],
+  "underperforming_factors": [
+    "courseFit",
+    "strategic",
+    "dfsValue"
+  ]
+}

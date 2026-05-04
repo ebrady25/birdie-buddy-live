@@ -1,0 +1,98 @@
+{
+  "event_id": 480,
+  "event_name": "Truist Championship",
+  "event_slug": "Truist_Championship",
+  "event_snake": "truist_championship",
+  "course": "Quail Hollow Club",
+  "course_slug": "quail_hollow_club",
+  "location": "Charlotte, NC",
+  "start_date": "2026-05-07",
+  "week_num": 14,
+  "year": 2026,
+  "par": 72,
+  "yardage": 7535,
+  "team_event": false,
+  "sg_weights": {
+    "sg_app": 1.2,
+    "sg_ott": 1.18,
+    "sg_putt": 0.95,
+    "sg_arg": 0.7,
+    "_note": "Quail Hollow: long (7535y) bentgrass course, hard difficulty. Over_200_fw is highest-weighted shotmaking band. APP and OTT both critical \u2014 Green Mile (16-18) demands elite iron play and length. ARG suppressed (chip-out situations less frequent on bermuda-adjacent layout)."
+  },
+  "course_weight_override": {
+    "courseFit_pool": 0.22,
+    "courseFit_dfs": 0.17,
+    "_note": "Standard weights \u2014 Quail Hollow has stable modern history at event_id 480 (Wells Fargo/Truist). Good sample size across 10+ editions."
+  },
+  "course_form_name": "Quail Hollow Form",
+  "course_history_event_id_fallbacks": [
+    480
+  ],
+  "course_history_year_range": [
+    2016,
+    2026
+  ],
+  "course_history_note": "Quail Hollow has hosted Wells Fargo/Truist Championship continuously. event_id 480 covers full modern history. No fallback needed.",
+  "course_tier_thresholds": {
+    "SPECIALIST": {
+      "min_rounds": 8,
+      "min_sg": 0.5,
+      "mult": 1.25
+    },
+    "COMFORTABLE": {
+      "min_rounds": 4,
+      "min_sg": 0.0,
+      "mult": 1.15
+    },
+    "NEUTRAL": {
+      "min_rounds": 4,
+      "min_sg": -99,
+      "mult": 1.0
+    },
+    "LIMITED": {
+      "min_rounds": 1,
+      "mult": 0.95
+    },
+    "NO_HISTORY": {
+      "mult": 1.0
+    }
+  },
+  "course_notes": "Par-72, 7535y. Bentgrass greens, stimp ~12.5. Hard difficulty (avg ~72.5). Famous Green Mile finish: 16 (par-3), 17 (par-4 drivable), 18 (par-4 with water left). OTT is critical to reach par-5s and set up approach angles. Bermuda-like rough complexity. Historical specialists: McIlroy (multiple wins, course record holder), Fowler, Rory-type bombers with precise iron play.",
+  "winner_archetype": "Long bomber with elite iron play. Bentgrass putting helps those with good putting form. Green Mile survivability separates the field in final round \u2014 needs nerves and length simultaneously.",
+  "course_dna": {
+    "sg_importance": {
+      "sg_app": 0.3,
+      "sg_ott": 0.28,
+      "sg_putt": 0.25,
+      "sg_arg": 0.17
+    },
+    "difficulty": "hard",
+    "greens": "bentgrass",
+    "stimpmeter": 12.5,
+    "rough": 1.06,
+    "yardage_breakdown": {
+      "50_100_fw": 0.1,
+      "100_150_fw": 0.16,
+      "150_200_fw": 0.26,
+      "over_200_fw": 0.24,
+      "under_150_rgh": 0.1,
+      "over_150_rgh": 0.14
+    },
+    "course_fit_leverage": {
+      "favors": [
+        "bombers",
+        "elite_iron",
+        "bentgrass_putters"
+      ],
+      "penalizes": [
+        "short_hitters",
+        "weak_approach",
+        "bermuda_only_putters"
+      ]
+    }
+  },
+  "pipeline_mode": "active",
+  "bbi_pipeline_action": "FULL \u2014 Individual BBI v8.5 rankings active. Phase 1 / THEMIS / OMNIA all run normally. Pool + DFS outputs published.",
+  "auto_detected_at": "2026-05-04T13:11:40.692829+00:00",
+  "detected_by": "mnemosyne_auto"
+}
