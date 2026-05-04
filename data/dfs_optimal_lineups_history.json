@@ -64,7 +64,71 @@
       "our_best_id": "L1",
       "capture_rate_pct": 82.54,
       "n_optimal_in_our_pool": 1
+    },
+    {
+      "event": "Cadillac Championship",
+      "event_id": 556,
+      "year": 2026,
+      "completed": "2026-05-03",
+      "optimal": {
+        "total": 602.5,
+        "salary": 49300,
+        "players": [
+          {
+            "dg_id": 26651,
+            "name": "Young, Cameron",
+            "salary": 10200,
+            "total_pts": 124.0,
+            "ownership": 0.26789999999999997,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 6430,
+            "name": "Scott, Adam",
+            "salary": 8400,
+            "total_pts": 102.5,
+            "ownership": 0.147,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 24968,
+            "name": "Griffin, Ben",
+            "salary": 8000,
+            "total_pts": 98.5,
+            "ownership": 0.0446,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 14609,
+            "name": "Kim, Si Woo",
+            "salary": 9200,
+            "total_pts": 96.5,
+            "ownership": 0.1308,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 28635,
+            "name": "McCarty, Matt",
+            "salary": 6800,
+            "total_pts": 93.0,
+            "ownership": 0.059000000000000004,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 25362,
+            "name": "Fitzpatrick, Alex",
+            "salary": 6700,
+            "total_pts": 88.0,
+            "ownership": 0.0358,
+            "in_our_pool": false
+          }
+        ]
+      },
+      "our_best_actual": 528.0,
+      "our_best_id": "C5",
+      "capture_rate_pct": 87.63,
+      "n_optimal_in_our_pool": 3
     }
   ],
-  "last_updated": "2026-04-29T01:56:02Z"
+  "last_updated": "2026-05-04T13:38:21Z"
 }

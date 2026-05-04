@@ -17,14 +17,31 @@
       "n_top_001pct": 3,
       "cashed_total": 12,
       "cash_rate_pct": 100.0
+    },
+    {
+      "event": "Cadillac Championship",
+      "event_id": 556,
+      "year": 2026,
+      "completed": "2026-05-03",
+      "our_best": 528.0,
+      "our_best_id": "C5",
+      "pool_hindsight": 570.5,
+      "field_optimal": 602.5,
+      "capture_rate_pct": 87.63,
+      "n_lineups": 12,
+      "n_cash": 1,
+      "n_top_1pct": 8,
+      "n_top_001pct": 3,
+      "cashed_total": 12,
+      "cash_rate_pct": 100.0
     }
   ],
   "season": {
-    "n_events": 1,
-    "mean_capture_rate_pct": 82.54,
+    "n_events": 2,
+    "mean_capture_rate_pct": 85.09,
     "mean_cash_rate_pct": 100.0,
-    "total_cashed": 12,
-    "total_lineups": 12
+    "total_cashed": 24,
+    "total_lineups": 24
   },
-  "last_updated": "2026-04-29T01:56:02Z"
+  "last_updated": "2026-05-04T13:38:21Z"
 }

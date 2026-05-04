@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-04-27",
+  "last_updated": "2026-05-04T13:09:05.766360+00:00",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -196,34 +196,9 @@
     }
   ],
   "rolling_metrics": {
-    "3_event_avg_bbi_spearman": 0.4696,
-    "3_event_avg_dg_spearman": 0.6659,
-    "3_event_avg_delta": null,
-    "3_event_avg_z": 5.566,
-    "season_avg_bbi_spearman": 0.4521,
-    "season_avg_dg_spearman": null,
-    "season_avg_z": 5.262,
-    "best_bbi_spearman": {
-      "event": "Valero Texas Open",
-      "value": 0.5736,
-      "z": 7.407
-    },
-    "worst_bbi_spearman": {
-      "event": "Masters Tournament",
-      "value": 0.3824,
-      "z": 3.779
-    },
-    "beat_dg_streak": 0,
-    "beat_dg_total": 0,
-    "total_events_tracked": 4,
-    "events_bbi_beat_dg": 0,
-    "events_dg_beat_bbi": 1,
-    "events_above_040": 2,
-    "events_above_050": 1,
-    "avg_top5_accuracy": 0.35,
-    "avg_top20_accuracy": 0.4125,
-    "winners_from_top10_bbi": 3,
-    "winners_from_top10_bbi_total": 4
+    "events_with_data": 2,
+    "avg_spearman": 0.3231,
+    "last_5_avg": 0.3231
   },
   "improvement_trend": {
     "spearman_slope_per_week": 0.0248,
@@ -333,6 +308,22 @@
       "n_scored": 0,
       "logged_utc": "2026-04-27T13:10:00Z",
       "notes": "Zurich Classic team format \u2014 paused_team_event mode"
+    },
+    {
+      "year": 2026,
+      "week": 13,
+      "event": "Cadillac Championship",
+      "event_id": 556,
+      "completed": "2026-05-03",
+      "spearman_bbi": 0.3026,
+      "spearman_dg": null,
+      "diff_bbi_vs_dg": null,
+      "winner": "Young, Cameron",
+      "winner_bbi_rank": 2,
+      "winner_dg_rank": null,
+      "n_scored": 70,
+      "logged_utc": "2026-05-04T13:09:05.766333+00:00",
+      "notes": "All 70 players made cut (small field 72). Spearman 0.303 (p=0.011, significant). Top-10 overlap 4/10. Cameron Young BBI#2 wins."
     }
   ],
   "summary": {

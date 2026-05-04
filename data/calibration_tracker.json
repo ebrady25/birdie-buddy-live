@@ -123,6 +123,26 @@
       "winning_factors": [],
       "underperforming_factors": [],
       "logged_utc": "2026-04-27T13:10:00Z"
+    },
+    {
+      "week": 13,
+      "event": "Cadillac Championship",
+      "event_id": 556,
+      "date": "2026-05-03",
+      "bbi_brier_top10": 0.1047,
+      "bbi_brier_win": 0.0131,
+      "bbi_spearman": 0.3026,
+      "bbi_skill_top10_pct": 14.52,
+      "winning_factors": [
+        "ceiling",
+        "leverage",
+        "floor"
+      ],
+      "underperforming_factors": [
+        "courseFit",
+        "strategic",
+        "dfsValue"
+      ]
     }
   ]
 }

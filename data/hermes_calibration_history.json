@@ -45,12 +45,57 @@
           "bias": 38.27
         }
       }
+    },
+    {
+      "event": "Cadillac Championship",
+      "event_id": 556,
+      "year": 2026,
+      "completed": "2026-05-03",
+      "scored_at_utc": "2026-05-04T13:38:24Z",
+      "n_compared": 70,
+      "summary": {
+        "mae": 8.53,
+        "bias": 6.74,
+        "rmse": 29.33,
+        "clean_mae": 1.92,
+        "clean_bias": 0.02,
+        "clean_rmse": 2.79,
+        "n_suspect_excluded": 4,
+        "suspect_threshold_pct": 50.0
+      },
+      "by_tier": {
+        "studs": {
+          "n": 2,
+          "mae": 5.12,
+          "bias": 3.88
+        },
+        "anchors": {
+          "n": 12,
+          "mae": 2.73,
+          "bias": 1.92
+        },
+        "mid-tier": {
+          "n": 16,
+          "mae": 2.27,
+          "bias": -0.76
+        },
+        "value": {
+          "n": 25,
+          "mae": 1.61,
+          "bias": -0.93
+        },
+        "punt": {
+          "n": 15,
+          "mae": 31.83,
+          "bias": 31.75
+        }
+      }
     }
   ],
   "season": {
-    "n_events": 1,
-    "mean_mae": 12.58,
-    "mean_bias": 10.9
+    "n_events": 2,
+    "mean_mae": 10.55,
+    "mean_bias": 8.82
   },
-  "last_updated": "2026-04-29T01:32:46Z"
+  "last_updated": "2026-05-04T13:38:24Z"
 }

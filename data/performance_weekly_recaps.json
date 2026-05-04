@@ -67,7 +67,18 @@
       "dg_spearman": null,
       "summary": "Zurich Classic \u2014 paused for team-event format. BBI v8.5 is calibrated on individual stroke-play; resumed at Cadillac (Wk 13).",
       "body_html": "<div class=\"weekly-recap-body\"><section><h3>Why This Week Is Skipped</h3><p>The Zurich Classic of New Orleans runs in <strong>2-player team format</strong> (alternate shot R1/R3, best ball R2/R4). BBI v8.5 is built around individual stroke-play \u2014 the team scoring structure breaks the math behind every factor (talent normalization, course fit per player, form trends per player).</p><p>Per the Team-Event Protocol, the pipeline writes <code>state: \"deferred\"</code> for the week. PERSEPHONE still tracks live scoring but flags \"no BBI baseline.\" No pool picks. No DFS lineups. No bankroll deployment.</p></section><section><h3>Resume Trigger</h3><p>Auto-resumed at <strong>Wk 13 Cadillac Championship</strong> (Trump National Doral, Apr 30\u2013May 3) \u2014 first stroke-play event back.</p></section></div>"
+    },
+    {
+      "week": 13,
+      "year": 2026,
+      "event": "Cadillac Championship",
+      "date": "2026-05-03",
+      "course": "Trump National Doral (Blue Monster)",
+      "bbi_spearman": 0.3026,
+      "dg_spearman": null,
+      "summary": "BBI Spearman 0.3026 (DG comparison not computed for this event). We ranked Young #2 (tactical win).",
+      "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p>BBI Spearman \u03c1 was <strong>0.3026</strong>. <em>DataGolf head-to-head not computed for this event \u2014 comparison gap left unfilled in the tracker.</em></p></section><section><h3>What BBI Got Right</h3><p><strong>Winner ranking.</strong> Young's pre-tournament profile aligned with BBI's course-fit boost. Ranking them <strong>#2</strong> proved sound.</p></section><section><h3>Calibration in Plain English</h3><p>Brier score measures how far the predicted probability lands from the actual outcome (lower = better). Skill % is the improvement vs. predicting the field-average rate for everyone. For this event:</p><ul><li><strong>Win market:</strong> Brier <strong>0.0131</strong>, <strong>+7.2%</strong> skill \u2014 modest edge over naive.</li><li><strong>Top-5:</strong> Brier <strong>0.0636</strong>, <strong>+18.8%</strong> skill \u2014 modest edge over naive.</li><li><strong>Top-10:</strong> Brier <strong>0.1390</strong>, <strong>+8.1%</strong> skill \u2014 modest edge over naive.</li><li><strong>Top-20:</strong> Brier <strong>0.2036</strong>, <strong>+3.0%</strong> skill \u2014 calibrated, no clear edge.</li><li><strong>Make-cut:</strong> Brier <strong>0.0000</strong>, <strong>+0.0%</strong> skill \u2014 calibrated, no clear edge.</li></ul></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (6 events):</strong> Currently averaging <strong>0.409</strong>. Our 0.40 target is in reach; 0.50 is the best-in-world stretch goal.</li><li><strong>vs. industry baseline:</strong> We're in a statistical dead-heat with the baseline (0.393 baseline mean across 47 events). Some weeks we pull ahead; some we lag \u2014 exactly what a young model should look like.</li><li><strong>Promotion bar:</strong> Variant <code>v8.6-cf</code> has met threshold for 5 consecutive weeks \u2014 manual review pending. \u2014 Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events.</li></ul></section><section><h3>Next Event</h3><p><strong>Next up</strong> is the <strong>Truist Championship</strong> at <strong>Quail Hollow Club</strong> (2026-05-07). The pipeline runs Monday \u2014 fresh rankings, shadow variants, and market edges land by Tuesday lock.</p></section></div>"
     }
   ],
-  "last_updated": "2026-04-28T22:10:06Z"
+  "last_updated": "2026-05-04T13:38:12Z"
 }
