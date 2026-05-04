@@ -58,6 +58,13 @@
       padding-top: clamp(var(--space-10), 10vh, var(--space-16));
       padding-bottom: clamp(var(--space-10), 10vh, var(--space-16));
     }
+    /* Stack hero children vertically so inline-flex pills (ctas, books, scroll cue)
+       don't collapse onto one line on wide viewports. */
+    .cine-hero .cine-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     /* Warm gold halo behind the text — kept for legibility + atmosphere */
     .cine-hero::before {
       content: '';
