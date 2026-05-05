@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-05-04T17:17:23Z",
-  "phase_checked": "phase1",
-  "next_phase": "phase1_apollo_atlas",
+  "timestamp": "2026-05-05T11:53:42Z",
+  "phase_checked": "phase15",
+  "next_phase": "phase15_aeolus_zeus",
   "status": "green",
   "checks": {
     "current_event": {
@@ -9,20 +9,22 @@
       "event_id": 480,
       "event_name": "Truist Championship",
       "start_date": "2026-05-07",
-      "days_until_start": 2,
+      "days_until_start": 1,
       "team_event": false,
       "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.27,
+      "duration_s": 0.35,
       "players_returned": 72,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "n/a",
-      "note": "phase1 has no prior-output gate (first or independent phase)."
+      "status": "pass",
+      "checked": [
+        "bbi_rankings.json (0.0h)"
+      ]
     }
   },
   "recommendations": [],
