@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-05-06T02:41:13.169214+00:00",
+  "last_updated": "2026-05-06T02:51:15.077291+00:00",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -202,7 +202,7 @@
       "field_size": 82,
       "spearman_bbi": 0.3437,
       "spearman_dg": 0.377,
-      "spearman_delta": -0.033299999999999996,
+      "spearman_delta": -0.0333,
       "beat_dg": false,
       "beat_target": false,
       "beat_baseline": true,
@@ -221,14 +221,14 @@
       "spearman_bbi": null,
       "spearman_dg": null,
       "spearman_delta": null,
-      "beat_dg": false,
-      "beat_target": false,
-      "beat_baseline": false,
+      "beat_dg": null,
+      "beat_target": null,
+      "beat_baseline": null,
       "winner": "Fitzpatrick, Matt / Fitzpatrick, Alex",
       "winner_bbi_rank": null,
       "winner_dg_rank": null,
       "winner_in_top10_bbi": null,
-      "notes": "Zurich Classic team format \u2014 paused_team_event mode (team event \u2014 pipeline deferred per project_team_event_handling)",
+      "notes": "Zurich Classic team format \u2014 paused_team_event mode (team event \u2014 pipeline deferred)",
       "deferred": true
     },
     {
@@ -237,10 +237,10 @@
       "event_id": 556,
       "date": "2026-05-03",
       "field_size": 70,
-      "spearman_bbi": 0.3026,
-      "spearman_dg": 0.3124,
-      "spearman_delta": -0.009800000000000031,
-      "beat_dg": false,
+      "spearman_bbi": 0.3151,
+      "spearman_dg": 0.2508,
+      "spearman_delta": 0.0643,
+      "beat_dg": true,
       "beat_target": false,
       "beat_baseline": true,
       "winner": "Young, Cameron",
@@ -251,10 +251,10 @@
     }
   ],
   "rolling_metrics": {
-    "season_avg_bbi_spearman": 0.4091,
-    "last_5_avg_bbi_spearman": 0.411,
+    "season_avg_bbi_spearman": 0.4112,
+    "last_5_avg_bbi_spearman": 0.4135,
     "total_events_tracked": 6,
-    "events_bbi_beat_dg": 0,
+    "events_bbi_beat_dg": 1,
     "events_with_dg_comparison": 3,
     "events_above_040": 2,
     "winners_from_top10_bbi": 5,
@@ -265,8 +265,8 @@
       "spearman_bbi": 0.5736
     },
     "events_with_data": 6,
-    "avg_spearman": 0.4091,
-    "last_5_avg": 0.411
+    "avg_spearman": 0.4112,
+    "last_5_avg": 0.4135
   },
   "improvement_trend": {
     "spearman_slope_per_week": 0.0248,
@@ -396,10 +396,9 @@
   ],
   "summary": {
     "events_scored": 6,
-    "mean_spearman_bbi": 0.4091,
-    "mean_spearman_dg": 0.4518,
-    "mean_diff": -0.1089,
-    "last_updated": "2026-05-06T02:41:13.169214+00:00"
-  },
-  "_history_deprecation_note": "The 'history' field is being phased out as of 2026-05-05. New entries go into 'events' (canonical). 'history' kept for backward compatibility."
+    "mean_spearman_bbi": 0.4112,
+    "mean_spearman_dg": 0.4312,
+    "mean_diff": -0.0842,
+    "last_updated": "2026-05-06T02:51:15.077273+00:00"
+  }
 }
