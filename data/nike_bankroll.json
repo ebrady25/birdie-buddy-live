@@ -1,8 +1,10 @@
 {
-  "event": "Cadillac Championship",
-  "event_slug": "Cadillac_Championship",
+  "event": "Truist Championship",
+  "event_slug": "Truist_Championship",
   "year": 2026,
-  "philosophy": "Standard week. OMNIA market data unavailable; bankroll allocated by archetype only without Kelly EV overlay.",
+  "week": 14,
+  "generated_at": "2026-05-05T13:11:53.858863+00:00",
+  "philosophy": "OMNIA market data is stale (still shows last week's event \u2014 books haven't posted Truist outrights yet). Bankroll allocated by archetype without Kelly EV overlay. Re-evaluate Wednesday post Phase 2 Lock.",
   "allocation_pct": {
     "cash": 60,
     "gpp": 30,
@@ -15,9 +17,10 @@
   },
   "kelly_bets_recommended": [],
   "guidance": [
-    "Cash: 4-6 entries split across double-ups + cash 50-50s. Use SAFE-bucket lineups.",
-    "GPP: 2-3 entries in mid-stakes. CORE + LEVERAGE buckets.",
-    "Variance: 1 satellite or single-entry GPP for tournament leverage.",
-    "Kelly +EV bets unavailable this cycle \u2014 re-evaluate after OMNIA refresh on Wednesday."
-  ]
+    "Cash: 4\u20136 entries split across double-ups + cash 50/50s. Use CASH-bucket lineups (lineups #1\u2013#2).",
+    "GPP: 2\u20133 entries in mid-stakes. CORE + LEVERAGE buckets (lineups #3\u2013#10).",
+    "High-variance: 1 satellite or single-entry GPP for tournament leverage (MOONSHOT lineup #11).",
+    "Kelly +EV bets unavailable this cycle (OMNIA stale) \u2014 re-evaluate after Wednesday Lock + Phase 2 OMNIA refresh."
+  ],
+  "omnia_status": "stale"
 }

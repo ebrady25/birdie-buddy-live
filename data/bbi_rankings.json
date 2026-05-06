@@ -59,7 +59,16 @@
     "course_history_coverage": "65/72",
     "argus_note": null,
     "schema_normalized_at": "2026-05-05T03:49:16.205255Z",
-    "schema_normalization_note": "Re-run produced flat list with renamed keys (player_name, proj_points, p_cut). Normalized to {meta, rankings} with name/proj_points_total/p_makecut for downstream compatibility (site_deploy.py, HEPHAESTUS, phase1-validate). Raw flat file preserved at bbi_v85_Truist_Championship.raw_flat.json."
+    "schema_normalization_note": "Re-run produced flat list with renamed keys (player_name, proj_points, p_cut). Normalized to {meta, rankings} with name/proj_points_total/p_makecut for downstream compatibility (site_deploy.py, HEPHAESTUS, phase1-validate). Raw flat file preserved at bbi_v85_Truist_Championship.raw_flat.json.",
+    "zeus_applied_utc": "2026-05-05T11:02:52Z",
+    "zeus_params": {
+      "avg_wind_mph": 10.6,
+      "peak_wind_mph": 11.9,
+      "wind_intensity": 0.1733,
+      "total_precip_in": 2.375,
+      "rain_flag": true,
+      "firm_fast_flag": false
+    }
   },
   "rankings": [
     {
@@ -128,7 +137,13 @@
       "name": "McIlroy, Rory",
       "proj_points_total": 86.85,
       "p_makecut": 1.0,
-      "owgr_rank": 3
+      "owgr_rank": 3,
+      "wind_adj": 0.2473,
+      "condition_adj": 0.2962,
+      "zeus_pool": 89.3602,
+      "zeus_dfs": 81.4312,
+      "zeus_rank_pool": 1,
+      "zeus_rank_dfs": 1
     },
     {
       "dg_id": 19895,
@@ -195,7 +210,13 @@
       "name": "Schauffele, Xander",
       "proj_points_total": 81.78,
       "p_makecut": 1.0,
-      "owgr_rank": 6
+      "owgr_rank": 6,
+      "wind_adj": 0.1374,
+      "condition_adj": -0.0326,
+      "zeus_pool": 80.1513,
+      "zeus_dfs": 74.5192,
+      "zeus_rank_pool": 2,
+      "zeus_rank_dfs": 2
     },
     {
       "dg_id": 26651,
@@ -259,7 +280,13 @@
       "name": "Young, Cameron",
       "proj_points_total": 82.61,
       "p_makecut": 1.0,
-      "owgr_rank": 4
+      "owgr_rank": 4,
+      "wind_adj": -0.0544,
+      "condition_adj": -0.1681,
+      "zeus_pool": 76.0907,
+      "zeus_dfs": 71.6797,
+      "zeus_rank_pool": 3,
+      "zeus_rank_dfs": 3
     },
     {
       "dg_id": 17646,
@@ -324,7 +351,13 @@
       "name": "Fitzpatrick, Matt",
       "proj_points_total": 77.01,
       "p_makecut": 1.0,
-      "owgr_rank": 5
+      "owgr_rank": 5,
+      "wind_adj": 0.0362,
+      "condition_adj": -0.0791,
+      "zeus_pool": 70.9908,
+      "zeus_dfs": 63.0121,
+      "zeus_rank_pool": 4,
+      "zeus_rank_dfs": 4
     },
     {
       "dg_id": 14609,
@@ -389,7 +422,13 @@
       "name": "Kim, Si Woo",
       "proj_points_total": 73.63,
       "p_makecut": 1.0,
-      "owgr_rank": 10
+      "owgr_rank": 10,
+      "wind_adj": 0.181,
+      "condition_adj": 0.2972,
+      "zeus_pool": 68.5016,
+      "zeus_dfs": 60.3375,
+      "zeus_rank_pool": 5,
+      "zeus_rank_dfs": 5
     },
     {
       "dg_id": 12294,
@@ -456,7 +495,13 @@
       "name": "Fleetwood, Tommy",
       "proj_points_total": 72.96,
       "p_makecut": 1.0,
-      "owgr_rank": 9
+      "owgr_rank": 9,
+      "wind_adj": 0.2073,
+      "condition_adj": 0.2517,
+      "zeus_pool": 67.0972,
+      "zeus_dfs": 56.9035,
+      "zeus_rank_pool": 6,
+      "zeus_rank_dfs": 12
     },
     {
       "dg_id": 23950,
@@ -518,7 +563,13 @@
       "name": "Aberg, Ludvig",
       "proj_points_total": 76.78,
       "p_makecut": 1.0,
-      "owgr_rank": 7
+      "owgr_rank": 7,
+      "wind_adj": -0.0976,
+      "condition_adj": 0.1999,
+      "zeus_pool": 66.3591,
+      "zeus_dfs": 60.161,
+      "zeus_rank_pool": 7,
+      "zeus_rank_dfs": 7
     },
     {
       "dg_id": 18841,
@@ -583,7 +634,13 @@
       "name": "Hovland, Viktor",
       "proj_points_total": 70.09,
       "p_makecut": 1.0,
-      "owgr_rank": 20
+      "owgr_rank": 20,
+      "wind_adj": 0.1118,
+      "condition_adj": 0.209,
+      "zeus_pool": 64.4647,
+      "zeus_dfs": 58.0136,
+      "zeus_rank_pool": 8,
+      "zeus_rank_dfs": 9
     },
     {
       "dg_id": 6430,
@@ -649,7 +706,13 @@
       "name": "Scott, Adam",
       "proj_points_total": 72.52,
       "p_makecut": 1.0,
-      "owgr_rank": 17
+      "owgr_rank": 17,
+      "wind_adj": 0.0548,
+      "condition_adj": 0.033,
+      "zeus_pool": 63.9147,
+      "zeus_dfs": 57.3271,
+      "zeus_rank_pool": 10,
+      "zeus_rank_dfs": 10
     },
     {
       "dg_id": 17536,
@@ -713,7 +776,13 @@
       "name": "Spaun, J.J.",
       "proj_points_total": 69.7,
       "p_makecut": 1.0,
-      "owgr_rank": 24
+      "owgr_rank": 24,
+      "wind_adj": 0.1536,
+      "condition_adj": 0.4675,
+      "zeus_pool": 64.3815,
+      "zeus_dfs": 60.2836,
+      "zeus_rank_pool": 9,
+      "zeus_rank_dfs": 6
     },
     {
       "dg_id": 13562,
@@ -778,7 +847,13 @@
       "name": "Matsuyama, Hideki",
       "proj_points_total": 70.45,
       "p_makecut": 1.0,
-      "owgr_rank": 14
+      "owgr_rank": 14,
+      "wind_adj": 0.1452,
+      "condition_adj": 0.0288,
+      "zeus_pool": 63.4383,
+      "zeus_dfs": 55.6109,
+      "zeus_rank_pool": 11,
+      "zeus_rank_dfs": 15
     },
     {
       "dg_id": 15466,
@@ -844,7 +919,13 @@
       "name": "Cantlay, Patrick",
       "proj_points_total": 69.79,
       "p_makecut": 1.0,
-      "owgr_rank": 13
+      "owgr_rank": 13,
+      "wind_adj": -0.0735,
+      "condition_adj": -0.4847,
+      "zeus_pool": 60.8816,
+      "zeus_dfs": 51.6336,
+      "zeus_rank_pool": 15,
+      "zeus_rank_dfs": 31
     },
     {
       "dg_id": 12965,
@@ -912,7 +993,13 @@
       "name": "Fowler, Rickie",
       "proj_points_total": 70.19,
       "p_makecut": 1.0,
-      "owgr_rank": 22
+      "owgr_rank": 22,
+      "wind_adj": 0.0812,
+      "condition_adj": -0.0153,
+      "zeus_pool": 61.4874,
+      "zeus_dfs": 52.911,
+      "zeus_rank_pool": 13,
+      "zeus_rank_dfs": 22
     },
     {
       "dg_id": 23602,
@@ -974,7 +1061,13 @@
       "name": "Hojgaard, Nicolai",
       "proj_points_total": 70.61,
       "p_makecut": 1.0,
-      "owgr_rank": 35
+      "owgr_rank": 35,
+      "wind_adj": 0.1987,
+      "condition_adj": 1.0358,
+      "zeus_pool": 61.9175,
+      "zeus_dfs": 59.713,
+      "zeus_rank_pool": 12,
+      "zeus_rank_dfs": 8
     },
     {
       "dg_id": 19483,
@@ -1040,7 +1133,13 @@
       "name": "Burns, Sam",
       "proj_points_total": 70.93,
       "p_makecut": 1.0,
-      "owgr_rank": 15
+      "owgr_rank": 15,
+      "wind_adj": 0.034,
+      "condition_adj": 0.1076,
+      "zeus_pool": 60.6137,
+      "zeus_dfs": 52.3049,
+      "zeus_rank_pool": 16,
+      "zeus_rank_dfs": 26
     },
     {
       "dg_id": 23323,
@@ -1102,7 +1201,13 @@
       "name": "MacIntyre, Robert",
       "proj_points_total": 68.62,
       "p_makecut": 1.0,
-      "owgr_rank": 11
+      "owgr_rank": 11,
+      "wind_adj": 0.0747,
+      "condition_adj": 0.136,
+      "zeus_pool": 60.5426,
+      "zeus_dfs": 49.8362,
+      "zeus_rank_pool": 17,
+      "zeus_rank_dfs": 35
     },
     {
       "dg_id": 14577,
@@ -1168,7 +1273,13 @@
       "name": "English, Harris",
       "proj_points_total": 68.28,
       "p_makecut": 1.0,
-      "owgr_rank": 27
+      "owgr_rank": 27,
+      "wind_adj": 0.1877,
+      "condition_adj": 0.5794,
+      "zeus_pool": 61.0143,
+      "zeus_dfs": 54.6824,
+      "zeus_rank_pool": 14,
+      "zeus_rank_dfs": 17
     },
     {
       "dg_id": 18634,
@@ -1231,7 +1342,13 @@
       "name": "McNealy, Maverick",
       "proj_points_total": 69.17,
       "p_makecut": 1.0,
-      "owgr_rank": 16
+      "owgr_rank": 16,
+      "wind_adj": 0.0026,
+      "condition_adj": -0.2662,
+      "zeus_pool": 59.4943,
+      "zeus_dfs": 52.5476,
+      "zeus_rank_pool": 19,
+      "zeus_rank_dfs": 25
     },
     {
       "dg_id": 18474,
@@ -1294,7 +1411,13 @@
       "name": "Smalley, Alex",
       "proj_points_total": 67.03,
       "p_makecut": 1.0,
-      "owgr_rank": 43
+      "owgr_rank": 43,
+      "wind_adj": 0.2738,
+      "condition_adj": 0.4097,
+      "zeus_pool": 60.0437,
+      "zeus_dfs": 56.5981,
+      "zeus_rank_pool": 18,
+      "zeus_rank_dfs": 13
     },
     {
       "dg_id": 27774,
@@ -1354,7 +1477,13 @@
       "name": "Gotterup, Chris",
       "proj_points_total": 72.02,
       "p_makecut": 1.0,
-      "owgr_rank": 26
+      "owgr_rank": 26,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 59.105,
+      "zeus_dfs": 54.1123,
+      "zeus_rank_pool": 21,
+      "zeus_rank_dfs": 19
     },
     {
       "dg_id": 14139,
@@ -1421,7 +1550,13 @@
       "name": "Thomas, Justin",
       "proj_points_total": 68.99,
       "p_makecut": 1.0,
-      "owgr_rank": 51
+      "owgr_rank": 51,
+      "wind_adj": 0.1765,
+      "condition_adj": 0.2143,
+      "zeus_pool": 59.2334,
+      "zeus_dfs": 56.9451,
+      "zeus_rank_pool": 20,
+      "zeus_rank_dfs": 11
     },
     {
       "dg_id": 24968,
@@ -1484,7 +1619,13 @@
       "name": "Griffin, Ben",
       "proj_points_total": 67.19,
       "p_makecut": 1.0,
-      "owgr_rank": 19
+      "owgr_rank": 19,
+      "wind_adj": -0.0393,
+      "condition_adj": -0.1487,
+      "zeus_pool": 57.9882,
+      "zeus_dfs": 48.9373,
+      "zeus_rank_pool": 24,
+      "zeus_rank_dfs": 40
     },
     {
       "dg_id": 9771,
@@ -1552,7 +1693,13 @@
       "name": "Day, Jason",
       "proj_points_total": 67.56,
       "p_makecut": 1.0,
-      "owgr_rank": 36
+      "owgr_rank": 36,
+      "wind_adj": 0.1083,
+      "condition_adj": -0.2006,
+      "zeus_pool": 58.0451,
+      "zeus_dfs": 52.9075,
+      "zeus_rank_pool": 22,
+      "zeus_rank_dfs": 23
     },
     {
       "dg_id": 13872,
@@ -1620,7 +1767,13 @@
       "name": "Bradley, Keegan",
       "proj_points_total": 67.78,
       "p_makecut": 1.0,
-      "owgr_rank": 39
+      "owgr_rank": 39,
+      "wind_adj": 0.2119,
+      "condition_adj": 0.3396,
+      "zeus_pool": 57.4917,
+      "zeus_dfs": 55.7009,
+      "zeus_rank_pool": 25,
+      "zeus_rank_dfs": 14
     },
     {
       "dg_id": 17576,
@@ -1686,7 +1839,13 @@
       "name": "Conners, Corey",
       "proj_points_total": 64.66,
       "p_makecut": 1.0,
-      "owgr_rank": 49
+      "owgr_rank": 49,
+      "wind_adj": 0.3172,
+      "condition_adj": 0.9712,
+      "zeus_pool": 58.0207,
+      "zeus_dfs": 54.2451,
+      "zeus_rank_pool": 23,
+      "zeus_rank_dfs": 18
     },
     {
       "dg_id": 17511,
@@ -1752,7 +1911,13 @@
       "name": "Straka, Sepp",
       "proj_points_total": 68.7,
       "p_makecut": 1.0,
-      "owgr_rank": 29
+      "owgr_rank": 29,
+      "wind_adj": -0.1078,
+      "condition_adj": -0.3242,
+      "zeus_pool": 56.1512,
+      "zeus_dfs": 51.5718,
+      "zeus_rank_pool": 27,
+      "zeus_rank_dfs": 32
     },
     {
       "dg_id": 16841,
@@ -1814,7 +1979,13 @@
       "name": "Lee, Min Woo",
       "proj_points_total": 72.44,
       "p_makecut": 1.0,
-      "owgr_rank": 30
+      "owgr_rank": 30,
+      "wind_adj": 0.0131,
+      "condition_adj": -0.4008,
+      "zeus_pool": 55.7878,
+      "zeus_dfs": 53.399,
+      "zeus_rank_pool": 28,
+      "zeus_rank_dfs": 21
     },
     {
       "dg_id": 29767,
@@ -1877,7 +2048,13 @@
       "name": "Gerard, Ryan",
       "proj_points_total": 66.26,
       "p_makecut": 1.0,
-      "owgr_rank": 40
+      "owgr_rank": 40,
+      "wind_adj": 0.2038,
+      "condition_adj": 0.5566,
+      "zeus_pool": 56.8474,
+      "zeus_dfs": 54.7317,
+      "zeus_rank_pool": 26,
+      "zeus_rank_dfs": 16
     },
     {
       "dg_id": 6093,
@@ -1942,7 +2119,13 @@
       "name": "Rose, Justin",
       "proj_points_total": 67.68,
       "p_makecut": 1.0,
-      "owgr_rank": 34
+      "owgr_rank": 34,
+      "wind_adj": 0.1359,
+      "condition_adj": 0.4111,
+      "zeus_pool": 55.2894,
+      "zeus_dfs": 52.1796,
+      "zeus_rank_pool": 29,
+      "zeus_rank_dfs": 27
     },
     {
       "dg_id": 12577,
@@ -2010,7 +2193,13 @@
       "name": "Woodland, Gary",
       "proj_points_total": 67.0,
       "p_makecut": 1.0,
-      "owgr_rank": 54
+      "owgr_rank": 54,
+      "wind_adj": 0.0152,
+      "condition_adj": -0.0103,
+      "zeus_pool": 54.6656,
+      "zeus_dfs": 51.6995,
+      "zeus_rank_pool": 31,
+      "zeus_rank_dfs": 29
     },
     {
       "dg_id": 21891,
@@ -2074,7 +2263,13 @@
       "name": "Kitayama, Kurt",
       "proj_points_total": 69.74,
       "p_makecut": 1.0,
-      "owgr_rank": 38
+      "owgr_rank": 38,
+      "wind_adj": 0.1322,
+      "condition_adj": 0.4775,
+      "zeus_pool": 55.0745,
+      "zeus_dfs": 53.5982,
+      "zeus_rank_pool": 30,
+      "zeus_rank_dfs": 20
     },
     {
       "dg_id": 19396,
@@ -2137,7 +2332,13 @@
       "name": "Knapp, Jake",
       "proj_points_total": 70.45,
       "p_makecut": 1.0,
-      "owgr_rank": 18
+      "owgr_rank": 18,
+      "wind_adj": -0.3493,
+      "condition_adj": -1.4241,
+      "zeus_pool": 52.5714,
+      "zeus_dfs": 50.4406,
+      "zeus_rank_pool": 36,
+      "zeus_rank_dfs": 34
     },
     {
       "dg_id": 14636,
@@ -2202,7 +2403,13 @@
       "name": "Spieth, Jordan",
       "proj_points_total": 67.59,
       "p_makecut": 1.0,
-      "owgr_rank": 31
+      "owgr_rank": 31,
+      "wind_adj": -0.1798,
+      "condition_adj": -0.9932,
+      "zeus_pool": 52.784,
+      "zeus_dfs": 48.3857,
+      "zeus_rank_pool": 34,
+      "zeus_rank_dfs": 42
     },
     {
       "dg_id": 26096,
@@ -2267,7 +2474,13 @@
       "name": "Bhatia, Akshay",
       "proj_points_total": 66.2,
       "p_makecut": 1.0,
-      "owgr_rank": 21
+      "owgr_rank": 21,
+      "wind_adj": -0.0017,
+      "condition_adj": 0.1506,
+      "zeus_pool": 53.449,
+      "zeus_dfs": 49.3954,
+      "zeus_rank_pool": 32,
+      "zeus_rank_dfs": 39
     },
     {
       "dg_id": 10419,
@@ -2333,7 +2546,13 @@
       "name": "Noren, Alex",
       "proj_points_total": 64.62,
       "p_makecut": 1.0,
-      "owgr_rank": 25
+      "owgr_rank": 25,
+      "wind_adj": 0.0611,
+      "condition_adj": 0.0207,
+      "zeus_pool": 53.0811,
+      "zeus_dfs": 49.5539,
+      "zeus_rank_pool": 33,
+      "zeus_rank_dfs": 38
     },
     {
       "dg_id": 11889,
@@ -2396,7 +2615,13 @@
       "name": "Fox, Ryan",
       "proj_points_total": 63.11,
       "p_makecut": 1.0,
-      "owgr_rank": 55
+      "owgr_rank": 55,
+      "wind_adj": 0.1561,
+      "condition_adj": 0.1227,
+      "zeus_pool": 52.6521,
+      "zeus_dfs": 52.8523,
+      "zeus_rank_pool": 35,
+      "zeus_rank_dfs": 24
     },
     {
       "dg_id": 17606,
@@ -2461,7 +2686,13 @@
       "name": "Berger, Daniel",
       "proj_points_total": 63.84,
       "p_makecut": 1.0,
-      "owgr_rank": 59
+      "owgr_rank": 59,
+      "wind_adj": 0.1171,
+      "condition_adj": 0.5145,
+      "zeus_pool": 52.5588,
+      "zeus_dfs": 51.6909,
+      "zeus_rank_pool": 37,
+      "zeus_rank_dfs": 30
     },
     {
       "dg_id": 22760,
@@ -2523,7 +2754,13 @@
       "name": "Hisatsune, Ryo",
       "proj_points_total": 63.9,
       "p_makecut": 1.0,
-      "owgr_rank": 65
+      "owgr_rank": 65,
+      "wind_adj": 0.031,
+      "condition_adj": -0.0217,
+      "zeus_pool": 51.3143,
+      "zeus_dfs": 51.9192,
+      "zeus_rank_pool": 39,
+      "zeus_rank_dfs": 28
     },
     {
       "dg_id": 27194,
@@ -2586,7 +2823,13 @@
       "name": "Hall, Harry",
       "proj_points_total": 62.8,
       "p_makecut": 1.0,
-      "owgr_rank": 41
+      "owgr_rank": 41,
+      "wind_adj": 0.1651,
+      "condition_adj": 0.3035,
+      "zeus_pool": 51.6946,
+      "zeus_dfs": 48.0369,
+      "zeus_rank_pool": 38,
+      "zeus_rank_dfs": 44
     },
     {
       "dg_id": 25569,
@@ -2649,7 +2892,13 @@
       "name": "Stevens, Sam",
       "proj_points_total": 66.24,
       "p_makecut": 1.0,
-      "owgr_rank": 46
+      "owgr_rank": 46,
+      "wind_adj": -0.0616,
+      "condition_adj": -0.5544,
+      "zeus_pool": 50.1582,
+      "zeus_dfs": 49.759,
+      "zeus_rank_pool": 41,
+      "zeus_rank_dfs": 36
     },
     {
       "dg_id": 17780,
@@ -2713,7 +2962,13 @@
       "name": "Pendrith, Taylor",
       "proj_points_total": 63.29,
       "p_makecut": 1.0,
-      "owgr_rank": 96
+      "owgr_rank": 96,
+      "wind_adj": 0.0138,
+      "condition_adj": -0.2379,
+      "zeus_pool": 50.0358,
+      "zeus_dfs": 50.958,
+      "zeus_rank_pool": 42,
+      "zeus_rank_dfs": 33
     },
     {
       "dg_id": 17538,
@@ -2779,7 +3034,13 @@
       "name": "Homa, Max",
       "proj_points_total": 62.96,
       "p_makecut": 1.0,
-      "owgr_rank": 82
+      "owgr_rank": 82,
+      "wind_adj": 0.0988,
+      "condition_adj": 0.2422,
+      "zeus_pool": 50.3027,
+      "zeus_dfs": 48.1691,
+      "zeus_rank_pool": 40,
+      "zeus_rank_dfs": 43
     },
     {
       "dg_id": 21407,
@@ -2839,7 +3100,13 @@
       "name": "Reitan, Kristoffer",
       "proj_points_total": 65.14,
       "p_makecut": 1.0,
-      "owgr_rank": 60
+      "owgr_rank": 60,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 49.1022,
+      "zeus_dfs": 49.6987,
+      "zeus_rank_pool": 43,
+      "zeus_rank_dfs": 37
     },
     {
       "dg_id": 28635,
@@ -2901,7 +3168,13 @@
       "name": "McCarty, Matt",
       "proj_points_total": 62.4,
       "p_makecut": 1.0,
-      "owgr_rank": 48
+      "owgr_rank": 48,
+      "wind_adj": -0.0724,
+      "condition_adj": 0.0563,
+      "zeus_pool": 48.5924,
+      "zeus_dfs": 46.5959,
+      "zeus_rank_pool": 45,
+      "zeus_rank_dfs": 49
     },
     {
       "dg_id": 25362,
@@ -2961,7 +3234,13 @@
       "name": "Fitzpatrick, Alex",
       "proj_points_total": 62.75,
       "p_makecut": 1.0,
-      "owgr_rank": 62
+      "owgr_rank": 62,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 48.4357,
+      "zeus_dfs": 48.0242,
+      "zeus_rank_pool": 46,
+      "zeus_rank_dfs": 45
     },
     {
       "dg_id": 29433,
@@ -3023,7 +3302,13 @@
       "name": "Bridgeman, Jacob",
       "proj_points_total": 66.13,
       "p_makecut": 1.0,
-      "owgr_rank": 32
+      "owgr_rank": 32,
+      "wind_adj": -0.2959,
+      "condition_adj": -0.6338,
+      "zeus_pool": 47.3647,
+      "zeus_dfs": 45.5082,
+      "zeus_rank_pool": 50,
+      "zeus_rank_dfs": 52
     },
     {
       "dg_id": 23014,
@@ -3086,7 +3371,13 @@
       "name": "Theegala, Sahith",
       "proj_points_total": 64.7,
       "p_makecut": 1.0,
-      "owgr_rank": 47
+      "owgr_rank": 47,
+      "wind_adj": -0.1076,
+      "condition_adj": 0.2304,
+      "zeus_pool": 48.3621,
+      "zeus_dfs": 46.5006,
+      "zeus_rank_pool": 47,
+      "zeus_rank_dfs": 50
     },
     {
       "dg_id": 20706,
@@ -3150,7 +3441,13 @@
       "name": "Wallace, Matt",
       "proj_points_total": 60.69,
       "p_makecut": 1.0,
-      "owgr_rank": 84
+      "owgr_rank": 84,
+      "wind_adj": 0.2446,
+      "condition_adj": 0.2491,
+      "zeus_pool": 48.6354,
+      "zeus_dfs": 47.5871,
+      "zeus_rank_pool": 44,
+      "zeus_rank_dfs": 46
     },
     {
       "dg_id": 14502,
@@ -3215,7 +3512,13 @@
       "name": "Cauley, Bud",
       "proj_points_total": 63.79,
       "p_makecut": 1.0,
-      "owgr_rank": 75
+      "owgr_rank": 75,
+      "wind_adj": 0.0873,
+      "condition_adj": -0.0427,
+      "zeus_pool": 48.1164,
+      "zeus_dfs": 48.7479,
+      "zeus_rank_pool": 48,
+      "zeus_rank_dfs": 41
     },
     {
       "dg_id": 13126,
@@ -3281,7 +3584,13 @@
       "name": "Taylor, Nick",
       "proj_points_total": 61.16,
       "p_makecut": 1.0,
-      "owgr_rank": 44
+      "owgr_rank": 44,
+      "wind_adj": 0.0439,
+      "condition_adj": -0.0227,
+      "zeus_pool": 47.9024,
+      "zeus_dfs": 44.4075,
+      "zeus_rank_pool": 49,
+      "zeus_rank_dfs": 55
     },
     {
       "dg_id": 21554,
@@ -3348,7 +3657,13 @@
       "name": "Poston, J.T.",
       "proj_points_total": 61.19,
       "p_makecut": 1.0,
-      "owgr_rank": 77
+      "owgr_rank": 77,
+      "wind_adj": 0.0111,
+      "condition_adj": 0.0632,
+      "zeus_pool": 46.3886,
+      "zeus_dfs": 47.08,
+      "zeus_rank_pool": 51,
+      "zeus_rank_dfs": 48
     },
     {
       "dg_id": 8825,
@@ -3416,7 +3731,13 @@
       "name": "Harman, Brian",
       "proj_points_total": 62.0,
       "p_makecut": 1.0,
-      "owgr_rank": 71
+      "owgr_rank": 71,
+      "wind_adj": -0.0253,
+      "condition_adj": -0.3308,
+      "zeus_pool": 45.0484,
+      "zeus_dfs": 44.5461,
+      "zeus_rank_pool": 54,
+      "zeus_rank_dfs": 54
     },
     {
       "dg_id": 29925,
@@ -3476,7 +3797,13 @@
       "name": "Yellamaraju, Sudarshan",
       "proj_points_total": 62.06,
       "p_makecut": 1.0,
-      "owgr_rank": 86
+      "owgr_rank": 86,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 45.368,
+      "zeus_dfs": 45.5853,
+      "zeus_rank_pool": 52,
+      "zeus_rank_dfs": 51
     },
     {
       "dg_id": 27819,
@@ -3536,7 +3863,13 @@
       "name": "Castillo, Ricky",
       "proj_points_total": 62.67,
       "p_makecut": 1.0,
-      "owgr_rank": 93
+      "owgr_rank": 93,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 45.3223,
+      "zeus_dfs": 47.3745,
+      "zeus_rank_pool": 53,
+      "zeus_rank_dfs": 47
     },
     {
       "dg_id": 19870,
@@ -3603,7 +3936,13 @@
       "name": "McCarthy, Denny",
       "proj_points_total": 58.44,
       "p_makecut": 1.0,
-      "owgr_rank": 76
+      "owgr_rank": 76,
+      "wind_adj": -0.0517,
+      "condition_adj": -0.3635,
+      "zeus_pool": 44.4748,
+      "zeus_dfs": 42.8444,
+      "zeus_rank_pool": 56,
+      "zeus_rank_dfs": 57
     },
     {
       "dg_id": 17543,
@@ -3667,7 +4006,13 @@
       "name": "Kim, Michael",
       "proj_points_total": 59.85,
       "p_makecut": 1.0,
-      "owgr_rank": 61
+      "owgr_rank": 61,
+      "wind_adj": 0.0478,
+      "condition_adj": 0.0001,
+      "zeus_pool": 44.6684,
+      "zeus_dfs": 44.9903,
+      "zeus_rank_pool": 55,
+      "zeus_rank_dfs": 53
     },
     {
       "dg_id": 14704,
@@ -3731,7 +4076,13 @@
       "name": "Putnam, Andrew",
       "proj_points_total": 56.27,
       "p_makecut": 1.0,
-      "owgr_rank": 67
+      "owgr_rank": 67,
+      "wind_adj": 0.0328,
+      "condition_adj": 0.4957,
+      "zeus_pool": 43.5929,
+      "zeus_dfs": 42.0437,
+      "zeus_rank_pool": 57,
+      "zeus_rank_dfs": 59
     },
     {
       "dg_id": 7399,
@@ -3799,7 +4150,13 @@
       "name": "Glover, Lucas",
       "proj_points_total": 57.43,
       "p_makecut": 1.0,
-      "owgr_rank": 114
+      "owgr_rank": 114,
+      "wind_adj": 0.2268,
+      "condition_adj": 0.3094,
+      "zeus_pool": 43.3432,
+      "zeus_dfs": 43.5484,
+      "zeus_rank_pool": 58,
+      "zeus_rank_dfs": 56
     },
     {
       "dg_id": 17488,
@@ -3865,7 +4222,13 @@
       "name": "Im, Sungjae",
       "proj_points_total": 59.82,
       "p_makecut": 1.0,
-      "owgr_rank": 149
+      "owgr_rank": 149,
+      "wind_adj": -0.0119,
+      "condition_adj": -0.2636,
+      "zeus_pool": 40.8125,
+      "zeus_dfs": 42.4732,
+      "zeus_rank_pool": 59,
+      "zeus_rank_dfs": 58
     },
     {
       "dg_id": 16283,
@@ -3932,7 +4295,13 @@
       "name": "Rodgers, Patrick",
       "proj_points_total": 60.79,
       "p_makecut": 1.0,
-      "owgr_rank": 100
+      "owgr_rank": 100,
+      "wind_adj": -0.1415,
+      "condition_adj": -0.3914,
+      "zeus_pool": 39.6146,
+      "zeus_dfs": 41.7677,
+      "zeus_rank_pool": 60,
+      "zeus_rank_dfs": 60
     },
     {
       "dg_id": 13508,
@@ -3998,7 +4367,13 @@
       "name": "Vegas, Jhonattan",
       "proj_points_total": 56.68,
       "p_makecut": 1.0,
-      "owgr_rank": 212
+      "owgr_rank": 212,
+      "wind_adj": 0.1083,
+      "condition_adj": -0.0055,
+      "zeus_pool": 38.7333,
+      "zeus_dfs": 40.3556,
+      "zeus_rank_pool": 62,
+      "zeus_rank_dfs": 61
     },
     {
       "dg_id": 22833,
@@ -4061,7 +4436,13 @@
       "name": "Echavarria, Nico",
       "proj_points_total": 55.59,
       "p_makecut": 1.0,
-      "owgr_rank": 163
+      "owgr_rank": 163,
+      "wind_adj": 0.0238,
+      "condition_adj": 0.55,
+      "zeus_pool": 38.8142,
+      "zeus_dfs": 38.8776,
+      "zeus_rank_pool": 61,
+      "zeus_rank_dfs": 63
     },
     {
       "dg_id": 27900,
@@ -4121,7 +4502,13 @@
       "name": "Potgieter, Aldrich",
       "proj_points_total": 62.07,
       "p_makecut": 1.0,
-      "owgr_rank": 187
+      "owgr_rank": 187,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 37.6475,
+      "zeus_dfs": 39.4323,
+      "zeus_rank_pool": 64,
+      "zeus_rank_dfs": 62
     },
     {
       "dg_id": 11676,
@@ -4189,7 +4576,13 @@
       "name": "Finau, Tony",
       "proj_points_total": 57.74,
       "p_makecut": 1.0,
-      "owgr_rank": 170
+      "owgr_rank": 170,
+      "wind_adj": 0.0604,
+      "condition_adj": 0.0365,
+      "zeus_pool": 37.7148,
+      "zeus_dfs": 38.2828,
+      "zeus_rank_pool": 63,
+      "zeus_rank_dfs": 64
     },
     {
       "dg_id": 11049,
@@ -4255,7 +4648,13 @@
       "name": "Simpson, Webb",
       "proj_points_total": 55.35,
       "p_makecut": 1.0,
-      "owgr_rank": 190
+      "owgr_rank": 190,
+      "wind_adj": 0.1928,
+      "condition_adj": 0.2825,
+      "zeus_pool": 36.7804,
+      "zeus_dfs": 37.0435,
+      "zeus_rank_pool": 65,
+      "zeus_rank_dfs": 66
     },
     {
       "dg_id": 24956,
@@ -4315,7 +4714,13 @@
       "name": "Blanchet, Chandler",
       "proj_points_total": 54.86,
       "p_makecut": 1.0,
-      "owgr_rank": 175
+      "owgr_rank": 175,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 34.9239,
+      "zeus_dfs": 35.9836,
+      "zeus_rank_pool": 66,
+      "zeus_rank_dfs": 68
     },
     {
       "dg_id": 15556,
@@ -4383,7 +4788,13 @@
       "name": "Hughes, Mackenzie",
       "proj_points_total": 56.59,
       "p_makecut": 1.0,
-      "owgr_rank": 137
+      "owgr_rank": 137,
+      "wind_adj": -0.0641,
+      "condition_adj": -0.2684,
+      "zeus_pool": 34.5699,
+      "zeus_dfs": 35.5861,
+      "zeus_rank_pool": 67,
+      "zeus_rank_dfs": 69
     },
     {
       "dg_id": 28309,
@@ -4445,7 +4856,13 @@
       "name": "Coody, Pierceson",
       "proj_points_total": 65.43,
       "p_makecut": 1.0,
-      "owgr_rank": 64
+      "owgr_rank": 64,
+      "wind_adj": -0.6715,
+      "condition_adj": -1.482,
+      "zeus_pool": 32.6166,
+      "zeus_dfs": 37.0927,
+      "zeus_rank_pool": 69,
+      "zeus_rank_dfs": 65
     },
     {
       "dg_id": 23475,
@@ -4507,7 +4924,13 @@
       "name": "Novak, Andrew",
       "proj_points_total": 60.35,
       "p_makecut": 1.0,
-      "owgr_rank": 102
+      "owgr_rank": 102,
+      "wind_adj": -0.3413,
+      "condition_adj": -1.0492,
+      "zeus_pool": 32.6474,
+      "zeus_dfs": 36.0027,
+      "zeus_rank_pool": 68,
+      "zeus_rank_dfs": 67
     },
     {
       "dg_id": 15575,
@@ -4573,7 +4996,13 @@
       "name": "Hoge, Tom",
       "proj_points_total": 54.84,
       "p_makecut": 1.0,
-      "owgr_rank": 210
+      "owgr_rank": 210,
+      "wind_adj": 0.0326,
+      "condition_adj": 0.196,
+      "zeus_pool": 31.3507,
+      "zeus_dfs": 31.7858,
+      "zeus_rank_pool": 70,
+      "zeus_rank_dfs": 70
     },
     {
       "dg_id": 15980,
@@ -4635,7 +5064,13 @@
       "name": "Lipsky, David",
       "proj_points_total": 53.15,
       "p_makecut": 1.0,
-      "owgr_rank": 182
+      "owgr_rank": 182,
+      "wind_adj": 0.2095,
+      "condition_adj": 1.224,
+      "zeus_pool": 31.1564,
+      "zeus_dfs": 31.1595,
+      "zeus_rank_pool": 71,
+      "zeus_rank_dfs": 71
     },
     {
       "dg_id": 18628,
@@ -4697,7 +5132,13 @@
       "name": "Campbell, Brian",
       "proj_points_total": 48.42,
       "p_makecut": 1.0,
-      "owgr_rank": 294
+      "owgr_rank": 294,
+      "wind_adj": 0.2415,
+      "condition_adj": 1.0739,
+      "zeus_pool": 24.2567,
+      "zeus_dfs": 22.0831,
+      "zeus_rank_pool": 72,
+      "zeus_rank_dfs": 72
     }
   ],
   "players": [
@@ -4767,7 +5208,13 @@
       "name": "McIlroy, Rory",
       "proj_points_total": 86.85,
       "p_makecut": 1.0,
-      "owgr_rank": 3
+      "owgr_rank": 3,
+      "wind_adj": 0.2473,
+      "condition_adj": 0.2962,
+      "zeus_pool": 89.3602,
+      "zeus_dfs": 81.4312,
+      "zeus_rank_pool": 1,
+      "zeus_rank_dfs": 1
     },
     {
       "dg_id": 19895,
@@ -4834,7 +5281,13 @@
       "name": "Schauffele, Xander",
       "proj_points_total": 81.78,
       "p_makecut": 1.0,
-      "owgr_rank": 6
+      "owgr_rank": 6,
+      "wind_adj": 0.1374,
+      "condition_adj": -0.0326,
+      "zeus_pool": 80.1513,
+      "zeus_dfs": 74.5192,
+      "zeus_rank_pool": 2,
+      "zeus_rank_dfs": 2
     },
     {
       "dg_id": 26651,
@@ -4898,7 +5351,13 @@
       "name": "Young, Cameron",
       "proj_points_total": 82.61,
       "p_makecut": 1.0,
-      "owgr_rank": 4
+      "owgr_rank": 4,
+      "wind_adj": -0.0544,
+      "condition_adj": -0.1681,
+      "zeus_pool": 76.0907,
+      "zeus_dfs": 71.6797,
+      "zeus_rank_pool": 3,
+      "zeus_rank_dfs": 3
     },
     {
       "dg_id": 17646,
@@ -4963,7 +5422,13 @@
       "name": "Fitzpatrick, Matt",
       "proj_points_total": 77.01,
       "p_makecut": 1.0,
-      "owgr_rank": 5
+      "owgr_rank": 5,
+      "wind_adj": 0.0362,
+      "condition_adj": -0.0791,
+      "zeus_pool": 70.9908,
+      "zeus_dfs": 63.0121,
+      "zeus_rank_pool": 4,
+      "zeus_rank_dfs": 4
     },
     {
       "dg_id": 14609,
@@ -5028,7 +5493,13 @@
       "name": "Kim, Si Woo",
       "proj_points_total": 73.63,
       "p_makecut": 1.0,
-      "owgr_rank": 10
+      "owgr_rank": 10,
+      "wind_adj": 0.181,
+      "condition_adj": 0.2972,
+      "zeus_pool": 68.5016,
+      "zeus_dfs": 60.3375,
+      "zeus_rank_pool": 5,
+      "zeus_rank_dfs": 5
     },
     {
       "dg_id": 12294,
@@ -5095,7 +5566,13 @@
       "name": "Fleetwood, Tommy",
       "proj_points_total": 72.96,
       "p_makecut": 1.0,
-      "owgr_rank": 9
+      "owgr_rank": 9,
+      "wind_adj": 0.2073,
+      "condition_adj": 0.2517,
+      "zeus_pool": 67.0972,
+      "zeus_dfs": 56.9035,
+      "zeus_rank_pool": 6,
+      "zeus_rank_dfs": 12
     },
     {
       "dg_id": 23950,
@@ -5157,7 +5634,13 @@
       "name": "Aberg, Ludvig",
       "proj_points_total": 76.78,
       "p_makecut": 1.0,
-      "owgr_rank": 7
+      "owgr_rank": 7,
+      "wind_adj": -0.0976,
+      "condition_adj": 0.1999,
+      "zeus_pool": 66.3591,
+      "zeus_dfs": 60.161,
+      "zeus_rank_pool": 7,
+      "zeus_rank_dfs": 7
     },
     {
       "dg_id": 18841,
@@ -5222,7 +5705,13 @@
       "name": "Hovland, Viktor",
       "proj_points_total": 70.09,
       "p_makecut": 1.0,
-      "owgr_rank": 20
+      "owgr_rank": 20,
+      "wind_adj": 0.1118,
+      "condition_adj": 0.209,
+      "zeus_pool": 64.4647,
+      "zeus_dfs": 58.0136,
+      "zeus_rank_pool": 8,
+      "zeus_rank_dfs": 9
     },
     {
       "dg_id": 6430,
@@ -5288,7 +5777,13 @@
       "name": "Scott, Adam",
       "proj_points_total": 72.52,
       "p_makecut": 1.0,
-      "owgr_rank": 17
+      "owgr_rank": 17,
+      "wind_adj": 0.0548,
+      "condition_adj": 0.033,
+      "zeus_pool": 63.9147,
+      "zeus_dfs": 57.3271,
+      "zeus_rank_pool": 10,
+      "zeus_rank_dfs": 10
     },
     {
       "dg_id": 17536,
@@ -5352,7 +5847,13 @@
       "name": "Spaun, J.J.",
       "proj_points_total": 69.7,
       "p_makecut": 1.0,
-      "owgr_rank": 24
+      "owgr_rank": 24,
+      "wind_adj": 0.1536,
+      "condition_adj": 0.4675,
+      "zeus_pool": 64.3815,
+      "zeus_dfs": 60.2836,
+      "zeus_rank_pool": 9,
+      "zeus_rank_dfs": 6
     },
     {
       "dg_id": 13562,
@@ -5417,7 +5918,13 @@
       "name": "Matsuyama, Hideki",
       "proj_points_total": 70.45,
       "p_makecut": 1.0,
-      "owgr_rank": 14
+      "owgr_rank": 14,
+      "wind_adj": 0.1452,
+      "condition_adj": 0.0288,
+      "zeus_pool": 63.4383,
+      "zeus_dfs": 55.6109,
+      "zeus_rank_pool": 11,
+      "zeus_rank_dfs": 15
     },
     {
       "dg_id": 15466,
@@ -5483,7 +5990,13 @@
       "name": "Cantlay, Patrick",
       "proj_points_total": 69.79,
       "p_makecut": 1.0,
-      "owgr_rank": 13
+      "owgr_rank": 13,
+      "wind_adj": -0.0735,
+      "condition_adj": -0.4847,
+      "zeus_pool": 60.8816,
+      "zeus_dfs": 51.6336,
+      "zeus_rank_pool": 15,
+      "zeus_rank_dfs": 31
     },
     {
       "dg_id": 12965,
@@ -5551,7 +6064,13 @@
       "name": "Fowler, Rickie",
       "proj_points_total": 70.19,
       "p_makecut": 1.0,
-      "owgr_rank": 22
+      "owgr_rank": 22,
+      "wind_adj": 0.0812,
+      "condition_adj": -0.0153,
+      "zeus_pool": 61.4874,
+      "zeus_dfs": 52.911,
+      "zeus_rank_pool": 13,
+      "zeus_rank_dfs": 22
     },
     {
       "dg_id": 23602,
@@ -5613,7 +6132,13 @@
       "name": "Hojgaard, Nicolai",
       "proj_points_total": 70.61,
       "p_makecut": 1.0,
-      "owgr_rank": 35
+      "owgr_rank": 35,
+      "wind_adj": 0.1987,
+      "condition_adj": 1.0358,
+      "zeus_pool": 61.9175,
+      "zeus_dfs": 59.713,
+      "zeus_rank_pool": 12,
+      "zeus_rank_dfs": 8
     },
     {
       "dg_id": 19483,
@@ -5679,7 +6204,13 @@
       "name": "Burns, Sam",
       "proj_points_total": 70.93,
       "p_makecut": 1.0,
-      "owgr_rank": 15
+      "owgr_rank": 15,
+      "wind_adj": 0.034,
+      "condition_adj": 0.1076,
+      "zeus_pool": 60.6137,
+      "zeus_dfs": 52.3049,
+      "zeus_rank_pool": 16,
+      "zeus_rank_dfs": 26
     },
     {
       "dg_id": 23323,
@@ -5741,7 +6272,13 @@
       "name": "MacIntyre, Robert",
       "proj_points_total": 68.62,
       "p_makecut": 1.0,
-      "owgr_rank": 11
+      "owgr_rank": 11,
+      "wind_adj": 0.0747,
+      "condition_adj": 0.136,
+      "zeus_pool": 60.5426,
+      "zeus_dfs": 49.8362,
+      "zeus_rank_pool": 17,
+      "zeus_rank_dfs": 35
     },
     {
       "dg_id": 14577,
@@ -5807,7 +6344,13 @@
       "name": "English, Harris",
       "proj_points_total": 68.28,
       "p_makecut": 1.0,
-      "owgr_rank": 27
+      "owgr_rank": 27,
+      "wind_adj": 0.1877,
+      "condition_adj": 0.5794,
+      "zeus_pool": 61.0143,
+      "zeus_dfs": 54.6824,
+      "zeus_rank_pool": 14,
+      "zeus_rank_dfs": 17
     },
     {
       "dg_id": 18634,
@@ -5870,7 +6413,13 @@
       "name": "McNealy, Maverick",
       "proj_points_total": 69.17,
       "p_makecut": 1.0,
-      "owgr_rank": 16
+      "owgr_rank": 16,
+      "wind_adj": 0.0026,
+      "condition_adj": -0.2662,
+      "zeus_pool": 59.4943,
+      "zeus_dfs": 52.5476,
+      "zeus_rank_pool": 19,
+      "zeus_rank_dfs": 25
     },
     {
       "dg_id": 18474,
@@ -5933,7 +6482,13 @@
       "name": "Smalley, Alex",
       "proj_points_total": 67.03,
       "p_makecut": 1.0,
-      "owgr_rank": 43
+      "owgr_rank": 43,
+      "wind_adj": 0.2738,
+      "condition_adj": 0.4097,
+      "zeus_pool": 60.0437,
+      "zeus_dfs": 56.5981,
+      "zeus_rank_pool": 18,
+      "zeus_rank_dfs": 13
     },
     {
       "dg_id": 27774,
@@ -5993,7 +6548,13 @@
       "name": "Gotterup, Chris",
       "proj_points_total": 72.02,
       "p_makecut": 1.0,
-      "owgr_rank": 26
+      "owgr_rank": 26,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 59.105,
+      "zeus_dfs": 54.1123,
+      "zeus_rank_pool": 21,
+      "zeus_rank_dfs": 19
     },
     {
       "dg_id": 14139,
@@ -6060,7 +6621,13 @@
       "name": "Thomas, Justin",
       "proj_points_total": 68.99,
       "p_makecut": 1.0,
-      "owgr_rank": 51
+      "owgr_rank": 51,
+      "wind_adj": 0.1765,
+      "condition_adj": 0.2143,
+      "zeus_pool": 59.2334,
+      "zeus_dfs": 56.9451,
+      "zeus_rank_pool": 20,
+      "zeus_rank_dfs": 11
     },
     {
       "dg_id": 24968,
@@ -6123,7 +6690,13 @@
       "name": "Griffin, Ben",
       "proj_points_total": 67.19,
       "p_makecut": 1.0,
-      "owgr_rank": 19
+      "owgr_rank": 19,
+      "wind_adj": -0.0393,
+      "condition_adj": -0.1487,
+      "zeus_pool": 57.9882,
+      "zeus_dfs": 48.9373,
+      "zeus_rank_pool": 24,
+      "zeus_rank_dfs": 40
     },
     {
       "dg_id": 9771,
@@ -6191,7 +6764,13 @@
       "name": "Day, Jason",
       "proj_points_total": 67.56,
       "p_makecut": 1.0,
-      "owgr_rank": 36
+      "owgr_rank": 36,
+      "wind_adj": 0.1083,
+      "condition_adj": -0.2006,
+      "zeus_pool": 58.0451,
+      "zeus_dfs": 52.9075,
+      "zeus_rank_pool": 22,
+      "zeus_rank_dfs": 23
     },
     {
       "dg_id": 13872,
@@ -6259,7 +6838,13 @@
       "name": "Bradley, Keegan",
       "proj_points_total": 67.78,
       "p_makecut": 1.0,
-      "owgr_rank": 39
+      "owgr_rank": 39,
+      "wind_adj": 0.2119,
+      "condition_adj": 0.3396,
+      "zeus_pool": 57.4917,
+      "zeus_dfs": 55.7009,
+      "zeus_rank_pool": 25,
+      "zeus_rank_dfs": 14
     },
     {
       "dg_id": 17576,
@@ -6325,7 +6910,13 @@
       "name": "Conners, Corey",
       "proj_points_total": 64.66,
       "p_makecut": 1.0,
-      "owgr_rank": 49
+      "owgr_rank": 49,
+      "wind_adj": 0.3172,
+      "condition_adj": 0.9712,
+      "zeus_pool": 58.0207,
+      "zeus_dfs": 54.2451,
+      "zeus_rank_pool": 23,
+      "zeus_rank_dfs": 18
     },
     {
       "dg_id": 17511,
@@ -6391,7 +6982,13 @@
       "name": "Straka, Sepp",
       "proj_points_total": 68.7,
       "p_makecut": 1.0,
-      "owgr_rank": 29
+      "owgr_rank": 29,
+      "wind_adj": -0.1078,
+      "condition_adj": -0.3242,
+      "zeus_pool": 56.1512,
+      "zeus_dfs": 51.5718,
+      "zeus_rank_pool": 27,
+      "zeus_rank_dfs": 32
     },
     {
       "dg_id": 16841,
@@ -6453,7 +7050,13 @@
       "name": "Lee, Min Woo",
       "proj_points_total": 72.44,
       "p_makecut": 1.0,
-      "owgr_rank": 30
+      "owgr_rank": 30,
+      "wind_adj": 0.0131,
+      "condition_adj": -0.4008,
+      "zeus_pool": 55.7878,
+      "zeus_dfs": 53.399,
+      "zeus_rank_pool": 28,
+      "zeus_rank_dfs": 21
     },
     {
       "dg_id": 29767,
@@ -6516,7 +7119,13 @@
       "name": "Gerard, Ryan",
       "proj_points_total": 66.26,
       "p_makecut": 1.0,
-      "owgr_rank": 40
+      "owgr_rank": 40,
+      "wind_adj": 0.2038,
+      "condition_adj": 0.5566,
+      "zeus_pool": 56.8474,
+      "zeus_dfs": 54.7317,
+      "zeus_rank_pool": 26,
+      "zeus_rank_dfs": 16
     },
     {
       "dg_id": 6093,
@@ -6581,7 +7190,13 @@
       "name": "Rose, Justin",
       "proj_points_total": 67.68,
       "p_makecut": 1.0,
-      "owgr_rank": 34
+      "owgr_rank": 34,
+      "wind_adj": 0.1359,
+      "condition_adj": 0.4111,
+      "zeus_pool": 55.2894,
+      "zeus_dfs": 52.1796,
+      "zeus_rank_pool": 29,
+      "zeus_rank_dfs": 27
     },
     {
       "dg_id": 12577,
@@ -6649,7 +7264,13 @@
       "name": "Woodland, Gary",
       "proj_points_total": 67.0,
       "p_makecut": 1.0,
-      "owgr_rank": 54
+      "owgr_rank": 54,
+      "wind_adj": 0.0152,
+      "condition_adj": -0.0103,
+      "zeus_pool": 54.6656,
+      "zeus_dfs": 51.6995,
+      "zeus_rank_pool": 31,
+      "zeus_rank_dfs": 29
     },
     {
       "dg_id": 21891,
@@ -6713,7 +7334,13 @@
       "name": "Kitayama, Kurt",
       "proj_points_total": 69.74,
       "p_makecut": 1.0,
-      "owgr_rank": 38
+      "owgr_rank": 38,
+      "wind_adj": 0.1322,
+      "condition_adj": 0.4775,
+      "zeus_pool": 55.0745,
+      "zeus_dfs": 53.5982,
+      "zeus_rank_pool": 30,
+      "zeus_rank_dfs": 20
     },
     {
       "dg_id": 19396,
@@ -6776,7 +7403,13 @@
       "name": "Knapp, Jake",
       "proj_points_total": 70.45,
       "p_makecut": 1.0,
-      "owgr_rank": 18
+      "owgr_rank": 18,
+      "wind_adj": -0.3493,
+      "condition_adj": -1.4241,
+      "zeus_pool": 52.5714,
+      "zeus_dfs": 50.4406,
+      "zeus_rank_pool": 36,
+      "zeus_rank_dfs": 34
     },
     {
       "dg_id": 14636,
@@ -6841,7 +7474,13 @@
       "name": "Spieth, Jordan",
       "proj_points_total": 67.59,
       "p_makecut": 1.0,
-      "owgr_rank": 31
+      "owgr_rank": 31,
+      "wind_adj": -0.1798,
+      "condition_adj": -0.9932,
+      "zeus_pool": 52.784,
+      "zeus_dfs": 48.3857,
+      "zeus_rank_pool": 34,
+      "zeus_rank_dfs": 42
     },
     {
       "dg_id": 26096,
@@ -6906,7 +7545,13 @@
       "name": "Bhatia, Akshay",
       "proj_points_total": 66.2,
       "p_makecut": 1.0,
-      "owgr_rank": 21
+      "owgr_rank": 21,
+      "wind_adj": -0.0017,
+      "condition_adj": 0.1506,
+      "zeus_pool": 53.449,
+      "zeus_dfs": 49.3954,
+      "zeus_rank_pool": 32,
+      "zeus_rank_dfs": 39
     },
     {
       "dg_id": 10419,
@@ -6972,7 +7617,13 @@
       "name": "Noren, Alex",
       "proj_points_total": 64.62,
       "p_makecut": 1.0,
-      "owgr_rank": 25
+      "owgr_rank": 25,
+      "wind_adj": 0.0611,
+      "condition_adj": 0.0207,
+      "zeus_pool": 53.0811,
+      "zeus_dfs": 49.5539,
+      "zeus_rank_pool": 33,
+      "zeus_rank_dfs": 38
     },
     {
       "dg_id": 11889,
@@ -7035,7 +7686,13 @@
       "name": "Fox, Ryan",
       "proj_points_total": 63.11,
       "p_makecut": 1.0,
-      "owgr_rank": 55
+      "owgr_rank": 55,
+      "wind_adj": 0.1561,
+      "condition_adj": 0.1227,
+      "zeus_pool": 52.6521,
+      "zeus_dfs": 52.8523,
+      "zeus_rank_pool": 35,
+      "zeus_rank_dfs": 24
     },
     {
       "dg_id": 17606,
@@ -7100,7 +7757,13 @@
       "name": "Berger, Daniel",
       "proj_points_total": 63.84,
       "p_makecut": 1.0,
-      "owgr_rank": 59
+      "owgr_rank": 59,
+      "wind_adj": 0.1171,
+      "condition_adj": 0.5145,
+      "zeus_pool": 52.5588,
+      "zeus_dfs": 51.6909,
+      "zeus_rank_pool": 37,
+      "zeus_rank_dfs": 30
     },
     {
       "dg_id": 22760,
@@ -7162,7 +7825,13 @@
       "name": "Hisatsune, Ryo",
       "proj_points_total": 63.9,
       "p_makecut": 1.0,
-      "owgr_rank": 65
+      "owgr_rank": 65,
+      "wind_adj": 0.031,
+      "condition_adj": -0.0217,
+      "zeus_pool": 51.3143,
+      "zeus_dfs": 51.9192,
+      "zeus_rank_pool": 39,
+      "zeus_rank_dfs": 28
     },
     {
       "dg_id": 27194,
@@ -7225,7 +7894,13 @@
       "name": "Hall, Harry",
       "proj_points_total": 62.8,
       "p_makecut": 1.0,
-      "owgr_rank": 41
+      "owgr_rank": 41,
+      "wind_adj": 0.1651,
+      "condition_adj": 0.3035,
+      "zeus_pool": 51.6946,
+      "zeus_dfs": 48.0369,
+      "zeus_rank_pool": 38,
+      "zeus_rank_dfs": 44
     },
     {
       "dg_id": 25569,
@@ -7288,7 +7963,13 @@
       "name": "Stevens, Sam",
       "proj_points_total": 66.24,
       "p_makecut": 1.0,
-      "owgr_rank": 46
+      "owgr_rank": 46,
+      "wind_adj": -0.0616,
+      "condition_adj": -0.5544,
+      "zeus_pool": 50.1582,
+      "zeus_dfs": 49.759,
+      "zeus_rank_pool": 41,
+      "zeus_rank_dfs": 36
     },
     {
       "dg_id": 17780,
@@ -7352,7 +8033,13 @@
       "name": "Pendrith, Taylor",
       "proj_points_total": 63.29,
       "p_makecut": 1.0,
-      "owgr_rank": 96
+      "owgr_rank": 96,
+      "wind_adj": 0.0138,
+      "condition_adj": -0.2379,
+      "zeus_pool": 50.0358,
+      "zeus_dfs": 50.958,
+      "zeus_rank_pool": 42,
+      "zeus_rank_dfs": 33
     },
     {
       "dg_id": 17538,
@@ -7418,7 +8105,13 @@
       "name": "Homa, Max",
       "proj_points_total": 62.96,
       "p_makecut": 1.0,
-      "owgr_rank": 82
+      "owgr_rank": 82,
+      "wind_adj": 0.0988,
+      "condition_adj": 0.2422,
+      "zeus_pool": 50.3027,
+      "zeus_dfs": 48.1691,
+      "zeus_rank_pool": 40,
+      "zeus_rank_dfs": 43
     },
     {
       "dg_id": 21407,
@@ -7478,7 +8171,13 @@
       "name": "Reitan, Kristoffer",
       "proj_points_total": 65.14,
       "p_makecut": 1.0,
-      "owgr_rank": 60
+      "owgr_rank": 60,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 49.1022,
+      "zeus_dfs": 49.6987,
+      "zeus_rank_pool": 43,
+      "zeus_rank_dfs": 37
     },
     {
       "dg_id": 28635,
@@ -7540,7 +8239,13 @@
       "name": "McCarty, Matt",
       "proj_points_total": 62.4,
       "p_makecut": 1.0,
-      "owgr_rank": 48
+      "owgr_rank": 48,
+      "wind_adj": -0.0724,
+      "condition_adj": 0.0563,
+      "zeus_pool": 48.5924,
+      "zeus_dfs": 46.5959,
+      "zeus_rank_pool": 45,
+      "zeus_rank_dfs": 49
     },
     {
       "dg_id": 25362,
@@ -7600,7 +8305,13 @@
       "name": "Fitzpatrick, Alex",
       "proj_points_total": 62.75,
       "p_makecut": 1.0,
-      "owgr_rank": 62
+      "owgr_rank": 62,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 48.4357,
+      "zeus_dfs": 48.0242,
+      "zeus_rank_pool": 46,
+      "zeus_rank_dfs": 45
     },
     {
       "dg_id": 29433,
@@ -7662,7 +8373,13 @@
       "name": "Bridgeman, Jacob",
       "proj_points_total": 66.13,
       "p_makecut": 1.0,
-      "owgr_rank": 32
+      "owgr_rank": 32,
+      "wind_adj": -0.2959,
+      "condition_adj": -0.6338,
+      "zeus_pool": 47.3647,
+      "zeus_dfs": 45.5082,
+      "zeus_rank_pool": 50,
+      "zeus_rank_dfs": 52
     },
     {
       "dg_id": 23014,
@@ -7725,7 +8442,13 @@
       "name": "Theegala, Sahith",
       "proj_points_total": 64.7,
       "p_makecut": 1.0,
-      "owgr_rank": 47
+      "owgr_rank": 47,
+      "wind_adj": -0.1076,
+      "condition_adj": 0.2304,
+      "zeus_pool": 48.3621,
+      "zeus_dfs": 46.5006,
+      "zeus_rank_pool": 47,
+      "zeus_rank_dfs": 50
     },
     {
       "dg_id": 20706,
@@ -7789,7 +8512,13 @@
       "name": "Wallace, Matt",
       "proj_points_total": 60.69,
       "p_makecut": 1.0,
-      "owgr_rank": 84
+      "owgr_rank": 84,
+      "wind_adj": 0.2446,
+      "condition_adj": 0.2491,
+      "zeus_pool": 48.6354,
+      "zeus_dfs": 47.5871,
+      "zeus_rank_pool": 44,
+      "zeus_rank_dfs": 46
     },
     {
       "dg_id": 14502,
@@ -7854,7 +8583,13 @@
       "name": "Cauley, Bud",
       "proj_points_total": 63.79,
       "p_makecut": 1.0,
-      "owgr_rank": 75
+      "owgr_rank": 75,
+      "wind_adj": 0.0873,
+      "condition_adj": -0.0427,
+      "zeus_pool": 48.1164,
+      "zeus_dfs": 48.7479,
+      "zeus_rank_pool": 48,
+      "zeus_rank_dfs": 41
     },
     {
       "dg_id": 13126,
@@ -7920,7 +8655,13 @@
       "name": "Taylor, Nick",
       "proj_points_total": 61.16,
       "p_makecut": 1.0,
-      "owgr_rank": 44
+      "owgr_rank": 44,
+      "wind_adj": 0.0439,
+      "condition_adj": -0.0227,
+      "zeus_pool": 47.9024,
+      "zeus_dfs": 44.4075,
+      "zeus_rank_pool": 49,
+      "zeus_rank_dfs": 55
     },
     {
       "dg_id": 21554,
@@ -7987,7 +8728,13 @@
       "name": "Poston, J.T.",
       "proj_points_total": 61.19,
       "p_makecut": 1.0,
-      "owgr_rank": 77
+      "owgr_rank": 77,
+      "wind_adj": 0.0111,
+      "condition_adj": 0.0632,
+      "zeus_pool": 46.3886,
+      "zeus_dfs": 47.08,
+      "zeus_rank_pool": 51,
+      "zeus_rank_dfs": 48
     },
     {
       "dg_id": 8825,
@@ -8055,7 +8802,13 @@
       "name": "Harman, Brian",
       "proj_points_total": 62.0,
       "p_makecut": 1.0,
-      "owgr_rank": 71
+      "owgr_rank": 71,
+      "wind_adj": -0.0253,
+      "condition_adj": -0.3308,
+      "zeus_pool": 45.0484,
+      "zeus_dfs": 44.5461,
+      "zeus_rank_pool": 54,
+      "zeus_rank_dfs": 54
     },
     {
       "dg_id": 29925,
@@ -8115,7 +8868,13 @@
       "name": "Yellamaraju, Sudarshan",
       "proj_points_total": 62.06,
       "p_makecut": 1.0,
-      "owgr_rank": 86
+      "owgr_rank": 86,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 45.368,
+      "zeus_dfs": 45.5853,
+      "zeus_rank_pool": 52,
+      "zeus_rank_dfs": 51
     },
     {
       "dg_id": 27819,
@@ -8175,7 +8934,13 @@
       "name": "Castillo, Ricky",
       "proj_points_total": 62.67,
       "p_makecut": 1.0,
-      "owgr_rank": 93
+      "owgr_rank": 93,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 45.3223,
+      "zeus_dfs": 47.3745,
+      "zeus_rank_pool": 53,
+      "zeus_rank_dfs": 47
     },
     {
       "dg_id": 19870,
@@ -8242,7 +9007,13 @@
       "name": "McCarthy, Denny",
       "proj_points_total": 58.44,
       "p_makecut": 1.0,
-      "owgr_rank": 76
+      "owgr_rank": 76,
+      "wind_adj": -0.0517,
+      "condition_adj": -0.3635,
+      "zeus_pool": 44.4748,
+      "zeus_dfs": 42.8444,
+      "zeus_rank_pool": 56,
+      "zeus_rank_dfs": 57
     },
     {
       "dg_id": 17543,
@@ -8306,7 +9077,13 @@
       "name": "Kim, Michael",
       "proj_points_total": 59.85,
       "p_makecut": 1.0,
-      "owgr_rank": 61
+      "owgr_rank": 61,
+      "wind_adj": 0.0478,
+      "condition_adj": 0.0001,
+      "zeus_pool": 44.6684,
+      "zeus_dfs": 44.9903,
+      "zeus_rank_pool": 55,
+      "zeus_rank_dfs": 53
     },
     {
       "dg_id": 14704,
@@ -8370,7 +9147,13 @@
       "name": "Putnam, Andrew",
       "proj_points_total": 56.27,
       "p_makecut": 1.0,
-      "owgr_rank": 67
+      "owgr_rank": 67,
+      "wind_adj": 0.0328,
+      "condition_adj": 0.4957,
+      "zeus_pool": 43.5929,
+      "zeus_dfs": 42.0437,
+      "zeus_rank_pool": 57,
+      "zeus_rank_dfs": 59
     },
     {
       "dg_id": 7399,
@@ -8438,7 +9221,13 @@
       "name": "Glover, Lucas",
       "proj_points_total": 57.43,
       "p_makecut": 1.0,
-      "owgr_rank": 114
+      "owgr_rank": 114,
+      "wind_adj": 0.2268,
+      "condition_adj": 0.3094,
+      "zeus_pool": 43.3432,
+      "zeus_dfs": 43.5484,
+      "zeus_rank_pool": 58,
+      "zeus_rank_dfs": 56
     },
     {
       "dg_id": 17488,
@@ -8504,7 +9293,13 @@
       "name": "Im, Sungjae",
       "proj_points_total": 59.82,
       "p_makecut": 1.0,
-      "owgr_rank": 149
+      "owgr_rank": 149,
+      "wind_adj": -0.0119,
+      "condition_adj": -0.2636,
+      "zeus_pool": 40.8125,
+      "zeus_dfs": 42.4732,
+      "zeus_rank_pool": 59,
+      "zeus_rank_dfs": 58
     },
     {
       "dg_id": 16283,
@@ -8571,7 +9366,13 @@
       "name": "Rodgers, Patrick",
       "proj_points_total": 60.79,
       "p_makecut": 1.0,
-      "owgr_rank": 100
+      "owgr_rank": 100,
+      "wind_adj": -0.1415,
+      "condition_adj": -0.3914,
+      "zeus_pool": 39.6146,
+      "zeus_dfs": 41.7677,
+      "zeus_rank_pool": 60,
+      "zeus_rank_dfs": 60
     },
     {
       "dg_id": 13508,
@@ -8637,7 +9438,13 @@
       "name": "Vegas, Jhonattan",
       "proj_points_total": 56.68,
       "p_makecut": 1.0,
-      "owgr_rank": 212
+      "owgr_rank": 212,
+      "wind_adj": 0.1083,
+      "condition_adj": -0.0055,
+      "zeus_pool": 38.7333,
+      "zeus_dfs": 40.3556,
+      "zeus_rank_pool": 62,
+      "zeus_rank_dfs": 61
     },
     {
       "dg_id": 22833,
@@ -8700,7 +9507,13 @@
       "name": "Echavarria, Nico",
       "proj_points_total": 55.59,
       "p_makecut": 1.0,
-      "owgr_rank": 163
+      "owgr_rank": 163,
+      "wind_adj": 0.0238,
+      "condition_adj": 0.55,
+      "zeus_pool": 38.8142,
+      "zeus_dfs": 38.8776,
+      "zeus_rank_pool": 61,
+      "zeus_rank_dfs": 63
     },
     {
       "dg_id": 27900,
@@ -8760,7 +9573,13 @@
       "name": "Potgieter, Aldrich",
       "proj_points_total": 62.07,
       "p_makecut": 1.0,
-      "owgr_rank": 187
+      "owgr_rank": 187,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 37.6475,
+      "zeus_dfs": 39.4323,
+      "zeus_rank_pool": 64,
+      "zeus_rank_dfs": 62
     },
     {
       "dg_id": 11676,
@@ -8828,7 +9647,13 @@
       "name": "Finau, Tony",
       "proj_points_total": 57.74,
       "p_makecut": 1.0,
-      "owgr_rank": 170
+      "owgr_rank": 170,
+      "wind_adj": 0.0604,
+      "condition_adj": 0.0365,
+      "zeus_pool": 37.7148,
+      "zeus_dfs": 38.2828,
+      "zeus_rank_pool": 63,
+      "zeus_rank_dfs": 64
     },
     {
       "dg_id": 11049,
@@ -8894,7 +9719,13 @@
       "name": "Simpson, Webb",
       "proj_points_total": 55.35,
       "p_makecut": 1.0,
-      "owgr_rank": 190
+      "owgr_rank": 190,
+      "wind_adj": 0.1928,
+      "condition_adj": 0.2825,
+      "zeus_pool": 36.7804,
+      "zeus_dfs": 37.0435,
+      "zeus_rank_pool": 65,
+      "zeus_rank_dfs": 66
     },
     {
       "dg_id": 24956,
@@ -8954,7 +9785,13 @@
       "name": "Blanchet, Chandler",
       "proj_points_total": 54.86,
       "p_makecut": 1.0,
-      "owgr_rank": 175
+      "owgr_rank": 175,
+      "wind_adj": 0.0,
+      "condition_adj": 0.0,
+      "zeus_pool": 34.9239,
+      "zeus_dfs": 35.9836,
+      "zeus_rank_pool": 66,
+      "zeus_rank_dfs": 68
     },
     {
       "dg_id": 15556,
@@ -9022,7 +9859,13 @@
       "name": "Hughes, Mackenzie",
       "proj_points_total": 56.59,
       "p_makecut": 1.0,
-      "owgr_rank": 137
+      "owgr_rank": 137,
+      "wind_adj": -0.0641,
+      "condition_adj": -0.2684,
+      "zeus_pool": 34.5699,
+      "zeus_dfs": 35.5861,
+      "zeus_rank_pool": 67,
+      "zeus_rank_dfs": 69
     },
     {
       "dg_id": 28309,
@@ -9084,7 +9927,13 @@
       "name": "Coody, Pierceson",
       "proj_points_total": 65.43,
       "p_makecut": 1.0,
-      "owgr_rank": 64
+      "owgr_rank": 64,
+      "wind_adj": -0.6715,
+      "condition_adj": -1.482,
+      "zeus_pool": 32.6166,
+      "zeus_dfs": 37.0927,
+      "zeus_rank_pool": 69,
+      "zeus_rank_dfs": 65
     },
     {
       "dg_id": 23475,
@@ -9146,7 +9995,13 @@
       "name": "Novak, Andrew",
       "proj_points_total": 60.35,
       "p_makecut": 1.0,
-      "owgr_rank": 102
+      "owgr_rank": 102,
+      "wind_adj": -0.3413,
+      "condition_adj": -1.0492,
+      "zeus_pool": 32.6474,
+      "zeus_dfs": 36.0027,
+      "zeus_rank_pool": 68,
+      "zeus_rank_dfs": 67
     },
     {
       "dg_id": 15575,
@@ -9212,7 +10067,13 @@
       "name": "Hoge, Tom",
       "proj_points_total": 54.84,
       "p_makecut": 1.0,
-      "owgr_rank": 210
+      "owgr_rank": 210,
+      "wind_adj": 0.0326,
+      "condition_adj": 0.196,
+      "zeus_pool": 31.3507,
+      "zeus_dfs": 31.7858,
+      "zeus_rank_pool": 70,
+      "zeus_rank_dfs": 70
     },
     {
       "dg_id": 15980,
@@ -9274,7 +10135,13 @@
       "name": "Lipsky, David",
       "proj_points_total": 53.15,
       "p_makecut": 1.0,
-      "owgr_rank": 182
+      "owgr_rank": 182,
+      "wind_adj": 0.2095,
+      "condition_adj": 1.224,
+      "zeus_pool": 31.1564,
+      "zeus_dfs": 31.1595,
+      "zeus_rank_pool": 71,
+      "zeus_rank_dfs": 71
     },
     {
       "dg_id": 18628,
@@ -9336,7 +10203,13 @@
       "name": "Campbell, Brian",
       "proj_points_total": 48.42,
       "p_makecut": 1.0,
-      "owgr_rank": 294
+      "owgr_rank": 294,
+      "wind_adj": 0.2415,
+      "condition_adj": 1.0739,
+      "zeus_pool": 24.2567,
+      "zeus_dfs": 22.0831,
+      "zeus_rank_pool": 72,
+      "zeus_rank_dfs": 72
     }
   ],
   "_public_scrubbed": true

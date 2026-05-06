@@ -1,179 +1,161 @@
 {
-  "event": "Cadillac Championship",
-  "event_slug": "Cadillac_Championship",
+  "event": "Truist Championship",
+  "event_slug": "Truist_Championship",
   "year": 2026,
-  "week_num": 13,
-  "philosophy": "Cadillac Championship \u2014 first PGA return to Doral since 2016 + Hanse redesign. Course history weighted lighter (windowed 2014-2016 only). Wind 15-18mph S\u2192WSW will reward ball-striking specialists. Lean toward starters with strong sg_app + sg_ott; alternates from leverage bucket.",
-  "primary_pool": [
+  "week": 14,
+  "generated_at": "2026-05-05T13:11:53.861010+00:00",
+  "primary": [
     {
-      "dg_id": 18417,
-      "name": "Scheffler, Scottie",
+      "name": "McIlroy, Rory",
+      "dg_id": 10091,
       "rank_pool": 1,
-      "bbi_pool": 72.35,
-      "zeus_pool": 72.35,
-      "proj_own": 36.0,
-      "make_cut": 1.0,
-      "win_pct": 0.1923076923076923
+      "bbi_pool": 89.36,
+      "salary": 11700,
+      "p_top10": 0.5,
+      "p_makecut": 1.0
     },
     {
-      "dg_id": 26651,
-      "name": "Young, Cameron",
+      "name": "Schauffele, Xander",
+      "dg_id": 19895,
       "rank_pool": 2,
-      "bbi_pool": 51.36,
-      "zeus_pool": 51.36,
-      "proj_own": 34.0,
-      "make_cut": 1.0,
-      "win_pct": 0.06944444444444445
+      "bbi_pool": 80.15,
+      "salary": 10000,
+      "p_top10": 0.40816,
+      "p_makecut": 1.0
     },
     {
-      "dg_id": 22085,
-      "name": "Morikawa, Collin",
+      "name": "Young, Cameron",
+      "dg_id": 26651,
       "rank_pool": 3,
-      "bbi_pool": 46.26,
-      "zeus_pool": 46.26,
-      "proj_own": 34.0,
-      "make_cut": 1.0,
-      "win_pct": 0.03825554705432287
+      "bbi_pool": 76.09,
+      "salary": 10100,
+      "p_top10": 0.41841,
+      "p_makecut": 1.0
     },
     {
-      "dg_id": 14609,
-      "name": "Kim, Si Woo",
+      "name": "Fitzpatrick, Matt",
+      "dg_id": 17646,
       "rank_pool": 4,
-      "bbi_pool": 43.4,
-      "zeus_pool": 43.4,
-      "proj_own": 22.0,
-      "make_cut": 1.0,
-      "win_pct": 0.027770063871146906
+      "bbi_pool": 70.99,
+      "salary": 9900,
+      "p_top10": 0.33333,
+      "p_makecut": 1.0
     },
     {
-      "dg_id": 14577,
-      "name": "English, Harris",
-      "rank_pool": 6,
-      "bbi_pool": 41.52,
-      "zeus_pool": 42.15,
-      "proj_own": 19.0,
-      "make_cut": 1.0,
-      "win_pct": 0.014400921658986175
+      "name": "Kim, Si Woo",
+      "dg_id": 14609,
+      "rank_pool": 5,
+      "bbi_pool": 68.5,
+      "salary": 9400,
+      "p_top10": 0.27933,
+      "p_makecut": 1.0
     },
-    {
-      "dg_id": 13562,
-      "name": "Matsuyama, Hideki",
-      "rank_pool": 7,
-      "bbi_pool": 41.3,
-      "zeus_pool": 41.3,
-      "proj_own": 16.19,
-      "make_cut": 1.0,
-      "win_pct": 0.021867483052700636,
-      "_note": "Cantlay WD replacement \u2014 Wednesday lock"
-    }
-  ],
-  "leverage_pool": [
-    {
-      "dg_id": 18841,
-      "name": "Hovland, Viktor",
-      "rank_pool": 18,
-      "proj_own": 5.0,
-      "bbi_pool": 37.88,
-      "win_pct": 0.016983695652173912
-    },
-    {
-      "dg_id": 26096,
-      "name": "Bhatia, Akshay",
-      "rank_pool": 21,
-      "proj_own": 5.0,
-      "bbi_pool": 36.43,
-      "win_pct": 0.011816140848398913
-    },
-    {
-      "dg_id": 6093,
-      "name": "Rose, Justin",
-      "rank_pool": 23,
-      "proj_own": 5.0,
-      "bbi_pool": 35.8,
-      "win_pct": 0.015167602002123463
-    },
-    {
-      "dg_id": 24968,
-      "name": "Griffin, Ben",
-      "rank_pool": 27,
-      "proj_own": 5.0,
-      "bbi_pool": 34.98,
-      "win_pct": 0.010900370612600829
-    },
-    {
-      "dg_id": 9771,
-      "name": "Day, Jason",
-      "rank_pool": 28,
-      "proj_own": 5.0,
-      "bbi_pool": 34.73,
-      "win_pct": 0.00848320325755005
-    },
-    {
-      "dg_id": 14636,
-      "name": "Spieth, Jordan",
-      "rank_pool": 29,
-      "proj_own": 5.0,
-      "bbi_pool": 34.71,
-      "win_pct": 0.014249073810202335
-    },
-    {
-      "dg_id": 17511,
-      "name": "Straka, Sepp",
-      "rank_pool": 30,
-      "proj_own": 5.0,
-      "bbi_pool": 34.26,
-      "win_pct": 0.010599957600169598
-    }
-  ],
-  "fade_pool": [
-    {
-      "dg_id": 12577,
-      "name": "Woodland, Gary",
-      "proj_own": 8.5,
-      "rank_pool": 26,
-      "bbi_pool": 35.37
-    },
-    {
-      "dg_id": 22760,
-      "name": "Hisatsune, Ryo",
-      "proj_own": 8.5,
-      "rank_pool": 31,
-      "bbi_pool": 33.45
-    },
-    {
-      "dg_id": 18474,
-      "name": "Smalley, Alex",
-      "proj_own": 8.5,
-      "rank_pool": 32,
-      "bbi_pool": 33.37
-    }
-  ],
-  "lineup_construction": {
-    "starters": [
-      "Scheffler, Scottie",
-      "Young, Cameron",
-      "Morikawa, Collin",
-      "Kim, Si Woo"
-    ],
-    "alternates": [
-      "Hovland, Viktor",
-      "Bhatia, Akshay"
-    ],
-    "rationale": "Top-3 BBI pool finishers as conviction starters. #4 starter from BBI top-5. Alternates from leverage list to capture upside if a starter fades."
-  },
-  "manual_overrides_applied": [
     {
       "name": "Fleetwood, Tommy",
-      "action": "min_rank=13 (MOMUS small-sample-fade flag)"
+      "dg_id": 12294,
+      "rank_pool": 6,
+      "bbi_pool": 67.1,
+      "salary": 9800,
+      "p_top10": 0.26316,
+      "p_makecut": 1.0
+    }
+  ],
+  "leverage": [
+    {
+      "name": "Aberg, Ludvig",
+      "dg_id": 23950,
+      "rank_pool": 7,
+      "bbi_pool": 66.36,
+      "salary": 9600,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+    },
+    {
+      "name": "Hovland, Viktor",
+      "dg_id": 18841,
+      "rank_pool": 8,
+      "bbi_pool": 64.46,
+      "salary": 8400,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+    },
+    {
+      "name": "Spaun, J.J.",
+      "dg_id": 17536,
+      "rank_pool": 9,
+      "bbi_pool": 64.38,
+      "salary": 7900,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
     },
     {
       "name": "Scott, Adam",
-      "action": "max_rank=9 (MOMUS single-factor flag)"
+      "dg_id": 6430,
+      "rank_pool": 10,
+      "bbi_pool": 63.91,
+      "salary": 8900,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+    },
+    {
+      "name": "Matsuyama, Hideki",
+      "dg_id": 13562,
+      "rank_pool": 11,
+      "bbi_pool": 63.44,
+      "salary": 8800,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+    },
+    {
+      "name": "Hojgaard, Nicolai",
+      "dg_id": 23602,
+      "rank_pool": 12,
+      "bbi_pool": 61.92,
+      "salary": 7800,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+    },
+    {
+      "name": "Fowler, Rickie",
+      "dg_id": 12965,
+      "rank_pool": 13,
+      "bbi_pool": 61.49,
+      "salary": 9000,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+    },
+    {
+      "name": "English, Harris",
+      "dg_id": 14577,
+      "rank_pool": 14,
+      "bbi_pool": 61.01,
+      "salary": 8200,
+      "proj_ownership": null,
+      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
     }
   ],
-  "_wednesday_lock_update": {
-    "cantlay_wd": true,
-    "primary_pool_updated": true,
-    "updated_at": "2026-04-29T13:27:31.229356+00:00"
-  }
+  "fade": [
+    {
+      "name": "Knapp, Jake",
+      "dg_id": 19396,
+      "rank_pool": 36,
+      "bbi_pool": 52.57,
+      "salary": 8000,
+      "rationale": "Salary-priced as a contender but BBI ranks them outside the top-35 \u2014 fade in pool."
+    },
+    {
+      "name": "Bridgeman, Jacob",
+      "dg_id": 29433,
+      "rank_pool": 50,
+      "bbi_pool": 47.36,
+      "salary": 7500,
+      "rationale": "Salary-priced as a contender but BBI ranks them outside the top-35 \u2014 fade in pool."
+    }
+  ],
+  "notes": [
+    "Primary = recommended 4-starter slate; pick 4 of these 6 + 2 of the leverage bucket as alternates.",
+    "Leverage = top-30 BBI players the field is likely sleeping on (low proj_own). Worth a starter or alt.",
+    "Fade = chalk ranked outside BBI top-35 \u2014 opportunity cost says skip in pool."
+  ],
+  "omnia_status": "stale"
 }
