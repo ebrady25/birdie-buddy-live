@@ -68,7 +68,10 @@
       "total_precip_in": 2.375,
       "rain_flag": true,
       "firm_fast_flag": false
-    }
+    },
+    "ownership_source": "DG fantasy-projection-defaults",
+    "ownership_injected_at": "2026-05-06T03:51:40.495838+00:00",
+    "ownership_coverage": "72/72"
   },
   "rankings": [
     {
@@ -93,7 +96,7 @@
         "PGA 2025"
       ],
       "salary": 11700,
-      "proj_ownership": null,
+      "proj_ownership": 35.35,
       "p_win": 0.11547,
       "p_top5": 0.34014,
       "p_top10": 0.5,
@@ -143,7 +146,8 @@
       "zeus_pool": 89.3602,
       "zeus_dfs": 81.4312,
       "zeus_rank_pool": 1,
-      "zeus_rank_dfs": 1
+      "zeus_rank_dfs": 1,
+      "hermes_own": 35.35
     },
     {
       "dg_id": 19895,
@@ -166,7 +170,7 @@
         "PGA 2025"
       ],
       "salary": 10000,
-      "proj_ownership": null,
+      "proj_ownership": 31.68,
       "p_win": 0.07225,
       "p_top5": 0.25575,
       "p_top10": 0.40816,
@@ -216,7 +220,8 @@
       "zeus_pool": 80.1513,
       "zeus_dfs": 74.5192,
       "zeus_rank_pool": 2,
-      "zeus_rank_dfs": 2
+      "zeus_rank_dfs": 2,
+      "hermes_own": 31.68
     },
     {
       "dg_id": 26651,
@@ -236,7 +241,7 @@
         "PGA 2025"
       ],
       "salary": 10100,
-      "proj_ownership": null,
+      "proj_ownership": 29.91,
       "p_win": 0.07943,
       "p_top5": 0.26738,
       "p_top10": 0.41841,
@@ -286,7 +291,8 @@
       "zeus_pool": 76.0907,
       "zeus_dfs": 71.6797,
       "zeus_rank_pool": 3,
-      "zeus_rank_dfs": 3
+      "zeus_rank_dfs": 3,
+      "hermes_own": 29.91
     },
     {
       "dg_id": 17646,
@@ -307,7 +313,7 @@
         "PGA 2025"
       ],
       "salary": 9900,
-      "proj_ownership": null,
+      "proj_ownership": 19.12,
       "p_win": 0.04521,
       "p_top5": 0.19342,
       "p_top10": 0.33333,
@@ -357,7 +363,8 @@
       "zeus_pool": 70.9908,
       "zeus_dfs": 63.0121,
       "zeus_rank_pool": 4,
-      "zeus_rank_dfs": 4
+      "zeus_rank_dfs": 4,
+      "hermes_own": 19.12
     },
     {
       "dg_id": 14609,
@@ -378,7 +385,7 @@
         "PGA 2025"
       ],
       "salary": 9400,
-      "proj_ownership": null,
+      "proj_ownership": 15.05,
       "p_win": 0.03177,
       "p_top5": 0.1506,
       "p_top10": 0.27933,
@@ -428,7 +435,8 @@
       "zeus_pool": 68.5016,
       "zeus_dfs": 60.3375,
       "zeus_rank_pool": 5,
-      "zeus_rank_dfs": 5
+      "zeus_rank_dfs": 5,
+      "hermes_own": 15.05
     },
     {
       "dg_id": 12294,
@@ -451,7 +459,7 @@
         "PGA 2025"
       ],
       "salary": 9800,
-      "proj_ownership": null,
+      "proj_ownership": 12.99,
       "p_win": 0.02865,
       "p_top5": 0.14025,
       "p_top10": 0.26316,
@@ -501,7 +509,8 @@
       "zeus_pool": 67.0972,
       "zeus_dfs": 56.9035,
       "zeus_rank_pool": 6,
-      "zeus_rank_dfs": 12
+      "zeus_rank_dfs": 12,
+      "hermes_own": 12.99
     },
     {
       "dg_id": 23950,
@@ -519,7 +528,7 @@
         "PGA 2025"
       ],
       "salary": 9600,
-      "proj_ownership": null,
+      "proj_ownership": 27.42,
       "p_win": 0.04212,
       "p_top5": 0.17513,
       "p_top10": 0.30488,
@@ -569,7 +578,8 @@
       "zeus_pool": 66.3591,
       "zeus_dfs": 60.161,
       "zeus_rank_pool": 7,
-      "zeus_rank_dfs": 7
+      "zeus_rank_dfs": 7,
+      "hermes_own": 27.42
     },
     {
       "dg_id": 18841,
@@ -590,7 +600,7 @@
         "PGA 2025"
       ],
       "salary": 8400,
-      "proj_ownership": null,
+      "proj_ownership": 11.91,
       "p_win": 0.01877,
       "p_top5": 0.1004,
       "p_top10": 0.2008,
@@ -640,7 +650,8 @@
       "zeus_pool": 64.4647,
       "zeus_dfs": 58.0136,
       "zeus_rank_pool": 8,
-      "zeus_rank_dfs": 9
+      "zeus_rank_dfs": 9,
+      "hermes_own": 11.91
     },
     {
       "dg_id": 6430,
@@ -662,7 +673,7 @@
         "PGA 2025"
       ],
       "salary": 8900,
-      "proj_ownership": null,
+      "proj_ownership": 20.32,
       "p_win": 0.02456,
       "p_top5": 0.11976,
       "p_top10": 0.22936,
@@ -712,7 +723,8 @@
       "zeus_pool": 63.9147,
       "zeus_dfs": 57.3271,
       "zeus_rank_pool": 10,
-      "zeus_rank_dfs": 10
+      "zeus_rank_dfs": 10,
+      "hermes_own": 20.32
     },
     {
       "dg_id": 17536,
@@ -732,7 +744,7 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 9.01,
       "p_win": 0.01737,
       "p_top5": 0.0956,
       "p_top10": 0.19194,
@@ -782,7 +794,8 @@
       "zeus_pool": 64.3815,
       "zeus_dfs": 60.2836,
       "zeus_rank_pool": 9,
-      "zeus_rank_dfs": 6
+      "zeus_rank_dfs": 6,
+      "hermes_own": 9.01
     },
     {
       "dg_id": 13562,
@@ -803,7 +816,7 @@
         "PGA 2025"
       ],
       "salary": 8800,
-      "proj_ownership": null,
+      "proj_ownership": 9.83,
       "p_win": 0.02035,
       "p_top5": 0.10537,
       "p_top10": 0.20921,
@@ -853,7 +866,8 @@
       "zeus_pool": 63.4383,
       "zeus_dfs": 55.6109,
       "zeus_rank_pool": 11,
-      "zeus_rank_dfs": 15
+      "zeus_rank_dfs": 15,
+      "hermes_own": 9.83
     },
     {
       "dg_id": 15466,
@@ -875,7 +889,7 @@
         "PGA 2025"
       ],
       "salary": 9200,
-      "proj_ownership": null,
+      "proj_ownership": 9.49,
       "p_win": 0.02012,
       "p_top5": 0.10549,
       "p_top10": 0.20747,
@@ -925,7 +939,8 @@
       "zeus_pool": 60.8816,
       "zeus_dfs": 51.6336,
       "zeus_rank_pool": 15,
-      "zeus_rank_dfs": 31
+      "zeus_rank_dfs": 31,
+      "hermes_own": 9.49
     },
     {
       "dg_id": 12965,
@@ -949,7 +964,7 @@
         "PGA 2025"
       ],
       "salary": 9000,
-      "proj_ownership": null,
+      "proj_ownership": 12.84,
       "p_win": 0.01822,
       "p_top5": 0.09823,
       "p_top10": 0.1938,
@@ -999,7 +1014,8 @@
       "zeus_pool": 61.4874,
       "zeus_dfs": 52.911,
       "zeus_rank_pool": 13,
-      "zeus_rank_dfs": 22
+      "zeus_rank_dfs": 22,
+      "hermes_own": 12.84
     },
     {
       "dg_id": 23602,
@@ -1017,7 +1033,7 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.66,
       "p_win": 0.01938,
       "p_top5": 0.0997,
       "p_top10": 0.19569,
@@ -1067,7 +1083,8 @@
       "zeus_pool": 61.9175,
       "zeus_dfs": 59.713,
       "zeus_rank_pool": 12,
-      "zeus_rank_dfs": 8
+      "zeus_rank_dfs": 8,
+      "hermes_own": 10.66
     },
     {
       "dg_id": 19483,
@@ -1089,7 +1106,7 @@
         "PGA 2025"
       ],
       "salary": 9100,
-      "proj_ownership": null,
+      "proj_ownership": 13.14,
       "p_win": 0.0193,
       "p_top5": 0.10363,
       "p_top10": 0.20161,
@@ -1139,7 +1156,8 @@
       "zeus_pool": 60.6137,
       "zeus_dfs": 52.3049,
       "zeus_rank_pool": 16,
-      "zeus_rank_dfs": 26
+      "zeus_rank_dfs": 26,
+      "hermes_own": 13.14
     },
     {
       "dg_id": 23323,
@@ -1157,7 +1175,7 @@
         "PGA 2025"
       ],
       "salary": 9300,
-      "proj_ownership": null,
+      "proj_ownership": 8.44,
       "p_win": 0.0151,
       "p_top5": 0.08961,
       "p_top10": 0.18382,
@@ -1207,7 +1225,8 @@
       "zeus_pool": 60.5426,
       "zeus_dfs": 49.8362,
       "zeus_rank_pool": 17,
-      "zeus_rank_dfs": 35
+      "zeus_rank_dfs": 35,
+      "hermes_own": 8.44
     },
     {
       "dg_id": 14577,
@@ -1229,7 +1248,7 @@
         "PGA 2025"
       ],
       "salary": 8200,
-      "proj_ownership": null,
+      "proj_ownership": 9.51,
       "p_win": 0.01392,
       "p_top5": 0.08475,
       "p_top10": 0.17921,
@@ -1279,7 +1298,8 @@
       "zeus_pool": 61.0143,
       "zeus_dfs": 54.6824,
       "zeus_rank_pool": 14,
-      "zeus_rank_dfs": 17
+      "zeus_rank_dfs": 17,
+      "hermes_own": 9.51
     },
     {
       "dg_id": 18634,
@@ -1298,7 +1318,7 @@
         "PGA 2025"
       ],
       "salary": 8500,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01653,
       "p_top5": 0.08945,
       "p_top10": 0.18051,
@@ -1348,7 +1368,8 @@
       "zeus_pool": 59.4943,
       "zeus_dfs": 52.5476,
       "zeus_rank_pool": 19,
-      "zeus_rank_dfs": 25
+      "zeus_rank_dfs": 25,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 18474,
@@ -1367,7 +1388,7 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 10.55,
       "p_win": 0.0115,
       "p_top5": 0.06873,
       "p_top10": 0.1462,
@@ -1417,7 +1438,8 @@
       "zeus_pool": 60.0437,
       "zeus_dfs": 56.5981,
       "zeus_rank_pool": 18,
-      "zeus_rank_dfs": 13
+      "zeus_rank_dfs": 13,
+      "hermes_own": 10.55
     },
     {
       "dg_id": 27774,
@@ -1433,7 +1455,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 8600,
-      "proj_ownership": null,
+      "proj_ownership": 17.25,
       "p_win": 0.02125,
       "p_top5": 0.10299,
       "p_top10": 0.20121,
@@ -1483,7 +1505,8 @@
       "zeus_pool": 59.105,
       "zeus_dfs": 54.1123,
       "zeus_rank_pool": 21,
-      "zeus_rank_dfs": 19
+      "zeus_rank_dfs": 19,
+      "hermes_own": 17.25
     },
     {
       "dg_id": 14139,
@@ -1506,7 +1529,7 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.29,
       "p_win": 0.01633,
       "p_top5": 0.08375,
       "p_top10": 0.16639,
@@ -1556,7 +1579,8 @@
       "zeus_pool": 59.2334,
       "zeus_dfs": 56.9451,
       "zeus_rank_pool": 20,
-      "zeus_rank_dfs": 11
+      "zeus_rank_dfs": 11,
+      "hermes_own": 12.29
     },
     {
       "dg_id": 24968,
@@ -1575,7 +1599,7 @@
         "PGA 2025"
       ],
       "salary": 8700,
-      "proj_ownership": null,
+      "proj_ownership": 10.96,
       "p_win": 0.01127,
       "p_top5": 0.07452,
       "p_top10": 0.15974,
@@ -1625,7 +1649,8 @@
       "zeus_pool": 57.9882,
       "zeus_dfs": 48.9373,
       "zeus_rank_pool": 24,
-      "zeus_rank_dfs": 40
+      "zeus_rank_dfs": 40,
+      "hermes_own": 10.96
     },
     {
       "dg_id": 9771,
@@ -1649,7 +1674,7 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 7.58,
       "p_win": 0.01253,
       "p_top5": 0.07502,
       "p_top10": 0.15649,
@@ -1699,7 +1724,8 @@
       "zeus_pool": 58.0451,
       "zeus_dfs": 52.9075,
       "zeus_rank_pool": 22,
-      "zeus_rank_dfs": 23
+      "zeus_rank_dfs": 23,
+      "hermes_own": 7.58
     },
     {
       "dg_id": 13872,
@@ -1723,7 +1749,7 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01287,
       "p_top5": 0.07386,
       "p_top10": 0.1548,
@@ -1773,7 +1799,8 @@
       "zeus_pool": 57.4917,
       "zeus_dfs": 55.7009,
       "zeus_rank_pool": 25,
-      "zeus_rank_dfs": 14
+      "zeus_rank_dfs": 14,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 17576,
@@ -1795,7 +1822,7 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 5.99,
       "p_win": 0.0075,
       "p_top5": 0.04885,
       "p_top10": 0.11351,
@@ -1845,7 +1872,8 @@
       "zeus_pool": 58.0207,
       "zeus_dfs": 54.2451,
       "zeus_rank_pool": 23,
-      "zeus_rank_dfs": 18
+      "zeus_rank_dfs": 18,
+      "hermes_own": 5.99
     },
     {
       "dg_id": 17511,
@@ -1867,7 +1895,7 @@
         "PGA 2025"
       ],
       "salary": 8100,
-      "proj_ownership": null,
+      "proj_ownership": 11.99,
       "p_win": 0.01507,
       "p_top5": 0.08143,
       "p_top10": 0.16722,
@@ -1917,7 +1945,8 @@
       "zeus_pool": 56.1512,
       "zeus_dfs": 51.5718,
       "zeus_rank_pool": 27,
-      "zeus_rank_dfs": 32
+      "zeus_rank_dfs": 32,
+      "hermes_own": 11.99
     },
     {
       "dg_id": 16841,
@@ -1935,7 +1964,7 @@
         "PGA 2025"
       ],
       "salary": 8300,
-      "proj_ownership": null,
+      "proj_ownership": 12.33,
       "p_win": 0.02263,
       "p_top5": 0.11481,
       "p_top10": 0.21834,
@@ -1985,7 +2014,8 @@
       "zeus_pool": 55.7878,
       "zeus_dfs": 53.399,
       "zeus_rank_pool": 28,
-      "zeus_rank_dfs": 21
+      "zeus_rank_dfs": 21,
+      "hermes_own": 12.33
     },
     {
       "dg_id": 29767,
@@ -2004,7 +2034,7 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.81,
       "p_win": 0.00978,
       "p_top5": 0.0618,
       "p_top10": 0.13736,
@@ -2054,7 +2084,8 @@
       "zeus_pool": 56.8474,
       "zeus_dfs": 54.7317,
       "zeus_rank_pool": 26,
-      "zeus_rank_dfs": 16
+      "zeus_rank_dfs": 16,
+      "hermes_own": 4.81
     },
     {
       "dg_id": 6093,
@@ -2075,7 +2106,7 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.29,
       "p_win": 0.01188,
       "p_top5": 0.06859,
       "p_top10": 0.14409,
@@ -2125,7 +2156,8 @@
       "zeus_pool": 55.2894,
       "zeus_dfs": 52.1796,
       "zeus_rank_pool": 29,
-      "zeus_rank_dfs": 27
+      "zeus_rank_dfs": 27,
+      "hermes_own": 7.29
     },
     {
       "dg_id": 12577,
@@ -2149,7 +2181,7 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.73,
       "p_win": 0.01178,
       "p_top5": 0.06649,
       "p_top10": 0.14065,
@@ -2199,7 +2231,8 @@
       "zeus_pool": 54.6656,
       "zeus_dfs": 51.6995,
       "zeus_rank_pool": 31,
-      "zeus_rank_dfs": 29
+      "zeus_rank_dfs": 29,
+      "hermes_own": 12.73
     },
     {
       "dg_id": 21891,
@@ -2219,7 +2252,7 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.21,
       "p_win": 0.01705,
       "p_top5": 0.08961,
       "p_top10": 0.18248,
@@ -2269,7 +2302,8 @@
       "zeus_pool": 55.0745,
       "zeus_dfs": 53.5982,
       "zeus_rank_pool": 30,
-      "zeus_rank_dfs": 20
+      "zeus_rank_dfs": 20,
+      "hermes_own": 10.21
     },
     {
       "dg_id": 19396,
@@ -2288,7 +2322,7 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 9.04,
       "p_win": 0.01838,
       "p_top5": 0.09398,
       "p_top10": 0.18382,
@@ -2338,7 +2372,8 @@
       "zeus_pool": 52.5714,
       "zeus_dfs": 50.4406,
       "zeus_rank_pool": 36,
-      "zeus_rank_dfs": 34
+      "zeus_rank_dfs": 34,
+      "hermes_own": 9.04
     },
     {
       "dg_id": 14636,
@@ -2359,7 +2394,7 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 13.33,
       "p_win": 0.01337,
       "p_top5": 0.07479,
       "p_top10": 0.15674,
@@ -2409,7 +2444,8 @@
       "zeus_pool": 52.784,
       "zeus_dfs": 48.3857,
       "zeus_rank_pool": 34,
-      "zeus_rank_dfs": 42
+      "zeus_rank_dfs": 42,
+      "hermes_own": 13.33
     },
     {
       "dg_id": 26096,
@@ -2430,7 +2466,7 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.89,
       "p_win": 0.00992,
       "p_top5": 0.06101,
       "p_top10": 0.13459,
@@ -2480,7 +2516,8 @@
       "zeus_pool": 53.449,
       "zeus_dfs": 49.3954,
       "zeus_rank_pool": 32,
-      "zeus_rank_dfs": 39
+      "zeus_rank_dfs": 39,
+      "hermes_own": 7.89
     },
     {
       "dg_id": 10419,
@@ -2502,7 +2539,7 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 5.43,
       "p_win": 0.00863,
       "p_top5": 0.05414,
       "p_top10": 0.12136,
@@ -2552,7 +2589,8 @@
       "zeus_pool": 53.0811,
       "zeus_dfs": 49.5539,
       "zeus_rank_pool": 33,
-      "zeus_rank_dfs": 38
+      "zeus_rank_dfs": 38,
+      "hermes_own": 5.43
     },
     {
       "dg_id": 11889,
@@ -2571,7 +2609,7 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 8.95,
       "p_win": 0.00555,
       "p_top5": 0.0383,
       "p_top10": 0.09058,
@@ -2621,7 +2659,8 @@
       "zeus_pool": 52.6521,
       "zeus_dfs": 52.8523,
       "zeus_rank_pool": 35,
-      "zeus_rank_dfs": 24
+      "zeus_rank_dfs": 24,
+      "hermes_own": 8.95
     },
     {
       "dg_id": 17606,
@@ -2642,7 +2681,7 @@
         "PGA 2025"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 4.06,
       "p_win": 0.006,
       "p_top5": 0.04509,
       "p_top10": 0.10363,
@@ -2692,7 +2731,8 @@
       "zeus_pool": 52.5588,
       "zeus_dfs": 51.6909,
       "zeus_rank_pool": 37,
-      "zeus_rank_dfs": 30
+      "zeus_rank_dfs": 30,
+      "hermes_own": 4.06
     },
     {
       "dg_id": 22760,
@@ -2710,7 +2750,7 @@
         "PGA 2025"
       ],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 3.56,
       "p_win": 0.00603,
       "p_top5": 0.04679,
       "p_top10": 0.10695,
@@ -2760,7 +2800,8 @@
       "zeus_pool": 51.3143,
       "zeus_dfs": 51.9192,
       "zeus_rank_pool": 39,
-      "zeus_rank_dfs": 28
+      "zeus_rank_dfs": 28,
+      "hermes_own": 3.56
     },
     {
       "dg_id": 27194,
@@ -2779,7 +2820,7 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 1.63,
       "p_win": 0.0058,
       "p_top5": 0.04325,
       "p_top10": 0.10152,
@@ -2829,7 +2870,8 @@
       "zeus_pool": 51.6946,
       "zeus_dfs": 48.0369,
       "zeus_rank_pool": 38,
-      "zeus_rank_dfs": 44
+      "zeus_rank_dfs": 44,
+      "hermes_own": 1.63
     },
     {
       "dg_id": 25569,
@@ -2848,7 +2890,7 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 5.41,
       "p_win": 0.00915,
       "p_top5": 0.06112,
       "p_top10": 0.1355,
@@ -2898,7 +2940,8 @@
       "zeus_pool": 50.1582,
       "zeus_dfs": 49.759,
       "zeus_rank_pool": 41,
-      "zeus_rank_dfs": 36
+      "zeus_rank_dfs": 36,
+      "hermes_own": 5.41
     },
     {
       "dg_id": 17780,
@@ -2918,7 +2961,7 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 7.31,
       "p_win": 0.0061,
       "p_top5": 0.03964,
       "p_top10": 0.0939,
@@ -2968,7 +3011,8 @@
       "zeus_pool": 50.0358,
       "zeus_dfs": 50.958,
       "zeus_rank_pool": 42,
-      "zeus_rank_dfs": 33
+      "zeus_rank_dfs": 33,
+      "hermes_own": 7.31
     },
     {
       "dg_id": 17538,
@@ -2990,7 +3034,7 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 9.54,
       "p_win": 0.0052,
       "p_top5": 0.0369,
       "p_top10": 0.08547,
@@ -3040,7 +3084,8 @@
       "zeus_pool": 50.3027,
       "zeus_dfs": 48.1691,
       "zeus_rank_pool": 40,
-      "zeus_rank_dfs": 43
+      "zeus_rank_dfs": 43,
+      "hermes_own": 9.54
     },
     {
       "dg_id": 21407,
@@ -3056,7 +3101,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 7.8,
       "p_win": 0.00667,
       "p_top5": 0.04587,
       "p_top10": 0.10428,
@@ -3106,7 +3151,8 @@
       "zeus_pool": 49.1022,
       "zeus_dfs": 49.6987,
       "zeus_rank_pool": 43,
-      "zeus_rank_dfs": 37
+      "zeus_rank_dfs": 37,
+      "hermes_own": 7.8
     },
     {
       "dg_id": 28635,
@@ -3124,7 +3170,7 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 4.31,
       "p_win": 0.00523,
       "p_top5": 0.03897,
       "p_top10": 0.09434,
@@ -3174,7 +3220,8 @@
       "zeus_pool": 48.5924,
       "zeus_dfs": 46.5959,
       "zeus_rank_pool": 45,
-      "zeus_rank_dfs": 49
+      "zeus_rank_dfs": 49,
+      "hermes_own": 4.31
     },
     {
       "dg_id": 25362,
@@ -3190,7 +3237,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 8.27,
       "p_win": 0.00553,
       "p_top5": 0.03812,
       "p_top10": 0.09132,
@@ -3240,7 +3287,8 @@
       "zeus_pool": 48.4357,
       "zeus_dfs": 48.0242,
       "zeus_rank_pool": 46,
-      "zeus_rank_dfs": 45
+      "zeus_rank_dfs": 45,
+      "hermes_own": 8.27
     },
     {
       "dg_id": 29433,
@@ -3258,7 +3306,7 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 5.77,
       "p_win": 0.00962,
       "p_top5": 0.06079,
       "p_top10": 0.13477,
@@ -3308,7 +3356,8 @@
       "zeus_pool": 47.3647,
       "zeus_dfs": 45.5082,
       "zeus_rank_pool": 50,
-      "zeus_rank_dfs": 52
+      "zeus_rank_dfs": 52,
+      "hermes_own": 5.77
     },
     {
       "dg_id": 23014,
@@ -3327,7 +3376,7 @@
         "WF 2024"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.78,
       "p_win": 0.00833,
       "p_top5": 0.0484,
       "p_top10": 0.11013,
@@ -3377,7 +3426,8 @@
       "zeus_pool": 48.3621,
       "zeus_dfs": 46.5006,
       "zeus_rank_pool": 47,
-      "zeus_rank_dfs": 50
+      "zeus_rank_dfs": 50,
+      "hermes_own": 4.78
     },
     {
       "dg_id": 20706,
@@ -3397,7 +3447,7 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 2.61,
       "p_win": 0.00348,
       "p_top5": 0.02769,
       "p_top10": 0.06817,
@@ -3447,7 +3497,8 @@
       "zeus_pool": 48.6354,
       "zeus_dfs": 47.5871,
       "zeus_rank_pool": 44,
-      "zeus_rank_dfs": 46
+      "zeus_rank_dfs": 46,
+      "hermes_own": 2.61
     },
     {
       "dg_id": 14502,
@@ -3468,7 +3519,7 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 3.14,
       "p_win": 0.00665,
       "p_top5": 0.04625,
       "p_top10": 0.10741,
@@ -3518,7 +3569,8 @@
       "zeus_pool": 48.1164,
       "zeus_dfs": 48.7479,
       "zeus_rank_pool": 48,
-      "zeus_rank_dfs": 41
+      "zeus_rank_dfs": 41,
+      "hermes_own": 3.14
     },
     {
       "dg_id": 13126,
@@ -3540,7 +3592,7 @@
         "PGA 2025"
       ],
       "salary": 7100,
-      "proj_ownership": null,
+      "proj_ownership": 2.73,
       "p_win": 0.00403,
       "p_top5": 0.0321,
       "p_top10": 0.08045,
@@ -3590,7 +3642,8 @@
       "zeus_pool": 47.9024,
       "zeus_dfs": 44.4075,
       "zeus_rank_pool": 49,
-      "zeus_rank_dfs": 55
+      "zeus_rank_dfs": 55,
+      "hermes_own": 2.73
     },
     {
       "dg_id": 21554,
@@ -3613,7 +3666,7 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.31,
       "p_win": 0.00398,
       "p_top5": 0.03157,
       "p_top10": 0.07874,
@@ -3663,7 +3716,8 @@
       "zeus_pool": 46.3886,
       "zeus_dfs": 47.08,
       "zeus_rank_pool": 51,
-      "zeus_rank_dfs": 48
+      "zeus_rank_dfs": 48,
+      "hermes_own": 2.31
     },
     {
       "dg_id": 8825,
@@ -3687,7 +3741,7 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 2.27,
       "p_win": 0.00443,
       "p_top5": 0.03583,
       "p_top10": 0.08598,
@@ -3737,7 +3791,8 @@
       "zeus_pool": 45.0484,
       "zeus_dfs": 44.5461,
       "zeus_rank_pool": 54,
-      "zeus_rank_dfs": 54
+      "zeus_rank_dfs": 54,
+      "hermes_own": 2.27
     },
     {
       "dg_id": 29925,
@@ -3753,7 +3808,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.57,
       "p_win": 0.00487,
       "p_top5": 0.0339,
       "p_top10": 0.07937,
@@ -3803,7 +3858,8 @@
       "zeus_pool": 45.368,
       "zeus_dfs": 45.5853,
       "zeus_rank_pool": 52,
-      "zeus_rank_dfs": 51
+      "zeus_rank_dfs": 51,
+      "hermes_own": 6.57
     },
     {
       "dg_id": 27819,
@@ -3819,7 +3875,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.45,
       "p_win": 0.00477,
       "p_top5": 0.03547,
       "p_top10": 0.08258,
@@ -3869,7 +3925,8 @@
       "zeus_pool": 45.3223,
       "zeus_dfs": 47.3745,
       "zeus_rank_pool": 53,
-      "zeus_rank_dfs": 47
+      "zeus_rank_dfs": 47,
+      "hermes_own": 2.45
     },
     {
       "dg_id": 19870,
@@ -3892,7 +3949,7 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 4.19,
       "p_win": 0.00217,
       "p_top5": 0.01983,
       "p_top10": 0.05376,
@@ -3942,7 +3999,8 @@
       "zeus_pool": 44.4748,
       "zeus_dfs": 42.8444,
       "zeus_rank_pool": 56,
-      "zeus_rank_dfs": 57
+      "zeus_rank_dfs": 57,
+      "hermes_own": 4.19
     },
     {
       "dg_id": 17543,
@@ -3962,7 +4020,7 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 3.97,
       "p_win": 0.00305,
       "p_top5": 0.02293,
       "p_top10": 0.06083,
@@ -4012,7 +4070,8 @@
       "zeus_pool": 44.6684,
       "zeus_dfs": 44.9903,
       "zeus_rank_pool": 55,
-      "zeus_rank_dfs": 53
+      "zeus_rank_dfs": 53,
+      "hermes_own": 3.97
     },
     {
       "dg_id": 14704,
@@ -4032,7 +4091,7 @@
         "WF 2024"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 2.0,
       "p_win": 0.00172,
       "p_top5": 0.01437,
       "p_top10": 0.04175,
@@ -4082,7 +4141,8 @@
       "zeus_pool": 43.5929,
       "zeus_dfs": 42.0437,
       "zeus_rank_pool": 57,
-      "zeus_rank_dfs": 59
+      "zeus_rank_dfs": 59,
+      "hermes_own": 2.0
     },
     {
       "dg_id": 7399,
@@ -4106,7 +4166,7 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 2.21,
       "p_win": 0.00158,
       "p_top5": 0.0154,
       "p_top10": 0.04388,
@@ -4156,7 +4216,8 @@
       "zeus_pool": 43.3432,
       "zeus_dfs": 43.5484,
       "zeus_rank_pool": 58,
-      "zeus_rank_dfs": 56
+      "zeus_rank_dfs": 56,
+      "hermes_own": 2.21
     },
     {
       "dg_id": 17488,
@@ -4178,7 +4239,7 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.11,
       "p_win": 0.00263,
       "p_top5": 0.02226,
       "p_top10": 0.05744,
@@ -4228,7 +4289,8 @@
       "zeus_pool": 40.8125,
       "zeus_dfs": 42.4732,
       "zeus_rank_pool": 59,
-      "zeus_rank_dfs": 58
+      "zeus_rank_dfs": 58,
+      "hermes_own": 4.11
     },
     {
       "dg_id": 16283,
@@ -4251,7 +4313,7 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 2.19,
       "p_win": 0.00303,
       "p_top5": 0.02441,
       "p_top10": 0.06361,
@@ -4301,7 +4363,8 @@
       "zeus_pool": 39.6146,
       "zeus_dfs": 41.7677,
       "zeus_rank_pool": 60,
-      "zeus_rank_dfs": 60
+      "zeus_rank_dfs": 60,
+      "hermes_own": 2.19
     },
     {
       "dg_id": 13508,
@@ -4323,7 +4386,7 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 2.26,
       "p_win": 0.00147,
       "p_top5": 0.01085,
       "p_top10": 0.03173,
@@ -4373,7 +4436,8 @@
       "zeus_pool": 38.7333,
       "zeus_dfs": 40.3556,
       "zeus_rank_pool": 62,
-      "zeus_rank_dfs": 61
+      "zeus_rank_dfs": 61,
+      "hermes_own": 2.26
     },
     {
       "dg_id": 22833,
@@ -4392,7 +4456,7 @@
         "PGA 2025"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.42,
       "p_win": 0.00102,
       "p_top5": 0.009,
       "p_top10": 0.02617,
@@ -4442,7 +4506,8 @@
       "zeus_pool": 38.8142,
       "zeus_dfs": 38.8776,
       "zeus_rank_pool": 61,
-      "zeus_rank_dfs": 63
+      "zeus_rank_dfs": 63,
+      "hermes_own": 1.42
     },
     {
       "dg_id": 27900,
@@ -4458,7 +4523,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.56,
       "p_win": 0.00405,
       "p_top5": 0.02828,
       "p_top10": 0.06831,
@@ -4508,7 +4573,8 @@
       "zeus_pool": 37.6475,
       "zeus_dfs": 39.4323,
       "zeus_rank_pool": 64,
-      "zeus_rank_dfs": 62
+      "zeus_rank_dfs": 62,
+      "hermes_own": 6.56
     },
     {
       "dg_id": 11676,
@@ -4532,7 +4598,7 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.48,
       "p_win": 0.00188,
       "p_top5": 0.01559,
       "p_top10": 0.04026,
@@ -4582,7 +4648,8 @@
       "zeus_pool": 37.7148,
       "zeus_dfs": 38.2828,
       "zeus_rank_pool": 63,
-      "zeus_rank_dfs": 64
+      "zeus_rank_dfs": 64,
+      "hermes_own": 4.48
     },
     {
       "dg_id": 11049,
@@ -4604,7 +4671,7 @@
         "PGA 2017"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.76,
       "p_win": 0.00122,
       "p_top5": 0.01005,
       "p_top10": 0.02976,
@@ -4654,7 +4721,8 @@
       "zeus_pool": 36.7804,
       "zeus_dfs": 37.0435,
       "zeus_rank_pool": 65,
-      "zeus_rank_dfs": 66
+      "zeus_rank_dfs": 66,
+      "hermes_own": 1.76
     },
     {
       "dg_id": 24956,
@@ -4670,7 +4738,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 1.08,
       "p_win": 0.001,
       "p_top5": 0.00914,
       "p_top10": 0.02599,
@@ -4720,7 +4788,8 @@
       "zeus_pool": 34.9239,
       "zeus_dfs": 35.9836,
       "zeus_rank_pool": 66,
-      "zeus_rank_dfs": 68
+      "zeus_rank_dfs": 68,
+      "hermes_own": 1.08
     },
     {
       "dg_id": 15556,
@@ -4744,7 +4813,7 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.67,
       "p_win": 0.00145,
       "p_top5": 0.01333,
       "p_top10": 0.03643,
@@ -4794,7 +4863,8 @@
       "zeus_pool": 34.5699,
       "zeus_dfs": 35.5861,
       "zeus_rank_pool": 67,
-      "zeus_rank_dfs": 69
+      "zeus_rank_dfs": 69,
+      "hermes_own": 1.67
     },
     {
       "dg_id": 28309,
@@ -4812,7 +4882,7 @@
         "WF 2023"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 5.31,
       "p_win": 0.00758,
       "p_top5": 0.05003,
       "p_top10": 0.11111,
@@ -4862,7 +4932,8 @@
       "zeus_pool": 32.6166,
       "zeus_dfs": 37.0927,
       "zeus_rank_pool": 69,
-      "zeus_rank_dfs": 65
+      "zeus_rank_dfs": 65,
+      "hermes_own": 5.31
     },
     {
       "dg_id": 23475,
@@ -4880,7 +4951,7 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 1.85,
       "p_win": 0.00292,
       "p_top5": 0.02412,
       "p_top10": 0.06098,
@@ -4930,7 +5001,8 @@
       "zeus_pool": 32.6474,
       "zeus_dfs": 36.0027,
       "zeus_rank_pool": 68,
-      "zeus_rank_dfs": 67
+      "zeus_rank_dfs": 67,
+      "hermes_own": 1.85
     },
     {
       "dg_id": 15575,
@@ -4952,7 +5024,7 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.28,
       "p_win": 0.00095,
       "p_top5": 0.00847,
       "p_top10": 0.02521,
@@ -5002,7 +5074,8 @@
       "zeus_pool": 31.3507,
       "zeus_dfs": 31.7858,
       "zeus_rank_pool": 70,
-      "zeus_rank_dfs": 70
+      "zeus_rank_dfs": 70,
+      "hermes_own": 1.28
     },
     {
       "dg_id": 15980,
@@ -5020,7 +5093,7 @@
         "WF 2023"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00042,
       "p_top5": 0.00558,
       "p_top10": 0.01772,
@@ -5070,7 +5143,8 @@
       "zeus_pool": 31.1564,
       "zeus_dfs": 31.1595,
       "zeus_rank_pool": 71,
-      "zeus_rank_dfs": 71
+      "zeus_rank_dfs": 71,
+      "hermes_own": 0.79
     },
     {
       "dg_id": 18628,
@@ -5088,7 +5162,7 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00012,
       "p_top5": 0.00142,
       "p_top10": 0.0058,
@@ -5138,7 +5212,8 @@
       "zeus_pool": 24.2567,
       "zeus_dfs": 22.0831,
       "zeus_rank_pool": 72,
-      "zeus_rank_dfs": 72
+      "zeus_rank_dfs": 72,
+      "hermes_own": 0.79
     }
   ],
   "players": [
@@ -5164,7 +5239,7 @@
         "PGA 2025"
       ],
       "salary": 11700,
-      "proj_ownership": null,
+      "proj_ownership": 35.35,
       "p_win": 0.11547,
       "p_top5": 0.34014,
       "p_top10": 0.5,
@@ -5214,7 +5289,8 @@
       "zeus_pool": 89.3602,
       "zeus_dfs": 81.4312,
       "zeus_rank_pool": 1,
-      "zeus_rank_dfs": 1
+      "zeus_rank_dfs": 1,
+      "hermes_own": 35.35
     },
     {
       "dg_id": 19895,
@@ -5237,7 +5313,7 @@
         "PGA 2025"
       ],
       "salary": 10000,
-      "proj_ownership": null,
+      "proj_ownership": 31.68,
       "p_win": 0.07225,
       "p_top5": 0.25575,
       "p_top10": 0.40816,
@@ -5287,7 +5363,8 @@
       "zeus_pool": 80.1513,
       "zeus_dfs": 74.5192,
       "zeus_rank_pool": 2,
-      "zeus_rank_dfs": 2
+      "zeus_rank_dfs": 2,
+      "hermes_own": 31.68
     },
     {
       "dg_id": 26651,
@@ -5307,7 +5384,7 @@
         "PGA 2025"
       ],
       "salary": 10100,
-      "proj_ownership": null,
+      "proj_ownership": 29.91,
       "p_win": 0.07943,
       "p_top5": 0.26738,
       "p_top10": 0.41841,
@@ -5357,7 +5434,8 @@
       "zeus_pool": 76.0907,
       "zeus_dfs": 71.6797,
       "zeus_rank_pool": 3,
-      "zeus_rank_dfs": 3
+      "zeus_rank_dfs": 3,
+      "hermes_own": 29.91
     },
     {
       "dg_id": 17646,
@@ -5378,7 +5456,7 @@
         "PGA 2025"
       ],
       "salary": 9900,
-      "proj_ownership": null,
+      "proj_ownership": 19.12,
       "p_win": 0.04521,
       "p_top5": 0.19342,
       "p_top10": 0.33333,
@@ -5428,7 +5506,8 @@
       "zeus_pool": 70.9908,
       "zeus_dfs": 63.0121,
       "zeus_rank_pool": 4,
-      "zeus_rank_dfs": 4
+      "zeus_rank_dfs": 4,
+      "hermes_own": 19.12
     },
     {
       "dg_id": 14609,
@@ -5449,7 +5528,7 @@
         "PGA 2025"
       ],
       "salary": 9400,
-      "proj_ownership": null,
+      "proj_ownership": 15.05,
       "p_win": 0.03177,
       "p_top5": 0.1506,
       "p_top10": 0.27933,
@@ -5499,7 +5578,8 @@
       "zeus_pool": 68.5016,
       "zeus_dfs": 60.3375,
       "zeus_rank_pool": 5,
-      "zeus_rank_dfs": 5
+      "zeus_rank_dfs": 5,
+      "hermes_own": 15.05
     },
     {
       "dg_id": 12294,
@@ -5522,7 +5602,7 @@
         "PGA 2025"
       ],
       "salary": 9800,
-      "proj_ownership": null,
+      "proj_ownership": 12.99,
       "p_win": 0.02865,
       "p_top5": 0.14025,
       "p_top10": 0.26316,
@@ -5572,7 +5652,8 @@
       "zeus_pool": 67.0972,
       "zeus_dfs": 56.9035,
       "zeus_rank_pool": 6,
-      "zeus_rank_dfs": 12
+      "zeus_rank_dfs": 12,
+      "hermes_own": 12.99
     },
     {
       "dg_id": 23950,
@@ -5590,7 +5671,7 @@
         "PGA 2025"
       ],
       "salary": 9600,
-      "proj_ownership": null,
+      "proj_ownership": 27.42,
       "p_win": 0.04212,
       "p_top5": 0.17513,
       "p_top10": 0.30488,
@@ -5640,7 +5721,8 @@
       "zeus_pool": 66.3591,
       "zeus_dfs": 60.161,
       "zeus_rank_pool": 7,
-      "zeus_rank_dfs": 7
+      "zeus_rank_dfs": 7,
+      "hermes_own": 27.42
     },
     {
       "dg_id": 18841,
@@ -5661,7 +5743,7 @@
         "PGA 2025"
       ],
       "salary": 8400,
-      "proj_ownership": null,
+      "proj_ownership": 11.91,
       "p_win": 0.01877,
       "p_top5": 0.1004,
       "p_top10": 0.2008,
@@ -5711,7 +5793,8 @@
       "zeus_pool": 64.4647,
       "zeus_dfs": 58.0136,
       "zeus_rank_pool": 8,
-      "zeus_rank_dfs": 9
+      "zeus_rank_dfs": 9,
+      "hermes_own": 11.91
     },
     {
       "dg_id": 6430,
@@ -5733,7 +5816,7 @@
         "PGA 2025"
       ],
       "salary": 8900,
-      "proj_ownership": null,
+      "proj_ownership": 20.32,
       "p_win": 0.02456,
       "p_top5": 0.11976,
       "p_top10": 0.22936,
@@ -5783,7 +5866,8 @@
       "zeus_pool": 63.9147,
       "zeus_dfs": 57.3271,
       "zeus_rank_pool": 10,
-      "zeus_rank_dfs": 10
+      "zeus_rank_dfs": 10,
+      "hermes_own": 20.32
     },
     {
       "dg_id": 17536,
@@ -5803,7 +5887,7 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 9.01,
       "p_win": 0.01737,
       "p_top5": 0.0956,
       "p_top10": 0.19194,
@@ -5853,7 +5937,8 @@
       "zeus_pool": 64.3815,
       "zeus_dfs": 60.2836,
       "zeus_rank_pool": 9,
-      "zeus_rank_dfs": 6
+      "zeus_rank_dfs": 6,
+      "hermes_own": 9.01
     },
     {
       "dg_id": 13562,
@@ -5874,7 +5959,7 @@
         "PGA 2025"
       ],
       "salary": 8800,
-      "proj_ownership": null,
+      "proj_ownership": 9.83,
       "p_win": 0.02035,
       "p_top5": 0.10537,
       "p_top10": 0.20921,
@@ -5924,7 +6009,8 @@
       "zeus_pool": 63.4383,
       "zeus_dfs": 55.6109,
       "zeus_rank_pool": 11,
-      "zeus_rank_dfs": 15
+      "zeus_rank_dfs": 15,
+      "hermes_own": 9.83
     },
     {
       "dg_id": 15466,
@@ -5946,7 +6032,7 @@
         "PGA 2025"
       ],
       "salary": 9200,
-      "proj_ownership": null,
+      "proj_ownership": 9.49,
       "p_win": 0.02012,
       "p_top5": 0.10549,
       "p_top10": 0.20747,
@@ -5996,7 +6082,8 @@
       "zeus_pool": 60.8816,
       "zeus_dfs": 51.6336,
       "zeus_rank_pool": 15,
-      "zeus_rank_dfs": 31
+      "zeus_rank_dfs": 31,
+      "hermes_own": 9.49
     },
     {
       "dg_id": 12965,
@@ -6020,7 +6107,7 @@
         "PGA 2025"
       ],
       "salary": 9000,
-      "proj_ownership": null,
+      "proj_ownership": 12.84,
       "p_win": 0.01822,
       "p_top5": 0.09823,
       "p_top10": 0.1938,
@@ -6070,7 +6157,8 @@
       "zeus_pool": 61.4874,
       "zeus_dfs": 52.911,
       "zeus_rank_pool": 13,
-      "zeus_rank_dfs": 22
+      "zeus_rank_dfs": 22,
+      "hermes_own": 12.84
     },
     {
       "dg_id": 23602,
@@ -6088,7 +6176,7 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.66,
       "p_win": 0.01938,
       "p_top5": 0.0997,
       "p_top10": 0.19569,
@@ -6138,7 +6226,8 @@
       "zeus_pool": 61.9175,
       "zeus_dfs": 59.713,
       "zeus_rank_pool": 12,
-      "zeus_rank_dfs": 8
+      "zeus_rank_dfs": 8,
+      "hermes_own": 10.66
     },
     {
       "dg_id": 19483,
@@ -6160,7 +6249,7 @@
         "PGA 2025"
       ],
       "salary": 9100,
-      "proj_ownership": null,
+      "proj_ownership": 13.14,
       "p_win": 0.0193,
       "p_top5": 0.10363,
       "p_top10": 0.20161,
@@ -6210,7 +6299,8 @@
       "zeus_pool": 60.6137,
       "zeus_dfs": 52.3049,
       "zeus_rank_pool": 16,
-      "zeus_rank_dfs": 26
+      "zeus_rank_dfs": 26,
+      "hermes_own": 13.14
     },
     {
       "dg_id": 23323,
@@ -6228,7 +6318,7 @@
         "PGA 2025"
       ],
       "salary": 9300,
-      "proj_ownership": null,
+      "proj_ownership": 8.44,
       "p_win": 0.0151,
       "p_top5": 0.08961,
       "p_top10": 0.18382,
@@ -6278,7 +6368,8 @@
       "zeus_pool": 60.5426,
       "zeus_dfs": 49.8362,
       "zeus_rank_pool": 17,
-      "zeus_rank_dfs": 35
+      "zeus_rank_dfs": 35,
+      "hermes_own": 8.44
     },
     {
       "dg_id": 14577,
@@ -6300,7 +6391,7 @@
         "PGA 2025"
       ],
       "salary": 8200,
-      "proj_ownership": null,
+      "proj_ownership": 9.51,
       "p_win": 0.01392,
       "p_top5": 0.08475,
       "p_top10": 0.17921,
@@ -6350,7 +6441,8 @@
       "zeus_pool": 61.0143,
       "zeus_dfs": 54.6824,
       "zeus_rank_pool": 14,
-      "zeus_rank_dfs": 17
+      "zeus_rank_dfs": 17,
+      "hermes_own": 9.51
     },
     {
       "dg_id": 18634,
@@ -6369,7 +6461,7 @@
         "PGA 2025"
       ],
       "salary": 8500,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01653,
       "p_top5": 0.08945,
       "p_top10": 0.18051,
@@ -6419,7 +6511,8 @@
       "zeus_pool": 59.4943,
       "zeus_dfs": 52.5476,
       "zeus_rank_pool": 19,
-      "zeus_rank_dfs": 25
+      "zeus_rank_dfs": 25,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 18474,
@@ -6438,7 +6531,7 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 10.55,
       "p_win": 0.0115,
       "p_top5": 0.06873,
       "p_top10": 0.1462,
@@ -6488,7 +6581,8 @@
       "zeus_pool": 60.0437,
       "zeus_dfs": 56.5981,
       "zeus_rank_pool": 18,
-      "zeus_rank_dfs": 13
+      "zeus_rank_dfs": 13,
+      "hermes_own": 10.55
     },
     {
       "dg_id": 27774,
@@ -6504,7 +6598,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 8600,
-      "proj_ownership": null,
+      "proj_ownership": 17.25,
       "p_win": 0.02125,
       "p_top5": 0.10299,
       "p_top10": 0.20121,
@@ -6554,7 +6648,8 @@
       "zeus_pool": 59.105,
       "zeus_dfs": 54.1123,
       "zeus_rank_pool": 21,
-      "zeus_rank_dfs": 19
+      "zeus_rank_dfs": 19,
+      "hermes_own": 17.25
     },
     {
       "dg_id": 14139,
@@ -6577,7 +6672,7 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.29,
       "p_win": 0.01633,
       "p_top5": 0.08375,
       "p_top10": 0.16639,
@@ -6627,7 +6722,8 @@
       "zeus_pool": 59.2334,
       "zeus_dfs": 56.9451,
       "zeus_rank_pool": 20,
-      "zeus_rank_dfs": 11
+      "zeus_rank_dfs": 11,
+      "hermes_own": 12.29
     },
     {
       "dg_id": 24968,
@@ -6646,7 +6742,7 @@
         "PGA 2025"
       ],
       "salary": 8700,
-      "proj_ownership": null,
+      "proj_ownership": 10.96,
       "p_win": 0.01127,
       "p_top5": 0.07452,
       "p_top10": 0.15974,
@@ -6696,7 +6792,8 @@
       "zeus_pool": 57.9882,
       "zeus_dfs": 48.9373,
       "zeus_rank_pool": 24,
-      "zeus_rank_dfs": 40
+      "zeus_rank_dfs": 40,
+      "hermes_own": 10.96
     },
     {
       "dg_id": 9771,
@@ -6720,7 +6817,7 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 7.58,
       "p_win": 0.01253,
       "p_top5": 0.07502,
       "p_top10": 0.15649,
@@ -6770,7 +6867,8 @@
       "zeus_pool": 58.0451,
       "zeus_dfs": 52.9075,
       "zeus_rank_pool": 22,
-      "zeus_rank_dfs": 23
+      "zeus_rank_dfs": 23,
+      "hermes_own": 7.58
     },
     {
       "dg_id": 13872,
@@ -6794,7 +6892,7 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01287,
       "p_top5": 0.07386,
       "p_top10": 0.1548,
@@ -6844,7 +6942,8 @@
       "zeus_pool": 57.4917,
       "zeus_dfs": 55.7009,
       "zeus_rank_pool": 25,
-      "zeus_rank_dfs": 14
+      "zeus_rank_dfs": 14,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 17576,
@@ -6866,7 +6965,7 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 5.99,
       "p_win": 0.0075,
       "p_top5": 0.04885,
       "p_top10": 0.11351,
@@ -6916,7 +7015,8 @@
       "zeus_pool": 58.0207,
       "zeus_dfs": 54.2451,
       "zeus_rank_pool": 23,
-      "zeus_rank_dfs": 18
+      "zeus_rank_dfs": 18,
+      "hermes_own": 5.99
     },
     {
       "dg_id": 17511,
@@ -6938,7 +7038,7 @@
         "PGA 2025"
       ],
       "salary": 8100,
-      "proj_ownership": null,
+      "proj_ownership": 11.99,
       "p_win": 0.01507,
       "p_top5": 0.08143,
       "p_top10": 0.16722,
@@ -6988,7 +7088,8 @@
       "zeus_pool": 56.1512,
       "zeus_dfs": 51.5718,
       "zeus_rank_pool": 27,
-      "zeus_rank_dfs": 32
+      "zeus_rank_dfs": 32,
+      "hermes_own": 11.99
     },
     {
       "dg_id": 16841,
@@ -7006,7 +7107,7 @@
         "PGA 2025"
       ],
       "salary": 8300,
-      "proj_ownership": null,
+      "proj_ownership": 12.33,
       "p_win": 0.02263,
       "p_top5": 0.11481,
       "p_top10": 0.21834,
@@ -7056,7 +7157,8 @@
       "zeus_pool": 55.7878,
       "zeus_dfs": 53.399,
       "zeus_rank_pool": 28,
-      "zeus_rank_dfs": 21
+      "zeus_rank_dfs": 21,
+      "hermes_own": 12.33
     },
     {
       "dg_id": 29767,
@@ -7075,7 +7177,7 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.81,
       "p_win": 0.00978,
       "p_top5": 0.0618,
       "p_top10": 0.13736,
@@ -7125,7 +7227,8 @@
       "zeus_pool": 56.8474,
       "zeus_dfs": 54.7317,
       "zeus_rank_pool": 26,
-      "zeus_rank_dfs": 16
+      "zeus_rank_dfs": 16,
+      "hermes_own": 4.81
     },
     {
       "dg_id": 6093,
@@ -7146,7 +7249,7 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.29,
       "p_win": 0.01188,
       "p_top5": 0.06859,
       "p_top10": 0.14409,
@@ -7196,7 +7299,8 @@
       "zeus_pool": 55.2894,
       "zeus_dfs": 52.1796,
       "zeus_rank_pool": 29,
-      "zeus_rank_dfs": 27
+      "zeus_rank_dfs": 27,
+      "hermes_own": 7.29
     },
     {
       "dg_id": 12577,
@@ -7220,7 +7324,7 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.73,
       "p_win": 0.01178,
       "p_top5": 0.06649,
       "p_top10": 0.14065,
@@ -7270,7 +7374,8 @@
       "zeus_pool": 54.6656,
       "zeus_dfs": 51.6995,
       "zeus_rank_pool": 31,
-      "zeus_rank_dfs": 29
+      "zeus_rank_dfs": 29,
+      "hermes_own": 12.73
     },
     {
       "dg_id": 21891,
@@ -7290,7 +7395,7 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.21,
       "p_win": 0.01705,
       "p_top5": 0.08961,
       "p_top10": 0.18248,
@@ -7340,7 +7445,8 @@
       "zeus_pool": 55.0745,
       "zeus_dfs": 53.5982,
       "zeus_rank_pool": 30,
-      "zeus_rank_dfs": 20
+      "zeus_rank_dfs": 20,
+      "hermes_own": 10.21
     },
     {
       "dg_id": 19396,
@@ -7359,7 +7465,7 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 9.04,
       "p_win": 0.01838,
       "p_top5": 0.09398,
       "p_top10": 0.18382,
@@ -7409,7 +7515,8 @@
       "zeus_pool": 52.5714,
       "zeus_dfs": 50.4406,
       "zeus_rank_pool": 36,
-      "zeus_rank_dfs": 34
+      "zeus_rank_dfs": 34,
+      "hermes_own": 9.04
     },
     {
       "dg_id": 14636,
@@ -7430,7 +7537,7 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 13.33,
       "p_win": 0.01337,
       "p_top5": 0.07479,
       "p_top10": 0.15674,
@@ -7480,7 +7587,8 @@
       "zeus_pool": 52.784,
       "zeus_dfs": 48.3857,
       "zeus_rank_pool": 34,
-      "zeus_rank_dfs": 42
+      "zeus_rank_dfs": 42,
+      "hermes_own": 13.33
     },
     {
       "dg_id": 26096,
@@ -7501,7 +7609,7 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.89,
       "p_win": 0.00992,
       "p_top5": 0.06101,
       "p_top10": 0.13459,
@@ -7551,7 +7659,8 @@
       "zeus_pool": 53.449,
       "zeus_dfs": 49.3954,
       "zeus_rank_pool": 32,
-      "zeus_rank_dfs": 39
+      "zeus_rank_dfs": 39,
+      "hermes_own": 7.89
     },
     {
       "dg_id": 10419,
@@ -7573,7 +7682,7 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 5.43,
       "p_win": 0.00863,
       "p_top5": 0.05414,
       "p_top10": 0.12136,
@@ -7623,7 +7732,8 @@
       "zeus_pool": 53.0811,
       "zeus_dfs": 49.5539,
       "zeus_rank_pool": 33,
-      "zeus_rank_dfs": 38
+      "zeus_rank_dfs": 38,
+      "hermes_own": 5.43
     },
     {
       "dg_id": 11889,
@@ -7642,7 +7752,7 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 8.95,
       "p_win": 0.00555,
       "p_top5": 0.0383,
       "p_top10": 0.09058,
@@ -7692,7 +7802,8 @@
       "zeus_pool": 52.6521,
       "zeus_dfs": 52.8523,
       "zeus_rank_pool": 35,
-      "zeus_rank_dfs": 24
+      "zeus_rank_dfs": 24,
+      "hermes_own": 8.95
     },
     {
       "dg_id": 17606,
@@ -7713,7 +7824,7 @@
         "PGA 2025"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 4.06,
       "p_win": 0.006,
       "p_top5": 0.04509,
       "p_top10": 0.10363,
@@ -7763,7 +7874,8 @@
       "zeus_pool": 52.5588,
       "zeus_dfs": 51.6909,
       "zeus_rank_pool": 37,
-      "zeus_rank_dfs": 30
+      "zeus_rank_dfs": 30,
+      "hermes_own": 4.06
     },
     {
       "dg_id": 22760,
@@ -7781,7 +7893,7 @@
         "PGA 2025"
       ],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 3.56,
       "p_win": 0.00603,
       "p_top5": 0.04679,
       "p_top10": 0.10695,
@@ -7831,7 +7943,8 @@
       "zeus_pool": 51.3143,
       "zeus_dfs": 51.9192,
       "zeus_rank_pool": 39,
-      "zeus_rank_dfs": 28
+      "zeus_rank_dfs": 28,
+      "hermes_own": 3.56
     },
     {
       "dg_id": 27194,
@@ -7850,7 +7963,7 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 1.63,
       "p_win": 0.0058,
       "p_top5": 0.04325,
       "p_top10": 0.10152,
@@ -7900,7 +8013,8 @@
       "zeus_pool": 51.6946,
       "zeus_dfs": 48.0369,
       "zeus_rank_pool": 38,
-      "zeus_rank_dfs": 44
+      "zeus_rank_dfs": 44,
+      "hermes_own": 1.63
     },
     {
       "dg_id": 25569,
@@ -7919,7 +8033,7 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 5.41,
       "p_win": 0.00915,
       "p_top5": 0.06112,
       "p_top10": 0.1355,
@@ -7969,7 +8083,8 @@
       "zeus_pool": 50.1582,
       "zeus_dfs": 49.759,
       "zeus_rank_pool": 41,
-      "zeus_rank_dfs": 36
+      "zeus_rank_dfs": 36,
+      "hermes_own": 5.41
     },
     {
       "dg_id": 17780,
@@ -7989,7 +8104,7 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 7.31,
       "p_win": 0.0061,
       "p_top5": 0.03964,
       "p_top10": 0.0939,
@@ -8039,7 +8154,8 @@
       "zeus_pool": 50.0358,
       "zeus_dfs": 50.958,
       "zeus_rank_pool": 42,
-      "zeus_rank_dfs": 33
+      "zeus_rank_dfs": 33,
+      "hermes_own": 7.31
     },
     {
       "dg_id": 17538,
@@ -8061,7 +8177,7 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 9.54,
       "p_win": 0.0052,
       "p_top5": 0.0369,
       "p_top10": 0.08547,
@@ -8111,7 +8227,8 @@
       "zeus_pool": 50.3027,
       "zeus_dfs": 48.1691,
       "zeus_rank_pool": 40,
-      "zeus_rank_dfs": 43
+      "zeus_rank_dfs": 43,
+      "hermes_own": 9.54
     },
     {
       "dg_id": 21407,
@@ -8127,7 +8244,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 7.8,
       "p_win": 0.00667,
       "p_top5": 0.04587,
       "p_top10": 0.10428,
@@ -8177,7 +8294,8 @@
       "zeus_pool": 49.1022,
       "zeus_dfs": 49.6987,
       "zeus_rank_pool": 43,
-      "zeus_rank_dfs": 37
+      "zeus_rank_dfs": 37,
+      "hermes_own": 7.8
     },
     {
       "dg_id": 28635,
@@ -8195,7 +8313,7 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 4.31,
       "p_win": 0.00523,
       "p_top5": 0.03897,
       "p_top10": 0.09434,
@@ -8245,7 +8363,8 @@
       "zeus_pool": 48.5924,
       "zeus_dfs": 46.5959,
       "zeus_rank_pool": 45,
-      "zeus_rank_dfs": 49
+      "zeus_rank_dfs": 49,
+      "hermes_own": 4.31
     },
     {
       "dg_id": 25362,
@@ -8261,7 +8380,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 8.27,
       "p_win": 0.00553,
       "p_top5": 0.03812,
       "p_top10": 0.09132,
@@ -8311,7 +8430,8 @@
       "zeus_pool": 48.4357,
       "zeus_dfs": 48.0242,
       "zeus_rank_pool": 46,
-      "zeus_rank_dfs": 45
+      "zeus_rank_dfs": 45,
+      "hermes_own": 8.27
     },
     {
       "dg_id": 29433,
@@ -8329,7 +8449,7 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 5.77,
       "p_win": 0.00962,
       "p_top5": 0.06079,
       "p_top10": 0.13477,
@@ -8379,7 +8499,8 @@
       "zeus_pool": 47.3647,
       "zeus_dfs": 45.5082,
       "zeus_rank_pool": 50,
-      "zeus_rank_dfs": 52
+      "zeus_rank_dfs": 52,
+      "hermes_own": 5.77
     },
     {
       "dg_id": 23014,
@@ -8398,7 +8519,7 @@
         "WF 2024"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.78,
       "p_win": 0.00833,
       "p_top5": 0.0484,
       "p_top10": 0.11013,
@@ -8448,7 +8569,8 @@
       "zeus_pool": 48.3621,
       "zeus_dfs": 46.5006,
       "zeus_rank_pool": 47,
-      "zeus_rank_dfs": 50
+      "zeus_rank_dfs": 50,
+      "hermes_own": 4.78
     },
     {
       "dg_id": 20706,
@@ -8468,7 +8590,7 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 2.61,
       "p_win": 0.00348,
       "p_top5": 0.02769,
       "p_top10": 0.06817,
@@ -8518,7 +8640,8 @@
       "zeus_pool": 48.6354,
       "zeus_dfs": 47.5871,
       "zeus_rank_pool": 44,
-      "zeus_rank_dfs": 46
+      "zeus_rank_dfs": 46,
+      "hermes_own": 2.61
     },
     {
       "dg_id": 14502,
@@ -8539,7 +8662,7 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 3.14,
       "p_win": 0.00665,
       "p_top5": 0.04625,
       "p_top10": 0.10741,
@@ -8589,7 +8712,8 @@
       "zeus_pool": 48.1164,
       "zeus_dfs": 48.7479,
       "zeus_rank_pool": 48,
-      "zeus_rank_dfs": 41
+      "zeus_rank_dfs": 41,
+      "hermes_own": 3.14
     },
     {
       "dg_id": 13126,
@@ -8611,7 +8735,7 @@
         "PGA 2025"
       ],
       "salary": 7100,
-      "proj_ownership": null,
+      "proj_ownership": 2.73,
       "p_win": 0.00403,
       "p_top5": 0.0321,
       "p_top10": 0.08045,
@@ -8661,7 +8785,8 @@
       "zeus_pool": 47.9024,
       "zeus_dfs": 44.4075,
       "zeus_rank_pool": 49,
-      "zeus_rank_dfs": 55
+      "zeus_rank_dfs": 55,
+      "hermes_own": 2.73
     },
     {
       "dg_id": 21554,
@@ -8684,7 +8809,7 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.31,
       "p_win": 0.00398,
       "p_top5": 0.03157,
       "p_top10": 0.07874,
@@ -8734,7 +8859,8 @@
       "zeus_pool": 46.3886,
       "zeus_dfs": 47.08,
       "zeus_rank_pool": 51,
-      "zeus_rank_dfs": 48
+      "zeus_rank_dfs": 48,
+      "hermes_own": 2.31
     },
     {
       "dg_id": 8825,
@@ -8758,7 +8884,7 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 2.27,
       "p_win": 0.00443,
       "p_top5": 0.03583,
       "p_top10": 0.08598,
@@ -8808,7 +8934,8 @@
       "zeus_pool": 45.0484,
       "zeus_dfs": 44.5461,
       "zeus_rank_pool": 54,
-      "zeus_rank_dfs": 54
+      "zeus_rank_dfs": 54,
+      "hermes_own": 2.27
     },
     {
       "dg_id": 29925,
@@ -8824,7 +8951,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.57,
       "p_win": 0.00487,
       "p_top5": 0.0339,
       "p_top10": 0.07937,
@@ -8874,7 +9001,8 @@
       "zeus_pool": 45.368,
       "zeus_dfs": 45.5853,
       "zeus_rank_pool": 52,
-      "zeus_rank_dfs": 51
+      "zeus_rank_dfs": 51,
+      "hermes_own": 6.57
     },
     {
       "dg_id": 27819,
@@ -8890,7 +9018,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.45,
       "p_win": 0.00477,
       "p_top5": 0.03547,
       "p_top10": 0.08258,
@@ -8940,7 +9068,8 @@
       "zeus_pool": 45.3223,
       "zeus_dfs": 47.3745,
       "zeus_rank_pool": 53,
-      "zeus_rank_dfs": 47
+      "zeus_rank_dfs": 47,
+      "hermes_own": 2.45
     },
     {
       "dg_id": 19870,
@@ -8963,7 +9092,7 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 4.19,
       "p_win": 0.00217,
       "p_top5": 0.01983,
       "p_top10": 0.05376,
@@ -9013,7 +9142,8 @@
       "zeus_pool": 44.4748,
       "zeus_dfs": 42.8444,
       "zeus_rank_pool": 56,
-      "zeus_rank_dfs": 57
+      "zeus_rank_dfs": 57,
+      "hermes_own": 4.19
     },
     {
       "dg_id": 17543,
@@ -9033,7 +9163,7 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 3.97,
       "p_win": 0.00305,
       "p_top5": 0.02293,
       "p_top10": 0.06083,
@@ -9083,7 +9213,8 @@
       "zeus_pool": 44.6684,
       "zeus_dfs": 44.9903,
       "zeus_rank_pool": 55,
-      "zeus_rank_dfs": 53
+      "zeus_rank_dfs": 53,
+      "hermes_own": 3.97
     },
     {
       "dg_id": 14704,
@@ -9103,7 +9234,7 @@
         "WF 2024"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 2.0,
       "p_win": 0.00172,
       "p_top5": 0.01437,
       "p_top10": 0.04175,
@@ -9153,7 +9284,8 @@
       "zeus_pool": 43.5929,
       "zeus_dfs": 42.0437,
       "zeus_rank_pool": 57,
-      "zeus_rank_dfs": 59
+      "zeus_rank_dfs": 59,
+      "hermes_own": 2.0
     },
     {
       "dg_id": 7399,
@@ -9177,7 +9309,7 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 2.21,
       "p_win": 0.00158,
       "p_top5": 0.0154,
       "p_top10": 0.04388,
@@ -9227,7 +9359,8 @@
       "zeus_pool": 43.3432,
       "zeus_dfs": 43.5484,
       "zeus_rank_pool": 58,
-      "zeus_rank_dfs": 56
+      "zeus_rank_dfs": 56,
+      "hermes_own": 2.21
     },
     {
       "dg_id": 17488,
@@ -9249,7 +9382,7 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.11,
       "p_win": 0.00263,
       "p_top5": 0.02226,
       "p_top10": 0.05744,
@@ -9299,7 +9432,8 @@
       "zeus_pool": 40.8125,
       "zeus_dfs": 42.4732,
       "zeus_rank_pool": 59,
-      "zeus_rank_dfs": 58
+      "zeus_rank_dfs": 58,
+      "hermes_own": 4.11
     },
     {
       "dg_id": 16283,
@@ -9322,7 +9456,7 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 2.19,
       "p_win": 0.00303,
       "p_top5": 0.02441,
       "p_top10": 0.06361,
@@ -9372,7 +9506,8 @@
       "zeus_pool": 39.6146,
       "zeus_dfs": 41.7677,
       "zeus_rank_pool": 60,
-      "zeus_rank_dfs": 60
+      "zeus_rank_dfs": 60,
+      "hermes_own": 2.19
     },
     {
       "dg_id": 13508,
@@ -9394,7 +9529,7 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 2.26,
       "p_win": 0.00147,
       "p_top5": 0.01085,
       "p_top10": 0.03173,
@@ -9444,7 +9579,8 @@
       "zeus_pool": 38.7333,
       "zeus_dfs": 40.3556,
       "zeus_rank_pool": 62,
-      "zeus_rank_dfs": 61
+      "zeus_rank_dfs": 61,
+      "hermes_own": 2.26
     },
     {
       "dg_id": 22833,
@@ -9463,7 +9599,7 @@
         "PGA 2025"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.42,
       "p_win": 0.00102,
       "p_top5": 0.009,
       "p_top10": 0.02617,
@@ -9513,7 +9649,8 @@
       "zeus_pool": 38.8142,
       "zeus_dfs": 38.8776,
       "zeus_rank_pool": 61,
-      "zeus_rank_dfs": 63
+      "zeus_rank_dfs": 63,
+      "hermes_own": 1.42
     },
     {
       "dg_id": 27900,
@@ -9529,7 +9666,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.56,
       "p_win": 0.00405,
       "p_top5": 0.02828,
       "p_top10": 0.06831,
@@ -9579,7 +9716,8 @@
       "zeus_pool": 37.6475,
       "zeus_dfs": 39.4323,
       "zeus_rank_pool": 64,
-      "zeus_rank_dfs": 62
+      "zeus_rank_dfs": 62,
+      "hermes_own": 6.56
     },
     {
       "dg_id": 11676,
@@ -9603,7 +9741,7 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.48,
       "p_win": 0.00188,
       "p_top5": 0.01559,
       "p_top10": 0.04026,
@@ -9653,7 +9791,8 @@
       "zeus_pool": 37.7148,
       "zeus_dfs": 38.2828,
       "zeus_rank_pool": 63,
-      "zeus_rank_dfs": 64
+      "zeus_rank_dfs": 64,
+      "hermes_own": 4.48
     },
     {
       "dg_id": 11049,
@@ -9675,7 +9814,7 @@
         "PGA 2017"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.76,
       "p_win": 0.00122,
       "p_top5": 0.01005,
       "p_top10": 0.02976,
@@ -9725,7 +9864,8 @@
       "zeus_pool": 36.7804,
       "zeus_dfs": 37.0435,
       "zeus_rank_pool": 65,
-      "zeus_rank_dfs": 66
+      "zeus_rank_dfs": 66,
+      "hermes_own": 1.76
     },
     {
       "dg_id": 24956,
@@ -9741,7 +9881,7 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 1.08,
       "p_win": 0.001,
       "p_top5": 0.00914,
       "p_top10": 0.02599,
@@ -9791,7 +9931,8 @@
       "zeus_pool": 34.9239,
       "zeus_dfs": 35.9836,
       "zeus_rank_pool": 66,
-      "zeus_rank_dfs": 68
+      "zeus_rank_dfs": 68,
+      "hermes_own": 1.08
     },
     {
       "dg_id": 15556,
@@ -9815,7 +9956,7 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.67,
       "p_win": 0.00145,
       "p_top5": 0.01333,
       "p_top10": 0.03643,
@@ -9865,7 +10006,8 @@
       "zeus_pool": 34.5699,
       "zeus_dfs": 35.5861,
       "zeus_rank_pool": 67,
-      "zeus_rank_dfs": 69
+      "zeus_rank_dfs": 69,
+      "hermes_own": 1.67
     },
     {
       "dg_id": 28309,
@@ -9883,7 +10025,7 @@
         "WF 2023"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 5.31,
       "p_win": 0.00758,
       "p_top5": 0.05003,
       "p_top10": 0.11111,
@@ -9933,7 +10075,8 @@
       "zeus_pool": 32.6166,
       "zeus_dfs": 37.0927,
       "zeus_rank_pool": 69,
-      "zeus_rank_dfs": 65
+      "zeus_rank_dfs": 65,
+      "hermes_own": 5.31
     },
     {
       "dg_id": 23475,
@@ -9951,7 +10094,7 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 1.85,
       "p_win": 0.00292,
       "p_top5": 0.02412,
       "p_top10": 0.06098,
@@ -10001,7 +10144,8 @@
       "zeus_pool": 32.6474,
       "zeus_dfs": 36.0027,
       "zeus_rank_pool": 68,
-      "zeus_rank_dfs": 67
+      "zeus_rank_dfs": 67,
+      "hermes_own": 1.85
     },
     {
       "dg_id": 15575,
@@ -10023,7 +10167,7 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.28,
       "p_win": 0.00095,
       "p_top5": 0.00847,
       "p_top10": 0.02521,
@@ -10073,7 +10217,8 @@
       "zeus_pool": 31.3507,
       "zeus_dfs": 31.7858,
       "zeus_rank_pool": 70,
-      "zeus_rank_dfs": 70
+      "zeus_rank_dfs": 70,
+      "hermes_own": 1.28
     },
     {
       "dg_id": 15980,
@@ -10091,7 +10236,7 @@
         "WF 2023"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00042,
       "p_top5": 0.00558,
       "p_top10": 0.01772,
@@ -10141,7 +10286,8 @@
       "zeus_pool": 31.1564,
       "zeus_dfs": 31.1595,
       "zeus_rank_pool": 71,
-      "zeus_rank_dfs": 71
+      "zeus_rank_dfs": 71,
+      "hermes_own": 0.79
     },
     {
       "dg_id": 18628,
@@ -10159,7 +10305,7 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00012,
       "p_top5": 0.00142,
       "p_top10": 0.0058,
@@ -10209,7 +10355,8 @@
       "zeus_pool": 24.2567,
       "zeus_dfs": 22.0831,
       "zeus_rank_pool": 72,
-      "zeus_rank_dfs": 72
+      "zeus_rank_dfs": 72,
+      "hermes_own": 0.79
     }
   ],
   "_public_scrubbed": true
