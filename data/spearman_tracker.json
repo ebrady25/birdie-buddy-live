@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-05-06T02:56:17.760579+00:00",
+  "last_updated": "2026-05-06T03:01:14.677174+00:00",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -56,9 +56,9 @@
       "winner_dg_rank": 5,
       "field_size": 135,
       "spearman_bbi": 0.3994,
-      "spearman_dg": null,
-      "spearman_delta": null,
-      "beat_dg": null,
+      "spearman_dg": 0.1539,
+      "spearman_delta": 0.2455,
+      "beat_dg": true,
       "spearman_normalized_z": 4.859,
       "beat_target": true,
       "beat_baseline": true,
@@ -76,7 +76,7 @@
       "winner_in_top10_bbi": true,
       "model_version": "v8.5",
       "dashboard_version": "v4.0",
-      "notes": "First tracked event. Fitzpatrick was a top-5 BBI pick."
+      "notes": "First tracked event. Fitzpatrick was a top-5 BBI pick. | DG backfilled 2026-05-05 (canonical method)."
     },
     {
       "week": 8,
@@ -87,9 +87,9 @@
       "winner_dg_rank": 88,
       "field_size": 135,
       "spearman_bbi": 0.4529,
-      "spearman_dg": null,
-      "spearman_delta": null,
-      "beat_dg": null,
+      "spearman_dg": 0.4445,
+      "spearman_delta": 0.0084,
+      "beat_dg": true,
       "spearman_normalized_z": 5.611,
       "beat_target": true,
       "beat_baseline": true,
@@ -107,7 +107,7 @@
       "winner_in_top10_bbi": false,
       "model_version": "v8.5",
       "dashboard_version": "v4.0",
-      "notes": "Woodland win from rank #88 \u2014 deep field surprise. Model still ranked field well overall despite missing winner."
+      "notes": "Woodland win from rank #88 \u2014 deep field surprise. Model still ranked field well overall despite missing winner. | DG backfilled 2026-05-05 (canonical method, status=NO_RANK_FIELD). | DG backfilled 2026-05-05 (canonical method)."
     },
     {
       "week": 9,
@@ -118,9 +118,9 @@
       "winner_dg_rank": 23,
       "field_size": 132,
       "spearman_bbi": 0.5736,
-      "spearman_dg": null,
-      "spearman_delta": null,
-      "beat_dg": null,
+      "spearman_dg": 0.4224,
+      "spearman_delta": 0.1512,
+      "beat_dg": true,
       "spearman_normalized_z": 7.407,
       "beat_target": true,
       "beat_baseline": true,
@@ -138,7 +138,7 @@
       "winner_in_top10_bbi": true,
       "model_version": "v8.5",
       "dashboard_version": "v4.0",
-      "notes": "Best Spearman yet. APP layer validated (+2.19 for winner). Spaun was within BBI credible range."
+      "notes": "Best Spearman yet. APP layer validated (+2.19 for winner). Spaun was within BBI credible range. | DG backfilled 2026-05-05 (canonical method, status=NO_RANK_FIELD). | DG backfilled 2026-05-05 (canonical method)."
     },
     {
       "week": 10,
@@ -254,8 +254,8 @@
     "season_avg_bbi_spearman": 0.4093,
     "last_5_avg_bbi_spearman": 0.4113,
     "total_events_tracked": 6,
-    "events_bbi_beat_dg": 1,
-    "events_with_dg_comparison": 3,
+    "events_bbi_beat_dg": 4,
+    "events_with_dg_comparison": 6,
     "events_above_040": 2,
     "winners_from_top10_bbi": 5,
     "winners_from_top10_bbi_total": 6,
@@ -397,8 +397,8 @@
   "summary": {
     "events_scored": 6,
     "mean_spearman_bbi": 0.4093,
-    "mean_spearman_dg": 0.347,
-    "mean_diff": -0.0037,
-    "last_updated": "2026-05-06T02:56:17.760559+00:00"
+    "mean_spearman_dg": 0.3437,
+    "mean_diff": 0.0656,
+    "last_updated": "2026-05-06T03:01:14.677135+00:00"
   }
 }
