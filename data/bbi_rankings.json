@@ -68,7 +68,11 @@
       "total_precip_in": 2.375,
       "rain_flag": true,
       "firm_fast_flag": false
-    }
+    },
+    "ownership_source": "DG fantasy-projection-defaults via JANUS",
+    "ownership_injected_at": "2026-05-06T04:09:45.959137+00:00",
+    "ownership_coverage": "72/72",
+    "dg_ownership_last_updated": "2026-05-06 00:04:48 UTC"
   },
   "rankings": [
     {
@@ -93,11 +97,19 @@
         "PGA 2025"
       ],
       "salary": 11700,
-      "proj_ownership": null,
+      "proj_ownership": 35.35,
       "p_win": 0.11547,
       "p_top5": 0.34014,
       "p_top10": 0.5,
       "p_top20": 0.69444,
+      "n_talent": 1.0,
+      "n_courseFit": 1.0,
+      "n_form": 1.0,
+      "n_cutSafety": 0.5,
+      "n_leverage": 1.0,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.01970014839072848,
+      "n_strategic": 0.9449316029463346,
       "bbi_pool": 88.8167,
       "bbi_dfs": 80.8877,
       "pool_decomp": {
@@ -135,7 +147,8 @@
       "zeus_pool": 89.3602,
       "zeus_dfs": 81.4312,
       "zeus_rank_pool": 1,
-      "zeus_rank_dfs": 1
+      "zeus_rank_dfs": 1,
+      "hermes_own": 35.35
     },
     {
       "dg_id": 19895,
@@ -158,11 +171,19 @@
         "PGA 2025"
       ],
       "salary": 10000,
-      "proj_ownership": null,
+      "proj_ownership": 31.68,
       "p_win": 0.07225,
       "p_top5": 0.25575,
       "p_top10": 0.40816,
       "p_top20": 0.6135,
+      "n_talent": 0.9218964502772808,
+      "n_courseFit": 0.8694860452348996,
+      "n_form": 0.7908264097162618,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9896907216494846,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.35328762216650517,
+      "n_strategic": 1.0,
       "bbi_pool": 80.0465,
       "bbi_dfs": 74.4144,
       "pool_decomp": {
@@ -200,7 +221,8 @@
       "zeus_pool": 80.1513,
       "zeus_dfs": 74.5192,
       "zeus_rank_pool": 2,
-      "zeus_rank_dfs": 2
+      "zeus_rank_dfs": 2,
+      "hermes_own": 31.68
     },
     {
       "dg_id": 26651,
@@ -220,11 +242,19 @@
         "PGA 2025"
       ],
       "salary": 10100,
-      "proj_ownership": null,
+      "proj_ownership": 29.91,
       "p_win": 0.07943,
       "p_top5": 0.26738,
       "p_top10": 0.41841,
       "p_top20": 0.61728,
+      "n_talent": 0.9934655455495401,
+      "n_courseFit": 0.642727648252371,
+      "n_form": 0.8166102938614855,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9965635738831615,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.3538213815095006,
+      "n_strategic": 0.8849526481936163,
       "bbi_pool": 76.3131,
       "bbi_dfs": 71.9021,
       "pool_decomp": {
@@ -262,7 +292,8 @@
       "zeus_pool": 76.0907,
       "zeus_dfs": 71.6797,
       "zeus_rank_pool": 3,
-      "zeus_rank_dfs": 3
+      "zeus_rank_dfs": 3,
+      "hermes_own": 29.91
     },
     {
       "dg_id": 17646,
@@ -283,11 +314,19 @@
         "PGA 2025"
       ],
       "salary": 9900,
-      "proj_ownership": null,
+      "proj_ownership": 19.12,
       "p_win": 0.04521,
       "p_top5": 0.19342,
       "p_top10": 0.33333,
       "p_top20": 0.54348,
+      "n_talent": 0.960203552930472,
+      "n_courseFit": 0.6674752621962543,
+      "n_form": 0.6279775199962513,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9931271477663229,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.17688267828983215,
+      "n_strategic": 0.8309365135040337,
       "bbi_pool": 71.0337,
       "bbi_dfs": 63.055,
       "pool_decomp": {
@@ -325,7 +364,8 @@
       "zeus_pool": 70.9908,
       "zeus_dfs": 63.0121,
       "zeus_rank_pool": 4,
-      "zeus_rank_dfs": 4
+      "zeus_rank_dfs": 4,
+      "hermes_own": 19.12
     },
     {
       "dg_id": 14609,
@@ -346,11 +386,19 @@
         "PGA 2025"
       ],
       "salary": 9400,
-      "proj_ownership": null,
+      "proj_ownership": 15.05,
       "p_win": 0.03177,
       "p_top5": 0.1506,
       "p_top10": 0.27933,
       "p_top20": 0.48544,
+      "n_talent": 0.8018790351982841,
+      "n_courseFit": 0.7729758332209684,
+      "n_form": 0.5142073267097326,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9759450171821306,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.20082867690870104,
+      "n_strategic": 0.8824973693440898,
       "bbi_pool": 68.0234,
       "bbi_dfs": 59.8593,
       "pool_decomp": {
@@ -388,7 +436,8 @@
       "zeus_pool": 68.5016,
       "zeus_dfs": 60.3375,
       "zeus_rank_pool": 5,
-      "zeus_rank_dfs": 5
+      "zeus_rank_dfs": 5,
+      "hermes_own": 15.05
     },
     {
       "dg_id": 12294,
@@ -411,11 +460,19 @@
         "PGA 2025"
       ],
       "salary": 9800,
-      "proj_ownership": null,
+      "proj_ownership": 12.99,
       "p_win": 0.02865,
       "p_top5": 0.14025,
       "p_top10": 0.26316,
       "p_top20": 0.46512,
+      "n_talent": 0.8047732122021054,
+      "n_courseFit": 0.7906574891493829,
+      "n_form": 0.48225348380020366,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.979381443298969,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.02934248750120987,
+      "n_strategic": 0.7323746054016135,
       "bbi_pool": 66.6382,
       "bbi_dfs": 56.4445,
       "pool_decomp": {
@@ -453,7 +510,8 @@
       "zeus_pool": 67.0972,
       "zeus_dfs": 56.9035,
       "zeus_rank_pool": 6,
-      "zeus_rank_dfs": 12
+      "zeus_rank_dfs": 12,
+      "hermes_own": 12.99
     },
     {
       "dg_id": 23950,
@@ -471,11 +529,19 @@
         "PGA 2025"
       ],
       "salary": 9600,
-      "proj_ownership": null,
+      "proj_ownership": 27.42,
       "p_win": 0.04212,
       "p_top5": 0.17513,
       "p_top10": 0.30488,
       "p_top20": 0.50251,
+      "n_talent": 0.8525632455344758,
+      "n_courseFit": 0.5993238754090939,
+      "n_form": 0.5725579442087559,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9862542955326461,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.2737119063457141,
+      "n_strategic": 0.8158540862855139,
       "bbi_pool": 66.2567,
       "bbi_dfs": 60.0586,
       "pool_decomp": {
@@ -513,7 +579,8 @@
       "zeus_pool": 66.3591,
       "zeus_dfs": 60.161,
       "zeus_rank_pool": 7,
-      "zeus_rank_dfs": 7
+      "zeus_rank_dfs": 7,
+      "hermes_own": 27.42
     },
     {
       "dg_id": 18841,
@@ -534,11 +601,19 @@
         "PGA 2025"
       ],
       "salary": 8400,
-      "proj_ownership": null,
+      "proj_ownership": 11.91,
       "p_win": 0.01877,
       "p_top5": 0.1004,
       "p_top10": 0.2008,
       "p_top20": 0.38168,
+      "n_talent": 0.6661799186501033,
+      "n_courseFit": 0.9054190683581369,
+      "n_form": 0.3598505064428708,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9415807560137457,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4266611981741986,
+      "n_strategic": 0.6958961767800772,
       "bbi_pool": 64.1439,
       "bbi_dfs": 57.6928,
       "pool_decomp": {
@@ -576,7 +651,8 @@
       "zeus_pool": 64.4647,
       "zeus_dfs": 58.0136,
       "zeus_rank_pool": 8,
-      "zeus_rank_dfs": 9
+      "zeus_rank_dfs": 9,
+      "hermes_own": 11.91
     },
     {
       "dg_id": 6430,
@@ -598,11 +674,19 @@
         "PGA 2025"
       ],
       "salary": 8900,
-      "proj_ownership": null,
+      "proj_ownership": 20.32,
       "p_win": 0.02456,
       "p_top5": 0.11976,
       "p_top10": 0.22936,
       "p_top20": 0.41841,
+      "n_talent": 0.6880973626137782,
+      "n_courseFit": 0.7966795503736674,
+      "n_form": 0.4171635746420314,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9518900343642612,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.34017015941058937,
+      "n_strategic": 0.7941073307611365,
       "bbi_pool": 63.8269,
       "bbi_dfs": 57.2393,
       "pool_decomp": {
@@ -640,7 +724,8 @@
       "zeus_pool": 63.9147,
       "zeus_dfs": 57.3271,
       "zeus_rank_pool": 10,
-      "zeus_rank_dfs": 10
+      "zeus_rank_dfs": 10,
+      "hermes_own": 20.32
     },
     {
       "dg_id": 17536,
@@ -660,11 +745,19 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 9.01,
       "p_win": 0.01737,
       "p_top5": 0.0956,
       "p_top10": 0.19194,
       "p_top20": 0.37313,
+      "n_talent": 0.659359716406053,
+      "n_courseFit": 0.8685584309283859,
+      "n_form": 0.3430772902277388,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9278350515463918,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6382068974068316,
+      "n_strategic": 0.8183093651350404,
       "bbi_pool": 63.7604,
       "bbi_dfs": 59.6625,
       "pool_decomp": {
@@ -702,7 +795,8 @@
       "zeus_pool": 64.3815,
       "zeus_dfs": 60.2836,
       "zeus_rank_pool": 9,
-      "zeus_rank_dfs": 6
+      "zeus_rank_dfs": 6,
+      "hermes_own": 9.01
     },
     {
       "dg_id": 13562,
@@ -723,11 +817,19 @@
         "PGA 2025"
       ],
       "salary": 8800,
-      "proj_ownership": null,
+      "proj_ownership": 9.83,
       "p_win": 0.02035,
       "p_top5": 0.10537,
       "p_top10": 0.20921,
       "p_top20": 0.3937,
+      "n_talent": 0.743573721014546,
+      "n_courseFit": 0.8095778288261608,
+      "n_form": 0.3761477302596771,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9621993127147767,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.27714319273317406,
+      "n_strategic": 0.6183795159593126,
       "bbi_pool": 63.2643,
       "bbi_dfs": 55.4369,
       "pool_decomp": {
@@ -765,7 +867,8 @@
       "zeus_pool": 63.4383,
       "zeus_dfs": 55.6109,
       "zeus_rank_pool": 11,
-      "zeus_rank_dfs": 15
+      "zeus_rank_dfs": 15,
+      "hermes_own": 9.83
     },
     {
       "dg_id": 15466,
@@ -787,11 +890,19 @@
         "PGA 2025"
       ],
       "salary": 9200,
-      "proj_ownership": null,
+      "proj_ownership": 9.49,
       "p_win": 0.02012,
       "p_top5": 0.10549,
       "p_top10": 0.20747,
       "p_top20": 0.39216,
+      "n_talent": 0.7530504845498881,
+      "n_courseFit": 0.7066391939548361,
+      "n_form": 0.3736363292906779,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9656357388316151,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.09163540630106076,
+      "n_strategic": 0.7649947386881796,
       "bbi_pool": 61.4398,
       "bbi_dfs": 52.1918,
       "pool_decomp": {
@@ -829,7 +940,8 @@
       "zeus_pool": 60.8816,
       "zeus_dfs": 51.6336,
       "zeus_rank_pool": 15,
-      "zeus_rank_dfs": 31
+      "zeus_rank_dfs": 31,
+      "hermes_own": 9.49
     },
     {
       "dg_id": 12965,
@@ -853,11 +965,19 @@
         "PGA 2025"
       ],
       "salary": 9000,
-      "proj_ownership": null,
+      "proj_ownership": 12.84,
       "p_win": 0.01822,
       "p_top5": 0.09823,
       "p_top10": 0.1938,
       "p_top20": 0.37313,
+      "n_talent": 0.6639041148306697,
+      "n_courseFit": 0.8413104828571039,
+      "n_form": 0.347969553035834,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9347079037800687,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.18576496760501268,
+      "n_strategic": 0.6211855489302,
       "bbi_pool": 61.4216,
       "bbi_dfs": 52.8452,
       "pool_decomp": {
@@ -895,7 +1015,8 @@
       "zeus_pool": 61.4874,
       "zeus_dfs": 52.911,
       "zeus_rank_pool": 13,
-      "zeus_rank_dfs": 22
+      "zeus_rank_dfs": 22,
+      "hermes_own": 12.84
     },
     {
       "dg_id": 23602,
@@ -913,11 +1034,19 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.66,
       "p_win": 0.01938,
       "p_top5": 0.0997,
       "p_top10": 0.19569,
       "p_top20": 0.37175,
+      "n_talent": 0.601076158434687,
+      "n_courseFit": 0.7978103948303461,
+      "n_form": 0.35218984217876964,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8900343642611683,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7397423995438634,
+      "n_strategic": 0.7386881795861101,
       "bbi_pool": 60.6831,
       "bbi_dfs": 58.4786,
       "pool_decomp": {
@@ -955,7 +1084,8 @@
       "zeus_pool": 61.9175,
       "zeus_dfs": 59.713,
       "zeus_rank_pool": 12,
-      "zeus_rank_dfs": 8
+      "zeus_rank_dfs": 8,
+      "hermes_own": 10.66
     },
     {
       "dg_id": 19483,
@@ -977,11 +1107,19 @@
         "PGA 2025"
       ],
       "salary": 9100,
-      "proj_ownership": null,
+      "proj_ownership": 13.14,
       "p_win": 0.0193,
       "p_top5": 0.10363,
       "p_top10": 0.20161,
       "p_top20": 0.38168,
+      "n_talent": 0.7304914521638686,
+      "n_courseFit": 0.7282587277169952,
+      "n_form": 0.36354253609081044,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9587628865979381,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.18382802130728002,
+      "n_strategic": 0.5892669238863557,
       "bbi_pool": 60.4722,
       "bbi_dfs": 52.1634,
       "pool_decomp": {
@@ -1019,7 +1157,8 @@
       "zeus_pool": 60.6137,
       "zeus_dfs": 52.3049,
       "zeus_rank_pool": 16,
-      "zeus_rank_dfs": 26
+      "zeus_rank_dfs": 26,
+      "hermes_own": 13.14
     },
     {
       "dg_id": 23323,
@@ -1037,11 +1176,19 @@
         "PGA 2025"
       ],
       "salary": 9300,
-      "proj_ownership": null,
+      "proj_ownership": 8.44,
       "p_win": 0.0151,
       "p_top5": 0.08961,
       "p_top10": 0.18382,
       "p_top20": 0.36364,
+      "n_talent": 0.771086185185576,
+      "n_courseFit": 0.7366997455051549,
+      "n_form": 0.3262079226260044,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9725085910652922,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.0,
+      "n_strategic": 0.5899684321290775,
       "bbi_pool": 60.3319,
       "bbi_dfs": 49.6255,
       "pool_decomp": {
@@ -1079,7 +1226,8 @@
       "zeus_pool": 60.5426,
       "zeus_dfs": 49.8362,
       "zeus_rank_pool": 17,
-      "zeus_rank_dfs": 35
+      "zeus_rank_dfs": 35,
+      "hermes_own": 8.44
     },
     {
       "dg_id": 14577,
@@ -1101,11 +1249,19 @@
         "PGA 2025"
       ],
       "salary": 8200,
-      "proj_ownership": null,
+      "proj_ownership": 9.51,
       "p_win": 0.01392,
       "p_top5": 0.08475,
       "p_top10": 0.17921,
       "p_top20": 0.35587,
+      "n_talent": 0.6529482607750763,
+      "n_courseFit": 0.8411489659587915,
+      "n_form": 0.3156103521972342,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9175257731958764,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4190527062542874,
+      "n_strategic": 0.5215713784636969,
       "bbi_pool": 60.2473,
       "bbi_dfs": 53.9154,
       "pool_decomp": {
@@ -1143,7 +1299,8 @@
       "zeus_pool": 61.0143,
       "zeus_dfs": 54.6824,
       "zeus_rank_pool": 14,
-      "zeus_rank_dfs": 17
+      "zeus_rank_dfs": 17,
+      "hermes_own": 9.51
     },
     {
       "dg_id": 18634,
@@ -1162,11 +1319,19 @@
         "PGA 2025"
       ],
       "salary": 8500,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01653,
       "p_top5": 0.08945,
       "p_top10": 0.18051,
       "p_top20": 0.35336,
+      "n_talent": 0.7123456989349243,
+      "n_courseFit": 0.7564182314589513,
+      "n_form": 0.32181829463399625,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9553264604810997,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.33545635416321834,
+      "n_strategic": 0.5198176078568923,
       "bbi_pool": 59.758,
       "bbi_dfs": 52.8113,
       "pool_decomp": {
@@ -1204,7 +1369,8 @@
       "zeus_pool": 59.4943,
       "zeus_dfs": 52.5476,
       "zeus_rank_pool": 19,
-      "zeus_rank_dfs": 25
+      "zeus_rank_dfs": 25,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 18474,
@@ -1223,11 +1389,19 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 10.55,
       "p_win": 0.0115,
       "p_top5": 0.06873,
       "p_top10": 0.1462,
       "p_top20": 0.30769,
+      "n_talent": 0.5473706957966951,
+      "n_courseFit": 0.9157732210166437,
+      "n_form": 0.25549305637535547,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8625429553264605,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6888239121059057,
+      "n_strategic": 0.6520519116099615,
       "bbi_pool": 59.3602,
       "bbi_dfs": 55.9146,
       "pool_decomp": {
@@ -1265,7 +1439,8 @@
       "zeus_pool": 60.0437,
       "zeus_dfs": 56.5981,
       "zeus_rank_pool": 18,
-      "zeus_rank_dfs": 13
+      "zeus_rank_dfs": 13,
+      "hermes_own": 10.55
     },
     {
       "dg_id": 27774,
@@ -1281,11 +1456,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 8600,
-      "proj_ownership": null,
+      "proj_ownership": 17.25,
       "p_win": 0.02125,
       "p_top5": 0.10299,
       "p_top10": 0.20121,
       "p_top20": 0.37594,
+      "n_talent": 0.6533833513313756,
+      "n_courseFit": 0.7021342314243881,
+      "n_form": 0.36319767666271596,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9209621993127148,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4400816123505153,
+      "n_strategic": 0.6836197825324448,
       "bbi_pool": 59.105,
       "bbi_dfs": 54.1123,
       "pool_decomp": {
@@ -1323,7 +1506,8 @@
       "zeus_pool": 59.105,
       "zeus_dfs": 54.1123,
       "zeus_rank_pool": 21,
-      "zeus_rank_dfs": 19
+      "zeus_rank_dfs": 19,
+      "hermes_own": 17.25
     },
     {
       "dg_id": 14139,
@@ -1346,11 +1530,19 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.29,
       "p_win": 0.01633,
       "p_top5": 0.08375,
       "p_top10": 0.16639,
       "p_top20": 0.32573,
+      "n_talent": 0.5034669450367218,
+      "n_courseFit": 0.9173175915237337,
+      "n_form": 0.29724775463265357,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8350515463917525,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7508192845620166,
+      "n_strategic": 0.5503332164152929,
       "bbi_pool": 58.8426,
       "bbi_dfs": 56.5543,
       "pool_decomp": {
@@ -1388,7 +1580,8 @@
       "zeus_pool": 59.2334,
       "zeus_dfs": 56.9451,
       "zeus_rank_pool": 20,
-      "zeus_rank_dfs": 11
+      "zeus_rank_dfs": 11,
+      "hermes_own": 12.29
     },
     {
       "dg_id": 24968,
@@ -1407,11 +1600,19 @@
         "PGA 2025"
       ],
       "salary": 8700,
-      "proj_ownership": null,
+      "proj_ownership": 10.96,
       "p_win": 0.01127,
       "p_top5": 0.07452,
       "p_top10": 0.15974,
       "p_top20": 0.33333,
+      "n_talent": 0.6680859467290851,
+      "n_courseFit": 0.7925063610807671,
+      "n_form": 0.2791510333473915,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9450171821305842,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.15222589873183562,
+      "n_strategic": 0.4945633111189057,
       "bbi_pool": 58.1762,
       "bbi_dfs": 49.1253,
       "pool_decomp": {
@@ -1449,7 +1650,8 @@
       "zeus_pool": 57.9882,
       "zeus_dfs": 48.9373,
       "zeus_rank_pool": 24,
-      "zeus_rank_dfs": 40
+      "zeus_rank_dfs": 40,
+      "hermes_own": 10.96
     },
     {
       "dg_id": 9771,
@@ -1473,11 +1675,19 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 7.58,
       "p_win": 0.01253,
       "p_top5": 0.07502,
       "p_top10": 0.15649,
       "p_top20": 0.32051,
+      "n_talent": 0.5908726524702466,
+      "n_courseFit": 0.8689806772434682,
+      "n_form": 0.2752780076331675,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8865979381443299,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5185070173537667,
+      "n_strategic": 0.4086285513854788,
       "bbi_pool": 58.1374,
       "bbi_dfs": 52.9998,
       "pool_decomp": {
@@ -1515,7 +1725,8 @@
       "zeus_pool": 58.0451,
       "zeus_dfs": 52.9075,
       "zeus_rank_pool": 22,
-      "zeus_rank_dfs": 23
+      "zeus_rank_dfs": 23,
+      "hermes_own": 7.58
     },
     {
       "dg_id": 13872,
@@ -1539,11 +1750,19 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01287,
       "p_top5": 0.07386,
       "p_top10": 0.1548,
       "p_top20": 0.31949,
+      "n_talent": 0.564982014642172,
+      "n_courseFit": 0.7895594599178425,
+      "n_form": 0.27210923472608844,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8762886597938144,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7869776121835681,
+      "n_strategic": 0.5415643633812698,
       "bbi_pool": 56.9403,
       "bbi_dfs": 55.1495,
       "pool_decomp": {
@@ -1581,7 +1800,8 @@
       "zeus_pool": 57.4917,
       "zeus_dfs": 55.7009,
       "zeus_rank_pool": 25,
-      "zeus_rank_dfs": 14
+      "zeus_rank_dfs": 14,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 17576,
@@ -1603,11 +1823,19 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 5.99,
       "p_win": 0.0075,
       "p_top5": 0.04885,
       "p_top10": 0.11351,
       "p_top20": 0.25641,
+      "n_talent": 0.5075673688011267,
+      "n_courseFit": 0.9155515324818736,
+      "n_form": 0.19248119926379506,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8419243986254296,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.653562073416711,
+      "n_strategic": 0.626096106629253,
       "bbi_pool": 56.7323,
       "bbi_dfs": 52.9567,
       "pool_decomp": {
@@ -1645,7 +1873,8 @@
       "zeus_pool": 58.0207,
       "zeus_dfs": 54.2451,
       "zeus_rank_pool": 23,
-      "zeus_rank_dfs": 18
+      "zeus_rank_dfs": 18,
+      "hermes_own": 5.99
     },
     {
       "dg_id": 17511,
@@ -1667,11 +1896,19 @@
         "PGA 2025"
       ],
       "salary": 8100,
-      "proj_ownership": null,
+      "proj_ownership": 11.99,
       "p_win": 0.01507,
       "p_top5": 0.08143,
       "p_top10": 0.16722,
       "p_top20": 0.33557,
+      "n_talent": 0.6364151435634383,
+      "n_courseFit": 0.676374041069162,
+      "n_form": 0.2963211604651415,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9106529209621993,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4873908491572112,
+      "n_strategic": 0.6646790599789547,
       "bbi_pool": 56.5832,
       "bbi_dfs": 52.0038,
       "pool_decomp": {
@@ -1709,7 +1946,8 @@
       "zeus_pool": 56.1512,
       "zeus_dfs": 51.5718,
       "zeus_rank_pool": 27,
-      "zeus_rank_dfs": 32
+      "zeus_rank_dfs": 32,
+      "hermes_own": 11.99
     },
     {
       "dg_id": 16841,
@@ -1727,11 +1965,19 @@
         "PGA 2025"
       ],
       "salary": 8300,
-      "proj_ownership": null,
+      "proj_ownership": 12.33,
       "p_win": 0.02263,
       "p_top5": 0.11481,
       "p_top10": 0.21834,
       "p_top20": 0.40323,
+      "n_talent": 0.6326429084696967,
+      "n_courseFit": 0.556269844455999,
+      "n_form": 0.39698098598992465,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9072164948453608,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5961953529720376,
+      "n_strategic": 0.6517011574886006,
       "bbi_pool": 56.1755,
       "bbi_dfs": 53.7867,
       "pool_decomp": {
@@ -1769,7 +2015,8 @@
       "zeus_pool": 55.7878,
       "zeus_dfs": 53.399,
       "zeus_rank_pool": 28,
-      "zeus_rank_dfs": 21
+      "zeus_rank_dfs": 21,
+      "hermes_own": 12.33
     },
     {
       "dg_id": 29767,
@@ -1788,11 +2035,19 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.81,
       "p_win": 0.00978,
       "p_top5": 0.0618,
       "p_top10": 0.13736,
       "p_top20": 0.29586,
+      "n_talent": 0.5585584855269404,
+      "n_courseFit": 0.754875176491909,
+      "n_form": 0.23711206056367845,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.872852233676976,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7504130837784276,
+      "n_strategic": 0.7302700806734479,
       "bbi_pool": 56.087,
       "bbi_dfs": 53.9713,
       "pool_decomp": {
@@ -1830,7 +2085,8 @@
       "zeus_pool": 56.8474,
       "zeus_dfs": 54.7317,
       "zeus_rank_pool": 26,
-      "zeus_rank_dfs": 16
+      "zeus_rank_dfs": 16,
+      "hermes_own": 4.81
     },
     {
       "dg_id": 6093,
@@ -1851,11 +2107,19 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.29,
       "p_win": 0.01188,
       "p_top5": 0.06859,
       "p_top10": 0.14409,
       "p_top20": 0.29851,
+      "n_talent": 0.6074903425965514,
+      "n_courseFit": 0.6675684198658682,
+      "n_form": 0.25248711740061264,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8934707903780069,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6235476937445493,
+      "n_strategic": 0.6310066643283059,
       "bbi_pool": 54.7424,
       "bbi_dfs": 51.6326,
       "pool_decomp": {
@@ -1893,7 +2157,8 @@
       "zeus_pool": 55.2894,
       "zeus_dfs": 52.1796,
       "zeus_rank_pool": 29,
-      "zeus_rank_dfs": 27
+      "zeus_rank_dfs": 27,
+      "hermes_own": 7.29
     },
     {
       "dg_id": 12577,
@@ -1917,11 +2182,19 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.73,
       "p_win": 0.01178,
       "p_top5": 0.06649,
       "p_top10": 0.14065,
       "p_top20": 0.2924,
+      "n_talent": 0.4696219830518817,
+      "n_courseFit": 0.8130298225404062,
+      "n_form": 0.2459601058807814,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8247422680412371,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6351157790090025,
+      "n_strategic": 0.6194317783233954,
       "bbi_pool": 54.6607,
       "bbi_dfs": 51.6946,
       "pool_decomp": {
@@ -1959,7 +2232,8 @@
       "zeus_pool": 54.6656,
       "zeus_dfs": 51.6995,
       "zeus_rank_pool": 31,
-      "zeus_rank_dfs": 29
+      "zeus_rank_dfs": 29,
+      "hermes_own": 12.73
     },
     {
       "dg_id": 21891,
@@ -1979,11 +2253,19 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.21,
       "p_win": 0.01705,
       "p_top5": 0.08961,
       "p_top10": 0.18248,
       "p_top20": 0.34965,
+      "n_talent": 0.5733135660955785,
+      "n_courseFit": 0.5737158437656636,
+      "n_form": 0.32497464063569415,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8797250859106529,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6904554791266148,
+      "n_strategic": 0.796211855489302,
       "bbi_pool": 54.4648,
       "bbi_dfs": 52.9885,
       "pool_decomp": {
@@ -2021,7 +2303,8 @@
       "zeus_pool": 55.0745,
       "zeus_dfs": 53.5982,
       "zeus_rank_pool": 30,
-      "zeus_rank_dfs": 20
+      "zeus_rank_dfs": 20,
+      "hermes_own": 10.21
     },
     {
       "dg_id": 19396,
@@ -2040,11 +2323,19 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 9.04,
       "p_win": 0.01838,
       "p_top5": 0.09398,
       "p_top10": 0.18382,
       "p_top20": 0.35461,
+      "n_talent": 0.6864879526305216,
+      "n_courseFit": 0.47185032036426205,
+      "n_form": 0.3305557953577374,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9484536082474226,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6309004502891064,
+      "n_strategic": 0.6801122413188355,
       "bbi_pool": 54.3448,
       "bbi_dfs": 52.214,
       "pool_decomp": {
@@ -2082,7 +2373,8 @@
       "zeus_pool": 52.5714,
       "zeus_dfs": 50.4406,
       "zeus_rank_pool": 36,
-      "zeus_rank_dfs": 34
+      "zeus_rank_dfs": 34,
+      "hermes_own": 9.04
     },
     {
       "dg_id": 14636,
@@ -2103,11 +2395,19 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 13.33,
       "p_win": 0.01337,
       "p_top5": 0.07479,
       "p_top10": 0.15674,
       "p_top20": 0.32154,
+      "n_talent": 0.6187898108533856,
+      "n_courseFit": 0.6186445957459566,
+      "n_form": 0.2757714261874614,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9037800687285222,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.47292737260692574,
+      "n_strategic": 0.5868116450368293,
       "bbi_pool": 53.957,
       "bbi_dfs": 49.5587,
       "pool_decomp": {
@@ -2145,7 +2445,8 @@
       "zeus_pool": 52.784,
       "zeus_dfs": 48.3857,
       "zeus_rank_pool": 34,
-      "zeus_rank_dfs": 42
+      "zeus_rank_dfs": 42,
+      "hermes_own": 13.33
     },
     {
       "dg_id": 26096,
@@ -2166,11 +2467,19 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.89,
       "p_win": 0.00992,
       "p_top5": 0.06101,
       "p_top10": 0.13459,
       "p_top20": 0.28736,
+      "n_talent": 0.6653249261193054,
+      "n_courseFit": 0.5947952796233201,
+      "n_form": 0.23258312309770787,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9381443298969073,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5386143888786414,
+      "n_strategic": 0.5068397053665381,
       "bbi_pool": 53.3,
       "bbi_dfs": 49.2464,
       "pool_decomp": {
@@ -2208,7 +2517,8 @@
       "zeus_pool": 53.449,
       "zeus_dfs": 49.3954,
       "zeus_rank_pool": 32,
-      "zeus_rank_dfs": 39
+      "zeus_rank_dfs": 39,
+      "hermes_own": 7.89
     },
     {
       "dg_id": 10419,
@@ -2230,11 +2540,19 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 5.43,
       "p_win": 0.00863,
       "p_top5": 0.05414,
       "p_top10": 0.12136,
       "p_top20": 0.271,
+      "n_talent": 0.6568512976411639,
+      "n_courseFit": 0.6110485986724362,
+      "n_form": 0.2080502818791147,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9243986254295532,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5982817416578866,
+      "n_strategic": 0.5113995089442301,
       "bbi_pool": 52.9994,
       "bbi_dfs": 49.4722,
       "pool_decomp": {
@@ -2272,7 +2590,8 @@
       "zeus_pool": 53.0811,
       "zeus_dfs": 49.5539,
       "zeus_rank_pool": 33,
-      "zeus_rank_dfs": 38
+      "zeus_rank_dfs": 38,
+      "hermes_own": 5.43
     },
     {
       "dg_id": 11889,
@@ -2291,11 +2610,19 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 8.95,
       "p_win": 0.00555,
       "p_top5": 0.0383,
       "p_top10": 0.09058,
       "p_top20": 0.21978,
+      "n_talent": 0.465886650804042,
+      "n_courseFit": 0.8035126214830861,
+      "n_form": 0.15104366147634332,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8213058419243986,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9649068886391715,
+      "n_strategic": 0.5289372150122764,
       "bbi_pool": 52.3734,
       "bbi_dfs": 52.5736,
       "pool_decomp": {
@@ -2333,7 +2660,8 @@
       "zeus_pool": 52.6521,
       "zeus_dfs": 52.8523,
       "zeus_rank_pool": 35,
-      "zeus_rank_dfs": 24
+      "zeus_rank_dfs": 24,
+      "hermes_own": 8.95
     },
     {
       "dg_id": 17606,
@@ -2354,11 +2682,19 @@
         "PGA 2025"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 4.06,
       "p_win": 0.006,
       "p_top5": 0.04509,
       "p_top10": 0.10363,
       "p_top20": 0.23697,
+      "n_talent": 0.45435906313841484,
+      "n_courseFit": 0.7571221441808267,
+      "n_form": 0.17494996404778415,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8075601374570447,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.827946528486475,
+      "n_strategic": 0.6713433882848124,
       "bbi_pool": 51.9273,
       "bbi_dfs": 51.0594,
       "pool_decomp": {
@@ -2396,7 +2732,8 @@
       "zeus_pool": 52.5588,
       "zeus_dfs": 51.6909,
       "zeus_rank_pool": 37,
-      "zeus_rank_dfs": 30
+      "zeus_rank_dfs": 30,
+      "hermes_own": 4.06
     },
     {
       "dg_id": 22760,
@@ -2414,11 +2751,19 @@
         "PGA 2025"
       ],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 3.56,
       "p_win": 0.00603,
       "p_top5": 0.04679,
       "p_top10": 0.10695,
       "p_top20": 0.24155,
+      "n_talent": 0.42853798962684136,
+      "n_courseFit": 0.7551163876803236,
+      "n_form": 0.18099804920826848,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7869415807560137,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9539447592848395,
+      "n_strategic": 0.615924237109786,
       "bbi_pool": 51.305,
       "bbi_dfs": 51.9099,
       "pool_decomp": {
@@ -2456,7 +2801,8 @@
       "zeus_pool": 51.3143,
       "zeus_dfs": 51.9192,
       "zeus_rank_pool": 39,
-      "zeus_rank_dfs": 28
+      "zeus_rank_dfs": 28,
+      "hermes_own": 3.56
     },
     {
       "dg_id": 27194,
@@ -2475,11 +2821,19 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 1.63,
       "p_win": 0.0058,
       "p_top5": 0.04325,
       "p_top10": 0.10152,
       "p_top20": 0.23923,
+      "n_talent": 0.5540118988058746,
+      "n_courseFit": 0.7164284268946725,
+      "n_form": 0.17051529979759925,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8694158075601374,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5937700260475677,
+      "n_strategic": 0.3504033672395651,
       "bbi_pool": 51.226,
       "bbi_dfs": 47.5683,
       "pool_decomp": {
@@ -2517,7 +2871,8 @@
       "zeus_pool": 51.6946,
       "zeus_dfs": 48.0369,
       "zeus_rank_pool": 38,
-      "zeus_rank_dfs": 44
+      "zeus_rank_dfs": 44,
+      "hermes_own": 1.63
     },
     {
       "dg_id": 25569,
@@ -2536,11 +2891,19 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 5.41,
       "p_win": 0.00915,
       "p_top5": 0.06112,
       "p_top10": 0.1355,
       "p_top20": 0.29412,
+      "n_talent": 0.5172998045712737,
+      "n_courseFit": 0.5812583651565182,
+      "n_form": 0.23370401880265984,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.852233676975945,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8048917771068923,
+      "n_strategic": 0.653805682216766,
       "bbi_pool": 50.7742,
       "bbi_dfs": 50.375,
       "pool_decomp": {
@@ -2578,7 +2941,8 @@
       "zeus_pool": 50.1582,
       "zeus_dfs": 49.759,
       "zeus_rank_pool": 41,
-      "zeus_rank_dfs": 36
+      "zeus_rank_dfs": 36,
+      "hermes_own": 5.41
     },
     {
       "dg_id": 17780,
@@ -2598,11 +2962,19 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 7.31,
       "p_win": 0.0061,
       "p_top5": 0.03964,
       "p_top10": 0.0939,
       "p_top20": 0.21692,
+      "n_talent": 0.3411919212093887,
+      "n_courseFit": 0.8494582497804285,
+      "n_form": 0.15699752507234468,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6804123711340206,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.976958235951226,
+      "n_strategic": 0.6029463346194318,
       "bbi_pool": 50.2598,
       "bbi_dfs": 51.182,
       "pool_decomp": {
@@ -2640,7 +3012,8 @@
       "zeus_pool": 50.0358,
       "zeus_dfs": 50.958,
       "zeus_rank_pool": 42,
-      "zeus_rank_dfs": 33
+      "zeus_rank_dfs": 33,
+      "hermes_own": 7.31
     },
     {
       "dg_id": 17538,
@@ -2662,11 +3035,19 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 9.54,
       "p_win": 0.0052,
       "p_top5": 0.0369,
       "p_top10": 0.08547,
       "p_top20": 0.20492,
+      "n_talent": 0.3833223302949164,
+      "n_courseFit": 0.8583409715511281,
+      "n_form": 0.14252735935661107,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7285223367697594,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7139901859531105,
+      "n_strategic": 0.43703963521571376,
       "bbi_pool": 49.9618,
       "bbi_dfs": 47.8282,
       "pool_decomp": {
@@ -2704,7 +3085,8 @@
       "zeus_pool": 50.3027,
       "zeus_dfs": 48.1691,
       "zeus_rank_pool": 40,
-      "zeus_rank_dfs": 43
+      "zeus_rank_dfs": 43,
+      "hermes_own": 9.54
     },
     {
       "dg_id": 21407,
@@ -2720,11 +3102,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 7.8,
       "p_win": 0.00667,
       "p_top5": 0.04587,
       "p_top10": 0.10428,
       "p_top20": 0.23256,
+      "n_talent": 0.4421289980904833,
+      "n_courseFit": 0.6648454491382362,
+      "n_form": 0.1766945981168823,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8041237113402062,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9111997973571894,
+      "n_strategic": 0.5492809540512101,
       "bbi_pool": 49.1022,
       "bbi_dfs": 49.6987,
       "pool_decomp": {
@@ -2762,7 +3152,8 @@
       "zeus_pool": 49.1022,
       "zeus_dfs": 49.6987,
       "zeus_rank_pool": 43,
-      "zeus_rank_dfs": 37
+      "zeus_rank_dfs": 37,
+      "hermes_own": 7.8
     },
     {
       "dg_id": 28635,
@@ -2780,11 +3171,19 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 4.31,
       "p_win": 0.00523,
       "p_top5": 0.03897,
       "p_top10": 0.09434,
       "p_top20": 0.22676,
+      "n_talent": 0.5158119046004737,
+      "n_courseFit": 0.6056809209097157,
+      "n_form": 0.15684461352599824,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.845360824742268,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.678639567171084,
+      "n_strategic": 0.5436688881094353,
       "bbi_pool": 48.6085,
       "bbi_dfs": 46.612,
       "pool_decomp": {
@@ -2822,7 +3221,8 @@
       "zeus_pool": 48.5924,
       "zeus_dfs": 46.5959,
       "zeus_rank_pool": 45,
-      "zeus_rank_dfs": 49
+      "zeus_rank_dfs": 49,
+      "hermes_own": 4.31
     },
     {
       "dg_id": 25362,
@@ -2838,11 +3238,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 8.27,
       "p_win": 0.00553,
       "p_top5": 0.03812,
       "p_top10": 0.09132,
       "p_top20": 0.21786,
+      "n_talent": 0.4354001056289033,
+      "n_courseFit": 0.669208311954631,
+      "n_form": 0.15198637392037173,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7972508591065293,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8172385005785565,
+      "n_strategic": 0.5766397755173623,
       "bbi_pool": 48.4357,
       "bbi_dfs": 48.0242,
       "pool_decomp": {
@@ -2880,7 +3288,8 @@
       "zeus_pool": 48.4357,
       "zeus_dfs": 48.0242,
       "zeus_rank_pool": 46,
-      "zeus_rank_dfs": 45
+      "zeus_rank_dfs": 45,
+      "hermes_own": 8.27
     },
     {
       "dg_id": 29433,
@@ -2898,11 +3307,19 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 5.77,
       "p_win": 0.00962,
       "p_top5": 0.06079,
       "p_top10": 0.13477,
       "p_top20": 0.28571,
+      "n_talent": 0.612580865961458,
+      "n_courseFit": 0.4301148622569017,
+      "n_form": 0.2325759311620821,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9003436426116839,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6357979839328656,
+      "n_strategic": 0.49386180287618386,
       "bbi_pool": 48.2944,
       "bbi_dfs": 46.4379,
       "pool_decomp": {
@@ -2940,7 +3357,8 @@
       "zeus_pool": 47.3647,
       "zeus_dfs": 45.5082,
       "zeus_rank_pool": 50,
-      "zeus_rank_dfs": 52
+      "zeus_rank_dfs": 52,
+      "hermes_own": 5.77
     },
     {
       "dg_id": 23014,
@@ -2959,11 +3377,19 @@
         "WF 2024"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.78,
       "p_win": 0.00833,
       "p_top5": 0.0484,
       "p_top10": 0.11013,
       "p_top20": 0.24631,
+      "n_talent": 0.5170966894895414,
+      "n_courseFit": 0.564160155201237,
+      "n_form": 0.18758293952152116,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8487972508591066,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6559833486757539,
+      "n_strategic": 0.5173623290073659,
       "bbi_pool": 48.2393,
       "bbi_dfs": 46.3778,
       "pool_decomp": {
@@ -3001,7 +3427,8 @@
       "zeus_pool": 48.3621,
       "zeus_dfs": 46.5006,
       "zeus_rank_pool": 47,
-      "zeus_rank_dfs": 50
+      "zeus_rank_dfs": 50,
+      "hermes_own": 4.78
     },
     {
       "dg_id": 20706,
@@ -3021,11 +3448,19 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 2.61,
       "p_win": 0.00348,
       "p_top5": 0.02769,
       "p_top10": 0.06817,
       "p_top20": 0.17637,
+      "n_talent": 0.38090429758909944,
+      "n_courseFit": 0.815637949923734,
+      "n_form": 0.1102679238928041,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7216494845360825,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8028832192215501,
+      "n_strategic": 0.40652402665731324,
       "bbi_pool": 48.1417,
       "bbi_dfs": 47.0934,
       "pool_decomp": {
@@ -3063,7 +3498,8 @@
       "zeus_pool": 48.6354,
       "zeus_dfs": 47.5871,
       "zeus_rank_pool": 44,
-      "zeus_rank_dfs": 46
+      "zeus_rank_dfs": 46,
+      "hermes_own": 2.61
     },
     {
       "dg_id": 14502,
@@ -3084,11 +3520,19 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 3.14,
       "p_win": 0.00665,
       "p_top5": 0.04625,
       "p_top10": 0.10741,
       "p_top20": 0.24331,
+      "n_talent": 0.41283029561168716,
+      "n_courseFit": 0.6454785318584615,
+      "n_form": 0.18149360210681212,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7525773195876289,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8848205658971362,
+      "n_strategic": 0.6166257453525079,
       "bbi_pool": 48.0718,
       "bbi_dfs": 48.7033,
       "pool_decomp": {
@@ -3126,7 +3570,8 @@
       "zeus_pool": 48.1164,
       "zeus_dfs": 48.7479,
       "zeus_rank_pool": 48,
-      "zeus_rank_dfs": 41
+      "zeus_rank_dfs": 41,
+      "hermes_own": 3.14
     },
     {
       "dg_id": 13126,
@@ -3148,11 +3593,19 @@
         "PGA 2025"
       ],
       "salary": 7100,
-      "proj_ownership": null,
+      "proj_ownership": 2.73,
       "p_win": 0.00403,
       "p_top5": 0.0321,
       "p_top10": 0.08045,
       "p_top20": 0.20492,
+      "n_talent": 0.5441721073263864,
+      "n_courseFit": 0.5897617126470186,
+      "n_form": 0.13139219041033653,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.859106529209622,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5459858367314877,
+      "n_strategic": 0.5128025254296739,
       "bbi_pool": 47.8812,
       "bbi_dfs": 44.3863,
       "pool_decomp": {
@@ -3190,7 +3643,8 @@
       "zeus_pool": 47.9024,
       "zeus_dfs": 44.4075,
       "zeus_rank_pool": 49,
-      "zeus_rank_dfs": 55
+      "zeus_rank_dfs": 55,
+      "hermes_own": 2.73
     },
     {
       "dg_id": 21554,
@@ -3213,11 +3667,19 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.31,
       "p_win": 0.00398,
       "p_top5": 0.03157,
       "p_top10": 0.07874,
       "p_top20": 0.19493,
+      "n_talent": 0.4030164729014609,
+      "n_courseFit": 0.6512440162539875,
+      "n_form": 0.12851606948304173,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7457044673539518,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8993867003896168,
+      "n_strategic": 0.535601543318134,
       "bbi_pool": 46.3143,
       "bbi_dfs": 47.0057,
       "pool_decomp": {
@@ -3255,7 +3717,8 @@
       "zeus_pool": 46.3886,
       "zeus_dfs": 47.08,
       "zeus_rank_pool": 51,
-      "zeus_rank_dfs": 48
+      "zeus_rank_dfs": 48,
+      "hermes_own": 2.31
     },
     {
       "dg_id": 8825,
@@ -3279,11 +3742,19 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 2.27,
       "p_win": 0.00443,
       "p_top5": 0.03583,
       "p_top10": 0.08598,
       "p_top20": 0.20921,
+      "n_talent": 0.4173129783305979,
+      "n_courseFit": 0.6097856870347355,
+      "n_form": 0.14222023573887901,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7663230240549828,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7685014342430416,
+      "n_strategic": 0.44335320940021045,
       "bbi_pool": 45.4045,
       "bbi_dfs": 44.9022,
       "pool_decomp": {
@@ -3321,7 +3792,8 @@
       "zeus_pool": 45.0484,
       "zeus_dfs": 44.5461,
       "zeus_rank_pool": 54,
-      "zeus_rank_dfs": 54
+      "zeus_rank_dfs": 54,
+      "hermes_own": 2.27
     },
     {
       "dg_id": 29925,
@@ -3337,11 +3809,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.57,
       "p_win": 0.00487,
       "p_top5": 0.0339,
       "p_top10": 0.07937,
       "p_top20": 0.19194,
+      "n_talent": 0.37995459420934224,
+      "n_courseFit": 0.6514608973679753,
+      "n_form": 0.13142202696759822,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7147766323024055,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8325918888390775,
+      "n_strategic": 0.5078919677306208,
       "bbi_pool": 45.368,
       "bbi_dfs": 45.5853,
       "pool_decomp": {
@@ -3379,7 +3859,8 @@
       "zeus_pool": 45.368,
       "zeus_dfs": 45.5853,
       "zeus_rank_pool": 52,
-      "zeus_rank_dfs": 51
+      "zeus_rank_dfs": 51,
+      "hermes_own": 6.57
     },
     {
       "dg_id": 27819,
@@ -3395,11 +3876,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.45,
       "p_win": 0.00477,
       "p_top5": 0.03547,
       "p_top10": 0.08258,
       "p_top20": 0.19881,
+      "n_talent": 0.3616380098687974,
+      "n_courseFit": 0.6527317223299659,
+      "n_form": 0.13716137976532639,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6907216494845361,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 1.0,
+      "n_strategic": 0.5096457383374255,
       "bbi_pool": 45.3223,
       "bbi_dfs": 47.3745,
       "pool_decomp": {
@@ -3437,7 +3926,8 @@
       "zeus_pool": 45.3223,
       "zeus_dfs": 47.3745,
       "zeus_rank_pool": 53,
-      "zeus_rank_dfs": 47
+      "zeus_rank_dfs": 47,
+      "hermes_own": 2.45
     },
     {
       "dg_id": 19870,
@@ -3460,11 +3950,19 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 4.19,
       "p_win": 0.00217,
       "p_top5": 0.01983,
       "p_top10": 0.05376,
       "p_top20": 0.14771,
+      "n_talent": 0.40612948754084227,
+      "n_courseFit": 0.7097625526108691,
+      "n_form": 0.0833126396230736,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7491408934707904,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7124363126000538,
+      "n_strategic": 0.27218519817607856,
       "bbi_pool": 44.89,
       "bbi_dfs": 43.2596,
       "pool_decomp": {
@@ -3502,7 +4000,8 @@
       "zeus_pool": 44.4748,
       "zeus_dfs": 42.8444,
       "zeus_rank_pool": 56,
-      "zeus_rank_dfs": 57
+      "zeus_rank_dfs": 57,
+      "hermes_own": 4.19
     },
     {
       "dg_id": 17543,
@@ -3522,11 +4021,19 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 3.97,
       "p_win": 0.00305,
       "p_top5": 0.02293,
       "p_top10": 0.06083,
       "p_top20": 0.15949,
+      "n_talent": 0.4398570809140812,
+      "n_courseFit": 0.6143301374278375,
+      "n_form": 0.09607280467473527,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8006872852233676,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8718646290962786,
+      "n_strategic": 0.303402314977201,
       "bbi_pool": 44.6204,
       "bbi_dfs": 44.9423,
       "pool_decomp": {
@@ -3564,7 +4071,8 @@
       "zeus_pool": 44.6684,
       "zeus_dfs": 44.9903,
       "zeus_rank_pool": 55,
-      "zeus_rank_dfs": 53
+      "zeus_rank_dfs": 53,
+      "hermes_own": 3.97
     },
     {
       "dg_id": 14704,
@@ -3584,11 +4092,19 @@
         "WF 2024"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 2.0,
       "p_win": 0.00172,
       "p_top5": 0.01437,
       "p_top10": 0.04175,
       "p_top20": 0.12723,
+      "n_talent": 0.4256302762325267,
+      "n_courseFit": 0.6157468157814288,
+      "n_form": 0.06186108595989161,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7800687285223368,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6863549800004946,
+      "n_strategic": 0.3142756927393897,
       "bbi_pool": 43.0645,
       "bbi_dfs": 41.5153,
       "pool_decomp": {
@@ -3626,7 +4142,8 @@
       "zeus_pool": 43.5929,
       "zeus_dfs": 42.0437,
       "zeus_rank_pool": 57,
-      "zeus_rank_dfs": 59
+      "zeus_rank_dfs": 59,
+      "hermes_own": 2.0
     },
     {
       "dg_id": 7399,
@@ -3650,11 +4167,19 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 2.21,
       "p_win": 0.00158,
       "p_top5": 0.0154,
       "p_top10": 0.04388,
       "p_top20": 0.1261,
+      "n_talent": 0.29620002496941494,
+      "n_courseFit": 0.729159544440776,
+      "n_form": 0.06562854283924482,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6185567010309279,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8326876265524371,
+      "n_strategic": 0.45562960364784294,
       "bbi_pool": 42.8071,
       "bbi_dfs": 43.0123,
       "pool_decomp": {
@@ -3692,7 +4217,8 @@
       "zeus_pool": 43.3432,
       "zeus_dfs": 43.5484,
       "zeus_rank_pool": 58,
-      "zeus_rank_dfs": 56
+      "zeus_rank_dfs": 56,
+      "hermes_own": 2.21
     },
     {
       "dg_id": 17488,
@@ -3714,11 +4240,19 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.11,
       "p_win": 0.00263,
       "p_top5": 0.02226,
       "p_top10": 0.05744,
       "p_top20": 0.15152,
+      "n_talent": 0.2343692910183961,
+      "n_courseFit": 0.7518978311852801,
+      "n_form": 0.0905449108102411,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.4982817869415807,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9353523940405616,
+      "n_strategic": 0.3079621185548931,
       "bbi_pool": 41.088,
       "bbi_dfs": 42.7487,
       "pool_decomp": {
@@ -3756,7 +4290,8 @@
       "zeus_pool": 40.8125,
       "zeus_dfs": 42.4732,
       "zeus_rank_pool": 59,
-      "zeus_rank_dfs": 58
+      "zeus_rank_dfs": 58,
+      "hermes_own": 4.11
     },
     {
       "dg_id": 16283,
@@ -3779,11 +4314,19 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 2.19,
       "p_win": 0.00303,
       "p_top5": 0.02441,
       "p_top10": 0.06361,
       "p_top20": 0.1642,
+      "n_talent": 0.33152281545300405,
+      "n_courseFit": 0.5330647515645411,
+      "n_form": 0.10116173645965641,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6666666666666666,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9367661557664051,
+      "n_strategic": 0.38582953349701865,
       "bbi_pool": 40.1475,
       "bbi_dfs": 42.3006,
       "pool_decomp": {
@@ -3821,7 +4364,8 @@
       "zeus_pool": 39.6146,
       "zeus_dfs": 41.7677,
       "zeus_rank_pool": 60,
-      "zeus_rank_dfs": 60
+      "zeus_rank_dfs": 60,
+      "hermes_own": 2.19
     },
     {
       "dg_id": 13508,
@@ -3843,11 +4387,19 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 2.26,
       "p_win": 0.00147,
       "p_top5": 0.01085,
       "p_top10": 0.03173,
       "p_top20": 0.09533,
+      "n_talent": 0.11933739688570463,
+      "n_courseFit": 0.8694034480372341,
+      "n_form": 0.04474590094295097,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.281786941580756,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9138895183514744,
+      "n_strategic": 0.3525078919677307,
       "bbi_pool": 38.6305,
       "bbi_dfs": 40.2528,
       "pool_decomp": {
@@ -3885,7 +4437,8 @@
       "zeus_pool": 38.7333,
       "zeus_dfs": 40.3556,
       "zeus_rank_pool": 62,
-      "zeus_rank_dfs": 61
+      "zeus_rank_dfs": 61,
+      "hermes_own": 2.26
     },
     {
       "dg_id": 22833,
@@ -3904,11 +4457,19 @@
         "PGA 2025"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.42,
       "p_win": 0.00102,
       "p_top5": 0.009,
       "p_top10": 0.02617,
       "p_top20": 0.08177,
+      "n_talent": 0.21265900269179752,
+      "n_courseFit": 0.747564200966831,
+      "n_form": 0.035224285321578175,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.45017182130584193,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7664986870362497,
+      "n_strategic": 0.2830585759382673,
       "bbi_pool": 38.2404,
       "bbi_dfs": 38.3038,
       "pool_decomp": {
@@ -3946,7 +4507,8 @@
       "zeus_pool": 38.8142,
       "zeus_dfs": 38.8776,
       "zeus_rank_pool": 61,
-      "zeus_rank_dfs": 63
+      "zeus_rank_dfs": 63,
+      "hermes_own": 1.42
     },
     {
       "dg_id": 27900,
@@ -3962,11 +4524,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.56,
       "p_win": 0.00405,
       "p_top5": 0.02828,
       "p_top10": 0.06831,
       "p_top20": 0.17007,
+      "n_talent": 0.16961261669585956,
+      "n_courseFit": 0.6356898168003501,
+      "n_form": 0.11109844377312726,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.3676975945017182,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.833251415308891,
+      "n_strategic": 0.5724307260610313,
       "bbi_pool": 37.6475,
       "bbi_dfs": 39.4323,
       "pool_decomp": {
@@ -4004,7 +4574,8 @@
       "zeus_pool": 37.6475,
       "zeus_dfs": 39.4323,
       "zeus_rank_pool": 64,
-      "zeus_rank_dfs": 62
+      "zeus_rank_dfs": 62,
+      "hermes_own": 6.56
     },
     {
       "dg_id": 11676,
@@ -4028,11 +4599,19 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.48,
       "p_win": 0.00188,
       "p_top5": 0.01559,
       "p_top10": 0.04026,
       "p_top20": 0.11299,
+      "n_talent": 0.20083681441017767,
+      "n_courseFit": 0.7216244745556015,
+      "n_form": 0.06064212186813371,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.4261168384879725,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.789460951448072,
+      "n_strategic": 0.2300947036127675,
       "bbi_pool": 37.6179,
       "bbi_dfs": 38.1859,
       "pool_decomp": {
@@ -4070,7 +4649,8 @@
       "zeus_pool": 37.7148,
       "zeus_dfs": 38.2828,
       "zeus_rank_pool": 63,
-      "zeus_rank_dfs": 64
+      "zeus_rank_dfs": 64,
+      "hermes_own": 4.48
     },
     {
       "dg_id": 11049,
@@ -4092,11 +4672,19 @@
         "PGA 2017"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.76,
       "p_win": 0.00122,
       "p_top5": 0.01005,
       "p_top10": 0.02976,
       "p_top20": 0.09083,
+      "n_talent": 0.162553055763063,
+      "n_courseFit": 0.7476716932008053,
+      "n_form": 0.04124514885686643,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.3573883161512027,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7491131368155803,
+      "n_strategic": 0.23395299894773766,
       "bbi_pool": 36.3051,
       "bbi_dfs": 36.5682,
       "pool_decomp": {
@@ -4134,7 +4722,8 @@
       "zeus_pool": 36.7804,
       "zeus_dfs": 37.0435,
       "zeus_rank_pool": 65,
-      "zeus_rank_dfs": 66
+      "zeus_rank_dfs": 66,
+      "hermes_own": 1.76
     },
     {
       "dg_id": 24956,
@@ -4150,11 +4739,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 1.08,
       "p_win": 0.001,
       "p_top5": 0.00914,
       "p_top10": 0.02599,
       "p_top20": 0.07918,
+      "n_talent": 0.19456032058504968,
+      "n_courseFit": 0.6141078598871159,
+      "n_form": 0.03505998138077796,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.40893470790378006,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7798517554696236,
+      "n_strategic": 0.37179936864258156,
       "bbi_pool": 34.9239,
       "bbi_dfs": 35.9836,
       "pool_decomp": {
@@ -4192,7 +4789,8 @@
       "zeus_pool": 34.9239,
       "zeus_dfs": 35.9836,
       "zeus_rank_pool": 66,
-      "zeus_rank_dfs": 68
+      "zeus_rank_dfs": 68,
+      "hermes_own": 1.08
     },
     {
       "dg_id": 15556,
@@ -4216,11 +4814,19 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.67,
       "p_win": 0.00145,
       "p_top5": 0.01333,
       "p_top10": 0.03643,
       "p_top20": 0.10616,
+      "n_talent": 0.25253316266068626,
+      "n_courseFit": 0.5278158016803913,
+      "n_form": 0.05332506688599901,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.5395189003436426,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7728196431312636,
+      "n_strategic": 0.21185548930199932,
       "bbi_pool": 34.9023,
       "bbi_dfs": 35.9185,
       "pool_decomp": {
@@ -4258,7 +4864,8 @@
       "zeus_pool": 34.5699,
       "zeus_dfs": 35.5861,
       "zeus_rank_pool": 67,
-      "zeus_rank_dfs": 69
+      "zeus_rank_dfs": 69,
+      "hermes_own": 1.67
     },
     {
       "dg_id": 28309,
@@ -4276,11 +4883,19 @@
         "WF 2023"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 5.31,
       "p_win": 0.00758,
       "p_top5": 0.05003,
       "p_top10": 0.11111,
       "p_top20": 0.25189,
+      "n_talent": 0.43259442904599565,
+      "n_courseFit": 0.0,
+      "n_form": 0.1898974557479665,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7903780068728522,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9297716804129647,
+      "n_strategic": 0.7018589968432128,
       "bbi_pool": 34.7701,
       "bbi_dfs": 39.2462,
       "pool_decomp": {
@@ -4318,7 +4933,8 @@
       "zeus_pool": 32.6166,
       "zeus_dfs": 37.0927,
       "zeus_rank_pool": 69,
-      "zeus_rank_dfs": 65
+      "zeus_rank_dfs": 65,
+      "hermes_own": 5.31
     },
     {
       "dg_id": 23475,
@@ -4336,11 +4952,19 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 1.85,
       "p_win": 0.00292,
       "p_top5": 0.02412,
       "p_top10": 0.06098,
       "p_top20": 0.15723,
+      "n_talent": 0.32908042090558837,
+      "n_courseFit": 0.25519129064692464,
+      "n_form": 0.09709761165663425,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6597938144329897,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9063867177506013,
+      "n_strategic": 0.4907050157839355,
       "bbi_pool": 34.0379,
       "bbi_dfs": 37.3932,
       "pool_decomp": {
@@ -4378,7 +5002,8 @@
       "zeus_pool": 32.6474,
       "zeus_dfs": 36.0027,
       "zeus_rank_pool": 68,
-      "zeus_rank_dfs": 67
+      "zeus_rank_dfs": 67,
+      "hermes_own": 1.85
     },
     {
       "dg_id": 15575,
@@ -4400,11 +5025,19 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.28,
       "p_win": 0.00095,
       "p_top5": 0.00847,
       "p_top10": 0.02521,
       "p_top20": 0.07819,
+      "n_talent": 0.12322441229113265,
+      "n_courseFit": 0.5738982138544805,
+      "n_form": 0.033427900518860375,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.28865979381443296,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6480946776704852,
+      "n_strategic": 0.35145562960364785,
       "bbi_pool": 31.1221,
       "bbi_dfs": 31.5572,
       "pool_decomp": {
@@ -4442,7 +5075,8 @@
       "zeus_pool": 31.3507,
       "zeus_dfs": 31.7858,
       "zeus_rank_pool": 70,
-      "zeus_rank_dfs": 70
+      "zeus_rank_dfs": 70,
+      "hermes_own": 1.28
     },
     {
       "dg_id": 15980,
@@ -4460,11 +5094,19 @@
         "WF 2023"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00042,
       "p_top5": 0.00558,
       "p_top10": 0.01772,
       "p_top20": 0.06254,
+      "n_talent": 0.1753235349606003,
+      "n_courseFit": 0.4682565186703795,
+      "n_form": 0.020332329988680193,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.3848797250859106,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5897455931261173,
+      "n_strategic": 0.2735882146615223,
       "bbi_pool": 29.7229,
       "bbi_dfs": 29.726,
       "pool_decomp": {
@@ -4502,7 +5144,8 @@
       "zeus_pool": 31.1564,
       "zeus_dfs": 31.1595,
       "zeus_rank_pool": 71,
-      "zeus_rank_dfs": 71
+      "zeus_rank_dfs": 71,
+      "hermes_own": 0.79
     },
     {
       "dg_id": 18628,
@@ -4520,11 +5163,19 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00012,
       "p_top5": 0.00142,
       "p_top10": 0.0058,
       "p_top20": 0.0262,
+      "n_talent": 0.0,
+      "n_courseFit": 0.5869340784284117,
+      "n_form": 0.0,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.0,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.30556428681076925,
+      "n_strategic": 0.0,
       "bbi_pool": 22.9413,
       "bbi_dfs": 20.7677,
       "pool_decomp": {
@@ -4562,7 +5213,8 @@
       "zeus_pool": 24.2567,
       "zeus_dfs": 22.0831,
       "zeus_rank_pool": 72,
-      "zeus_rank_dfs": 72
+      "zeus_rank_dfs": 72,
+      "hermes_own": 0.79
     }
   ],
   "players": [
@@ -4588,11 +5240,19 @@
         "PGA 2025"
       ],
       "salary": 11700,
-      "proj_ownership": null,
+      "proj_ownership": 35.35,
       "p_win": 0.11547,
       "p_top5": 0.34014,
       "p_top10": 0.5,
       "p_top20": 0.69444,
+      "n_talent": 1.0,
+      "n_courseFit": 1.0,
+      "n_form": 1.0,
+      "n_cutSafety": 0.5,
+      "n_leverage": 1.0,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.01970014839072848,
+      "n_strategic": 0.9449316029463346,
       "bbi_pool": 88.8167,
       "bbi_dfs": 80.8877,
       "pool_decomp": {
@@ -4630,7 +5290,8 @@
       "zeus_pool": 89.3602,
       "zeus_dfs": 81.4312,
       "zeus_rank_pool": 1,
-      "zeus_rank_dfs": 1
+      "zeus_rank_dfs": 1,
+      "hermes_own": 35.35
     },
     {
       "dg_id": 19895,
@@ -4653,11 +5314,19 @@
         "PGA 2025"
       ],
       "salary": 10000,
-      "proj_ownership": null,
+      "proj_ownership": 31.68,
       "p_win": 0.07225,
       "p_top5": 0.25575,
       "p_top10": 0.40816,
       "p_top20": 0.6135,
+      "n_talent": 0.9218964502772808,
+      "n_courseFit": 0.8694860452348996,
+      "n_form": 0.7908264097162618,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9896907216494846,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.35328762216650517,
+      "n_strategic": 1.0,
       "bbi_pool": 80.0465,
       "bbi_dfs": 74.4144,
       "pool_decomp": {
@@ -4695,7 +5364,8 @@
       "zeus_pool": 80.1513,
       "zeus_dfs": 74.5192,
       "zeus_rank_pool": 2,
-      "zeus_rank_dfs": 2
+      "zeus_rank_dfs": 2,
+      "hermes_own": 31.68
     },
     {
       "dg_id": 26651,
@@ -4715,11 +5385,19 @@
         "PGA 2025"
       ],
       "salary": 10100,
-      "proj_ownership": null,
+      "proj_ownership": 29.91,
       "p_win": 0.07943,
       "p_top5": 0.26738,
       "p_top10": 0.41841,
       "p_top20": 0.61728,
+      "n_talent": 0.9934655455495401,
+      "n_courseFit": 0.642727648252371,
+      "n_form": 0.8166102938614855,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9965635738831615,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.3538213815095006,
+      "n_strategic": 0.8849526481936163,
       "bbi_pool": 76.3131,
       "bbi_dfs": 71.9021,
       "pool_decomp": {
@@ -4757,7 +5435,8 @@
       "zeus_pool": 76.0907,
       "zeus_dfs": 71.6797,
       "zeus_rank_pool": 3,
-      "zeus_rank_dfs": 3
+      "zeus_rank_dfs": 3,
+      "hermes_own": 29.91
     },
     {
       "dg_id": 17646,
@@ -4778,11 +5457,19 @@
         "PGA 2025"
       ],
       "salary": 9900,
-      "proj_ownership": null,
+      "proj_ownership": 19.12,
       "p_win": 0.04521,
       "p_top5": 0.19342,
       "p_top10": 0.33333,
       "p_top20": 0.54348,
+      "n_talent": 0.960203552930472,
+      "n_courseFit": 0.6674752621962543,
+      "n_form": 0.6279775199962513,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9931271477663229,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.17688267828983215,
+      "n_strategic": 0.8309365135040337,
       "bbi_pool": 71.0337,
       "bbi_dfs": 63.055,
       "pool_decomp": {
@@ -4820,7 +5507,8 @@
       "zeus_pool": 70.9908,
       "zeus_dfs": 63.0121,
       "zeus_rank_pool": 4,
-      "zeus_rank_dfs": 4
+      "zeus_rank_dfs": 4,
+      "hermes_own": 19.12
     },
     {
       "dg_id": 14609,
@@ -4841,11 +5529,19 @@
         "PGA 2025"
       ],
       "salary": 9400,
-      "proj_ownership": null,
+      "proj_ownership": 15.05,
       "p_win": 0.03177,
       "p_top5": 0.1506,
       "p_top10": 0.27933,
       "p_top20": 0.48544,
+      "n_talent": 0.8018790351982841,
+      "n_courseFit": 0.7729758332209684,
+      "n_form": 0.5142073267097326,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9759450171821306,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.20082867690870104,
+      "n_strategic": 0.8824973693440898,
       "bbi_pool": 68.0234,
       "bbi_dfs": 59.8593,
       "pool_decomp": {
@@ -4883,7 +5579,8 @@
       "zeus_pool": 68.5016,
       "zeus_dfs": 60.3375,
       "zeus_rank_pool": 5,
-      "zeus_rank_dfs": 5
+      "zeus_rank_dfs": 5,
+      "hermes_own": 15.05
     },
     {
       "dg_id": 12294,
@@ -4906,11 +5603,19 @@
         "PGA 2025"
       ],
       "salary": 9800,
-      "proj_ownership": null,
+      "proj_ownership": 12.99,
       "p_win": 0.02865,
       "p_top5": 0.14025,
       "p_top10": 0.26316,
       "p_top20": 0.46512,
+      "n_talent": 0.8047732122021054,
+      "n_courseFit": 0.7906574891493829,
+      "n_form": 0.48225348380020366,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.979381443298969,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.02934248750120987,
+      "n_strategic": 0.7323746054016135,
       "bbi_pool": 66.6382,
       "bbi_dfs": 56.4445,
       "pool_decomp": {
@@ -4948,7 +5653,8 @@
       "zeus_pool": 67.0972,
       "zeus_dfs": 56.9035,
       "zeus_rank_pool": 6,
-      "zeus_rank_dfs": 12
+      "zeus_rank_dfs": 12,
+      "hermes_own": 12.99
     },
     {
       "dg_id": 23950,
@@ -4966,11 +5672,19 @@
         "PGA 2025"
       ],
       "salary": 9600,
-      "proj_ownership": null,
+      "proj_ownership": 27.42,
       "p_win": 0.04212,
       "p_top5": 0.17513,
       "p_top10": 0.30488,
       "p_top20": 0.50251,
+      "n_talent": 0.8525632455344758,
+      "n_courseFit": 0.5993238754090939,
+      "n_form": 0.5725579442087559,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9862542955326461,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.2737119063457141,
+      "n_strategic": 0.8158540862855139,
       "bbi_pool": 66.2567,
       "bbi_dfs": 60.0586,
       "pool_decomp": {
@@ -5008,7 +5722,8 @@
       "zeus_pool": 66.3591,
       "zeus_dfs": 60.161,
       "zeus_rank_pool": 7,
-      "zeus_rank_dfs": 7
+      "zeus_rank_dfs": 7,
+      "hermes_own": 27.42
     },
     {
       "dg_id": 18841,
@@ -5029,11 +5744,19 @@
         "PGA 2025"
       ],
       "salary": 8400,
-      "proj_ownership": null,
+      "proj_ownership": 11.91,
       "p_win": 0.01877,
       "p_top5": 0.1004,
       "p_top10": 0.2008,
       "p_top20": 0.38168,
+      "n_talent": 0.6661799186501033,
+      "n_courseFit": 0.9054190683581369,
+      "n_form": 0.3598505064428708,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9415807560137457,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4266611981741986,
+      "n_strategic": 0.6958961767800772,
       "bbi_pool": 64.1439,
       "bbi_dfs": 57.6928,
       "pool_decomp": {
@@ -5071,7 +5794,8 @@
       "zeus_pool": 64.4647,
       "zeus_dfs": 58.0136,
       "zeus_rank_pool": 8,
-      "zeus_rank_dfs": 9
+      "zeus_rank_dfs": 9,
+      "hermes_own": 11.91
     },
     {
       "dg_id": 6430,
@@ -5093,11 +5817,19 @@
         "PGA 2025"
       ],
       "salary": 8900,
-      "proj_ownership": null,
+      "proj_ownership": 20.32,
       "p_win": 0.02456,
       "p_top5": 0.11976,
       "p_top10": 0.22936,
       "p_top20": 0.41841,
+      "n_talent": 0.6880973626137782,
+      "n_courseFit": 0.7966795503736674,
+      "n_form": 0.4171635746420314,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9518900343642612,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.34017015941058937,
+      "n_strategic": 0.7941073307611365,
       "bbi_pool": 63.8269,
       "bbi_dfs": 57.2393,
       "pool_decomp": {
@@ -5135,7 +5867,8 @@
       "zeus_pool": 63.9147,
       "zeus_dfs": 57.3271,
       "zeus_rank_pool": 10,
-      "zeus_rank_dfs": 10
+      "zeus_rank_dfs": 10,
+      "hermes_own": 20.32
     },
     {
       "dg_id": 17536,
@@ -5155,11 +5888,19 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 9.01,
       "p_win": 0.01737,
       "p_top5": 0.0956,
       "p_top10": 0.19194,
       "p_top20": 0.37313,
+      "n_talent": 0.659359716406053,
+      "n_courseFit": 0.8685584309283859,
+      "n_form": 0.3430772902277388,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9278350515463918,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6382068974068316,
+      "n_strategic": 0.8183093651350404,
       "bbi_pool": 63.7604,
       "bbi_dfs": 59.6625,
       "pool_decomp": {
@@ -5197,7 +5938,8 @@
       "zeus_pool": 64.3815,
       "zeus_dfs": 60.2836,
       "zeus_rank_pool": 9,
-      "zeus_rank_dfs": 6
+      "zeus_rank_dfs": 6,
+      "hermes_own": 9.01
     },
     {
       "dg_id": 13562,
@@ -5218,11 +5960,19 @@
         "PGA 2025"
       ],
       "salary": 8800,
-      "proj_ownership": null,
+      "proj_ownership": 9.83,
       "p_win": 0.02035,
       "p_top5": 0.10537,
       "p_top10": 0.20921,
       "p_top20": 0.3937,
+      "n_talent": 0.743573721014546,
+      "n_courseFit": 0.8095778288261608,
+      "n_form": 0.3761477302596771,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9621993127147767,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.27714319273317406,
+      "n_strategic": 0.6183795159593126,
       "bbi_pool": 63.2643,
       "bbi_dfs": 55.4369,
       "pool_decomp": {
@@ -5260,7 +6010,8 @@
       "zeus_pool": 63.4383,
       "zeus_dfs": 55.6109,
       "zeus_rank_pool": 11,
-      "zeus_rank_dfs": 15
+      "zeus_rank_dfs": 15,
+      "hermes_own": 9.83
     },
     {
       "dg_id": 15466,
@@ -5282,11 +6033,19 @@
         "PGA 2025"
       ],
       "salary": 9200,
-      "proj_ownership": null,
+      "proj_ownership": 9.49,
       "p_win": 0.02012,
       "p_top5": 0.10549,
       "p_top10": 0.20747,
       "p_top20": 0.39216,
+      "n_talent": 0.7530504845498881,
+      "n_courseFit": 0.7066391939548361,
+      "n_form": 0.3736363292906779,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9656357388316151,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.09163540630106076,
+      "n_strategic": 0.7649947386881796,
       "bbi_pool": 61.4398,
       "bbi_dfs": 52.1918,
       "pool_decomp": {
@@ -5324,7 +6083,8 @@
       "zeus_pool": 60.8816,
       "zeus_dfs": 51.6336,
       "zeus_rank_pool": 15,
-      "zeus_rank_dfs": 31
+      "zeus_rank_dfs": 31,
+      "hermes_own": 9.49
     },
     {
       "dg_id": 12965,
@@ -5348,11 +6108,19 @@
         "PGA 2025"
       ],
       "salary": 9000,
-      "proj_ownership": null,
+      "proj_ownership": 12.84,
       "p_win": 0.01822,
       "p_top5": 0.09823,
       "p_top10": 0.1938,
       "p_top20": 0.37313,
+      "n_talent": 0.6639041148306697,
+      "n_courseFit": 0.8413104828571039,
+      "n_form": 0.347969553035834,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9347079037800687,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.18576496760501268,
+      "n_strategic": 0.6211855489302,
       "bbi_pool": 61.4216,
       "bbi_dfs": 52.8452,
       "pool_decomp": {
@@ -5390,7 +6158,8 @@
       "zeus_pool": 61.4874,
       "zeus_dfs": 52.911,
       "zeus_rank_pool": 13,
-      "zeus_rank_dfs": 22
+      "zeus_rank_dfs": 22,
+      "hermes_own": 12.84
     },
     {
       "dg_id": 23602,
@@ -5408,11 +6177,19 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.66,
       "p_win": 0.01938,
       "p_top5": 0.0997,
       "p_top10": 0.19569,
       "p_top20": 0.37175,
+      "n_talent": 0.601076158434687,
+      "n_courseFit": 0.7978103948303461,
+      "n_form": 0.35218984217876964,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8900343642611683,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7397423995438634,
+      "n_strategic": 0.7386881795861101,
       "bbi_pool": 60.6831,
       "bbi_dfs": 58.4786,
       "pool_decomp": {
@@ -5450,7 +6227,8 @@
       "zeus_pool": 61.9175,
       "zeus_dfs": 59.713,
       "zeus_rank_pool": 12,
-      "zeus_rank_dfs": 8
+      "zeus_rank_dfs": 8,
+      "hermes_own": 10.66
     },
     {
       "dg_id": 19483,
@@ -5472,11 +6250,19 @@
         "PGA 2025"
       ],
       "salary": 9100,
-      "proj_ownership": null,
+      "proj_ownership": 13.14,
       "p_win": 0.0193,
       "p_top5": 0.10363,
       "p_top10": 0.20161,
       "p_top20": 0.38168,
+      "n_talent": 0.7304914521638686,
+      "n_courseFit": 0.7282587277169952,
+      "n_form": 0.36354253609081044,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9587628865979381,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.18382802130728002,
+      "n_strategic": 0.5892669238863557,
       "bbi_pool": 60.4722,
       "bbi_dfs": 52.1634,
       "pool_decomp": {
@@ -5514,7 +6300,8 @@
       "zeus_pool": 60.6137,
       "zeus_dfs": 52.3049,
       "zeus_rank_pool": 16,
-      "zeus_rank_dfs": 26
+      "zeus_rank_dfs": 26,
+      "hermes_own": 13.14
     },
     {
       "dg_id": 23323,
@@ -5532,11 +6319,19 @@
         "PGA 2025"
       ],
       "salary": 9300,
-      "proj_ownership": null,
+      "proj_ownership": 8.44,
       "p_win": 0.0151,
       "p_top5": 0.08961,
       "p_top10": 0.18382,
       "p_top20": 0.36364,
+      "n_talent": 0.771086185185576,
+      "n_courseFit": 0.7366997455051549,
+      "n_form": 0.3262079226260044,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9725085910652922,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.0,
+      "n_strategic": 0.5899684321290775,
       "bbi_pool": 60.3319,
       "bbi_dfs": 49.6255,
       "pool_decomp": {
@@ -5574,7 +6369,8 @@
       "zeus_pool": 60.5426,
       "zeus_dfs": 49.8362,
       "zeus_rank_pool": 17,
-      "zeus_rank_dfs": 35
+      "zeus_rank_dfs": 35,
+      "hermes_own": 8.44
     },
     {
       "dg_id": 14577,
@@ -5596,11 +6392,19 @@
         "PGA 2025"
       ],
       "salary": 8200,
-      "proj_ownership": null,
+      "proj_ownership": 9.51,
       "p_win": 0.01392,
       "p_top5": 0.08475,
       "p_top10": 0.17921,
       "p_top20": 0.35587,
+      "n_talent": 0.6529482607750763,
+      "n_courseFit": 0.8411489659587915,
+      "n_form": 0.3156103521972342,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9175257731958764,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4190527062542874,
+      "n_strategic": 0.5215713784636969,
       "bbi_pool": 60.2473,
       "bbi_dfs": 53.9154,
       "pool_decomp": {
@@ -5638,7 +6442,8 @@
       "zeus_pool": 61.0143,
       "zeus_dfs": 54.6824,
       "zeus_rank_pool": 14,
-      "zeus_rank_dfs": 17
+      "zeus_rank_dfs": 17,
+      "hermes_own": 9.51
     },
     {
       "dg_id": 18634,
@@ -5657,11 +6462,19 @@
         "PGA 2025"
       ],
       "salary": 8500,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01653,
       "p_top5": 0.08945,
       "p_top10": 0.18051,
       "p_top20": 0.35336,
+      "n_talent": 0.7123456989349243,
+      "n_courseFit": 0.7564182314589513,
+      "n_form": 0.32181829463399625,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9553264604810997,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.33545635416321834,
+      "n_strategic": 0.5198176078568923,
       "bbi_pool": 59.758,
       "bbi_dfs": 52.8113,
       "pool_decomp": {
@@ -5699,7 +6512,8 @@
       "zeus_pool": 59.4943,
       "zeus_dfs": 52.5476,
       "zeus_rank_pool": 19,
-      "zeus_rank_dfs": 25
+      "zeus_rank_dfs": 25,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 18474,
@@ -5718,11 +6532,19 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 10.55,
       "p_win": 0.0115,
       "p_top5": 0.06873,
       "p_top10": 0.1462,
       "p_top20": 0.30769,
+      "n_talent": 0.5473706957966951,
+      "n_courseFit": 0.9157732210166437,
+      "n_form": 0.25549305637535547,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8625429553264605,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6888239121059057,
+      "n_strategic": 0.6520519116099615,
       "bbi_pool": 59.3602,
       "bbi_dfs": 55.9146,
       "pool_decomp": {
@@ -5760,7 +6582,8 @@
       "zeus_pool": 60.0437,
       "zeus_dfs": 56.5981,
       "zeus_rank_pool": 18,
-      "zeus_rank_dfs": 13
+      "zeus_rank_dfs": 13,
+      "hermes_own": 10.55
     },
     {
       "dg_id": 27774,
@@ -5776,11 +6599,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 8600,
-      "proj_ownership": null,
+      "proj_ownership": 17.25,
       "p_win": 0.02125,
       "p_top5": 0.10299,
       "p_top10": 0.20121,
       "p_top20": 0.37594,
+      "n_talent": 0.6533833513313756,
+      "n_courseFit": 0.7021342314243881,
+      "n_form": 0.36319767666271596,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9209621993127148,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4400816123505153,
+      "n_strategic": 0.6836197825324448,
       "bbi_pool": 59.105,
       "bbi_dfs": 54.1123,
       "pool_decomp": {
@@ -5818,7 +6649,8 @@
       "zeus_pool": 59.105,
       "zeus_dfs": 54.1123,
       "zeus_rank_pool": 21,
-      "zeus_rank_dfs": 19
+      "zeus_rank_dfs": 19,
+      "hermes_own": 17.25
     },
     {
       "dg_id": 14139,
@@ -5841,11 +6673,19 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.29,
       "p_win": 0.01633,
       "p_top5": 0.08375,
       "p_top10": 0.16639,
       "p_top20": 0.32573,
+      "n_talent": 0.5034669450367218,
+      "n_courseFit": 0.9173175915237337,
+      "n_form": 0.29724775463265357,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8350515463917525,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7508192845620166,
+      "n_strategic": 0.5503332164152929,
       "bbi_pool": 58.8426,
       "bbi_dfs": 56.5543,
       "pool_decomp": {
@@ -5883,7 +6723,8 @@
       "zeus_pool": 59.2334,
       "zeus_dfs": 56.9451,
       "zeus_rank_pool": 20,
-      "zeus_rank_dfs": 11
+      "zeus_rank_dfs": 11,
+      "hermes_own": 12.29
     },
     {
       "dg_id": 24968,
@@ -5902,11 +6743,19 @@
         "PGA 2025"
       ],
       "salary": 8700,
-      "proj_ownership": null,
+      "proj_ownership": 10.96,
       "p_win": 0.01127,
       "p_top5": 0.07452,
       "p_top10": 0.15974,
       "p_top20": 0.33333,
+      "n_talent": 0.6680859467290851,
+      "n_courseFit": 0.7925063610807671,
+      "n_form": 0.2791510333473915,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9450171821305842,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.15222589873183562,
+      "n_strategic": 0.4945633111189057,
       "bbi_pool": 58.1762,
       "bbi_dfs": 49.1253,
       "pool_decomp": {
@@ -5944,7 +6793,8 @@
       "zeus_pool": 57.9882,
       "zeus_dfs": 48.9373,
       "zeus_rank_pool": 24,
-      "zeus_rank_dfs": 40
+      "zeus_rank_dfs": 40,
+      "hermes_own": 10.96
     },
     {
       "dg_id": 9771,
@@ -5968,11 +6818,19 @@
         "PGA 2025"
       ],
       "salary": 7900,
-      "proj_ownership": null,
+      "proj_ownership": 7.58,
       "p_win": 0.01253,
       "p_top5": 0.07502,
       "p_top10": 0.15649,
       "p_top20": 0.32051,
+      "n_talent": 0.5908726524702466,
+      "n_courseFit": 0.8689806772434682,
+      "n_form": 0.2752780076331675,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8865979381443299,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5185070173537667,
+      "n_strategic": 0.4086285513854788,
       "bbi_pool": 58.1374,
       "bbi_dfs": 52.9998,
       "pool_decomp": {
@@ -6010,7 +6868,8 @@
       "zeus_pool": 58.0451,
       "zeus_dfs": 52.9075,
       "zeus_rank_pool": 22,
-      "zeus_rank_dfs": 23
+      "zeus_rank_dfs": 23,
+      "hermes_own": 7.58
     },
     {
       "dg_id": 13872,
@@ -6034,11 +6893,19 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 6.13,
       "p_win": 0.01287,
       "p_top5": 0.07386,
       "p_top10": 0.1548,
       "p_top20": 0.31949,
+      "n_talent": 0.564982014642172,
+      "n_courseFit": 0.7895594599178425,
+      "n_form": 0.27210923472608844,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8762886597938144,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7869776121835681,
+      "n_strategic": 0.5415643633812698,
       "bbi_pool": 56.9403,
       "bbi_dfs": 55.1495,
       "pool_decomp": {
@@ -6076,7 +6943,8 @@
       "zeus_pool": 57.4917,
       "zeus_dfs": 55.7009,
       "zeus_rank_pool": 25,
-      "zeus_rank_dfs": 14
+      "zeus_rank_dfs": 14,
+      "hermes_own": 6.13
     },
     {
       "dg_id": 17576,
@@ -6098,11 +6966,19 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 5.99,
       "p_win": 0.0075,
       "p_top5": 0.04885,
       "p_top10": 0.11351,
       "p_top20": 0.25641,
+      "n_talent": 0.5075673688011267,
+      "n_courseFit": 0.9155515324818736,
+      "n_form": 0.19248119926379506,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8419243986254296,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.653562073416711,
+      "n_strategic": 0.626096106629253,
       "bbi_pool": 56.7323,
       "bbi_dfs": 52.9567,
       "pool_decomp": {
@@ -6140,7 +7016,8 @@
       "zeus_pool": 58.0207,
       "zeus_dfs": 54.2451,
       "zeus_rank_pool": 23,
-      "zeus_rank_dfs": 18
+      "zeus_rank_dfs": 18,
+      "hermes_own": 5.99
     },
     {
       "dg_id": 17511,
@@ -6162,11 +7039,19 @@
         "PGA 2025"
       ],
       "salary": 8100,
-      "proj_ownership": null,
+      "proj_ownership": 11.99,
       "p_win": 0.01507,
       "p_top5": 0.08143,
       "p_top10": 0.16722,
       "p_top20": 0.33557,
+      "n_talent": 0.6364151435634383,
+      "n_courseFit": 0.676374041069162,
+      "n_form": 0.2963211604651415,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9106529209621993,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.4873908491572112,
+      "n_strategic": 0.6646790599789547,
       "bbi_pool": 56.5832,
       "bbi_dfs": 52.0038,
       "pool_decomp": {
@@ -6204,7 +7089,8 @@
       "zeus_pool": 56.1512,
       "zeus_dfs": 51.5718,
       "zeus_rank_pool": 27,
-      "zeus_rank_dfs": 32
+      "zeus_rank_dfs": 32,
+      "hermes_own": 11.99
     },
     {
       "dg_id": 16841,
@@ -6222,11 +7108,19 @@
         "PGA 2025"
       ],
       "salary": 8300,
-      "proj_ownership": null,
+      "proj_ownership": 12.33,
       "p_win": 0.02263,
       "p_top5": 0.11481,
       "p_top10": 0.21834,
       "p_top20": 0.40323,
+      "n_talent": 0.6326429084696967,
+      "n_courseFit": 0.556269844455999,
+      "n_form": 0.39698098598992465,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9072164948453608,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5961953529720376,
+      "n_strategic": 0.6517011574886006,
       "bbi_pool": 56.1755,
       "bbi_dfs": 53.7867,
       "pool_decomp": {
@@ -6264,7 +7158,8 @@
       "zeus_pool": 55.7878,
       "zeus_dfs": 53.399,
       "zeus_rank_pool": 28,
-      "zeus_rank_dfs": 21
+      "zeus_rank_dfs": 21,
+      "hermes_own": 12.33
     },
     {
       "dg_id": 29767,
@@ -6283,11 +7178,19 @@
         "PGA 2025"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.81,
       "p_win": 0.00978,
       "p_top5": 0.0618,
       "p_top10": 0.13736,
       "p_top20": 0.29586,
+      "n_talent": 0.5585584855269404,
+      "n_courseFit": 0.754875176491909,
+      "n_form": 0.23711206056367845,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.872852233676976,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7504130837784276,
+      "n_strategic": 0.7302700806734479,
       "bbi_pool": 56.087,
       "bbi_dfs": 53.9713,
       "pool_decomp": {
@@ -6325,7 +7228,8 @@
       "zeus_pool": 56.8474,
       "zeus_dfs": 54.7317,
       "zeus_rank_pool": 26,
-      "zeus_rank_dfs": 16
+      "zeus_rank_dfs": 16,
+      "hermes_own": 4.81
     },
     {
       "dg_id": 6093,
@@ -6346,11 +7250,19 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.29,
       "p_win": 0.01188,
       "p_top5": 0.06859,
       "p_top10": 0.14409,
       "p_top20": 0.29851,
+      "n_talent": 0.6074903425965514,
+      "n_courseFit": 0.6675684198658682,
+      "n_form": 0.25248711740061264,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8934707903780069,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6235476937445493,
+      "n_strategic": 0.6310066643283059,
       "bbi_pool": 54.7424,
       "bbi_dfs": 51.6326,
       "pool_decomp": {
@@ -6388,7 +7300,8 @@
       "zeus_pool": 55.2894,
       "zeus_dfs": 52.1796,
       "zeus_rank_pool": 29,
-      "zeus_rank_dfs": 27
+      "zeus_rank_dfs": 27,
+      "hermes_own": 7.29
     },
     {
       "dg_id": 12577,
@@ -6412,11 +7325,19 @@
         "PGA 2025"
       ],
       "salary": 7600,
-      "proj_ownership": null,
+      "proj_ownership": 12.73,
       "p_win": 0.01178,
       "p_top5": 0.06649,
       "p_top10": 0.14065,
       "p_top20": 0.2924,
+      "n_talent": 0.4696219830518817,
+      "n_courseFit": 0.8130298225404062,
+      "n_form": 0.2459601058807814,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8247422680412371,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6351157790090025,
+      "n_strategic": 0.6194317783233954,
       "bbi_pool": 54.6607,
       "bbi_dfs": 51.6946,
       "pool_decomp": {
@@ -6454,7 +7375,8 @@
       "zeus_pool": 54.6656,
       "zeus_dfs": 51.6995,
       "zeus_rank_pool": 31,
-      "zeus_rank_dfs": 29
+      "zeus_rank_dfs": 29,
+      "hermes_own": 12.73
     },
     {
       "dg_id": 21891,
@@ -6474,11 +7396,19 @@
         "PGA 2025"
       ],
       "salary": 7800,
-      "proj_ownership": null,
+      "proj_ownership": 10.21,
       "p_win": 0.01705,
       "p_top5": 0.08961,
       "p_top10": 0.18248,
       "p_top20": 0.34965,
+      "n_talent": 0.5733135660955785,
+      "n_courseFit": 0.5737158437656636,
+      "n_form": 0.32497464063569415,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8797250859106529,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6904554791266148,
+      "n_strategic": 0.796211855489302,
       "bbi_pool": 54.4648,
       "bbi_dfs": 52.9885,
       "pool_decomp": {
@@ -6516,7 +7446,8 @@
       "zeus_pool": 55.0745,
       "zeus_dfs": 53.5982,
       "zeus_rank_pool": 30,
-      "zeus_rank_dfs": 20
+      "zeus_rank_dfs": 20,
+      "hermes_own": 10.21
     },
     {
       "dg_id": 19396,
@@ -6535,11 +7466,19 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 9.04,
       "p_win": 0.01838,
       "p_top5": 0.09398,
       "p_top10": 0.18382,
       "p_top20": 0.35461,
+      "n_talent": 0.6864879526305216,
+      "n_courseFit": 0.47185032036426205,
+      "n_form": 0.3305557953577374,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9484536082474226,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6309004502891064,
+      "n_strategic": 0.6801122413188355,
       "bbi_pool": 54.3448,
       "bbi_dfs": 52.214,
       "pool_decomp": {
@@ -6577,7 +7516,8 @@
       "zeus_pool": 52.5714,
       "zeus_dfs": 50.4406,
       "zeus_rank_pool": 36,
-      "zeus_rank_dfs": 34
+      "zeus_rank_dfs": 34,
+      "hermes_own": 9.04
     },
     {
       "dg_id": 14636,
@@ -6598,11 +7538,19 @@
         "PGA 2025"
       ],
       "salary": 8000,
-      "proj_ownership": null,
+      "proj_ownership": 13.33,
       "p_win": 0.01337,
       "p_top5": 0.07479,
       "p_top10": 0.15674,
       "p_top20": 0.32154,
+      "n_talent": 0.6187898108533856,
+      "n_courseFit": 0.6186445957459566,
+      "n_form": 0.2757714261874614,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9037800687285222,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.47292737260692574,
+      "n_strategic": 0.5868116450368293,
       "bbi_pool": 53.957,
       "bbi_dfs": 49.5587,
       "pool_decomp": {
@@ -6640,7 +7588,8 @@
       "zeus_pool": 52.784,
       "zeus_dfs": 48.3857,
       "zeus_rank_pool": 34,
-      "zeus_rank_dfs": 42
+      "zeus_rank_dfs": 42,
+      "hermes_own": 13.33
     },
     {
       "dg_id": 26096,
@@ -6661,11 +7610,19 @@
         "PGA 2025"
       ],
       "salary": 7700,
-      "proj_ownership": null,
+      "proj_ownership": 7.89,
       "p_win": 0.00992,
       "p_top5": 0.06101,
       "p_top10": 0.13459,
       "p_top20": 0.28736,
+      "n_talent": 0.6653249261193054,
+      "n_courseFit": 0.5947952796233201,
+      "n_form": 0.23258312309770787,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9381443298969073,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5386143888786414,
+      "n_strategic": 0.5068397053665381,
       "bbi_pool": 53.3,
       "bbi_dfs": 49.2464,
       "pool_decomp": {
@@ -6703,7 +7660,8 @@
       "zeus_pool": 53.449,
       "zeus_dfs": 49.3954,
       "zeus_rank_pool": 32,
-      "zeus_rank_dfs": 39
+      "zeus_rank_dfs": 39,
+      "hermes_own": 7.89
     },
     {
       "dg_id": 10419,
@@ -6725,11 +7683,19 @@
         "PGA 2025"
       ],
       "salary": 7400,
-      "proj_ownership": null,
+      "proj_ownership": 5.43,
       "p_win": 0.00863,
       "p_top5": 0.05414,
       "p_top10": 0.12136,
       "p_top20": 0.271,
+      "n_talent": 0.6568512976411639,
+      "n_courseFit": 0.6110485986724362,
+      "n_form": 0.2080502818791147,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9243986254295532,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5982817416578866,
+      "n_strategic": 0.5113995089442301,
       "bbi_pool": 52.9994,
       "bbi_dfs": 49.4722,
       "pool_decomp": {
@@ -6767,7 +7733,8 @@
       "zeus_pool": 53.0811,
       "zeus_dfs": 49.5539,
       "zeus_rank_pool": 33,
-      "zeus_rank_dfs": 38
+      "zeus_rank_dfs": 38,
+      "hermes_own": 5.43
     },
     {
       "dg_id": 11889,
@@ -6786,11 +7753,19 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 8.95,
       "p_win": 0.00555,
       "p_top5": 0.0383,
       "p_top10": 0.09058,
       "p_top20": 0.21978,
+      "n_talent": 0.465886650804042,
+      "n_courseFit": 0.8035126214830861,
+      "n_form": 0.15104366147634332,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8213058419243986,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9649068886391715,
+      "n_strategic": 0.5289372150122764,
       "bbi_pool": 52.3734,
       "bbi_dfs": 52.5736,
       "pool_decomp": {
@@ -6828,7 +7803,8 @@
       "zeus_pool": 52.6521,
       "zeus_dfs": 52.8523,
       "zeus_rank_pool": 35,
-      "zeus_rank_dfs": 24
+      "zeus_rank_dfs": 24,
+      "hermes_own": 8.95
     },
     {
       "dg_id": 17606,
@@ -6849,11 +7825,19 @@
         "PGA 2025"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 4.06,
       "p_win": 0.006,
       "p_top5": 0.04509,
       "p_top10": 0.10363,
       "p_top20": 0.23697,
+      "n_talent": 0.45435906313841484,
+      "n_courseFit": 0.7571221441808267,
+      "n_form": 0.17494996404778415,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8075601374570447,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.827946528486475,
+      "n_strategic": 0.6713433882848124,
       "bbi_pool": 51.9273,
       "bbi_dfs": 51.0594,
       "pool_decomp": {
@@ -6891,7 +7875,8 @@
       "zeus_pool": 52.5588,
       "zeus_dfs": 51.6909,
       "zeus_rank_pool": 37,
-      "zeus_rank_dfs": 30
+      "zeus_rank_dfs": 30,
+      "hermes_own": 4.06
     },
     {
       "dg_id": 22760,
@@ -6909,11 +7894,19 @@
         "PGA 2025"
       ],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 3.56,
       "p_win": 0.00603,
       "p_top5": 0.04679,
       "p_top10": 0.10695,
       "p_top20": 0.24155,
+      "n_talent": 0.42853798962684136,
+      "n_courseFit": 0.7551163876803236,
+      "n_form": 0.18099804920826848,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7869415807560137,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9539447592848395,
+      "n_strategic": 0.615924237109786,
       "bbi_pool": 51.305,
       "bbi_dfs": 51.9099,
       "pool_decomp": {
@@ -6951,7 +7944,8 @@
       "zeus_pool": 51.3143,
       "zeus_dfs": 51.9192,
       "zeus_rank_pool": 39,
-      "zeus_rank_dfs": 28
+      "zeus_rank_dfs": 28,
+      "hermes_own": 3.56
     },
     {
       "dg_id": 27194,
@@ -6970,11 +7964,19 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 1.63,
       "p_win": 0.0058,
       "p_top5": 0.04325,
       "p_top10": 0.10152,
       "p_top20": 0.23923,
+      "n_talent": 0.5540118988058746,
+      "n_courseFit": 0.7164284268946725,
+      "n_form": 0.17051529979759925,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8694158075601374,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5937700260475677,
+      "n_strategic": 0.3504033672395651,
       "bbi_pool": 51.226,
       "bbi_dfs": 47.5683,
       "pool_decomp": {
@@ -7012,7 +8014,8 @@
       "zeus_pool": 51.6946,
       "zeus_dfs": 48.0369,
       "zeus_rank_pool": 38,
-      "zeus_rank_dfs": 44
+      "zeus_rank_dfs": 44,
+      "hermes_own": 1.63
     },
     {
       "dg_id": 25569,
@@ -7031,11 +8034,19 @@
         "PGA 2025"
       ],
       "salary": 7200,
-      "proj_ownership": null,
+      "proj_ownership": 5.41,
       "p_win": 0.00915,
       "p_top5": 0.06112,
       "p_top10": 0.1355,
       "p_top20": 0.29412,
+      "n_talent": 0.5172998045712737,
+      "n_courseFit": 0.5812583651565182,
+      "n_form": 0.23370401880265984,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.852233676975945,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8048917771068923,
+      "n_strategic": 0.653805682216766,
       "bbi_pool": 50.7742,
       "bbi_dfs": 50.375,
       "pool_decomp": {
@@ -7073,7 +8084,8 @@
       "zeus_pool": 50.1582,
       "zeus_dfs": 49.759,
       "zeus_rank_pool": 41,
-      "zeus_rank_dfs": 36
+      "zeus_rank_dfs": 36,
+      "hermes_own": 5.41
     },
     {
       "dg_id": 17780,
@@ -7093,11 +8105,19 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 7.31,
       "p_win": 0.0061,
       "p_top5": 0.03964,
       "p_top10": 0.0939,
       "p_top20": 0.21692,
+      "n_talent": 0.3411919212093887,
+      "n_courseFit": 0.8494582497804285,
+      "n_form": 0.15699752507234468,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6804123711340206,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.976958235951226,
+      "n_strategic": 0.6029463346194318,
       "bbi_pool": 50.2598,
       "bbi_dfs": 51.182,
       "pool_decomp": {
@@ -7135,7 +8155,8 @@
       "zeus_pool": 50.0358,
       "zeus_dfs": 50.958,
       "zeus_rank_pool": 42,
-      "zeus_rank_dfs": 33
+      "zeus_rank_dfs": 33,
+      "hermes_own": 7.31
     },
     {
       "dg_id": 17538,
@@ -7157,11 +8178,19 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 9.54,
       "p_win": 0.0052,
       "p_top5": 0.0369,
       "p_top10": 0.08547,
       "p_top20": 0.20492,
+      "n_talent": 0.3833223302949164,
+      "n_courseFit": 0.8583409715511281,
+      "n_form": 0.14252735935661107,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7285223367697594,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7139901859531105,
+      "n_strategic": 0.43703963521571376,
       "bbi_pool": 49.9618,
       "bbi_dfs": 47.8282,
       "pool_decomp": {
@@ -7199,7 +8228,8 @@
       "zeus_pool": 50.3027,
       "zeus_dfs": 48.1691,
       "zeus_rank_pool": 40,
-      "zeus_rank_dfs": 43
+      "zeus_rank_dfs": 43,
+      "hermes_own": 9.54
     },
     {
       "dg_id": 21407,
@@ -7215,11 +8245,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 7.8,
       "p_win": 0.00667,
       "p_top5": 0.04587,
       "p_top10": 0.10428,
       "p_top20": 0.23256,
+      "n_talent": 0.4421289980904833,
+      "n_courseFit": 0.6648454491382362,
+      "n_form": 0.1766945981168823,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8041237113402062,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9111997973571894,
+      "n_strategic": 0.5492809540512101,
       "bbi_pool": 49.1022,
       "bbi_dfs": 49.6987,
       "pool_decomp": {
@@ -7257,7 +8295,8 @@
       "zeus_pool": 49.1022,
       "zeus_dfs": 49.6987,
       "zeus_rank_pool": 43,
-      "zeus_rank_dfs": 37
+      "zeus_rank_dfs": 37,
+      "hermes_own": 7.8
     },
     {
       "dg_id": 28635,
@@ -7275,11 +8314,19 @@
         "PGA 2025"
       ],
       "salary": 7000,
-      "proj_ownership": null,
+      "proj_ownership": 4.31,
       "p_win": 0.00523,
       "p_top5": 0.03897,
       "p_top10": 0.09434,
       "p_top20": 0.22676,
+      "n_talent": 0.5158119046004737,
+      "n_courseFit": 0.6056809209097157,
+      "n_form": 0.15684461352599824,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.845360824742268,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.678639567171084,
+      "n_strategic": 0.5436688881094353,
       "bbi_pool": 48.6085,
       "bbi_dfs": 46.612,
       "pool_decomp": {
@@ -7317,7 +8364,8 @@
       "zeus_pool": 48.5924,
       "zeus_dfs": 46.5959,
       "zeus_rank_pool": 45,
-      "zeus_rank_dfs": 49
+      "zeus_rank_dfs": 49,
+      "hermes_own": 4.31
     },
     {
       "dg_id": 25362,
@@ -7333,11 +8381,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 8.27,
       "p_win": 0.00553,
       "p_top5": 0.03812,
       "p_top10": 0.09132,
       "p_top20": 0.21786,
+      "n_talent": 0.4354001056289033,
+      "n_courseFit": 0.669208311954631,
+      "n_form": 0.15198637392037173,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7972508591065293,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8172385005785565,
+      "n_strategic": 0.5766397755173623,
       "bbi_pool": 48.4357,
       "bbi_dfs": 48.0242,
       "pool_decomp": {
@@ -7375,7 +8431,8 @@
       "zeus_pool": 48.4357,
       "zeus_dfs": 48.0242,
       "zeus_rank_pool": 46,
-      "zeus_rank_dfs": 45
+      "zeus_rank_dfs": 45,
+      "hermes_own": 8.27
     },
     {
       "dg_id": 29433,
@@ -7393,11 +8450,19 @@
         "PGA 2025"
       ],
       "salary": 7500,
-      "proj_ownership": null,
+      "proj_ownership": 5.77,
       "p_win": 0.00962,
       "p_top5": 0.06079,
       "p_top10": 0.13477,
       "p_top20": 0.28571,
+      "n_talent": 0.612580865961458,
+      "n_courseFit": 0.4301148622569017,
+      "n_form": 0.2325759311620821,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.9003436426116839,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6357979839328656,
+      "n_strategic": 0.49386180287618386,
       "bbi_pool": 48.2944,
       "bbi_dfs": 46.4379,
       "pool_decomp": {
@@ -7435,7 +8500,8 @@
       "zeus_pool": 47.3647,
       "zeus_dfs": 45.5082,
       "zeus_rank_pool": 50,
-      "zeus_rank_dfs": 52
+      "zeus_rank_dfs": 52,
+      "hermes_own": 5.77
     },
     {
       "dg_id": 23014,
@@ -7454,11 +8520,19 @@
         "WF 2024"
       ],
       "salary": 7300,
-      "proj_ownership": null,
+      "proj_ownership": 4.78,
       "p_win": 0.00833,
       "p_top5": 0.0484,
       "p_top10": 0.11013,
       "p_top20": 0.24631,
+      "n_talent": 0.5170966894895414,
+      "n_courseFit": 0.564160155201237,
+      "n_form": 0.18758293952152116,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8487972508591066,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6559833486757539,
+      "n_strategic": 0.5173623290073659,
       "bbi_pool": 48.2393,
       "bbi_dfs": 46.3778,
       "pool_decomp": {
@@ -7496,7 +8570,8 @@
       "zeus_pool": 48.3621,
       "zeus_dfs": 46.5006,
       "zeus_rank_pool": 47,
-      "zeus_rank_dfs": 50
+      "zeus_rank_dfs": 50,
+      "hermes_own": 4.78
     },
     {
       "dg_id": 20706,
@@ -7516,11 +8591,19 @@
         "PGA 2025"
       ],
       "salary": 6600,
-      "proj_ownership": null,
+      "proj_ownership": 2.61,
       "p_win": 0.00348,
       "p_top5": 0.02769,
       "p_top10": 0.06817,
       "p_top20": 0.17637,
+      "n_talent": 0.38090429758909944,
+      "n_courseFit": 0.815637949923734,
+      "n_form": 0.1102679238928041,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7216494845360825,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8028832192215501,
+      "n_strategic": 0.40652402665731324,
       "bbi_pool": 48.1417,
       "bbi_dfs": 47.0934,
       "pool_decomp": {
@@ -7558,7 +8641,8 @@
       "zeus_pool": 48.6354,
       "zeus_dfs": 47.5871,
       "zeus_rank_pool": 44,
-      "zeus_rank_dfs": 46
+      "zeus_rank_dfs": 46,
+      "hermes_own": 2.61
     },
     {
       "dg_id": 14502,
@@ -7579,11 +8663,19 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 3.14,
       "p_win": 0.00665,
       "p_top5": 0.04625,
       "p_top10": 0.10741,
       "p_top20": 0.24331,
+      "n_talent": 0.41283029561168716,
+      "n_courseFit": 0.6454785318584615,
+      "n_form": 0.18149360210681212,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7525773195876289,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8848205658971362,
+      "n_strategic": 0.6166257453525079,
       "bbi_pool": 48.0718,
       "bbi_dfs": 48.7033,
       "pool_decomp": {
@@ -7621,7 +8713,8 @@
       "zeus_pool": 48.1164,
       "zeus_dfs": 48.7479,
       "zeus_rank_pool": 48,
-      "zeus_rank_dfs": 41
+      "zeus_rank_dfs": 41,
+      "hermes_own": 3.14
     },
     {
       "dg_id": 13126,
@@ -7643,11 +8736,19 @@
         "PGA 2025"
       ],
       "salary": 7100,
-      "proj_ownership": null,
+      "proj_ownership": 2.73,
       "p_win": 0.00403,
       "p_top5": 0.0321,
       "p_top10": 0.08045,
       "p_top20": 0.20492,
+      "n_talent": 0.5441721073263864,
+      "n_courseFit": 0.5897617126470186,
+      "n_form": 0.13139219041033653,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.859106529209622,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5459858367314877,
+      "n_strategic": 0.5128025254296739,
       "bbi_pool": 47.8812,
       "bbi_dfs": 44.3863,
       "pool_decomp": {
@@ -7685,7 +8786,8 @@
       "zeus_pool": 47.9024,
       "zeus_dfs": 44.4075,
       "zeus_rank_pool": 49,
-      "zeus_rank_dfs": 55
+      "zeus_rank_dfs": 55,
+      "hermes_own": 2.73
     },
     {
       "dg_id": 21554,
@@ -7708,11 +8810,19 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.31,
       "p_win": 0.00398,
       "p_top5": 0.03157,
       "p_top10": 0.07874,
       "p_top20": 0.19493,
+      "n_talent": 0.4030164729014609,
+      "n_courseFit": 0.6512440162539875,
+      "n_form": 0.12851606948304173,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7457044673539518,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8993867003896168,
+      "n_strategic": 0.535601543318134,
       "bbi_pool": 46.3143,
       "bbi_dfs": 47.0057,
       "pool_decomp": {
@@ -7750,7 +8860,8 @@
       "zeus_pool": 46.3886,
       "zeus_dfs": 47.08,
       "zeus_rank_pool": 51,
-      "zeus_rank_dfs": 48
+      "zeus_rank_dfs": 48,
+      "hermes_own": 2.31
     },
     {
       "dg_id": 8825,
@@ -7774,11 +8885,19 @@
         "PGA 2025"
       ],
       "salary": 6800,
-      "proj_ownership": null,
+      "proj_ownership": 2.27,
       "p_win": 0.00443,
       "p_top5": 0.03583,
       "p_top10": 0.08598,
       "p_top20": 0.20921,
+      "n_talent": 0.4173129783305979,
+      "n_courseFit": 0.6097856870347355,
+      "n_form": 0.14222023573887901,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7663230240549828,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7685014342430416,
+      "n_strategic": 0.44335320940021045,
       "bbi_pool": 45.4045,
       "bbi_dfs": 44.9022,
       "pool_decomp": {
@@ -7816,7 +8935,8 @@
       "zeus_pool": 45.0484,
       "zeus_dfs": 44.5461,
       "zeus_rank_pool": 54,
-      "zeus_rank_dfs": 54
+      "zeus_rank_dfs": 54,
+      "hermes_own": 2.27
     },
     {
       "dg_id": 29925,
@@ -7832,11 +8952,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.57,
       "p_win": 0.00487,
       "p_top5": 0.0339,
       "p_top10": 0.07937,
       "p_top20": 0.19194,
+      "n_talent": 0.37995459420934224,
+      "n_courseFit": 0.6514608973679753,
+      "n_form": 0.13142202696759822,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7147766323024055,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8325918888390775,
+      "n_strategic": 0.5078919677306208,
       "bbi_pool": 45.368,
       "bbi_dfs": 45.5853,
       "pool_decomp": {
@@ -7874,7 +9002,8 @@
       "zeus_pool": 45.368,
       "zeus_dfs": 45.5853,
       "zeus_rank_pool": 52,
-      "zeus_rank_dfs": 51
+      "zeus_rank_dfs": 51,
+      "hermes_own": 6.57
     },
     {
       "dg_id": 27819,
@@ -7890,11 +9019,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 2.45,
       "p_win": 0.00477,
       "p_top5": 0.03547,
       "p_top10": 0.08258,
       "p_top20": 0.19881,
+      "n_talent": 0.3616380098687974,
+      "n_courseFit": 0.6527317223299659,
+      "n_form": 0.13716137976532639,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6907216494845361,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 1.0,
+      "n_strategic": 0.5096457383374255,
       "bbi_pool": 45.3223,
       "bbi_dfs": 47.3745,
       "pool_decomp": {
@@ -7932,7 +9069,8 @@
       "zeus_pool": 45.3223,
       "zeus_dfs": 47.3745,
       "zeus_rank_pool": 53,
-      "zeus_rank_dfs": 47
+      "zeus_rank_dfs": 47,
+      "hermes_own": 2.45
     },
     {
       "dg_id": 19870,
@@ -7955,11 +9093,19 @@
         "PGA 2025"
       ],
       "salary": 6500,
-      "proj_ownership": null,
+      "proj_ownership": 4.19,
       "p_win": 0.00217,
       "p_top5": 0.01983,
       "p_top10": 0.05376,
       "p_top20": 0.14771,
+      "n_talent": 0.40612948754084227,
+      "n_courseFit": 0.7097625526108691,
+      "n_form": 0.0833126396230736,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7491408934707904,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7124363126000538,
+      "n_strategic": 0.27218519817607856,
       "bbi_pool": 44.89,
       "bbi_dfs": 43.2596,
       "pool_decomp": {
@@ -7997,7 +9143,8 @@
       "zeus_pool": 44.4748,
       "zeus_dfs": 42.8444,
       "zeus_rank_pool": 56,
-      "zeus_rank_dfs": 57
+      "zeus_rank_dfs": 57,
+      "hermes_own": 4.19
     },
     {
       "dg_id": 17543,
@@ -8017,11 +9164,19 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 3.97,
       "p_win": 0.00305,
       "p_top5": 0.02293,
       "p_top10": 0.06083,
       "p_top20": 0.15949,
+      "n_talent": 0.4398570809140812,
+      "n_courseFit": 0.6143301374278375,
+      "n_form": 0.09607280467473527,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.8006872852233676,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8718646290962786,
+      "n_strategic": 0.303402314977201,
       "bbi_pool": 44.6204,
       "bbi_dfs": 44.9423,
       "pool_decomp": {
@@ -8059,7 +9214,8 @@
       "zeus_pool": 44.6684,
       "zeus_dfs": 44.9903,
       "zeus_rank_pool": 55,
-      "zeus_rank_dfs": 53
+      "zeus_rank_dfs": 53,
+      "hermes_own": 3.97
     },
     {
       "dg_id": 14704,
@@ -8079,11 +9235,19 @@
         "WF 2024"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 2.0,
       "p_win": 0.00172,
       "p_top5": 0.01437,
       "p_top10": 0.04175,
       "p_top20": 0.12723,
+      "n_talent": 0.4256302762325267,
+      "n_courseFit": 0.6157468157814288,
+      "n_form": 0.06186108595989161,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7800687285223368,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6863549800004946,
+      "n_strategic": 0.3142756927393897,
       "bbi_pool": 43.0645,
       "bbi_dfs": 41.5153,
       "pool_decomp": {
@@ -8121,7 +9285,8 @@
       "zeus_pool": 43.5929,
       "zeus_dfs": 42.0437,
       "zeus_rank_pool": 57,
-      "zeus_rank_dfs": 59
+      "zeus_rank_dfs": 59,
+      "hermes_own": 2.0
     },
     {
       "dg_id": 7399,
@@ -8145,11 +9310,19 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 2.21,
       "p_win": 0.00158,
       "p_top5": 0.0154,
       "p_top10": 0.04388,
       "p_top20": 0.1261,
+      "n_talent": 0.29620002496941494,
+      "n_courseFit": 0.729159544440776,
+      "n_form": 0.06562854283924482,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6185567010309279,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.8326876265524371,
+      "n_strategic": 0.45562960364784294,
       "bbi_pool": 42.8071,
       "bbi_dfs": 43.0123,
       "pool_decomp": {
@@ -8187,7 +9360,8 @@
       "zeus_pool": 43.3432,
       "zeus_dfs": 43.5484,
       "zeus_rank_pool": 58,
-      "zeus_rank_dfs": 56
+      "zeus_rank_dfs": 56,
+      "hermes_own": 2.21
     },
     {
       "dg_id": 17488,
@@ -8209,11 +9383,19 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.11,
       "p_win": 0.00263,
       "p_top5": 0.02226,
       "p_top10": 0.05744,
       "p_top20": 0.15152,
+      "n_talent": 0.2343692910183961,
+      "n_courseFit": 0.7518978311852801,
+      "n_form": 0.0905449108102411,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.4982817869415807,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9353523940405616,
+      "n_strategic": 0.3079621185548931,
       "bbi_pool": 41.088,
       "bbi_dfs": 42.7487,
       "pool_decomp": {
@@ -8251,7 +9433,8 @@
       "zeus_pool": 40.8125,
       "zeus_dfs": 42.4732,
       "zeus_rank_pool": 59,
-      "zeus_rank_dfs": 58
+      "zeus_rank_dfs": 58,
+      "hermes_own": 4.11
     },
     {
       "dg_id": 16283,
@@ -8274,11 +9457,19 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 2.19,
       "p_win": 0.00303,
       "p_top5": 0.02441,
       "p_top10": 0.06361,
       "p_top20": 0.1642,
+      "n_talent": 0.33152281545300405,
+      "n_courseFit": 0.5330647515645411,
+      "n_form": 0.10116173645965641,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6666666666666666,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9367661557664051,
+      "n_strategic": 0.38582953349701865,
       "bbi_pool": 40.1475,
       "bbi_dfs": 42.3006,
       "pool_decomp": {
@@ -8316,7 +9507,8 @@
       "zeus_pool": 39.6146,
       "zeus_dfs": 41.7677,
       "zeus_rank_pool": 60,
-      "zeus_rank_dfs": 60
+      "zeus_rank_dfs": 60,
+      "hermes_own": 2.19
     },
     {
       "dg_id": 13508,
@@ -8338,11 +9530,19 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 2.26,
       "p_win": 0.00147,
       "p_top5": 0.01085,
       "p_top10": 0.03173,
       "p_top20": 0.09533,
+      "n_talent": 0.11933739688570463,
+      "n_courseFit": 0.8694034480372341,
+      "n_form": 0.04474590094295097,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.281786941580756,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9138895183514744,
+      "n_strategic": 0.3525078919677307,
       "bbi_pool": 38.6305,
       "bbi_dfs": 40.2528,
       "pool_decomp": {
@@ -8380,7 +9580,8 @@
       "zeus_pool": 38.7333,
       "zeus_dfs": 40.3556,
       "zeus_rank_pool": 62,
-      "zeus_rank_dfs": 61
+      "zeus_rank_dfs": 61,
+      "hermes_own": 2.26
     },
     {
       "dg_id": 22833,
@@ -8399,11 +9600,19 @@
         "PGA 2025"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.42,
       "p_win": 0.00102,
       "p_top5": 0.009,
       "p_top10": 0.02617,
       "p_top20": 0.08177,
+      "n_talent": 0.21265900269179752,
+      "n_courseFit": 0.747564200966831,
+      "n_form": 0.035224285321578175,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.45017182130584193,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7664986870362497,
+      "n_strategic": 0.2830585759382673,
       "bbi_pool": 38.2404,
       "bbi_dfs": 38.3038,
       "pool_decomp": {
@@ -8441,7 +9650,8 @@
       "zeus_pool": 38.8142,
       "zeus_dfs": 38.8776,
       "zeus_rank_pool": 61,
-      "zeus_rank_dfs": 63
+      "zeus_rank_dfs": 63,
+      "hermes_own": 1.42
     },
     {
       "dg_id": 27900,
@@ -8457,11 +9667,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6700,
-      "proj_ownership": null,
+      "proj_ownership": 6.56,
       "p_win": 0.00405,
       "p_top5": 0.02828,
       "p_top10": 0.06831,
       "p_top20": 0.17007,
+      "n_talent": 0.16961261669585956,
+      "n_courseFit": 0.6356898168003501,
+      "n_form": 0.11109844377312726,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.3676975945017182,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.833251415308891,
+      "n_strategic": 0.5724307260610313,
       "bbi_pool": 37.6475,
       "bbi_dfs": 39.4323,
       "pool_decomp": {
@@ -8499,7 +9717,8 @@
       "zeus_pool": 37.6475,
       "zeus_dfs": 39.4323,
       "zeus_rank_pool": 64,
-      "zeus_rank_dfs": 62
+      "zeus_rank_dfs": 62,
+      "hermes_own": 6.56
     },
     {
       "dg_id": 11676,
@@ -8523,11 +9742,19 @@
         "PGA 2025"
       ],
       "salary": 6300,
-      "proj_ownership": null,
+      "proj_ownership": 4.48,
       "p_win": 0.00188,
       "p_top5": 0.01559,
       "p_top10": 0.04026,
       "p_top20": 0.11299,
+      "n_talent": 0.20083681441017767,
+      "n_courseFit": 0.7216244745556015,
+      "n_form": 0.06064212186813371,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.4261168384879725,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.789460951448072,
+      "n_strategic": 0.2300947036127675,
       "bbi_pool": 37.6179,
       "bbi_dfs": 38.1859,
       "pool_decomp": {
@@ -8565,7 +9792,8 @@
       "zeus_pool": 37.7148,
       "zeus_dfs": 38.2828,
       "zeus_rank_pool": 63,
-      "zeus_rank_dfs": 64
+      "zeus_rank_dfs": 64,
+      "hermes_own": 4.48
     },
     {
       "dg_id": 11049,
@@ -8587,11 +9815,19 @@
         "PGA 2017"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 1.76,
       "p_win": 0.00122,
       "p_top5": 0.01005,
       "p_top10": 0.02976,
       "p_top20": 0.09083,
+      "n_talent": 0.162553055763063,
+      "n_courseFit": 0.7476716932008053,
+      "n_form": 0.04124514885686643,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.3573883161512027,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7491131368155803,
+      "n_strategic": 0.23395299894773766,
       "bbi_pool": 36.3051,
       "bbi_dfs": 36.5682,
       "pool_decomp": {
@@ -8629,7 +9865,8 @@
       "zeus_pool": 36.7804,
       "zeus_dfs": 37.0435,
       "zeus_rank_pool": 65,
-      "zeus_rank_dfs": 66
+      "zeus_rank_dfs": 66,
+      "hermes_own": 1.76
     },
     {
       "dg_id": 24956,
@@ -8645,11 +9882,19 @@
       "hist_sg_arg": 0.0,
       "hist_sources": [],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 1.08,
       "p_win": 0.001,
       "p_top5": 0.00914,
       "p_top10": 0.02599,
       "p_top20": 0.07918,
+      "n_talent": 0.19456032058504968,
+      "n_courseFit": 0.6141078598871159,
+      "n_form": 0.03505998138077796,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.40893470790378006,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7798517554696236,
+      "n_strategic": 0.37179936864258156,
       "bbi_pool": 34.9239,
       "bbi_dfs": 35.9836,
       "pool_decomp": {
@@ -8687,7 +9932,8 @@
       "zeus_pool": 34.9239,
       "zeus_dfs": 35.9836,
       "zeus_rank_pool": 66,
-      "zeus_rank_dfs": 68
+      "zeus_rank_dfs": 68,
+      "hermes_own": 1.08
     },
     {
       "dg_id": 15556,
@@ -8711,11 +9957,19 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.67,
       "p_win": 0.00145,
       "p_top5": 0.01333,
       "p_top10": 0.03643,
       "p_top20": 0.10616,
+      "n_talent": 0.25253316266068626,
+      "n_courseFit": 0.5278158016803913,
+      "n_form": 0.05332506688599901,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.5395189003436426,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.7728196431312636,
+      "n_strategic": 0.21185548930199932,
       "bbi_pool": 34.9023,
       "bbi_dfs": 35.9185,
       "pool_decomp": {
@@ -8753,7 +10007,8 @@
       "zeus_pool": 34.5699,
       "zeus_dfs": 35.5861,
       "zeus_rank_pool": 67,
-      "zeus_rank_dfs": 69
+      "zeus_rank_dfs": 69,
+      "hermes_own": 1.67
     },
     {
       "dg_id": 28309,
@@ -8771,11 +10026,19 @@
         "WF 2023"
       ],
       "salary": 6900,
-      "proj_ownership": null,
+      "proj_ownership": 5.31,
       "p_win": 0.00758,
       "p_top5": 0.05003,
       "p_top10": 0.11111,
       "p_top20": 0.25189,
+      "n_talent": 0.43259442904599565,
+      "n_courseFit": 0.0,
+      "n_form": 0.1898974557479665,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.7903780068728522,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9297716804129647,
+      "n_strategic": 0.7018589968432128,
       "bbi_pool": 34.7701,
       "bbi_dfs": 39.2462,
       "pool_decomp": {
@@ -8813,7 +10076,8 @@
       "zeus_pool": 32.6166,
       "zeus_dfs": 37.0927,
       "zeus_rank_pool": 69,
-      "zeus_rank_dfs": 65
+      "zeus_rank_dfs": 65,
+      "hermes_own": 5.31
     },
     {
       "dg_id": 23475,
@@ -8831,11 +10095,19 @@
         "PGA 2025"
       ],
       "salary": 6400,
-      "proj_ownership": null,
+      "proj_ownership": 1.85,
       "p_win": 0.00292,
       "p_top5": 0.02412,
       "p_top10": 0.06098,
       "p_top20": 0.15723,
+      "n_talent": 0.32908042090558837,
+      "n_courseFit": 0.25519129064692464,
+      "n_form": 0.09709761165663425,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.6597938144329897,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.9063867177506013,
+      "n_strategic": 0.4907050157839355,
       "bbi_pool": 34.0379,
       "bbi_dfs": 37.3932,
       "pool_decomp": {
@@ -8873,7 +10145,8 @@
       "zeus_pool": 32.6474,
       "zeus_dfs": 36.0027,
       "zeus_rank_pool": 68,
-      "zeus_rank_dfs": 67
+      "zeus_rank_dfs": 67,
+      "hermes_own": 1.85
     },
     {
       "dg_id": 15575,
@@ -8895,11 +10168,19 @@
         "PGA 2025"
       ],
       "salary": 6200,
-      "proj_ownership": null,
+      "proj_ownership": 1.28,
       "p_win": 0.00095,
       "p_top5": 0.00847,
       "p_top10": 0.02521,
       "p_top20": 0.07819,
+      "n_talent": 0.12322441229113265,
+      "n_courseFit": 0.5738982138544805,
+      "n_form": 0.033427900518860375,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.28865979381443296,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.6480946776704852,
+      "n_strategic": 0.35145562960364785,
       "bbi_pool": 31.1221,
       "bbi_dfs": 31.5572,
       "pool_decomp": {
@@ -8937,7 +10218,8 @@
       "zeus_pool": 31.3507,
       "zeus_dfs": 31.7858,
       "zeus_rank_pool": 70,
-      "zeus_rank_dfs": 70
+      "zeus_rank_dfs": 70,
+      "hermes_own": 1.28
     },
     {
       "dg_id": 15980,
@@ -8955,11 +10237,19 @@
         "WF 2023"
       ],
       "salary": 6100,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00042,
       "p_top5": 0.00558,
       "p_top10": 0.01772,
       "p_top20": 0.06254,
+      "n_talent": 0.1753235349606003,
+      "n_courseFit": 0.4682565186703795,
+      "n_form": 0.020332329988680193,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.3848797250859106,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.5897455931261173,
+      "n_strategic": 0.2735882146615223,
       "bbi_pool": 29.7229,
       "bbi_dfs": 29.726,
       "pool_decomp": {
@@ -8997,7 +10287,8 @@
       "zeus_pool": 31.1564,
       "zeus_dfs": 31.1595,
       "zeus_rank_pool": 71,
-      "zeus_rank_dfs": 71
+      "zeus_rank_dfs": 71,
+      "hermes_own": 0.79
     },
     {
       "dg_id": 18628,
@@ -9015,11 +10306,19 @@
         "PGA 2025"
       ],
       "salary": 6000,
-      "proj_ownership": null,
+      "proj_ownership": 0.79,
       "p_win": 0.00012,
       "p_top5": 0.00142,
       "p_top10": 0.0058,
       "p_top20": 0.0262,
+      "n_talent": 0.0,
+      "n_courseFit": 0.5869340784284117,
+      "n_form": 0.0,
+      "n_cutSafety": 0.5,
+      "n_leverage": 0.0,
+      "n_contrarian": 0.5,
+      "n_dfsValue": 0.30556428681076925,
+      "n_strategic": 0.0,
       "bbi_pool": 22.9413,
       "bbi_dfs": 20.7677,
       "pool_decomp": {
@@ -9057,7 +10356,8 @@
       "zeus_pool": 24.2567,
       "zeus_dfs": 22.0831,
       "zeus_rank_pool": 72,
-      "zeus_rank_dfs": 72
+      "zeus_rank_dfs": 72,
+      "hermes_own": 0.79
     }
   ],
   "_public_scrubbed": true
