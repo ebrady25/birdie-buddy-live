@@ -19,6 +19,23 @@
       "cash_rate_pct": 100.0
     },
     {
+      "event": "Truist Championship",
+      "event_id": 480,
+      "year": 2026,
+      "completed": "2026-05-10",
+      "our_best": 484.0,
+      "our_best_id": "L3",
+      "pool_hindsight": 541.0,
+      "field_optimal": 630.5,
+      "capture_rate_pct": 76.76,
+      "n_lineups": 11,
+      "n_cash": 4,
+      "n_top_1pct": 7,
+      "n_top_001pct": 0,
+      "cashed_total": 11,
+      "cash_rate_pct": 100.0
+    },
+    {
       "event": "Cadillac Championship",
       "event_id": 556,
       "year": 2026,
@@ -37,11 +54,11 @@
     }
   ],
   "season": {
-    "n_events": 2,
-    "mean_capture_rate_pct": 85.09,
+    "n_events": 3,
+    "mean_capture_rate_pct": 82.31,
     "mean_cash_rate_pct": 100.0,
-    "total_cashed": 24,
-    "total_lineups": 24
+    "total_cashed": 35,
+    "total_lineups": 35
   },
-  "last_updated": "2026-05-04T13:38:21Z"
+  "last_updated": "2026-05-11T13:37:52Z"
 }

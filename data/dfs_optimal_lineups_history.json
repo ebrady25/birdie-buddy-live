@@ -66,6 +66,70 @@
       "n_optimal_in_our_pool": 1
     },
     {
+      "event": "Truist Championship",
+      "event_id": 480,
+      "year": 2026,
+      "completed": "2026-05-10",
+      "optimal": {
+        "total": 630.5,
+        "salary": 46600,
+        "players": [
+          {
+            "dg_id": 21407,
+            "name": "Reitan, Kristoffer",
+            "salary": 6900,
+            "total_pts": 124.0,
+            "ownership": 0.0771,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 23602,
+            "name": "Hojgaard, Nicolai",
+            "salary": 7800,
+            "total_pts": 107.5,
+            "ownership": 0.1437,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 12965,
+            "name": "Fowler, Rickie",
+            "salary": 9000,
+            "total_pts": 105.0,
+            "ownership": 0.0728,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 17488,
+            "name": "Im, Sungjae",
+            "salary": 6300,
+            "total_pts": 101.0,
+            "ownership": 0.0521,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 25362,
+            "name": "Fitzpatrick, Alex",
+            "salary": 6800,
+            "total_pts": 98.0,
+            "ownership": 0.10529999999999999,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 12294,
+            "name": "Fleetwood, Tommy",
+            "salary": 9800,
+            "total_pts": 95.0,
+            "ownership": 0.09910000000000001,
+            "in_our_pool": true
+          }
+        ]
+      },
+      "our_best_actual": 484.0,
+      "our_best_id": "L3",
+      "capture_rate_pct": 76.76,
+      "n_optimal_in_our_pool": 2
+    },
+    {
       "event": "Cadillac Championship",
       "event_id": 556,
       "year": 2026,
@@ -130,5 +194,5 @@
       "n_optimal_in_our_pool": 3
     }
   ],
-  "last_updated": "2026-05-04T13:38:21Z"
+  "last_updated": "2026-05-11T13:37:52Z"
 }

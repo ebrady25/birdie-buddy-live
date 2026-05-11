@@ -47,6 +47,51 @@
       }
     },
     {
+      "event": "Truist Championship",
+      "event_id": 480,
+      "year": 2026,
+      "completed": "2026-05-10",
+      "scored_at_utc": "2026-05-11T13:37:55Z",
+      "n_compared": 71,
+      "summary": {
+        "mae": 9.42,
+        "bias": 7.38,
+        "rmse": 29.18,
+        "clean_mae": 2.06,
+        "clean_bias": -0.14,
+        "clean_rmse": 2.64,
+        "n_suspect_excluded": 5,
+        "suspect_threshold_pct": 50.0
+      },
+      "by_tier": {
+        "studs": {
+          "n": 3,
+          "mae": 2.68,
+          "bias": 2.68
+        },
+        "anchors": {
+          "n": 13,
+          "mae": 3.11,
+          "bias": 2.69
+        },
+        "mid-tier": {
+          "n": 15,
+          "mae": 2.44,
+          "bias": -1.73
+        },
+        "value": {
+          "n": 25,
+          "mae": 1.65,
+          "bias": -1.2
+        },
+        "punt": {
+          "n": 15,
+          "mae": 36.18,
+          "bias": 35.78
+        }
+      }
+    },
+    {
       "event": "Cadillac Championship",
       "event_id": 556,
       "year": 2026,
@@ -93,9 +138,9 @@
     }
   ],
   "season": {
-    "n_events": 2,
-    "mean_mae": 10.55,
-    "mean_bias": 8.82
+    "n_events": 3,
+    "mean_mae": 10.18,
+    "mean_bias": 8.34
   },
-  "last_updated": "2026-05-04T13:38:24Z"
+  "last_updated": "2026-05-11T13:37:55Z"
 }
