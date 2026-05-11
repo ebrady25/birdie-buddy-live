@@ -143,6 +143,32 @@
         "strategic",
         "dfsValue"
       ]
+    },
+    {
+      "week": 14,
+      "event": "Truist Championship",
+      "event_id": 480,
+      "date": "2026-05-10",
+      "bbi_brier_top10": 0.1209,
+      "bbi_brier_win": 0.0144,
+      "bbi_brier_top5": 0.0684,
+      "bbi_brier_top20": 0.1862,
+      "bbi_skill_top10_pct": 0.11,
+      "bbi_skill_win_pct": -3.96,
+      "bbi_spearman": 0.1766,
+      "winning_factors": [
+        "form",
+        "ceiling",
+        "floor"
+      ],
+      "underperforming_factors": [
+        "cutSafety",
+        "contrarian",
+        "dfsValue"
+      ],
+      "notes": "Reitan surprise win from rank 43. form (+1.243) and ceiling (+1.222) best-performing factors for actual top-10. dfsValue underperformed (0.848). Skill% near 0 for top_10 \u2014 model barely above naive baseline on probability calibration this week.",
+      "logged_utc": "2026-05-11T13:11:22.010347+00:00"
     }
-  ]
+  ],
+  "last_updated": "2026-05-11T13:11:22.010353+00:00"
 }

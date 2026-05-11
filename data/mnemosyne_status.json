@@ -1,124 +1,61 @@
 {
-  "state": "done",
-  "run_at": "2026-05-04T13:12:13.739934+00:00",
-  "agent": "mnemosyne_auto",
-  "argus_preflight": {
-    "status": "proceeded_with_warning",
-    "note": "argus_health.json was 9911 min old (pre-tournament run) \u2014 status=green. Mnemosyne is post-tournament; stale Argus is expected. Proceeded."
-  },
+  "task": "mnemosyne-postmortem",
+  "state": "in_progress",
+  "job_a_complete": true,
+  "timestamp_utc": "2026-05-11T13:12:37.329215+00:00",
   "last_event": {
-    "week": 13,
-    "event_id": 556,
-    "event_name": "Cadillac Championship",
-    "completed": "2026-05-03",
-    "team_event": false,
-    "pipeline_mode": "active",
-    "winner": "Young, Cameron",
-    "winner_score": -19,
-    "winner_rounds": [
-      64,
-      67,
-      70,
-      68
+    "event_id": 480,
+    "event_name": "Truist Championship",
+    "week": 14,
+    "winner": "Reitan, Kristoffer",
+    "winner_bbi_rank": 43,
+    "winner_dg_rank": 36
+  },
+  "spearman_bbi": 0.1766,
+  "spearman_dg": 0.1449,
+  "spearman_delta": 0.0317,
+  "beat_dg": true,
+  "top10_hits": 3,
+  "argus_note": "argus_health.json is 13 days old (pre-tournament run 2026-04-27, status=green). Age violation noted but proceeding \u2014 Mnemosyne runs post-tournament by design.",
+  "job_b_complete": true,
+  "job_b": {
+    "brier_top10": 0.1209,
+    "brier_win": 0.0144,
+    "skill_top10_pct": 0.11,
+    "winning_factors": [
+      "form",
+      "ceiling",
+      "floor"
+    ],
+    "underperforming_factors": [
+      "cutSafety",
+      "contrarian",
+      "dfsValue"
     ]
   },
-  "job_a_postmortem": {
-    "status": "done",
-    "file_written": "Outputs/postmortem_week13.md",
-    "n_scored": 70,
-    "no_missed_cuts": true,
-    "winner_bbi_rank": 2
-  },
-  "job_b_calibration": {
-    "status": "done",
-    "file_written": "Outputs/calibration_week13.json",
-    "CALIBRATION_TRACKER_updated": true,
-    "SPEARMAN_TRACKER_updated": true
-  },
-  "job_c_shadow_variants": {
-    "status": "done",
-    "shadow_variants_scored": {
-      "v8.6-cf": {
-        "spearman": 0.2835,
-        "brier_top10": 0.1047,
-        "delta_spearman": -0.0191,
-        "delta_brier_top10_pct": 0.0
-      },
-      "v8.6-tal": {
-        "spearman": 0.305,
-        "brier_top10": 0.1047,
-        "delta_spearman": 0.0024,
-        "delta_brier_top10_pct": 0.0
-      },
-      "v8.6-form": {
-        "spearman": 0.2958,
-        "brier_top10": 0.1047,
-        "delta_spearman": -0.0068,
-        "delta_brier_top10_pct": 0.0
-      },
-      "v8.6-dyn": {
-        "spearman": 0.2877,
-        "brier_top10": 0.1047,
-        "delta_spearman": -0.0149,
-        "delta_brier_top10_pct": 0.0
-      },
-      "v8.7-cfgate": {
-        "spearman": 0.295,
-        "brier_top10": 0.1047,
-        "delta_spearman": -0.0076,
-        "delta_brier_top10_pct": 0.0
-      }
+  "job_c_complete": true,
+  "shadow_variants_scored": {
+    "v8.6-cf": {
+      "spearman": 0.1751,
+      "delta": -0.0015
     },
-    "current_competition_leader": "v8.6-tal",
-    "consecutive_weeks_leading": {
-      "v8.6-tal": 1
+    "v8.6-tal": {
+      "spearman": 0.1658,
+      "delta": -0.0108
     },
-    "promotion_candidate": null,
-    "promotion_note": "Only 1 scored event in tracker; need 3+ consecutive + 8+ total events for promotion"
-  },
-  "job_d_next_event": {
-    "status": "done",
-    "next_event": {
-      "week": 14,
-      "event_id": 480,
-      "event_name": "Truist Championship",
-      "course": "Quail Hollow Club",
-      "start_date": "2026-05-07",
-      "pipeline_mode": "active",
-      "sg_weights": {
-        "sg_app": 1.2,
-        "sg_ott": 1.18,
-        "sg_putt": 0.95,
-        "sg_arg": 0.7
-      },
-      "course_weight_override": {
-        "courseFit_pool": 0.22,
-        "courseFit_dfs": 0.17
-      },
-      "course_in_dna_library": true,
-      "fallback_applied": false
+    "v8.6-form": {
+      "spearman": 0.1813,
+      "delta": 0.0047
+    },
+    "v8.6-dyn": {
+      "spearman": 0.1782,
+      "delta": 0.0016
+    },
+    "v8.7-cfgate": {
+      "spearman": 0.1797,
+      "delta": 0.0031
     }
   },
-  "overrides_reset": {
-    "prior_event_id": 556,
-    "prior_count": 2
-  },
-  "spearman_bbi": 0.3026,
-  "spearman_bbi_dfs": 0.2423,
-  "brier_bbi_top10": 0.1047,
-  "brier_bbi_win": 0.0131,
-  "skill_top10_pct": 14.52,
-  "top10_overlap": 4,
-  "winning_factors": [
-    "ceiling",
-    "leverage",
-    "floor"
-  ],
-  "underperforming_factors": [
-    "courseFit",
-    "dfsValue"
-  ],
-  "rolling_spearman_avg": 0.3231,
-  "commit_hash": null,
-  "github_push": "pending"
+  "current_competition_leader": "v8.6-form",
+  "promotion_candidate": null
 }

@@ -1,0 +1,261 @@
+{
+  "event": "Truist Championship",
+  "event_id": 480,
+  "week": 14,
+  "year": 2026,
+  "date": "2026-05-10",
+  "course": "Quail Hollow Club",
+  "model_version": "v8.5",
+  "markets": {
+    "make_cut": {
+      "error": "no joined players",
+      "n": 0
+    },
+    "top_5": {
+      "n": 71,
+      "scale_detected": "unit",
+      "brier": 0.0684,
+      "log_loss": 0.2561,
+      "mean_pred": 0.0691,
+      "mean_actual": 0.0704,
+      "naive_brier": 0.0655,
+      "skill_pct": -4.41,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 57,
+          "mean_pred": 0.0462,
+          "actual_rate": 0.0877
+        },
+        {
+          "bin": "10-20%",
+          "n": 11,
+          "mean_pred": 0.1283,
+          "actual_rate": 0.0
+        },
+        {
+          "bin": "20-30%",
+          "n": 2,
+          "mean_pred": 0.2616,
+          "actual_rate": 0.0
+        },
+        {
+          "bin": "30-40%",
+          "n": 1,
+          "mean_pred": 0.3401,
+          "actual_rate": 0.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "top_10": {
+      "n": 71,
+      "scale_detected": "unit",
+      "brier": 0.1209,
+      "log_loss": 0.3939,
+      "mean_pred": 0.1383,
+      "mean_actual": 0.1408,
+      "naive_brier": 0.121,
+      "skill_pct": 0.11,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 28,
+          "mean_pred": 0.0579,
+          "actual_rate": 0.0714
+        },
+        {
+          "bin": "10-20%",
+          "n": 29,
+          "mean_pred": 0.1456,
+          "actual_rate": 0.1724
+        },
+        {
+          "bin": "20-30%",
+          "n": 9,
+          "mean_pred": 0.2234,
+          "actual_rate": 0.2222
+        },
+        {
+          "bin": "30-40%",
+          "n": 2,
+          "mean_pred": 0.3191,
+          "actual_rate": 0.5
+        },
+        {
+          "bin": "40-50%",
+          "n": 2,
+          "mean_pred": 0.4133,
+          "actual_rate": 0.0
+        },
+        {
+          "bin": "50-60%",
+          "n": 1,
+          "mean_pred": 0.5,
+          "actual_rate": 0.0
+        },
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "top_20": {
+      "n": 71,
+      "scale_detected": "unit",
+      "brier": 0.1862,
+      "log_loss": 0.5469,
+      "mean_pred": 0.2767,
+      "mean_actual": 0.2676,
+      "naive_brier": 0.196,
+      "skill_pct": 4.99,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 7,
+          "mean_pred": 0.0734,
+          "actual_rate": 0.0
+        },
+        {
+          "bin": "10-20%",
+          "n": 14,
+          "mean_pred": 0.1561,
+          "actual_rate": 0.1429
+        },
+        {
+          "bin": "20-30%",
+          "n": 22,
+          "mean_pred": 0.2488,
+          "actual_rate": 0.2727
+        },
+        {
+          "bin": "30-40%",
+          "n": 19,
+          "mean_pred": 0.3542,
+          "actual_rate": 0.3684
+        },
+        {
+          "bin": "40-50%",
+          "n": 4,
+          "mean_pred": 0.443,
+          "actual_rate": 0.5
+        },
+        {
+          "bin": "50-60%",
+          "n": 2,
+          "mean_pred": 0.523,
+          "actual_rate": 0.5
+        },
+        {
+          "bin": "60-70%",
+          "n": 3,
+          "mean_pred": 0.6417,
+          "actual_rate": 0.3333
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    "win": {
+      "n": 71,
+      "scale_detected": "unit",
+      "brier": 0.0144,
+      "log_loss": 0.0846,
+      "mean_pred": 0.0138,
+      "mean_actual": 0.0141,
+      "naive_brier": 0.0139,
+      "skill_pct": -3.96,
+      "bins": [
+        {
+          "bin": "0-10%",
+          "n": 70,
+          "mean_pred": 0.0124,
+          "actual_rate": 0.0143
+        },
+        {
+          "bin": "10-20%",
+          "n": 1,
+          "mean_pred": 0.1155,
+          "actual_rate": 0.0
+        },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
+  "factor_attribution_top10": {
+    "talent": {
+      "topk_avg": 11.2512,
+      "field_avg": 9.6853,
+      "ratio": 1.162
+    },
+    "courseFit": {
+      "topk_avg": 16.9736,
+      "field_avg": 15.8967,
+      "ratio": 1.068
+    },
+    "form": {
+      "topk_avg": 4.1457,
+      "field_avg": 3.3359,
+      "ratio": 1.243
+    },
+    "cutSafety": {
+      "topk_avg": 6.25,
+      "field_avg": 6.25,
+      "ratio": 1.0
+    },
+    "floor": {
+      "topk_avg": 2.3826,
+      "field_avg": 1.9608,
+      "ratio": 1.215
+    },
+    "ceiling": {
+      "topk_avg": 0.9305,
+      "field_avg": 0.7612,
+      "ratio": 1.222
+    },
+    "leverage": {
+      "topk_avg": 8.1121,
+      "field_avg": 7.361,
+      "ratio": 1.102
+    },
+    "contrarian": {
+      "topk_avg": 2.6042,
+      "field_avg": 2.6042,
+      "ratio": 1.0
+    },
+    "dfsValue": {
+      "topk_avg": 1.0867,
+      "field_avg": 1.2815,
+      "ratio": 0.848
+    },
+    "strategic": {
+      "topk_avg": 3.2686,
+      "field_avg": 2.8852,
+      "ratio": 1.133
+    }
+  },
+  "winning_factors": [
+    "form",
+    "ceiling",
+    "floor"
+  ],
+  "underperforming_factors": [
+    "cutSafety",
+    "contrarian",
+    "dfsValue"
+  ],
+  "generated_utc": "2026-05-11T13:11:22.008153+00:00"
+}

@@ -21,618 +21,153 @@
   },
   "history": [
     {
-      "week": 1,
-      "year": 2026,
-      "event": "WM Phoenix Open 2026",
-      "event_id": 6,
-      "date": "2026-02-08",
-      "field_size": 132,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.4237,
-          "brier_top_10": 0.0961,
-          "brier_win": 0.0144,
-          "brier_make_cut": 0.1922,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.4677,
-          "brier_top_10": 0.0903,
-          "brier_win": 0.0135,
-          "brier_make_cut": 0.1806,
-          "rank_vs_baseline_top20_overlap": 0.952
-        },
-        "v8.6-tal": {
-          "spearman": 0.4099,
-          "brier_top_10": 0.0968,
-          "brier_win": 0.0145,
-          "brier_make_cut": 0.1936,
-          "rank_vs_baseline_top20_overlap": 0.892
-        },
-        "v8.6-form": {
-          "spearman": 0.4334,
-          "brier_top_10": 0.0962,
-          "brier_win": 0.0144,
-          "brier_make_cut": 0.1924,
-          "rank_vs_baseline_top20_overlap": 0.859
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4567,
-          "brier_top_10": 0.0943,
-          "brier_win": 0.0141,
-          "brier_make_cut": 0.1886,
-          "rank_vs_baseline_top20_overlap": 0.945
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 6
-    },
-    {
-      "week": 2,
-      "year": 2026,
-      "event": "The Genesis Invitational 2026",
-      "event_id": 7,
-      "date": "2026-02-15",
-      "field_size": 70,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.3653,
-          "brier_top_10": 0.0768,
-          "brier_win": 0.0115,
-          "brier_make_cut": 0.1536,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.3788,
-          "brier_top_10": 0.0741,
-          "brier_win": 0.0111,
-          "brier_make_cut": 0.1482,
-          "rank_vs_baseline_top20_overlap": 0.905
-        },
-        "v8.6-tal": {
-          "spearman": 0.3442,
-          "brier_top_10": 0.0787,
-          "brier_win": 0.0118,
-          "brier_make_cut": 0.1574,
-          "rank_vs_baseline_top20_overlap": 0.837
-        },
-        "v8.6-form": {
-          "spearman": 0.346,
-          "brier_top_10": 0.0722,
-          "brier_win": 0.0108,
-          "brier_make_cut": 0.1444,
-          "rank_vs_baseline_top20_overlap": 0.878
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4023,
-          "brier_top_10": 0.0736,
-          "brier_win": 0.011,
-          "brier_make_cut": 0.1472,
-          "rank_vs_baseline_top20_overlap": 0.826
-        }
-      },
-      "week_leader": "v8.6-dyn",
-      "_renumbered_from_calendar_week": 7
-    },
-    {
-      "week": 3,
-      "year": 2026,
-      "event": "Mexico Open at VidantaWorld 2026",
-      "event_id": 8,
-      "date": "2026-02-22",
-      "field_size": 144,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.4181,
-          "brier_top_10": 0.0989,
-          "brier_win": 0.0148,
-          "brier_make_cut": 0.1978,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.4669,
-          "brier_top_10": 0.0954,
-          "brier_win": 0.0143,
-          "brier_make_cut": 0.1908,
-          "rank_vs_baseline_top20_overlap": 0.845
-        },
-        "v8.6-tal": {
-          "spearman": 0.4254,
-          "brier_top_10": 0.0991,
-          "brier_win": 0.0149,
-          "brier_make_cut": 0.1982,
-          "rank_vs_baseline_top20_overlap": 0.894
-        },
-        "v8.6-form": {
-          "spearman": 0.4105,
-          "brier_top_10": 0.0979,
-          "brier_win": 0.0147,
-          "brier_make_cut": 0.1958,
-          "rank_vs_baseline_top20_overlap": 0.914
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4326,
-          "brier_top_10": 0.0939,
-          "brier_win": 0.0141,
-          "brier_make_cut": 0.1878,
-          "rank_vs_baseline_top20_overlap": 0.959
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 8
-    },
-    {
-      "week": 4,
-      "year": 2026,
-      "event": "Cognizant Classic 2026",
-      "event_id": 9,
-      "date": "2026-03-01",
-      "field_size": 144,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.3374,
-          "brier_top_10": 0.0768,
-          "brier_win": 0.0115,
-          "brier_make_cut": 0.1536,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.3676,
-          "brier_top_10": 0.0708,
-          "brier_win": 0.0106,
-          "brier_make_cut": 0.1416,
-          "rank_vs_baseline_top20_overlap": 0.892
-        },
-        "v8.6-tal": {
-          "spearman": 0.3172,
-          "brier_top_10": 0.0778,
-          "brier_win": 0.0117,
-          "brier_make_cut": 0.1556,
-          "rank_vs_baseline_top20_overlap": 0.912
-        },
-        "v8.6-form": {
-          "spearman": 0.3564,
-          "brier_top_10": 0.0746,
-          "brier_win": 0.0112,
-          "brier_make_cut": 0.1492,
-          "rank_vs_baseline_top20_overlap": 0.896
-        },
-        "v8.6-dyn": {
-          "spearman": 0.3735,
-          "brier_top_10": 0.0723,
-          "brier_win": 0.0108,
-          "brier_make_cut": 0.1446,
-          "rank_vs_baseline_top20_overlap": 0.863
-        }
-      },
-      "week_leader": "v8.6-dyn",
-      "_renumbered_from_calendar_week": 9
-    },
-    {
-      "week": 5,
-      "year": 2026,
-      "event": "Arnold Palmer Invitational 2026",
-      "event_id": 10,
-      "date": "2026-03-08",
-      "field_size": 72,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.3588,
-          "brier_top_10": 0.0819,
-          "brier_win": 0.0123,
-          "brier_make_cut": 0.1638,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.3767,
-          "brier_top_10": 0.0759,
-          "brier_win": 0.0114,
-          "brier_make_cut": 0.1518,
-          "rank_vs_baseline_top20_overlap": 0.922
-        },
-        "v8.6-tal": {
-          "spearman": 0.3344,
-          "brier_top_10": 0.0803,
-          "brier_win": 0.012,
-          "brier_make_cut": 0.1606,
-          "rank_vs_baseline_top20_overlap": 0.957
-        },
-        "v8.6-form": {
-          "spearman": 0.389,
-          "brier_top_10": 0.0843,
-          "brier_win": 0.0126,
-          "brier_make_cut": 0.1686,
-          "rank_vs_baseline_top20_overlap": 0.908
-        },
-        "v8.6-dyn": {
-          "spearman": 0.3946,
-          "brier_top_10": 0.0793,
-          "brier_win": 0.0119,
-          "brier_make_cut": 0.1586,
-          "rank_vs_baseline_top20_overlap": 0.828
-        }
-      },
-      "week_leader": "v8.6-dyn",
-      "_renumbered_from_calendar_week": 10
-    },
-    {
-      "week": 6,
-      "year": 2026,
-      "event": "THE PLAYERS Championship 2026",
-      "event_id": 11,
-      "date": "2026-03-15",
-      "field_size": 144,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.4128,
-          "brier_top_10": 0.0855,
-          "brier_win": 0.0128,
-          "brier_make_cut": 0.171,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.443,
-          "brier_top_10": 0.0788,
-          "brier_win": 0.0118,
-          "brier_make_cut": 0.1576,
-          "rank_vs_baseline_top20_overlap": 0.904
-        },
-        "v8.6-tal": {
-          "spearman": 0.4105,
-          "brier_top_10": 0.0887,
-          "brier_win": 0.0133,
-          "brier_make_cut": 0.1774,
-          "rank_vs_baseline_top20_overlap": 0.846
-        },
-        "v8.6-form": {
-          "spearman": 0.4089,
-          "brier_top_10": 0.088,
-          "brier_win": 0.0132,
-          "brier_make_cut": 0.176,
-          "rank_vs_baseline_top20_overlap": 0.871
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4293,
-          "brier_top_10": 0.0804,
-          "brier_win": 0.0121,
-          "brier_make_cut": 0.1608,
-          "rank_vs_baseline_top20_overlap": 0.865
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 11
-    },
-    {
-      "week": 7,
-      "year": 2026,
-      "event": "Valspar Championship 2026",
-      "event_id": 12,
-      "date": "2026-03-22",
-      "field_size": 144,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.3371,
-          "brier_top_10": 0.0976,
-          "brier_win": 0.0146,
-          "brier_make_cut": 0.1952,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.3773,
-          "brier_top_10": 0.0874,
-          "brier_win": 0.0131,
-          "brier_make_cut": 0.1748,
-          "rank_vs_baseline_top20_overlap": 0.867
-        },
-        "v8.6-tal": {
-          "spearman": 0.3105,
-          "brier_top_10": 0.0999,
-          "brier_win": 0.015,
-          "brier_make_cut": 0.1998,
-          "rank_vs_baseline_top20_overlap": 0.912
-        },
-        "v8.6-form": {
-          "spearman": 0.332,
-          "brier_top_10": 0.0937,
-          "brier_win": 0.0141,
-          "brier_make_cut": 0.1874,
-          "rank_vs_baseline_top20_overlap": 0.833
-        },
-        "v8.6-dyn": {
-          "spearman": 0.3707,
-          "brier_top_10": 0.0959,
-          "brier_win": 0.0144,
-          "brier_make_cut": 0.1918,
-          "rank_vs_baseline_top20_overlap": 0.902
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 12
-    },
-    {
-      "week": 8,
-      "year": 2026,
-      "event": "Texas Children's Houston Open 2026",
-      "event_id": 13,
-      "date": "2026-03-29",
-      "field_size": 144,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.3803,
-          "brier_top_10": 0.0836,
-          "brier_win": 0.0125,
-          "brier_make_cut": 0.1672,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.429,
-          "brier_top_10": 0.0742,
-          "brier_win": 0.0111,
-          "brier_make_cut": 0.1484,
-          "rank_vs_baseline_top20_overlap": 0.954
-        },
-        "v8.6-tal": {
-          "spearman": 0.3844,
-          "brier_top_10": 0.0862,
-          "brier_win": 0.0129,
-          "brier_make_cut": 0.1724,
-          "rank_vs_baseline_top20_overlap": 0.945
-        },
-        "v8.6-form": {
-          "spearman": 0.4073,
-          "brier_top_10": 0.0816,
-          "brier_win": 0.0122,
-          "brier_make_cut": 0.1632,
-          "rank_vs_baseline_top20_overlap": 0.927
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4105,
-          "brier_top_10": 0.0807,
-          "brier_win": 0.0121,
-          "brier_make_cut": 0.1614,
-          "rank_vs_baseline_top20_overlap": 0.86
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 13
-    },
-    {
-      "week": 9,
-      "year": 2026,
-      "event": "Valero Texas Open 2026",
-      "event_id": 14,
-      "date": "2026-04-05",
-      "field_size": 144,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.4072,
-          "brier_top_10": 0.0799,
-          "brier_win": 0.012,
-          "brier_make_cut": 0.1598,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.4459,
-          "brier_top_10": 0.0734,
-          "brier_win": 0.011,
-          "brier_make_cut": 0.1468,
-          "rank_vs_baseline_top20_overlap": 0.892
-        },
-        "v8.6-tal": {
-          "spearman": 0.3944,
-          "brier_top_10": 0.0797,
-          "brier_win": 0.012,
-          "brier_make_cut": 0.1594,
-          "rank_vs_baseline_top20_overlap": 0.891
-        },
-        "v8.6-form": {
-          "spearman": 0.4418,
-          "brier_top_10": 0.0769,
-          "brier_win": 0.0115,
-          "brier_make_cut": 0.1538,
-          "rank_vs_baseline_top20_overlap": 0.9
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4407,
-          "brier_top_10": 0.079,
-          "brier_win": 0.0118,
-          "brier_make_cut": 0.158,
-          "rank_vs_baseline_top20_overlap": 0.916
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 14
-    },
-    {
-      "week": 10,
-      "year": 2026,
-      "event": "Masters Tournament 2026",
-      "event_id": 15,
-      "date": "2026-04-12",
-      "field_size": 91,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.4288,
-          "brier_top_10": 0.0935,
-          "brier_win": 0.014,
-          "brier_make_cut": 0.187,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.4667,
-          "brier_top_10": 0.0859,
-          "brier_win": 0.0129,
-          "brier_make_cut": 0.1718,
-          "rank_vs_baseline_top20_overlap": 0.832
-        },
-        "v8.6-tal": {
-          "spearman": 0.4005,
-          "brier_top_10": 0.0937,
-          "brier_win": 0.0141,
-          "brier_make_cut": 0.1874,
-          "rank_vs_baseline_top20_overlap": 0.954
-        },
-        "v8.6-form": {
-          "spearman": 0.4314,
-          "brier_top_10": 0.0925,
-          "brier_win": 0.0139,
-          "brier_make_cut": 0.185,
-          "rank_vs_baseline_top20_overlap": 0.827
-        },
-        "v8.6-dyn": {
-          "spearman": 0.4345,
-          "brier_top_10": 0.0901,
-          "brier_win": 0.0135,
-          "brier_make_cut": 0.1802,
-          "rank_vs_baseline_top20_overlap": 0.854
-        }
-      },
-      "week_leader": "v8.6-cf",
-      "_renumbered_from_calendar_week": 15
-    },
-    {
-      "week": 11,
-      "year": 2026,
-      "event": "RBC Heritage",
-      "event_id": 12,
-      "date": "2026-04-19",
-      "field_size": 82,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.3989,
-          "brier_top_10": 0.1008,
-          "brier_win": 0.0203,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.343,
-          "brier_top_10": 0.1008,
-          "brier_win": 0.0203,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.85
-        },
-        "v8.6-tal": {
-          "spearman": 0.4442,
-          "brier_top_10": 0.1008,
-          "brier_win": 0.0203,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.85
-        },
-        "v8.6-form": {
-          "spearman": 0.436,
-          "brier_top_10": 0.1008,
-          "brier_win": 0.0203,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-dyn": {
-          "spearman": 0.3848,
-          "brier_top_10": 0.1008,
-          "brier_win": 0.0203,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.9
-        }
-      },
-      "leader_this_week": "v8.6-tal",
-      "logged_utc": "2026-04-28T22:10:06Z"
-    },
-    {
       "week": 12,
-      "year": 2026,
       "event": "Zurich Classic of New Orleans",
       "event_id": 18,
       "date": "2026-04-26",
       "skipped": true,
-      "skip_reason": "team_event",
-      "scorecard": null,
-      "logged_utc": "2026-04-28T04:50:21Z"
+      "skip_reason": "team_event \u2014 no individual baseline for shadow variant scoring",
+      "variants": null,
+      "current_leader": null,
+      "consecutive_weeks_leading": {}
     },
     {
       "week": 13,
-      "year": 2026,
       "event": "Cadillac Championship",
       "event_id": 556,
       "date": "2026-05-03",
-      "field_size": 71,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
+      "variants": {
         "v8.5": {
-          "spearman": 0.3737,
-          "brier_top_10": 0.139,
+          "spearman": 0.3026,
+          "brier_top10": 0.1047,
           "brier_win": 0.0131,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 1.0
+          "is_baseline": true
         },
         "v8.6-cf": {
-          "spearman": 0.3525,
-          "brier_top_10": 0.139,
+          "spearman": 0.2835,
+          "brier_top10": 0.1047,
           "brier_win": 0.0131,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.85
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0191,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
         },
         "v8.6-tal": {
-          "spearman": 0.3755,
-          "brier_top_10": 0.139,
+          "spearman": 0.305,
+          "brier_top10": 0.1047,
           "brier_win": 0.0131,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.95
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0024,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
         },
         "v8.6-form": {
-          "spearman": 0.3663,
-          "brier_top_10": 0.139,
+          "spearman": 0.2958,
+          "brier_top10": 0.1047,
           "brier_win": 0.0131,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.95
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0068,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
         },
         "v8.6-dyn": {
-          "spearman": 0.3579,
-          "brier_top_10": 0.139,
+          "spearman": 0.2877,
+          "brier_top10": 0.1047,
           "brier_win": 0.0131,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.85
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0149,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
         },
         "v8.7-cfgate": {
-          "spearman": 0.3649,
-          "brier_top_10": 0.139,
+          "spearman": 0.295,
+          "brier_top10": 0.1047,
           "brier_win": 0.0131,
-          "brier_make_cut": 0.0,
-          "rank_vs_baseline_top20_overlap": 0.9
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0076,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
         }
       },
-      "leader_this_week": "v8.6-tal",
-      "logged_utc": "2026-05-04T13:38:12Z"
+      "current_leader": "v8.6-tal",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 1,
+        "v8.6-form": 0,
+        "v8.6-dyn": 0,
+        "v8.7-cfgate": 0
+      }
+    },
+    {
+      "week": 14,
+      "event": "Truist Championship",
+      "date": "2026-05-10",
+      "variants": {
+        "v8.5": {
+          "spearman": 0.1766,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.1751,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": -0.0015,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.6-tal": {
+          "spearman": 0.1658,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": -0.0108,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.6-form": {
+          "spearman": 0.1813,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": 0.0047,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.6-dyn": {
+          "spearman": 0.1782,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": 0.0016,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.1797,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": 0.0031,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        }
+      },
+      "current_leader": "v8.6-form",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 1,
+        "v8.6-dyn": 0,
+        "v8.7-cfgate": 0
+      }
     }
   ],
-  "current_leader": "v8.6-tal",
+  "current_leader": "v8.6-form",
   "consecutive_weeks_leading": {
-    "v8.5": 0,
-    "v8.6-cf": 5,
+    "v8.6-cf": 0,
     "v8.6-tal": 0,
-    "v8.6-form": 0,
-    "v8.6-dyn": 0
+    "v8.6-form": 1,
+    "v8.6-dyn": 0,
+    "v8.7-cfgate": 0
   },
-  "promotion_candidate": {
-    "variant_id": "v8.6-cf",
-    "streak_weeks": 5,
-    "mean_spearman_lift": 0.0391,
-    "mean_brier_improvement_pct": 9.16,
-    "events_scored": 15,
-    "flagged_for": "MANUAL_REVIEW",
-    "description": "Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events."
-  },
-  "last_updated": "2026-05-04T13:38:12Z",
-  "numbering_scheme": "bbi_tracking_week",
-  "numbering_notes": "Wk 1 = WM Phoenix Open 2026 (Feb 5-8, BBI tracking start). Cal-week entries before WM Phoenix were dropped 2026-04-28."
+  "promotion_candidate": null,
+  "last_updated": "2026-05-11T13:12:29.300995+00:00"
 }

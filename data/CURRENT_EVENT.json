@@ -1,38 +1,39 @@
 {
-  "event_id": 480,
-  "event_name": "Truist Championship",
-  "event_slug": "Truist_Championship",
-  "event_snake": "truist_championship",
-  "course": "Quail Hollow Club",
-  "course_slug": "quail_hollow_club",
-  "location": "Charlotte, NC",
-  "start_date": "2026-05-07",
-  "week_num": 14,
+  "event_id": 33,
+  "event_name": "PGA Championship",
+  "event_slug": "PGA_Championship",
+  "event_snake": "pga_championship",
+  "course": "Aronimink Golf Club",
+  "course_slug": "aronimink_golf_club",
+  "location": "Newtown Square, PA",
+  "start_date": "2026-05-14",
+  "week_num": 15,
   "year": 2026,
-  "par": 72,
-  "yardage": 7535,
+  "par": 70,
+  "yardage": 7200,
   "team_event": false,
+  "is_major": true,
   "sg_weights": {
-    "sg_app": 1.2,
-    "sg_ott": 1.18,
-    "sg_putt": 0.95,
-    "sg_arg": 0.7,
-    "_note": "Quail Hollow: long (7535y) bentgrass course, hard difficulty. Over_200_fw is highest-weighted shotmaking band. APP and OTT both critical \u2014 Green Mile (16-18) demands elite iron play and length. ARG suppressed (chip-out situations less frequent on bermuda-adjacent layout)."
+    "sg_app": 1.3,
+    "sg_ott": 1.1,
+    "sg_putt": 1.05,
+    "sg_arg": 1.2,
+    "_note": "Aronimink: par-70 bentgrass course, historically demanding small greens. APP elevated (1.30) \u2014 small greens, tight approach windows. ARG elevated (1.20) \u2014 Major rough penalties, false fronts. PUTT moderate (1.05) \u2014 bentgrass greens reward good putters. OTT moderate (1.10) \u2014 length matters but fairway positioning critical. Generic PGA Championship weights applied \u2014 no Aronimink-specific modern data."
   },
   "course_weight_override": {
     "courseFit_pool": 0.22,
     "courseFit_dfs": 0.17,
-    "_note": "Standard weights \u2014 Quail Hollow has stable modern history at event_id 480 (Wells Fargo/Truist). Good sample size across 10+ editions."
+    "_note": "Standard weights \u2014 no Aronimink modern history; course fit layer has low confidence. Consider reducing courseFit weight to 0.15/0.12 in Phase 1 if coverage < 20%."
   },
-  "course_form_name": "Quail Hollow Form",
+  "course_form_name": "PGA Championship Form",
   "course_history_event_id_fallbacks": [
-    480
+    33
   ],
   "course_history_year_range": [
-    2016,
-    2026
+    2017,
+    2025
   ],
-  "course_history_note": "Quail Hollow has hosted Wells Fargo/Truist Championship continuously. event_id 480 covers full modern history. No fallback needed.",
+  "course_history_note": "PGA Championship rotates venues yearly. Aronimink has NO modern course history (last hosted 1962). event_id=33 history covers different PGA Championship venues (2017-2025). Course fit model should treat all players as NO_HISTORY or LIMITED tier for Aronimink-specific history. Flag: Phase 1 may return 0/N Aronimink-specific course history \u2014 this is expected. Do NOT add a fallback entry for event_id=33 (rotating venue).",
   "course_tier_thresholds": {
     "SPECIALIST": {
       "min_rounds": 8,
@@ -57,42 +58,37 @@
       "mult": 1.0
     }
   },
-  "course_notes": "Par-72, 7535y. Bentgrass greens, stimp ~12.5. Hard difficulty (avg ~72.5). Famous Green Mile finish: 16 (par-3), 17 (par-4 drivable), 18 (par-4 with water left). OTT is critical to reach par-5s and set up approach angles. Bermuda-like rough complexity. Historical specialists: McIlroy (multiple wins, course record holder), Fowler, Rory-type bombers with precise iron play.",
-  "winner_archetype": "Long bomber with elite iron play. Bentgrass putting helps those with good putting form. Green Mile survivability separates the field in final round \u2014 needs nerves and length simultaneously.",
+  "course_notes": "Par-70, ~7200y. Aronimink Golf Club, Newtown Square PA. Last PGA Championship here: 1962. Bentgrass greens, est. stimpmeter 13.5 for major setup. Known for: tight fairways, small and undulating greens, demanding iron play. Heavy rough expected (major setup). No modern SG data for this venue. Major-field composition: invitational (approx 156 players including LIV). Par-70 means 2 par-5s, 12 par-4s, 4 par-3s \u2014 iron play at par-3s critical.",
+  "winner_archetype": "Elite iron player with major experience. Par-70 reduces advantage of long hitters slightly but Aronimink's length (7200y) still demands adequate OTT. Bentgrass putter with major composure. Major history at PGA Championship (venue rotates \u2014 general major experience applies).",
   "course_dna": {
     "sg_importance": {
-      "sg_app": 0.3,
-      "sg_ott": 0.28,
+      "sg_app": 0.35,
+      "sg_ott": 0.25,
       "sg_putt": 0.25,
-      "sg_arg": 0.17
+      "sg_arg": 0.15
     },
-    "difficulty": "hard",
+    "difficulty": "very_hard",
     "greens": "bentgrass",
-    "stimpmeter": 12.5,
-    "rough": 1.06,
-    "yardage_breakdown": {
-      "50_100_fw": 0.1,
-      "100_150_fw": 0.16,
-      "150_200_fw": 0.26,
-      "over_200_fw": 0.24,
-      "under_150_rgh": 0.1,
-      "over_150_rgh": 0.14
-    },
+    "stimpmeter": 13.5,
+    "rough": 1.1,
+    "is_major": true,
+    "no_modern_venue_history": true,
     "course_fit_leverage": {
       "favors": [
-        "bombers",
         "elite_iron",
-        "bentgrass_putters"
+        "major_experience",
+        "bentgrass_putters",
+        "scrambling"
       ],
       "penalizes": [
-        "short_hitters",
         "weak_approach",
-        "bermuda_only_putters"
+        "inconsistent_from_rough",
+        "no_major_experience"
       ]
     }
   },
   "pipeline_mode": "active",
-  "bbi_pipeline_action": "FULL \u2014 Individual BBI v8.5 rankings active. Phase 1 / THEMIS / OMNIA all run normally. Pool + DFS outputs published.",
-  "auto_detected_at": "2026-05-04T13:11:40.692829+00:00",
+  "bbi_pipeline_action": "FULL \u2014 Major championship. Individual BBI v8.5 rankings active. WARNING: No Aronimink venue history. Course fit layer has low confidence. Consider major-field expansion to top-55 ranked players (Masters improvement suggestion wk10). Phase 1 / THEMIS / OMNIA all run normally.",
+  "auto_detected_at": "2026-05-11T13:14:05.965595+00:00",
   "detected_by": "mnemosyne_auto"
 }
