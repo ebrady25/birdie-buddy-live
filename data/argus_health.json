@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-05-11T17:46:29Z",
-  "phase_checked": "phase1",
-  "next_phase": "phase1_apollo_atlas",
+  "timestamp": "2026-05-12T12:31:08Z",
+  "phase_checked": "phase15",
+  "next_phase": "phase15_aeolus_zeus",
   "status": "green",
   "checks": {
     "current_event": {
@@ -9,20 +9,22 @@
       "event_id": 33,
       "event_name": "PGA Championship",
       "start_date": "2026-05-14",
-      "days_until_start": 2,
+      "days_until_start": 1,
       "team_event": false,
       "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.21,
+      "duration_s": 0.19,
       "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "n/a",
-      "note": "phase1 has no prior-output gate (first or independent phase)."
+      "status": "pass",
+      "checked": [
+        "bbi_rankings.json (0.0h)"
+      ]
     }
   },
   "recommendations": [],
