@@ -1,26 +1,48 @@
 {
-  "event": "Truist Championship",
-  "event_slug": "Truist_Championship",
-  "year": 2026,
-  "week": 14,
-  "generated_at": "2026-05-05T13:11:53.858863+00:00",
-  "philosophy": "OMNIA market data is stale (still shows last week's event \u2014 books haven't posted Truist outrights yet). Bankroll allocated by archetype without Kelly EV overlay. Re-evaluate Wednesday post Phase 2 Lock.",
-  "allocation_pct": {
-    "cash": 60,
-    "gpp": 30,
-    "high_variance": 10
+  "event": "PGA Championship",
+  "generated_utc": "2026-05-12T13:14:21.036901+00:00",
+  "total_bankroll": 1000.0,
+  "split": {
+    "cash": 600.0,
+    "gpp": 300.0,
+    "high_variance": 100.0
   },
-  "allocation_for_$1000_bankroll": {
-    "cash_games": 600,
-    "gpp": 300,
-    "high_variance_satellites_singles": 100
-  },
-  "kelly_bets_recommended": [],
-  "guidance": [
-    "Cash: 4\u20136 entries split across double-ups + cash 50/50s. Use CASH-bucket lineups (lineups #1\u2013#2).",
-    "GPP: 2\u20133 entries in mid-stakes. CORE + LEVERAGE buckets (lineups #3\u2013#10).",
-    "High-variance: 1 satellite or single-entry GPP for tournament leverage (MOONSHOT lineup #11).",
-    "Kelly +EV bets unavailable this cycle (OMNIA stale) \u2014 re-evaluate after Wednesday Lock + Phase 2 OMNIA refresh."
+  "recommended_allocations": [
+    {
+      "category": "DraftKings GPP (Tournament)",
+      "allocation_pct": 20,
+      "amount": 200,
+      "notes": "10 entries \u00d7 $20 \u2014 Showdown + Classic mix or Main Slate $20 GPP"
+    },
+    {
+      "category": "DraftKings Cash (Double-Up/50-50)",
+      "allocation_pct": 30,
+      "amount": 300,
+      "notes": "Lock CASH archetype lineups in 6 cash games \u00d7 $50"
+    },
+    {
+      "category": "Lou's Pool",
+      "allocation_pct": 0,
+      "amount": 0,
+      "notes": "Pool entry already paid; no incremental allocation"
+    },
+    {
+      "category": "Parlay/Prop Bets",
+      "allocation_pct": 10,
+      "amount": 100,
+      "notes": "Hold for OMNIA edges \u2014 Wednesday lock"
+    },
+    {
+      "category": "Reserve",
+      "allocation_pct": 40,
+      "amount": 400,
+      "notes": "Held \u2014 major-week conservatism without OMNIA inputs"
+    }
   ],
-  "omnia_status": "stale"
+  "auto_kelly_bets": [],
+  "notes": [
+    "Standard week sizing \u2014 Masters-mode (2.5x) NOT triggered.",
+    "OMNIA edges not yet available \u2014 Kelly-sized bets deferred to Wed lock.",
+    "Major championship variance is elevated; reserve held at 40% pending OMNIA."
+  ]
 }

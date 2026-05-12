@@ -1,161 +1,212 @@
 {
-  "event": "Truist Championship",
-  "event_slug": "Truist_Championship",
-  "year": 2026,
-  "week": 14,
-  "generated_at": "2026-05-05T13:11:53.861010+00:00",
-  "primary": [
+  "event": "PGA Championship",
+  "generated_utc": "2026-05-12T13:14:21.035912+00:00",
+  "field_size": 156,
+  "primary_starters": [
     {
+      "rank": 1,
+      "name": "Scheffler, Scottie",
+      "bbi_pool": 93.0,
+      "course_tier": "SPECIALIST",
+      "prob_top20": 68.97,
+      "prob_mc": 91.74,
+      "salary": 0,
+      "hermes_own": 0.0
+    },
+    {
+      "rank": 2,
       "name": "McIlroy, Rory",
-      "dg_id": 10091,
-      "rank_pool": 1,
-      "bbi_pool": 89.36,
+      "bbi_pool": 74.6,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 52.36,
+      "prob_mc": 84.75,
       "salary": 11700,
-      "p_top10": 0.5,
-      "p_makecut": 1.0
+      "hermes_own": 41.29
     },
     {
-      "name": "Schauffele, Xander",
-      "dg_id": 19895,
-      "rank_pool": 2,
-      "bbi_pool": 80.15,
-      "salary": 10000,
-      "p_top10": 0.40816,
-      "p_makecut": 1.0
+      "rank": 3,
+      "name": "Rahm, Jon",
+      "bbi_pool": 71.7,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 50.76,
+      "prob_mc": 84.75,
+      "salary": 0,
+      "hermes_own": 0.0
     },
     {
+      "rank": 4,
       "name": "Young, Cameron",
-      "dg_id": 26651,
-      "rank_pool": 3,
-      "bbi_pool": 76.09,
+      "bbi_pool": 69.9,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 49.02,
+      "prob_mc": 83.33,
       "salary": 10100,
-      "p_top10": 0.41841,
-      "p_makecut": 1.0
+      "hermes_own": 32.04
     },
     {
+      "rank": 5,
+      "name": "Schauffele, Xander",
+      "bbi_pool": 69.3,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 46.08,
+      "prob_mc": 82.64,
+      "salary": 10000,
+      "hermes_own": 39.94
+    },
+    {
+      "rank": 6,
       "name": "Fitzpatrick, Matt",
-      "dg_id": 17646,
-      "rank_pool": 4,
-      "bbi_pool": 70.99,
+      "bbi_pool": 67.3,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 41.67,
+      "prob_mc": 81.3,
       "salary": 9900,
-      "p_top10": 0.33333,
-      "p_makecut": 1.0
-    },
-    {
-      "name": "Kim, Si Woo",
-      "dg_id": 14609,
-      "rank_pool": 5,
-      "bbi_pool": 68.5,
-      "salary": 9400,
-      "p_top10": 0.27933,
-      "p_makecut": 1.0
-    },
-    {
-      "name": "Fleetwood, Tommy",
-      "dg_id": 12294,
-      "rank_pool": 6,
-      "bbi_pool": 67.1,
-      "salary": 9800,
-      "p_top10": 0.26316,
-      "p_makecut": 1.0
+      "hermes_own": 23.63
     }
   ],
-  "leverage": [
+  "leverage_picks": [
     {
-      "name": "Aberg, Ludvig",
-      "dg_id": 23950,
-      "rank_pool": 7,
-      "bbi_pool": 66.36,
-      "salary": 9600,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+      "rank": 8,
+      "name": "DeChambeau, Bryson",
+      "bbi_pool": 61.6,
+      "course_tier": "SPECIALIST",
+      "prob_top20": 34.13,
+      "prob_mc": 75.19,
+      "salary": 0,
+      "hermes_own": 3.0
     },
     {
-      "name": "Hovland, Viktor",
-      "dg_id": 18841,
-      "rank_pool": 8,
-      "bbi_pool": 64.46,
-      "salary": 8400,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+      "rank": 9,
+      "name": "Cantlay, Patrick",
+      "bbi_pool": 60.5,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 31.85,
+      "prob_mc": 75.76,
+      "salary": 9200,
+      "hermes_own": 12.37
     },
     {
-      "name": "Spaun, J.J.",
-      "dg_id": 17536,
-      "rank_pool": 9,
-      "bbi_pool": 64.38,
-      "salary": 7900,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+      "rank": 11,
+      "name": "Morikawa, Collin",
+      "bbi_pool": 60.2,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 30.58,
+      "prob_mc": 74.63,
+      "salary": 0,
+      "hermes_own": 0.0
     },
     {
-      "name": "Scott, Adam",
-      "dg_id": 6430,
-      "rank_pool": 10,
-      "bbi_pool": 63.91,
-      "salary": 8900,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
-    },
-    {
-      "name": "Matsuyama, Hideki",
-      "dg_id": 13562,
-      "rank_pool": 11,
-      "bbi_pool": 63.44,
-      "salary": 8800,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
-    },
-    {
-      "name": "Hojgaard, Nicolai",
-      "dg_id": 23602,
-      "rank_pool": 12,
-      "bbi_pool": 61.92,
-      "salary": 7800,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
-    },
-    {
+      "rank": 13,
       "name": "Fowler, Rickie",
-      "dg_id": 12965,
-      "rank_pool": 13,
-      "bbi_pool": 61.49,
+      "bbi_pool": 58.3,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 27.1,
+      "prob_mc": 71.94,
       "salary": 9000,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+      "hermes_own": 12.73
     },
     {
-      "name": "English, Harris",
-      "dg_id": 14577,
-      "rank_pool": 14,
-      "bbi_pool": 61.01,
-      "salary": 8200,
-      "proj_ownership": null,
-      "rationale": "Top-30 BBI w/ low projected ownership \u2014 pivot off chalk in pool."
+      "rank": 15,
+      "name": "Kim, Si Woo",
+      "bbi_pool": 56.4,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 30.03,
+      "prob_mc": 74.63,
+      "salary": 9400,
+      "hermes_own": 14.39
+    },
+    {
+      "rank": 16,
+      "name": "Henley, Russell",
+      "bbi_pool": 56.1,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 29.5,
+      "prob_mc": 74.63,
+      "salary": 0,
+      "hermes_own": 0.0
+    },
+    {
+      "rank": 17,
+      "name": "Spaun, J.J.",
+      "bbi_pool": 55.8,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 27.93,
+      "prob_mc": 72.99,
+      "salary": 7900,
+      "hermes_own": 10.2
+    },
+    {
+      "rank": 20,
+      "name": "Matsuyama, Hideki",
+      "bbi_pool": 54.9,
+      "course_tier": "COMFORTABLE",
+      "prob_top20": 22.22,
+      "prob_mc": 68.97,
+      "salary": 8800,
+      "hermes_own": 12.18
     }
   ],
-  "fade": [
+  "fades": [
     {
-      "name": "Knapp, Jake",
-      "dg_id": 19396,
-      "rank_pool": 36,
-      "bbi_pool": 52.57,
-      "salary": 8000,
-      "rationale": "Salary-priced as a contender but BBI ranks them outside the top-35 \u2014 fade in pool."
+      "rank": 62,
+      "name": "Glover, Lucas",
+      "bbi_pool": 44.6,
+      "prob_mc": 44.05,
+      "reason": "MC risk 44.1% under 55%"
     },
     {
-      "name": "Bridgeman, Jacob",
-      "dg_id": 29433,
-      "rank_pool": 50,
-      "bbi_pool": 47.36,
-      "salary": 7500,
-      "rationale": "Salary-priced as a contender but BBI ranks them outside the top-35 \u2014 fade in pool."
+      "rank": 64,
+      "name": "Homa, Max",
+      "bbi_pool": 44.4,
+      "prob_mc": 52.36,
+      "reason": "MC risk 52.4% under 55%"
+    },
+    {
+      "rank": 68,
+      "name": "Cink, Stewart",
+      "bbi_pool": 43.5,
+      "prob_mc": 51.55,
+      "reason": "MC risk 51.5% under 55%"
+    },
+    {
+      "rank": 72,
+      "name": "Johnson, Dustin",
+      "bbi_pool": 43.1,
+      "prob_mc": 50.25,
+      "reason": "MC risk 50.3% under 55%"
+    },
+    {
+      "rank": 77,
+      "name": "Kirk, Chris",
+      "bbi_pool": 41.6,
+      "prob_mc": 45.87,
+      "reason": "MC risk 45.9% under 55%"
+    },
+    {
+      "rank": 80,
+      "name": "Li, Haotong",
+      "bbi_pool": 41.2,
+      "prob_mc": 51.28,
+      "reason": "MC risk 51.3% under 55%"
+    },
+    {
+      "rank": 81,
+      "name": "Penge, Marco",
+      "bbi_pool": 40.9,
+      "prob_mc": 50.25,
+      "reason": "MC risk 50.3% under 55%"
+    },
+    {
+      "rank": 83,
+      "name": "Horschel, Billy",
+      "bbi_pool": 40.4,
+      "prob_mc": 42.02,
+      "reason": "MC risk 42.0% under 55%"
     }
   ],
   "notes": [
-    "Primary = recommended 4-starter slate; pick 4 of these 6 + 2 of the leverage bucket as alternates.",
-    "Leverage = top-30 BBI players the field is likely sleeping on (low proj_own). Worth a starter or alt.",
-    "Fade = chalk ranked outside BBI top-35 \u2014 opportunity cost says skip in pool."
-  ],
-  "omnia_status": "stale"
+    "Major championship \u2014 field expanded to top-55 ranked players (Aronimink no modern history).",
+    "PGA Championship 2026 \u2014 winner archetype: elite iron player with major experience.",
+    "Use 4 starters + 2 alternates from primary list; deploy leverage if pool standings demand."
+  ]
 }
