@@ -15,6 +15,20 @@ window.BBI = window.BBI || {};
       const res = await fetch(path, { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
+      // Normalize new-format bbi_rankings into legacy field names expected by site pages
+      if (path === BBI.data.paths.bbiRankings && json && json.players) {
+        const remap = { player_name: 'name', course_tier: 'tier', dk_salary: 'salary',
+                        dk_ownership: 'proj_own', prob_win: 'win_pct',
+                        dg_skill_estimate: 'dg_skill', prob_top5: 'top_5',
+                        prob_top10: 'top_10', prob_top20: 'top_20', prob_mc: 'make_cut' };
+        json.players = json.players.map(p => {
+          const out = { ...p };
+          for (const [k, v] of Object.entries(remap)) {
+            if (k in p && !(v in p)) out[v] = p[k];
+          }
+          return out;
+        });
+      }
       cache.set(path, json);
       return json;
     } catch (e) {
