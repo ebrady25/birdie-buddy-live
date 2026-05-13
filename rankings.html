@@ -198,6 +198,8 @@
 
       $('#rankEvent').textContent = ev?.event_name || '—';
       const players = (rank && rank.players) || [];
+      // Sort descending by BBI so the initial render matches the default sort order
+      players.sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
 
       // Build fast lookups for expansion data
       const themMap = themis?.per_player || {};
