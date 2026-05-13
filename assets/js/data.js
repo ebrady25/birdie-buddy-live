@@ -20,14 +20,30 @@ window.BBI = window.BBI || {};
         const remap = { player_name: 'name', course_tier: 'tier', dk_salary: 'salary',
                         dk_ownership: 'proj_own', prob_win: 'win_pct',
                         dg_skill_estimate: 'dg_skill', prob_top5: 'top_5',
-                        prob_top10: 'top_10', prob_top20: 'top_20', prob_mc: 'make_cut' };
-        json.players = json.players.map(p => {
+                        prob_top10: 'top_10', prob_top20: 'top_20', prob_mc: 'make_cut',
+                        p_win: 'win_pct', p_top5: 'top_5', p_top10: 'top_10',
+                        p_top20: 'top_20', p_makecut: 'make_cut',
+                        proj_ownership: 'proj_own' };
+        const arr = json.players || json.rankings || [];
+        const normalized = arr.map(p => {
           const out = { ...p };
           for (const [k, v] of Object.entries(remap)) {
             if (k in p && !(v in p)) out[v] = p[k];
           }
+          // Compute derived columns not present in raw data
+          if (!('value' in out) && out.zeus_dfs && out.salary) {
+            out.value = out.zeus_dfs / (out.salary / 1000);
+          }
+          if (!('course_hist_sg' in out) && 'hist_wsg' in out) {
+            out.course_hist_sg = out.hist_wsg;
+          }
+          if (!('form_score' in out) && 'n_form' in out) {
+            out.form_score = out.n_form * 100; // normalized 0-1 to 0-100 scale
+          }
           return out;
         });
+        json.players = normalized;
+        json.rankings = normalized;
       }
       cache.set(path, json);
       return json;
