@@ -683,7 +683,7 @@
                 <span class="stat win">Win <strong>${fmt.pct(p.win_pct, 1)}</strong></span>
                 <span class="stat">T10 <strong>${fmt.pct(p.top_10, 1)}</strong></span>
                 <span class="stat">MC <strong>${fmt.pct(p.make_cut, 0)}</strong></span>
-                ${p.salary ? `<span class="stat">$<strong>${(p.salary / 1000).toFixed(1)}k</strong>${p.value != null ? ` · val ${fmt.num(p.value, 1)}` : ''}${p.proj_own != null ? ` · ${fmt.pct(p.proj_own, 1)} own` : ''}</span>` : ''}
+                ${p.salary ? `<span class="stat">$<strong>${(p.salary / 1000).toFixed(1)}k</strong>${p.value != null ? ` · val ${fmt.num(p.value, 1)}` : ''}${p.proj_own != null ? ` · ${fmt.num(p.proj_own, 0)}% own` : ''}</span>` : ''}
                 ${courseChip}
                 ${formChip}
               </div>
