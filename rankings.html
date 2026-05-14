@@ -198,6 +198,8 @@
 
       $('#rankEvent').textContent = ev?.event_name || '—';
       const players = (rank && rank.players) || [];
+      // Sort descending by BBI so the initial render matches the default sort order
+      players.sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
 
       // Build fast lookups for expansion data
       const themMap = themis?.per_player || {};
@@ -234,8 +236,8 @@
         const winHeat = heat(p.win_pct, 'win_pct').toFixed(3);
         const valHeat = heat(p.value, 'value').toFixed(3);
         const rankClass = i < 3 ? 'player-rank-gold' : '';
-        const mcColor = p.make_cut >= 80 ? 'positive' : (p.make_cut >= 60 ? '' : 'negative');
-        const ownColor = p.proj_own > 20 ? 'negative' : (p.proj_own > 10 ? 'gold-bright' : 'positive');
+        const mcColor = p.make_cut >= 0.80 ? 'positive' : (p.make_cut >= 0.60 ? '' : 'negative');
+        const ownColor = p.proj_own > 0.20 ? 'negative' : (p.proj_own > 0.10 ? 'gold-bright' : 'positive');
         const courseClass = p.course_hist_sg > 0 ? 'positive' : (p.course_hist_sg < 0 ? 'negative' : 'dimmed');
         const playerLinkHtml = playerLink(p.dg_id, fmt.abbrevName(p.name));
         return `
@@ -268,11 +270,11 @@
             <td><span class="${tierClass(p.tier)}">${(p.tier || 'NEUTRAL').slice(0, 4)}</span></td>
             <td class="num heat" style="--heat:${bbiHeat}"><span><strong>${fmt.num(bbi, 2)}</strong></span></td>
             <td class="num">${fmt.num(p.dg_skill, 2)}</td>
-            <td class="num heat" style="--heat:${winHeat}"><span>${fmt.num(p.win_pct, 2)}</span></td>
+            <td class="num heat" style="--heat:${winHeat}"><span>${fmt.pct(p.win_pct, 2)}</span></td>
             <td class="num">${fmt.pct(p.top_5, 1)}</td>
             <td class="num">${fmt.pct(p.top_10, 1)}</td>
             <td class="num">${fmt.pct(p.top_20, 1)}</td>
-            <td class="num ${mcColor}">${fmt.num(p.make_cut, 0)}</td>
+            <td class="num ${mcColor}">${fmt.pct(p.make_cut, 0)}</td>
             <td class="num">${p.salary ? '$'+Math.round(p.salary/100)/10+'k' : '—'}</td>
             <td class="num heat" style="--heat:${valHeat}"><span>${fmt.num(p.value, 2)}</span></td>
             <td class="num ${ownColor}">${fmt.pct(p.proj_own, 1)}</td>
@@ -383,7 +385,7 @@
               <div class="expand-title">Monte Carlo + market</div>
               ${th ? `
                 <div class="key-stat-row">
-                  <div class="key-stat"><span class="lbl">Empirical Win</span><span class="val">${fmt.pct((th.empirical_win_prob || 0) * 100, 2)}</span></div>
+                  <div class="key-stat"><span class="lbl">Empirical Win</span><span class="val">${fmt.pct(th.empirical_win_prob || 0, 2)}</span></div>
                   <div class="key-stat"><span class="lbl">p95 Ceiling</span><span class="val">${fmt.num(th.p95, 0)}</span></div>
                   <div class="key-stat"><span class="lbl">p5 Floor</span><span class="val">${fmt.num(th.p5, 0)}</span></div>
                 </div>
@@ -399,8 +401,8 @@
                     <span class="badge badge-positive">+${fmt.num(edge.edge_consensus_pp, 2)}pp</span>
                   </div>
                   <div class="key-stat-row" style="margin-top: var(--space-2);">
-                    <div class="key-stat"><span class="lbl">BBI</span><span class="val">${fmt.pct((edge.bbi_prob||0)*100, 2)}</span></div>
-                    <div class="key-stat"><span class="lbl">Market</span><span class="val">${fmt.pct((edge.market_consensus_prob_deviged||0)*100, 2)}</span></div>
+                    <div class="key-stat"><span class="lbl">BBI</span><span class="val">${fmt.pct(edge.bbi_prob||0, 2)}</span></div>
+                    <div class="key-stat"><span class="lbl">Market</span><span class="val">${fmt.pct(edge.market_consensus_prob_deviged||0, 2)}</span></div>
                     <div class="key-stat"><span class="lbl">Kelly</span><span class="val gold">${fmt.num(edge.kelly_stake_pct_bankroll, 2)}%</span></div>
                   </div>
                 </div>
