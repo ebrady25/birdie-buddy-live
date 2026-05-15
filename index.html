@@ -31,6 +31,7 @@
       pointer-events: none;
     }
     .hero > * { position: relative; z-index: 1; }
+    #heroCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .hero .badge { margin-bottom: var(--s-8); }
     .hero h1 {
       font-size: clamp(2.5rem, 6.5vw, 5.5rem);
@@ -118,6 +119,7 @@
   <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
   <div class="links">
     <a href="rankings.html">Rankings</a>
+    <a href="full-rankings.html">Full Rankings</a>
     <a href="performance.html">Performance</a>
     <a href="methodology.html">Methodology</a>
   </div>
@@ -125,6 +127,7 @@
 
 <!-- HERO -->
 <header class="hero">
+  <canvas id="heroCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
   <div class="badge" id="eventBadge">
     <span class="live-dot"></span>
     Loading event...
@@ -252,6 +255,7 @@
   <div style="font-weight: 700; color: var(--text);">BirdieBuddy</div>
   <div style="display: flex; gap: var(--s-6);">
     <a href="rankings.html" style="color: var(--text-4);">Rankings</a>
+    <a href="full-rankings.html" style="color: var(--text-4);">Full Rankings</a>
     <a href="performance.html" style="color: var(--text-4);">Performance</a>
     <a href="methodology.html" style="color: var(--text-4);">Methodology</a>
   </div>
@@ -361,5 +365,73 @@
   });
 </script>
 
+
+<script>
+  // Hero particle network
+  (function() {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const COUNT = 55;
+    const CONNECT = 130;
+    let W, H;
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      W = canvas.width = rect.width;
+      H = canvas.height = rect.height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class P {
+      constructor() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.25;
+        this.vy = (Math.random() - 0.5) * 0.25;
+        this.r = Math.random() * 1.2 + 0.4;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > W) this.vx *= -1;
+        if (this.y < 0 || this.y > H) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(212,168,67,0.35)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < COUNT; i++) particles.push(new P());
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < CONNECT) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(212,168,67,${0.1 * (1 - d/CONNECT)})`;
+            ctx.lineWidth = 0.4;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
+  })();
+</script>
 </body>
 </html>

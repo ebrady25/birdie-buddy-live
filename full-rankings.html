@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sneak Peek — BirdieBuddy Rankings</title>
+  <title>Live Rankings — BirdieBuddy</title>
   <link rel="stylesheet" href="assets/css/vault-theme.css" />
   <style>
     /* Page header */
@@ -179,43 +179,7 @@
       border-radius: var(--r-lg);
       padding: var(--s-6);
     }
-  
-    /* Sneak peek blur */
-    .table-wrap { position: relative; }
-    .sneak-blur {
-      filter: blur(6px);
-      opacity: 0.22;
-      pointer-events: none;
-      user-select: none;
-    }
-    .sneak-cta {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: var(--s-20) var(--s-5) var(--s-8);
-      background: linear-gradient(to top, var(--bg) 25%, transparent);
-      text-align: center;
-      pointer-events: none;
-      z-index: 5;
-    }
-    .sneak-cta .cta-box {
-      background: var(--bg-2);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--r-lg);
-      padding: var(--s-8) var(--s-6);
-      display: inline-block;
-      pointer-events: auto;
-      max-width: 400px;
-    }
-    .sneak-cta .cta-box h3 {
-      font-size: 20px; font-weight: 700; color: var(--text);
-      margin-bottom: var(--s-3);
-    }
-    .sneak-cta .cta-box p {
-      font-size: 13px; color: var(--text-3);
-      margin-bottom: var(--s-5); line-height: 1.5;
-    }
-    .sneak-cta .cta-box .btn-gold { width: 100%; }
-  </style>
+    </style>
 </head>
 <body>
 
@@ -229,9 +193,6 @@
 </nav>
 
 <main class="container">
-  <div style="text-align:center;padding:var(--s-3) 0;border-bottom:1px solid var(--border-gold);background: linear-gradient(90deg, transparent, rgba(212,168,67,0.08), transparent);">
-    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Sneak peek · Top 3 visible · Full rankings for subscribers</span>
-  </div>
   <header class="page-head">
     <div class="eyebrow">Live rankings · <span id="eventName">—</span></div>
     <h1>The field, decomposed.</h1>
@@ -437,32 +398,6 @@
       // Count
       $('#totalCount').textContent = players.length;
       $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
-
-      // Sneak peek: blur rows > 3
-      $$('tr[data-row]', tbody).forEach((row, i) => {
-        if (i >= 3) row.classList.add('sneak-blur');
-      });
-      const expandRows = $$('.expand-row', tbody);
-      expandRows.forEach((row, i) => {
-        // count visible expand rows that follow blurred rows
-        const prev = row.previousElementSibling;
-        if (prev && prev.classList.contains('sneak-blur')) row.classList.add('sneak-blur');
-      });
-
-      // Inject CTA overlay once
-      if (!$('.sneak-cta')) {
-        const wrap = $('.table-wrap');
-        const cta = document.createElement('div');
-        cta.className = 'sneak-cta';
-        cta.innerHTML = `
-          <div class="cta-box">
-            <h3>156 players. 10 factors. One edge.</h3>
-            <p>The top 3 are free. The full field — with factor decomposition, course history, and DFS values — is for subscribers.</p>
-            <a href="index.html#emailInput" class="btn-gold">Request access</a>
-          </div>
-        `;
-        wrap.appendChild(cta);
-      }
     }
 
     function expandHTML(p) {
