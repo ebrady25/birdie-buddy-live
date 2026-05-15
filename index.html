@@ -110,6 +110,14 @@
       color: var(--gold); letter-spacing: 0.1em;
       margin-bottom: var(--s-6);
     }
+  
+    /* Scroll reveal */
+    [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+    [data-reveal-delay="1"] { transition-delay: 0.08s; }
+    [data-reveal-delay="2"] { transition-delay: 0.16s; }
+    [data-reveal-delay="3"] { transition-delay: 0.24s; }
+    [data-reveal-delay="4"] { transition-delay: 0.32s; }
   </style>
 </head>
 <body>
@@ -154,27 +162,27 @@
 <!-- KEYHOLE -->
 <section class="section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <div class="eyebrow">What's inside</div>
       <h2>A peek through the keyhole.</h2>
       <p>Three outputs. Zero noise. Everything the model produces, nothing it doesn't.</p>
     </div>
-    <div class="peek-grid">
-      <div class="card">
+    <div class="peek-grid" data-reveal>
+      <div class="card" data-reveal data-reveal-delay="1">
         <div class="card-title">Rankings</div>
         <div class="card-body">Full field, ten factors, one composite score. See who BBI is high on and why.</div>
         <div class="card-data" id="rankPreview">
           <div class="data-row"><span>Loading...</span><span>—</span></div>
         </div>
       </div>
-      <div class="card">
+      <div class="card" data-reveal data-reveal-delay="2">
         <div class="card-title">Edges</div>
         <div class="card-body">Where BBI's win probability exceeds the books' implied odds. De-vigged, Kelly-sized.</div>
         <div class="card-data" id="edgePreview">
           <div class="data-row"><span>Loading...</span><span>—</span></div>
         </div>
       </div>
-      <div class="card" style="position: relative;">
+      <div class="card" data-reveal data-reveal-delay="3" style="position: relative;">
         <div style="position: absolute; top: 12px; right: 16px; font-family: var(--mono); font-size: 9px; color: var(--text-4); letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 4px;">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           Subscribers only
@@ -194,7 +202,7 @@
 <!-- PROOF -->
 <section class="section" style="padding-top: 0;">
   <div class="container">
-    <div class="proof-strip">
+    <div class="proof-strip" data-reveal>
       <div class="proof-cell">
         <div class="proof-num">0.393</div>
         <div class="proof-label">Mean Spearman</div>
@@ -222,12 +230,12 @@
 <!-- THIS WEEK'S EDGES -->
 <section class="section">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <div class="eyebrow">This week</div>
       <h2>Four live edges the market hasn't priced in.</h2>
       <p>De-vigged consensus across fourteen books, compared to BBI's simulated win probability. Positive pp means BBI sees a bigger chance than the books do.</p>
     </div>
-    <div class="edge-grid" id="edgeGrid">
+    <div class="edge-grid" id="edgeGrid" data-reveal>
       <div class="edge-card"><div class="rank">Rank 1</div><div class="name">Loading...</div></div>
       <div class="edge-card"><div class="rank">Rank 2</div><div class="name">Loading...</div></div>
       <div class="edge-card"><div class="rank">Rank 3</div><div class="name">Loading...</div></div>
@@ -373,8 +381,8 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const COUNT = 55;
-    const CONNECT = 130;
+    const COUNT = 70;
+    const CONNECT = 150;
     let W, H;
 
     function resize() {
@@ -391,7 +399,7 @@
         this.y = Math.random() * H;
         this.vx = (Math.random() - 0.5) * 0.25;
         this.vy = (Math.random() - 0.5) * 0.25;
-        this.r = Math.random() * 1.2 + 0.4;
+        this.r = Math.random() * 1.6 + 0.5;
       }
       update() {
         this.x += this.vx;
@@ -402,7 +410,7 @@
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(212,168,67,0.35)';
+        ctx.fillStyle = 'rgba(212,168,67,0.55)';
         ctx.fill();
       }
     }
@@ -422,7 +430,7 @@
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(212,168,67,${0.1 * (1 - d/CONNECT)})`;
+            ctx.strokeStyle = `rgba(212,168,67,${0.22 * (1 - d/CONNECT)})`;
             ctx.lineWidth = 0.4;
             ctx.stroke();
           }
@@ -431,6 +439,21 @@
       requestAnimationFrame(frame);
     }
     frame();
+  })();
+</script>
+
+<script>
+  // Scroll reveal
+  (function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
   })();
 </script>
 </body>

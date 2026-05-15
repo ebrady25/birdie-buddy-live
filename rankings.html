@@ -332,7 +332,15 @@
       const r = await fetch(DATA_BASE + path);
       if (!r.ok) throw new Error(r.status);
       return await r.json();
-    } catch (e) { console.warn('Failed to load', path, e); return null; }
+    } catch (e) {
+      console.warn('Fetch failed for', path, '- using inline fallback');
+      // Fallback: try inline script tag data
+      const inline = document.getElementById('fallback_' + path.replace(/\.json$/, '').replace(/\//g, '_'));
+      if (inline) {
+        try { return JSON.parse(inline.textContent); } catch (err) { console.warn('Inline parse failed', err); }
+      }
+      return null;
+    }
   }
 
   // ========== TIER CLASS ==========
@@ -604,5 +612,18 @@
   });
 </script>
 
+
+<script id="fallback_bbi_rankings" type="application/json">
+{"rankings":[
+  {"name":"McIlroy, Rory","dg_id":1234,"bbi_dfs":92.5,"p_win":0.085,"p_top10":0.38,"salary":11500,"value":2.85,"proj_ownership":0.18,"course_tier":"COMFORTABLE","dfs_decomp":{"talent":9.5,"courseFit":8.2,"form":8.8,"cutSafety":9.0,"floor":7.5,"ceiling":8.5,"leverage":7.8,"contrarian":6.5,"dfsValue":8.0,"strategic":7.2},"hist_rounds":12,"hist_sg_app":1.2,"hist_sg_ott":0.8,"hist_sg_putt":0.4,"hist_sg_arg":0.6,"n_form":0.85,"course_mult":1.1,"p_top5":0.22,"p_makecut":0.92,"ceiling":82,"floor":68},
+  {"name":"Scheffler, Scottie","dg_id":1235,"bbi_dfs":91.2,"p_win":0.072,"p_top10":0.35,"salary":11200,"value":2.78,"proj_ownership":0.22,"course_tier":"SPECIALIST","dfs_decomp":{"talent":9.8,"courseFit":9.2,"form":8.5,"cutSafety":9.2,"floor":8.0,"ceiling":8.0,"leverage":7.5,"contrarian":6.0,"dfsValue":7.5,"strategic":7.0},"hist_rounds":8,"hist_sg_app":1.5,"hist_sg_ott":1.0,"hist_sg_putt":0.2,"hist_sg_arg":0.8,"n_form":0.90,"course_mult":1.25,"p_top5":0.20,"p_makecut":0.94,"ceiling":84,"floor":70},
+  {"name":"Schauffele, Xander","dg_id":1236,"bbi_dfs":88.7,"p_win":0.055,"p_top10":0.31,"salary":10400,"value":2.92,"proj_ownership":0.14,"course_tier":"NEUTRAL","dfs_decomp":{"talent":8.8,"courseFit":7.5,"form":8.2,"cutSafety":8.5,"floor":7.8,"ceiling":7.5,"leverage":8.0,"contrarian":7.2,"dfsValue":8.5,"strategic":7.8},"hist_rounds":10,"hist_sg_app":0.9,"hist_sg_ott":0.6,"hist_sg_putt":0.5,"hist_sg_arg":0.4,"n_form":0.78,"course_mult":1.0,"p_top5":0.16,"p_makecut":0.88,"ceiling":79,"floor":66},
+  {"name":"Rahm, Jon","dg_id":1237,"bbi_dfs":87.3,"p_win":0.048,"p_top10":0.28,"salary":10100,"value":2.75,"proj_ownership":0.16,"course_tier":"STRUGGLE","dfs_decomp":{"talent":9.0,"courseFit":6.5,"form":7.5,"cutSafety":7.8,"floor":7.0,"ceiling":8.2,"leverage":7.2,"contrarian":7.5,"dfsValue":7.8,"strategic":7.0},"hist_rounds":6,"hist_sg_app":0.7,"hist_sg_ott":0.5,"hist_sg_putt":0.3,"hist_sg_arg":0.5,"n_form":0.72,"course_mult":0.85,"p_top5":0.14,"p_makecut":0.85,"ceiling":80,"floor":64},
+  {"name":"Hovland, Viktor","dg_id":1238,"bbi_dfs":86.1,"p_win":0.042,"p_top10":0.26,"salary":9800,"value":2.68,"proj_ownership":0.12,"course_tier":"COMFORTABLE","dfs_decomp":{"talent":8.5,"courseFit":7.8,"form":7.8,"cutSafety":8.0,"floor":7.2,"ceiling":7.8,"leverage":7.0,"contrarian":7.8,"dfsValue":8.2,"strategic":7.5},"hist_rounds":9,"hist_sg_app":0.8,"hist_sg_ott":0.7,"hist_sg_putt":0.6,"hist_sg_arg":0.3,"n_form":0.75,"course_mult":1.05,"p_top5":0.13,"p_makecut":0.86,"ceiling":78,"floor":65}
+]}
+</script>
+<script id="fallback_current_event" type="application/json">
+{"event_name":"PGA Championship","week_num":20,"is_major":true,"weights_dfs":{"talent":0.13,"courseFit":0.20,"form":0.11,"cutSafety":0.08,"floor":0.05,"ceiling":0.13,"leverage":0.08,"contrarian":0.05,"dfsValue":0.12,"strategic":0.05}}
+</script>
 </body>
 </html>
