@@ -191,11 +191,16 @@
   
     /* Sneak peek blur */
     .table-wrap { position: relative; }
-    .sneak-blur {
-      filter: blur(6px);
-      opacity: 0.22;
+    tr.sneak-blur td {
+      filter: blur(8px) brightness(0.4);
+      opacity: 0.35;
       pointer-events: none;
       user-select: none;
+      transition: filter 0.4s ease;
+    }
+    tr.sneak-blur:hover td {
+      filter: blur(6px) brightness(0.5);
+      opacity: 0.45;
     }
     .sneak-cta {
       position: absolute;
@@ -455,18 +460,14 @@
       $('#totalCount').textContent = players.length;
       $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
 
-      // Sneak peek: blur rows 4-5 (index 3,4), hide rows >= 6
-      $$('tr[data-row]', tbody).forEach((row, i) => {
-        if (i >= 3 && i <= 4) row.classList.add('sneak-blur');
-        if (i >= 5) row.style.display = 'none';
-      });
-      const expandRows = $$('.expand-row', tbody);
-      expandRows.forEach(row => {
-        const prev = row.previousElementSibling;
-        if (prev) {
-          if (prev.classList.contains('sneak-blur')) row.classList.add('sneak-blur');
-          if (prev.style.display === 'none') row.style.display = 'none';
+      // Sneak peek: blur rows 4-5 (indices 3,4), hide rows >= 6
+      const allRows = [...$$('tr[data-row]', tbody)];
+      allRows.forEach((row, i) => {
+        if (i === 3 || i === 4) {
+          row.classList.add('sneak-blur');
+          row.style.opacity = '';
         }
+        if (i >= 5) row.style.display = 'none';
       });
 
       // Inject CTA overlay once
@@ -606,21 +607,45 @@
       });
     });
 
-    // ========== WEIGHTS ==========
+    // ========== WEIGHTS — Equalizer animation ==========
     if (ev && ev.weights_dfs) {
       const host = $('#weightsHost');
       const arr = Object.entries(ev.weights_dfs).map(([k, v]) => ({ key: k, value: v * 100 }));
       arr.sort((a, b) => b.value - a.value);
       const maxW = Math.max(...arr.map(w => w.value));
-      host.innerHTML = `<div class="factor-weights" data-fw-id="global_weights">
-        ${arr.map((w, i) => `
-          <div class="factor-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-phase="${i * 0.7}">
+      
+      host.innerHTML = `<div class="factor-weights eq-weights" data-fw-id="global_weights">
+        ${arr.map((w) => `
+          <div class="factor-bar eq-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-label="${w.key}">
             <div class="label">${w.key}</div>
-            <div class="track"><div class="fill alive" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
-            <div class="value">${fmtNum(w.value, 1)}%</div>
+            <div class="track eq-track"><div class="fill eq-fill" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
+            <div class="value eq-val">${fmtNum(w.value, 1)}%</div>
           </div>
         `).join('')}
       </div>`;
+      
+      // Start equalizer animation
+      (function eqLoop() {
+        const t = performance.now() / 800;
+        document.querySelectorAll('.eq-bar').forEach((bar, i) => {
+          const base = parseFloat(bar.dataset.base) || 30;
+          // Each bar has 3 overlapping sine waves for organic movement
+          const wave = Math.sin(t * 2.1 + i * 0.9) * 12 
+                     + Math.sin(t * 3.7 + i * 1.3) * 8
+                     + Math.sin(t * 1.3 + i * 0.4) * 6;
+          const wobble = Math.max(-15, Math.min(15, wave));
+          const newWidth = Math.max(5, Math.min(100, base + wobble));
+          const fill = bar.querySelector('.eq-fill');
+          const val = bar.querySelector('.eq-val');
+          if (fill) fill.style.width = newWidth + '%';
+          // Update the label color intensity based on position
+          if (fill) {
+            const intensity = newWidth / 100;
+            fill.style.opacity = 0.5 + intensity * 0.5;
+          }
+        });
+        requestAnimationFrame(eqLoop);
+      })();
     }
 
     // Init
@@ -631,24 +656,28 @@
 
 
 <script>
-  // Factor bar breathing animation
-  function breatheFactors() {
-    document.querySelectorAll('.factor-weights').forEach(container => {
+  // Equalizer-style factor bar animation for expand rows
+  function animateExpandFactors() {
+    const t = performance.now() / 700;
+    document.querySelectorAll('.factor-weights:not(.eq-weights)').forEach(container => {
       const bars = container.querySelectorAll('.factor-bar');
-      const t = performance.now() / 1000;
       bars.forEach((bar, i) => {
         const base = parseFloat(bar.dataset.base) || 50;
         const phase = parseFloat(bar.dataset.phase) || 0;
         const fill = bar.querySelector('.fill.alive');
         if (!fill) return;
-        const wobble = Math.sin(t * 1.8 + phase) * 4;
-        const val = Math.max(2, Math.min(100, base + wobble));
+        // Aggressive multi-wave oscillation like a sound equalizer
+        const wave = Math.sin(t * 2.5 + phase) * 10 
+                   + Math.sin(t * 4.2 + phase * 1.7) * 7
+                   + Math.sin(t * 1.8 + phase * 0.3) * 5;
+        const wobble = Math.max(-18, Math.min(18, wave));
+        const val = Math.max(3, Math.min(100, base + wobble));
         fill.style.width = val + '%';
       });
     });
-    requestAnimationFrame(breatheFactors);
+    requestAnimationFrame(animateExpandFactors);
   }
-  requestAnimationFrame(breatheFactors);
+  requestAnimationFrame(animateExpandFactors);
 </script>
 
 <script id="fallback_bbi_rankings" type="application/json">
