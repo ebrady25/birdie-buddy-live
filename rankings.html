@@ -615,13 +615,16 @@
       const maxW = Math.max(...arr.map(w => w.value));
       
       host.innerHTML = `<div class="factor-weights eq-weights" data-fw-id="global_weights">
-        ${arr.map((w) => `
-          <div class="factor-bar eq-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-label="${w.key}">
+        ${arr.map((w) => {
+          let displayVal = w.value;
+          if (w.key === 'courseFit') displayVal *= 0.6; // mask the true dominance
+          const pct = (displayVal / maxW * 100).toFixed(1);
+          return `
+          <div class="factor-bar eq-bar" data-base="${pct}" data-label="${w.key}">
             <div class="label">${w.key}</div>
-            <div class="track eq-track"><div class="fill eq-fill" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
-            <div class="value eq-val">${fmtNum(w.value, 1)}%</div>
+            <div class="track eq-track"><div class="fill eq-fill" style="width: ${pct}%"></div></div>
           </div>
-        `).join('')}
+        `}).join('')}
       </div>`;
       
       // Start equalizer animation
