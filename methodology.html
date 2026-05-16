@@ -307,21 +307,23 @@
 
   <div id="site-header"></div>
 
-  <main class="container" style="padding-top: var(--s-16);">
-    <!-- PAGE HEAD -->
-    <section class="page-head">
-      <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        <span>TRUST &amp; TRANSPARENCY</span>
-      </div>
-      <h1>Methodology</h1>
-      <p>Every number on this site is traceable. BBI is a 10-factor score computed from tour data, OWGR, and course history. This page shows you the weights, the math, the 14 agents that run the pipeline, and the rules for when a shadow model gets promoted.</p>
-      <div class="page-head-meta">
-        <span>Version <strong class="gold" id="mVer">v8.5 Pantheon</strong></span>
-        <span>Backtest — <strong id="mBack">47 events · 2025 season</strong></span>
-        <span>Spearman baseline — <strong id="mSpear">0.393</strong></span>
-        <span>Brier top-10 — <strong id="mBrier">0.088</strong></span>
-        <span>Updated — <strong id="mUpdated">—</strong></span>
+  <main class="container" style="padding-top: 0;">
+    <!-- METHOD HERO -->
+    <section class="m-hero" style="min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:var(--s-24) var(--s-5) var(--s-16);position:relative;overflow:hidden;border-bottom:1px solid var(--border-gold);">
+      <canvas id="methodCanvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+      <div style="position:relative;z-index:1;max-width:800px;">
+        <div class="eyebrow"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:8px;"></span>TRUST &amp; TRANSPARENCY</div>
+        <h1 style="font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin:var(--s-6) 0 var(--s-4);line-height:0.95;">How BirdieBuddy<br><span style="background:linear-gradient(135deg,var(--gold-2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;">thinks.</span></h1>
+        <p style="font-size:clamp(15px,1.4vw,18px);color:var(--text-3);max-width:52ch;margin:0 auto var(--s-8);line-height:1.65;">Ten factors. Fifteen agents. Ten thousand simulations. No black box — every weight, every threshold, every promotion rule is documented here.</p>
+        <div style="display:flex;gap:var(--s-6);justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--text-4);letter-spacing:0.08em;text-transform:uppercase;">
+          <span><strong style="color:var(--gold);">v8.5</strong> Pantheon</span>
+          <span style="color:var(--text-5);">·</span>
+          <span><strong style="color:var(--gold);">47</strong> events backtested</span>
+          <span style="color:var(--text-5);">·</span>
+          <span>Spearman <strong style="color:var(--gold);">0.393</strong></span>
+          <span style="color:var(--text-5);">·</span>
+          <span>Brier <strong style="color:var(--gold);">0.088</strong></span>
+        </div>
       </div>
     </section>
 
@@ -793,5 +795,126 @@
       });
     });
   </script>
+<script>
+  // Methodology hero — rotating decagon of 10 factors
+  (function() {
+    const canvas = document.getElementById('methodCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, cx, cy;
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      W = canvas.width = rect.width;
+      H = canvas.height = rect.height;
+      cx = W / 2; cy = H / 2;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const factors = ['talent','courseFit','form','cutSafety','floor','ceiling','leverage','contrarian','dfsValue','strategic'];
+    const weights = [0.13,0.20,0.11,0.08,0.05,0.13,0.08,0.05,0.12,0.05];
+    const N = 10;
+
+    function frame(t) {
+      t = t / 1000;
+      ctx.clearRect(0, 0, W, H);
+
+      const radius = Math.min(W, H) * 0.28;
+      const rot = t * 0.12; // slow rotation
+
+      // Build vertices
+      const verts = [];
+      for (let i = 0; i < N; i++) {
+        const angle = (i / N) * Math.PI * 2 - Math.PI / 2 + rot;
+        const pulse = 1 + Math.sin(t * 0.8 + i * 0.9) * 0.06;
+        const r = radius * (0.3 + weights[i] * 3.5) * pulse;
+        verts.push({
+          x: cx + Math.cos(angle) * r,
+          y: cy + Math.sin(angle) * r,
+          angle: angle,
+          weight: weights[i],
+          name: factors[i]
+        });
+      }
+
+      // Draw outer faint decagon (full radius reference)
+      ctx.beginPath();
+      for (let i = 0; i < N; i++) {
+        const angle = (i / N) * Math.PI * 2 - Math.PI / 2 + rot;
+        const r = radius * 0.95;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(212,168,67,0.06)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Draw filled data polygon
+      ctx.beginPath();
+      verts.forEach((v, i) => {
+        if (i === 0) ctx.moveTo(v.x, v.y); else ctx.lineTo(v.x, v.y);
+      });
+      ctx.closePath();
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+      grad.addColorStop(0, 'rgba(212,168,67,0.12)');
+      grad.addColorStop(1, 'rgba(212,168,67,0.02)');
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(212,168,67,0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Draw center-to-vertex lines
+      verts.forEach(v => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(v.x, v.y);
+        ctx.strokeStyle = 'rgba(212,168,67,0.10)';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      });
+
+      // Draw vertices
+      verts.forEach((v, i) => {
+        const glow = 4 + Math.sin(t * 1.2 + i) * 2;
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(212,168,67,0.8)';
+        ctx.fill();
+        // Glow
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, glow, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(212,168,67,${0.15 * (0.7 + 0.3 * Math.sin(t * 2 + i))})`;
+        ctx.fill();
+      });
+
+      // Draw factor labels on outer ring
+      ctx.font = '10px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (let i = 0; i < N; i++) {
+        const angle = (i / N) * Math.PI * 2 - Math.PI / 2 + rot;
+        const r = radius * 1.18;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        const alpha = 0.35 + Math.sin(t * 0.6 + i * 0.5) * 0.15;
+        ctx.fillStyle = `rgba(212,168,67,${alpha})`;
+        ctx.fillText(factors[i], x, y);
+      }
+
+      // Center dot
+      ctx.beginPath();
+      ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(212,168,67,0.5)';
+      ctx.fill();
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
+</script>
 </body>
 </html>

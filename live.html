@@ -4,141 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live · BirdieBuddy</title>
-  <link rel="stylesheet" href="assets/css/vault-theme.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/components.css">
   <style>
-  :root {
-    /* Surfaces → vault bg */
-    --surface-0: var(--bg);
-    --surface-1: var(--bg);
-    --surface-2: var(--bg-2);
-    --surface-3: var(--bg-3);
-    --surface-4: var(--bg-4);
-    --surface-5: var(--bg-5);
-    --surface-6: var(--bg-5);
-    /* Text → vault text */
-    --text-primary: var(--text);
-    --text-body: var(--text-2);
-    --text-muted: var(--text-3);
-    --text-dimmed: var(--text-4);
-    --text-faint: var(--text-5);
-    --text-on-gold: #08080c;
-    /* Gold → vault gold */
-    --gold-50:  var(--gold-2);
-    --gold-100: var(--gold-2);
-    --gold-200: var(--gold-2);
-    --gold-300: var(--gold-2);
-    --gold-400: var(--gold-2);
-    --gold-500: var(--gold);
-    --gold-600: var(--gold-3);
-    --gold-700: var(--gold-3);
-    --gold-800: var(--gold-3);
-    --gold-900: var(--bg);
-    --gold-950: var(--bg);
-    /* Borders → vault borders */
-    --border-subtle: var(--border);
-    --border-soft:   var(--border);
-    --border-base:   var(--border-2);
-    --border-strong: var(--border-2);
-    --border-gold:   var(--border-gold);
-    --border-gold-strong: var(--border-gold);
-    /* Typography families */
-    --font-body:    var(--font);
-    --font-mono:    var(--mono);
-    --font-display: var(--font);
-    /* Spacing → vault spacing */
-    --space-0:  0;
-    --space-px: 1px;
-    --space-1:  var(--s-1);
-    --space-2:  var(--s-2);
-    --space-3:  var(--s-3);
-    --space-4:  var(--s-4);
-    --space-5:  var(--s-5);
-    --space-6:  var(--s-6);
-    --space-8:  var(--s-8);
-    --space-10: var(--s-10);
-    --space-12: var(--s-12);
-    --space-16: var(--s-16);
-    --space-20: var(--s-20);
-    --space-24: var(--s-24);
-    /* Radii → vault radii */
-    --radius-xs:  var(--r-sm);
-    --radius-sm:  var(--r-sm);
-    --radius-md:  var(--r-md);
-    --radius-lg:  var(--r-lg);
-    --radius-xl:  var(--r-xl);
-    --radius-2xl: var(--r-xl);
-    --radius-full: var(--r-full);
-    /* Type scale (keep original rem values) */
-    --fs-3xs: 0.625rem;
-    --fs-2xs: 0.6875rem;
-    --fs-xs:  0.75rem;
-    --fs-sm:  0.8125rem;
-    --fs-md:  0.875rem;
-    --fs-base: 1rem;
-    --fs-lg:  1.125rem;
-    --fs-xl:  1.25rem;
-    --fs-2xl: 1.5rem;
-    --fs-3xl: 2rem;
-    --fs-4xl: 3rem;
-    --fs-5xl: 4rem;
-    --fs-6xl: 6rem;
-    /* Line height / tracking / motion / z / shadows / layout (preserve) */
-    --lh-tight: 1.1;
-    --lh-snug:  1.25;
-    --lh-base:  1.5;
-    --lh-relaxed: 1.7;
-    --tracking-tight: -0.02em;
-    --tracking-base:  0;
-    --tracking-wide:  0.02em;
-    --tracking-wider: 0.06em;
-    --tracking-widest: 0.14em;
-    --dur-instant: 80ms;
-    --dur-fast:    150ms;
-    --dur-base:    220ms;
-    --dur-slow:    400ms;
-    --dur-slower:  700ms;
-    --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
-    --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
-    --z-base: 1;
-    --z-elevated: 10;
-    --z-sticky: 50;
-    --z-nav: 100;
-    --z-overlay: 500;
-    --z-modal: 1000;
-    --z-tooltip: 2000;
-    --shadow-xs: 0 1px 2px 0 rgba(0,0,0,0.4);
-    --shadow-sm: 0 2px 4px -1px rgba(0,0,0,0.5), 0 1px 2px -1px rgba(0,0,0,0.4);
-    --shadow-md: 0 6px 14px -4px rgba(0,0,0,0.55), 0 2px 4px -2px rgba(0,0,0,0.4);
-    --shadow-lg: 0 14px 30px -8px rgba(0,0,0,0.6), 0 4px 8px -4px rgba(0,0,0,0.4);
-    --shadow-xl: 0 24px 50px -12px rgba(0,0,0,0.7);
-    --shadow-gold-sm: 0 0 0 1px rgba(212,168,67,0.25), 0 4px 14px -4px rgba(212,168,67,0.18);
-    --shadow-gold-md: 0 0 0 1px rgba(212,168,67,0.35), 0 8px 22px -6px rgba(212,168,67,0.22);
-    --shadow-inset: inset 0 1px 0 0 rgba(255,255,255,0.04);
-    --container-max: 1480px;
-    --container-pad: clamp(1rem, 3vw, 2rem);
-    --nav-h: 56px;
-    --status-h: 32px;
-    --page-toolbar-h: 54px;
-    /* Data viz / semantic (preserve) */
-    --positive-soft: rgba(74, 222, 128, 0.15);
-    --negative-soft: rgba(248, 113, 113, 0.15);
-    --info: #60a5fa;
-    --info-soft: rgba(96, 165, 250, 0.15);
-    --info-deep: #14304a;
-    --warning-soft: rgba(251, 191, 36, 0.15);
-    --neutral: #9ca3af;
-    --heat-1: rgba(46, 35, 16, 0.35);
-    --heat-2: rgba(138, 110, 42, 0.40);
-    --heat-3: rgba(212, 168, 67, 0.45);
-    --heat-4: rgba(244, 200, 99, 0.55);
-    --heat-5: rgba(253, 246, 221, 0.60);
-    --tier-specialist: var(--gold);
-    --tier-comfortable: var(--positive);
-    --tier-neutral: var(--text-3);
-    --tier-struggle: var(--negative);
-  }
     /* =============================================================
        LIVE — PERSEPHONE in-round tracker
        ============================================================= */
@@ -640,16 +511,9 @@
   </style>
 </head>
 <body>
-<nav class="vault-nav">
-  <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
-  <div class="links">
-    <a href="rankings.html">Rankings</a>
-    <a href="full-rankings.html">Full Rankings</a>
-    <a href="performance.html">Performance</a>
-    <a href="methodology.html">Methodology</a>
-  </div>
-</nav>
-<main class="container" style="padding-top: var(--s-16);">
+  <div id="site-header"></div>
+
+  <main class="container">
     <!-- PAGE HEAD -->
     <header class="page-head">
       <div class="eyebrow">PERSEPHONE · in-round intelligence</div>
@@ -793,17 +657,10 @@
       <strong>How to read this page.</strong> The probability shift is BBI's pre-tournament win probability minus the live-Monte-Carlo baseline — positive means the player has dramatically outperformed expectations. Hole heat map sums morning + afternoon waves and colors by score-to-par. Lineup health is a hard-rule check: <em>green</em> = all six golfers active and inside the projected cut, <em>amber</em> = at least one withdrawal, <em>red</em> = at least one missed cut. Updates every 30 minutes during play.
     </div>
   </main>
-<footer class="vault-footer">
-  <div style="font-weight: 700; color: var(--text);">BirdieBuddy</div>
-  <div style="display: flex; gap: var(--s-6);">
-    <a href="rankings.html" style="color: var(--text-4);">Rankings</a>
-    <a href="full-rankings.html" style="color: var(--text-4);">Full Rankings</a>
-    <a href="performance.html" style="color: var(--text-4);">Performance</a>
-    <a href="methodology.html" style="color: var(--text-4);">Methodology</a>
-  </div>
-</footer>
 
-<!-- Scripts -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
   <script src="assets/js/core.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/components.js"></script>
@@ -830,7 +687,8 @@
     };
 
     (async function init() {
-
+      await window.BBI.renderHeader('live.html');
+      await window.BBI.renderFooter();
 
       const [pers, ev, omnia] = await Promise.all([
         window.BBI.data.load(window.BBI.data.paths.persephone),

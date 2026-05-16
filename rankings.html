@@ -128,6 +128,15 @@
       background: linear-gradient(90deg, var(--gold-3), var(--gold));
       transition: width 0.6s ease;
     }
+    .factor-bar .fill.alive {
+      background: linear-gradient(90deg, var(--gold-3), var(--gold), var(--gold-2), var(--gold));
+      background-size: 200% 100%;
+      animation: factorPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes factorPulse {
+      0%, 100% { background-position: 0% 50%; opacity: 0.85; }
+      50% { background-position: 100% 50%; opacity: 1; }
+    }
     .factor-bar .value {
       font-family: var(--mono); font-size: 10px;
       color: var(--text-3); width: 36px; text-align: right;
@@ -446,9 +455,9 @@
       $('#totalCount').textContent = players.length;
       $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
 
-      // Sneak peek: blur rows > 3
+      // Sneak peek: blur rows >= 6 (show top 5)
       $$('tr[data-row]', tbody).forEach((row, i) => {
-        if (i >= 3) row.classList.add('sneak-blur');
+        if (i >= 5) row.classList.add('sneak-blur');
       });
       const expandRows = $$('.expand-row', tbody);
       expandRows.forEach((row, i) => {
@@ -483,19 +492,22 @@
         { k: 'dfsValue', v: decomp.dfsValue }, { k: 'strategic', v: decomp.strategic }
       ].filter(f => f.v != null);
       const maxFactor = Math.max(...factors.map(f => f.v), 1);
+      const uid = 'fw_' + Math.random().toString(36).substr(2, 9);
 
       return `
         <div class="expand-inner">
           <div class="expand-grid">
             <div class="expand-block">
               <div class="title">Factor decomposition</div>
-              ${factors.map(f => `
-                <div class="factor-bar">
+              <div class="factor-weights" data-fw-id="${uid}">
+              ${factors.map((f, i) => `
+                <div class="factor-bar" data-base="${(f.v / maxFactor * 100).toFixed(1)}" data-phase="${i * 0.7}">
                   <div class="label">${f.k}</div>
-                  <div class="track"><div class="fill" style="width: ${(f.v / maxFactor * 100).toFixed(1)}%"></div></div>
+                  <div class="track"><div class="fill alive" style="width: ${(f.v / maxFactor * 100).toFixed(1)}%"></div></div>
                   <div class="value">${fmtNum(f.v, 1)}</div>
                 </div>
               `).join('')}
+              </div>
             </div>
             <div class="expand-block">
               <div class="title">Course history · ${p.hist_rounds || 0} rounds</div>
@@ -612,6 +624,27 @@
   });
 </script>
 
+
+<script>
+  // Factor bar breathing animation
+  function breatheFactors() {
+    document.querySelectorAll('.factor-weights').forEach(container => {
+      const bars = container.querySelectorAll('.factor-bar');
+      const t = performance.now() / 1000;
+      bars.forEach((bar, i) => {
+        const base = parseFloat(bar.dataset.base) || 50;
+        const phase = parseFloat(bar.dataset.phase) || 0;
+        const fill = bar.querySelector('.fill.alive');
+        if (!fill) return;
+        const wobble = Math.sin(t * 1.8 + phase) * 4;
+        const val = Math.max(2, Math.min(100, base + wobble));
+        fill.style.width = val + '%';
+      });
+    });
+    requestAnimationFrame(breatheFactors);
+  }
+  requestAnimationFrame(breatheFactors);
+</script>
 
 <script id="fallback_bbi_rankings" type="application/json">
 {"rankings":[
