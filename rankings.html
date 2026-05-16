@@ -239,7 +239,7 @@
 
 <main class="container">
   <div style="text-align:center;padding:var(--s-3) 0;border-bottom:1px solid var(--border-gold);background: linear-gradient(90deg, transparent, rgba(212,168,67,0.08), transparent);">
-    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Sneak peek · Top 3 visible · Full rankings for subscribers</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Sneak peek · Top 3 crystal clear · Rows 4–5 blurred · Full rankings for subscribers</span>
   </div>
   <header class="page-head">
     <div class="eyebrow">Live rankings · <span id="eventName">—</span></div>
@@ -455,15 +455,18 @@
       $('#totalCount').textContent = players.length;
       $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
 
-      // Sneak peek: blur rows >= 6 (show top 5)
+      // Sneak peek: blur rows 4-5 (index 3,4), hide rows >= 6
       $$('tr[data-row]', tbody).forEach((row, i) => {
-        if (i >= 5) row.classList.add('sneak-blur');
+        if (i >= 3 && i <= 4) row.classList.add('sneak-blur');
+        if (i >= 5) row.style.display = 'none';
       });
       const expandRows = $$('.expand-row', tbody);
-      expandRows.forEach((row, i) => {
-        // count visible expand rows that follow blurred rows
+      expandRows.forEach(row => {
         const prev = row.previousElementSibling;
-        if (prev && prev.classList.contains('sneak-blur')) row.classList.add('sneak-blur');
+        if (prev) {
+          if (prev.classList.contains('sneak-blur')) row.classList.add('sneak-blur');
+          if (prev.style.display === 'none') row.style.display = 'none';
+        }
       });
 
       // Inject CTA overlay once
@@ -474,7 +477,7 @@
         cta.innerHTML = `
           <div class="cta-box">
             <h3>156 players. 10 factors. One edge.</h3>
-            <p>The top 3 are free. The full field — with factor decomposition, course history, and DFS values — is for subscribers.</p>
+            <p>The top 3 are crystal clear. Rows 4–5 give you a hint. The full field — with factor decomposition, course history, and DFS values — is for subscribers.</p>
             <a href="index.html#emailInput" class="btn-gold">Request access</a>
           </div>
         `;
@@ -609,13 +612,15 @@
       const arr = Object.entries(ev.weights_dfs).map(([k, v]) => ({ key: k, value: v * 100 }));
       arr.sort((a, b) => b.value - a.value);
       const maxW = Math.max(...arr.map(w => w.value));
-      host.innerHTML = arr.map(w => `
-        <div class="factor-bar">
-          <div class="label">${w.key}</div>
-          <div class="track"><div class="fill" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
-          <div class="value">${fmtNum(w.value, 1)}%</div>
-        </div>
-      `).join('');
+      host.innerHTML = `<div class="factor-weights" data-fw-id="global_weights">
+        ${arr.map((w, i) => `
+          <div class="factor-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-phase="${i * 0.7}">
+            <div class="label">${w.key}</div>
+            <div class="track"><div class="fill alive" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
+            <div class="value">${fmtNum(w.value, 1)}%</div>
+          </div>
+        `).join('')}
+      </div>`;
     }
 
     // Init
