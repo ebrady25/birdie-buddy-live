@@ -7,8 +7,178 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/design-system.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/vault-theme.css" />
+  <style>
+    /* ==========================================================
+       CSS VARIABLE BRIDGE — old design-system tokens → vault tokens
+       ========================================================== */
+    :root {
+      /* Golds */
+      --gold-400: var(--gold);
+      --gold-300: var(--gold-2);
+      --gold-500: var(--gold-3);
+      --gold-600: var(--gold-3);
+      --gold-700: var(--gold-3);
+      --gold-900: var(--gold-dim);
+
+      /* Surfaces */
+      --surface-1: var(--bg);
+      --surface-2: var(--bg-2);
+      --surface-3: var(--bg-3);
+      --surface-4: var(--bg-4);
+      --surface-5: var(--bg-5);
+
+      /* Borders */
+      --border-subtle: var(--border);
+      --border-soft:   var(--border-2);
+      --border-base:   var(--border-2);
+
+      /* Text */
+      --text-primary: var(--text);
+      --text-body:    var(--text-2);
+      --text-muted:   var(--text-3);
+      --text-dimmed:  var(--text-4);
+      --text-faint:   var(--text-5);
+      --text-on-gold: var(--bg);
+
+      /* Radius */
+      --radius-sm:  var(--r-sm);
+      --radius-md:  var(--r-md);
+      --radius-lg:  var(--r-lg);
+      --radius-xl:  var(--r-xl);
+      --radius-full: var(--r-full);
+
+      /* Fonts */
+      --font-mono:    var(--mono);
+      --font-body:    var(--font);
+      --font-display: var(--font);
+
+      /* Spacing */
+      --space-1:  var(--s-1);
+      --space-2:  var(--s-2);
+      --space-3:  var(--s-3);
+      --space-4:  var(--s-4);
+      --space-5:  var(--s-5);
+      --space-6:  var(--s-6);
+      --space-8:  var(--s-8);
+      --space-10: var(--s-10);
+      --space-12: var(--s-12);
+      --space-px: 1px;
+
+      /* Misc tokens */
+      --positive:       #4ade80;
+      --negative:       #ef4444;
+      --warning:        #f59e0b;
+      --info:           #60a5fa;
+      --positive-soft:  rgba(74,222,128,0.12);
+      --negative-soft:  rgba(239,68,68,0.12);
+      --z-elevated:     50;
+      --dur-fast:       0.15s;
+      --dur-base:       0.25s;
+      --dur-slow:       0.4s;
+      --ease-out:       cubic-bezier(0.22, 1, 0.36, 1);
+      --tracking-wide:  0.04em;
+      --tracking-widest: 0.12em;
+      --lh-snug:        1.35;
+      --nav-h:          56px;
+      --status-h:       0px;
+
+      /* Shadows */
+      --shadow-lg:      0 10px 30px rgba(0,0,0,0.35);
+      --shadow-gold-sm: 0 2px 8px rgba(212,168,67,0.12);
+      --shadow-gold-md: 0 4px 16px rgba(212,168,67,0.18);
+    }
+
+    /* ---------- Utility classes from old components.css ---------- */
+    .page-head { padding: var(--s-16) 0 var(--s-8); }
+    .page-head .eyebrow {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: var(--s-4);
+      display: block;
+    }
+    .page-head h1, .page-head .h-1 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; color: var(--text);
+    }
+    .page-head p, .page-head .lede {
+      font-size: 15px; color: var(--text-3);
+      line-height: 1.6; max-width: 55ch;
+    }
+    .page-head-meta {
+      display: flex; gap: var(--s-6); flex-wrap: wrap;
+      margin-top: var(--s-5);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-4);
+    }
+    .page-head-meta strong { color: var(--text); font-weight: 600; }
+    .page-head-meta .gold { color: var(--gold); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--gold), var(--gold-3));
+      color: var(--bg) !important; border: none;
+      border-radius: var(--r-md);
+      padding: var(--s-3) var(--s-5);
+      font-family: var(--mono); font-size: 12px;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; white-space: nowrap;
+      transition: filter 0.2s; text-decoration: none;
+    }
+    .btn:hover { filter: brightness(1.15); }
+    .btn-sm { padding: 6px 12px; font-size: 11px; }
+    .btn-lg { padding: 10px 18px; font-size: 13px; }
+
+    .seg {
+      display: inline-flex; gap: 2px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 2px;
+    }
+    .seg button {
+      padding: 4px 10px;
+      background: transparent; border: none;
+      color: var(--text-4);
+      font-family: var(--mono); font-size: 10px;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; border-radius: var(--r-sm);
+      transition: all 0.2s;
+    }
+    .seg button.active {
+      background: var(--bg-5); color: var(--gold-2);
+    }
+    .seg button:hover:not(.active) { color: var(--text-2); }
+
+    .search-input {
+      display: flex; align-items: center; gap: var(--s-2);
+      background: var(--bg-3);
+      border: 1px solid var(--border-2);
+      border-radius: var(--r-md);
+      padding: var(--s-2) var(--s-3);
+    }
+    .search-input input {
+      background: transparent; border: none; outline: none;
+      color: var(--text); font-size: 13px; font-family: var(--font);
+      width: 100%;
+    }
+    .search-input input::placeholder { color: var(--text-5); }
+
+    .tier {
+      font-family: var(--mono); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: var(--r-sm);
+    }
+    .tier-specialist { background: rgba(212,168,67,0.12); color: var(--gold); border: 1px solid rgba(212,168,67,0.3); }
+    .tier-comfortable { background: rgba(74,222,128,0.10); color: var(--positive); border: 1px solid rgba(74,222,128,0.25); }
+    .tier-neutral    { background: rgba(255,255,255,0.05); color: var(--text-3); border: 1px solid var(--border); }
+    .tier-struggle   { background: rgba(239,68,68,0.10); color: var(--negative); border: 1px solid rgba(239,68,68,0.25); }
+
+    /* Ensure main clears fixed nav */
+    main.container { padding-top: 72px; }
+  </style>
   <style>
     /* ===== COMPARE PAGE ===== */
     :root {
@@ -507,9 +677,17 @@
   </style>
 </head>
 <body>
-  <div id="site-header"></div>
-
-  <main class="container">
+  <nav class="vault-nav">
+  <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="rankings.html">Rankings</a>
+    <a href="compare.html" class="active">Compare</a>
+    <a href="simulator.html" class="">Simulator</a>
+    <a href="courses.html" class="">Courses</a>
+  </div>
+</nav>
+<main class="container">
     <header class="page-head">
       <div class="eyebrow">Head-to-head</div>
       <h1 class="h-1">Compare players</h1>
@@ -537,17 +715,17 @@
     <div id="cmpBody"></div>
   </main>
 
-  <div id="site-footer"></div>
+  <footer class="vault-footer">
+  <span>BirdieBuddy · DataGolf-powered golf intelligence</span>
+  <span>Built for sharp bettors and DFS players</span>
+</footer>
 
-  <script src="assets/js/core.js"></script>
+<script src="assets/js/core.js"></script>
   <script src="assets/js/components.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/data.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      await BBI.renderHeader('compare.html');
-      await BBI.renderFooter();
-
       const [rankings, currentEvent, tourBaselines, courseHistory, recentForm] = await Promise.all([
         BBI.data.load(BBI.data.paths.bbiRankings),
         BBI.data.load(BBI.data.paths.currentEvent),

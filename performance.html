@@ -8,9 +8,66 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="prefetch" href="methodology.html" />
-  <link rel="stylesheet" href="assets/css/design-system.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/vault-theme.css" />
   <style>
+  :root {
+    /* Bridge old tokens to vault */
+    --surface-1: var(--bg);
+    --surface-2: var(--bg-2);
+    --surface-3: var(--bg-3);
+    --surface-4: var(--bg-4);
+    --surface-5: var(--bg-5);
+    --text-primary: var(--text);
+    --text-body: var(--text-2);
+    --text-muted: var(--text-3);
+    --text-dimmed: var(--text-4);
+    --border-soft: var(--border);
+    --border-strong: var(--border-2);
+    --border-subtle: var(--border);
+    --border-gold: rgba(212,168,67,0.25);
+    --gold-500: var(--gold);
+    --gold-400: var(--gold-2);
+    --gold-300: var(--gold-2);
+    --gold-200: var(--gold-2);
+    --gold-700: var(--gold-3);
+    --gold-600: var(--gold-3);
+    --positive: #4ade80;
+    --negative: #ef4444;
+    --info: #60a5fa;
+    --font-display: var(--font);
+    --font-mono: var(--mono);
+    --font-body: var(--font);
+    --fs-xl: 18px;
+    --fs-lg: 16px;
+    --fs-md: 14px;
+    --fs-sm: 13px;
+    --fs-xs: 12px;
+    --fs-3xs: 10px;
+    --fs-2xl: 22px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-7: 32px;
+    --space-8: 40px;
+    --space-9: 48px;
+    --space-10: 64px;
+    --space-11: 80px;
+    --space-12: 96px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 18px;
+    --radius-pill: 999px;
+    --dur-base: 0.25s;
+    --tracking-wide: 0.05em;
+    --tracking-widest: 0.15em;
+    --nav-h: 64px;
+    --status-h: 0px;
+  }
+
     /* =========================================================
        PERFORMANCE — PAGE-SPECIFIC STYLES
        (page-head, page-head-meta live in components.css)
@@ -1506,6 +1563,16 @@
   </style>
 </head>
 <body>
+<nav class="vault-nav">
+  <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+  <div class="links">
+    <a href="rankings.html">Rankings</a>
+    <a href="full-rankings.html">Full Rankings</a>
+    <a href="performance.html" class="active">Performance</a>
+    <a href="methodology.html">Methodology</a>
+  </div>
+</nav>
+
   <div id="site-header"></div>
 
   <!-- Sticky mini-summary: fades in once user scrolls past the hero -->
@@ -1521,7 +1588,7 @@
     </div>
   </div>
 
-  <main class="container">
+  <main class="container" style="padding-top: var(--s-16);">
     <!-- PAGE HEAD -->
     <header class="page-head">
       <div class="eyebrow">Public performance tracking · BBI <span class="gold">v8.5</span></div>
@@ -2127,7 +2194,7 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
       await BBI.renderHeader('performance.html');
-      await BBI.renderFooter();
+      await ;
 
       const [spear, calib, comp, shadow, prom, recaps, attr, worldRank, dfsCapture, dfsOptimal] = await Promise.all([
         BBI.data.load(BBI.data.paths.spearman),
