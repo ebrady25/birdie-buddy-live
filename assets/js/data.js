@@ -15,36 +15,6 @@ window.BBI = window.BBI || {};
       const res = await fetch(path, { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
-      // Normalize new-format bbi_rankings into legacy field names expected by site pages
-      if (path === BBI.data.paths.bbiRankings && json && json.players) {
-        const remap = { player_name: 'name', course_tier: 'tier', dk_salary: 'salary',
-                        dk_ownership: 'proj_own', prob_win: 'win_pct',
-                        dg_skill_estimate: 'dg_skill', prob_top5: 'top_5',
-                        prob_top10: 'top_10', prob_top20: 'top_20', prob_mc: 'make_cut',
-                        p_win: 'win_pct', p_top5: 'top_5', p_top10: 'top_10',
-                        p_top20: 'top_20', p_makecut: 'make_cut',
-                        proj_ownership: 'proj_own' };
-        const arr = json.players || json.rankings || [];
-        const normalized = arr.map(p => {
-          const out = { ...p };
-          for (const [k, v] of Object.entries(remap)) {
-            if (k in p && !(v in p)) out[v] = p[k];
-          }
-          // Compute derived columns not present in raw data
-          if (!('value' in out) && out.zeus_dfs && out.salary) {
-            out.value = out.zeus_dfs / (out.salary / 1000);
-          }
-          if (!('course_hist_sg' in out) && 'hist_wsg' in out) {
-            out.course_hist_sg = out.hist_wsg;
-          }
-          if (!('form_score' in out) && 'n_form' in out) {
-            out.form_score = out.n_form * 100; // normalized 0-1 to 0-100 scale
-          }
-          return out;
-        });
-        json.players = normalized;
-        json.rankings = normalized;
-      }
       cache.set(path, json);
       return json;
     } catch (e) {
@@ -153,7 +123,8 @@ window.BBI = window.BBI || {};
         { href: 'methodology.html', label: 'Methodology',  sub: 'How BBI scores' }
       ]},
       { type: 'link', href: 'courses.html', label: 'Courses' },
-      { type: 'link', href: 'market.html',  label: 'Market' }
+      { type: 'link', href: 'market.html',  label: 'Market' },
+      { type: 'link', href: 'pricing.html', label: 'Pricing' }
     ];
 
     mount.innerHTML = `
@@ -212,6 +183,7 @@ window.BBI = window.BBI || {};
               <span class="pulse-dot"></span>
               <strong>${eventName}</strong>${week ? ` · ${week}` : ''}
             </span>
+            <span id="authControl" class="bbi-auth-ctl"></span>
           </div>
         </div>
       </nav>
@@ -242,6 +214,26 @@ window.BBI = window.BBI || {};
       const html = tickerItems.map(t => `<span class="marquee-item">${t}</span>`).join('');
       track.innerHTML = html + html;
     }
+
+    // ---------- Auth + tiered entitlements (site-wide, zero per-page edits) ----------
+    // auth.js powers the login system and the 3 paid tiers. Loaded lazily once
+    // so every page that renders this shared header gets the account control,
+    // the login/signup modal, and [data-gate] content gating automatically.
+    (function ensureAuth() {
+      const mountControl = () => { try { window.BBI.auth?.mountHeaderControl(); } catch (e) {} };
+      if (window.BBI.auth) { mountControl(); return; }
+      if (document.getElementById('bbi-auth-js')) {        // already injected, still loading
+        document.getElementById('bbi-auth-js').addEventListener('load', mountControl);
+        return;
+      }
+      const s = document.createElement('script');
+      s.id = 'bbi-auth-js';
+      s.src = 'assets/js/auth.js';
+      s.async = true;
+      s.addEventListener('load', mountControl);
+      s.addEventListener('error', () => console.warn('[auth] failed to load auth.js'));
+      document.head.appendChild(s);
+    })();
 
     // Hydrate star-count badge from localStorage
     try {
@@ -387,6 +379,14 @@ window.BBI = window.BBI || {};
               <a class="footer-link" href="performance.html#calibration">Calibration</a>
               <a class="footer-link" href="methodology.html">Methodology</a>
               <a class="footer-link" href="archive.html">Archive</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-heading">Account</div>
+            <div class="footer-links">
+              <a class="footer-link" href="pricing.html">Pricing &amp; plans</a>
+              <a class="footer-link" href="account.html">My account</a>
+              <a class="footer-link" href="login.html">Sign in</a>
             </div>
           </div>
           <div>

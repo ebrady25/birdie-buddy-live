@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .price-toggle{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--border-base);
+      border-radius:var(--radius-full);background:var(--surface-2);margin:var(--space-5) 0 var(--space-8)}
+    .price-toggle button{padding:8px 18px;border-radius:var(--radius-full);font-size:var(--fs-xs);
+      font-weight:600;color:var(--text-muted)}
+    .price-toggle button.on{background:var(--gold-500);color:var(--text-on-gold)}
+    .price-toggle .save{font-size:var(--fs-3xs);color:var(--positive);margin-left:6px}
+    .tier-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-4);
+      align-items:stretch}
+    @media(max-width:1100px){.tier-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.tier-grid{grid-template-columns:1fr}}
+    .tier{display:flex;flex-direction:column;background:var(--surface-3);
+      border:1px solid var(--border-base);border-radius:var(--radius-xl);
+      padding:var(--space-6);position:relative}
+    .tier.feat{border-color:var(--border-gold-strong);box-shadow:var(--shadow-gold-md)}
+    .tier-flag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,var(--gold-300),var(--gold-600));
+      color:var(--text-on-gold);font-size:var(--fs-3xs);font-weight:700;
+      text-transform:uppercase;letter-spacing:var(--tracking-wide);
+      padding:4px 12px;border-radius:var(--radius-full)}
+    .tier h3{font-size:var(--fs-lg);color:var(--text-primary);font-weight:700}
+    .tier .tag{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-4);min-height:2.4em}
+    .tier .amt{font-family:var(--font-display);font-size:var(--fs-4xl);font-weight:800;
+      color:var(--text-primary);line-height:1;letter-spacing:-0.02em}
+    .tier .amt small{font-size:var(--fs-sm);color:var(--text-muted);font-weight:500}
+    .tier .billed{font-size:var(--fs-3xs);color:var(--text-dimmed);margin-top:6px;min-height:1.4em}
+    .tier ul{list-style:none;margin:var(--space-5) 0;display:grid;gap:10px;flex:1}
+    .tier li{display:flex;gap:9px;font-size:var(--fs-xs);color:var(--text-body);line-height:1.45}
+    .tier li svg{flex:none;margin-top:2px;color:var(--gold-500)}
+    .tier .cta{margin-top:auto}
+    .cmp{width:100%;border-collapse:collapse;margin-top:var(--space-6);font-size:var(--fs-xs)}
+    .cmp th,.cmp td{padding:11px var(--space-3);border-bottom:1px solid var(--border-soft);text-align:center}
+    .cmp th{color:var(--text-muted);font-size:var(--fs-3xs);text-transform:uppercase;
+      letter-spacing:var(--tracking-wide)}
+    .cmp td:first-child,.cmp th:first-child{text-align:left;color:var(--text-body)}
+    .cmp .yes{color:var(--positive);font-weight:700}
+    .cmp .no{color:var(--text-faint)}
+    .faq{display:grid;gap:var(--space-3);margin-top:var(--space-6)}
+    .faq details{background:var(--surface-2);border:1px solid var(--border-soft);
+      border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5)}
+    .faq summary{cursor:pointer;font-weight:600;color:var(--text-primary);font-size:var(--fs-sm)}
+    .faq p{margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);line-height:1.6}
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <header class="page-head">
+      <div class="eyebrow">Plans &amp; pricing</div>
+      <h1>Pick a plan. Cancel anytime.</h1>
+      <p>One honest scorecard, twelve coached lineups, no homework. Every paid plan is
+         backed by the public track record — judge us on results, not features.
+         Annual billing saves the most and locks your price.</p>
+    </header>
+
+    <div style="text-align:center">
+      <div class="price-toggle" role="tablist" aria-label="Billing cycle">
+        <button id="cycMonth" role="tab">Monthly</button>
+        <button id="cycYear" class="on" role="tab">Annual<span class="save">save up to 30%</span></button>
+      </div>
+    </div>
+
+    <div class="tier-grid" id="tierGrid"></div>
+
+    <section class="section">
+      <header class="page-head" style="border:0;padding-bottom:0">
+        <div class="eyebrow">Compare</div>
+        <h1 style="font-size:var(--fs-2xl)">What's in each plan</h1>
+      </header>
+      <div style="overflow-x:auto">
+        <table class="cmp">
+          <thead><tr><th>Feature</th><th>Free</th><th>Pro</th><th>All-Access</th><th>Sharp</th></tr></thead>
+          <tbody id="cmpBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <header class="page-head" style="border:0;padding-bottom:0">
+        <div class="eyebrow">Questions</div>
+        <h1 style="font-size:var(--fs-2xl)">Good to know</h1>
+      </header>
+      <div class="faq">
+        <details><summary>Can I cancel anytime?</summary><p>Yes. Monthly plans stop at the end of the cycle; annual plans don't auto-trap you — you keep access through the term you paid for. No retention mazes.</p></details>
+        <details><summary>What's the difference between Pro and All-Access?</summary><p>Pro covers one sport (PGA) fully. All-Access adds NFL DFS, the lineup optimizer, the late-swap assistant, and the THEMIS simulator. Sharp adds earliest model release, raw data/model exports, and the private room.</p></details>
+        <details><summary>Do you really publish your losing weeks?</summary><p>Yes — the public Scorecard shows the full record, wins and misses. That's the entire point of the product.</p></details>
+        <details><summary>Is my payment secure?</summary><p>Billing runs through the payment processor once connected — we never store card details. <strong>Note:</strong> this preview runs in demo mode; account creation and upgrades are simulated locally until the billing backend is live.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('pricing.html');
+      await BBI.renderFooter();
+
+      const T = BBI.auth.TIERS;
+      const order = ['free', 'pro', 'all_access', 'sharp'];
+      const check = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      let cycle = 'year';
+
+      const grid = document.getElementById('tierGrid');
+      const renderTiers = () => {
+        grid.innerHTML = order.map(k => {
+          const t = T[k];
+          const isPaid = t.priceM > 0;
+          const amount = !isPaid ? 0 : (cycle === 'year' ? Math.round(t.priceY / 12) : t.priceM);
+          const billed = !isPaid ? 'Free forever'
+            : cycle === 'year'
+              ? `$${t.priceY} billed annually · save $${t.priceM * 12 - t.priceY}/yr`
+              : 'Billed monthly';
+          const ctaLabel = !isPaid ? 'Create free account' : `Choose ${t.name}`;
+          return `
+            <div class="tier ${t.popular ? 'feat' : ''}">
+              ${t.popular ? '<span class="tier-flag">Most popular</span>' : ''}
+              <h3 style="color:${t.accent}">${t.name}</h3>
+              <div class="tag">${t.tagline}</div>
+              <div class="amt">$${amount}<small>${isPaid ? '/mo' : ''}</small></div>
+              <div class="billed">${billed}</div>
+              <ul>${t.features.map(f => `<li>${check}<span>${f}</span></li>`).join('')}</ul>
+              <div class="cta">
+                <button class="btn ${t.popular ? 'btn-primary' : 'btn-ghost'} btn-block btn-lg"
+                        data-buy="${k}">${ctaLabel}</button>
+              </div>
+            </div>`;
+        }).join('');
+        grid.querySelectorAll('[data-buy]').forEach(b => {
+          b.addEventListener('click', () => {
+            const k = b.dataset.buy;
+            if (k === 'free') {
+              if (BBI.auth.isLoggedIn()) location.href = 'account.html';
+              else BBI.auth.openSignup();
+            } else {
+              BBI.auth.subscribe(k, cycle);
+            }
+          });
+        });
+      };
+
+      const mBtn = document.getElementById('cycMonth');
+      const yBtn = document.getElementById('cycYear');
+      const setCycle = c => {
+        cycle = c;
+        mBtn.classList.toggle('on', c === 'month');
+        yBtn.classList.toggle('on', c === 'year');
+        renderTiers();
+      };
+      mBtn.addEventListener('click', () => setCycle('month'));
+      yBtn.addEventListener('click', () => setCycle('year'));
+      renderTiers();
+
+      // Comparison matrix
+      const rank = { free: 0, pro: 1, all_access: 2, sharp: 3 };
+      const rows = [
+        ['Public Scorecard (full track record)', 0],
+        ['Sample weekly lineups', 0],
+        ['Full field rankings + factor decomposition', 1],
+        ['All 12 DFS lineups + the "why"', 1],
+        ['NIKE bankroll & contest plan', 1],
+        ['Member community', 1],
+        ['NFL DFS (added for the season)', 2],
+        ['Lineup optimizer + late-swap assistant', 2],
+        ['THEMIS simulator', 2],
+        ['Earliest release + raw data/model exports', 3],
+        ['Private Sharp room + priority support', 3],
+        ['Founding price locked for life', 3]
+      ];
+      document.getElementById('cmpBody').innerHTML = rows.map(([label, need]) => `
+        <tr><td>${label}</td>${order.map(k =>
+          rank[k] >= need ? '<td class="yes">✓</td>' : '<td class="no">—</td>').join('')}</tr>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in — BirdieBuddy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .auth-wrap{max-width:420px;margin:var(--space-12) auto;background:var(--surface-3);
+      border:1px solid var(--border-strong);border-radius:var(--radius-2xl);
+      overflow:hidden;box-shadow:var(--shadow-xl)}
+    .auth-wrap .hd{padding:var(--space-6) var(--space-6) var(--space-4)}
+    .auth-wrap .hd h1{font-size:var(--fs-xl);color:var(--text-primary);font-weight:700}
+    .auth-tabs{display:flex;gap:4px;padding:0 var(--space-6)}
+    .auth-tabs button{flex:1;padding:10px;font-size:var(--fs-xs);font-weight:600;
+      color:var(--text-muted);border-bottom:2px solid transparent}
+    .auth-tabs button.on{color:var(--gold-500);border-color:var(--gold-500)}
+    .auth-form{padding:var(--space-5) var(--space-6) var(--space-6);display:grid;gap:var(--space-3)}
+    .auth-form label{display:block;font-size:var(--fs-3xs);font-weight:600;text-transform:uppercase;
+      letter-spacing:var(--tracking-wide);color:var(--text-muted);margin-bottom:5px}
+    .auth-form input{width:100%;padding:11px 12px;background:var(--surface-1);
+      border:1px solid var(--border-base);border-radius:var(--radius-md);
+      color:var(--text-primary);font-size:var(--fs-sm)}
+    .auth-form input:focus{outline:none;border-color:var(--gold-500)}
+    .auth-err{color:var(--negative);font-size:var(--fs-xs);min-height:1em}
+    .auth-note{font-size:var(--fs-3xs);color:var(--text-dimmed);
+      padding:0 var(--space-6) var(--space-6);line-height:1.5}
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <div id="loginMount"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('login.html');
+      await BBI.renderFooter();
+      const mount = document.getElementById('loginMount');
+
+      if (BBI.auth.isLoggedIn()) {
+        const u = BBI.auth.user();
+        mount.innerHTML = `
+          <div class="auth-wrap" style="text-align:center;padding:var(--space-8) var(--space-6)">
+            <div class="eyebrow" style="margin-bottom:var(--space-3)">Signed in</div>
+            <h1 class="h-3" style="margin-bottom:var(--space-2)">Hi, ${(u.name||u.email)}</h1>
+            <p class="muted" style="font-size:var(--fs-sm);margin-bottom:var(--space-6)">
+              You're on the ${BBI.auth.TIERS[u.tier].name} plan.</p>
+            <a class="btn btn-primary btn-lg" href="account.html">Go to my account</a>
+          </div>`;
+        return;
+      }
+
+      let mode = 'login';
+      const draw = () => {
+        mount.innerHTML = `
+          <div class="auth-wrap">
+            <div class="hd">
+              <div class="eyebrow">BirdieBuddy</div>
+              <h1>${mode==='login'?'Welcome back':'Create your account'}</h1>
+            </div>
+            <div class="auth-tabs">
+              <button data-m="login" class="${mode==='login'?'on':''}">Sign in</button>
+              <button data-m="signup" class="${mode==='signup'?'on':''}">Create account</button>
+            </div>
+            <form class="auth-form" id="f" novalidate>
+              ${mode==='signup'?`<div><label>Name</label><input name="name" autocomplete="name"/></div>`:''}
+              <div><label>Email</label><input name="email" type="email" autocomplete="email" required/></div>
+              <div><label>Password</label><input name="password" type="password" required/></div>
+              <div class="auth-err" id="e" role="alert"></div>
+              <button class="btn btn-primary btn-block btn-lg" type="submit" id="s">
+                ${mode==='login'?'Sign in':'Create account'}</button>
+            </form>
+            <div class="auth-note">Demo mode — accounts are stored only in this browser and
+              upgrades are simulated until the billing backend is connected. Don't reuse a real password.</div>
+          </div>`;
+        mount.querySelectorAll('[data-m]').forEach(b =>
+          b.onclick = () => { mode = b.dataset.m; draw(); });
+        const f = document.getElementById('f');
+        f.onsubmit = async ev => {
+          ev.preventDefault();
+          const btn = document.getElementById('s'), err = document.getElementById('e');
+          const fd = new FormData(f);
+          btn.disabled = true; err.textContent = '';
+          try {
+            const data = { email: fd.get('email'), password: fd.get('password'), name: fd.get('name') };
+            if (mode === 'signup') await BBI.auth.signup(data);
+            else await BBI.auth.login(data);
+            location.href = 'account.html';
+          } catch (ex) {
+            err.textContent = ex.message || 'Something went wrong.';
+            btn.disabled = false;
+          }
+        };
+      };
+      draw();
+    });
+  </script>
+</body>
+</html>
