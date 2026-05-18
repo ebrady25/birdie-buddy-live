@@ -194,86 +194,125 @@ window.BBI = window.BBI || {};
   /* ---------------- STYLES (self-injected, Pantheon tokens) ---------------- */
   function injectCSS() {
     if (document.getElementById('bbi-auth-css')) return;
+    // Every var() carries a Pantheon fallback so the module is fully
+    // self-contained: identical on pages with design-system.css, correct
+    // on standalone vault pages without it. Fallbacks never override a
+    // page's own token (they only apply when the var is undefined).
+    const G5='var(--gold-500,#d4a843)', G4='var(--gold-400,#e6b94e)',
+          G3='var(--gold-300,#f4c863)', G6='var(--gold-600,#b08828)',
+          BG='var(--border-gold,rgba(212,168,67,.30))',
+          BGS='var(--border-gold-strong,rgba(212,168,67,.55))',
+          BB='var(--border-base,rgba(255,255,255,.08))',
+          BST='var(--border-strong,rgba(255,255,255,.12))',
+          BSF='var(--border-soft,rgba(255,255,255,.06))',
+          S1='var(--surface-1,#0a0a0f)', S3='var(--surface-3,#141419)',
+          S4='var(--surface-4,#1a1a22)', S5='var(--surface-5,#222230)',
+          TP='var(--text-primary,#f4f4f8)', TB='var(--text-body,#c0c0cc)',
+          TM='var(--text-muted,#8a8a98)', TD='var(--text-dimmed,#5a5a68)',
+          TOG='var(--text-on-gold,#1a1408)', NEG='var(--negative,#f87171)',
+          RMD='var(--radius-md,6px)', RLG='var(--radius-lg,8px)',
+          RXL='var(--radius-xl,12px)', R2='var(--radius-2xl,16px)',
+          RF='var(--radius-full,999px)',
+          SXL='var(--shadow-xl,0 24px 50px -12px rgba(0,0,0,.7))',
+          SLG='var(--shadow-lg,0 14px 30px -8px rgba(0,0,0,.6))',
+          SGM='var(--shadow-gold-md,0 8px 22px -6px rgba(212,168,67,.3))',
+          DF='var(--dur-fast,150ms)', DB='var(--dur-base,220ms)',
+          EO='var(--ease-out,cubic-bezier(.16,1,.3,1))',
+          ES='var(--ease-spring,cubic-bezier(.34,1.56,.64,1))',
+          TW='var(--tracking-wide,.02em)',
+          S2='var(--space-2,.5rem)', S3P='var(--space-3,.75rem)',
+          S4P='var(--space-4,1rem)', S5P='var(--space-5,1.25rem)',
+          S6P='var(--space-6,1.5rem)',
+          F3X='var(--fs-3xs,.625rem)', F2X='var(--fs-2xs,.6875rem)',
+          FXS='var(--fs-xs,.75rem)', FSM='var(--fs-sm,.8125rem)',
+          FLG='var(--fs-lg,1.125rem)', FXL='var(--fs-xl,1.25rem)',
+          ZM='var(--z-modal,1000)', ZT='var(--z-tooltip,2000)';
     const css = `
-    .bbi-auth-ctl{display:flex;align-items:center;gap:var(--space-2)}
-    .bbi-auth-btn{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs);
-      font-weight:600;padding:6px 12px;border-radius:var(--radius-full);
-      border:1px solid var(--border-gold);color:var(--gold-500);
-      background:rgba(212,168,67,.06);transition:all var(--dur-fast) var(--ease-out)}
-    .bbi-auth-btn:hover{background:rgba(212,168,67,.14);border-color:var(--border-gold-strong)}
-    .bbi-auth-btn.ghost{border-color:var(--border-base);color:var(--text-body);background:transparent}
-    .bbi-auth-btn.ghost:hover{color:var(--text-primary);border-color:var(--border-strong)}
+    @keyframes bbiFadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes bbiFadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+    @keyframes bbiScaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+    @keyframes bbiFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .bbi-auth-ctl{display:flex;align-items:center;gap:${S2}}
+    .bbi-auth-btn{display:inline-flex;align-items:center;gap:6px;font-size:${F2X};
+      font-weight:600;padding:6px 12px;border-radius:${RF};
+      border:1px solid ${BG};color:${G5};
+      background:rgba(212,168,67,.06);transition:all ${DF} ${EO}}
+    .bbi-auth-btn:hover{background:rgba(212,168,67,.14);border-color:${BGS}}
+    .bbi-auth-btn.ghost{border-color:${BB};color:${TB};background:transparent}
+    .bbi-auth-btn.ghost:hover{color:${TP};border-color:${BST}}
     .bbi-chip{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-      padding:5px 10px 5px 6px;border-radius:var(--radius-full);
-      border:1px solid var(--border-base);background:var(--surface-3)}
-    .bbi-chip:hover{border-color:var(--border-gold)}
+      padding:5px 10px 5px 6px;border-radius:${RF};
+      border:1px solid ${BB};background:${S3}}
+    .bbi-chip:hover{border-color:${BG}}
     .bbi-ava{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
-      font-size:var(--fs-3xs);font-weight:700;color:var(--text-on-gold);
-      background:linear-gradient(135deg,var(--gold-300),var(--gold-600))}
-    .bbi-chip-tier{font-size:var(--fs-3xs);font-weight:700;text-transform:uppercase;
-      letter-spacing:var(--tracking-wide)}
+      font-size:${F3X};font-weight:700;color:${TOG};
+      background:linear-gradient(135deg,${G3},${G6})}
+    .bbi-chip-tier{font-size:${F3X};font-weight:700;text-transform:uppercase;
+      letter-spacing:${TW}}
     .bbi-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:220px;
-      background:var(--surface-4);border:1px solid var(--border-strong);
-      border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);padding:6px;
-      z-index:var(--z-modal);animation:fadeDown var(--dur-fast) var(--ease-out)}
+      background:${S4};border:1px solid ${BST};
+      border-radius:${RLG};box-shadow:${SXL};padding:6px;
+      z-index:${ZM};animation:bbiFadeDown ${DF} ${EO}}
     .bbi-menu[hidden]{display:none}
     .bbi-menu a,.bbi-menu button{display:flex;width:100%;align-items:center;gap:8px;
-      justify-content:flex-start;padding:9px 10px;border-radius:var(--radius-md);
-      font-size:var(--fs-xs);color:var(--text-body);text-align:left}
-    .bbi-menu a:hover,.bbi-menu button:hover{background:var(--surface-5);color:var(--text-primary)}
-    .bbi-menu-head{padding:10px;border-bottom:1px solid var(--border-soft);margin-bottom:4px}
-    .bbi-menu-head b{display:block;color:var(--text-primary);font-size:var(--fs-sm)}
-    .bbi-menu-head span{font-size:var(--fs-3xs);color:var(--text-muted)}
+      justify-content:flex-start;padding:9px 10px;border-radius:${RMD};
+      font-size:${FXS};color:${TB};text-align:left}
+    .bbi-menu a:hover,.bbi-menu button:hover{background:${S5};color:${TP}}
+    .bbi-menu-head{padding:10px;border-bottom:1px solid ${BSF};margin-bottom:4px}
+    .bbi-menu-head b{display:block;color:${TP};font-size:${FSM}}
+    .bbi-menu-head span{font-size:${F3X};color:${TM}}
     .bbi-ovl{position:fixed;inset:0;background:rgba(4,4,8,.78);backdrop-filter:blur(4px);
-      z-index:var(--z-modal);display:grid;place-items:center;padding:var(--space-4);
-      animation:fadeIn var(--dur-fast) var(--ease-out)}
+      z-index:${ZM};display:grid;place-items:center;padding:${S4P};
+      animation:bbiFadeIn ${DF} ${EO}}
     .bbi-ovl[hidden]{display:none}
-    .bbi-modal{width:100%;max-width:420px;background:var(--surface-3);
-      border:1px solid var(--border-strong);border-radius:var(--radius-2xl);
-      box-shadow:var(--shadow-xl);overflow:hidden;animation:scaleIn var(--dur-base) var(--ease-spring)}
-    .bbi-modal-h{padding:var(--space-6) var(--space-6) var(--space-4)}
-    .bbi-modal-h .eyebrow{margin-bottom:6px}
-    .bbi-modal-h h3{font-size:var(--fs-xl);font-weight:700;color:var(--text-primary)}
-    .bbi-tabs{display:flex;gap:4px;padding:0 var(--space-6)}
-    .bbi-tab{flex:1;padding:9px;font-size:var(--fs-xs);font-weight:600;
-      color:var(--text-muted);border-bottom:2px solid transparent}
-    .bbi-tab.on{color:var(--gold-500);border-color:var(--gold-500)}
-    .bbi-form{padding:var(--space-5) var(--space-6) var(--space-6);display:grid;gap:var(--space-3)}
-    .bbi-field label{display:block;font-size:var(--fs-3xs);font-weight:600;
-      text-transform:uppercase;letter-spacing:var(--tracking-wide);
-      color:var(--text-muted);margin-bottom:5px}
-    .bbi-field input{width:100%;padding:10px 12px;background:var(--surface-1);
-      border:1px solid var(--border-base);border-radius:var(--radius-md);
-      color:var(--text-primary);font-size:var(--fs-sm)}
-    .bbi-field input:focus{outline:none;border-color:var(--gold-500)}
-    .bbi-submit{margin-top:4px;padding:11px;border-radius:var(--radius-md);
-      background:linear-gradient(135deg,var(--gold-400),var(--gold-600));
-      color:var(--text-on-gold);font-weight:700;font-size:var(--fs-sm);
-      transition:filter var(--dur-fast)}
+    .bbi-modal{width:100%;max-width:420px;background:${S3};
+      border:1px solid ${BST};border-radius:${R2};
+      box-shadow:${SXL};overflow:hidden;animation:bbiScaleIn ${DB} ${ES}}
+    .bbi-modal-h{padding:${S6P} ${S6P} ${S4P}}
+    .bbi-modal-h .eyebrow{margin-bottom:6px;font-size:${F2X};font-weight:600;
+      text-transform:uppercase;letter-spacing:.14em;color:${G5}}
+    .bbi-modal-h h3{font-size:${FXL};font-weight:700;color:${TP}}
+    .bbi-tabs{display:flex;gap:4px;padding:0 ${S6P}}
+    .bbi-tab{flex:1;padding:9px;font-size:${FXS};font-weight:600;
+      color:${TM};border-bottom:2px solid transparent}
+    .bbi-tab.on{color:${G5};border-color:${G5}}
+    .bbi-form{padding:${S5P} ${S6P} ${S6P};display:grid;gap:${S3P}}
+    .bbi-field label{display:block;font-size:${F3X};font-weight:600;
+      text-transform:uppercase;letter-spacing:${TW};
+      color:${TM};margin-bottom:5px}
+    .bbi-field input{width:100%;padding:10px 12px;background:${S1};
+      border:1px solid ${BB};border-radius:${RMD};
+      color:${TP};font-size:${FSM}}
+    .bbi-field input:focus{outline:none;border-color:${G5}}
+    .bbi-submit{margin-top:4px;padding:11px;border-radius:${RMD};
+      background:linear-gradient(135deg,${G4},${G6});
+      color:${TOG};font-weight:700;font-size:${FSM};
+      transition:filter ${DF}}
     .bbi-submit:hover{filter:brightness(1.08)}
     .bbi-submit[disabled]{opacity:.6;cursor:wait}
-    .bbi-err{color:var(--negative);font-size:var(--fs-xs);min-height:1em}
-    .bbi-demo-note{font-size:var(--fs-3xs);color:var(--text-dimmed);
-      padding:0 var(--space-6) var(--space-5);line-height:1.5}
+    .bbi-err{color:${NEG};font-size:${FXS};min-height:1em}
+    .bbi-demo-note{font-size:${F3X};color:${TD};
+      padding:0 ${S6P} ${S5P};line-height:1.5}
     .bbi-x{position:absolute;top:14px;right:14px;width:28px;height:28px;
-      display:grid;place-items:center;border-radius:var(--radius-md);
-      color:var(--text-muted)}
-    .bbi-x:hover{background:var(--surface-5);color:var(--text-primary)}
+      display:grid;place-items:center;border-radius:${RMD};
+      color:${TM}}
+    .bbi-x:hover{background:${S5};color:${TP}}
     .bbi-locked{position:relative}
     .bbi-locked > .bbi-lock-content{filter:blur(7px);pointer-events:none;user-select:none}
     .bbi-lock-ovl{position:absolute;inset:0;display:grid;place-items:center;
-      text-align:center;padding:var(--space-6);z-index:2}
-    .bbi-lock-card{max-width:340px;background:var(--surface-4);
-      border:1px solid var(--border-gold);border-radius:var(--radius-xl);
-      padding:var(--space-6);box-shadow:var(--shadow-gold-md)}
-    .bbi-lock-card .eyebrow{margin-bottom:8px}
-    .bbi-lock-card h4{font-size:var(--fs-lg);color:var(--text-primary);margin-bottom:6px}
-    .bbi-lock-card p{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-4)}
+      text-align:center;padding:${S6P};z-index:2}
+    .bbi-lock-card{max-width:340px;background:${S4};
+      border:1px solid ${BG};border-radius:${RXL};
+      padding:${S6P};box-shadow:${SGM}}
+    .bbi-lock-card .eyebrow{margin-bottom:8px;font-size:${F2X};font-weight:600;
+      text-transform:uppercase;letter-spacing:.14em;color:${G5}}
+    .bbi-lock-card h4{font-size:${FLG};color:${TP};margin-bottom:6px}
+    .bbi-lock-card p{font-size:${FXS};color:${TM};margin-bottom:${S4P}}
     .bbi-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-      background:var(--surface-5);border:1px solid var(--border-gold);
-      color:var(--text-primary);font-size:var(--fs-xs);padding:10px 18px;
-      border-radius:var(--radius-full);box-shadow:var(--shadow-lg);
-      z-index:var(--z-tooltip);animation:fadeUp var(--dur-base) var(--ease-out)}
+      background:${S5};border:1px solid ${BG};
+      color:${TP};font-size:${FXS};padding:10px 18px;
+      border-radius:${RF};box-shadow:${SLG};
+      z-index:${ZT};animation:bbiFadeUp ${DB} ${EO}}
     .bbi-toast[hidden]{display:none}
     `;
     const s = document.createElement('style');
