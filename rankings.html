@@ -239,8 +239,6 @@
     <a href="rankings.html" class="active">Rankings</a>
     <a href="performance.html">Performance</a>
     <a href="methodology.html">Methodology</a>
-    <a href="pricing.html">Pricing</a>
-    <span id="authControl" class="bbi-auth-ctl"></span>
   </div>
 </nav>
 
@@ -617,16 +615,13 @@
       const maxW = Math.max(...arr.map(w => w.value));
       
       host.innerHTML = `<div class="factor-weights eq-weights" data-fw-id="global_weights">
-        ${arr.map((w) => {
-          let displayVal = w.value;
-          if (w.key === 'courseFit') displayVal *= 0.6; // mask the true dominance
-          const pct = (displayVal / maxW * 100).toFixed(1);
-          return `
-          <div class="factor-bar eq-bar" data-base="${pct}" data-label="${w.key}">
+        ${arr.map((w) => `
+          <div class="factor-bar eq-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-label="${w.key}">
             <div class="label">${w.key}</div>
-            <div class="track eq-track"><div class="fill eq-fill" style="width: ${pct}%"></div></div>
+            <div class="track eq-track"><div class="fill eq-fill" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
+            <div class="value eq-val">${fmtNum(w.value, 1)}%</div>
           </div>
-        `}).join('')}
+        `).join('')}
       </div>`;
       
       // Start equalizer animation
@@ -697,6 +692,5 @@
 <script id="fallback_current_event" type="application/json">
 {"event_name":"PGA Championship","week_num":20,"is_major":true,"weights_dfs":{"talent":0.13,"courseFit":0.20,"form":0.11,"cutSafety":0.08,"floor":0.05,"ceiling":0.13,"leverage":0.08,"contrarian":0.05,"dfsValue":0.12,"strategic":0.05}}
 </script>
-<script src="assets/js/auth.js"></script>
 </body>
 </html>

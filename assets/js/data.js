@@ -153,8 +153,7 @@ window.BBI = window.BBI || {};
         { href: 'methodology.html', label: 'Methodology',  sub: 'How BBI scores' }
       ]},
       { type: 'link', href: 'courses.html', label: 'Courses' },
-      { type: 'link', href: 'market.html',  label: 'Market' },
-      { type: 'link', href: 'pricing.html', label: 'Pricing' }
+      { type: 'link', href: 'market.html',  label: 'Market' }
     ];
 
     mount.innerHTML = `
@@ -213,7 +212,6 @@ window.BBI = window.BBI || {};
               <span class="pulse-dot"></span>
               <strong>${eventName}</strong>${week ? ` · ${week}` : ''}
             </span>
-            <span id="authControl" class="bbi-auth-ctl"></span>
           </div>
         </div>
       </nav>
@@ -244,26 +242,6 @@ window.BBI = window.BBI || {};
       const html = tickerItems.map(t => `<span class="marquee-item">${t}</span>`).join('');
       track.innerHTML = html + html;
     }
-
-    // ---------- Auth + tiered entitlements (site-wide, zero per-page edits) ----------
-    // auth.js powers the login system and the 3 paid tiers. Loaded lazily once
-    // so every page that renders this shared header gets the account control,
-    // the login/signup modal, and [data-gate] content gating automatically.
-    (function ensureAuth() {
-      const mountControl = () => { try { window.BBI.auth?.mountHeaderControl(); } catch (e) {} };
-      if (window.BBI.auth) { mountControl(); return; }
-      if (document.getElementById('bbi-auth-js')) {
-        document.getElementById('bbi-auth-js').addEventListener('load', mountControl);
-        return;
-      }
-      const s = document.createElement('script');
-      s.id = 'bbi-auth-js';
-      s.src = 'assets/js/auth.js';
-      s.async = true;
-      s.addEventListener('load', mountControl);
-      s.addEventListener('error', () => console.warn('[auth] failed to load auth.js'));
-      document.head.appendChild(s);
-    })();
 
     // Hydrate star-count badge from localStorage
     try {
@@ -409,14 +387,6 @@ window.BBI = window.BBI || {};
               <a class="footer-link" href="performance.html#calibration">Calibration</a>
               <a class="footer-link" href="methodology.html">Methodology</a>
               <a class="footer-link" href="archive.html">Archive</a>
-            </div>
-          </div>
-          <div>
-            <div class="footer-heading">Account</div>
-            <div class="footer-links">
-              <a class="footer-link" href="pricing.html">Pricing &amp; plans</a>
-              <a class="footer-link" href="account.html">My account</a>
-              <a class="footer-link" href="login.html">Sign in</a>
             </div>
           </div>
           <div>
