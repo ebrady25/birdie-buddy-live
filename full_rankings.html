@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Full Rankings — BirdieBuddy</title>
+  <link rel="stylesheet" href="assets/css/vault-theme.css" />
+  <style>
+    /* Page header */
+    .page-head {
+      padding: calc(var(--s-16) + 40px) 0 var(--s-10);
+      text-align: center;
+    }
+    .page-head .eyebrow {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: var(--s-4);
+    }
+    .page-head h1 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: var(--s-3);
+    }
+    .page-head p {
+      color: var(--text-3); max-width: 50ch;
+      margin: 0 auto; font-size: 15px;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex; align-items: center; gap: var(--s-4);
+      flex-wrap: wrap;
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: var(--s-4);
+    }
+    .toolbar input[type="search"] {
+      padding: var(--s-2) var(--s-3);
+      font-size: 13px; font-family: var(--font);
+      border-radius: var(--r-sm);
+      background: var(--bg-3);
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      outline: none;
+      min-width: 180px;
+      transition: border-color 0.2s;
+    }
+    .toolbar input[type="search"]:focus { border-color: var(--border-gold); }
+    .toolbar input[type="search"]::placeholder { color: var(--text-5); }
+    .toolbar-count {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--text-4); margin-left: auto;
+    }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; margin-bottom: var(--s-12); }
+    .vault-table { min-width: 700px; }
+    .vault-table thead th { cursor: pointer; user-select: none; }
+    .vault-table thead th:hover { color: var(--text-2); }
+    .vault-table thead th.sort-asc::after { content: ' ↑'; color: var(--gold); }
+    .vault-table thead th.sort-desc::after { content: ' ↓'; color: var(--gold); }
+    .vault-table .sticky-col {
+      position: sticky; left: 0;
+      background: var(--bg);
+      z-index: 2;
+    }
+    .vault-table thead th.sticky-col { background: var(--bg-2); }
+
+    /* Player cell */
+    .player-cell {
+      display: flex; align-items: center; gap: var(--s-2);
+    }
+    .star-btn {
+      background: none; border: none;
+      color: var(--text-5); font-size: 14px;
+      cursor: pointer; padding: 0; line-height: 1;
+      transition: color 0.2s;
+    }
+    .star-btn:hover, .star-btn.active { color: var(--gold); }
+
+    /* Expand row */
+    .expand-row td {
+      padding: 0;
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .expand-inner {
+      padding: var(--s-6);
+      background: var(--bg-2);
+    }
+    .expand-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s-5);
+    }
+    @media (max-width: 900px) { .expand-grid { grid-template-columns: 1fr; } }
+
+    .expand-block {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--s-5);
+    }
+    .expand-block .title {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: var(--s-3);
+      padding-bottom: var(--s-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Factor bars */
+    .factor-bar {
+      display: flex; align-items: center; gap: var(--s-3);
+      margin-bottom: var(--s-2);
+    }
+    .factor-bar .label {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--text-4); width: 80px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .factor-bar .track {
+      flex: 1; height: 6px;
+      background: var(--bg-4);
+      border-radius: 3px; overflow: hidden;
+    }
+    .factor-bar .fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--gold-3), var(--gold));
+      transition: width 0.6s ease;
+    }
+    .factor-bar .fill.alive {
+      background: linear-gradient(90deg, var(--gold-3), var(--gold), var(--gold-2), var(--gold));
+      background-size: 200% 100%;
+      animation: factorPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes factorPulse {
+      0%, 100% { background-position: 0% 50%; opacity: 0.85; }
+      50% { background-position: 100% 50%; opacity: 1; }
+    }
+    .factor-bar .value {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--text-3); width: 36px; text-align: right;
+    }
+
+    /* SG grid inside expand */
+    .sg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-2);
+    }
+    .sg-cell {
+      background: var(--bg-4);
+      padding: var(--s-2);
+      border-radius: var(--r-sm);
+      text-align: center;
+    }
+    .sg-cell .sg-label {
+      font-family: var(--mono); font-size: 9px;
+      color: var(--text-4); letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .sg-cell .sg-value {
+      color: var(--text); font-weight: 600;
+      margin-top: 2px; font-size: 12px;
+    }
+
+    /* Key stats row */
+    .key-stat-row {
+      display: flex; gap: var(--s-5);
+      margin-top: var(--s-3);
+    }
+    .key-stat {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .key-stat .lbl {
+      font-family: var(--mono); font-size: 9px;
+      color: var(--text-4); letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .key-stat .val {
+      color: var(--text); font-weight: 600; font-size: 14px;
+    }
+
+    /* Weights section */
+    .weights-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--s-6);
+    }
+  
+      </style>
+</head>
+<body>
+
+<nav class="vault-nav">
+  <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+  <div class="links">
+    <a href="rankings.html">Sneak Peek</a>
+    <a href="full_rankings.html" class="active">Full Rankings</a>
+    <a href="performance.html">Performance</a>
+    <a href="methodology.html">Methodology</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div style="text-align:center;padding:var(--s-3) 0;border-bottom:1px solid var(--border-gold);background: linear-gradient(90deg, transparent, rgba(212,168,67,0.08), transparent);">
+    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Full rankings · All players · All factors · Subscriber-only</span>
+  </div>
+  <header class="page-head">
+    <div class="eyebrow">Live rankings · <span id="eventName">—</span></div>
+    <h1>The full field, decomposed.</h1>
+    <p>Complete subscriber rankings. Every player, every factor, fully visible. Expand any row for factor decomposition.</p>
+  </header>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="chip-row" id="tierChips">
+      <button class="chip" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" data-filter="SPECIALIST">Specialist</button>
+      <button class="chip" data-filter="COMFORTABLE">Comfortable</button>
+      <button class="chip" data-filter="NEUTRAL">Neutral</button>
+      <button class="chip" data-filter="STRUGGLE">Struggle</button>
+    </div>
+    <input type="search" id="rankSearch" placeholder="Search player…" />
+    <div class="toolbar-count"><span id="shownCount">0</span> of <span id="totalCount">0</span></div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table class="vault-table" id="rankTable">
+      <thead>
+        <tr>
+          <th style="width: 36px;">#</th>
+          <th class="sticky-col" style="min-width: 160px;">Player</th>
+          <th>Tier</th>
+          <th class="num sortable" data-sort="bbi">BBI</th>
+          <th class="num sortable" data-sort="win">Win</th>
+          <th class="num sortable" data-sort="top10">T10</th>
+          <th class="num sortable" data-sort="salary">Salary</th>
+          <th class="num sortable" data-sort="value">Value</th>
+          <th class="num sortable" data-sort="own">Own</th>
+          <th style="width: 36px;"></th>
+        </tr>
+      </thead>
+      <tbody id="rankBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Weights -->
+  <section style="padding: var(--s-12) 0; border-top: 1px solid var(--border);">
+    <div class="section-head" style="text-align: left; margin-bottom: var(--s-6);">
+      <div class="eyebrow" style="text-align: left;">How BBI scores</div>
+      <h2 style="text-align: left; margin: 0;">Ten factors. One composite.</h2>
+    </div>
+    <div class="weights-card">
+      <div class="label-gold" style="margin-bottom: var(--s-4);">BBI weights (v8.5) — DFS mode</div>
+      <div id="weightsHost"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="vault-footer">
+  <div style="font-weight: 700; color: var(--text);">BirdieBuddy</div>
+  <div style="display: flex; gap: var(--s-6);">
+    <a href="rankings.html" style="color: var(--text-4);">Sneak Peek</a>
+    <a href="performance.html" style="color: var(--text-4);">Performance</a>
+    <a href="methodology.html" style="color: var(--text-4);">Methodology</a>
+  </div>
+</footer>
+
+<script>
+  // ========== UTILS ==========
+  const $ = s => document.querySelector(s);
+  const $$ = (s, p = document) => p.querySelectorAll(s);
+
+  function fmtName(fullName) {
+    const parts = fullName.split(', ');
+    return parts.length === 2 ? parts[1] + ' ' + parts[0] : fullName;
+  }
+  function fmtPct(v, d = 1) {
+    if (v == null || isNaN(v)) return '—';
+    return (v * 100).toFixed(d) + '%';
+  }
+  function fmtNum(v, d = 2) {
+    if (v == null || isNaN(v)) return '—';
+    return v.toFixed(d);
+  }
+
+  // ========== BOOKMARKS ==========
+  const bbiBookmarks = {
+    _set: new Set(JSON.parse(localStorage.getItem('bbiBookmarks') || '[]')),
+    has(id) { return this._set.has(String(id)); },
+    toggle(id) {
+      const s = String(id);
+      if (this._set.has(s)) { this._set.delete(s); }
+      else { this._set.add(s); }
+      localStorage.setItem('bbiBookmarks', JSON.stringify([...this._set]));
+      return this._set.has(s);
+    }
+  };
+
+  // ========== DATA ==========
+  const DATA_BASE = 'data/';
+  async function loadJSON(path) {
+    try {
+      const r = await fetch(DATA_BASE + path);
+      if (!r.ok) throw new Error(r.status);
+      return await r.json();
+    } catch (e) {
+      console.warn('Fetch failed for', path, '- using inline fallback');
+      // Fallback: try inline script tag data
+      const inline = document.getElementById('fallback_' + path.replace(/\.json$/, '').replace(/\//g, '_'));
+      if (inline) {
+        try { return JSON.parse(inline.textContent); } catch (err) { console.warn('Inline parse failed', err); }
+      }
+      return null;
+    }
+  }
+
+  // ========== TIER CLASS ==========
+  function tierClass(tier) {
+    switch (tier) {
+      case 'SPECIALIST': return 'tier-specialist';
+      case 'COMFORTABLE': return 'tier-comfortable';
+      case 'NEUTRAL': return 'tier-neutral';
+      case 'STRUGGLE': return 'tier-struggle';
+      default: return 'tier-neutral';
+    }
+  }
+
+  // ========== HEAT ==========
+  function computeHeat(players, key) {
+    const vals = players.map(p => p[key]).filter(v => v != null && !isNaN(v));
+    const min = Math.min(...vals), max = Math.max(...vals);
+    const range = max - min || 1;
+    return v => clamp((v - min) / range, 0, 1);
+  }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  // ========== RENDER ==========
+  document.addEventListener('DOMContentLoaded', async () => {
+    const [ev, rank] = await Promise.all([
+      loadJSON('current_event.json'),
+      loadJSON('bbi_rankings.json')
+    ]);
+
+    if (ev) $('#eventName').textContent = ev.event_name || 'Upcoming Event';
+
+    const players = (rank && rank.rankings) || [];
+    // Sort by BBI descending
+    players.sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
+
+    // Heat
+    const hBbi = computeHeat(players, 'bbi_dfs');
+    const hWin = computeHeat(players, 'p_win');
+    const hVal = computeHeat(players, 'value');
+
+    // Render rows
+    const tbody = $('#rankBody');
+    function renderRows() {
+      tbody.innerHTML = players.map((p, i) => {
+        const rankClass = i < 3 ? 'rank-' + (i+1) : '';
+        const bbiHeat = hBbi(p.bbi_dfs || 0).toFixed(3);
+        const winHeat = hWin(p.p_win || 0).toFixed(3);
+        const valHeat = hVal(p.value || 0).toFixed(3);
+        const ownColor = p.proj_ownership > 0.20 ? 'negative' : (p.proj_ownership > 0.10 ? 'gold' : 'positive');
+        return `
+          <tr data-row data-rank="${i+1}" data-name="${p.name}" data-tier="${p.course_tier || 'NEUTRAL'}"
+              data-bbi="${p.bbi_dfs || 0}" data-win="${p.p_win || 0}" data-top10="${p.p_top10 || 0}"
+              data-salary="${p.salary || 0}" data-value="${p.value || 0}" data-own="${p.proj_ownership || 0}">
+            <td><span class="${rankClass}">${i+1}</span></td>
+            <td class="sticky-col">
+              <div class="player-cell">
+                <button class="star-btn ${bbiBookmarks.has(p.dg_id) ? 'active' : ''}" data-star="${p.dg_id}">★</button>
+                <span style="font-weight: 600;">${fmtName(p.name)}</span>
+              </div>
+            </td>
+            <td><span class="tier-badge ${tierClass(p.course_tier)}">${(p.course_tier || 'NEUTRAL').slice(0, 4)}</span></td>
+            <td class="num heat" style="--heat:${bbiHeat}"><strong>${fmtNum(p.bbi_dfs, 1)}</strong></td>
+            <td class="num heat" style="--heat:${winHeat}">${fmtPct(p.p_win, 1)}</td>
+            <td class="num">${fmtPct(p.p_top10, 1)}</td>
+            <td class="num">${p.salary ? '$' + Math.round(p.salary / 100) / 10 + 'k' : '—'}</td>
+            <td class="num heat" style="--heat:${valHeat}">${fmtNum(p.value, 2)}</td>
+            <td class="num" style="color: var(--${ownColor})">${fmtPct(p.proj_ownership, 1)}</td>
+            <td><button class="star-btn" data-expand="${p.dg_id}" style="font-size: 16px;">+</button></td>
+          </tr>
+        `;
+      }).join('');
+
+      // Bind stars
+      $$('.star-btn[data-star]', tbody).forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const on = bbiBookmarks.toggle(btn.dataset.star);
+          btn.classList.toggle('active', on);
+        });
+      });
+
+      // Bind expands
+      $$('[data-expand]', tbody).forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const id = btn.dataset.expand;
+          const row = btn.closest('tr');
+          const next = row.nextElementSibling;
+          if (next && next.classList.contains('expand-row')) {
+            next.remove(); row.classList.remove('expanded'); return;
+          }
+          const p = players.find(x => String(x.dg_id) === String(id));
+          if (!p) return;
+          row.classList.add('expanded');
+          const tr = document.createElement('tr');
+          tr.className = 'expand-row';
+          tr.innerHTML = `<td colspan="10">${expandHTML(p)}</td>`;
+          row.parentNode.insertBefore(tr, row.nextSibling);
+        });
+      });
+
+      // Count
+      $('#totalCount').textContent = players.length;
+      $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
+
+      // Full rankings: no blur, all rows visible
+    }
+
+    function expandHTML(p) {
+      const decomp = p.dfs_decomp || {};
+      const factors = [
+        { k: 'talent', v: decomp.talent }, { k: 'courseFit', v: decomp.courseFit },
+        { k: 'form', v: decomp.form }, { k: 'cutSafety', v: decomp.cutSafety },
+        { k: 'floor', v: decomp.floor }, { k: 'ceiling', v: decomp.ceiling },
+        { k: 'leverage', v: decomp.leverage }, { k: 'contrarian', v: decomp.contrarian },
+        { k: 'dfsValue', v: decomp.dfsValue }, { k: 'strategic', v: decomp.strategic }
+      ].filter(f => f.v != null);
+      const maxFactor = Math.max(...factors.map(f => f.v), 1);
+      const uid = 'fw_' + Math.random().toString(36).substr(2, 9);
+
+      return `
+        <div class="expand-inner">
+          <div class="expand-grid">
+            <div class="expand-block">
+              <div class="title">Factor decomposition</div>
+              <div class="factor-weights" data-fw-id="${uid}">
+              ${factors.map((f, i) => `
+                <div class="factor-bar" data-base="${(f.v / maxFactor * 100).toFixed(1)}" data-phase="${i * 0.7}">
+                  <div class="label">${f.k}</div>
+                  <div class="track"><div class="fill alive" style="width: ${(f.v / maxFactor * 100).toFixed(1)}%"></div></div>
+                  <div class="value">${fmtNum(f.v, 1)}</div>
+                </div>
+              `).join('')}
+              </div>
+            </div>
+            <div class="expand-block">
+              <div class="title">Course history · ${p.hist_rounds || 0} rounds</div>
+              <div class="sg-grid">
+                <div class="sg-cell"><div class="sg-label">SG APP</div><div class="sg-value">${p.hist_sg_app != null ? (p.hist_sg_app > 0 ? '+' : '') + fmtNum(p.hist_sg_app, 2) : '—'}</div></div>
+                <div class="sg-cell"><div class="sg-label">SG OTT</div><div class="sg-value">${p.hist_sg_ott != null ? (p.hist_sg_ott > 0 ? '+' : '') + fmtNum(p.hist_sg_ott, 2) : '—'}</div></div>
+                <div class="sg-cell"><div class="sg-label">SG PUTT</div><div class="sg-value">${p.hist_sg_putt != null ? (p.hist_sg_putt > 0 ? '+' : '') + fmtNum(p.hist_sg_putt, 2) : '—'}</div></div>
+                <div class="sg-cell"><div class="sg-label">SG ARG</div><div class="sg-value">${p.hist_sg_arg != null ? (p.hist_sg_arg > 0 ? '+' : '') + fmtNum(p.hist_sg_arg, 2) : '—'}</div></div>
+              </div>
+              <div class="key-stat-row">
+                <div class="key-stat"><div class="lbl">Form</div><div class="val">${fmtNum(p.n_form, 2)}</div></div>
+                <div class="key-stat"><div class="lbl">Course mult</div><div class="val">${fmtNum(p.course_mult, 2)}×</div></div>
+              </div>
+            </div>
+            <div class="expand-block">
+              <div class="title">Model output</div>
+              <div class="key-stat-row">
+                <div class="key-stat"><div class="lbl">Win</div><div class="val">${fmtPct(p.p_win, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Top 5</div><div class="val">${fmtPct(p.p_top5, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Top 10</div><div class="val">${fmtPct(p.p_top10, 1)}</div></div>
+              </div>
+              <div class="key-stat-row">
+                <div class="key-stat"><div class="lbl">Make cut</div><div class="val">${fmtPct(p.p_makecut, 0)}</div></div>
+                <div class="key-stat"><div class="lbl">Ceiling</div><div class="val">${fmtNum(p.ceiling, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Floor</div><div class="val">${fmtNum(p.floor, 1)}</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ========== SORTING ==========
+    function makeSortable(table) {
+      const headers = $$('th.sortable', table);
+      let sortCol = 'bbi', sortDir = 'desc';
+
+      function applySort() {
+        const rows = [...$$('tr[data-row]', tbody)];
+        rows.sort((a, b) => {
+          const av = parseFloat(a.dataset[sortCol]) || 0;
+          const bv = parseFloat(b.dataset[sortCol]) || 0;
+          return sortDir === 'asc' ? av - bv : bv - av;
+        });
+        rows.forEach(r => tbody.appendChild(r));
+        // Re-number
+        rows.forEach((r, i) => { r.querySelector('td:first-child span').textContent = i + 1; });
+
+        headers.forEach(th => {
+          th.classList.remove('sort-asc', 'sort-desc');
+          if (th.dataset.sort === sortCol) th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+        });
+      }
+
+      headers.forEach(th => {
+        th.addEventListener('click', () => {
+          const col = th.dataset.sort;
+          if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+          else { sortCol = col; sortDir = 'desc'; }
+          applySort();
+        });
+      });
+
+      applySort();
+    }
+
+    // ========== FILTERING ==========
+    const searchInput = $('#rankSearch');
+    function applyFilters() {
+      const q = searchInput.value.trim().toLowerCase();
+      const activeTier = document.querySelector('#tierChips .chip[aria-pressed="true"]')?.dataset.filter;
+
+      $$('tr[data-row]', tbody).forEach(row => {
+        const name = (row.dataset.name || '').toLowerCase();
+        const tier = row.dataset.tier || 'NEUTRAL';
+        const show = (!q || name.includes(q)) && (activeTier === 'all' || tier === activeTier);
+        row.style.display = show ? '' : 'none';
+        const ex = row.nextElementSibling;
+        if (ex && ex.classList.contains('expand-row')) ex.style.display = show ? '' : 'none';
+      });
+
+      $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    // Chips
+    $$('#tierChips .chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        $$('#tierChips .chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', 'true');
+        applyFilters();
+      });
+    });
+
+    // ========== WEIGHTS — Equalizer animation ==========
+    if (ev && ev.weights_dfs) {
+      const host = $('#weightsHost');
+      const arr = Object.entries(ev.weights_dfs).map(([k, v]) => ({ key: k, value: v * 100 }));
+      arr.sort((a, b) => b.value - a.value);
+      const maxW = Math.max(...arr.map(w => w.value));
+      
+      host.innerHTML = `<div class="factor-weights eq-weights" data-fw-id="global_weights">
+        ${arr.map((w) => `
+          <div class="factor-bar eq-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-label="${w.key}">
+            <div class="label">${w.key}</div>
+            <div class="track eq-track"><div class="fill eq-fill" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
+            <div class="value eq-val">${fmtNum(w.value, 1)}%</div>
+          </div>
+        `).join('')}
+      </div>`;
+      
+      // Start equalizer animation
+      (function eqLoop() {
+        const t = performance.now() / 800;
+        document.querySelectorAll('.eq-bar').forEach((bar, i) => {
+          const base = parseFloat(bar.dataset.base) || 30;
+          // Each bar has 3 overlapping sine waves for organic movement
+          const wave = Math.sin(t * 2.1 + i * 0.9) * 12 
+                     + Math.sin(t * 3.7 + i * 1.3) * 8
+                     + Math.sin(t * 1.3 + i * 0.4) * 6;
+          const wobble = Math.max(-15, Math.min(15, wave));
+          const newWidth = Math.max(5, Math.min(100, base + wobble));
+          const fill = bar.querySelector('.eq-fill');
+          const val = bar.querySelector('.eq-val');
+          if (fill) fill.style.width = newWidth + '%';
+          // Update the label color intensity based on position
+          if (fill) {
+            const intensity = newWidth / 100;
+            fill.style.opacity = 0.5 + intensity * 0.5;
+          }
+        });
+        requestAnimationFrame(eqLoop);
+      })();
+    }
+
+    // Init
+    renderRows();
+    makeSortable($('#rankTable'));
+  });
+</script>
+
+
+<script>
+  // Equalizer-style factor bar animation for expand rows
+  function animateExpandFactors() {
+    const t = performance.now() / 700;
+    document.querySelectorAll('.factor-weights:not(.eq-weights)').forEach(container => {
+      const bars = container.querySelectorAll('.factor-bar');
+      bars.forEach((bar, i) => {
+        const base = parseFloat(bar.dataset.base) || 50;
+        const phase = parseFloat(bar.dataset.phase) || 0;
+        const fill = bar.querySelector('.fill.alive');
+        if (!fill) return;
+        // Aggressive multi-wave oscillation like a sound equalizer
+        const wave = Math.sin(t * 2.5 + phase) * 10 
+                   + Math.sin(t * 4.2 + phase * 1.7) * 7
+                   + Math.sin(t * 1.8 + phase * 0.3) * 5;
+        const wobble = Math.max(-18, Math.min(18, wave));
+        const val = Math.max(3, Math.min(100, base + wobble));
+        fill.style.width = val + '%';
+      });
+    });
+    requestAnimationFrame(animateExpandFactors);
+  }
+  requestAnimationFrame(animateExpandFactors);
+</script>
+
+<script id="fallback_bbi_rankings" type="application/json">
+{"rankings":[
+  {"name":"McIlroy, Rory","dg_id":1234,"bbi_dfs":92.5,"p_win":0.085,"p_top10":0.38,"salary":11500,"value":2.85,"proj_ownership":0.18,"course_tier":"COMFORTABLE","dfs_decomp":{"talent":9.5,"courseFit":8.2,"form":8.8,"cutSafety":9.0,"floor":7.5,"ceiling":8.5,"leverage":7.8,"contrarian":6.5,"dfsValue":8.0,"strategic":7.2},"hist_rounds":12,"hist_sg_app":1.2,"hist_sg_ott":0.8,"hist_sg_putt":0.4,"hist_sg_arg":0.6,"n_form":0.85,"course_mult":1.1,"p_top5":0.22,"p_makecut":0.92,"ceiling":82,"floor":68},
+  {"name":"Scheffler, Scottie","dg_id":1235,"bbi_dfs":91.2,"p_win":0.072,"p_top10":0.35,"salary":11200,"value":2.78,"proj_ownership":0.22,"course_tier":"SPECIALIST","dfs_decomp":{"talent":9.8,"courseFit":9.2,"form":8.5,"cutSafety":9.2,"floor":8.0,"ceiling":8.0,"leverage":7.5,"contrarian":6.0,"dfsValue":7.5,"strategic":7.0},"hist_rounds":8,"hist_sg_app":1.5,"hist_sg_ott":1.0,"hist_sg_putt":0.2,"hist_sg_arg":0.8,"n_form":0.90,"course_mult":1.25,"p_top5":0.20,"p_makecut":0.94,"ceiling":84,"floor":70},
+  {"name":"Schauffele, Xander","dg_id":1236,"bbi_dfs":88.7,"p_win":0.055,"p_top10":0.31,"salary":10400,"value":2.92,"proj_ownership":0.14,"course_tier":"NEUTRAL","dfs_decomp":{"talent":8.8,"courseFit":7.5,"form":8.2,"cutSafety":8.5,"floor":7.8,"ceiling":7.5,"leverage":8.0,"contrarian":7.2,"dfsValue":8.5,"strategic":7.8},"hist_rounds":10,"hist_sg_app":0.9,"hist_sg_ott":0.6,"hist_sg_putt":0.5,"hist_sg_arg":0.4,"n_form":0.78,"course_mult":1.0,"p_top5":0.16,"p_makecut":0.88,"ceiling":79,"floor":66},
+  {"name":"Rahm, Jon","dg_id":1237,"bbi_dfs":87.3,"p_win":0.048,"p_top10":0.28,"salary":10100,"value":2.75,"proj_ownership":0.16,"course_tier":"STRUGGLE","dfs_decomp":{"talent":9.0,"courseFit":6.5,"form":7.5,"cutSafety":7.8,"floor":7.0,"ceiling":8.2,"leverage":7.2,"contrarian":7.5,"dfsValue":7.8,"strategic":7.0},"hist_rounds":6,"hist_sg_app":0.7,"hist_sg_ott":0.5,"hist_sg_putt":0.3,"hist_sg_arg":0.5,"n_form":0.72,"course_mult":0.85,"p_top5":0.14,"p_makecut":0.85,"ceiling":80,"floor":64},
+  {"name":"Hovland, Viktor","dg_id":1238,"bbi_dfs":86.1,"p_win":0.042,"p_top10":0.26,"salary":9800,"value":2.68,"proj_ownership":0.12,"course_tier":"COMFORTABLE","dfs_decomp":{"talent":8.5,"courseFit":7.8,"form":7.8,"cutSafety":8.0,"floor":7.2,"ceiling":7.8,"leverage":7.0,"contrarian":7.8,"dfsValue":8.2,"strategic":7.5},"hist_rounds":9,"hist_sg_app":0.8,"hist_sg_ott":0.7,"hist_sg_putt":0.6,"hist_sg_arg":0.3,"n_form":0.75,"course_mult":1.05,"p_top5":0.13,"p_makecut":0.86,"ceiling":78,"floor":65}
+]}
+</script>
+<script id="fallback_current_event" type="application/json">
+{"event_name":"PGA Championship","week_num":20,"is_major":true,"weights_dfs":{"talent":0.13,"courseFit":0.20,"form":0.11,"cutSafety":0.08,"floor":0.05,"ceiling":0.13,"leverage":0.08,"contrarian":0.05,"dfsValue":0.12,"strategic":0.05}}
+</script>
+</body>
+</html>
