@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "description": "Ethan's manual overrides on top of the BBI v8.5 model output. MOMUS surfaces flagged players each Monday at 12:49 ET; this file is where you encode any decisions to override the model. Cleared/reset each Monday by Mnemosyne when CURRENT_EVENT.json rolls forward.",
+  "actions_supported": {
+    "bbi_pool_delta": "Additive adjustment to bbi_pool. Positive pushes UP, negative pushes DOWN. Applies proportional delta to bbi_dfs.",
+    "min_rank": "Ensure final rank ≤ this number (player floor — they finish at this rank or better).",
+    "max_rank": "Ensure final rank ≥ this number (player ceiling — they finish at this rank or worse).",
+    "exclude": "Drop the player from rankings entirely. Use for late WDs. Set value=true."
+  },
+  "event_id": 21,
+  "event_name": "Charles Schwab Challenge",
+  "last_updated": "2026-05-20T09:00:00+00:00",
+  "overrides": []
+}
