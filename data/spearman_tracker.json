@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-05-11T13:09:00.545516+00:00",
+  "last_updated": "2026-05-23T13:45:00+00:00",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -281,12 +281,12 @@
   "rolling_metrics": {
     "season_avg_bbi_spearman": 0.3761,
     "last_5_avg_bbi_spearman": 0.356,
-    "total_events_tracked": 7,
+    "total_events_tracked": 8,
     "events_bbi_beat_dg": 5,
     "events_with_dg_comparison": 7,
     "events_above_040": 2,
     "winners_from_top10_bbi": 5,
-    "winners_from_top10_bbi_total": 7,
+    "winners_from_top10_bbi_total": 8,
     "best_event": {
       "week": 9,
       "event": "Valero Texas Open",
@@ -320,7 +320,11 @@
     },
     "events_with_data": 7,
     "avg_spearman": 0.3761,
-    "last_5_avg": 0.356
+    "last_5_avg": 0.356,
+    "best_bbi_spearman": {
+      "value": 0.5736,
+      "event": "Valero Texas Open"
+    }
   },
   "improvement_trend": {
     "spearman_slope_per_week": 0.0248,
