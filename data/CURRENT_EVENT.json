@@ -1,39 +1,39 @@
 {
-  "event_id": 33,
-  "event_name": "PGA Championship",
-  "event_slug": "PGA_Championship",
-  "event_snake": "pga_championship",
-  "course": "Aronimink Golf Club",
-  "course_slug": "aronimink_golf_club",
-  "location": "Newtown Square, PA",
-  "start_date": "2026-05-14",
-  "week_num": 15,
+  "event_id": 21,
+  "event_slug": "Charles_Schwab_Challenge",
+  "event_snake": "charles_schwab_challenge",
+  "event_name": "Charles Schwab Challenge",
+  "course": "Colonial Country Club",
+  "course_slug": "colonial_country_club",
+  "location": "Fort Worth, TX",
+  "start_date": "2026-05-28",
+  "week_num": 17,
   "year": 2026,
   "par": 70,
-  "yardage": 7200,
+  "yardage": 7209,
   "team_event": false,
-  "is_major": true,
+  "is_major": false,
   "sg_weights": {
-    "sg_app": 1.3,
-    "sg_ott": 1.1,
-    "sg_putt": 1.05,
-    "sg_arg": 1.2,
-    "_note": "Aronimink: par-70 bentgrass course, historically demanding small greens. APP elevated (1.30) \u2014 small greens, tight approach windows. ARG elevated (1.20) \u2014 Major rough penalties, false fronts. PUTT moderate (1.05) \u2014 bentgrass greens reward good putters. OTT moderate (1.10) \u2014 length matters but fairway positioning critical. Generic PGA Championship weights applied \u2014 no Aronimink-specific modern data."
+    "sg_app": 1.25,
+    "sg_putt": 1.1,
+    "sg_arg": 1.1,
+    "sg_ott": 0.95,
+    "_note": "Colonial CC: Par-70 shotmaker's course. Tight tree-lined fairways, small bermuda greens. APP elevated (accuracy/approach premium). OTT reduced (distance penalty for offline shots). PUTT/ARG moderate. Derived from course profile \u2014 no sg_weights in COURSE_DNA_LIBRARY entry."
   },
   "course_weight_override": {
     "courseFit_pool": 0.22,
     "courseFit_dfs": 0.17,
-    "_note": "Standard weights \u2014 no Aronimink modern history; course fit layer has low confidence. Consider reducing courseFit weight to 0.15/0.12 in Phase 1 if coverage < 20%."
+    "_note": "Standard weights. Colonial has rich modern course history (annual event since 1946). Course fit layer has HIGH confidence \u2014 increase to 0.24/0.19 if Phase 1 coverage > 50%."
   },
-  "course_form_name": "PGA Championship Form",
+  "course_form_name": "Colonial Form",
   "course_history_event_id_fallbacks": [
-    33
+    21
   ],
   "course_history_year_range": [
     2017,
     2025
   ],
-  "course_history_note": "PGA Championship rotates venues yearly. Aronimink has NO modern course history (last hosted 1962). event_id=33 history covers different PGA Championship venues (2017-2025). Course fit model should treat all players as NO_HISTORY or LIMITED tier for Aronimink-specific history. Flag: Phase 1 may return 0/N Aronimink-specific course history \u2014 this is expected. Do NOT add a fallback entry for event_id=33 (rotating venue).",
+  "course_history_note": "Charles Schwab Challenge is an annual event at Colonial CC. No fallback remapping needed \u2014 all historical rounds indexed under event_id=21. Rich course history expected (high field coverage).",
   "course_tier_thresholds": {
     "SPECIALIST": {
       "min_rounds": 8,
@@ -58,37 +58,37 @@
       "mult": 1.0
     }
   },
-  "course_notes": "Par-70, ~7200y. Aronimink Golf Club, Newtown Square PA. Last PGA Championship here: 1962. Bentgrass greens, est. stimpmeter 13.5 for major setup. Known for: tight fairways, small and undulating greens, demanding iron play. Heavy rough expected (major setup). No modern SG data for this venue. Major-field composition: invitational (approx 156 players including LIV). Par-70 means 2 par-5s, 12 par-4s, 4 par-3s \u2014 iron play at par-3s critical.",
-  "winner_archetype": "Elite iron player with major experience. Par-70 reduces advantage of long hitters slightly but Aronimink's length (7200y) still demands adequate OTT. Bentgrass putter with major composure. Major history at PGA Championship (venue rotates \u2014 general major experience applies).",
+  "winner_archetype": "Precision iron player. Tight fairways reward accuracy off the tee, small bermuda greens reward sharp approach play and short game. Historical winners include Spieth (3\u00d7), Fowler (2\u00d7), Fleetwood \u2014 all elite approach players. Form matters: in-form ball-strikers excel at Colonial.",
   "course_dna": {
     "sg_importance": {
       "sg_app": 0.35,
-      "sg_ott": 0.25,
+      "sg_ott": 0.2,
       "sg_putt": 0.25,
-      "sg_arg": 0.15
+      "sg_arg": 0.2
     },
-    "difficulty": "very_hard",
-    "greens": "bentgrass",
-    "stimpmeter": 13.5,
-    "rough": 1.1,
-    "is_major": true,
-    "no_modern_venue_history": true,
+    "difficulty": "moderate",
+    "greens": "bermuda",
+    "stimpmeter": 12.0,
+    "rough": 0.98,
+    "is_major": false,
     "course_fit_leverage": {
       "favors": [
-        "elite_iron",
-        "major_experience",
-        "bentgrass_putters",
-        "scrambling"
+        "precision_iron",
+        "bermuda_putters",
+        "scrambling",
+        "accuracy_off_tee"
       ],
       "penalizes": [
+        "big_hitters_inaccurate",
         "weak_approach",
-        "inconsistent_from_rough",
-        "no_major_experience"
+        "bentgrass_specialists"
       ]
     }
   },
   "pipeline_mode": "active",
-  "bbi_pipeline_action": "FULL \u2014 Major championship. Individual BBI v8.5 rankings active. WARNING: No Aronimink venue history. Course fit layer has low confidence. Consider major-field expansion to top-55 ranked players (Masters improvement suggestion wk10). Phase 1 / THEMIS / OMNIA all run normally.",
-  "auto_detected_at": "2026-05-11T13:14:05.965595+00:00",
-  "detected_by": "mnemosyne_auto"
+  "bbi_pipeline_action": "FULL \u2014 Standard individual BBI v8.5 rankings. Colonial has rich course history. Phase 1 should return high field coverage (50%+). If coverage < 30%, investigate fallbacks.",
+  "course_notes": "Colonial Country Club, Fort Worth TX. Par-70, 7209y. Annual event since 1946 (oldest non-major on PGA Tour). Tree-lined fairways, small bermuda greens, creek in play on several holes. Ben Hogan's home course. Bermuda rough demands creativity. Notably: distance is not the primary differentiator here \u2014 Spieth has 3 wins, Fleetwood 2 recent wins.",
+  "auto_detected_at": "2026-05-25T14:17:53.826031+00:00",
+  "detected_by": "mnemosyne_auto",
+  "_week_correction_note": "week_num corrected 16\u219217 by Mnemosyne on 2026-05-25. CJ Cup Byron Nelson (event_id=19, May 21-24) was week 16 but pipeline missed it. Charles Schwab Challenge is week 17."
 }

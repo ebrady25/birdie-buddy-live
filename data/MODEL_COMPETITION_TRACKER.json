@@ -158,16 +158,110 @@
         "v8.6-dyn": 0,
         "v8.7-cfgate": 0
       }
+    },
+    {
+      "week": 15,
+      "event": "PGA Championship",
+      "event_id": 33,
+      "date": "2026-05-14",
+      "year": 2026,
+      "variants": {
+        "v8.5": {
+          "spearman": 0.4309,
+          "brier_top10": 0.0492,
+          "brier_win": 0.0068,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.4366,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0057,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.6-tal": {
+          "spearman": 0.4532,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0223,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.6-form": {
+          "spearman": 0.4497,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0188,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.6-dyn": {
+          "spearman": 0.4545,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0236,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.445,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0141,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        }
+      },
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      }
+    },
+    {
+      "week": 16,
+      "event": "THE CJ CUP Byron Nelson",
+      "event_id": 19,
+      "date": "2026-05-21",
+      "year": 2026,
+      "skipped": true,
+      "skip_reason": "pipeline_not_run \u2014 no shadow models generated for this event",
+      "variants": {},
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "Pipeline miss \u2014 shadow model scoring skipped. Week 16 counts as 0 data point for promotion threshold.",
+      "logged_utc": "2026-05-25T14:17:31.058999+00:00"
     }
   ],
-  "current_leader": "v8.6-form",
+  "current_leader": "v8.6-dyn",
   "consecutive_weeks_leading": {
     "v8.6-cf": 0,
     "v8.6-tal": 0,
-    "v8.6-form": 1,
-    "v8.6-dyn": 0,
+    "v8.6-form": 0,
+    "v8.6-dyn": 1,
     "v8.7-cfgate": 0
   },
   "promotion_candidate": null,
-  "last_updated": "2026-05-11T13:12:29.300995+00:00"
+  "last_updated": "2026-05-21T01:21:31.297649+00:00"
 }

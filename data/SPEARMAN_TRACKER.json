@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-05-11T13:09:00.545516+00:00",
+  "last_updated": "2026-05-21T01:24:09.527060+00:00",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -276,17 +276,66 @@
       "model_version": "v8.5",
       "dashboard_version": "v4.0",
       "notes": "Reitan wins (BBI #43, DG #36). Low-ranked surprise winner. BBI beat DG narrowly. McIlroy (#1 BBI) T22, Schauffele (#2 BBI) T60. Fowler (T2) was BBI #13. Top-10: 3 BBI top-10 picks hit (Fleetwood, Aberg, Cantlay/Spaun overlaps)."
+    },
+    {
+      "week": 15,
+      "event": "PGA Championship",
+      "event_id": 33,
+      "course": "Aronimink Golf Club",
+      "date": "2026-05-14",
+      "winner": "Rai, Aaron",
+      "winner_bbi_rank": 63,
+      "winner_dg_rank": null,
+      "field_size": 152,
+      "spearman_bbi": 0.4309,
+      "spearman_dg": null,
+      "spearman_delta": null,
+      "beat_dg": null,
+      "spearman_normalized_z": 5.627,
+      "beat_target": true,
+      "beat_baseline": true,
+      "top5_hits": 1,
+      "top5_total": 5,
+      "top10_hits": 4,
+      "top10_total": 10,
+      "top20_hits": 7,
+      "top20_total": 20,
+      "winner_in_top10_bbi": false,
+      "model_version": "v8.5",
+      "dashboard_version": "v4.0",
+      "dg_note": "DG pre-tournament predictions unavailable post-event (endpoint returns 0 players for completed events). DG Spearman not computed this week.",
+      "improvement_suggestions": [
+        {
+          "category": "new_factor_candidates",
+          "suggestion": "Investigate low-ranked players at majors with elite putting profiles. Aaron Rai (BBI #63) won with a dominant putting display: sg_putt tournament total = +6.86 (by far tournament leader). BBI's talent and form signals missed him because he's ranked ~80 globally, but his putting SG was historically exceptional this week. Consider a 'major_putter_floor' rule: players ranked 40-80 globally with last-12-month sg_putt > 0.75 and make_cut_prob > 0.75 get a floor boost to BBI top-50.",
+          "rationale": "Rai's 4 rounds: sg_putt = +2.60, +0.20, +0.12, +3.93. Total sg_putt = +6.85, sg_t2g = -0.34 (negative!). He won almost entirely on putting \u2014 his ball-striking was neutral to negative. Standard BBI overweights sg_app/sg_ott relative to sg_putt for Aronimink (sg_app weight 1.30), so Rai's elite putting was systematically underweighted.",
+          "expected_impact": "Medium: Would move Rai from ~#63 to ~#35-40, within the top-40 radar. Full win prediction still unlikely. More importantly, reduces missed-cut penalty for elite putters."
+        },
+        {
+          "category": "course_fit_refinement",
+          "suggestion": "For Aronimink/major-with-no-venue-history, validate that setting sg_putt weight = 1.20 (vs 1.05 used this week) better captures the premium on small-green scrambling. Rai, Smalley, Rahm all had strong putting; the top-10 had average sg_putt of +0.62 per round.",
+          "rationale": "With no course history, the model defaults to generic major weights. The tournament demonstrated bermuda/small-green bentgrass played differently \u2014 putting was more decisive than the 1.05 multiplier anticipated. sg_putt factor attribution ratio = (not available for top-10 decomp this week because winner was outside top-15 BBI).",
+          "expected_impact": "Low-medium for one-off venues; high if the pattern holds at other parkland majors with small greens."
+        },
+        {
+          "category": "weight_adjustments",
+          "suggestion": "Ceiling and leverage factors were top performers this week (ceiling ratio=3.99, leverage ratio=3.16 for actual top-10). The v8.5 ceiling weight of 0.05 is likely too low for majors where upside variance is high. Consider bumping ceiling from 0.05 to 0.08 and reducing courseFit from 0.22 to 0.19 for no-history major venues.",
+          "rationale": "Factor attribution shows ceiling and leverage dramatically over-indexed among actual top-10 finishers. Rahm (#3 BBI, T2 actual) and McIlroy (#2 BBI, T7 actual) both have elite ceiling scores. The players who delivered had legitimate upside \u2014 the model was correct directionally but ceiling weight didn't pull them high enough vs the field.",
+          "expected_impact": "Medium: +0.02 to +0.03 Spearman at major events. Consistent with v8.6-dyn outperforming baseline this week by +0.0236 \u2014 dyn uses major-specific weights with higher talent (0.26) and ceiling (0.06)."
+        }
+      ],
+      "notes": "BBI above 0.40 target at a major with zero venue history \u2014 best major performance of season. Surprise winner Aaron Rai (BBI #63) was a near-miss \u2014 a LIV player with elite putting stats not well-captured by global skill rankings. All 5 shadow variants beat baseline Spearman (v8.6-dyn +0.024, v8.6-tal +0.022). DG preds unavailable post-event. Rahm T2, McIlroy T7, Schauffele T7 \u2014 top BBI picks delivered in top-10."
     }
   ],
   "rolling_metrics": {
-    "season_avg_bbi_spearman": 0.3761,
-    "last_5_avg_bbi_spearman": 0.356,
-    "total_events_tracked": 7,
+    "season_avg_bbi_spearman": 0.3829,
+    "last_5_avg_bbi_spearman": 0.3275,
+    "total_events_tracked": 8,
     "events_bbi_beat_dg": 5,
     "events_with_dg_comparison": 7,
-    "events_above_040": 2,
+    "events_above_040": 3,
     "winners_from_top10_bbi": 5,
-    "winners_from_top10_bbi_total": 7,
+    "winners_from_top10_bbi_total": 8,
     "best_event": {
       "week": 9,
       "event": "Valero Texas Open",
@@ -319,8 +368,8 @@
       "notes": "Best Spearman yet. APP layer validated (+2.19 for winner). Spaun was within BBI credible range. | DG backfilled 2026-05-05 (canonical method, status=NO_RANK_FIELD). | DG backfilled 2026-05-05 (canonical method)."
     },
     "events_with_data": 7,
-    "avg_spearman": 0.3761,
-    "last_5_avg": 0.356
+    "avg_spearman": 0.3829,
+    "last_5_avg": 0.3275
   },
   "improvement_trend": {
     "spearman_slope_per_week": 0.0248,
@@ -377,6 +426,30 @@
             "suggestion": "Increase Augusta ARG weight from 1.20x to 1.35x; reduce OTT distance bonus for non-elite ball-strikers",
             "rationale": "McIlroy sg_arg=+5.574 won. ARG layer correlation: +0.494. Fleetwood (ARG=-4.04) bombed despite course history.",
             "expected_impact": "Medium: +0.02 to +0.04 Spearman at Augusta-type venues"
+          }
+        ]
+      },
+      {
+        "week": 15,
+        "event": "PGA Championship",
+        "suggestions": [
+          {
+            "category": "new_factor_candidates",
+            "suggestion": "Investigate low-ranked players at majors with elite putting profiles. Aaron Rai (BBI #63) won with a dominant putting display: sg_putt tournament total = +6.86 (by far tournament leader). BBI's talent and form signals missed him because he's ranked ~80 globally, but his putting SG was historically exceptional this week. Consider a 'major_putter_floor' rule: players ranked 40-80 globally with last-12-month sg_putt > 0.75 and make_cut_prob > 0.75 get a floor boost to BBI top-50.",
+            "rationale": "Rai's 4 rounds: sg_putt = +2.60, +0.20, +0.12, +3.93. Total sg_putt = +6.85, sg_t2g = -0.34 (negative!). He won almost entirely on putting \u2014 his ball-striking was neutral to negative. Standard BBI overweights sg_app/sg_ott relative to sg_putt for Aronimink (sg_app weight 1.30), so Rai's elite putting was systematically underweighted.",
+            "expected_impact": "Medium: Would move Rai from ~#63 to ~#35-40, within the top-40 radar. Full win prediction still unlikely. More importantly, reduces missed-cut penalty for elite putters."
+          },
+          {
+            "category": "course_fit_refinement",
+            "suggestion": "For Aronimink/major-with-no-venue-history, validate that setting sg_putt weight = 1.20 (vs 1.05 used this week) better captures the premium on small-green scrambling. Rai, Smalley, Rahm all had strong putting; the top-10 had average sg_putt of +0.62 per round.",
+            "rationale": "With no course history, the model defaults to generic major weights. The tournament demonstrated bermuda/small-green bentgrass played differently \u2014 putting was more decisive than the 1.05 multiplier anticipated. sg_putt factor attribution ratio = (not available for top-10 decomp this week because winner was outside top-15 BBI).",
+            "expected_impact": "Low-medium for one-off venues; high if the pattern holds at other parkland majors with small greens."
+          },
+          {
+            "category": "weight_adjustments",
+            "suggestion": "Ceiling and leverage factors were top performers this week (ceiling ratio=3.99, leverage ratio=3.16 for actual top-10). The v8.5 ceiling weight of 0.05 is likely too low for majors where upside variance is high. Consider bumping ceiling from 0.05 to 0.08 and reducing courseFit from 0.22 to 0.19 for no-history major venues.",
+            "rationale": "Factor attribution shows ceiling and leverage dramatically over-indexed among actual top-10 finishers. Rahm (#3 BBI, T2 actual) and McIlroy (#2 BBI, T7 actual) both have elite ceiling scores. The players who delivered had legitimate upside \u2014 the model was correct directionally but ceiling weight didn't pull them high enough vs the field.",
+            "expected_impact": "Medium: +0.02 to +0.03 Spearman at major events. Consistent with v8.6-dyn outperforming baseline this week by +0.0236 \u2014 dyn uses major-specific weights with higher talent (0.26) and ceiling (0.06)."
           }
         ]
       }
@@ -475,13 +548,68 @@
       "model_version": "v8.5",
       "logged_utc": "2026-05-11T13:09:00.545516+00:00",
       "notes": "Kristoffer Reitan wins from BBI rank #43 (DG rank #36). McIlroy (#1 BBI) T22; Schauffele (#2 BBI) T60. Both models struggled with low-ranked surprise winner. BBI beat DG narrowly (+0.032). Small field (72 players, no missed cuts in DataGolf feed)."
+    },
+    {
+      "year": 2026,
+      "week": 15,
+      "event": "PGA Championship",
+      "event_id": 33,
+      "completed": "2026-05-17",
+      "field_size": 152,
+      "spearman_bbi": 0.4309,
+      "spearman_dg": null,
+      "spearman_delta": null,
+      "spearman_normalized_z": 5.627,
+      "beat_dg": null,
+      "beat_target": true,
+      "beat_baseline": true,
+      "winner": "Rai, Aaron",
+      "winner_bbi_rank": 63,
+      "winner_dg_rank": null,
+      "winner_in_top10_bbi": false,
+      "top5_hits": 1,
+      "top5_total": 5,
+      "top10_hits": 4,
+      "top10_total": 10,
+      "top20_hits": 7,
+      "top20_total": 20,
+      "n_scored": 152,
+      "model_version": "v8.5",
+      "logged_utc": "2026-05-21T01:24:09.527060+00:00",
+      "notes": "BBI 0.4309 \u2014 above 0.40 target. Aaron Rai wins (BBI #63, surprise). Rahm T2 (BBI #3) \u2713, McIlroy T7 (BBI #2) \u2713, Aberg T4 (BBI #8) \u2713, Schauffele T7 (BBI #5) \u2713. DG preds unavailable post-event."
+    },
+    {
+      "year": 2026,
+      "week": 16,
+      "event": "THE CJ CUP Byron Nelson",
+      "event_id": 19,
+      "completed": "2026-05-24",
+      "skipped": true,
+      "skip_reason": "pipeline_not_run \u2014 CURRENT_EVENT.json was set to Charles Schwab Challenge on 2026-05-21 before CJ Cup Byron Nelson began. No BBI file generated.",
+      "actual_winner": "Clark, Wyndham",
+      "actual_winner_score": -30,
+      "actual_top5": [
+        "Clark, Wyndham",
+        "Kim, Si Woo",
+        "Scheffler, Scottie",
+        "Suber, Jackson",
+        "Mitchell, Keith"
+      ],
+      "spearman_bbi": null,
+      "spearman_dg": null,
+      "diff_bbi_vs_dg": null,
+      "winner_bbi_rank": null,
+      "winner_dg_rank": null,
+      "n_scored": 0,
+      "logged_utc": "2026-05-25T14:17:10.456120+00:00",
+      "notes": "Pipeline miss: Mnemosyne (2026-05-21) auto-detected CJ Cup Byron Nelson as 'upcoming' but set CURRENT_EVENT.json to Charles Schwab Challenge. Apollo/Phase1 never ran for event_id=19. Wyndham Clark won at -30 (field: 70 made cut from 147). Scheffler finished T3 (-25)."
     }
   ],
   "summary": {
-    "events_scored": 6,
-    "mean_spearman_bbi": 0.4093,
+    "events_scored": 8,
+    "mean_spearman_bbi": 0.3829,
     "mean_spearman_dg": 0.3437,
     "mean_diff": 0.0656,
-    "last_updated": "2026-05-06T03:01:14.677135+00:00"
+    "last_updated": "2026-05-21T01:24:09.527060+00:00"
   }
 }
