@@ -47,6 +47,51 @@
       }
     },
     {
+      "event": "PGA Championship",
+      "event_id": 33,
+      "year": 2026,
+      "completed": "2026-05-17",
+      "scored_at_utc": "2026-05-25T13:36:42Z",
+      "n_compared": 152,
+      "summary": {
+        "mae": 22.44,
+        "bias": 21.27,
+        "rmse": 44.66,
+        "clean_mae": 5.09,
+        "clean_bias": 3.66,
+        "clean_rmse": 10.76,
+        "n_suspect_excluded": 28,
+        "suspect_threshold_pct": 50.0
+      },
+      "by_tier": {
+        "studs": {
+          "n": 7,
+          "mae": 5.42,
+          "bias": 1.11
+        },
+        "anchors": {
+          "n": 15,
+          "mae": 2.17,
+          "bias": 0.84
+        },
+        "mid-tier": {
+          "n": 15,
+          "mae": 1.74,
+          "bias": -0.37
+        },
+        "value": {
+          "n": 23,
+          "mae": 19.26,
+          "bias": 16.93
+        },
+        "punt": {
+          "n": 92,
+          "mae": 31.21,
+          "bias": 30.75
+        }
+      }
+    },
+    {
       "event": "Truist Championship",
       "event_id": 480,
       "year": 2026,
@@ -138,9 +183,9 @@
     }
   ],
   "season": {
-    "n_events": 3,
-    "mean_mae": 10.18,
-    "mean_bias": 8.34
+    "n_events": 4,
+    "mean_mae": 13.24,
+    "mean_bias": 11.57
   },
-  "last_updated": "2026-05-11T13:37:55Z"
+  "last_updated": "2026-05-25T13:36:42Z"
 }

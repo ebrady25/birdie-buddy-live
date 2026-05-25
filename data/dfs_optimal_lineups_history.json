@@ -66,6 +66,70 @@
       "n_optimal_in_our_pool": 1
     },
     {
+      "event": "PGA Championship",
+      "event_id": 33,
+      "year": 2026,
+      "completed": "2026-05-17",
+      "optimal": {
+        "total": 550.0,
+        "salary": 49700,
+        "players": [
+          {
+            "dg_id": 18554,
+            "name": "Rai, Aaron",
+            "salary": 6700,
+            "total_pts": 117.0,
+            "ownership": 0.026600000000000002,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 18474,
+            "name": "Smalley, Alex",
+            "salary": 6100,
+            "total_pts": 96.5,
+            "ownership": 0.10529999999999999,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 19195,
+            "name": "Rahm, Jon",
+            "salary": 10400,
+            "total_pts": 87.0,
+            "ownership": 0.1348,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 23950,
+            "name": "Aberg, Ludvig",
+            "salary": 9800,
+            "total_pts": 84.0,
+            "ownership": 0.23120000000000002,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 14139,
+            "name": "Thomas, Justin",
+            "salary": 9400,
+            "total_pts": 84.0,
+            "ownership": 0.046799999999999994,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 21891,
+            "name": "Kitayama, Kurt",
+            "salary": 7300,
+            "total_pts": 81.5,
+            "ownership": 0.09210000000000002,
+            "in_our_pool": true
+          }
+        ]
+      },
+      "our_best_actual": 345.5,
+      "our_best_id": "L2",
+      "capture_rate_pct": 62.82,
+      "n_optimal_in_our_pool": 2
+    },
+    {
       "event": "Truist Championship",
       "event_id": 480,
       "year": 2026,
@@ -194,5 +258,5 @@
       "n_optimal_in_our_pool": 3
     }
   ],
-  "last_updated": "2026-05-11T13:37:52Z"
+  "last_updated": "2026-05-25T13:36:37Z"
 }

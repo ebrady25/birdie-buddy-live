@@ -1,27 +1,93 @@
 {
-  "event_id": 19,
-  "event_name": "THE CJ CUP Byron Nelson",
-  "event_slug": "Byron_Nelson",
-  "event_snake": "byron_nelson",
-  "course": "TPC Craig Ranch",
-  "course_slug": "tpc_craig_ranch",
-  "location": "McKinney, TX",
-  "start_date": "2026-05-21",
+  "event_id": 21,
+  "event_slug": "Charles_Schwab_Challenge",
+  "event_snake": "charles_schwab_challenge",
+  "event_name": "Charles Schwab Challenge",
+  "course": "Colonial Country Club",
+  "course_slug": "colonial_country_club",
+  "location": "Fort Worth, TX",
+  "start_date": "2026-05-28",
   "week_num": 16,
   "year": 2026,
-  "par": 72,
-  "yardage": 7435,
+  "par": 70,
+  "yardage": 7209,
   "team_event": false,
   "is_major": false,
   "sg_weights": {
-    "sg_app": 1.0,
-    "sg_ott": 1.0,
-    "sg_putt": 1.0,
-    "sg_arg": 1.0,
-    "_note": "Standard weights — TPC Craig Ranch is a moderate-difficulty bermuda course with no extreme profile."
+    "sg_app": 1.25,
+    "sg_putt": 1.1,
+    "sg_arg": 1.1,
+    "sg_ott": 0.95,
+    "_note": "Colonial CC: Par-70 shotmaker's course. Tight tree-lined fairways, small bermuda greens. APP elevated (accuracy/approach premium). OTT reduced (distance penalty for offline shots). PUTT/ARG moderate. Derived from course profile \u2014 no sg_weights in COURSE_DNA_LIBRARY entry."
   },
-  "course_notes": "Par-72, ~7435y. TPC Craig Ranch, McKinney TX. Bermuda greens, stimpmeter ~12.0. Moderate difficulty with generous fairways. Strong approach play rewarded; elevated GIR course. Wind can be a factor in afternoon waves.",
+  "course_weight_override": {
+    "courseFit_pool": 0.22,
+    "courseFit_dfs": 0.17,
+    "_note": "Standard weights. Colonial has rich modern course history (annual event since 1946). Course fit layer has HIGH confidence \u2014 increase to 0.24/0.19 if Phase 1 coverage > 50%."
+  },
+  "course_form_name": "Colonial Form",
+  "course_history_event_id_fallbacks": [
+    21
+  ],
+  "course_history_year_range": [
+    2017,
+    2025
+  ],
+  "course_history_note": "Charles Schwab Challenge is an annual event at Colonial CC. No fallback remapping needed \u2014 all historical rounds indexed under event_id=21. Rich course history expected (high field coverage).",
+  "course_tier_thresholds": {
+    "SPECIALIST": {
+      "min_rounds": 8,
+      "min_sg": 0.5,
+      "mult": 1.25
+    },
+    "COMFORTABLE": {
+      "min_rounds": 4,
+      "min_sg": 0.0,
+      "mult": 1.15
+    },
+    "NEUTRAL": {
+      "min_rounds": 4,
+      "min_sg": -99,
+      "mult": 1.0
+    },
+    "LIMITED": {
+      "min_rounds": 1,
+      "mult": 0.95
+    },
+    "NO_HISTORY": {
+      "mult": 1.0
+    }
+  },
+  "winner_archetype": "Precision iron player. Tight fairways reward accuracy off the tee, small bermuda greens reward sharp approach play and short game. Historical winners include Spieth (3\u00d7), Fowler (2\u00d7), Fleetwood \u2014 all elite approach players. Form matters: in-form ball-strikers excel at Colonial.",
+  "course_dna": {
+    "sg_importance": {
+      "sg_app": 0.35,
+      "sg_ott": 0.2,
+      "sg_putt": 0.25,
+      "sg_arg": 0.2
+    },
+    "difficulty": "moderate",
+    "greens": "bermuda",
+    "stimpmeter": 12.0,
+    "rough": 0.98,
+    "is_major": false,
+    "course_fit_leverage": {
+      "favors": [
+        "precision_iron",
+        "bermuda_putters",
+        "scrambling",
+        "accuracy_off_tee"
+      ],
+      "penalizes": [
+        "big_hitters_inaccurate",
+        "weak_approach",
+        "bentgrass_specialists"
+      ]
+    }
+  },
   "pipeline_mode": "active",
-  "auto_detected_at": "2026-05-21T02:00:00Z",
-  "detected_by": "tars_manual"
+  "bbi_pipeline_action": "FULL \u2014 Standard individual BBI v8.5 rankings. Colonial has rich course history. Phase 1 should return high field coverage (50%+). If coverage < 30%, investigate fallbacks.",
+  "course_notes": "Colonial Country Club, Fort Worth TX. Par-70, 7209y. Annual event since 1946 (oldest non-major on PGA Tour). Tree-lined fairways, small bermuda greens, creek in play on several holes. Ben Hogan's home course. Bermuda rough demands creativity. Notably: distance is not the primary differentiator here \u2014 Spieth has 3 wins, Fleetwood 2 recent wins.",
+  "auto_detected_at": "2026-05-21T01:22:57.804233+00:00",
+  "detected_by": "mnemosyne_auto"
 }
