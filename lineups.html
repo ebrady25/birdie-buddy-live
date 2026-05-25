@@ -1,1304 +1,441 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DFS Lineups — BirdieBuddy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/design-system.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
-  <style>
-    /* =========================================================
-       LINEUPS — PAGE-SPECIFIC STYLES
-       (page-head, page-toolbar, .seg, .toolbar-count live in components.css)
-       ========================================================= */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DFS Lineups — BirdieBuddy</title>
+<meta name="description" content="BBI-optimized DraftKings lineups. Leverage-adjusted, course-fit aware, built for large-field GPPs.">
 
-    /* DK export modal — the [hidden] attribute must win over inline display:flex */
-    #dkModal[hidden] { display: none !important; }
+<style>
+  /* ========== VAULT THEME ========== */
+  :root {
+    --bg: #0a0a0c;
+    --bg-2: #111114;
+    --bg-3: #16161b;
+    --bg-glass: rgba(17,17,20,0.72);
+    --text: #f3eedf;
+    --text-2: #cfc8b6;
+    --text-3: #9a9384;
+    --text-4: #5e5849;
+    --text-5: #3a352a;
+    --border: #1e1c18;
+    --border-2: #2a2722;
+    --border-gold: #3a3220;
+    --gold: #d4a843;
+    --gold-2: #e8c878;
+    --gold-3: #f3e1a0;
+    --gold-soft: rgba(212,168,67,0.12);
+    --green: #4ea564;
+    --green-soft: rgba(78,165,100,0.12);
+    --red: #c45d5d;
+    --red-soft: rgba(196,93,93,0.12);
+    --purple: #a870d8;
+    --purple-soft: rgba(168,112,216,0.12);
+    --blue: #6b9bd1;
+    --blue-soft: rgba(107,155,209,0.12);
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 
-    /* .kpi-strip used here (shared in components.css) — was .summary-strip previously. */
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+    --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+    --s-12: 48px; --s-16: 64px; --s-20: 80px;
+    --r-sm: 6px; --r: 10px; --r-lg: 14px;
+  }
 
-    /* ---------- LINEUP CARD ---------- */
-    .lineup-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-5);
-    }
-    @media (max-width: 1000px) { .lineup-grid { grid-template-columns: 1fr; } }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--text); margin: 0; padding: 0; font-family: var(--sans); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
 
-    .lineup-card {
-      position: relative;
-      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-xl);
-      padding: var(--space-5);
-      transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
-      overflow: hidden;
-    }
-    .lineup-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(1200px 220px at 0% 0%, rgba(212, 168, 67, 0.045), transparent 60%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--dur-base);
-    }
-    .lineup-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(212, 168, 67, 0.08);
-    }
-    .lineup-card:hover::before { opacity: 1; }
+  /* ---------- NAV ---------- */
+  .vault-nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--s-5) var(--s-8);
+    background: rgba(10,10,12,0.65);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .vault-nav .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 18px; color: var(--text); }
+  .vault-nav .brand span { color: var(--gold); }
+  .vault-nav .links { display: flex; gap: var(--s-6); font-size: 13px; color: var(--text-3); }
+  .vault-nav .links a { transition: color .25s ease; }
+  .vault-nav .links a:hover { color: var(--gold); }
 
-    .lineup-card-head {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
-    }
-    .lineup-kind {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-soft);
-    }
-    .lineup-kind[data-kind="Cash"]      { background: rgba(74, 222, 128, 0.10); color: var(--positive); border-color: rgba(74, 222, 128, 0.30); }
-    .lineup-kind[data-kind="Core"]      { background: rgba(96, 165, 250, 0.10); color: var(--info);     border-color: rgba(96, 165, 250, 0.32); }
-    .lineup-kind[data-kind="Safe"]      { background: rgba(74, 222, 128, 0.10); color: var(--positive); border-color: rgba(74, 222, 128, 0.30); }
-    .lineup-kind[data-kind="Leverage"]  { background: rgba(212, 168, 67, 0.12); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
-    .lineup-kind[data-kind="Moonshot"]  { background: rgba(168, 85, 247, 0.10); color: #c084fc;         border-color: rgba(168, 85, 247, 0.30); }
-    .lineup-kind[data-kind="GPP"]       { background: rgba(248, 113, 113, 0.10); color: var(--negative); border-color: rgba(248, 113, 113, 0.3); }
-    .lineup-kind[data-kind="Contrarian"]{ background: rgba(168, 85, 247, 0.10); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
+  /* ---------- UTILS ---------- */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 var(--s-6); }
+  .section { padding: var(--s-16) var(--s-5); }
+  .eyebrow {
+    display: inline-block; font-family: var(--mono); font-size: 11px;
+    color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase;
+    margin-bottom: var(--s-4);
+  }
+  h1 { font-size: clamp(2rem, 4.2vw, 3rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.05; margin: 0 0 var(--s-4); }
+  h2 { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 var(--s-4); }
+  .sub { color: var(--text-3); font-size: 15px; line-height: 1.6; margin: 0 0 var(--s-8); max-width: 640px; }
 
-    .lineup-title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-md); color: var(--text-primary); letter-spacing: -0.01em; line-height: 1.25; }
-    .lineup-id { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); }
+  /* ---------- BADGES ---------- */
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px; border: 1px solid var(--border-2);
+  }
+  .badge-gold   { background: var(--gold-soft);   color: var(--gold-2); border-color: rgba(212,168,67,0.25); }
+  .badge-green  { background: var(--green-soft);  color: var(--green);  border-color: rgba(78,165,100,0.25); }
+  .badge-red    { background: var(--red-soft);    color: #e07070;       border-color: rgba(196,93,93,0.25); }
+  .badge-purple { background: var(--purple-soft); color: #c490f0;       border-color: rgba(168,112,216,0.25); }
+  .badge-blue   { background: var(--blue-soft);   color: #8bb8f0;       border-color: rgba(107,155,209,0.25); }
 
-    /* KPIs */
-    .lineup-kpis {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
-      background: var(--border-soft);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      margin-bottom: var(--space-4);
-    }
-    .lineup-kpi {
-      background: var(--surface-3);
-      padding: var(--space-3);
-      display: flex; flex-direction: column; gap: 2px;
-    }
-    .lineup-kpi .k-label { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-muted); }
-    .lineup-kpi .k-value { font-family: var(--font-mono); font-weight: 600; font-size: var(--fs-sm); color: var(--text-primary); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-    .lineup-kpi .k-value.gold { color: var(--gold-300); }
-    .lineup-kpi .k-value.positive { color: var(--positive); }
-    .lineup-kpi .k-value.negative { color: var(--negative); }
+  /* ---------- KPI STRIP ---------- */
+  .kpi-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 1px solid var(--border); border-radius: var(--r-lg);
+    background: linear-gradient(180deg, rgba(22,22,28,0.55), rgba(14,14,18,0.55));
+    overflow: hidden; margin-bottom: var(--s-10);
+  }
+  @media (max-width: 860px) { .kpi-strip { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .kpi-strip { grid-template-columns: 1fr; } }
+  .kpi-cell { padding: var(--s-6); border-right: 1px solid var(--border); position: relative; }
+  .kpi-cell:last-child { border-right: none; }
+  @media (max-width: 860px) {
+    .kpi-cell:nth-child(2n) { border-right: none; }
+    .kpi-cell { border-bottom: 1px solid var(--border); }
+  }
+  .kpi-num { font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .kpi-label { font-family: var(--mono); font-size: 10px; color: var(--text-2); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; }
+  .kpi-desc { color: var(--text-4); font-size: 12px; margin-top: 6px; line-height: 1.45; }
 
-    /* PLAYER ROWS */
-    .lineup-players { display: flex; flex-direction: column; border: 1px solid var(--border-soft); border-radius: var(--radius-md); overflow: hidden; }
-    .lineup-player {
-      display: grid;
-      grid-template-columns: 22px 1fr 70px 54px 54px 52px;
-      align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-2) var(--space-3);
-      font-family: var(--font-mono);
-      font-size: var(--fs-xs);
-      border-top: 1px solid var(--border-soft);
-      background: var(--surface-1);
-      transition: background var(--dur-fast);
-    }
-    .lineup-player:first-child { border-top: none; }
-    .lineup-player:hover { background: var(--surface-3); }
-    .lineup-player .lp-rank { color: var(--text-dimmed); font-size: var(--fs-3xs); }
-    .lineup-player .lp-name { display: flex; align-items: center; gap: var(--space-2); color: var(--text-primary); font-family: var(--font-sans); font-weight: 500; font-size: var(--fs-sm); }
-    .lineup-player .lp-name .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-dimmed); flex-shrink: 0; }
-    .lineup-player .lp-tier {
-      font-size: 9px;
-      padding: 2px 5px;
-      border-radius: 3px;
-      letter-spacing: var(--tracking-wide);
-    }
-    .lineup-player .lp-salary { text-align: right; color: var(--text-body); font-variant-numeric: tabular-nums; }
-    .lineup-player .lp-zeus { text-align: right; color: var(--gold-300); font-weight: 600; font-variant-numeric: tabular-nums; }
-    .lineup-player .lp-own { text-align: right; font-variant-numeric: tabular-nums; }
-    .lineup-player .lp-own.high { color: var(--negative); }
-    .lineup-player .lp-own.med { color: var(--gold-400); }
-    .lineup-player .lp-own.low { color: var(--positive); }
+  /* ---------- TABLES ---------- */
+  .table-wrap { border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; margin-bottom: var(--s-10); }
+  .vault-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .vault-table thead { background: var(--bg-2); }
+  .vault-table th { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-3); font-weight: 600; text-align: left; padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .vault-table td { padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--border); color: var(--text-2); vertical-align: middle; }
+  .vault-table tr:last-child td { border-bottom: none; }
+  .vault-table tr:hover td { background: rgba(212,168,67,0.03); }
+  .vault-table .num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  .vault-table .right { text-align: right; }
+  .vault-table .tier-SPECIALIST  { color: var(--gold-2); }
+  .vault-table .tier-COMFORTABLE { color: var(--green); }
+  .vault-table .tier-NEUTRAL     { color: var(--text-3); }
+  .vault-table .tier-LIMITED     { color: var(--text-4); }
+  .vault-table .tier-NO_HISTORY  { color: var(--text-5); font-style: italic; }
+  .bar { display: inline-block; height: 4px; border-radius: 2px; background: var(--gold); vertical-align: middle; margin-right: 6px; }
 
-    /* DIST BAR (ceiling distribution mini chart) */
-    .themis-bar {
-      display: flex; align-items: flex-end;
-      gap: 3px;
-      height: 36px;
-      margin-top: var(--space-4);
-      padding: var(--space-3);
-      background: var(--surface-1);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      position: relative;
-    }
-    .themis-bar-label { position: absolute; top: 4px; left: 8px; font-family: var(--font-mono); font-size: 9px; letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-dimmed); }
-    .themis-bar-stat { position: absolute; top: 4px; right: 8px; font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-muted); }
-    .themis-bar-stat .pct { color: var(--gold-300); font-weight: 600; }
-    .themis-slot {
-      flex: 1;
-      background: rgba(212, 168, 67, 0.18);
-      border-radius: 1px;
-      position: relative;
-      align-self: flex-end;
-    }
-    .themis-slot.p5  { background: rgba(248, 113, 113, 0.3); }
-    .themis-slot.p25 { background: rgba(251, 191, 36, 0.25); }
-    .themis-slot.p50 { background: rgba(212, 168, 67, 0.35); }
-    .themis-slot.p75 { background: rgba(74, 222, 128, 0.28); }
-    .themis-slot.p95 { background: rgba(74, 222, 128, 0.45); box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.2) inset; }
+  /* ---------- LINEUP CARDS ---------- */
+  .lineup-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-5);
+  }
+  @media (max-width: 1000px) { .lineup-grid { grid-template-columns: 1fr; } }
 
-    /* ---------- EXPOSURE CHART ---------- */
-    .exposure-panel {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: var(--space-6);
-    }
-    @media (max-width: 1100px) { .exposure-panel { grid-template-columns: 1fr; } }
+  .lineup-card {
+    background: linear-gradient(180deg, rgba(22,22,28,0.6), rgba(14,14,18,0.6));
+    border: 1px solid var(--border); border-radius: var(--r-lg);
+    padding: var(--s-5); position: relative; overflow: hidden;
+    transition: border-color .3s ease, transform .3s ease;
+  }
+  .lineup-card:hover {
+    border-color: var(--border-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(212,168,67,0.06);
+  }
+  .lineup-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(800px 180px at 0% 0%, rgba(212,168,67,0.04), transparent 60%);
+    pointer-events: none; opacity: 0; transition: opacity .3s;
+  }
+  .lineup-card:hover::before { opacity: 1; }
 
-    .exposure-list { display: flex; flex-direction: column; gap: 1px; background: var(--border-soft); border-radius: var(--radius-md); overflow: hidden; }
-    .exposure-row {
-      display: grid; grid-template-columns: 170px 1fr 72px;
-      align-items: center; gap: var(--space-3);
-      padding: var(--space-2) var(--space-3);
-      background: var(--surface-2);
-      font-size: var(--fs-xs);
-    }
-    .exposure-row:hover { background: var(--surface-3); }
-    .exposure-name { font-weight: 500; color: var(--text-primary); }
-    .exposure-bar-track {
-      height: 10px; background: var(--surface-1); border-radius: 999px;
-      overflow: hidden; position: relative;
-    }
-    .exposure-bar-fill {
-      height: 100%; border-radius: 999px;
-      background: linear-gradient(90deg, var(--gold-600), var(--gold-400));
-      transition: width 900ms cubic-bezier(.2,.8,.2,1);
-    }
-    .exposure-meta { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; color: var(--text-body); font-size: var(--fs-xs); }
-    .exposure-meta .tgt { color: var(--text-dimmed); }
-    .exposure-meta .delta { font-size: var(--fs-3xs); }
-    .exposure-meta .delta.up { color: var(--negative); }
-    .exposure-meta .delta.down { color: var(--positive); }
+  .lineup-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-3); margin-bottom: var(--s-4); position: relative; z-index: 1; }
+  .lineup-title { font-weight: 700; font-size: 15px; color: var(--text); letter-spacing: -0.01em; }
+  .lineup-meta { font-family: var(--mono); font-size: 11px; color: var(--text-4); margin-top: 2px; }
 
-    .exposure-aside { display: flex; flex-direction: column; gap: var(--space-4); }
-    .exposure-note {
-      padding: var(--space-4);
-      background: var(--surface-2);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      border-left: 2px solid var(--gold-500);
-    }
-    .exposure-note .eyebrow { margin-bottom: var(--space-2); }
-    .exposure-note p { font-size: var(--fs-sm); color: var(--text-body); line-height: 1.6; }
+  .lineup-kpis {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border); border-radius: var(--r-sm); overflow: hidden;
+    margin-bottom: var(--s-4); position: relative; z-index: 1;
+  }
+  .lineup-kpi { background: var(--bg-2); padding: var(--s-3); display: flex; flex-direction: column; gap: 2px; }
+  .lineup-kpi .k-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-4); }
+  .lineup-kpi .k-val { font-family: var(--mono); font-weight: 600; font-size: 13px; color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .lineup-kpi .k-val.gold { color: var(--gold); }
 
-    /* CONSTRUCTION LOGIC */
-    .rules-card .rule-line { display: flex; gap: var(--space-3); padding: var(--space-2) 0; border-top: 1px solid var(--border-soft); font-size: var(--fs-xs); }
-    .rules-card .rule-line:first-child { border-top: none; padding-top: 0; }
-    .rules-card .rule-tag { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-300); min-width: 66px; padding-top: 2px; }
-    .rules-card .rule-text { color: var(--text-body); line-height: 1.5; }
+  .player-rows { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--r-sm); overflow: hidden; position: relative; z-index: 1; }
+  .player-row {
+    display: grid; grid-template-columns: 1fr auto auto auto auto;
+    align-items: center; gap: var(--s-3);
+    padding: 8px 12px; border-bottom: 1px solid var(--border);
+    font-size: 13px; background: var(--bg-2);
+  }
+  .player-row:last-child { border-bottom: none; }
+  .player-row .p-name { font-weight: 600; color: var(--text); }
+  .player-row .p-salary { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+  .player-row .p-proj  { font-family: var(--mono); font-size: 12px; color: var(--gold-2); }
+  .player-row .p-own   { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+  .player-row .p-tier  { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .player-row .p-tier.tier-SPECIALIST  { color: var(--gold-2); }
+  .player-row .p-tier.tier-COMFORTABLE { color: var(--green); }
+  .player-row .p-tier.tier-NEUTRAL     { color: var(--text-3); }
+  .player-row .p-tier.tier-LIMITED     { color: var(--text-4); }
+  .player-row .p-tier.tier-NO_HISTORY  { color: var(--text-5); }
 
-    /* =========================================================
-       LAST WEEK'S REPORT CARD — DFS grading
-       ========================================================= */
-    .grade-card {
-      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-xl);
-      padding: var(--space-6);
-      margin-bottom: var(--space-8);
-      position: relative;
-    }
-    .grade-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
-    }
-    .grade-head {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: var(--space-4); flex-wrap: wrap;
-      margin-bottom: var(--space-5);
-      padding-bottom: var(--space-4);
-      border-bottom: 1px solid var(--border-soft);
-    }
-    .grade-head h3 {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: var(--fs-xl); color: var(--text-primary);
-      letter-spacing: -0.02em; margin: 0;
-    }
-    .grade-head .grade-event {
-      font-family: var(--font-mono); font-size: var(--fs-xs);
-      color: var(--text-muted); margin-top: 4px;
-    }
-    /* Top stats row */
-    .grade-pillars {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-4);
-      margin-bottom: var(--space-5);
-    }
-    @media (max-width: 800px) { .grade-pillars { grid-template-columns: repeat(2, 1fr); } }
-    .grade-pillar {
-      background: var(--surface-3);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      padding: var(--space-4);
-      text-align: center;
-    }
-    .grade-pillar .lbl {
-      font-family: var(--font-mono); font-size: var(--fs-3xs);
-      letter-spacing: var(--tracking-widest); text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 4px;
-    }
-    .grade-pillar .val {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-      letter-spacing: -0.02em; color: var(--text-primary);
-      line-height: 1;
-    }
-    .grade-pillar .val.gold { color: var(--gold-300); }
-    .grade-pillar .sub {
-      font-family: var(--font-mono); font-size: var(--fs-3xs);
-      color: var(--text-muted); margin-top: 4px;
-    }
+  /* ---------- LOADING & ERROR ---------- */
+  .loading { text-align: center; padding: var(--s-20) var(--s-5); color: var(--text-3); }
+  .loading::after { content: ''; display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border-2); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 8px; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error { text-align: center; padding: var(--s-20); color: var(--red); }
 
-    /* Per-lineup grade table */
-    .grade-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-xs); }
-    .grade-table thead th {
-      padding: var(--space-2) var(--space-3); text-align: right;
-      font-family: var(--font-mono); font-size: var(--fs-3xs);
-      font-weight: 600; letter-spacing: var(--tracking-wide);
-      text-transform: uppercase; color: var(--text-muted);
-      border-bottom: 1px solid var(--border-soft);
-      background: var(--surface-3);
-    }
-    .grade-table thead th:first-child,
-    .grade-table thead th:nth-child(2) { text-align: left; }
-    .grade-table tbody td {
-      padding: var(--space-2) var(--space-3); text-align: right;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .grade-table tbody td:first-child,
-    .grade-table tbody td:nth-child(2) { text-align: left; }
-    .grade-table tbody tr:hover { background: rgba(212, 168, 67, 0.04); }
-    .grade-id {
-      display: inline-block; padding: 2px 8px;
-      border-radius: var(--radius-sm); font-family: var(--font-mono);
-      font-size: var(--fs-3xs); font-weight: 700;
-      background: var(--surface-4); color: var(--gold-200);
-      letter-spacing: 0.05em;
-    }
-    .verdict-pill {
-      display: inline-block; padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      font-family: var(--font-mono); font-size: 10px;
-      font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-      border: 1px solid currentColor;
-    }
-    .verdict-below { color: var(--text-dimmed); background: var(--surface-3); }
-    .verdict-cash  { color: var(--positive); background: rgba(74, 222, 128, 0.10); }
-    .verdict-top1  { color: var(--gold-300); background: rgba(212, 168, 67, 0.14); }
-    .verdict-top001{ color: #f4d97a; background: rgba(244, 217, 122, 0.16); border-color: var(--gold-400); }
-    .grade-delta-up   { color: var(--positive); }
-    .grade-delta-down { color: var(--negative); }
+  /* ---------- FOOTER ---------- */
+  .vault-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--s-8); border-top: 1px solid var(--border);
+    color: var(--text-4); font-size: 12px; font-family: var(--mono);
+  }
 
-    /* Hindsight callout */
-    .grade-hindsight {
-      margin-top: var(--space-5);
-      padding: var(--space-4) var(--space-5);
-      background: var(--surface-3);
-      border-left: 3px solid var(--gold-500);
-      border-radius: var(--radius-md);
-      font-size: var(--fs-sm);
-      color: var(--text-body);
-      line-height: 1.5;
-    }
-    .grade-hindsight strong { color: var(--text-primary); }
-    .grade-hindsight .gold { color: var(--gold-300); font-weight: 700; }
-
-    /* 3-tier hindsight ladder */
-    .ladder {
-      margin-top: var(--space-5);
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-2);
-    }
-    .ladder-row {
-      display: grid;
-      grid-template-columns: 24px 1fr auto;
-      align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3) var(--space-4);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-soft);
-      background: var(--surface-3);
-      transition: transform var(--dur-base);
-    }
-    .ladder-row:hover { transform: translateX(2px); }
-    .ladder-row.our      { border-left: 3px solid var(--info); }
-    .ladder-row.pool     { border-left: 3px solid var(--gold-500); }
-    .ladder-row.optimal  { border-left: 3px solid var(--positive); background: linear-gradient(90deg, rgba(74, 222, 128, 0.06), var(--surface-3)); }
-    .ladder-icon {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      font-weight: 700;
-      color: var(--text-muted);
-      text-align: center;
-    }
-    .ladder-row.our .ladder-icon     { color: var(--info); }
-    .ladder-row.pool .ladder-icon    { color: var(--gold-300); }
-    .ladder-row.optimal .ladder-icon { color: var(--positive); }
-    .ladder-label {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .ladder-label-title {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: var(--fs-sm);
-      color: var(--text-primary);
-    }
-    .ladder-label-sub {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      color: var(--text-muted);
-      letter-spacing: 0.02em;
-    }
-    .ladder-value {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(1.25rem, 2.5vw, 1.625rem);
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-      font-variant-numeric: tabular-nums;
-    }
-    .ladder-row.optimal .ladder-value { color: var(--positive); }
-
-    /* Field-wide optimal lineup display */
-    .optimal-lineup {
-      margin-top: var(--space-3);
-      padding: var(--space-4) var(--space-5);
-      background: var(--surface-2);
-      border: 1px solid rgba(74, 222, 128, 0.20);
-      border-radius: var(--radius-md);
-    }
-    .optimal-lineup-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: var(--space-3);
-      padding-bottom: var(--space-2);
-      border-bottom: 1px solid var(--border-soft);
-    }
-    .optimal-lineup-head .title {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      font-weight: 700;
-      letter-spacing: var(--tracking-widest);
-      text-transform: uppercase;
-      color: var(--positive);
-    }
-    .optimal-lineup-head .meta {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      color: var(--text-muted);
-    }
-    .optimal-lineup-players {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 4px;
-    }
-    .optimal-player {
-      display: grid;
-      grid-template-columns: 56px 1fr auto auto;
-      gap: var(--space-3);
-      align-items: center;
-      padding: 4px 6px;
-      border-radius: var(--radius-sm);
-      font-size: var(--fs-xs);
-    }
-    .optimal-player:hover { background: rgba(74, 222, 128, 0.04); }
-    .optimal-player .salary {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      color: var(--text-muted);
-    }
-    .optimal-player .name {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-    .optimal-player .pts {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      color: var(--positive);
-      font-variant-numeric: tabular-nums;
-    }
-    .optimal-player .own {
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      color: var(--text-muted);
-      min-width: 38px;
-      text-align: right;
-    }
-    .optimal-player.in-our-pool {
-      background: rgba(212, 168, 67, 0.05);
-    }
-    .optimal-player.in-our-pool::before {
-      content: '★';
-      color: var(--gold-300);
-      grid-column: 1;
-      font-size: 9px;
-      align-self: center;
-      margin-left: 2px;
-    }
-
-    .grade-empty {
-      padding: var(--space-6);
-      text-align: center;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-    .grade-note {
-      margin-top: var(--space-3);
-      font-family: var(--font-mono);
-      font-size: var(--fs-3xs);
-      letter-spacing: var(--tracking-wide);
-      text-transform: uppercase;
-      color: var(--text-dimmed);
-    }
-  </style>
+  /* ---------- SCROLLBAR ---------- */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-5); }
+</style>
 </head>
 <body>
-  <div id="site-header"></div>
 
-  <main class="container">
-    <!-- PAGE HEAD -->
-    <header class="page-head">
-      <div class="eyebrow">DraftKings main slate · <span id="lineupEvent">—</span></div>
-      <h1>Twelve lineups. One optimal grid.</h1>
-      <p>Each lineup is sourced from ODYSSEUS (composition search) then re-scored by THEMIS against 10,000 Monte Carlo tournaments. Ownership projections from HERMES determine leverage. Salaries pulled live from DraftKings. Sort by mean projection, ceiling, ownership, or BBI.</p>
-      <div class="page-head-meta">
-        <span>Contest <strong>Main Slate</strong></span>
-        <span>Salary cap <strong>$50,000</strong></span>
-        <span>Roster <strong>6 golfers</strong></span>
-        <span>Generated <span class="gold" id="lineupGen">—</span></span>
-        <span>Sims per lineup <strong>10,000</strong></span>
-      </div>
-    </header>
+<nav class="vault-nav">
+  <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+  <div class="links">
+    <a href="rankings.html">Rankings</a>
+    <a href="lineups.html">DFS</a>
+    <a href="performance.html">Performance</a>
+    <a href="methodology.html">Methodology</a>
+  </div>
+</nav>
 
-    <!-- SUMMARY STRIP -->
-    <div class="kpi-strip">
-      <div class="stat">
-        <div class="stat-label">Lineups generated</div>
-        <div class="stat-value"><span data-countup="12" data-dur="500">0</span></div>
-        <div class="stat-sub">Core · Safe · Leverage</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Unique players</div>
-        <div class="stat-value"><span id="kpiUnique">0</span></div>
-        <div class="stat-sub">Across all 12 builds</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Best p95 ceiling</div>
-        <div class="stat-value stat-value-gold"><span id="kpiP95">0</span></div>
-        <div class="stat-sub"><span id="kpiP95Name">—</span></div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Avg projection</div>
-        <div class="stat-value"><span id="kpiAvgProj">0</span></div>
-        <div class="stat-sub">THEMIS mean across 12</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Avg ownership</div>
-        <div class="stat-value"><span id="kpiAvgOwn">0</span></div>
-        <div class="stat-sub">Cumulative HERMES</div>
-      </div>
+<main id="app">
+  <div class="loading">Loading lineups</div>
+</main>
+
+<footer class="vault-footer">
+  <span>BirdieBuddy v8.5</span>
+  <span id="meta-footer"></span>
+</footer>
+
+<script>
+/* ================================================================
+   DFS LINEUPS — v2.0 Renderer
+   Consumes: data/dfs_lineups.json
+   ================================================================ */
+
+const ARCHETYPE_STYLES = {
+  CASH:     'badge-green',
+  CORE:     'badge-blue',
+  GPP:      'badge-red',
+  MOONSHOT: 'badge-purple',
+  Safe:     'badge-green',
+  Leverage: 'badge-gold',
+  Contrarian:'badge-purple'
+};
+
+const TIER_CLASS = tier => 'tier-' + (tier || 'NEUTRAL');
+
+function fmt(n, d=1) {
+  if (n == null) return '—';
+  return Number(n).toFixed(d);
+}
+
+function fmtPct(n, d=1) {
+  if (n == null) return '—';
+  return Number(n).toFixed(d) + '%';
+}
+
+function fmtMoney(n) {
+  if (n == null) return '—';
+  return '$' + Number(n).toLocaleString();
+}
+
+function renderPlayerRow(p) {
+  const tier = p.course_tier || p.tier || 'NEUTRAL';
+  return `
+    <div class="player-row">
+      <span class="p-name">${p.name}</span>
+      <span class="p-salary">${fmtMoney(p.salary)}</span>
+      <span class="p-proj">${fmt(p.adj_proj || p.zeus_dfs || p.proj_total)}</span>
+      <span class="p-own">${fmtPct(p.own || p.proj_ownership || p.dk_ownership)}</span>
+      <span class="p-tier ${TIER_CLASS(tier)}">${tier.replace('_',' ')}</span>
     </div>
+  `;
+}
 
-    <!-- LAST WEEK'S REPORT CARD — DFS grade -->
-    <section id="gradeSection" hidden>
-      <div class="grade-card" data-reveal>
-        <div class="grade-head">
-          <div>
-            <h3>Last week's report card</h3>
-            <div class="grade-event" id="gradeEvent">—</div>
-          </div>
-          <a href="#lineupGrid" class="muted" style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none;">↓ This week's lineups</a>
+function renderLineupCard(lu, idx) {
+  const badgeClass = ARCHETYPE_STYLES[lu.archetype] || 'badge-gold';
+  const players = (lu.players || []).map(renderPlayerRow).join('');
+  const salary = lu.salary || lu.total_salary || 0;
+  const remaining = lu.salary_remaining != null ? lu.salary_remaining : (50000 - salary);
+  const proj = lu.proj_total || (lu.players || []).reduce((s,p) => s + (p.adj_proj || p.zeus_dfs || 0), 0);
+  const floor = lu.floor_score || (proj * 0.4);
+  const ceiling = lu.ceiling_score || (proj * 1.3);
+  const avgOwn = lu.avg_own || (lu.players || []).reduce((s,p) => s + (p.own || p.proj_ownership || 0), 0) / (lu.players || []).length;
+
+  return `
+    <div class="lineup-card">
+      <div class="lineup-head">
+        <div>
+          <span class="badge ${badgeClass}">${lu.archetype}</span>
+          <div class="lineup-title" style="margin-top:6px">Lineup ${idx + 1}</div>
+          <div class="lineup-meta">${lu.players ? lu.players.length : 6} players &middot; ${fmtMoney(salary)} &middot; ${fmtPct(avgOwn)} avg own</div>
         </div>
-
-        <div class="grade-pillars">
-          <div class="grade-pillar">
-            <div class="lbl">Best lineup</div>
-            <div class="val gold" id="gradeBestVal">—</div>
-            <div class="sub" id="gradeBestId">—</div>
-          </div>
-          <div class="grade-pillar">
-            <div class="lbl">Portfolio avg</div>
-            <div class="val" id="gradeAvgVal">—</div>
-            <div class="sub">DK pts (estimated)</div>
-          </div>
-          <div class="grade-pillar">
-            <div class="lbl">Cashed</div>
-            <div class="val" id="gradeCashCount">—</div>
-            <div class="sub" id="gradeCashSub">of 12 lineups</div>
-          </div>
-          <div class="grade-pillar">
-            <div class="lbl">Capture rate</div>
-            <div class="val gold" id="gradeCaptureVal">—</div>
-            <div class="sub" id="gradeCaptureSub">vs theoretical max</div>
-          </div>
+      </div>
+      <div class="lineup-kpis">
+        <div class="lineup-kpi">
+          <span class="k-label">Proj</span>
+          <span class="k-val gold">${fmt(proj)}</span>
         </div>
+        <div class="lineup-kpi">
+          <span class="k-label">Floor</span>
+          <span class="k-val">${fmt(floor)}</span>
+        </div>
+        <div class="lineup-kpi">
+          <span class="k-label">Ceiling</span>
+          <span class="k-val">${fmt(ceiling)}</span>
+        </div>
+        <div class="lineup-kpi">
+          <span class="k-label">Remaining</span>
+          <span class="k-val">${fmtMoney(remaining)}</span>
+        </div>
+      </div>
+      <div class="player-rows">${players}</div>
+    </div>
+  `;
+}
 
-        <table class="grade-table" id="gradeTable">
+function renderExposureTable(exposure) {
+  if (!exposure || !exposure.length) return '';
+  const maxExp = Math.max(...exposure.map(e => e.exposure_pct || e.n_lineups || 0));
+  const rows = exposure.map(e => {
+    const pct = e.exposure_pct || ((e.n_lineups / 12) * 100).toFixed(1);
+    const barW = maxExp > 0 ? (pct / maxExp * 60) : 0;
+    const tier = e.course_tier || 'NEUTRAL';
+    return `
+      <tr>
+        <td>${e.name}</td>
+        <td class="num">${fmtMoney(e.salary)}</td>
+        <td class="num">${fmt(e.zeus_dfs || e.adj_proj || 0)}</td>
+        <td class="num">${fmtPct(e.own || 0)}</td>
+        <td class="num"><span class="bar" style="width:${barW}px"></span>${fmtPct(pct, 1)}</td>
+        <td class="num ${TIER_CLASS(tier)}">${tier.replace('_',' ')}</td>
+      </tr>
+    `;
+  }).join('');
+
+  return `
+    <div class="section" style="padding-top:0">
+      <div class="eyebrow">Portfolio</div>
+      <h2>Exposure Table</h2>
+      <p class="sub">Where our capital is concentrated across the 12-lineup portfolio.</p>
+      <div class="table-wrap">
+        <table class="vault-table">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Build</th>
-              <th>Salary</th>
-              <th>Proj</th>
-              <th>Actual</th>
-              <th>Δ</th>
-              <th>Verdict</th>
-            </tr>
+            <tr><th>Player</th><th class="right">Salary</th><th class="right">Proj</th><th class="right">Own</th><th class="right">Exposure</th><th class="right">Course Fit</th></tr>
           </thead>
-          <tbody id="gradeBody"></tbody>
+          <tbody>${rows}</tbody>
         </table>
-
-        <!-- 3-tier hindsight ladder -->
-        <div class="ladder" id="gradeLadder"></div>
-
-        <!-- Field-wide optimal lineup, expanded -->
-        <div class="optimal-lineup" id="gradeOptimalBlock" hidden>
-          <div class="optimal-lineup-head">
-            <span class="title">Optimal lineup of the week</span>
-            <span class="meta" id="gradeOptimalMeta">—</span>
-          </div>
-          <div class="optimal-lineup-players" id="gradeOptimalPlayers"></div>
-          <div class="grade-note" style="margin-top: var(--space-3);">
-            ★ = player was on at least one of our 12 lineups
-          </div>
-        </div>
-
-        <div class="grade-hindsight" id="gradeHindsightBlock"></div>
-
-        <div class="grade-note" id="gradeApproxNote">
-          DK points approximated from per-round scores · cash thresholds: 340 / 410 / 500
-        </div>
       </div>
-    </section>
+    </div>
+  `;
+}
 
-    <!-- TOOLBAR -->
-    <div class="page-toolbar">
-      <div class="page-toolbar-row">
-        <div class="chip-row" id="kindChips">
-          <button class="chip" data-filter="all" aria-pressed="true">All <span class="count" id="cAll">12</span></button>
-          <button class="chip" data-filter="Cash" aria-pressed="false">Cash <span class="count" id="cCash">0</span></button>
-          <button class="chip" data-filter="Core" aria-pressed="false">Core <span class="count" id="cCore">0</span></button>
-          <button class="chip" data-filter="Leverage" aria-pressed="false">Leverage <span class="count" id="cLev">0</span></button>
-          <button class="chip" data-filter="Moonshot" aria-pressed="false">Moonshot <span class="count" id="cMoon">0</span></button>
-        </div>
+function renderKPIs(data) {
+  const lineups = data.lineups || [];
+  const n = lineups.length;
+  const avgProj = n > 0 ? lineups.reduce((s,l) => s + (l.proj_total || 0), 0) / n : 0;
+  const avgOwn  = n > 0 ? lineups.reduce((s,l) => s + (l.avg_own || 0), 0) / n : 0;
+  const totalSal = n > 0 ? lineups.reduce((s,l) => s + (l.salary || l.total_salary || 0), 0) : 0;
+  const capUsed = n > 0 ? (totalSal / (n * 50000) * 100) : 0;
 
-        <div class="divider-vertical"></div>
+  return `
+    <div class="kpi-strip">
+      <div class="kpi-cell">
+        <div class="kpi-num">${n}</div>
+        <div class="kpi-label">Lineups</div>
+        <div class="kpi-desc">${data.constraints ? Object.entries(data.constraints.buckets || {}).map(([k,v]) => `${v} ${k}`).join(' / ') : '2 CASH / 5 CORE / 4 GPP / 1 MOONSHOT'}</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-num">${fmt(capUsed)}%</div>
+        <div class="kpi-label">Cap Used</div>
+        <div class="kpi-desc">Average salary utilization across portfolio</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-num">${fmt(avgProj)}</div>
+        <div class="kpi-label">Avg Projection</div>
+        <div class="kpi-desc">Mean lineup projection (DFS pts)</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-num">${fmtPct(avgOwn)}</div>
+        <div class="kpi-label">Avg Ownership</div>
+        <div class="kpi-desc">Portfolio-wide projected ownership</div>
+      </div>
+    </div>
+  `;
+}
 
-        <div class="seg" role="radiogroup" aria-label="Sort lineups by">
-          <button class="active" data-sort="mean">Mean proj</button>
-          <button data-sort="p95">p95 ceiling</button>
-          <button data-sort="own">Ownership</button>
-          <button data-sort="bbi">Avg BBI</button>
-          <button data-sort="salary">Salary</button>
-        </div>
+function renderApp(data) {
+  const lineups = data.lineups || [];
+  const exposure = data.exposure || [];
+  const cards = lineups.map((lu, i) => renderLineupCard(lu, i)).join('');
+  const version = data.constructor_version || '1.0';
+  const alpha = data.constraints ? data.constraints.gpp_alpha : '0.5';
 
-        <div class="toolbar-count"><strong id="lcShown">12</strong> of <strong>12</strong></div>
-
-        <div class="divider-vertical"></div>
-
-        <button type="button" id="dkExportBtn" title="Download visible lineups as a DraftKings-ready CSV"
-                style="display: inline-flex; align-items: center; gap: var(--space-2); padding: 7px 14px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); border: 1px solid var(--gold-500); color: var(--text-on-gold); border-radius: var(--radius-md); font-size: var(--fs-xs); font-weight: 600; cursor: pointer; white-space: nowrap;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Download DK CSV
-        </button>
+  document.getElementById('app').innerHTML = `
+    <div class="section" style="padding-bottom:var(--s-10)">
+      <div class="container">
+        <div class="eyebrow">DraftKings Optimizer</div>
+        <h1>DFS Lineups</h1>
+        <p class="sub">
+          BBI-optimized lineups for large-field GPPs. 
+          Ownership-leveraged scoring, course-fit aware, built by the v${version} constructor.
+        </p>
+        ${renderKPIs(data)}
       </div>
     </div>
 
-    <!-- DK Export modal -->
-    <div id="dkModal" role="dialog" aria-modal="true" aria-labelledby="dkModalTitle" hidden
-         style="position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(8, 8, 12, 0.72); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: var(--space-5);">
-      <div style="background: var(--surface-3); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: var(--space-6); max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto;">
-        <div style="display: flex; justify-content: space-between; align-items: start; gap: var(--space-4); margin-bottom: var(--space-4);">
-          <div>
-            <div class="eyebrow" style="margin-bottom: var(--space-2);">DraftKings export</div>
-            <h2 id="dkModalTitle" style="font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); line-height: var(--lh-tight);">Ready to upload</h2>
-          </div>
-          <button type="button" id="dkModalClose" aria-label="Close"
-                  style="width: 32px; height: 32px; background: var(--surface-2); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; font-size: 18px;">×</button>
-        </div>
+    ${renderExposureTable(exposure)}
 
-        <div id="dkModalSummary" style="font-size: var(--fs-sm); color: var(--text-body); margin-bottom: var(--space-4); line-height: var(--lh-relaxed);"></div>
-
-        <div style="background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-3); margin-bottom: var(--space-5); max-height: 180px; overflow-y: auto;">
-          <pre id="dkModalPreview" style="font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--text-body); white-space: pre; margin: 0;"></pre>
-        </div>
-
-        <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap;">
-          <button type="button" id="dkDownload" style="flex: 1; min-width: 160px; padding: 10px 16px; background: linear-gradient(180deg, var(--gold-400) 0%, var(--gold-600) 100%); border: 1px solid var(--gold-500); color: var(--text-on-gold); border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            Download .csv
-          </button>
-          <button type="button" id="dkCopy" style="flex: 1; min-width: 160px; padding: 10px 16px; background: var(--surface-2); border: 1px solid var(--border-soft); color: var(--text-body); border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 600; cursor: pointer;">
-            Copy to clipboard
-          </button>
-        </div>
-
-        <div style="font-size: var(--fs-xs); color: var(--text-muted); line-height: var(--lh-relaxed); padding-top: var(--space-4); border-top: 1px solid var(--border-subtle);">
-          <strong style="color: var(--text-body);">How to upload:</strong>
-          Open the contest in DraftKings, choose <em>Upload CSV</em> on the lineup builder, and select this file. If DK can't auto-match a name, you'll get a manual-select prompt for that player. All lineups are validated against the <strong>$50,000 salary cap</strong> client-side before export.
-        </div>
+    <div class="section" style="padding-top:0">
+      <div class="container">
+        <div class="eyebrow">Recommended</div>
+        <h2>12-Lineup Portfolio</h2>
+        <p class="sub">
+          Archetype-optimized builds. CASH targets safe chalk. CORE balances projection and leverage. 
+          GPP fades public ownership. MOONSHOT is high-variance punt construction.
+        </p>
+        <div class="lineup-grid">${cards}</div>
       </div>
     </div>
+  `;
 
-    <!-- LINEUP GRID -->
-    <div class="lineup-grid" id="lineupGrid"></div>
+  document.getElementById('meta-footer').textContent = 
+    `constructor v${version} &middot; α=${alpha} &middot; ${data.generated_at ? new Date(data.generated_at).toLocaleDateString() : ''}`;
+}
 
-    <!-- EXPOSURE + CONSTRUCTION -->
-    <section class="section">
-      <div class="section-head">
-        <div class="section-head-text">
-          <span class="eyebrow">Portfolio exposure</span>
-          <h2>Where the money goes.</h2>
-          <p>Aggregate roster exposure across the 12 lineups vs. field-wide ownership projections. Positive deltas (red) indicate overweights; negative (green) are underweights. Target zone marked by HERMES.</p>
-        </div>
+/* ---------- LOAD DATA ---------- */
+async function load() {
+  try {
+    const res = await fetch('data/dfs_lineups.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    renderApp(data);
+  } catch (e) {
+    document.getElementById('app').innerHTML = `
+      <div class="error">
+        <p>Could not load lineup data.</p>
+        <p style="color:var(--text-4);font-size:13px;margin-top:8px">${e.message}</p>
       </div>
-      <div class="exposure-panel">
-        <div class="exposure-list" id="exposureList"></div>
-        <div class="exposure-aside">
-          <div class="exposure-note">
-            <div class="eyebrow">Leverage read</div>
-            <p id="leverageNote">Exposure is calibrated against projected ownership so every overweight is a conscious bet. Red deltas mark players the portfolio leans into against the field; green deltas mark deliberate fades.</p>
-          </div>
-          <div class="card rules-card">
-            <div class="card-title">Construction rules (v8.5)</div>
-            <div style="margin-top: var(--space-3);">
-              <div class="rule-line"><span class="rule-tag">Salary</span><span class="rule-text">Target $48,000–$50,000 ceiling; minimum $47,500.</span></div>
-              <div class="rule-line"><span class="rule-tag">Chalk</span><span class="rule-text">At most one player above 22% projected ownership per lineup.</span></div>
-              <div class="rule-line"><span class="rule-tag">Stacks</span><span class="rule-text">At least three Harbour Town specialists in every build.</span></div>
-              <div class="rule-line"><span class="rule-tag">Leverage</span><span class="rule-text">Leverage/GPP lineups must fade one top-5 owned player vs. Cores.</span></div>
-              <div class="rule-line"><span class="rule-tag">Overlap</span><span class="rule-text">Maximum 80% overlap between any two lineups.</span></div>
-              <div class="rule-line"><span class="rule-tag">Floor</span><span class="rule-text">Every lineup must project ≥ 440 Zeus points mean.</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+    `;
+  }
+}
 
-  <div id="site-footer"></div>
-
-  <script src="assets/js/core.js"></script>
-  <script src="assets/js/components.js"></script>
-  <script src="assets/js/animations.js"></script>
-  <script src="assets/js/data.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      await BBI.renderHeader('lineups.html');
-      await BBI.renderFooter();
-
-      const [ev, dfs, themis, gradesHist] = await Promise.all([
-        BBI.data.load(BBI.data.paths.currentEvent),
-        BBI.data.load(BBI.data.paths.dfsLineups),
-        BBI.data.load(BBI.data.paths.themis),
-        BBI.data.load(BBI.data.paths.dfsGradesHistory)
-      ]);
-
-      // ---------- LAST WEEK'S REPORT CARD ----------
-      (function renderGradeReport() {
-        const events = gradesHist?.events || [];
-        if (!events.length) return;
-        // Pick most recent graded event
-        const latest = events.slice().sort((a, b) =>
-          (b.year || 0) - (a.year || 0) || (b.event_id || 0) - (a.event_id || 0)
-        )[0];
-        if (!latest || !latest.lineups) return;
-
-        const sec = document.getElementById('gradeSection');
-        if (sec) sec.removeAttribute('hidden');
-
-        const evEl = document.getElementById('gradeEvent');
-        if (evEl) {
-          const date = latest.completed || '';
-          evEl.textContent = `${latest.event}${date ? ' · completed ' + date : ''} · ${latest.lineups.length} lineups graded`;
-        }
-
-        const p = latest.portfolio || {};
-        const setT = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-        setT('gradeBestVal', fmt.num(p.best_lineup_actual, 0));
-        setT('gradeBestId', `${p.best_lineup_id || '—'} · ${fmt.num(p.delta_pct, 1)}% vs proj`);
-        setT('gradeAvgVal', fmt.num(p.avg_actual, 0));
-        const cashedTotal = (p.n_cash || 0) + (p.n_top_1pct || 0) + (p.n_top_001pct || 0);
-        setT('gradeCashCount', cashedTotal);
-        setT('gradeCashSub', `of ${p.n_lineups || 12} lineups`);
-
-        const hb = latest.hindsight_best;
-        const fo = latest.field_wide_optimal;
-        const captureRate = latest.capture_rate_pct;
-        if (captureRate != null) {
-          setT('gradeCaptureVal', fmt.num(captureRate, 1) + '%');
-          setT('gradeCaptureSub',
-            (p.best_lineup_actual && fo)
-              ? `${fmt.num(p.best_lineup_actual, 0)} of ${fmt.num(fo.total, 0)} max`
-              : 'vs theoretical max');
-        } else if (hb && hb.total != null) {
-          // Fallback: roster-pool hindsight only
-          setT('gradeCaptureVal', fmt.num(hb.total, 0));
-          setT('gradeCaptureSub',
-            latest.vs_hindsight_pts_left != null
-              ? `${fmt.num(latest.vs_hindsight_pts_left, 0)} pts left`
-              : 'best from our pool');
-        }
-
-        // ---- 3-tier hindsight ladder ----
-        const ladder = document.getElementById('gradeLadder');
-        if (ladder) {
-          const ours = p.best_lineup_actual || 0;
-          const poolBest = hb?.total || null;
-          const optimal = fo?.total || null;
-
-          const rows = [
-            {
-              cls: 'our',
-              icon: '01',
-              title: 'Our best lineup',
-              sub: `${p.best_lineup_id || '—'} · pre-tournament selection`,
-              value: fmt.num(ours, 0),
-            },
-          ];
-          if (poolBest != null) {
-            const gap = poolBest - ours;
-            rows.push({
-              cls: 'pool',
-              icon: '02',
-              title: 'Roster-pool hindsight',
-              sub: `Best 6 from our ${hb?.n_players || '?'}-player shortlist · construction layer cost ${fmt.num(gap, 0)} pts`,
-              value: fmt.num(poolBest, 0),
-            });
-          }
-          if (optimal != null) {
-            const selectionGap = poolBest != null ? optimal - poolBest : null;
-            const totalGap = optimal - ours;
-            rows.push({
-              cls: 'optimal',
-              icon: '03',
-              title: 'Field-wide optimal',
-              sub: selectionGap != null
-                ? `Best 6 from full field · selection layer cost ${fmt.num(selectionGap, 0)} pts · total gap ${fmt.num(totalGap, 0)}`
-                : `Best 6 from full field · total gap ${fmt.num(totalGap, 0)}`,
-              value: fmt.num(optimal, 0),
-            });
-          }
-          ladder.innerHTML = rows.map(r => `
-            <div class="ladder-row ${r.cls}">
-              <div class="ladder-icon">${r.icon}</div>
-              <div class="ladder-label">
-                <span class="ladder-label-title">${r.title}</span>
-                <span class="ladder-label-sub">${r.sub}</span>
-              </div>
-              <div class="ladder-value">${r.value}</div>
-            </div>
-          `).join('');
-        }
-
-        // ---- Field-wide optimal lineup details ----
-        if (fo && fo.players && fo.players.length) {
-          // Pool the dg_ids from our 12 lineups so we can star players we did roster
-          const ourPoolDgIds = new Set();
-          (latest.lineups || []).forEach(l => {
-            // The lineups in the history file don't have player_breakdown by default;
-            // fall back to checking against current dfs_lineups payload's pool
-          });
-          (dfs?.lineups || []).forEach(l => l.players.forEach(p => ourPoolDgIds.add(p.dg_id)));
-
-          const optBlock = document.getElementById('gradeOptimalBlock');
-          if (optBlock) optBlock.removeAttribute('hidden');
-          setT('gradeOptimalMeta',
-            `${fmt.num(fo.total, 0)} pts · $${(fo.salary/1000).toFixed(1)}k of $50k cap`);
-          const playersEl = document.getElementById('gradeOptimalPlayers');
-          if (playersEl) {
-            playersEl.innerHTML = fo.players.map(p => {
-              const inOurs = ourPoolDgIds.has(p.dg_id);
-              const ownStr = p.ownership != null
-                ? `${(p.ownership * 100).toFixed(1)}%`
-                : '—';
-              return `
-                <div class="optimal-player ${inOurs ? 'in-our-pool' : ''}">
-                  <span class="salary">$${p.salary}</span>
-                  <span class="name">${fmt.abbrevName(p.name)}</span>
-                  <span class="pts">${fmt.num(p.total_pts, 1)}</span>
-                  <span class="own">own ${ownStr}</span>
-                </div>
-              `;
-            }).join('');
-          }
-        }
-
-        // Verdict pill helper
-        const verdictPill = (v) => {
-          const map = {
-            'below_cash':  ['verdict-below', 'Below cash'],
-            'cash':        ['verdict-cash',  'Cashed'],
-            'top_1_pct':   ['verdict-top1',  'Top 1%'],
-            'top_001_pct': ['verdict-top001','Top 0.01%'],
-          };
-          const [cls, lbl] = map[v] || ['verdict-below', '—'];
-          return `<span class="verdict-pill ${cls}">${lbl}</span>`;
-        };
-
-        // Table rows — sort best-actual first
-        const lineups = latest.lineups.slice().sort((a, b) => (b.actual_total || 0) - (a.actual_total || 0));
-        const body = document.getElementById('gradeBody');
-        if (body) {
-          body.innerHTML = lineups.map(l => {
-            const dCls = (l.delta_pct || 0) > 0 ? 'grade-delta-up' : ((l.delta_pct || 0) < 0 ? 'grade-delta-down' : '');
-            const dSign = (l.delta_pct || 0) > 0 ? '+' : '';
-            return `
-              <tr>
-                <td><span class="grade-id">${l.lineup_id}</span></td>
-                <td>${l.kind} · <span class="muted" style="font-size: var(--fs-3xs);">${l.title || ''}</span></td>
-                <td class="num">$${(l.salary / 1000).toFixed(1)}k</td>
-                <td class="num">${fmt.num(l.proj_total, 0)}</td>
-                <td class="num"><strong>${fmt.num(l.actual_total, 0)}</strong></td>
-                <td class="num ${dCls}">${dSign}${fmt.num(l.delta_pct, 1)}%</td>
-                <td>${verdictPill(l.verdict)}</td>
-              </tr>
-            `;
-          }).join('');
-        }
-
-        // Concise summary callout — the 3-tier ladder above carries most of the story
-        const hbBlock = document.getElementById('gradeHindsightBlock');
-        if (hbBlock && (hb || fo)) {
-          const ours = p.best_lineup_actual || 0;
-          const optimal = fo?.total || hb?.total || 0;
-          const gap = optimal - ours;
-          const cap = captureRate != null ? `<span class="gold">${fmt.num(captureRate, 1)}%</span> capture rate` : '';
-          if (fo && hb) {
-            const selectionGap = fo.total - hb.total;
-            const construction = hb.total - ours;
-            hbBlock.innerHTML = `
-              <strong>What this tells us.</strong> Our best lineup
-              (<strong>${p.best_lineup_id}</strong> = ${fmt.num(ours, 0)}) hit
-              ${cap} of the field-wide optimum. The gap splits into two parts:
-              <strong>~${fmt.num(construction, 0)} pts</strong> from construction
-              (which 6 of our shortlist's players to play together) and
-              <strong>~${fmt.num(selectionGap, 0)} pts</strong> from selection
-              (which players made our shortlist at all). The selection layer is
-              where deeper Course Fit reads + ownership leverage have the most room to grow.
-            `;
-          } else if (hb) {
-            hbBlock.innerHTML = `
-              <strong>Hindsight check.</strong> Best 6-player combo from our
-              ${hb.n_players}-player shortlist would have scored
-              <span class="gold">${fmt.num(hb.total, 0)}</span>. We hit ${fmt.num(ours, 0)},
-              leaving ${fmt.num(gap, 0)} pts to construction noise.
-            `;
-          }
-        }
-      })();
-
-      $('#lineupEvent').textContent = ev?.event_name || 'RBC Heritage';
-      $('#lineupGen').textContent = dfs?.generated_at ? fmt.ago(dfs.generated_at) : 'Live';
-
-      const lineups = dfs?.lineups || [];
-      const themisDist = themis?.lineup_distributions || [];
-      const themisMap = new Map();
-      themisDist.forEach(d => themisMap.set(d.label, d));
-
-      // ---------- ENRICH LINEUPS (handles both old + new schema) ----------
-      // New schema (2026-04+): { archetype: "CORE"|"SAFE"|"LEVERAGE", salary, proj_total, avg_own,
-      //   floor_score, ceiling_score, players: [{dg_id, name, salary, zeus_dfs, proj_own, leverage}] }
-      // Old schema: { label: "Core #1 — ...", total_salary, sum_zeus, sum_hermes_own, avg_bbi_dfs,
-      //   players: [{..., tier, hermes_own}] }
-      const KIND_FROM_ARCHETYPE = {
-        'CASH': 'Cash', 'CORE': 'Core', 'SAFE': 'Cash', 'LEVERAGE': 'Leverage',
-        'MOONSHOT': 'Moonshot', 'GPP': 'GPP', 'CONTRARIAN': 'Contrarian',
-      };
-      const kindCounters = { Cash: 0, Core: 0, Leverage: 0, Moonshot: 0, Safe: 0, GPP: 0, Contrarian: 0 };
-      const enriched = lineups.map((l, idx) => {
-        // Detect kind from archetype (new schema) or label prefix (old schema)
-        let kind;
-        if (l.archetype) {
-          kind = KIND_FROM_ARCHETYPE[String(l.archetype).toUpperCase()] || 'Core';
-        } else if (l.label) {
-          kind = l.label.startsWith('Core') ? 'Core'
-               : l.label.startsWith('Safe') ? 'Safe'
-               : l.label.startsWith('Leverage') ? 'Leverage'
-               : l.label.startsWith('GPP') ? 'GPP' : 'Core';
-        } else {
-          kind = 'Core';
-        }
-
-        // Sequential ID per kind (C1, C2, S1, ...)
-        kindCounters[kind] = (kindCounters[kind] || 0) + 1;
-        const lineupId = `${kind.slice(0, 1)}${kindCounters[kind]}`;
-
-        // Title: prefer old-schema "label — title", fallback to a derived archetype label
-        const titleText = (l.label && l.label.split(' — ')[1])
-          || (l.archetype ? `${kind} build #${kindCounters[kind]}` : `Lineup ${idx + 1}`);
-        const labelKey = l.label || `${kind} #${kindCounters[kind]}`;
-        const t = themisMap.get(labelKey) || {};
-
-        // Normalize salary / proj / ownership across schemas
-        const total_salary = l.total_salary ?? l.salary ?? 0;
-        const proj = l.sum_zeus ?? l.proj_total ?? 0;
-        const own = l.sum_hermes_own ?? l.avg_own ?? 0;
-        // bbi_dfs avg is missing in new schema — fall back to proj/6 (per-player avg)
-        const avg_bbi = l.avg_bbi_dfs ?? (proj / 6);
-
-        // Adapt players: new schema has proj_own (not hermes_own), no tier field
-        const players = (l.players || []).map(p => ({
-          ...p,
-          hermes_own: p.hermes_own ?? p.proj_own ?? 0,
-          tier: p.tier || (p.leverage ? 'LEV' : 'NEUT'),
-        }));
-
-        return {
-          idx,
-          lineupId,
-          kind,
-          label: labelKey,
-          title: titleText,
-          players,
-          total_salary,
-          sum_zeus: proj,
-          sum_hermes_own: own,
-          avg_bbi_dfs: avg_bbi,
-          // THEMIS distribution stats — only show the per-lineup bar when real
-          // simulation totals exist. floor_score/ceiling_score in the new lineup
-          // file aren't projection percentiles (they're build-style characteristic
-          // scores), so don't use them as p5/p95.
-          mean: t.mean ?? proj,
-          p5: t.p5 ?? null,
-          p25: t.p25 ?? null,
-          p50: t.p50 ?? proj,
-          p75: t.p75 ?? null,
-          p95: t.p95 ?? null,
-          std: t.std ?? null,
-        };
-      });
-
-      // ---------- SUMMARY STATS ----------
-      const uniquePlayers = new Set();
-      enriched.forEach(l => l.players.forEach(p => uniquePlayers.add(p.name)));
-      $('#kpiUnique').textContent = uniquePlayers.size;
-
-      // Best ceiling — prefer THEMIS p95, fall back to highest projected lineup
-      const hasP95 = enriched.some(l => l.p95 != null);
-      const bestCeiling = hasP95
-        ? enriched.reduce((best, l) => (l.p95 != null && (best == null || l.p95 > best.p95)) ? l : best, null)
-        : enriched.reduce((best, l) => (best == null || l.mean > best.mean) ? l : best, null);
-      if (bestCeiling) {
-        $('#kpiP95').textContent = fmt.num(hasP95 ? bestCeiling.p95 : bestCeiling.mean, 0);
-        $('#kpiP95Name').textContent = bestCeiling.lineupId + ' · ' + bestCeiling.title.slice(0, 38);
-      }
-
-      const avgMean = enriched.reduce((s, l) => s + (l.mean || 0), 0) / (enriched.length || 1);
-      $('#kpiAvgProj').textContent = fmt.num(avgMean, 0);
-
-      const avgOwn = enriched.reduce((s, l) => s + (l.sum_hermes_own || 0), 0) / (enriched.length || 1);
-      $('#kpiAvgOwn').textContent = fmt.num(avgOwn, 0) + '%';
-
-      // ---------- KIND COUNTS ----------
-      const kindCounts = { Cash: 0, Core: 0, Leverage: 0, Moonshot: 0, Safe: 0, GPP: 0 };
-      enriched.forEach(l => kindCounts[l.kind] = (kindCounts[l.kind] || 0) + 1);
-      const setCount = (id, n) => { const el = $('#' + id); if (el) el.textContent = n || 0; };
-      // Cash chip absorbs the legacy Safe count for backward-compat
-      setCount('cCash', (kindCounts.Cash || 0) + (kindCounts.Safe || 0));
-      setCount('cCore', kindCounts.Core);
-      setCount('cLev',  kindCounts.Leverage);
-      setCount('cMoon', kindCounts.Moonshot);
-      setCount('cSafe', kindCounts.Safe);  // legacy chip if still in DOM
-      setCount('cGpp',  kindCounts.GPP);
-      $('#cAll').textContent = enriched.length;
-
-      // ---------- RENDER LINEUP CARDS ----------
-      const grid = $('#lineupGrid');
-
-      const ownClass = (own) => own > 18 ? 'high' : (own > 10 ? 'med' : 'low');
-      const tierSlug = (t) => {
-        const s = (t || 'NEUTRAL').toLowerCase();
-        if (s.includes('spec')) return 'tier tier-specialist';
-        if (s.includes('comf')) return 'tier tier-comfortable';
-        if (s.includes('stru')) return 'tier tier-struggle';
-        return 'tier tier-neutral';
-      };
-      const tierAbbrev = (t) => (t || 'NEUT').slice(0, 4);
-
-      // Find global max for THEMIS bar scaling (anchor to p95 across all lineups)
-      const globalCeiling = Math.max(...enriched.map(l => l.p95 || 0), 1);
-      const globalFloor   = Math.min(...enriched.map(l => l.p5 || 0), 0);
-      const globalSpan = globalCeiling - globalFloor || 1;
-      const scaleH = (v) => Math.max(6, Math.min(26, ((v - globalFloor) / globalSpan) * 26 + 4));
-
-      const cardHTML = (l, pos) => {
-        const playersHTML = l.players.map((p, i) => `
-          <div class="lineup-player">
-            <span class="lp-rank">${i+1}</span>
-            <span class="lp-name"><span class="dot"></span>${playerLink(p.dg_id, fmt.abbrevName(p.name))}</span>
-            <span class="lp-tier ${tierSlug(p.tier)}">${tierAbbrev(p.tier)}</span>
-            <span class="lp-salary">$${(p.salary/1000).toFixed(1)}k</span>
-            <span class="lp-zeus">${fmt.num(p.zeus_dfs, 1)}</span>
-            <span class="lp-own ${ownClass(p.hermes_own)}">${fmt.num(p.hermes_own, 1)}%</span>
-          </div>
-        `).join('');
-
-        const themisHTML = (l.p5 != null) ? `
-          <div class="themis-bar" title="THEMIS Monte Carlo distribution: p5 ${fmt.num(l.p5,0)} / p50 ${fmt.num(l.p50,0)} / p95 ${fmt.num(l.p95,0)}">
-            <span class="themis-bar-label">THEMIS · 10k sims</span>
-            <span class="themis-bar-stat">p95 <span class="pct">${fmt.num(l.p95, 0)}</span></span>
-            <div class="themis-slot p5"  style="height:${scaleH(l.p5)}px"></div>
-            <div class="themis-slot p25" style="height:${scaleH(l.p25)}px"></div>
-            <div class="themis-slot p50" style="height:${scaleH(l.p50)}px"></div>
-            <div class="themis-slot p75" style="height:${scaleH(l.p75)}px"></div>
-            <div class="themis-slot p95" style="height:${scaleH(l.p95)}px"></div>
-          </div>
-        ` : '';
-
-        return `
-          <article class="lineup-card" data-lineup data-kind="${l.kind}"
-            data-mean="${l.mean || 0}" data-p95="${l.p95 || 0}"
-            data-own="${l.sum_hermes_own || 0}" data-bbi="${l.avg_bbi_dfs || 0}"
-            data-salary="${l.total_salary || 0}"
-            data-reveal data-delay="${Math.min(6, pos+1)}">
-            <header class="lineup-card-head">
-              <div>
-                <div class="row-tight" style="gap: var(--space-2); margin-bottom: 4px;">
-                  <span class="lineup-kind" data-kind="${l.kind}">${l.kind}</span>
-                  <span class="lineup-id">${l.lineupId}</span>
-                </div>
-                <div class="lineup-title">${l.title}</div>
-              </div>
-              <div style="text-align: right;">
-                <div class="stat-label" style="font-size: var(--fs-3xs); margin-bottom: 2px;">Proj</div>
-                <div class="num-display" style="font-size: var(--fs-xl); color: var(--gold-300);">${fmt.num(l.mean, 0)}</div>
-              </div>
-            </header>
-
-            <div class="lineup-kpis">
-              <div class="lineup-kpi"><span class="k-label">Salary</span><span class="k-value">$${(l.total_salary/1000).toFixed(1)}k</span></div>
-              <div class="lineup-kpi"><span class="k-label">p95</span><span class="k-value gold">${fmt.num(l.p95, 0)}</span></div>
-              <div class="lineup-kpi"><span class="k-label">p5</span><span class="k-value">${fmt.num(l.p5, 0)}</span></div>
-              <div class="lineup-kpi"><span class="k-label">Own</span><span class="k-value ${l.sum_hermes_own > 80 ? 'negative' : (l.sum_hermes_own < 70 ? 'positive' : '')}">${fmt.num(l.sum_hermes_own, 1)}%</span></div>
-              <div class="lineup-kpi"><span class="k-label">Avg BBI</span><span class="k-value">${fmt.num(l.avg_bbi_dfs, 1)}</span></div>
-            </div>
-
-            <div class="lineup-players">
-              ${playersHTML}
-            </div>
-
-            ${themisHTML}
-          </article>
-        `;
-      };
-
-      const renderCards = (list) => {
-        grid.innerHTML = list.map((l, i) => cardHTML(l, i)).join('');
-        window.observeAnimations?.(grid);
-        $('#lcShown').textContent = list.length;
-      };
-
-      // ---------- SORT ----------
-      let sortKey = 'mean';
-      let activeKind = 'all';
-      const applySortAndFilter = () => {
-        let list = enriched.slice();
-        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind || (activeKind === 'Cash' && l.kind === 'Safe'));
-        list.sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
-        renderCards(list);
-      };
-      applySortAndFilter();
-
-      // Wire sort buttons
-      $$('.seg[aria-label="Sort lineups by"] button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          $$('.seg[aria-label="Sort lineups by"] button').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          sortKey = btn.dataset.sort;
-          applySortAndFilter();
-        });
-      });
-
-      // ---------- DK CSV EXPORT ----------
-      // Convert "Last, First" (DG format) → "First Last" (DK format)
-      const toDkName = (name) => {
-        if (!name) return '';
-        if (name.includes(',')) {
-          const [last, first] = name.split(',').map(s => s.trim());
-          return `${first} ${last}`;
-        }
-        return name;
-      };
-
-      const currentlyVisibleLineups = () => {
-        let list = enriched.slice();
-        if (activeKind !== 'all') list = list.filter(l => l.kind === activeKind || (activeKind === 'Cash' && l.kind === 'Safe'));
-        list.sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
-        return list;
-      };
-
-      const buildCsv = (list) => {
-        // DraftKings classic golf format: 6 G columns
-        const header = 'G,G,G,G,G,G';
-        const rows = list.map(l => {
-          const players = (l.players || []).slice(0, 6);
-          // Pad to 6 if needed
-          while (players.length < 6) players.push({ name: '' });
-          return players.map(p => {
-            const n = toDkName(p.name).replace(/,/g, ''); // strip any stray commas so CSV parses
-            return n;
-          }).join(',');
-        });
-        return [header, ...rows].join('\n');
-      };
-
-      // Cap validation — warn if any lineup blows the $50k cap
-      const CAP = 50000;
-      const capWarnings = (list) => list
-        .map((l, i) => ({ i, id: l.lineupId, over: (l.total_salary || 0) - CAP, salary: l.total_salary }))
-        .filter(x => x.over > 0);
-
-      const openModal = () => {
-        const list = currentlyVisibleLineups();
-        if (!list.length) {
-          alert('No lineups to export. Clear any active filters.');
-          return;
-        }
-        const csv = buildCsv(list);
-        const warnings = capWarnings(list);
-
-        const summary = `Exporting <strong>${list.length}</strong> lineup${list.length === 1 ? '' : 's'}` +
-          (activeKind !== 'all' ? ` (filter: <strong>${activeKind}</strong>)` : '') +
-          `. Total players across all rosters: <strong>${list.reduce((s, l) => s + (l.players?.length || 0), 0)}</strong>. ` +
-          (warnings.length
-            ? `<br/><span style="color: var(--negative);"><strong>Warning:</strong> ${warnings.length} lineup${warnings.length === 1 ? '' : 's'} over $50k cap (${warnings.map(w => w.id + ' $' + fmt.int(w.salary)).join(', ')}). DK will reject these on upload.</span>`
-            : `All lineups validate under the $50,000 cap.`);
-
-        $('#dkModalSummary').innerHTML = summary;
-        $('#dkModalPreview').textContent = csv;
-        $('#dkModal').removeAttribute('hidden');
-        $('#dkModal').dataset.csv = csv;
-      };
-
-      const closeModal = () => $('#dkModal').setAttribute('hidden', '');
-
-      const downloadCsv = () => {
-        const csv = $('#dkModal').dataset.csv || '';
-        const blob = new Blob([csv + '\n'], { type: 'text/csv;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const now = new Date();
-        const stamp = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-        const eventSlug = (dfs?.event || 'event').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        const filename = `bbi-dk-lineups_${eventSlug}_${stamp}.csv`;
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      };
-
-      const copyToClipboard = async () => {
-        const csv = $('#dkModal').dataset.csv || '';
-        try {
-          await navigator.clipboard.writeText(csv);
-          const btn = $('#dkCopy');
-          const orig = btn.textContent;
-          btn.textContent = 'Copied ✓';
-          setTimeout(() => { btn.textContent = orig; }, 1400);
-        } catch (e) {
-          alert('Clipboard access blocked. Use the download button instead.');
-        }
-      };
-
-      $('#dkExportBtn').addEventListener('click', openModal);
-      $('#dkModalClose').addEventListener('click', closeModal);
-      $('#dkDownload').addEventListener('click', downloadCsv);
-      $('#dkCopy').addEventListener('click', copyToClipboard);
-      $('#dkModal').addEventListener('click', (e) => {
-        if (e.target.id === 'dkModal') closeModal(); // click backdrop closes
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !$('#dkModal').hasAttribute('hidden')) closeModal();
-      });
-
-      // Wire kind chips
-      $$('#kindChips .chip').forEach(c => {
-        c.addEventListener('click', () => {
-          $$('#kindChips .chip').forEach(cc => cc.setAttribute('aria-pressed', 'false'));
-          c.setAttribute('aria-pressed', 'true');
-          activeKind = c.dataset.filter;
-          applySortAndFilter();
-        });
-      });
-
-      // ---------- EXPOSURE ----------
-      // Build name -> dg_id map from all lineup players
-      const nameToId = {};
-      (dfs?.lineups || []).forEach(l => {
-        l.players.forEach(p => {
-          nameToId[p.name] = p.dg_id;
-        });
-      });
-
-      const exposure = dfs?.exposure || {};
-      const projOwn = dfs?.hermes_own_projections || {};
-      const exposureList = Object.entries(exposure).map(([name, pct]) => ({
-        name, pct, dg_id: nameToId[name],
-        projected: projOwn[name] || 0,
-        delta: pct - (projOwn[name] || 0)
-      }));
-      exposureList.sort((a, b) => b.pct - a.pct);
-
-      const expoMount = $('#exposureList');
-      const maxPct = Math.max(...exposureList.map(e => e.pct), 1);
-      expoMount.innerHTML = exposureList.map((e, i) => {
-        const deltaClass = e.delta > 2 ? 'up' : (e.delta < -2 ? 'down' : '');
-        const deltaSign = e.delta > 0 ? '+' : '';
-        const widthPct = (e.pct / 100) * 100;
-        return `
-          <div class="exposure-row" data-reveal data-delay="${Math.min(6, Math.floor(i/3)+1)}">
-            <div class="exposure-name">${playerLink(e.dg_id, fmt.abbrevName(e.name))}</div>
-            <div class="exposure-bar-track">
-              <div class="exposure-bar-fill bar-fill" data-to="${widthPct}" style="width:0%"></div>
-            </div>
-            <div class="exposure-meta">
-              <div>${fmt.num(e.pct, 1)}% <span class="tgt">/ ${fmt.num(e.projected, 1)}%</span></div>
-              <div class="delta ${deltaClass}">${e.delta !== 0 ? deltaSign + fmt.num(e.delta, 1) + 'pp' : '—'}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-      window.observeAnimations?.(expoMount);
-
-      // Build leverage note
-      const overweight = exposureList.filter(e => e.delta > 5).slice(0, 2);
-      const underweight = exposureList.filter(e => e.delta < -3 && e.pct === 0).slice(0, 2);
-      const ovNames = overweight.map(e => `<strong>${fmt.abbrevName(e.name)}</strong> (+${fmt.num(e.delta,1)}pp)`).join(', ');
-      const fadeNames = underweight.map(e => `<strong>${fmt.abbrevName(e.name)}</strong>`).join(', ');
-      if (ovNames) {
-        $('#leverageNote').innerHTML = `Portfolio leans heavily into ${ovNames} — deliberate overweights against field ownership. ${fadeNames ? `Fades include ${fadeNames}, giving room for leverage when the chalk falters.` : ''}`;
-      }
-
-      // Final pass to catch any late reveal triggers
-      window.observeAnimations?.(document);
-    });
-  </script>
+load();
+</script>
 </body>
 </html>

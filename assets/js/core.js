@@ -29,8 +29,8 @@
   const fmt = {
     int:   v => (v == null || isNaN(v)) ? '—' : Math.round(v).toLocaleString(),
     num:   (v, d = 2) => (v == null || isNaN(v)) ? '—' : (+v).toFixed(d),
-    pct:   (v, d = 1) => (v == null || isNaN(v)) ? '—' : `${(+v).toFixed(d)}%`,
-    pctProb: (v, d = 1) => (v == null || isNaN(v)) ? '—' : `${(+v * (v < 1 ? 100 : 1)).toFixed(d)}%`,
+    pct:   (v, d = 1) => (v == null || isNaN(v)) ? '—' : `${(+v * 100).toFixed(d)}%`,
+    pctProb: (v, d = 1) => (v == null || isNaN(v)) ? '—' : `${(+v * 100).toFixed(d)}%`,
     pp:    (v, d = 2) => (v == null || isNaN(v)) ? '—' : `${(v >= 0 ? '+' : '')}${(+v).toFixed(d)}pp`,
     money: v => (v == null || isNaN(v)) ? '—' : `$${(+v).toLocaleString()}`,
     decimal: v => (v == null || isNaN(v)) ? '—' : (+v).toFixed(2),

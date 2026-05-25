@@ -19,23 +19,6 @@
       "cash_rate_pct": 100.0
     },
     {
-      "event": "PGA Championship",
-      "event_id": 33,
-      "year": 2026,
-      "completed": "2026-05-17",
-      "our_best": 345.5,
-      "our_best_id": "L2",
-      "pool_hindsight": 438.0,
-      "field_optimal": 550.0,
-      "capture_rate_pct": 62.82,
-      "n_lineups": 10,
-      "n_cash": 1,
-      "n_top_1pct": 0,
-      "n_top_001pct": 0,
-      "cashed_total": 1,
-      "cash_rate_pct": 10.0
-    },
-    {
       "event": "Truist Championship",
       "event_id": 480,
       "year": 2026,
@@ -71,11 +54,11 @@
     }
   ],
   "season": {
-    "n_events": 4,
-    "mean_capture_rate_pct": 77.44,
-    "mean_cash_rate_pct": 77.5,
-    "total_cashed": 36,
-    "total_lineups": 45
+    "n_events": 3,
+    "mean_capture_rate_pct": 82.31,
+    "mean_cash_rate_pct": 100.0,
+    "total_cashed": 35,
+    "total_lineups": 35
   },
-  "last_updated": "2026-05-25T13:36:37Z"
+  "last_updated": "2026-05-11T13:37:52Z"
 }
