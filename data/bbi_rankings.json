@@ -63,7 +63,23 @@
       "bbi_ceiling": 150.9,
       "floor": 32.3,
       "cv": 0.3997,
-      "bbi_value": 8.233
+      "bbi_value": 8.233,
+      "bbi_pool": 0.96134,
+      "bbi_dfs": 0.96134,
+      "p_win": 0.087796,
+      "value": 8.233,
+      "prob_win": 0.087796,
+      "pool": {
+        "composite": 0.96134,
+        "rank": 1
+      },
+      "dfs": {
+        "composite": 0.96134,
+        "rank": 1,
+        "ceiling": 150.9,
+        "floor": 32.3,
+        "cv": 0.3997
+      }
     },
     {
       "rank": 2,
@@ -92,7 +108,23 @@
       "bbi_ceiling": 136.2,
       "floor": 27.0,
       "cv": 0.4163,
-      "bbi_value": 7.491
+      "bbi_value": 7.491,
+      "bbi_pool": 0.76332,
+      "bbi_dfs": 0.76332,
+      "p_win": 0.042608,
+      "value": 7.491,
+      "prob_win": 0.042608,
+      "pool": {
+        "composite": 0.76332,
+        "rank": 2
+      },
+      "dfs": {
+        "composite": 0.76332,
+        "rank": 2,
+        "ceiling": 136.2,
+        "floor": 27.0,
+        "cv": 0.4163
+      }
     },
     {
       "rank": 3,
@@ -121,7 +153,23 @@
       "bbi_ceiling": 130.0,
       "floor": 22.9,
       "cv": 0.4391,
-      "bbi_value": 7.191
+      "bbi_value": 7.191,
+      "bbi_pool": 0.69287,
+      "bbi_dfs": 0.69287,
+      "p_win": 0.027847,
+      "value": 7.191,
+      "prob_win": 0.027847,
+      "pool": {
+        "composite": 0.69287,
+        "rank": 3
+      },
+      "dfs": {
+        "composite": 0.69287,
+        "rank": 3,
+        "ceiling": 130.0,
+        "floor": 22.9,
+        "cv": 0.4391
+      }
     },
     {
       "rank": 4,
@@ -150,7 +198,23 @@
       "bbi_ceiling": 131.6,
       "floor": 24.5,
       "cv": 0.4284,
-      "bbi_value": 7.737
+      "bbi_value": 7.737,
+      "bbi_pool": 0.67333,
+      "bbi_dfs": 0.67333,
+      "p_win": 0.031566,
+      "value": 7.737,
+      "prob_win": 0.031566,
+      "pool": {
+        "composite": 0.67333,
+        "rank": 4
+      },
+      "dfs": {
+        "composite": 0.67333,
+        "rank": 4,
+        "ceiling": 131.6,
+        "floor": 24.5,
+        "cv": 0.4284
+      }
     },
     {
       "rank": 5,
@@ -179,7 +243,23 @@
       "bbi_ceiling": 134.4,
       "floor": 22.0,
       "cv": 0.4522,
-      "bbi_value": 7.396
+      "bbi_value": 7.396,
+      "bbi_pool": 0.66984,
+      "bbi_dfs": 0.66984,
+      "p_win": 0.032082,
+      "value": 7.396,
+      "prob_win": 0.032082,
+      "pool": {
+        "composite": 0.66984,
+        "rank": 5
+      },
+      "dfs": {
+        "composite": 0.66984,
+        "rank": 5,
+        "ceiling": 134.4,
+        "floor": 22.0,
+        "cv": 0.4522
+      }
     },
     {
       "rank": 6,
@@ -208,7 +288,23 @@
       "bbi_ceiling": 125.1,
       "floor": 18.5,
       "cv": 0.4693,
-      "bbi_value": 7.466
+      "bbi_value": 7.466,
+      "bbi_pool": 0.65779,
+      "bbi_dfs": 0.65779,
+      "p_win": 0.017999,
+      "value": 7.466,
+      "prob_win": 0.017999,
+      "pool": {
+        "composite": 0.65779,
+        "rank": 6
+      },
+      "dfs": {
+        "composite": 0.65779,
+        "rank": 6,
+        "ceiling": 125.1,
+        "floor": 18.5,
+        "cv": 0.4693
+      }
     },
     {
       "rank": 7,
@@ -237,7 +333,23 @@
       "bbi_ceiling": 132.5,
       "floor": 22.6,
       "cv": 0.4451,
-      "bbi_value": 7.488
+      "bbi_value": 7.488,
+      "bbi_pool": 0.63836,
+      "bbi_dfs": 0.63836,
+      "p_win": 0.032103,
+      "value": 7.488,
+      "prob_win": 0.032103,
+      "pool": {
+        "composite": 0.63836,
+        "rank": 7
+      },
+      "dfs": {
+        "composite": 0.63836,
+        "rank": 7,
+        "ceiling": 132.5,
+        "floor": 22.6,
+        "cv": 0.4451
+      }
     },
     {
       "rank": 8,
@@ -266,7 +378,23 @@
       "bbi_ceiling": 126.7,
       "floor": 20.5,
       "cv": 0.455,
-      "bbi_value": 7.156
+      "bbi_value": 7.156,
+      "bbi_pool": 0.58132,
+      "bbi_dfs": 0.58132,
+      "p_win": 0.022831,
+      "value": 7.156,
+      "prob_win": 0.022831,
+      "pool": {
+        "composite": 0.58132,
+        "rank": 8
+      },
+      "dfs": {
+        "composite": 0.58132,
+        "rank": 8,
+        "ceiling": 126.7,
+        "floor": 20.5,
+        "cv": 0.455
+      }
     },
     {
       "rank": 9,
@@ -295,7 +423,23 @@
       "bbi_ceiling": 123.5,
       "floor": 19.8,
       "cv": 0.4568,
-      "bbi_value": 7.599
+      "bbi_value": 7.599,
+      "bbi_pool": 0.55198,
+      "bbi_dfs": 0.55198,
+      "p_win": 0.017618,
+      "value": 7.599,
+      "prob_win": 0.017618,
+      "pool": {
+        "composite": 0.55198,
+        "rank": 9
+      },
+      "dfs": {
+        "composite": 0.55198,
+        "rank": 9,
+        "ceiling": 123.5,
+        "floor": 19.8,
+        "cv": 0.4568
+      }
     },
     {
       "rank": 10,
@@ -324,7 +468,23 @@
       "bbi_ceiling": 129.6,
       "floor": 22.8,
       "cv": 0.4402,
-      "bbi_value": 7.648
+      "bbi_value": 7.648,
+      "bbi_pool": 0.51717,
+      "bbi_dfs": 0.51717,
+      "p_win": 0.02742,
+      "value": 7.648,
+      "prob_win": 0.02742,
+      "pool": {
+        "composite": 0.51717,
+        "rank": 10
+      },
+      "dfs": {
+        "composite": 0.51717,
+        "rank": 10,
+        "ceiling": 129.6,
+        "floor": 22.8,
+        "cv": 0.4402
+      }
     },
     {
       "rank": 11,
@@ -353,7 +513,23 @@
       "bbi_ceiling": 120.5,
       "floor": 17.9,
       "cv": 0.4695,
-      "bbi_value": 7.956
+      "bbi_value": 7.956,
+      "bbi_pool": 0.51447,
+      "bbi_dfs": 0.51447,
+      "p_win": 0.014484,
+      "value": 7.956,
+      "prob_win": 0.014484,
+      "pool": {
+        "composite": 0.51447,
+        "rank": 11
+      },
+      "dfs": {
+        "composite": 0.51447,
+        "rank": 11,
+        "ceiling": 120.5,
+        "floor": 17.9,
+        "cv": 0.4695
+      }
     },
     {
       "rank": 12,
@@ -382,7 +558,23 @@
       "bbi_ceiling": 124.9,
       "floor": 19.6,
       "cv": 0.4608,
-      "bbi_value": 7.817
+      "bbi_value": 7.817,
+      "bbi_pool": 0.50951,
+      "bbi_dfs": 0.50951,
+      "p_win": 0.019833,
+      "value": 7.817,
+      "prob_win": 0.019833,
+      "pool": {
+        "composite": 0.50951,
+        "rank": 12
+      },
+      "dfs": {
+        "composite": 0.50951,
+        "rank": 12,
+        "ceiling": 124.9,
+        "floor": 19.6,
+        "cv": 0.4608
+      }
     },
     {
       "rank": 13,
@@ -411,7 +603,23 @@
       "bbi_ceiling": 127.8,
       "floor": 21.9,
       "cv": 0.4455,
-      "bbi_value": 7.581
+      "bbi_value": 7.581,
+      "bbi_pool": 0.49477,
+      "bbi_dfs": 0.49477,
+      "p_win": 0.02505,
+      "value": 7.581,
+      "prob_win": 0.02505,
+      "pool": {
+        "composite": 0.49477,
+        "rank": 13
+      },
+      "dfs": {
+        "composite": 0.49477,
+        "rank": 13,
+        "ceiling": 127.8,
+        "floor": 21.9,
+        "cv": 0.4455
+      }
     },
     {
       "rank": 14,
@@ -440,7 +648,23 @@
       "bbi_ceiling": 122.1,
       "floor": 17.6,
       "cv": 0.4749,
-      "bbi_value": 7.45
+      "bbi_value": 7.45,
+      "bbi_pool": 0.49339,
+      "bbi_dfs": 0.49339,
+      "p_win": 0.014616,
+      "value": 7.45,
+      "prob_win": 0.014616,
+      "pool": {
+        "composite": 0.49339,
+        "rank": 14
+      },
+      "dfs": {
+        "composite": 0.49339,
+        "rank": 14,
+        "ceiling": 122.1,
+        "floor": 17.6,
+        "cv": 0.4749
+      }
     },
     {
       "rank": 15,
@@ -469,7 +693,23 @@
       "bbi_ceiling": 123.6,
       "floor": 18.7,
       "cv": 0.4666,
-      "bbi_value": 8.068
+      "bbi_value": 8.068,
+      "bbi_pool": 0.48632,
+      "bbi_dfs": 0.48632,
+      "p_win": 0.018365,
+      "value": 8.068,
+      "prob_win": 0.018365,
+      "pool": {
+        "composite": 0.48632,
+        "rank": 15
+      },
+      "dfs": {
+        "composite": 0.48632,
+        "rank": 15,
+        "ceiling": 123.6,
+        "floor": 18.7,
+        "cv": 0.4666
+      }
     },
     {
       "rank": 16,
@@ -498,7 +738,23 @@
       "bbi_ceiling": 120.2,
       "floor": 15.3,
       "cv": 0.4937,
-      "bbi_value": 7.366
+      "bbi_value": 7.366,
+      "bbi_pool": 0.47239,
+      "bbi_dfs": 0.47239,
+      "p_win": 0.013667,
+      "value": 7.366,
+      "prob_win": 0.013667,
+      "pool": {
+        "composite": 0.47239,
+        "rank": 16
+      },
+      "dfs": {
+        "composite": 0.47239,
+        "rank": 16,
+        "ceiling": 120.2,
+        "floor": 15.3,
+        "cv": 0.4937
+      }
     },
     {
       "rank": 17,
@@ -527,7 +783,23 @@
       "bbi_ceiling": 123.0,
       "floor": 17.9,
       "cv": 0.4737,
-      "bbi_value": 7.159
+      "bbi_value": 7.159,
+      "bbi_pool": 0.42818,
+      "bbi_dfs": 0.42818,
+      "p_win": 0.016932,
+      "value": 7.159,
+      "prob_win": 0.016932,
+      "pool": {
+        "composite": 0.42818,
+        "rank": 17
+      },
+      "dfs": {
+        "composite": 0.42818,
+        "rank": 17,
+        "ceiling": 123.0,
+        "floor": 17.9,
+        "cv": 0.4737
+      }
     },
     {
       "rank": 18,
@@ -556,7 +828,23 @@
       "bbi_ceiling": 120.6,
       "floor": 16.9,
       "cv": 0.4799,
-      "bbi_value": 7.932
+      "bbi_value": 7.932,
+      "bbi_pool": 0.39101,
+      "bbi_dfs": 0.39101,
+      "p_win": 0.013684,
+      "value": 7.932,
+      "prob_win": 0.013684,
+      "pool": {
+        "composite": 0.39101,
+        "rank": 18
+      },
+      "dfs": {
+        "composite": 0.39101,
+        "rank": 18,
+        "ceiling": 120.6,
+        "floor": 16.9,
+        "cv": 0.4799
+      }
     },
     {
       "rank": 19,
@@ -585,7 +873,23 @@
       "bbi_ceiling": 117.5,
       "floor": 17.5,
       "cv": 0.4701,
-      "bbi_value": 8.115
+      "bbi_value": 8.115,
+      "bbi_pool": 0.39092,
+      "bbi_dfs": 0.39092,
+      "p_win": 0.011183,
+      "value": 8.115,
+      "prob_win": 0.011183,
+      "pool": {
+        "composite": 0.39092,
+        "rank": 19
+      },
+      "dfs": {
+        "composite": 0.39092,
+        "rank": 19,
+        "ceiling": 117.5,
+        "floor": 17.5,
+        "cv": 0.4701
+      }
     },
     {
       "rank": 20,
@@ -614,7 +918,23 @@
       "bbi_ceiling": 120.0,
       "floor": 16.4,
       "cv": 0.484,
-      "bbi_value": 8.277
+      "bbi_value": 8.277,
+      "bbi_pool": 0.37419,
+      "bbi_dfs": 0.37419,
+      "p_win": 0.012234,
+      "value": 8.277,
+      "prob_win": 0.012234,
+      "pool": {
+        "composite": 0.37419,
+        "rank": 20
+      },
+      "dfs": {
+        "composite": 0.37419,
+        "rank": 20,
+        "ceiling": 120.0,
+        "floor": 16.4,
+        "cv": 0.484
+      }
     },
     {
       "rank": 21,
@@ -643,7 +963,23 @@
       "bbi_ceiling": 119.7,
       "floor": 17.0,
       "cv": 0.4781,
-      "bbi_value": 7.982
+      "bbi_value": 7.982,
+      "bbi_pool": 0.36543,
+      "bbi_dfs": 0.36543,
+      "p_win": 0.014217,
+      "value": 7.982,
+      "prob_win": 0.014217,
+      "pool": {
+        "composite": 0.36543,
+        "rank": 21
+      },
+      "dfs": {
+        "composite": 0.36543,
+        "rank": 21,
+        "ceiling": 119.7,
+        "floor": 17.0,
+        "cv": 0.4781
+      }
     },
     {
       "rank": 22,
@@ -672,7 +1008,23 @@
       "bbi_ceiling": 117.3,
       "floor": 16.0,
       "cv": 0.4843,
-      "bbi_value": 7.979
+      "bbi_value": 7.979,
+      "bbi_pool": 0.35691,
+      "bbi_dfs": 0.35691,
+      "p_win": 0.010367,
+      "value": 7.979,
+      "prob_win": 0.010367,
+      "pool": {
+        "composite": 0.35691,
+        "rank": 22
+      },
+      "dfs": {
+        "composite": 0.35691,
+        "rank": 22,
+        "ceiling": 117.3,
+        "floor": 16.0,
+        "cv": 0.4843
+      }
     },
     {
       "rank": 23,
@@ -701,7 +1053,23 @@
       "bbi_ceiling": 121.3,
       "floor": 17.6,
       "cv": 0.4754,
-      "bbi_value": 7.612
+      "bbi_value": 7.612,
+      "bbi_pool": 0.3349,
+      "bbi_dfs": 0.3349,
+      "p_win": 0.015333,
+      "value": 7.612,
+      "prob_win": 0.015333,
+      "pool": {
+        "composite": 0.3349,
+        "rank": 23
+      },
+      "dfs": {
+        "composite": 0.3349,
+        "rank": 23,
+        "ceiling": 121.3,
+        "floor": 17.6,
+        "cv": 0.4754
+      }
     },
     {
       "rank": 24,
@@ -730,7 +1098,23 @@
       "bbi_ceiling": 118.9,
       "floor": 18.6,
       "cv": 0.463,
-      "bbi_value": 8.578
+      "bbi_value": 8.578,
+      "bbi_pool": 0.31215,
+      "bbi_dfs": 0.31215,
+      "p_win": 0.013767,
+      "value": 8.578,
+      "prob_win": 0.013767,
+      "pool": {
+        "composite": 0.31215,
+        "rank": 24
+      },
+      "dfs": {
+        "composite": 0.31215,
+        "rank": 24,
+        "ceiling": 118.9,
+        "floor": 18.6,
+        "cv": 0.463
+      }
     },
     {
       "rank": 25,
@@ -759,7 +1143,23 @@
       "bbi_ceiling": 117.4,
       "floor": 16.7,
       "cv": 0.4786,
-      "bbi_value": 7.911
+      "bbi_value": 7.911,
+      "bbi_pool": 0.31053,
+      "bbi_dfs": 0.31053,
+      "p_win": 0.011199,
+      "value": 7.911,
+      "prob_win": 0.011199,
+      "pool": {
+        "composite": 0.31053,
+        "rank": 25
+      },
+      "dfs": {
+        "composite": 0.31053,
+        "rank": 25,
+        "ceiling": 117.4,
+        "floor": 16.7,
+        "cv": 0.4786
+      }
     },
     {
       "rank": 26,
@@ -788,7 +1188,23 @@
       "bbi_ceiling": 124.1,
       "floor": 18.7,
       "cv": 0.4691,
-      "bbi_value": 7.379
+      "bbi_value": 7.379,
+      "bbi_pool": 0.30879,
+      "bbi_dfs": 0.30879,
+      "p_win": 0.018182,
+      "value": 7.379,
+      "prob_win": 0.018182,
+      "pool": {
+        "composite": 0.30879,
+        "rank": 26
+      },
+      "dfs": {
+        "composite": 0.30879,
+        "rank": 26,
+        "ceiling": 124.1,
+        "floor": 18.7,
+        "cv": 0.4691
+      }
     },
     {
       "rank": 27,
@@ -817,7 +1233,23 @@
       "bbi_ceiling": 117.4,
       "floor": 16.4,
       "cv": 0.4812,
-      "bbi_value": 7.986
+      "bbi_value": 7.986,
+      "bbi_pool": 0.29697,
+      "bbi_dfs": 0.29697,
+      "p_win": 0.013583,
+      "value": 7.986,
+      "prob_win": 0.013583,
+      "pool": {
+        "composite": 0.29697,
+        "rank": 27
+      },
+      "dfs": {
+        "composite": 0.29697,
+        "rank": 27,
+        "ceiling": 117.4,
+        "floor": 16.4,
+        "cv": 0.4812
+      }
     },
     {
       "rank": 28,
@@ -846,7 +1278,23 @@
       "bbi_ceiling": 118.1,
       "floor": 15.5,
       "cv": 0.4911,
-      "bbi_value": 8.168
+      "bbi_value": 8.168,
+      "bbi_pool": 0.29065,
+      "bbi_dfs": 0.29065,
+      "p_win": 0.011133,
+      "value": 8.168,
+      "prob_win": 0.011133,
+      "pool": {
+        "composite": 0.29065,
+        "rank": 28
+      },
+      "dfs": {
+        "composite": 0.29065,
+        "rank": 28,
+        "ceiling": 118.1,
+        "floor": 15.5,
+        "cv": 0.4911
+      }
     },
     {
       "rank": 29,
@@ -875,7 +1323,23 @@
       "bbi_ceiling": 117.7,
       "floor": 15.1,
       "cv": 0.4943,
-      "bbi_value": 7.317
+      "bbi_value": 7.317,
+      "bbi_pool": 0.27982,
+      "bbi_dfs": 0.27982,
+      "p_win": 0.012933,
+      "value": 7.317,
+      "prob_win": 0.012933,
+      "pool": {
+        "composite": 0.27982,
+        "rank": 29
+      },
+      "dfs": {
+        "composite": 0.27982,
+        "rank": 29,
+        "ceiling": 117.7,
+        "floor": 15.1,
+        "cv": 0.4943
+      }
     },
     {
       "rank": 30,
@@ -904,7 +1368,23 @@
       "bbi_ceiling": 113.7,
       "floor": 14.7,
       "cv": 0.4927,
-      "bbi_value": 8.059
+      "bbi_value": 8.059,
+      "bbi_pool": 0.25074,
+      "bbi_dfs": 0.25074,
+      "p_win": 0.0079,
+      "value": 8.059,
+      "prob_win": 0.0079,
+      "pool": {
+        "composite": 0.25074,
+        "rank": 30
+      },
+      "dfs": {
+        "composite": 0.25074,
+        "rank": 30,
+        "ceiling": 113.7,
+        "floor": 14.7,
+        "cv": 0.4927
+      }
     },
     {
       "rank": 31,
@@ -933,7 +1413,23 @@
       "bbi_ceiling": 120.4,
       "floor": 16.1,
       "cv": 0.4886,
-      "bbi_value": 8.002
+      "bbi_value": 8.002,
+      "bbi_pool": 0.24395,
+      "bbi_dfs": 0.24395,
+      "p_win": 0.013801,
+      "value": 8.002,
+      "prob_win": 0.013801,
+      "pool": {
+        "composite": 0.24395,
+        "rank": 31
+      },
+      "dfs": {
+        "composite": 0.24395,
+        "rank": 31,
+        "ceiling": 120.4,
+        "floor": 16.1,
+        "cv": 0.4886
+      }
     },
     {
       "rank": 32,
@@ -962,7 +1458,23 @@
       "bbi_ceiling": 111.7,
       "floor": 12.4,
       "cv": 0.5143,
-      "bbi_value": 7.741
+      "bbi_value": 7.741,
+      "bbi_pool": 0.22866,
+      "bbi_dfs": 0.22866,
+      "p_win": 0.007534,
+      "value": 7.741,
+      "prob_win": 0.007534,
+      "pool": {
+        "composite": 0.22866,
+        "rank": 32
+      },
+      "dfs": {
+        "composite": 0.22866,
+        "rank": 32,
+        "ceiling": 111.7,
+        "floor": 12.4,
+        "cv": 0.5143
+      }
     },
     {
       "rank": 33,
@@ -991,7 +1503,23 @@
       "bbi_ceiling": 117.8,
       "floor": 16.6,
       "cv": 0.48,
-      "bbi_value": 7.789
+      "bbi_value": 7.789,
+      "bbi_pool": 0.22605,
+      "bbi_dfs": 0.22605,
+      "p_win": 0.011867,
+      "value": 7.789,
+      "prob_win": 0.011867,
+      "pool": {
+        "composite": 0.22605,
+        "rank": 33
+      },
+      "dfs": {
+        "composite": 0.22605,
+        "rank": 33,
+        "ceiling": 117.8,
+        "floor": 16.6,
+        "cv": 0.48
+      }
     },
     {
       "rank": 34,
@@ -1020,7 +1548,23 @@
       "bbi_ceiling": 112.1,
       "floor": 13.5,
       "cv": 0.5038,
-      "bbi_value": 7.739
+      "bbi_value": 7.739,
+      "bbi_pool": 0.22521,
+      "bbi_dfs": 0.22521,
+      "p_win": 0.0071,
+      "value": 7.739,
+      "prob_win": 0.0071,
+      "pool": {
+        "composite": 0.22521,
+        "rank": 34
+      },
+      "dfs": {
+        "composite": 0.22521,
+        "rank": 34,
+        "ceiling": 112.1,
+        "floor": 13.5,
+        "cv": 0.5038
+      }
     },
     {
       "rank": 35,
@@ -1049,7 +1593,23 @@
       "bbi_ceiling": 110.3,
       "floor": 12.9,
       "cv": 0.5073,
-      "bbi_value": 7.589
+      "bbi_value": 7.589,
+      "bbi_pool": 0.21481,
+      "bbi_dfs": 0.21481,
+      "p_win": 0.006417,
+      "value": 7.589,
+      "prob_win": 0.006417,
+      "pool": {
+        "composite": 0.21481,
+        "rank": 35
+      },
+      "dfs": {
+        "composite": 0.21481,
+        "rank": 35,
+        "ceiling": 110.3,
+        "floor": 12.9,
+        "cv": 0.5073
+      }
     },
     {
       "rank": 36,
@@ -1078,7 +1638,23 @@
       "bbi_ceiling": 120.4,
       "floor": 15.3,
       "cv": 0.4958,
-      "bbi_value": 7.733
+      "bbi_value": 7.733,
+      "bbi_pool": 0.20813,
+      "bbi_dfs": 0.20813,
+      "p_win": 0.014233,
+      "value": 7.733,
+      "prob_win": 0.014233,
+      "pool": {
+        "composite": 0.20813,
+        "rank": 36
+      },
+      "dfs": {
+        "composite": 0.20813,
+        "rank": 36,
+        "ceiling": 120.4,
+        "floor": 15.3,
+        "cv": 0.4958
+      }
     },
     {
       "rank": 37,
@@ -1107,7 +1683,23 @@
       "bbi_ceiling": 110.9,
       "floor": 12.0,
       "cv": 0.5184,
-      "bbi_value": 7.44
+      "bbi_value": 7.44,
+      "bbi_pool": 0.20275,
+      "bbi_dfs": 0.20275,
+      "p_win": 0.006517,
+      "value": 7.44,
+      "prob_win": 0.006517,
+      "pool": {
+        "composite": 0.20275,
+        "rank": 37
+      },
+      "dfs": {
+        "composite": 0.20275,
+        "rank": 37,
+        "ceiling": 110.9,
+        "floor": 12.0,
+        "cv": 0.5184
+      }
     },
     {
       "rank": 38,
@@ -1136,7 +1728,23 @@
       "bbi_ceiling": 111.2,
       "floor": 11.7,
       "cv": 0.5218,
-      "bbi_value": 7.34
+      "bbi_value": 7.34,
+      "bbi_pool": 0.19975,
+      "bbi_dfs": 0.19975,
+      "p_win": 0.006667,
+      "value": 7.34,
+      "prob_win": 0.006667,
+      "pool": {
+        "composite": 0.19975,
+        "rank": 38
+      },
+      "dfs": {
+        "composite": 0.19975,
+        "rank": 38,
+        "ceiling": 111.2,
+        "floor": 11.7,
+        "cv": 0.5218
+      }
     },
     {
       "rank": 39,
@@ -1165,7 +1773,23 @@
       "bbi_ceiling": 102.4,
       "floor": 8.9,
       "cv": 0.5448,
-      "bbi_value": 7.294
+      "bbi_value": 7.294,
+      "bbi_pool": 0.19646,
+      "bbi_dfs": 0.19646,
+      "p_win": 0.002517,
+      "value": 7.294,
+      "prob_win": 0.002517,
+      "pool": {
+        "composite": 0.19646,
+        "rank": 39
+      },
+      "dfs": {
+        "composite": 0.19646,
+        "rank": 39,
+        "ceiling": 102.4,
+        "floor": 8.9,
+        "cv": 0.5448
+      }
     },
     {
       "rank": 40,
@@ -1194,7 +1818,23 @@
       "bbi_ceiling": 114.7,
       "floor": 15.4,
       "cv": 0.4877,
-      "bbi_value": 8.144
+      "bbi_value": 8.144,
+      "bbi_pool": 0.18947,
+      "bbi_dfs": 0.18947,
+      "p_win": 0.009834,
+      "value": 8.144,
+      "prob_win": 0.009834,
+      "pool": {
+        "composite": 0.18947,
+        "rank": 40
+      },
+      "dfs": {
+        "composite": 0.18947,
+        "rank": 40,
+        "ceiling": 114.7,
+        "floor": 15.4,
+        "cv": 0.4877
+      }
     },
     {
       "rank": 41,
@@ -1223,7 +1863,23 @@
       "bbi_ceiling": 109.9,
       "floor": 11.2,
       "cv": 0.5265,
-      "bbi_value": 7.724
+      "bbi_value": 7.724,
+      "bbi_pool": 0.16981,
+      "bbi_dfs": 0.16981,
+      "p_win": 0.00715,
+      "value": 7.724,
+      "prob_win": 0.00715,
+      "pool": {
+        "composite": 0.16981,
+        "rank": 41
+      },
+      "dfs": {
+        "composite": 0.16981,
+        "rank": 41,
+        "ceiling": 109.9,
+        "floor": 11.2,
+        "cv": 0.5265
+      }
     },
     {
       "rank": 42,
@@ -1252,7 +1908,23 @@
       "bbi_ceiling": 103.2,
       "floor": 8.6,
       "cv": 0.5495,
-      "bbi_value": 7.306
+      "bbi_value": 7.306,
+      "bbi_pool": 0.16373,
+      "bbi_dfs": 0.16373,
+      "p_win": 0.003483,
+      "value": 7.306,
+      "prob_win": 0.003483,
+      "pool": {
+        "composite": 0.16373,
+        "rank": 42
+      },
+      "dfs": {
+        "composite": 0.16373,
+        "rank": 42,
+        "ceiling": 103.2,
+        "floor": 8.6,
+        "cv": 0.5495
+      }
     },
     {
       "rank": 43,
@@ -1281,7 +1953,23 @@
       "bbi_ceiling": 107.2,
       "floor": 10.8,
       "cv": 0.5271,
-      "bbi_value": 7.526
+      "bbi_value": 7.526,
+      "bbi_pool": 0.15478,
+      "bbi_dfs": 0.15478,
+      "p_win": 0.005433,
+      "value": 7.526,
+      "prob_win": 0.005433,
+      "pool": {
+        "composite": 0.15478,
+        "rank": 43
+      },
+      "dfs": {
+        "composite": 0.15478,
+        "rank": 43,
+        "ceiling": 107.2,
+        "floor": 10.8,
+        "cv": 0.5271
+      }
     },
     {
       "rank": 44,
@@ -1310,7 +1998,23 @@
       "bbi_ceiling": 109.0,
       "floor": 11.5,
       "cv": 0.5219,
-      "bbi_value": 7.466
+      "bbi_value": 7.466,
+      "bbi_pool": 0.14639,
+      "bbi_dfs": 0.14639,
+      "p_win": 0.0058,
+      "value": 7.466,
+      "prob_win": 0.0058,
+      "pool": {
+        "composite": 0.14639,
+        "rank": 44
+      },
+      "dfs": {
+        "composite": 0.14639,
+        "rank": 44,
+        "ceiling": 109.0,
+        "floor": 11.5,
+        "cv": 0.5219
+      }
     },
     {
       "rank": 45,
@@ -1339,7 +2043,23 @@
       "bbi_ceiling": 113.3,
       "floor": 13.8,
       "cv": 0.503,
-      "bbi_value": 7.794
+      "bbi_value": 7.794,
+      "bbi_pool": 0.13643,
+      "bbi_dfs": 0.13643,
+      "p_win": 0.00815,
+      "value": 7.794,
+      "prob_win": 0.00815,
+      "pool": {
+        "composite": 0.13643,
+        "rank": 45
+      },
+      "dfs": {
+        "composite": 0.13643,
+        "rank": 45,
+        "ceiling": 113.3,
+        "floor": 13.8,
+        "cv": 0.503
+      }
     },
     {
       "rank": 46,
@@ -1368,7 +2088,23 @@
       "bbi_ceiling": 115.7,
       "floor": 14.8,
       "cv": 0.4959,
-      "bbi_value": 7.31
+      "bbi_value": 7.31,
+      "bbi_pool": 0.13122,
+      "bbi_dfs": 0.13122,
+      "p_win": 0.009883,
+      "value": 7.31,
+      "prob_win": 0.009883,
+      "pool": {
+        "composite": 0.13122,
+        "rank": 46
+      },
+      "dfs": {
+        "composite": 0.13122,
+        "rank": 46,
+        "ceiling": 115.7,
+        "floor": 14.8,
+        "cv": 0.4959
+      }
     },
     {
       "rank": 47,
@@ -1397,7 +2133,23 @@
       "bbi_ceiling": 105.9,
       "floor": 11.3,
       "cv": 0.5201,
-      "bbi_value": 7.809
+      "bbi_value": 7.809,
+      "bbi_pool": 0.13116,
+      "bbi_dfs": 0.13116,
+      "p_win": 0.0042,
+      "value": 7.809,
+      "prob_win": 0.0042,
+      "pool": {
+        "composite": 0.13116,
+        "rank": 47
+      },
+      "dfs": {
+        "composite": 0.13116,
+        "rank": 47,
+        "ceiling": 105.9,
+        "floor": 11.3,
+        "cv": 0.5201
+      }
     },
     {
       "rank": 48,
@@ -1426,7 +2178,23 @@
       "bbi_ceiling": 108.4,
       "floor": 13.0,
       "cv": 0.5052,
-      "bbi_value": 7.759
+      "bbi_value": 7.759,
+      "bbi_pool": 0.1291,
+      "bbi_dfs": 0.1291,
+      "p_win": 0.005217,
+      "value": 7.759,
+      "prob_win": 0.005217,
+      "pool": {
+        "composite": 0.1291,
+        "rank": 48
+      },
+      "dfs": {
+        "composite": 0.1291,
+        "rank": 48,
+        "ceiling": 108.4,
+        "floor": 13.0,
+        "cv": 0.5052
+      }
     },
     {
       "rank": 49,
@@ -1455,7 +2223,23 @@
       "bbi_ceiling": 114.8,
       "floor": 15.7,
       "cv": 0.4862,
-      "bbi_value": 8.029
+      "bbi_value": 8.029,
+      "bbi_pool": 0.1283,
+      "bbi_dfs": 0.1283,
+      "p_win": 0.00955,
+      "value": 8.029,
+      "prob_win": 0.00955,
+      "pool": {
+        "composite": 0.1283,
+        "rank": 49
+      },
+      "dfs": {
+        "composite": 0.1283,
+        "rank": 49,
+        "ceiling": 114.8,
+        "floor": 15.7,
+        "cv": 0.4862
+      }
     },
     {
       "rank": 50,
@@ -1484,7 +2268,23 @@
       "bbi_ceiling": 110.0,
       "floor": 12.3,
       "cv": 0.5143,
-      "bbi_value": 7.686
+      "bbi_value": 7.686,
+      "bbi_pool": 0.11835,
+      "bbi_dfs": 0.11835,
+      "p_win": 0.0066,
+      "value": 7.686,
+      "prob_win": 0.0066,
+      "pool": {
+        "composite": 0.11835,
+        "rank": 50
+      },
+      "dfs": {
+        "composite": 0.11835,
+        "rank": 50,
+        "ceiling": 110.0,
+        "floor": 12.3,
+        "cv": 0.5143
+      }
     },
     {
       "rank": 51,
@@ -1513,7 +2313,23 @@
       "bbi_ceiling": 104.9,
       "floor": 10.2,
       "cv": 0.532,
-      "bbi_value": 7.42
+      "bbi_value": 7.42,
+      "bbi_pool": 0.11804,
+      "bbi_dfs": 0.11804,
+      "p_win": 0.003933,
+      "value": 7.42,
+      "prob_win": 0.003933,
+      "pool": {
+        "composite": 0.11804,
+        "rank": 51
+      },
+      "dfs": {
+        "composite": 0.11804,
+        "rank": 51,
+        "ceiling": 104.9,
+        "floor": 10.2,
+        "cv": 0.532
+      }
     },
     {
       "rank": 52,
@@ -1542,7 +2358,23 @@
       "bbi_ceiling": 110.9,
       "floor": 13.8,
       "cv": 0.5003,
-      "bbi_value": 8.084
+      "bbi_value": 8.084,
+      "bbi_pool": 0.10882,
+      "bbi_dfs": 0.10882,
+      "p_win": 0.007067,
+      "value": 8.084,
+      "prob_win": 0.007067,
+      "pool": {
+        "composite": 0.10882,
+        "rank": 52
+      },
+      "dfs": {
+        "composite": 0.10882,
+        "rank": 52,
+        "ceiling": 110.9,
+        "floor": 13.8,
+        "cv": 0.5003
+      }
     },
     {
       "rank": 53,
@@ -1571,7 +2403,23 @@
       "bbi_ceiling": 103.6,
       "floor": 10.6,
       "cv": 0.526,
-      "bbi_value": 7.815
+      "bbi_value": 7.815,
+      "bbi_pool": 0.09798,
+      "bbi_dfs": 0.09798,
+      "p_win": 0.003,
+      "value": 7.815,
+      "prob_win": 0.003,
+      "pool": {
+        "composite": 0.09798,
+        "rank": 53
+      },
+      "dfs": {
+        "composite": 0.09798,
+        "rank": 53,
+        "ceiling": 103.6,
+        "floor": 10.6,
+        "cv": 0.526
+      }
     },
     {
       "rank": 54,
@@ -1600,7 +2448,23 @@
       "bbi_ceiling": 106.0,
       "floor": 11.2,
       "cv": 0.5214,
-      "bbi_value": 7.457
+      "bbi_value": 7.457,
+      "bbi_pool": 0.09787,
+      "bbi_dfs": 0.09787,
+      "p_win": 0.004783,
+      "value": 7.457,
+      "prob_win": 0.004783,
+      "pool": {
+        "composite": 0.09787,
+        "rank": 54
+      },
+      "dfs": {
+        "composite": 0.09787,
+        "rank": 54,
+        "ceiling": 106.0,
+        "floor": 11.2,
+        "cv": 0.5214
+      }
     },
     {
       "rank": 55,
@@ -1629,7 +2493,23 @@
       "bbi_ceiling": 108.4,
       "floor": 12.0,
       "cv": 0.5162,
-      "bbi_value": 7.552
+      "bbi_value": 7.552,
+      "bbi_pool": 0.09324,
+      "bbi_dfs": 0.09324,
+      "p_win": 0.005633,
+      "value": 7.552,
+      "prob_win": 0.005633,
+      "pool": {
+        "composite": 0.09324,
+        "rank": 55
+      },
+      "dfs": {
+        "composite": 0.09324,
+        "rank": 55,
+        "ceiling": 108.4,
+        "floor": 12.0,
+        "cv": 0.5162
+      }
     },
     {
       "rank": 56,
@@ -1658,7 +2538,23 @@
       "bbi_ceiling": 109.1,
       "floor": 12.6,
       "cv": 0.5105,
-      "bbi_value": 7.641
+      "bbi_value": 7.641,
+      "bbi_pool": 0.08967,
+      "bbi_dfs": 0.08967,
+      "p_win": 0.005867,
+      "value": 7.641,
+      "prob_win": 0.005867,
+      "pool": {
+        "composite": 0.08967,
+        "rank": 56
+      },
+      "dfs": {
+        "composite": 0.08967,
+        "rank": 56,
+        "ceiling": 109.1,
+        "floor": 12.6,
+        "cv": 0.5105
+      }
     },
     {
       "rank": 57,
@@ -1687,7 +2583,23 @@
       "bbi_ceiling": 112.1,
       "floor": 14.4,
       "cv": 0.4957,
-      "bbi_value": 7.642
+      "bbi_value": 7.642,
+      "bbi_pool": 0.08164,
+      "bbi_dfs": 0.08164,
+      "p_win": 0.008467,
+      "value": 7.642,
+      "prob_win": 0.008467,
+      "pool": {
+        "composite": 0.08164,
+        "rank": 57
+      },
+      "dfs": {
+        "composite": 0.08164,
+        "rank": 57,
+        "ceiling": 112.1,
+        "floor": 14.4,
+        "cv": 0.4957
+      }
     },
     {
       "rank": 58,
@@ -1716,7 +2628,23 @@
       "bbi_ceiling": 100.5,
       "floor": 9.5,
       "cv": 0.5358,
-      "bbi_value": 7.281
+      "bbi_value": 7.281,
+      "bbi_pool": 0.0805,
+      "bbi_dfs": 0.0805,
+      "p_win": 0.002567,
+      "value": 7.281,
+      "prob_win": 0.002567,
+      "pool": {
+        "composite": 0.0805,
+        "rank": 58
+      },
+      "dfs": {
+        "composite": 0.0805,
+        "rank": 58,
+        "ceiling": 100.5,
+        "floor": 9.5,
+        "cv": 0.5358
+      }
     },
     {
       "rank": 59,
@@ -1745,7 +2673,23 @@
       "bbi_ceiling": 107.5,
       "floor": 10.9,
       "cv": 0.5272,
-      "bbi_value": 7.619
+      "bbi_value": 7.619,
+      "bbi_pool": 0.08043,
+      "bbi_dfs": 0.08043,
+      "p_win": 0.00545,
+      "value": 7.619,
+      "prob_win": 0.00545,
+      "pool": {
+        "composite": 0.08043,
+        "rank": 59
+      },
+      "dfs": {
+        "composite": 0.08043,
+        "rank": 59,
+        "ceiling": 107.5,
+        "floor": 10.9,
+        "cv": 0.5272
+      }
     },
     {
       "rank": 60,
@@ -1774,7 +2718,23 @@
       "bbi_ceiling": 104.5,
       "floor": 11.5,
       "cv": 0.5174,
-      "bbi_value": 7.582
+      "bbi_value": 7.582,
+      "bbi_pool": 0.06907,
+      "bbi_dfs": 0.06907,
+      "p_win": 0.003983,
+      "value": 7.582,
+      "prob_win": 0.003983,
+      "pool": {
+        "composite": 0.06907,
+        "rank": 60
+      },
+      "dfs": {
+        "composite": 0.06907,
+        "rank": 60,
+        "ceiling": 104.5,
+        "floor": 11.5,
+        "cv": 0.5174
+      }
     },
     {
       "rank": 61,
@@ -1803,7 +2763,23 @@
       "bbi_ceiling": 110.8,
       "floor": 13.1,
       "cv": 0.5073,
-      "bbi_value": 7.671
+      "bbi_value": 7.671,
+      "bbi_pool": 0.06804,
+      "bbi_dfs": 0.06804,
+      "p_win": 0.007183,
+      "value": 7.671,
+      "prob_win": 0.007183,
+      "pool": {
+        "composite": 0.06804,
+        "rank": 61
+      },
+      "dfs": {
+        "composite": 0.06804,
+        "rank": 61,
+        "ceiling": 110.8,
+        "floor": 13.1,
+        "cv": 0.5073
+      }
     },
     {
       "rank": 62,
@@ -1832,7 +2808,23 @@
       "bbi_ceiling": 106.3,
       "floor": 10.4,
       "cv": 0.5315,
-      "bbi_value": 7.717
+      "bbi_value": 7.717,
+      "bbi_pool": 0.06266,
+      "bbi_dfs": 0.06266,
+      "p_win": 0.004633,
+      "value": 7.717,
+      "prob_win": 0.004633,
+      "pool": {
+        "composite": 0.06266,
+        "rank": 62
+      },
+      "dfs": {
+        "composite": 0.06266,
+        "rank": 62,
+        "ceiling": 106.3,
+        "floor": 10.4,
+        "cv": 0.5315
+      }
     },
     {
       "rank": 63,
@@ -1861,7 +2853,23 @@
       "bbi_ceiling": 105.4,
       "floor": 11.5,
       "cv": 0.5187,
-      "bbi_value": 7.518
+      "bbi_value": 7.518,
+      "bbi_pool": 0.04046,
+      "bbi_dfs": 0.04046,
+      "p_win": 0.004567,
+      "value": 7.518,
+      "prob_win": 0.004567,
+      "pool": {
+        "composite": 0.04046,
+        "rank": 63
+      },
+      "dfs": {
+        "composite": 0.04046,
+        "rank": 63,
+        "ceiling": 105.4,
+        "floor": 11.5,
+        "cv": 0.5187
+      }
     },
     {
       "rank": 64,
@@ -1890,7 +2898,23 @@
       "bbi_ceiling": 102.9,
       "floor": 9.6,
       "cv": 0.5372,
-      "bbi_value": 6.998
+      "bbi_value": 6.998,
+      "bbi_pool": 0.03137,
+      "bbi_dfs": 0.03137,
+      "p_win": 0.00365,
+      "value": 6.998,
+      "prob_win": 0.00365,
+      "pool": {
+        "composite": 0.03137,
+        "rank": 64
+      },
+      "dfs": {
+        "composite": 0.03137,
+        "rank": 64,
+        "ceiling": 102.9,
+        "floor": 9.6,
+        "cv": 0.5372
+      }
     },
     {
       "rank": 65,
@@ -1919,7 +2943,23 @@
       "bbi_ceiling": 99.4,
       "floor": 9.3,
       "cv": 0.537,
-      "bbi_value": 7.375
+      "bbi_value": 7.375,
+      "bbi_pool": 0.01012,
+      "bbi_dfs": 0.01012,
+      "p_win": 0.002717,
+      "value": 7.375,
+      "prob_win": 0.002717,
+      "pool": {
+        "composite": 0.01012,
+        "rank": 65
+      },
+      "dfs": {
+        "composite": 0.01012,
+        "rank": 65,
+        "ceiling": 99.4,
+        "floor": 9.3,
+        "cv": 0.537
+      }
     },
     {
       "rank": 66,
@@ -1948,7 +2988,23 @@
       "bbi_ceiling": 99.7,
       "floor": 8.6,
       "cv": 0.5457,
-      "bbi_value": 7.452
+      "bbi_value": 7.452,
+      "bbi_pool": 0.00998,
+      "bbi_dfs": 0.00998,
+      "p_win": 0.002583,
+      "value": 7.452,
+      "prob_win": 0.002583,
+      "pool": {
+        "composite": 0.00998,
+        "rank": 66
+      },
+      "dfs": {
+        "composite": 0.00998,
+        "rank": 66,
+        "ceiling": 99.7,
+        "floor": 8.6,
+        "cv": 0.5457
+      }
     },
     {
       "rank": 67,
@@ -1977,7 +3033,23 @@
       "bbi_ceiling": 100.6,
       "floor": 9.2,
       "cv": 0.5398,
-      "bbi_value": 7.564
+      "bbi_value": 7.564,
+      "bbi_pool": 0.00615,
+      "bbi_dfs": 0.00615,
+      "p_win": 0.002683,
+      "value": 7.564,
+      "prob_win": 0.002683,
+      "pool": {
+        "composite": 0.00615,
+        "rank": 67
+      },
+      "dfs": {
+        "composite": 0.00615,
+        "rank": 67,
+        "ceiling": 100.6,
+        "floor": 9.2,
+        "cv": 0.5398
+      }
     },
     {
       "rank": 68,
@@ -2006,7 +3078,23 @@
       "bbi_ceiling": 106.8,
       "floor": 11.4,
       "cv": 0.5218,
-      "bbi_value": 7.463
+      "bbi_value": 7.463,
+      "bbi_pool": -0.00592,
+      "bbi_dfs": -0.00592,
+      "p_win": 0.005733,
+      "value": 7.463,
+      "prob_win": 0.005733,
+      "pool": {
+        "composite": -0.00592,
+        "rank": 68
+      },
+      "dfs": {
+        "composite": -0.00592,
+        "rank": 68,
+        "ceiling": 106.8,
+        "floor": 11.4,
+        "cv": 0.5218
+      }
     },
     {
       "rank": 69,
@@ -2035,7 +3123,23 @@
       "bbi_ceiling": 103.5,
       "floor": 10.2,
       "cv": 0.5316,
-      "bbi_value": 7.963
+      "bbi_value": 7.963,
+      "bbi_pool": -0.00756,
+      "bbi_dfs": -0.00756,
+      "p_win": 0.004217,
+      "value": 7.963,
+      "prob_win": 0.004217,
+      "pool": {
+        "composite": -0.00756,
+        "rank": 69
+      },
+      "dfs": {
+        "composite": -0.00756,
+        "rank": 69,
+        "ceiling": 103.5,
+        "floor": 10.2,
+        "cv": 0.5316
+      }
     },
     {
       "rank": 70,
@@ -2064,7 +3168,23 @@
       "bbi_ceiling": 100.4,
       "floor": 9.2,
       "cv": 0.5397,
-      "bbi_value": 7.092
+      "bbi_value": 7.092,
+      "bbi_pool": -0.02235,
+      "bbi_dfs": -0.02235,
+      "p_win": 0.002683,
+      "value": 7.092,
+      "prob_win": 0.002683,
+      "pool": {
+        "composite": -0.02235,
+        "rank": 70
+      },
+      "dfs": {
+        "composite": -0.02235,
+        "rank": 70,
+        "ceiling": 100.4,
+        "floor": 9.2,
+        "cv": 0.5397
+      }
     },
     {
       "rank": 71,
@@ -2093,7 +3213,23 @@
       "bbi_ceiling": 102.8,
       "floor": 9.9,
       "cv": 0.5339,
-      "bbi_value": 7.296
+      "bbi_value": 7.296,
+      "bbi_pool": -0.02837,
+      "bbi_dfs": -0.02837,
+      "p_win": 0.00395,
+      "value": 7.296,
+      "prob_win": 0.00395,
+      "pool": {
+        "composite": -0.02837,
+        "rank": 71
+      },
+      "dfs": {
+        "composite": -0.02837,
+        "rank": 71,
+        "ceiling": 102.8,
+        "floor": 9.9,
+        "cv": 0.5339
+      }
     },
     {
       "rank": 72,
@@ -2122,7 +3258,23 @@
       "bbi_ceiling": 103.9,
       "floor": 10.5,
       "cv": 0.5288,
-      "bbi_value": 7.404
+      "bbi_value": 7.404,
+      "bbi_pool": -0.03998,
+      "bbi_dfs": -0.03998,
+      "p_win": 0.004083,
+      "value": 7.404,
+      "prob_win": 0.004083,
+      "pool": {
+        "composite": -0.03998,
+        "rank": 72
+      },
+      "dfs": {
+        "composite": -0.03998,
+        "rank": 72,
+        "ceiling": 103.9,
+        "floor": 10.5,
+        "cv": 0.5288
+      }
     },
     {
       "rank": 73,
@@ -2151,7 +3303,23 @@
       "bbi_ceiling": 109.9,
       "floor": 12.1,
       "cv": 0.5171,
-      "bbi_value": 7.698
+      "bbi_value": 7.698,
+      "bbi_pool": -0.04071,
+      "bbi_dfs": -0.04071,
+      "p_win": 0.00635,
+      "value": 7.698,
+      "prob_win": 0.00635,
+      "pool": {
+        "composite": -0.04071,
+        "rank": 73
+      },
+      "dfs": {
+        "composite": -0.04071,
+        "rank": 73,
+        "ceiling": 109.9,
+        "floor": 12.1,
+        "cv": 0.5171
+      }
     },
     {
       "rank": 74,
@@ -2180,7 +3348,23 @@
       "bbi_ceiling": 104.4,
       "floor": 10.5,
       "cv": 0.5292,
-      "bbi_value": 7.553
+      "bbi_value": 7.553,
+      "bbi_pool": -0.0436,
+      "bbi_dfs": -0.0436,
+      "p_win": 0.00415,
+      "value": 7.553,
+      "prob_win": 0.00415,
+      "pool": {
+        "composite": -0.0436,
+        "rank": 74
+      },
+      "dfs": {
+        "composite": -0.0436,
+        "rank": 74,
+        "ceiling": 104.4,
+        "floor": 10.5,
+        "cv": 0.5292
+      }
     },
     {
       "rank": 75,
@@ -2209,7 +3393,23 @@
       "bbi_ceiling": 98.3,
       "floor": 9.6,
       "cv": 0.5324,
-      "bbi_value": 7.303
+      "bbi_value": 7.303,
+      "bbi_pool": -0.04634,
+      "bbi_dfs": -0.04634,
+      "p_win": 0.00225,
+      "value": 7.303,
+      "prob_win": 0.00225,
+      "pool": {
+        "composite": -0.04634,
+        "rank": 75
+      },
+      "dfs": {
+        "composite": -0.04634,
+        "rank": 75,
+        "ceiling": 98.3,
+        "floor": 9.6,
+        "cv": 0.5324
+      }
     },
     {
       "rank": 76,
@@ -2238,7 +3438,23 @@
       "bbi_ceiling": 111.5,
       "floor": 13.0,
       "cv": 0.5096,
-      "bbi_value": 7.44
+      "bbi_value": 7.44,
+      "bbi_pool": -0.04678,
+      "bbi_dfs": -0.04678,
+      "p_win": 0.0085,
+      "value": 7.44,
+      "prob_win": 0.0085,
+      "pool": {
+        "composite": -0.04678,
+        "rank": 76
+      },
+      "dfs": {
+        "composite": -0.04678,
+        "rank": 76,
+        "ceiling": 111.5,
+        "floor": 13.0,
+        "cv": 0.5096
+      }
     },
     {
       "rank": 77,
@@ -2267,7 +3483,23 @@
       "bbi_ceiling": 102.2,
       "floor": 9.4,
       "cv": 0.5391,
-      "bbi_value": 7.422
+      "bbi_value": 7.422,
+      "bbi_pool": -0.05635,
+      "bbi_dfs": -0.05635,
+      "p_win": 0.003733,
+      "value": 7.422,
+      "prob_win": 0.003733,
+      "pool": {
+        "composite": -0.05635,
+        "rank": 77
+      },
+      "dfs": {
+        "composite": -0.05635,
+        "rank": 77,
+        "ceiling": 102.2,
+        "floor": 9.4,
+        "cv": 0.5391
+      }
     },
     {
       "rank": 78,
@@ -2296,7 +3528,23 @@
       "bbi_ceiling": 100.4,
       "floor": 9.9,
       "cv": 0.5313,
-      "bbi_value": 7.334
+      "bbi_value": 7.334,
+      "bbi_pool": -0.0824,
+      "bbi_dfs": -0.0824,
+      "p_win": 0.002767,
+      "value": 7.334,
+      "prob_win": 0.002767,
+      "pool": {
+        "composite": -0.0824,
+        "rank": 78
+      },
+      "dfs": {
+        "composite": -0.0824,
+        "rank": 78,
+        "ceiling": 100.4,
+        "floor": 9.9,
+        "cv": 0.5313
+      }
     },
     {
       "rank": 79,
@@ -2325,7 +3573,23 @@
       "bbi_ceiling": 92.9,
       "floor": 6.8,
       "cv": 0.5639,
-      "bbi_value": 6.883
+      "bbi_value": 6.883,
+      "bbi_pool": -0.08831,
+      "bbi_dfs": -0.08831,
+      "p_win": 0.001533,
+      "value": 6.883,
+      "prob_win": 0.001533,
+      "pool": {
+        "composite": -0.08831,
+        "rank": 79
+      },
+      "dfs": {
+        "composite": -0.08831,
+        "rank": 79,
+        "ceiling": 92.9,
+        "floor": 6.8,
+        "cv": 0.5639
+      }
     },
     {
       "rank": 80,
@@ -2354,7 +3618,23 @@
       "bbi_ceiling": 99.1,
       "floor": 8.5,
       "cv": 0.5477,
-      "bbi_value": 7.347
+      "bbi_value": 7.347,
+      "bbi_pool": -0.08978,
+      "bbi_dfs": -0.08978,
+      "p_win": 0.002867,
+      "value": 7.347,
+      "prob_win": 0.002867,
+      "pool": {
+        "composite": -0.08978,
+        "rank": 80
+      },
+      "dfs": {
+        "composite": -0.08978,
+        "rank": 80,
+        "ceiling": 99.1,
+        "floor": 8.5,
+        "cv": 0.5477
+      }
     },
     {
       "rank": 81,
@@ -2383,7 +3663,23 @@
       "bbi_ceiling": 96.3,
       "floor": 7.6,
       "cv": 0.5556,
-      "bbi_value": 6.869
+      "bbi_value": 6.869,
+      "bbi_pool": -0.09077,
+      "bbi_dfs": -0.09077,
+      "p_win": 0.002283,
+      "value": 6.869,
+      "prob_win": 0.002283,
+      "pool": {
+        "composite": -0.09077,
+        "rank": 81
+      },
+      "dfs": {
+        "composite": -0.09077,
+        "rank": 81,
+        "ceiling": 96.3,
+        "floor": 7.6,
+        "cv": 0.5556
+      }
     },
     {
       "rank": 82,
@@ -2412,7 +3708,23 @@
       "bbi_ceiling": 92.8,
       "floor": 7.4,
       "cv": 0.5555,
-      "bbi_value": 6.823
+      "bbi_value": 6.823,
+      "bbi_pool": -0.09697,
+      "bbi_dfs": -0.09697,
+      "p_win": 0.001533,
+      "value": 6.823,
+      "prob_win": 0.001533,
+      "pool": {
+        "composite": -0.09697,
+        "rank": 82
+      },
+      "dfs": {
+        "composite": -0.09697,
+        "rank": 82,
+        "ceiling": 92.8,
+        "floor": 7.4,
+        "cv": 0.5555
+      }
     },
     {
       "rank": 83,
@@ -2441,7 +3753,23 @@
       "bbi_ceiling": 102.1,
       "floor": 9.8,
       "cv": 0.5351,
-      "bbi_value": 7.314
+      "bbi_value": 7.314,
+      "bbi_pool": -0.09955,
+      "bbi_dfs": -0.09955,
+      "p_win": 0.003317,
+      "value": 7.314,
+      "prob_win": 0.003317,
+      "pool": {
+        "composite": -0.09955,
+        "rank": 83
+      },
+      "dfs": {
+        "composite": -0.09955,
+        "rank": 83,
+        "ceiling": 102.1,
+        "floor": 9.8,
+        "cv": 0.5351
+      }
     },
     {
       "rank": 84,
@@ -2470,7 +3798,23 @@
       "bbi_ceiling": 89.9,
       "floor": 5.9,
       "cv": 0.5729,
-      "bbi_value": 6.707
+      "bbi_value": 6.707,
+      "bbi_pool": -0.10471,
+      "bbi_dfs": -0.10471,
+      "p_win": 0.00115,
+      "value": 6.707,
+      "prob_win": 0.00115,
+      "pool": {
+        "composite": -0.10471,
+        "rank": 84
+      },
+      "dfs": {
+        "composite": -0.10471,
+        "rank": 84,
+        "ceiling": 89.9,
+        "floor": 5.9,
+        "cv": 0.5729
+      }
     },
     {
       "rank": 85,
@@ -2499,7 +3843,23 @@
       "bbi_ceiling": 100.0,
       "floor": 9.4,
       "cv": 0.5374,
-      "bbi_value": 7.245
+      "bbi_value": 7.245,
+      "bbi_pool": -0.11592,
+      "bbi_dfs": -0.11592,
+      "p_win": 0.003017,
+      "value": 7.245,
+      "prob_win": 0.003017,
+      "pool": {
+        "composite": -0.11592,
+        "rank": 85
+      },
+      "dfs": {
+        "composite": -0.11592,
+        "rank": 85,
+        "ceiling": 100.0,
+        "floor": 9.4,
+        "cv": 0.5374
+      }
     },
     {
       "rank": 86,
@@ -2528,7 +3888,23 @@
       "bbi_ceiling": 105.7,
       "floor": 10.2,
       "cv": 0.5344,
-      "bbi_value": 7.681
+      "bbi_value": 7.681,
+      "bbi_pool": -0.12037,
+      "bbi_dfs": -0.12037,
+      "p_win": 0.00465,
+      "value": 7.681,
+      "prob_win": 0.00465,
+      "pool": {
+        "composite": -0.12037,
+        "rank": 86
+      },
+      "dfs": {
+        "composite": -0.12037,
+        "rank": 86,
+        "ceiling": 105.7,
+        "floor": 10.2,
+        "cv": 0.5344
+      }
     },
     {
       "rank": 87,
@@ -2557,7 +3933,23 @@
       "bbi_ceiling": 88.3,
       "floor": 6.2,
       "cv": 0.5676,
-      "bbi_value": 6.607
+      "bbi_value": 6.607,
+      "bbi_pool": -0.1226,
+      "bbi_dfs": -0.1226,
+      "p_win": 0.0009,
+      "value": 6.607,
+      "prob_win": 0.0009,
+      "pool": {
+        "composite": -0.1226,
+        "rank": 87
+      },
+      "dfs": {
+        "composite": -0.1226,
+        "rank": 87,
+        "ceiling": 88.3,
+        "floor": 6.2,
+        "cv": 0.5676
+      }
     },
     {
       "rank": 88,
@@ -2586,7 +3978,23 @@
       "bbi_ceiling": 98.9,
       "floor": 8.7,
       "cv": 0.5448,
-      "bbi_value": 7.006
+      "bbi_value": 7.006,
+      "bbi_pool": -0.12456,
+      "bbi_dfs": -0.12456,
+      "p_win": 0.002467,
+      "value": 7.006,
+      "prob_win": 0.002467,
+      "pool": {
+        "composite": -0.12456,
+        "rank": 88
+      },
+      "dfs": {
+        "composite": -0.12456,
+        "rank": 88,
+        "ceiling": 98.9,
+        "floor": 8.7,
+        "cv": 0.5448
+      }
     },
     {
       "rank": 89,
@@ -2615,7 +4023,23 @@
       "bbi_ceiling": 102.3,
       "floor": 10.4,
       "cv": 0.5288,
-      "bbi_value": 6.948
+      "bbi_value": 6.948,
+      "bbi_pool": -0.12642,
+      "bbi_dfs": -0.12642,
+      "p_win": 0.004083,
+      "value": 6.948,
+      "prob_win": 0.004083,
+      "pool": {
+        "composite": -0.12642,
+        "rank": 89
+      },
+      "dfs": {
+        "composite": -0.12642,
+        "rank": 89,
+        "ceiling": 102.3,
+        "floor": 10.4,
+        "cv": 0.5288
+      }
     },
     {
       "rank": 90,
@@ -2644,7 +4068,23 @@
       "bbi_ceiling": 110.0,
       "floor": 12.8,
       "cv": 0.5112,
-      "bbi_value": 7.199
+      "bbi_value": 7.199,
+      "bbi_pool": -0.13251,
+      "bbi_dfs": -0.13251,
+      "p_win": 0.007916,
+      "value": 7.199,
+      "prob_win": 0.007916,
+      "pool": {
+        "composite": -0.13251,
+        "rank": 90
+      },
+      "dfs": {
+        "composite": -0.13251,
+        "rank": 90,
+        "ceiling": 110.0,
+        "floor": 12.8,
+        "cv": 0.5112
+      }
     },
     {
       "rank": 91,
@@ -2673,7 +4113,23 @@
       "bbi_ceiling": 87.2,
       "floor": 4.5,
       "cv": 0.5919,
-      "bbi_value": 6.474
+      "bbi_value": 6.474,
+      "bbi_pool": -0.13664,
+      "bbi_dfs": -0.13664,
+      "p_win": 0.000717,
+      "value": 6.474,
+      "prob_win": 0.000717,
+      "pool": {
+        "composite": -0.13664,
+        "rank": 91
+      },
+      "dfs": {
+        "composite": -0.13664,
+        "rank": 91,
+        "ceiling": 87.2,
+        "floor": 4.5,
+        "cv": 0.5919
+      }
     },
     {
       "rank": 92,
@@ -2702,7 +4158,23 @@
       "bbi_ceiling": 86.3,
       "floor": 4.6,
       "cv": 0.5903,
-      "bbi_value": 6.313
+      "bbi_value": 6.313,
+      "bbi_pool": -0.13665,
+      "bbi_dfs": -0.13665,
+      "p_win": 0.000767,
+      "value": 6.313,
+      "prob_win": 0.000767,
+      "pool": {
+        "composite": -0.13665,
+        "rank": 92
+      },
+      "dfs": {
+        "composite": -0.13665,
+        "rank": 92,
+        "ceiling": 86.3,
+        "floor": 4.6,
+        "cv": 0.5903
+      }
     },
     {
       "rank": 93,
@@ -2731,7 +4203,23 @@
       "bbi_ceiling": 89.1,
       "floor": 5.0,
       "cv": 0.5856,
-      "bbi_value": 6.34
+      "bbi_value": 6.34,
+      "bbi_pool": -0.13938,
+      "bbi_dfs": -0.13938,
+      "p_win": 0.001333,
+      "value": 6.34,
+      "prob_win": 0.001333,
+      "pool": {
+        "composite": -0.13938,
+        "rank": 93
+      },
+      "dfs": {
+        "composite": -0.13938,
+        "rank": 93,
+        "ceiling": 89.1,
+        "floor": 5.0,
+        "cv": 0.5856
+      }
     },
     {
       "rank": 94,
@@ -2760,7 +4248,23 @@
       "bbi_ceiling": 96.0,
       "floor": 8.6,
       "cv": 0.5427,
-      "bbi_value": 7.124
+      "bbi_value": 7.124,
+      "bbi_pool": -0.14276,
+      "bbi_dfs": -0.14276,
+      "p_win": 0.0021,
+      "value": 7.124,
+      "prob_win": 0.0021,
+      "pool": {
+        "composite": -0.14276,
+        "rank": 94
+      },
+      "dfs": {
+        "composite": -0.14276,
+        "rank": 94,
+        "ceiling": 96.0,
+        "floor": 8.6,
+        "cv": 0.5427
+      }
     },
     {
       "rank": 95,
@@ -2789,7 +4293,23 @@
       "bbi_ceiling": 101.2,
       "floor": 9.7,
       "cv": 0.5359,
-      "bbi_value": 7.012
+      "bbi_value": 7.012,
+      "bbi_pool": -0.14325,
+      "bbi_dfs": -0.14325,
+      "p_win": 0.003317,
+      "value": 7.012,
+      "prob_win": 0.003317,
+      "pool": {
+        "composite": -0.14325,
+        "rank": 95
+      },
+      "dfs": {
+        "composite": -0.14325,
+        "rank": 95,
+        "ceiling": 101.2,
+        "floor": 9.7,
+        "cv": 0.5359
+      }
     },
     {
       "rank": 96,
@@ -2818,7 +4338,23 @@
       "bbi_ceiling": 98.8,
       "floor": 8.8,
       "cv": 0.5436,
-      "bbi_value": 7.101
+      "bbi_value": 7.101,
+      "bbi_pool": -0.14575,
+      "bbi_dfs": -0.14575,
+      "p_win": 0.002533,
+      "value": 7.101,
+      "prob_win": 0.002533,
+      "pool": {
+        "composite": -0.14575,
+        "rank": 96
+      },
+      "dfs": {
+        "composite": -0.14575,
+        "rank": 96,
+        "ceiling": 98.8,
+        "floor": 8.8,
+        "cv": 0.5436
+      }
     },
     {
       "rank": 97,
@@ -2847,7 +4383,23 @@
       "bbi_ceiling": 59.1,
       "floor": 0,
       "cv": 1.0,
-      "bbi_value": -0.899
+      "bbi_value": -0.899,
+      "bbi_pool": -0.14979,
+      "bbi_dfs": -0.14979,
+      "p_win": 0.002283,
+      "value": -0.899,
+      "prob_win": 0.002283,
+      "pool": {
+        "composite": -0.14979,
+        "rank": 97
+      },
+      "dfs": {
+        "composite": -0.14979,
+        "rank": 97,
+        "ceiling": 59.1,
+        "floor": 0,
+        "cv": 1.0
+      }
     },
     {
       "rank": 98,
@@ -2876,7 +4428,23 @@
       "bbi_ceiling": 95.6,
       "floor": 8.3,
       "cv": 0.5471,
-      "bbi_value": 6.945
+      "bbi_value": 6.945,
+      "bbi_pool": -0.15986,
+      "bbi_dfs": -0.15986,
+      "p_win": 0.002083,
+      "value": 6.945,
+      "prob_win": 0.002083,
+      "pool": {
+        "composite": -0.15986,
+        "rank": 98
+      },
+      "dfs": {
+        "composite": -0.15986,
+        "rank": 98,
+        "ceiling": 95.6,
+        "floor": 8.3,
+        "cv": 0.5471
+      }
     },
     {
       "rank": 99,
@@ -2905,7 +4473,23 @@
       "bbi_ceiling": 81.0,
       "floor": 4.7,
       "cv": 0.5846,
-      "bbi_value": 6.135
+      "bbi_value": 6.135,
+      "bbi_pool": -0.16811,
+      "bbi_dfs": -0.16811,
+      "p_win": 0.000383,
+      "value": 6.135,
+      "prob_win": 0.000383,
+      "pool": {
+        "composite": -0.16811,
+        "rank": 99
+      },
+      "dfs": {
+        "composite": -0.16811,
+        "rank": 99,
+        "ceiling": 81.0,
+        "floor": 4.7,
+        "cv": 0.5846
+      }
     },
     {
       "rank": 100,
@@ -2934,7 +4518,23 @@
       "bbi_ceiling": 93.4,
       "floor": 7.7,
       "cv": 0.552,
-      "bbi_value": 6.955
+      "bbi_value": 6.955,
+      "bbi_pool": -0.17543,
+      "bbi_dfs": -0.17543,
+      "p_win": 0.00155,
+      "value": 6.955,
+      "prob_win": 0.00155,
+      "pool": {
+        "composite": -0.17543,
+        "rank": 100
+      },
+      "dfs": {
+        "composite": -0.17543,
+        "rank": 100,
+        "ceiling": 93.4,
+        "floor": 7.7,
+        "cv": 0.552
+      }
     },
     {
       "rank": 101,
@@ -2963,7 +4563,23 @@
       "bbi_ceiling": 90.0,
       "floor": 6.2,
       "cv": 0.569,
-      "bbi_value": 6.592
+      "bbi_value": 6.592,
+      "bbi_pool": -0.18152,
+      "bbi_dfs": -0.18152,
+      "p_win": 0.001083,
+      "value": 6.592,
+      "prob_win": 0.001083,
+      "pool": {
+        "composite": -0.18152,
+        "rank": 101
+      },
+      "dfs": {
+        "composite": -0.18152,
+        "rank": 101,
+        "ceiling": 90.0,
+        "floor": 6.2,
+        "cv": 0.569
+      }
     },
     {
       "rank": 102,
@@ -2992,7 +4608,23 @@
       "bbi_ceiling": 94.5,
       "floor": 7.4,
       "cv": 0.5578,
-      "bbi_value": 7.111
+      "bbi_value": 7.111,
+      "bbi_pool": -0.18186,
+      "bbi_dfs": -0.18186,
+      "p_win": 0.001967,
+      "value": 7.111,
+      "prob_win": 0.001967,
+      "pool": {
+        "composite": -0.18186,
+        "rank": 102
+      },
+      "dfs": {
+        "composite": -0.18186,
+        "rank": 102,
+        "ceiling": 94.5,
+        "floor": 7.4,
+        "cv": 0.5578
+      }
     },
     {
       "rank": 103,
@@ -3021,7 +4653,23 @@
       "bbi_ceiling": 90.5,
       "floor": 6.4,
       "cv": 0.5677,
-      "bbi_value": 6.524
+      "bbi_value": 6.524,
+      "bbi_pool": -0.19557,
+      "bbi_dfs": -0.19557,
+      "p_win": 0.00135,
+      "value": 6.524,
+      "prob_win": 0.00135,
+      "pool": {
+        "composite": -0.19557,
+        "rank": 103
+      },
+      "dfs": {
+        "composite": -0.19557,
+        "rank": 103,
+        "ceiling": 90.5,
+        "floor": 6.4,
+        "cv": 0.5677
+      }
     },
     {
       "rank": 104,
@@ -3050,7 +4698,23 @@
       "bbi_ceiling": 92.8,
       "floor": 8.3,
       "cv": 0.5439,
-      "bbi_value": 6.957
+      "bbi_value": 6.957,
+      "bbi_pool": -0.19635,
+      "bbi_dfs": -0.19635,
+      "p_win": 0.001083,
+      "value": 6.957,
+      "prob_win": 0.001083,
+      "pool": {
+        "composite": -0.19635,
+        "rank": 104
+      },
+      "dfs": {
+        "composite": -0.19635,
+        "rank": 104,
+        "ceiling": 92.8,
+        "floor": 8.3,
+        "cv": 0.5439
+      }
     },
     {
       "rank": 105,
@@ -3079,7 +4743,23 @@
       "bbi_ceiling": 102.1,
       "floor": 11.6,
       "cv": 0.515,
-      "bbi_value": 7.414
+      "bbi_value": 7.414,
+      "bbi_pool": -0.20287,
+      "bbi_dfs": -0.20287,
+      "p_win": 0.0036,
+      "value": 7.414,
+      "prob_win": 0.0036,
+      "pool": {
+        "composite": -0.20287,
+        "rank": 105
+      },
+      "dfs": {
+        "composite": -0.20287,
+        "rank": 105,
+        "ceiling": 102.1,
+        "floor": 11.6,
+        "cv": 0.515
+      }
     },
     {
       "rank": 106,
@@ -3108,7 +4788,23 @@
       "bbi_ceiling": 92.7,
       "floor": 6.8,
       "cv": 0.5639,
-      "bbi_value": 6.606
+      "bbi_value": 6.606,
+      "bbi_pool": -0.20327,
+      "bbi_dfs": -0.20327,
+      "p_win": 0.002067,
+      "value": 6.606,
+      "prob_win": 0.002067,
+      "pool": {
+        "composite": -0.20327,
+        "rank": 106
+      },
+      "dfs": {
+        "composite": -0.20327,
+        "rank": 106,
+        "ceiling": 92.7,
+        "floor": 6.8,
+        "cv": 0.5639
+      }
     },
     {
       "rank": 107,
@@ -3137,7 +4833,23 @@
       "bbi_ceiling": 95.0,
       "floor": 7.2,
       "cv": 0.5605,
-      "bbi_value": 6.788
+      "bbi_value": 6.788,
+      "bbi_pool": -0.21143,
+      "bbi_dfs": -0.21143,
+      "p_win": 0.0019,
+      "value": 6.788,
+      "prob_win": 0.0019,
+      "pool": {
+        "composite": -0.21143,
+        "rank": 107
+      },
+      "dfs": {
+        "composite": -0.21143,
+        "rank": 107,
+        "ceiling": 95.0,
+        "floor": 7.2,
+        "cv": 0.5605
+      }
     },
     {
       "rank": 108,
@@ -3166,7 +4878,23 @@
       "bbi_ceiling": 102.2,
       "floor": 10.4,
       "cv": 0.5284,
-      "bbi_value": 7.099
+      "bbi_value": 7.099,
+      "bbi_pool": -0.22235,
+      "bbi_dfs": -0.22235,
+      "p_win": 0.004133,
+      "value": 7.099,
+      "prob_win": 0.004133,
+      "pool": {
+        "composite": -0.22235,
+        "rank": 108
+      },
+      "dfs": {
+        "composite": -0.22235,
+        "rank": 108,
+        "ceiling": 102.2,
+        "floor": 10.4,
+        "cv": 0.5284
+      }
     },
     {
       "rank": 109,
@@ -3195,7 +4923,23 @@
       "bbi_ceiling": 88.0,
       "floor": 4.6,
       "cv": 0.5925,
-      "bbi_value": 6.267
+      "bbi_value": 6.267,
+      "bbi_pool": -0.24955,
+      "bbi_dfs": -0.24955,
+      "p_win": 0.00085,
+      "value": 6.267,
+      "prob_win": 0.00085,
+      "pool": {
+        "composite": -0.24955,
+        "rank": 109
+      },
+      "dfs": {
+        "composite": -0.24955,
+        "rank": 109,
+        "ceiling": 88.0,
+        "floor": 4.6,
+        "cv": 0.5925
+      }
     },
     {
       "rank": 110,
@@ -3224,7 +4968,23 @@
       "bbi_ceiling": 73.8,
       "floor": 3.5,
       "cv": 0.5994,
-      "bbi_value": 5.456
+      "bbi_value": 5.456,
+      "bbi_pool": -0.25599,
+      "bbi_dfs": -0.25599,
+      "p_win": 0.00015,
+      "value": 5.456,
+      "prob_win": 0.00015,
+      "pool": {
+        "composite": -0.25599,
+        "rank": 110
+      },
+      "dfs": {
+        "composite": -0.25599,
+        "rank": 110,
+        "ceiling": 73.8,
+        "floor": 3.5,
+        "cv": 0.5994
+      }
     },
     {
       "rank": 111,
@@ -3253,7 +5013,23 @@
       "bbi_ceiling": 91.1,
       "floor": 6.5,
       "cv": 0.5677,
-      "bbi_value": 6.525
+      "bbi_value": 6.525,
+      "bbi_pool": -0.2886,
+      "bbi_dfs": -0.2886,
+      "p_win": 0.001483,
+      "value": 6.525,
+      "prob_win": 0.001483,
+      "pool": {
+        "composite": -0.2886,
+        "rank": 111
+      },
+      "dfs": {
+        "composite": -0.2886,
+        "rank": 111,
+        "ceiling": 91.1,
+        "floor": 6.5,
+        "cv": 0.5677
+      }
     },
     {
       "rank": 112,
@@ -3282,7 +5058,23 @@
       "bbi_ceiling": 91.7,
       "floor": 6.2,
       "cv": 0.5714,
-      "bbi_value": 6.641
+      "bbi_value": 6.641,
+      "bbi_pool": -0.29515,
+      "bbi_dfs": -0.29515,
+      "p_win": 0.00165,
+      "value": 6.641,
+      "prob_win": 0.00165,
+      "pool": {
+        "composite": -0.29515,
+        "rank": 112
+      },
+      "dfs": {
+        "composite": -0.29515,
+        "rank": 112,
+        "ceiling": 91.7,
+        "floor": 6.2,
+        "cv": 0.5714
+      }
     },
     {
       "rank": 113,
@@ -3311,7 +5103,23 @@
       "bbi_ceiling": 87.8,
       "floor": 5.4,
       "cv": 0.5802,
-      "bbi_value": 6.502
+      "bbi_value": 6.502,
+      "bbi_pool": -0.3014,
+      "bbi_dfs": -0.3014,
+      "p_win": 0.000917,
+      "value": 6.502,
+      "prob_win": 0.000917,
+      "pool": {
+        "composite": -0.3014,
+        "rank": 113
+      },
+      "dfs": {
+        "composite": -0.3014,
+        "rank": 113,
+        "ceiling": 87.8,
+        "floor": 5.4,
+        "cv": 0.5802
+      }
     },
     {
       "rank": 114,
@@ -3340,7 +5148,23 @@
       "bbi_ceiling": 84.7,
       "floor": 5.7,
       "cv": 0.5732,
-      "bbi_value": 6.405
+      "bbi_value": 6.405,
+      "bbi_pool": -0.31493,
+      "bbi_dfs": -0.31493,
+      "p_win": 0.000683,
+      "value": 6.405,
+      "prob_win": 0.000683,
+      "pool": {
+        "composite": -0.31493,
+        "rank": 114
+      },
+      "dfs": {
+        "composite": -0.31493,
+        "rank": 114,
+        "ceiling": 84.7,
+        "floor": 5.7,
+        "cv": 0.5732
+      }
     },
     {
       "rank": 115,
@@ -3369,7 +5193,23 @@
       "bbi_ceiling": 85.8,
       "floor": 5.8,
       "cv": 0.5717,
-      "bbi_value": 6.283
+      "bbi_value": 6.283,
+      "bbi_pool": -0.34131,
+      "bbi_dfs": -0.34131,
+      "p_win": 0.00075,
+      "value": 6.283,
+      "prob_win": 0.00075,
+      "pool": {
+        "composite": -0.34131,
+        "rank": 115
+      },
+      "dfs": {
+        "composite": -0.34131,
+        "rank": 115,
+        "ceiling": 85.8,
+        "floor": 5.8,
+        "cv": 0.5717
+      }
     },
     {
       "rank": 116,
@@ -3398,7 +5238,23 @@
       "bbi_ceiling": 58.7,
       "floor": 2.8,
       "cv": 0.5983,
-      "bbi_value": 4.269
+      "bbi_value": 4.269,
+      "bbi_pool": -0.34481,
+      "bbi_dfs": -0.34481,
+      "p_win": 3.3e-05,
+      "value": 4.269,
+      "prob_win": 3.3e-05,
+      "pool": {
+        "composite": -0.34481,
+        "rank": 116
+      },
+      "dfs": {
+        "composite": -0.34481,
+        "rank": 116,
+        "ceiling": 58.7,
+        "floor": 2.8,
+        "cv": 0.5983
+      }
     },
     {
       "rank": 117,
@@ -3427,7 +5283,23 @@
       "bbi_ceiling": 84.7,
       "floor": 4.8,
       "cv": 0.5859,
-      "bbi_value": 6.21
+      "bbi_value": 6.21,
+      "bbi_pool": -0.35158,
+      "bbi_dfs": -0.35158,
+      "p_win": 0.00065,
+      "value": 6.21,
+      "prob_win": 0.00065,
+      "pool": {
+        "composite": -0.35158,
+        "rank": 117
+      },
+      "dfs": {
+        "composite": -0.35158,
+        "rank": 117,
+        "ceiling": 84.7,
+        "floor": 4.8,
+        "cv": 0.5859
+      }
     },
     {
       "rank": 118,
@@ -3456,7 +5328,23 @@
       "bbi_ceiling": 95.9,
       "floor": 7.9,
       "cv": 0.5539,
-      "bbi_value": 6.727
+      "bbi_value": 6.727,
+      "bbi_pool": -0.3523,
+      "bbi_dfs": -0.3523,
+      "p_win": 0.0021,
+      "value": 6.727,
+      "prob_win": 0.0021,
+      "pool": {
+        "composite": -0.3523,
+        "rank": 118
+      },
+      "dfs": {
+        "composite": -0.3523,
+        "rank": 118,
+        "ceiling": 95.9,
+        "floor": 7.9,
+        "cv": 0.5539
+      }
     },
     {
       "rank": 119,
@@ -3485,7 +5373,23 @@
       "bbi_ceiling": 89.2,
       "floor": 7.2,
       "cv": 0.5557,
-      "bbi_value": 6.528
+      "bbi_value": 6.528,
+      "bbi_pool": -0.35606,
+      "bbi_dfs": -0.35606,
+      "p_win": 0.001367,
+      "value": 6.528,
+      "prob_win": 0.001367,
+      "pool": {
+        "composite": -0.35606,
+        "rank": 119
+      },
+      "dfs": {
+        "composite": -0.35606,
+        "rank": 119,
+        "ceiling": 89.2,
+        "floor": 7.2,
+        "cv": 0.5557
+      }
     },
     {
       "rank": 120,
@@ -3514,7 +5418,23 @@
       "bbi_ceiling": 82.3,
       "floor": 4.2,
       "cv": 0.594,
-      "bbi_value": 5.956
+      "bbi_value": 5.956,
+      "bbi_pool": -0.38596,
+      "bbi_dfs": -0.38596,
+      "p_win": 0.00045,
+      "value": 5.956,
+      "prob_win": 0.00045,
+      "pool": {
+        "composite": -0.38596,
+        "rank": 120
+      },
+      "dfs": {
+        "composite": -0.38596,
+        "rank": 120,
+        "ceiling": 82.3,
+        "floor": 4.2,
+        "cv": 0.594
+      }
     },
     {
       "rank": 121,
@@ -3543,7 +5463,23 @@
       "bbi_ceiling": 85.0,
       "floor": 4.1,
       "cv": 0.5972,
-      "bbi_value": 6.131
+      "bbi_value": 6.131,
+      "bbi_pool": -0.40822,
+      "bbi_dfs": -0.40822,
+      "p_win": 0.000667,
+      "value": 6.131,
+      "prob_win": 0.000667,
+      "pool": {
+        "composite": -0.40822,
+        "rank": 121
+      },
+      "dfs": {
+        "composite": -0.40822,
+        "rank": 121,
+        "ceiling": 85.0,
+        "floor": 4.1,
+        "cv": 0.5972
+      }
     },
     {
       "rank": 122,
@@ -3572,7 +5508,23 @@
       "bbi_ceiling": 84.5,
       "floor": 5.0,
       "cv": 0.5839,
-      "bbi_value": 6.074
+      "bbi_value": 6.074,
+      "bbi_pool": -0.41222,
+      "bbi_dfs": -0.41222,
+      "p_win": 0.0009,
+      "value": 6.074,
+      "prob_win": 0.0009,
+      "pool": {
+        "composite": -0.41222,
+        "rank": 122
+      },
+      "dfs": {
+        "composite": -0.41222,
+        "rank": 122,
+        "ceiling": 84.5,
+        "floor": 5.0,
+        "cv": 0.5839
+      }
     },
     {
       "rank": 123,
@@ -3601,7 +5553,23 @@
       "bbi_ceiling": 81.3,
       "floor": 5.0,
       "cv": 0.5803,
-      "bbi_value": 5.853
+      "bbi_value": 5.853,
+      "bbi_pool": -0.41696,
+      "bbi_dfs": -0.41696,
+      "p_win": 0.00065,
+      "value": 5.853,
+      "prob_win": 0.00065,
+      "pool": {
+        "composite": -0.41696,
+        "rank": 123
+      },
+      "dfs": {
+        "composite": -0.41696,
+        "rank": 123,
+        "ceiling": 81.3,
+        "floor": 5.0,
+        "cv": 0.5803
+      }
     },
     {
       "rank": 124,
@@ -3630,7 +5598,23 @@
       "bbi_ceiling": 79.6,
       "floor": 4.5,
       "cv": 0.5876,
-      "bbi_value": 5.747
+      "bbi_value": 5.747,
+      "bbi_pool": -0.47348,
+      "bbi_dfs": -0.47348,
+      "p_win": 0.000367,
+      "value": 5.747,
+      "prob_win": 0.000367,
+      "pool": {
+        "composite": -0.47348,
+        "rank": 124
+      },
+      "dfs": {
+        "composite": -0.47348,
+        "rank": 124,
+        "ceiling": 79.6,
+        "floor": 4.5,
+        "cv": 0.5876
+      }
     },
     {
       "rank": 125,
@@ -3659,7 +5643,23 @@
       "bbi_ceiling": 86.2,
       "floor": 5.2,
       "cv": 0.5823,
-      "bbi_value": 6.173
+      "bbi_value": 6.173,
+      "bbi_pool": -0.47925,
+      "bbi_dfs": -0.47925,
+      "p_win": 0.0009,
+      "value": 6.173,
+      "prob_win": 0.0009,
+      "pool": {
+        "composite": -0.47925,
+        "rank": 125
+      },
+      "dfs": {
+        "composite": -0.47925,
+        "rank": 125,
+        "ceiling": 86.2,
+        "floor": 5.2,
+        "cv": 0.5823
+      }
     },
     {
       "rank": 126,
@@ -3688,7 +5688,23 @@
       "bbi_ceiling": 84.0,
       "floor": 4.5,
       "cv": 0.5915,
-      "bbi_value": 6.142
+      "bbi_value": 6.142,
+      "bbi_pool": -0.49992,
+      "bbi_dfs": -0.49992,
+      "p_win": 0.00075,
+      "value": 6.142,
+      "prob_win": 0.00075,
+      "pool": {
+        "composite": -0.49992,
+        "rank": 126
+      },
+      "dfs": {
+        "composite": -0.49992,
+        "rank": 126,
+        "ceiling": 84.0,
+        "floor": 4.5,
+        "cv": 0.5915
+      }
     },
     {
       "rank": 127,
@@ -3717,7 +5733,23 @@
       "bbi_ceiling": 79.2,
       "floor": 4.6,
       "cv": 0.5861,
-      "bbi_value": 5.692
+      "bbi_value": 5.692,
+      "bbi_pool": -0.53945,
+      "bbi_dfs": -0.53945,
+      "p_win": 0.000533,
+      "value": 5.692,
+      "prob_win": 0.000533,
+      "pool": {
+        "composite": -0.53945,
+        "rank": 127
+      },
+      "dfs": {
+        "composite": -0.53945,
+        "rank": 127,
+        "ceiling": 79.2,
+        "floor": 4.6,
+        "cv": 0.5861
+      }
     },
     {
       "rank": 128,
@@ -3746,7 +5778,23 @@
       "bbi_ceiling": 98.1,
       "floor": 9.3,
       "cv": 0.5395,
-      "bbi_value": 6.996
+      "bbi_value": 6.996,
+      "bbi_pool": -0.54895,
+      "bbi_dfs": -0.54895,
+      "p_win": 0.003767,
+      "value": 6.996,
+      "prob_win": 0.003767,
+      "pool": {
+        "composite": -0.54895,
+        "rank": 128
+      },
+      "dfs": {
+        "composite": -0.54895,
+        "rank": 128,
+        "ceiling": 98.1,
+        "floor": 9.3,
+        "cv": 0.5395
+      }
     },
     {
       "rank": 129,
@@ -3775,7 +5823,23 @@
       "bbi_ceiling": 76.8,
       "floor": 3.4,
       "cv": 0.6046,
-      "bbi_value": 5.478
+      "bbi_value": 5.478,
+      "bbi_pool": -0.57499,
+      "bbi_dfs": -0.57499,
+      "p_win": 0.0004,
+      "value": 5.478,
+      "prob_win": 0.0004,
+      "pool": {
+        "composite": -0.57499,
+        "rank": 129
+      },
+      "dfs": {
+        "composite": -0.57499,
+        "rank": 129,
+        "ceiling": 76.8,
+        "floor": 3.4,
+        "cv": 0.6046
+      }
     },
     {
       "rank": 130,
@@ -3804,7 +5868,23 @@
       "bbi_ceiling": 56.3,
       "floor": 0,
       "cv": 1.0,
-      "bbi_value": -3.699
+      "bbi_value": -3.699,
+      "bbi_pool": -0.61652,
+      "bbi_dfs": -0.61652,
+      "p_win": 0.00155,
+      "value": -3.699,
+      "prob_win": 0.00155,
+      "pool": {
+        "composite": -0.61652,
+        "rank": 130
+      },
+      "dfs": {
+        "composite": -0.61652,
+        "rank": 130,
+        "ceiling": 56.3,
+        "floor": 0,
+        "cv": 1.0
+      }
     },
     {
       "rank": 131,
@@ -3833,7 +5913,23 @@
       "bbi_ceiling": 81.6,
       "floor": 5.1,
       "cv": 0.5803,
-      "bbi_value": 5.941
+      "bbi_value": 5.941,
+      "bbi_pool": -0.66196,
+      "bbi_dfs": -0.66196,
+      "p_win": 0.000733,
+      "value": 5.941,
+      "prob_win": 0.000733,
+      "pool": {
+        "composite": -0.66196,
+        "rank": 131
+      },
+      "dfs": {
+        "composite": -0.66196,
+        "rank": 131,
+        "ceiling": 81.6,
+        "floor": 5.1,
+        "cv": 0.5803
+      }
     },
     {
       "rank": 132,
@@ -3862,7 +5958,23 @@
       "bbi_ceiling": 61.4,
       "floor": 3.0,
       "cv": 0.6012,
-      "bbi_value": 4.084
+      "bbi_value": 4.084,
+      "bbi_pool": -1.02755,
+      "bbi_dfs": -1.02755,
+      "p_win": 6.7e-05,
+      "value": 4.084,
+      "prob_win": 6.7e-05,
+      "pool": {
+        "composite": -1.02755,
+        "rank": 132
+      },
+      "dfs": {
+        "composite": -1.02755,
+        "rank": 132,
+        "ceiling": 61.4,
+        "floor": 3.0,
+        "cv": 0.6012
+      }
     }
   ],
   "players": [
@@ -3893,7 +6005,23 @@
       "bbi_ceiling": 150.9,
       "floor": 32.3,
       "cv": 0.3997,
-      "bbi_value": 8.233
+      "bbi_value": 8.233,
+      "bbi_pool": 0.96134,
+      "bbi_dfs": 0.96134,
+      "p_win": 0.087796,
+      "value": 8.233,
+      "prob_win": 0.087796,
+      "pool": {
+        "composite": 0.96134,
+        "rank": 1
+      },
+      "dfs": {
+        "composite": 0.96134,
+        "rank": 1,
+        "ceiling": 150.9,
+        "floor": 32.3,
+        "cv": 0.3997
+      }
     },
     {
       "rank": 2,
@@ -3922,7 +6050,23 @@
       "bbi_ceiling": 136.2,
       "floor": 27.0,
       "cv": 0.4163,
-      "bbi_value": 7.491
+      "bbi_value": 7.491,
+      "bbi_pool": 0.76332,
+      "bbi_dfs": 0.76332,
+      "p_win": 0.042608,
+      "value": 7.491,
+      "prob_win": 0.042608,
+      "pool": {
+        "composite": 0.76332,
+        "rank": 2
+      },
+      "dfs": {
+        "composite": 0.76332,
+        "rank": 2,
+        "ceiling": 136.2,
+        "floor": 27.0,
+        "cv": 0.4163
+      }
     },
     {
       "rank": 3,
@@ -3951,7 +6095,23 @@
       "bbi_ceiling": 130.0,
       "floor": 22.9,
       "cv": 0.4391,
-      "bbi_value": 7.191
+      "bbi_value": 7.191,
+      "bbi_pool": 0.69287,
+      "bbi_dfs": 0.69287,
+      "p_win": 0.027847,
+      "value": 7.191,
+      "prob_win": 0.027847,
+      "pool": {
+        "composite": 0.69287,
+        "rank": 3
+      },
+      "dfs": {
+        "composite": 0.69287,
+        "rank": 3,
+        "ceiling": 130.0,
+        "floor": 22.9,
+        "cv": 0.4391
+      }
     },
     {
       "rank": 4,
@@ -3980,7 +6140,23 @@
       "bbi_ceiling": 131.6,
       "floor": 24.5,
       "cv": 0.4284,
-      "bbi_value": 7.737
+      "bbi_value": 7.737,
+      "bbi_pool": 0.67333,
+      "bbi_dfs": 0.67333,
+      "p_win": 0.031566,
+      "value": 7.737,
+      "prob_win": 0.031566,
+      "pool": {
+        "composite": 0.67333,
+        "rank": 4
+      },
+      "dfs": {
+        "composite": 0.67333,
+        "rank": 4,
+        "ceiling": 131.6,
+        "floor": 24.5,
+        "cv": 0.4284
+      }
     },
     {
       "rank": 5,
@@ -4009,7 +6185,23 @@
       "bbi_ceiling": 134.4,
       "floor": 22.0,
       "cv": 0.4522,
-      "bbi_value": 7.396
+      "bbi_value": 7.396,
+      "bbi_pool": 0.66984,
+      "bbi_dfs": 0.66984,
+      "p_win": 0.032082,
+      "value": 7.396,
+      "prob_win": 0.032082,
+      "pool": {
+        "composite": 0.66984,
+        "rank": 5
+      },
+      "dfs": {
+        "composite": 0.66984,
+        "rank": 5,
+        "ceiling": 134.4,
+        "floor": 22.0,
+        "cv": 0.4522
+      }
     },
     {
       "rank": 6,
@@ -4038,7 +6230,23 @@
       "bbi_ceiling": 125.1,
       "floor": 18.5,
       "cv": 0.4693,
-      "bbi_value": 7.466
+      "bbi_value": 7.466,
+      "bbi_pool": 0.65779,
+      "bbi_dfs": 0.65779,
+      "p_win": 0.017999,
+      "value": 7.466,
+      "prob_win": 0.017999,
+      "pool": {
+        "composite": 0.65779,
+        "rank": 6
+      },
+      "dfs": {
+        "composite": 0.65779,
+        "rank": 6,
+        "ceiling": 125.1,
+        "floor": 18.5,
+        "cv": 0.4693
+      }
     },
     {
       "rank": 7,
@@ -4067,7 +6275,23 @@
       "bbi_ceiling": 132.5,
       "floor": 22.6,
       "cv": 0.4451,
-      "bbi_value": 7.488
+      "bbi_value": 7.488,
+      "bbi_pool": 0.63836,
+      "bbi_dfs": 0.63836,
+      "p_win": 0.032103,
+      "value": 7.488,
+      "prob_win": 0.032103,
+      "pool": {
+        "composite": 0.63836,
+        "rank": 7
+      },
+      "dfs": {
+        "composite": 0.63836,
+        "rank": 7,
+        "ceiling": 132.5,
+        "floor": 22.6,
+        "cv": 0.4451
+      }
     },
     {
       "rank": 8,
@@ -4096,7 +6320,23 @@
       "bbi_ceiling": 126.7,
       "floor": 20.5,
       "cv": 0.455,
-      "bbi_value": 7.156
+      "bbi_value": 7.156,
+      "bbi_pool": 0.58132,
+      "bbi_dfs": 0.58132,
+      "p_win": 0.022831,
+      "value": 7.156,
+      "prob_win": 0.022831,
+      "pool": {
+        "composite": 0.58132,
+        "rank": 8
+      },
+      "dfs": {
+        "composite": 0.58132,
+        "rank": 8,
+        "ceiling": 126.7,
+        "floor": 20.5,
+        "cv": 0.455
+      }
     },
     {
       "rank": 9,
@@ -4125,7 +6365,23 @@
       "bbi_ceiling": 123.5,
       "floor": 19.8,
       "cv": 0.4568,
-      "bbi_value": 7.599
+      "bbi_value": 7.599,
+      "bbi_pool": 0.55198,
+      "bbi_dfs": 0.55198,
+      "p_win": 0.017618,
+      "value": 7.599,
+      "prob_win": 0.017618,
+      "pool": {
+        "composite": 0.55198,
+        "rank": 9
+      },
+      "dfs": {
+        "composite": 0.55198,
+        "rank": 9,
+        "ceiling": 123.5,
+        "floor": 19.8,
+        "cv": 0.4568
+      }
     },
     {
       "rank": 10,
@@ -4154,7 +6410,23 @@
       "bbi_ceiling": 129.6,
       "floor": 22.8,
       "cv": 0.4402,
-      "bbi_value": 7.648
+      "bbi_value": 7.648,
+      "bbi_pool": 0.51717,
+      "bbi_dfs": 0.51717,
+      "p_win": 0.02742,
+      "value": 7.648,
+      "prob_win": 0.02742,
+      "pool": {
+        "composite": 0.51717,
+        "rank": 10
+      },
+      "dfs": {
+        "composite": 0.51717,
+        "rank": 10,
+        "ceiling": 129.6,
+        "floor": 22.8,
+        "cv": 0.4402
+      }
     },
     {
       "rank": 11,
@@ -4183,7 +6455,23 @@
       "bbi_ceiling": 120.5,
       "floor": 17.9,
       "cv": 0.4695,
-      "bbi_value": 7.956
+      "bbi_value": 7.956,
+      "bbi_pool": 0.51447,
+      "bbi_dfs": 0.51447,
+      "p_win": 0.014484,
+      "value": 7.956,
+      "prob_win": 0.014484,
+      "pool": {
+        "composite": 0.51447,
+        "rank": 11
+      },
+      "dfs": {
+        "composite": 0.51447,
+        "rank": 11,
+        "ceiling": 120.5,
+        "floor": 17.9,
+        "cv": 0.4695
+      }
     },
     {
       "rank": 12,
@@ -4212,7 +6500,23 @@
       "bbi_ceiling": 124.9,
       "floor": 19.6,
       "cv": 0.4608,
-      "bbi_value": 7.817
+      "bbi_value": 7.817,
+      "bbi_pool": 0.50951,
+      "bbi_dfs": 0.50951,
+      "p_win": 0.019833,
+      "value": 7.817,
+      "prob_win": 0.019833,
+      "pool": {
+        "composite": 0.50951,
+        "rank": 12
+      },
+      "dfs": {
+        "composite": 0.50951,
+        "rank": 12,
+        "ceiling": 124.9,
+        "floor": 19.6,
+        "cv": 0.4608
+      }
     },
     {
       "rank": 13,
@@ -4241,7 +6545,23 @@
       "bbi_ceiling": 127.8,
       "floor": 21.9,
       "cv": 0.4455,
-      "bbi_value": 7.581
+      "bbi_value": 7.581,
+      "bbi_pool": 0.49477,
+      "bbi_dfs": 0.49477,
+      "p_win": 0.02505,
+      "value": 7.581,
+      "prob_win": 0.02505,
+      "pool": {
+        "composite": 0.49477,
+        "rank": 13
+      },
+      "dfs": {
+        "composite": 0.49477,
+        "rank": 13,
+        "ceiling": 127.8,
+        "floor": 21.9,
+        "cv": 0.4455
+      }
     },
     {
       "rank": 14,
@@ -4270,7 +6590,23 @@
       "bbi_ceiling": 122.1,
       "floor": 17.6,
       "cv": 0.4749,
-      "bbi_value": 7.45
+      "bbi_value": 7.45,
+      "bbi_pool": 0.49339,
+      "bbi_dfs": 0.49339,
+      "p_win": 0.014616,
+      "value": 7.45,
+      "prob_win": 0.014616,
+      "pool": {
+        "composite": 0.49339,
+        "rank": 14
+      },
+      "dfs": {
+        "composite": 0.49339,
+        "rank": 14,
+        "ceiling": 122.1,
+        "floor": 17.6,
+        "cv": 0.4749
+      }
     },
     {
       "rank": 15,
@@ -4299,7 +6635,23 @@
       "bbi_ceiling": 123.6,
       "floor": 18.7,
       "cv": 0.4666,
-      "bbi_value": 8.068
+      "bbi_value": 8.068,
+      "bbi_pool": 0.48632,
+      "bbi_dfs": 0.48632,
+      "p_win": 0.018365,
+      "value": 8.068,
+      "prob_win": 0.018365,
+      "pool": {
+        "composite": 0.48632,
+        "rank": 15
+      },
+      "dfs": {
+        "composite": 0.48632,
+        "rank": 15,
+        "ceiling": 123.6,
+        "floor": 18.7,
+        "cv": 0.4666
+      }
     },
     {
       "rank": 16,
@@ -4328,7 +6680,23 @@
       "bbi_ceiling": 120.2,
       "floor": 15.3,
       "cv": 0.4937,
-      "bbi_value": 7.366
+      "bbi_value": 7.366,
+      "bbi_pool": 0.47239,
+      "bbi_dfs": 0.47239,
+      "p_win": 0.013667,
+      "value": 7.366,
+      "prob_win": 0.013667,
+      "pool": {
+        "composite": 0.47239,
+        "rank": 16
+      },
+      "dfs": {
+        "composite": 0.47239,
+        "rank": 16,
+        "ceiling": 120.2,
+        "floor": 15.3,
+        "cv": 0.4937
+      }
     },
     {
       "rank": 17,
@@ -4357,7 +6725,23 @@
       "bbi_ceiling": 123.0,
       "floor": 17.9,
       "cv": 0.4737,
-      "bbi_value": 7.159
+      "bbi_value": 7.159,
+      "bbi_pool": 0.42818,
+      "bbi_dfs": 0.42818,
+      "p_win": 0.016932,
+      "value": 7.159,
+      "prob_win": 0.016932,
+      "pool": {
+        "composite": 0.42818,
+        "rank": 17
+      },
+      "dfs": {
+        "composite": 0.42818,
+        "rank": 17,
+        "ceiling": 123.0,
+        "floor": 17.9,
+        "cv": 0.4737
+      }
     },
     {
       "rank": 18,
@@ -4386,7 +6770,23 @@
       "bbi_ceiling": 120.6,
       "floor": 16.9,
       "cv": 0.4799,
-      "bbi_value": 7.932
+      "bbi_value": 7.932,
+      "bbi_pool": 0.39101,
+      "bbi_dfs": 0.39101,
+      "p_win": 0.013684,
+      "value": 7.932,
+      "prob_win": 0.013684,
+      "pool": {
+        "composite": 0.39101,
+        "rank": 18
+      },
+      "dfs": {
+        "composite": 0.39101,
+        "rank": 18,
+        "ceiling": 120.6,
+        "floor": 16.9,
+        "cv": 0.4799
+      }
     },
     {
       "rank": 19,
@@ -4415,7 +6815,23 @@
       "bbi_ceiling": 117.5,
       "floor": 17.5,
       "cv": 0.4701,
-      "bbi_value": 8.115
+      "bbi_value": 8.115,
+      "bbi_pool": 0.39092,
+      "bbi_dfs": 0.39092,
+      "p_win": 0.011183,
+      "value": 8.115,
+      "prob_win": 0.011183,
+      "pool": {
+        "composite": 0.39092,
+        "rank": 19
+      },
+      "dfs": {
+        "composite": 0.39092,
+        "rank": 19,
+        "ceiling": 117.5,
+        "floor": 17.5,
+        "cv": 0.4701
+      }
     },
     {
       "rank": 20,
@@ -4444,7 +6860,23 @@
       "bbi_ceiling": 120.0,
       "floor": 16.4,
       "cv": 0.484,
-      "bbi_value": 8.277
+      "bbi_value": 8.277,
+      "bbi_pool": 0.37419,
+      "bbi_dfs": 0.37419,
+      "p_win": 0.012234,
+      "value": 8.277,
+      "prob_win": 0.012234,
+      "pool": {
+        "composite": 0.37419,
+        "rank": 20
+      },
+      "dfs": {
+        "composite": 0.37419,
+        "rank": 20,
+        "ceiling": 120.0,
+        "floor": 16.4,
+        "cv": 0.484
+      }
     },
     {
       "rank": 21,
@@ -4473,7 +6905,23 @@
       "bbi_ceiling": 119.7,
       "floor": 17.0,
       "cv": 0.4781,
-      "bbi_value": 7.982
+      "bbi_value": 7.982,
+      "bbi_pool": 0.36543,
+      "bbi_dfs": 0.36543,
+      "p_win": 0.014217,
+      "value": 7.982,
+      "prob_win": 0.014217,
+      "pool": {
+        "composite": 0.36543,
+        "rank": 21
+      },
+      "dfs": {
+        "composite": 0.36543,
+        "rank": 21,
+        "ceiling": 119.7,
+        "floor": 17.0,
+        "cv": 0.4781
+      }
     },
     {
       "rank": 22,
@@ -4502,7 +6950,23 @@
       "bbi_ceiling": 117.3,
       "floor": 16.0,
       "cv": 0.4843,
-      "bbi_value": 7.979
+      "bbi_value": 7.979,
+      "bbi_pool": 0.35691,
+      "bbi_dfs": 0.35691,
+      "p_win": 0.010367,
+      "value": 7.979,
+      "prob_win": 0.010367,
+      "pool": {
+        "composite": 0.35691,
+        "rank": 22
+      },
+      "dfs": {
+        "composite": 0.35691,
+        "rank": 22,
+        "ceiling": 117.3,
+        "floor": 16.0,
+        "cv": 0.4843
+      }
     },
     {
       "rank": 23,
@@ -4531,7 +6995,23 @@
       "bbi_ceiling": 121.3,
       "floor": 17.6,
       "cv": 0.4754,
-      "bbi_value": 7.612
+      "bbi_value": 7.612,
+      "bbi_pool": 0.3349,
+      "bbi_dfs": 0.3349,
+      "p_win": 0.015333,
+      "value": 7.612,
+      "prob_win": 0.015333,
+      "pool": {
+        "composite": 0.3349,
+        "rank": 23
+      },
+      "dfs": {
+        "composite": 0.3349,
+        "rank": 23,
+        "ceiling": 121.3,
+        "floor": 17.6,
+        "cv": 0.4754
+      }
     },
     {
       "rank": 24,
@@ -4560,7 +7040,23 @@
       "bbi_ceiling": 118.9,
       "floor": 18.6,
       "cv": 0.463,
-      "bbi_value": 8.578
+      "bbi_value": 8.578,
+      "bbi_pool": 0.31215,
+      "bbi_dfs": 0.31215,
+      "p_win": 0.013767,
+      "value": 8.578,
+      "prob_win": 0.013767,
+      "pool": {
+        "composite": 0.31215,
+        "rank": 24
+      },
+      "dfs": {
+        "composite": 0.31215,
+        "rank": 24,
+        "ceiling": 118.9,
+        "floor": 18.6,
+        "cv": 0.463
+      }
     },
     {
       "rank": 25,
@@ -4589,7 +7085,23 @@
       "bbi_ceiling": 117.4,
       "floor": 16.7,
       "cv": 0.4786,
-      "bbi_value": 7.911
+      "bbi_value": 7.911,
+      "bbi_pool": 0.31053,
+      "bbi_dfs": 0.31053,
+      "p_win": 0.011199,
+      "value": 7.911,
+      "prob_win": 0.011199,
+      "pool": {
+        "composite": 0.31053,
+        "rank": 25
+      },
+      "dfs": {
+        "composite": 0.31053,
+        "rank": 25,
+        "ceiling": 117.4,
+        "floor": 16.7,
+        "cv": 0.4786
+      }
     },
     {
       "rank": 26,
@@ -4618,7 +7130,23 @@
       "bbi_ceiling": 124.1,
       "floor": 18.7,
       "cv": 0.4691,
-      "bbi_value": 7.379
+      "bbi_value": 7.379,
+      "bbi_pool": 0.30879,
+      "bbi_dfs": 0.30879,
+      "p_win": 0.018182,
+      "value": 7.379,
+      "prob_win": 0.018182,
+      "pool": {
+        "composite": 0.30879,
+        "rank": 26
+      },
+      "dfs": {
+        "composite": 0.30879,
+        "rank": 26,
+        "ceiling": 124.1,
+        "floor": 18.7,
+        "cv": 0.4691
+      }
     },
     {
       "rank": 27,
@@ -4647,7 +7175,23 @@
       "bbi_ceiling": 117.4,
       "floor": 16.4,
       "cv": 0.4812,
-      "bbi_value": 7.986
+      "bbi_value": 7.986,
+      "bbi_pool": 0.29697,
+      "bbi_dfs": 0.29697,
+      "p_win": 0.013583,
+      "value": 7.986,
+      "prob_win": 0.013583,
+      "pool": {
+        "composite": 0.29697,
+        "rank": 27
+      },
+      "dfs": {
+        "composite": 0.29697,
+        "rank": 27,
+        "ceiling": 117.4,
+        "floor": 16.4,
+        "cv": 0.4812
+      }
     },
     {
       "rank": 28,
@@ -4676,7 +7220,23 @@
       "bbi_ceiling": 118.1,
       "floor": 15.5,
       "cv": 0.4911,
-      "bbi_value": 8.168
+      "bbi_value": 8.168,
+      "bbi_pool": 0.29065,
+      "bbi_dfs": 0.29065,
+      "p_win": 0.011133,
+      "value": 8.168,
+      "prob_win": 0.011133,
+      "pool": {
+        "composite": 0.29065,
+        "rank": 28
+      },
+      "dfs": {
+        "composite": 0.29065,
+        "rank": 28,
+        "ceiling": 118.1,
+        "floor": 15.5,
+        "cv": 0.4911
+      }
     },
     {
       "rank": 29,
@@ -4705,7 +7265,23 @@
       "bbi_ceiling": 117.7,
       "floor": 15.1,
       "cv": 0.4943,
-      "bbi_value": 7.317
+      "bbi_value": 7.317,
+      "bbi_pool": 0.27982,
+      "bbi_dfs": 0.27982,
+      "p_win": 0.012933,
+      "value": 7.317,
+      "prob_win": 0.012933,
+      "pool": {
+        "composite": 0.27982,
+        "rank": 29
+      },
+      "dfs": {
+        "composite": 0.27982,
+        "rank": 29,
+        "ceiling": 117.7,
+        "floor": 15.1,
+        "cv": 0.4943
+      }
     },
     {
       "rank": 30,
@@ -4734,7 +7310,23 @@
       "bbi_ceiling": 113.7,
       "floor": 14.7,
       "cv": 0.4927,
-      "bbi_value": 8.059
+      "bbi_value": 8.059,
+      "bbi_pool": 0.25074,
+      "bbi_dfs": 0.25074,
+      "p_win": 0.0079,
+      "value": 8.059,
+      "prob_win": 0.0079,
+      "pool": {
+        "composite": 0.25074,
+        "rank": 30
+      },
+      "dfs": {
+        "composite": 0.25074,
+        "rank": 30,
+        "ceiling": 113.7,
+        "floor": 14.7,
+        "cv": 0.4927
+      }
     },
     {
       "rank": 31,
@@ -4763,7 +7355,23 @@
       "bbi_ceiling": 120.4,
       "floor": 16.1,
       "cv": 0.4886,
-      "bbi_value": 8.002
+      "bbi_value": 8.002,
+      "bbi_pool": 0.24395,
+      "bbi_dfs": 0.24395,
+      "p_win": 0.013801,
+      "value": 8.002,
+      "prob_win": 0.013801,
+      "pool": {
+        "composite": 0.24395,
+        "rank": 31
+      },
+      "dfs": {
+        "composite": 0.24395,
+        "rank": 31,
+        "ceiling": 120.4,
+        "floor": 16.1,
+        "cv": 0.4886
+      }
     },
     {
       "rank": 32,
@@ -4792,7 +7400,23 @@
       "bbi_ceiling": 111.7,
       "floor": 12.4,
       "cv": 0.5143,
-      "bbi_value": 7.741
+      "bbi_value": 7.741,
+      "bbi_pool": 0.22866,
+      "bbi_dfs": 0.22866,
+      "p_win": 0.007534,
+      "value": 7.741,
+      "prob_win": 0.007534,
+      "pool": {
+        "composite": 0.22866,
+        "rank": 32
+      },
+      "dfs": {
+        "composite": 0.22866,
+        "rank": 32,
+        "ceiling": 111.7,
+        "floor": 12.4,
+        "cv": 0.5143
+      }
     },
     {
       "rank": 33,
@@ -4821,7 +7445,23 @@
       "bbi_ceiling": 117.8,
       "floor": 16.6,
       "cv": 0.48,
-      "bbi_value": 7.789
+      "bbi_value": 7.789,
+      "bbi_pool": 0.22605,
+      "bbi_dfs": 0.22605,
+      "p_win": 0.011867,
+      "value": 7.789,
+      "prob_win": 0.011867,
+      "pool": {
+        "composite": 0.22605,
+        "rank": 33
+      },
+      "dfs": {
+        "composite": 0.22605,
+        "rank": 33,
+        "ceiling": 117.8,
+        "floor": 16.6,
+        "cv": 0.48
+      }
     },
     {
       "rank": 34,
@@ -4850,7 +7490,23 @@
       "bbi_ceiling": 112.1,
       "floor": 13.5,
       "cv": 0.5038,
-      "bbi_value": 7.739
+      "bbi_value": 7.739,
+      "bbi_pool": 0.22521,
+      "bbi_dfs": 0.22521,
+      "p_win": 0.0071,
+      "value": 7.739,
+      "prob_win": 0.0071,
+      "pool": {
+        "composite": 0.22521,
+        "rank": 34
+      },
+      "dfs": {
+        "composite": 0.22521,
+        "rank": 34,
+        "ceiling": 112.1,
+        "floor": 13.5,
+        "cv": 0.5038
+      }
     },
     {
       "rank": 35,
@@ -4879,7 +7535,23 @@
       "bbi_ceiling": 110.3,
       "floor": 12.9,
       "cv": 0.5073,
-      "bbi_value": 7.589
+      "bbi_value": 7.589,
+      "bbi_pool": 0.21481,
+      "bbi_dfs": 0.21481,
+      "p_win": 0.006417,
+      "value": 7.589,
+      "prob_win": 0.006417,
+      "pool": {
+        "composite": 0.21481,
+        "rank": 35
+      },
+      "dfs": {
+        "composite": 0.21481,
+        "rank": 35,
+        "ceiling": 110.3,
+        "floor": 12.9,
+        "cv": 0.5073
+      }
     },
     {
       "rank": 36,
@@ -4908,7 +7580,23 @@
       "bbi_ceiling": 120.4,
       "floor": 15.3,
       "cv": 0.4958,
-      "bbi_value": 7.733
+      "bbi_value": 7.733,
+      "bbi_pool": 0.20813,
+      "bbi_dfs": 0.20813,
+      "p_win": 0.014233,
+      "value": 7.733,
+      "prob_win": 0.014233,
+      "pool": {
+        "composite": 0.20813,
+        "rank": 36
+      },
+      "dfs": {
+        "composite": 0.20813,
+        "rank": 36,
+        "ceiling": 120.4,
+        "floor": 15.3,
+        "cv": 0.4958
+      }
     },
     {
       "rank": 37,
@@ -4937,7 +7625,23 @@
       "bbi_ceiling": 110.9,
       "floor": 12.0,
       "cv": 0.5184,
-      "bbi_value": 7.44
+      "bbi_value": 7.44,
+      "bbi_pool": 0.20275,
+      "bbi_dfs": 0.20275,
+      "p_win": 0.006517,
+      "value": 7.44,
+      "prob_win": 0.006517,
+      "pool": {
+        "composite": 0.20275,
+        "rank": 37
+      },
+      "dfs": {
+        "composite": 0.20275,
+        "rank": 37,
+        "ceiling": 110.9,
+        "floor": 12.0,
+        "cv": 0.5184
+      }
     },
     {
       "rank": 38,
@@ -4966,7 +7670,23 @@
       "bbi_ceiling": 111.2,
       "floor": 11.7,
       "cv": 0.5218,
-      "bbi_value": 7.34
+      "bbi_value": 7.34,
+      "bbi_pool": 0.19975,
+      "bbi_dfs": 0.19975,
+      "p_win": 0.006667,
+      "value": 7.34,
+      "prob_win": 0.006667,
+      "pool": {
+        "composite": 0.19975,
+        "rank": 38
+      },
+      "dfs": {
+        "composite": 0.19975,
+        "rank": 38,
+        "ceiling": 111.2,
+        "floor": 11.7,
+        "cv": 0.5218
+      }
     },
     {
       "rank": 39,
@@ -4995,7 +7715,23 @@
       "bbi_ceiling": 102.4,
       "floor": 8.9,
       "cv": 0.5448,
-      "bbi_value": 7.294
+      "bbi_value": 7.294,
+      "bbi_pool": 0.19646,
+      "bbi_dfs": 0.19646,
+      "p_win": 0.002517,
+      "value": 7.294,
+      "prob_win": 0.002517,
+      "pool": {
+        "composite": 0.19646,
+        "rank": 39
+      },
+      "dfs": {
+        "composite": 0.19646,
+        "rank": 39,
+        "ceiling": 102.4,
+        "floor": 8.9,
+        "cv": 0.5448
+      }
     },
     {
       "rank": 40,
@@ -5024,7 +7760,23 @@
       "bbi_ceiling": 114.7,
       "floor": 15.4,
       "cv": 0.4877,
-      "bbi_value": 8.144
+      "bbi_value": 8.144,
+      "bbi_pool": 0.18947,
+      "bbi_dfs": 0.18947,
+      "p_win": 0.009834,
+      "value": 8.144,
+      "prob_win": 0.009834,
+      "pool": {
+        "composite": 0.18947,
+        "rank": 40
+      },
+      "dfs": {
+        "composite": 0.18947,
+        "rank": 40,
+        "ceiling": 114.7,
+        "floor": 15.4,
+        "cv": 0.4877
+      }
     },
     {
       "rank": 41,
@@ -5053,7 +7805,23 @@
       "bbi_ceiling": 109.9,
       "floor": 11.2,
       "cv": 0.5265,
-      "bbi_value": 7.724
+      "bbi_value": 7.724,
+      "bbi_pool": 0.16981,
+      "bbi_dfs": 0.16981,
+      "p_win": 0.00715,
+      "value": 7.724,
+      "prob_win": 0.00715,
+      "pool": {
+        "composite": 0.16981,
+        "rank": 41
+      },
+      "dfs": {
+        "composite": 0.16981,
+        "rank": 41,
+        "ceiling": 109.9,
+        "floor": 11.2,
+        "cv": 0.5265
+      }
     },
     {
       "rank": 42,
@@ -5082,7 +7850,23 @@
       "bbi_ceiling": 103.2,
       "floor": 8.6,
       "cv": 0.5495,
-      "bbi_value": 7.306
+      "bbi_value": 7.306,
+      "bbi_pool": 0.16373,
+      "bbi_dfs": 0.16373,
+      "p_win": 0.003483,
+      "value": 7.306,
+      "prob_win": 0.003483,
+      "pool": {
+        "composite": 0.16373,
+        "rank": 42
+      },
+      "dfs": {
+        "composite": 0.16373,
+        "rank": 42,
+        "ceiling": 103.2,
+        "floor": 8.6,
+        "cv": 0.5495
+      }
     },
     {
       "rank": 43,
@@ -5111,7 +7895,23 @@
       "bbi_ceiling": 107.2,
       "floor": 10.8,
       "cv": 0.5271,
-      "bbi_value": 7.526
+      "bbi_value": 7.526,
+      "bbi_pool": 0.15478,
+      "bbi_dfs": 0.15478,
+      "p_win": 0.005433,
+      "value": 7.526,
+      "prob_win": 0.005433,
+      "pool": {
+        "composite": 0.15478,
+        "rank": 43
+      },
+      "dfs": {
+        "composite": 0.15478,
+        "rank": 43,
+        "ceiling": 107.2,
+        "floor": 10.8,
+        "cv": 0.5271
+      }
     },
     {
       "rank": 44,
@@ -5140,7 +7940,23 @@
       "bbi_ceiling": 109.0,
       "floor": 11.5,
       "cv": 0.5219,
-      "bbi_value": 7.466
+      "bbi_value": 7.466,
+      "bbi_pool": 0.14639,
+      "bbi_dfs": 0.14639,
+      "p_win": 0.0058,
+      "value": 7.466,
+      "prob_win": 0.0058,
+      "pool": {
+        "composite": 0.14639,
+        "rank": 44
+      },
+      "dfs": {
+        "composite": 0.14639,
+        "rank": 44,
+        "ceiling": 109.0,
+        "floor": 11.5,
+        "cv": 0.5219
+      }
     },
     {
       "rank": 45,
@@ -5169,7 +7985,23 @@
       "bbi_ceiling": 113.3,
       "floor": 13.8,
       "cv": 0.503,
-      "bbi_value": 7.794
+      "bbi_value": 7.794,
+      "bbi_pool": 0.13643,
+      "bbi_dfs": 0.13643,
+      "p_win": 0.00815,
+      "value": 7.794,
+      "prob_win": 0.00815,
+      "pool": {
+        "composite": 0.13643,
+        "rank": 45
+      },
+      "dfs": {
+        "composite": 0.13643,
+        "rank": 45,
+        "ceiling": 113.3,
+        "floor": 13.8,
+        "cv": 0.503
+      }
     },
     {
       "rank": 46,
@@ -5198,7 +8030,23 @@
       "bbi_ceiling": 115.7,
       "floor": 14.8,
       "cv": 0.4959,
-      "bbi_value": 7.31
+      "bbi_value": 7.31,
+      "bbi_pool": 0.13122,
+      "bbi_dfs": 0.13122,
+      "p_win": 0.009883,
+      "value": 7.31,
+      "prob_win": 0.009883,
+      "pool": {
+        "composite": 0.13122,
+        "rank": 46
+      },
+      "dfs": {
+        "composite": 0.13122,
+        "rank": 46,
+        "ceiling": 115.7,
+        "floor": 14.8,
+        "cv": 0.4959
+      }
     },
     {
       "rank": 47,
@@ -5227,7 +8075,23 @@
       "bbi_ceiling": 105.9,
       "floor": 11.3,
       "cv": 0.5201,
-      "bbi_value": 7.809
+      "bbi_value": 7.809,
+      "bbi_pool": 0.13116,
+      "bbi_dfs": 0.13116,
+      "p_win": 0.0042,
+      "value": 7.809,
+      "prob_win": 0.0042,
+      "pool": {
+        "composite": 0.13116,
+        "rank": 47
+      },
+      "dfs": {
+        "composite": 0.13116,
+        "rank": 47,
+        "ceiling": 105.9,
+        "floor": 11.3,
+        "cv": 0.5201
+      }
     },
     {
       "rank": 48,
@@ -5256,7 +8120,23 @@
       "bbi_ceiling": 108.4,
       "floor": 13.0,
       "cv": 0.5052,
-      "bbi_value": 7.759
+      "bbi_value": 7.759,
+      "bbi_pool": 0.1291,
+      "bbi_dfs": 0.1291,
+      "p_win": 0.005217,
+      "value": 7.759,
+      "prob_win": 0.005217,
+      "pool": {
+        "composite": 0.1291,
+        "rank": 48
+      },
+      "dfs": {
+        "composite": 0.1291,
+        "rank": 48,
+        "ceiling": 108.4,
+        "floor": 13.0,
+        "cv": 0.5052
+      }
     },
     {
       "rank": 49,
@@ -5285,7 +8165,23 @@
       "bbi_ceiling": 114.8,
       "floor": 15.7,
       "cv": 0.4862,
-      "bbi_value": 8.029
+      "bbi_value": 8.029,
+      "bbi_pool": 0.1283,
+      "bbi_dfs": 0.1283,
+      "p_win": 0.00955,
+      "value": 8.029,
+      "prob_win": 0.00955,
+      "pool": {
+        "composite": 0.1283,
+        "rank": 49
+      },
+      "dfs": {
+        "composite": 0.1283,
+        "rank": 49,
+        "ceiling": 114.8,
+        "floor": 15.7,
+        "cv": 0.4862
+      }
     },
     {
       "rank": 50,
@@ -5314,7 +8210,23 @@
       "bbi_ceiling": 110.0,
       "floor": 12.3,
       "cv": 0.5143,
-      "bbi_value": 7.686
+      "bbi_value": 7.686,
+      "bbi_pool": 0.11835,
+      "bbi_dfs": 0.11835,
+      "p_win": 0.0066,
+      "value": 7.686,
+      "prob_win": 0.0066,
+      "pool": {
+        "composite": 0.11835,
+        "rank": 50
+      },
+      "dfs": {
+        "composite": 0.11835,
+        "rank": 50,
+        "ceiling": 110.0,
+        "floor": 12.3,
+        "cv": 0.5143
+      }
     },
     {
       "rank": 51,
@@ -5343,7 +8255,23 @@
       "bbi_ceiling": 104.9,
       "floor": 10.2,
       "cv": 0.532,
-      "bbi_value": 7.42
+      "bbi_value": 7.42,
+      "bbi_pool": 0.11804,
+      "bbi_dfs": 0.11804,
+      "p_win": 0.003933,
+      "value": 7.42,
+      "prob_win": 0.003933,
+      "pool": {
+        "composite": 0.11804,
+        "rank": 51
+      },
+      "dfs": {
+        "composite": 0.11804,
+        "rank": 51,
+        "ceiling": 104.9,
+        "floor": 10.2,
+        "cv": 0.532
+      }
     },
     {
       "rank": 52,
@@ -5372,7 +8300,23 @@
       "bbi_ceiling": 110.9,
       "floor": 13.8,
       "cv": 0.5003,
-      "bbi_value": 8.084
+      "bbi_value": 8.084,
+      "bbi_pool": 0.10882,
+      "bbi_dfs": 0.10882,
+      "p_win": 0.007067,
+      "value": 8.084,
+      "prob_win": 0.007067,
+      "pool": {
+        "composite": 0.10882,
+        "rank": 52
+      },
+      "dfs": {
+        "composite": 0.10882,
+        "rank": 52,
+        "ceiling": 110.9,
+        "floor": 13.8,
+        "cv": 0.5003
+      }
     },
     {
       "rank": 53,
@@ -5401,7 +8345,23 @@
       "bbi_ceiling": 103.6,
       "floor": 10.6,
       "cv": 0.526,
-      "bbi_value": 7.815
+      "bbi_value": 7.815,
+      "bbi_pool": 0.09798,
+      "bbi_dfs": 0.09798,
+      "p_win": 0.003,
+      "value": 7.815,
+      "prob_win": 0.003,
+      "pool": {
+        "composite": 0.09798,
+        "rank": 53
+      },
+      "dfs": {
+        "composite": 0.09798,
+        "rank": 53,
+        "ceiling": 103.6,
+        "floor": 10.6,
+        "cv": 0.526
+      }
     },
     {
       "rank": 54,
@@ -5430,7 +8390,23 @@
       "bbi_ceiling": 106.0,
       "floor": 11.2,
       "cv": 0.5214,
-      "bbi_value": 7.457
+      "bbi_value": 7.457,
+      "bbi_pool": 0.09787,
+      "bbi_dfs": 0.09787,
+      "p_win": 0.004783,
+      "value": 7.457,
+      "prob_win": 0.004783,
+      "pool": {
+        "composite": 0.09787,
+        "rank": 54
+      },
+      "dfs": {
+        "composite": 0.09787,
+        "rank": 54,
+        "ceiling": 106.0,
+        "floor": 11.2,
+        "cv": 0.5214
+      }
     },
     {
       "rank": 55,
@@ -5459,7 +8435,23 @@
       "bbi_ceiling": 108.4,
       "floor": 12.0,
       "cv": 0.5162,
-      "bbi_value": 7.552
+      "bbi_value": 7.552,
+      "bbi_pool": 0.09324,
+      "bbi_dfs": 0.09324,
+      "p_win": 0.005633,
+      "value": 7.552,
+      "prob_win": 0.005633,
+      "pool": {
+        "composite": 0.09324,
+        "rank": 55
+      },
+      "dfs": {
+        "composite": 0.09324,
+        "rank": 55,
+        "ceiling": 108.4,
+        "floor": 12.0,
+        "cv": 0.5162
+      }
     },
     {
       "rank": 56,
@@ -5488,7 +8480,23 @@
       "bbi_ceiling": 109.1,
       "floor": 12.6,
       "cv": 0.5105,
-      "bbi_value": 7.641
+      "bbi_value": 7.641,
+      "bbi_pool": 0.08967,
+      "bbi_dfs": 0.08967,
+      "p_win": 0.005867,
+      "value": 7.641,
+      "prob_win": 0.005867,
+      "pool": {
+        "composite": 0.08967,
+        "rank": 56
+      },
+      "dfs": {
+        "composite": 0.08967,
+        "rank": 56,
+        "ceiling": 109.1,
+        "floor": 12.6,
+        "cv": 0.5105
+      }
     },
     {
       "rank": 57,
@@ -5517,7 +8525,23 @@
       "bbi_ceiling": 112.1,
       "floor": 14.4,
       "cv": 0.4957,
-      "bbi_value": 7.642
+      "bbi_value": 7.642,
+      "bbi_pool": 0.08164,
+      "bbi_dfs": 0.08164,
+      "p_win": 0.008467,
+      "value": 7.642,
+      "prob_win": 0.008467,
+      "pool": {
+        "composite": 0.08164,
+        "rank": 57
+      },
+      "dfs": {
+        "composite": 0.08164,
+        "rank": 57,
+        "ceiling": 112.1,
+        "floor": 14.4,
+        "cv": 0.4957
+      }
     },
     {
       "rank": 58,
@@ -5546,7 +8570,23 @@
       "bbi_ceiling": 100.5,
       "floor": 9.5,
       "cv": 0.5358,
-      "bbi_value": 7.281
+      "bbi_value": 7.281,
+      "bbi_pool": 0.0805,
+      "bbi_dfs": 0.0805,
+      "p_win": 0.002567,
+      "value": 7.281,
+      "prob_win": 0.002567,
+      "pool": {
+        "composite": 0.0805,
+        "rank": 58
+      },
+      "dfs": {
+        "composite": 0.0805,
+        "rank": 58,
+        "ceiling": 100.5,
+        "floor": 9.5,
+        "cv": 0.5358
+      }
     },
     {
       "rank": 59,
@@ -5575,7 +8615,23 @@
       "bbi_ceiling": 107.5,
       "floor": 10.9,
       "cv": 0.5272,
-      "bbi_value": 7.619
+      "bbi_value": 7.619,
+      "bbi_pool": 0.08043,
+      "bbi_dfs": 0.08043,
+      "p_win": 0.00545,
+      "value": 7.619,
+      "prob_win": 0.00545,
+      "pool": {
+        "composite": 0.08043,
+        "rank": 59
+      },
+      "dfs": {
+        "composite": 0.08043,
+        "rank": 59,
+        "ceiling": 107.5,
+        "floor": 10.9,
+        "cv": 0.5272
+      }
     },
     {
       "rank": 60,
@@ -5604,7 +8660,23 @@
       "bbi_ceiling": 104.5,
       "floor": 11.5,
       "cv": 0.5174,
-      "bbi_value": 7.582
+      "bbi_value": 7.582,
+      "bbi_pool": 0.06907,
+      "bbi_dfs": 0.06907,
+      "p_win": 0.003983,
+      "value": 7.582,
+      "prob_win": 0.003983,
+      "pool": {
+        "composite": 0.06907,
+        "rank": 60
+      },
+      "dfs": {
+        "composite": 0.06907,
+        "rank": 60,
+        "ceiling": 104.5,
+        "floor": 11.5,
+        "cv": 0.5174
+      }
     },
     {
       "rank": 61,
@@ -5633,7 +8705,23 @@
       "bbi_ceiling": 110.8,
       "floor": 13.1,
       "cv": 0.5073,
-      "bbi_value": 7.671
+      "bbi_value": 7.671,
+      "bbi_pool": 0.06804,
+      "bbi_dfs": 0.06804,
+      "p_win": 0.007183,
+      "value": 7.671,
+      "prob_win": 0.007183,
+      "pool": {
+        "composite": 0.06804,
+        "rank": 61
+      },
+      "dfs": {
+        "composite": 0.06804,
+        "rank": 61,
+        "ceiling": 110.8,
+        "floor": 13.1,
+        "cv": 0.5073
+      }
     },
     {
       "rank": 62,
@@ -5662,7 +8750,23 @@
       "bbi_ceiling": 106.3,
       "floor": 10.4,
       "cv": 0.5315,
-      "bbi_value": 7.717
+      "bbi_value": 7.717,
+      "bbi_pool": 0.06266,
+      "bbi_dfs": 0.06266,
+      "p_win": 0.004633,
+      "value": 7.717,
+      "prob_win": 0.004633,
+      "pool": {
+        "composite": 0.06266,
+        "rank": 62
+      },
+      "dfs": {
+        "composite": 0.06266,
+        "rank": 62,
+        "ceiling": 106.3,
+        "floor": 10.4,
+        "cv": 0.5315
+      }
     },
     {
       "rank": 63,
@@ -5691,7 +8795,23 @@
       "bbi_ceiling": 105.4,
       "floor": 11.5,
       "cv": 0.5187,
-      "bbi_value": 7.518
+      "bbi_value": 7.518,
+      "bbi_pool": 0.04046,
+      "bbi_dfs": 0.04046,
+      "p_win": 0.004567,
+      "value": 7.518,
+      "prob_win": 0.004567,
+      "pool": {
+        "composite": 0.04046,
+        "rank": 63
+      },
+      "dfs": {
+        "composite": 0.04046,
+        "rank": 63,
+        "ceiling": 105.4,
+        "floor": 11.5,
+        "cv": 0.5187
+      }
     },
     {
       "rank": 64,
@@ -5720,7 +8840,23 @@
       "bbi_ceiling": 102.9,
       "floor": 9.6,
       "cv": 0.5372,
-      "bbi_value": 6.998
+      "bbi_value": 6.998,
+      "bbi_pool": 0.03137,
+      "bbi_dfs": 0.03137,
+      "p_win": 0.00365,
+      "value": 6.998,
+      "prob_win": 0.00365,
+      "pool": {
+        "composite": 0.03137,
+        "rank": 64
+      },
+      "dfs": {
+        "composite": 0.03137,
+        "rank": 64,
+        "ceiling": 102.9,
+        "floor": 9.6,
+        "cv": 0.5372
+      }
     },
     {
       "rank": 65,
@@ -5749,7 +8885,23 @@
       "bbi_ceiling": 99.4,
       "floor": 9.3,
       "cv": 0.537,
-      "bbi_value": 7.375
+      "bbi_value": 7.375,
+      "bbi_pool": 0.01012,
+      "bbi_dfs": 0.01012,
+      "p_win": 0.002717,
+      "value": 7.375,
+      "prob_win": 0.002717,
+      "pool": {
+        "composite": 0.01012,
+        "rank": 65
+      },
+      "dfs": {
+        "composite": 0.01012,
+        "rank": 65,
+        "ceiling": 99.4,
+        "floor": 9.3,
+        "cv": 0.537
+      }
     },
     {
       "rank": 66,
@@ -5778,7 +8930,23 @@
       "bbi_ceiling": 99.7,
       "floor": 8.6,
       "cv": 0.5457,
-      "bbi_value": 7.452
+      "bbi_value": 7.452,
+      "bbi_pool": 0.00998,
+      "bbi_dfs": 0.00998,
+      "p_win": 0.002583,
+      "value": 7.452,
+      "prob_win": 0.002583,
+      "pool": {
+        "composite": 0.00998,
+        "rank": 66
+      },
+      "dfs": {
+        "composite": 0.00998,
+        "rank": 66,
+        "ceiling": 99.7,
+        "floor": 8.6,
+        "cv": 0.5457
+      }
     },
     {
       "rank": 67,
@@ -5807,7 +8975,23 @@
       "bbi_ceiling": 100.6,
       "floor": 9.2,
       "cv": 0.5398,
-      "bbi_value": 7.564
+      "bbi_value": 7.564,
+      "bbi_pool": 0.00615,
+      "bbi_dfs": 0.00615,
+      "p_win": 0.002683,
+      "value": 7.564,
+      "prob_win": 0.002683,
+      "pool": {
+        "composite": 0.00615,
+        "rank": 67
+      },
+      "dfs": {
+        "composite": 0.00615,
+        "rank": 67,
+        "ceiling": 100.6,
+        "floor": 9.2,
+        "cv": 0.5398
+      }
     },
     {
       "rank": 68,
@@ -5836,7 +9020,23 @@
       "bbi_ceiling": 106.8,
       "floor": 11.4,
       "cv": 0.5218,
-      "bbi_value": 7.463
+      "bbi_value": 7.463,
+      "bbi_pool": -0.00592,
+      "bbi_dfs": -0.00592,
+      "p_win": 0.005733,
+      "value": 7.463,
+      "prob_win": 0.005733,
+      "pool": {
+        "composite": -0.00592,
+        "rank": 68
+      },
+      "dfs": {
+        "composite": -0.00592,
+        "rank": 68,
+        "ceiling": 106.8,
+        "floor": 11.4,
+        "cv": 0.5218
+      }
     },
     {
       "rank": 69,
@@ -5865,7 +9065,23 @@
       "bbi_ceiling": 103.5,
       "floor": 10.2,
       "cv": 0.5316,
-      "bbi_value": 7.963
+      "bbi_value": 7.963,
+      "bbi_pool": -0.00756,
+      "bbi_dfs": -0.00756,
+      "p_win": 0.004217,
+      "value": 7.963,
+      "prob_win": 0.004217,
+      "pool": {
+        "composite": -0.00756,
+        "rank": 69
+      },
+      "dfs": {
+        "composite": -0.00756,
+        "rank": 69,
+        "ceiling": 103.5,
+        "floor": 10.2,
+        "cv": 0.5316
+      }
     },
     {
       "rank": 70,
@@ -5894,7 +9110,23 @@
       "bbi_ceiling": 100.4,
       "floor": 9.2,
       "cv": 0.5397,
-      "bbi_value": 7.092
+      "bbi_value": 7.092,
+      "bbi_pool": -0.02235,
+      "bbi_dfs": -0.02235,
+      "p_win": 0.002683,
+      "value": 7.092,
+      "prob_win": 0.002683,
+      "pool": {
+        "composite": -0.02235,
+        "rank": 70
+      },
+      "dfs": {
+        "composite": -0.02235,
+        "rank": 70,
+        "ceiling": 100.4,
+        "floor": 9.2,
+        "cv": 0.5397
+      }
     },
     {
       "rank": 71,
@@ -5923,7 +9155,23 @@
       "bbi_ceiling": 102.8,
       "floor": 9.9,
       "cv": 0.5339,
-      "bbi_value": 7.296
+      "bbi_value": 7.296,
+      "bbi_pool": -0.02837,
+      "bbi_dfs": -0.02837,
+      "p_win": 0.00395,
+      "value": 7.296,
+      "prob_win": 0.00395,
+      "pool": {
+        "composite": -0.02837,
+        "rank": 71
+      },
+      "dfs": {
+        "composite": -0.02837,
+        "rank": 71,
+        "ceiling": 102.8,
+        "floor": 9.9,
+        "cv": 0.5339
+      }
     },
     {
       "rank": 72,
@@ -5952,7 +9200,23 @@
       "bbi_ceiling": 103.9,
       "floor": 10.5,
       "cv": 0.5288,
-      "bbi_value": 7.404
+      "bbi_value": 7.404,
+      "bbi_pool": -0.03998,
+      "bbi_dfs": -0.03998,
+      "p_win": 0.004083,
+      "value": 7.404,
+      "prob_win": 0.004083,
+      "pool": {
+        "composite": -0.03998,
+        "rank": 72
+      },
+      "dfs": {
+        "composite": -0.03998,
+        "rank": 72,
+        "ceiling": 103.9,
+        "floor": 10.5,
+        "cv": 0.5288
+      }
     },
     {
       "rank": 73,
@@ -5981,7 +9245,23 @@
       "bbi_ceiling": 109.9,
       "floor": 12.1,
       "cv": 0.5171,
-      "bbi_value": 7.698
+      "bbi_value": 7.698,
+      "bbi_pool": -0.04071,
+      "bbi_dfs": -0.04071,
+      "p_win": 0.00635,
+      "value": 7.698,
+      "prob_win": 0.00635,
+      "pool": {
+        "composite": -0.04071,
+        "rank": 73
+      },
+      "dfs": {
+        "composite": -0.04071,
+        "rank": 73,
+        "ceiling": 109.9,
+        "floor": 12.1,
+        "cv": 0.5171
+      }
     },
     {
       "rank": 74,
@@ -6010,7 +9290,23 @@
       "bbi_ceiling": 104.4,
       "floor": 10.5,
       "cv": 0.5292,
-      "bbi_value": 7.553
+      "bbi_value": 7.553,
+      "bbi_pool": -0.0436,
+      "bbi_dfs": -0.0436,
+      "p_win": 0.00415,
+      "value": 7.553,
+      "prob_win": 0.00415,
+      "pool": {
+        "composite": -0.0436,
+        "rank": 74
+      },
+      "dfs": {
+        "composite": -0.0436,
+        "rank": 74,
+        "ceiling": 104.4,
+        "floor": 10.5,
+        "cv": 0.5292
+      }
     },
     {
       "rank": 75,
@@ -6039,7 +9335,23 @@
       "bbi_ceiling": 98.3,
       "floor": 9.6,
       "cv": 0.5324,
-      "bbi_value": 7.303
+      "bbi_value": 7.303,
+      "bbi_pool": -0.04634,
+      "bbi_dfs": -0.04634,
+      "p_win": 0.00225,
+      "value": 7.303,
+      "prob_win": 0.00225,
+      "pool": {
+        "composite": -0.04634,
+        "rank": 75
+      },
+      "dfs": {
+        "composite": -0.04634,
+        "rank": 75,
+        "ceiling": 98.3,
+        "floor": 9.6,
+        "cv": 0.5324
+      }
     },
     {
       "rank": 76,
@@ -6068,7 +9380,23 @@
       "bbi_ceiling": 111.5,
       "floor": 13.0,
       "cv": 0.5096,
-      "bbi_value": 7.44
+      "bbi_value": 7.44,
+      "bbi_pool": -0.04678,
+      "bbi_dfs": -0.04678,
+      "p_win": 0.0085,
+      "value": 7.44,
+      "prob_win": 0.0085,
+      "pool": {
+        "composite": -0.04678,
+        "rank": 76
+      },
+      "dfs": {
+        "composite": -0.04678,
+        "rank": 76,
+        "ceiling": 111.5,
+        "floor": 13.0,
+        "cv": 0.5096
+      }
     },
     {
       "rank": 77,
@@ -6097,7 +9425,23 @@
       "bbi_ceiling": 102.2,
       "floor": 9.4,
       "cv": 0.5391,
-      "bbi_value": 7.422
+      "bbi_value": 7.422,
+      "bbi_pool": -0.05635,
+      "bbi_dfs": -0.05635,
+      "p_win": 0.003733,
+      "value": 7.422,
+      "prob_win": 0.003733,
+      "pool": {
+        "composite": -0.05635,
+        "rank": 77
+      },
+      "dfs": {
+        "composite": -0.05635,
+        "rank": 77,
+        "ceiling": 102.2,
+        "floor": 9.4,
+        "cv": 0.5391
+      }
     },
     {
       "rank": 78,
@@ -6126,7 +9470,23 @@
       "bbi_ceiling": 100.4,
       "floor": 9.9,
       "cv": 0.5313,
-      "bbi_value": 7.334
+      "bbi_value": 7.334,
+      "bbi_pool": -0.0824,
+      "bbi_dfs": -0.0824,
+      "p_win": 0.002767,
+      "value": 7.334,
+      "prob_win": 0.002767,
+      "pool": {
+        "composite": -0.0824,
+        "rank": 78
+      },
+      "dfs": {
+        "composite": -0.0824,
+        "rank": 78,
+        "ceiling": 100.4,
+        "floor": 9.9,
+        "cv": 0.5313
+      }
     },
     {
       "rank": 79,
@@ -6155,7 +9515,23 @@
       "bbi_ceiling": 92.9,
       "floor": 6.8,
       "cv": 0.5639,
-      "bbi_value": 6.883
+      "bbi_value": 6.883,
+      "bbi_pool": -0.08831,
+      "bbi_dfs": -0.08831,
+      "p_win": 0.001533,
+      "value": 6.883,
+      "prob_win": 0.001533,
+      "pool": {
+        "composite": -0.08831,
+        "rank": 79
+      },
+      "dfs": {
+        "composite": -0.08831,
+        "rank": 79,
+        "ceiling": 92.9,
+        "floor": 6.8,
+        "cv": 0.5639
+      }
     },
     {
       "rank": 80,
@@ -6184,7 +9560,23 @@
       "bbi_ceiling": 99.1,
       "floor": 8.5,
       "cv": 0.5477,
-      "bbi_value": 7.347
+      "bbi_value": 7.347,
+      "bbi_pool": -0.08978,
+      "bbi_dfs": -0.08978,
+      "p_win": 0.002867,
+      "value": 7.347,
+      "prob_win": 0.002867,
+      "pool": {
+        "composite": -0.08978,
+        "rank": 80
+      },
+      "dfs": {
+        "composite": -0.08978,
+        "rank": 80,
+        "ceiling": 99.1,
+        "floor": 8.5,
+        "cv": 0.5477
+      }
     },
     {
       "rank": 81,
@@ -6213,7 +9605,23 @@
       "bbi_ceiling": 96.3,
       "floor": 7.6,
       "cv": 0.5556,
-      "bbi_value": 6.869
+      "bbi_value": 6.869,
+      "bbi_pool": -0.09077,
+      "bbi_dfs": -0.09077,
+      "p_win": 0.002283,
+      "value": 6.869,
+      "prob_win": 0.002283,
+      "pool": {
+        "composite": -0.09077,
+        "rank": 81
+      },
+      "dfs": {
+        "composite": -0.09077,
+        "rank": 81,
+        "ceiling": 96.3,
+        "floor": 7.6,
+        "cv": 0.5556
+      }
     },
     {
       "rank": 82,
@@ -6242,7 +9650,23 @@
       "bbi_ceiling": 92.8,
       "floor": 7.4,
       "cv": 0.5555,
-      "bbi_value": 6.823
+      "bbi_value": 6.823,
+      "bbi_pool": -0.09697,
+      "bbi_dfs": -0.09697,
+      "p_win": 0.001533,
+      "value": 6.823,
+      "prob_win": 0.001533,
+      "pool": {
+        "composite": -0.09697,
+        "rank": 82
+      },
+      "dfs": {
+        "composite": -0.09697,
+        "rank": 82,
+        "ceiling": 92.8,
+        "floor": 7.4,
+        "cv": 0.5555
+      }
     },
     {
       "rank": 83,
@@ -6271,7 +9695,23 @@
       "bbi_ceiling": 102.1,
       "floor": 9.8,
       "cv": 0.5351,
-      "bbi_value": 7.314
+      "bbi_value": 7.314,
+      "bbi_pool": -0.09955,
+      "bbi_dfs": -0.09955,
+      "p_win": 0.003317,
+      "value": 7.314,
+      "prob_win": 0.003317,
+      "pool": {
+        "composite": -0.09955,
+        "rank": 83
+      },
+      "dfs": {
+        "composite": -0.09955,
+        "rank": 83,
+        "ceiling": 102.1,
+        "floor": 9.8,
+        "cv": 0.5351
+      }
     },
     {
       "rank": 84,
@@ -6300,7 +9740,23 @@
       "bbi_ceiling": 89.9,
       "floor": 5.9,
       "cv": 0.5729,
-      "bbi_value": 6.707
+      "bbi_value": 6.707,
+      "bbi_pool": -0.10471,
+      "bbi_dfs": -0.10471,
+      "p_win": 0.00115,
+      "value": 6.707,
+      "prob_win": 0.00115,
+      "pool": {
+        "composite": -0.10471,
+        "rank": 84
+      },
+      "dfs": {
+        "composite": -0.10471,
+        "rank": 84,
+        "ceiling": 89.9,
+        "floor": 5.9,
+        "cv": 0.5729
+      }
     },
     {
       "rank": 85,
@@ -6329,7 +9785,23 @@
       "bbi_ceiling": 100.0,
       "floor": 9.4,
       "cv": 0.5374,
-      "bbi_value": 7.245
+      "bbi_value": 7.245,
+      "bbi_pool": -0.11592,
+      "bbi_dfs": -0.11592,
+      "p_win": 0.003017,
+      "value": 7.245,
+      "prob_win": 0.003017,
+      "pool": {
+        "composite": -0.11592,
+        "rank": 85
+      },
+      "dfs": {
+        "composite": -0.11592,
+        "rank": 85,
+        "ceiling": 100.0,
+        "floor": 9.4,
+        "cv": 0.5374
+      }
     },
     {
       "rank": 86,
@@ -6358,7 +9830,23 @@
       "bbi_ceiling": 105.7,
       "floor": 10.2,
       "cv": 0.5344,
-      "bbi_value": 7.681
+      "bbi_value": 7.681,
+      "bbi_pool": -0.12037,
+      "bbi_dfs": -0.12037,
+      "p_win": 0.00465,
+      "value": 7.681,
+      "prob_win": 0.00465,
+      "pool": {
+        "composite": -0.12037,
+        "rank": 86
+      },
+      "dfs": {
+        "composite": -0.12037,
+        "rank": 86,
+        "ceiling": 105.7,
+        "floor": 10.2,
+        "cv": 0.5344
+      }
     },
     {
       "rank": 87,
@@ -6387,7 +9875,23 @@
       "bbi_ceiling": 88.3,
       "floor": 6.2,
       "cv": 0.5676,
-      "bbi_value": 6.607
+      "bbi_value": 6.607,
+      "bbi_pool": -0.1226,
+      "bbi_dfs": -0.1226,
+      "p_win": 0.0009,
+      "value": 6.607,
+      "prob_win": 0.0009,
+      "pool": {
+        "composite": -0.1226,
+        "rank": 87
+      },
+      "dfs": {
+        "composite": -0.1226,
+        "rank": 87,
+        "ceiling": 88.3,
+        "floor": 6.2,
+        "cv": 0.5676
+      }
     },
     {
       "rank": 88,
@@ -6416,7 +9920,23 @@
       "bbi_ceiling": 98.9,
       "floor": 8.7,
       "cv": 0.5448,
-      "bbi_value": 7.006
+      "bbi_value": 7.006,
+      "bbi_pool": -0.12456,
+      "bbi_dfs": -0.12456,
+      "p_win": 0.002467,
+      "value": 7.006,
+      "prob_win": 0.002467,
+      "pool": {
+        "composite": -0.12456,
+        "rank": 88
+      },
+      "dfs": {
+        "composite": -0.12456,
+        "rank": 88,
+        "ceiling": 98.9,
+        "floor": 8.7,
+        "cv": 0.5448
+      }
     },
     {
       "rank": 89,
@@ -6445,7 +9965,23 @@
       "bbi_ceiling": 102.3,
       "floor": 10.4,
       "cv": 0.5288,
-      "bbi_value": 6.948
+      "bbi_value": 6.948,
+      "bbi_pool": -0.12642,
+      "bbi_dfs": -0.12642,
+      "p_win": 0.004083,
+      "value": 6.948,
+      "prob_win": 0.004083,
+      "pool": {
+        "composite": -0.12642,
+        "rank": 89
+      },
+      "dfs": {
+        "composite": -0.12642,
+        "rank": 89,
+        "ceiling": 102.3,
+        "floor": 10.4,
+        "cv": 0.5288
+      }
     },
     {
       "rank": 90,
@@ -6474,7 +10010,23 @@
       "bbi_ceiling": 110.0,
       "floor": 12.8,
       "cv": 0.5112,
-      "bbi_value": 7.199
+      "bbi_value": 7.199,
+      "bbi_pool": -0.13251,
+      "bbi_dfs": -0.13251,
+      "p_win": 0.007916,
+      "value": 7.199,
+      "prob_win": 0.007916,
+      "pool": {
+        "composite": -0.13251,
+        "rank": 90
+      },
+      "dfs": {
+        "composite": -0.13251,
+        "rank": 90,
+        "ceiling": 110.0,
+        "floor": 12.8,
+        "cv": 0.5112
+      }
     },
     {
       "rank": 91,
@@ -6503,7 +10055,23 @@
       "bbi_ceiling": 87.2,
       "floor": 4.5,
       "cv": 0.5919,
-      "bbi_value": 6.474
+      "bbi_value": 6.474,
+      "bbi_pool": -0.13664,
+      "bbi_dfs": -0.13664,
+      "p_win": 0.000717,
+      "value": 6.474,
+      "prob_win": 0.000717,
+      "pool": {
+        "composite": -0.13664,
+        "rank": 91
+      },
+      "dfs": {
+        "composite": -0.13664,
+        "rank": 91,
+        "ceiling": 87.2,
+        "floor": 4.5,
+        "cv": 0.5919
+      }
     },
     {
       "rank": 92,
@@ -6532,7 +10100,23 @@
       "bbi_ceiling": 86.3,
       "floor": 4.6,
       "cv": 0.5903,
-      "bbi_value": 6.313
+      "bbi_value": 6.313,
+      "bbi_pool": -0.13665,
+      "bbi_dfs": -0.13665,
+      "p_win": 0.000767,
+      "value": 6.313,
+      "prob_win": 0.000767,
+      "pool": {
+        "composite": -0.13665,
+        "rank": 92
+      },
+      "dfs": {
+        "composite": -0.13665,
+        "rank": 92,
+        "ceiling": 86.3,
+        "floor": 4.6,
+        "cv": 0.5903
+      }
     },
     {
       "rank": 93,
@@ -6561,7 +10145,23 @@
       "bbi_ceiling": 89.1,
       "floor": 5.0,
       "cv": 0.5856,
-      "bbi_value": 6.34
+      "bbi_value": 6.34,
+      "bbi_pool": -0.13938,
+      "bbi_dfs": -0.13938,
+      "p_win": 0.001333,
+      "value": 6.34,
+      "prob_win": 0.001333,
+      "pool": {
+        "composite": -0.13938,
+        "rank": 93
+      },
+      "dfs": {
+        "composite": -0.13938,
+        "rank": 93,
+        "ceiling": 89.1,
+        "floor": 5.0,
+        "cv": 0.5856
+      }
     },
     {
       "rank": 94,
@@ -6590,7 +10190,23 @@
       "bbi_ceiling": 96.0,
       "floor": 8.6,
       "cv": 0.5427,
-      "bbi_value": 7.124
+      "bbi_value": 7.124,
+      "bbi_pool": -0.14276,
+      "bbi_dfs": -0.14276,
+      "p_win": 0.0021,
+      "value": 7.124,
+      "prob_win": 0.0021,
+      "pool": {
+        "composite": -0.14276,
+        "rank": 94
+      },
+      "dfs": {
+        "composite": -0.14276,
+        "rank": 94,
+        "ceiling": 96.0,
+        "floor": 8.6,
+        "cv": 0.5427
+      }
     },
     {
       "rank": 95,
@@ -6619,7 +10235,23 @@
       "bbi_ceiling": 101.2,
       "floor": 9.7,
       "cv": 0.5359,
-      "bbi_value": 7.012
+      "bbi_value": 7.012,
+      "bbi_pool": -0.14325,
+      "bbi_dfs": -0.14325,
+      "p_win": 0.003317,
+      "value": 7.012,
+      "prob_win": 0.003317,
+      "pool": {
+        "composite": -0.14325,
+        "rank": 95
+      },
+      "dfs": {
+        "composite": -0.14325,
+        "rank": 95,
+        "ceiling": 101.2,
+        "floor": 9.7,
+        "cv": 0.5359
+      }
     },
     {
       "rank": 96,
@@ -6648,7 +10280,23 @@
       "bbi_ceiling": 98.8,
       "floor": 8.8,
       "cv": 0.5436,
-      "bbi_value": 7.101
+      "bbi_value": 7.101,
+      "bbi_pool": -0.14575,
+      "bbi_dfs": -0.14575,
+      "p_win": 0.002533,
+      "value": 7.101,
+      "prob_win": 0.002533,
+      "pool": {
+        "composite": -0.14575,
+        "rank": 96
+      },
+      "dfs": {
+        "composite": -0.14575,
+        "rank": 96,
+        "ceiling": 98.8,
+        "floor": 8.8,
+        "cv": 0.5436
+      }
     },
     {
       "rank": 97,
@@ -6677,7 +10325,23 @@
       "bbi_ceiling": 59.1,
       "floor": 0,
       "cv": 1.0,
-      "bbi_value": -0.899
+      "bbi_value": -0.899,
+      "bbi_pool": -0.14979,
+      "bbi_dfs": -0.14979,
+      "p_win": 0.002283,
+      "value": -0.899,
+      "prob_win": 0.002283,
+      "pool": {
+        "composite": -0.14979,
+        "rank": 97
+      },
+      "dfs": {
+        "composite": -0.14979,
+        "rank": 97,
+        "ceiling": 59.1,
+        "floor": 0,
+        "cv": 1.0
+      }
     },
     {
       "rank": 98,
@@ -6706,7 +10370,23 @@
       "bbi_ceiling": 95.6,
       "floor": 8.3,
       "cv": 0.5471,
-      "bbi_value": 6.945
+      "bbi_value": 6.945,
+      "bbi_pool": -0.15986,
+      "bbi_dfs": -0.15986,
+      "p_win": 0.002083,
+      "value": 6.945,
+      "prob_win": 0.002083,
+      "pool": {
+        "composite": -0.15986,
+        "rank": 98
+      },
+      "dfs": {
+        "composite": -0.15986,
+        "rank": 98,
+        "ceiling": 95.6,
+        "floor": 8.3,
+        "cv": 0.5471
+      }
     },
     {
       "rank": 99,
@@ -6735,7 +10415,23 @@
       "bbi_ceiling": 81.0,
       "floor": 4.7,
       "cv": 0.5846,
-      "bbi_value": 6.135
+      "bbi_value": 6.135,
+      "bbi_pool": -0.16811,
+      "bbi_dfs": -0.16811,
+      "p_win": 0.000383,
+      "value": 6.135,
+      "prob_win": 0.000383,
+      "pool": {
+        "composite": -0.16811,
+        "rank": 99
+      },
+      "dfs": {
+        "composite": -0.16811,
+        "rank": 99,
+        "ceiling": 81.0,
+        "floor": 4.7,
+        "cv": 0.5846
+      }
     },
     {
       "rank": 100,
@@ -6764,7 +10460,23 @@
       "bbi_ceiling": 93.4,
       "floor": 7.7,
       "cv": 0.552,
-      "bbi_value": 6.955
+      "bbi_value": 6.955,
+      "bbi_pool": -0.17543,
+      "bbi_dfs": -0.17543,
+      "p_win": 0.00155,
+      "value": 6.955,
+      "prob_win": 0.00155,
+      "pool": {
+        "composite": -0.17543,
+        "rank": 100
+      },
+      "dfs": {
+        "composite": -0.17543,
+        "rank": 100,
+        "ceiling": 93.4,
+        "floor": 7.7,
+        "cv": 0.552
+      }
     },
     {
       "rank": 101,
@@ -6793,7 +10505,23 @@
       "bbi_ceiling": 90.0,
       "floor": 6.2,
       "cv": 0.569,
-      "bbi_value": 6.592
+      "bbi_value": 6.592,
+      "bbi_pool": -0.18152,
+      "bbi_dfs": -0.18152,
+      "p_win": 0.001083,
+      "value": 6.592,
+      "prob_win": 0.001083,
+      "pool": {
+        "composite": -0.18152,
+        "rank": 101
+      },
+      "dfs": {
+        "composite": -0.18152,
+        "rank": 101,
+        "ceiling": 90.0,
+        "floor": 6.2,
+        "cv": 0.569
+      }
     },
     {
       "rank": 102,
@@ -6822,7 +10550,23 @@
       "bbi_ceiling": 94.5,
       "floor": 7.4,
       "cv": 0.5578,
-      "bbi_value": 7.111
+      "bbi_value": 7.111,
+      "bbi_pool": -0.18186,
+      "bbi_dfs": -0.18186,
+      "p_win": 0.001967,
+      "value": 7.111,
+      "prob_win": 0.001967,
+      "pool": {
+        "composite": -0.18186,
+        "rank": 102
+      },
+      "dfs": {
+        "composite": -0.18186,
+        "rank": 102,
+        "ceiling": 94.5,
+        "floor": 7.4,
+        "cv": 0.5578
+      }
     },
     {
       "rank": 103,
@@ -6851,7 +10595,23 @@
       "bbi_ceiling": 90.5,
       "floor": 6.4,
       "cv": 0.5677,
-      "bbi_value": 6.524
+      "bbi_value": 6.524,
+      "bbi_pool": -0.19557,
+      "bbi_dfs": -0.19557,
+      "p_win": 0.00135,
+      "value": 6.524,
+      "prob_win": 0.00135,
+      "pool": {
+        "composite": -0.19557,
+        "rank": 103
+      },
+      "dfs": {
+        "composite": -0.19557,
+        "rank": 103,
+        "ceiling": 90.5,
+        "floor": 6.4,
+        "cv": 0.5677
+      }
     },
     {
       "rank": 104,
@@ -6880,7 +10640,23 @@
       "bbi_ceiling": 92.8,
       "floor": 8.3,
       "cv": 0.5439,
-      "bbi_value": 6.957
+      "bbi_value": 6.957,
+      "bbi_pool": -0.19635,
+      "bbi_dfs": -0.19635,
+      "p_win": 0.001083,
+      "value": 6.957,
+      "prob_win": 0.001083,
+      "pool": {
+        "composite": -0.19635,
+        "rank": 104
+      },
+      "dfs": {
+        "composite": -0.19635,
+        "rank": 104,
+        "ceiling": 92.8,
+        "floor": 8.3,
+        "cv": 0.5439
+      }
     },
     {
       "rank": 105,
@@ -6909,7 +10685,23 @@
       "bbi_ceiling": 102.1,
       "floor": 11.6,
       "cv": 0.515,
-      "bbi_value": 7.414
+      "bbi_value": 7.414,
+      "bbi_pool": -0.20287,
+      "bbi_dfs": -0.20287,
+      "p_win": 0.0036,
+      "value": 7.414,
+      "prob_win": 0.0036,
+      "pool": {
+        "composite": -0.20287,
+        "rank": 105
+      },
+      "dfs": {
+        "composite": -0.20287,
+        "rank": 105,
+        "ceiling": 102.1,
+        "floor": 11.6,
+        "cv": 0.515
+      }
     },
     {
       "rank": 106,
@@ -6938,7 +10730,23 @@
       "bbi_ceiling": 92.7,
       "floor": 6.8,
       "cv": 0.5639,
-      "bbi_value": 6.606
+      "bbi_value": 6.606,
+      "bbi_pool": -0.20327,
+      "bbi_dfs": -0.20327,
+      "p_win": 0.002067,
+      "value": 6.606,
+      "prob_win": 0.002067,
+      "pool": {
+        "composite": -0.20327,
+        "rank": 106
+      },
+      "dfs": {
+        "composite": -0.20327,
+        "rank": 106,
+        "ceiling": 92.7,
+        "floor": 6.8,
+        "cv": 0.5639
+      }
     },
     {
       "rank": 107,
@@ -6967,7 +10775,23 @@
       "bbi_ceiling": 95.0,
       "floor": 7.2,
       "cv": 0.5605,
-      "bbi_value": 6.788
+      "bbi_value": 6.788,
+      "bbi_pool": -0.21143,
+      "bbi_dfs": -0.21143,
+      "p_win": 0.0019,
+      "value": 6.788,
+      "prob_win": 0.0019,
+      "pool": {
+        "composite": -0.21143,
+        "rank": 107
+      },
+      "dfs": {
+        "composite": -0.21143,
+        "rank": 107,
+        "ceiling": 95.0,
+        "floor": 7.2,
+        "cv": 0.5605
+      }
     },
     {
       "rank": 108,
@@ -6996,7 +10820,23 @@
       "bbi_ceiling": 102.2,
       "floor": 10.4,
       "cv": 0.5284,
-      "bbi_value": 7.099
+      "bbi_value": 7.099,
+      "bbi_pool": -0.22235,
+      "bbi_dfs": -0.22235,
+      "p_win": 0.004133,
+      "value": 7.099,
+      "prob_win": 0.004133,
+      "pool": {
+        "composite": -0.22235,
+        "rank": 108
+      },
+      "dfs": {
+        "composite": -0.22235,
+        "rank": 108,
+        "ceiling": 102.2,
+        "floor": 10.4,
+        "cv": 0.5284
+      }
     },
     {
       "rank": 109,
@@ -7025,7 +10865,23 @@
       "bbi_ceiling": 88.0,
       "floor": 4.6,
       "cv": 0.5925,
-      "bbi_value": 6.267
+      "bbi_value": 6.267,
+      "bbi_pool": -0.24955,
+      "bbi_dfs": -0.24955,
+      "p_win": 0.00085,
+      "value": 6.267,
+      "prob_win": 0.00085,
+      "pool": {
+        "composite": -0.24955,
+        "rank": 109
+      },
+      "dfs": {
+        "composite": -0.24955,
+        "rank": 109,
+        "ceiling": 88.0,
+        "floor": 4.6,
+        "cv": 0.5925
+      }
     },
     {
       "rank": 110,
@@ -7054,7 +10910,23 @@
       "bbi_ceiling": 73.8,
       "floor": 3.5,
       "cv": 0.5994,
-      "bbi_value": 5.456
+      "bbi_value": 5.456,
+      "bbi_pool": -0.25599,
+      "bbi_dfs": -0.25599,
+      "p_win": 0.00015,
+      "value": 5.456,
+      "prob_win": 0.00015,
+      "pool": {
+        "composite": -0.25599,
+        "rank": 110
+      },
+      "dfs": {
+        "composite": -0.25599,
+        "rank": 110,
+        "ceiling": 73.8,
+        "floor": 3.5,
+        "cv": 0.5994
+      }
     },
     {
       "rank": 111,
@@ -7083,7 +10955,23 @@
       "bbi_ceiling": 91.1,
       "floor": 6.5,
       "cv": 0.5677,
-      "bbi_value": 6.525
+      "bbi_value": 6.525,
+      "bbi_pool": -0.2886,
+      "bbi_dfs": -0.2886,
+      "p_win": 0.001483,
+      "value": 6.525,
+      "prob_win": 0.001483,
+      "pool": {
+        "composite": -0.2886,
+        "rank": 111
+      },
+      "dfs": {
+        "composite": -0.2886,
+        "rank": 111,
+        "ceiling": 91.1,
+        "floor": 6.5,
+        "cv": 0.5677
+      }
     },
     {
       "rank": 112,
@@ -7112,7 +11000,23 @@
       "bbi_ceiling": 91.7,
       "floor": 6.2,
       "cv": 0.5714,
-      "bbi_value": 6.641
+      "bbi_value": 6.641,
+      "bbi_pool": -0.29515,
+      "bbi_dfs": -0.29515,
+      "p_win": 0.00165,
+      "value": 6.641,
+      "prob_win": 0.00165,
+      "pool": {
+        "composite": -0.29515,
+        "rank": 112
+      },
+      "dfs": {
+        "composite": -0.29515,
+        "rank": 112,
+        "ceiling": 91.7,
+        "floor": 6.2,
+        "cv": 0.5714
+      }
     },
     {
       "rank": 113,
@@ -7141,7 +11045,23 @@
       "bbi_ceiling": 87.8,
       "floor": 5.4,
       "cv": 0.5802,
-      "bbi_value": 6.502
+      "bbi_value": 6.502,
+      "bbi_pool": -0.3014,
+      "bbi_dfs": -0.3014,
+      "p_win": 0.000917,
+      "value": 6.502,
+      "prob_win": 0.000917,
+      "pool": {
+        "composite": -0.3014,
+        "rank": 113
+      },
+      "dfs": {
+        "composite": -0.3014,
+        "rank": 113,
+        "ceiling": 87.8,
+        "floor": 5.4,
+        "cv": 0.5802
+      }
     },
     {
       "rank": 114,
@@ -7170,7 +11090,23 @@
       "bbi_ceiling": 84.7,
       "floor": 5.7,
       "cv": 0.5732,
-      "bbi_value": 6.405
+      "bbi_value": 6.405,
+      "bbi_pool": -0.31493,
+      "bbi_dfs": -0.31493,
+      "p_win": 0.000683,
+      "value": 6.405,
+      "prob_win": 0.000683,
+      "pool": {
+        "composite": -0.31493,
+        "rank": 114
+      },
+      "dfs": {
+        "composite": -0.31493,
+        "rank": 114,
+        "ceiling": 84.7,
+        "floor": 5.7,
+        "cv": 0.5732
+      }
     },
     {
       "rank": 115,
@@ -7199,7 +11135,23 @@
       "bbi_ceiling": 85.8,
       "floor": 5.8,
       "cv": 0.5717,
-      "bbi_value": 6.283
+      "bbi_value": 6.283,
+      "bbi_pool": -0.34131,
+      "bbi_dfs": -0.34131,
+      "p_win": 0.00075,
+      "value": 6.283,
+      "prob_win": 0.00075,
+      "pool": {
+        "composite": -0.34131,
+        "rank": 115
+      },
+      "dfs": {
+        "composite": -0.34131,
+        "rank": 115,
+        "ceiling": 85.8,
+        "floor": 5.8,
+        "cv": 0.5717
+      }
     },
     {
       "rank": 116,
@@ -7228,7 +11180,23 @@
       "bbi_ceiling": 58.7,
       "floor": 2.8,
       "cv": 0.5983,
-      "bbi_value": 4.269
+      "bbi_value": 4.269,
+      "bbi_pool": -0.34481,
+      "bbi_dfs": -0.34481,
+      "p_win": 3.3e-05,
+      "value": 4.269,
+      "prob_win": 3.3e-05,
+      "pool": {
+        "composite": -0.34481,
+        "rank": 116
+      },
+      "dfs": {
+        "composite": -0.34481,
+        "rank": 116,
+        "ceiling": 58.7,
+        "floor": 2.8,
+        "cv": 0.5983
+      }
     },
     {
       "rank": 117,
@@ -7257,7 +11225,23 @@
       "bbi_ceiling": 84.7,
       "floor": 4.8,
       "cv": 0.5859,
-      "bbi_value": 6.21
+      "bbi_value": 6.21,
+      "bbi_pool": -0.35158,
+      "bbi_dfs": -0.35158,
+      "p_win": 0.00065,
+      "value": 6.21,
+      "prob_win": 0.00065,
+      "pool": {
+        "composite": -0.35158,
+        "rank": 117
+      },
+      "dfs": {
+        "composite": -0.35158,
+        "rank": 117,
+        "ceiling": 84.7,
+        "floor": 4.8,
+        "cv": 0.5859
+      }
     },
     {
       "rank": 118,
@@ -7286,7 +11270,23 @@
       "bbi_ceiling": 95.9,
       "floor": 7.9,
       "cv": 0.5539,
-      "bbi_value": 6.727
+      "bbi_value": 6.727,
+      "bbi_pool": -0.3523,
+      "bbi_dfs": -0.3523,
+      "p_win": 0.0021,
+      "value": 6.727,
+      "prob_win": 0.0021,
+      "pool": {
+        "composite": -0.3523,
+        "rank": 118
+      },
+      "dfs": {
+        "composite": -0.3523,
+        "rank": 118,
+        "ceiling": 95.9,
+        "floor": 7.9,
+        "cv": 0.5539
+      }
     },
     {
       "rank": 119,
@@ -7315,7 +11315,23 @@
       "bbi_ceiling": 89.2,
       "floor": 7.2,
       "cv": 0.5557,
-      "bbi_value": 6.528
+      "bbi_value": 6.528,
+      "bbi_pool": -0.35606,
+      "bbi_dfs": -0.35606,
+      "p_win": 0.001367,
+      "value": 6.528,
+      "prob_win": 0.001367,
+      "pool": {
+        "composite": -0.35606,
+        "rank": 119
+      },
+      "dfs": {
+        "composite": -0.35606,
+        "rank": 119,
+        "ceiling": 89.2,
+        "floor": 7.2,
+        "cv": 0.5557
+      }
     },
     {
       "rank": 120,
@@ -7344,7 +11360,23 @@
       "bbi_ceiling": 82.3,
       "floor": 4.2,
       "cv": 0.594,
-      "bbi_value": 5.956
+      "bbi_value": 5.956,
+      "bbi_pool": -0.38596,
+      "bbi_dfs": -0.38596,
+      "p_win": 0.00045,
+      "value": 5.956,
+      "prob_win": 0.00045,
+      "pool": {
+        "composite": -0.38596,
+        "rank": 120
+      },
+      "dfs": {
+        "composite": -0.38596,
+        "rank": 120,
+        "ceiling": 82.3,
+        "floor": 4.2,
+        "cv": 0.594
+      }
     },
     {
       "rank": 121,
@@ -7373,7 +11405,23 @@
       "bbi_ceiling": 85.0,
       "floor": 4.1,
       "cv": 0.5972,
-      "bbi_value": 6.131
+      "bbi_value": 6.131,
+      "bbi_pool": -0.40822,
+      "bbi_dfs": -0.40822,
+      "p_win": 0.000667,
+      "value": 6.131,
+      "prob_win": 0.000667,
+      "pool": {
+        "composite": -0.40822,
+        "rank": 121
+      },
+      "dfs": {
+        "composite": -0.40822,
+        "rank": 121,
+        "ceiling": 85.0,
+        "floor": 4.1,
+        "cv": 0.5972
+      }
     },
     {
       "rank": 122,
@@ -7402,7 +11450,23 @@
       "bbi_ceiling": 84.5,
       "floor": 5.0,
       "cv": 0.5839,
-      "bbi_value": 6.074
+      "bbi_value": 6.074,
+      "bbi_pool": -0.41222,
+      "bbi_dfs": -0.41222,
+      "p_win": 0.0009,
+      "value": 6.074,
+      "prob_win": 0.0009,
+      "pool": {
+        "composite": -0.41222,
+        "rank": 122
+      },
+      "dfs": {
+        "composite": -0.41222,
+        "rank": 122,
+        "ceiling": 84.5,
+        "floor": 5.0,
+        "cv": 0.5839
+      }
     },
     {
       "rank": 123,
@@ -7431,7 +11495,23 @@
       "bbi_ceiling": 81.3,
       "floor": 5.0,
       "cv": 0.5803,
-      "bbi_value": 5.853
+      "bbi_value": 5.853,
+      "bbi_pool": -0.41696,
+      "bbi_dfs": -0.41696,
+      "p_win": 0.00065,
+      "value": 5.853,
+      "prob_win": 0.00065,
+      "pool": {
+        "composite": -0.41696,
+        "rank": 123
+      },
+      "dfs": {
+        "composite": -0.41696,
+        "rank": 123,
+        "ceiling": 81.3,
+        "floor": 5.0,
+        "cv": 0.5803
+      }
     },
     {
       "rank": 124,
@@ -7460,7 +11540,23 @@
       "bbi_ceiling": 79.6,
       "floor": 4.5,
       "cv": 0.5876,
-      "bbi_value": 5.747
+      "bbi_value": 5.747,
+      "bbi_pool": -0.47348,
+      "bbi_dfs": -0.47348,
+      "p_win": 0.000367,
+      "value": 5.747,
+      "prob_win": 0.000367,
+      "pool": {
+        "composite": -0.47348,
+        "rank": 124
+      },
+      "dfs": {
+        "composite": -0.47348,
+        "rank": 124,
+        "ceiling": 79.6,
+        "floor": 4.5,
+        "cv": 0.5876
+      }
     },
     {
       "rank": 125,
@@ -7489,7 +11585,23 @@
       "bbi_ceiling": 86.2,
       "floor": 5.2,
       "cv": 0.5823,
-      "bbi_value": 6.173
+      "bbi_value": 6.173,
+      "bbi_pool": -0.47925,
+      "bbi_dfs": -0.47925,
+      "p_win": 0.0009,
+      "value": 6.173,
+      "prob_win": 0.0009,
+      "pool": {
+        "composite": -0.47925,
+        "rank": 125
+      },
+      "dfs": {
+        "composite": -0.47925,
+        "rank": 125,
+        "ceiling": 86.2,
+        "floor": 5.2,
+        "cv": 0.5823
+      }
     },
     {
       "rank": 126,
@@ -7518,7 +11630,23 @@
       "bbi_ceiling": 84.0,
       "floor": 4.5,
       "cv": 0.5915,
-      "bbi_value": 6.142
+      "bbi_value": 6.142,
+      "bbi_pool": -0.49992,
+      "bbi_dfs": -0.49992,
+      "p_win": 0.00075,
+      "value": 6.142,
+      "prob_win": 0.00075,
+      "pool": {
+        "composite": -0.49992,
+        "rank": 126
+      },
+      "dfs": {
+        "composite": -0.49992,
+        "rank": 126,
+        "ceiling": 84.0,
+        "floor": 4.5,
+        "cv": 0.5915
+      }
     },
     {
       "rank": 127,
@@ -7547,7 +11675,23 @@
       "bbi_ceiling": 79.2,
       "floor": 4.6,
       "cv": 0.5861,
-      "bbi_value": 5.692
+      "bbi_value": 5.692,
+      "bbi_pool": -0.53945,
+      "bbi_dfs": -0.53945,
+      "p_win": 0.000533,
+      "value": 5.692,
+      "prob_win": 0.000533,
+      "pool": {
+        "composite": -0.53945,
+        "rank": 127
+      },
+      "dfs": {
+        "composite": -0.53945,
+        "rank": 127,
+        "ceiling": 79.2,
+        "floor": 4.6,
+        "cv": 0.5861
+      }
     },
     {
       "rank": 128,
@@ -7576,7 +11720,23 @@
       "bbi_ceiling": 98.1,
       "floor": 9.3,
       "cv": 0.5395,
-      "bbi_value": 6.996
+      "bbi_value": 6.996,
+      "bbi_pool": -0.54895,
+      "bbi_dfs": -0.54895,
+      "p_win": 0.003767,
+      "value": 6.996,
+      "prob_win": 0.003767,
+      "pool": {
+        "composite": -0.54895,
+        "rank": 128
+      },
+      "dfs": {
+        "composite": -0.54895,
+        "rank": 128,
+        "ceiling": 98.1,
+        "floor": 9.3,
+        "cv": 0.5395
+      }
     },
     {
       "rank": 129,
@@ -7605,7 +11765,23 @@
       "bbi_ceiling": 76.8,
       "floor": 3.4,
       "cv": 0.6046,
-      "bbi_value": 5.478
+      "bbi_value": 5.478,
+      "bbi_pool": -0.57499,
+      "bbi_dfs": -0.57499,
+      "p_win": 0.0004,
+      "value": 5.478,
+      "prob_win": 0.0004,
+      "pool": {
+        "composite": -0.57499,
+        "rank": 129
+      },
+      "dfs": {
+        "composite": -0.57499,
+        "rank": 129,
+        "ceiling": 76.8,
+        "floor": 3.4,
+        "cv": 0.6046
+      }
     },
     {
       "rank": 130,
@@ -7634,7 +11810,23 @@
       "bbi_ceiling": 56.3,
       "floor": 0,
       "cv": 1.0,
-      "bbi_value": -3.699
+      "bbi_value": -3.699,
+      "bbi_pool": -0.61652,
+      "bbi_dfs": -0.61652,
+      "p_win": 0.00155,
+      "value": -3.699,
+      "prob_win": 0.00155,
+      "pool": {
+        "composite": -0.61652,
+        "rank": 130
+      },
+      "dfs": {
+        "composite": -0.61652,
+        "rank": 130,
+        "ceiling": 56.3,
+        "floor": 0,
+        "cv": 1.0
+      }
     },
     {
       "rank": 131,
@@ -7663,7 +11855,23 @@
       "bbi_ceiling": 81.6,
       "floor": 5.1,
       "cv": 0.5803,
-      "bbi_value": 5.941
+      "bbi_value": 5.941,
+      "bbi_pool": -0.66196,
+      "bbi_dfs": -0.66196,
+      "p_win": 0.000733,
+      "value": 5.941,
+      "prob_win": 0.000733,
+      "pool": {
+        "composite": -0.66196,
+        "rank": 131
+      },
+      "dfs": {
+        "composite": -0.66196,
+        "rank": 131,
+        "ceiling": 81.6,
+        "floor": 5.1,
+        "cv": 0.5803
+      }
     },
     {
       "rank": 132,
@@ -7692,7 +11900,23 @@
       "bbi_ceiling": 61.4,
       "floor": 3.0,
       "cv": 0.6012,
-      "bbi_value": 4.084
+      "bbi_value": 4.084,
+      "bbi_pool": -1.02755,
+      "bbi_dfs": -1.02755,
+      "p_win": 6.7e-05,
+      "value": 4.084,
+      "prob_win": 6.7e-05,
+      "pool": {
+        "composite": -1.02755,
+        "rank": 132
+      },
+      "dfs": {
+        "composite": -1.02755,
+        "rank": 132,
+        "ceiling": 61.4,
+        "floor": 3.0,
+        "cv": 0.6012
+      }
     }
   ],
   "_public_scrubbed": true
