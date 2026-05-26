@@ -1,34 +1,34 @@
 {
-  "timestamp": "2026-05-26T13:43:04Z",
-  "phase_checked": "phase15",
-  "next_phase": "phase15_aeolus_zeus",
-  "status": "red",
+  "timestamp": "2026-05-26T16:34:33Z",
+  "phase_checked": "preview",
+  "next_phase": "phase2_preview",
+  "status": "green",
   "checks": {
     "current_event": {
-      "status": "fail",
-      "error": "current_event is stale",
-      "event_id": 19,
-      "event_name": "THE CJ CUP Byron Nelson",
-      "days_until_start": -6,
-      "team_event": false
+      "status": "pass",
+      "event_id": 21,
+      "event_name": "Charles Schwab Challenge",
+      "start_date": "2026-05-28",
+      "days_until_start": 1,
+      "team_event": false,
+      "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.24,
+      "duration_s": 0.2,
       "players_returned": 132,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "pass",
       "checked": [
+        "themis.json (0.0h)",
         "bbi_rankings.json (0.0h)"
       ]
     }
   },
-  "recommendations": [
-    "MNEMOSYNE has not advanced CURRENT_EVENT \u2014 pipeline will cascade-abort."
-  ],
-  "action_required": true,
+  "recommendations": [],
+  "action_required": false,
   "auto_generated_by": "github-actions / argus_health.py"
 }
