@@ -39,16 +39,10 @@
         const owner = r.previousElementSibling;
         if (owner) expansions.set(owner, r);
       });
-      rows.forEach((r, i) => {
+      rows.forEach(r => {
         tbody.appendChild(r);
         const ex = expansions.get(r);
         if (ex) tbody.appendChild(ex);
-        // Renumber the rank badge in the first <td>
-        const rankBadge = r.querySelector('td:first-child .player-rank');
-        if (rankBadge) {
-          rankBadge.textContent = i + 1;
-          rankBadge.classList.toggle('player-rank-gold', i < 3);
-        }
       });
       // header arrows
       ths.forEach(th => {

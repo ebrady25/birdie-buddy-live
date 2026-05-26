@@ -1,113 +1,847 @@
 {
-  "event": "THE CJ CUP Byron Nelson",
-  "event_slug": "Byron_Nelson",
+  "event": "PGA_Championship",
+  "event_slug": "PGA_Championship",
   "year": 2026,
-  "generated_at": "2026-05-25T16:30:32Z",
-  "constructor_version": "2.0",
-  "n_lineups": 1,
+  "generated_at": "2026-05-13T09:12:37Z",
+  "n_lineups": 10,
   "constraints": {
     "cap": 50000,
     "size": 6,
     "buckets": {
       "CASH": 2,
       "CORE": 5,
-      "GPP": 4,
+      "LEVERAGE": 4,
       "MOONSHOT": 1
     },
-    "course_tier_mult": {
-      "SPECIALIST": 1.15,
-      "COMFORTABLE": 1.0,
-      "NEUTRAL": 0.85,
-      "LIMITED": 0.8,
-      "NO_HISTORY": 0.75
-    },
-    "gpp_alpha": 0.5,
-    "wave_penalty": 2.0
+    "max_exposure_per_player": 6
   },
   "lineups": [
     {
-      "archetype": "MOONSHOT",
-      "salary": 48800,
-      "salary_remaining": 1200,
-      "avg_own": 0.0,
+      "archetype": "CASH",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 330.91,
+      "avg_own": 13.7,
+      "floor_score": 1.78,
+      "ceiling_score": 0.23,
       "players": [
         {
-          "dg_id": null,
+          "dg_id": 18417,
           "name": "Scheffler, Scottie",
-          "salary": 14800,
-          "zeus_dfs": 0,
-          "adj_proj": 0.0,
-          "own": 0,
-          "wave": null
+          "salary": 13900,
+          "zeus_dfs": 83.0,
+          "proj_own": 32.89,
+          "leverage": false
         },
         {
-          "dg_id": null,
-          "name": "Kanaya, Takumi",
-          "salary": 6900,
-          "zeus_dfs": 0,
-          "adj_proj": 0.0,
-          "own": 0,
-          "wave": null
+          "dg_id": 10091,
+          "name": "McIlroy, Rory",
+          "salary": 12400,
+          "zeus_dfs": 71.5189,
+          "proj_own": 21.03,
+          "leverage": false
         },
         {
-          "dg_id": null,
-          "name": "Kuchar, Matt",
-          "salary": 6900,
-          "zeus_dfs": 0,
-          "adj_proj": 0.0,
-          "own": 0,
-          "wave": null
+          "dg_id": 12965,
+          "name": "Fowler, Rickie",
+          "salary": 7400,
+          "zeus_dfs": 55.2617,
+          "proj_own": 18.04,
+          "leverage": false
         },
         {
-          "dg_id": null,
-          "name": "Blanchet, Chandler",
-          "salary": 6800,
-          "zeus_dfs": 0,
-          "adj_proj": 0.0,
-          "own": 0,
-          "wave": null
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "salary": 5800,
+          "zeus_dfs": 49.5606,
+          "proj_own": 7.54,
+          "leverage": false
         },
         {
-          "dg_id": null,
-          "name": "Grillo, Emiliano",
-          "salary": 6800,
-          "zeus_dfs": 0,
-          "adj_proj": 0.0,
-          "own": 0,
-          "wave": null
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 5400,
+          "zeus_dfs": 45.1523,
+          "proj_own": 2.14,
+          "leverage": false
         },
         {
-          "dg_id": null,
-          "name": "Dahmen, Joel",
-          "salary": 6600,
-          "zeus_dfs": 0,
-          "adj_proj": 0.0,
-          "own": 0,
-          "wave": null
+          "dg_id": 7301,
+          "name": "Dufner, Jason",
+          "salary": 5100,
+          "zeus_dfs": 26.4126,
+          "proj_own": 0.55,
+          "leverage": false
         }
-      ],
-      "proj_total": 0.0,
-      "floor_score": 0.0,
-      "ceiling_score": 0.0,
-      "total_salary": 48800
+      ]
+    },
+    {
+      "archetype": "CASH",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 314.02,
+      "avg_own": 12.13,
+      "floor_score": 1.83,
+      "ceiling_score": 0.25,
+      "players": [
+        {
+          "dg_id": 18417,
+          "name": "Scheffler, Scottie",
+          "salary": 13900,
+          "zeus_dfs": 83.0,
+          "proj_own": 32.89,
+          "leverage": false
+        },
+        {
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10200,
+          "zeus_dfs": 67.5309,
+          "proj_own": 18.22,
+          "leverage": false
+        },
+        {
+          "dg_id": 19895,
+          "name": "Schauffele, Xander",
+          "salary": 10100,
+          "zeus_dfs": 66.7207,
+          "proj_own": 14.07,
+          "leverage": false
+        },
+        {
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "salary": 5800,
+          "zeus_dfs": 49.5606,
+          "proj_own": 7.54,
+          "leverage": false
+        },
+        {
+          "dg_id": 25439,
+          "name": "Kern, Ben",
+          "salary": 5000,
+          "zeus_dfs": 23.7962,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 17617,
+          "name": "Berg, Derek",
+          "salary": 5000,
+          "zeus_dfs": 23.4094,
+          "proj_own": 0.03,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 42000,
+      "salary_remaining": 8000,
+      "proj_total": 318.26,
+      "avg_own": 7.99,
+      "floor_score": 1.28,
+      "ceiling_score": 0.15,
+      "players": [
+        {
+          "dg_id": 18417,
+          "name": "Scheffler, Scottie",
+          "salary": 13900,
+          "zeus_dfs": 83.0,
+          "proj_own": 32.89,
+          "leverage": false
+        },
+        {
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "salary": 5800,
+          "zeus_dfs": 49.5606,
+          "proj_own": 7.54,
+          "leverage": false
+        },
+        {
+          "dg_id": 14502,
+          "name": "Cauley, Bud",
+          "salary": 5700,
+          "zeus_dfs": 46.4348,
+          "proj_own": 2.38,
+          "leverage": false
+        },
+        {
+          "dg_id": 20706,
+          "name": "Wallace, Matt",
+          "salary": 5600,
+          "zeus_dfs": 48.0527,
+          "proj_own": 2.15,
+          "leverage": false
+        },
+        {
+          "dg_id": 7399,
+          "name": "Glover, Lucas",
+          "salary": 5600,
+          "zeus_dfs": 46.058,
+          "proj_own": 0.84,
+          "leverage": false
+        },
+        {
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 5400,
+          "zeus_dfs": 45.1523,
+          "proj_own": 2.14,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 297.68,
+      "avg_own": 12.13,
+      "floor_score": 1.72,
+      "ceiling_score": 0.23,
+      "players": [
+        {
+          "dg_id": 18417,
+          "name": "Scheffler, Scottie",
+          "salary": 13900,
+          "zeus_dfs": 83.0,
+          "proj_own": 32.89,
+          "leverage": false
+        },
+        {
+          "dg_id": 10091,
+          "name": "McIlroy, Rory",
+          "salary": 12400,
+          "zeus_dfs": 71.5189,
+          "proj_own": 21.03,
+          "leverage": false
+        },
+        {
+          "dg_id": 16841,
+          "name": "Lee, Min Woo",
+          "salary": 7500,
+          "zeus_dfs": 53.9779,
+          "proj_own": 9.95,
+          "leverage": false
+        },
+        {
+          "dg_id": 14181,
+          "name": "Detry, Thomas",
+          "salary": 6100,
+          "zeus_dfs": 38.9769,
+          "proj_own": 8.34,
+          "leverage": false
+        },
+        {
+          "dg_id": 7301,
+          "name": "Dufner, Jason",
+          "salary": 5100,
+          "zeus_dfs": 26.4126,
+          "proj_own": 0.55,
+          "leverage": false
+        },
+        {
+          "dg_id": 25439,
+          "name": "Kern, Ben",
+          "salary": 5000,
+          "zeus_dfs": 23.7962,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 309.73,
+      "avg_own": 11.85,
+      "floor_score": 1.75,
+      "ceiling_score": 0.23,
+      "players": [
+        {
+          "dg_id": 18417,
+          "name": "Scheffler, Scottie",
+          "salary": 13900,
+          "zeus_dfs": 83.0,
+          "proj_own": 32.89,
+          "leverage": false
+        },
+        {
+          "dg_id": 10091,
+          "name": "McIlroy, Rory",
+          "salary": 12400,
+          "zeus_dfs": 71.5189,
+          "proj_own": 21.03,
+          "leverage": false
+        },
+        {
+          "dg_id": 21891,
+          "name": "Kitayama, Kurt",
+          "salary": 7300,
+          "zeus_dfs": 53.3668,
+          "proj_own": 6.96,
+          "leverage": false
+        },
+        {
+          "dg_id": 14181,
+          "name": "Detry, Thomas",
+          "salary": 6100,
+          "zeus_dfs": 38.9769,
+          "proj_own": 8.34,
+          "leverage": false
+        },
+        {
+          "dg_id": 22985,
+          "name": "Smotherman, Austin",
+          "salary": 5300,
+          "zeus_dfs": 39.453,
+          "proj_own": 1.87,
+          "leverage": false
+        },
+        {
+          "dg_id": 17617,
+          "name": "Berg, Derek",
+          "salary": 5000,
+          "zeus_dfs": 23.4094,
+          "proj_own": 0.03,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 39800,
+      "salary_remaining": 10200,
+      "proj_total": 308.92,
+      "avg_own": 6.34,
+      "floor_score": 1.16,
+      "ceiling_score": 0.07,
+      "players": [
+        {
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10200,
+          "zeus_dfs": 67.5309,
+          "proj_own": 18.22,
+          "leverage": false
+        },
+        {
+          "dg_id": 14577,
+          "name": "English, Harris",
+          "salary": 7200,
+          "zeus_dfs": 52.5674,
+          "proj_own": 7.13,
+          "leverage": false
+        },
+        {
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "salary": 5800,
+          "zeus_dfs": 49.5606,
+          "proj_own": 7.54,
+          "leverage": false
+        },
+        {
+          "dg_id": 20706,
+          "name": "Wallace, Matt",
+          "salary": 5600,
+          "zeus_dfs": 48.0527,
+          "proj_own": 2.15,
+          "leverage": false
+        },
+        {
+          "dg_id": 7399,
+          "name": "Glover, Lucas",
+          "salary": 5600,
+          "zeus_dfs": 46.058,
+          "proj_own": 0.84,
+          "leverage": false
+        },
+        {
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 5400,
+          "zeus_dfs": 45.1523,
+          "proj_own": 2.14,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "LEVERAGE",
+      "salary": 44300,
+      "salary_remaining": 5700,
+      "proj_total": 263.43,
+      "avg_own": 4.4,
+      "floor_score": 1.1,
+      "ceiling_score": 0.08,
+      "players": [
+        {
+          "dg_id": 19895,
+          "name": "Schauffele, Xander",
+          "salary": 10100,
+          "zeus_dfs": 66.7207,
+          "proj_own": 14.07,
+          "leverage": false
+        },
+        {
+          "dg_id": 17646,
+          "name": "Fitzpatrick, Matt",
+          "salary": 10000,
+          "zeus_dfs": 63.6812,
+          "proj_own": 12.33,
+          "leverage": false
+        },
+        {
+          "dg_id": 22833,
+          "name": "Echavarria, Nico",
+          "salary": 6600,
+          "zeus_dfs": 40.2482,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 27819,
+          "name": "Castillo, Ricky",
+          "salary": 6400,
+          "zeus_dfs": 41.1551,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 28469,
+          "name": "Highsmith, Joe",
+          "salary": 5800,
+          "zeus_dfs": 26.2072,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 20766,
+          "name": "Brown, Dan",
+          "salary": 5400,
+          "zeus_dfs": 25.419,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "LEVERAGE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 317.79,
+      "avg_own": 9.5,
+      "floor_score": 1.77,
+      "ceiling_score": 0.14,
+      "players": [
+        {
+          "dg_id": 19895,
+          "name": "Schauffele, Xander",
+          "salary": 10100,
+          "zeus_dfs": 66.7207,
+          "proj_own": 14.07,
+          "leverage": false
+        },
+        {
+          "dg_id": 17646,
+          "name": "Fitzpatrick, Matt",
+          "salary": 10000,
+          "zeus_dfs": 63.6812,
+          "proj_own": 12.33,
+          "leverage": false
+        },
+        {
+          "dg_id": 23950,
+          "name": "Aberg, Ludvig",
+          "salary": 9800,
+          "zeus_dfs": 59.4261,
+          "proj_own": 17.04,
+          "leverage": false
+        },
+        {
+          "dg_id": 12294,
+          "name": "Fleetwood, Tommy",
+          "salary": 9700,
+          "zeus_dfs": 59.0157,
+          "proj_own": 11.41,
+          "leverage": false
+        },
+        {
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 5400,
+          "zeus_dfs": 45.1523,
+          "proj_own": 2.14,
+          "leverage": false
+        },
+        {
+          "dg_id": 25439,
+          "name": "Kern, Ben",
+          "salary": 5000,
+          "zeus_dfs": 23.7962,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "LEVERAGE",
+      "salary": 41800,
+      "salary_remaining": 8200,
+      "proj_total": 305.56,
+      "avg_own": 6.1,
+      "floor_score": 1.15,
+      "ceiling_score": 0.06,
+      "players": [
+        {
+          "dg_id": 23950,
+          "name": "Aberg, Ludvig",
+          "salary": 9800,
+          "zeus_dfs": 59.4261,
+          "proj_own": 17.04,
+          "leverage": false
+        },
+        {
+          "dg_id": 18841,
+          "name": "Hovland, Viktor",
+          "salary": 9600,
+          "zeus_dfs": 57.3139,
+          "proj_own": 6.91,
+          "leverage": false
+        },
+        {
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "salary": 5800,
+          "zeus_dfs": 49.5606,
+          "proj_own": 7.54,
+          "leverage": false
+        },
+        {
+          "dg_id": 20706,
+          "name": "Wallace, Matt",
+          "salary": 5600,
+          "zeus_dfs": 48.0527,
+          "proj_own": 2.15,
+          "leverage": false
+        },
+        {
+          "dg_id": 7399,
+          "name": "Glover, Lucas",
+          "salary": 5600,
+          "zeus_dfs": 46.058,
+          "proj_own": 0.84,
+          "leverage": false
+        },
+        {
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 5400,
+          "zeus_dfs": 45.1523,
+          "proj_own": 2.14,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "MOONSHOT",
+      "salary": 40500,
+      "salary_remaining": 9500,
+      "proj_total": 306.78,
+      "avg_own": 6.01,
+      "floor_score": 1.12,
+      "ceiling_score": 0.08,
+      "players": [
+        {
+          "dg_id": 10091,
+          "name": "McIlroy, Rory",
+          "salary": 12400,
+          "zeus_dfs": 71.5189,
+          "proj_own": 21.03,
+          "leverage": false
+        },
+        {
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "salary": 5800,
+          "zeus_dfs": 49.5606,
+          "proj_own": 7.54,
+          "leverage": false
+        },
+        {
+          "dg_id": 14502,
+          "name": "Cauley, Bud",
+          "salary": 5700,
+          "zeus_dfs": 46.4348,
+          "proj_own": 2.38,
+          "leverage": false
+        },
+        {
+          "dg_id": 20706,
+          "name": "Wallace, Matt",
+          "salary": 5600,
+          "zeus_dfs": 48.0527,
+          "proj_own": 2.15,
+          "leverage": false
+        },
+        {
+          "dg_id": 7399,
+          "name": "Glover, Lucas",
+          "salary": 5600,
+          "zeus_dfs": 46.058,
+          "proj_own": 0.84,
+          "leverage": false
+        },
+        {
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 5400,
+          "zeus_dfs": 45.1523,
+          "proj_own": 2.14,
+          "leverage": false
+        }
+      ]
     }
   ],
   "exposure": [
     {
-      "dg_id": null,
-      "name": "Villegas, Camilo",
+      "dg_id": 27194,
+      "name": "Hall, Harry",
       "n_lineups": 6,
-      "exposure_pct": 600.0,
+      "exposure_pct": 60.0,
+      "salary": 5800,
+      "proj": 49.5606,
+      "proj_own": 7.54
+    },
+    {
+      "dg_id": 14704,
+      "name": "Putnam, Andrew",
+      "n_lineups": 6,
+      "exposure_pct": 60.0,
+      "salary": 5400,
+      "proj": 45.1523,
+      "proj_own": 2.14
+    },
+    {
+      "dg_id": 18417,
+      "name": "Scheffler, Scottie",
+      "n_lineups": 5,
+      "exposure_pct": 50.0,
+      "salary": 13900,
+      "proj": 83.0,
+      "proj_own": 32.89
+    },
+    {
+      "dg_id": 10091,
+      "name": "McIlroy, Rory",
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 12400,
+      "proj": 71.5189,
+      "proj_own": 21.03
+    },
+    {
+      "dg_id": 20706,
+      "name": "Wallace, Matt",
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 5600,
+      "proj": 48.0527,
+      "proj_own": 2.15
+    },
+    {
+      "dg_id": 7399,
+      "name": "Glover, Lucas",
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 5600,
+      "proj": 46.058,
+      "proj_own": 0.84
+    },
+    {
+      "dg_id": 19895,
+      "name": "Schauffele, Xander",
+      "n_lineups": 3,
+      "exposure_pct": 30.0,
+      "salary": 10100,
+      "proj": 66.7207,
+      "proj_own": 14.07
+    },
+    {
+      "dg_id": 25439,
+      "name": "Kern, Ben",
+      "n_lineups": 3,
+      "exposure_pct": 30.0,
+      "salary": 5000,
+      "proj": 23.7962,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 7301,
+      "name": "Dufner, Jason",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 5100,
+      "proj": 26.4126,
+      "proj_own": 0.55
+    },
+    {
+      "dg_id": 26651,
+      "name": "Young, Cameron",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 10200,
+      "proj": 67.5309,
+      "proj_own": 18.22
+    },
+    {
+      "dg_id": 17617,
+      "name": "Berg, Derek",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 5000,
+      "proj": 23.4094,
+      "proj_own": 0.03
+    },
+    {
+      "dg_id": 14502,
+      "name": "Cauley, Bud",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 5700,
+      "proj": 46.4348,
+      "proj_own": 2.38
+    },
+    {
+      "dg_id": 14181,
+      "name": "Detry, Thomas",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
       "salary": 6100,
-      "zeus_dfs": 0,
-      "own": 0,
-      "course_tier": "NEUTRAL"
+      "proj": 38.9769,
+      "proj_own": 8.34
+    },
+    {
+      "dg_id": 17646,
+      "name": "Fitzpatrick, Matt",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 10000,
+      "proj": 63.6812,
+      "proj_own": 12.33
+    },
+    {
+      "dg_id": 23950,
+      "name": "Aberg, Ludvig",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 9800,
+      "proj": 59.4261,
+      "proj_own": 17.04
+    },
+    {
+      "dg_id": 12965,
+      "name": "Fowler, Rickie",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 7400,
+      "proj": 55.2617,
+      "proj_own": 18.04
+    },
+    {
+      "dg_id": 16841,
+      "name": "Lee, Min Woo",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 7500,
+      "proj": 53.9779,
+      "proj_own": 9.95
+    },
+    {
+      "dg_id": 21891,
+      "name": "Kitayama, Kurt",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 7300,
+      "proj": 53.3668,
+      "proj_own": 6.96
+    },
+    {
+      "dg_id": 22985,
+      "name": "Smotherman, Austin",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 5300,
+      "proj": 39.453,
+      "proj_own": 1.87
+    },
+    {
+      "dg_id": 14577,
+      "name": "English, Harris",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 7200,
+      "proj": 52.5674,
+      "proj_own": 7.13
+    },
+    {
+      "dg_id": 22833,
+      "name": "Echavarria, Nico",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6600,
+      "proj": 40.2482,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 27819,
+      "name": "Castillo, Ricky",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6400,
+      "proj": 41.1551,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 28469,
+      "name": "Highsmith, Joe",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 5800,
+      "proj": 26.2072,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 20766,
+      "name": "Brown, Dan",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 5400,
+      "proj": 25.419,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 12294,
+      "name": "Fleetwood, Tommy",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 9700,
+      "proj": 59.0157,
+      "proj_own": 11.41
+    },
+    {
+      "dg_id": 18841,
+      "name": "Hovland, Viktor",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 9600,
+      "proj": 57.3139,
+      "proj_own": 6.91
     }
   ],
-  "_built_by": "lineup_constructor_v2.py",
-  "_floor_enforced": {
-    "min_salary": 47500,
-    "fixed": 0,
-    "short": 0
-  }
+  "_built_by": "lineup_constructor.py"
 }

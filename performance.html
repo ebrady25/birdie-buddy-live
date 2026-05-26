@@ -2386,8 +2386,8 @@
         trendEl.classList.add(seasonVsBacktest >= 0 ? 'stat-delta-up' : 'stat-delta-down');
       }
 
-      const best = rolling.best_event || {};
-      $('#kpiBestEv').textContent = fmt.num(best.spearman_bbi, 3);
+      const best = rolling.best_bbi_spearman || {};
+      $('#kpiBestEv').textContent = fmt.num(best.value, 3);
       $('#kpiBestEvName').textContent = best.event || '—';
 
       $('#kpiBeatDg').textContent = rolling.events_bbi_beat_dg ?? 0;
