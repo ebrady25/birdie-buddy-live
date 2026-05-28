@@ -1239,6 +1239,7 @@
 </head>
 <body>
   <div id="site-header"></div>
+  <div id="authControl" style="position:absolute;right:16px;top:12px;z-index:1000;"></div>
 
   <main class="container">
     <div id="playerContent"></div>
@@ -2334,5 +2335,6 @@
       return name.split(' ').map(p => p[0]).join('').toUpperCase().slice(0, 2);
     }
   </script>
+  <script src="assets/js/auth.js"></script>
 </body>
 </html>
