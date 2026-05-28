@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "version": "2.0.0",
+    "calibrated": "2026-05-21",
+    "source": "back-test on RBC Heritage + Truist + Cadillac (n=35 lineups, Spearman vs actual)",
+    "note": "Pillars normalized (z-score) against the reference distribution before weighting; raw weight sums need not equal 1.0. Cash mode is field-size agnostic.",
+    "pillars": ["simLeverage", "ceiling", "bbi", "floor", "jointCut", "capPct", "mean", "dupRisk"]
+  },
+  "gpp": {
+    "local": { "simLeverage": 0.10, "ceiling": 0.15, "bbi": 0.20, "floor": 0.25, "jointCut": 0.05, "capPct": 0.15, "mean": 0.10, "dupRisk": 0.00 },
+    "mid":   { "simLeverage": 0.25, "ceiling": 0.25, "bbi": 0.20, "floor": 0.15, "jointCut": 0.00, "capPct": 0.10, "mean": 0.05, "dupRisk": 0.00 },
+    "large": { "simLeverage": 0.30, "ceiling": 0.25, "bbi": 0.17, "floor": 0.10, "jointCut": 0.00, "capPct": 0.05, "mean": 0.05, "dupRisk": 0.13 },
+    "mass":  { "simLeverage": 0.35, "ceiling": 0.25, "bbi": 0.15, "floor": 0.05, "jointCut": 0.00, "capPct": 0.00, "mean": 0.05, "dupRisk": 0.25 }
+  },
+  "cash": {
+    "local": { "simLeverage": 0.05, "ceiling": 0.05, "bbi": 0.20, "floor": 0.30, "jointCut": 0.25, "capPct": 0.10, "mean": 0.05, "dupRisk": 0.00 },
+    "mid":   { "simLeverage": 0.05, "ceiling": 0.05, "bbi": 0.20, "floor": 0.30, "jointCut": 0.25, "capPct": 0.10, "mean": 0.05, "dupRisk": 0.00 },
+    "large": { "simLeverage": 0.05, "ceiling": 0.05, "bbi": 0.20, "floor": 0.30, "jointCut": 0.25, "capPct": 0.10, "mean": 0.05, "dupRisk": 0.00 },
+    "mass":  { "simLeverage": 0.05, "ceiling": 0.05, "bbi": 0.20, "floor": 0.30, "jointCut": 0.25, "capPct": 0.10, "mean": 0.05, "dupRisk": 0.00 }
+  },
+  "styleNudge": {
+    "se": { "floor": 0.05, "simLeverage": -0.03, "ceiling": -0.02 },
+    "me": { "simLeverage": 0.05, "ceiling": 0.03, "floor": -0.05, "dupRisk": 0.03 }
+  }
+}

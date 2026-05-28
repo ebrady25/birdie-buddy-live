@@ -1161,6 +1161,7 @@
   <script src="assets/js/data.js"></script>
   <script src="assets/js/components.js"></script>
   <script src="assets/js/animations.js"></script>
+  <script src="assets/js/bbscore-v2.js"></script>
 
   <script>
     // ===================================================================
@@ -1229,10 +1230,12 @@
         return {
           dg_id: p.dg_id,
           name: p.name,
-          tier: p.tier,
-          salary: p.salary,
+          // Rich schema (live) uses dk_salary/proj_ownership/course_tier; archived
+          // pre-migration snapshots used salary/proj_own/tier. Accept either.
+          tier: p.course_tier ?? p.tier ?? '',
+          salary: p.dk_salary ?? p.salary ?? 0,
           bbi_dfs: p.bbi_dfs,
-          proj_own: p.proj_own,
+          proj_own: p.proj_ownership ?? p.proj_own ?? p.hermes_own ?? 0,
           raw,                            // raw factor values for recomputation
           mean: td.mean_points ?? p.proj_total ?? 0,
           std:  td.points_std ?? p.std_dev ?? 0,
@@ -1241,6 +1244,9 @@
           p50: td.p50 ?? 0,
           p75: td.p75 ?? 0,
           p95: td.p95 ?? 0,
+          // v2 score inputs
+          top10: td.empirical_top10_prob ?? p.prob_top10 ?? (p.top_10 != null ? p.top_10 / 100 : 0),
+          pCut:  p.prob_mc ?? (p.make_cut != null ? p.make_cut / 100 : 0.85),
         };
       });
       state.players.forEach(p => state.playersById.set(p.dg_id, p));
@@ -1426,16 +1432,20 @@
       if (capBar) capBar.classList.toggle('over', sumSalary > state.cap);
       if (capFill) capFill.style.width = `${Math.min(100, (sumSalary / state.cap) * 100)}%`;
 
-      // Update BirdieBuddy Score (replaces the old KPI readouts — same data now
-      // drives the meta labels under each sub-score)
-      updateBBScore({
-        players,
-        sumSalary,
-        sumMean,
-        avgOwn,
-        sumP5: players.reduce((a, p) => a + (p.p5 || 0), 0),
-        sumP95: players.reduce((a, p) => a + (p.p95 || 0), 0),
-      });
+      // Update BirdieBuddy Score. v2 (feature-flagged via ?bbv=2) routes to the
+      // calibrated engine; otherwise the original v1 scorer renders.
+      if (window.BB_VERSION === 'v2' && window.BBI && window.BBI.score) {
+        updateBBScoreV2(players);
+      } else {
+        updateBBScore({
+          players,
+          sumSalary,
+          sumMean,
+          avgOwn,
+          sumP5: players.reduce((a, p) => a + (p.p5 || 0), 0),
+          sumP95: players.reduce((a, p) => a + (p.p95 || 0), 0),
+        });
+      }
 
       // Distribution visual
       renderDist(players.length ? { p5, p25, p50, p75, p95, mean: sumMean, std: sumStd } : null);
@@ -1538,6 +1548,140 @@
         return `Floor is thin — fine for GPP, but risky if any picks miss the cut.`;
       }
       return null;
+    }
+
+    // =========================================================================
+    // BirdieBuddy Score v2 — calibrated engine path (feature-flagged ?bbv=2)
+    // Reuses the v1 .bbscore card DOM; engine math lives in bbscore-v2.js.
+    // =========================================================================
+    (function initBBVersion() {
+      const raw = new URLSearchParams(location.search).get('bbv');
+      let v;
+      if (raw === '2' || raw === 'v2') v = 'v2';
+      else if (raw === '1' || raw === 'v1') v = 'v1';
+      else v = localStorage.getItem('bbScoreVersion') || 'v1';
+      window.BB_VERSION = v;
+      try { if (raw) localStorage.setItem('bbScoreVersion', v); } catch (e) {}
+    })();
+
+    const bbv2 = { weights: null, refSamples: null, refStats: null, refCompByMode: {} };
+
+    function bbv2ToEngine(sp) {
+      return {
+        dg_id: sp.dg_id, name: sp.name, salary: sp.salary || 0,
+        mean: sp.mean || 0, std: sp.std || 0,
+        ceiling: sp.p75 || 0, floor: sp.p25 || 0,
+        bbi: sp.bbi_dfs || 0,
+        ownership: sp.proj_own > 1 ? sp.proj_own / 100 : (sp.proj_own || 0),
+        pCut: sp.pCut != null ? sp.pCut : 0.85,
+        top10: sp.top10 || 0
+      };
+    }
+
+    async function bbv2EnsureReady() {
+      const S = window.BBI && window.BBI.score;
+      if (!S) return false;
+      if (!bbv2.weights) {
+        try { bbv2.weights = await window.BBI.data.load('./data/bbscore_v2_weights.json'); }
+        catch (e) { bbv2.weights = await (await fetch('data/bbscore_v2_weights.json')).json(); }
+      }
+      if (!bbv2.refSamples) {
+        const pool = state.players.map(bbv2ToEngine).filter(p => p.salary > 0);
+        bbv2.refSamples = S.sampleRawPillars(pool, { n: 1500, cap: state.cap || 50000 });
+        bbv2.refStats = S.refStats(bbv2.refSamples);
+      }
+      return true;
+    }
+
+    function bbv2RefComposites(mode, weights) {
+      if (bbv2.refCompByMode[mode]) return bbv2.refCompByMode[mode];
+      const S = window.BBI.score;
+      const arr = bbv2.refSamples.map(r => S.composite(r, weights, bbv2.refStats));
+      bbv2.refCompByMode[mode] = arr;
+      return arr;
+    }
+
+    const BBV2_TAGLINES = {
+      A: ['Elite build — ship it', 'Tournament-grade lineup'],
+      B: ['Strong construction', 'Well-balanced build'],
+      C: ['Solid — room to optimize', 'Workable, small tweaks unlock more'],
+      D: ['Some dimensions drag this down', 'Risky in GPP'],
+      F: ['Needs work', 'This build has holes']
+    };
+    const BBV2_PILLARS = [
+      ['simLeverage', 'Leverage', 'top10 − own'],
+      ['ceiling',     'Ceiling',  'p75 sum'],
+      ['bbi',         'BBI',      'Σ bbi_dfs'],
+      ['floor',       'Floor',    'p25 sum'],
+      ['capPct',      'Salary',   'cap used']
+    ];
+
+    async function updateBBScoreV2(statePlayers) {
+      const root = document.getElementById('bbscore');
+      if (!root) return;
+      const setT = (id, t) => { const e = document.getElementById(id); if (e) e.textContent = t; };
+      const n = statePlayers.length;
+
+      if (n < 6) {
+        root.setAttribute('data-state', n === 0 ? 'empty' : 'partial');
+        root.setAttribute('data-grade', 'F');
+        setT('bbGrade', '—'); setT('bbNumber', '—');
+        setT('bbTagline', n === 0 ? 'Build 6 players to reveal your grade' : (n + ' of 6 slots filled — keep going'));
+        const tip = document.getElementById('bbTip'); if (tip) tip.hidden = true;
+        const ins = document.getElementById('bbInsight'); if (ins) ins.hidden = true;
+        bbv2.lastNum = 0;
+        return;
+      }
+
+      const ready = await bbv2EnsureReady();
+      if (!ready) return;
+      const S = window.BBI.score;
+      const cap = state.cap || 50000;
+      const mode = bbState.mode || 'gpp';
+      const bucket = 'mid';   // Phase 2: fixed bucket; field-size buckets land in Phase 3
+      const weights = S.pickWeights(bbv2.weights, mode, bucket, null);
+
+      const players = statePlayers.map(bbv2ToEngine);
+      const raw = S.computeRawPillars(players, { cap });
+      const refComp = bbv2RefComposites(mode, weights);
+      const c = S.composite(raw, weights, bbv2.refStats);
+      const pct = S.percentile(c, refComp);
+      const grade = S.gradeFromPercentile(pct);
+      const number = Math.round(pct * 100);
+
+      root.setAttribute('data-state', 'full');
+      root.setAttribute('data-grade', grade);
+      setT('bbGrade', grade);
+      // Set the readout directly (reliable everywhere), then let the count-up
+      // tween animate over it in a visible tab. rAF is paused in hidden tabs, so
+      // the direct set guarantees the number always shows.
+      const numEl = document.getElementById('bbNumber');
+      if (numEl) { numEl.textContent = number; tweenNumber(numEl, bbv2.lastNum || 0, number, 600); }
+      const tl = BBV2_TAGLINES[grade] || [''];
+      setT('bbTagline', tl[Math.floor(Math.random() * tl.length)]);
+
+      // per-pillar percentile bars in the existing 5 sub-slots
+      const subs = document.querySelectorAll('#bbSubs .bbsub');
+      let lowest = { pp: 2, label: '' };
+      BBV2_PILLARS.forEach((p, i) => {
+        const node = subs[i]; if (!node) return;
+        const vals = bbv2.refSamples.map(r => r[p[0]]);
+        const pp = S.percentile(raw[p[0]], vals);
+        const nm = node.querySelector('.bbsub-name'); if (nm) nm.textContent = p[1];
+        const bar = node.querySelector('.bbsub-bar > i'); if (bar) bar.style.width = Math.round(pp * 100) + '%';
+        const val = node.querySelector('.bbsub-value'); if (val) val.textContent = Math.round(pp * 100);
+        const meta = node.querySelector('.bbsub-meta'); if (meta) meta.textContent = p[2];
+        if (weights[p[0]] && pp < lowest.pp) lowest = { pp: pp, label: p[1] };
+      });
+
+      const tipEl = document.getElementById('bbTip');
+      if (tipEl) {
+        if (lowest.pp < 0.40 && lowest.label) {
+          tipEl.innerHTML = '<strong>' + lowest.label + '</strong> is your weakest dimension for this contest type — swapping one slot there is where the grade moves most.';
+          tipEl.hidden = false;
+        } else { tipEl.hidden = true; }
+      }
+      bbv2.lastNum = number;
     }
 
     function updateBBScore(data) {
