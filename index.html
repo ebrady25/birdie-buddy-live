@@ -419,6 +419,37 @@
     .hero h1 .char { transform: none; opacity: 1; filter: none; }
   }
 </style>
+<style>
+  /* auth.js injects its own CSS using the app design-system tokens (--gold-500,
+     --surface-2, --fs-2xs, --radius-md, …). The vault homepage uses a different
+     token system (--gold, --bg-2, --r-md). Alias the app tokens onto vault
+     values so the #authControl sign-in button styles correctly here too.
+     Keep in :root so multiple :root blocks merge (CSS spec). */
+  :root {
+    --fs-3xs: 10px;  --fs-2xs: 11.5px; --fs-xs: 12.5px; --fs-sm: 14px;
+    --fs-lg: 18px;   --fs-xl: 22px;
+    --space-1: var(--s-1); --space-2: var(--s-2); --space-3: var(--s-3);
+    --space-4: var(--s-4); --space-5: var(--s-5); --space-6: var(--s-6);
+    --space-8: var(--s-8); --space-10: var(--s-10);
+    --radius-sm: var(--r-sm); --radius-md: var(--r-md);
+    --radius-lg: var(--r-lg); --radius-xl: var(--r-xl);
+    --radius-2xl: 22px; --radius-full: var(--r-full);
+    --border-soft: var(--border); --border-base: var(--border-2);
+    --border-strong: var(--border-2); --border-gold-strong: var(--gold);
+    --gold-300: var(--gold-2); --gold-400: var(--gold); --gold-500: var(--gold); --gold-600: var(--gold-3);
+    --text-primary: var(--text); --text-body: var(--text-2);
+    --text-muted: var(--text-3); --text-faint: var(--text-4);
+    --surface-1: var(--bg);  --surface-2: var(--bg-2); --surface-3: var(--bg-3);
+    --surface-4: var(--bg-4); --surface-5: var(--bg-5);
+    --info: #60a5fa;
+    --dur-fast: 120ms; --dur-base: 200ms;
+    --ease-out: cubic-bezier(.22,1,.36,1); --ease-spring: cubic-bezier(.34,1.56,.64,1);
+    --shadow-lg: 0 10px 24px rgba(0,0,0,.5);
+    --shadow-xl: 0 20px 48px rgba(0,0,0,.6);
+    --shadow-gold-md: 0 4px 16px rgba(212,168,67,.15);
+    --tracking-wide: 0.04em; --tracking-widest: 0.08em;
+  }
+</style>
 </head>
 <body>
 
@@ -427,9 +458,10 @@
   <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
   <div class="links">
     <a href="rankings.html">Rankings</a>
-    <a href="full-rankings.html">Full Rankings</a>
+    <a href="full_rankings.html">Full Rankings</a>
     <a href="performance.html">Performance</a>
     <a href="methodology.html">Methodology</a>
+    <a href="pricing.html">Pricing</a>
   </div>
   <div id="authControl" style="margin-left:auto;"></div>
   <script src="assets/js/auth.js"></script>
@@ -604,9 +636,10 @@
   <div style="font-weight: 700; color: var(--text);">BirdieBuddy</div>
   <div style="display: flex; gap: var(--s-6);">
     <a href="rankings.html" style="color: var(--text-4);">Rankings</a>
-    <a href="full-rankings.html" style="color: var(--text-4);">Full Rankings</a>
+    <a href="full_rankings.html" style="color: var(--text-4);">Full Rankings</a>
     <a href="performance.html" style="color: var(--text-4);">Performance</a>
     <a href="methodology.html" style="color: var(--text-4);">Methodology</a>
+    <a href="pricing.html" style="color: var(--text-4);">Pricing</a>
   </div>
 </footer>
 
