@@ -88,6 +88,57 @@
       color: var(--text-muted);
     }
     .builder-filled strong { color: var(--gold-300); }
+    .builder-head-actions { display: flex; align-items: center; gap: var(--space-3); }
+    .btn-save-lineup {
+      font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 700;
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      padding: 5px 12px; border-radius: var(--radius-sm); cursor: pointer;
+      background: var(--gold-500); color: #1a1305; border: 1px solid var(--gold-400);
+      transition: all var(--dur-fast);
+    }
+    .btn-save-lineup:hover:not(:disabled) { background: var(--gold-400); transform: translateY(-1px); }
+    .btn-save-lineup:disabled { opacity: 0.4; cursor: not-allowed; background: var(--surface-4); color: var(--text-muted); border-color: var(--border-soft); }
+
+    /* Saved lineups (Section 02) */
+    .saved-empty {
+      padding: var(--space-5); text-align: center; color: var(--text-muted);
+      font-size: var(--fs-sm); background: var(--surface-2);
+      border: 1px dashed var(--border-soft); border-radius: var(--radius-lg);
+    }
+    .saved-empty strong { color: var(--gold-300); }
+    .saved-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); }
+    .saved-card {
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      border: 1px solid var(--border-soft); border-radius: var(--radius-lg);
+      padding: var(--space-4); position: relative;
+      transition: border-color var(--dur-base), transform var(--dur-base);
+    }
+    .saved-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+    .saved-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-3); }
+    .saved-card-title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-md); color: var(--text-primary); }
+    .saved-grade {
+      font-family: var(--font-display); font-weight: 800; font-size: var(--fs-xl); line-height: 1;
+      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-soft);
+    }
+    .saved-grade[data-grade="A"] { color: var(--gold-300); border-color: var(--border-gold); }
+    .saved-grade[data-grade="B"] { color: var(--gold-500); }
+    .saved-grade[data-grade="C"] { color: var(--warning); }
+    .saved-grade[data-grade="D"] { color: #ff9966; }
+    .saved-grade[data-grade="F"] { color: var(--negative); }
+    .saved-stats { display: flex; gap: var(--space-4); margin-bottom: var(--space-3); }
+    .saved-stat .s-label { display: block; font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-muted); }
+    .saved-stat .s-value { font-family: var(--font-mono); font-weight: 600; font-size: var(--fs-sm); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+    .saved-names { font-size: var(--fs-xs); color: var(--text-body); line-height: 1.5; margin-bottom: var(--space-3); min-height: 2.6em; }
+    .saved-actions { display: flex; gap: var(--space-2); }
+    .saved-actions button {
+      flex: 1; font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600;
+      letter-spacing: var(--tracking-wide); text-transform: uppercase; padding: 6px;
+      border-radius: var(--radius-sm); cursor: pointer; transition: all var(--dur-fast);
+      background: var(--surface-3); border: 1px solid var(--border-soft); color: var(--text-body);
+    }
+    .saved-actions .s-load:hover { border-color: var(--border-gold); color: var(--gold-300); }
+    .saved-actions .s-del:hover { border-color: rgba(248,113,113,0.4); color: var(--negative); }
 
     /* Lineup slots */
     .slots {
@@ -250,6 +301,73 @@
       color: var(--gold-300);
     }
     .bbscore-mode button:hover:not(.active) { color: var(--text-body); }
+
+    /* Contest field-size bucket selector */
+    .bbscore-buckets {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      margin-bottom: var(--space-4);
+    }
+    .bbscore-buckets button {
+      display: flex; flex-direction: column; align-items: center; gap: 1px;
+      padding: 6px 4px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--dur-fast);
+      position: relative;
+    }
+    .bbscore-buckets button span {
+      font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 700;
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+    }
+    .bbscore-buckets button small { font-family: var(--font-mono); font-size: 9px; color: var(--text-faint); }
+    .bbscore-buckets button.active {
+      background: var(--surface-5); border-color: var(--border-gold); color: var(--gold-300);
+    }
+    .bbscore-buckets button.active small { color: var(--gold-500); }
+    .bbscore-buckets button:hover:not(.active):not(.locked) { color: var(--text-body); border-color: var(--border-strong); }
+    .bbscore-buckets button.locked { opacity: 0.5; cursor: not-allowed; }
+    .bbscore-buckets button.locked::after {
+      content: '🔒'; position: absolute; top: 2px; right: 3px; font-size: 8px; opacity: 0.8;
+    }
+
+    /* Comparator — grade across all four field sizes */
+    .bbscore-comparator { margin-bottom: var(--space-4); }
+    .bbcmp-label {
+      font-family: var(--font-mono); font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-widest); text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 6px;
+    }
+    .bbcmp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .bbcmp-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 8px 4px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      position: relative; overflow: hidden;
+    }
+    .bbcmp-cell .bbcmp-bucket { font-family: var(--font-mono); font-size: 9px; letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-faint); }
+    .bbcmp-cell .bbcmp-grade { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 800; line-height: 1; }
+    .bbcmp-cell .bbcmp-num { font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-muted); }
+    .bbcmp-cell[data-grade="A"] .bbcmp-grade { color: var(--gold-300); }
+    .bbcmp-cell[data-grade="B"] .bbcmp-grade { color: var(--gold-500); }
+    .bbcmp-cell[data-grade="C"] .bbcmp-grade { color: var(--warning); }
+    .bbcmp-cell[data-grade="D"] .bbcmp-grade { color: #ff9966; }
+    .bbcmp-cell[data-grade="F"] .bbcmp-grade { color: var(--negative); }
+    .bbcmp-cell.current { border-color: var(--border-gold); box-shadow: inset 0 0 0 1px rgba(212,168,67,0.25); }
+    .bbcmp-cell.locked .bbcmp-grade,
+    .bbcmp-cell.locked .bbcmp-num { filter: blur(5px); opacity: 0.7; }
+    .bbcmp-cell.locked::after {
+      content: '🔒 ' attr(data-tier); position: absolute; inset: 0;
+      display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px;
+      font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.04em;
+      color: var(--gold-300); text-transform: uppercase;
+    }
 
     .bbscore-hero {
       display: grid;
@@ -971,7 +1089,10 @@
         <div class="builder-card">
           <div class="builder-head">
             <h3>Your lineup</h3>
-            <div class="builder-filled"><strong id="slotsFilled">0</strong> of 6 slots</div>
+            <div class="builder-head-actions">
+              <span class="builder-filled"><strong id="slotsFilled">0</strong> of 6 slots</span>
+              <button class="btn-save-lineup" id="btnSaveLineup" type="button" disabled>Save lineup</button>
+            </div>
           </div>
 
           <div class="slots" id="slots"></div>
@@ -993,6 +1114,14 @@
                 <button class="active" type="button" data-bb-mode="gpp" aria-pressed="true">GPP</button>
                 <button type="button" data-bb-mode="cash" aria-pressed="false">Cash</button>
               </div>
+            </div>
+
+            <!-- Contest field-size buckets (v2). Local is free; larger fields gate up. -->
+            <div class="bbscore-buckets" id="bbBuckets" role="radiogroup" aria-label="Contest field size">
+              <button class="active" type="button" data-bb-bucket="local"><span>Local</span><small>100–999</small></button>
+              <button type="button" data-bb-bucket="mid"><span>Mid</span><small>1k–10k</small></button>
+              <button type="button" data-bb-bucket="large"><span>Large</span><small>10k–30k</small></button>
+              <button type="button" data-bb-bucket="mass"><span>Mass</span><small>30k+</small></button>
             </div>
 
             <div class="bbscore-hero">
@@ -1045,6 +1174,12 @@
               </div>
             </div>
 
+            <!-- "If you played this in…" — grade across all four field sizes -->
+            <div class="bbscore-comparator" id="bbComparator" hidden>
+              <div class="bbcmp-label">If you played this in…</div>
+              <div class="bbcmp-grid" id="bbcmpGrid"></div>
+            </div>
+
             <div class="bbscore-tip" id="bbTip" hidden></div>
           </div>
 
@@ -1094,11 +1229,24 @@
       </div>
     </section>
 
-    <!-- ========== SECTION 2: WEIGHT PLAYGROUND ========== -->
+    <!-- ========== SECTION 2: MY LINEUPS ========== -->
     <section class="sim-section">
       <div class="sim-section-head">
         <div>
-          <span class="section-num">02 · Weight playground</span>
+          <span class="section-num">02 · My lineups</span>
+          <h2>Build a portfolio</h2>
+        </div>
+        <p class="sim-section-hint">Save up to 10 lineups and compare their grades side by side. Stored in your browser for this event. Click a card to load it back into the builder.</p>
+      </div>
+      <div class="saved-empty" id="savedEmpty">No saved lineups yet — fill all six slots above, then hit <strong>Save lineup</strong>.</div>
+      <div class="saved-grid" id="savedGrid"></div>
+    </section>
+
+    <!-- ========== SECTION 3: WEIGHT PLAYGROUND ========== -->
+    <section class="sim-section">
+      <div class="sim-section-head">
+        <div>
+          <span class="section-num">03 · Weight playground</span>
           <h2>Tune the 10 factors. Re-rank the field.</h2>
         </div>
         <p class="sim-section-hint">Adjust any factor weight to interrogate its impact. The top-20 board on the right resorts in real time. Your weights don't have to sum to 1 — the model normalizes internally.</p>
@@ -1193,7 +1341,9 @@
       poolSearch: '',
       defaultBBI: new Map(), // baseline BBI for rank-delta display
       cap: 50000,
-      presets: []            // preset lineups from dfs_lineups
+      presets: [],           // preset lineups from dfs_lineups
+      eventId: 'cur',        // for per-event localStorage keying of saved lineups
+      savedLineups: []       // user's saved portfolio (max 10), persisted to localStorage
     };
 
     (async function init() {
@@ -1208,6 +1358,7 @@
       ]);
 
       if (lu?.salary_cap) state.cap = lu.salary_cap;
+      state.eventId = (rk && rk.event_id) ?? (ev && ev.event_id) ?? 'cur';
       const field = rk?.players?.length || 0;
       const simField = document.getElementById('simField');
       const simCap = document.getElementById('simCap');
@@ -1268,10 +1419,12 @@
       // Pool events
       wireToolbars();
       // Initial renders
+      bbSavedLoad();
       renderSlots();
       renderPool();
       renderReranked();
       recomputeLineup();
+      bbSavedRender();
       window.observeAnimations?.(document);
     })();
 
@@ -1313,6 +1466,13 @@
       });
       const filled = document.getElementById('slotsFilled');
       if (filled) filled.textContent = String(state.lineup.length);
+      const saveBtn = document.getElementById('btnSaveLineup');
+      if (saveBtn) {
+        const full = state.lineup.length === ROSTER;
+        const atMax = (state.savedLineups || []).length >= 10;
+        saveBtn.disabled = !full || atMax;
+        saveBtn.textContent = atMax ? 'Max 10 saved' : 'Save lineup';
+      }
     }
 
     // ---------- Pool rendering ----------
@@ -1559,7 +1719,7 @@
       let v;
       if (raw === '2' || raw === 'v2') v = 'v2';
       else if (raw === '1' || raw === 'v1') v = 'v1';
-      else v = localStorage.getItem('bbScoreVersion') || 'v1';
+      else v = localStorage.getItem('bbScoreVersion') || 'v2';   // v2 is now the default; ?bbv=1 forces legacy
       window.BB_VERSION = v;
       try { if (raw) localStorage.setItem('bbScoreVersion', v); } catch (e) {}
     })();
@@ -1593,13 +1753,24 @@
       return true;
     }
 
-    function bbv2RefComposites(mode, weights) {
-      if (bbv2.refCompByMode[mode]) return bbv2.refCompByMode[mode];
+    function bbv2RefComposites(key, weights) {
+      if (bbv2.refCompByMode[key]) return bbv2.refCompByMode[key];
       const S = window.BBI.score;
       const arr = bbv2.refSamples.map(r => S.composite(r, weights, bbv2.refStats));
-      bbv2.refCompByMode[mode] = arr;
+      bbv2.refCompByMode[key] = arr;
       return arr;
     }
+
+    // Contest field-size buckets + tier gating (Phase 3)
+    const BBV2_BUCKETS = ['local', 'mid', 'large', 'mass'];
+    const BBV2_BUCKET_TIER = { local: 'free', mid: 'pro', large: 'all_access', mass: 'all_access' };
+    const BBV2_TIER_RANK = { free: 0, pro: 1, all_access: 2, sharp: 3 };
+    const BBV2_TIER_LABEL = { pro: 'Pro', all_access: 'All-Access' };
+    function bbv2UserRank() {
+      try { if (window.BBI && BBI.auth && typeof BBI.auth.tier === 'function') return BBV2_TIER_RANK[BBI.auth.tier()] ?? 0; } catch (e) {}
+      return 0;
+    }
+    function bbv2BucketUnlocked(b) { return bbv2UserRank() >= (BBV2_TIER_RANK[BBV2_BUCKET_TIER[b]] || 0); }
 
     const BBV2_TAGLINES = {
       A: ['Elite build — ship it', 'Tournament-grade lineup'],
@@ -1629,21 +1800,25 @@
         setT('bbTagline', n === 0 ? 'Build 6 players to reveal your grade' : (n + ' of 6 slots filled — keep going'));
         const tip = document.getElementById('bbTip'); if (tip) tip.hidden = true;
         const ins = document.getElementById('bbInsight'); if (ins) ins.hidden = true;
+        const cmp = document.getElementById('bbComparator'); if (cmp) cmp.hidden = true;
         bbv2.lastNum = 0;
         return;
       }
 
       const ready = await bbv2EnsureReady();
       if (!ready) return;
+      // once the engine reference is built, fill in any saved-card grades that
+      // rendered before it was ready
+      if (!bbv2._savedSynced) { bbv2._savedSynced = true; bbSavedRender(); }
       const S = window.BBI.score;
       const cap = state.cap || 50000;
       const mode = bbState.mode || 'gpp';
-      const bucket = 'mid';   // Phase 2: fixed bucket; field-size buckets land in Phase 3
+      const bucket = bbState.bucket || 'local';
       const weights = S.pickWeights(bbv2.weights, mode, bucket, null);
 
       const players = statePlayers.map(bbv2ToEngine);
       const raw = S.computeRawPillars(players, { cap });
-      const refComp = bbv2RefComposites(mode, weights);
+      const refComp = bbv2RefComposites(mode + ':' + bucket, weights);
       const c = S.composite(raw, weights, bbv2.refStats);
       const pct = S.percentile(c, refComp);
       const grade = S.gradeFromPercentile(pct);
@@ -1681,6 +1856,31 @@
           tipEl.hidden = false;
         } else { tipEl.hidden = true; }
       }
+
+      // Comparator: this lineup's grade across all four field sizes (premium blurred)
+      const cmpGrid = document.getElementById('bbcmpGrid');
+      const cmpWrap = document.getElementById('bbComparator');
+      if (cmpGrid && cmpWrap) {
+        cmpGrid.innerHTML = '';
+        BBV2_BUCKETS.forEach(b => {
+          const wB = S.pickWeights(bbv2.weights, mode, b, null);
+          const refB = bbv2RefComposites(mode + ':' + b, wB);
+          const pctB = S.percentile(S.composite(raw, wB, bbv2.refStats), refB);
+          const gB = S.gradeFromPercentile(pctB);
+          const unlocked = bbv2BucketUnlocked(b);
+          const cell = document.createElement('div');
+          cell.className = 'bbcmp-cell' + (b === bucket ? ' current' : '') + (unlocked ? '' : ' locked');
+          cell.setAttribute('data-grade', gB);
+          cell.setAttribute('data-tier', BBV2_TIER_LABEL[BBV2_BUCKET_TIER[b]] || '');
+          cell.innerHTML =
+            '<span class="bbcmp-bucket">' + b + '</span>' +
+            '<span class="bbcmp-grade">' + gB + '</span>' +
+            '<span class="bbcmp-num">' + Math.round(pctB * 100) + '</span>';
+          cmpGrid.appendChild(cell);
+        });
+        cmpWrap.hidden = false;
+      }
+
       bbv2.lastNum = number;
     }
 
@@ -1833,7 +2033,7 @@
       requestAnimationFrame(step);
     }
 
-    // Wire mode toggle (GPP / Cash)
+    // Wire mode toggle (GPP / Cash) + contest-bucket selector
     document.addEventListener('DOMContentLoaded', () => {
       const modeBtns = document.querySelectorAll('.bbscore-mode button[data-bb-mode]');
       modeBtns.forEach(btn => btn.addEventListener('click', () => {
@@ -1842,8 +2042,117 @@
         btn.setAttribute('aria-pressed', 'true');
         bbState.mode = btn.dataset.bbMode;
         recomputeLineup();
+        bbSavedRender();
       }));
+
+      // Bucket selector — lock by tier, default to the highest unlocked bucket.
+      const bucketBtns = [...document.querySelectorAll('#bbBuckets button[data-bb-bucket]')];
+      let defaultBucket = 'local';
+      bucketBtns.forEach(btn => {
+        const b = btn.dataset.bbBucket;
+        if (!bbv2BucketUnlocked(b)) btn.classList.add('locked');
+        else defaultBucket = b;   // DOM order is ascending, so last unlocked = highest
+      });
+      bbState.bucket = defaultBucket;
+      bucketBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.bbBucket === defaultBucket));
+      bucketBtns.forEach(btn => btn.addEventListener('click', () => {
+        const b = btn.dataset.bbBucket;
+        if (!bbv2BucketUnlocked(b)) {
+          const tip = document.getElementById('bbTip');
+          if (tip) {
+            tip.innerHTML = 'Scoring against <strong>' + b + '</strong>-field contests is a ' +
+              (BBV2_TIER_LABEL[BBV2_BUCKET_TIER[b]] || 'paid') +
+              ' feature. <a href="pricing.html" style="color:var(--gold-300)">Upgrade →</a>';
+            tip.hidden = false;
+          }
+          return;
+        }
+        bucketBtns.forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        bbState.bucket = b;
+        recomputeLineup();
+        bbSavedRender();
+      }));
+
+      const sb = document.getElementById('btnSaveLineup');
+      if (sb) sb.addEventListener('click', bbSaveCurrent);
     });
+
+    // =========================================================================
+    // Saved lineups — build a portfolio of up to 10, persisted to localStorage
+    // =========================================================================
+    function bbSavedKey() { return 'bbi_saved_lineups_' + (state.eventId || 'cur'); }
+    function bbSavedLoad() {
+      try { state.savedLineups = JSON.parse(localStorage.getItem(bbSavedKey()) || '[]'); }
+      catch (e) { state.savedLineups = []; }
+      if (!Array.isArray(state.savedLineups)) state.savedLineups = [];
+    }
+    function bbSavedPersist() {
+      try { localStorage.setItem(bbSavedKey(), JSON.stringify(state.savedLineups)); } catch (e) {}
+    }
+    function bbSaveCurrent() {
+      if (state.lineup.length !== ROSTER || state.savedLineups.length >= 10) return;
+      const players = state.lineup.map(id => state.playersById.get(id)).filter(Boolean);
+      const salary = players.reduce((a, p) => a + (p.salary || 0), 0);
+      state.savedLineups.push({ id: Date.now(), ids: [...state.lineup], salary });
+      bbSavedPersist(); renderSlots(); bbSavedRender();
+    }
+    function bbSavedDelete(id) {
+      state.savedLineups = state.savedLineups.filter(l => l.id !== id);
+      bbSavedPersist(); renderSlots(); bbSavedRender();
+    }
+    function bbSavedLoadInto(id) {
+      const l = state.savedLineups.find(x => x.id === id);
+      if (!l) return;
+      state.lineup = l.ids.filter(x => state.playersById.has(x)).slice(0, ROSTER);
+      renderSlots(); renderPool(); recomputeLineup();
+      document.getElementById('bbscore')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function bbSavedGrade(ids) {
+      const S = window.BBI && window.BBI.score;
+      if (!S || !bbv2.weights || !bbv2.refStats) return null;
+      const players = ids.map(id => state.playersById.get(id)).filter(Boolean).map(bbv2ToEngine);
+      if (players.length !== ROSTER) return null;
+      const mode = bbState.mode || 'gpp', bucket = bbState.bucket || 'local';
+      const w = S.pickWeights(bbv2.weights, mode, bucket, null);
+      const raw = S.computeRawPillars(players, { cap: state.cap || 50000 });
+      const pct = S.percentile(S.composite(raw, w, bbv2.refStats), bbv2RefComposites(mode + ':' + bucket, w));
+      return { grade: S.gradeFromPercentile(pct), number: Math.round(pct * 100) };
+    }
+    function bbSavedRender() {
+      const grid = document.getElementById('savedGrid');
+      const empty = document.getElementById('savedEmpty');
+      if (!grid) return;
+      const list = state.savedLineups || [];
+      if (empty) empty.hidden = list.length > 0;
+      grid.innerHTML = '';
+      list.forEach((l, i) => {
+        const players = l.ids.map(id => state.playersById.get(id)).filter(Boolean);
+        const sumMean = players.reduce((a, p) => a + (p.mean || 0), 0);
+        const g = bbSavedGrade(l.ids);
+        const names = players.map(p => fmt.abbrevName(p.name)).join(', ');
+        const card = document.createElement('div');
+        card.className = 'saved-card';
+        card.innerHTML =
+          '<div class="saved-card-head">' +
+            '<span class="saved-card-title">Lineup ' + (i + 1) + '</span>' +
+            '<span class="saved-grade" data-grade="' + (g ? g.grade : 'F') + '">' + (g ? g.grade : '·') + '</span>' +
+          '</div>' +
+          '<div class="saved-stats">' +
+            '<div class="saved-stat"><span class="s-label">Salary</span><span class="s-value">$' + (l.salary || 0).toLocaleString() + '</span></div>' +
+            '<div class="saved-stat"><span class="s-label">Proj</span><span class="s-value">' + sumMean.toFixed(1) + '</span></div>' +
+            '<div class="saved-stat"><span class="s-label">Score</span><span class="s-value">' + (g ? g.number : '—') + '</span></div>' +
+          '</div>' +
+          '<div class="saved-names">' + names + '</div>' +
+          '<div class="saved-actions">' +
+            '<button class="s-load" data-load="' + l.id + '">Load</button>' +
+            '<button class="s-del" data-del="' + l.id + '">Delete</button>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+      grid.querySelectorAll('[data-load]').forEach(b => b.addEventListener('click', () => bbSavedLoadInto(parseInt(b.getAttribute('data-load'), 10))));
+      grid.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => bbSavedDelete(parseInt(b.getAttribute('data-del'), 10))));
+    }
 
     function renderDist(dist) {
       const svg = document.getElementById('distSvg');
