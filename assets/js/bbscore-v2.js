@@ -27,43 +27,99 @@
   var ROSTER = 6;
   var DEFAULT_CAP = 50000;
 
-  // ---- schema adapter: the 3 archived events use drifted field names ----
-  // RBC/Cadillac: proj_own, make_cut, proj_total, ceiling/floor (Cadillac's are 0-1 normalized)
-  // Truist:       proj_ownership, p_makecut, proj_points_total
-  function normalizePlayer(p) {
-    var mean = num(p.proj_total) || num(p.proj_points_total) || num(p.dk_pts) || 0;
-    var std = num(p.std_dev) || num(p.dk_std) || 0;
+  // ---- schema adapter ----
+  // Handles three schemas in one place:
+  //   archived bbi_v85 (back-test): proj_own, make_cut, proj_total, ceiling/floor
+  //                                 (Cadillac's ceiling/floor are 0-1 normalized)
+  //   Truist archived:             proj_ownership, p_makecut, proj_points_total, p_top10
+  //   live rich (site):            dk_salary, proj_ownership, prob_mc, prob_top10
+  //                                + points distribution joined from THEMIS (2nd arg)
+  // Pass the player's THEMIS per_player record as `themis` when available; its
+  // mean_points / p25 / p75 / points_std / empirical_top10_prob take precedence.
+  function normalizePlayer(p, themis) {
+    themis = themis || {};
 
-    var ceil = num(p.ceiling);
-    var flr = num(p.floor);
-    // Cadillac stores ceiling/floor as 0-1 normalized factor scores, not points.
-    // Detect (value <= 1.5 while mean is a real point total) and reconstruct from
-    // a Normal(mean, std): p75 = mean + 0.6745*std, p25 = mean - 0.6745*std.
-    if (ceil > 0 && ceil <= 1.5 && mean > 5) {
+    var mean = num(themis.mean_points) || num(p.proj_total) || num(p.proj_points_total) || num(p.dk_pts) || 0;
+    var std = num(themis.points_std) || num(p.std_dev) || num(p.dk_std) || 0;
+
+    var p75 = num(themis.p75), p25 = num(themis.p25);
+    var ceil = p75 || num(p.ceiling);
+    var flr = p25 || num(p.floor);
+    // Archived Cadillac stores ceiling/floor as 0-1 normalized factor scores, not
+    // points. When no THEMIS percentile is available and the value looks normalized
+    // (<= 1.5 while mean is a real total), reconstruct from Normal(mean, std).
+    if (!p75 && ceil > 0 && ceil <= 1.5 && mean > 5) {
       ceil = std > 0 ? mean + 0.6745 * std : mean * 1.3;
       flr = std > 0 ? mean - 0.6745 * std : mean * 0.7;
     }
 
-    var own = firstNum([p.proj_own, p.proj_ownership, p.hermes_own], 0);
+    var salary = num(p.dk_salary) || num(p.salary) || 0;
+
+    var own = firstNum([p.proj_own, p.proj_ownership, p.hermes_own, p.dk_ownership], 0);
     own = own > 1 ? own / 100 : own;            // -> fraction 0..1
 
-    var cut = firstNum([p.make_cut, p.p_makecut != null ? p.p_makecut * 100 : null], null);
+    var cut = firstNum([
+      p.make_cut,
+      p.prob_mc != null ? p.prob_mc * 100 : null,
+      p.p_makecut != null ? p.p_makecut * 100 : null
+    ], null);
     if (cut == null) cut = 85;                   // default 85% make-cut when absent
     cut = cut > 1 ? cut / 100 : cut;             // -> fraction 0..1
     cut = clamp(cut, 0, 1);
 
-    var t10 = firstNum([p.top_10, p.p_top10], 0);
+    var t10 = firstNum([themis.empirical_top10_prob, p.top_10, p.prob_top10, p.p_top10], 0);
     t10 = t10 > 1 ? t10 / 100 : t10;             // -> fraction 0..1
 
     return {
       dg_id: p.dg_id, name: p.name,
-      salary: num(p.salary) || 0,
+      salary: salary,
       mean: mean, std: std,
       ceiling: ceil, floor: flr,
       bbi: num(p.bbi_dfs) || num(p.composite) || 0,
       ownership: own,
       pCut: cut,
       top10: t10
+    };
+  }
+
+  // ---- reference distribution: sample N random salary-valid lineups from a pool ----
+  // Returns raw-pillar objects for each sampled lineup. Used to build the
+  // normalization reference (mean/std per pillar) and the composite percentile
+  // ladder, client-side, until the server-baked sim grid lands.
+  function sampleRawPillars(pool, opts) {
+    opts = opts || {};
+    var n = opts.n || 1500, cap = opts.cap || DEFAULT_CAP, roster = opts.roster || ROSTER;
+    var rng = mulberry32(opts.seed || 0x9e3779b9);
+    var out = [], tries = 0, maxTries = n * 40;
+    while (out.length < n && tries < maxTries) {
+      tries++;
+      var picks = [], used = {}, sal = 0;
+      for (var k = 0; k < roster; k++) {
+        var idx = Math.floor(rng() * pool.length);
+        if (used[idx]) { k--; continue; }
+        used[idx] = 1; picks.push(pool[idx]); sal += pool[idx].salary;
+      }
+      if (sal > cap || sal < cap * 0.80) continue;  // valid salary envelope
+      out.push(computeRawPillars(picks, opts));
+    }
+    return out;
+  }
+
+  // percentile (0..1) of value within a numeric array (need not be pre-sorted)
+  function percentile(value, arr) {
+    if (!arr.length) return 0.5;
+    var below = 0;
+    for (var i = 0; i < arr.length; i++) if (arr[i] < value) below++;
+    return below / arr.length;
+  }
+
+  // small deterministic PRNG so reference sampling is stable per load
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
   }
 
@@ -181,6 +237,15 @@
     return r;
   }
 
+  // percentile (0..1) -> letter grade, per plan: A top10%, B top25%, C top50%, D top75%
+  function gradeFromPercentile(p) {
+    if (p >= 0.90) return 'A';
+    if (p >= 0.75) return 'B';
+    if (p >= 0.50) return 'C';
+    if (p >= 0.25) return 'D';
+    return 'F';
+  }
+
   var API = {
     VERSION: '2.0.0',
     PILLARS: PILLARS,
@@ -191,6 +256,9 @@
     composite: composite,
     pickWeights: pickWeights,
     spearman: spearman,
+    sampleRawPillars: sampleRawPillars,
+    percentile: percentile,
+    gradeFromPercentile: gradeFromPercentile,
     __backtest: __backtest
   };
 
