@@ -51,7 +51,7 @@
   }
   .vault-nav .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 18px; color: var(--text); }
   .vault-nav .brand span { color: var(--gold); }
-  .vault-nav .links { display: flex; gap: var(--s-6); font-size: 13px; color: var(--text-3); }
+  .vault-nav .links { display: flex; gap: var(--s-6); margin-left: var(--s-10); font-size: 13px; color: var(--text-3); }
   .vault-nav .links a { transition: color .25s ease; }
   .vault-nav .links a:hover { color: var(--gold); }
 
@@ -457,14 +457,26 @@
 <nav class="vault-nav">
   <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
   <div class="links">
-    <a href="rankings.html">Rankings</a>
-    <a href="full_rankings.html">Full Rankings</a>
+    <a href="full_rankings.html" data-rankings-link>Rankings</a>
     <a href="performance.html">Performance</a>
     <a href="methodology.html">Methodology</a>
     <a href="pricing.html">Pricing</a>
   </div>
   <div id="authControl" style="margin-left:auto;"></div>
   <script src="assets/js/auth.js"></script>
+  <script>
+    /* Smart Rankings link: free/logged-out → teaser; Pro+ → full field. */
+    (function routeRankingsLink() {
+      function apply() {
+        const paid = window.BBI && window.BBI.auth && window.BBI.auth.hasTier
+                   ? window.BBI.auth.hasTier('pro') : false;
+        document.querySelectorAll('[data-rankings-link]').forEach(a =>
+          a.setAttribute('href', paid ? 'rankings.html' : 'full_rankings.html'));
+      }
+      if (window.BBI && window.BBI.auth && window.BBI.auth.onChange) window.BBI.auth.onChange(apply);
+      apply();
+    })();
+  </script>
 </nav>
 
 <div class="cursor-glow" id="cursorGlow"></div>
@@ -635,8 +647,7 @@
 <footer class="vault-footer">
   <div style="font-weight: 700; color: var(--text);">BirdieBuddy</div>
   <div style="display: flex; gap: var(--s-6);">
-    <a href="rankings.html" style="color: var(--text-4);">Rankings</a>
-    <a href="full_rankings.html" style="color: var(--text-4);">Full Rankings</a>
+    <a href="full_rankings.html" data-rankings-link style="color: var(--text-4);">Rankings</a>
     <a href="performance.html" style="color: var(--text-4);">Performance</a>
     <a href="methodology.html" style="color: var(--text-4);">Methodology</a>
     <a href="pricing.html" style="color: var(--text-4);">Pricing</a>

@@ -188,7 +188,36 @@
       border-radius: var(--r-lg);
       padding: var(--s-6);
     }
-  
+
+    /* Locked (blurred) teaser rows */
+    .vault-table tr.locked-row td {
+      filter: blur(5px);
+      opacity: 0.55;
+      user-select: none;
+    }
+    .vault-table tr.locked-row { pointer-events: none; }
+
+    /* Unlock CTA */
+    .unlock-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--s-5); flex-wrap: wrap;
+      margin: calc(-1 * var(--s-8)) 0 var(--s-12);
+      padding: var(--s-5) var(--s-6);
+      background: linear-gradient(90deg, rgba(212,168,67,0.10), rgba(212,168,67,0.03));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--r-lg);
+    }
+    .unlock-cta-text { font-size: 14px; color: var(--text-3); max-width: 60ch; }
+    .unlock-cta-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+    .unlock-btn {
+      flex-shrink: 0;
+      padding: var(--s-3) var(--s-5);
+      background: var(--gold); color: #1a1408;
+      font-weight: 700; font-size: 13px;
+      border-radius: var(--r-md); text-decoration: none;
+      white-space: nowrap; transition: filter 0.2s;
+    }
+    .unlock-btn:hover { filter: brightness(1.08); }
       </style>
 </head>
 <body>
@@ -197,25 +226,25 @@
 <nav class="vault-nav">
   <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
   <div class="links">
-    <a href="rankings.html">Sneak Peek</a>
-    <a href="full_rankings.html" class="active">Full Rankings</a>
+    <a href="full_rankings.html" class="active" data-rankings-link>Rankings</a>
     <a href="performance.html">Performance</a>
     <a href="methodology.html">Methodology</a>
+    <a href="pricing.html">Pricing</a>
   </div>
 </nav>
 
 <main class="container">
   <div style="text-align:center;padding:var(--s-3) 0;border-bottom:1px solid var(--border-gold);background: linear-gradient(90deg, transparent, rgba(212,168,67,0.08), transparent);">
-    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Full rankings · All players · All factors · Subscriber-only</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Free preview · Top of the field · Updated weekly</span>
   </div>
   <header class="page-head">
     <div class="eyebrow">Live rankings · <span id="eventName">—</span></div>
-    <h1>The full field, decomposed.</h1>
-    <p>Complete subscriber rankings. Every player, every factor, fully visible. Expand any row for factor decomposition.</p>
+    <h1>This week's top of the field.</h1>
+    <p>A free look at the BirdieBuddy composite — the top three ranked players this week. Unlock the full field, every factor, and DFS value inside.</p>
   </header>
 
-  <!-- Toolbar -->
-  <div class="toolbar">
+  <!-- Toolbar (hidden on free preview) -->
+  <div class="toolbar" style="display:none;">
     <div class="chip-row" id="tierChips">
       <button class="chip" data-filter="all" aria-pressed="true">All</button>
       <button class="chip" data-filter="SPECIALIST">Specialist</button>
@@ -248,6 +277,15 @@
     </table>
   </div>
 
+  <!-- Unlock CTA -->
+  <div class="unlock-cta">
+    <div class="unlock-cta-text">
+      <strong>Seeing 3 of <span id="fieldSize">—</span> ranked players.</strong>
+      Unlock the full field, every factor decomposition, and DFS value with a BirdieBuddy membership.
+    </div>
+    <a href="pricing.html" class="unlock-btn">Unlock full rankings →</a>
+  </div>
+
   <!-- Weights -->
   <section style="padding: var(--s-12) 0; border-top: 1px solid var(--border);">
     <div class="section-head" style="text-align: left; margin-bottom: var(--s-6);">
@@ -255,7 +293,7 @@
       <h2 style="text-align: left; margin: 0;">Ten factors. One composite.</h2>
     </div>
     <div class="weights-card">
-      <div class="label-gold" style="margin-bottom: var(--s-4);">BBI weights (v8.5) — DFS mode</div>
+      <div class="label-gold" style="margin-bottom: var(--s-4);">Every player scored across ten weighted factors</div>
       <div id="weightsHost"></div>
     </div>
   </section>
@@ -264,7 +302,7 @@
 <footer class="vault-footer">
   <div style="font-weight: 700; color: var(--text);">BirdieBuddy</div>
   <div style="display: flex; gap: var(--s-6);">
-    <a href="rankings.html" style="color: var(--text-4);">Sneak Peek</a>
+    <a href="full_rankings.html" data-rankings-link style="color: var(--text-4);">Rankings</a>
     <a href="performance.html" style="color: var(--text-4);">Performance</a>
     <a href="methodology.html" style="color: var(--text-4);">Methodology</a>
   </div>
@@ -351,45 +389,50 @@
     const players = (rank && rank.rankings) || [];
     // Sort by BBI descending
     players.sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
+    // DFS value proxy = composite points per $1k salary
+    players.forEach(p => { p._value = (p.bbi_dfs && p.dk_salary) ? p.bbi_dfs / (p.dk_salary / 1000) : 0; });
 
-    // Heat
-    const hBbi = computeHeat(players, 'bbi_dfs');
-    const hWin = computeHeat(players, 'p_win');
-    const hVal = computeHeat(players, 'value');
+    // Free preview: only the top 5, with the bottom 2 blurred (3 visible)
+    const PREVIEW_ROWS = 5, VISIBLE_ROWS = 3;
+    const preview = players.slice(0, PREVIEW_ROWS);
+
+    // Heat (scaled across the previewed rows)
+    const hBbi = computeHeat(preview, 'bbi_dfs');
+    const hWin = computeHeat(preview, 'prob_win');
+    const hVal = computeHeat(preview, '_value');
 
     // Render rows
     const tbody = $('#rankBody');
     function renderRows() {
-      tbody.innerHTML = players.map((p, i) => {
+      tbody.innerHTML = preview.map((p, i) => {
+        const locked = i >= VISIBLE_ROWS;
         const rankClass = i < 3 ? 'rank-' + (i+1) : '';
         const bbiHeat = hBbi(p.bbi_dfs || 0).toFixed(3);
-        const winHeat = hWin(p.p_win || 0).toFixed(3);
-        const valHeat = hVal(p.value || 0).toFixed(3);
-        const ownColor = p.proj_ownership > 0.20 ? 'negative' : (p.proj_ownership > 0.10 ? 'gold' : 'positive');
+        const winHeat = hWin(p.prob_win || 0).toFixed(3);
+        const valHeat = hVal(p._value || 0).toFixed(3);
+        const ownColor = p.proj_ownership > 20 ? 'negative' : (p.proj_ownership > 10 ? 'gold' : 'positive');
         return `
-          <tr data-row data-rank="${i+1}" data-name="${p.name}" data-tier="${p.course_tier || 'NEUTRAL'}"
-              data-bbi="${p.bbi_dfs || 0}" data-win="${p.p_win || 0}" data-top10="${p.p_top10 || 0}"
-              data-salary="${p.salary || 0}" data-value="${p.value || 0}" data-own="${p.proj_ownership || 0}">
+          <tr data-row class="${locked ? 'locked-row' : ''}" data-rank="${i+1}" data-name="${p.name}" data-tier="${p.course_tier || 'NEUTRAL'}">
             <td><span class="${rankClass}">${i+1}</span></td>
             <td class="sticky-col">
               <div class="player-cell">
-                <button class="star-btn ${bbiBookmarks.has(p.dg_id) ? 'active' : ''}" data-star="${p.dg_id}">★</button>
+                ${locked ? '' : `<button class="star-btn ${bbiBookmarks.has(p.dg_id) ? 'active' : ''}" data-star="${p.dg_id}">★</button>`}
                 <span style="font-weight: 600;">${fmtName(p.name)}</span>
               </div>
             </td>
             <td><span class="tier-badge ${tierClass(p.course_tier)}">${(p.course_tier || 'NEUTRAL').slice(0, 4)}</span></td>
             <td class="num heat" style="--heat:${bbiHeat}"><strong>${fmtNum(p.bbi_dfs, 1)}</strong></td>
-            <td class="num heat" style="--heat:${winHeat}">${fmtPct(p.p_win, 1)}</td>
-            <td class="num">${fmtPct(p.p_top10, 1)}</td>
-            <td class="num">${p.salary ? '$' + Math.round(p.salary / 100) / 10 + 'k' : '—'}</td>
-            <td class="num heat" style="--heat:${valHeat}">${fmtNum(p.value, 2)}</td>
-            <td class="num" style="color: var(--${ownColor})">${fmtPct(p.proj_ownership, 1)}</td>
-            <td><button class="star-btn" data-expand="${p.dg_id}" style="font-size: 16px;">+</button></td>
+            <td class="num heat" style="--heat:${winHeat}">${fmtPct(p.prob_win, 1)}</td>
+            <td class="num">${fmtPct(p.prob_top10, 1)}</td>
+            <td class="num">${p.dk_salary ? '$' + Math.round(p.dk_salary / 100) / 10 + 'k' : '—'}</td>
+            <td class="num heat" style="--heat:${valHeat}">${fmtNum(p._value, 2)}</td>
+            <td class="num" style="color: var(--${ownColor})">${p.proj_ownership != null ? fmtNum(p.proj_ownership, 1) + '%' : '—'}</td>
+            <td>${locked ? '' : `<button class="star-btn" data-expand="${p.dg_id}" style="font-size: 16px;">+</button>`}</td>
           </tr>
         `;
       }).join('');
 
-      // Bind stars
+      // Bind stars (visible rows only)
       $$('.star-btn[data-star]', tbody).forEach(btn => {
         btn.addEventListener('click', e => {
           e.stopPropagation();
@@ -398,7 +441,7 @@
         });
       });
 
-      // Bind expands
+      // Bind expands (visible rows only)
       $$('[data-expand]', tbody).forEach(btn => {
         btn.addEventListener('click', e => {
           e.stopPropagation();
@@ -418,11 +461,10 @@
         });
       });
 
-      // Count
+      // Counts
+      const fs = $('#fieldSize'); if (fs) fs.textContent = players.length;
       $('#totalCount').textContent = players.length;
-      $('#shownCount').textContent = $$('tr[data-row]', tbody).filter(r => r.style.display !== 'none').length;
-
-      // Full rankings: no blur, all rows visible
+      $('#shownCount').textContent = VISIBLE_ROWS;
     }
 
     function expandHTML(p) {
@@ -468,14 +510,14 @@
             <div class="expand-block">
               <div class="title">Model output</div>
               <div class="key-stat-row">
-                <div class="key-stat"><div class="lbl">Win</div><div class="val">${fmtPct(p.p_win, 1)}</div></div>
-                <div class="key-stat"><div class="lbl">Top 5</div><div class="val">${fmtPct(p.p_top5, 1)}</div></div>
-                <div class="key-stat"><div class="lbl">Top 10</div><div class="val">${fmtPct(p.p_top10, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Win</div><div class="val">${fmtPct(p.prob_win, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Top 5</div><div class="val">${fmtPct(p.prob_top5, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Top 10</div><div class="val">${fmtPct(p.prob_top10, 1)}</div></div>
               </div>
               <div class="key-stat-row">
-                <div class="key-stat"><div class="lbl">Make cut</div><div class="val">${fmtPct(p.p_makecut, 0)}</div></div>
-                <div class="key-stat"><div class="lbl">Ceiling</div><div class="val">${fmtNum(p.ceiling, 1)}</div></div>
-                <div class="key-stat"><div class="lbl">Floor</div><div class="val">${fmtNum(p.floor, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Make cut</div><div class="val">${fmtPct(p.prob_mc, 0)}</div></div>
+                <div class="key-stat"><div class="lbl">Ceiling</div><div class="val">${fmtNum((p.dfs_decomp || {}).ceiling, 1)}</div></div>
+                <div class="key-stat"><div class="lbl">Floor</div><div class="val">${fmtNum((p.dfs_decomp || {}).floor, 1)}</div></div>
               </div>
             </div>
           </div>
@@ -546,46 +588,51 @@
       });
     });
 
-    // ========== WEIGHTS — Equalizer animation ==========
-    if (ev && ev.weights_dfs) {
+    // ========== TEN FACTORS — decorative synthesizer equalizer ==========
+    // No data binding: the bars slide back and forth like a music EQ.
+    (function renderFactorEqualizer() {
       const host = $('#weightsHost');
-      const arr = Object.entries(ev.weights_dfs).map(([k, v]) => ({ key: k, value: v * 100 }));
-      arr.sort((a, b) => b.value - a.value);
-      const maxW = Math.max(...arr.map(w => w.value));
-      
-      host.innerHTML = `<div class="factor-weights eq-weights" data-fw-id="global_weights">
-        ${arr.map((w) => `
-          <div class="factor-bar eq-bar" data-base="${(w.value / maxW * 100).toFixed(1)}" data-label="${w.key}">
-            <div class="label">${w.key}</div>
-            <div class="track eq-track"><div class="fill eq-fill" style="width: ${(w.value / maxW * 100).toFixed(1)}%"></div></div>
-            <div class="value eq-val">${fmtNum(w.value, 1)}%</div>
+      if (!host) return;
+      const FACTORS = [
+        { key: 'Talent',     base: 72 },
+        { key: 'Course Fit', base: 66 },
+        { key: 'Form',       base: 54 },
+        { key: 'Cut Safety', base: 46 },
+        { key: 'Floor',      base: 34 },
+        { key: 'Ceiling',    base: 60 },
+        { key: 'Leverage',   base: 42 },
+        { key: 'Contrarian', base: 30 },
+        { key: 'DFS Value',  base: 50 },
+        { key: 'Strategic',  base: 38 }
+      ];
+      host.innerHTML = `<div class="factor-weights eq-weights">
+        ${FACTORS.map(f => `
+          <div class="factor-bar eq-bar" data-base="${f.base}">
+            <div class="label">${f.key}</div>
+            <div class="track eq-track"><div class="fill eq-fill" style="width: ${f.base}%"></div></div>
           </div>
         `).join('')}
       </div>`;
-      
-      // Start equalizer animation
+
       (function eqLoop() {
         const t = performance.now() / 800;
         document.querySelectorAll('.eq-bar').forEach((bar, i) => {
-          const base = parseFloat(bar.dataset.base) || 30;
-          // Each bar has 3 overlapping sine waves for organic movement
-          const wave = Math.sin(t * 2.1 + i * 0.9) * 12 
+          const base = parseFloat(bar.dataset.base) || 40;
+          // Three overlapping sine waves → organic synthesizer movement
+          const wave = Math.sin(t * 2.1 + i * 0.9) * 12
                      + Math.sin(t * 3.7 + i * 1.3) * 8
                      + Math.sin(t * 1.3 + i * 0.4) * 6;
-          const wobble = Math.max(-15, Math.min(15, wave));
-          const newWidth = Math.max(5, Math.min(100, base + wobble));
+          const wobble = Math.max(-18, Math.min(18, wave));
+          const newWidth = Math.max(6, Math.min(100, base + wobble));
           const fill = bar.querySelector('.eq-fill');
-          const val = bar.querySelector('.eq-val');
-          if (fill) fill.style.width = newWidth + '%';
-          // Update the label color intensity based on position
           if (fill) {
-            const intensity = newWidth / 100;
-            fill.style.opacity = 0.5 + intensity * 0.5;
+            fill.style.width = newWidth + '%';
+            fill.style.opacity = 0.5 + (newWidth / 100) * 0.5;
           }
         });
         requestAnimationFrame(eqLoop);
       })();
-    }
+    })();
 
     // Init
     renderRows();
@@ -632,5 +679,18 @@
 {"event_name":"PGA Championship","week_num":20,"is_major":true,"weights_dfs":{"talent":0.13,"courseFit":0.20,"form":0.11,"cutSafety":0.08,"floor":0.05,"ceiling":0.13,"leverage":0.08,"contrarian":0.05,"dfsValue":0.12,"strategic":0.05}}
 </script>
   <script src="assets/js/auth.js"></script>
+  <script>
+    /* Smart Rankings link: free/logged-out → teaser; Pro+ → full field. */
+    (function routeRankingsLink() {
+      function apply() {
+        const paid = window.BBI && window.BBI.auth && window.BBI.auth.hasTier
+                   ? window.BBI.auth.hasTier('pro') : false;
+        document.querySelectorAll('[data-rankings-link]').forEach(a =>
+          a.setAttribute('href', paid ? 'rankings.html' : 'full_rankings.html'));
+      }
+      if (window.BBI && window.BBI.auth && window.BBI.auth.onChange) window.BBI.auth.onChange(apply);
+      apply();
+    })();
+  </script>
 </body>
 </html>
