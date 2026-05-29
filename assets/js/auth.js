@@ -78,6 +78,28 @@ window.BBI = window.BBI || {};
   const PAID = ['pro', 'all_access', 'sharp'];
   const tierOf = k => TIERS[k] || TIERS.free;
 
+  /* ---------------- PAGE ENTITLEMENTS ----------------
+     SINGLE SOURCE OF TRUTH for which pages require which tier. The router
+     (applyPageGate) reads this and gates the page's [data-gate-region] —
+     or its <main> if no region is marked — by stamping data-gate, which
+     applyGates() then renders (blur + upgrade overlay). Pages NOT listed
+     are free. simulator.html is intentionally omitted: it's a free hook
+     with in-page contest-bucket gating (Mid=Pro, Large/Mass=All-Access). */
+  const PAGE_TIERS = {
+    'rankings.html': 'pro',
+    'lineups.html':  'pro',
+    'live.html':     'pro',
+    'compare.html':  'pro',
+    'market.html':   'all_access'
+  };
+  const PAGE_GATE_MSG = {
+    'lineups.html': 'The 12 optimized DFS lineups — with the reasoning on every pick — are a Pro feature.',
+    'live.html':    'Live Thursday–Sunday pivots and late-swap calls are a Pro feature.',
+    'compare.html': 'Head-to-head player comparison is a Pro feature.',
+    'market.html':  'Market edges, devig, and Kelly staking are an All-Access feature.'
+  };
+  const currentPageName = () => (location.pathname.split('/').pop() || '') || 'index.html';
+
   /* ---------------- STORAGE ---------------- */
   const LS_USERS = 'bbi_auth_users_v1';
   const LS_SESSION = 'bbi_auth_session_v1';
@@ -141,7 +163,7 @@ window.BBI = window.BBI || {};
   let current = null; // {email,name,tier}
 
   const emit = () => { listeners.forEach(fn => { try { fn(current); } catch {} });
-                       applyGates(); renderHeaderControl(); };
+                       applyPageGate(); applyGates(); renderHeaderControl(); };
 
   const auth = {
     TIERS, PAID, backend: demoBackend,
@@ -261,9 +283,13 @@ window.BBI = window.BBI || {};
     .bbi-x:hover{background:var(--surface-5);color:var(--text-primary)}
     .bbi-locked{position:relative}
     .bbi-locked > .bbi-lock-content{filter:blur(7px);pointer-events:none;user-select:none}
-    .bbi-lock-ovl{position:absolute;inset:0;display:grid;place-items:center;
-      text-align:center;padding:var(--space-6);z-index:2}
-    .bbi-lock-card{max-width:340px;background:var(--surface-4);
+    /* Overlay spans the whole gated region; the card sticks just below the
+       nav so the upgrade CTA stays in view on tall, async-loading regions. */
+    .bbi-lock-ovl{position:absolute;inset:0;display:flex;justify-content:center;
+      align-items:flex-start;text-align:center;padding:var(--space-8) var(--space-6);
+      pointer-events:none;z-index:2}
+    .bbi-lock-card{position:sticky;top:calc(var(--nav-h, 64px) + 24px);
+      pointer-events:auto;max-width:340px;background:var(--surface-4);
       border:1px solid var(--border-gold);border-radius:var(--radius-xl);
       padding:var(--space-6);box-shadow:var(--shadow-gold-md)}
     .bbi-lock-card .eyebrow{margin-bottom:8px}
@@ -435,6 +461,22 @@ window.BBI = window.BBI || {};
     });
   }
 
+  /* ---------------- PAGE ROUTER ----------------
+     Stamps data-gate on the current page's gated region straight from the
+     PAGE_TIERS map, so all gating flows through one config instead of
+     hand-placed attributes. Region = [data-gate-region] if marked, else
+     <main>. Idempotent; the visual is handled by applyGates(). */
+  function applyPageGate() {
+    const page = currentPageName();
+    const need = PAGE_TIERS[page];
+    if (!need) return;
+    const region = document.querySelector('[data-gate-region]') || document.querySelector('main');
+    if (!region) return;
+    if (!region.getAttribute('data-gate')) region.setAttribute('data-gate', need);
+    if (!region.getAttribute('data-gate-msg') && PAGE_GATE_MSG[page])
+      region.setAttribute('data-gate-msg', PAGE_GATE_MSG[page]);
+  }
+
   /* ---------------- CONTENT GATING ----------------
      Any element: <section data-gate="all_access"> … </section>
      If the user's tier rank < required, the content is blurred and an
@@ -478,8 +520,17 @@ window.BBI = window.BBI || {};
   function escapeHtml(s) { return String(s ?? '').replace(/[&<>"]/g,
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
-  /* ---------------- BOOT ---------------- */
-  function boot() { injectCSS(); auth.init(); }
+  /* ---------------- BOOT ----------------
+     Resolve-window: seed tier synchronously from the stored session BEFORE
+     the async init() confirms it, then gate immediately. This gates-by-
+     default for free/logged-out users (no content flash) while preventing
+     the paywall from flashing to an already-entitled member. */
+  function boot() {
+    injectCSS();
+    try { current = store.get(LS_SESSION, null) || null; } catch {}
+    applyPageGate(); applyGates();
+    auth.init();
+  }
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', boot);
   else boot();
