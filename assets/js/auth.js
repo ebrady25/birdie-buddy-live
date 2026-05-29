@@ -120,6 +120,97 @@ window.BBI = window.BBI || {};
     }
   }
 
+  /* ---------------- SUPABASE BACKEND (LIVE) ----------------
+     Real auth against Supabase. Implements the same 5-method seam the demo
+     does, so flipping `backend` below is the only switch. Identity + tier are
+     server-truth: tier lives in public.profiles (RLS: a user reads only their
+     own row) and is set by the Stripe webhook, never by the client.
+     Public config only — the anon/publishable key is safe in the browser;
+     the service-role key lives ONLY in the Vercel /api functions.            */
+  const SUPABASE_URL      = 'https://mooqbndhgsuatxlkmlrq.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_zVvQoQNxnStWCeRgqg9Dlg_LhTcengq';
+  const API_BASE          = 'https://vercel-app-beige-psi.vercel.app';
+  const SUPABASE_JS_CDN   = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  const VALID_TIERS       = ['free', 'pro', 'all_access', 'sharp'];
+
+  // Lazy-load supabase-js once and memoize a single client (avoids the
+  // multiple-GoTrueClient warning). Resolves to the client.
+  let _sbPromise = null;
+  function getSupabase() {
+    if (_sbPromise) return _sbPromise;
+    _sbPromise = new Promise((resolve, reject) => {
+      const make = () => {
+        if (window.supabase?.createClient)
+          resolve(window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+        else reject(new Error('Auth library failed to initialize.'));
+      };
+      if (window.supabase?.createClient) return make();
+      const s = document.createElement('script');
+      s.src = SUPABASE_JS_CDN; s.async = true;
+      s.onload = make;
+      s.onerror = () => reject(new Error('Could not load the auth library.'));
+      document.head.appendChild(s);
+    });
+    return _sbPromise;
+  }
+
+  async function fetchTier(sb, userId) {
+    const { data } = await sb.from('profiles').select('tier').eq('id', userId).single();
+    return VALID_TIERS.includes(data?.tier) ? data.tier : 'free';
+  }
+  const friendlyAuthErr = m =>
+    /invalid login credentials/i.test(m) ? 'Invalid email or password.' : m;
+
+  const supabaseBackend = {
+    mode: 'live',
+    async signup({ email, password, name }) {
+      email = (email || '').trim().toLowerCase();
+      if (!email || !password) throw new Error('Email and password are required.');
+      const sb = await getSupabase();
+      const fallbackName = name || email.split('@')[0];
+      const { data, error } = await sb.auth.signUp({
+        email, password, options: { data: { name: fallbackName } }
+      });
+      if (error) throw new Error(error.message);
+      // With email confirmation ON, no session is returned until the user
+      // confirms. Signal that so the UI prompts "check your email".
+      if (!data.session) return { email, name: fallbackName, tier: 'free', needsConfirmation: true };
+      return { email, name: fallbackName, tier: await fetchTier(sb, data.user.id) };
+    },
+    async login({ email, password }) {
+      email = (email || '').trim().toLowerCase();
+      const sb = await getSupabase();
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) throw new Error(friendlyAuthErr(error.message));
+      const name = data.user.user_metadata?.name || email.split('@')[0];
+      return { email, name, tier: await fetchTier(sb, data.user.id) };
+    },
+    async checkout() {
+      // Stripe is not wired yet — never grant a paid tier without payment.
+      const e = new Error("Checkout isn't live yet — payments are coming soon.");
+      e.code = 'billing_unavailable';
+      throw e;
+    },
+    async portal() { return { url: null }; },          // Stripe billing portal (later)
+    async session() {
+      const sb = await getSupabase();
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session?.user) return null;
+      const email = session.user.email;
+      const name = session.user.user_metadata?.name || email?.split('@')[0] || email;
+      let tier = 'free';
+      try { tier = await fetchTier(sb, session.user.id); }
+      catch { tier = store.get(LS_SESSION, {})?.tier || 'free'; } // keep last-known on transient failure
+      return { email, name, tier };
+    },
+    async signOut() { try { (await getSupabase()).auth.signOut(); } catch {} },
+    async accessToken() {
+      const sb = await getSupabase();
+      const { data: { session } } = await sb.auth.getSession();
+      return session?.access_token || null;
+    }
+  };
+
   /* ---------------- BACKEND SEAM ----------------
      Replace these 5 methods with real API calls to go to production.
      Each returns/throws the same shapes the demo does. Pages never call
@@ -166,7 +257,7 @@ window.BBI = window.BBI || {};
                        applyPageGate(); applyGates(); renderHeaderControl(); };
 
   const auth = {
-    TIERS, PAID, backend: demoBackend,
+    TIERS, PAID, backend: supabaseBackend, API_BASE,
     user: () => current,
     tier: () => tierOf(current?.tier).key,
     isLoggedIn: () => !!current,
@@ -180,27 +271,56 @@ window.BBI = window.BBI || {};
         const users = store.get(LS_USERS, {});
         current = { email: s.email, name: s.name || s.email,
                     tier: users[s.email]?.tier || s.tier || 'free' };
+        store.set(LS_SESSION, current);
+      } else {
+        // No valid backend session — drop any stale synchronously-seeded state.
+        current = null; store.del(LS_SESSION);
       }
       emit();
       return current;
     },
     async signup(data) {
       const u = await this.backend.signup(data);
+      if (u && u.needsConfirmation) return u;  // don't log in until email is confirmed
       current = u; store.set(LS_SESSION, u); emit(); return u;
     },
     async login(data) {
       const u = await this.backend.login(data);
       current = u; store.set(LS_SESSION, u); emit(); return u;
     },
-    logout() { current = null; store.del(LS_SESSION); emit(); },
+    logout() {
+      this.backend.signOut?.();
+      current = null; store.del(LS_SESSION); emit();
+    },
 
     /** Start checkout for a tier. Demo grants immediately; prod → Stripe. */
     async subscribe(tier, cycle = 'year') {
       if (!current) { openModal('signup', { intentTier: tier, intentCycle: cycle }); return; }
-      const r = await this.backend.checkout({ email: current.email, tier, cycle });
-      current = { ...current, tier: r.tier }; store.set(LS_SESSION, current);
-      emit(); toast(`You're on ${tierOf(r.tier).name}${r.simulated ? ' (demo)' : ''}.`);
-      return r;
+      try {
+        const r = await this.backend.checkout({ email: current.email, tier, cycle });
+        if (r?.url) { location.href = r.url; return r; }          // real Stripe redirect (later)
+        if (r?.tier) {                                            // demo immediate grant
+          current = { ...current, tier: r.tier }; store.set(LS_SESSION, current);
+          emit(); toast(`You're on ${tierOf(r.tier).name}${r.simulated ? ' (demo)' : ''}.`);
+        }
+        return r;
+      } catch (e) {
+        if (e.code === 'billing_unavailable') { toast(e.message); return; }
+        throw e;
+      }
+    },
+
+    /** Authenticated read of the gated rankings backend. Sends the user's
+        Supabase token so Pro+ callers get full_json; free/anon get the teaser.
+        Returns the /api/rankings JSON envelope { event, tier, gated, data }. */
+    async fetchRankings(eventSlug) {
+      const token = await this.backend.accessToken?.();
+      const res = await fetch(
+        `${API_BASE}/api/rankings?event=${encodeURIComponent(eventSlug)}`,
+        token ? { headers: { Authorization: `Bearer ${token}` } } : undefined
+      );
+      if (!res.ok) throw new Error(`Rankings unavailable (${res.status}).`);
+      return res.json();
     },
     async manageBilling() {
       const r = await this.backend.portal({ email: current?.email });
@@ -374,10 +494,19 @@ window.BBI = window.BBI || {};
       const fd = new FormData(form);
       const data = { email: fd.get('email'), password: fd.get('password'),
                      name: fd.get('name') };
-      btn.disabled = true; err.textContent = '';
+      btn.disabled = true; err.textContent = ''; err.style.color = '';
       try {
-        if (mode === 'signup') await auth.signup(data);
-        else await auth.login(data);
+        if (mode === 'signup') {
+          const r = await auth.signup(data);
+          if (r && r.needsConfirmation) {                 // email confirmation is on
+            err.style.color = 'var(--text-muted)';
+            err.textContent = 'Almost there — check your email to confirm, then sign in.';
+            setMode('login');
+            return;
+          }
+        } else {
+          await auth.login(data);
+        }
         closeModal();
         if (modalIntent.intentTier) {
           await auth.subscribe(modalIntent.intentTier, modalIntent.intentCycle || 'year');
