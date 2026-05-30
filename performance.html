@@ -300,6 +300,26 @@
 
     /* Anchor offsets for in-page nav */
     section.section[id] { scroll-margin-top: calc(var(--nav-h) + var(--status-h) + 20px); }
+    /* Consistent break between every section */
+    main.container > section.section { margin-top: var(--space-5); padding-top: var(--space-6); border-top: 1px solid var(--border-subtle); }
+    main.container > section.section:first-of-type { margin-top: var(--space-6); padding-top: 0; border-top: none; }
+    /* Fix: the status-bar marquee is a flex item (flex:1) with a wide, non-shrinking
+       track. Default min-width:auto lets it widen the page; min-width:0 lets the
+       existing overflow:hidden clip it instead of creating a horizontal scrollbar. */
+    .marquee { min-width: 0; }
+    .status-bar-inner { min-width: 0; max-width: 100%; }
+    /* Attribution: a touch more air above the eyebrow + before the factor box. */
+    #attribution { padding-top: var(--space-8); }
+    #attribution .section-head { margin-bottom: var(--space-8); }
+    /* Shadow header: tighter cluster so it reads as one unit, not a tall stack. */
+    #shadow .section-head { margin-bottom: var(--space-4); }
+    #shadow .section-head-text { gap: 6px; }
+    #shadow .section-info { margin-top: 6px; }
+    #shadow .section-refreshed { margin-top: 2px; }
+    /* Declutter pass: drop the at-a-glance stat pills + per-section "Refreshed" badges
+       so every section header is just eyebrow → headline → "how it works". */
+    .section-head-text .section-glance, .section-head-text .section-refreshed { display: none; }
+    #world-rank .section-head { margin-bottom: var(--space-7); }
 
     /* =========================================================
        ALTERNATING SECTION ZONES — visual rhythm without dividers
@@ -377,7 +397,7 @@
       background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
       border: 1px solid var(--border-gold);
       border-radius: var(--radius-xl);
-      padding: var(--space-6);
+      padding: var(--space-8);
       margin-bottom: var(--space-8);
       position: relative;
       overflow: hidden;
@@ -392,9 +412,9 @@
     .rank-headline {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-5);
-      margin-bottom: var(--space-6);
-      padding-bottom: var(--space-4);
+      gap: var(--space-8);
+      margin-bottom: var(--space-7);
+      padding-bottom: var(--space-6);
       border-bottom: 1px solid var(--border-soft);
     }
     @media (max-width: 760px) {
@@ -403,8 +423,8 @@
     .rank-headline-item {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding: var(--space-3) var(--space-4);
+      gap: var(--space-2);
+      padding: var(--space-4) var(--space-5);
       background: rgba(255, 255, 255, 0.015);
       border-left: 2px solid var(--border-soft);
       border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -850,8 +870,8 @@
        COLLAPSIBLE SECTION DESCRIPTION ("Why this matters")
        ========================================================= */
     .section-info {
-      margin-top: var(--space-3);
-      margin-bottom: var(--space-2);
+      margin-top: var(--space-2);
+      margin-bottom: 0;
     }
     .section-info-toggle {
       display: inline-flex;
@@ -1504,6 +1524,335 @@
       font-style: italic;
     }
   </style>
+
+  <!-- =========================================================
+       VAULT RESTYLE — aligns this page to the homepage's
+       "Pantheon" aesthetic (warm near-black, cream text, gold
+       accents, centered eyebrow-rule section heads, hero energy).
+       Layered last so it wins the cascade over the app tokens.
+       Token-driven: warming :root recolors every component.
+       ========================================================= -->
+  <style id="vault-restyle">
+    /* ---------- 1 · WARM PALETTE (homepage token values) ---------- */
+    :root {
+      /* Surfaces — warm near-black graphite */
+      --surface-0: #060607;
+      --surface-1: #0a0a0c;
+      --surface-2: #111114;
+      --surface-3: #16161b;
+      --surface-4: #1c1b21;
+      --surface-5: #25242b;
+      --surface-6: #2f2d35;
+
+      /* Text — warm off-white → tan */
+      --text-primary: #f3eedf;
+      --text-body:    #cfc8b6;
+      --text-muted:   #9a9384;
+      --text-dimmed:  #6b6453;
+      --text-faint:   #46402f;
+      --text-on-gold: #14100a;
+
+      /* Borders — warm cream alpha, not blue-white */
+      --border-subtle:      rgba(243, 238, 223, 0.045);
+      --border-soft:        rgba(243, 238, 223, 0.075);
+      --border-base:        rgba(243, 238, 223, 0.11);
+      --border-strong:      rgba(243, 238, 223, 0.17);
+      --border-gold:        rgba(212, 168, 67, 0.32);
+      --border-gold-strong: rgba(212, 168, 67, 0.62);
+
+      /* Golds — homepage lineage (slightly warmer/brighter highs) */
+      --gold-700: #8a6e2a;
+      --gold-600: #b08828;
+      --gold-500: #d4a843;
+      --gold-400: #e0b552;
+      --gold-300: #e8c878;
+      --gold-200: #f3e1a0;
+      --gold-100: #f9ecb6;
+      --gold-900: #2a2110;
+
+      /* Semantic — kept on warm palette; baseline is muted steel, not saturated blue */
+      --positive:      #4ea564;
+      --positive-soft: rgba(78, 165, 100, 0.14);
+      --negative:      #d9624e;
+      --negative-soft: rgba(217, 98, 78, 0.14);
+      --info:          #8aa1bd;
+      --info-soft:     rgba(138, 161, 189, 0.14);
+      --warning:       #d9a441;
+      --warning-soft:  rgba(217, 164, 65, 0.14);
+
+      /* Ensure pill radius resolves on this build */
+      --radius-pill: 999px;
+    }
+
+    /* ---------- 2 · ATMOSPHERE ---------- */
+    html, body { background: var(--surface-1); }
+    body {
+      color: var(--text-body);
+      background-image:
+        radial-gradient(1100px 720px at 84% -10%, rgba(212, 168, 67, 0.055), transparent 60%),
+        radial-gradient(820px 560px at 50% 112%, rgba(212, 168, 67, 0.035), transparent 70%);
+      background-attachment: fixed;
+    }
+
+    /* ---------- 3 · TYPE — tighter, more confident headlines ---------- */
+    .page-head h1, .h-1, .h-2, .num-display { letter-spacing: -0.038em; }
+    .section-head-text h2 {
+      font-size: clamp(1.5rem, 2.6vw, 2.05rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+    }
+
+    /* ---------- 4 · PAGE HEAD → editorial hero ---------- */
+    .page-head {
+      text-align: center;
+      border-bottom: none;
+      padding: clamp(44px, 8vh, 92px) 0 var(--space-8);
+      margin-bottom: var(--space-4);
+      position: relative;
+    }
+    .page-head::before {
+      content: '';
+      position: absolute;
+      inset: -8% -25% auto;
+      top: 0; height: 86%;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 56% 70% at 50% 26%, rgba(212, 168, 67, 0.07), transparent 72%);
+    }
+    .page-head > * { position: relative; z-index: 1; }
+    .page-head .eyebrow {
+      display: inline-block;
+      position: relative;
+      padding: 0 22px;
+      margin-bottom: var(--space-5);
+      color: var(--gold-500);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      white-space: nowrap;
+    }
+    .page-head .eyebrow .gold { color: var(--gold-200); }
+    .page-head .eyebrow::before,
+    .page-head .eyebrow::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-gold-strong));
+    }
+    .page-head .eyebrow::before { right: 100%; }
+    .page-head .eyebrow::after  { left: 100%; background: linear-gradient(to left, transparent, var(--border-gold-strong)); }
+    .page-head h1 {
+      font-size: clamp(2.4rem, 5.6vw, 4.05rem);
+      font-weight: 800;
+      letter-spacing: -0.042em;
+      line-height: 0.98;
+      max-width: 19ch;
+      margin: 0 auto var(--space-5);
+    }
+    .page-head-meta {
+      justify-content: center;
+      border-top: none;
+      padding-top: 0;
+      margin-top: var(--space-2);
+      gap: var(--space-6);
+      color: var(--text-muted);
+    }
+    .page-head-meta strong { color: var(--text-primary); }
+    .page-head-meta .gold, .page-head-meta strong.gold { color: var(--gold-300); }
+
+    /* ---------- 5 · PULL-QUOTE PROOF LINE ---------- */
+    #perfHeadlineProof {
+      font-size: clamp(1.18rem, 1.9vw, 1.6rem) !important;
+      font-weight: 500;
+      color: var(--text-primary) !important;
+      line-height: 1.45 !important;
+      letter-spacing: -0.012em;
+      max-width: 42ch !important;
+      margin: var(--space-10) auto var(--space-2) !important;
+      padding-top: var(--space-6);
+      position: relative;
+      text-wrap: balance;
+    }
+    #perfHeadlineProof::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 52px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+    }
+    #perfHeadlineProof strong { color: var(--gold-200); font-weight: 700; }
+
+    /* ---------- 6 · SECTION HEADS → centered eyebrow-rule motif ---------- */
+    .section-head {
+      display: block;
+      text-align: center;
+      margin-bottom: var(--space-5);
+    }
+    .section-head-text {
+      align-items: center;
+      max-width: 760px;
+      margin: 0 auto;
+      gap: var(--space-2);
+    }
+    .section-head .eyebrow {
+      display: inline-block;
+      position: relative;
+      padding: 0 20px;
+      margin-bottom: 2px;
+      color: var(--gold-500);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      white-space: nowrap;
+    }
+    .section-head .eyebrow::before,
+    .section-head .eyebrow::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-gold-strong));
+    }
+    .section-head .eyebrow::before { right: 100%; }
+    .section-head .eyebrow::after  { left: 100%; background: linear-gradient(to left, transparent, var(--border-gold-strong)); }
+    .section-head-text > p { max-width: 56ch; margin-left: auto; margin-right: auto; }
+    .section-info { text-align: center; }
+    .section-info-toggle { white-space: nowrap; }
+    .section-info-body p { text-align: left; margin: 0 auto; }
+    /* glance pill reads cleaner as its own centered line under long titles */
+    .section-glance { background: var(--surface-3); border-color: var(--border-soft); }
+    .section-glance:empty { display: none; }
+    .section-glance strong { color: var(--gold-300); }
+
+    /* ---------- 7 · KPI STRIP → big, confident, glassy ---------- */
+    .kpi-strip { gap: var(--space-3); margin-top: var(--space-2); }
+    .kpi-strip .stat {
+      background: linear-gradient(180deg, rgba(24, 24, 30, 0.62), rgba(13, 13, 17, 0.55));
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-5) var(--space-6);
+    }
+    .kpi-strip .stat-label { color: var(--text-muted); letter-spacing: 0.18em; }
+    .kpi-strip .stat-value {
+      font-size: clamp(1.7rem, 2.7vw, 2.45rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-top: 2px;
+    }
+    .kpi-strip .stat-value-gold {
+      background: linear-gradient(135deg, var(--gold-200), var(--gold-500));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .kpi-strip .stat-sub { color: var(--text-muted); }
+
+    /* ---------- 8 · CARDS → homepage glass + gold titles ---------- */
+    .card,
+    .perf-card,
+    .attr-card,
+    .shadow-card,
+    .calib-market,
+    .bt-leader-card,
+    .promo-card {
+      background: linear-gradient(180deg, rgba(23, 23, 29, 0.6), rgba(13, 13, 17, 0.55));
+    }
+    .card-title { color: var(--gold-500); }
+    .card-title-accent { color: var(--gold-300); }
+    .perf-card-head h3,
+    .recap-header-info h3 { letter-spacing: -0.02em; }
+
+    /* World-rank hero card: keep its gold top-rule premium */
+    .rank-card { background: linear-gradient(180deg, rgba(26, 24, 18, 0.7), rgba(13, 13, 17, 0.6)); }
+    .rank-summary { background: linear-gradient(180deg, rgba(23, 23, 29, 0.6), rgba(13, 13, 17, 0.5)); }
+
+    /* Baseline / "the other model" series — muted steel, never neon blue */
+    .legend-dot.dg { background: var(--info); box-shadow: 0 0 0 3px rgba(138, 161, 189, 0.14); }
+    .legend-dot.bbi { background: var(--gold-500); box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.18); }
+    .rank-headline-item.baseline .rank-headline-eyebrow { color: #aebdd1; }
+    .rank-marker.baseline .rank-marker-pill { color: #cdd8e6; background: rgba(138, 161, 189, 0.16); border-color: var(--info); }
+
+    /* ---------- 9 · ZONE BANDS → warm, quiet ---------- */
+    section.section.zone-elevated {
+      background:
+        radial-gradient(82% 60% at 50% 0%, rgba(212, 168, 67, 0.035), transparent 70%),
+        linear-gradient(180deg, var(--surface-2), rgba(11, 11, 14, 0.55));
+    }
+
+    /* ---------- 10 · STICKY CHROME → warm frost ---------- */
+    .perf-mini {
+      background: linear-gradient(180deg, rgba(10, 10, 12, 0.96), rgba(10, 10, 12, 0.88));
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .perf-mini-brand, .perf-mini-stat strong { color: var(--gold-200); }
+    .perf-toc {
+      background: rgba(10, 10, 12, 0.92);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .toc-pill.active {
+      color: var(--gold-200);
+      background: rgba(212, 168, 67, 0.13);
+      border-color: var(--border-gold);
+    }
+
+    /* ---------- 11 · LOCKED ATTRIBUTION → velvet rope ----------
+       auth.js injects the blur + upgrade overlay and reads
+       data-gate / data-gate-msg. It styles with the app tokens
+       we've warmed above, so its overlay inherits this palette.
+       We add a premium gold frame + aura around the gated card and
+       style the common overlay/upgrade-card patterns so the wall
+       reads as desirable, not broken. */
+    #attribution { position: relative; }
+    #attribution .attr-card {
+      border-color: var(--border-gold);
+      box-shadow: 0 0 0 1px var(--border-gold), 0 24px 60px -28px rgba(212, 168, 67, 0.25);
+    }
+    #attribution .attr-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-500), transparent);
+      z-index: 2;
+    }
+    /* Blur treatment for the gated content beneath the overlay */
+    .blurred, [data-gated-content].locked, .gate-blur {
+      filter: blur(5px) saturate(0.85);
+      opacity: 0.55;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Generic upgrade overlay/card styling (best-effort match to auth.js) */
+    .gate-overlay, .upgrade-overlay, [data-gate-overlay] {
+      position: absolute; inset: 0; z-index: 5;
+      display: flex; align-items: center; justify-content: center;
+      padding: var(--space-6);
+      background:
+        radial-gradient(120% 90% at 50% 40%, rgba(10, 10, 12, 0.4), rgba(10, 10, 12, 0.82) 70%);
+      backdrop-filter: saturate(130%) blur(2px);
+      -webkit-backdrop-filter: saturate(130%) blur(2px);
+    }
+    .gate-card, .upgrade-card, [data-gate-card] {
+      max-width: 440px; text-align: center;
+      padding: var(--space-8);
+      background: linear-gradient(180deg, rgba(26, 24, 18, 0.92), rgba(14, 13, 16, 0.92));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-gold-strong) inset;
+    }
+
+    /* ---------- 12 · MISC POLISH ---------- */
+    .table tbody tr:hover { background: rgba(212, 168, 67, 0.05); }
+    .gloss { border-bottom-color: var(--gold-600); }
+    ::selection { background: rgba(212, 168, 67, 0.30); color: var(--text-primary); }
+
+    @media (max-width: 600px) {
+      .page-head h1 { letter-spacing: -0.03em; }
+      .section-head .eyebrow { letter-spacing: 0.2em; }
+    }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
@@ -1526,7 +1875,6 @@
     <header class="page-head">
       <div class="eyebrow">Public performance tracking · BBI <span class="gold">v8.5</span></div>
       <h1>The model's report card — every week, no asterisks.</h1>
-      <p>Every prediction BBI makes is scored against the truth. Spearman rank correlation vs. the published industry baseline. Brier-score calibration across five markets. Four shadow variants competing against the champion every Monday. This is what model honesty looks like.</p>
       <div class="page-head-meta">
         <span>Season <strong>2026</strong></span>
         <span>Events tracked <strong id="pmEvents" class="skeleton" style="min-width: 20px;">00</strong></span>
@@ -1571,10 +1919,10 @@
         <span class="perf-toc-eyebrow">Jump to</span>
         <a href="#world-rank" class="toc-pill" data-toc="world-rank">Global rank</a>
         <a href="#spearman" class="toc-pill" data-toc="spearman">Spearman <span class="toc-stat" id="tocSpearmanStat"></span></a>
+        <a href="#calibration" class="toc-pill" data-toc="calibration">Calibration</a>
         <a href="#recaps" class="toc-pill" data-toc="recaps">Recaps <span class="toc-stat" id="tocRecapsStat"></span></a>
         <a href="#attribution" class="toc-pill" data-toc="attribution">Attribution</a>
         <a href="#shadow" class="toc-pill" data-toc="shadow">Shadow models</a>
-        <a href="#calibration" class="toc-pill" data-toc="calibration">Calibration</a>
         <a href="#backtest" class="toc-pill" data-toc="backtest">Backtest <span class="toc-stat" id="tocBacktestStat"></span></a>
         <a href="#dfs" class="toc-pill" data-toc="dfs">DFS <span class="toc-stat" id="tocDfsStat"></span></a>
         <a href="#competition" class="toc-pill" data-toc="competition">Competition</a>
@@ -1585,6 +1933,7 @@
     <section class="section zone-elevated" id="world-rank" data-reveal>
       <div class="section-head">
         <div class="section-head-text">
+          <span class="eyebrow">Global standing · world ranking</span>
           <h2>Where BBI ranks among the world's golf models.</h2>
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">Why this matters</button>
@@ -1656,6 +2005,7 @@
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Spearman ρ</button>
             <div class="section-info-body">
+              <p>In plain terms: how closely our pre-tournament ranking matched the real finishing order each week. <strong>0 is a coin flip; 1.0 is a perfect call.</strong></p>
               <p><span class="gloss" tabindex="0" data-tip="Rank correlation between predicted and actual finishing order. Range −1 to +1; higher is better. 0.40 = target, 0.50 = aspirational, 0.55+ = best-in-world.">Spearman ρ</span> measures how well BBI's pre-tournament rankings correlate with the actual finishing order. Closer to 1.0 is better. We plot BBI against the published industry baseline and the two goal tiers — 0.40 (target) and 0.50 (aspirational).</p>
             </div>
           </div>
@@ -1705,11 +2055,38 @@
       </div>
     </section>
 
+    <!-- CALIBRATION -->
+    <section class="section" id="calibration" data-reveal data-delay="1">
+      <div class="section-head">
+        <div class="section-head-text">
+          <span class="eyebrow">Probability calibration · Brier score</span>
+          <h2>How accurate the probabilities really are. <span class="section-glance" id="glanceCalibration"></span></h2>
+          <div class="section-info">
+            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Brier score</button>
+            <div class="section-info-body">
+              <p>In plain terms: when BBI says a player has a 30% chance, does it happen about 30% of the time? <strong>Lower score = more honest probabilities.</strong></p>
+              <p>For each market, <span class="gloss" tabindex="0" data-tip="Mean squared error between predicted probability and binary outcome (0 or 1). Range 0 to 1; lower is better. A perfectly calibrated coin flip on 50/50 events scores 0.25.">Brier score</span> measures how close predicted probabilities land to observed outcomes (lower is better). <span class="gloss" tabindex="0" data-tip="Improvement over the naive baseline of predicting the field-average rate for everyone. 0% = no edge, 100% = perfect predictions.">Skill %</span> is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="perf-card">
+        <div class="perf-card-head">
+          <h3><span id="calibEvent">—</span></h3>
+          <div class="perf-legend">
+            <span class="perf-legend-item"><span class="muted">Lower Brier = sharper predictions</span></span>
+          </div>
+        </div>
+        <div class="calib-grid" id="calibGrid"></div>
+      </div>
+    </section>
+
     <!-- WEEKLY RECAPS -->
     <section class="section zone-elevated" id="recaps" data-reveal>
       <div class="section-head">
         <div class="section-head-text">
-          <h2>What happened — and why. <span class="section-glance" id="glanceRecaps"></span></h2>
+          <span class="eyebrow">Weekly recaps · postmortem</span>
+          <h2>What happened.</h2>
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">Why we publish these</button>
             <div class="section-info-body">
@@ -1721,14 +2098,9 @@
       <div id="recapsMount"></div>
     </section>
 
-    <div class="section-ornament" aria-hidden="true">
-      <span class="section-ornament-line"></span>
-      <span class="section-ornament-glyph">✦ ✦ ✦</span>
-      <span class="section-ornament-line"></span>
-    </div>
 
     <!-- FACTOR ATTRIBUTION -->
-    <section class="section" id="attribution" data-reveal data-delay="1">
+    <section class="section" id="attribution" data-reveal data-delay="1" data-gate="pro" data-gate-msg="Per-factor attribution — exactly how the model weighs talent, course fit, form, cut safety and more for every finisher — is a Pro feature. The proof above is free; the recipe is for members.">
       <div class="section-head">
         <div class="section-head-text">
           <span class="eyebrow" id="attrEyebrow">Per-factor analysis · Most recent event</span>
@@ -1772,11 +2144,6 @@
       </div>
     </section>
 
-    <div class="section-ornament" aria-hidden="true">
-      <span class="section-ornament-line"></span>
-      <span class="section-ornament-glyph">✦ ✦ ✦</span>
-      <span class="section-ornament-line"></span>
-    </div>
 
     <!-- SHADOW VARIANTS -->
     <section class="section" id="shadow" data-reveal data-delay="1">
@@ -1795,36 +2162,7 @@
       <div class="shadow-grid" id="shadowGrid"></div>
     </section>
 
-    <div class="section-ornament" aria-hidden="true">
-      <span class="section-ornament-line"></span>
-      <span class="section-ornament-glyph">✦ ✦ ✦</span>
-      <span class="section-ornament-line"></span>
-    </div>
 
-    <!-- CALIBRATION -->
-    <section class="section" id="calibration" data-reveal data-delay="1">
-      <div class="section-head">
-        <div class="section-head-text">
-          <span class="eyebrow">Probability calibration · Brier score</span>
-          <h2>How accurate the probabilities really are. <span class="section-glance" id="glanceCalibration"></span></h2>
-          <div class="section-info">
-            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Brier score</button>
-            <div class="section-info-body">
-              <p>For each market, <span class="gloss" tabindex="0" data-tip="Mean squared error between predicted probability and binary outcome (0 or 1). Range 0 to 1; lower is better. A perfectly calibrated coin flip on 50/50 events scores 0.25.">Brier score</span> measures how close predicted probabilities land to observed outcomes (lower is better). <span class="gloss" tabindex="0" data-tip="Improvement over the naive baseline of predicting the field-average rate for everyone. 0% = no edge, 100% = perfect predictions.">Skill %</span> is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="perf-card">
-        <div class="perf-card-head">
-          <h3><span id="calibEvent">—</span></h3>
-          <div class="perf-legend">
-            <span class="perf-legend-item"><span class="muted">Lower Brier = sharper predictions</span></span>
-          </div>
-        </div>
-        <div class="calib-grid" id="calibGrid"></div>
-      </div>
-    </section>
 
     <!-- BACKTEST / LAYER HEALTH -->
     <section class="section zone-elevated" id="backtest" data-reveal>
@@ -1929,6 +2267,7 @@
     <section class="section zone-elevated" id="dfs" data-reveal>
       <div class="section-head">
         <div class="section-head-text">
+          <span class="eyebrow">Daily fantasy · lineup grading</span>
           <h2>DFS lineup performance. <span class="section-glance" id="glanceDfs"></span></h2>
           <div class="section-info">
             <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">How DFS grading works</button>
@@ -2090,7 +2429,7 @@
 
     // Scroll-spy: highlight TOC pill matching the section nearest the top
     function initTocScrollSpy() {
-      const sections = ['world-rank','spearman','recaps','attribution','shadow','calibration','backtest','dfs','competition'];
+      const sections = ['world-rank','spearman','calibration','recaps','attribution','shadow','backtest','dfs','competition'];
       const pills = new Map(sections.map(id => [id, document.querySelector(`.toc-pill[data-toc="${id}"]`)]));
       if (!('IntersectionObserver' in window)) return;
       const observer = new IntersectionObserver((entries) => {
@@ -2142,7 +2481,8 @@
         BBI.data.load(BBI.data.paths.dfsOptimalHistory)
       ]);
 
-      const events = (spear?.events || []).slice().sort((a, b) => (a.week || 0) - (b.week || 0));
+      // Exclude unscored team events (e.g. Zurich Classic) — they distort the chart + KPIs.
+      const events = (spear?.events || []).filter(e => !/zurich/i.test(e.event || e.event_name || e.name || '')).slice().sort((a, b) => (a.week || 0) - (b.week || 0));
       const rolling = spear?.rolling_metrics || {};
 
       // ---------- WORLD RANKING — global percentile ----------
@@ -2242,9 +2582,9 @@
         if (sec) sec.style.display = 'none';
       }
 
-      // ---------- WEEKLY RECAPS — last 3 only, archive link below ----------
+      // ---------- WEEKLY RECAPS — most recent event only, archive link below ----------
       const allRecaps = (recaps?.recaps || []).slice().reverse();
-      const recapList = allRecaps.slice(0, 3);
+      const recapList = allRecaps.slice(0, 1);
       const remainingCount = Math.max(0, allRecaps.length - recapList.length);
       // Sanitize DG mentions (site-wide branding policy)
       const sanitizeDG = (html) => String(html || '')
@@ -2257,7 +2597,7 @@
       if (recapList.length > 0) {
         // Auto-expand the most recent recap; collapse older ones
         recapsMount.innerHTML = recapList.map((recap, idx) => `
-          <div class="recap-card ${idx === 0 ? 'open' : ''}" data-reveal data-delay="${Math.min(3, idx+1)}">
+          <div class="recap-card" data-reveal data-delay="${Math.min(3, idx+1)}">
             <button class="recap-header" onclick="this.closest('.recap-card').classList.toggle('open'); event.preventDefault();">
               <div class="recap-header-info">
                 <h3>Week ${recap.week} · ${recap.event}</h3>
@@ -2396,6 +2736,26 @@
       $('#kpiAbove40').textContent = rolling.events_above_040 ?? events.filter(e => e.spearman_bbi >= 0.4).length;
       $('#kpiWinHits').textContent = rolling.winners_from_top10_bbi ?? 0;
       $('#kpiWinHitsTotal').textContent = rolling.winners_from_top10_bbi_total ?? events.length;
+
+      // ---------- PLAIN-LANGUAGE HEADLINE PROOF ----------
+      // Translates the season record into an outcome a non-quant cares about.
+      // Computed from the same rolling data as the KPIs — truthful, not marketing.
+      (function headlineProof() {
+        const el = document.getElementById('perfHeadlineProof');
+        if (!el) return;
+        const n       = rolling.total_events_tracked ?? events.length;
+        const beat    = rolling.events_bbi_beat_dg ?? 0;
+        const winHits = rolling.winners_from_top10_bbi ?? 0;
+        const winTot  = rolling.winners_from_top10_bbi_total ?? n;
+        const avg     = rolling.season_avg_bbi_spearman;
+        if (!n) { el.remove(); return; }  // no scored events yet → don't show an empty claim
+        const parts = [];
+        if (winTot) parts.push(`ranked the eventual winner inside its top 10 in <strong class="gold">${winHits} of ${winTot}</strong> events`);
+        parts.push(`beat the published industry baseline <strong class="gold">${beat} of ${n}</strong> times`);
+        el.innerHTML = `This season BBI ${parts.join(', and ')}`
+          + (avg != null ? `, at a season-average rank correlation of <strong class="gold">${fmt.num(avg, 2)}</strong>` : '')
+          + `. Every number on this page is scored against the truth — no asterisks.`;
+      })();
 
       // ---------- SPEARMAN CHART ----------
       const W = 1000, H = 340;
@@ -2573,9 +2933,6 @@
               <span class="shadow-stat-value">${fmt.num(sp, 3)}</span>
             </div>
             <div class="shadow-bar"><div class="shadow-bar-fill" style="width: ${spPct.toFixed(1)}%"></div></div>
-            <div class="shadow-weights">
-              ${weightsHTML}
-            </div>
           </div>
         `;
       }).join('');
@@ -2586,7 +2943,7 @@
       setTimeout(renderShadowVariants, 0);
 
       // ---------- CALIBRATION ----------
-      const calibHist = (calib?.history || []).slice().reverse();
+      const calibHist = (calib?.history || []).filter(e => !/zurich/i.test(e.event || e.event_name || e.name || '')).slice().reverse();
       const latestCalib = calibHist[0];
       if (latestCalib) {
         $('#calibEvent').textContent = `${latestCalib.event} · Wk ${latestCalib.week}`;
@@ -2844,7 +3201,7 @@
         };
         const variantIds = comp?.variant_ids || ['v8.5', 'v8.6-cf', 'v8.6-tal', 'v8.6-form', 'v8.6-dyn'];
         const baselineId = comp?.baseline_variant_id || 'v8.5';
-        const history = (comp?.history || []).filter(h => !h.skipped && h.scorecard);
+        const history = (comp?.history || []).filter(h => !h.skipped && h.scorecard && !/zurich/i.test(h.event || h.event_name || h.name || ''));
 
         // For each variant, compute current state vs each criterion
         const rows = variantIds.map(vid => {

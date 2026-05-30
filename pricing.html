@@ -1,14 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://localhost:8137/pricing.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pricing — BirdieBuddy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/design-system.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <!-- fonts now loaded via the canonical Google Fonts link below (Inter + JetBrains Mono) -->
+  <link rel="stylesheet" href="assets/css/design-system.css">
+  <link rel="stylesheet" href="assets/css/components.css">
   <style>
     .price-toggle{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--border-base);
       border-radius:var(--radius-full);background:var(--surface-2);margin:var(--space-5) 0 var(--space-8)}
@@ -52,11 +52,513 @@
     .faq summary{cursor:pointer;font-weight:600;color:var(--text-primary);font-size:var(--fs-sm)}
     .faq p{margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);line-height:1.6}
   </style>
+<style>
+    [data-reveal] { opacity: 0; transform: translateY(10px); transition: opacity 500ms cubic-bezier(0.22,1,0.36,1), transform 500ms cubic-bezier(0.22,1,0.36,1); }
+    [data-reveal].revealed { opacity: 1; transform: none; }
+    [data-reveal][data-delay="1"].revealed { transition-delay: 50ms; }
+    [data-reveal][data-delay="2"].revealed { transition-delay: 100ms; }
+    [data-reveal][data-delay="3"].revealed { transition-delay: 150ms; }
+    [data-reveal][data-delay="4"].revealed { transition-delay: 200ms; }
+    [data-reveal][data-delay="5"].revealed { transition-delay: 260ms; }
+    [data-reveal][data-delay="6"].revealed { transition-delay: 320ms; }
+  </style><style id="bbi-auth-css">
+    .bbi-auth-ctl{display:flex;align-items:center;gap:var(--space-2)}
+    .bbi-auth-btn{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs);
+      font-weight:600;padding:6px 12px;border-radius:var(--radius-full);
+      border:1px solid var(--border-gold);color:var(--gold-500);
+      background:rgba(212,168,67,.06);transition:all var(--dur-fast) var(--ease-out)}
+    .bbi-auth-btn:hover{background:rgba(212,168,67,.14);border-color:var(--border-gold-strong)}
+    .bbi-auth-btn.ghost{border-color:var(--border-base);color:var(--text-body);background:transparent}
+    .bbi-auth-btn.ghost:hover{color:var(--text-primary);border-color:var(--border-strong)}
+    .bbi-chip{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+      padding:5px 10px 5px 6px;border-radius:var(--radius-full);
+      border:1px solid var(--border-base);background:var(--surface-3)}
+    .bbi-chip:hover{border-color:var(--border-gold)}
+    .bbi-ava{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+      font-size:var(--fs-3xs);font-weight:700;color:var(--text-on-gold);
+      background:linear-gradient(135deg,var(--gold-300),var(--gold-600))}
+    .bbi-chip-tier{font-size:var(--fs-3xs);font-weight:700;text-transform:uppercase;
+      letter-spacing:var(--tracking-wide)}
+    .bbi-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:220px;
+      background:var(--surface-4);border:1px solid var(--border-strong);
+      border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);padding:6px;
+      z-index:var(--z-modal);animation:fadeDown var(--dur-fast) var(--ease-out)}
+    .bbi-menu[hidden]{display:none}
+    .bbi-menu a,.bbi-menu button{display:flex;width:100%;align-items:center;gap:8px;
+      justify-content:flex-start;padding:9px 10px;border-radius:var(--radius-md);
+      font-size:var(--fs-xs);color:var(--text-body);text-align:left}
+    .bbi-menu a:hover,.bbi-menu button:hover{background:var(--surface-5);color:var(--text-primary)}
+    .bbi-menu-head{padding:10px;border-bottom:1px solid var(--border-soft);margin-bottom:4px}
+    .bbi-menu-head b{display:block;color:var(--text-primary);font-size:var(--fs-sm)}
+    .bbi-menu-head span{font-size:var(--fs-3xs);color:var(--text-muted)}
+    .bbi-ovl{position:fixed;inset:0;background:rgba(4,4,8,.78);backdrop-filter:blur(4px);
+      z-index:var(--z-modal);display:grid;place-items:center;padding:var(--space-4);
+      animation:fadeIn var(--dur-fast) var(--ease-out)}
+    .bbi-ovl[hidden]{display:none}
+    .bbi-modal{width:100%;max-width:420px;background:var(--surface-3);
+      border:1px solid var(--border-strong);border-radius:var(--radius-2xl);
+      box-shadow:var(--shadow-xl);overflow:hidden;animation:scaleIn var(--dur-base) var(--ease-spring)}
+    .bbi-modal-h{padding:var(--space-6) var(--space-6) var(--space-4)}
+    .bbi-modal-h .eyebrow{margin-bottom:6px}
+    .bbi-modal-h h3{font-size:var(--fs-xl);font-weight:700;color:var(--text-primary)}
+    .bbi-tabs{display:flex;gap:4px;padding:0 var(--space-6)}
+    .bbi-tab{flex:1;padding:9px;font-size:var(--fs-xs);font-weight:600;
+      color:var(--text-muted);border-bottom:2px solid transparent}
+    .bbi-tab.on{color:var(--gold-500);border-color:var(--gold-500)}
+    .bbi-form{padding:var(--space-5) var(--space-6) var(--space-6);display:grid;gap:var(--space-3)}
+    .bbi-field label{display:block;font-size:var(--fs-3xs);font-weight:600;
+      text-transform:uppercase;letter-spacing:var(--tracking-wide);
+      color:var(--text-muted);margin-bottom:5px}
+    .bbi-field input{width:100%;padding:10px 12px;background:var(--surface-1);
+      border:1px solid var(--border-base);border-radius:var(--radius-md);
+      color:var(--text-primary);font-size:var(--fs-sm)}
+    .bbi-field input:focus{outline:none;border-color:var(--gold-500)}
+    .bbi-submit{margin-top:4px;padding:11px;border-radius:var(--radius-md);
+      background:linear-gradient(135deg,var(--gold-400),var(--gold-600));
+      color:var(--text-on-gold);font-weight:700;font-size:var(--fs-sm);
+      transition:filter var(--dur-fast)}
+    .bbi-submit:hover{filter:brightness(1.08)}
+    .bbi-submit[disabled]{opacity:.6;cursor:wait}
+    .bbi-err{color:var(--negative);font-size:var(--fs-xs);min-height:1em}
+    .bbi-demo-note{font-size:var(--fs-3xs);color:var(--text-dimmed);
+      padding:0 var(--space-6) var(--space-5);line-height:1.5}
+    .bbi-x{position:absolute;top:14px;right:14px;width:28px;height:28px;
+      display:grid;place-items:center;border-radius:var(--radius-md);
+      color:var(--text-muted)}
+    .bbi-x:hover{background:var(--surface-5);color:var(--text-primary)}
+    .bbi-locked{position:relative}
+    .bbi-locked > .bbi-lock-content{filter:blur(7px);pointer-events:none;user-select:none}
+    /* Overlay spans the whole gated region; the card sticks just below the
+       nav so the upgrade CTA stays in view on tall, async-loading regions. */
+    .bbi-lock-ovl{position:absolute;inset:0;display:flex;justify-content:center;
+      align-items:flex-start;text-align:center;padding:var(--space-8) var(--space-6);
+      pointer-events:none;z-index:2}
+    .bbi-lock-card{position:sticky;top:calc(var(--nav-h, 64px) + 24px);
+      pointer-events:auto;max-width:340px;background:var(--surface-4);
+      border:1px solid var(--border-gold);border-radius:var(--radius-xl);
+      padding:var(--space-6);box-shadow:var(--shadow-gold-md)}
+    .bbi-lock-card .eyebrow{margin-bottom:8px}
+    .bbi-lock-card h4{font-size:var(--fs-lg);color:var(--text-primary);margin-bottom:6px}
+    .bbi-lock-card p{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-4)}
+    .bbi-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+      background:var(--surface-5);border:1px solid var(--border-gold);
+      color:var(--text-primary);font-size:var(--fs-xs);padding:10px 18px;
+      border-radius:var(--radius-full);box-shadow:var(--shadow-lg);
+      z-index:var(--z-tooltip);animation:fadeUp var(--dur-base) var(--ease-out)}
+    .bbi-toast[hidden]{display:none}
+    </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" async=""></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- =========================================================
+       VAULT RESTYLE — pricing page aligned to the homepage /
+       performance "Pantheon" aesthetic: warm near-black, cream
+       text, gold accents, centered eyebrow-rule heads, plus
+       conversion-minded motion (tracer hero, count-up prices,
+       breathing featured card, cursor spotlight).
+       ========================================================= -->
+  <style id="vault-restyle">
+    /* ---------- 1 · WARM PALETTE ---------- */
+    :root {
+      --surface-0:#060607; --surface-1:#0a0a0c; --surface-2:#111114;
+      --surface-3:#16161b; --surface-4:#1c1b21; --surface-5:#25242b; --surface-6:#2f2d35;
+      --text-primary:#f3eedf; --text-body:#cfc8b6; --text-muted:#9a9384;
+      --text-dimmed:#6b6453; --text-faint:#46402f; --text-on-gold:#14100a;
+      --border-subtle:rgba(243,238,223,0.045); --border-soft:rgba(243,238,223,0.075);
+      --border-base:rgba(243,238,223,0.11); --border-strong:rgba(243,238,223,0.17);
+      --border-gold:rgba(212,168,67,0.32); --border-gold-strong:rgba(212,168,67,0.62);
+      --gold-700:#8a6e2a; --gold-600:#b08828; --gold-500:#d4a843; --gold-400:#e0b552;
+      --gold-300:#e8c878; --gold-200:#f3e1a0; --gold-100:#f9ecb6; --gold-900:#2a2110;
+      --positive:#4ea564; --positive-soft:rgba(78,165,100,0.14);
+      --negative:#d9624e; --negative-soft:rgba(217,98,78,0.14);
+      --info:#8aa1bd; --info-soft:rgba(138,161,189,0.14);
+      --warning:#d9a441; --radius-pill:999px;
+    }
+
+    /* ---------- 2 · ATMOSPHERE ---------- */
+    html, body { background: var(--surface-1); }
+    body {
+      color: var(--text-body);
+      background-image:
+        radial-gradient(1100px 720px at 84% -10%, rgba(212,168,67,0.055), transparent 60%),
+        radial-gradient(820px 560px at 50% 118%, rgba(212,168,67,0.035), transparent 70%);
+      background-attachment: fixed;
+    }
+    main.container { position: relative; }
+
+    /* ---------- 3 · HERO TRACER FIELD ---------- */
+    .price-aura {
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 100vw; height: 600px; z-index: 0; pointer-events: none; overflow: hidden;
+      -webkit-mask-image: radial-gradient(120% 100% at 50% 22%, #000 38%, transparent 78%);
+      mask-image: radial-gradient(120% 100% at 50% 22%, #000 38%, transparent 78%);
+    }
+    .price-aura canvas { width: 100%; height: 100%; display: block; opacity: 0.6; }
+
+    /* ---------- 4 · PAGE HEADS → centered eyebrow-rule motif ---------- */
+    .page-head { text-align: center; border-bottom: none; position: relative; }
+    .page-head > * { position: relative; z-index: 1; }
+    .page-head .eyebrow {
+      display: inline-block; position: relative; padding: 0 20px; margin-bottom: var(--space-4);
+      color: var(--gold-500); font-size: 11px; letter-spacing: 0.26em; white-space: nowrap;
+    }
+    .page-head .eyebrow::before, .page-head .eyebrow::after {
+      content:''; position: absolute; top: 50%; width: 30px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-gold-strong));
+    }
+    .page-head .eyebrow::before { right: 100%; }
+    .page-head .eyebrow::after  { left: 100%; background: linear-gradient(to left, transparent, var(--border-gold-strong)); }
+    .page-head h1 {
+      font-weight: 800; letter-spacing: -0.038em; line-height: 1.04;
+      max-width: 18ch; margin: 0 auto var(--space-4);
+    }
+    .page-head p { color: var(--text-muted); max-width: 56ch; margin: 0 auto; line-height: 1.6; }
+
+    /* Hero (first page-head only) gets the big size + aura headroom */
+    main.container > .page-head { padding: clamp(48px,7.5vh,96px) 0 var(--space-6); }
+    main.container > .page-head::before {
+      content:''; position: absolute; left: 50%; top: 4%; transform: translateX(-50%);
+      width: 70%; height: 78%; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 70% at 50% 40%, rgba(212,168,67,0.10), transparent 70%);
+    }
+    main.container > .page-head h1 { font-size: clamp(2.5rem,5.8vw,4.1rem); letter-spacing: -0.042em; line-height: 0.98; max-width: 16ch; }
+
+    /* ---------- 5 · TRUST CHIPS ---------- */
+    .trust-row {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2);
+      margin: var(--space-2) auto var(--space-8); position: relative; z-index: 1;
+    }
+    .trust-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: var(--radius-full);
+      background: rgba(20,20,24,0.5); border: 1px solid var(--border-soft);
+      font-family: var(--font-mono); font-size: var(--fs-3xs);
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
+      backdrop-filter: blur(8px);
+    }
+    .trust-chip svg { width: 12px; height: 12px; color: var(--gold-500); flex: none; }
+
+    /* ---------- 6 · BILLING TOGGLE ---------- */
+    .price-toggle {
+      background: rgba(20,20,24,0.6); border: 1px solid var(--border-base);
+      backdrop-filter: blur(10px); position: relative; z-index: 1;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    .price-toggle button {
+      position: relative; transition: color var(--dur-base) var(--ease-out);
+      letter-spacing: 0.02em; white-space: nowrap;
+    }
+    .price-toggle button.on {
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+      color: var(--text-on-gold);
+      box-shadow: 0 6px 18px -8px rgba(212,168,67,0.6);
+    }
+    .price-toggle .save { color: var(--positive); font-weight: 700; }
+    .price-toggle button.on .save { color: #1c3a26; }
+
+    /* ---------- 7 · TIER CARDS ---------- */
+    .tier-grid { position: relative; z-index: 1; }
+    .tier {
+      background: linear-gradient(180deg, rgba(24,24,30,0.66), rgba(13,13,17,0.6));
+      border: 1px solid var(--border-base); border-radius: var(--radius-xl);
+      overflow: hidden;
+      /* override the colliding .tier BADGE component (mono/uppercase) from components.css */
+      font-family: var(--font-body); text-transform: none; letter-spacing: normal;
+      transition: border-color .35s var(--ease-out), transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+      animation: tierIn .65s cubic-bezier(.16,1,.3,1) both;
+    }
+    .tier h3 { font-family: var(--font-display); }
+    .tier .tag, .tier .billed, .tier li { letter-spacing: normal; text-transform: none; }
+    .tier:nth-child(1){ animation-delay:.05s } .tier:nth-child(2){ animation-delay:.12s }
+    .tier:nth-child(3){ animation-delay:.19s } .tier:nth-child(4){ animation-delay:.26s }
+    @keyframes tierIn { from { opacity:0; translate:0 16px; } to { opacity:1; translate:0 0; } }
+    /* cursor spotlight */
+    .tier::before {
+      content:''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      border-radius: inherit; opacity: 0; transition: opacity .35s var(--ease-out);
+      background: radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(212,168,67,0.16), transparent 42%);
+      mix-blend-mode: screen;
+    }
+    .tier:hover::before { opacity: 1; }
+    .tier > * { position: relative; z-index: 1; }
+    .tier:hover { border-color: var(--border-gold); transform: translateY(-7px); box-shadow: 0 26px 60px -28px rgba(0,0,0,0.7); }
+    .tier h3 { letter-spacing: -0.01em; }
+    .tier .amt { font-variant-numeric: tabular-nums; }
+    .tier li svg { color: var(--gold-500); }
+
+    /* Featured card — the conversion magnet */
+    .tier.feat {
+      border-color: var(--border-gold-strong);
+      background:
+        radial-gradient(120% 60% at 50% 0%, rgba(212,168,67,0.12), transparent 60%),
+        linear-gradient(180deg, rgba(28,25,18,0.85), rgba(14,13,16,0.78));
+      margin-top: -10px;
+      animation: tierIn .65s cubic-bezier(.16,1,.3,1) .19s both,
+                 featPulse 4.6s ease-in-out 1.1s infinite;
+    }
+    @media (max-width: 1100px) { .tier.feat { margin-top: 0; } }
+    .tier.feat:hover { transform: translateY(-12px); }
+    @keyframes featPulse {
+      0%,100% { box-shadow: 0 0 0 1px var(--border-gold), 0 22px 54px -24px rgba(212,168,67,0.28); }
+      50%     { box-shadow: 0 0 0 1px var(--border-gold-strong), 0 30px 72px -20px rgba(212,168,67,0.46); }
+    }
+    .tier.feat::after {
+      content:''; position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 2;
+      background: linear-gradient(90deg, transparent, var(--gold-200), var(--gold-500), var(--gold-200), transparent);
+      background-size: 200% 100%; animation: featSheen 5s linear infinite;
+    }
+    @keyframes featSheen { 0%{background-position:0 0} 100%{background-position:200% 0} }
+    .tier-flag {
+      top: -1px; left: 50%; transform: translateX(-50%);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
+      background: linear-gradient(135deg, var(--gold-200), var(--gold-500));
+      letter-spacing: 0.16em; padding: 5px 16px;
+      box-shadow: 0 6px 18px -8px rgba(212,168,67,0.7);
+    }
+
+    /* ---------- 8 · CTA BUTTONS ---------- */
+    .tier .btn-primary {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--gold-200), var(--gold-500));
+      color: var(--text-on-gold); border: none;
+      box-shadow: 0 10px 28px -12px rgba(212,168,67,0.6);
+    }
+    .tier .btn-primary::after {
+      content:''; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+      transform: translateX(-150%); transition: transform .6s var(--ease-out);
+    }
+    .tier .btn-primary:hover::after { transform: translateX(150%); }
+    .tier .btn-ghost { border: 1px solid var(--border-base); color: var(--text-body); transition: all var(--dur-base) var(--ease-out); }
+    .tier .btn-ghost:hover { border-color: var(--border-gold); color: var(--gold-200); background: rgba(212,168,67,0.06); }
+
+    /* ---------- 9 · COMPARE TABLE ---------- */
+    .cmp { border-radius: var(--radius-lg); overflow: hidden; }
+    .cmp th, .cmp td { border-bottom: 1px solid var(--border-soft); }
+    .cmp thead th { color: var(--text-muted); }
+    /* highlight the All-Access (4th col, featured) column */
+    .cmp th:nth-child(4), .cmp td:nth-child(4) {
+      background: linear-gradient(180deg, rgba(212,168,67,0.07), rgba(212,168,67,0.03));
+    }
+    .cmp thead th:nth-child(4) { color: var(--gold-300); }
+    .cmp tbody tr { transition: background var(--dur-fast); }
+    .cmp tbody tr:hover { background: rgba(212,168,67,0.05); }
+    .cmp .yes { color: var(--positive); }
+    .cmp td:first-child { color: var(--text-body); }
+
+    /* ---------- 10 · FAQ ---------- */
+    .faq details {
+      background: linear-gradient(180deg, rgba(22,22,28,0.55), rgba(13,13,17,0.5));
+      border: 1px solid var(--border-soft); transition: border-color var(--dur-base);
+    }
+    .faq details[open] { border-color: var(--border-gold); }
+    .faq summary { list-style: none; position: relative; padding-right: 28px; transition: color var(--dur-base); }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: '+'; position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+      color: var(--gold-500); font-weight: 400; font-size: 18px; transition: transform var(--dur-base);
+    }
+    .faq details[open] summary::after { content: '\2212'; }
+    .faq details[open] summary { color: var(--gold-200); }
+
+    /* ---------- 11 · FINAL CTA BAND ---------- */
+    .final-cta {
+      position: relative; overflow: hidden; text-align: center;
+      margin: var(--space-12) calc(50% - 50vw) 0; padding: var(--space-24) var(--space-5) var(--space-20);
+      width: 100vw;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(212,168,67,0.05), transparent 62%), var(--surface-1);
+      border-top: 1px solid var(--border-soft);
+    }
+    .final-cta canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.7; z-index: 0; }
+    .final-cta::before { content:''; position: absolute; top: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, var(--surface-1), transparent); z-index: 1; }
+    .final-cta::after  { content:''; position: absolute; bottom: 0; left: 0; right: 0; height: 130px; background: linear-gradient(to top, var(--surface-1), transparent); z-index: 1; }
+    .final-cta > * { position: relative; z-index: 2; }
+    .final-cta .eyebrow {
+      display: inline-block; position: relative; padding: 0 20px; margin-bottom: var(--space-4);
+      font-family: var(--font-mono); color: var(--gold-500); font-size: 11px;
+      letter-spacing: 0.26em; text-transform: uppercase;
+    }
+    .final-cta .eyebrow::before, .final-cta .eyebrow::after { content:''; position: absolute; top: 50%; width: 30px; height: 1px; background: linear-gradient(to right, transparent, var(--border-gold-strong)); }
+    .final-cta .eyebrow::before { right: 100%; }
+    .final-cta .eyebrow::after { left: 100%; background: linear-gradient(to left, transparent, var(--border-gold-strong)); }
+    .final-cta h2 {
+      font-family: var(--font-display); font-size: clamp(2rem,4.6vw,3.2rem); font-weight: 800;
+      letter-spacing: -0.038em; line-height: 1.04; color: var(--text-primary);
+      max-width: 18ch; margin: 0 auto var(--space-4);
+    }
+    .final-cta p { color: var(--text-muted); max-width: 46ch; margin: 0 auto var(--space-6); font-size: var(--fs-md); line-height: 1.6; }
+    .final-cta .final-btn {
+      display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+      padding: 15px 30px; border: none; border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--gold-200), var(--gold-500)); color: var(--text-on-gold);
+      font-weight: 700; font-size: var(--fs-md); letter-spacing: -0.01em;
+      position: relative; overflow: hidden;
+      box-shadow: 0 14px 36px -12px rgba(212,168,67,0.6); transition: transform .2s var(--ease-out), box-shadow .25s var(--ease-out);
+    }
+    .final-cta .final-btn:hover { transform: translateY(-2px); box-shadow: 0 20px 48px -12px rgba(212,168,67,0.7); }
+    .final-cta .final-btn::after { content:''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%); transform: translateX(-150%); transition: transform .6s var(--ease-out); }
+    .final-cta .final-btn:hover::after { transform: translateX(150%); }
+    .final-cta .final-meta {
+      margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-3xs);
+      color: var(--text-dimmed); letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    /* ---------- 12 · REVEAL FALLBACK + MISC ---------- */
+    .final-cta.cta-armed { opacity: 0; transform: translateY(26px); }
+    .final-cta.cta-in { opacity: 1; transform: none; transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+    [data-reveal] { will-change: opacity, transform; }
+    ::selection { background: rgba(212,168,67,0.30); color: var(--text-primary); }
+    @media (prefers-reduced-motion: reduce) {
+      .tier, .tier.feat { animation: none !important; }
+      .tier.feat::after { animation: none; }
+    }
+  </style>
 </head>
-<body>
-  <div id="site-header"></div>
+<body class="page-enter">
+  <div id="site-header">
+      <nav class="site-nav">
+        <div class="site-nav-inner">
+          <a href="http://localhost:8137/index.html" class="brand">
+            <span class="brand-mark">B</span>
+            <span class="brand-lockup">
+              BirdieBuddy
+              <small>PANTHEON · v8.5</small>
+            </span>
+          </a>
+          <div class="nav-links" id="navLinks">
+            
+                <div class="nav-group" data-group="predict" aria-expanded="false">
+                  <button type="button" class="nav-group-trigger " aria-haspopup="true" aria-expanded="false">
+                    Predict
+                    <svg class="nav-group-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5l3 3 3-3" stroke-linecap="round"></path></svg>
+                  </button>
+                  <div class="nav-group-menu" role="menu">
+                    
+                        <a class="nav-group-item " href="http://localhost:8137/rankings.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Rankings</span>
+                            <span class="item-sub">Full field</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/compare.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Compare</span>
+                            <span class="item-sub">Head-to-head</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/watchlist.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Watchlist</span>
+                            <span class="item-sub">Your starred players</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/lineups.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>DFS Lineups</span>
+                            <span class="item-sub">12 optimized</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/live.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Live pivots</span>
+                            <span class="item-sub">Thu–Sun</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/simulator.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Simulator</span>
+                            <span class="item-sub">10k Monte Carlo</span>
+                          </span>
+                        </a>
+                  </div>
+                </div>
+                <div class="nav-group" data-group="measure" aria-expanded="false">
+                  <button type="button" class="nav-group-trigger " aria-haspopup="true" aria-expanded="false">
+                    Measure
+                    <svg class="nav-group-chevron" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5l3 3 3-3" stroke-linecap="round"></path></svg>
+                  </button>
+                  <div class="nav-group-menu" role="menu">
+                    
+                        <a class="nav-group-item " href="http://localhost:8137/performance.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Performance</span>
+                            <span class="item-sub">Season report card</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/recap.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Event recaps</span>
+                            <span class="item-sub">Weekly grade</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/archive.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Archive</span>
+                            <span class="item-sub">47 scored events</span>
+                          </span>
+                        </a>
+                        <a class="nav-group-item " href="http://localhost:8137/methodology.html" role="menuitem">
+                          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                            <span>Methodology</span>
+                            <span class="item-sub">How BBI scores</span>
+                          </span>
+                        </a>
+                  </div>
+                </div>
+                  <a class="nav-link " href="http://localhost:8137/courses.html">
+                    Courses
+                  </a>
+                  <a class="nav-link " href="http://localhost:8137/market.html">
+                    Market
+                  </a>
+                  <a class="nav-link active" href="http://localhost:8137/pricing.html">
+                    Pricing
+                  </a>
+          </div>
+          <div class="row-tight">
+            <a href="http://localhost:8137/watchlist.html" class="nav-watch-pill" id="navWatchPill" title="Your watchlist" aria-label="Open watchlist" style="display: none;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.3l-6.16 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63L22 9.24l-5.48 4.76 1.64 7.03z"></path></svg>
+              <span id="navWatchBadge">0</span>
+            </a>
+            <label class="search-input" title="Search (⌘K)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" placeholder="Search players…" data-search="" aria-label="Search">
+              <span class="kbd">⌘K</span>
+            </label>
+            <span class="event-pill">
+              <span class="pulse-dot"></span>
+              <strong>Charles Schwab Challenge</strong> · Week 17
+            </span>
+            <span id="authControl" class="bbi-auth-ctl">
+        <div class="bbi-auth-ctl">
+          <button class="bbi-auth-btn ghost" data-auth="login">Sign in</button>
+          <a class="bbi-auth-btn" href="http://localhost:8137/pricing.html">Get BirdieBuddy</a>
+        </div></span>
+          </div>
+        </div>
+      </nav>
+      <div class="status-bar">
+        <div class="status-bar-inner">
+          <span class="status-item" title="ARGUS preflight system">
+            <span class="status-dots">
+              <span class="status-dot green"></span>
+              <span class="status-dot green"></span>
+              <span class="status-dot green"></span>
+              <span class="status-dot green"></span>
+              <span class="status-dot green"></span>
+            </span>
+            <span>ARGUS</span>
+          </span>
+          <span class="status-item"><strong>Colonial Country Club</strong></span>
+          <span class="status-item">Model <strong>v8.5</strong></span>
+          <span class="status-item">Shadow leader <strong class="gold">v8.6-cf</strong> ρ=0.00</span>
+          <div class="marquee"><div class="marquee-track" id="tickerTrack"><span class="marquee-item"><span><strong>J. Smith</strong> <span class="up">↑ 8.6pp</span> live</span></span><span class="marquee-item"><span><strong>H. Matsuyama</strong> <span class="up">↑ 7.8pp</span> live</span></span><span class="marquee-item"><span><strong>B. Harman</strong> <span class="up">↑ 7.2pp</span> live</span></span><span class="marquee-item"><span><strong>R. Gerard</strong> <span class="up">↑ 5.7pp</span> live</span></span><span class="marquee-item"><span><strong>J. Smith</strong> <span class="up">↑ 8.6pp</span> live</span></span><span class="marquee-item"><span><strong>H. Matsuyama</strong> <span class="up">↑ 7.8pp</span> live</span></span><span class="marquee-item"><span><strong>B. Harman</strong> <span class="up">↑ 7.2pp</span> live</span></span><span class="marquee-item"><span><strong>R. Gerard</strong> <span class="up">↑ 5.7pp</span> live</span></span></div></div>
+          <span class="status-item">Live</span>
+        </div>
+      </div>
+    </div>
 
   <main class="container">
+    <div class="price-aura" aria-hidden="true"><canvas id="priceHeroCanvas"></canvas></div>
     <header class="page-head">
       <div class="eyebrow">Plans &amp; pricing</div>
       <h1>Pick a plan. Cancel anytime.</h1>
@@ -72,7 +574,57 @@
       </div>
     </div>
 
-    <div class="tier-grid" id="tierGrid"></div>
+    <div class="trust-row">
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancel anytime</span>
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 17l5-6 4 3 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>Backed by the public track record</span>
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>No card stored in demo</span>
+    </div>
+
+    <div class="tier-grid" id="tierGrid">
+            <div class="tier ">
+              
+              <h3 style="color:var(--text-muted)">Free</h3>
+              <div class="tag">The honest scorecard</div>
+              <div class="amt">$0<small></small></div>
+              <div class="billed">Free forever</div>
+              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Public BBI Scorecard (full track record)</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>3 sample DFS lineups each week</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Top-20 rankings preview</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Weekly email</span></li></ul>
+              <div class="cta">
+                <button class="btn btn-ghost btn-block btn-lg" data-buy="free">Create free account</button>
+              </div>
+            </div>
+            <div class="tier ">
+              
+              <h3 style="color:var(--info)">Pro</h3>
+              <div class="tag">One sport, fully coached</div>
+              <div class="amt">$17<small>/mo</small></div>
+              <div class="billed">$199 billed annually · save $149/yr</div>
+              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Free</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Full field rankings + factor decomposition</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>All 12 DFS lineups + the "why" on every pick</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>NIKE bankroll &amp; contest plan</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Member community</span></li></ul>
+              <div class="cta">
+                <button class="btn btn-ghost btn-block btn-lg" data-buy="pro">Choose Pro</button>
+              </div>
+            </div>
+            <div class="tier feat">
+              <span class="tier-flag">Most popular</span>
+              <h3 style="color:var(--gold-500)">All-Access</h3>
+              <div class="tag">PGA + NFL, every tool</div>
+              <div class="amt">$33<small>/mo</small></div>
+              <div class="billed">$399 billed annually · save $69/yr</div>
+              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Pro</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Both sports: PGA + NFL DFS</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Lineup optimizer + late-swap assistant</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>THEMIS simulator access</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>VIP community room</span></li></ul>
+              <div class="cta">
+                <button class="btn btn-primary btn-block btn-lg" data-buy="all_access">Choose All-Access</button>
+              </div>
+            </div>
+            <div class="tier ">
+              
+              <h3 style="color:var(--positive)">Sharp</h3>
+              <div class="tag">The edge, unfiltered</div>
+              <div class="amt">$58<small>/mo</small></div>
+              <div class="billed">$699 billed annually · save $249/yr</div>
+              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in All-Access</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Earliest model release (Mon AM)</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Calibrated-leverage tools + raw model/data exports</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Private Sharp room + priority support</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Founding-member pricing locked for life</span></li></ul>
+              <div class="cta">
+                <button class="btn btn-ghost btn-block btn-lg" data-buy="sharp">Choose Sharp</button>
+              </div>
+            </div></div>
 
     <section class="section">
       <header class="page-head" style="border:0;padding-bottom:0">
@@ -82,7 +634,31 @@
       <div style="overflow-x:auto">
         <table class="cmp">
           <thead><tr><th>Feature</th><th>Free</th><th>Pro</th><th>All-Access</th><th>Sharp</th></tr></thead>
-          <tbody id="cmpBody"></tbody>
+          <tbody id="cmpBody">
+        <tr><td>Public Scorecard (full track record)</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Sample weekly lineups</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Full field rankings + factor decomposition</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>All 12 DFS lineups + the "why"</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>NIKE bankroll &amp; contest plan</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Member community</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>NFL DFS (added for the season)</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Lineup optimizer + late-swap assistant</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>THEMIS simulator</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Earliest release + raw data/model exports</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Private Sharp room + priority support</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+      
+        <tr><td>Founding price locked for life</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
+      </tbody>
         </table>
       </div>
     </section>
@@ -99,9 +675,78 @@
         <details><summary>Is my payment secure?</summary><p>Billing runs through the payment processor once connected — we never store card details. <strong>Note:</strong> this preview runs in demo mode; account creation and upgrades are simulated locally until the billing backend is live.</p></details>
       </div>
     </section>
+
+    <section class="final-cta">
+      <canvas id="priceFinalCanvas" aria-hidden="true"></canvas>
+      <div class="eyebrow">Ready when you are</div>
+      <h2>Pick your edge. Cancel anytime.</h2>
+      <p>Every plan is backed by the public track record — wins and misses, in the open. Start today and judge us on results, not features.</p>
+      <button class="final-btn" id="priceFinalCta" type="button">
+        Get All-Access
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="final-meta">Most popular · $33/mo billed annually · cancel anytime</div>
+    </section>
   </main>
 
-  <div id="site-footer"></div>
+  <div id="site-footer">
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <div>
+            <a href="http://localhost:8137/index.html" class="brand">
+              <span class="brand-mark">B</span>
+              <span class="brand-lockup">BirdieBuddy<small>PANTHEON · v8.5</small></span>
+            </a>
+            <p class="muted" style="margin-top: var(--space-3); font-size: var(--fs-xs); line-height: 1.6; max-width: 42ch;">
+              A 15-agent predictive engine for PGA Tour tournaments.
+              BBI scores every player across 10 factors, simulates 10k tournaments per event,
+              and surfaces +EV mispricings against 15 live sportsbooks.
+            </p>
+          </div>
+          <div>
+            <div class="footer-heading">Predictions</div>
+            <div class="footer-links">
+              <a class="footer-link" href="http://localhost:8137/rankings.html">Live Rankings</a>
+              <a class="footer-link" href="http://localhost:8137/lineups.html">DFS Lineups</a>
+              <a class="footer-link" href="http://localhost:8137/simulator.html">THEMIS Simulator</a>
+              <a class="footer-link" href="http://localhost:8137/market.html">Market Edges</a>
+              <a class="footer-link" href="http://localhost:8137/live.html">Live Pivot</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-heading">Model</div>
+            <div class="footer-links">
+              <a class="footer-link" href="http://localhost:8137/performance.html">Performance</a>
+              <a class="footer-link" href="http://localhost:8137/performance.html#shadow">Shadow Models</a>
+              <a class="footer-link" href="http://localhost:8137/performance.html#calibration">Calibration</a>
+              <a class="footer-link" href="http://localhost:8137/methodology.html">Methodology</a>
+              <a class="footer-link" href="http://localhost:8137/archive.html">Archive</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-heading">Account</div>
+            <div class="footer-links">
+              <a class="footer-link" href="http://localhost:8137/pricing.html">Pricing &amp; plans</a>
+              <a class="footer-link" href="http://localhost:8137/account.html">My account</a>
+              <a class="footer-link" href="http://localhost:8137/login.html">Sign in</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-heading">System</div>
+            <div class="footer-links">
+              <span class="footer-link"><span class="pulse-dot"></span> 15 agents nominal</span>
+              <span class="footer-link">Tour-wide data · 26 endpoints</span>
+              <span class="footer-link">10,000 sims / event</span>
+              <span class="footer-link">Updated Live</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-credit">
+          <span>© 2026 BirdieBuddy · Built by Ethan Brady</span>
+          <span>BBI v8.5 · Pantheon Pro · Private preview</span>
+        </div>
+      </footer>
+    </div>
 
   <script src="assets/js/core.js"></script>
   <script src="assets/js/components.js"></script>
@@ -190,5 +835,138 @@
       `).join('');
     });
   </script>
-</body>
-</html>
+
+
+  <!-- ===== VAULT RESTYLE — conversion motion ===== -->
+  <script>
+  (function () {
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ---- Tracer flow-field (brand motif from the homepage) ---- */
+    function tracerField(canvas) {
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = 0, H = 0, dpr = 1, lines = [], t = 0, raf = null;
+      function make(rl) {
+        var dir = Math.random() < 0.82 ? 1 : -1;
+        return {
+          x: dir > 0 ? -60 - Math.random() * 260 : W + 60 + Math.random() * 260,
+          y: Math.random() * H, history: [], maxLen: 90 + Math.random() * 110,
+          life: rl ? Math.random() * 300 : 0, maxLife: 380 + Math.random() * 260,
+          speed: 1.0 + Math.random() * 0.7, bright: 0.26 + Math.random() * 0.5,
+          width: 0.6 + Math.random() * 0.8, hue: 38 + Math.random() * 12, dir: dir
+        };
+      }
+      function ang(x, y, time, dir) {
+        var s = 0.0018;
+        var v = Math.sin(x * s + time * 0.4) * 0.28 + Math.cos(y * s * 0.9 - time * 0.25) * 0.20;
+        return (dir > 0 ? 0 : Math.PI) + v * dir;
+      }
+      function resize() {
+        var r = canvas.parentElement.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = r.width; H = r.height;
+        if (!W || !H) return;
+        canvas.width = W * dpr; canvas.height = H * dpr;
+        canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.scale(dpr, dpr);
+        lines = [];
+        var count = Math.round(Math.min(46, Math.max(14, (W * H) / 30000)));
+        for (var i = 0; i < count; i++) lines.push(make(true));
+        ctx.fillStyle = '#0a0a0c'; ctx.fillRect(0, 0, W, H);
+      }
+      function step() {
+        t += 0.005;
+        ctx.fillStyle = 'rgba(10,10,12,0.22)'; ctx.fillRect(0, 0, W, H);
+        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        for (var n = 0; n < lines.length; n++) {
+          var L = lines[n]; L.life++;
+          if (L.life > L.maxLife || (L.dir > 0 && L.x > W + 90) || (L.dir < 0 && L.x < -90) || L.y < -160 || L.y > H + 160) {
+            Object.assign(L, make(false)); continue;
+          }
+          var a = ang(L.x, L.y, t, L.dir);
+          L.x += Math.cos(a) * L.speed; L.y += Math.sin(a) * L.speed;
+          L.history.push(L.x, L.y);
+          if (L.history.length / 2 > L.maxLen) L.history.splice(0, 2);
+          var h = L.history; if (h.length < 6) continue;
+          var fi = Math.min(1, L.life / 28), fo = Math.min(1, (L.maxLife - L.life) / 70);
+          var ha = L.bright * fi * fo, segs = h.length / 2 - 1;
+          ctx.lineWidth = L.width;
+          for (var k = 0; k < segs; k++) {
+            var tp = k / segs, al = ha * Math.pow(tp, 1.6);
+            if (al < 0.005) continue;
+            ctx.strokeStyle = 'hsla(' + L.hue + ',70%,' + (52 + tp * 20) + '%,' + al + ')';
+            ctx.beginPath(); ctx.moveTo(h[k * 2], h[k * 2 + 1]); ctx.lineTo(h[k * 2 + 2], h[k * 2 + 3]); ctx.stroke();
+          }
+          var halo = ctx.createRadialGradient(L.x, L.y, 0, L.x, L.y, 10);
+          halo.addColorStop(0, 'hsla(' + (L.hue + 6) + ',95%,78%,' + (ha * 0.5) + ')');
+          halo.addColorStop(1, 'hsla(' + L.hue + ',85%,60%,0)');
+          ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(L.x, L.y, 10, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(L.x, L.y, 1.6, 0, Math.PI * 2);
+          ctx.fillStyle = 'hsla(' + (L.hue + 10) + ',95%,84%,' + Math.min(1, ha * 1.6) + ')'; ctx.fill();
+        }
+        raf = requestAnimationFrame(step);
+      }
+      window.addEventListener('resize', function () { cancelAnimationFrame(raf); resize(); if (!reduce) step(); });
+      resize();
+      if (reduce) { step(); cancelAnimationFrame(raf); } else step();
+    }
+    tracerField(document.getElementById('priceHeroCanvas'));
+    tracerField(document.getElementById('priceFinalCanvas'));
+
+    /* ---- Cursor spotlight on tier cards (delegated, survives re-render) ---- */
+    document.addEventListener('pointermove', function (e) {
+      var tier = e.target.closest ? e.target.closest('.tier') : null;
+      if (!tier) return;
+      var r = tier.getBoundingClientRect();
+      tier.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      tier.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+
+    /* ---- Price count-up on every (re)render ---- */
+    var grid = document.getElementById('tierGrid');
+    var easeOut = function (x) { return 1 - Math.pow(1 - x, 4); };
+    function countAmounts() {
+      if (reduce || !grid) return;
+      grid.querySelectorAll('.amt').forEach(function (amt) {
+        var node = null;
+        amt.childNodes.forEach(function (c) { if (!node && c.nodeType === 3 && c.textContent.indexOf('$') > -1) node = c; });
+        if (!node) return;
+        var target = parseInt(node.textContent.replace(/[^0-9]/g, ''), 10);
+        if (isNaN(target) || target === 0) return;
+        var dur = 650, start = performance.now();
+        (function tick(now) {
+          var p = Math.min(1, (now - start) / dur);
+          node.textContent = '$' + Math.round(target * easeOut(p));
+          if (p < 1) requestAnimationFrame(tick); else node.textContent = '$' + target;
+        })(start);
+      });
+    }
+    if (grid) {
+      var mo = new MutationObserver(function () { countAmounts(); });
+      mo.observe(grid, { childList: true });
+      countAmounts();
+    }
+
+    /* ---- Final CTA → same purchase flow as the featured card ---- */
+    var fcta = document.getElementById('priceFinalCta');
+    if (fcta) fcta.addEventListener('click', function () {
+      var y = document.getElementById('cycYear');
+      var cyc = (y && y.classList.contains('on')) ? 'year' : 'month';
+      try { if (window.BBI && BBI.auth && BBI.auth.subscribe) return BBI.auth.subscribe('all_access', cyc); } catch (e) {}
+      location.href = 'pricing.html';
+    });
+
+    /* ---- Reveal the final CTA on scroll (defaults visible if JS/IO fails) ---- */
+    var cta = document.querySelector('.final-cta');
+    if (cta) {
+      cta.classList.add('cta-armed');
+      var io = new IntersectionObserver(function (ents) {
+        ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('cta-in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      io.observe(cta);
+    }
+  })();
+  </script>
+
+<div id="fpCE_version" style="display:none">16.4.3</div></body></html>

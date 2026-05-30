@@ -1303,6 +1303,16 @@
       const playerRank = rankings.players.findIndex(p => p.dg_id === player.dg_id) + 1;
       const html = renderPlayer(player, playerRank, rankings, currentEvent, dfsData, courseHistory, recentForm, tourBaselines, pressureMetrics);
       mount.innerHTML = html;
+      // The factor decomposition (#sec-factors) is Pro-gated. It's injected here
+      // dynamically, so re-run applyGates once auth.js is ready to blur it for
+      // non-members. (auth.js is lazy-loaded; subsequent login/logout re-gates via onChange.)
+      (function gateWhenReady() {
+        const go = () => window.BBI?.auth?.applyGates?.();
+        if (window.BBI?.auth?.applyGates) { go(); return; }
+        let n = 0; const t = setInterval(() => {
+          if (window.BBI?.auth?.applyGates || ++n > 60) { clearInterval(t); go(); }
+        }, 50);
+      })();
 
       // Wire up Pass 2 wayfinding interactions
       wireWayfinding(rankings, player, playerRank);
@@ -1640,7 +1650,7 @@
         <div id="sec-market">${marketHtml}</div>
 
         <!-- FACTOR DECOMPOSITION v2 — model explanation, most detailed -->
-        <div id="sec-factors">${renderFactorDecomp(decomp, weights, mode, bbi, fieldMedians)}</div>
+        <div id="sec-factors" data-gate="pro" data-gate-msg="BBI's factor decomposition — how the model weighs talent, course fit, form, cut safety and the rest into this player's score — is a Pro feature. The stats above are free; the model's reasoning is for members.">${renderFactorDecomp(decomp, weights, mode, bbi, fieldMedians)}</div>
 
         <section class="section" style="margin-bottom: var(--space-12);">
           <div class="section-head">
