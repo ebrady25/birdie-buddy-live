@@ -363,13 +363,13 @@ window.BBI = window.BBI || {};
     if (document.getElementById('bbi-auth-css')) return;
     const css = `
     .bbi-auth-ctl{display:flex;align-items:center;gap:var(--space-2)}
-    .bbi-auth-btn{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs);
-      font-weight:600;padding:6px 12px;border-radius:var(--radius-full);
-      border:1px solid var(--border-gold);color:var(--gold-500);
-      background:rgba(212,168,67,.06);transition:all var(--dur-fast) var(--ease-out)}
-    .bbi-auth-btn:hover{background:rgba(212,168,67,.14);border-color:var(--border-gold-strong)}
-    .bbi-auth-btn.ghost{border-color:var(--border-base);color:var(--text-body);background:transparent}
-    .bbi-auth-btn.ghost:hover{color:var(--text-primary);border-color:var(--border-strong)}
+    .bbi-auth-btn{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs,11px);
+      font-weight:700;padding:7px 14px;border-radius:var(--radius-full,999px);
+      border:1px solid transparent;color:#15100a;white-space:nowrap;
+      background:var(--gold-500,#d4a843);transition:all var(--dur-fast,.16s) var(--ease-out,ease);text-decoration:none;cursor:pointer}
+    .bbi-auth-btn:hover{background:var(--gold-300,#e8c878);filter:brightness(1.03)}
+    .bbi-auth-btn.ghost{border:1px solid var(--border-base,rgba(243,238,223,.14));color:var(--text-body,#cfc8b6);background:transparent;font-weight:600}
+    .bbi-auth-btn.ghost:hover{color:var(--gold-300,#e8c878);border-color:var(--gold-500,#d4a843);background:rgba(212,168,67,.06)}
     .bbi-chip{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
       padding:5px 10px 5px 6px;border-radius:var(--radius-full);
       border:1px solid var(--border-base);background:var(--surface-3)}
