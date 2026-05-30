@@ -105,7 +105,7 @@
 
     /* ========== LAYOUT ========== */
     .container {
-      max-width: 1180px; margin: 0 auto;
+      max-width: min(1760px, 96vw); margin: 0 auto;
       padding: var(--s-8) var(--s-6) var(--s-16);
     }
     @media (max-width: 800px) { .container { padding: var(--s-6) var(--s-4) var(--s-12); } }
@@ -280,13 +280,23 @@
     /* ---------- SECTION 1: BUILDER ---------- */
     .builder-grid {
       display: grid;
-      /* DFS rankings are the main attraction (wide); the lineup builder is the
-         compact side panel. */
+      /* DFS rankings are the main attraction (wide, full-height); the lineup
+         builder + strategy sliders stack in the compact 380px left column. */
       grid-template-columns: 380px minmax(0, 1fr);
+      grid-template-rows: auto auto;
       gap: var(--space-5);
       align-items: start;
     }
+    .builder-grid > .builder-card { grid-column: 1; grid-row: 1; }
+    /* strategy sliders = a smaller box under the lineup, same 380px width */
+    .builder-grid > .sliders-card { grid-column: 1; grid-row: 2; }
+    /* rankings span both left rows; JS (syncPoolHeight) caps the list so the
+       table bottom-aligns with the builder + sliders stack and scrolls inside */
+    .builder-grid > .pool-card { grid-column: 2; grid-row: 1 / span 2; max-height: none; }
     @media (max-width: 1100px) { .builder-grid { grid-template-columns: 1fr; } }
+    /* Right column stacks the rankings + the strategy-lever sliders (fills the space
+       below the rankings so tuning re-ranks the field live, right where you're looking). */
+    .rankings-col { display: flex; flex-direction: column; gap: var(--s-5); min-width: 0; }
 
     .builder-card {
       background: linear-gradient(180deg, rgba(212, 168, 67, 0.03), transparent 40%), var(--surface-2);
@@ -1390,7 +1400,7 @@
           <span class="section-num">01 · Lineup builder</span>
           <h2>Draft a lineup, see the distribution</h2>
         </div>
-        <p class="sim-section-hint">Add players from the pool until all six slots are filled. The band chart below samples convolved Gaussian distributions for a fast approximation of THEMIS Monte Carlo.</p>
+        <p class="sim-section-hint">Add players from the DFS rankings until all six slots are filled. Tune the strategy levers below the rankings and the whole field re-ranks live — your lineup is repriced against the THEMIS distributions in real time.</p>
       </div>
 
       <div class="builder-grid">
@@ -1403,6 +1413,8 @@
               <button class="btn-optimize" id="btnOptimize" type="button" title="Auto-build the highest-BBI lineup under the salary cap"
                 style="font:inherit;font-size:var(--fs-3xs,11px);font-weight:600;padding:6px 12px;border-radius:var(--radius-md,8px);border:1px solid var(--border-gold,rgba(212,168,67,.4));color:var(--gold-300,#e8c878);background:rgba(212,168,67,.10);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;">Optimize</button>
               <button class="btn-save-lineup" id="btnSaveLineup" type="button" disabled>Save lineup</button>
+              <button id="btnClear" type="button" title="Clear lineup" aria-label="Clear lineup"
+                style="font:inherit;font-size:13px;font-weight:600;padding:5px 9px;border-radius:var(--radius-md,8px);border:1px solid var(--border-base,rgba(243,238,223,.14));color:var(--text-muted,#9a9384);background:transparent;cursor:pointer;line-height:1;">✕</button>
             </div>
           </div>
 
@@ -1494,13 +1506,12 @@
             <div class="bbscore-tip" id="bbTip" hidden></div>
           </div>
 
-          <!-- Distribution chart -->
+          <!-- Lineup outlook -->
           <div class="dist-card">
             <div class="dist-card-head">
-              <h4>Lineup points distribution</h4>
-              <span class="dist-span" id="distSpan">—</span>
+              <h4>Lineup outlook</h4>
             </div>
-            <svg class="dist-svg" id="distSvg" viewBox="0 0 600 90" preserveAspectRatio="none" aria-label="Lineup points distribution"></svg>
+            <div class="dist-span" id="distSpan" style="font-family:var(--font-mono,monospace);font-size:14px;line-height:1.9;color:var(--text-muted,#9a9384);">—</div>
           </div>
 
           <!-- Actions -->
@@ -1512,11 +1523,10 @@
               </button>
               <div class="preset-picker-menu" role="listbox" id="presetPickerMenu"></div>
             </div>
-            <button class="btn btn-sm" id="btnClear">Clear</button>
           </div>
         </div>
 
-        <!-- RIGHT: PLAYER FIELD -->
+        <!-- RIGHT: rankings span both left-column rows so the table bottom-aligns with the builder + sliders stack -->
         <aside class="pool-card">
           <div class="pool-head">
             <h3>DFS Rankings</h3>
@@ -1542,25 +1552,12 @@
           </div>
           <div class="pool-list" id="poolList"></div>
         </aside>
-      </div>
-    </section>
 
-    <!-- ========== SECTION 3: WEIGHT PLAYGROUND ========== -->
-    <section class="sim-section">
-      <div class="sim-section-head">
-        <div>
-          <span class="section-num">02 · Strategy levers</span>
-          <h2>Tune the strategy factors. Re-rank the field.</h2>
-        </div>
-        <p class="sim-section-hint">The core skill factors (talent, course fit, form) stay locked at the model's weights. Dial these five strategy levers to lean your field toward cash or GPP — the DFS Rankings above re-sort live.</p>
-      </div>
-
-      <div class="weights-grid">
-        <!-- LEFT: sliders -->
-        <div class="sliders-card">
+        <!-- Strategy levers — in the rankings column so tuning re-ranks the field live above -->
+        <div class="sliders-card" id="strategyPanel">
           <div class="sliders-head">
-            <h3>Factor weights</h3>
-            <span class="sliders-head-sub">DFS-calibrated defaults</span>
+            <h3>Strategy levers</h3>
+            <span class="sliders-head-sub">Re-ranks the field live · core factors stay locked</span>
           </div>
           <div id="slidersList"></div>
           <div class="alloc-gauge" id="allocGauge">
@@ -1572,7 +1569,6 @@
               </span>
             </div>
             <div class="alloc-gauge-track">
-              <!-- Target band 0.95-1.05 -->
               <div class="alloc-gauge-band"></div>
               <div class="alloc-gauge-fill" id="allocFill" style="width: 50%;"></div>
               <div class="alloc-gauge-marker" style="left: 50%;" title="Target = 1.00"></div>
@@ -1584,21 +1580,13 @@
           </div>
         </div>
       </div>
-
-      <div class="sim-note">
-        <strong>How this works.</strong> BBI is a weighted sum of ten normalized factor scores.
-        The sliders override the weight vector, and the top-20 board is resorted on every change.
-        The lineup distribution model assumes per-player independence — true THEMIS samples 10,000
-        tournaments with correlation between players in the same tee group, so this sandbox
-        slightly under-estimates variance at the extremes.
-      </div>
     </section>
 
     <!-- ========== SECTION: MY LINEUPS ========== -->
     <section class="sim-section">
       <div class="sim-section-head">
         <div>
-          <span class="section-num">03 · My lineups</span>
+          <span class="section-num">02 · My lineups</span>
           <h2>Build a portfolio</h2>
         </div>
         <p class="sim-section-hint">Save up to 10 lineups and compare their grades side by side. Stored in your browser for this event. Click a card to load it back into the builder.</p>
@@ -1929,6 +1917,7 @@
           }
         });
       });
+      if (typeof syncPoolHeight === 'function') syncPoolHeight();
     }
 
     // ---------- Correlation model ----------
@@ -2074,7 +2063,7 @@
       }
 
       // Distribution visual
-      renderDist(players.length ? { p5, p25, p50, p75, p95, mean: sumMean, std: sumStd } : null);
+      renderDist(players.length ? { p5, p25, p50, p75, p95, mean: sumMean, std: sumStd, avgOwn } : null);
     }
 
     // =============================================================
@@ -2650,6 +2639,13 @@
     function renderDist(dist) {
       const svg = document.getElementById('distSvg');
       const spanEl = document.getElementById('distSpan');
+      if (spanEl) {
+        if (!dist) { spanEl.textContent = 'Fill all six slots to see the outlook.'; }
+        else {
+          const own = dist.avgOwn != null ? ` &nbsp;·&nbsp; Avg ownership <strong>${dist.avgOwn.toFixed(0)}%</strong>` : '';
+          spanEl.innerHTML = `Floor <strong style="color:var(--text-primary,#f3eedf)">${dist.p5.toFixed(0)}</strong> &nbsp;·&nbsp; Median <strong style="color:var(--gold-300,#e8c878)">${dist.p50.toFixed(0)}</strong> &nbsp;·&nbsp; Ceiling <strong style="color:var(--text-primary,#f3eedf)">${dist.p95.toFixed(0)}</strong>` + own;
+        }
+      }
       if (!svg) return;
       const W = 600, H = 90;
       if (!dist) {
@@ -2854,6 +2850,34 @@
       state.lineup = ids;
       renderSlots(); renderPool(); recomputeLineup();
     }
+
+    // ---------- Bottom-align the rankings with the builder + sliders stack ----------
+    // The rankings are the tallest element; rather than let 132 rows blow up the
+    // grid, cap the scroll list to the left column's height so both columns finish
+    // on the same line. Re-runs whenever the builder/sliders resize.
+    function syncPoolHeight() {
+      const grid = document.querySelector('.builder-grid');
+      if (!grid) return;
+      const bc = grid.querySelector('.builder-card');
+      const sc = grid.querySelector('.sliders-card');
+      const pc = grid.querySelector('.pool-card');
+      const pl = pc && pc.querySelector('.pool-list');
+      if (!bc || !sc || !pc || !pl) return;
+      const bcr = bc.getBoundingClientRect();
+      const pcr = pc.getBoundingClientRect();
+      // Single-column (stacked) layout: clear the cap, let it flow.
+      if (pcr.left < bcr.left + 5) { pl.style.maxHeight = ''; return; }
+      const target = sc.getBoundingClientRect().bottom - bcr.top;   // left-stack height
+      const chrome = pl.getBoundingClientRect().top - pcr.top;      // header/filters above the list
+      pl.style.maxHeight = Math.max(320, Math.round(target - chrome - 16)) + 'px';
+    }
+    if (typeof ResizeObserver !== 'undefined') {
+      const _ro = new ResizeObserver(() => syncPoolHeight());
+      const _g = document.querySelector('.builder-grid');
+      if (_g) _g.querySelectorAll('.builder-card, .sliders-card').forEach(el => _ro.observe(el));
+    }
+    window.addEventListener('resize', syncPoolHeight);
+    syncPoolHeight();
   </script>
 </body>
 </html>
