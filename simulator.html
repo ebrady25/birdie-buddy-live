@@ -7,8 +7,237 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Shared component styles for the JS-injected header/footer/status-bar (.site-nav, .nav-group,
+       .marquee, …). The vault-base block below re-aliases their tokens to vault values, so they
+       render fully themed without a separate restyle. -->
   <link rel="stylesheet" href="assets/css/design-system.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <!-- design-system.css + components.css inlined & restyled to the BirdieBuddy vault theme.
+       Page-specific styles below consume app tokens (--surface-2, --gold-500, --space-4 …);
+       this block defines the vault palette and aliases every app token onto vault values,
+       exactly as the homepage does. CSS-only restyle — all JS hooks untouched. -->
+  <style id="vault-base">
+    /* ========== VAULT PALETTE ========== */
+    :root {
+      --bg:    #0a0a0c;  --bg-2: #111114; --bg-3: #16161b;
+      --bg-4:  #1b1b21;  --bg-5: #212129;
+      --text:  #f3eedf;  --text-2: #cfc8b6; --text-3: #9a9384;
+      --text-4:#5e5849;  --text-5: #3a352a;
+      --border:#1e1c18;  --border-2: #2a2722; --border-gold: #3a3220;
+      --gold:  #d4a843;  --gold-2: #e8c878; --gold-3: #f3e1a0;
+      --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono:  'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+      --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+      --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-12: 48px; --s-16: 64px; --s-20: 80px;
+      --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 18px; --r-full: 999px;
+    }
+
+    /* ========== APP → VAULT TOKEN BRIDGE ========== */
+    :root {
+      /* type families */
+      --font-display: var(--sans); --font-body: var(--sans); --font-mono: var(--mono);
+      /* font sizes */
+      --fs-3xs: 10px; --fs-2xs: 11.5px; --fs-xs: 12.5px; --fs-sm: 14px; --fs-md: 15.5px;
+      --fs-lg: 18px; --fs-xl: 23px; --fs-2xl: 30px; --fs-3xl: 40px;
+      /* spacing */
+      --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px; --space-5: 20px;
+      --space-6: 24px; --space-7: 28px; --space-8: 32px; --space-9: 36px; --space-10: 40px;
+      /* radius */
+      --radius-sm: var(--r-sm); --radius-md: var(--r-md); --radius-lg: var(--r-lg);
+      --radius-xl: var(--r-xl); --radius-2xl: 22px; --radius-full: var(--r-full);
+      /* golds */
+      --gold-300: var(--gold-2); --gold-400: var(--gold); --gold-500: var(--gold);
+      --gold-600: #b88a2e; --gold-700: #8f6a22;
+      /* surfaces */
+      --surface-1: var(--bg);  --surface-2: var(--bg-2); --surface-3: var(--bg-3);
+      --surface-4: var(--bg-4); --surface-5: var(--bg-5);
+      /* text */
+      --text-primary: var(--text); --text-body: var(--text-2); --text-muted: var(--text-3);
+      --text-dimmed: var(--text-4); --text-faint: #48433a;
+      /* borders */
+      --border-soft: var(--border); --border-subtle: #171511; --border-base: var(--border-2);
+      --border-strong: #3a362e;
+      /* semantic */
+      --positive: #4ea564; --positive-soft: rgba(78,165,100,0.14);
+      --negative: #e0564f; --negative-soft: rgba(224,86,79,0.14);
+      --warning: #d99a3a; --info: #6f9bdc;
+      /* tracking */
+      --tracking-wide: 0.04em; --tracking-widest: 0.18em;
+      /* motion */
+      --dur-fast: 120ms; --dur-base: 220ms; --dur-slow: 420ms;
+      --ease-out: cubic-bezier(.22,1,.36,1); --ease-spring: cubic-bezier(.34,1.56,.64,1);
+      /* elevation */
+      --shadow-lg: 0 12px 30px rgba(0,0,0,.5); --shadow-xl: 0 24px 60px rgba(0,0,0,.6);
+      --shadow-gold-md: 0 4px 16px rgba(212,168,67,.15);
+      --z-elevated: 50;
+    }
+
+    /* ========== RESET / BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text-2);
+      font-family: var(--sans); line-height: 1.55;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden; position: relative;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Faint gold atmosphere + grain, fixed behind everything (echoes the homepage). */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(900px 520px at 50% -8%, rgba(212,168,67,0.06), transparent 62%),
+        radial-gradient(700px 600px at 100% 0%, rgba(212,168,67,0.03), transparent 60%);
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      opacity: 0.045; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.78 0 0 0 0 0.55 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--text-5); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-4); }
+
+    /* ========== LAYOUT ========== */
+    .container {
+      max-width: 1180px; margin: 0 auto;
+      padding: var(--s-8) var(--s-6) var(--s-16);
+    }
+    @media (max-width: 800px) { .container { padding: var(--s-6) var(--s-4) var(--s-12); } }
+
+    /* ========== NAV (static fallback; JS overwrites #site-header live) ========== */
+    .vault-nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; gap: var(--s-6);
+      padding: var(--s-4) var(--s-6);
+      background: rgba(10,10,12,0.72);
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .vault-nav .brand { font-weight: 800; letter-spacing: -0.02em; font-size: 18px; color: var(--text); }
+    .vault-nav .brand span { color: var(--gold); }
+    .vault-nav .links {
+      display: flex; gap: var(--s-6); margin-left: var(--s-6);
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-3);
+    }
+    .vault-nav .links a { transition: color .2s ease; }
+    .vault-nav .links a:hover { color: var(--gold); }
+    .vault-nav .links a.active { color: var(--gold); }
+    .vault-nav .nav-cta { margin-left: auto; }
+
+    /* ========== FOOTER ========== */
+    .vault-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--s-4);
+      max-width: 1180px; margin: 0 auto;
+      padding: var(--s-8) var(--s-6); border-top: 1px solid var(--border);
+      color: var(--text-4); font-size: 13px;
+    }
+    .vault-footer .foot-links { display: flex; gap: var(--s-6); font-family: var(--mono); font-size: 12px; }
+    .vault-footer .foot-links a { color: var(--text-4); transition: color .2s; }
+    .vault-footer .foot-links a:hover { color: var(--gold); }
+
+    /* ========== PAGE HEAD ========== */
+    .page-head {
+      padding: var(--s-6) 0 var(--s-8);
+      margin-bottom: var(--s-8);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-head .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: var(--s-4);
+    }
+    .page-head .eyebrow::after {
+      content: ''; width: 42px; height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent); opacity: 0.55;
+    }
+    .page-head h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 800;
+      letter-spacing: -0.035em; line-height: 1.04; color: var(--text);
+      margin: 0 0 var(--s-4); max-width: 20ch;
+    }
+    .page-head p {
+      color: var(--text-3); font-size: 16px; line-height: 1.6;
+      max-width: 64ch; margin: 0;
+    }
+    .page-head-meta {
+      display: flex; flex-wrap: wrap; gap: var(--s-5);
+      margin-top: var(--s-5);
+      font-family: var(--mono); font-size: 12px; color: var(--text-4);
+      letter-spacing: 0.03em;
+    }
+    .page-head-meta strong { color: var(--text-2); font-weight: 600; }
+    .page-head-meta .gold { color: var(--gold); }
+
+    /* ========== SEGMENTED CONTROL ========== */
+    .seg {
+      display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px;
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--r-md);
+    }
+    .seg button {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 5px 10px; border: none; background: transparent;
+      color: var(--text-3); border-radius: 6px; cursor: pointer;
+      transition: all var(--dur-fast);
+    }
+    .seg button:hover { color: var(--text); }
+    .seg button.active { background: var(--bg-4); color: var(--gold); }
+
+    /* ========== SEARCH INPUT ========== */
+    .search-input {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 12px; background: var(--bg-2);
+      border: 1px solid var(--border-2); border-radius: var(--r-md);
+      color: var(--text-3); transition: border-color .2s, background .2s;
+    }
+    .search-input:focus-within { border-color: var(--border-gold); background: rgba(30,28,22,0.5); }
+    .search-input svg { color: var(--text-4); flex-shrink: 0; }
+    .search-input input {
+      flex: 1; min-width: 0; background: transparent; border: none; outline: none;
+      color: var(--text); font-family: var(--font-body); font-size: 13px;
+    }
+    .search-input input::placeholder { color: var(--text-5); }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 9px 16px; background: transparent; color: var(--text-3);
+      border: 1px solid var(--border-2); border-radius: var(--r-md);
+      cursor: pointer; white-space: nowrap; transition: all var(--dur-fast);
+    }
+    .btn:hover { border-color: var(--border-gold); color: var(--text); }
+    .btn-sm { padding: 7px 12px; font-size: 11px; }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #0d0a04; border: none;
+      box-shadow: 0 8px 24px -10px rgba(212,168,67,0.45);
+    }
+    .btn-gold:hover { filter: brightness(1.08); border: none; color: #0d0a04; transform: translateY(-1px); }
+
+    /* ========== TIER BADGES ========== */
+    .tier {
+      display: inline-block; font-family: var(--mono); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 5px;
+    }
+    .tier-specialist  { background: rgba(212,168,67,0.12); color: var(--gold);     border: 1px solid rgba(212,168,67,0.30); }
+    .tier-comfortable { background: rgba(78,165,100,0.10); color: var(--positive); border: 1px solid rgba(78,165,100,0.25); }
+    .tier-neutral     { background: rgba(255,255,255,0.05); color: var(--text-3);  border: 1px solid var(--border-2); }
+    .tier-struggle    { background: rgba(224,86,79,0.10);  color: var(--negative); border: 1px solid rgba(224,86,79,0.25); }
+  </style>
+
   <style>
     /* =========================================================
        SIMULATOR — PAGE-SPECIFIC STYLES
@@ -51,7 +280,9 @@
     /* ---------- SECTION 1: BUILDER ---------- */
     .builder-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 400px;
+      /* DFS rankings are the main attraction (wide); the lineup builder is the
+         compact side panel. */
+      grid-template-columns: 380px minmax(0, 1fr);
       gap: var(--space-5);
       align-items: start;
     }
@@ -150,9 +381,9 @@
     }
     .slot {
       display: grid;
-      grid-template-columns: 28px 1fr 80px 56px 50px 28px;
+      grid-template-columns: 24px 1fr 58px 38px 24px;
       align-items: center;
-      gap: var(--space-3);
+      gap: var(--space-2);
       padding: var(--space-3);
       border-top: 1px solid var(--border-soft);
       background: var(--surface-3);
@@ -711,7 +942,7 @@
     }
     .pool-row {
       display: grid;
-      grid-template-columns: 1fr 58px 42px 42px 32px;
+      grid-template-columns: 1fr 66px 44px 46px 50px 44px 50px 28px;
       align-items: center;
       gap: var(--space-2);
       padding: 7px var(--space-3);
@@ -728,13 +959,27 @@
       font-weight: 500; color: var(--text-primary);
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .pool-row .ps, .pool-row .pb, .pool-row .pv {
+    .pool-row .ps, .pool-row .pb, .pool-row .pv, .pool-row .pp, .pool-row .po, .pool-row .pval, .pool-row .psyn {
       font-family: var(--font-mono);
       font-variant-numeric: tabular-nums;
       text-align: right;
       color: var(--text-body);
     }
     .pool-row .pb { color: var(--gold-300); font-weight: 600; }
+    .pool-row .pp { color: var(--text-primary); }
+    .pool-row .po { color: var(--text-muted); }
+    .pool-row .psyn { color: var(--gold-400, #e8c878); font-weight: 600; }
+    /* Column header for the DFS rankings table */
+    .pool-head-row {
+      display: grid;
+      grid-template-columns: 1fr 66px 44px 46px 50px 44px 50px 28px;
+      gap: var(--space-2);
+      padding: 2px var(--space-3) 6px;
+      font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+      letter-spacing: var(--tracking-widest); text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .pool-head-row span:not(:first-child) { text-align: right; }
     .pool-row .add-btn {
       background: var(--surface-5);
       border: 1px solid var(--border-base);
@@ -759,7 +1004,7 @@
     /* ---------- SECTION 2: WEIGHTS ---------- */
     .weights-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 420px;
+      grid-template-columns: 1fr;
       gap: var(--space-5);
       align-items: start;
     }
@@ -1056,16 +1301,80 @@
     }
     .sim-note strong { color: var(--text-primary); }
   </style>
+
+  <!-- Vault-theme signature flourishes — must beat the page-specific rules above. -->
+  <style id="vault-overrides">
+    /* Big, tight section headlines like the homepage */
+    .sim-section-head h2 {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+      line-height: 1.06;
+    }
+    /* Gold mono eyebrow with a trailing rule-line */
+    .sim-section-head .section-num {
+      display: inline-flex; align-items: center; gap: 10px;
+      letter-spacing: 0.2em;
+    }
+    .sim-section-head .section-num::after {
+      content: ''; width: 38px; height: 1px;
+      background: linear-gradient(to right, var(--gold), transparent); opacity: 0.55;
+    }
+
+    /* Glassy cards: layered translucent gradient + hairline, matching the homepage .card */
+    .builder-card, .pool-card, .sliders-card, .rerank-card {
+      background:
+        linear-gradient(180deg, rgba(212,168,67,0.035), transparent 36%),
+        linear-gradient(180deg, rgba(26,26,32,0.72), rgba(14,14,18,0.72));
+      backdrop-filter: blur(2px);
+    }
+    .builder-card { border-color: var(--border-gold); }
+    .saved-card {
+      background: linear-gradient(180deg, rgba(24,24,30,0.7), rgba(14,14,18,0.7));
+    }
+
+    /* Primary gold action buttons get the homepage sheen treatment */
+    .btn-save-lineup:not(:disabled) {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      border-color: transparent;
+      box-shadow: 0 8px 22px -12px rgba(212,168,67,0.5);
+    }
+    .btn-save-lineup:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--gold-3), var(--gold-2));
+      transform: translateY(-1px);
+    }
+
+    /* Section rhythm: a touch more air between the page's three sections */
+    .sim-section { margin-bottom: var(--s-16); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
 <body>
-  <div id="site-header"></div>
+  <!-- #site-header is populated by BBI.renderHeader() on the live site; this static
+       vault nav is a graceful fallback so the page reads correctly on its own. -->
+  <div id="site-header">
+    <nav class="vault-nav">
+      <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+      <div class="links">
+        <a href="full_rankings.html">Rankings</a>
+        <a href="performance.html">Performance</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="simulator.html" class="active">Simulator</a>
+      </div>
+      <div class="nav-cta"><a class="btn btn-sm" href="pricing.html">Get access</a></div>
+    </nav>
+  </div>
 
   <main class="container">
     <!-- PAGE HEAD -->
     <header class="page-head">
       <div class="eyebrow">THEMIS sandbox · BBI v8.5</div>
       <h1>Build lineups. Tune the model.</h1>
-      <p>A live sandbox backed by the THEMIS per-player distribution layer. Draft any 6 golfers, and the tool reprices the lineup against 10,000 simulated tournaments. Tune the 10 BBI factor weights and watch the top of the field re-sort in real time.</p>
+      <p>A live sandbox backed by the THEMIS per-player distribution layer. Draft any 6 golfers, and the tool reprices the lineup against 10,000 simulated tournaments. Dial the five contest-strategy factors and watch the field re-rank in real time.</p>
       <div class="page-head-meta">
         <span>Salary cap <strong id="simCap">$50,000</strong></span>
         <span>Roster <strong>6 golfers</strong></span>
@@ -1091,6 +1400,8 @@
             <h3>Your lineup</h3>
             <div class="builder-head-actions">
               <span class="builder-filled"><strong id="slotsFilled">0</strong> of 6 slots</span>
+              <button class="btn-optimize" id="btnOptimize" type="button" title="Auto-build the highest-BBI lineup under the salary cap"
+                style="font:inherit;font-size:var(--fs-3xs,11px);font-weight:600;padding:6px 12px;border-radius:var(--radius-md,8px);border:1px solid var(--border-gold,rgba(212,168,67,.4));color:var(--gold-300,#e8c878);background:rgba(212,168,67,.10);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;">Optimize</button>
               <button class="btn-save-lineup" id="btnSaveLineup" type="button" disabled>Save lineup</button>
             </div>
           </div>
@@ -1208,48 +1519,40 @@
         <!-- RIGHT: PLAYER FIELD -->
         <aside class="pool-card">
           <div class="pool-head">
-            <h3>Player field</h3>
+            <h3>DFS Rankings</h3>
             <small id="poolCount">0 players</small>
           </div>
           <div class="pool-filters">
             <label class="search-input" style="min-width: unset; width: 100%;">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" id="poolSearch" placeholder="Search players…" aria-label="Search player field"/>
+              <input type="text" id="poolSearch" placeholder="Search the full field…" aria-label="Search DFS rankings"/>
             </label>
             <div class="seg" role="radiogroup" aria-label="Sort field">
               <button class="active" data-sort="bbi">BBI</button>
+              <button data-sort="proj">Proj</button>
+              <button data-sort="syn" title="Synergy — ceiling this player adds to your current lineup">Syn</button>
+              <button data-sort="value">Val</button>
               <button data-sort="salary">$</button>
-              <button data-sort="p95">p95</button>
               <button data-sort="own">Own</button>
               <button data-sort="name">A–Z</button>
             </div>
+          </div>
+          <div class="pool-head-row">
+            <span>Player</span><span>$</span><span>BBI</span><span>Proj</span><span>Syn</span><span>Own</span><span>Val</span><span></span>
           </div>
           <div class="pool-list" id="poolList"></div>
         </aside>
       </div>
     </section>
 
-    <!-- ========== SECTION 2: MY LINEUPS ========== -->
-    <section class="sim-section">
-      <div class="sim-section-head">
-        <div>
-          <span class="section-num">02 · My lineups</span>
-          <h2>Build a portfolio</h2>
-        </div>
-        <p class="sim-section-hint">Save up to 10 lineups and compare their grades side by side. Stored in your browser for this event. Click a card to load it back into the builder.</p>
-      </div>
-      <div class="saved-empty" id="savedEmpty">No saved lineups yet — fill all six slots above, then hit <strong>Save lineup</strong>.</div>
-      <div class="saved-grid" id="savedGrid"></div>
-    </section>
-
     <!-- ========== SECTION 3: WEIGHT PLAYGROUND ========== -->
     <section class="sim-section">
       <div class="sim-section-head">
         <div>
-          <span class="section-num">03 · Weight playground</span>
-          <h2>Tune the 10 factors. Re-rank the field.</h2>
+          <span class="section-num">02 · Strategy levers</span>
+          <h2>Tune the strategy factors. Re-rank the field.</h2>
         </div>
-        <p class="sim-section-hint">Adjust any factor weight to interrogate its impact. The top-20 board on the right resorts in real time. Your weights don't have to sum to 1 — the model normalizes internally.</p>
+        <p class="sim-section-hint">The core skill factors (talent, course fit, form) stay locked at the model's weights. Dial these five strategy levers to lean your field toward cash or GPP — the DFS Rankings above re-sort live.</p>
       </div>
 
       <div class="weights-grid">
@@ -1280,15 +1583,6 @@
             </div>
           </div>
         </div>
-
-        <!-- RIGHT: re-ranked leaderboard -->
-        <aside class="rerank-card">
-          <div class="rerank-head">
-            <h3>Top 20 — re-ranked</h3>
-            <small id="rerankLive">Live</small>
-          </div>
-          <div class="rerank-list" id="rerankList"></div>
-        </aside>
       </div>
 
       <div class="sim-note">
@@ -1300,9 +1594,35 @@
       </div>
     </section>
 
+    <!-- ========== SECTION: MY LINEUPS ========== -->
+    <section class="sim-section">
+      <div class="sim-section-head">
+        <div>
+          <span class="section-num">03 · My lineups</span>
+          <h2>Build a portfolio</h2>
+        </div>
+        <p class="sim-section-hint">Save up to 10 lineups and compare their grades side by side. Stored in your browser for this event. Click a card to load it back into the builder.</p>
+        <button id="btnExportCsv" type="button" title="Export your saved lineups (or the current one) as a DraftKings-style CSV"
+          style="font:inherit;font-size:var(--fs-3xs,11px);font-weight:600;padding:6px 14px;border-radius:var(--radius-md,8px);border:1px solid var(--border-gold,rgba(212,168,67,.4));color:var(--gold-300,#e8c878);background:rgba(212,168,67,.10);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;align-self:start;">Export CSV ↓</button>
+      </div>
+      <div class="saved-empty" id="savedEmpty">No saved lineups yet — fill all six slots above, then hit <strong>Save lineup</strong>.</div>
+      <div class="saved-grid" id="savedGrid"></div>
+    </section>
+
   </main>
 
-  <div id="site-footer"></div>
+  <!-- #site-footer is populated by BBI.renderFooter() live; static vault fallback below. -->
+  <div id="site-footer">
+    <footer class="vault-footer">
+      <div style="font-weight:700;color:var(--text);">Birdie<span style="color:var(--gold);">Buddy</span></div>
+      <div class="foot-links">
+        <a href="full_rankings.html">Rankings</a>
+        <a href="performance.html">Performance</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </footer>
+  </div>
 
   <!-- Scripts -->
   <script src="assets/js/core.js"></script>
@@ -1317,6 +1637,10 @@
     // SIMULATOR — state machine
     // ===================================================================
     const FACTORS = ['talent','courseFit','form','cutSafety','floor','ceiling','leverage','contrarian','dfsValue','strategic'];
+    // Only the 5 contest-strategy levers are user-tunable; the core skill factors
+    // (talent/courseFit/form/dfsValue/strategic) stay locked at the model's weights.
+    // liveBBI still blends all 10 — locked at default + these 5 at the slider values.
+    const TUNABLE_FACTORS = ['cutSafety','floor','ceiling','leverage','contrarian'];
     const FACTOR_LABELS = {
       talent: 'Talent', courseFit: 'Course fit', form: 'Form',
       cutSafety: 'Cut safety', floor: 'Floor', ceiling: 'Ceiling',
@@ -1368,8 +1692,8 @@
 
       // Build enriched player list
       const themisPer = th?.per_player || {};
-      const wp = rk?.weights_pool || {};
-      const wd = rk?.weights_dfs || {};
+      const wp = rk?.pool_weights_used || rk?.weights_pool || {};
+      const wd = rk?.dfs_weights_used || rk?.weights_dfs || {};
       state.players = (rk?.players || []).map(p => {
         const td = themisPer[p.dg_id] || {};
         // Recover raw factor values from dfs_decomp / weight (DFS-only positioning)
@@ -1445,15 +1769,13 @@
             <span class="slot-name">${fmt.abbrevName(p.name)}<span class="slot-tier tier tier-${(p.tier||'').toLowerCase()}">${(p.tier||'').slice(0,4)}</span></span>
             <span class="slot-salary">$${p.salary?.toLocaleString?.() || '—'}</span>
             <span class="slot-bbi">${p.bbi_dfs?.toFixed(1) ?? '—'}</span>
-            <span class="slot-proj">${p.mean?.toFixed(1) ?? '—'}</span>
             <button class="slot-remove" data-remove="${p.dg_id}" title="Remove">×</button>`;
         } else {
           row.innerHTML = `
             <span class="slot-num">G${i+1}</span>
-            <span class="slot-name">Click a player in the pool →</span>
+            <span class="slot-name" style="color:var(--text-dimmed);font-style:italic;">Add a player</span>
             <span class="slot-salary">—</span>
             <span class="slot-bbi">—</span>
-            <span class="slot-proj">—</span>
             <span></span>`;
         }
         mount.appendChild(row);
@@ -1485,9 +1807,9 @@
           renderPool();
         });
       }
-      document.querySelectorAll('.seg[aria-label="Sort pool"] button').forEach(btn => {
+      document.querySelectorAll('.seg[aria-label="Sort field"] button').forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.seg[aria-label="Sort pool"] button').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.seg[aria-label="Sort field"] button').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           state.poolSort = btn.getAttribute('data-sort');
           renderPool();
@@ -1504,6 +1826,45 @@
         state.weights = { ...state.weightsBase };
         renderSliders(); renderReranked();
       });
+      const opt = document.getElementById('btnOptimize');
+      if (opt) opt.addEventListener('click', optimizeLineup);
+    }
+
+    // ---------- Lineup optimizer ----------
+    // Auto-build the highest total BBI-DFS lineup that fits the salary cap.
+    // Greedy value seed → cheapest backfill → 1-swap hill-climb (fast for 6-of-N).
+    function optimizeLineup() {
+      const cap = state.cap || 50000;
+      const pool = state.players.filter(p => (p.salary || 0) > 0 && p.bbi_dfs != null);
+      if (pool.length < ROSTER) return;
+      const val = p => p.bbi_dfs || 0;
+      let pick = [], spent = 0;
+      for (const p of [...pool].sort((a, b) => (val(b) / (b.salary / 1000)) - (val(a) / (a.salary / 1000)))) {
+        if (pick.length >= ROSTER) break;
+        if (spent + p.salary <= cap) { pick.push(p); spent += p.salary; }
+      }
+      if (pick.length < ROSTER) {
+        const ids = new Set(pick.map(p => p.dg_id));
+        for (const p of [...pool].sort((a, b) => a.salary - b.salary)) {
+          if (pick.length >= ROSTER) break;
+          if (!ids.has(p.dg_id) && spent + p.salary <= cap) { pick.push(p); spent += p.salary; ids.add(p.dg_id); }
+        }
+      }
+      let improved = true, guard = 0;
+      while (improved && guard++ < 300) {
+        improved = false;
+        const ids = new Set(pick.map(p => p.dg_id));
+        const sumSal = pick.reduce((a, p) => a + p.salary, 0);
+        for (let i = 0; i < pick.length && !improved; i++) {
+          for (const cand of pool) {
+            if (ids.has(cand.dg_id)) continue;
+            if (sumSal - pick[i].salary + cand.salary > cap) continue;
+            if (val(cand) > val(pick[i])) { pick[i] = cand; improved = true; break; }
+          }
+        }
+      }
+      state.lineup = pick.slice(0, ROSTER).map(p => p.dg_id);
+      renderSlots(); renderPool(); recomputeLineup();
     }
 
     function renderPool() {
@@ -1515,16 +1876,21 @@
       let list = state.players.filter(p => !filterText || p.name.toLowerCase().includes(filterText));
 
       const sortKey = state.poolSort;
+      // Synergy: how much each player raises the CURRENT lineup's ceiling (correlation-aware).
+      // Empty lineup → it's the player's own ceiling; as you build, it surfaces stack-fit.
+      const lp = state.lineup.map(id => state.playersById.get(id)).filter(Boolean);
+      const baseCeil = lineupCeiling(lp);
+      const synOf = pl => lineupCeiling(lp.concat(pl)) - baseCeil;
       list.sort((a, b) => {
         if (sortKey === 'name') return a.name.localeCompare(b.name);
-        const av = sortKey === 'own' ? (a.proj_own || 0)
-                  : sortKey === 'salary' ? (a.salary || 0)
-                  : sortKey === 'p95' ? (a.p95 || 0)
-                  : (a.bbi_dfs || 0);
-        const bv = sortKey === 'own' ? (b.proj_own || 0)
-                  : sortKey === 'salary' ? (b.salary || 0)
-                  : sortKey === 'p95' ? (b.p95 || 0)
-                  : (b.bbi_dfs || 0);
+        const metric = pl => sortKey === 'own' ? (pl.proj_own || 0)
+                  : sortKey === 'salary' ? (pl.salary || 0)
+                  : sortKey === 'p95' ? (pl.p95 || 0)
+                  : sortKey === 'proj' ? (pl.mean || 0)
+                  : sortKey === 'syn' ? synOf(pl)
+                  : sortKey === 'value' ? (pl.salary ? (pl.mean || 0) / (pl.salary / 1000) : 0)
+                  : liveBBI(pl);
+        const av = metric(a), bv = metric(b);
         return bv - av; // desc
       });
 
@@ -1537,13 +1903,18 @@
       const inLineup = new Set(state.lineup);
       const atCap = state.lineup.length >= ROSTER;
       mount.innerHTML = list.map(p => {
-        const taken = inLineup.has(p.dg_id) || atCap;
+        // Dim only players already in the lineup — keep the full board readable even
+        // when the lineup is full (rankings are the main attraction). Add is guarded below.
+        const taken = inLineup.has(p.dg_id);
         return `
           <div class="pool-row ${taken ? 'taken' : ''}" data-id="${p.dg_id}">
             <span class="pn">${fmt.abbrevName(p.name)}</span>
             <span class="ps">$${(p.salary || 0).toLocaleString()}</span>
-            <span class="pb">${(p.bbi_dfs || 0).toFixed(1)}</span>
-            <span class="pv">${(p.p95 || 0).toFixed(0)}</span>
+            <span class="pb">${liveBBI(p).toFixed(1)}</span>
+            <span class="pp">${(p.mean || 0).toFixed(1)}</span>
+            <span class="psyn">${synOf(p).toFixed(1)}</span>
+            <span class="po">${(p.proj_own || 0).toFixed(0)}%</span>
+            <span class="pval">${p.salary ? ((p.mean || 0) / (p.salary / 1000)).toFixed(2) : '—'}</span>
             <span class="add-btn">+</span>
           </div>`;
       }).join('');
@@ -1560,6 +1931,101 @@
       });
     }
 
+    // ---------- Correlation model ----------
+    // Golfers share modest positive correlation (course conditions affect everyone);
+    // similar course-fit (same tier) correlates a touch more. Powers both the lineup
+    // variance (realistic ceiling) and the rankings "Syn" (stack-fit) signal.
+    const RHO_BASE = 0.10, RHO_TIER = 0.06;
+    function pairRho(a, b) {
+      let r = RHO_BASE;
+      if (a.tier && b.tier && a.tier === b.tier) r += RHO_TIER;
+      return r;
+    }
+    function lineupStd(players) {
+      let v = 0;
+      for (let i = 0; i < players.length; i++) {
+        const si = players[i].std || 0;
+        v += si * si;
+        for (let j = i + 1; j < players.length; j++) {
+          v += 2 * pairRho(players[i], players[j]) * si * (players[j].std || 0);
+        }
+      }
+      return Math.sqrt(Math.max(0, v));
+    }
+    function lineupCeiling(players) {
+      const mean = players.reduce((a, p) => a + (p.mean || 0), 0);
+      return mean + 1.6449 * lineupStd(players); // ~p95
+    }
+
+    // Live BBI from the current factor-weight sliders (Σ weight × raw factor).
+    // Equals the player's bbi_dfs at default weights; re-ranks the field when sliders move.
+    function liveBBI(p) {
+      let s = 0;
+      for (const f of FACTORS) s += (state.weights[f] || 0) * (p.raw[f] || 0);
+      return s;
+    }
+
+    // ---------- Win / cash model ----------
+    // Per-bucket field size + cash rate (fraction of the field that cashes).
+    const BUCKET_PARAMS = {
+      local: { N: 150,   cash: 0.45 },
+      mid:   { N: 3000,  cash: 0.28 },
+      large: { N: 20000, cash: 0.20 },
+      mass:  { N: 50000, cash: 0.16 }
+    };
+    function _erf(x) {
+      const t = 1 / (1 + 0.3275911 * Math.abs(x));
+      const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+      return x >= 0 ? y : -y;
+    }
+    function normCDF(x) { return 0.5 * (1 + _erf(x / Math.SQRT2)); }
+    function invNorm(p) { // Acklam's rational approximation
+      if (p <= 0) return -6; if (p >= 1) return 6;
+      const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+      const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+      const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+      const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+      const pl=0.02425, ph=1-pl; let q,r;
+      if (p<pl){ q=Math.sqrt(-2*Math.log(p)); return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+      if (p<=ph){ q=p-0.5; r=q*q; return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1); }
+      q=Math.sqrt(-2*Math.log(1-p)); return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+    }
+    // Sample random valid lineups once to estimate the field: mean projection (muF)
+    // and a typical lineup's correlated outcome std (sigO).
+    let _fieldStats = null;
+    function getFieldStats() {
+      if (_fieldStats) return _fieldStats;
+      const pool = state.players.filter(p => (p.salary||0)>0 && (p.mean||0)>0);
+      const cap = state.cap || 50000;
+      if (pool.length < ROSTER) return { muF: 0, sigO: 10 };
+      const means=[], stds=[];
+      for (let s=0; s<400; s++){
+        const pick=[]; let spent=0; const used=new Set(); let g=0;
+        while (pick.length<ROSTER && g++<60){
+          const c=pool[Math.floor(Math.random()*pool.length)];
+          if (used.has(c.dg_id) || spent+c.salary>cap) continue;
+          pick.push(c); spent+=c.salary; used.add(c.dg_id);
+        }
+        if (pick.length===ROSTER){ means.push(pick.reduce((a,p)=>a+(p.mean||0),0)); stds.push(lineupStd(pick)); }
+      }
+      if (!means.length) return { muF: 0, sigO: 10 };
+      const muF = means.reduce((a,b)=>a+b,0)/means.length;
+      const sigO = stds.reduce((a,b)=>a+b,0)/stds.length;
+      _fieldStats = { muF: muF * 1.04, sigO: sigO || 10 }; // real fields are a touch sharper than random
+      return _fieldStats;
+    }
+    function winCashFor(muL, sigL, bucket) {
+      const { N, cash } = BUCKET_PARAMS[bucket] || BUCKET_PARAMS.mid;
+      const { muF, sigO } = getFieldStats();
+      const sd = Math.sqrt(sigL*sigL + sigO*sigO) || 1;
+      const winLine  = muF + sigO * invNorm(1 - 1/N);    // expected best of N opponents
+      const cashLine = muF + sigO * invNorm(1 - cash);   // score the top `cash` fraction hits
+      return {
+        win:  Math.max(0, Math.min(1, normCDF((muL - winLine)  / sd))),
+        cash: Math.max(0, Math.min(1, normCDF((muL - cashLine) / sd)))
+      };
+    }
+
     // ---------- Lineup recomputation ----------
     function recomputeLineup() {
       const players = state.lineup.map(id => state.playersById.get(id)).filter(Boolean);
@@ -1568,9 +2034,8 @@
       const sumMean   = players.reduce((a, p) => a + (p.mean || 0), 0);
       const avgOwn    = players.length ? players.reduce((a, p) => a + (p.proj_own || 0), 0) / players.length : 0;
 
-      // Convolve independent Gaussians → sum std is sqrt(Σσ²)
-      const sumVar = players.reduce((a, p) => a + Math.pow(p.std || 0, 2), 0);
-      const sumStd = Math.sqrt(sumVar);
+      // Correlation-aware lineup std (course-conditions ρ; rewards realistic stacking).
+      const sumStd = lineupStd(players);
       // Approximate percentiles from Normal(sumMean, sumStd)
       const Z = (pct) => { // inverse CDF approximation
         const Zmap = { 0.05: -1.6449, 0.25: -0.6745, 0.50: 0, 0.75: 0.6745, 0.95: 1.6449 };
@@ -1858,16 +2323,20 @@
         } else { tipEl.hidden = true; }
       }
 
-      // Comparator: this lineup's grade across all four field sizes (premium blurred)
+      // Comparator: win% / cash% across the four field sizes (premium blurred for locked tiers)
       const cmpGrid = document.getElementById('bbcmpGrid');
       const cmpWrap = document.getElementById('bbComparator');
       if (cmpGrid && cmpWrap) {
         cmpGrid.innerHTML = '';
+        const muL = statePlayers.reduce((a, p) => a + (p.mean || 0), 0);
+        const sigL = lineupStd(statePlayers);
         BBV2_BUCKETS.forEach(b => {
           const wB = S.pickWeights(bbv2.weights, mode, b, null);
           const refB = bbv2RefComposites(mode + ':' + b, wB);
           const pctB = S.percentile(S.composite(raw, wB, bbv2.refStats), refB);
           const gB = S.gradeFromPercentile(pctB);
+          const wc = winCashFor(muL, sigL, b);
+          const winPct = wc.win >= 0.01 ? (wc.win * 100).toFixed(1) : (wc.win * 100).toFixed(2);
           const unlocked = bbv2BucketUnlocked(b);
           const cell = document.createElement('div');
           cell.className = 'bbcmp-cell' + (b === bucket ? ' current' : '') + (unlocked ? '' : ' locked');
@@ -1876,7 +2345,7 @@
           cell.innerHTML =
             '<span class="bbcmp-bucket">' + b + '</span>' +
             '<span class="bbcmp-grade">' + gB + '</span>' +
-            '<span class="bbcmp-num">' + Math.round(pctB * 100) + '</span>';
+            '<span class="bbcmp-num" title="Win ' + winPct + '% · ' + (BUCKET_PARAMS[b]?.N || 0).toLocaleString() + '-entry field">' + Math.round(wc.cash * 100) + '% cash</span>';
           cmpGrid.appendChild(cell);
         });
         cmpWrap.hidden = false;
@@ -2077,6 +2546,8 @@
 
       const sb = document.getElementById('btnSaveLineup');
       if (sb) sb.addEventListener('click', bbSaveCurrent);
+      const ex = document.getElementById('btnExportCsv');
+      if (ex) ex.addEventListener('click', exportLineupsCSV);
     });
 
     // =========================================================================
@@ -2097,6 +2568,27 @@
       const salary = players.reduce((a, p) => a + (p.salary || 0), 0);
       state.savedLineups.push({ id: Date.now(), ids: [...state.lineup], salary });
       bbSavedPersist(); renderSlots(); bbSavedRender();
+    }
+    // Export saved lineups (or the current build) as a DraftKings-style CSV.
+    // Names are written "First Last" for DK matching; DK contest IDs aren't available
+    // from DataGolf, so verify names on import.
+    function exportLineupsCSV() {
+      const lineups = (state.savedLineups && state.savedLineups.length)
+        ? state.savedLineups.map(l => l.ids)
+        : (state.lineup.length === ROSTER ? [state.lineup] : []);
+      if (!lineups.length) return;
+      const dkName = n => { const m = String(n).split(', '); return m.length === 2 ? `${m[1]} ${m[0]}` : n; };
+      const esc = s => `"${String(s).replace(/"/g, '""')}"`;
+      const rows = ['G,G,G,G,G,G'];
+      lineups.forEach(ids => {
+        rows.push(ids.map(id => { const p = state.playersById.get(id); return p ? esc(dkName(p.name)) : ''; }).join(','));
+      });
+      const blob = new Blob([rows.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `bbi_dfs_lineups_${state.eventId || 'event'}.csv`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
     function bbSavedDelete(id) {
       state.savedLineups = state.savedLineups.filter(l => l.id !== id);
@@ -2219,7 +2711,7 @@
     function renderSliders() {
       const mount = document.getElementById('slidersList');
       if (!mount) return;
-      mount.innerHTML = FACTORS.map(f => {
+      mount.innerHTML = TUNABLE_FACTORS.map(f => {
         const v = state.weights[f] ?? 0;
         return `
           <div class="sliders-row">
@@ -2271,8 +2763,8 @@
     // ---------- Re-rank with custom weights ----------
     let rerankTimer = null;
     function renderRerankedDebounced() {
-      if (rerankTimer) cancelAnimationFrame(rerankTimer);
-      rerankTimer = requestAnimationFrame(renderReranked);
+      if (rerankTimer) clearTimeout(rerankTimer);
+      rerankTimer = setTimeout(renderReranked, 30);
     }
 
     let rerankPulseTimer = null;
@@ -2285,36 +2777,10 @@
     }
 
     function renderReranked() {
-      const mount = document.getElementById('rerankList');
-      if (!mount) return;
-      pulseRerankLive();
-      const w = state.weights;
-      // new BBI per player = Σ weights[f] * raw[f]
-      const scored = state.players.map(p => {
-        let s = 0;
-        for (const f of FACTORS) s += (w[f] || 0) * (p.raw[f] || 0);
-        return { id: p.dg_id, name: p.name, new_bbi: s };
-      });
-      scored.sort((a, b) => b.new_bbi - a.new_bbi);
-      // Precompute default rank by bbi_dfs (DFS-only positioning)
-      const defaultOrder = [...state.players].sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
-      const defaultRank = new Map(defaultOrder.map((p, i) => [p.dg_id, i + 1]));
-
-      const top20 = scored.slice(0, 20);
-      mount.innerHTML = top20.map((p, i) => {
-        const origRank = defaultRank.get(p.id);
-        const delta = origRank != null ? (origRank - (i + 1)) : 0;
-        const cls = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
-        const sym = delta > 0 ? '▲' : delta < 0 ? '▼' : '—';
-        return `
-          <div class="rerank-row">
-            <span class="rr-rank ${i < 3 ? 'gold' : ''}">${i + 1}</span>
-            <span class="rr-name">${fmt.abbrevName(p.name)}</span>
-            <span class="rr-bbi">${p.new_bbi.toFixed(1)}</span>
-            <span class="rr-delta ${cls}" title="From default rank ${origRank}">${sym}${delta ? ' ' + Math.abs(delta) : ''}</span>
-          </div>
-        `;
-      }).join('');
+      // The 10-factor sliders re-rank the MAIN DFS rankings (the centerpiece) via
+      // liveBBI, and refresh the lineup grade. (The old separate top-20 board was removed.)
+      renderPool();
+      recomputeLineup();
     }
 
     // ---------- Preset picker ----------
