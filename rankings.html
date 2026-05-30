@@ -193,7 +193,7 @@
       await BBI.renderHeader('rankings.html');
       await BBI.renderFooter();
 
-      const [ev, rank, themis, omnia] = await Promise.all([
+      const [ev, rankStatic, themis, omnia] = await Promise.all([
         BBI.data.load(BBI.data.paths.currentEvent),
         BBI.data.load(BBI.data.paths.bbiRankings),
         BBI.data.load(BBI.data.paths.themis),
@@ -201,6 +201,30 @@
       ]);
 
       $('#rankEvent').textContent = ev?.event_name || '—';
+
+      // Data source: static file by default; opt into the gated API with ?src=api.
+      // Pro+ callers get full_json server-side; falls back to static on error.
+      // auth.js is lazy-loaded by renderHeader, so wait (briefly) for BBI.auth
+      // before deciding — otherwise the API path would race and fall back to static.
+      const _useApi = new URLSearchParams(location.search).get('src') === 'api';
+      let rank = rankStatic;
+      if (_useApi) {
+        const authReady = await new Promise(res => {
+          if (window.BBI && BBI.auth) return res(true);
+          let n = 0; const t = setInterval(() => {
+            if ((window.BBI && BBI.auth) || ++n > 60) { clearInterval(t); res(!!(window.BBI && BBI.auth)); }
+          }, 50);
+        });
+        if (authReady && BBI.auth.loadRankings) {
+          try {
+            const slug = (ev && ev.event_slug) || 'Charles_Schwab_Challenge';
+            const res = await BBI.auth.loadRankings(slug);
+            console.log('[rankings] API src=api → tier:', res.tier, 'gated:', res.gated,
+                        'rows:', res.rank && res.rank.players && res.rank.players.length);
+            rank = res.rank || rankStatic;
+          } catch (e) { console.warn('[rankings] API load failed, using static', e); }
+        }
+      }
       const players = (rank && rank.players) || [];
 
       // Build fast lookups for expansion data

@@ -322,6 +322,31 @@ window.BBI = window.BBI || {};
       if (!res.ok) throw new Error(`Rankings unavailable (${res.status}).`);
       return res.json();
     },
+
+    /** Normalize the /api/rankings `data` payload into a uniform rankings
+        object { players:[], rankings:[], ...meta }. Resilient to a stringified
+        payload or a bare array (tolerates pre-contract-fix snapshots; stays
+        correct once the snapshot is a native object per SNAPSHOT_CONTRACT). */
+    normalizeRankings(data) {
+      if (data == null) return null;
+      if (typeof data === 'string') { try { data = JSON.parse(data); } catch (e) { return null; } }
+      if (Array.isArray(data)) data = { players: data.slice(), rankings: data.slice(), teaser: true };
+      if (!data.players  && data.rankings) data.players  = data.rankings;
+      if (!data.rankings && data.players)  data.rankings = data.players;
+      return data;
+    },
+
+    /** High-level loader the rankings pages call: fetch + normalize.
+        Returns { event, week, year, tier, gated, rank } where `rank` is the
+        uniform object the pages already expect (rank.players / rank.rankings). */
+    async loadRankings(eventSlug) {
+      const env = await this.fetchRankings(eventSlug);
+      return {
+        event: env.event, week: env.week, year: env.year,
+        tier: env.tier, gated: env.gated,
+        rank: this.normalizeRankings(env.data)
+      };
+    },
     async manageBilling() {
       const r = await this.backend.portal({ email: current?.email });
       if (r.url) location.href = r.url;

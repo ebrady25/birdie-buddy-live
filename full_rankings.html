@@ -379,12 +379,22 @@
 
   // ========== RENDER ==========
   document.addEventListener('DOMContentLoaded', async () => {
-    const [ev, rank] = await Promise.all([
-      loadJSON('current_event.json'),
-      loadJSON('bbi_rankings.json')
-    ]);
-
+    const ev = await loadJSON('current_event.json');
     if (ev) $('#eventName').textContent = ev.event_name || 'Upcoming Event';
+
+    // Data source: static file by default; opt into the gated API with ?src=api
+    // (server-side tier gating via /api/rankings). Falls back to static on error.
+    const _useApi = new URLSearchParams(location.search).get('src') === 'api';
+    let rank;
+    if (_useApi && window.BBI && BBI.auth && BBI.auth.loadRankings) {
+      try {
+        const slug = (ev && ev.event_slug) || 'Charles_Schwab_Challenge';
+        rank = (await BBI.auth.loadRankings(slug)).rank;
+      } catch (e) {
+        console.warn('[full_rankings] API load failed, using static', e);
+      }
+    }
+    if (!rank) rank = await loadJSON('bbi_rankings.json');
 
     const players = (rank && rank.rankings) || [];
     // Sort by BBI descending
