@@ -1499,7 +1499,10 @@
         ? `${firstName} is your #${rank} pick at ${rankings.course || 'this venue'} — ${prettyFactor(factorEntries[0][0])} and ${prettyFactor(factorEntries[1][0])} carry the composite.`
         : `${firstName} ranks #${rank} with a composite score of ${fmt.num(bbi, 2)}.`;
 
-      const tierClass = (player.tier || 'NEUTRAL').toLowerCase();
+      const TIER_LABEL = { SPECIALIST: 'Course specialist', COMFORTABLE: 'Comfortable', NEUTRAL: 'Neutral', LIMITED: 'Limited history', NO_HISTORY: 'No history' };
+      const prettyTier = t => TIER_LABEL[String(t || '').toUpperCase()] || (t ? String(t).replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase()) : 'Neutral');
+      const tierStyleClass = t => { const u = String(t || '').toUpperCase(); return u === 'SPECIALIST' ? 'specialist' : u === 'COMFORTABLE' ? 'comfortable' : 'neutral'; };
+      const tierClass = tierStyleClass(player.tier);
 
       // Combined Signals section: SG Fingerprint (left) + Pressure/Surge stacked (right)
       const sgSrc = (courseHistory && courseHistory[player.dg_id] && courseHistory[player.dg_id].aggregate) || null;
@@ -1550,7 +1553,7 @@
           <span class="mini-rank">#${rank}</span>
           <div>
             <div class="mini-name">${player.name}</div>
-            <span class="mini-tier">${player.tier || 'NEUTRAL'} · Composite ${fmt.num(bbi, 2)}</span>
+            <span class="mini-tier">${prettyTier(player.tier)} · Composite ${fmt.num(bbi, 2)}</span>
           </div>
           <div class="mini-strip-nav">
             <button type="button" data-nav="prev" ${!prevPlayer ? 'disabled' : ''} title="${prevPlayer ? `#${prevRank} ${fmt.abbrevName(prevPlayer.name)}` : 'No previous'}">←</button>
@@ -1612,7 +1615,7 @@
           <div class="player-info">
             <div class="player-name-section">
               <h2 class="player-full-name">${player.name}</h2>
-              <span class="tier-badge ${tierClass}">${player.tier || 'NEUTRAL'}</span>
+              <span class="tier-badge ${tierClass}">${prettyTier(player.tier)}</span>
             </div>
             <div class="player-meta-row">
               ${player.owgr ? `<div class="meta-item"><span class="meta-label">OWGR</span><span class="meta-value">#${player.owgr}</span></div>` : ''}
@@ -1632,7 +1635,7 @@
             </div>
             <div>
               <div class="snapshot-tldr">${tldr}</div>
-              <div class="snapshot-score">Composite <strong>${fmt.num(bbi, 2)}</strong> · Tier <strong>${player.tier || 'NEUTRAL'}</strong>${player.dg_skill != null ? ` · Skill rating <strong>${fmt.num(player.dg_skill, 2)}</strong>` : ''}</div>
+              <div class="snapshot-score">Composite <strong>${fmt.num(bbi, 2)}</strong> · Tier <strong>${prettyTier(player.tier)}</strong>${player.dg_skill != null ? ` · Skill rating <strong>${fmt.num(player.dg_skill, 2)}</strong>` : ''}</div>
             </div>
           </div>
           <div class="prob-grid">
@@ -1684,7 +1687,7 @@
               <div class="signals-col">
                 <div class="signals-col-title">Fingerprint</div>
                 <div class="signals-col-heading">SG across four dimensions</div>
-                <div class="signals-col-caption">Radial distance to tour average on OTT, APP, ARG, PUTT. Morphs from tour baseline to the player's shape on load.</div>
+                <div class="signals-col-caption">OTT · APP · ARG · PUTT shape from this player's course history, plotted against the tour range.</div>
                 ${fingerprintInner}
               </div>
             ` : '<div></div>'}
