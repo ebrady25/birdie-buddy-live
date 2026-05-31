@@ -288,11 +288,35 @@
       align-items: start;
     }
     .builder-grid > .builder-card { grid-column: 1; grid-row: 1; }
-    /* strategy sliders = a smaller box under the lineup, same 380px width */
+    /* strategy levers = a smaller box under the lineup, same 380px width */
     .builder-grid > .sliders-card { grid-column: 1; grid-row: 2; }
-    /* rankings span both left rows; JS (syncPoolHeight) caps the list so the
-       table bottom-aligns with the builder + sliders stack and scrolls inside */
-    .builder-grid > .pool-card { grid-column: 2; grid-row: 1 / span 2; max-height: none; }
+    /* rankings sit in row 1; JS (syncPoolHeight) caps the list so the table
+       bottom-aligns with the lineup box and scrolls inside */
+    .builder-grid > .pool-card { grid-column: 2; grid-row: 1; max-height: none; }
+    /* saved lineups = compact stacked rows, right of the levers, rankings width */
+    .builder-grid > .saved-col { grid-column: 2; grid-row: 2; }
+    .saved-col {
+      background: var(--surface-2);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      display: flex; flex-direction: column; gap: var(--space-3);
+      min-width: 0;
+    }
+    .saved-head { display: flex; justify-content: space-between; align-items: center; }
+    .saved-head h3 { margin: 0; font-size: var(--fs-base); }
+    /* one compact row per saved lineup, full rankings width */
+    .saved-col .saved-grid { display: flex; flex-direction: column; gap: var(--space-2); }
+    .saved-col .saved-card {
+      display: grid;
+      grid-template-columns: minmax(96px, auto) auto minmax(0, 1fr) auto;
+      align-items: center; gap: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+    }
+    .saved-col .saved-card-head { margin: 0; gap: var(--space-2); justify-content: flex-start; }
+    .saved-col .saved-stats { margin: 0; }
+    .saved-col .saved-names { margin: 0; min-height: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .saved-col .saved-actions { margin: 0; }
     @media (max-width: 1100px) { .builder-grid { grid-template-columns: 1fr; } }
     /* Right column stacks the rankings + the strategy-lever sliders (fills the space
        below the rankings so tuning re-ranks the field live, right where you're looking). */
@@ -1397,10 +1421,10 @@
     <section class="sim-section">
       <div class="sim-section-head">
         <div>
-          <span class="section-num">01 · Lineup builder</span>
+          <span class="section-num">Lineup builder</span>
           <h2>Draft a lineup, see the distribution</h2>
         </div>
-        <p class="sim-section-hint">Add players from the DFS rankings until all six slots are filled. Tune the strategy levers below the rankings and the whole field re-ranks live — your lineup is repriced against the THEMIS distributions in real time.</p>
+        <p class="sim-section-hint">Add players from the DFS rankings until all six slots are filled. Tune the strategy levers on the left and the whole field re-ranks live — your lineup is repriced against the THEMIS distributions in real time.</p>
       </div>
 
       <div class="builder-grid">
@@ -1579,22 +1603,18 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ========== SECTION: MY LINEUPS ========== -->
-    <section class="sim-section">
-      <div class="sim-section-head">
-        <div>
-          <span class="section-num">02 · My lineups</span>
-          <h2>Build a portfolio</h2>
-        </div>
-        <p class="sim-section-hint">Save up to 10 lineups and compare their grades side by side. Stored in your browser for this event. Click a card to load it back into the builder.</p>
-        <button id="btnExportCsv" type="button" title="Export your saved lineups (or the current one) as a DraftKings-style CSV"
-          style="font:inherit;font-size:var(--fs-3xs,11px);font-weight:600;padding:6px 14px;border-radius:var(--radius-md,8px);border:1px solid var(--border-gold,rgba(212,168,67,.4));color:var(--gold-300,#e8c878);background:rgba(212,168,67,.10);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;align-self:start;">Export CSV ↓</button>
+        <!-- Saved lineups — right of the strategy levers, same width as the rankings -->
+        <aside class="saved-col">
+          <div class="saved-head">
+            <h3>My lineups</h3>
+            <button id="btnExportCsv" type="button" title="Export your saved lineups (or the current one) as a DraftKings-style CSV"
+              style="font:inherit;font-size:var(--fs-3xs,11px);font-weight:600;padding:6px 14px;border-radius:var(--radius-md,8px);border:1px solid var(--border-gold,rgba(212,168,67,.4));color:var(--gold-300,#e8c878);background:rgba(212,168,67,.10);cursor:pointer;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;">Export CSV ↓</button>
+          </div>
+          <div class="saved-empty" id="savedEmpty">No saved lineups yet — fill all six slots, then hit <strong>Save lineup</strong>.</div>
+          <div class="saved-grid" id="savedGrid"></div>
+        </aside>
       </div>
-      <div class="saved-empty" id="savedEmpty">No saved lineups yet — fill all six slots above, then hit <strong>Save lineup</strong>.</div>
-      <div class="saved-grid" id="savedGrid"></div>
     </section>
 
   </main>
@@ -2867,7 +2887,7 @@
       const pcr = pc.getBoundingClientRect();
       // Single-column (stacked) layout: clear the cap, let it flow.
       if (pcr.left < bcr.left + 5) { pl.style.maxHeight = ''; return; }
-      const target = sc.getBoundingClientRect().bottom - bcr.top;   // left-stack height
+      const target = bcr.height;                                    // match the lineup box (row 1)
       const chrome = pl.getBoundingClientRect().top - pcr.top;      // header/filters above the list
       pl.style.maxHeight = Math.max(320, Math.round(target - chrome - 16)) + 'px';
     }
