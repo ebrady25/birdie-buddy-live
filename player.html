@@ -1278,6 +1278,12 @@
         return;
       }
 
+      // Map the current rankings schema onto the field names this page reads. The producer
+      // renamed fields (prob_* as 0-1 fractions, course_tier, dg_skill_estimate, dk_salary,
+      // proj_ownership) — without this, probabilities/tier/skill/salary/ownership all render
+      // blank. Done once over the whole field so renderPlayer AND field-max computation work.
+      rankings.players.forEach(normalizePlayerSchema);
+
       // Resolve player from id or slug
       let player = null;
       if (dg_id) {
@@ -1496,7 +1502,8 @@
       const tierClass = (player.tier || 'NEUTRAL').toLowerCase();
 
       // Combined Signals section: SG Fingerprint (left) + Pressure/Surge stacked (right)
-      const fingerprintHtml = buildSgFingerprint(player, tourBaselines);
+      const sgSrc = (courseHistory && courseHistory[player.dg_id] && courseHistory[player.dg_id].aggregate) || null;
+      const fingerprintHtml = buildSgFingerprint(player, tourBaselines, sgSrc);
       const pressureHtml = buildPressureMetrics(player, pressureMetrics);
       const signalsHtml = buildSignalsSection(fingerprintHtml, pressureHtml);
 
@@ -1692,6 +1699,21 @@
           </div>
         </section>
       `;
+    }
+
+    // ---------- Schema normalization (current rankings schema -> field names this page reads) ----------
+    function normalizePlayerSchema(p) {
+      const pct = f => (f != null && !isNaN(f)) ? f * 100 : undefined;   // 0-1 fraction -> percent
+      if (p.win_pct  == null) p.win_pct  = pct(p.prob_win);
+      if (p.top_5    == null) p.top_5    = pct(p.prob_top5);
+      if (p.top_10   == null) p.top_10   = pct(p.prob_top10);
+      if (p.top_20   == null) p.top_20   = pct(p.prob_top20);
+      if (p.make_cut == null) p.make_cut = pct(p.prob_mc);
+      if (p.tier     == null) p.tier     = p.course_tier;
+      if (p.dg_skill == null) p.dg_skill = p.dg_skill_estimate;
+      if (p.salary   == null) p.salary   = p.dk_salary;
+      if (p.proj_own == null) p.proj_own = (p.proj_ownership != null ? p.proj_ownership : p.hermes_own);
+      return p;
     }
 
     // ---------- Pass 1 helpers ----------
@@ -2155,16 +2177,22 @@
       `;
     }
 
-    function buildSgFingerprint(player, tourBaselines) {
+    function buildSgFingerprint(player, tourBaselines, sgSrc) {
       if (!tourBaselines || !tourBaselines.sg_ott) {
         return ''; // Skip if no baselines
       }
-
-      // Get player's current season SG values (use historical if available, else tour avg)
-      const sgOtt = player.sg_ott || (player.hist_sg_ott || 0);
-      const sgApp = player.sg_app || (player.hist_sg_app || 0);
-      const sgArg = player.sg_arg || (player.hist_sg_arg || 0);
-      const sgPutt = player.sg_putt || (player.hist_sg_putt || 0);
+      // Player SG, in priority: live row (if exposed) → course-history aggregate (sgSrc).
+      // The public rankings row scrubs raw SG, so sgSrc (per-player course-history SG, refreshed
+      // weekly) is the working source. If neither is present, render nothing rather than a
+      // misleading flat-average shape.
+      const pick = (a, b) => (a != null && !isNaN(a)) ? a : ((b != null && !isNaN(b)) ? b : null);
+      const sgOtt  = pick(player.sg_ott,  sgSrc && sgSrc.sg_ott);
+      const sgApp  = pick(player.sg_app,  sgSrc && sgSrc.sg_app);
+      const sgArg  = pick(player.sg_arg,  sgSrc && sgSrc.sg_arg);
+      const sgPutt = pick(player.sg_putt, sgSrc && sgSrc.sg_putt);
+      if ([sgOtt, sgApp, sgArg, sgPutt].every(v => v == null)) {
+        return ''; // no real SG data for this player → omit the fingerprint (don't fake it)
+      }
 
       // Compute percentiles (0-100 scale based on tour)
       const computePercentile = (value, baseline) => {
