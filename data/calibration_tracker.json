@@ -212,6 +212,33 @@
       "underperforming_factors": [],
       "notes": "Pipeline miss. Wyndham Clark won at -30. No BBI predictions were produced.",
       "logged_utc": "2026-05-25T14:17:31.058999+00:00"
+    },
+    {
+      "week": 17,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-28",
+      "year": 2026,
+      "field_size": 132,
+      "bbi_brier_top10": 0.063,
+      "bbi_brier_win": 0.007,
+      "bbi_brier_top5": 0.0325,
+      "bbi_brier_top20": 0.1063,
+      "bbi_skill_top10_pct": 10.01,
+      "bbi_skill_win_pct": 6.38,
+      "bbi_spearman": 0.4054,
+      "winning_factors": [
+        "ceiling",
+        "leverage",
+        "floor"
+      ],
+      "underperforming_factors": [
+        "dfsValue",
+        "contrarian",
+        "courseFit"
+      ],
+      "notes": "Colonial CC. Russell Henley wins (BBI #4, playoff over Cole). Spearman 0.4054 \u2014 above target. courseFit=0 for all players (course history tables being rebuilt). ceiling+leverage strong this week. 9/20 top-20 hits (45%).",
+      "logged_utc": "2026-06-01T13:11:43.578751+00:00"
     }
   ],
   "last_updated": "2026-05-21T01:20:20.031101+00:00"

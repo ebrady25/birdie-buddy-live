@@ -603,13 +603,42 @@
       "n_scored": 0,
       "logged_utc": "2026-05-25T14:17:10.456120+00:00",
       "notes": "Pipeline miss: Mnemosyne (2026-05-21) auto-detected CJ Cup Byron Nelson as 'upcoming' but set CURRENT_EVENT.json to Charles Schwab Challenge. Apollo/Phase1 never ran for event_id=19. Wyndham Clark won at -30 (field: 70 made cut from 147). Scheffler finished T3 (-25)."
+    },
+    {
+      "year": 2026,
+      "week": 17,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "completed": "2026-05-31",
+      "field_size": 132,
+      "spearman_bbi": 0.4054,
+      "spearman_dg": null,
+      "spearman_delta": null,
+      "spearman_normalized_z": 0.281,
+      "beat_dg": null,
+      "beat_target": true,
+      "beat_baseline": true,
+      "winner": "Henley, Russell",
+      "winner_bbi_rank": 4,
+      "winner_dg_rank": null,
+      "winner_in_top10_bbi": true,
+      "top5_hits": 2,
+      "top5_total": 5,
+      "top10_hits": 3,
+      "top10_total": 10,
+      "top20_hits": 9,
+      "top20_total": 20,
+      "n_scored": 75,
+      "model_version": "v8.5",
+      "logged_utc": "2026-06-01T13:11:24.851587+00:00",
+      "notes": "BBI 0.4054 \u2014 above 0.40 target. Henley, Russell wins (BBI #4). Griffin T5 (BBI #2) \u2713, Henley wins (BBI #4) \u2713, Spaun T7 (BBI #5) \u2713. courseFit=0 all players (new course history rebuild). ceiling+leverage top-performing factors."
     }
   ],
   "summary": {
-    "events_scored": 8,
-    "mean_spearman_bbi": 0.3829,
-    "mean_spearman_dg": 0.3437,
-    "mean_diff": 0.0656,
-    "last_updated": "2026-05-21T01:24:09.527060+00:00"
+    "events_scored": 5,
+    "mean_spearman_bbi": 0.3318,
+    "mean_spearman_dg": 0.261,
+    "mean_diff": null,
+    "last_updated": "2026-06-01T13:11:24.851587+00:00"
   }
 }
