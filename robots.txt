@@ -34,4 +34,4 @@ User-agent: Bytespider
 Disallow: /
 
 # Sitemap (when published)
-# Sitemap: https://ebrady25.github.io/birdie-buddy-live/sitemap.xml
+# Sitemap: https://birdiebuddy.io/sitemap.xml
