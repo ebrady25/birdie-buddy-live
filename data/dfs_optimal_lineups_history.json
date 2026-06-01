@@ -66,70 +66,6 @@
       "n_optimal_in_our_pool": 1
     },
     {
-      "event": "Charles Schwab Challenge",
-      "event_id": 21,
-      "year": 2026,
-      "completed": "2026-05-31",
-      "optimal": {
-        "total": 619.5,
-        "salary": 49900,
-        "players": [
-          {
-            "dg_id": 14578,
-            "name": "Henley, Russell",
-            "salary": 10200,
-            "total_pts": 119.0,
-            "ownership": 0.16440000000000002,
-            "in_our_pool": true
-          },
-          {
-            "dg_id": 21756,
-            "name": "Cole, Eric",
-            "salary": 7200,
-            "total_pts": 104.5,
-            "ownership": 0.0819,
-            "in_our_pool": true
-          },
-          {
-            "dg_id": 29197,
-            "name": "Brennan, Michael",
-            "salary": 7000,
-            "total_pts": 101.5,
-            "ownership": 0.0296,
-            "in_our_pool": false
-          },
-          {
-            "dg_id": 12577,
-            "name": "Woodland, Gary",
-            "salary": 8400,
-            "total_pts": 99.0,
-            "ownership": 0.1052,
-            "in_our_pool": false
-          },
-          {
-            "dg_id": 18474,
-            "name": "Smalley, Alex",
-            "salary": 9100,
-            "total_pts": 98.5,
-            "ownership": 0.2177,
-            "in_our_pool": false
-          },
-          {
-            "dg_id": 28159,
-            "name": "Meissner, Mac",
-            "salary": 8000,
-            "total_pts": 97.0,
-            "ownership": 0.1134,
-            "in_our_pool": false
-          }
-        ]
-      },
-      "our_best_actual": 447.0,
-      "our_best_id": "C6",
-      "capture_rate_pct": 72.15,
-      "n_optimal_in_our_pool": 2
-    },
-    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -322,5 +258,5 @@
       "n_optimal_in_our_pool": 3
     }
   ],
-  "last_updated": "2026-06-01T13:39:56Z"
+  "last_updated": "2026-05-25T13:36:37Z"
 }

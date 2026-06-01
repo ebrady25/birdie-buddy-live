@@ -19,23 +19,6 @@
       "cash_rate_pct": 100.0
     },
     {
-      "event": "Charles Schwab Challenge",
-      "event_id": 21,
-      "year": 2026,
-      "completed": "2026-05-31",
-      "our_best": 447.0,
-      "our_best_id": "C6",
-      "pool_hindsight": 567.5,
-      "field_optimal": 619.5,
-      "capture_rate_pct": 72.15,
-      "n_lineups": 11,
-      "n_cash": 3,
-      "n_top_1pct": 6,
-      "n_top_001pct": 0,
-      "cashed_total": 9,
-      "cash_rate_pct": 81.8
-    },
-    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -88,11 +71,11 @@
     }
   ],
   "season": {
-    "n_events": 5,
-    "mean_capture_rate_pct": 76.38,
-    "mean_cash_rate_pct": 78.36,
-    "total_cashed": 45,
-    "total_lineups": 56
+    "n_events": 4,
+    "mean_capture_rate_pct": 77.44,
+    "mean_cash_rate_pct": 77.5,
+    "total_cashed": 36,
+    "total_lineups": 45
   },
-  "last_updated": "2026-06-01T13:39:56Z"
+  "last_updated": "2026-05-25T13:36:37Z"
 }

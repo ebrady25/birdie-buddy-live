@@ -47,51 +47,6 @@
       }
     },
     {
-      "event": "Charles Schwab Challenge",
-      "event_id": 21,
-      "year": 2026,
-      "completed": "2026-05-31",
-      "scored_at_utc": "2026-06-01T13:40:30Z",
-      "n_compared": 132,
-      "summary": {
-        "mae": 19.86,
-        "bias": 18.78,
-        "rmse": 41.16,
-        "clean_mae": 4.58,
-        "clean_bias": 3.27,
-        "clean_rmse": 9.69,
-        "n_suspect_excluded": 23,
-        "suspect_threshold_pct": 50.0
-      },
-      "by_tier": {
-        "studs": {
-          "n": 2,
-          "mae": 8.54,
-          "bias": -6.63
-        },
-        "anchors": {
-          "n": 13,
-          "mae": 3.16,
-          "bias": 0.96
-        },
-        "mid-tier": {
-          "n": 17,
-          "mae": 1.59,
-          "bias": -1.49
-        },
-        "value": {
-          "n": 60,
-          "mae": 26.12,
-          "bias": 25.62
-        },
-        "punt": {
-          "n": 40,
-          "mae": 24.24,
-          "bias": 24.21
-        }
-      }
-    },
-    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -228,9 +183,9 @@
     }
   ],
   "season": {
-    "n_events": 5,
-    "mean_mae": 14.57,
-    "mean_bias": 13.01
+    "n_events": 4,
+    "mean_mae": 13.24,
+    "mean_bias": 11.57
   },
-  "last_updated": "2026-06-01T13:40:30Z"
+  "last_updated": "2026-05-25T13:36:42Z"
 }
