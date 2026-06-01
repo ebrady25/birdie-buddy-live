@@ -83,21 +83,19 @@ window.BBI = window.BBI || {};
      (applyPageGate) reads this and gates the page's [data-gate-region] —
      or its <main> if no region is marked — by stamping data-gate, which
      applyGates() then renders (blur + upgrade overlay). Pages NOT listed
-     are free. simulator.html is Pro-gated at the page level; paid tiers also get
-     the in-page contest-bucket gating (Large/Mass=All-Access). */
+     are free. simulator.html is intentionally omitted: it's a free hook
+     with in-page contest-bucket gating (Mid=Pro, Large/Mass=All-Access). */
   const PAGE_TIERS = {
     'rankings.html': 'pro',
     'lineups.html':  'pro',
     'live.html':     'pro',
     'compare.html':  'pro',
-    'simulator.html':'pro',
     'market.html':   'all_access'
   };
   const PAGE_GATE_MSG = {
     'lineups.html': 'The 12 optimized DFS lineups — with the reasoning on every pick — are a Pro feature.',
     'live.html':    'Live Thursday–Sunday pivots and late-swap calls are a Pro feature.',
     'compare.html': 'Head-to-head player comparison is a Pro feature.',
-    'simulator.html': 'The THEMIS DFS simulator — build leverage-tilted lineup portfolios against live projections — is a Pro feature.',
     'market.html':  'Market edges, devig, and Kelly staking are an All-Access feature.'
   };
   const currentPageName = () => (location.pathname.split('/').pop() || '') || 'index.html';
@@ -384,7 +382,7 @@ window.BBI = window.BBI || {};
     .bbi-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:220px;
       background:var(--surface-4);border:1px solid var(--border-strong);
       border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);padding:6px;
-      z-index:var(--z-modal,1000);animation:fadeDown var(--dur-fast) var(--ease-out)}
+      z-index:var(--z-modal);animation:fadeDown var(--dur-fast) var(--ease-out)}
     .bbi-menu[hidden]{display:none}
     .bbi-menu a,.bbi-menu button{display:flex;width:100%;align-items:center;gap:8px;
       justify-content:flex-start;padding:9px 10px;border-radius:var(--radius-md);
@@ -394,7 +392,7 @@ window.BBI = window.BBI || {};
     .bbi-menu-head b{display:block;color:var(--text-primary);font-size:var(--fs-sm)}
     .bbi-menu-head span{font-size:var(--fs-3xs);color:var(--text-muted)}
     .bbi-ovl{position:fixed;inset:0;background:rgba(4,4,8,.78);backdrop-filter:blur(4px);
-      z-index:var(--z-modal,1000);display:grid;place-items:center;padding:var(--space-4);
+      z-index:var(--z-modal);display:grid;place-items:center;padding:var(--space-4);
       animation:fadeIn var(--dur-fast) var(--ease-out)}
     .bbi-ovl[hidden]{display:none}
     .bbi-modal{width:100%;max-width:420px;background:var(--surface-3);
@@ -446,7 +444,7 @@ window.BBI = window.BBI || {};
       background:var(--surface-5);border:1px solid var(--border-gold);
       color:var(--text-primary);font-size:var(--fs-xs);padding:10px 18px;
       border-radius:var(--radius-full);box-shadow:var(--shadow-lg);
-      z-index:var(--z-tooltip,2000);animation:fadeUp var(--dur-base) var(--ease-out)}
+      z-index:var(--z-tooltip);animation:fadeUp var(--dur-base) var(--ease-out)}
     .bbi-toast[hidden]{display:none}
     `;
     const s = document.createElement('style');
