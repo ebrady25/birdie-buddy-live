@@ -1,31 +1,28 @@
 {
-  "timestamp": "2026-05-27T12:02:51Z",
-  "phase_checked": "lock",
-  "next_phase": "phase2_lock",
+  "timestamp": "2026-06-01T16:20:16Z",
+  "phase_checked": "mnemosyne",
+  "next_phase": "mnemosyne_postmortem",
   "status": "green",
   "checks": {
     "current_event": {
       "status": "pass",
-      "event_id": 21,
-      "event_name": "Charles Schwab Challenge",
-      "start_date": "2026-05-28",
-      "days_until_start": 0,
+      "event_id": 23,
+      "event_name": "the Memorial Tournament presented by Workday",
+      "start_date": "2026-06-04",
+      "days_until_start": 2,
       "team_event": false,
       "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.24,
+      "duration_s": 0.32,
       "players_returned": 132,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "pass",
-      "checked": [
-        "bbi_rankings.json (0.0h)",
-        "themis.json (0.0h)"
-      ]
+      "status": "n/a",
+      "note": "mnemosyne has no prior-output gate (first or independent phase)."
     }
   },
   "recommendations": [],
