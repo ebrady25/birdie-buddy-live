@@ -1,10 +1,10 @@
 {
   "event_name": "Charles Schwab Challenge",
-  "event_id": null,
+  "event_id": 21,
   "event_slug": "Charles_Schwab_Challenge",
   "year": 2026,
   "course": "Charles Schwab Challenge",
-  "generated_utc": "2026-06-01T16:48:15.002201",
+  "generated_utc": "2026-06-01T16:50:40.742242",
   "field_size": 132,
   "pool_weights_used": {
     "talent": 0.22,
