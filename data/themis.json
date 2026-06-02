@@ -4,7 +4,7 @@
   "n_simulations": 10000,
   "seed": 42,
   "n_players": 72,
-  "generated_at": "2026-06-02T22:15:30Z",
+  "generated_at": "2026-06-02T23:33:58Z",
   "per_player": {
     "18417": {
       "name": "Scheffler, Scottie",
@@ -76,8 +76,8 @@
       "p95": 72.31,
       "points_std": 17.31
     },
-    "14609": {
-      "name": "Kim, Si Woo",
+    "14578": {
+      "name": "Henley, Russell",
       "empirical_win_prob": 0.012,
       "empirical_top5_prob": 0.0698,
       "empirical_top10_prob": 0.1379,
@@ -90,8 +90,8 @@
       "p95": 71.49,
       "points_std": 17.27
     },
-    "14578": {
-      "name": "Henley, Russell",
+    "14609": {
+      "name": "Kim, Si Woo",
       "empirical_win_prob": 0.0124,
       "empirical_top5_prob": 0.0627,
       "empirical_top10_prob": 0.1288,
@@ -314,8 +314,8 @@
       "p95": 71.69,
       "points_std": 17.29
     },
-    "21891": {
-      "name": "Kitayama, Kurt",
+    "14636": {
+      "name": "Spieth, Jordan",
       "empirical_win_prob": 0.0144,
       "empirical_top5_prob": 0.0687,
       "empirical_top10_prob": 0.1393,
@@ -328,8 +328,8 @@
       "p95": 71.87,
       "points_std": 17.21
     },
-    "14636": {
-      "name": "Spieth, Jordan",
+    "21891": {
+      "name": "Kitayama, Kurt",
       "empirical_win_prob": 0.0114,
       "empirical_top5_prob": 0.066,
       "empirical_top10_prob": 0.1421,
@@ -398,8 +398,8 @@
       "p95": 71.78,
       "points_std": 17.23
     },
-    "29767": {
-      "name": "Gerard, Ryan",
+    "12577": {
+      "name": "Woodland, Gary",
       "empirical_win_prob": 0.0154,
       "empirical_top5_prob": 0.0704,
       "empirical_top10_prob": 0.1397,
@@ -412,8 +412,8 @@
       "p95": 72.3,
       "points_std": 17.3
     },
-    "12577": {
-      "name": "Woodland, Gary",
+    "29767": {
+      "name": "Gerard, Ryan",
       "empirical_win_prob": 0.0144,
       "empirical_top5_prob": 0.072,
       "empirical_top10_prob": 0.1443,
@@ -566,8 +566,8 @@
       "p95": 72.47,
       "points_std": 17.41
     },
-    "22760": {
-      "name": "Hisatsune, Ryo",
+    "21756": {
+      "name": "Cole, Eric",
       "empirical_win_prob": 0.0131,
       "empirical_top5_prob": 0.0692,
       "empirical_top10_prob": 0.1402,
@@ -580,8 +580,8 @@
       "p95": 72.12,
       "points_std": 17.28
     },
-    "21756": {
-      "name": "Cole, Eric",
+    "22760": {
+      "name": "Hisatsune, Ryo",
       "empirical_win_prob": 0.0152,
       "empirical_top5_prob": 0.0735,
       "empirical_top10_prob": 0.1408,
@@ -762,8 +762,8 @@
       "p95": 72.53,
       "points_std": 17.33
     },
-    "9771": {
-      "name": "Day, Jason",
+    "17543": {
+      "name": "Kim, Michael",
       "empirical_win_prob": 0.0131,
       "empirical_top5_prob": 0.0725,
       "empirical_top10_prob": 0.1421,
@@ -776,8 +776,8 @@
       "p95": 72.08,
       "points_std": 17.32
     },
-    "17543": {
-      "name": "Kim, Michael",
+    "9771": {
+      "name": "Day, Jason",
       "empirical_win_prob": 0.0143,
       "empirical_top5_prob": 0.0685,
       "empirical_top10_prob": 0.1382,
@@ -1067,8 +1067,8 @@
       "delta_top10": 0.1391
     },
     {
-      "name": "Kim, Si Woo",
-      "dg_id": 14609,
+      "name": "Henley, Russell",
+      "dg_id": 14578,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.012,
       "delta_win": 0.012,
@@ -1077,8 +1077,8 @@
       "delta_top10": 0.1379
     },
     {
-      "name": "Henley, Russell",
-      "dg_id": 14578,
+      "name": "Kim, Si Woo",
+      "dg_id": 14609,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0124,
       "delta_win": 0.0124,
@@ -1237,8 +1237,8 @@
       "delta_top10": 0.1352
     },
     {
-      "name": "Kitayama, Kurt",
-      "dg_id": 21891,
+      "name": "Spieth, Jordan",
+      "dg_id": 14636,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0144,
       "delta_win": 0.0144,
@@ -1247,8 +1247,8 @@
       "delta_top10": 0.1393
     },
     {
-      "name": "Spieth, Jordan",
-      "dg_id": 14636,
+      "name": "Kitayama, Kurt",
+      "dg_id": 21891,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0114,
       "delta_win": 0.0114,
@@ -1297,8 +1297,8 @@
       "delta_top10": 0.139
     },
     {
-      "name": "Gerard, Ryan",
-      "dg_id": 29767,
+      "name": "Woodland, Gary",
+      "dg_id": 12577,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0154,
       "delta_win": 0.0154,
@@ -1307,8 +1307,8 @@
       "delta_top10": 0.1397
     },
     {
-      "name": "Woodland, Gary",
-      "dg_id": 12577,
+      "name": "Gerard, Ryan",
+      "dg_id": 29767,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0144,
       "delta_win": 0.0144,
@@ -1417,8 +1417,8 @@
       "delta_top10": 0.1378
     },
     {
-      "name": "Hisatsune, Ryo",
-      "dg_id": 22760,
+      "name": "Cole, Eric",
+      "dg_id": 21756,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0131,
       "delta_win": 0.0131,
@@ -1427,8 +1427,8 @@
       "delta_top10": 0.1402
     },
     {
-      "name": "Cole, Eric",
-      "dg_id": 21756,
+      "name": "Hisatsune, Ryo",
+      "dg_id": 22760,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0152,
       "delta_win": 0.0152,
@@ -1557,8 +1557,8 @@
       "delta_top10": 0.1395
     },
     {
-      "name": "Day, Jason",
-      "dg_id": 9771,
+      "name": "Kim, Michael",
+      "dg_id": 17543,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0131,
       "delta_win": 0.0131,
@@ -1567,8 +1567,8 @@
       "delta_top10": 0.1421
     },
     {
-      "name": "Kim, Michael",
-      "dg_id": 17543,
+      "name": "Day, Jason",
+      "dg_id": 9771,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0143,
       "delta_win": 0.0143,
