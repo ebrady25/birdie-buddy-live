@@ -193,11 +193,13 @@
       await BBI.renderHeader('rankings.html');
       await BBI.renderFooter();
 
-      const [ev, rankStatic, themis, omnia] = await Promise.all([
+      const [ev, rankStatic, themis, omnia, courseHistory, recentForm] = await Promise.all([
         BBI.data.load(BBI.data.paths.currentEvent),
         BBI.data.load(BBI.data.paths.bbiRankings),
         BBI.data.load(BBI.data.paths.themis),
-        BBI.data.load(BBI.data.paths.omnia)
+        BBI.data.load(BBI.data.paths.omnia),
+        BBI.data.load(BBI.data.paths.playerCourseHistory),
+        BBI.data.load(BBI.data.paths.playerRecentForm)
       ]);
 
       $('#rankEvent').textContent = ev?.event_name || '—';
@@ -248,6 +250,33 @@
         return p;
       };
       players.forEach(normalizePlayerSchema);
+
+      // Join the runner-generated course-history + recent-form datasets for the
+      // Course+, Tier, and Form columns. These proven aggregates are authoritative
+      // (the rich producer's inline course-history fetch is unreliable).
+      const tierFromCourse = (sg, rounds) => {
+        if (!rounds || rounds < 3) return 'NEUTRAL';
+        if (rounds >= 8 && sg >= 0.8) return 'SPECIALIST';
+        if (sg >= 0.2) return 'COMFORTABLE';
+        if (sg <= -0.4) return 'STRUGGLE';
+        return 'NEUTRAL';
+      };
+      players.forEach(p => {
+        const agg = courseHistory && courseHistory[p.dg_id] && courseHistory[p.dg_id].aggregate;
+        if (agg && agg.rounds > 0 && agg.sg_total != null) {
+          p.course_hist_sg = agg.sg_total;
+          p.ch_rounds = agg.rounds;
+          p.tier = tierFromCourse(agg.sg_total, agg.rounds);
+        }
+        const rf = recentForm && recentForm[p.dg_id];
+        if (Array.isArray(rf) && rf.length) {
+          const sgs = rf.map(r => r.sg_total).filter(v => v != null && !isNaN(v));
+          if (sgs.length) {
+            const mean = sgs.reduce((a, b) => a + b, 0) / sgs.length;
+            p.form_score = Math.max(0, Math.min(100, Math.round(50 + mean * 15)));  // 0-100 recent-form rating (mean recent SG)
+          }
+        }
+      });
 
       // Build fast lookups for expansion data
       const themMap = themis?.per_player || {};
