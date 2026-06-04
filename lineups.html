@@ -209,6 +209,40 @@
     /* =========================================================
        LAST WEEK'S REPORT CARD — DFS grading
        ========================================================= */
+    /* Collapsible wrapper — report card sits at the page bottom, collapsed by default. */
+    .grade-collapse {
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      margin-bottom: var(--space-8);
+      overflow: hidden;
+    }
+    .grade-summary {
+      display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap;
+      padding: var(--space-4) var(--space-5);
+      cursor: pointer; list-style: none;
+      font-family: var(--font-display); font-weight: 700;
+      font-size: var(--fs-lg); color: var(--text-primary);
+      -webkit-user-select: none; user-select: none;
+    }
+    .grade-summary::-webkit-details-marker { display: none; }
+    .grade-summary::marker { content: ''; }
+    .grade-summary:hover { background: var(--surface-3); }
+    .grade-summary .grade-event {
+      font-family: var(--font-mono); font-size: var(--fs-xs);
+      font-weight: 400; color: var(--text-muted); margin: 0;
+    }
+    .grade-summary .grade-summary-hint {
+      margin-left: auto;
+      font-family: var(--font-mono); font-size: var(--fs-3xs);
+      letter-spacing: var(--tracking-wide); text-transform: uppercase;
+      color: var(--gold-300);
+    }
+    .grade-collapse[open] .grade-summary { border-bottom: 1px solid var(--border-soft); }
+    .grade-collapse[open] .grade-summary .grade-summary-hint::after { content: ' (open)'; }
+    /* Card inside the collapse drops its own frame — the <details> is the frame now. */
+    .grade-collapse .grade-card { border: none; border-radius: 0; margin-bottom: 0; padding: var(--space-5) var(--space-6) var(--space-6); background: transparent; }
+    .grade-collapse .grade-card::before { display: none; }
     .grade-card {
       background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
       border: 1px solid var(--border-gold);
@@ -484,7 +518,7 @@
     <!-- PAGE HEAD -->
     <header class="page-head">
       <div class="eyebrow">DraftKings main slate · <span id="lineupEvent">—</span></div>
-      <h1>Twelve lineups. One optimal grid.</h1>
+      <h1>Ten lineups. One optimal grid.</h1>
       <p>Each lineup is sourced from ODYSSEUS (composition search) then re-scored by THEMIS against 10,000 Monte Carlo tournaments. Ownership projections from HERMES determine leverage. Salaries pulled live from DraftKings. Sort by mean projection, ceiling, ownership, or BBI.</p>
       <div class="page-head-meta">
         <span>Contest <strong>Main Slate</strong></span>
@@ -499,13 +533,13 @@
     <div class="kpi-strip">
       <div class="stat">
         <div class="stat-label">Lineups generated</div>
-        <div class="stat-value"><span data-countup="12" data-dur="500">0</span></div>
+        <div class="stat-value"><span data-countup="10" data-dur="500">0</span></div>
         <div class="stat-sub">Core · Safe · Leverage</div>
       </div>
       <div class="stat">
         <div class="stat-label">Unique players</div>
         <div class="stat-value"><span id="kpiUnique">0</span></div>
-        <div class="stat-sub">Across all 12 builds</div>
+        <div class="stat-sub">Across all 10 builds</div>
       </div>
       <div class="stat">
         <div class="stat-label">Best p95 ceiling</div>
@@ -515,7 +549,7 @@
       <div class="stat">
         <div class="stat-label">Avg projection</div>
         <div class="stat-value"><span id="kpiAvgProj">0</span></div>
-        <div class="stat-sub">THEMIS mean across 12</div>
+        <div class="stat-sub">THEMIS mean across 10</div>
       </div>
       <div class="stat">
         <div class="stat-label">Avg ownership</div>
@@ -524,77 +558,7 @@
       </div>
     </div>
 
-    <!-- LAST WEEK'S REPORT CARD — DFS grade -->
-    <section id="gradeSection" hidden>
-      <div class="grade-card" data-reveal>
-        <div class="grade-head">
-          <div>
-            <h3>Last week's report card</h3>
-            <div class="grade-event" id="gradeEvent">—</div>
-          </div>
-          <a href="#lineupGrid" class="muted" style="font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; text-decoration: none;">↓ This week's lineups</a>
-        </div>
-
-        <div class="grade-pillars">
-          <div class="grade-pillar">
-            <div class="lbl">Best lineup</div>
-            <div class="val gold" id="gradeBestVal">—</div>
-            <div class="sub" id="gradeBestId">—</div>
-          </div>
-          <div class="grade-pillar">
-            <div class="lbl">Portfolio avg</div>
-            <div class="val" id="gradeAvgVal">—</div>
-            <div class="sub">DK pts (estimated)</div>
-          </div>
-          <div class="grade-pillar">
-            <div class="lbl">Cashed</div>
-            <div class="val" id="gradeCashCount">—</div>
-            <div class="sub" id="gradeCashSub">of 12 lineups</div>
-          </div>
-          <div class="grade-pillar">
-            <div class="lbl">Capture rate</div>
-            <div class="val gold" id="gradeCaptureVal">—</div>
-            <div class="sub" id="gradeCaptureSub">vs theoretical max</div>
-          </div>
-        </div>
-
-        <table class="grade-table" id="gradeTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Build</th>
-              <th>Salary</th>
-              <th>Proj</th>
-              <th>Actual</th>
-              <th>Δ</th>
-              <th>Verdict</th>
-            </tr>
-          </thead>
-          <tbody id="gradeBody"></tbody>
-        </table>
-
-        <!-- 3-tier hindsight ladder -->
-        <div class="ladder" id="gradeLadder"></div>
-
-        <!-- Field-wide optimal lineup, expanded -->
-        <div class="optimal-lineup" id="gradeOptimalBlock" hidden>
-          <div class="optimal-lineup-head">
-            <span class="title">Optimal lineup of the week</span>
-            <span class="meta" id="gradeOptimalMeta">—</span>
-          </div>
-          <div class="optimal-lineup-players" id="gradeOptimalPlayers"></div>
-          <div class="grade-note" style="margin-top: var(--space-3);">
-            ★ = player was on at least one of our 12 lineups
-          </div>
-        </div>
-
-        <div class="grade-hindsight" id="gradeHindsightBlock"></div>
-
-        <div class="grade-note" id="gradeApproxNote">
-          DK points approximated from per-round scores · cash thresholds: 340 / 410 / 500
-        </div>
-      </div>
-    </section>
+    <!-- LAST WEEK'S REPORT CARD — moved to the bottom of <main> and made collapsible (see #gradeSection before </main>). -->
 
     <!-- TOOLBAR -->
     <div class="page-toolbar">
@@ -674,7 +638,7 @@
         <div class="section-head-text">
           <span class="eyebrow">Portfolio exposure</span>
           <h2>Where the money goes.</h2>
-          <p>Aggregate roster exposure across the 12 lineups vs. field-wide ownership projections. Positive deltas (red) indicate overweights; negative (green) are underweights. Target zone marked by HERMES.</p>
+          <p>Aggregate roster exposure across the 10 lineups vs. field-wide ownership projections. Positive deltas (red) indicate overweights; negative (green) are underweights. Target zone marked by HERMES.</p>
         </div>
       </div>
       <div class="exposure-panel">
@@ -697,6 +661,77 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- LAST WEEK'S REPORT CARD — DFS grade (collapsed by default; full card on expand) -->
+    <section id="gradeSection" hidden>
+      <details class="grade-collapse">
+        <summary class="grade-summary">
+          <span class="grade-summary-title">Last week's report card</span>
+          <span class="grade-event" id="gradeEvent">—</span>
+          <span class="grade-summary-hint">expand ▾</span>
+        </summary>
+        <div class="grade-card" data-reveal>
+          <div class="grade-pillars">
+            <div class="grade-pillar">
+              <div class="lbl">Best lineup</div>
+              <div class="val gold" id="gradeBestVal">—</div>
+              <div class="sub" id="gradeBestId">—</div>
+            </div>
+            <div class="grade-pillar">
+              <div class="lbl">Portfolio avg</div>
+              <div class="val" id="gradeAvgVal">—</div>
+              <div class="sub">DK pts (estimated)</div>
+            </div>
+            <div class="grade-pillar">
+              <div class="lbl">Cashed</div>
+              <div class="val" id="gradeCashCount">—</div>
+              <div class="sub" id="gradeCashSub">of lineups</div>
+            </div>
+            <div class="grade-pillar">
+              <div class="lbl">Capture rate</div>
+              <div class="val gold" id="gradeCaptureVal">—</div>
+              <div class="sub" id="gradeCaptureSub">vs theoretical max</div>
+            </div>
+          </div>
+
+          <table class="grade-table" id="gradeTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Build</th>
+                <th>Salary</th>
+                <th>Proj</th>
+                <th>Actual</th>
+                <th>Δ</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody id="gradeBody"></tbody>
+          </table>
+
+          <!-- 3-tier hindsight ladder -->
+          <div class="ladder" id="gradeLadder"></div>
+
+          <!-- Field-wide optimal lineup, expanded -->
+          <div class="optimal-lineup" id="gradeOptimalBlock" hidden>
+            <div class="optimal-lineup-head">
+              <span class="title">Optimal lineup of the week</span>
+              <span class="meta" id="gradeOptimalMeta">—</span>
+            </div>
+            <div class="optimal-lineup-players" id="gradeOptimalPlayers"></div>
+            <div class="grade-note" style="margin-top: var(--space-3);">
+              ★ = player was on at least one of our lineups
+            </div>
+          </div>
+
+          <div class="grade-hindsight" id="gradeHindsightBlock"></div>
+
+          <div class="grade-note" id="gradeApproxNote">
+            DK points approximated from per-round scores · cash thresholds: 340 / 410 / 500
+          </div>
+        </div>
+      </details>
     </section>
   </main>
 
