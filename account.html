@@ -108,6 +108,13 @@
                 <div class="kv"><span>Status</span><strong class="positive">Active</strong></div>
               </div>
               <div class="acct-card" style="margin-top:var(--space-5)">
+                <h2>Discord</h2>
+                <p class="muted" style="font-size:var(--fs-xs);margin-bottom:var(--space-4)">
+                  Link your Discord to unlock the member server — you'll get the ${t.name} channels automatically.</p>
+                <button class="btn btn-primary btn-block" id="linkDiscord">Connect Discord</button>
+                <div id="discordMsg" style="margin-top:10px;font-size:var(--fs-xs)"></div>
+              </div>
+              <div class="acct-card" style="margin-top:var(--space-5)">
                 <h2>Session</h2>
                 <p class="muted" style="font-size:var(--fs-xs);margin-bottom:var(--space-4)">
                   Demo mode: your account lives in this browser only. Connect the backend for real auth + billing.</p>
@@ -126,6 +133,36 @@
         document.getElementById('downgrade').onclick = () => {
           if (confirm('Cancel your plan and return to Free?')) BBI.auth.subscribe('free', 'year');
         };
+
+        // --- Discord link ---
+        const ld = document.getElementById('linkDiscord');
+        if (ld) ld.onclick = async () => {
+          ld.disabled = true; ld.textContent = 'Connecting…';
+          try {
+            const token = await BBI.auth.backend.accessToken();
+            if (!token) throw new Error('no_session');
+            const API = BBI.auth.API_BASE || 'https://vercel-app-beige-psi.vercel.app';
+            const r = await fetch(`${API}/api/discord/login`, { headers: { Authorization: `Bearer ${token}` } });
+            const j = await r.json();
+            if (j.url) { window.location = j.url; return; }
+            throw new Error(j.message || j.error || 'failed');
+          } catch (e) {
+            ld.disabled = false; ld.textContent = 'Connect Discord';
+            document.getElementById('discordMsg').innerHTML =
+              `<span class="danger">Couldn't start linking — make sure you're signed in, then try again.</span>`;
+          }
+        };
+        // feedback after the OAuth round-trip
+        const ds = new URLSearchParams(location.search).get('discord');
+        const dmsg = document.getElementById('discordMsg');
+        if (ds && dmsg) {
+          const m = {
+            ok:          ['positive', '✓ Discord linked and your role is set — head to the server!'],
+            linked_join: ['',         "✓ Linked! You haven't joined the server yet — join and your role applies automatically."],
+            denied:      ['muted',    'Linking canceled.'],
+          }[ds] || ['danger', "Linking didn't complete. Try again, or reach out in #help-and-support."];
+          dmsg.innerHTML = `<span class="${m[0]}">${m[1]}</span>`;
+        }
       };
 
       BBI.auth.onChange(render);
