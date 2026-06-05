@@ -22,7 +22,7 @@
       "salary": 50000,
       "salary_remaining": 0,
       "proj_total": 219.4,
-      "avg_own": 13.83,
+      "avg_own": 12.75,
       "floor_score": 135.3,
       "ceiling_score": 638.2,
       "players": [
@@ -31,7 +31,7 @@
           "name": "Scheffler, Scottie",
           "salary": 13500,
           "zeus_dfs": 62.2,
-          "proj_own": 39.7,
+          "proj_own": 33.22,
           "leverage": false
         },
         {
@@ -81,7 +81,7 @@
       "salary": 50000,
       "salary_remaining": 0,
       "proj_total": 214.4,
-      "avg_own": 14.59,
+      "avg_own": 13.51,
       "floor_score": 132.0,
       "ceiling_score": 640.5,
       "players": [
@@ -90,7 +90,7 @@
           "name": "Scheffler, Scottie",
           "salary": 13500,
           "zeus_dfs": 62.2,
-          "proj_own": 39.7,
+          "proj_own": 33.22,
           "leverage": false
         },
         {
@@ -140,7 +140,7 @@
       "salary": 48900,
       "salary_remaining": 1100,
       "proj_total": 252.8,
-      "avg_own": 14.18,
+      "avg_own": 13.1,
       "floor_score": 141.1,
       "ceiling_score": 655.7,
       "players": [
@@ -149,7 +149,7 @@
           "name": "Scheffler, Scottie",
           "salary": 13500,
           "zeus_dfs": 62.2,
-          "proj_own": 39.7,
+          "proj_own": 33.22,
           "leverage": false
         },
         {
@@ -258,7 +258,7 @@
       "salary": 50000,
       "salary_remaining": 0,
       "proj_total": 230.8,
-      "avg_own": 13.71,
+      "avg_own": 12.63,
       "floor_score": 136.1,
       "ceiling_score": 648.4,
       "players": [
@@ -267,7 +267,7 @@
           "name": "Scheffler, Scottie",
           "salary": 13500,
           "zeus_dfs": 62.2,
-          "proj_own": 39.7,
+          "proj_own": 33.22,
           "leverage": false
         },
         {
@@ -317,7 +317,7 @@
       "salary": 50000,
       "salary_remaining": 0,
       "proj_total": 182.1,
-      "avg_own": 14.22,
+      "avg_own": 13.14,
       "floor_score": 119.1,
       "ceiling_score": 617.8,
       "players": [
@@ -326,7 +326,7 @@
           "name": "Scheffler, Scottie",
           "salary": 13500,
           "zeus_dfs": 62.2,
-          "proj_own": 39.7,
+          "proj_own": 33.22,
           "leverage": false
         },
         {
@@ -553,7 +553,7 @@
       "salary": 47000,
       "salary_remaining": 3000,
       "proj_total": 239.2,
-      "avg_own": 12.3,
+      "avg_own": 11.21,
       "floor_score": 127.7,
       "ceiling_score": 642.7,
       "players": [
@@ -562,7 +562,7 @@
           "name": "Scheffler, Scottie",
           "salary": 13500,
           "zeus_dfs": 62.2,
-          "proj_own": 39.7,
+          "proj_own": 33.22,
           "leverage": false
         },
         {
@@ -629,5 +629,42 @@
     "Kim, Si Woo": 1,
     "Reitan, Kristoffer": 1
   },
-  "_built_by": "lineup_constructor.py"
+  "_built_by": "lineup_constructor.py",
+  "hermes_refresh": {
+    "timestamp_utc": "2026-06-03T09:18:00Z",
+    "changes": [
+      {
+        "name": "Scheffler, Scottie",
+        "old": 39.7,
+        "new": 33.22
+      },
+      {
+        "name": "Scheffler, Scottie",
+        "old": 39.7,
+        "new": 33.22
+      },
+      {
+        "name": "Scheffler, Scottie",
+        "old": 39.7,
+        "new": 33.22
+      },
+      {
+        "name": "Scheffler, Scottie",
+        "old": 39.7,
+        "new": 33.22
+      },
+      {
+        "name": "Scheffler, Scottie",
+        "old": 39.7,
+        "new": 33.22
+      },
+      {
+        "name": "Scheffler, Scottie",
+        "old": 39.7,
+        "new": 33.22
+      }
+    ],
+    "source": "datagolf_dfs_projections",
+    "phase": "wednesday_final_lock"
+  }
 }
