@@ -131,7 +131,7 @@ window.BBI = window.BBI || {};
       <nav class="site-nav">
         <div class="site-nav-inner">
           <a href="index.html" class="brand">
-            <span class="brand-mark">B</span>
+            <img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />
             <span class="brand-lockup">
               BirdieBuddy
               <small>PANTHEON · v8.5</small>
@@ -352,7 +352,7 @@ window.BBI = window.BBI || {};
         <div class="site-footer-inner">
           <div>
             <a href="index.html" class="brand">
-              <span class="brand-mark">B</span>
+              <img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />
               <span class="brand-lockup">BirdieBuddy<small>PANTHEON · v8.5</small></span>
             </a>
             <p class="muted" style="margin-top: var(--space-3); font-size: var(--fs-xs); line-height: 1.6; max-width: 42ch;">

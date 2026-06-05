@@ -571,6 +571,7 @@
   letter-spacing: -0.05em;
   box-shadow: var(--shadow-inset), 0 2px 8px -2px rgba(212, 168, 67, 0.4);
 }
+.brand-mark-img { height: 26px; width: auto; display: block; flex: none; }
 .brand-lockup { display: flex; flex-direction: column; line-height: 1; }
 .brand-lockup small {
   font-family: var(--font-mono);
