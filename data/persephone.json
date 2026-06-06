@@ -1,7 +1,7 @@
 {
   "event_name": "the Memorial Tournament presented by Workday",
   "event_slug": "Memorial_Tournament",
-  "generated_at": "2026-06-05T23:08:14.416278+00:00",
+  "generated_at": "2026-06-06T18:07:58.351958+00:00",
   "sections": {
     "in_play_fetched": true,
     "live_stats_fetched": true,
@@ -15,8 +15,8 @@
         "dg_id": 21554,
         "name": "Poston, J.T.",
         "pre_win_prob": 0.00557,
-        "live_win_prob": 0.31447,
-        "win_shift_pp": 30.89,
+        "live_win_prob": 0.31056,
+        "win_shift_pp": 30.5,
         "pre_top10_prob": 0.09855,
         "live_top10_prob": 0.91743,
         "top10_shift_pp": 81.89,
@@ -27,33 +27,33 @@
         "bbi_rank": 51,
         "current_pos": "1",
         "current_score": -9,
-        "thru": 18
+        "thru": null
       },
       "biggest_win_fade": {
-        "dg_id": 13900,
-        "name": "Lowry, Shane",
-        "pre_win_prob": 0.00788,
-        "live_win_prob": 0.00795,
-        "win_shift_pp": 0.01,
-        "pre_top10_prob": 0.12095,
-        "live_top10_prob": 0.31348,
-        "top10_shift_pp": 19.25,
-        "pre_top20_prob": 0.27114,
-        "live_top20_prob": 0.6135,
-        "top20_shift_pp": 34.24,
+        "dg_id": 25362,
+        "name": "Fitzpatrick, Alex",
+        "pre_win_prob": 0.00558,
+        "live_win_prob": 0.00546,
+        "win_shift_pp": -0.01,
+        "pre_top10_prob": 0.08855,
+        "live_top10_prob": 0.26042,
+        "top10_shift_pp": 17.19,
+        "pre_top20_prob": 0.21333,
+        "live_top20_prob": 0.5618,
+        "top20_shift_pp": 34.85,
         "live_mc_prob": 1.0,
-        "bbi_rank": 28,
+        "bbi_rank": 47,
         "current_pos": "T9",
         "current_score": -1,
-        "thru": 18
+        "thru": null
       },
       "top_10_movers": [
         {
           "dg_id": 21554,
           "name": "Poston, J.T.",
           "pre_win_prob": 0.00557,
-          "live_win_prob": 0.31447,
-          "win_shift_pp": 30.89,
+          "live_win_prob": 0.31056,
+          "win_shift_pp": 30.5,
           "pre_top10_prob": 0.09855,
           "live_top10_prob": 0.91743,
           "top10_shift_pp": 81.89,
@@ -64,17 +64,17 @@
           "bbi_rank": 51,
           "current_pos": "1",
           "current_score": -9,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 29767,
           "name": "Gerard, Ryan",
           "pre_win_prob": 0.00843,
-          "live_win_prob": 0.23641,
-          "win_shift_pp": 22.8,
+          "live_win_prob": 0.2331,
+          "win_shift_pp": 22.47,
           "pre_top10_prob": 0.13408,
-          "live_top10_prob": 0.88496,
-          "top10_shift_pp": 75.09,
+          "live_top10_prob": 0.87719,
+          "top10_shift_pp": 74.31,
           "pre_top20_prob": 0.28752,
           "live_top20_prob": 0.97087,
           "top20_shift_pp": 68.34,
@@ -82,53 +82,53 @@
           "bbi_rank": 30,
           "current_pos": "2",
           "current_score": -8,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 18417,
           "name": "Scheffler, Scottie",
           "pre_win_prob": 0.17987,
-          "live_win_prob": 0.02117,
-          "win_shift_pp": -15.87,
+          "live_win_prob": 0.00853,
+          "win_shift_pp": -17.13,
           "pre_top10_prob": 0.62459,
-          "live_top10_prob": 0.4717,
-          "top10_shift_pp": -15.29,
+          "live_top10_prob": 0.33898,
+          "top10_shift_pp": -28.56,
           "pre_top20_prob": 0.79363,
-          "live_top20_prob": 0.75758,
-          "top20_shift_pp": -3.61,
+          "live_top20_prob": 0.65789,
+          "top20_shift_pp": -13.57,
           "live_mc_prob": 1.0,
           "bbi_rank": 1,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "current_pos": "T29",
+          "current_score": 2,
+          "thru": 4
         },
         {
           "dg_id": 19483,
           "name": "Burns, Sam",
           "pre_win_prob": 0.01173,
-          "live_win_prob": 0.14859,
-          "win_shift_pp": 13.69,
+          "live_win_prob": 0.14771,
+          "win_shift_pp": 13.6,
           "pre_top10_prob": 0.14407,
           "live_top10_prob": 0.80645,
           "top10_shift_pp": 66.24,
           "pre_top20_prob": 0.2958,
-          "live_top20_prob": 0.93458,
-          "top20_shift_pp": 63.88,
+          "live_top20_prob": 0.9434,
+          "top20_shift_pp": 64.76,
           "live_mc_prob": 1.0,
           "bbi_rank": 22,
           "current_pos": "3",
           "current_score": -6,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 12294,
           "name": "Fleetwood, Tommy",
           "pre_win_prob": 0.0217,
-          "live_win_prob": 0.07955,
-          "win_shift_pp": 5.79,
+          "live_win_prob": 0.07868,
+          "win_shift_pp": 5.7,
           "pre_top10_prob": 0.22467,
-          "live_top10_prob": 0.71429,
-          "top10_shift_pp": 48.96,
+          "live_top10_prob": 0.70922,
+          "top10_shift_pp": 48.45,
           "pre_top20_prob": 0.41501,
           "live_top20_prob": 0.9009,
           "top20_shift_pp": 48.59,
@@ -136,118 +136,100 @@
           "bbi_rank": 9,
           "current_pos": "4",
           "current_score": -4,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 23950,
           "name": "Aberg, Ludvig",
           "pre_win_prob": 0.0563,
-          "live_win_prob": 0.00076,
-          "win_shift_pp": -5.55,
+          "live_win_prob": 0.00053,
+          "win_shift_pp": -5.58,
           "pre_top10_prob": 0.35698,
-          "live_top10_prob": 0.08636,
-          "top10_shift_pp": -27.06,
+          "live_top10_prob": 0.11312,
+          "top10_shift_pp": -24.39,
           "pre_top20_prob": 0.55646,
-          "live_top20_prob": 0.27548,
-          "top20_shift_pp": -28.1,
+          "live_top20_prob": 0.4065,
+          "top20_shift_pp": -15.0,
           "live_mc_prob": 1.0,
           "bbi_rank": 3,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
-        },
-        {
-          "dg_id": 10091,
-          "name": "McIlroy, Rory",
-          "pre_win_prob": 0.05363,
-          "live_win_prob": 0.01002,
-          "win_shift_pp": -4.36,
-          "pre_top10_prob": 0.351,
-          "live_top10_prob": 0.32468,
-          "top10_shift_pp": -2.63,
-          "pre_top20_prob": 0.54894,
-          "live_top20_prob": 0.61728,
-          "top20_shift_pp": 6.83,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 2,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
-        },
-        {
-          "dg_id": 14609,
-          "name": "Kim, Si Woo",
-          "pre_win_prob": 0.0418,
-          "live_win_prob": 0.00043,
-          "win_shift_pp": -4.14,
-          "pre_top10_prob": 0.33347,
-          "live_top10_prob": 0.09285,
-          "top10_shift_pp": -24.06,
-          "pre_top20_prob": 0.54606,
-          "live_top20_prob": 0.30675,
-          "top20_shift_pp": -23.93,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 7,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "current_pos": "T32",
+          "current_score": 3,
+          "thru": 14
         },
         {
           "dg_id": 14578,
           "name": "Henley, Russell",
           "pre_win_prob": 0.04198,
-          "live_win_prob": 0.00087,
-          "win_shift_pp": -4.11,
+          "live_win_prob": 5e-05,
+          "win_shift_pp": -4.19,
           "pre_top10_prob": 0.33568,
-          "live_top10_prob": 0.10482,
-          "top10_shift_pp": -23.09,
+          "live_top10_prob": 0.06075,
+          "top10_shift_pp": -27.49,
           "pre_top20_prob": 0.54614,
-          "live_top20_prob": 0.32787,
-          "top20_shift_pp": -21.83,
+          "live_top20_prob": 0.29326,
+          "top20_shift_pp": -25.29,
           "live_mc_prob": 1.0,
           "bbi_rank": 6,
           "current_pos": "T38",
           "current_score": 4,
-          "thru": 18
+          "thru": 12
         },
         {
           "dg_id": 26651,
           "name": "Young, Cameron",
           "pre_win_prob": 0.04162,
-          "live_win_prob": 0.00209,
-          "win_shift_pp": -3.95,
+          "live_win_prob": 0.00022,
+          "win_shift_pp": -4.14,
           "pre_top10_prob": 0.30629,
-          "live_top10_prob": 0.16892,
-          "top10_shift_pp": -13.74,
+          "live_top10_prob": 0.0356,
+          "top10_shift_pp": -27.07,
           "pre_top20_prob": 0.50219,
-          "live_top20_prob": 0.41841,
-          "top20_shift_pp": -8.38,
+          "live_top20_prob": 0.17094,
+          "top20_shift_pp": -33.12,
           "live_mc_prob": 1.0,
           "bbi_rank": 4,
-          "current_pos": "T33",
-          "current_score": 3,
-          "thru": 18
+          "current_pos": "T44",
+          "current_score": 5,
+          "thru": 8
+        },
+        {
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "pre_win_prob": 0.0418,
+          "live_win_prob": 0.0059,
+          "win_shift_pp": -3.59,
+          "pre_top10_prob": 0.33347,
+          "live_top10_prob": 0.37594,
+          "top10_shift_pp": 4.25,
+          "pre_top20_prob": 0.54606,
+          "live_top20_prob": 0.73529,
+          "top20_shift_pp": 18.92,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 7,
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": 11
+        },
+        {
+          "dg_id": 10091,
+          "name": "McIlroy, Rory",
+          "pre_win_prob": 0.05363,
+          "live_win_prob": 0.01815,
+          "win_shift_pp": -3.55,
+          "pre_top10_prob": 0.351,
+          "live_top10_prob": 0.4717,
+          "top10_shift_pp": 12.07,
+          "pre_top20_prob": 0.54894,
+          "live_top20_prob": 0.76923,
+          "top20_shift_pp": 22.03,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 2,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": 5
         }
       ],
       "bottom_10_movers": [
-        {
-          "dg_id": 11276,
-          "name": "Horschel, Billy",
-          "pre_win_prob": 0.00117,
-          "live_win_prob": 0.0,
-          "win_shift_pp": -0.12,
-          "pre_top10_prob": 0.0323,
-          "live_top10_prob": 0.0,
-          "top10_shift_pp": -3.23,
-          "pre_top20_prob": 0.09424,
-          "live_top20_prob": 0.0,
-          "top20_shift_pp": -9.42,
-          "live_mc_prob": 0.0,
-          "bbi_rank": 68,
-          "current_pos": "T54",
-          "current_score": 6,
-          "thru": 18
-        },
         {
           "dg_id": 16333,
           "name": "Hubbard, Mark",
@@ -262,63 +244,45 @@
           "top20_shift_pp": -10.62,
           "live_mc_prob": 0.0,
           "bbi_rank": 67,
-          "current_pos": "T63",
+          "current_pos": "CUT",
           "current_score": 8,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 6169,
           "name": "Kuchar, Matt",
           "pre_win_prob": 0.00122,
-          "live_win_prob": 0.00018,
+          "live_win_prob": 0.00017,
           "win_shift_pp": -0.1,
           "pre_top10_prob": 0.03878,
-          "live_top10_prob": 0.05066,
-          "top10_shift_pp": 1.19,
+          "live_top10_prob": 0.08183,
+          "top10_shift_pp": 4.31,
           "pre_top20_prob": 0.11823,
-          "live_top20_prob": 0.21053,
-          "top20_shift_pp": 9.23,
+          "live_top20_prob": 0.31348,
+          "top20_shift_pp": 19.52,
           "live_mc_prob": 1.0,
           "bbi_rank": 66,
-          "current_pos": "T28",
-          "current_score": 2,
-          "thru": 18
+          "current_pos": "T24",
+          "current_score": 1,
+          "thru": 6
         },
         {
           "dg_id": 15575,
           "name": "Hoge, Tom",
           "pre_win_prob": 0.00098,
-          "live_win_prob": 1e-05,
+          "live_win_prob": 0.0,
           "win_shift_pp": -0.1,
           "pre_top10_prob": 0.03034,
-          "live_top10_prob": 0.00727,
-          "top10_shift_pp": -2.31,
+          "live_top10_prob": 0.0,
+          "top10_shift_pp": -3.03,
           "pre_top20_prob": 0.09215,
-          "live_top20_prob": 0.05216,
-          "top20_shift_pp": -4.0,
+          "live_top20_prob": 0.00088,
+          "top20_shift_pp": -9.13,
           "live_mc_prob": 1.0,
           "bbi_rank": 70,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
-        },
-        {
-          "dg_id": 18554,
-          "name": "Rai, Aaron",
-          "pre_win_prob": 0.00957,
-          "live_win_prob": 0.0088,
-          "win_shift_pp": -0.08,
-          "pre_top10_prob": 0.13466,
-          "live_top10_prob": 0.34483,
-          "top10_shift_pp": 21.02,
-          "pre_top20_prob": 0.29145,
-          "live_top20_prob": 0.65359,
-          "top20_shift_pp": 36.21,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 31,
-          "current_pos": "T9",
-          "current_score": -1,
-          "thru": 18
+          "current_pos": "T52",
+          "current_score": 9,
+          "thru": 14
         },
         {
           "dg_id": 13508,
@@ -334,9 +298,45 @@
           "top20_shift_pp": -7.8,
           "live_mc_prob": 0.0,
           "bbi_rank": 71,
-          "current_pos": "70",
+          "current_pos": "CUT",
           "current_score": 12,
-          "thru": 18
+          "thru": null
+        },
+        {
+          "dg_id": 10419,
+          "name": "Noren, Alex",
+          "pre_win_prob": 0.01023,
+          "live_win_prob": 0.00949,
+          "win_shift_pp": -0.07,
+          "pre_top10_prob": 0.14283,
+          "live_top10_prob": 0.35211,
+          "top10_shift_pp": 20.93,
+          "pre_top20_prob": 0.30624,
+          "live_top20_prob": 0.66667,
+          "top20_shift_pp": 36.04,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 20,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": 2
+        },
+        {
+          "dg_id": 18554,
+          "name": "Rai, Aaron",
+          "pre_win_prob": 0.00957,
+          "live_win_prob": 0.00889,
+          "win_shift_pp": -0.07,
+          "pre_top10_prob": 0.13466,
+          "live_top10_prob": 0.3367,
+          "top10_shift_pp": 20.2,
+          "pre_top20_prob": 0.29145,
+          "live_top20_prob": 0.64516,
+          "top20_shift_pp": 35.37,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 31,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": null
         },
         {
           "dg_id": 7399,
@@ -345,34 +345,34 @@
           "live_win_prob": 0.0,
           "win_shift_pp": -0.07,
           "pre_top10_prob": 0.02719,
-          "live_top10_prob": 0.00753,
-          "top10_shift_pp": -1.97,
+          "live_top10_prob": 0.00924,
+          "top10_shift_pp": -1.79,
           "pre_top20_prob": 0.0867,
-          "live_top20_prob": 0.05269,
-          "top20_shift_pp": -3.4,
+          "live_top20_prob": 0.09091,
+          "top20_shift_pp": 0.42,
           "live_mc_prob": 1.0,
           "bbi_rank": 69,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
+          "current_pos": "T38",
+          "current_score": 4,
+          "thru": 14
         },
         {
-          "dg_id": 25362,
-          "name": "Fitzpatrick, Alex",
-          "pre_win_prob": 0.00558,
-          "live_win_prob": 0.00584,
-          "win_shift_pp": 0.03,
-          "pre_top10_prob": 0.08855,
-          "live_top10_prob": 0.27397,
-          "top10_shift_pp": 18.54,
-          "pre_top20_prob": 0.21333,
-          "live_top20_prob": 0.56818,
-          "top20_shift_pp": 35.49,
+          "dg_id": 13900,
+          "name": "Lowry, Shane",
+          "pre_win_prob": 0.00788,
+          "live_win_prob": 0.00835,
+          "win_shift_pp": 0.05,
+          "pre_top10_prob": 0.12095,
+          "live_top10_prob": 0.3003,
+          "top10_shift_pp": 17.94,
+          "pre_top20_prob": 0.27114,
+          "live_top20_prob": 0.60976,
+          "top20_shift_pp": 33.86,
           "live_mc_prob": 1.0,
-          "bbi_rank": 47,
+          "bbi_rank": 28,
           "current_pos": "T9",
           "current_score": -1,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 18628,
@@ -388,27 +388,27 @@
           "top20_shift_pp": -3.66,
           "live_mc_prob": 0.0,
           "bbi_rank": 72,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
+          "thru": null
         },
         {
-          "dg_id": 13900,
-          "name": "Lowry, Shane",
-          "pre_win_prob": 0.00788,
-          "live_win_prob": 0.00795,
-          "win_shift_pp": 0.01,
-          "pre_top10_prob": 0.12095,
-          "live_top10_prob": 0.31348,
-          "top10_shift_pp": 19.25,
-          "pre_top20_prob": 0.27114,
-          "live_top20_prob": 0.6135,
-          "top20_shift_pp": 34.24,
+          "dg_id": 25362,
+          "name": "Fitzpatrick, Alex",
+          "pre_win_prob": 0.00558,
+          "live_win_prob": 0.00546,
+          "win_shift_pp": -0.01,
+          "pre_top10_prob": 0.08855,
+          "live_top10_prob": 0.26042,
+          "top10_shift_pp": 17.19,
+          "pre_top20_prob": 0.21333,
+          "live_top20_prob": 0.5618,
+          "top20_shift_pp": 34.85,
           "live_mc_prob": 1.0,
-          "bbi_rank": 28,
+          "bbi_rank": 47,
           "current_pos": "T9",
           "current_score": -1,
-          "thru": 18
+          "thru": null
         }
       ],
       "all_shifts": [
@@ -416,8 +416,8 @@
           "dg_id": 21554,
           "name": "Poston, J.T.",
           "pre_win_prob": 0.00557,
-          "live_win_prob": 0.31447,
-          "win_shift_pp": 30.89,
+          "live_win_prob": 0.31056,
+          "win_shift_pp": 30.5,
           "pre_top10_prob": 0.09855,
           "live_top10_prob": 0.91743,
           "top10_shift_pp": 81.89,
@@ -428,17 +428,17 @@
           "bbi_rank": 51,
           "current_pos": "1",
           "current_score": -9,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 29767,
           "name": "Gerard, Ryan",
           "pre_win_prob": 0.00843,
-          "live_win_prob": 0.23641,
-          "win_shift_pp": 22.8,
+          "live_win_prob": 0.2331,
+          "win_shift_pp": 22.47,
           "pre_top10_prob": 0.13408,
-          "live_top10_prob": 0.88496,
-          "top10_shift_pp": 75.09,
+          "live_top10_prob": 0.87719,
+          "top10_shift_pp": 74.31,
           "pre_top20_prob": 0.28752,
           "live_top20_prob": 0.97087,
           "top20_shift_pp": 68.34,
@@ -446,53 +446,53 @@
           "bbi_rank": 30,
           "current_pos": "2",
           "current_score": -8,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 18417,
           "name": "Scheffler, Scottie",
           "pre_win_prob": 0.17987,
-          "live_win_prob": 0.02117,
-          "win_shift_pp": -15.87,
+          "live_win_prob": 0.00853,
+          "win_shift_pp": -17.13,
           "pre_top10_prob": 0.62459,
-          "live_top10_prob": 0.4717,
-          "top10_shift_pp": -15.29,
+          "live_top10_prob": 0.33898,
+          "top10_shift_pp": -28.56,
           "pre_top20_prob": 0.79363,
-          "live_top20_prob": 0.75758,
-          "top20_shift_pp": -3.61,
+          "live_top20_prob": 0.65789,
+          "top20_shift_pp": -13.57,
           "live_mc_prob": 1.0,
           "bbi_rank": 1,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "current_pos": "T29",
+          "current_score": 2,
+          "thru": 4
         },
         {
           "dg_id": 19483,
           "name": "Burns, Sam",
           "pre_win_prob": 0.01173,
-          "live_win_prob": 0.14859,
-          "win_shift_pp": 13.69,
+          "live_win_prob": 0.14771,
+          "win_shift_pp": 13.6,
           "pre_top10_prob": 0.14407,
           "live_top10_prob": 0.80645,
           "top10_shift_pp": 66.24,
           "pre_top20_prob": 0.2958,
-          "live_top20_prob": 0.93458,
-          "top20_shift_pp": 63.88,
+          "live_top20_prob": 0.9434,
+          "top20_shift_pp": 64.76,
           "live_mc_prob": 1.0,
           "bbi_rank": 22,
           "current_pos": "3",
           "current_score": -6,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 12294,
           "name": "Fleetwood, Tommy",
           "pre_win_prob": 0.0217,
-          "live_win_prob": 0.07955,
-          "win_shift_pp": 5.79,
+          "live_win_prob": 0.07868,
+          "win_shift_pp": 5.7,
           "pre_top10_prob": 0.22467,
-          "live_top10_prob": 0.71429,
-          "top10_shift_pp": 48.96,
+          "live_top10_prob": 0.70922,
+          "top10_shift_pp": 48.45,
           "pre_top20_prob": 0.41501,
           "live_top20_prob": 0.9009,
           "top20_shift_pp": 48.59,
@@ -500,133 +500,133 @@
           "bbi_rank": 9,
           "current_pos": "4",
           "current_score": -4,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 23950,
           "name": "Aberg, Ludvig",
           "pre_win_prob": 0.0563,
-          "live_win_prob": 0.00076,
-          "win_shift_pp": -5.55,
+          "live_win_prob": 0.00053,
+          "win_shift_pp": -5.58,
           "pre_top10_prob": 0.35698,
-          "live_top10_prob": 0.08636,
-          "top10_shift_pp": -27.06,
+          "live_top10_prob": 0.11312,
+          "top10_shift_pp": -24.39,
           "pre_top20_prob": 0.55646,
-          "live_top20_prob": 0.27548,
-          "top20_shift_pp": -28.1,
+          "live_top20_prob": 0.4065,
+          "top20_shift_pp": -15.0,
           "live_mc_prob": 1.0,
           "bbi_rank": 3,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
-        },
-        {
-          "dg_id": 10091,
-          "name": "McIlroy, Rory",
-          "pre_win_prob": 0.05363,
-          "live_win_prob": 0.01002,
-          "win_shift_pp": -4.36,
-          "pre_top10_prob": 0.351,
-          "live_top10_prob": 0.32468,
-          "top10_shift_pp": -2.63,
-          "pre_top20_prob": 0.54894,
-          "live_top20_prob": 0.61728,
-          "top20_shift_pp": 6.83,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 2,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
-        },
-        {
-          "dg_id": 14609,
-          "name": "Kim, Si Woo",
-          "pre_win_prob": 0.0418,
-          "live_win_prob": 0.00043,
-          "win_shift_pp": -4.14,
-          "pre_top10_prob": 0.33347,
-          "live_top10_prob": 0.09285,
-          "top10_shift_pp": -24.06,
-          "pre_top20_prob": 0.54606,
-          "live_top20_prob": 0.30675,
-          "top20_shift_pp": -23.93,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 7,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "current_pos": "T32",
+          "current_score": 3,
+          "thru": 14
         },
         {
           "dg_id": 14578,
           "name": "Henley, Russell",
           "pre_win_prob": 0.04198,
-          "live_win_prob": 0.00087,
-          "win_shift_pp": -4.11,
+          "live_win_prob": 5e-05,
+          "win_shift_pp": -4.19,
           "pre_top10_prob": 0.33568,
-          "live_top10_prob": 0.10482,
-          "top10_shift_pp": -23.09,
+          "live_top10_prob": 0.06075,
+          "top10_shift_pp": -27.49,
           "pre_top20_prob": 0.54614,
-          "live_top20_prob": 0.32787,
-          "top20_shift_pp": -21.83,
+          "live_top20_prob": 0.29326,
+          "top20_shift_pp": -25.29,
           "live_mc_prob": 1.0,
           "bbi_rank": 6,
           "current_pos": "T38",
           "current_score": 4,
-          "thru": 18
+          "thru": 12
         },
         {
           "dg_id": 26651,
           "name": "Young, Cameron",
           "pre_win_prob": 0.04162,
-          "live_win_prob": 0.00209,
-          "win_shift_pp": -3.95,
+          "live_win_prob": 0.00022,
+          "win_shift_pp": -4.14,
           "pre_top10_prob": 0.30629,
-          "live_top10_prob": 0.16892,
-          "top10_shift_pp": -13.74,
+          "live_top10_prob": 0.0356,
+          "top10_shift_pp": -27.07,
           "pre_top20_prob": 0.50219,
-          "live_top20_prob": 0.41841,
-          "top20_shift_pp": -8.38,
+          "live_top20_prob": 0.17094,
+          "top20_shift_pp": -33.12,
           "live_mc_prob": 1.0,
           "bbi_rank": 4,
-          "current_pos": "T33",
-          "current_score": 3,
-          "thru": 18
+          "current_pos": "T44",
+          "current_score": 5,
+          "thru": 8
+        },
+        {
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "pre_win_prob": 0.0418,
+          "live_win_prob": 0.0059,
+          "win_shift_pp": -3.59,
+          "pre_top10_prob": 0.33347,
+          "live_top10_prob": 0.37594,
+          "top10_shift_pp": 4.25,
+          "pre_top20_prob": 0.54606,
+          "live_top20_prob": 0.73529,
+          "top20_shift_pp": 18.92,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 7,
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": 11
+        },
+        {
+          "dg_id": 10091,
+          "name": "McIlroy, Rory",
+          "pre_win_prob": 0.05363,
+          "live_win_prob": 0.01815,
+          "win_shift_pp": -3.55,
+          "pre_top10_prob": 0.351,
+          "live_top10_prob": 0.4717,
+          "top10_shift_pp": 12.07,
+          "pre_top20_prob": 0.54894,
+          "live_top20_prob": 0.76923,
+          "top20_shift_pp": 22.03,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 2,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": 5
         },
         {
           "dg_id": 17646,
           "name": "Fitzpatrick, Matt",
           "pre_win_prob": 0.03338,
-          "live_win_prob": 0.00417,
-          "win_shift_pp": -2.92,
+          "live_win_prob": 0.00407,
+          "win_shift_pp": -2.93,
           "pre_top10_prob": 0.29548,
-          "live_top10_prob": 0.23041,
-          "top10_shift_pp": -6.51,
+          "live_top10_prob": 0.27174,
+          "top10_shift_pp": -2.37,
           "pre_top20_prob": 0.50032,
-          "live_top20_prob": 0.51813,
-          "top20_shift_pp": 1.78,
+          "live_top20_prob": 0.60241,
+          "top20_shift_pp": 10.21,
           "live_mc_prob": 1.0,
           "bbi_rank": 8,
-          "current_pos": "T28",
-          "current_score": 2,
-          "thru": 18
+          "current_pos": "T24",
+          "current_score": 1,
+          "thru": 6
         },
         {
           "dg_id": 14139,
           "name": "Thomas, Justin",
           "pre_win_prob": 0.02203,
-          "live_win_prob": 0.00028,
-          "win_shift_pp": -2.17,
+          "live_win_prob": 1e-05,
+          "win_shift_pp": -2.2,
           "pre_top10_prob": 0.21367,
-          "live_top10_prob": 0.04861,
-          "top10_shift_pp": -16.51,
+          "live_top10_prob": 0.03316,
+          "top10_shift_pp": -18.05,
           "pre_top20_prob": 0.38797,
-          "live_top20_prob": 0.18832,
-          "top20_shift_pp": -19.96,
+          "live_top20_prob": 0.21413,
+          "top20_shift_pp": -17.38,
           "live_mc_prob": 1.0,
           "bbi_rank": 15,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
+          "current_pos": "T38",
+          "current_score": 4,
+          "thru": 17
         },
         {
           "dg_id": 24968,
@@ -642,19 +642,19 @@
           "top20_shift_pp": -40.76,
           "live_mc_prob": 0.0,
           "bbi_rank": 12,
-          "current_pos": "T61",
+          "current_pos": "CUT",
           "current_score": 7,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 21756,
           "name": "Cole, Eric",
           "pre_win_prob": 0.00577,
-          "live_win_prob": 0.02438,
-          "win_shift_pp": 1.86,
+          "live_win_prob": 0.02403,
+          "win_shift_pp": 1.83,
           "pre_top10_prob": 0.10112,
-          "live_top10_prob": 0.49505,
-          "top10_shift_pp": 39.39,
+          "live_top10_prob": 0.4878,
+          "top10_shift_pp": 38.67,
           "pre_top20_prob": 0.23627,
           "live_top20_prob": 0.76923,
           "top20_shift_pp": 53.3,
@@ -662,7 +662,7 @@
           "bbi_rank": 41,
           "current_pos": "5",
           "current_score": -3,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 18474,
@@ -678,9 +678,9 @@
           "top20_shift_pp": -36.58,
           "live_mc_prob": 0.0,
           "bbi_rank": 14,
-          "current_pos": "71",
+          "current_pos": "CUT",
           "current_score": 15,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 16841,
@@ -696,9 +696,9 @@
           "top20_shift_pp": -35.41,
           "live_mc_prob": 0.0,
           "bbi_rank": 13,
-          "current_pos": "T63",
+          "current_pos": "CUT",
           "current_score": 8,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 14636,
@@ -714,9 +714,9 @@
           "top20_shift_pp": -34.24,
           "live_mc_prob": 0.0,
           "bbi_rank": 23,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 23323,
@@ -732,45 +732,27 @@
           "top20_shift_pp": -34.87,
           "live_mc_prob": 0.0,
           "bbi_rank": 17,
-          "current_pos": "T61",
+          "current_pos": "CUT",
           "current_score": 7,
-          "thru": 18
-        },
-        {
-          "dg_id": 17536,
-          "name": "Spaun, J.J.",
-          "pre_win_prob": 0.02173,
-          "live_win_prob": 0.00767,
-          "win_shift_pp": -1.41,
-          "pre_top10_prob": 0.22253,
-          "live_top10_prob": 0.31546,
-          "top10_shift_pp": 9.29,
-          "pre_top20_prob": 0.41224,
-          "live_top20_prob": 0.61728,
-          "top20_shift_pp": 20.5,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 11,
-          "current_pos": "T12",
-          "current_score": 0,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 27774,
           "name": "Gotterup, Chris",
           "pre_win_prob": 0.01408,
-          "live_win_prob": 0.00033,
-          "win_shift_pp": -1.38,
+          "live_win_prob": 1e-05,
+          "win_shift_pp": -1.41,
           "pre_top10_prob": 0.15817,
-          "live_top10_prob": 0.05107,
-          "top10_shift_pp": -10.71,
+          "live_top10_prob": 0.02976,
+          "top10_shift_pp": -12.84,
           "pre_top20_prob": 0.31595,
-          "live_top20_prob": 0.19231,
-          "top20_shift_pp": -12.36,
+          "live_top20_prob": 0.17065,
+          "top20_shift_pp": -14.53,
           "live_mc_prob": 1.0,
           "bbi_rank": 16,
           "current_pos": "T38",
           "current_score": 4,
-          "thru": 18
+          "thru": 12
         },
         {
           "dg_id": 12965,
@@ -786,45 +768,63 @@
           "top20_shift_pp": -31.35,
           "live_mc_prob": 0.0,
           "bbi_rank": 27,
-          "current_pos": "72",
+          "current_pos": "CUT",
           "current_score": 17,
-          "thru": 18
-        },
-        {
-          "dg_id": 17511,
-          "name": "Straka, Sepp",
-          "pre_win_prob": 0.01177,
-          "live_win_prob": 0.0002,
-          "win_shift_pp": -1.16,
-          "pre_top10_prob": 0.14764,
-          "live_top10_prob": 0.03877,
-          "top10_shift_pp": -10.89,
-          "pre_top20_prob": 0.30706,
-          "live_top20_prob": 0.16502,
-          "top20_shift_pp": -14.2,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 37,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 13562,
           "name": "Matsuyama, Hideki",
           "pre_win_prob": 0.01452,
-          "live_win_prob": 0.00324,
-          "win_shift_pp": -1.13,
+          "live_win_prob": 0.00189,
+          "win_shift_pp": -1.26,
           "pre_top10_prob": 0.18218,
-          "live_top10_prob": 0.19802,
-          "top10_shift_pp": 1.58,
+          "live_top10_prob": 0.18622,
+          "top10_shift_pp": 0.4,
           "pre_top20_prob": 0.36133,
-          "live_top20_prob": 0.47619,
-          "top20_shift_pp": 11.49,
+          "live_top20_prob": 0.48544,
+          "top20_shift_pp": 12.41,
           "live_mc_prob": 1.0,
           "bbi_rank": 21,
-          "current_pos": "T19",
+          "current_pos": "T24",
           "current_score": 1,
-          "thru": 18
+          "thru": 4
+        },
+        {
+          "dg_id": 17511,
+          "name": "Straka, Sepp",
+          "pre_win_prob": 0.01177,
+          "live_win_prob": 6e-05,
+          "win_shift_pp": -1.17,
+          "pre_top10_prob": 0.14764,
+          "live_top10_prob": 0.026,
+          "top10_shift_pp": -12.16,
+          "pre_top20_prob": 0.30706,
+          "live_top20_prob": 0.17123,
+          "top20_shift_pp": -13.58,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 37,
+          "current_pos": "T38",
+          "current_score": 4,
+          "thru": 15
+        },
+        {
+          "dg_id": 12577,
+          "name": "Woodland, Gary",
+          "pre_win_prob": 0.01157,
+          "live_win_prob": 0.00048,
+          "win_shift_pp": -1.11,
+          "pre_top10_prob": 0.1471,
+          "live_top10_prob": 0.09804,
+          "top10_shift_pp": -4.91,
+          "pre_top20_prob": 0.30207,
+          "live_top20_prob": 0.32787,
+          "top20_shift_pp": 2.58,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 29,
+          "current_pos": "T29",
+          "current_score": 2,
+          "thru": 5
         },
         {
           "dg_id": 23602,
@@ -840,81 +840,63 @@
           "top20_shift_pp": -29.96,
           "live_mc_prob": 0.0,
           "bbi_rank": 18,
-          "current_pos": "T63",
+          "current_pos": "CUT",
           "current_score": 8,
-          "thru": 18
-        },
-        {
-          "dg_id": 12577,
-          "name": "Woodland, Gary",
-          "pre_win_prob": 0.01157,
-          "live_win_prob": 0.00135,
-          "win_shift_pp": -1.02,
-          "pre_top10_prob": 0.1471,
-          "live_top10_prob": 0.12531,
-          "top10_shift_pp": -2.18,
-          "pre_top20_prob": 0.30207,
-          "live_top20_prob": 0.35461,
-          "top20_shift_pp": 5.25,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 29,
-          "current_pos": "T28",
-          "current_score": 2,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 6430,
           "name": "Scott, Adam",
           "pre_win_prob": 0.01033,
-          "live_win_prob": 0.00108,
-          "win_shift_pp": -0.93,
+          "live_win_prob": 0.0003,
+          "win_shift_pp": -1.0,
           "pre_top10_prob": 0.14054,
-          "live_top10_prob": 0.10893,
-          "top10_shift_pp": -3.16,
+          "live_top10_prob": 0.05637,
+          "top10_shift_pp": -8.42,
           "pre_top20_prob": 0.29568,
-          "live_top20_prob": 0.32787,
-          "top20_shift_pp": 3.22,
+          "live_top20_prob": 0.23256,
+          "top20_shift_pp": -6.31,
           "live_mc_prob": 1.0,
           "bbi_rank": 26,
-          "current_pos": "T28",
-          "current_score": 2,
-          "thru": 18
+          "current_pos": "T32",
+          "current_score": 3,
+          "thru": 6
+        },
+        {
+          "dg_id": 17536,
+          "name": "Spaun, J.J.",
+          "pre_win_prob": 0.02173,
+          "live_win_prob": 0.01283,
+          "win_shift_pp": -0.89,
+          "pre_top10_prob": 0.22253,
+          "live_top10_prob": 0.39216,
+          "top10_shift_pp": 16.96,
+          "pre_top20_prob": 0.41224,
+          "live_top20_prob": 0.6993,
+          "top20_shift_pp": 28.71,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 11,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": 1
         },
         {
           "dg_id": 14577,
           "name": "English, Harris",
           "pre_win_prob": 0.00945,
-          "live_win_prob": 0.00033,
-          "win_shift_pp": -0.91,
+          "live_win_prob": 0.00145,
+          "win_shift_pp": -0.8,
           "pre_top10_prob": 0.13762,
-          "live_top10_prob": 0.05774,
-          "top10_shift_pp": -7.99,
+          "live_top10_prob": 0.19084,
+          "top10_shift_pp": 5.32,
           "pre_top20_prob": 0.2965,
-          "live_top20_prob": 0.22371,
-          "top20_shift_pp": -7.28,
+          "live_top20_prob": 0.51282,
+          "top20_shift_pp": 21.63,
           "live_mc_prob": 1.0,
           "bbi_rank": 25,
-          "current_pos": "T33",
-          "current_score": 3,
-          "thru": 18
-        },
-        {
-          "dg_id": 10419,
-          "name": "Noren, Alex",
-          "pre_win_prob": 0.01023,
-          "live_win_prob": 0.00212,
-          "win_shift_pp": -0.81,
-          "pre_top10_prob": 0.14283,
-          "live_top10_prob": 0.18349,
-          "top10_shift_pp": 4.07,
-          "pre_top20_prob": 0.30624,
-          "live_top20_prob": 0.46083,
-          "top20_shift_pp": 15.46,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 20,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": 7
         },
         {
           "dg_id": 26096,
@@ -930,153 +912,189 @@
           "top20_shift_pp": -25.73,
           "live_mc_prob": 0.0,
           "bbi_rank": 33,
-          "current_pos": "T66",
+          "current_pos": "CUT",
           "current_score": 9,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 18634,
           "name": "McNealy, Maverick",
           "pre_win_prob": 0.01072,
-          "live_win_prob": 0.00315,
+          "live_win_prob": 0.00314,
           "win_shift_pp": -0.76,
           "pre_top10_prob": 0.14057,
-          "live_top10_prob": 0.19455,
-          "top10_shift_pp": 5.4,
+          "live_top10_prob": 0.18382,
+          "top10_shift_pp": 4.33,
           "pre_top20_prob": 0.29276,
-          "live_top20_prob": 0.4717,
-          "top20_shift_pp": 17.89,
+          "live_top20_prob": 0.45455,
+          "top20_shift_pp": 16.18,
           "live_mc_prob": 1.0,
           "bbi_rank": 19,
-          "current_pos": "T12",
+          "current_pos": "T16",
           "current_score": 0,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 22760,
           "name": "Hisatsune, Ryo",
           "pre_win_prob": 0.00748,
-          "live_win_prob": 0.00046,
-          "win_shift_pp": -0.7,
+          "live_win_prob": 1e-05,
+          "win_shift_pp": -0.75,
           "pre_top10_prob": 0.11585,
-          "live_top10_prob": 0.06234,
-          "top10_shift_pp": -5.35,
+          "live_top10_prob": 0.01,
+          "top10_shift_pp": -10.58,
           "pre_top20_prob": 0.26119,
-          "live_top20_prob": 0.23202,
-          "top20_shift_pp": -2.92,
+          "live_top20_prob": 0.07843,
+          "top20_shift_pp": -18.28,
           "live_mc_prob": 1.0,
           "bbi_rank": 42,
-          "current_pos": "T33",
-          "current_score": 3,
-          "thru": 18
-        },
-        {
-          "dg_id": 21891,
-          "name": "Kitayama, Kurt",
-          "pre_win_prob": 0.01097,
-          "live_win_prob": 0.00475,
-          "win_shift_pp": -0.62,
-          "pre_top10_prob": 0.1391,
-          "live_top10_prob": 0.23419,
-          "top10_shift_pp": 9.51,
-          "pre_top20_prob": 0.28683,
-          "live_top20_prob": 0.51546,
-          "top20_shift_pp": 22.86,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 24,
-          "current_pos": "T12",
-          "current_score": 0,
-          "thru": 18
-        },
-        {
-          "dg_id": 17576,
-          "name": "Conners, Corey",
-          "pre_win_prob": 0.00625,
-          "live_win_prob": 6e-05,
-          "win_shift_pp": -0.62,
-          "pre_top10_prob": 0.10366,
-          "live_top10_prob": 0.02048,
-          "top10_shift_pp": -8.32,
-          "pre_top20_prob": 0.23663,
-          "live_top20_prob": 0.1056,
-          "top20_shift_pp": -13.1,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 44,
-          "current_pos": "T47",
+          "current_pos": "T44",
           "current_score": 5,
-          "thru": 18
-        },
-        {
-          "dg_id": 23604,
-          "name": "Clark, Wyndham",
-          "pre_win_prob": 0.00792,
-          "live_win_prob": 0.01393,
-          "win_shift_pp": 0.6,
-          "pre_top10_prob": 0.11472,
-          "live_top10_prob": 0.37594,
-          "top10_shift_pp": 26.12,
-          "pre_top20_prob": 0.25194,
-          "live_top20_prob": 0.66667,
-          "top20_shift_pp": 41.47,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 35,
-          "current_pos": "T6",
-          "current_score": -2,
-          "thru": 18
-        },
-        {
-          "dg_id": 13126,
-          "name": "Taylor, Nick",
-          "pre_win_prob": 0.00643,
-          "live_win_prob": 0.00061,
-          "win_shift_pp": -0.58,
-          "pre_top10_prob": 0.10875,
-          "live_top10_prob": 0.09872,
-          "top10_shift_pp": -1.0,
-          "pre_top20_prob": 0.25274,
-          "live_top20_prob": 0.31847,
-          "top20_shift_pp": 6.57,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 32,
-          "current_pos": "T28",
-          "current_score": 2,
-          "thru": 18
-        },
-        {
-          "dg_id": 21407,
-          "name": "Reitan, Kristoffer",
-          "pre_win_prob": 0.00767,
-          "live_win_prob": 0.00199,
-          "win_shift_pp": -0.57,
-          "pre_top10_prob": 0.10742,
-          "live_top10_prob": 0.14903,
-          "top10_shift_pp": 4.16,
-          "pre_top20_prob": 0.23813,
-          "live_top20_prob": 0.3876,
-          "top20_shift_pp": 14.95,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 36,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "thru": 8
         },
         {
           "dg_id": 23014,
           "name": "Theegala, Sahith",
           "pre_win_prob": 0.00735,
-          "live_win_prob": 0.00173,
-          "win_shift_pp": -0.56,
+          "live_win_prob": 0.00051,
+          "win_shift_pp": -0.68,
           "pre_top10_prob": 0.11021,
-          "live_top10_prob": 0.13908,
-          "top10_shift_pp": 2.89,
+          "live_top10_prob": 0.08264,
+          "top10_shift_pp": -2.76,
           "pre_top20_prob": 0.24606,
-          "live_top20_prob": 0.38168,
-          "top20_shift_pp": 13.56,
+          "live_top20_prob": 0.2849,
+          "top20_shift_pp": 3.88,
           "live_mc_prob": 1.0,
           "bbi_rank": 50,
-          "current_pos": "T19",
+          "current_pos": "T29",
+          "current_score": 2,
+          "thru": 2
+        },
+        {
+          "dg_id": 13126,
+          "name": "Taylor, Nick",
+          "pre_win_prob": 0.00643,
+          "live_win_prob": 6e-05,
+          "win_shift_pp": -0.64,
+          "pre_top10_prob": 0.10875,
+          "live_top10_prob": 0.04365,
+          "top10_shift_pp": -6.51,
+          "pre_top20_prob": 0.25274,
+          "live_top20_prob": 0.21142,
+          "top20_shift_pp": -4.13,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 32,
+          "current_pos": "T32",
+          "current_score": 3,
+          "thru": 6
+        },
+        {
+          "dg_id": 6093,
+          "name": "Rose, Justin",
+          "pre_win_prob": 0.00828,
+          "live_win_prob": 0.00202,
+          "win_shift_pp": -0.63,
+          "pre_top10_prob": 0.12032,
+          "live_top10_prob": 0.17762,
+          "top10_shift_pp": 5.73,
+          "pre_top20_prob": 0.2591,
+          "live_top20_prob": 0.45455,
+          "top20_shift_pp": 19.54,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 38,
+          "current_pos": "T24",
           "current_score": 1,
-          "thru": 18
+          "thru": 4
+        },
+        {
+          "dg_id": 17576,
+          "name": "Conners, Corey",
+          "pre_win_prob": 0.00625,
+          "live_win_prob": 0.0,
+          "win_shift_pp": -0.62,
+          "pre_top10_prob": 0.10366,
+          "live_top10_prob": 8e-05,
+          "top10_shift_pp": -10.36,
+          "pre_top20_prob": 0.23663,
+          "live_top20_prob": 0.00168,
+          "top20_shift_pp": -23.49,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 44,
+          "current_pos": "T52",
+          "current_score": 9,
+          "thru": 15
+        },
+        {
+          "dg_id": 15466,
+          "name": "Cantlay, Patrick",
+          "pre_win_prob": 0.02523,
+          "live_win_prob": 0.03113,
+          "win_shift_pp": 0.59,
+          "pre_top10_prob": 0.24117,
+          "live_top10_prob": 0.52083,
+          "top10_shift_pp": 27.97,
+          "pre_top20_prob": 0.43634,
+          "live_top20_prob": 0.79365,
+          "top20_shift_pp": 35.73,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 10,
+          "current_pos": "T6",
+          "current_score": -2,
+          "thru": null
+        },
+        {
+          "dg_id": 23604,
+          "name": "Clark, Wyndham",
+          "pre_win_prob": 0.00792,
+          "live_win_prob": 0.01373,
+          "win_shift_pp": 0.58,
+          "pre_top10_prob": 0.11472,
+          "live_top10_prob": 0.36496,
+          "top10_shift_pp": 25.02,
+          "pre_top20_prob": 0.25194,
+          "live_top20_prob": 0.66225,
+          "top20_shift_pp": 41.03,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 35,
+          "current_pos": "T6",
+          "current_score": -2,
+          "thru": null
+        },
+        {
+          "dg_id": 14502,
+          "name": "Cauley, Bud",
+          "pre_win_prob": 0.0058,
+          "live_win_prob": 8e-05,
+          "win_shift_pp": -0.57,
+          "pre_top10_prob": 0.09949,
+          "live_top10_prob": 0.04859,
+          "top10_shift_pp": -5.09,
+          "pre_top20_prob": 0.22974,
+          "live_top20_prob": 0.22173,
+          "top20_shift_pp": -0.8,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 45,
+          "current_pos": "T32",
+          "current_score": 3,
+          "thru": 9
+        },
+        {
+          "dg_id": 29433,
+          "name": "Bridgeman, Jacob",
+          "pre_win_prob": 0.00588,
+          "live_win_prob": 0.00028,
+          "win_shift_pp": -0.56,
+          "pre_top10_prob": 0.09765,
+          "live_top10_prob": 0.05015,
+          "top10_shift_pp": -4.75,
+          "pre_top20_prob": 0.23078,
+          "live_top20_prob": 0.2079,
+          "top20_shift_pp": -2.29,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 40,
+          "current_pos": "T32",
+          "current_score": 3,
+          "thru": 2
         },
         {
           "dg_id": 28309,
@@ -1092,9 +1110,9 @@
           "top20_shift_pp": -21.91,
           "live_mc_prob": 0.0,
           "bbi_rank": 46,
-          "current_pos": "68",
+          "current_pos": "CUT",
           "current_score": 10,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 23475,
@@ -1110,9 +1128,9 @@
           "top20_shift_pp": -20.71,
           "live_mc_prob": 0.0,
           "bbi_rank": 53,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 8825,
@@ -1128,45 +1146,27 @@
           "top20_shift_pp": -22.62,
           "live_mc_prob": 0.0,
           "bbi_rank": 49,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
+          "thru": null
         },
         {
-          "dg_id": 14502,
-          "name": "Cauley, Bud",
-          "pre_win_prob": 0.0058,
-          "live_win_prob": 0.00068,
-          "win_shift_pp": -0.51,
-          "pre_top10_prob": 0.09949,
-          "live_top10_prob": 0.06386,
-          "top10_shift_pp": -3.56,
-          "pre_top20_prob": 0.22974,
-          "live_top20_prob": 0.23148,
-          "top20_shift_pp": 0.17,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 45,
-          "current_pos": "T33",
-          "current_score": 3,
-          "thru": 18
-        },
-        {
-          "dg_id": 6093,
-          "name": "Rose, Justin",
-          "pre_win_prob": 0.00828,
-          "live_win_prob": 0.00325,
+          "dg_id": 13872,
+          "name": "Bradley, Keegan",
+          "pre_win_prob": 0.00885,
+          "live_win_prob": 0.00387,
           "win_shift_pp": -0.5,
-          "pre_top10_prob": 0.12032,
-          "live_top10_prob": 0.19342,
-          "top10_shift_pp": 7.31,
-          "pre_top20_prob": 0.2591,
-          "live_top20_prob": 0.46083,
-          "top20_shift_pp": 20.17,
+          "pre_top10_prob": 0.1219,
+          "live_top10_prob": 0.20964,
+          "top10_shift_pp": 8.77,
+          "pre_top20_prob": 0.26855,
+          "live_top20_prob": 0.49261,
+          "top20_shift_pp": 22.41,
           "live_mc_prob": 1.0,
-          "bbi_rank": 38,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "bbi_rank": 34,
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": null
         },
         {
           "dg_id": 25569,
@@ -1182,9 +1182,9 @@
           "top20_shift_pp": -22.39,
           "live_mc_prob": 0.0,
           "bbi_rank": 52,
-          "current_pos": "69",
+          "current_pos": "CUT",
           "current_score": 11,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 9771,
@@ -1200,63 +1200,27 @@
           "top20_shift_pp": -19.84,
           "live_mc_prob": 0.0,
           "bbi_rank": 56,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
-        },
-        {
-          "dg_id": 15466,
-          "name": "Cantlay, Patrick",
-          "pre_win_prob": 0.02523,
-          "live_win_prob": 0.0298,
-          "win_shift_pp": 0.46,
-          "pre_top10_prob": 0.24117,
-          "live_top10_prob": 0.53191,
-          "top10_shift_pp": 29.07,
-          "pre_top20_prob": 0.43634,
-          "live_top20_prob": 0.8,
-          "top20_shift_pp": 36.37,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 10,
-          "current_pos": "T6",
-          "current_score": -2,
-          "thru": 18
-        },
-        {
-          "dg_id": 13872,
-          "name": "Bradley, Keegan",
-          "pre_win_prob": 0.00885,
-          "live_win_prob": 0.00421,
-          "win_shift_pp": -0.46,
-          "pre_top10_prob": 0.1219,
-          "live_top10_prob": 0.22026,
-          "top10_shift_pp": 9.84,
-          "pre_top20_prob": 0.26855,
-          "live_top20_prob": 0.50761,
-          "top20_shift_pp": 23.91,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 34,
-          "current_pos": "T12",
-          "current_score": 0,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 28159,
           "name": "Meissner, Mac",
           "pre_win_prob": 0.0046,
-          "live_win_prob": 4e-05,
+          "live_win_prob": 0.0,
           "win_shift_pp": -0.46,
           "pre_top10_prob": 0.09469,
-          "live_top10_prob": 0.02143,
-          "top10_shift_pp": -7.33,
+          "live_top10_prob": 0.00108,
+          "top10_shift_pp": -9.36,
           "pre_top20_prob": 0.22648,
-          "live_top20_prob": 0.11223,
-          "top20_shift_pp": -11.42,
+          "live_top20_prob": 0.02016,
+          "top20_shift_pp": -20.63,
           "live_mc_prob": 1.0,
           "bbi_rank": 43,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
+          "current_pos": "T50",
+          "current_score": 7,
+          "thru": 14
         },
         {
           "dg_id": 28635,
@@ -1272,27 +1236,9 @@
           "top20_shift_pp": -21.41,
           "live_mc_prob": 0.0,
           "bbi_rank": 48,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
-        },
-        {
-          "dg_id": 29433,
-          "name": "Bridgeman, Jacob",
-          "pre_win_prob": 0.00588,
-          "live_win_prob": 0.00163,
-          "win_shift_pp": -0.43,
-          "pre_top10_prob": 0.09765,
-          "live_top10_prob": 0.15291,
-          "top10_shift_pp": 5.53,
-          "pre_top20_prob": 0.23078,
-          "live_top20_prob": 0.41494,
-          "top20_shift_pp": 18.42,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 40,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 17606,
@@ -1308,63 +1254,81 @@
           "top20_shift_pp": -18.41,
           "live_mc_prob": 0.0,
           "bbi_rank": 54,
-          "current_pos": "T66",
+          "current_pos": "CUT",
           "current_score": 9,
-          "thru": 18
+          "thru": null
+        },
+        {
+          "dg_id": 21407,
+          "name": "Reitan, Kristoffer",
+          "pre_win_prob": 0.00767,
+          "live_win_prob": 0.00411,
+          "win_shift_pp": -0.36,
+          "pre_top10_prob": 0.10742,
+          "live_top10_prob": 0.20747,
+          "top10_shift_pp": 10.0,
+          "pre_top20_prob": 0.23813,
+          "live_top20_prob": 0.4878,
+          "top20_shift_pp": 24.97,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 36,
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": 2
         },
         {
           "dg_id": 29925,
           "name": "Yellamaraju, Sudarshan",
           "pre_win_prob": 0.00297,
-          "live_win_prob": 0.00014,
-          "win_shift_pp": -0.28,
+          "live_win_prob": 0.0,
+          "win_shift_pp": -0.3,
           "pre_top10_prob": 0.06374,
-          "live_top10_prob": 0.03078,
-          "top10_shift_pp": -3.3,
+          "live_top10_prob": 0.0042,
+          "top10_shift_pp": -5.95,
           "pre_top20_prob": 0.16493,
-          "live_top20_prob": 0.13889,
-          "top20_shift_pp": -2.6,
+          "live_top20_prob": 0.04172,
+          "top20_shift_pp": -12.32,
           "live_mc_prob": 1.0,
           "bbi_rank": 63,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "current_pos": "T48",
+          "current_score": 6,
+          "thru": 11
         },
         {
           "dg_id": 17543,
           "name": "Kim, Michael",
           "pre_win_prob": 0.00283,
-          "live_win_prob": 0.0001,
-          "win_shift_pp": -0.27,
+          "live_win_prob": 0.0,
+          "win_shift_pp": -0.28,
           "pre_top10_prob": 0.06734,
-          "live_top10_prob": 0.03322,
-          "top10_shift_pp": -3.41,
+          "live_top10_prob": 0.00172,
+          "top10_shift_pp": -6.56,
           "pre_top20_prob": 0.17383,
-          "live_top20_prob": 0.14641,
-          "top20_shift_pp": -2.74,
+          "live_top20_prob": 0.02312,
+          "top20_shift_pp": -15.07,
           "live_mc_prob": 1.0,
           "bbi_rank": 55,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "current_pos": "T50",
+          "current_score": 7,
+          "thru": 12
         },
         {
-          "dg_id": 27194,
-          "name": "Hall, Harry",
-          "pre_win_prob": 0.00513,
-          "live_win_prob": 0.00259,
-          "win_shift_pp": -0.25,
-          "pre_top10_prob": 0.09235,
-          "live_top10_prob": 0.18762,
-          "top10_shift_pp": 9.53,
-          "pre_top20_prob": 0.22189,
-          "live_top20_prob": 0.46512,
-          "top20_shift_pp": 24.32,
+          "dg_id": 17488,
+          "name": "Im, Sungjae",
+          "pre_win_prob": 0.00397,
+          "live_win_prob": 0.00129,
+          "win_shift_pp": -0.27,
+          "pre_top10_prob": 0.07381,
+          "live_top10_prob": 0.13369,
+          "top10_shift_pp": 5.99,
+          "pre_top20_prob": 0.18323,
+          "live_top20_prob": 0.39062,
+          "top20_shift_pp": 20.74,
           "live_mc_prob": 1.0,
-          "bbi_rank": 39,
-          "current_pos": "T12",
-          "current_score": 0,
-          "thru": 18
+          "bbi_rank": 59,
+          "current_pos": "T24",
+          "current_score": 1,
+          "thru": 4
         },
         {
           "dg_id": 16283,
@@ -1373,160 +1337,178 @@
           "live_win_prob": 0.0,
           "win_shift_pp": -0.24,
           "pre_top10_prob": 0.05606,
-          "live_top10_prob": 0.0162,
-          "top10_shift_pp": -3.99,
+          "live_top10_prob": 0.00184,
+          "top10_shift_pp": -5.42,
           "pre_top20_prob": 0.15311,
-          "live_top20_prob": 0.08673,
-          "top20_shift_pp": -6.64,
+          "live_top20_prob": 0.02456,
+          "top20_shift_pp": -12.85,
           "live_mc_prob": 1.0,
           "bbi_rank": 62,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "current_pos": "T48",
+          "current_score": 6,
+          "thru": 9
         },
         {
-          "dg_id": 17488,
-          "name": "Im, Sungjae",
-          "pre_win_prob": 0.00397,
-          "live_win_prob": 0.00181,
-          "win_shift_pp": -0.22,
-          "pre_top10_prob": 0.07381,
-          "live_top10_prob": 0.14599,
-          "top10_shift_pp": 7.22,
-          "pre_top20_prob": 0.18323,
-          "live_top20_prob": 0.39216,
-          "top20_shift_pp": 20.89,
+          "dg_id": 27194,
+          "name": "Hall, Harry",
+          "pre_win_prob": 0.00513,
+          "live_win_prob": 0.00286,
+          "win_shift_pp": -0.23,
+          "pre_top10_prob": 0.09235,
+          "live_top10_prob": 0.17762,
+          "top10_shift_pp": 8.53,
+          "pre_top20_prob": 0.22189,
+          "live_top20_prob": 0.45249,
+          "top20_shift_pp": 23.06,
           "live_mc_prob": 1.0,
-          "bbi_rank": 59,
-          "current_pos": "T19",
-          "current_score": 1,
-          "thru": 18
+          "bbi_rank": 39,
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": null
         },
         {
           "dg_id": 19870,
           "name": "McCarthy, Denny",
           "pre_win_prob": 0.00212,
-          "live_win_prob": 3e-05,
+          "live_win_prob": 0.0,
           "win_shift_pp": -0.21,
           "pre_top10_prob": 0.05417,
-          "live_top10_prob": 0.01753,
-          "top10_shift_pp": -3.66,
+          "live_top10_prob": 0.00516,
+          "top10_shift_pp": -4.9,
           "pre_top20_prob": 0.14964,
-          "live_top20_prob": 0.1002,
-          "top20_shift_pp": -4.94,
+          "live_top20_prob": 0.05244,
+          "top20_shift_pp": -9.72,
           "live_mc_prob": 1.0,
           "bbi_rank": 60,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "current_pos": "T44",
+          "current_score": 5,
+          "thru": 11
         },
         {
           "dg_id": 19895,
           "name": "Schauffele, Xander",
           "pre_win_prob": 0.03917,
-          "live_win_prob": 0.04119,
+          "live_win_prob": 0.04115,
           "win_shift_pp": 0.2,
           "pre_top10_prob": 0.29884,
-          "live_top10_prob": 0.57471,
-          "top10_shift_pp": 27.59,
+          "live_top10_prob": 0.5618,
+          "top10_shift_pp": 26.3,
           "pre_top20_prob": 0.4955,
-          "live_top20_prob": 0.81967,
-          "top20_shift_pp": 32.42,
+          "live_top20_prob": 0.81301,
+          "top20_shift_pp": 31.75,
           "live_mc_prob": 1.0,
           "bbi_rank": 5,
           "current_pos": "T6",
           "current_score": -2,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 11889,
           "name": "Fox, Ryan",
           "pre_win_prob": 0.00198,
-          "live_win_prob": 3e-05,
-          "win_shift_pp": -0.2,
+          "live_win_prob": 5e-05,
+          "win_shift_pp": -0.19,
           "pre_top10_prob": 0.0516,
-          "live_top10_prob": 0.02657,
-          "top10_shift_pp": -2.5,
+          "live_top10_prob": 0.02344,
+          "top10_shift_pp": -2.82,
           "pre_top20_prob": 0.14439,
-          "live_top20_prob": 0.12953,
-          "top20_shift_pp": -1.49,
+          "live_top20_prob": 0.1355,
+          "top20_shift_pp": -0.89,
           "live_mc_prob": 1.0,
           "bbi_rank": 58,
-          "current_pos": "T33",
+          "current_pos": "T32",
           "current_score": 3,
-          "thru": 18
-        },
-        {
-          "dg_id": 17780,
-          "name": "Pendrith, Taylor",
-          "pre_win_prob": 0.00382,
-          "live_win_prob": 0.00209,
-          "win_shift_pp": -0.17,
-          "pre_top10_prob": 0.07111,
-          "live_top10_prob": 0.17007,
-          "top10_shift_pp": 9.9,
-          "pre_top20_prob": 0.17973,
-          "live_top20_prob": 0.43478,
-          "top20_shift_pp": 25.51,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 57,
-          "current_pos": "T12",
-          "current_score": 0,
-          "thru": 18
-        },
-        {
-          "dg_id": 22833,
-          "name": "Echavarria, Nico",
-          "pre_win_prob": 0.00155,
-          "live_win_prob": 1e-05,
-          "win_shift_pp": -0.15,
-          "pre_top10_prob": 0.03888,
-          "live_top10_prob": 0.0176,
-          "top10_shift_pp": -2.13,
-          "pre_top20_prob": 0.11273,
-          "live_top20_prob": 0.09488,
-          "top20_shift_pp": -1.79,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 64,
-          "current_pos": "T38",
-          "current_score": 4,
-          "thru": 18
+          "thru": 8
         },
         {
           "dg_id": 11676,
           "name": "Finau, Tony",
           "pre_win_prob": 0.00477,
-          "live_win_prob": 0.00359,
-          "win_shift_pp": -0.12,
+          "live_win_prob": 0.00317,
+          "win_shift_pp": -0.16,
           "pre_top10_prob": 0.0795,
-          "live_top10_prob": 0.20121,
-          "top10_shift_pp": 12.17,
+          "live_top10_prob": 0.19157,
+          "top10_shift_pp": 11.21,
           "pre_top20_prob": 0.19204,
-          "live_top20_prob": 0.46948,
-          "top20_shift_pp": 27.74,
+          "live_top20_prob": 0.45872,
+          "top20_shift_pp": 26.67,
           "live_mc_prob": 1.0,
           "bbi_rank": 61,
-          "current_pos": "T12",
+          "current_pos": "T16",
           "current_score": 0,
-          "thru": 18
+          "thru": null
+        },
+        {
+          "dg_id": 21891,
+          "name": "Kitayama, Kurt",
+          "pre_win_prob": 0.01097,
+          "live_win_prob": 0.00946,
+          "win_shift_pp": -0.15,
+          "pre_top10_prob": 0.1391,
+          "live_top10_prob": 0.30395,
+          "top10_shift_pp": 16.48,
+          "pre_top20_prob": 0.28683,
+          "live_top20_prob": 0.60606,
+          "top20_shift_pp": 31.92,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 24,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": 1
+        },
+        {
+          "dg_id": 22833,
+          "name": "Echavarria, Nico",
+          "pre_win_prob": 0.00155,
+          "live_win_prob": 0.0,
+          "win_shift_pp": -0.15,
+          "pre_top10_prob": 0.03888,
+          "live_top10_prob": 0.00656,
+          "top10_shift_pp": -3.23,
+          "pre_top20_prob": 0.11273,
+          "live_top20_prob": 0.06035,
+          "top20_shift_pp": -5.24,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 64,
+          "current_pos": "T44",
+          "current_score": 5,
+          "thru": 12
+        },
+        {
+          "dg_id": 17780,
+          "name": "Pendrith, Taylor",
+          "pre_win_prob": 0.00382,
+          "live_win_prob": 0.0025,
+          "win_shift_pp": -0.13,
+          "pre_top10_prob": 0.07111,
+          "live_top10_prob": 0.16529,
+          "top10_shift_pp": 9.42,
+          "pre_top20_prob": 0.17973,
+          "live_top20_prob": 0.42373,
+          "top20_shift_pp": 24.4,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 57,
+          "current_pos": "T16",
+          "current_score": 0,
+          "thru": null
         },
         {
           "dg_id": 8820,
           "name": "Snedeker, Brandt",
           "pre_win_prob": 0.00123,
-          "live_win_prob": 1e-05,
+          "live_win_prob": 0.0,
           "win_shift_pp": -0.12,
           "pre_top10_prob": 0.03892,
-          "live_top10_prob": 0.01485,
-          "top10_shift_pp": -2.41,
+          "live_top10_prob": 0.01448,
+          "top10_shift_pp": -2.44,
           "pre_top20_prob": 0.11724,
-          "live_top20_prob": 0.08764,
-          "top20_shift_pp": -2.96,
+          "live_top20_prob": 0.10582,
+          "top20_shift_pp": -1.14,
           "live_mc_prob": 1.0,
           "bbi_rank": 65,
           "current_pos": "T38",
           "current_score": 4,
-          "thru": 18
+          "thru": 10
         },
         {
           "dg_id": 11276,
@@ -1542,9 +1524,9 @@
           "top20_shift_pp": -9.42,
           "live_mc_prob": 0.0,
           "bbi_rank": 68,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 16333,
@@ -1560,63 +1542,45 @@
           "top20_shift_pp": -10.62,
           "live_mc_prob": 0.0,
           "bbi_rank": 67,
-          "current_pos": "T63",
+          "current_pos": "CUT",
           "current_score": 8,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 6169,
           "name": "Kuchar, Matt",
           "pre_win_prob": 0.00122,
-          "live_win_prob": 0.00018,
+          "live_win_prob": 0.00017,
           "win_shift_pp": -0.1,
           "pre_top10_prob": 0.03878,
-          "live_top10_prob": 0.05066,
-          "top10_shift_pp": 1.19,
+          "live_top10_prob": 0.08183,
+          "top10_shift_pp": 4.31,
           "pre_top20_prob": 0.11823,
-          "live_top20_prob": 0.21053,
-          "top20_shift_pp": 9.23,
+          "live_top20_prob": 0.31348,
+          "top20_shift_pp": 19.52,
           "live_mc_prob": 1.0,
           "bbi_rank": 66,
-          "current_pos": "T28",
-          "current_score": 2,
-          "thru": 18
+          "current_pos": "T24",
+          "current_score": 1,
+          "thru": 6
         },
         {
           "dg_id": 15575,
           "name": "Hoge, Tom",
           "pre_win_prob": 0.00098,
-          "live_win_prob": 1e-05,
+          "live_win_prob": 0.0,
           "win_shift_pp": -0.1,
           "pre_top10_prob": 0.03034,
-          "live_top10_prob": 0.00727,
-          "top10_shift_pp": -2.31,
+          "live_top10_prob": 0.0,
+          "top10_shift_pp": -3.03,
           "pre_top20_prob": 0.09215,
-          "live_top20_prob": 0.05216,
-          "top20_shift_pp": -4.0,
+          "live_top20_prob": 0.00088,
+          "top20_shift_pp": -9.13,
           "live_mc_prob": 1.0,
           "bbi_rank": 70,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
-        },
-        {
-          "dg_id": 18554,
-          "name": "Rai, Aaron",
-          "pre_win_prob": 0.00957,
-          "live_win_prob": 0.0088,
-          "win_shift_pp": -0.08,
-          "pre_top10_prob": 0.13466,
-          "live_top10_prob": 0.34483,
-          "top10_shift_pp": 21.02,
-          "pre_top20_prob": 0.29145,
-          "live_top20_prob": 0.65359,
-          "top20_shift_pp": 36.21,
-          "live_mc_prob": 1.0,
-          "bbi_rank": 31,
-          "current_pos": "T9",
-          "current_score": -1,
-          "thru": 18
+          "current_pos": "T52",
+          "current_score": 9,
+          "thru": 14
         },
         {
           "dg_id": 13508,
@@ -1632,9 +1596,45 @@
           "top20_shift_pp": -7.8,
           "live_mc_prob": 0.0,
           "bbi_rank": 71,
-          "current_pos": "70",
+          "current_pos": "CUT",
           "current_score": 12,
-          "thru": 18
+          "thru": null
+        },
+        {
+          "dg_id": 10419,
+          "name": "Noren, Alex",
+          "pre_win_prob": 0.01023,
+          "live_win_prob": 0.00949,
+          "win_shift_pp": -0.07,
+          "pre_top10_prob": 0.14283,
+          "live_top10_prob": 0.35211,
+          "top10_shift_pp": 20.93,
+          "pre_top20_prob": 0.30624,
+          "live_top20_prob": 0.66667,
+          "top20_shift_pp": 36.04,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 20,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": 2
+        },
+        {
+          "dg_id": 18554,
+          "name": "Rai, Aaron",
+          "pre_win_prob": 0.00957,
+          "live_win_prob": 0.00889,
+          "win_shift_pp": -0.07,
+          "pre_top10_prob": 0.13466,
+          "live_top10_prob": 0.3367,
+          "top10_shift_pp": 20.2,
+          "pre_top20_prob": 0.29145,
+          "live_top20_prob": 0.64516,
+          "top20_shift_pp": 35.37,
+          "live_mc_prob": 1.0,
+          "bbi_rank": 31,
+          "current_pos": "T9",
+          "current_score": -1,
+          "thru": null
         },
         {
           "dg_id": 7399,
@@ -1643,34 +1643,34 @@
           "live_win_prob": 0.0,
           "win_shift_pp": -0.07,
           "pre_top10_prob": 0.02719,
-          "live_top10_prob": 0.00753,
-          "top10_shift_pp": -1.97,
+          "live_top10_prob": 0.00924,
+          "top10_shift_pp": -1.79,
           "pre_top20_prob": 0.0867,
-          "live_top20_prob": 0.05269,
-          "top20_shift_pp": -3.4,
+          "live_top20_prob": 0.09091,
+          "top20_shift_pp": 0.42,
           "live_mc_prob": 1.0,
           "bbi_rank": 69,
-          "current_pos": "T47",
-          "current_score": 5,
-          "thru": 18
+          "current_pos": "T38",
+          "current_score": 4,
+          "thru": 14
         },
         {
-          "dg_id": 25362,
-          "name": "Fitzpatrick, Alex",
-          "pre_win_prob": 0.00558,
-          "live_win_prob": 0.00584,
-          "win_shift_pp": 0.03,
-          "pre_top10_prob": 0.08855,
-          "live_top10_prob": 0.27397,
-          "top10_shift_pp": 18.54,
-          "pre_top20_prob": 0.21333,
-          "live_top20_prob": 0.56818,
-          "top20_shift_pp": 35.49,
+          "dg_id": 13900,
+          "name": "Lowry, Shane",
+          "pre_win_prob": 0.00788,
+          "live_win_prob": 0.00835,
+          "win_shift_pp": 0.05,
+          "pre_top10_prob": 0.12095,
+          "live_top10_prob": 0.3003,
+          "top10_shift_pp": 17.94,
+          "pre_top20_prob": 0.27114,
+          "live_top20_prob": 0.60976,
+          "top20_shift_pp": 33.86,
           "live_mc_prob": 1.0,
-          "bbi_rank": 47,
+          "bbi_rank": 28,
           "current_pos": "T9",
           "current_score": -1,
-          "thru": 18
+          "thru": null
         },
         {
           "dg_id": 18628,
@@ -1686,27 +1686,27 @@
           "top20_shift_pp": -3.66,
           "live_mc_prob": 0.0,
           "bbi_rank": 72,
-          "current_pos": "T54",
+          "current_pos": "CUT",
           "current_score": 6,
-          "thru": 18
+          "thru": null
         },
         {
-          "dg_id": 13900,
-          "name": "Lowry, Shane",
-          "pre_win_prob": 0.00788,
-          "live_win_prob": 0.00795,
-          "win_shift_pp": 0.01,
-          "pre_top10_prob": 0.12095,
-          "live_top10_prob": 0.31348,
-          "top10_shift_pp": 19.25,
-          "pre_top20_prob": 0.27114,
-          "live_top20_prob": 0.6135,
-          "top20_shift_pp": 34.24,
+          "dg_id": 25362,
+          "name": "Fitzpatrick, Alex",
+          "pre_win_prob": 0.00558,
+          "live_win_prob": 0.00546,
+          "win_shift_pp": -0.01,
+          "pre_top10_prob": 0.08855,
+          "live_top10_prob": 0.26042,
+          "top10_shift_pp": 17.19,
+          "pre_top20_prob": 0.21333,
+          "live_top20_prob": 0.5618,
+          "top20_shift_pp": 34.85,
           "live_mc_prob": 1.0,
-          "bbi_rank": 28,
+          "bbi_rank": 47,
           "current_pos": "T9",
           "current_score": -1,
-          "thru": 18
+          "thru": null
         }
       ]
     },
@@ -1714,38 +1714,38 @@
       "field_sg_stats": {
         "sg_putt": {
           "mean": -0.0,
-          "std": 2.297,
-          "top10_avg": 3.633,
-          "spread": 11.84
+          "std": 2.542,
+          "top10_avg": 4.093,
+          "spread": 11.94
         },
         "sg_arg": {
-          "mean": -0.0,
-          "std": 1.887,
-          "top10_avg": 2.747,
-          "spread": 8.01
+          "mean": 0.001,
+          "std": 1.964,
+          "top10_avg": 2.884,
+          "spread": 8.09
         },
         "sg_app": {
-          "mean": -0.0,
-          "std": 2.867,
-          "top10_avg": 4.753,
+          "mean": 0.0,
+          "std": 2.931,
+          "top10_avg": 4.865,
           "spread": 17.02
         },
         "sg_ott": {
           "mean": -0.0,
-          "std": 1.782,
-          "top10_avg": 2.338,
-          "spread": 8.93
+          "std": 1.928,
+          "top10_avg": 2.552,
+          "spread": 10.34
         },
         "sg_t2g": {
           "mean": 0.001,
-          "std": 3.944,
-          "top10_avg": 6.017,
+          "std": 4.115,
+          "top10_avg": 6.174,
           "spread": 20.01
         },
         "sg_total": {
-          "mean": -0.0,
-          "std": 4.52,
-          "top10_avg": 6.96,
+          "mean": -0.001,
+          "std": 4.728,
+          "top10_avg": 6.989,
           "spread": 26.0
         }
       },
@@ -1759,141 +1759,29 @@
       "separation_analysis": {
         "sg_putt": {
           "expected_importance": 1.15,
-          "actual_spread": 11.84,
-          "top10_avg": 3.633
+          "actual_spread": 11.94,
+          "top10_avg": 4.093
         },
         "sg_arg": {
           "expected_importance": 1.1,
-          "actual_spread": 8.01,
-          "top10_avg": 2.747
+          "actual_spread": 8.09,
+          "top10_avg": 2.884
         },
         "sg_app": {
           "expected_importance": 1.2,
           "actual_spread": 17.02,
-          "top10_avg": 4.753
+          "top10_avg": 4.865
         },
         "sg_ott": {
           "expected_importance": 0.95,
-          "actual_spread": 8.93,
-          "top10_avg": 2.338
+          "actual_spread": 10.34,
+          "top10_avg": 2.552
         }
       }
     },
     "lineup_health": {
       "n_lineups": 10,
       "lineups": [
-        {
-          "label": "?",
-          "n_players": 6,
-          "n_wd": 0,
-          "wd_names": [],
-          "n_alive": 6,
-          "alive_names": [
-            "Scheffler, Scottie",
-            "Henley, Russell",
-            "Spaun, J.J.",
-            "Noren, Alex",
-            "Glover, Lucas",
-            "Vegas, Jhonattan"
-          ],
-          "n_missed_cut": 0,
-          "mc_names": [],
-          "total_live_score": 0,
-          "player_statuses": [
-            {
-              "name": "Scheffler, Scottie",
-              "dg_id": 18417,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Henley, Russell",
-              "dg_id": 14578,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Spaun, J.J.",
-              "dg_id": 17536,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Noren, Alex",
-              "dg_id": 10419,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Glover, Lucas",
-              "dg_id": 7399,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Vegas, Jhonattan",
-              "dg_id": 13508,
-              "status": "active",
-              "live_score": 0
-            }
-          ]
-        },
-        {
-          "label": "?",
-          "n_players": 6,
-          "n_wd": 0,
-          "wd_names": [],
-          "n_alive": 6,
-          "alive_names": [
-            "Scheffler, Scottie",
-            "Aberg, Ludvig",
-            "Spaun, J.J.",
-            "McCarty, Matt",
-            "Glover, Lucas",
-            "Vegas, Jhonattan"
-          ],
-          "n_missed_cut": 0,
-          "mc_names": [],
-          "total_live_score": 0,
-          "player_statuses": [
-            {
-              "name": "Scheffler, Scottie",
-              "dg_id": 18417,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Aberg, Ludvig",
-              "dg_id": 23950,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Spaun, J.J.",
-              "dg_id": 17536,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "McCarty, Matt",
-              "dg_id": 28635,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Glover, Lucas",
-              "dg_id": 7399,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Vegas, Jhonattan",
-              "dg_id": 13508,
-              "status": "active",
-              "live_score": 0
-            }
-          ]
-        },
         {
           "label": "?",
           "n_players": 6,
@@ -2057,62 +1945,6 @@
             {
               "name": "Glover, Lucas",
               "dg_id": 7399,
-              "status": "active",
-              "live_score": 0
-            }
-          ]
-        },
-        {
-          "label": "?",
-          "n_players": 6,
-          "n_wd": 0,
-          "wd_names": [],
-          "n_alive": 6,
-          "alive_names": [
-            "Scheffler, Scottie",
-            "Aberg, Ludvig",
-            "Thomas, Justin",
-            "Glover, Lucas",
-            "Vegas, Jhonattan",
-            "Campbell, Brian"
-          ],
-          "n_missed_cut": 0,
-          "mc_names": [],
-          "total_live_score": 0,
-          "player_statuses": [
-            {
-              "name": "Scheffler, Scottie",
-              "dg_id": 18417,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Aberg, Ludvig",
-              "dg_id": 23950,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Thomas, Justin",
-              "dg_id": 14139,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Glover, Lucas",
-              "dg_id": 7399,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Vegas, Jhonattan",
-              "dg_id": 13508,
-              "status": "active",
-              "live_score": 0
-            },
-            {
-              "name": "Campbell, Brian",
-              "dg_id": 18628,
               "status": "active",
               "live_score": 0
             }
@@ -2291,17 +2123,75 @@
           "n_players": 6,
           "n_wd": 0,
           "wd_names": [],
-          "n_alive": 6,
+          "n_alive": 5,
+          "alive_names": [
+            "Scheffler, Scottie",
+            "Henley, Russell",
+            "Spaun, J.J.",
+            "Noren, Alex",
+            "Glover, Lucas"
+          ],
+          "n_missed_cut": 1,
+          "mc_names": [
+            "Vegas, Jhonattan"
+          ],
+          "total_live_score": 0,
+          "player_statuses": [
+            {
+              "name": "Scheffler, Scottie",
+              "dg_id": 18417,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Henley, Russell",
+              "dg_id": 14578,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Spaun, J.J.",
+              "dg_id": 17536,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Noren, Alex",
+              "dg_id": 10419,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Glover, Lucas",
+              "dg_id": 7399,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Vegas, Jhonattan",
+              "dg_id": 13508,
+              "status": "missed_cut",
+              "live_score": 0
+            }
+          ]
+        },
+        {
+          "label": "?",
+          "n_players": 6,
+          "n_wd": 0,
+          "wd_names": [],
+          "n_alive": 5,
           "alive_names": [
             "Scheffler, Scottie",
             "Gerard, Ryan",
             "Reitan, Kristoffer",
             "Taylor, Nick",
-            "Cauley, Bud",
+            "Cauley, Bud"
+          ],
+          "n_missed_cut": 1,
+          "mc_names": [
             "McCarty, Matt"
           ],
-          "n_missed_cut": 0,
-          "mc_names": [],
           "total_live_score": 0,
           "player_statuses": [
             {
@@ -2337,7 +2227,121 @@
             {
               "name": "McCarty, Matt",
               "dg_id": 28635,
+              "status": "missed_cut",
+              "live_score": 0
+            }
+          ]
+        },
+        {
+          "label": "?",
+          "n_players": 6,
+          "n_wd": 0,
+          "wd_names": [],
+          "n_alive": 4,
+          "alive_names": [
+            "Scheffler, Scottie",
+            "Aberg, Ludvig",
+            "Spaun, J.J.",
+            "Glover, Lucas"
+          ],
+          "n_missed_cut": 2,
+          "mc_names": [
+            "McCarty, Matt",
+            "Vegas, Jhonattan"
+          ],
+          "total_live_score": 0,
+          "player_statuses": [
+            {
+              "name": "Scheffler, Scottie",
+              "dg_id": 18417,
               "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Aberg, Ludvig",
+              "dg_id": 23950,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Spaun, J.J.",
+              "dg_id": 17536,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "McCarty, Matt",
+              "dg_id": 28635,
+              "status": "missed_cut",
+              "live_score": 0
+            },
+            {
+              "name": "Glover, Lucas",
+              "dg_id": 7399,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Vegas, Jhonattan",
+              "dg_id": 13508,
+              "status": "missed_cut",
+              "live_score": 0
+            }
+          ]
+        },
+        {
+          "label": "?",
+          "n_players": 6,
+          "n_wd": 0,
+          "wd_names": [],
+          "n_alive": 4,
+          "alive_names": [
+            "Scheffler, Scottie",
+            "Aberg, Ludvig",
+            "Thomas, Justin",
+            "Glover, Lucas"
+          ],
+          "n_missed_cut": 2,
+          "mc_names": [
+            "Vegas, Jhonattan",
+            "Campbell, Brian"
+          ],
+          "total_live_score": 0,
+          "player_statuses": [
+            {
+              "name": "Scheffler, Scottie",
+              "dg_id": 18417,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Aberg, Ludvig",
+              "dg_id": 23950,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Thomas, Justin",
+              "dg_id": 14139,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Glover, Lucas",
+              "dg_id": 7399,
+              "status": "active",
+              "live_score": 0
+            },
+            {
+              "name": "Vegas, Jhonattan",
+              "dg_id": 13508,
+              "status": "missed_cut",
+              "live_score": 0
+            },
+            {
+              "name": "Campbell, Brian",
+              "dg_id": 18628,
+              "status": "missed_cut",
               "live_score": 0
             }
           ]
@@ -2351,11 +2355,11 @@
         "n_alive": 6,
         "alive_names": [
           "Scheffler, Scottie",
-          "Henley, Russell",
           "Spaun, J.J.",
           "Noren, Alex",
-          "Glover, Lucas",
-          "Vegas, Jhonattan"
+          "Gerard, Ryan",
+          "Taylor, Nick",
+          "Cauley, Bud"
         ],
         "n_missed_cut": 0,
         "mc_names": [],
@@ -2364,12 +2368,6 @@
           {
             "name": "Scheffler, Scottie",
             "dg_id": 18417,
-            "status": "active",
-            "live_score": 0
-          },
-          {
-            "name": "Henley, Russell",
-            "dg_id": 14578,
             "status": "active",
             "live_score": 0
           },
@@ -2386,14 +2384,20 @@
             "live_score": 0
           },
           {
-            "name": "Glover, Lucas",
-            "dg_id": 7399,
+            "name": "Gerard, Ryan",
+            "dg_id": 29767,
             "status": "active",
             "live_score": 0
           },
           {
-            "name": "Vegas, Jhonattan",
-            "dg_id": 13508,
+            "name": "Taylor, Nick",
+            "dg_id": 13126,
+            "status": "active",
+            "live_score": 0
+          },
+          {
+            "name": "Cauley, Bud",
+            "dg_id": 14502,
             "status": "active",
             "live_score": 0
           }
@@ -2402,13 +2406,13 @@
     },
     "pool_pivots": {
       "n_surging": 5,
-      "n_fading": 20,
+      "n_fading": 19,
       "top_surgers": [
         {
           "name": "Poston, J.T.",
           "dg_id": 21554,
           "bbi_rank": 51,
-          "win_shift_pp": 30.89,
+          "win_shift_pp": 30.5,
           "top10_shift_pp": 81.89,
           "current_pos": "1",
           "in_pool": false
@@ -2417,8 +2421,8 @@
           "name": "Gerard, Ryan",
           "dg_id": 29767,
           "bbi_rank": 30,
-          "win_shift_pp": 22.8,
-          "top10_shift_pp": 75.09,
+          "win_shift_pp": 22.47,
+          "top10_shift_pp": 74.31,
           "current_pos": "2",
           "in_pool": false
         },
@@ -2426,7 +2430,7 @@
           "name": "Burns, Sam",
           "dg_id": 19483,
           "bbi_rank": 22,
-          "win_shift_pp": 13.69,
+          "win_shift_pp": 13.6,
           "top10_shift_pp": 66.24,
           "current_pos": "3",
           "in_pool": false
@@ -2435,8 +2439,8 @@
           "name": "Fleetwood, Tommy",
           "dg_id": 12294,
           "bbi_rank": 9,
-          "win_shift_pp": 5.79,
-          "top10_shift_pp": 48.96,
+          "win_shift_pp": 5.7,
+          "top10_shift_pp": 48.45,
           "current_pos": "4",
           "in_pool": false
         },
@@ -2444,8 +2448,8 @@
           "name": "Cole, Eric",
           "dg_id": 21756,
           "bbi_rank": 41,
-          "win_shift_pp": 1.86,
-          "top10_shift_pp": 39.39,
+          "win_shift_pp": 1.83,
+          "top10_shift_pp": 38.67,
           "current_pos": "5",
           "in_pool": false
         }
@@ -2455,39 +2459,23 @@
           "name": "Scheffler, Scottie",
           "dg_id": 18417,
           "bbi_rank": 1,
-          "win_shift_pp": -15.87,
-          "current_pos": "T19",
+          "win_shift_pp": -17.13,
+          "current_pos": "T29",
           "in_pool": false
         },
         {
           "name": "Aberg, Ludvig",
           "dg_id": 23950,
           "bbi_rank": 3,
-          "win_shift_pp": -5.55,
-          "current_pos": "T47",
-          "in_pool": false
-        },
-        {
-          "name": "McIlroy, Rory",
-          "dg_id": 10091,
-          "bbi_rank": 2,
-          "win_shift_pp": -4.36,
-          "current_pos": "T19",
-          "in_pool": false
-        },
-        {
-          "name": "Kim, Si Woo",
-          "dg_id": 14609,
-          "bbi_rank": 7,
-          "win_shift_pp": -4.14,
-          "current_pos": "T38",
+          "win_shift_pp": -5.58,
+          "current_pos": "T32",
           "in_pool": false
         },
         {
           "name": "Henley, Russell",
           "dg_id": 14578,
           "bbi_rank": 6,
-          "win_shift_pp": -4.11,
+          "win_shift_pp": -4.19,
           "current_pos": "T38",
           "in_pool": false
         },
@@ -2495,24 +2483,40 @@
           "name": "Young, Cameron",
           "dg_id": 26651,
           "bbi_rank": 4,
-          "win_shift_pp": -3.95,
-          "current_pos": "T33",
+          "win_shift_pp": -4.14,
+          "current_pos": "T44",
+          "in_pool": false
+        },
+        {
+          "name": "Kim, Si Woo",
+          "dg_id": 14609,
+          "bbi_rank": 7,
+          "win_shift_pp": -3.59,
+          "current_pos": "T16",
+          "in_pool": false
+        },
+        {
+          "name": "McIlroy, Rory",
+          "dg_id": 10091,
+          "bbi_rank": 2,
+          "win_shift_pp": -3.55,
+          "current_pos": "T9",
           "in_pool": false
         },
         {
           "name": "Fitzpatrick, Matt",
           "dg_id": 17646,
           "bbi_rank": 8,
-          "win_shift_pp": -2.92,
-          "current_pos": "T28",
+          "win_shift_pp": -2.93,
+          "current_pos": "T24",
           "in_pool": false
         },
         {
           "name": "Thomas, Justin",
           "dg_id": 14139,
           "bbi_rank": 15,
-          "win_shift_pp": -2.17,
-          "current_pos": "T47",
+          "win_shift_pp": -2.2,
+          "current_pos": "T38",
           "in_pool": false
         },
         {
@@ -2520,7 +2524,7 @@
           "dg_id": 24968,
           "bbi_rank": 12,
           "win_shift_pp": -1.91,
-          "current_pos": "T61",
+          "current_pos": "CUT",
           "in_pool": false
         },
         {
@@ -2528,7 +2532,7 @@
           "dg_id": 18474,
           "bbi_rank": 14,
           "win_shift_pp": -1.69,
-          "current_pos": "71",
+          "current_pos": "CUT",
           "in_pool": false
         }
       ]
@@ -3701,13 +3705,594 @@
                 }
               ],
               "round_num": 2
+            },
+            {
+              "holes": [
+                {
+                  "afternoon_wave": {
+                    "avg_score": 3.6,
+                    "birdies": 6,
+                    "bogeys": 2,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 2,
+                    "players_thru": 10
+                  },
+                  "hole": 1,
+                  "morning_wave": {
+                    "avg_score": 4.074,
+                    "birdies": 3,
+                    "bogeys": 3,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 20,
+                    "players_thru": 27
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 3.946,
+                    "birdies": 9,
+                    "bogeys": 5,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 22,
+                    "players_thru": 37
+                  },
+                  "yardage": 490
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": 4.25,
+                    "birdies": 1,
+                    "bogeys": 0,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 6,
+                    "players_thru": 8
+                  },
+                  "hole": 2,
+                  "morning_wave": {
+                    "avg_score": 4.111,
+                    "birdies": 3,
+                    "bogeys": 3,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 20,
+                    "players_thru": 27
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.143,
+                    "birdies": 4,
+                    "bogeys": 3,
+                    "doubles_or_worse": 2,
+                    "eagles_or_better": 0,
+                    "pars": 26,
+                    "players_thru": 35
+                  },
+                  "yardage": 459
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": 3.75,
+                    "birdies": 1,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 3,
+                    "players_thru": 4
+                  },
+                  "hole": 3,
+                  "morning_wave": {
+                    "avg_score": 4.148,
+                    "birdies": 0,
+                    "bogeys": 2,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 24,
+                    "players_thru": 27
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.097,
+                    "birdies": 1,
+                    "bogeys": 2,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 27,
+                    "players_thru": 31
+                  },
+                  "yardage": 392
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": 3.5,
+                    "birdies": 0,
+                    "bogeys": 2,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 2,
+                    "players_thru": 4
+                  },
+                  "hole": 4,
+                  "morning_wave": {
+                    "avg_score": 2.852,
+                    "birdies": 9,
+                    "bogeys": 3,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 14,
+                    "players_thru": 27
+                  },
+                  "par": 3,
+                  "total": {
+                    "avg_score": 2.935,
+                    "birdies": 9,
+                    "bogeys": 5,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 16,
+                    "players_thru": 31
+                  },
+                  "yardage": 210
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 5,
+                  "morning_wave": {
+                    "avg_score": 4.741,
+                    "birdies": 9,
+                    "bogeys": 2,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 16,
+                    "players_thru": 27
+                  },
+                  "par": 5,
+                  "total": {
+                    "avg_score": 4.741,
+                    "birdies": 9,
+                    "bogeys": 2,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 16,
+                    "players_thru": 27
+                  },
+                  "yardage": 547
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 6,
+                  "morning_wave": {
+                    "avg_score": 4.2,
+                    "birdies": 1,
+                    "bogeys": 6,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 18,
+                    "players_thru": 25
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.2,
+                    "birdies": 1,
+                    "bogeys": 6,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 18,
+                    "players_thru": 25
+                  },
+                  "yardage": 455
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 7,
+                  "morning_wave": {
+                    "avg_score": 4.667,
+                    "birdies": 8,
+                    "bogeys": 1,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 1,
+                    "pars": 10,
+                    "players_thru": 21
+                  },
+                  "par": 5,
+                  "total": {
+                    "avg_score": 4.667,
+                    "birdies": 8,
+                    "bogeys": 1,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 1,
+                    "pars": 10,
+                    "players_thru": 21
+                  },
+                  "yardage": 582
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 8,
+                  "morning_wave": {
+                    "avg_score": 3.3,
+                    "birdies": 3,
+                    "bogeys": 7,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 9,
+                    "players_thru": 20
+                  },
+                  "par": 3,
+                  "total": {
+                    "avg_score": 3.3,
+                    "birdies": 3,
+                    "bogeys": 7,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 9,
+                    "players_thru": 20
+                  },
+                  "yardage": 200
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 9,
+                  "morning_wave": {
+                    "avg_score": 4.235,
+                    "birdies": 3,
+                    "bogeys": 5,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 8,
+                    "players_thru": 17
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.235,
+                    "birdies": 3,
+                    "bogeys": 5,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 8,
+                    "players_thru": 17
+                  },
+                  "yardage": 417
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 10,
+                  "morning_wave": {
+                    "avg_score": 4.333,
+                    "birdies": 2,
+                    "bogeys": 5,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 7,
+                    "players_thru": 15
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.333,
+                    "birdies": 2,
+                    "bogeys": 5,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 7,
+                    "players_thru": 15
+                  },
+                  "yardage": 472
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 11,
+                  "morning_wave": {
+                    "avg_score": 5.0,
+                    "birdies": 4,
+                    "bogeys": 1,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 8,
+                    "players_thru": 14
+                  },
+                  "par": 5,
+                  "total": {
+                    "avg_score": 5.0,
+                    "birdies": 4,
+                    "bogeys": 1,
+                    "doubles_or_worse": 1,
+                    "eagles_or_better": 0,
+                    "pars": 8,
+                    "players_thru": 14
+                  },
+                  "yardage": 588
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 12,
+                  "morning_wave": {
+                    "avg_score": 3.0,
+                    "birdies": 1,
+                    "bogeys": 1,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 9,
+                    "players_thru": 11
+                  },
+                  "par": 3,
+                  "total": {
+                    "avg_score": 3.0,
+                    "birdies": 1,
+                    "bogeys": 1,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 9,
+                    "players_thru": 11
+                  },
+                  "yardage": 180
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 13,
+                  "morning_wave": {
+                    "avg_score": 4.0,
+                    "birdies": 2,
+                    "bogeys": 2,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 3,
+                    "players_thru": 7
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.0,
+                    "birdies": 2,
+                    "bogeys": 2,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 3,
+                    "players_thru": 7
+                  },
+                  "yardage": 455
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 14,
+                  "morning_wave": {
+                    "avg_score": 4.0,
+                    "birdies": 1,
+                    "bogeys": 1,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 5,
+                    "players_thru": 7
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.0,
+                    "birdies": 1,
+                    "bogeys": 1,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 5,
+                    "players_thru": 7
+                  },
+                  "yardage": 360
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 15,
+                  "morning_wave": {
+                    "avg_score": 4.333,
+                    "birdies": 2,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 1,
+                    "players_thru": 3
+                  },
+                  "par": 5,
+                  "total": {
+                    "avg_score": 4.333,
+                    "birdies": 2,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 1,
+                    "players_thru": 3
+                  },
+                  "yardage": 561
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 16,
+                  "morning_wave": {
+                    "avg_score": 3.0,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 1,
+                    "players_thru": 1
+                  },
+                  "par": 3,
+                  "total": {
+                    "avg_score": 3.0,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 1,
+                    "players_thru": 1
+                  },
+                  "yardage": 218
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 17,
+                  "morning_wave": {
+                    "avg_score": 4.0,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 1,
+                    "players_thru": 1
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": 4.0,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 1,
+                    "players_thru": 1
+                  },
+                  "yardage": 503
+                },
+                {
+                  "afternoon_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "hole": 18,
+                  "morning_wave": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "par": 4,
+                  "total": {
+                    "avg_score": null,
+                    "birdies": 0,
+                    "bogeys": 0,
+                    "doubles_or_worse": 0,
+                    "eagles_or_better": 0,
+                    "pars": 0,
+                    "players_thru": 0
+                  },
+                  "yardage": 480
+                }
+              ],
+              "round_num": 3
             }
           ]
         }
       ],
-      "current_round": 2,
+      "current_round": 3,
       "event_name": "the Memorial Tournament presented by Workday",
-      "last_update": "2026-06-05 7:01 PM"
+      "last_update": "2026-06-06 2:05 PM"
     }
   },
   "errors": []
