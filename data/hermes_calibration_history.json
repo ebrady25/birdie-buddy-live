@@ -47,51 +47,6 @@
       }
     },
     {
-      "event": "Memorial Tournament",
-      "event_id": 23,
-      "year": 2026,
-      "completed": "",
-      "scored_at_utc": "2026-06-08T15:08:43Z",
-      "n_compared": 72,
-      "summary": {
-        "mae": 4.47,
-        "bias": 2.36,
-        "rmse": 14.45,
-        "clean_mae": 2.19,
-        "clean_bias": 0.02,
-        "clean_rmse": 3.01,
-        "n_suspect_excluded": 2,
-        "suspect_threshold_pct": 50.0
-      },
-      "by_tier": {
-        "studs": {
-          "n": 4,
-          "mae": 6.64,
-          "bias": 6.64
-        },
-        "anchors": {
-          "n": 12,
-          "mae": 3.05,
-          "bias": 2.48
-        },
-        "mid-tier": {
-          "n": 15,
-          "mae": 1.89,
-          "bias": -0.94
-        },
-        "value": {
-          "n": 25,
-          "mae": 1.82,
-          "bias": -1.65
-        },
-        "punt": {
-          "n": 16,
-          "mae": 11.54,
-          "bias": 10.53
-        }
-      }
-    },
-    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -228,9 +183,9 @@
     }
   ],
   "season": {
-    "n_events": 5,
-    "mean_mae": 11.49,
-    "mean_bias": 9.73
+    "n_events": 4,
+    "mean_mae": 13.24,
+    "mean_bias": 11.57
   },
-  "last_updated": "2026-06-08T15:08:43Z"
+  "last_updated": "2026-05-25T13:36:42Z"
 }

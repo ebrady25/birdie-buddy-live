@@ -725,16 +725,16 @@
       "logged_utc": "2026-05-25T13:36:31Z"
     },
     {
-      "week": 18,
+      "week": 17,
       "year": 2026,
-      "event": "Memorial Tournament",
-      "event_id": 23,
-      "date": "2026-06-07",
-      "field_size": 72,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-31",
+      "field_size": 132,
       "baseline_variant_id": "v8.5",
       "scorecard": {
         "v8.5": {
-          "spearman": 0.4216,
+          "spearman": 0.4657,
           "brier_top_10": null,
           "brier_win": null,
           "brier_make_cut": null,
@@ -742,7 +742,27 @@
         }
       },
       "leader_this_week": "v8.5",
-      "logged_utc": "2026-06-08T14:24:51Z"
+      "logged_utc": "2026-06-08T13:52:33Z"
+    },
+    {
+      "week": 18,
+      "year": 2026,
+      "event": "the Memorial Tournament presented by Workday",
+      "event_id": 23,
+      "date": "2026-06-07",
+      "field_size": 72,
+      "baseline_variant_id": "v8.5",
+      "scorecard": {
+        "v8.5": {
+          "spearman": 0.3672,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        }
+      },
+      "leader_this_week": "v8.5",
+      "logged_utc": "2026-06-08T13:52:28Z"
     }
   ],
   "current_leader": "v8.5",
@@ -762,7 +782,7 @@
     "flagged_for": "MANUAL_REVIEW",
     "description": "Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events."
   },
-  "last_updated": "2026-06-08T14:24:51Z",
+  "last_updated": "2026-06-08T13:52:33Z",
   "numbering_scheme": "bbi_tracking_week",
   "numbering_notes": "Wk 1 = WM Phoenix Open 2026 (Feb 5-8, BBI tracking start). Cal-week entries before WM Phoenix were dropped 2026-04-28."
 }
