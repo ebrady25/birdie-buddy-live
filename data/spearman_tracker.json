@@ -1,7 +1,7 @@
 {
   "tracker_version": "3.0",
   "created": "2026-04-06",
-  "last_updated": "2026-06-08T13:55:00Z",
+  "last_updated": "2026-05-21T01:24:09.527060+00:00",
   "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
   "goal_framework": {
     "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -603,42 +603,6 @@
       "n_scored": 0,
       "logged_utc": "2026-05-25T14:17:10.456120+00:00",
       "notes": "Pipeline miss: Mnemosyne (2026-05-21) auto-detected CJ Cup Byron Nelson as 'upcoming' but set CURRENT_EVENT.json to Charles Schwab Challenge. Apollo/Phase1 never ran for event_id=19. Wyndham Clark won at -30 (field: 70 made cut from 147). Scheffler finished T3 (-25)."
-    },
-    {
-      "year": 2026,
-      "week": 17,
-      "event": "Charles Schwab Challenge",
-      "event_id": 21,
-      "completed": "2026-05-31",
-      "skipped": false,
-      "actual_winner": "Bradley, Keegan",
-      "actual_winner_score": -15,
-      "spearman_bbi": 0.4657,
-      "spearman_dg": null,
-      "diff_bbi_vs_dg": null,
-      "winner_bbi_rank": null,
-      "winner_dg_rank": null,
-      "n_scored": 132,
-      "logged_utc": "2026-06-08T13:55:00Z",
-      "notes": "Scored via postmortem_artifacts.py on catch-up run."
-    },
-    {
-      "year": 2026,
-      "week": 18,
-      "event": "the Memorial Tournament presented by Workday",
-      "event_id": 23,
-      "completed": "2026-06-07",
-      "skipped": false,
-      "actual_winner": "Poston, J.T.",
-      "actual_winner_score": -12,
-      "spearman_bbi": 0.3672,
-      "spearman_dg": null,
-      "diff_bbi_vs_dg": null,
-      "winner_bbi_rank": null,
-      "winner_dg_rank": null,
-      "n_scored": 72,
-      "logged_utc": "2026-06-08T13:55:00Z",
-      "notes": "Scored via postmortem_artifacts.py on catch-up run."
     }
   ],
   "summary": {

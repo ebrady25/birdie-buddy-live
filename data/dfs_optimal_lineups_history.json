@@ -55,7 +55,7 @@
             "name": "Woodland, Gary",
             "salary": 6800,
             "total_pts": 93.0,
-            "ownership": 0.049699999999999994,
+            "ownership": 0.0497,
             "in_our_pool": false
           }
         ]
@@ -64,6 +64,70 @@
       "our_best_id": "L1",
       "capture_rate_pct": 82.54,
       "n_optimal_in_our_pool": 1
+    },
+    {
+      "event": "Memorial Tournament",
+      "event_id": 23,
+      "year": 2026,
+      "completed": "",
+      "optimal": {
+        "total": 607.5,
+        "salary": 45600,
+        "players": [
+          {
+            "dg_id": 21554,
+            "name": "Poston, J.T.",
+            "salary": 6600,
+            "total_pts": 115.5,
+            "ownership": 0.032400000000000005,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 29767,
+            "name": "Gerard, Ryan",
+            "salary": 6900,
+            "total_pts": 110.0,
+            "ownership": 0.10460000000000001,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 23604,
+            "name": "Clark, Wyndham",
+            "salary": 7300,
+            "total_pts": 102.0,
+            "ownership": 0.08259999999999999,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 21407,
+            "name": "Reitan, Kristoffer",
+            "salary": 6900,
+            "total_pts": 96.5,
+            "ownership": 0.1066,
+            "in_our_pool": true
+          },
+          {
+            "dg_id": 12294,
+            "name": "Fleetwood, Tommy",
+            "salary": 9100,
+            "total_pts": 93.0,
+            "ownership": 0.12179999999999999,
+            "in_our_pool": false
+          },
+          {
+            "dg_id": 19483,
+            "name": "Burns, Sam",
+            "salary": 8800,
+            "total_pts": 90.5,
+            "ownership": 0.0546,
+            "in_our_pool": false
+          }
+        ]
+      },
+      "our_best_actual": 470.5,
+      "our_best_id": "C4",
+      "capture_rate_pct": 77.45,
+      "n_optimal_in_our_pool": 2
     },
     {
       "event": "PGA Championship",
@@ -79,7 +143,7 @@
             "name": "Rai, Aaron",
             "salary": 6700,
             "total_pts": 117.0,
-            "ownership": 0.026600000000000002,
+            "ownership": 0.0266,
             "in_our_pool": false
           },
           {
@@ -87,7 +151,7 @@
             "name": "Smalley, Alex",
             "salary": 6100,
             "total_pts": 96.5,
-            "ownership": 0.10529999999999999,
+            "ownership": 0.1053,
             "in_our_pool": false
           },
           {
@@ -103,7 +167,7 @@
             "name": "Aberg, Ludvig",
             "salary": 9800,
             "total_pts": 84.0,
-            "ownership": 0.23120000000000002,
+            "ownership": 0.2312,
             "in_our_pool": true
           },
           {
@@ -111,7 +175,7 @@
             "name": "Thomas, Justin",
             "salary": 9400,
             "total_pts": 84.0,
-            "ownership": 0.046799999999999994,
+            "ownership": 0.0468,
             "in_our_pool": false
           },
           {
@@ -119,7 +183,7 @@
             "name": "Kitayama, Kurt",
             "salary": 7300,
             "total_pts": 81.5,
-            "ownership": 0.09210000000000002,
+            "ownership": 0.0921,
             "in_our_pool": true
           }
         ]
@@ -175,7 +239,7 @@
             "name": "Fitzpatrick, Alex",
             "salary": 6800,
             "total_pts": 98.0,
-            "ownership": 0.10529999999999999,
+            "ownership": 0.1053,
             "in_our_pool": false
           },
           {
@@ -183,7 +247,7 @@
             "name": "Fleetwood, Tommy",
             "salary": 9800,
             "total_pts": 95.0,
-            "ownership": 0.09910000000000001,
+            "ownership": 0.0991,
             "in_our_pool": true
           }
         ]
@@ -207,7 +271,7 @@
             "name": "Young, Cameron",
             "salary": 10200,
             "total_pts": 124.0,
-            "ownership": 0.26789999999999997,
+            "ownership": 0.2679,
             "in_our_pool": true
           },
           {
@@ -239,7 +303,7 @@
             "name": "McCarty, Matt",
             "salary": 6800,
             "total_pts": 93.0,
-            "ownership": 0.059000000000000004,
+            "ownership": 0.059,
             "in_our_pool": true
           },
           {
@@ -258,5 +322,5 @@
       "n_optimal_in_our_pool": 3
     }
   ],
-  "last_updated": "2026-05-25T13:36:37Z"
+  "last_updated": "2026-06-08T14:44:25Z"
 }

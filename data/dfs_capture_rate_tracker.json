@@ -19,6 +19,23 @@
       "cash_rate_pct": 100.0
     },
     {
+      "event": "Memorial Tournament",
+      "event_id": 23,
+      "year": 2026,
+      "completed": "",
+      "our_best": 470.5,
+      "our_best_id": "C4",
+      "pool_hindsight": 513.0,
+      "field_optimal": 607.5,
+      "capture_rate_pct": 77.45,
+      "n_lineups": 10,
+      "n_cash": 4,
+      "n_top_1pct": 3,
+      "n_top_001pct": 0,
+      "cashed_total": 7,
+      "cash_rate_pct": 70.0
+    },
+    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -71,11 +88,11 @@
     }
   ],
   "season": {
-    "n_events": 4,
+    "n_events": 5,
     "mean_capture_rate_pct": 77.44,
-    "mean_cash_rate_pct": 77.5,
-    "total_cashed": 36,
-    "total_lineups": 45
+    "mean_cash_rate_pct": 76.0,
+    "total_cashed": 43,
+    "total_lineups": 55
   },
-  "last_updated": "2026-05-25T13:36:37Z"
+  "last_updated": "2026-06-08T14:44:25Z"
 }
