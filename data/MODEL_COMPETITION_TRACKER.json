@@ -252,6 +252,48 @@
       "promotion_candidate": null,
       "notes": "Pipeline miss \u2014 shadow model scoring skipped. Week 16 counts as 0 data point for promotion threshold.",
       "logged_utc": "2026-05-25T14:17:31.058999+00:00"
+    },
+    {
+      "week": 17,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-28",
+      "year": 2026,
+      "skipped": true,
+      "skip_reason": "no shadow models \u2014 Hephaestus not run for this event",
+      "variants": {},
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "Week 17 backfill. No shadow model scoring. BBI v8.5 Spearman=0.4076 (above 0.40 target). Henley BBI#4 wins.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 18,
+      "event": "the Memorial Tournament presented by Workday",
+      "event_id": 23,
+      "date": "2026-06-04",
+      "year": 2026,
+      "skipped": true,
+      "skip_reason": "no shadow models \u2014 Hephaestus not run for Memorial Tournament",
+      "variants": {},
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "No Hephaestus output for Memorial. BBI v8.5 Spearman=0.3876; beat DG (+0.033). Poston wins from BBI#51.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
     }
   ],
   "current_leader": "v8.6-dyn",
@@ -263,5 +305,5 @@
     "v8.7-cfgate": 0
   },
   "promotion_candidate": null,
-  "last_updated": "2026-05-21T01:21:31.297649+00:00"
+  "last_updated": "2026-06-08T13:17:13.398984+00:00"
 }

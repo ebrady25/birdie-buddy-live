@@ -1,63 +1,77 @@
 {
   "task": "mnemosyne-postmortem",
   "state": "done",
-  "timestamp_utc": "2026-06-01T13:14:55.803122+00:00",
-  "last_event": {
+  "timestamp_utc": "2026-06-08T13:00:00+00:00",
+  "argus_note": "argus_health.json stale (2026-04-27). Proceeded autonomously — same pattern as May 25 run.",
+  "week17_backfill": {
+    "event": "Charles Schwab Challenge",
     "event_id": 21,
-    "event_name": "Charles Schwab Challenge",
-    "event_slug": "Charles_Schwab_Challenge",
-    "week": 17,
-    "completed": "2026-05-31"
+    "spearman_bbi": 0.4076,
+    "winner": "Henley, Russell",
+    "winner_bbi_rank": 4,
+    "note": "Week 17 pipeline ran but postmortem was skipped in June 1 Mnemosyne run. Backfilled in this run."
+  },
+  "last_event": {
+    "event_name": "the Memorial Tournament presented by Workday",
+    "event_id": 23,
+    "week": 18,
+    "course": "Muirfield Village Golf Club",
+    "completed": "2026-06-07",
+    "winner": "Poston, J.T.",
+    "winner_score": -12,
+    "winner_bbi_rank": 51,
+    "pipeline_ran": true
   },
   "next_event": {
-    "event_id": 23,
-    "event_name": "the Memorial Tournament presented by Workday",
-    "event_slug": "Memorial_Tournament",
-    "week": 18,
-    "start_date": "2026-06-04",
-    "course": "Muirfield Village Golf Club"
+    "event_id": 32,
+    "event_name": "RBC Canadian Open",
+    "week": 19,
+    "course": "TPC Toronto at Osprey Valley (North Course)",
+    "start_date": "2026-06-11",
+    "is_major": false
   },
-  "spearman_bbi": 0.4054,
-  "brier_bbi_top10": 0.063,
-  "brier_bbi_win": 0.007,
-  "skill_top10_pct": 10.01,
-  "skill_win_pct": 6.38,
-  "winner": "Henley, Russell",
-  "winner_bbi_rank": 4,
-  "top10_hits": 3,
-  "top20_hits": 9,
-  "winning_factors": [
-    "ceiling",
-    "leverage",
-    "floor"
-  ],
-  "underperforming_factors": [
-    "dfsValue",
-    "contrarian",
-    "courseFit"
-  ],
-  "shadow_variants_scored": {
-    "status": "skipped",
-    "reason": "hephaestus_aborted_stale_input",
-    "hephaestus_checked": "2026-05-29T19:35:00Z",
-    "shadow_file_exists": false
-  },
+  "spearman_bbi": 0.3876,
+  "spearman_dg": 0.3546,
+  "beat_dg": true,
+  "brier_bbi_top10": 0.1368,
+  "brier_skill_top10_pct": -5.66,
+  "winning_factors": ["dfsValue", "form", "talent"],
+  "underperforming_factors": ["ceiling"],
+  "shadow_variants_scored": null,
+  "shadow_skip_reason": "no shadow_models_Memorial_Tournament.json — Hephaestus not run for this event",
   "current_competition_leader": "v8.6-dyn",
   "promotion_candidate": null,
-  "promotion_note": "v8.6-dyn leads with 1 consecutive week. Need 3 consecutive + 8 scored events. Current scored events: 3. No promotion candidate.",
   "overrides_reset": {
     "prior_event_id": 21,
-    "prior_event_name": "Charles Schwab Challenge",
-    "prior_count": 0,
-    "new_event_id": 23
+    "prior_count": 0
   },
-  "argus_note": "argus_health.json is legacy file from 2026-04-27 (Cadillac Championship). Argus not running recent weeks. Proceeded with postmortem based on pipeline output evidence.",
-  "coursefit_anomaly": "courseFit=0 for all players in Charles Schwab Challenge \u2014 course history tables were empty/rebuilding during Phase 1. Pipeline gap requiring investigation.",
-  "jobs_completed": [
-    "A_postmortem",
-    "B_calibration",
-    "C_shadow_skip",
-    "D_next_event"
+  "jobs_run": {
+    "job_a_postmortem": "done — week 17 backfilled + week 18 postmortem written",
+    "job_b_calibration": "done — calibration_week18.json written",
+    "job_c_shadow_variants": "skipped — no shadow models for Memorial Tournament",
+    "job_d_next_event": "done — RBC Canadian Open (week 19, id=32) → CURRENT_EVENT.json"
+  },
+  "files_written": [
+    "Outputs/postmortem_week17.md (backfill)",
+    "Outputs/postmortem_week18.md",
+    "Outputs/calibration_week18.json",
+    "Context/SPEARMAN_TRACKER.json (weeks 17+18 appended)",
+    "Context/CALIBRATION_TRACKER.json (weeks 17+18 appended)",
+    "Context/MODEL_COMPETITION_TRACKER.json (weeks 17+18 skip entries appended)",
+    "Context/CURRENT_EVENT.json (week 19 RBC Canadian Open)",
+    "Context/MANUAL_OVERRIDES.json (reset for event_id=32)"
   ],
-  "commit_hash": null
+  "alerts": [
+    "CRITICAL: Memorial Tournament (week 18) — all 72 players NO_HISTORY. Apollo Phase 1 course history lookup failed for event_id=23. Muirfield Village has 9+ years of DG data. Investigate before RBC Canadian Open pipeline runs to avoid repeat.",
+    "WARNING: Week 17 (Charles Schwab) postmortem was skipped by June 1 Mnemosyne run — postmortem_week17.md was never written despite pipeline completing. Confirm scheduled task is writing all output files reliably."
+  ],
+  "season_summary_through_week18": {
+    "events_scored": 10,
+    "season_avg_bbi_spearman": 0.3858,
+    "events_above_040": 4,
+    "last_5_avg_bbi_spearman": 0.3436,
+    "best_event": "Valero Texas Open (0.5736)"
+  },
+  "commit_hash": null,
+  "site_deploy_status": "skipped — GitHub push deferred (credentials not attempted in this run)"
 }

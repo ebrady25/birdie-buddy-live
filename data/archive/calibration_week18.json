@@ -1,0 +1,119 @@
+{
+  "event": "the Memorial Tournament presented by Workday",
+  "event_id": 23,
+  "week": 18,
+  "year": 2026,
+  "course": "Muirfield Village Golf Club",
+  "date": "2026-06-04",
+  "generated_utc": "2026-06-08T13:17:13.398984+00:00",
+  "markets": {
+    "top_10": {
+      "n": 72,
+      "brier": 0.1368,
+      "mean_pred": 0.1389,
+      "mean_actual": 0.1528,
+      "naive_brier": 0.1294,
+      "skill_pct": -5.66
+    },
+    "top_5": {
+      "n": 72,
+      "brier": 0.0696,
+      "mean_pred": 0.0694,
+      "mean_actual": 0.0694,
+      "naive_brier": 0.0646,
+      "skill_pct": -7.76
+    },
+    "top_20": {
+      "n": 72,
+      "brier": 0.184,
+      "mean_pred": 0.2778,
+      "mean_actual": 0.2917,
+      "naive_brier": 0.2066,
+      "skill_pct": 10.92
+    },
+    "win": {
+      "n": 72,
+      "brier": 0.0145,
+      "mean_pred": 0.0139,
+      "mean_actual": 0.0139,
+      "naive_brier": 0.0137,
+      "skill_pct": -5.61
+    },
+    "make_cut": {
+      "note": "not computed \u2014 key mismatch in prob_mc field"
+    }
+  },
+  "factor_attribution_top10": {
+    "talent": {
+      "topk_avg": 11.6727,
+      "field_avg": 10.6239,
+      "ratio": 1.099
+    },
+    "courseFit": {
+      "topk_avg": 0.0,
+      "field_avg": 0.0,
+      "ratio": null
+    },
+    "form": {
+      "topk_avg": 7.4791,
+      "field_avg": 6.3593,
+      "ratio": 1.176
+    },
+    "cutSafety": {
+      "topk_avg": 7.6991,
+      "field_avg": 7.0247,
+      "ratio": 1.096
+    },
+    "floor": {
+      "topk_avg": 1.7473,
+      "field_avg": 1.5925,
+      "ratio": 1.097
+    },
+    "ceiling": {
+      "topk_avg": 0.3409,
+      "field_avg": 0.3807,
+      "ratio": 0.895
+    },
+    "leverage": {
+      "topk_avg": 1.3373,
+      "field_avg": 1.3067,
+      "ratio": 1.023
+    },
+    "contrarian": {
+      "topk_avg": 4.0355,
+      "field_avg": 3.9904,
+      "ratio": 1.011
+    },
+    "dfsValue": {
+      "topk_avg": 1.3191,
+      "field_avg": 1.0704,
+      "ratio": 1.232
+    },
+    "strategic": {
+      "topk_avg": 0.0,
+      "field_avg": 0.0,
+      "ratio": null
+    }
+  },
+  "winning_factors": [
+    "dfsValue",
+    "form",
+    "talent"
+  ],
+  "underperforming_factors": [
+    "ceiling"
+  ],
+  "spearman_bbi": 0.3876,
+  "spearman_dg": 0.3546,
+  "spearman_delta": 0.0331,
+  "beat_dg": true,
+  "field_size": 72,
+  "made_cut": 53,
+  "course_fit_alert": "All 72 players had course_tier=NO_HISTORY. Memorial is annual event at Muirfield Village since 1976. Phase 1 course history pull failed \u2014 investigate Apollo logs.",
+  "sg_layer_correlations": {
+    "sg_app": 0.726,
+    "sg_arg": 0.475,
+    "sg_ott": 0.189,
+    "sg_putt": 0.556
+  }
+}
