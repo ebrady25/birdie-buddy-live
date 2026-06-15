@@ -1,35 +1,31 @@
 {
-  "timestamp": "2026-06-10T12:06:07Z",
-  "phase_checked": "lock",
-  "next_phase": "phase2_lock",
-  "status": "red",
+  "timestamp": "2026-06-15T16:06:50Z",
+  "phase_checked": "mnemosyne",
+  "next_phase": "mnemosyne_postmortem",
+  "status": "green",
   "checks": {
     "current_event": {
-      "status": "fail",
-      "error": "current_event is stale",
-      "event_id": 23,
-      "event_name": "the Memorial Tournament presented by Workday",
-      "days_until_start": -7,
-      "team_event": false
+      "status": "pass",
+      "event_id": 26,
+      "event_name": "US Open",
+      "start_date": "2026-06-18",
+      "days_until_start": 2,
+      "team_event": false,
+      "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.26,
+      "duration_s": 0.17,
       "players_returned": 147,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "pass",
-      "checked": [
-        "bbi_rankings.json (0.0h)",
-        "themis.json (0.0h)"
-      ]
+      "status": "n/a",
+      "note": "mnemosyne has no prior-output gate (first or independent phase)."
     }
   },
-  "recommendations": [
-    "MNEMOSYNE has not advanced CURRENT_EVENT \u2014 pipeline will cascade-abort."
-  ],
-  "action_required": true,
+  "recommendations": [],
+  "action_required": false,
   "auto_generated_by": "github-actions / argus_health.py"
 }
