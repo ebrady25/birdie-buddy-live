@@ -212,7 +212,127 @@
       "underperforming_factors": [],
       "notes": "Pipeline miss. Wyndham Clark won at -30. No BBI predictions were produced.",
       "logged_utc": "2026-05-25T14:17:31.058999+00:00"
+    },
+    {
+      "week": 17,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-28",
+      "year": 2026,
+      "field_size": 132,
+      "bbi_spearman": 0.4076,
+      "bbi_brier_top10": null,
+      "bbi_brier_win": null,
+      "bbi_skill_top10_pct": null,
+      "winning_factors": [],
+      "underperforming_factors": [],
+      "notes": "Backfilled 2026-06-08. Calibration not computed (no calibration helper run for week 17). Spearman backfilled from DataGolf historical results.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 18,
+      "event": "the Memorial Tournament presented by Workday",
+      "event_id": 23,
+      "date": "2026-06-04",
+      "year": 2026,
+      "field_size": 72,
+      "bbi_spearman": 0.3876,
+      "bbi_brier_top10": 0.1368,
+      "bbi_brier_win": 0.0145,
+      "bbi_brier_top5": 0.0696,
+      "bbi_brier_top20": 0.184,
+      "bbi_skill_top10_pct": -5.66,
+      "bbi_skill_win_pct": -5.61,
+      "winning_factors": [
+        "dfsValue",
+        "form",
+        "talent"
+      ],
+      "underperforming_factors": [
+        "ceiling"
+      ],
+      "factor_attribution_top10": {
+        "talent": {
+          "topk_avg": 11.6727,
+          "field_avg": 10.6239,
+          "ratio": 1.099
+        },
+        "form": {
+          "topk_avg": 7.4791,
+          "field_avg": 6.3593,
+          "ratio": 1.176
+        },
+        "cutSafety": {
+          "topk_avg": 7.6991,
+          "field_avg": 7.0247,
+          "ratio": 1.096
+        },
+        "floor": {
+          "topk_avg": 1.7473,
+          "field_avg": 1.5925,
+          "ratio": 1.097
+        },
+        "ceiling": {
+          "topk_avg": 0.3409,
+          "field_avg": 0.3807,
+          "ratio": 0.895
+        },
+        "leverage": {
+          "topk_avg": 1.3373,
+          "field_avg": 1.3067,
+          "ratio": 1.023
+        },
+        "contrarian": {
+          "topk_avg": 4.0355,
+          "field_avg": 3.9904,
+          "ratio": 1.011
+        },
+        "dfsValue": {
+          "topk_avg": 1.3191,
+          "field_avg": 1.0704,
+          "ratio": 1.232
+        }
+      },
+      "notes": "Poston wins playoff (BBI #51). Course fit layer absent \u2014 all NO_HISTORY. Form, talent, dfsValue factors over-indexed top-10. Negative skill% for top-5 and win indicates BBI probabilities over-confident on top-ranked players.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 19,
+      "event": "RBC Canadian Open",
+      "event_id": 32,
+      "date": "2026-06-14",
+      "year": 2026,
+      "field_size": 146,
+      "n_calibrated": 142,
+      "bbi_spearman": 0.199,
+      "bbi_brier_top10": 0.0646,
+      "bbi_brier_win": 0.007,
+      "bbi_brier_top5": 0.0321,
+      "bbi_brier_top20": 0.1861,
+      "bbi_skill_top10_pct": 1.3,
+      "bbi_skill_win_pct": 0.6,
+      "winning_factors": [
+        "courseFit",
+        "form",
+        "ceiling"
+      ],
+      "underperforming_factors": [
+        "contrarian",
+        "dfsValue",
+        "strategic"
+      ],
+      "factor_attribution_top10": {
+        "courseFit": {"top10_avg": 16.7, "field_avg": 14.65, "ratio": 1.14},
+        "form": {"top10_avg": 7.34, "field_avg": 6.44, "ratio": 1.139},
+        "ceiling": {"top10_avg": 2.62, "field_avg": 2.37, "ratio": 1.108},
+        "leverage": {"top10_avg": 4.63, "field_avg": 4.2, "ratio": 1.102},
+        "talent": {"top10_avg": 9.44, "field_avg": 8.9, "ratio": 1.061},
+        "contrarian": {"top10_avg": 2.5, "field_avg": 2.4, "ratio": 1.043},
+        "dfsValue": {"top10_avg": 1.0, "field_avg": 0.96, "ratio": 1.043}
+      },
+      "notes": "Weak week. Spearman 0.199, DG beat BBI (DG=0.245). Top-20 Brier severely negative (-53.8% skill) \u2014 inflated prob_top20 across large field. Baseline v8.5 beat all 5 shadow variants. RBC course history only 2025 relevant \u2014 prior years at different venues. Winning factors: courseFit, form, ceiling.",
+      "logged_utc": "2026-06-15T00:00:00Z"
     }
   ],
-  "last_updated": "2026-05-21T01:20:20.031101+00:00"
+  "last_updated": "2026-06-15T00:00:00Z"
 }
