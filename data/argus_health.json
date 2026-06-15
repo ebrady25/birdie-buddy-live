@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-06-15T16:06:50Z",
-  "phase_checked": "mnemosyne",
-  "next_phase": "mnemosyne_postmortem",
+  "timestamp": "2026-06-15T19:34:03Z",
+  "phase_checked": "phase1",
+  "next_phase": "phase1_apollo_atlas",
   "status": "green",
   "checks": {
     "current_event": {
       "status": "pass",
       "event_id": 26,
-      "event_name": "US Open",
+      "event_name": "U.S. Open",
       "start_date": "2026-06-18",
       "days_until_start": 2,
       "team_event": false,
@@ -16,13 +16,13 @@
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.17,
-      "players_returned": 147,
+      "duration_s": 0.29,
+      "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "n/a",
-      "note": "mnemosyne has no prior-output gate (first or independent phase)."
+      "note": "phase1 has no prior-output gate (first or independent phase)."
     }
   },
   "recommendations": [],
