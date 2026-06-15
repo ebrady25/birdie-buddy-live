@@ -1,84 +1,66 @@
 {
   "task": "mnemosyne-postmortem",
   "state": "done",
-  "timestamp_utc": "2026-06-08T13:00:00+00:00",
-  "argus_note": "argus_health.json stale (2026-04-27). Proceeded autonomously \u2014 same pattern as May 25 run.",
-  "week17_backfill": {
-    "event": "Charles Schwab Challenge",
-    "event_id": 21,
-    "spearman_bbi": 0.4076,
-    "winner": "Henley, Russell",
-    "winner_bbi_rank": 4,
-    "note": "Week 17 pipeline ran but postmortem was skipped in June 1 Mnemosyne run. Backfilled in this run."
-  },
+  "timestamp_utc": "2026-06-15T00:00:00Z",
   "last_event": {
-    "event_name": "the Memorial Tournament presented by Workday",
-    "event_id": 23,
-    "week": 18,
-    "course": "Muirfield Village Golf Club",
-    "completed": "2026-06-07",
-    "winner": "Poston, J.T.",
-    "winner_score": -12,
-    "winner_bbi_rank": 51,
-    "pipeline_ran": true
+    "event_name": "RBC Canadian Open",
+    "event_id": 32,
+    "week": 19,
+    "winner": "Cauley, Bud",
+    "winner_score": -27,
+    "winner_bbi_rank": 21
   },
   "next_event": {
-    "event_id": 32,
-    "event_name": "RBC Canadian Open",
-    "week": 19,
-    "course": "TPC Toronto at Osprey Valley (North Course)",
-    "start_date": "2026-06-11",
-    "is_major": false
+    "event_id": 26,
+    "event_name": "U.S. Open",
+    "week": 20,
+    "course": "Shinnecock Hills Golf Club",
+    "start_date": "2026-06-18",
+    "is_major": true
   },
-  "spearman_bbi": 0.3876,
-  "spearman_dg": 0.3546,
-  "beat_dg": true,
-  "brier_bbi_top10": 0.1368,
-  "brier_skill_top10_pct": -5.66,
+  "spearman_bbi": 0.199,
+  "spearman_dg": 0.2453,
+  "beat_dg": false,
+  "brier_bbi_top10": 0.0646,
+  "brier_skill_top10_pct": 1.3,
   "winning_factors": [
-    "dfsValue",
+    "courseFit",
     "form",
-    "talent"
-  ],
-  "underperforming_factors": [
     "ceiling"
   ],
-  "shadow_variants_scored": null,
-  "shadow_skip_reason": "no shadow_models_Memorial_Tournament.json \u2014 Hephaestus not run for this event",
+  "shadow_variants_scored": {
+    "v8.6-cf": {
+      "spearman": 0.1907,
+      "delta": -0.0083
+    },
+    "v8.6-tal": {
+      "spearman": 0.1629,
+      "delta": -0.0361
+    },
+    "v8.6-form": {
+      "spearman": 0.1894,
+      "delta": -0.0096
+    },
+    "v8.6-dyn": {
+      "spearman": 0.1828,
+      "delta": -0.0162
+    },
+    "v8.7-cfgate": {
+      "spearman": 0.1772,
+      "delta": -0.0218
+    }
+  },
   "current_competition_leader": "v8.6-dyn",
   "promotion_candidate": null,
   "overrides_reset": {
-    "prior_event_id": 21,
+    "prior_event_id": 32,
     "prior_count": 0
   },
-  "jobs_run": {
-    "job_a_postmortem": "done \u2014 week 17 backfilled + week 18 postmortem written",
-    "job_b_calibration": "done \u2014 calibration_week18.json written",
-    "job_c_shadow_variants": "skipped \u2014 no shadow models for Memorial Tournament",
-    "job_d_next_event": "done \u2014 RBC Canadian Open (week 19, id=32) \u2192 CURRENT_EVENT.json"
-  },
-  "files_written": [
-    "Outputs/postmortem_week17.md (backfill)",
-    "Outputs/postmortem_week18.md",
-    "Outputs/calibration_week18.json",
-    "Context/SPEARMAN_TRACKER.json (weeks 17+18 appended)",
-    "Context/CALIBRATION_TRACKER.json (weeks 17+18 appended)",
-    "Context/MODEL_COMPETITION_TRACKER.json (weeks 17+18 skip entries appended)",
-    "Context/CURRENT_EVENT.json (week 19 RBC Canadian Open)",
-    "Context/MANUAL_OVERRIDES.json (reset for event_id=32)"
-  ],
+  "season_avg_bbi_spearman": 0.3739,
   "alerts": [
-    "CRITICAL: Memorial Tournament (week 18) \u2014 all 72 players NO_HISTORY. Apollo Phase 1 course history lookup failed for event_id=23. Muirfield Village has 9+ years of DG data. Investigate before RBC Canadian Open pipeline runs to avoid repeat.",
-    "WARNING: Week 17 (Charles Schwab) postmortem was skipped by June 1 Mnemosyne run \u2014 postmortem_week17.md was never written despite pipeline completing. Confirm scheduled task is writing all output files reliably."
-  ],
-  "season_summary_through_week18": {
-    "events_scored": 10,
-    "season_avg_bbi_spearman": 0.3858,
-    "events_above_040": 4,
-    "last_5_avg_bbi_spearman": 0.3436,
-    "best_event": "Valero Texas Open (0.5736)"
-  },
-  "commit_hash": "64ee74e",
-  "site_deploy_status": "success_manual_clone (site_deploy.py bindfs-blocked; cloned birdie-buddy-live-mn)",
-  "live_site_commit": "001320f"
+    "RBC course history contaminated (2022-2024 = wrong venues). Apollo needs venue-year filter.",
+    "US Open: Apollo MUST filter event_id=26 to year=2018 ONLY (Shinnecock). Other years = wrong venues.",
+    "BBI LOST to DG this week (0.199 vs 0.245). Season avg drops 0.386 \u2192 0.374.",
+    "All shadow variants underperformed baseline v8.5. v8.6-dyn streak reset to 0."
+  ]
 }

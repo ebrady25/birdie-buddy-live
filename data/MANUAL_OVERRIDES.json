@@ -1,14 +1,8 @@
 {
   "schema_version": "1.0",
-  "description": "Ethan's manual overrides on top of the BBI v8.5 model output. MOMUS surfaces flagged players each Monday at 12:49 ET; this file is where you encode any decisions to override the model. Cleared/reset each Monday by Mnemosyne when CURRENT_EVENT.json rolls forward.",
-  "actions_supported": {
-    "bbi_pool_delta": "Additive adjustment to bbi_pool. Positive pushes UP, negative pushes DOWN. Applies proportional delta to bbi_dfs.",
-    "min_rank": "Ensure final rank \u2264 this number (player floor \u2014 they finish at this rank or better).",
-    "max_rank": "Ensure final rank \u2265 this number (player ceiling \u2014 they finish at this rank or worse).",
-    "exclude": "Drop the player from rankings entirely. Use for late WDs. Set value=true."
-  },
-  "event_id": 32,
-  "event_name": "RBC Canadian Open",
-  "last_updated": "2026-06-08T13:00:00+00:00",
+  "description": "Ethan's manual overrides. Cleared each Monday by Mnemosyne when CURRENT_EVENT.json rolls forward.",
+  "event_id": 26,
+  "event_name": "U.S. Open",
+  "last_updated": "2026-06-15T00:00:00Z",
   "overrides": []
 }

@@ -295,7 +295,72 @@
       },
       "notes": "Poston wins playoff (BBI #51). Course fit layer absent \u2014 all NO_HISTORY. Form, talent, dfsValue factors over-indexed top-10. Negative skill% for top-5 and win indicates BBI probabilities over-confident on top-ranked players.",
       "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 19,
+      "event": "RBC Canadian Open",
+      "event_id": 32,
+      "date": "2026-06-14",
+      "year": 2026,
+      "field_size": 146,
+      "n_calibrated": 142,
+      "bbi_spearman": 0.199,
+      "bbi_brier_top10": 0.0646,
+      "bbi_brier_win": 0.007,
+      "bbi_brier_top5": 0.0321,
+      "bbi_brier_top20": 0.1861,
+      "bbi_skill_top10_pct": 1.3,
+      "bbi_skill_win_pct": 0.6,
+      "winning_factors": [
+        "courseFit",
+        "form",
+        "ceiling"
+      ],
+      "underperforming_factors": [
+        "contrarian",
+        "dfsValue",
+        "strategic"
+      ],
+      "factor_attribution_top10": {
+        "courseFit": {
+          "top10_avg": 16.7,
+          "field_avg": 14.65,
+          "ratio": 1.14
+        },
+        "form": {
+          "top10_avg": 7.34,
+          "field_avg": 6.44,
+          "ratio": 1.139
+        },
+        "ceiling": {
+          "top10_avg": 2.62,
+          "field_avg": 2.37,
+          "ratio": 1.108
+        },
+        "leverage": {
+          "top10_avg": 4.63,
+          "field_avg": 4.2,
+          "ratio": 1.102
+        },
+        "talent": {
+          "top10_avg": 9.44,
+          "field_avg": 8.9,
+          "ratio": 1.061
+        },
+        "contrarian": {
+          "top10_avg": 2.5,
+          "field_avg": 2.4,
+          "ratio": 1.043
+        },
+        "dfsValue": {
+          "top10_avg": 1.0,
+          "field_avg": 0.96,
+          "ratio": 1.043
+        }
+      },
+      "notes": "Weak week. Spearman 0.199, DG beat BBI (DG=0.245). Top-20 Brier severely negative (-53.8% skill) \u2014 inflated prob_top20 across large field. Baseline v8.5 beat all 5 shadow variants. RBC course history only 2025 relevant \u2014 prior years at different venues. Winning factors: courseFit, form, ceiling.",
+      "logged_utc": "2026-06-15T00:00:00Z"
     }
   ],
-  "last_updated": "2026-06-08T13:17:13.398984+00:00"
+  "last_updated": "2026-06-15T00:00:00Z"
 }

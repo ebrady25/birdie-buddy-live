@@ -1,94 +1,37 @@
 {
-  "event_id": 32,
-  "event_slug": "RBC_Canadian_Open",
-  "event_snake": "rbc_canadian_open",
-  "event_name": "RBC Canadian Open",
-  "course": "TPC Toronto at Osprey Valley (North Course)",
-  "course_slug": "tpc_toronto_osprey_valley",
-  "location": "Caledon, ON, Canada",
-  "start_date": "2026-06-11",
-  "week_num": 19,
+  "event_id": 26,
+  "event_slug": "US_Open",
+  "event_snake": "us_open",
+  "event_name": "U.S. Open",
+  "course": "Shinnecock Hills Golf Club",
+  "course_slug": "shinnecock_hills",
+  "location": "Southampton, NY",
+  "start_date": "2026-06-18",
+  "week_num": 20,
   "year": 2026,
-  "par": 71,
-  "yardage": 7397,
+  "par": 70,
+  "yardage": 7445,
   "team_event": false,
-  "is_major": false,
+  "is_major": true,
   "sg_weights": {
-    "sg_app": 1.15,
+    "sg_app": 1.25,
     "sg_putt": 1.1,
-    "sg_arg": 1.05,
-    "sg_ott": 1.05,
-    "_note": "TPC Toronto (Osprey Valley North): Par-71, 7397y. Bentgrass at 12.0 stimp. APP elevated (150-200 range dominant per COURSE_DNA_LIBRARY w-weights). PUTT moderate-high (consistent bentgrass). ARG and OTT roughly neutral (moderate rough 1.02, par-71 with some longer holes). Derived knowledge-based from COURSE_DNA_LIBRARY entry (no explicit sg_weights)."
+    "sg_arg": 1.15,
+    "sg_ott": 1.0
   },
   "course_weight_override": {
     "courseFit_pool": 0.22,
-    "courseFit_dfs": 0.17,
-    "_note": "Standard weights. TPC Toronto returned to RBC Canadian Open in 2022; 4 years of course history expected. Confidence moderate \u2014 increase to 0.24/0.19 if Phase 1 coverage > 40%."
+    "courseFit_dfs": 0.17
   },
-  "course_form_name": "TPC Toronto Form",
   "course_history_event_id_fallbacks": [
-    32
+    26
   ],
   "course_history_year_range": [
-    2022,
-    2025
+    2018,
+    2018
   ],
-  "course_history_note": "RBC Canadian Open returned to TPC Toronto at Osprey Valley in 2022 (previously at Hamilton G&CC and other venues). History available 2022-2025 under event_id=32. If Phase 1 returns 0 history, investigate whether pre-2022 years are indexed under a different event_id or course_key. No fallback entry in COURSE_HISTORY_FALLBACKS.json for id=32 (standard direct lookup).",
-  "course_tier_thresholds": {
-    "SPECIALIST": {
-      "min_rounds": 8,
-      "min_sg": 0.5,
-      "mult": 1.25
-    },
-    "COMFORTABLE": {
-      "min_rounds": 4,
-      "min_sg": 0.0,
-      "mult": 1.15
-    },
-    "NEUTRAL": {
-      "min_rounds": 4,
-      "min_sg": -99,
-      "mult": 1.0
-    },
-    "LIMITED": {
-      "min_rounds": 1,
-      "mult": 0.95
-    },
-    "NO_HISTORY": {
-      "mult": 1.0
-    }
-  },
-  "winner_archetype": "Precision iron player who can putt on fast bentgrass. TPC Toronto (Osprey Valley North) is a demanding parkland course with tight fairways and bentgrass greens at 12.0 stimp. Par-71 means distance is less of a differentiator than accuracy and approach precision. Recent Canadian Open history includes strong iron players and complete golfers who combine solid ball-striking with reliable putting. Not a course that favors pure bombers.",
-  "course_dna": {
-    "sg_importance": {
-      "sg_app": 0.32,
-      "sg_ott": 0.22,
-      "sg_putt": 0.26,
-      "sg_arg": 0.2
-    },
-    "difficulty": "moderate",
-    "greens": "bentgrass",
-    "stimpmeter": 12.0,
-    "rough": 1.02,
-    "is_major": false,
-    "course_fit_leverage": {
-      "favors": [
-        "precision_iron",
-        "bentgrass_putters",
-        "accurate_drivers",
-        "solid_all_around"
-      ],
-      "penalizes": [
-        "wild_drivers",
-        "poor_bentgrass_putters",
-        "short_iron_weakness"
-      ]
-    }
-  },
-  "pipeline_mode": "active",
-  "bbi_pipeline_action": "FULL \u2014 Standard individual BBI v8.5 rankings. TPC Toronto course history available 2022-2025 (4 years). Phase 1 should return moderate field coverage (30-50%). Watch for course history 0-coverage flag \u2014 if all NO_HISTORY, investigate before generating rankings.",
-  "course_notes": "TPC Toronto at Osprey Valley (North Course), Caledon ON. Par-71, 7397y. Host of RBC Canadian Open since 2022 return. Parkland layout with bentgrass greens, moderate rough. Two sets of tees used for tournament play. Course management premium \u2014 tight driving corridors. Strong 2022-2025 results field required to validate course fit layer.",
-  "auto_detected_at": "2026-06-08T13:18:56.840165+00:00",
-  "detected_by": "mnemosyne_auto",
-  "pipeline_warning": "REMINDER \u2014 Check Phase 1 course history coverage before generating rankings. Memorial Tournament (week 18) had 0% coverage due to unknown bug. Verify event_id=32 returns historical rounds data before Apollo runs."
+  "course_history_note": "Shinnecock Hills last hosted 2018 US Open (Koepka). event_id=26 year=2018 only.",
+  "pipeline_warning": "Apollo: filter event_id=26 to year=2018 ONLY. 2019-2025 = wrong venues (Pebble, Winged Foot, Torrey, Oakmont, Pinehurst).",
+  "auto_detected_at": "2026-06-15T00:00:00Z",
+  "detected_by": "mnemosyne_auto"
 }
