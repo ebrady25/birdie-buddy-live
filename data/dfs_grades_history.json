@@ -602,6 +602,1120 @@
       "capture_rate_pct": 82.54
     },
     {
+      "event": "Memorial Tournament",
+      "event_id": 23,
+      "year": 2026,
+      "completed": "",
+      "graded_at_utc": "2026-06-08T14:44:25Z",
+      "thresholds": {
+        "cash_line": 340,
+        "top_1_pct": 410,
+        "top_001_pct": 500
+      },
+      "portfolio": {
+        "n_lineups": 10,
+        "avg_proj": 229.87,
+        "avg_actual": 380.85,
+        "n_below_cash": 3,
+        "n_cash": 4,
+        "n_top_1pct": 3,
+        "n_top_001pct": 0,
+        "best_lineup_id": "C4",
+        "best_lineup_actual": 470.5,
+        "worst_lineup_id": "C6",
+        "worst_lineup_actual": 293.5,
+        "delta_pct": 65.68
+      },
+      "lineups": [
+        {
+          "lineup_id": "C1",
+          "kind": "Core",
+          "title": "Core build #1",
+          "label": "Core #1",
+          "salary": 50000,
+          "proj_total": 219.4,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9300
+            },
+            {
+              "dg_id": 17536,
+              "name": "Spaun, J.J.",
+              "salary": 8000
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7200
+            },
+            {
+              "dg_id": 7399,
+              "name": "Glover, Lucas",
+              "salary": 6000
+            },
+            {
+              "dg_id": 13508,
+              "name": "Vegas, Jhonattan",
+              "salary": 6000
+            }
+          ],
+          "actual_total": 355.0,
+          "delta_pct": 61.8,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C2",
+          "kind": "Core",
+          "title": "Core build #2",
+          "label": "Core #2",
+          "salary": 50000,
+          "proj_total": 214.4,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 23950,
+              "name": "Aberg, Ludvig",
+              "salary": 10100
+            },
+            {
+              "dg_id": 17536,
+              "name": "Spaun, J.J.",
+              "salary": 8000
+            },
+            {
+              "dg_id": 28635,
+              "name": "McCarty, Matt",
+              "salary": 6400
+            },
+            {
+              "dg_id": 7399,
+              "name": "Glover, Lucas",
+              "salary": 6000
+            },
+            {
+              "dg_id": 13508,
+              "name": "Vegas, Jhonattan",
+              "salary": 6000
+            }
+          ],
+          "actual_total": 297.5,
+          "delta_pct": 38.76,
+          "verdict": "below_cash"
+        },
+        {
+          "lineup_id": "C3",
+          "kind": "Core",
+          "title": "Core build #3",
+          "label": "Core #3",
+          "salary": 48900,
+          "proj_total": 252.8,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 17536,
+              "name": "Spaun, J.J.",
+              "salary": 8000
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7200
+            },
+            {
+              "dg_id": 29767,
+              "name": "Gerard, Ryan",
+              "salary": 6900
+            },
+            {
+              "dg_id": 13126,
+              "name": "Taylor, Nick",
+              "salary": 6800
+            },
+            {
+              "dg_id": 14502,
+              "name": "Cauley, Bud",
+              "salary": 6500
+            }
+          ],
+          "actual_total": 451.0,
+          "delta_pct": 78.4,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "C4",
+          "kind": "Core",
+          "title": "Core build #4",
+          "label": "Core #4",
+          "salary": 48500,
+          "proj_total": 252.3,
+          "players": [
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9300
+            },
+            {
+              "dg_id": 17536,
+              "name": "Spaun, J.J.",
+              "salary": 8000
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7200
+            },
+            {
+              "dg_id": 13872,
+              "name": "Bradley, Keegan",
+              "salary": 7000
+            },
+            {
+              "dg_id": 29767,
+              "name": "Gerard, Ryan",
+              "salary": 6900
+            },
+            {
+              "dg_id": 23950,
+              "name": "Aberg, Ludvig",
+              "salary": 10100
+            }
+          ],
+          "actual_total": 470.5,
+          "delta_pct": 86.48,
+          "verdict": "top_1_pct"
+        },
+        {
+          "lineup_id": "C5",
+          "kind": "Core",
+          "title": "Core build #5",
+          "label": "Core #5",
+          "salary": 50000,
+          "proj_total": 230.8,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 23950,
+              "name": "Aberg, Ludvig",
+              "salary": 10100
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7200
+            },
+            {
+              "dg_id": 13872,
+              "name": "Bradley, Keegan",
+              "salary": 7000
+            },
+            {
+              "dg_id": 17543,
+              "name": "Kim, Michael",
+              "salary": 6200
+            },
+            {
+              "dg_id": 7399,
+              "name": "Glover, Lucas",
+              "salary": 6000
+            }
+          ],
+          "actual_total": 385.5,
+          "delta_pct": 67.03,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C6",
+          "kind": "Core",
+          "title": "Core build #6",
+          "label": "Core #6",
+          "salary": 50000,
+          "proj_total": 182.1,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 23950,
+              "name": "Aberg, Ludvig",
+              "salary": 10100
+            },
+            {
+              "dg_id": 14139,
+              "name": "Thomas, Justin",
+              "salary": 8400
+            },
+            {
+              "dg_id": 7399,
+              "name": "Glover, Lucas",
+              "salary": 6000
+            },
+            {
+              "dg_id": 13508,
+              "name": "Vegas, Jhonattan",
+              "salary": 6000
+            },
+            {
+              "dg_id": 18628,
+              "name": "Campbell, Brian",
+              "salary": 6000
+            }
+          ],
+          "actual_total": 293.5,
+          "delta_pct": 61.18,
+          "verdict": "below_cash"
+        },
+        {
+          "lineup_id": "L1",
+          "kind": "Leverage",
+          "title": "Leverage build #1",
+          "label": "Leverage #1",
+          "salary": 49900,
+          "proj_total": 252.5,
+          "players": [
+            {
+              "dg_id": 19895,
+              "name": "Schauffele, Xander",
+              "salary": 9800
+            },
+            {
+              "dg_id": 14609,
+              "name": "Kim, Si Woo",
+              "salary": 9400
+            },
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9300
+            },
+            {
+              "dg_id": 17536,
+              "name": "Spaun, J.J.",
+              "salary": 8000
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7200
+            },
+            {
+              "dg_id": 17543,
+              "name": "Kim, Michael",
+              "salary": 6200
+            }
+          ],
+          "actual_total": 402.5,
+          "delta_pct": 59.41,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "L2",
+          "kind": "Leverage",
+          "title": "Leverage build #2",
+          "label": "Leverage #2",
+          "salary": 47500,
+          "proj_total": 234.2,
+          "players": [
+            {
+              "dg_id": 26651,
+              "name": "Young, Cameron",
+              "salary": 10300
+            },
+            {
+              "dg_id": 19895,
+              "name": "Schauffele, Xander",
+              "salary": 9800
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 7200
+            },
+            {
+              "dg_id": 29767,
+              "name": "Gerard, Ryan",
+              "salary": 6900
+            },
+            {
+              "dg_id": 13126,
+              "name": "Taylor, Nick",
+              "salary": 6800
+            },
+            {
+              "dg_id": 14502,
+              "name": "Cauley, Bud",
+              "salary": 6500
+            }
+          ],
+          "actual_total": 401.5,
+          "delta_pct": 71.43,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "L3",
+          "kind": "Leverage",
+          "title": "Leverage build #3",
+          "label": "Leverage #3",
+          "salary": 50000,
+          "proj_total": 221.0,
+          "players": [
+            {
+              "dg_id": 26651,
+              "name": "Young, Cameron",
+              "salary": 10300
+            },
+            {
+              "dg_id": 19895,
+              "name": "Schauffele, Xander",
+              "salary": 9800
+            },
+            {
+              "dg_id": 14578,
+              "name": "Henley, Russell",
+              "salary": 9300
+            },
+            {
+              "dg_id": 14139,
+              "name": "Thomas, Justin",
+              "salary": 8400
+            },
+            {
+              "dg_id": 17543,
+              "name": "Kim, Michael",
+              "salary": 6200
+            },
+            {
+              "dg_id": 7399,
+              "name": "Glover, Lucas",
+              "salary": 6000
+            }
+          ],
+          "actual_total": 333.0,
+          "delta_pct": 50.68,
+          "verdict": "below_cash"
+        },
+        {
+          "lineup_id": "C7",
+          "kind": "Core",
+          "title": "Core build #7",
+          "label": "Core #7",
+          "salary": 47000,
+          "proj_total": 239.2,
+          "players": [
+            {
+              "dg_id": 18417,
+              "name": "Scheffler, Scottie",
+              "salary": 13500
+            },
+            {
+              "dg_id": 29767,
+              "name": "Gerard, Ryan",
+              "salary": 6900
+            },
+            {
+              "dg_id": 21407,
+              "name": "Reitan, Kristoffer",
+              "salary": 6900
+            },
+            {
+              "dg_id": 13126,
+              "name": "Taylor, Nick",
+              "salary": 6800
+            },
+            {
+              "dg_id": 14502,
+              "name": "Cauley, Bud",
+              "salary": 6500
+            },
+            {
+              "dg_id": 28635,
+              "name": "McCarty, Matt",
+              "salary": 6400
+            }
+          ],
+          "actual_total": 418.5,
+          "delta_pct": 74.96,
+          "verdict": "top_1_pct"
+        }
+      ],
+      "hindsight_best": {
+        "total": 513.0,
+        "salary": 45400,
+        "n_players": 6
+      },
+      "vs_hindsight_pts_left": 42.5,
+      "field_wide_optimal": {
+        "total": 607.5,
+        "salary": 45600,
+        "players": [
+          {
+            "dg_id": 21554,
+            "name": "Poston, J.T.",
+            "salary": 6600,
+            "total_pts": 115.5,
+            "ownership": 0.032400000000000005
+          },
+          {
+            "dg_id": 29767,
+            "name": "Gerard, Ryan",
+            "salary": 6900,
+            "total_pts": 110.0,
+            "ownership": 0.10460000000000001
+          },
+          {
+            "dg_id": 23604,
+            "name": "Clark, Wyndham",
+            "salary": 7300,
+            "total_pts": 102.0,
+            "ownership": 0.08259999999999999
+          },
+          {
+            "dg_id": 21407,
+            "name": "Reitan, Kristoffer",
+            "salary": 6900,
+            "total_pts": 96.5,
+            "ownership": 0.1066
+          },
+          {
+            "dg_id": 12294,
+            "name": "Fleetwood, Tommy",
+            "salary": 9100,
+            "total_pts": 93.0,
+            "ownership": 0.12179999999999999
+          },
+          {
+            "dg_id": 19483,
+            "name": "Burns, Sam",
+            "salary": 8800,
+            "total_pts": 90.5,
+            "ownership": 0.0546
+          }
+        ]
+      },
+      "vs_field_optimal_pts_left": 137.0,
+      "capture_rate_pct": 77.45
+    },
+    {
+      "event": "RBC Canadian Open",
+      "event_id": 32,
+      "year": 2026,
+      "completed": "",
+      "graded_at_utc": "2026-06-15T14:00:41Z",
+      "thresholds": {
+        "cash_line": 340,
+        "top_1_pct": 410,
+        "top_001_pct": 500
+      },
+      "portfolio": {
+        "n_lineups": 12,
+        "avg_proj": 0.0,
+        "avg_actual": 364.04,
+        "n_below_cash": 3,
+        "n_cash": 9,
+        "n_top_1pct": 0,
+        "n_top_001pct": 0,
+        "best_lineup_id": "C7",
+        "best_lineup_actual": 405.0,
+        "worst_lineup_id": "L2",
+        "worst_lineup_actual": 290.0,
+        "delta_pct": 0
+      },
+      "lineups": [
+        {
+          "lineup_id": "C1",
+          "kind": "Core",
+          "title": "Core build #1",
+          "label": "Cash 1 - Burns/Morikawa",
+          "salary": 49800,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 19483,
+              "name": "Burns, Sam",
+              "salary": 10100
+            },
+            {
+              "dg_id": 22085,
+              "name": "Morikawa, Collin",
+              "salary": 9900
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 19846,
+              "name": "Bauchou, Zach",
+              "salary": 7300
+            }
+          ],
+          "actual_total": 376.0,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C2",
+          "kind": "Core",
+          "title": "Core build #2",
+          "label": "Cash 2 - Burns/MacIntyre",
+          "salary": 49700,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 19483,
+              "name": "Burns, Sam",
+              "salary": 10100
+            },
+            {
+              "dg_id": 23323,
+              "name": "MacIntyre, Robert",
+              "salary": 9400
+            },
+            {
+              "dg_id": 18554,
+              "name": "Rai, Aaron",
+              "salary": 8300
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 317.0,
+          "delta_pct": 0,
+          "verdict": "below_cash"
+        },
+        {
+          "lineup_id": "C3",
+          "kind": "Core",
+          "title": "Core build #3",
+          "label": "Core 1 - Fitzpatrick/Lowry",
+          "salary": 49400,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 17646,
+              "name": "Fitzpatrick, Matt",
+              "salary": 10500
+            },
+            {
+              "dg_id": 13900,
+              "name": "Lowry, Shane",
+              "salary": 9000
+            },
+            {
+              "dg_id": 13126,
+              "name": "Taylor, Nick",
+              "salary": 8000
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 373.5,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C4",
+          "kind": "Core",
+          "title": "Core build #4",
+          "label": "Core 2 - Burns/Hovland",
+          "salary": 49000,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 19483,
+              "name": "Burns, Sam",
+              "salary": 10100
+            },
+            {
+              "dg_id": 18841,
+              "name": "Hovland, Viktor",
+              "salary": 9200
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19846,
+              "name": "Bauchou, Zach",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 373.5,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C5",
+          "kind": "Core",
+          "title": "Core build #5",
+          "label": "Core 3 - Morikawa/MacIntyre",
+          "salary": 49000,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 22085,
+              "name": "Morikawa, Collin",
+              "salary": 9900
+            },
+            {
+              "dg_id": 23323,
+              "name": "MacIntyre, Robert",
+              "salary": 9400
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 386.0,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C6",
+          "kind": "Core",
+          "title": "Core build #6",
+          "label": "Core 4 - Clark/Rose",
+          "salary": 48800,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 23604,
+              "name": "Clark, Wyndham",
+              "salary": 9700
+            },
+            {
+              "dg_id": 6093,
+              "name": "Rose, Justin",
+              "salary": 9300
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19846,
+              "name": "Bauchou, Zach",
+              "salary": 7300
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            }
+          ],
+          "actual_total": 332.5,
+          "delta_pct": 0,
+          "verdict": "below_cash"
+        },
+        {
+          "lineup_id": "L1",
+          "kind": "Leverage",
+          "title": "Leverage build #1",
+          "label": "Leverage 1 - Fleetwood/Morikawa",
+          "salary": 49900,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 12294,
+              "name": "Fleetwood, Tommy",
+              "salary": 10300
+            },
+            {
+              "dg_id": 22085,
+              "name": "Morikawa, Collin",
+              "salary": 9900
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 386.0,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "L2",
+          "kind": "Leverage",
+          "title": "Leverage build #2",
+          "label": "Leverage 2 - Burns/Noren",
+          "salary": 48700,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 19483,
+              "name": "Burns, Sam",
+              "salary": 10100
+            },
+            {
+              "dg_id": 10419,
+              "name": "Noren, Alex",
+              "salary": 8900
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19846,
+              "name": "Bauchou, Zach",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 290.0,
+          "delta_pct": 0,
+          "verdict": "below_cash"
+        },
+        {
+          "lineup_id": "C7",
+          "kind": "Core",
+          "title": "Core build #7",
+          "label": "Contrarian 1 - Low Chalk",
+          "salary": 48800,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 22085,
+              "name": "Morikawa, Collin",
+              "salary": 9900
+            },
+            {
+              "dg_id": 18841,
+              "name": "Hovland, Viktor",
+              "salary": 9200
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 405.0,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C8",
+          "kind": "Core",
+          "title": "Core build #8",
+          "label": "Contrarian 2 - Reitan Stack",
+          "salary": 49600,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 21407,
+              "name": "Reitan, Kristoffer",
+              "salary": 8800
+            },
+            {
+              "dg_id": 13900,
+              "name": "Lowry, Shane",
+              "salary": 9000
+            },
+            {
+              "dg_id": 6093,
+              "name": "Rose, Justin",
+              "salary": 9300
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            }
+          ],
+          "actual_total": 365.5,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C9",
+          "kind": "Core",
+          "title": "Core build #9",
+          "label": "Moonshot 1 - FW/Fitz Ceiling",
+          "salary": 49800,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 12294,
+              "name": "Fleetwood, Tommy",
+              "salary": 10300
+            },
+            {
+              "dg_id": 17646,
+              "name": "Fitzpatrick, Matt",
+              "salary": 10500
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            },
+            {
+              "dg_id": 23505,
+              "name": "McGreevy, Max",
+              "salary": 7100
+            }
+          ],
+          "actual_total": 378.5,
+          "delta_pct": 0,
+          "verdict": "cash"
+        },
+        {
+          "lineup_id": "C10",
+          "kind": "Core",
+          "title": "Core build #10",
+          "label": "Moonshot 2 - Morikawa/Clark GPP",
+          "salary": 49300,
+          "proj_total": 0,
+          "players": [
+            {
+              "dg_id": 22085,
+              "name": "Morikawa, Collin",
+              "salary": 9900
+            },
+            {
+              "dg_id": 23604,
+              "name": "Clark, Wyndham",
+              "salary": 9700
+            },
+            {
+              "dg_id": 11889,
+              "name": "Fox, Ryan",
+              "salary": 7800
+            },
+            {
+              "dg_id": 14704,
+              "name": "Putnam, Andrew",
+              "salary": 7400
+            },
+            {
+              "dg_id": 19870,
+              "name": "McCarthy, Denny",
+              "salary": 7300
+            },
+            {
+              "dg_id": 13412,
+              "name": "Olesen, Thorbjorn",
+              "salary": 7200
+            }
+          ],
+          "actual_total": 385.0,
+          "delta_pct": 0,
+          "verdict": "cash"
+        }
+      ],
+      "hindsight_best": {
+        "total": 503.5,
+        "salary": 49900,
+        "n_players": 6
+      },
+      "vs_hindsight_pts_left": 98.5,
+      "field_wide_optimal": {
+        "total": 676.0,
+        "salary": 47300,
+        "players": [
+          {
+            "dg_id": 14502,
+            "name": "Cauley, Bud",
+            "salary": 7800,
+            "total_pts": 135.5,
+            "ownership": 0.1365
+          },
+          {
+            "dg_id": 23048,
+            "name": "Stanger, Jimmy",
+            "salary": 6500,
+            "total_pts": 112.5,
+            "ownership": 0.0004
+          },
+          {
+            "dg_id": 17646,
+            "name": "Fitzpatrick, Matt",
+            "salary": 10500,
+            "total_pts": 111.5,
+            "ownership": 0.15130000000000002
+          },
+          {
+            "dg_id": 11451,
+            "name": "Garnett, Brice",
+            "salary": 6300,
+            "total_pts": 107.0,
+            "ownership": 0.001
+          },
+          {
+            "dg_id": 26850,
+            "name": "Svensson, Jesper",
+            "salary": 7000,
+            "total_pts": 105.0,
+            "ownership": 0.0129
+          },
+          {
+            "dg_id": 18841,
+            "name": "Hovland, Viktor",
+            "salary": 9200,
+            "total_pts": 104.5,
+            "ownership": 0.06849999999999999
+          }
+        ]
+      },
+      "vs_field_optimal_pts_left": 271.0,
+      "capture_rate_pct": 59.91
+    },
+    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -2273,5 +3387,5 @@
       "capture_rate_pct": 87.63
     }
   ],
-  "last_updated": "2026-05-25T13:36:37Z"
+  "last_updated": "2026-06-15T14:00:41Z"
 }
