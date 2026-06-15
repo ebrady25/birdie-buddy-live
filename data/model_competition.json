@@ -725,16 +725,36 @@
       "logged_utc": "2026-05-25T13:36:31Z"
     },
     {
+      "week": 17,
+      "year": 2026,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-31",
+      "field_size": 132,
+      "baseline_variant_id": "v8.5",
+      "scorecard": {
+        "v8.5": {
+          "spearman": 0.4657,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        }
+      },
+      "leader_this_week": "v8.5",
+      "logged_utc": "2026-06-08T13:52:33Z"
+    },
+    {
       "week": 18,
       "year": 2026,
-      "event": "Memorial Tournament",
+      "event": "the Memorial Tournament presented by Workday",
       "event_id": 23,
       "date": "2026-06-07",
       "field_size": 72,
       "baseline_variant_id": "v8.5",
       "scorecard": {
         "v8.5": {
-          "spearman": 0.4216,
+          "spearman": 0.3672,
           "brier_top_10": null,
           "brier_win": null,
           "brier_make_cut": null,
@@ -742,62 +762,7 @@
         }
       },
       "leader_this_week": "v8.5",
-      "logged_utc": "2026-06-08T14:24:51Z"
-    },
-    {
-      "week": 19,
-      "year": 2026,
-      "event": "RBC Canadian Open",
-      "event_id": 32,
-      "date": "2026-06-14",
-      "field_size": 147,
-      "baseline_variant_id": "v8.5",
-      "scorecard": {
-        "v8.5": {
-          "spearman": 0.2636,
-          "brier_top_10": null,
-          "brier_win": null,
-          "brier_make_cut": null,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-cf": {
-          "spearman": 0.2533,
-          "brier_top_10": 0.1301,
-          "brier_win": 0.0181,
-          "brier_make_cut": 0.2542,
-          "rank_vs_baseline_top20_overlap": 0.95
-        },
-        "v8.6-tal": {
-          "spearman": 0.227,
-          "brier_top_10": 0.1301,
-          "brier_win": 0.0181,
-          "brier_make_cut": 0.2542,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-form": {
-          "spearman": 0.2535,
-          "brier_top_10": 0.1301,
-          "brier_win": 0.0181,
-          "brier_make_cut": 0.2542,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.6-dyn": {
-          "spearman": 0.246,
-          "brier_top_10": 0.1301,
-          "brier_win": 0.0181,
-          "brier_make_cut": 0.2542,
-          "rank_vs_baseline_top20_overlap": 1.0
-        },
-        "v8.7-cfgate": {
-          "spearman": 0.239,
-          "brier_top_10": 0.1301,
-          "brier_win": 0.0181,
-          "brier_make_cut": 0.2542,
-          "rank_vs_baseline_top20_overlap": 1.0
-        }
-      },
-      "leader_this_week": "v8.5",
-      "logged_utc": "2026-06-15T13:55:07Z"
+      "logged_utc": "2026-06-08T13:52:28Z"
     }
   ],
   "current_leader": "v8.5",
@@ -817,7 +782,7 @@
     "flagged_for": "MANUAL_REVIEW",
     "description": "Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events."
   },
-  "last_updated": "2026-06-15T13:55:07Z",
+  "last_updated": "2026-06-08T13:52:33Z",
   "numbering_scheme": "bbi_tracking_week",
   "numbering_notes": "Wk 1 = WM Phoenix Open 2026 (Feb 5-8, BBI tracking start). Cal-week entries before WM Phoenix were dropped 2026-04-28."
 }

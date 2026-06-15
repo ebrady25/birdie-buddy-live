@@ -47,96 +47,6 @@
       }
     },
     {
-      "event": "Memorial Tournament",
-      "event_id": 23,
-      "year": 2026,
-      "completed": "",
-      "scored_at_utc": "2026-06-08T15:08:43Z",
-      "n_compared": 72,
-      "summary": {
-        "mae": 4.47,
-        "bias": 2.36,
-        "rmse": 14.45,
-        "clean_mae": 2.19,
-        "clean_bias": 0.02,
-        "clean_rmse": 3.01,
-        "n_suspect_excluded": 2,
-        "suspect_threshold_pct": 50.0
-      },
-      "by_tier": {
-        "studs": {
-          "n": 4,
-          "mae": 6.64,
-          "bias": 6.64
-        },
-        "anchors": {
-          "n": 12,
-          "mae": 3.05,
-          "bias": 2.48
-        },
-        "mid-tier": {
-          "n": 15,
-          "mae": 1.89,
-          "bias": -0.94
-        },
-        "value": {
-          "n": 25,
-          "mae": 1.82,
-          "bias": -1.65
-        },
-        "punt": {
-          "n": 16,
-          "mae": 11.54,
-          "bias": 10.53
-        }
-      }
-    },
-    {
-      "event": "RBC Canadian Open",
-      "event_id": 32,
-      "year": 2026,
-      "completed": "",
-      "scored_at_utc": "2026-06-15T14:01:01Z",
-      "n_compared": 142,
-      "summary": {
-        "mae": 14.91,
-        "bias": 13.8,
-        "rmse": 35.93,
-        "clean_mae": 3.81,
-        "clean_bias": 2.56,
-        "clean_rmse": 9.58,
-        "n_suspect_excluded": 17,
-        "suspect_threshold_pct": 50.0
-      },
-      "by_tier": {
-        "studs": {
-          "n": 3,
-          "mae": 4.6,
-          "bias": 2.1
-        },
-        "anchors": {
-          "n": 13,
-          "mae": 2.66,
-          "bias": 2.02
-        },
-        "mid-tier": {
-          "n": 22,
-          "mae": 2.81,
-          "bias": -2.05
-        },
-        "value": {
-          "n": 63,
-          "mae": 25.31,
-          "bias": 24.87
-        },
-        "punt": {
-          "n": 41,
-          "mae": 10.04,
-          "bias": 9.91
-        }
-      }
-    },
-    {
       "event": "PGA Championship",
       "event_id": 33,
       "year": 2026,
@@ -273,9 +183,9 @@
     }
   ],
   "season": {
-    "n_events": 6,
-    "mean_mae": 12.06,
-    "mean_bias": 10.41
+    "n_events": 4,
+    "mean_mae": 13.24,
+    "mean_bias": 11.57
   },
-  "last_updated": "2026-06-15T14:01:01Z"
+  "last_updated": "2026-05-25T13:36:42Z"
 }
