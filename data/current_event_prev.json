@@ -1,0 +1,93 @@
+{
+  "event_id": 23,
+  "event_slug": "Memorial_Tournament",
+  "event_snake": "memorial_tournament",
+  "event_name": "the Memorial Tournament presented by Workday",
+  "course": "Muirfield Village Golf Club",
+  "course_slug": "muirfield_village_golf_club",
+  "location": "Dublin, OH",
+  "start_date": "2026-06-04",
+  "week_num": 18,
+  "year": 2026,
+  "par": 72,
+  "yardage": 7547,
+  "team_event": false,
+  "is_major": false,
+  "sg_weights": {
+    "sg_app": 1.2,
+    "sg_putt": 1.15,
+    "sg_arg": 1.1,
+    "sg_ott": 0.95,
+    "_note": "Muirfield Village: Demanding Jack Nicklaus design, 7547y Par-72. APP elevated (long demanding par-4s, approach angles critical). PUTT elevated (bentgrass at 13 stimp, severe undulation). ARG moderate (thick rough demands recovery). OTT reduced (accuracy over distance, tight tee shots). Derived from COURSE_DNA_LIBRARY profile (no explicit sg_weights entry \u2014 knowledge-based)."
+  },
+  "course_weight_override": {
+    "courseFit_pool": 0.22,
+    "courseFit_dfs": 0.17,
+    "_note": "Standard weights. Memorial has rich modern course history (hosted since 1976, annual event). Course fit layer has HIGH confidence \u2014 increase to 0.24/0.19 if Phase 1 coverage > 50%."
+  },
+  "course_form_name": "Memorial Form",
+  "course_history_event_id_fallbacks": [
+    23
+  ],
+  "course_history_year_range": [
+    2017,
+    2025
+  ],
+  "course_history_note": "The Memorial Tournament is an annual event at Muirfield Village Golf Club. No fallback remapping needed \u2014 all historical rounds indexed under event_id=23. Rich course history expected (high field coverage). Verified via COURSE_HISTORY_FALLBACKS.json \u2014 no entry for id=23 (standard direct lookup).",
+  "course_tier_thresholds": {
+    "SPECIALIST": {
+      "min_rounds": 8,
+      "min_sg": 0.5,
+      "mult": 1.25
+    },
+    "COMFORTABLE": {
+      "min_rounds": 4,
+      "min_sg": 0.0,
+      "mult": 1.15
+    },
+    "NEUTRAL": {
+      "min_rounds": 4,
+      "min_sg": -99,
+      "mult": 1.0
+    },
+    "LIMITED": {
+      "min_rounds": 1,
+      "mult": 0.95
+    },
+    "NO_HISTORY": {
+      "mult": 1.0
+    }
+  },
+  "winner_archetype": "Complete player. Muirfield Village rewards all-around excellence: precision off the tee, quality approach play into difficult green complexes, and sharp bentgrass putting. Historical winners include Scheffler (multiple), Cantlay (2x), Rory McIlroy, Bryson DeChambeau \u2014 elite multi-category players. Not a bomber's course; course management and iron precision are primary differentiators.",
+  "course_dna": {
+    "sg_importance": {
+      "sg_app": 0.35,
+      "sg_ott": 0.2,
+      "sg_putt": 0.27,
+      "sg_arg": 0.18
+    },
+    "difficulty": "hard",
+    "greens": "bentgrass",
+    "stimpmeter": 13.0,
+    "rough": 1.12,
+    "is_major": false,
+    "course_fit_leverage": {
+      "favors": [
+        "precision_iron",
+        "bentgrass_putters",
+        "all_around",
+        "course_management"
+      ],
+      "penalizes": [
+        "short_iron_weakness",
+        "poor_bermuda_specialists",
+        "inconsistent_approach"
+      ]
+    }
+  },
+  "pipeline_mode": "active",
+  "bbi_pipeline_action": "FULL \u2014 Standard individual BBI v8.5 rankings. Memorial at Muirfield Village has rich course history (annual event since 1976). Phase 1 should return high field coverage (60%+).",
+  "course_notes": "Muirfield Village Golf Club, Dublin OH. Par-72, 7547y. Designed by Jack Nicklaus, hosted Memorial since 1976. One of the most respected venues on Tour. Elevated greens, significant rough (1.12in), bentgrass greens at 13.0 stimp. Long par-4s require precision approach play. Water in play on several key holes (15, 16). Historical winners are typically elite all-around players.",
+  "auto_detected_at": "2026-06-01T13:14:03.048917+00:00",
+  "detected_by": "mnemosyne_auto"
+}
