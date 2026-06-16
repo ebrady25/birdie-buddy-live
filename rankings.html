@@ -245,6 +245,7 @@
       // Without this, BBI/Skill/Win/T5-T20/MC/Own/Tier all render as "—".
       const normalizePlayerSchema = (p) => {
         const pct = f => (f != null && !isNaN(f)) ? f * 100 : undefined;  // 0-1 -> %
+        if (p.name     == null) p.name     = p.player_name || p.dg_name;  // producer emits player_name; this table reads name
         if (p.win_pct  == null) p.win_pct  = pct(p.prob_win);
         if (p.top_5    == null) p.top_5    = pct(p.prob_top5);
         if (p.top_10   == null) p.top_10   = pct(p.prob_top10);

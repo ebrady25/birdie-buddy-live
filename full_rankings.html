@@ -407,6 +407,7 @@
     if (!rank) rank = await loadJSON('bbi_rankings.json');
 
     const players = (rank && rank.rankings) || [];
+    players.forEach(p => { if (p.name == null) p.name = p.player_name || p.dg_name; });  // producer emits player_name; pages read name
     // Sort by BBI descending
     players.sort((a, b) => (b.bbi_dfs || 0) - (a.bbi_dfs || 0));
     // DFS value proxy = composite points per $1k salary

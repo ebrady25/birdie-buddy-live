@@ -574,6 +574,7 @@
 
       const MAX = 3;
       const players = rankings.players;
+      players.forEach(p => { if (p.name == null) p.name = p.player_name || p.dg_name; });  // producer emits player_name; pages read name
       const weights = rankings.weights_dfs || {};
       const PRIMARY = ['talent', 'courseFit', 'form', 'cutSafety', 'floor', 'ceiling', 'dfsValue', 'strategic'];
       const ADJUST = ['leverage', 'contrarian'];
