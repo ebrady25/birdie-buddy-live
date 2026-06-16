@@ -1,28 +1,30 @@
 {
-  "timestamp": "2026-06-15T19:34:03Z",
-  "phase_checked": "phase1",
-  "next_phase": "phase1_apollo_atlas",
+  "timestamp": "2026-06-16T15:49:37Z",
+  "phase_checked": "phase15",
+  "next_phase": "phase15_aeolus_zeus",
   "status": "green",
   "checks": {
     "current_event": {
       "status": "pass",
       "event_id": 26,
-      "event_name": "U.S. Open",
+      "event_name": "US Open",
       "start_date": "2026-06-18",
-      "days_until_start": 2,
+      "days_until_start": 1,
       "team_event": false,
       "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.29,
+      "duration_s": 0.14,
       "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "n/a",
-      "note": "phase1 has no prior-output gate (first or independent phase)."
+      "status": "pass",
+      "checked": [
+        "bbi_rankings.json (0.0h)"
+      ]
     }
   },
   "recommendations": [],
