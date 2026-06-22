@@ -1,0 +1,24 @@
+{
+  "event": "U.S. Open",
+  "event_id": 26,
+  "week": 20,
+  "year": 2026,
+  "date": "2026-06-22",
+  "bbi_spearman": 0.5282,
+  "bbi_brier_top10": 0.0265,
+  "bbi_brier_win": 0.0067,
+  "bbi_skill_top10_pct": 0.0,
+  "winning_factors": [
+    "strategic",
+    "ceiling",
+    "form"
+  ],
+  "underperforming_factors": [
+    "contrarian",
+    "leverage",
+    "courseFit"
+  ],
+  "field_coverage_pct": 38.9,
+  "n_matched": 28,
+  "n_made_cut": 72
+}

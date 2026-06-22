@@ -16,8 +16,7 @@
     "dg_baseline_mean_brier_top_10": 0.088,
     "dg_baseline_mean_brier_top_5": 0.055,
     "dg_baseline_mean_brier_top_20": 0.143,
-    "dg_baseline_mean_brier_make_cut": 0.172,
-    "notes": "These are the numbers our BBI must match or beat to be a real predictor. Current BBI is computed on top of these DG inputs, so we expect similar or better Brier and hopefully better Spearman from course-weighted factor blending."
+    "dg_baseline_mean_brier_make_cut": 0.172
   },
   "history": [
     {
@@ -30,10 +29,412 @@
       "variants": null,
       "current_leader": null,
       "consecutive_weeks_leading": {}
+    },
+    {
+      "week": 13,
+      "event": "Cadillac Championship",
+      "event_id": 556,
+      "date": "2026-05-03",
+      "variants": {
+        "v8.5": {
+          "spearman": 0.3026,
+          "brier_top10": 0.1047,
+          "brier_win": 0.0131,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.2835,
+          "brier_top10": 0.1047,
+          "brier_win": 0.0131,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0191,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
+        },
+        "v8.6-tal": {
+          "spearman": 0.305,
+          "brier_top10": 0.1047,
+          "brier_win": 0.0131,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0024,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
+        },
+        "v8.6-form": {
+          "spearman": 0.2958,
+          "brier_top10": 0.1047,
+          "brier_win": 0.0131,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0068,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
+        },
+        "v8.6-dyn": {
+          "spearman": 0.2877,
+          "brier_top10": 0.1047,
+          "brier_win": 0.0131,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0149,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.295,
+          "brier_top10": 0.1047,
+          "brier_win": 0.0131,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0076,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "delta_brier_top10_pct_improvement": 0.0
+        }
+      },
+      "current_leader": "v8.6-tal",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 1,
+        "v8.6-form": 0,
+        "v8.6-dyn": 0,
+        "v8.7-cfgate": 0
+      }
+    },
+    {
+      "week": 14,
+      "event": "Truist Championship",
+      "date": "2026-05-10",
+      "variants": {
+        "v8.5": {
+          "spearman": 0.1766,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.1751,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": -0.0015,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.6-tal": {
+          "spearman": 0.1658,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": -0.0108,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.6-form": {
+          "spearman": 0.1813,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": 0.0047,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.6-dyn": {
+          "spearman": 0.1782,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": 0.0016,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.1797,
+          "brier_top10": 0.1209,
+          "brier_win": 0.0144,
+          "delta_spearman_vs_baseline": 0.0031,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 71
+        }
+      },
+      "current_leader": "v8.6-form",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 1,
+        "v8.6-dyn": 0,
+        "v8.7-cfgate": 0
+      }
+    },
+    {
+      "week": 15,
+      "event": "PGA Championship",
+      "event_id": 33,
+      "date": "2026-05-14",
+      "year": 2026,
+      "variants": {
+        "v8.5": {
+          "spearman": 0.4309,
+          "brier_top10": 0.0492,
+          "brier_win": 0.0068,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.4366,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0057,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.6-tal": {
+          "spearman": 0.4532,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0223,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.6-form": {
+          "spearman": 0.4497,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0188,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.6-dyn": {
+          "spearman": 0.4545,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0236,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.445,
+          "brier_top10": 0.0495,
+          "brier_win": 0.0068,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": 0.0141,
+          "delta_brier_top10_vs_baseline": 0.0003,
+          "delta_brier_top10_pct_improvement": -0.61,
+          "n_matched": 151
+        }
+      },
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      }
+    },
+    {
+      "week": 16,
+      "event": "THE CJ CUP Byron Nelson",
+      "event_id": 19,
+      "date": "2026-05-21",
+      "year": 2026,
+      "skipped": true,
+      "skip_reason": "pipeline_not_run \u2014 no shadow models generated for this event",
+      "variants": {},
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "Pipeline miss \u2014 shadow model scoring skipped. Week 16 counts as 0 data point for promotion threshold.",
+      "logged_utc": "2026-05-25T14:17:31.058999+00:00"
+    },
+    {
+      "week": 17,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-28",
+      "year": 2026,
+      "skipped": true,
+      "skip_reason": "no shadow models \u2014 Hephaestus not run for this event",
+      "variants": {},
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "Week 17 backfill. No shadow model scoring. BBI v8.5 Spearman=0.4076 (above 0.40 target). Henley BBI#4 wins.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 18,
+      "event": "the Memorial Tournament presented by Workday",
+      "event_id": 23,
+      "date": "2026-06-04",
+      "year": 2026,
+      "skipped": true,
+      "skip_reason": "no shadow models \u2014 Hephaestus not run for Memorial Tournament",
+      "variants": {},
+      "current_leader": "v8.6-dyn",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 1,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "No Hephaestus output for Memorial. BBI v8.5 Spearman=0.3876; beat DG (+0.033). Poston wins from BBI#51.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 19,
+      "event": "RBC Canadian Open",
+      "event_id": 32,
+      "date": "2026-06-14",
+      "year": 2026,
+      "variants": {
+        "v8.5": {
+          "spearman": 0.199,
+          "brier_top10": 0.0646,
+          "brier_win": 0.007,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.1907,
+          "brier_top10": 0.1716,
+          "brier_win": null,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0083,
+          "delta_brier_top10_vs_baseline": -0.107
+        },
+        "v8.6-tal": {
+          "spearman": 0.1629,
+          "brier_top10": 0.1716,
+          "brier_win": null,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0361,
+          "delta_brier_top10_vs_baseline": -0.107
+        },
+        "v8.6-form": {
+          "spearman": 0.1894,
+          "brier_top10": 0.1716,
+          "brier_win": null,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0096,
+          "delta_brier_top10_vs_baseline": -0.107
+        },
+        "v8.6-dyn": {
+          "spearman": 0.1828,
+          "brier_top10": 0.1716,
+          "brier_win": null,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0162,
+          "delta_brier_top10_vs_baseline": -0.107
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.1772,
+          "brier_top10": 0.1716,
+          "brier_win": null,
+          "is_baseline": false,
+          "delta_spearman_vs_baseline": -0.0218,
+          "delta_brier_top10_vs_baseline": -0.107
+        }
+      },
+      "current_leader": "v8.6-cf",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 0,
+        "v8.6-dyn": 0,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "Baseline v8.5 beat all 5 shadow variants this week. v8.6-cf closest (-0.0083). All consecutive_weeks_leading reset to 0. v8.6-dyn streak (1 week from PGA Championship) broken. Shadow variant Brier scores all worse than baseline (shadow models inherit same probabilities as v8.5 \u2014 Brier reflects probability calibration which didn't change). Season leader by spearman aggregate: v8.6-dyn still leads across weeks 13+15 performance.",
+      "logged_utc": "2026-06-15T00:00:00Z"
+    },
+    {
+      "week": 20,
+      "event": "U.S. Open",
+      "event_id": 26,
+      "date": "2026-06-22",
+      "year": 2026,
+      "variants": {
+        "v8.5": {
+          "spearman": 0.5282,
+          "brier_top10": 0.0265,
+          "brier_win": 0.0067,
+          "is_baseline": true
+        },
+        "v8.6-cf": {
+          "spearman": 0.5309,
+          "brier_top10": 0.0265,
+          "brier_win": 0.0067,
+          "delta_spearman_vs_baseline": 0.0027,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 28
+        },
+        "v8.6-tal": {
+          "spearman": 0.5271,
+          "brier_top10": 0.0265,
+          "brier_win": 0.0067,
+          "delta_spearman_vs_baseline": -0.0011,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 28
+        },
+        "v8.6-form": {
+          "spearman": 0.5452,
+          "brier_top10": 0.0265,
+          "brier_win": 0.0067,
+          "delta_spearman_vs_baseline": 0.017,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 28
+        },
+        "v8.6-dyn": {
+          "spearman": 0.5304,
+          "brier_top10": 0.0265,
+          "brier_win": 0.0067,
+          "delta_spearman_vs_baseline": 0.0022,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 28
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.5238,
+          "brier_top10": 0.0265,
+          "brier_win": 0.0067,
+          "delta_spearman_vs_baseline": -0.0044,
+          "delta_brier_top10_vs_baseline": 0.0,
+          "n_matched": 28
+        }
+      },
+      "current_leader": "v8.6-form",
+      "consecutive_weeks_leading": {
+        "v8.6-cf": 0,
+        "v8.6-tal": 0,
+        "v8.6-form": 1,
+        "v8.6-dyn": 0,
+        "v8.7-cfgate": 0
+      },
+      "promotion_candidate": null,
+      "notes": "v8.6-form wins week 20 (+0.017). 3/5 variants beat baseline. v8.6-form starts consecutive-weeks streak (1 of 3 needed; delta +0.017 below +0.03 threshold). Season aggregate leader still v8.6-dyn.",
+      "logged_utc": "2026-06-22T00:00:00Z"
     }
   ],
-  "current_leader": null,
-  "consecutive_weeks_leading": {},
+  "current_leader": "v8.6-dyn",
+  "consecutive_weeks_leading": {
+    "v8.6-cf": 0,
+    "v8.6-tal": 0,
+    "v8.6-form": 1,
+    "v8.6-dyn": 0,
+    "v8.7-cfgate": 0
+  },
   "promotion_candidate": null,
-  "last_updated": "2026-04-27"
+  "last_updated": "2026-06-22T00:00:00Z"
 }

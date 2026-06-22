@@ -1,66 +1,108 @@
 {
   "task": "mnemosyne-postmortem",
   "state": "done",
-  "timestamp_utc": "2026-06-15T00:00:00Z",
+  "timestamp_utc": "2026-06-22T00:00:00Z",
+  "argus_note": "argus_health.json stale (2026-04-27). Proceeded autonomously \u2014 same established pattern (Jun 15, Jun 8, May 25).",
   "last_event": {
-    "event_name": "RBC Canadian Open",
-    "event_id": 32,
-    "week": 19,
-    "winner": "Cauley, Bud",
-    "winner_score": -27,
-    "winner_bbi_rank": 21
-  },
-  "next_event": {
-    "event_id": 26,
     "event_name": "U.S. Open",
+    "event_id": 26,
     "week": 20,
     "course": "Shinnecock Hills Golf Club",
-    "start_date": "2026-06-18",
-    "is_major": true
+    "completed": "2026-06-22",
+    "winner": "Clark, Wyndham",
+    "winner_score": -4,
+    "winner_bbi_rank": 6,
+    "pipeline_ran": true
   },
-  "spearman_bbi": 0.199,
-  "spearman_dg": 0.2453,
-  "beat_dg": false,
-  "brier_bbi_top10": 0.0646,
-  "brier_skill_top10_pct": 1.3,
+  "next_event": {
+    "event_id": 34,
+    "event_name": "Travelers Championship",
+    "week": 21,
+    "course": "TPC River Highlands",
+    "start_date": "2026-06-25",
+    "is_major": false
+  },
+  "spearman_bbi": 0.5282,
+  "spearman_dg": 0.4794,
+  "beat_dg": true,
+  "brier_bbi_top10": 0.0265,
+  "brier_skill_top10_pct": 0.0,
   "winning_factors": [
-    "courseFit",
-    "form",
-    "ceiling"
+    "strategic",
+    "ceiling",
+    "form"
+  ],
+  "underperforming_factors": [
+    "contrarian",
+    "leverage",
+    "courseFit"
   ],
   "shadow_variants_scored": {
     "v8.6-cf": {
-      "spearman": 0.1907,
-      "delta": -0.0083
+      "spearman": 0.5309,
+      "brier_top10": 0.0265,
+      "delta_spearman": 0.0027
     },
     "v8.6-tal": {
-      "spearman": 0.1629,
-      "delta": -0.0361
+      "spearman": 0.5271,
+      "brier_top10": 0.0265,
+      "delta_spearman": -0.0011
     },
     "v8.6-form": {
-      "spearman": 0.1894,
-      "delta": -0.0096
+      "spearman": 0.5452,
+      "brier_top10": 0.0265,
+      "delta_spearman": 0.017
     },
     "v8.6-dyn": {
-      "spearman": 0.1828,
-      "delta": -0.0162
+      "spearman": 0.5304,
+      "brier_top10": 0.0265,
+      "delta_spearman": 0.0022
     },
     "v8.7-cfgate": {
-      "spearman": 0.1772,
-      "delta": -0.0218
+      "spearman": 0.5238,
+      "brier_top10": 0.0265,
+      "delta_spearman": -0.0044
     }
   },
   "current_competition_leader": "v8.6-dyn",
+  "week_competition_winner": "v8.6-form",
   "promotion_candidate": null,
   "overrides_reset": {
-    "prior_event_id": 32,
-    "prior_count": 0
+    "prior_event_id": 26,
+    "prior_event_name": "U.S. Open",
+    "prior_count": 0,
+    "new_event_id": 34,
+    "new_event_name": "Travelers Championship"
   },
-  "season_avg_bbi_spearman": 0.3739,
+  "jobs_run": {
+    "job_a_postmortem": "done \u2014 postmortem_week20.md written. Spearman 0.5282. BBI beats DG +0.049. Clark BBI#6 wins.",
+    "job_b_calibration": "done \u2014 calibration_week20.json written. Make_cut -37% skill (US Open severity). Win +4.1% skill.",
+    "job_c_shadow_variants": "done \u2014 v8.6-form wins week (+0.017). 3/5 variants beat baseline. v8.6-form starts 1-week consecutive streak.",
+    "job_d_next_event": "done \u2014 Travelers Championship (week 21, id=34, TPC River Highlands) \u2192 CURRENT_EVENT.json"
+  },
+  "files_written": [
+    "Outputs/postmortem_week20.md",
+    "Outputs/calibration_week20.json",
+    "Context/SPEARMAN_TRACKER.json (week 20 appended)",
+    "Context/CALIBRATION_TRACKER.json (week 20 appended)",
+    "Context/MODEL_COMPETITION_TRACKER.json (week 20 appended, v8.6-form leads this week)",
+    "Context/CURRENT_EVENT.json (week 21 Travelers Championship at TPC River Highlands)",
+    "Context/MANUAL_OVERRIDES.json (reset for event_id=34)"
+  ],
   "alerts": [
-    "RBC course history contaminated (2022-2024 = wrong venues). Apollo needs venue-year filter.",
-    "US Open: Apollo MUST filter event_id=26 to year=2018 ONLY (Shinnecock). Other years = wrong venues.",
-    "BBI LOST to DG this week (0.199 vs 0.245). Season avg drops 0.386 \u2192 0.374.",
-    "All shadow variants underperformed baseline v8.5. v8.6-dyn streak reset to 0."
-  ]
+    "CRITICAL: US Open field coverage only 38.9% (28/72 cut-makers in BBI). Scheffler T4, Hatton T7, Niemann T7, Poston T4 all made cut but not in BBI field. Apollo must use DG field-updates endpoint (156 players) not just pre-tournament preds.",
+    "NOTE: BBI BEAT DG this week (Spearman 0.5282 vs DG 0.4794, +0.049). Season record improves to 7W-3L vs DG.",
+    "NOTE: v8.6-form wins week 20 (+0.017 vs baseline). Season aggregate leader still v8.6-dyn. v8.6-form starts consecutive-weeks streak at 1 (needs 3 at +0.03 threshold for promotion flag).",
+    "NOTE: Contrarian severely underperformed (ratio 0.251) at US Open \u2014 chalk result. Consider major_chalk_mode reducing contrarian weight."
+  ],
+  "season_summary_through_week20": {
+    "events_scored": 12,
+    "season_avg_bbi_spearman": 0.3868,
+    "events_above_040": 5,
+    "last_5_avg_bbi_spearman": 0.3907,
+    "best_event": "Valero Texas Open (0.5736)",
+    "events_bbi_beat_dg": 7,
+    "events_with_dg_comparison": 10,
+    "dg_head_to_head_record": "7W-3L"
+  }
 }
