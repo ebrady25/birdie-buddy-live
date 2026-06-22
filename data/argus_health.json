@@ -1,34 +1,32 @@
 {
-  "timestamp": "2026-06-17T12:41:38Z",
-  "phase_checked": "lock",
-  "next_phase": "phase2_lock",
-  "status": "green",
+  "timestamp": "2026-06-22T15:34:21Z",
+  "phase_checked": "mnemosyne",
+  "next_phase": "mnemosyne_postmortem",
+  "status": "red",
   "checks": {
     "current_event": {
-      "status": "pass",
+      "status": "fail",
+      "error": "current_event is stale",
       "event_id": 26,
       "event_name": "US Open",
-      "start_date": "2026-06-18",
-      "days_until_start": 0,
-      "team_event": false,
-      "required_fields_present": true
+      "days_until_start": -5,
+      "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.19,
+      "duration_s": 0.25,
       "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "pass",
-      "checked": [
-        "bbi_rankings.json (0.0h)",
-        "themis.json (0.0h)"
-      ]
+      "status": "n/a",
+      "note": "mnemosyne has no prior-output gate (first or independent phase)."
     }
   },
-  "recommendations": [],
-  "action_required": false,
+  "recommendations": [
+    "MNEMOSYNE has not advanced CURRENT_EVENT \u2014 pipeline will cascade-abort."
+  ],
+  "action_required": true,
   "auto_generated_by": "github-actions / argus_health.py"
 }
