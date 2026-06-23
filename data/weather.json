@@ -1,0 +1,60 @@
+{
+  "latitude": 41.6333,
+  "longitude": -72.6251,
+  "timezone": "America/New_York",
+  "elevation_m": 53.0,
+  "fetched_utc": "2026-06-23T13:25:49.331663+00:00",
+  "event": "Travelers Championship",
+  "course": "TPC River Highlands",
+  "start_date": "2026-06-25",
+  "daily": {
+    "time": [
+      "2026-06-25",
+      "2026-06-26",
+      "2026-06-27",
+      "2026-06-28"
+    ],
+    "temperature_2m_max_f": [
+      82.8,
+      78.8,
+      75.6,
+      83.5
+    ],
+    "temperature_2m_min_f": [
+      55.2,
+      60.3,
+      60.4,
+      55.8
+    ],
+    "precipitation_sum_in": [
+      0.11,
+      0.594,
+      0.0,
+      0.0
+    ],
+    "precipitation_probability_max_pct": [
+      32,
+      64,
+      51,
+      10
+    ],
+    "windspeed_10m_max_mph": [
+      11.2,
+      10.9,
+      6.1,
+      5.2
+    ],
+    "windgusts_10m_max_mph": [
+      21.0,
+      26.2,
+      8.9,
+      16.1
+    ],
+    "winddirection_10m_dominant_deg": [
+      201,
+      226,
+      106,
+      322
+    ]
+  }
+}
