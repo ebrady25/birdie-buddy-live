@@ -1,17 +1,16 @@
 {
-  "timestamp": "2026-06-23T15:38:42Z",
-  "phase_checked": "preview",
-  "next_phase": "phase2_preview",
-  "status": "green",
+  "timestamp": "2026-06-24T11:32:47Z",
+  "phase_checked": "lock",
+  "next_phase": "phase2_lock",
+  "status": "red",
   "checks": {
     "current_event": {
-      "status": "pass",
-      "event_id": 34,
-      "event_name": "Travelers Championship",
-      "start_date": "2026-06-25",
-      "days_until_start": 1,
-      "team_event": false,
-      "required_fields_present": true
+      "status": "fail",
+      "error": "current_event is stale",
+      "event_id": 26,
+      "event_name": "US Open",
+      "days_until_start": -7,
+      "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
@@ -23,12 +22,14 @@
     "prior_outputs": {
       "status": "pass",
       "checked": [
-        "themis.json (0.0h)",
-        "bbi_rankings.json (0.0h)"
+        "bbi_rankings.json (0.0h)",
+        "themis.json (0.0h)"
       ]
     }
   },
-  "recommendations": [],
-  "action_required": false,
+  "recommendations": [
+    "MNEMOSYNE has not advanced CURRENT_EVENT \u2014 pipeline will cascade-abort."
+  ],
+  "action_required": true,
   "auto_generated_by": "github-actions / argus_health.py"
 }
