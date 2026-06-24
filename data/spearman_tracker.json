@@ -379,12 +379,30 @@
       "n_scored": 0,
       "logged_utc": "2026-06-16T06:15:43.020425+00:00",
       "notes": "Skipped: pipeline cascade failure \u2014 wrong-field deployment, BBI never generated for this event."
+    },
+    {
+      "year": 2026,
+      "week": 20,
+      "event": "U.S. Open",
+      "event_id": 26,
+      "completed": "2026-06-21",
+      "skipped": false,
+      "actual_winner": "Clark, Wyndham",
+      "actual_winner_score": -4,
+      "spearman_bbi": 0.5109,
+      "spearman_dg": null,
+      "diff_bbi_vs_dg": null,
+      "winner_bbi_rank": 23,
+      "winner_dg_rank": null,
+      "n_scored": 155,
+      "logged_utc": "2026-06-24T22:59:47.877557Z",
+      "notes": "Scored with 155 common players. BBI top-3 (Scheffler, McIlroy, Rahm) missed cut/finished mid-pack; winner Clark was BBI rank 23. Spearman 0.511 despite top-board miss."
     }
   ],
   "rolling_metrics": {
-    "last_3_mean": 0.4213,
-    "last_5_mean": 0.3511,
-    "last_10_mean": 0.3896,
+    "last_3_mean": 0.4479,
+    "last_5_mean": 0.3903,
+    "last_10_mean": 0.4008,
     "best_event": "Valero Texas Open",
     "best_spearman": 0.5736,
     "worst_event": "Truist Championship",
@@ -558,14 +576,21 @@
       "rho_bbi": 0.3672,
       "rho_dg": null,
       "beat_dg": null
+    },
+    {
+      "week": 20,
+      "event_name": "U.S. Open",
+      "rho_bbi": 0.5109,
+      "rho_dg": null,
+      "beat_dg": null
     }
   ],
   "summary": {
-    "events_scored": 10,
+    "events_scored": 12,
     "events_skipped": 1,
-    "mean_spearman_bbi": 0.3896,
-    "mean_spearman_dg": 0.3153,
-    "mean_diff": 0.0608,
-    "last_updated": "2026-06-16T06:15:43.020848+00:00"
+    "mean_spearman_bbi": 0.4006,
+    "mean_spearman_dg": null,
+    "mean_diff": null,
+    "last_updated": "2026-06-24T22:59:47.877628+00:00"
   }
 }
