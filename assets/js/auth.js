@@ -78,6 +78,19 @@ window.BBI = window.BBI || {};
   const PAID = ['pro', 'all_access', 'sharp'];
   const tierOf = k => TIERS[k] || TIERS.free;
 
+  /* ---------------- DISCOUNT / REFERRAL CODES ----------------
+     Codes match case- and whitespace-insensitively ("Loc City" == "LOCCITY");
+     `label` is the canonical display form. The actual price reduction is applied
+     at checkout by a Stripe coupon of the same code (billing isn't live yet) —
+     signup validates + captures the code so it's ready to honor and so referrals
+     can be attributed. Add new codes here. */
+  const PROMO_CODES = {
+    LOCCITY: { label: 'LocCity', kind: 'Friends & Family',
+               note: "Friends & Family code applied — your discount kicks in at checkout." }
+  };
+  const normalizePromo = c => (c || '').trim().toUpperCase().replace(/\s+/g, '');
+  const lookupPromo = c => PROMO_CODES[normalizePromo(c)] || null;
+
   /* ---------------- PAGE ENTITLEMENTS ----------------
      SINGLE SOURCE OF TRUTH for which pages require which tier. The router
      (applyPageGate) reads this and gates the page's [data-gate-region] —
@@ -105,6 +118,7 @@ window.BBI = window.BBI || {};
   /* ---------------- STORAGE ---------------- */
   const LS_USERS = 'bbi_auth_users_v1';
   const LS_SESSION = 'bbi_auth_session_v1';
+  const LS_PROMO = 'bbi_auth_promo_v1';   // last applied discount code (for checkout to honor)
   const store = {
     get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
@@ -165,13 +179,14 @@ window.BBI = window.BBI || {};
 
   const supabaseBackend = {
     mode: 'live',
-    async signup({ email, password, name }) {
+    async signup({ email, password, name, promo }) {
       email = (email || '').trim().toLowerCase();
       if (!email || !password) throw new Error('Email and password are required.');
       const sb = await getSupabase();
       const fallbackName = name || email.split('@')[0];
       const { data, error } = await sb.auth.signUp({
-        email, password, options: { data: { name: fallbackName } }
+        email, password,
+        options: { data: { name: fallbackName, ...(promo ? { promo } : {}) } }
       });
       if (error) throw new Error(error.message);
       // With email confirmation ON, no session is returned until the user
@@ -219,13 +234,13 @@ window.BBI = window.BBI || {};
      storage directly — they only call BBI.auth.* which calls backend.* */
   const demoBackend = {
     mode: 'demo',
-    async signup({ email, password, name }) {
+    async signup({ email, password, name, promo }) {
       const users = store.get(LS_USERS, {});
       email = email.trim().toLowerCase();
       if (!email || !password) throw new Error('Email and password are required.');
       if (users[email]) throw new Error('An account with that email already exists.');
       users[email] = { name: name || email.split('@')[0], hash: await sha256(password),
-                        tier: 'free', created: new Date().toISOString() };
+                        tier: 'free', promo: promo || null, created: new Date().toISOString() };
       store.set(LS_USERS, users);
       return { email, name: users[email].name, tier: 'free' };
     },
@@ -259,7 +274,8 @@ window.BBI = window.BBI || {};
                        applyPageGate(); applyGates(); renderHeaderControl(); };
 
   const auth = {
-    TIERS, PAID, backend: supabaseBackend, API_BASE,
+    TIERS, PAID, PROMO_CODES, backend: supabaseBackend, API_BASE,
+    validatePromo: lookupPromo,
     user: () => current,
     tier: () => tierOf(current?.tier).key,
     isLoggedIn: () => !!current,
@@ -282,7 +298,11 @@ window.BBI = window.BBI || {};
       return current;
     },
     async signup(data) {
-      const u = await this.backend.signup(data);
+      const raw = (data.promo || '').trim();
+      const promo = lookupPromo(raw);
+      if (raw && !promo) throw new Error("That discount code isn't valid — leave it blank if you don't have one.");
+      const u = await this.backend.signup({ ...data, promo: promo?.label });
+      if (promo) { store.set(LS_PROMO, { code: normalizePromo(raw), label: promo.label, kind: promo.kind }); u.promo = promo.label; }
       if (u && u.needsConfirmation) return u;  // don't log in until email is confirmed
       current = u; store.set(LS_SESSION, u); emit(); return u;
     },
@@ -483,6 +503,11 @@ window.BBI = window.BBI || {};
             <label>Password</label>
             <input name="password" type="password" autocomplete="current-password" required />
           </div>
+          <div class="bbi-field" data-el="promoField" hidden>
+            <label>Discount code <span class="muted" style="font-weight:400">(optional)</span></label>
+            <input name="promo" autocomplete="off" placeholder="e.g. LocCity" style="text-transform:uppercase" />
+            <div data-el="promoHint" style="font-size:var(--fs-xs);margin-top:4px;min-height:1em"></div>
+          </div>
           <div class="bbi-err" data-el="err" role="alert"></div>
           <button class="bbi-submit" type="submit" data-el="submit">Sign in</button>
         </form>
@@ -500,6 +525,7 @@ window.BBI = window.BBI || {};
         t.classList.toggle('on', t.dataset.tab === m));
       q('[data-el="title"]').textContent = m === 'login' ? 'Welcome back' : 'Create your account';
       q('[data-el="nameField"]').hidden = m === 'login';
+      q('[data-el="promoField"]').hidden = m === 'login';
       q('[data-el="submit"]').textContent = m === 'login' ? 'Sign in' : 'Create account';
       q('[data-el="err"]').textContent = '';
       q('[data-el="note"]').innerHTML = auth.backend.mode === 'demo'
@@ -508,6 +534,16 @@ window.BBI = window.BBI || {};
     };
     modalEl.querySelectorAll('.bbi-tab').forEach(t =>
       t.addEventListener('click', () => setMode(t.dataset.tab)));
+
+    // Live feedback as a discount code is typed.
+    const promoInput = q('[name="promo"]'), promoHint = q('[data-el="promoHint"]');
+    if (promoInput) promoInput.addEventListener('input', () => {
+      const raw = promoInput.value.trim();
+      if (!raw) { promoHint.textContent = ''; return; }
+      const p = auth.validatePromo(raw);
+      promoHint.textContent = p ? `✓ ${p.label} — ${p.kind}` : 'Code not recognized';
+      promoHint.style.color = p ? 'var(--positive)' : 'var(--text-muted)';
+    });
     modalEl.addEventListener('click', e => {
       if (e.target === modalEl || e.target.closest('[data-act="close"]')) closeModal();
     });
@@ -520,7 +556,7 @@ window.BBI = window.BBI || {};
       const btn = q('[data-el="submit"]'), err = q('[data-el="err"]');
       const fd = new FormData(form);
       const data = { email: fd.get('email'), password: fd.get('password'),
-                     name: fd.get('name') };
+                     name: fd.get('name'), promo: fd.get('promo') };
       btn.disabled = true; err.textContent = ''; err.style.color = '';
       try {
         if (mode === 'signup') {
