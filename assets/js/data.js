@@ -75,8 +75,11 @@ window.BBI = window.BBI || {};
     const week = current?.week_num ? `Week ${current.week_num}` : '';
     const lastUpdated = current?.last_updated || current?.generated_at;
 
-    // Marquee ticker content
-    const edges = (await load(BBI.data.paths.omnia))?.markets?.win?.top_10_edges || [];
+    // Marquee ticker content — only use live market/pivot feeds if they're for the CURRENT event
+    // (omnia/persephone can lag a stale event; don't show last month's players in the ticker).
+    const curEv = current?.event_name;
+    const omniaData = await load(BBI.data.paths.omnia);
+    const edges = ((omniaData?.event_name || omniaData?.event) === curEv ? omniaData?.markets?.win?.top_10_edges : null) || [];
     const persephone = await load(BBI.data.paths.persephone);
     const tickerItems = [];
     edges.slice(0, 6).forEach(e => {
@@ -84,7 +87,7 @@ window.BBI = window.BBI || {};
       const pp = e.edge_consensus_pp;
       tickerItems.push(`<span><strong>${name}</strong> <span class="up">+${pp?.toFixed(2)}pp</span> market edge</span>`);
     });
-    const movers = persephone?.sections?.probability_shifts?.top_10_movers || [];
+    const movers = ((persephone?.event_name || persephone?.event) === curEv ? persephone?.sections?.probability_shifts?.top_10_movers : null) || [];
     movers.slice(0, 4).forEach(m => {
       const name = fmt.abbrevName(m.name);
       const shift = m.win_shift_pp;
