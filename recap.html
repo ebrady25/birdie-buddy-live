@@ -822,7 +822,11 @@
 
     function renderNarrative(cur) {
       const html = cur.body_html ? sanitize(cur.body_html) : null;
-      if (!html && !cur.summary) return '';
+      // Fall back to the scoring `notes` (every scored event carries one) when the
+      // polished weekly recap body/summary hasn't been written yet — keeps the
+      // narrative panel populated for the latest event instead of silently blank.
+      const notes = (!html && !cur.summary && cur.notes) ? cur.notes : null;
+      if (!html && !cur.summary && !notes) return '';
 
       if (html) {
         return `
@@ -834,10 +838,22 @@
         `;
       }
 
+      if (cur.summary) {
+        return `
+          <div class="recap-panel">
+            <h3>Summary</h3>
+            <div class="recap-narrative-body"><p>${sanitize(cur.summary)}</p></div>
+          </div>
+        `;
+      }
+
+      const paras = String(notes).split(' | ').map(s => s.trim()).filter(Boolean)
+        .map(s => `<p>${sanitize(s)}</p>`).join('');
       return `
         <div class="recap-panel">
-          <h3>Summary</h3>
-          <div class="recap-narrative-body"><p>${sanitize(cur.summary)}</p></div>
+          <h3>Scoring notes</h3>
+          <p class="recap-panel-sub">Candid model self-assessment logged when the event was scored.</p>
+          <div class="recap-narrative-body">${paras}</div>
         </div>
       `;
     }
