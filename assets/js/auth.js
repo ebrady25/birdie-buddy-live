@@ -78,15 +78,17 @@ window.BBI = window.BBI || {};
   const PAID = ['pro', 'all_access', 'sharp'];
   const tierOf = k => TIERS[k] || TIERS.free;
 
-  /* ---------------- DISCOUNT / REFERRAL CODES ----------------
-     Codes match case- and whitespace-insensitively ("Loc City" == "LOCCITY");
-     `label` is the canonical display form. The actual price reduction is applied
-     at checkout by a Stripe coupon of the same code (billing isn't live yet) —
-     signup validates + captures the code so it's ready to honor and so referrals
-     can be attributed. Add new codes here. */
+  /* ---------------- DISCOUNT / COMP CODES ----------------
+     Codes match case- and whitespace-insensitively ("Lock City" == "LOCKCITY");
+     `label` is the canonical display form. A code with `grantsTier` is a 100%-off
+     comp that unlocks that tier permanently at signup — granted server-side by the
+     redeem_promo() Supabase function (the client can't set its own tier). A code
+     without grantsTier is a percentage/Stripe discount applied at checkout (billing
+     not live yet). The grant map is mirrored server-side in redeem_promo; keep them
+     in sync when adding codes. */
   const PROMO_CODES = {
-    LOCCITY: { label: 'LocCity', kind: 'Friends & Family',
-               note: "Friends & Family code applied — your discount kicks in at checkout." }
+    LOCKCITY: { label: 'LockCity', kind: 'Friends & Family', grantsTier: 'sharp',
+                note: "Full access unlocked — free, forever. Welcome in." }
   };
   const normalizePromo = c => (c || '').trim().toUpperCase().replace(/\s+/g, '');
   const lookupPromo = c => PROMO_CODES[normalizePromo(c)] || null;
@@ -118,7 +120,7 @@ window.BBI = window.BBI || {};
   /* ---------------- STORAGE ---------------- */
   const LS_USERS = 'bbi_auth_users_v1';
   const LS_SESSION = 'bbi_auth_session_v1';
-  const LS_PROMO = 'bbi_auth_promo_v1';   // last applied discount code (for checkout to honor)
+  const LS_PROMO = 'bbi_auth_promo_v1';   // last applied promo code (drives applyPromoGrant)
   const store = {
     get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
@@ -221,6 +223,14 @@ window.BBI = window.BBI || {};
       return { email, name, tier };
     },
     async signOut() { try { (await getSupabase()).auth.signOut(); } catch {} },
+    // Redeem a comp code server-side (SECURITY DEFINER fn). Returns the granted
+    // tier (e.g. 'sharp') or null for a non-granting/unknown code. Requires a session.
+    async redeemPromo(code) {
+      const sb = await getSupabase();
+      const { data, error } = await sb.rpc('redeem_promo', { p_code: code });
+      if (error) throw new Error(error.message);
+      return data || null;
+    },
     async accessToken() {
       const sb = await getSupabase();
       const { data: { session } } = await sb.auth.getSession();
@@ -263,6 +273,14 @@ window.BBI = window.BBI || {};
     },
     async session() {                    // PRODUCTION: verify signed cookie/JWT
       return store.get(LS_SESSION, null);
+    },
+    async redeemPromo(code) {            // DEMO: grant the comp tier locally
+      const p = lookupPromo(code);
+      if (!p?.grantsTier) return null;
+      const email = (current?.email || '').trim().toLowerCase();
+      const users = store.get(LS_USERS, {});
+      if (users[email]) { users[email].tier = p.grantsTier; store.set(LS_USERS, users); }
+      return p.grantsTier;
     }
   };
 
@@ -295,6 +313,7 @@ window.BBI = window.BBI || {};
         current = null; store.del(LS_SESSION);
       }
       emit();
+      await this.applyPromoGrant();   // self-heal a pending comp-code grant
       return current;
     },
     async signup(data) {
@@ -303,12 +322,37 @@ window.BBI = window.BBI || {};
       if (raw && !promo) throw new Error("That discount code isn't valid — leave it blank if you don't have one.");
       const u = await this.backend.signup({ ...data, promo: promo?.label });
       if (promo) { store.set(LS_PROMO, { code: normalizePromo(raw), label: promo.label, kind: promo.kind }); u.promo = promo.label; }
-      if (u && u.needsConfirmation) return u;  // don't log in until email is confirmed
-      current = u; store.set(LS_SESSION, u); emit(); return u;
+      if (u && u.needsConfirmation) return u;  // grant applied on first login (see init)
+      current = u; store.set(LS_SESSION, u); emit();
+      await this.applyPromoGrant();            // 100%-off comp codes unlock their tier now
+      return current;
+    },
+    // Redeem a comp code that grants a tier, if it would upgrade the user.
+    // Idempotent + self-healing; the grant is server-enforced (redeem_promo) so it
+    // persists across devices and sessions. Uses the code stored on THIS browser
+    // (LS_PROMO) when present; on explicit login (useMetadata) a free user also lets
+    // the server check the code saved in their signup metadata — covers the case of
+    // confirming/logging in on a different device than they signed up on.
+    async applyPromoGrant({ useMetadata = false } = {}) {
+      if (!current) return;
+      const stored = store.get(LS_PROMO, null);
+      const localCode = (stored && lookupPromo(stored.code)?.grantsTier) ? stored.code : null;
+      const code = localCode != null ? localCode
+                 : (useMetadata && tierOf(current.tier).key === 'free') ? '' : null;
+      if (code === null) return;
+      try {
+        const granted = await this.backend.redeemPromo(code);
+        if (granted && tierOf(granted).rank > tierOf(current.tier).rank) {
+          current = { ...current, tier: granted };
+          store.set(LS_SESSION, current); emit();
+        }
+      } catch (e) { /* keep LS_PROMO and retry next session; never block auth */ }
     },
     async login(data) {
       const u = await this.backend.login(data);
-      current = u; store.set(LS_SESSION, u); emit(); return u;
+      current = u; store.set(LS_SESSION, u); emit();
+      await this.applyPromoGrant({ useMetadata: true });   // unlock a pending comp grant on login
+      return current;
     },
     logout() {
       this.backend.signOut?.();
@@ -505,7 +549,7 @@ window.BBI = window.BBI || {};
           </div>
           <div class="bbi-field" data-el="promoField" hidden>
             <label>Discount code <span class="muted" style="font-weight:400">(optional)</span></label>
-            <input name="promo" autocomplete="off" placeholder="e.g. LocCity" style="text-transform:uppercase" />
+            <input name="promo" autocomplete="off" placeholder="e.g. LockCity" style="text-transform:uppercase" />
             <div data-el="promoHint" style="font-size:var(--fs-xs);margin-top:4px;min-height:1em"></div>
           </div>
           <div class="bbi-err" data-el="err" role="alert"></div>
