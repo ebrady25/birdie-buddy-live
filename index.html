@@ -648,9 +648,9 @@
 <!-- FINAL LOCK -->
 <div class="final-lock">
   <canvas id="finalCanvas"></canvas>
-  <h2 data-reveal="">The door closes<br>Wednesday at 5:08 AM.</h2>
+  <h2 data-reveal="">The door closes<br>Thursday at 6 AM.</h2>
   <p data-reveal="" data-reveal-delay="1">Every week's edge list is sent before the DFS lock. Miss it, and you're betting blind until next Monday.</p>
-  <div class="countdown" id="countdown" data-reveal="" data-reveal-delay="2">Next lock: Wednesday 5:08 AM ET · PGA Championship</div>
+  <div class="countdown" id="countdown" data-reveal="" data-reveal-delay="2">Next lock: Thursday 6:00 AM ET · PGA Championship</div>
   <div class="vault-form" style="margin: 0 auto; max-width: 480px; justify-content: center;" data-reveal="" data-reveal-delay="3">
     <input type="email" placeholder="you@example.com">
     <button class="btn-gold">Request access</button>
@@ -1164,7 +1164,7 @@
       const major = ev.is_major ? ' · MAJOR' : '';
       badge.innerHTML = '<span class="live-dot"></span>Live · ' + name + ' · Week ' + week + major;
       const countdown = document.getElementById('countdown');
-      if (countdown) countdown.textContent = 'Next lock: Wednesday 5:08 AM ET · ' + name;
+      if (countdown) countdown.textContent = 'Next lock: Thursday 6:00 AM ET · ' + name;
     }
 
     if (rank && rank.rankings) {
