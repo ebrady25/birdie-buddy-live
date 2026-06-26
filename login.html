@@ -91,7 +91,7 @@
               ${mode==='signup'?`<div><label>Name</label><input name="name" autocomplete="name"/></div>`:''}
               <div><label>Email</label><input name="email" type="email" autocomplete="email" required/></div>
               <div><label>Password</label><input name="password" type="password" required/></div>
-              ${mode==='signup'?`<div><label>Discount code <span class="muted" style="font-weight:400">(optional)</span></label><input name="promo" autocomplete="off" placeholder="e.g. LockCity" style="text-transform:uppercase"/><div id="ph" style="font-size:var(--fs-xs);margin-top:4px;min-height:1em"></div></div>`:''}
+              ${mode==='signup'?`<div><label>Discount code <span class="muted" style="font-weight:400">(optional)</span></label><input name="promo" autocomplete="off" style="text-transform:uppercase"/><div id="ph" style="font-size:var(--fs-xs);margin-top:4px;min-height:1em"></div></div>`:''}
               <div class="auth-err" id="e" role="alert"></div>
               <button class="btn btn-primary btn-block btn-lg" type="submit" id="s">
                 ${mode==='login'?'Sign in':'Create account'}</button>

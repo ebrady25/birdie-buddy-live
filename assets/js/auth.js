@@ -549,7 +549,7 @@ window.BBI = window.BBI || {};
           </div>
           <div class="bbi-field" data-el="promoField" hidden>
             <label>Discount code <span class="muted" style="font-weight:400">(optional)</span></label>
-            <input name="promo" autocomplete="off" placeholder="e.g. LockCity" style="text-transform:uppercase" />
+            <input name="promo" autocomplete="off" style="text-transform:uppercase" />
             <div data-el="promoHint" style="font-size:var(--fs-xs);margin-top:4px;min-height:1em"></div>
           </div>
           <div class="bbi-err" data-el="err" role="alert"></div>
