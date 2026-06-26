@@ -137,7 +137,6 @@ window.BBI = window.BBI || {};
             <img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />
             <span class="brand-lockup">
               BirdieBuddy
-              <small>PANTHEON · v8.5</small>
             </span>
           </a>
           <div class="nav-links" id="navLinks">
@@ -356,7 +355,7 @@ window.BBI = window.BBI || {};
           <div>
             <a href="index.html" class="brand">
               <img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />
-              <span class="brand-lockup">BirdieBuddy<small>PANTHEON · v8.5</small></span>
+              <span class="brand-lockup">BirdieBuddy</span>
             </a>
             <p class="muted" style="margin-top: var(--space-3); font-size: var(--fs-xs); line-height: 1.6; max-width: 42ch;">
               A 15-agent predictive engine for PGA Tour tournaments.
