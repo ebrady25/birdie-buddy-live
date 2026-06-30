@@ -1,34 +1,24 @@
 {
-  "event_id": 34,
-  "event_slug": "Travelers_Championship",
-  "event_snake": "travelers_championship",
-  "event_name": "Travelers Championship",
-  "course": "TPC River Highlands",
-  "course_slug": "tpc_river_highlands",
-  "location": "Hartford, CT",
-  "start_date": "2026-06-25",
-  "week_num": 21,
+  "event_id": 30,
+  "event_slug": "John_Deere_Classic",
+  "event_snake": "john_deere_classic",
+  "event_name": "John Deere Classic",
+  "course": "TPC Deere Run",
+  "course_slug": "tpc_deere_run",
+  "location": "Silvis, IL",
+  "start_date": "2026-07-02",
+  "week_num": 22,
   "year": 2026,
-  "par": 70,
-  "yardage": 6820,
+  "par": 71,
+  "yardage": 7415,
   "team_event": false,
   "is_major": false,
-  "sg_weights": {
-    "sg_app": 1.15,
-    "sg_putt": 1.15,
-    "sg_arg": 1.05,
-    "sg_ott": 0.95,
-    "_note": "TPC River Highlands: Par-70, 6820y, short birdie-fest on bentgrass. APP dominant (150-200y fairway bucket = 0.24 of shots). PUTT elevated on fast bentgrass (stimp 12.0). ARG moderate — light rough (0.95\") means fewer scrambling penalties but still counts. OTT slightly depressed — accuracy and placement matter more than raw distance on this short layout. Course in COURSE_DNA_LIBRARY (event_id=34); Apollo will use approach bucket weights directly."
-  },
-  "course_weight_override": {
-    "courseFit_pool": 0.22,
-    "courseFit_dfs": 0.17,
-    "_note": "Standard weights. Travelers is annual with rich course history (event_id=34, played every year). Expect HIGH field coverage (>70%). Full 0.22 courseFit weight appropriate."
-  },
-  "course_form_name": "TPC River Highlands Form",
-  "course_history_event_id_fallbacks": [34],
+  "greens": "bentgrass",
+  "stimpmeter": 12.0,
+  "rough": 1.0,
+  "difficulty": "moderate",
+  "course_history_event_id_fallbacks": [30],
   "course_history_year_range": [2017, 2025],
-  "course_history_note": "Travelers Championship has been at TPC River Highlands consistently under event_id=34 for many years. DataGolf should have 7-9 years of round-level data (2017-2025). No fallback mapping needed. Expect 70%+ field coverage in Apollo Phase 1.",
   "course_tier_thresholds": {
     "SPECIALIST": {"min_rounds": 8, "min_sg": 0.5, "mult": 1.25},
     "COMFORTABLE": {"min_rounds": 4, "min_sg": 0.0, "mult": 1.15},
@@ -36,37 +26,9 @@
     "LIMITED": {"min_rounds": 1, "mult": 0.95},
     "NO_HISTORY": {"mult": 1.0}
   },
-  "winner_archetype": "Short-game wizard and iron player who converts on fast bentgrass. TPC River Highlands rewards complete ball-strikers who can attack pins — low rough means approach accuracy translates to makeable birdie putts. Prototypical winner: top-50 globally, strong sg_app (especially 150-200y), positive sg_putt on bentgrass, good make-cut probability in birdie-fest format. Historical winners include Cantlay, Woodland, DeChambeau, Straka, Burns (2022) — mix of elite ball-strikers and opportunistic scorers. OTT matters less than usual; the course plays short and wide.",
-  "course_dna": {
-    "sg_importance": {
-      "sg_app": 0.35,
-      "sg_ott": 0.15,
-      "sg_putt": 0.30,
-      "sg_arg": 0.20
-    },
-    "difficulty": "moderate",
-    "greens": "bentgrass",
-    "stimpmeter": 12.0,
-    "rough": 0.95,
-    "is_major": false,
-    "course_fit_leverage": {
-      "favors": [
-        "iron_players_150_200",
-        "bentgrass_putters",
-        "consistent_ball_strikers",
-        "birdie_machine_profiles",
-        "high_make_cut_probability"
-      ],
-      "penalizes": [
-        "wild_approach_players",
-        "poor_bentgrass_putters",
-        "high_mc_risk"
-      ]
-    }
+  "approach_buckets": {
+    "50_100_fw": 0.14, "100_150_fw": 0.2, "150_200_fw": 0.24,
+    "over_200_fw": 0.18, "under_150_rgh": 0.12, "over_150_rgh": 0.12
   },
-  "pipeline_mode": "active",
-  "bbi_pipeline_action": "FULL — Standard individual BBI v8.5 rankings. Annual event at consistent venue with rich course history. Expect full field (~144 players), high course history coverage (70%+). Standard weight configuration appropriate.",
-  "course_notes": "TPC River Highlands, Cromwell CT (near Hartford). Par-70, ~6820y, bentgrass throughout. Light rough (under 1\"). Fast greens (stimp ~12). Short course rewards scoring — expects -15 to -20 winning score in normal conditions. Historically a weather-influenced event (wind off Connecticut River can change scoring). Event has rich PGA Tour history under event_id=34 (2017-2025 all at same venue). Past champions include Cantlay (2021), Woodland (2019), DeChambeau (2018), Burns (2022), Straka (2023). Players with strong Travelers history are genuine courseFit signals.",
-  "auto_detected_at": "2026-06-22T00:00:00Z",
-  "detected_by": "mnemosyne_auto"
+  "_bridge_note": "Manually rolled by Claude 2026-06-29 (Mon) because MNEMOSYNE froze at Jun 22 and never rolled past Travelers. Identity + course params sourced from COURSE_DNA_LIBRARY profile id=30. SG-weight / course_weight_override / winner_archetype tuning intentionally OMITTED — those are MNEMOSYNE/Apollo's to regenerate; the rich producer (bbi_v85_rich_producer.py) does not read them. TARS to regenerate the canonical config on the next MNEMOSYNE run."
 }
