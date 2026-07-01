@@ -1,7 +1,7 @@
 {
  "tracker_version": "3.0",
  "created": "2026-04-06",
- "last_updated": "2026-07-01T14:47:46.983082+00:00",
+ "last_updated": "2026-07-01T15:26:55.991067+00:00",
  "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
  "goal_framework": {
   "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -452,13 +452,13 @@
    "event_id": 34,
    "date": "2026-06-28",
    "winner": "Hovland, Viktor",
-   "winner_dg_rank": 20,
+   "winner_dg_rank": 14,
    "winner_bbi_rank": 14,
    "winner_in_top10_bbi": false,
    "field_size": 72,
    "spearman_bbi": 0.4018,
-   "spearman_dg": 0.3648,
-   "spearman_delta": 0.037,
+   "spearman_dg": 0.3877,
+   "spearman_delta": 0.0141,
    "spearman_normalized_z": 3.537,
    "beat_dg": true,
    "beat_target": true,
@@ -471,7 +471,7 @@
    "top20_total": 20,
    "model_version": "v8.5",
    "dashboard_version": "backfill",
-   "notes": "Hovland wins (BBI #14). BBI Spearman 0.4018 vs DG 0.3648 (BBI beats DG +0.037). 72/72 matched. Backfilled by Claude 2026-07-01 from historical-raw-data (postmortem in-play source unavailable post-roll)."
+   "notes": "Hovland wins (BBI #14). BBI Spearman 0.4018 vs DG 0.3877 (BBI beats DG +0.0141). 72/72 matched. Backfilled by Claude 2026-07-01 from historical-raw-data (postmortem in-play source unavailable post-roll)."
   }
  ],
  "rolling_metrics": {
@@ -864,21 +864,21 @@
    "n_matched": 72,
    "field_coverage_pct": 100.0,
    "spearman_bbi": 0.4018,
-   "spearman_dg": 0.3648,
-   "diff_bbi_vs_dg": 0.037,
+   "spearman_dg": 0.3877,
+   "diff_bbi_vs_dg": 0.0141,
    "spearman_normalized_z": 3.537,
    "beat_dg": true,
    "beat_target": true,
    "winner": "Hovland, Viktor",
    "winner_bbi_rank": 14,
-   "winner_dg_rank": 20,
+   "winner_dg_rank": 14,
    "winner_in_top10_bbi": false,
    "top5_hits": 1,
    "top10_hits": 2,
    "top20_hits": 12,
    "model_version": "v8.5",
-   "logged_utc": "2026-07-01T14:47:46.983082+00:00",
-   "notes": "Hovland wins (BBI #14). BBI Spearman 0.4018 vs DG 0.3648 (BBI beats DG +0.037). 72/72 matched. Backfilled by Claude 2026-07-01 from historical-raw-data (postmortem in-play source unavailable post-roll)."
+   "logged_utc": "2026-07-01T15:26:55.991067+00:00",
+   "notes": "Hovland wins (BBI #14). BBI Spearman 0.4018 vs DG 0.3877 (BBI beats DG +0.0141). 72/72 matched. Backfilled by Claude 2026-07-01 from historical-raw-data (postmortem in-play source unavailable post-roll)."
   }
  ],
  "summary": {
