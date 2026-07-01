@@ -280,12 +280,17 @@
           p.ch_rounds = agg.rounds;
           p.tier = tierFromCourse(agg.sg_total, agg.rounds);
         }
-        const rf = recentForm && recentForm[p.dg_id];
-        if (Array.isArray(rf) && rf.length) {
-          const sgs = rf.map(r => r.sg_total).filter(v => v != null && !isNaN(v));
-          if (sgs.length) {
-            const mean = sgs.reduce((a, b) => a + b, 0) / sgs.length;
-            p.form_score = Math.max(0, Math.min(100, Math.round(50 + mean * 15)));  // 0-100 recent-form rating (mean recent SG)
+        // Form 0-100 = the producer's recency-weighted, skill-decorrelated form residual
+        // (the SAME value driving the composite's form factor). Fall back to the legacy
+        // mean-SG display only for older data that predates the producer emitting form_score.
+        if (p.form_score == null) {
+          const rf = recentForm && recentForm[p.dg_id];
+          if (Array.isArray(rf) && rf.length) {
+            const sgs = rf.map(r => r.sg_total).filter(v => v != null && !isNaN(v));
+            if (sgs.length) {
+              const mean = sgs.reduce((a, b) => a + b, 0) / sgs.length;
+              p.form_score = Math.max(0, Math.min(100, Math.round(50 + mean * 15)));
+            }
           }
         }
       });
