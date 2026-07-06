@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-07-06T14:03:36Z",
-  "phase_checked": "mnemosyne",
-  "next_phase": "mnemosyne_postmortem",
+  "timestamp": "2026-07-06T18:00:41Z",
+  "phase_checked": "phase1",
+  "next_phase": "phase1_apollo_atlas",
   "status": "red",
   "checks": {
     "current_event": {
@@ -15,13 +15,13 @@
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.15,
+      "duration_s": 0.35,
       "players_returned": 144,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "n/a",
-      "note": "mnemosyne has no prior-output gate (first or independent phase)."
+      "note": "phase1 has no prior-output gate (first or independent phase)."
     }
   },
   "recommendations": [
