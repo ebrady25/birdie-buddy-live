@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-07-07T13:08:05Z",
-  "phase_checked": "phase15",
-  "next_phase": "phase15_aeolus_zeus",
+  "timestamp": "2026-07-07T15:34:47Z",
+  "phase_checked": "preview",
+  "next_phase": "phase2_preview",
   "status": "red",
   "checks": {
     "current_event": {
@@ -15,13 +15,14 @@
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.27,
+      "duration_s": 0.21,
       "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "pass",
       "checked": [
+        "themis.json (0.0h)",
         "bbi_rankings.json (0.0h)"
       ]
     }
