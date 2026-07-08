@@ -138,12 +138,12 @@
    "week": 21,
    "year": 2026,
    "event": "Travelers Championship",
-   "date": "",
+   "date": "2026-06-28",
    "course": "TPC River Highlands",
-   "bbi_spearman": null,
-   "dg_spearman": null,
-   "summary": "Limited postmortem data preserved.",
-   "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p><em>Spearman data not preserved for this event.</em></p></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (20 events):</strong> Currently averaging <strong>0.368</strong>. Our 0.40 target is in reach; 0.50 is the best-in-world stretch goal.</li><li><strong>Promotion bar:</strong> Variant <code>v8.6-cf</code> has met threshold for 5 consecutive weeks \u2014 manual review pending. \u2014 Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events.</li></ul></section><section><h3>Next Event</h3><p><strong>Next up</strong> is the <strong>Genesis Scottish Open</strong> at <strong>The Renaissance Club</strong> (2026-07-09). The pipeline runs Monday \u2014 fresh rankings, shadow variants, and market edges land by Tuesday lock.</p></section></div>"
+   "bbi_spearman": 0.4018,
+   "dg_spearman": 0.3877,
+   "summary": "Hovland wins; BBI had him #14 pre-tournament. BBI Spearman 0.4018 vs DG 0.3877 (+0.0141).",
+   "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p><strong>BBI Spearman 0.4018</strong> vs DataGolf <strong>0.3877</strong> \u2014 BBI beat the industry baseline by <strong>+0.0141</strong> in a near-tie week.</p><p><strong>Hovland, Viktor</strong> won; BBI ranked him <strong>#14</strong> pre-tournament (DataGolf: #14) \u2014 both models had the winner mid-pack.</p></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (14 events):</strong> averaging <strong>0.382</strong>. Our 0.40 target is in reach; 0.50 is the best-in-world stretch goal.</li><li><strong>Promotion bar:</strong> No shadow variant currently qualifies (3+ consecutive weeks at \u22650.03 \u03c1 over baseline). <code>v8.6-cf</code> ran a 5-week qualifying streak in the early season (wks 6\u201310), but the streak broke at RBC Heritage and the variant has trailed baseline since \u2014 consistent with our finding that heavier course-fit weighting does not survive out-of-sample. <code>v8.5</code> holds the throne.</li></ul></section><section><h3>Next Event</h3><p><strong>Next up</strong> was the <strong>John Deere Classic</strong> at <strong>TPC Deere Run</strong> (2026-07-02) \u2014 scored above.</p></section></div>"
   },
   {
    "week": 22,
