@@ -4429,7 +4429,570 @@
           }
         }
       ]
+    },
+    {
+      "metadata": {
+        "event": "John Deere Classic",
+        "week": 22,
+        "year": 2026,
+        "completed": "2026-07-05",
+        "event_id": 30,
+        "description": "Per-factor attribution for top-10 finishers in Week 22 John Deere Classic. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
+      },
+      "players": [
+        {
+          "rank": 1,
+          "name": "Gotterup, Chris",
+          "dg_id": 27774,
+          "finish_pos": 1,
+          "bbi_rank": 2,
+          "bbi_pool_score": 60.6,
+          "factors": {
+            "talent": {
+              "raw": 21.18,
+              "pct": 34.94
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 3.81,
+              "pct": 6.29
+            },
+            "cutSafety": {
+              "raw": 11.45,
+              "pct": 18.89
+            },
+            "floor": {
+              "raw": 4.52,
+              "pct": 7.46
+            },
+            "ceiling": {
+              "raw": 4.75,
+              "pct": 7.84
+            },
+            "leverage": {
+              "raw": 8.02,
+              "pct": 13.23
+            },
+            "contrarian": {
+              "raw": 1.04,
+              "pct": 1.72
+            },
+            "dfsValue": {
+              "raw": 0.85,
+              "pct": 1.4
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 8.25
+            }
+          }
+        },
+        {
+          "rank": 2,
+          "name": "Homa, Max",
+          "dg_id": 17538,
+          "finish_pos": 2,
+          "bbi_rank": 30,
+          "bbi_pool_score": 45.2,
+          "factors": {
+            "talent": {
+              "raw": 15.25,
+              "pct": 33.72
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 5.79,
+              "pct": 12.8
+            },
+            "cutSafety": {
+              "raw": 9.04,
+              "pct": 19.99
+            },
+            "floor": {
+              "raw": 2.16,
+              "pct": 4.78
+            },
+            "ceiling": {
+              "raw": 0.99,
+              "pct": 2.19
+            },
+            "leverage": {
+              "raw": 2.53,
+              "pct": 5.59
+            },
+            "contrarian": {
+              "raw": 2.77,
+              "pct": 6.13
+            },
+            "dfsValue": {
+              "raw": 1.69,
+              "pct": 3.74
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 11.06
+            }
+          }
+        },
+        {
+          "rank": 3,
+          "name": "Kohles, Ben",
+          "dg_id": 16395,
+          "finish_pos": 3,
+          "bbi_rank": 15,
+          "bbi_pool_score": 48.9,
+          "factors": {
+            "talent": {
+              "raw": 14.68,
+              "pct": 30.05
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 8.2,
+              "pct": 16.78
+            },
+            "cutSafety": {
+              "raw": 9.61,
+              "pct": 19.67
+            },
+            "floor": {
+              "raw": 2.44,
+              "pct": 4.99
+            },
+            "ceiling": {
+              "raw": 1.04,
+              "pct": 2.13
+            },
+            "leverage": {
+              "raw": 2.8,
+              "pct": 5.73
+            },
+            "contrarian": {
+              "raw": 3.23,
+              "pct": 6.61
+            },
+            "dfsValue": {
+              "raw": 1.86,
+              "pct": 3.81
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 10.23
+            }
+          }
+        },
+        {
+          "rank": 3,
+          "name": "Glover, Lucas",
+          "dg_id": 7399,
+          "finish_pos": 3,
+          "bbi_rank": 82,
+          "bbi_pool_score": 34.3,
+          "factors": {
+            "talent": {
+              "raw": 10.55,
+              "pct": 30.77
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 2.06,
+              "pct": 6.01
+            },
+            "cutSafety": {
+              "raw": 7.95,
+              "pct": 23.18
+            },
+            "floor": {
+              "raw": 1.46,
+              "pct": 4.26
+            },
+            "ceiling": {
+              "raw": 0.43,
+              "pct": 1.25
+            },
+            "leverage": {
+              "raw": 1.34,
+              "pct": 3.91
+            },
+            "contrarian": {
+              "raw": 3.99,
+              "pct": 11.64
+            },
+            "dfsValue": {
+              "raw": 1.51,
+              "pct": 4.4
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 14.58
+            }
+          }
+        },
+        {
+          "rank": 3,
+          "name": "Hodges, Lee",
+          "dg_id": 25157,
+          "finish_pos": 3,
+          "bbi_rank": 46,
+          "bbi_pool_score": 41.5,
+          "factors": {
+            "talent": {
+              "raw": 12.64,
+              "pct": 30.46
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 6.38,
+              "pct": 15.37
+            },
+            "cutSafety": {
+              "raw": 8.1,
+              "pct": 19.52
+            },
+            "floor": {
+              "raw": 1.51,
+              "pct": 3.64
+            },
+            "ceiling": {
+              "raw": 0.43,
+              "pct": 1.04
+            },
+            "leverage": {
+              "raw": 1.4,
+              "pct": 3.37
+            },
+            "contrarian": {
+              "raw": 4.57,
+              "pct": 11.01
+            },
+            "dfsValue": {
+              "raw": 1.47,
+              "pct": 3.54
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 12.05
+            }
+          }
+        },
+        {
+          "rank": 6,
+          "name": "Suber, Jackson",
+          "dg_id": 29279,
+          "finish_pos": 6,
+          "bbi_rank": 32,
+          "bbi_pool_score": 45.1,
+          "factors": {
+            "talent": {
+              "raw": 14.79,
+              "pct": 32.81
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 9.89,
+              "pct": 21.94
+            },
+            "cutSafety": {
+              "raw": 8.97,
+              "pct": 19.9
+            },
+            "floor": {
+              "raw": 2.19,
+              "pct": 4.86
+            },
+            "ceiling": {
+              "raw": 1.02,
+              "pct": 2.26
+            },
+            "leverage": {
+              "raw": 2.55,
+              "pct": 5.66
+            },
+            "contrarian": {
+              "raw": 2.69,
+              "pct": 5.97
+            },
+            "dfsValue": {
+              "raw": 1.73,
+              "pct": 3.84
+            },
+            "strategic": {
+              "raw": 1.25,
+              "pct": 2.77
+            }
+          }
+        },
+        {
+          "rank": 6,
+          "name": "Meissner, Mac",
+          "dg_id": 28159,
+          "finish_pos": 6,
+          "bbi_rank": 16,
+          "bbi_pool_score": 47.6,
+          "factors": {
+            "talent": {
+              "raw": 17.49,
+              "pct": 36.77
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 5.0,
+              "pct": 10.51
+            },
+            "cutSafety": {
+              "raw": 10.25,
+              "pct": 21.55
+            },
+            "floor": {
+              "raw": 3.0,
+              "pct": 6.31
+            },
+            "ceiling": {
+              "raw": 1.64,
+              "pct": 3.45
+            },
+            "leverage": {
+              "raw": 3.8,
+              "pct": 7.99
+            },
+            "contrarian": {
+              "raw": 3.3,
+              "pct": 6.94
+            },
+            "dfsValue": {
+              "raw": 1.84,
+              "pct": 3.87
+            },
+            "strategic": {
+              "raw": 1.25,
+              "pct": 2.63
+            }
+          }
+        },
+        {
+          "rank": 6,
+          "name": "Ghim, Doug",
+          "dg_id": 24550,
+          "finish_pos": 6,
+          "bbi_rank": 4,
+          "bbi_pool_score": 54.8,
+          "factors": {
+            "talent": {
+              "raw": 17.21,
+              "pct": 31.39
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 9.06,
+              "pct": 16.52
+            },
+            "cutSafety": {
+              "raw": 10.2,
+              "pct": 18.6
+            },
+            "floor": {
+              "raw": 3.04,
+              "pct": 5.54
+            },
+            "ceiling": {
+              "raw": 1.78,
+              "pct": 3.25
+            },
+            "leverage": {
+              "raw": 3.93,
+              "pct": 7.17
+            },
+            "contrarian": {
+              "raw": 3.26,
+              "pct": 5.95
+            },
+            "dfsValue": {
+              "raw": 1.35,
+              "pct": 2.46
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 9.12
+            }
+          }
+        },
+        {
+          "rank": 9,
+          "name": "Johnson, Zach",
+          "dg_id": 6986,
+          "finish_pos": 9,
+          "bbi_rank": 55,
+          "bbi_pool_score": 40.1,
+          "factors": {
+            "talent": {
+              "raw": 11.21,
+              "pct": 27.96
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 6.84,
+              "pct": 17.06
+            },
+            "cutSafety": {
+              "raw": 8.09,
+              "pct": 20.17
+            },
+            "floor": {
+              "raw": 1.46,
+              "pct": 3.64
+            },
+            "ceiling": {
+              "raw": 0.39,
+              "pct": 0.97
+            },
+            "leverage": {
+              "raw": 1.24,
+              "pct": 3.09
+            },
+            "contrarian": {
+              "raw": 4.4,
+              "pct": 10.97
+            },
+            "dfsValue": {
+              "raw": 1.47,
+              "pct": 3.67
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 12.47
+            }
+          }
+        },
+        {
+          "rank": 9,
+          "name": "Blair, Zac",
+          "dg_id": 17639,
+          "finish_pos": 9,
+          "bbi_rank": 45,
+          "bbi_pool_score": 42.3,
+          "factors": {
+            "talent": {
+              "raw": 12.52,
+              "pct": 29.59
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 6.58,
+              "pct": 15.55
+            },
+            "cutSafety": {
+              "raw": 8.47,
+              "pct": 20.02
+            },
+            "floor": {
+              "raw": 1.67,
+              "pct": 3.95
+            },
+            "ceiling": {
+              "raw": 0.42,
+              "pct": 0.99
+            },
+            "leverage": {
+              "raw": 1.46,
+              "pct": 3.45
+            },
+            "contrarian": {
+              "raw": 4.55,
+              "pct": 10.75
+            },
+            "dfsValue": {
+              "raw": 1.64,
+              "pct": 3.88
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 11.82
+            }
+          }
+        },
+        {
+          "rank": 9,
+          "name": "Hisatsune, Ryo",
+          "dg_id": 22760,
+          "finish_pos": 9,
+          "bbi_rank": 14,
+          "bbi_pool_score": 48.9,
+          "factors": {
+            "talent": {
+              "raw": 17.46,
+              "pct": 35.72
+            },
+            "courseFit": {
+              "raw": 0,
+              "pct": 0.0
+            },
+            "form": {
+              "raw": 1.42,
+              "pct": 2.91
+            },
+            "cutSafety": {
+              "raw": 10.4,
+              "pct": 21.28
+            },
+            "floor": {
+              "raw": 3.19,
+              "pct": 6.53
+            },
+            "ceiling": {
+              "raw": 2.07,
+              "pct": 4.23
+            },
+            "leverage": {
+              "raw": 4.43,
+              "pct": 9.06
+            },
+            "contrarian": {
+              "raw": 3.08,
+              "pct": 6.3
+            },
+            "dfsValue": {
+              "raw": 1.83,
+              "pct": 3.74
+            },
+            "strategic": {
+              "raw": 5.0,
+              "pct": 10.23
+            }
+          }
+        }
+      ]
     }
   ],
-  "last_updated": "2026-07-08T18:24:10Z"
+  "last_updated": "2026-07-08T20:02:01Z"
 }
