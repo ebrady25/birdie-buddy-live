@@ -853,9 +853,64 @@
       },
       "leader_this_week": "v8.6-tal",
       "logged_utc": "2026-07-08T18:24:10Z"
+    },
+    {
+      "week": 22,
+      "year": 2026,
+      "event": "John Deere Classic",
+      "event_id": 30,
+      "date": "2026-07-05",
+      "field_size": 144,
+      "baseline_variant_id": "v8.5",
+      "scorecard": {
+        "v8.5": {
+          "spearman": 0.4218,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        },
+        "v8.6-cf": {
+          "spearman": 0.4796,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.85
+        },
+        "v8.6-tal": {
+          "spearman": 0.4424,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        },
+        "v8.6-form": {
+          "spearman": 0.4457,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.75
+        },
+        "v8.6-dyn": {
+          "spearman": 0.4511,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.95
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.4684,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.9
+        }
+      },
+      "leader_this_week": "v8.6-cf",
+      "logged_utc": "2026-07-08T20:02:01Z"
     }
   ],
-  "current_leader": "v8.6-tal",
+  "current_leader": "v8.6-cf",
   "consecutive_weeks_leading": {
     "v8.5": 0,
     "v8.6-cf": 5,
@@ -872,7 +927,7 @@
     "flagged_for": "MANUAL_REVIEW",
     "description": "Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events."
   },
-  "last_updated": "2026-07-08T18:24:10Z",
+  "last_updated": "2026-07-08T20:02:01Z",
   "numbering_scheme": "bbi_tracking_week",
   "numbering_notes": "Wk 1 = WM Phoenix Open 2026 (Feb 5-8, BBI tracking start). Cal-week entries before WM Phoenix were dropped 2026-04-28."
 }
