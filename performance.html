@@ -2741,8 +2741,12 @@
       $('#kpiBestEv').textContent = fmt.num(best.value, 3);
       $('#kpiBestEvName').textContent = best.event || '—';
 
+      // Head-to-head denominator = events WITH a published-baseline comparison, not all
+      // tracked events — mixing the two understates the record when comparisons are
+      // missing and would overstate it if an unflattering one were ever dropped.
+      const h2hTotal = rolling.events_with_dg_comparison ?? rolling.total_events_tracked ?? events.length;
       $('#kpiBeatDg').textContent = rolling.events_bbi_beat_dg ?? 0;
-      $('#kpiTotalEv').textContent = rolling.total_events_tracked ?? events.length;
+      $('#kpiTotalEv').textContent = h2hTotal;
       $('#kpiTotalEv2').textContent = rolling.total_events_tracked ?? events.length;
       $('#kpiAbove40').textContent = rolling.events_above_040 ?? events.filter(e => e.spearman_bbi >= 0.4).length;
       $('#kpiWinHits').textContent = rolling.winners_from_top10_bbi ?? 0;
@@ -2755,6 +2759,7 @@
         const el = document.getElementById('perfHeadlineProof');
         if (!el) return;
         const n       = rolling.total_events_tracked ?? events.length;
+        const h2hN    = rolling.events_with_dg_comparison ?? n;
         const beat    = rolling.events_bbi_beat_dg ?? 0;
         const winHits = rolling.winners_from_top10_bbi ?? 0;
         const winTot  = rolling.winners_from_top10_bbi_total ?? n;
@@ -2762,7 +2767,7 @@
         if (!n) { el.remove(); return; }  // no scored events yet → don't show an empty claim
         const parts = [];
         if (winTot) parts.push(`ranked the eventual winner inside its top 10 in <strong class="gold">${winHits} of ${winTot}</strong> events`);
-        parts.push(`beat the published industry baseline <strong class="gold">${beat} of ${n}</strong> times`);
+        parts.push(`beat the published industry baseline <strong class="gold">${beat} of ${h2hN}</strong> times`);
         el.innerHTML = `This season BBI ${parts.join(', and ')}`
           + (avg != null ? `, at a season-average rank correlation of <strong class="gold">${fmt.num(avg, 2)}</strong>` : '')
           + `. Every number on this page is scored against the truth — no asterisks.`;
