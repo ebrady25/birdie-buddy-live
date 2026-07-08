@@ -155,66 +155,6 @@
     .shadow-bar { height: 4px; background: var(--surface-4); border-radius: 999px; overflow: hidden; margin-top: var(--space-3); }
     .shadow-bar-fill { height: 100%; background: linear-gradient(90deg, var(--gold-600), var(--gold-400)); border-radius: 999px; }
 
-    /* Calibration */
-    .calib-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: var(--space-3);
-    }
-    @media (max-width: 1100px) { .calib-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 700px) { .calib-grid { grid-template-columns: repeat(2, 1fr); } }
-    .calib-market {
-      background: var(--surface-2);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: var(--space-3);
-      text-align: center;
-    }
-    .calib-market .mkt-label { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--text-muted); }
-    .calib-market .mkt-val { font-family: var(--font-mono); font-size: var(--fs-xl); font-weight: 600; color: var(--text-primary); margin: 4px 0; font-variant-numeric: tabular-nums; }
-    .calib-market .mkt-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-dimmed); }
-    .calib-market .skill { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 600; padding-top: 4px; }
-    .calib-market .skill.positive { color: var(--positive); }
-    .calib-market .skill.negative { color: var(--negative); }
-    /* Mini reliability bar — predicted vs actual rate */
-    .calib-bar {
-      position: relative;
-      height: 6px;
-      background: var(--surface-4);
-      border-radius: 999px;
-      margin: var(--space-2) 0 4px;
-      overflow: visible;
-    }
-    .calib-bar-pred {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      background: linear-gradient(90deg, var(--gold-700), var(--gold-400));
-      border-radius: 999px;
-      transition: width var(--dur-base);
-    }
-    .calib-bar-actual {
-      position: absolute;
-      top: -2px;
-      width: 2px;
-      height: 10px;
-      background: var(--text-primary);
-      border-radius: 1px;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
-    }
-    .calib-bar-labels {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 9px;
-      color: var(--text-dimmed);
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-    .calib-bar-labels .pred { color: var(--gold-400); }
-    .calib-bar-labels .actual { color: var(--text-body); }
-
     /* Best/worst events leaderboard */
     .bt-leaderboard {
       display: grid;
@@ -1765,7 +1705,6 @@
     .perf-card,
     .attr-card,
     .shadow-card,
-    .calib-market,
     .bt-leader-card,
     .promo-card {
       background: linear-gradient(180deg, rgba(23, 23, 29, 0.6), rgba(13, 13, 17, 0.55));
@@ -1930,7 +1869,6 @@
         <span class="perf-toc-eyebrow">Jump to</span>
         <a href="#world-rank" class="toc-pill" data-toc="world-rank">Global rank</a>
         <a href="#spearman" class="toc-pill" data-toc="spearman">Spearman <span class="toc-stat" id="tocSpearmanStat"></span></a>
-        <a href="#calibration" class="toc-pill" data-toc="calibration">Calibration</a>
         <a href="#recaps" class="toc-pill" data-toc="recaps">Recaps <span class="toc-stat" id="tocRecapsStat"></span></a>
         <a href="#attribution" class="toc-pill" data-toc="attribution">Attribution</a>
         <a href="#shadow" class="toc-pill" data-toc="shadow">Shadow models</a>
@@ -2067,31 +2005,6 @@
     </section>
 
     <!-- CALIBRATION -->
-    <section class="section" id="calibration" data-reveal data-delay="1">
-      <div class="section-head">
-        <div class="section-head-text">
-          <span class="eyebrow">Probability calibration · Brier score</span>
-          <h2>How accurate the probabilities really are. <span class="section-glance" id="glanceCalibration"></span></h2>
-          <div class="section-info">
-            <button type="button" class="section-info-toggle" onclick="toggleSectionInfo(this)">What is Brier score</button>
-            <div class="section-info-body">
-              <p>In plain terms: when BBI says a player has a 30% chance, does it happen about 30% of the time? <strong>Lower score = more honest probabilities.</strong></p>
-              <p>For each market, <span class="gloss" tabindex="0" data-tip="Mean squared error between predicted probability and binary outcome (0 or 1). Range 0 to 1; lower is better. A perfectly calibrated coin flip on 50/50 events scores 0.25.">Brier score</span> measures how close predicted probabilities land to observed outcomes (lower is better). <span class="gloss" tabindex="0" data-tip="Improvement over the naive baseline of predicting the field-average rate for everyone. 0% = no edge, 100% = perfect predictions.">Skill %</span> is the improvement vs. the naive baseline of predicting the field-average rate for everyone.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="perf-card">
-        <div class="perf-card-head">
-          <h3><span id="calibEvent">—</span></h3>
-          <div class="perf-legend">
-            <span class="perf-legend-item"><span class="muted">Lower Brier = sharper predictions</span></span>
-          </div>
-        </div>
-        <div class="calib-grid" id="calibGrid"></div>
-      </div>
-    </section>
-
     <!-- WEEKLY RECAPS -->
     <section class="section zone-elevated" id="recaps" data-reveal>
       <div class="section-head">
@@ -2440,7 +2353,7 @@
 
     // Scroll-spy: highlight TOC pill matching the section nearest the top
     function initTocScrollSpy() {
-      const sections = ['world-rank','spearman','calibration','recaps','attribution','shadow','backtest','dfs','competition'];
+      const sections = ['world-rank','spearman','recaps','attribution','shadow','backtest','dfs','competition'];
       const pills = new Map(sections.map(id => [id, document.querySelector(`.toc-pill[data-toc="${id}"]`)]));
       if (!('IntersectionObserver' in window)) return;
       const observer = new IntersectionObserver((entries) => {
@@ -2965,48 +2878,6 @@
       // Defer shadow rendering to next task to avoid blocking first paint
       setTimeout(renderShadowVariants, 0);
 
-      // ---------- CALIBRATION ----------
-      const calibHist = (calib?.history || []).filter(e => !/zurich/i.test(e.event || e.event_name || e.name || '')).slice().reverse();
-      const latestCalib = calibHist[0];
-      if (latestCalib) {
-        $('#calibEvent').textContent = `${latestCalib.event} · Wk ${latestCalib.week}`;
-        const markets = latestCalib.markets || {};
-        const mktOrder = ['win', 'top_5', 'top_10', 'top_20', 'make_cut'];
-        const mktLabel = { win: 'Win', top_5: 'Top 5', top_10: 'Top 10', top_20: 'Top 20', make_cut: 'Make Cut' };
-        const mount = $('#calibGrid');
-        mount.innerHTML = mktOrder.map(k => {
-          const m = markets[k];
-          if (!m) return '';
-          const skillCls = m.skill_pct > 10 ? 'positive' : (m.skill_pct < 0 ? 'negative' : '');
-          const skillSign = m.skill_pct > 0 ? '+' : '';
-          // Reliability bar: predicted rate (gold fill) vs actual rate (white tick)
-          // Scale to max(pred, actual) * 1.5 so the bar always shows reasonable proportion
-          const pred = m.mean_pred ?? 0;
-          const actual = m.mean_actual ?? 0;
-          const scale = Math.max(0.05, Math.max(pred, actual) * 1.6);
-          const predPct = clamp((pred / scale) * 100, 0, 100);
-          const actualPct = clamp((actual / scale) * 100, 0, 100);
-          return `
-            <div class="calib-market">
-              <div class="mkt-label">${mktLabel[k]}</div>
-              <div class="mkt-val">${fmt.num(m.brier, 4)}</div>
-              <div class="mkt-meta">Brier · ${fmt.num(m.log_loss, 3)} log-loss</div>
-              <div class="calib-bar-labels">
-                <span class="pred">pred ${(pred*100).toFixed(1)}%</span>
-                <span class="actual">actual ${(actual*100).toFixed(1)}%</span>
-              </div>
-              <div class="calib-bar" title="Predicted ${(pred*100).toFixed(2)}% vs actual ${(actual*100).toFixed(2)}%">
-                <div class="calib-bar-pred" style="width: ${predPct.toFixed(1)}%"></div>
-                <div class="calib-bar-actual" style="left: calc(${actualPct.toFixed(1)}% - 1px)"></div>
-              </div>
-              <div class="skill ${skillCls}">${skillSign}${fmt.num(m.skill_pct, 1)}% vs naive</div>
-            </div>
-          `;
-        }).join('');
-      } else {
-        $('#calibEvent').textContent = 'No calibration history yet';
-      }
-
       // ---------- BACKTEST AGGREGATE ----------
       if (prom?.aggregate) {
         const a = prom.aggregate;
@@ -3359,7 +3230,6 @@
       setRefresh('recaps', recaps?.last_updated, 'postmortem_artifacts');
       setRefresh('attribution', attr?.last_updated || (attrPayload?.metadata?.completed + 'T00:00:00Z'), 'postmortem_artifacts');
       setRefresh('shadow', shadow?.generated_at, 'HEPHAESTUS');
-      setRefresh('calibration', calib?.last_updated, 'Mnemosyne');
       setRefresh('backtest', prom?.run_at_utc, 'PROMETHEUS · GitHub Actions');
       setRefresh('competition', comp?.last_updated, 'Mnemosyne');
 
@@ -3376,8 +3246,6 @@
         meta.event ? `Wk <strong>${meta.week}</strong> · <strong>${attrPayload.players?.length || 0}</strong> finishers` : '');
       setGlance('glanceShadow',
         Object.keys(shadow?.variants || {}).length ? `<strong>${Object.keys(shadow.variants).length}</strong> variants live` : '');
-      const calibCount = (calib?.history || []).length;
-      setGlance('glanceCalibration', calibCount ? `<strong>${calibCount}</strong> events scored` : '');
       setGlance('glanceBacktest',
         prom?.aggregate?.n_events ? `<strong>${prom.aggregate.n_events}</strong> events · ρ <strong>${fmt.num(prom.aggregate.mean_spearman, 3)}</strong>` : '');
       setGlance('glanceCompetition',
