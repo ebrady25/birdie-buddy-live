@@ -1,95 +1,98 @@
 {
-  "schema_version": "1.0",
-  "description": "Reference percentile tiers for golf prediction models, used to position BBI in the global landscape. Estimates based on publicly observable Spearman performance across published forecasters; closed proprietary models are inferred from research-paper benchmarks and tournament-pool track records.",
-  "asof": "2026-04-28",
-  "current_state": {
-    "bbi_season_mean_spearman": 0.4304,
-    "bbi_season_median_spearman": 0.3994,
-    "bbi_best_week": {
-      "value": 0.5736,
-      "event": "Valero Texas Open",
-      "week": 9
-    },
-    "industry_baseline_mean_spearman": 0.3953,
-    "industry_baseline_source": "Published industry pre-tournament odds, mean of 62 events across 2025 + completed 2026 (PROMETHEUS backtest, refreshed weekly)",
-    "events_scored_2026": 5,
-    "head_to_head_record_vs_baseline": {
-      "events_compared": 2,
-      "bbi_won": 0,
-      "tied_within_004": 1,
-      "lost": 1,
-      "note": "Sample too small for confident verdict; 2026 baseline comparison is being computed only on majors and selected events. Real head-to-head will firm up over the season."
-    },
-    "estimated_global_percentile_range": [88, 94],
-    "honest_summary": "BBI averages 0.43 Spearman across 2026's 5 scored events, ranging from 0.34 (RBC Heritage) to 0.57 (Valero). That's measurably ahead of the 0.395 industry baseline (mean across 62 historical events from 2025-2026) — putting us in roughly the 88th-94th percentile of golf forecasting approaches. We're not yet best-in-world (0.55+ sustained), but we're playing in the top-tier commercial bracket from week one."
+ "schema_version": "1.0",
+ "description": "Reference percentile tiers for golf prediction models, used to position BBI in the global landscape. Estimates based on publicly observable Spearman performance across published forecasters; closed proprietary models are inferred from research-paper benchmarks and tournament-pool track records.",
+ "asof": "2026-07-08",
+ "current_state": {
+  "bbi_season_mean_spearman": 0.3822,
+  "bbi_season_median_spearman": 0.3935,
+  "bbi_best_week": {
+   "value": 0.5736,
+   "event": "Valero Texas Open",
+   "week": 9
   },
-  "tiers": [
-    {
-      "id": "noise",
-      "label": "Noise / random",
-      "spearman_min": -1.0,
-      "spearman_threshold": 0.10,
-      "percentile": 50,
-      "examples": "Coin-flip rankings, social-media 'gut feel' picks, hot-hand fallacies",
-      "description": "The unconditional baseline — picking by name recognition or recency. Half of all 'predictions' fall here."
-    },
-    {
-      "id": "casual",
-      "label": "Casual stats blogs",
-      "spearman_min": 0.10,
-      "spearman_threshold": 0.25,
-      "percentile": 75,
-      "examples": "Single-factor regressions, OWGR-only rankings, basic recent-form heuristics",
-      "description": "Better than nothing — captures the broad-strokes tier of player quality but no edge on close decisions."
-    },
-    {
-      "id": "solid",
-      "label": "Solid public models",
-      "spearman_min": 0.25,
-      "spearman_threshold": 0.35,
-      "percentile": 88,
-      "examples": "Multi-factor regressions, modest course-fit, Strokes Gained baselines",
-      "description": "Real signal. The kind of model a careful DFS player builds with public data."
-    },
-    {
-      "id": "top_tier",
-      "label": "Top-tier commercial",
-      "spearman_min": 0.35,
-      "spearman_threshold": 0.45,
-      "percentile": 94,
-      "examples": "Industry pre-tournament odds, paid analytics shops, professional sportsbook traders",
-      "description": "The bar BBI competes against every week. Industry baseline season averages live here."
-    },
-    {
-      "id": "best_in_world",
-      "label": "Best-in-world",
-      "spearman_min": 0.45,
-      "spearman_threshold": 1.0,
-      "percentile": 99,
-      "examples": "Closed proprietary research shops, top university statistics groups, sportsbook internals on majors",
-      "description": "Sustained 0.50+ Spearman across full seasons. A handful of names in the world reach this consistently."
-    }
+  "industry_baseline_mean_spearman": 0.3984,
+  "industry_baseline_source": "Published industry pre-tournament odds, mean of 72 events across 2025 + completed 2026 (PROMETHEUS backtest, refreshed weekly)",
+  "events_scored_2026": 14,
+  "head_to_head_record_vs_baseline": {
+   "events_compared": 14,
+   "bbi_won": 9,
+   "tied_within_004": 0,
+   "lost": 5,
+   "note": "Complete head-to-head: every scored 2026 event now has a published-baseline comparison (wk15/wk17 backfilled 2026-07-08 from the DG pre-tournament archive)."
+  },
+  "estimated_global_percentile_range": [
+   88,
+   94
   ],
-  "bbi_marker": {
-    "tier_id": "top_tier",
-    "spearman_value": 0.4304,
-    "label": "BBI v8.5 — 2026 season avg",
-    "weekly_range": {
-      "min": 0.3437,
-      "max": 0.5736,
-      "min_event": "RBC Heritage",
-      "max_event": "Valero Texas Open"
-    }
+  "honest_summary": "BBI averages 0.382 Spearman across 2026's 14 scored events, ranging from 0.18 (Truist Championship) to 0.57 (Valero Texas Open). Head-to-head we've beaten the published industry baseline in 9 of 14 weeks, while our season mean sits just under the baseline's long-run 0.398 (a few heavy misses cost more than the wins gained) \u2014 squarely inside the top-tier commercial bracket, roughly the 88th\u201394th percentile of golf forecasting approaches. We're not yet best-in-world (0.55+ sustained); we publish every week either way."
+ },
+ "tiers": [
+  {
+   "id": "noise",
+   "label": "Noise / random",
+   "spearman_min": -1.0,
+   "spearman_threshold": 0.1,
+   "percentile": 50,
+   "examples": "Coin-flip rankings, social-media 'gut feel' picks, hot-hand fallacies",
+   "description": "The unconditional baseline \u2014 picking by name recognition or recency. Half of all 'predictions' fall here."
   },
-  "industry_baseline_marker": {
-    "tier_id": "top_tier",
-    "spearman_value": 0.3953,
-    "label": "Industry baseline — 62-event multi-season backtest",
-    "note": "Mean across 47 events of 2025 + 15 events of completed 2026, refreshed every Sunday"
+  {
+   "id": "casual",
+   "label": "Casual stats blogs",
+   "spearman_min": 0.1,
+   "spearman_threshold": 0.25,
+   "percentile": 75,
+   "examples": "Single-factor regressions, OWGR-only rankings, basic recent-form heuristics",
+   "description": "Better than nothing \u2014 captures the broad-strokes tier of player quality but no edge on close decisions."
   },
-  "transparency_notes": [
-    "Percentile estimates are derived from publicly observable model performance across forecasters. Where private models exist, we infer their tier from research papers and tournament-pool track records.",
-    "Spearman is one of several metrics; calibration (Brier score) and top-N hit rates are tracked separately on this page.",
-    "We refuse to make 'best-in-world' claims we can't substantiate. The marker reflects current 2026 season averages, not a single hot week."
-  ]
+  {
+   "id": "solid",
+   "label": "Solid public models",
+   "spearman_min": 0.25,
+   "spearman_threshold": 0.35,
+   "percentile": 88,
+   "examples": "Multi-factor regressions, modest course-fit, Strokes Gained baselines",
+   "description": "Real signal. The kind of model a careful DFS player builds with public data."
+  },
+  {
+   "id": "top_tier",
+   "label": "Top-tier commercial",
+   "spearman_min": 0.35,
+   "spearman_threshold": 0.45,
+   "percentile": 94,
+   "examples": "Industry pre-tournament odds, paid analytics shops, professional sportsbook traders",
+   "description": "The bar BBI competes against every week. Industry baseline season averages live here."
+  },
+  {
+   "id": "best_in_world",
+   "label": "Best-in-world",
+   "spearman_min": 0.45,
+   "spearman_threshold": 1.0,
+   "percentile": 99,
+   "examples": "Closed proprietary research shops, top university statistics groups, sportsbook internals on majors",
+   "description": "Sustained 0.50+ Spearman across full seasons. A handful of names in the world reach this consistently."
+  }
+ ],
+ "bbi_marker": {
+  "tier_id": "top_tier",
+  "spearman_value": 0.3822,
+  "label": "BBI v8.5 \u2014 2026 season avg",
+  "weekly_range": {
+   "min": 0.1766,
+   "max": 0.5736,
+   "min_event": "Truist Championship",
+   "max_event": "Valero Texas Open"
+  }
+ },
+ "industry_baseline_marker": {
+  "tier_id": "top_tier",
+  "spearman_value": 0.3984,
+  "label": "Industry baseline \u2014 72-event multi-season backtest",
+  "note": "Mean across 72 events of 2025 + completed 2026, refreshed every Sunday"
+ },
+ "transparency_notes": [
+  "Percentile estimates are derived from publicly observable model performance across forecasters. Where private models exist, we infer their tier from research papers and tournament-pool track records.",
+  "Spearman is one of several metrics; calibration (Brier score) and top-N hit rates are tracked separately on this page.",
+  "We refuse to make 'best-in-world' claims we can't substantiate. The marker reflects current 2026 season averages, not a single hot week."
+ ]
 }
