@@ -1,7 +1,7 @@
 {
  "tracker_version": "3.0",
  "created": "2026-04-06",
- "last_updated": "2026-07-01T15:26:55.991067+00:00",
+ "last_updated": "2026-07-08T18:28:43.396098+00:00",
  "description": "BBI Model Performance Tracker \u2014 Spearman rank correlation with DG head-to-head comparison, field-size normalization, weekly improvement engine, and layer health across all events",
  "goal_framework": {
   "ultimate_goal": "Best-rated predictive golf model in the world",
@@ -472,6 +472,33 @@
    "model_version": "v8.5",
    "dashboard_version": "backfill",
    "notes": "Hovland wins (BBI #14). BBI Spearman 0.4018 vs DG 0.3877 (BBI beats DG +0.0141). 72/72 matched. Backfilled by Claude 2026-07-01 from historical-raw-data (postmortem in-play source unavailable post-roll)."
+  },
+  {
+   "week": 22,
+   "event": "John Deere Classic",
+   "event_id": 30,
+   "date": "2026-07-05",
+   "winner": "Gotterup, Chris",
+   "winner_dg_rank": 2,
+   "winner_bbi_rank": 2,
+   "winner_in_top10_bbi": true,
+   "field_size": 144,
+   "spearman_bbi": 0.3633,
+   "spearman_dg": 0.3224,
+   "spearman_delta": 0.0409,
+   "spearman_normalized_z": 4.472,
+   "beat_dg": true,
+   "beat_target": false,
+   "beat_baseline": true,
+   "top5_hits": 1,
+   "top5_total": 5,
+   "top10_hits": 2,
+   "top10_total": 10,
+   "top20_hits": 6,
+   "top20_total": 20,
+   "model_version": "v8.5",
+   "dashboard_version": "backfill",
+   "notes": "Gotterup wins (BBI #2). BBI Spearman 0.3633 vs DG 0.3224 (BBI beats DG +0.0409). 141/144 matched. Backfilled by Claude 2026-07-08 from historical-raw-data + DG pre-tournament archive."
   }
  ],
  "rolling_metrics": {
@@ -879,6 +906,33 @@
    "model_version": "v8.5",
    "logged_utc": "2026-07-01T15:26:55.991067+00:00",
    "notes": "Hovland wins (BBI #14). BBI Spearman 0.4018 vs DG 0.3877 (BBI beats DG +0.0141). 72/72 matched. Backfilled by Claude 2026-07-01 from historical-raw-data (postmortem in-play source unavailable post-roll)."
+  },
+  {
+   "year": 2026,
+   "week": 22,
+   "event": "John Deere Classic",
+   "event_id": 30,
+   "course": "TPC Deere Run",
+   "completed": "2026-07-05",
+   "field_size": 144,
+   "n_matched": 141,
+   "field_coverage_pct": 97.9,
+   "spearman_bbi": 0.3633,
+   "spearman_dg": 0.3224,
+   "diff_bbi_vs_dg": 0.0409,
+   "spearman_normalized_z": 4.472,
+   "beat_dg": true,
+   "beat_target": false,
+   "winner": "Gotterup, Chris",
+   "winner_bbi_rank": 2,
+   "winner_dg_rank": 2,
+   "winner_in_top10_bbi": true,
+   "top5_hits": 1,
+   "top10_hits": 2,
+   "top20_hits": 6,
+   "model_version": "v8.5",
+   "logged_utc": "2026-07-08T18:28:43.396098+00:00",
+   "notes": "Gotterup wins (BBI #2). BBI Spearman 0.3633 vs DG 0.3224 (BBI beats DG +0.0409). 141/144 matched. Backfilled by Claude 2026-07-08 from historical-raw-data + DG pre-tournament archive."
   }
  ],
  "summary": {
