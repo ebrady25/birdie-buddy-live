@@ -2512,7 +2512,7 @@
         const baselineTier = tiers.find(t => t.id === (baselineMarker.tier_id || 'top_tier'));
         $('#rankBaselinePercentile').textContent = `~${baselineTier?.percentile || 94}th percentile`;
         $('#rankBaselineContext').textContent =
-          `Spearman ${fmt.num(cs.industry_baseline_mean_spearman, 3)} · 47-event 2025 backtest`;
+          `Spearman ${fmt.num(cs.industry_baseline_mean_spearman, 3)} · ${prom?.aggregate?.n_events ? prom.aggregate.n_events + '-event' : 'multi-season'} backtest`;
 
         // Build the band visualization. Scale is 0.0 → 0.7 Spearman.
         // Bands are widthed by (threshold - prev_threshold) / 0.7 * 100%, clamped.
@@ -2729,9 +2729,13 @@
       if (pmBestEl) pmBestEl.textContent = bestWk != null ? fmt.num(bestWk, 3) : '—';
 
       $('#kpiSeasonSpear').textContent = fmt.num(rolling.season_avg_bbi_spearman, 3);
-      const seasonVsBacktest = (rolling.season_avg_bbi_spearman || 0) - (prom?.aggregate?.mean_spearman || 0);
+      // Only claim a delta vs the backtest when the backtest actually loaded —
+      // defaulting a missing benchmark to 0 turns the KPI into "+<season avg>", a
+      // nonsense (and flattering) number.
+      const backtestMean = prom?.aggregate?.mean_spearman;
       const trendEl = $('#kpiSpearTrend');
-      if (trendEl) {
+      if (trendEl && rolling.season_avg_bbi_spearman != null && backtestMean != null) {
+        const seasonVsBacktest = rolling.season_avg_bbi_spearman - backtestMean;
         trendEl.textContent = (seasonVsBacktest >= 0 ? '+' : '') + fmt.num(seasonVsBacktest, 3);
         trendEl.classList.remove('stat-delta-flat');
         trendEl.classList.add(seasonVsBacktest >= 0 ? 'stat-delta-up' : 'stat-delta-down');
