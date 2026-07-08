@@ -2783,14 +2783,17 @@
       const iw = W - m.l - m.r;
       const ih = H - m.t - m.b;
       const x = (i) => m.l + (events.length <= 1 ? iw / 2 : (i * iw) / (events.length - 1));
-      const y = (v) => m.t + (1 - v) * ih;  // 0..1 clamp; we'll clamp input
+      // Y scale tops out at 0.75, not 1.0 — no weekly ρ has come near 1.0, and the
+      // compressed scale was visually flattening the BBI-vs-baseline gap.
+      const Y_MAX = 0.75;
+      const y = (v) => m.t + (1 - clamp(v, 0, Y_MAX) / Y_MAX) * ih;
 
       const svg = $('#spearmanChart');
       let markup = '';
 
-      // Gridlines + y labels 0, 0.25, 0.5, 0.75, 1.0
+      // Gridlines + y labels 0 → Y_MAX
       markup += '<g class="chart-axis">';
-      [0, 0.25, 0.5, 0.75, 1.0].forEach(v => {
+      [0, 0.25, 0.5, 0.75].forEach(v => {
         markup += `<line class="chart-gridline" x1="${m.l}" y1="${y(v)}" x2="${W - m.r}" y2="${y(v)}"/>`;
         markup += `<text x="${m.l - 8}" y="${y(v) + 3}" text-anchor="end">${v.toFixed(2)}</text>`;
       });
