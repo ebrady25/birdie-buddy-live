@@ -82,6 +82,7 @@
     .lineup-kind[data-kind="Safe"]      { background: rgba(74, 222, 128, 0.10); color: var(--positive); border-color: rgba(74, 222, 128, 0.30); }
     .lineup-kind[data-kind="Leverage"]  { background: rgba(212, 168, 67, 0.12); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
     .lineup-kind[data-kind="Moonshot"]  { background: rgba(168, 85, 247, 0.10); color: #c084fc;         border-color: rgba(168, 85, 247, 0.30); }
+    .lineup-kind[data-kind="GPP"]       { background: rgba(212, 168, 67, 0.12); color: var(--gold-300); border-color: rgba(212, 168, 67, 0.35); }
     .lineup-kind[data-kind="GPP"]       { background: rgba(248, 113, 113, 0.10); color: var(--negative); border-color: rgba(248, 113, 113, 0.3); }
     .lineup-kind[data-kind="Contrarian"]{ background: rgba(168, 85, 247, 0.10); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
 
@@ -529,7 +530,7 @@
     <!-- PAGE HEAD -->
     <header class="page-head">
       <div class="eyebrow">DraftKings main slate · <span id="lineupEvent">—</span></div>
-      <h1>Ten lineups. One optimal grid.</h1>
+      <h1>The week's lineups. One optimal grid.</h1>
       <p>Each lineup is sourced from ODYSSEUS (composition search) then re-scored by THEMIS against 10,000 Monte Carlo tournaments. Ownership projections from HERMES determine leverage. Salaries pulled live from DraftKings. Sort by mean projection, ceiling, ownership, or BBI.</p>
       <div class="page-head-meta">
         <span>Contest <strong>Main Slate</strong></span>
@@ -580,6 +581,7 @@
           <button class="chip" data-filter="Core" aria-pressed="false">Core <span class="count" id="cCore">0</span></button>
           <button class="chip" data-filter="Leverage" aria-pressed="false">Leverage <span class="count" id="cLev">0</span></button>
           <button class="chip" data-filter="Moonshot" aria-pressed="false">Moonshot <span class="count" id="cMoon">0</span></button>
+          <button class="chip" data-filter="GPP" aria-pressed="false">GPP <span class="count" id="cGpp">0</span></button>
         </div>
 
         <div class="divider-vertical"></div>
@@ -974,6 +976,7 @@
       const KIND_FROM_ARCHETYPE = {
         'CASH': 'Cash', 'CORE': 'Core', 'SAFE': 'Cash', 'LEVERAGE': 'Leverage',
         'MOONSHOT': 'Moonshot', 'GPP': 'GPP', 'CONTRARIAN': 'Contrarian',
+        'GPP-STUD': 'GPP', 'GPP-BALANCED': 'GPP', 'GPP-LEVERAGE': 'GPP', 'GPP-DEEP': 'GPP',
       };
       const kindCounters = { Cash: 0, Core: 0, Leverage: 0, Moonshot: 0, Safe: 0, GPP: 0, Contrarian: 0 };
       const enriched = lineups.map((l, idx) => {
