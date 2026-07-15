@@ -1,10 +1,10 @@
 {
   "event": null,
-  "event_id": 541,
+  "event_id": 100,
   "n_simulations": 10000,
   "seed": 42,
   "n_players": 156,
-  "generated_at": "2026-07-14T12:48:30Z",
+  "generated_at": "2026-07-15T14:28:34Z",
   "per_player": {
     "18417": {
       "name": "Scheffler, Scottie",
@@ -20,8 +20,8 @@
       "p95": 72.32,
       "points_std": 17.34
     },
-    "10091": {
-      "name": "McIlroy, Rory",
+    "12294": {
+      "name": "Fleetwood, Tommy",
       "empirical_win_prob": 0.0076,
       "empirical_top5_prob": 0.0325,
       "empirical_top10_prob": 0.0639,
@@ -34,8 +34,8 @@
       "p95": 71.9,
       "points_std": 17.35
     },
-    "12294": {
-      "name": "Fleetwood, Tommy",
+    "10091": {
+      "name": "McIlroy, Rory",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0345,
       "empirical_top10_prob": 0.0674,
@@ -62,8 +62,8 @@
       "p95": 71.68,
       "points_std": 17.32
     },
-    "23604": {
-      "name": "Clark, Wyndham",
+    "19195": {
+      "name": "Rahm, Jon",
       "empirical_win_prob": 0.0071,
       "empirical_top5_prob": 0.0328,
       "empirical_top10_prob": 0.0656,
@@ -76,8 +76,8 @@
       "p95": 72.1,
       "points_std": 17.37
     },
-    "19895": {
-      "name": "Schauffele, Xander",
+    "27774": {
+      "name": "Gotterup, Chris",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0309,
       "empirical_top10_prob": 0.0597,
@@ -90,8 +90,8 @@
       "p95": 71.53,
       "points_std": 17.05
     },
-    "23950": {
-      "name": "Aberg, Ludvig",
+    "18841": {
+      "name": "Hovland, Viktor",
       "empirical_win_prob": 0.005,
       "empirical_top5_prob": 0.0325,
       "empirical_top10_prob": 0.0636,
@@ -104,8 +104,8 @@
       "p95": 72.1,
       "points_std": 17.31
     },
-    "27774": {
-      "name": "Gotterup, Chris",
+    "19895": {
+      "name": "Schauffele, Xander",
       "empirical_win_prob": 0.0076,
       "empirical_top5_prob": 0.0341,
       "empirical_top10_prob": 0.0659,
@@ -118,8 +118,8 @@
       "p95": 72.61,
       "points_std": 17.34
     },
-    "14139": {
-      "name": "Thomas, Justin",
+    "23604": {
+      "name": "Clark, Wyndham",
       "empirical_win_prob": 0.0081,
       "empirical_top5_prob": 0.0318,
       "empirical_top10_prob": 0.0669,
@@ -132,8 +132,8 @@
       "p95": 72.17,
       "points_std": 17.43
     },
-    "19195": {
-      "name": "Rahm, Jon",
+    "14796": {
+      "name": "Hatton, Tyrrell",
       "empirical_win_prob": 0.0052,
       "empirical_top5_prob": 0.0301,
       "empirical_top10_prob": 0.0606,
@@ -146,8 +146,8 @@
       "p95": 71.01,
       "points_std": 17.06
     },
-    "18841": {
-      "name": "Hovland, Viktor",
+    "23323": {
+      "name": "MacIntyre, Robert",
       "empirical_win_prob": 0.0048,
       "empirical_top5_prob": 0.0308,
       "empirical_top10_prob": 0.0607,
@@ -160,8 +160,8 @@
       "p95": 71.55,
       "points_std": 17.15
     },
-    "14609": {
-      "name": "Kim, Si Woo",
+    "6093": {
+      "name": "Rose, Justin",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.03,
       "empirical_top10_prob": 0.0645,
@@ -174,8 +174,8 @@
       "p95": 71.79,
       "points_std": 17.3
     },
-    "23323": {
-      "name": "MacIntyre, Robert",
+    "19483": {
+      "name": "Burns, Sam",
       "empirical_win_prob": 0.0076,
       "empirical_top5_prob": 0.0323,
       "empirical_top10_prob": 0.0629,
@@ -188,8 +188,8 @@
       "p95": 71.89,
       "points_std": 17.37
     },
-    "25362": {
-      "name": "Fitzpatrick, Alex",
+    "17536": {
+      "name": "Spaun, J.J.",
       "empirical_win_prob": 0.0076,
       "empirical_top5_prob": 0.0319,
       "empirical_top10_prob": 0.0639,
@@ -202,8 +202,8 @@
       "p95": 72.19,
       "points_std": 17.35
     },
-    "18554": {
-      "name": "Rai, Aaron",
+    "13900": {
+      "name": "Lowry, Shane",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.0312,
       "empirical_top10_prob": 0.0635,
@@ -216,8 +216,8 @@
       "p95": 71.98,
       "points_std": 17.37
     },
-    "14502": {
-      "name": "Cauley, Bud",
+    "14578": {
+      "name": "Henley, Russell",
       "empirical_win_prob": 0.0069,
       "empirical_top5_prob": 0.0321,
       "empirical_top10_prob": 0.0658,
@@ -230,8 +230,8 @@
       "p95": 72.29,
       "points_std": 17.46
     },
-    "21407": {
-      "name": "Reitan, Kristoffer",
+    "24766": {
+      "name": "Kim, Tom",
       "empirical_win_prob": 0.0066,
       "empirical_top5_prob": 0.0322,
       "empirical_top10_prob": 0.0624,
@@ -244,8 +244,8 @@
       "p95": 72.09,
       "points_std": 17.29
     },
-    "24766": {
-      "name": "Kim, Tom",
+    "23950": {
+      "name": "Aberg, Ludvig",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0351,
       "empirical_top10_prob": 0.0661,
@@ -258,8 +258,8 @@
       "p95": 72.41,
       "points_std": 17.51
     },
-    "23602": {
-      "name": "Hojgaard, Nicolai",
+    "25362": {
+      "name": "Fitzpatrick, Alex",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0311,
       "empirical_top10_prob": 0.0617,
@@ -272,8 +272,8 @@
       "p95": 71.6,
       "points_std": 17.26
     },
-    "14577": {
-      "name": "English, Harris",
+    "14139": {
+      "name": "Thomas, Justin",
       "empirical_win_prob": 0.0074,
       "empirical_top5_prob": 0.0322,
       "empirical_top10_prob": 0.0601,
@@ -286,8 +286,8 @@
       "p95": 71.7,
       "points_std": 17.39
     },
-    "14796": {
-      "name": "Hatton, Tyrrell",
+    "8825": {
+      "name": "Harman, Brian",
       "empirical_win_prob": 0.0058,
       "empirical_top5_prob": 0.0303,
       "empirical_top10_prob": 0.0602,
@@ -300,8 +300,8 @@
       "p95": 71.47,
       "points_std": 17.19
     },
-    "29767": {
-      "name": "Gerard, Ryan",
+    "14609": {
+      "name": "Kim, Si Woo",
       "empirical_win_prob": 0.0056,
       "empirical_top5_prob": 0.0314,
       "empirical_top10_prob": 0.0646,
@@ -328,8 +328,8 @@
       "p95": 72.1,
       "points_std": 17.3
     },
-    "17536": {
-      "name": "Spaun, J.J.",
+    "14577": {
+      "name": "English, Harris",
       "empirical_win_prob": 0.0061,
       "empirical_top5_prob": 0.0287,
       "empirical_top10_prob": 0.0613,
@@ -342,8 +342,8 @@
       "p95": 71.42,
       "points_std": 17.23
     },
-    "20706": {
-      "name": "Wallace, Matt",
+    "18079": {
+      "name": "Niemann, Joaquin",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.036,
       "empirical_top10_prob": 0.0706,
@@ -356,8 +356,8 @@
       "p95": 72.97,
       "points_std": 17.39
     },
-    "26850": {
-      "name": "Svensson, Jesper",
+    "26651": {
+      "name": "Young, Cameron",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0318,
       "empirical_top10_prob": 0.0628,
@@ -370,8 +370,8 @@
       "p95": 72.07,
       "points_std": 17.37
     },
-    "24550": {
-      "name": "Ghim, Doug",
+    "22085": {
+      "name": "Morikawa, Collin",
       "empirical_win_prob": 0.0073,
       "empirical_top5_prob": 0.0331,
       "empirical_top10_prob": 0.0637,
@@ -384,8 +384,8 @@
       "p95": 72.0,
       "points_std": 17.31
     },
-    "17881": {
-      "name": "Yu, Kevin",
+    "18554": {
+      "name": "Rai, Aaron",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.0329,
       "empirical_top10_prob": 0.0638,
@@ -398,8 +398,8 @@
       "p95": 72.05,
       "points_std": 17.37
     },
-    "21891": {
-      "name": "Kitayama, Kurt",
+    "13872": {
+      "name": "Bradley, Keegan",
       "empirical_win_prob": 0.0058,
       "empirical_top5_prob": 0.0319,
       "empirical_top10_prob": 0.0653,
@@ -412,8 +412,8 @@
       "p95": 72.03,
       "points_std": 17.28
     },
-    "20730": {
-      "name": "Perez, Victor",
+    "21407": {
+      "name": "Reitan, Kristoffer",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0311,
       "empirical_top10_prob": 0.0666,
@@ -426,8 +426,8 @@
       "p95": 72.2,
       "points_std": 17.24
     },
-    "6430": {
-      "name": "Scott, Adam",
+    "23602": {
+      "name": "Hojgaard, Nicolai",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0339,
       "empirical_top10_prob": 0.0644,
@@ -440,8 +440,8 @@
       "p95": 71.99,
       "points_std": 17.38
     },
-    "8825": {
-      "name": "Harman, Brian",
+    "26096": {
+      "name": "Bhatia, Akshay",
       "empirical_win_prob": 0.0048,
       "empirical_top5_prob": 0.0307,
       "empirical_top10_prob": 0.0611,
@@ -454,8 +454,8 @@
       "p95": 71.61,
       "points_std": 17.18
     },
-    "17576": {
-      "name": "Conners, Corey",
+    "20730": {
+      "name": "Perez, Victor",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.0304,
       "empirical_top10_prob": 0.0641,
@@ -468,8 +468,8 @@
       "p95": 71.91,
       "points_std": 17.31
     },
-    "26745": {
-      "name": "Chacarra, Eugenio",
+    "17576": {
+      "name": "Conners, Corey",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.029,
       "empirical_top10_prob": 0.0599,
@@ -482,8 +482,8 @@
       "p95": 71.4,
       "points_std": 17.14
     },
-    "18474": {
-      "name": "Smalley, Alex",
+    "16841": {
+      "name": "Lee, Min Woo",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0298,
       "empirical_top10_prob": 0.0635,
@@ -496,8 +496,8 @@
       "p95": 72.07,
       "points_std": 17.28
     },
-    "13900": {
-      "name": "Lowry, Shane",
+    "18634": {
+      "name": "McNealy, Maverick",
       "empirical_win_prob": 0.0058,
       "empirical_top5_prob": 0.03,
       "empirical_top10_prob": 0.06,
@@ -510,8 +510,8 @@
       "p95": 71.4,
       "points_std": 17.17
     },
-    "21756": {
-      "name": "Cole, Eric",
+    "19841": {
+      "name": "DeChambeau, Bryson",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0351,
       "empirical_top10_prob": 0.068,
@@ -524,8 +524,8 @@
       "p95": 72.49,
       "points_std": 17.36
     },
-    "11889": {
-      "name": "Fox, Ryan",
+    "12965": {
+      "name": "Fowler, Rickie",
       "empirical_win_prob": 0.0067,
       "empirical_top5_prob": 0.0325,
       "empirical_top10_prob": 0.0664,
@@ -538,8 +538,8 @@
       "p95": 72.54,
       "points_std": 17.37
     },
-    "23475": {
-      "name": "Novak, Andrew",
+    "14838": {
+      "name": "Reed, Patrick",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0294,
       "empirical_top10_prob": 0.0602,
@@ -552,8 +552,8 @@
       "p95": 71.66,
       "points_std": 17.09
     },
-    "21362": {
-      "name": "Hillier, Daniel",
+    "14181": {
+      "name": "Detry, Thomas",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0325,
       "empirical_top10_prob": 0.066,
@@ -566,8 +566,8 @@
       "p95": 72.37,
       "points_std": 17.45
     },
-    "13126": {
-      "name": "Taylor, Nick",
+    "24968": {
+      "name": "Griffin, Ben",
       "empirical_win_prob": 0.0057,
       "empirical_top5_prob": 0.0315,
       "empirical_top10_prob": 0.0672,
@@ -580,8 +580,8 @@
       "p95": 72.2,
       "points_std": 17.31
     },
-    "17543": {
-      "name": "Kim, Michael",
+    "20706": {
+      "name": "Wallace, Matt",
       "empirical_win_prob": 0.0066,
       "empirical_top5_prob": 0.0334,
       "empirical_top10_prob": 0.0645,
@@ -594,8 +594,8 @@
       "p95": 72.42,
       "points_std": 17.34
     },
-    "19396": {
-      "name": "Knapp, Jake",
+    "18586": {
+      "name": "Smith, Jordan",
       "empirical_win_prob": 0.0053,
       "empirical_top5_prob": 0.0308,
       "empirical_top10_prob": 0.0586,
@@ -608,8 +608,8 @@
       "p95": 71.29,
       "points_std": 17.21
     },
-    "18586": {
-      "name": "Smith, Jordan",
+    "13562": {
+      "name": "Matsuyama, Hideki",
       "empirical_win_prob": 0.0066,
       "empirical_top5_prob": 0.0339,
       "empirical_top10_prob": 0.0677,
@@ -622,8 +622,8 @@
       "p95": 72.57,
       "points_std": 17.42
     },
-    "16841": {
-      "name": "Lee, Min Woo",
+    "26850": {
+      "name": "Svensson, Jesper",
       "empirical_win_prob": 0.0046,
       "empirical_top5_prob": 0.0284,
       "empirical_top10_prob": 0.0586,
@@ -636,8 +636,8 @@
       "p95": 71.4,
       "points_std": 17.02
     },
-    "27194": {
-      "name": "Hall, Harry",
+    "29767": {
+      "name": "Gerard, Ryan",
       "empirical_win_prob": 0.0058,
       "empirical_top5_prob": 0.0311,
       "empirical_top10_prob": 0.0649,
@@ -650,8 +650,8 @@
       "p95": 72.15,
       "points_std": 17.38
     },
-    "28159": {
-      "name": "Meissner, Mac",
+    "14636": {
+      "name": "Spieth, Jordan",
       "empirical_win_prob": 0.0076,
       "empirical_top5_prob": 0.0308,
       "empirical_top10_prob": 0.0651,
@@ -664,8 +664,8 @@
       "p95": 71.68,
       "points_std": 17.28
     },
-    "25569": {
-      "name": "Stevens, Sam",
+    "7655": {
+      "name": "Molinari, Francesco",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0351,
       "empirical_top10_prob": 0.067,
@@ -678,8 +678,8 @@
       "p95": 72.5,
       "points_std": 17.52
     },
-    "28984": {
-      "name": "Puig, David",
+    "27194": {
+      "name": "Hall, Harry",
       "empirical_win_prob": 0.0058,
       "empirical_top5_prob": 0.0323,
       "empirical_top10_prob": 0.0651,
@@ -692,8 +692,8 @@
       "p95": 71.99,
       "points_std": 17.32
     },
-    "22259": {
-      "name": "Del Rey, Alejandro",
+    "17538": {
+      "name": "Homa, Max",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0338,
       "empirical_top10_prob": 0.0662,
@@ -706,8 +706,8 @@
       "p95": 72.48,
       "points_std": 17.44
     },
-    "29197": {
-      "name": "Brennan, Michael",
+    "21891": {
+      "name": "Kitayama, Kurt",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0312,
       "empirical_top10_prob": 0.0657,
@@ -720,8 +720,8 @@
       "p95": 72.13,
       "points_std": 17.35
     },
-    "23465": {
-      "name": "Greyserman, Max",
+    "15856": {
+      "name": "Smith, Cameron",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.03,
       "empirical_top10_prob": 0.0648,
@@ -734,8 +734,8 @@
       "p95": 71.73,
       "points_std": 17.28
     },
-    "14838": {
-      "name": "Reed, Patrick",
+    "25601": {
+      "name": "Jordan, Matthew",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.0326,
       "empirical_top10_prob": 0.064,
@@ -748,8 +748,8 @@
       "p95": 72.18,
       "points_std": 17.28
     },
-    "13764": {
-      "name": "Parry, John",
+    "26649": {
+      "name": "Thorbjornsen, Michael",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0329,
       "empirical_top10_prob": 0.0664,
@@ -762,8 +762,8 @@
       "p95": 72.24,
       "points_std": 17.37
     },
-    "14795": {
-      "name": "Canter, Laurie",
+    "13764": {
+      "name": "Parry, John",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0307,
       "empirical_top10_prob": 0.0639,
@@ -776,8 +776,8 @@
       "p95": 71.91,
       "points_std": 17.33
     },
-    "27900": {
-      "name": "Potgieter, Aldrich",
+    "10419": {
+      "name": "Noren, Alex",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0342,
       "empirical_top10_prob": 0.0662,
@@ -790,8 +790,8 @@
       "p95": 72.45,
       "points_std": 17.34
     },
-    "21944": {
-      "name": "Moore, Taylor",
+    "21756": {
+      "name": "Cole, Eric",
       "empirical_win_prob": 0.0069,
       "empirical_top5_prob": 0.0313,
       "empirical_top10_prob": 0.063,
@@ -804,8 +804,8 @@
       "p95": 71.73,
       "points_std": 17.19
     },
-    "22833": {
-      "name": "Echavarria, Nico",
+    "29279": {
+      "name": "Suber, Jackson",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0338,
       "empirical_top10_prob": 0.068,
@@ -818,8 +818,8 @@
       "p95": 72.54,
       "points_std": 17.34
     },
-    "28309": {
-      "name": "Coody, Pierceson",
+    "17606": {
+      "name": "Berger, Daniel",
       "empirical_win_prob": 0.0065,
       "empirical_top5_prob": 0.0318,
       "empirical_top10_prob": 0.0624,
@@ -832,8 +832,8 @@
       "p95": 71.85,
       "points_std": 17.3
     },
-    "23841": {
-      "name": "Neergaard-Petersen, Rasmus",
+    "11889": {
+      "name": "Fox, Ryan",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0329,
       "empirical_top10_prob": 0.0635,
@@ -846,8 +846,8 @@
       "p95": 72.16,
       "points_std": 17.25
     },
-    "22465": {
-      "name": "Penge, Marco",
+    "17488": {
+      "name": "Im, Sungjae",
       "empirical_win_prob": 0.0069,
       "empirical_top5_prob": 0.0342,
       "empirical_top10_prob": 0.0661,
@@ -860,8 +860,8 @@
       "p95": 72.6,
       "points_std": 17.31
     },
-    "10419": {
-      "name": "Noren, Alex",
+    "17365": {
+      "name": "Mitchell, Keith",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.0316,
       "empirical_top10_prob": 0.062,
@@ -874,8 +874,8 @@
       "p95": 71.7,
       "points_std": 17.26
     },
-    "30445": {
-      "name": "Ayora, Angel",
+    "32457": {
+      "name": "Keefer, Johnny",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0322,
       "empirical_top10_prob": 0.0648,
@@ -888,8 +888,8 @@
       "p95": 72.28,
       "points_std": 17.42
     },
-    "20722": {
-      "name": "Schmid, Matti",
+    "6430": {
+      "name": "Scott, Adam",
       "empirical_win_prob": 0.0056,
       "empirical_top5_prob": 0.0343,
       "empirical_top10_prob": 0.0633,
@@ -902,8 +902,8 @@
       "p95": 71.86,
       "points_std": 17.14
     },
-    "28635": {
-      "name": "McCarty, Matt",
+    "15310": {
+      "name": "Li, Haotong",
       "empirical_win_prob": 0.0082,
       "empirical_top5_prob": 0.0357,
       "empirical_top10_prob": 0.0656,
@@ -916,8 +916,8 @@
       "p95": 72.39,
       "points_std": 17.27
     },
-    "25131": {
-      "name": "Hill, Calum",
+    "9771": {
+      "name": "Day, Jason",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0338,
       "empirical_top10_prob": 0.0652,
@@ -930,8 +930,8 @@
       "p95": 72.34,
       "points_std": 17.32
     },
-    "18770": {
-      "name": "Rozner, Antoine",
+    "11276": {
+      "name": "Horschel, Billy",
       "empirical_win_prob": 0.0071,
       "empirical_top5_prob": 0.0351,
       "empirical_top10_prob": 0.0682,
@@ -944,8 +944,8 @@
       "p95": 72.49,
       "points_std": 17.44
     },
-    "21074": {
-      "name": "Nakajima, Keita",
+    "18770": {
+      "name": "Rozner, Antoine",
       "empirical_win_prob": 0.0056,
       "empirical_top5_prob": 0.029,
       "empirical_top10_prob": 0.0602,
@@ -958,8 +958,8 @@
       "p95": 71.59,
       "points_std": 17.18
     },
-    "23014": {
-      "name": "Theegala, Sahith",
+    "22322": {
+      "name": "McKibbin, Tom",
       "empirical_win_prob": 0.0065,
       "empirical_top5_prob": 0.0305,
       "empirical_top10_prob": 0.0625,
@@ -972,8 +972,8 @@
       "p95": 71.64,
       "points_std": 17.24
     },
-    "17488": {
-      "name": "Im, Sungjae",
+    "26947": {
+      "name": "Jarvis, Casey",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0309,
       "empirical_top10_prob": 0.0627,
@@ -986,8 +986,8 @@
       "p95": 71.98,
       "points_std": 17.28
     },
-    "16243": {
-      "name": "Koepka, Brooks",
+    "29433": {
+      "name": "Bridgeman, Jacob",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.032,
       "empirical_top10_prob": 0.0679,
@@ -1000,8 +1000,8 @@
       "p95": 72.11,
       "points_std": 17.42
     },
-    "32457": {
-      "name": "Keefer, Johnny",
+    "26745": {
+      "name": "Chacarra, Eugenio",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0306,
       "empirical_top10_prob": 0.0654,
@@ -1014,8 +1014,8 @@
       "p95": 72.18,
       "points_std": 17.43
     },
-    "20085": {
-      "name": "Lindell, Oliver",
+    "23838": {
+      "name": "Hojgaard, Rasmus",
       "empirical_win_prob": 0.0048,
       "empirical_top5_prob": 0.0317,
       "empirical_top10_prob": 0.0634,
@@ -1028,8 +1028,8 @@
       "p95": 71.9,
       "points_std": 17.19
     },
-    "22322": {
-      "name": "McKibbin, Tom",
+    "21554": {
+      "name": "Poston, J.T.",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.0323,
       "empirical_top10_prob": 0.0655,
@@ -1042,8 +1042,8 @@
       "p95": 72.32,
       "points_std": 17.45
     },
-    "26649": {
-      "name": "Thorbjornsen, Michael",
+    "13126": {
+      "name": "Taylor, Nick",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.0345,
       "empirical_top10_prob": 0.0661,
@@ -1056,8 +1056,8 @@
       "p95": 72.69,
       "points_std": 17.41
     },
-    "15326": {
-      "name": "Sullivan, Andy",
+    "23465": {
+      "name": "Greyserman, Max",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.0341,
       "empirical_top10_prob": 0.067,
@@ -1070,8 +1070,8 @@
       "p95": 72.57,
       "points_std": 17.42
     },
-    "13412": {
-      "name": "Olesen, Thorbjorn",
+    "14795": {
+      "name": "Canter, Laurie",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0309,
       "empirical_top10_prob": 0.0643,
@@ -1084,8 +1084,8 @@
       "p95": 72.02,
       "points_std": 17.26
     },
-    "16475": {
-      "name": "Forrest, Grant",
+    "23475": {
+      "name": "Novak, Andrew",
       "empirical_win_prob": 0.0058,
       "empirical_top5_prob": 0.029,
       "empirical_top10_prob": 0.0599,
@@ -1098,8 +1098,8 @@
       "p95": 71.32,
       "points_std": 17.23
     },
-    "19960": {
-      "name": "Pavon, Matthieu",
+    "17064": {
+      "name": "Herbert, Lucas",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.0335,
       "empirical_top10_prob": 0.0635,
@@ -1112,8 +1112,8 @@
       "p95": 71.93,
       "points_std": 17.34
     },
-    "20084": {
-      "name": "Lindberg, Mikael",
+    "18474": {
+      "name": "Smalley, Alex",
       "empirical_win_prob": 0.0071,
       "empirical_top5_prob": 0.0318,
       "empirical_top10_prob": 0.0651,
@@ -1126,8 +1126,8 @@
       "p95": 71.99,
       "points_std": 17.35
     },
-    "21646": {
-      "name": "Ferguson, Ewen",
+    "21362": {
+      "name": "Hillier, Daniel",
       "empirical_win_prob": 0.0079,
       "empirical_top5_prob": 0.0345,
       "empirical_top10_prob": 0.0658,
@@ -1140,8 +1140,8 @@
       "p95": 72.27,
       "points_std": 17.42
     },
-    "15310": {
-      "name": "Li, Haotong",
+    "16243": {
+      "name": "Koepka, Brooks",
       "empirical_win_prob": 0.0076,
       "empirical_top5_prob": 0.0351,
       "empirical_top10_prob": 0.0672,
@@ -1154,8 +1154,8 @@
       "p95": 72.6,
       "points_std": 17.4
     },
-    "29925": {
-      "name": "Yellamaraju, Sudarshan",
+    "23841": {
+      "name": "Neergaard-Petersen, Rasmus",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0343,
       "empirical_top10_prob": 0.0644,
@@ -1168,8 +1168,8 @@
       "p95": 72.16,
       "points_std": 17.33
     },
-    "15676": {
-      "name": "Norgaard, Niklas",
+    "14502": {
+      "name": "Cauley, Bud",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.0309,
       "empirical_top10_prob": 0.0613,
@@ -1182,8 +1182,8 @@
       "p95": 71.89,
       "points_std": 17.37
     },
-    "17550": {
-      "name": "Van Rooyen, Erik",
+    "29197": {
+      "name": "Brennan, Michael",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0335,
       "empirical_top10_prob": 0.0664,
@@ -1196,8 +1196,8 @@
       "p95": 72.21,
       "points_std": 17.38
     },
-    "24185": {
-      "name": "Mansell, Richard",
+    "14792": {
+      "name": "Saddier, Adrien",
       "empirical_win_prob": 0.0051,
       "empirical_top5_prob": 0.0275,
       "empirical_top10_prob": 0.0593,
@@ -1210,8 +1210,8 @@
       "p95": 71.37,
       "points_std": 17.2
     },
-    "23838": {
-      "name": "Hojgaard, Rasmus",
+    "28309": {
+      "name": "Coody, Pierceson",
       "empirical_win_prob": 0.0046,
       "empirical_top5_prob": 0.029,
       "empirical_top10_prob": 0.0605,
@@ -1224,8 +1224,8 @@
       "p95": 71.59,
       "points_std": 17.23
     },
-    "27819": {
-      "name": "Castillo, Ricky",
+    "30445": {
+      "name": "Ayora, Angel",
       "empirical_win_prob": 0.0054,
       "empirical_top5_prob": 0.0301,
       "empirical_top10_prob": 0.0617,
@@ -1238,8 +1238,8 @@
       "p95": 71.89,
       "points_std": 17.25
     },
-    "26947": {
-      "name": "Jarvis, Casey",
+    "17543": {
+      "name": "Kim, Michael",
       "empirical_win_prob": 0.0073,
       "empirical_top5_prob": 0.031,
       "empirical_top10_prob": 0.0649,
@@ -1252,8 +1252,8 @@
       "p95": 72.14,
       "points_std": 17.31
     },
-    "27811": {
-      "name": "Couvra, Martin",
+    "15326": {
+      "name": "Sullivan, Andy",
       "empirical_win_prob": 0.0071,
       "empirical_top5_prob": 0.032,
       "empirical_top10_prob": 0.0642,
@@ -1266,8 +1266,8 @@
       "p95": 72.22,
       "points_std": 17.37
     },
-    "23505": {
-      "name": "McGreevy, Max",
+    "22833": {
+      "name": "Echavarria, Nico",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.03,
       "empirical_top10_prob": 0.0635,
@@ -1280,8 +1280,8 @@
       "p95": 71.79,
       "points_std": 17.23
     },
-    "19421": {
-      "name": "Du Plessis, Hennie",
+    "17511": {
+      "name": "Straka, Sepp",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0315,
       "empirical_top10_prob": 0.0627,
@@ -1294,8 +1294,8 @@
       "p95": 71.82,
       "points_std": 17.29
     },
-    "19846": {
-      "name": "Bauchou, Zach",
+    "14559": {
+      "name": "Vincent, Scott",
       "empirical_win_prob": 0.0057,
       "empirical_top5_prob": 0.0322,
       "empirical_top10_prob": 0.0634,
@@ -1308,8 +1308,8 @@
       "p95": 72.1,
       "points_std": 17.37
     },
-    "17813": {
-      "name": "Armitage, Marcus",
+    "16497": {
+      "name": "Dean, Joe",
       "empirical_win_prob": 0.0065,
       "empirical_top5_prob": 0.031,
       "empirical_top10_prob": 0.0628,
@@ -1322,8 +1322,8 @@
       "p95": 72.12,
       "points_std": 17.33
     },
-    "11276": {
-      "name": "Horschel, Billy",
+    "23014": {
+      "name": "Theegala, Sahith",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0309,
       "empirical_top10_prob": 0.0626,
@@ -1336,8 +1336,8 @@
       "p95": 71.72,
       "points_std": 17.32
     },
-    "5716": {
-      "name": "Harrington, Padraig",
+    "5665": {
+      "name": "Cink, Stewart",
       "empirical_win_prob": 0.0081,
       "empirical_top5_prob": 0.0298,
       "empirical_top10_prob": 0.0627,
@@ -1350,8 +1350,8 @@
       "p95": 71.61,
       "points_std": 17.23
     },
-    "9531": {
-      "name": "Wiesberger, Bernd",
+    "21074": {
+      "name": "Nakajima, Keita",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0302,
       "empirical_top10_prob": 0.0601,
@@ -1364,8 +1364,8 @@
       "p95": 71.57,
       "points_std": 17.27
     },
-    "17511": {
-      "name": "Straka, Sepp",
+    "28635": {
+      "name": "McCarty, Matt",
       "empirical_win_prob": 0.0077,
       "empirical_top5_prob": 0.0326,
       "empirical_top10_prob": 0.0643,
@@ -1378,8 +1378,8 @@
       "p95": 72.07,
       "points_std": 17.35
     },
-    "27588": {
-      "name": "Schott, Freddy",
+    "5994": {
+      "name": "Stenson, Henrik",
       "empirical_win_prob": 0.0068,
       "empirical_top5_prob": 0.0341,
       "empirical_top10_prob": 0.0641,
@@ -1392,8 +1392,8 @@
       "p95": 71.72,
       "points_std": 17.33
     },
-    "28268": {
-      "name": "Kaneko, Kota",
+    "25569": {
+      "name": "Stevens, Sam",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.031,
       "empirical_top10_prob": 0.0632,
@@ -1420,8 +1420,8 @@
       "p95": 72.29,
       "points_std": 17.25
     },
-    "12426": {
-      "name": "Waring, Paul",
+    "12577": {
+      "name": "Woodland, Gary",
       "empirical_win_prob": 0.0074,
       "empirical_top5_prob": 0.0358,
       "empirical_top10_prob": 0.0679,
@@ -1434,8 +1434,8 @@
       "p95": 72.33,
       "points_std": 17.43
     },
-    "26653": {
-      "name": "Eckroat, Austin",
+    "22760": {
+      "name": "Hisatsune, Ryo",
       "empirical_win_prob": 0.0071,
       "empirical_top5_prob": 0.0336,
       "empirical_top10_prob": 0.0654,
@@ -1448,8 +1448,8 @@
       "p95": 71.99,
       "points_std": 17.4
     },
-    "14704": {
-      "name": "Putnam, Andrew",
+    "19396": {
+      "name": "Knapp, Jake",
       "empirical_win_prob": 0.0066,
       "empirical_top5_prob": 0.0329,
       "empirical_top10_prob": 0.0637,
@@ -1462,8 +1462,8 @@
       "p95": 72.46,
       "points_std": 17.27
     },
-    "29971": {
-      "name": "Bradbury, Dan",
+    "23816": {
+      "name": "Valimaki, Sami",
       "empirical_win_prob": 0.0061,
       "empirical_top5_prob": 0.0311,
       "empirical_top10_prob": 0.0652,
@@ -1476,8 +1476,8 @@
       "p95": 72.3,
       "points_std": 17.2
     },
-    "10201": {
-      "name": "Guerrier, Julien",
+    "26991": {
+      "name": "Schaper, Jayden",
       "empirical_win_prob": 0.0073,
       "empirical_top5_prob": 0.0335,
       "empirical_top10_prob": 0.0666,
@@ -1490,8 +1490,8 @@
       "p95": 72.27,
       "points_std": 17.37
     },
-    "24304": {
-      "name": "Vilips, Karl",
+    "19421": {
+      "name": "Du Plessis, Hennie",
       "empirical_win_prob": 0.0069,
       "empirical_top5_prob": 0.0333,
       "empirical_top10_prob": 0.066,
@@ -1504,8 +1504,8 @@
       "p95": 72.33,
       "points_std": 17.46
     },
-    "14780": {
-      "name": "Lagergren, Joakim",
+    "28473": {
+      "name": "Ballester, Jose Luis",
       "empirical_win_prob": 0.0045,
       "empirical_top5_prob": 0.0295,
       "empirical_top10_prob": 0.0599,
@@ -1518,8 +1518,8 @@
       "p95": 71.38,
       "points_std": 17.16
     },
-    "22985": {
-      "name": "Smotherman, Austin",
+    "7677": {
+      "name": "Norris, Shaun",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.0303,
       "empirical_top10_prob": 0.0591,
@@ -1532,8 +1532,8 @@
       "p95": 71.48,
       "points_std": 17.25
     },
-    "27149": {
-      "name": "Da Costa Rodrigues, Daniel",
+    "25739": {
+      "name": "Yonezawa, Ren",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0305,
       "empirical_top10_prob": 0.0631,
@@ -1546,8 +1546,8 @@
       "p95": 71.81,
       "points_std": 17.34
     },
-    "26991": {
-      "name": "Schaper, Jayden",
+    "17068": {
+      "name": "Daffue, MJ",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0314,
       "empirical_top10_prob": 0.0635,
@@ -1560,8 +1560,8 @@
       "p95": 71.64,
       "points_std": 17.33
     },
-    "8820": {
-      "name": "Snedeker, Brandt",
+    "24369": {
+      "name": "Kobori, Kazuma",
       "empirical_win_prob": 0.0077,
       "empirical_top5_prob": 0.0321,
       "empirical_top10_prob": 0.0642,
@@ -1574,8 +1574,8 @@
       "p95": 72.22,
       "points_std": 17.37
     },
-    "23733": {
-      "name": "LaCroix, Frederic",
+    "14987": {
+      "name": "Laporta, Francesco",
       "empirical_win_prob": 0.0079,
       "empirical_top5_prob": 0.0337,
       "empirical_top10_prob": 0.0678,
@@ -1588,8 +1588,8 @@
       "p95": 72.34,
       "points_std": 17.51
     },
-    "14792": {
-      "name": "Saddier, Adrien",
+    "28268": {
+      "name": "Kaneko, Kota",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.0311,
       "empirical_top10_prob": 0.061,
@@ -1602,8 +1602,8 @@
       "p95": 71.89,
       "points_std": 17.22
     },
-    "17357": {
-      "name": "Migliozzi, Guido",
+    "10523": {
+      "name": "Nagano, Ryutaro",
       "empirical_win_prob": 0.0074,
       "empirical_top5_prob": 0.0345,
       "empirical_top10_prob": 0.0649,
@@ -1616,8 +1616,8 @@
       "p95": 72.16,
       "points_std": 17.28
     },
-    "23416": {
-      "name": "Ravetto, David",
+    "18239": {
+      "name": "Truslow, Austen",
       "empirical_win_prob": 0.0078,
       "empirical_top5_prob": 0.0387,
       "empirical_top10_prob": 0.0701,
@@ -1630,8 +1630,8 @@
       "p95": 73.08,
       "points_std": 17.51
     },
-    "16896": {
-      "name": "Kruyswijk, Jacques",
+    "28984": {
+      "name": "Puig, David",
       "empirical_win_prob": 0.008,
       "empirical_top5_prob": 0.0343,
       "empirical_top10_prob": 0.0687,
@@ -1644,8 +1644,8 @@
       "p95": 72.71,
       "points_std": 17.51
     },
-    "18105": {
-      "name": "Lawrence, Thriston",
+    "22465": {
+      "name": "Penge, Marco",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0342,
       "empirical_top10_prob": 0.0659,
@@ -1658,8 +1658,8 @@
       "p95": 72.25,
       "points_std": 17.38
     },
-    "12423": {
-      "name": "Kirk, Chris",
+    "22489": {
+      "name": "Skogen, Baard",
       "empirical_win_prob": 0.0056,
       "empirical_top5_prob": 0.033,
       "empirical_top10_prob": 0.0666,
@@ -1672,8 +1672,8 @@
       "p95": 72.48,
       "points_std": 17.38
     },
-    "11955": {
-      "name": "Frittelli, Dylan",
+    "22633": {
+      "name": "Grehan, Stuart",
       "empirical_win_prob": 0.0073,
       "empirical_top5_prob": 0.0324,
       "empirical_top10_prob": 0.0614,
@@ -1686,8 +1686,8 @@
       "p95": 71.97,
       "points_std": 17.3
     },
-    "24127": {
-      "name": "Hidalgo Portillo, Angel",
+    "16372": {
+      "name": "McDonald, Jack",
       "empirical_win_prob": 0.0054,
       "empirical_top5_prob": 0.0345,
       "empirical_top10_prob": 0.0673,
@@ -1700,8 +1700,8 @@
       "p95": 72.75,
       "points_std": 17.44
     },
-    "22231": {
-      "name": "Von Dellingshausen, Nicolai",
+    "28615": {
+      "name": "Bairstow, Sam",
       "empirical_win_prob": 0.0053,
       "empirical_top5_prob": 0.0298,
       "empirical_top10_prob": 0.0625,
@@ -1714,8 +1714,8 @@
       "p95": 71.76,
       "points_std": 17.38
     },
-    "16333": {
-      "name": "Hubbard, Mark",
+    "24962": {
+      "name": "Docherty, Alistair",
       "empirical_win_prob": 0.0065,
       "empirical_top5_prob": 0.0325,
       "empirical_top10_prob": 0.0651,
@@ -1728,8 +1728,8 @@
       "p95": 72.13,
       "points_std": 17.39
     },
-    "11460": {
-      "name": "Manassero, Matteo",
+    "19390": {
+      "name": "John, Cameron",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0294,
       "empirical_top10_prob": 0.0605,
@@ -1742,8 +1742,8 @@
       "p95": 71.37,
       "points_std": 17.23
     },
-    "22089": {
-      "name": "Syme, Connor",
+    "5716": {
+      "name": "Harrington, Padraig",
       "empirical_win_prob": 0.0057,
       "empirical_top5_prob": 0.0312,
       "empirical_top10_prob": 0.0617,
@@ -1756,8 +1756,8 @@
       "p95": 71.8,
       "points_std": 17.26
     },
-    "26580": {
-      "name": "Choi, Seungbin",
+    "27900": {
+      "name": "Potgieter, Aldrich",
       "empirical_win_prob": 0.0074,
       "empirical_top5_prob": 0.0331,
       "empirical_top10_prob": 0.0671,
@@ -1770,8 +1770,8 @@
       "p95": 72.4,
       "points_std": 17.27
     },
-    "12988": {
-      "name": "Elvira Mijares, Ignacio",
+    "14780": {
+      "name": "Lagergren, Joakim",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0326,
       "empirical_top10_prob": 0.0628,
@@ -1784,8 +1784,8 @@
       "p95": 71.88,
       "points_std": 17.35
     },
-    "7655": {
-      "name": "Molinari, Francesco",
+    "27598": {
+      "name": "Nicholas, James",
       "empirical_win_prob": 0.0067,
       "empirical_top5_prob": 0.0299,
       "empirical_top10_prob": 0.0628,
@@ -1798,8 +1798,8 @@
       "p95": 72.15,
       "points_std": 17.22
     },
-    "6950": {
-      "name": "Siem, Marcel",
+    "30463": {
+      "name": "Surratt, Caleb",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0327,
       "empirical_top10_prob": 0.0647,
@@ -1812,8 +1812,8 @@
       "p95": 72.36,
       "points_std": 17.22
     },
-    "14196": {
-      "name": "Meronk, Adrian",
+    "14419": {
+      "name": "Yang, Jiho",
       "empirical_win_prob": 0.005,
       "empirical_top5_prob": 0.0307,
       "empirical_top10_prob": 0.0635,
@@ -1826,8 +1826,8 @@
       "p95": 71.8,
       "points_std": 17.19
     },
-    "13374": {
-      "name": "Van Driel, Darius",
+    "29973": {
+      "name": "Wiedemeyer, Tim",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.0335,
       "empirical_top10_prob": 0.0684,
@@ -1840,8 +1840,8 @@
       "p95": 72.51,
       "points_std": 17.48
     },
-    "7677": {
-      "name": "Norris, Shaun",
+    "17872": {
+      "name": "Ham, Jeong Woo",
       "empirical_win_prob": 0.0071,
       "empirical_top5_prob": 0.0299,
       "empirical_top10_prob": 0.0625,
@@ -1854,8 +1854,8 @@
       "p95": 71.48,
       "points_std": 17.28
     },
-    "21072": {
-      "name": "Ok, Taehoon",
+    "15993": {
+      "name": "Hollick, Michael",
       "empirical_win_prob": 0.0051,
       "empirical_top5_prob": 0.0289,
       "empirical_top10_prob": 0.0621,
@@ -1868,8 +1868,8 @@
       "p95": 71.71,
       "points_std": 17.15
     },
-    "25890": {
-      "name": "Premlall, Yurav",
+    "9531": {
+      "name": "Wiesberger, Bernd",
       "empirical_win_prob": 0.0074,
       "empirical_top5_prob": 0.0315,
       "empirical_top10_prob": 0.0611,
@@ -1882,8 +1882,8 @@
       "p95": 71.82,
       "points_std": 17.3
     },
-    "18424": {
-      "name": "Roy, Kevin",
+    "24055": {
+      "name": "Sloman, Tom",
       "empirical_win_prob": 0.006,
       "empirical_top5_prob": 0.0309,
       "empirical_top10_prob": 0.0648,
@@ -1896,8 +1896,8 @@
       "p95": 72.23,
       "points_std": 17.35
     },
-    "11763": {
-      "name": "Wu, Ashun",
+    "11357": {
+      "name": "Uihlein, Peter",
       "empirical_win_prob": 0.0064,
       "empirical_top5_prob": 0.0322,
       "empirical_top10_prob": 0.0652,
@@ -1910,8 +1910,8 @@
       "p95": 71.93,
       "points_std": 17.32
     },
-    "19872": {
-      "name": "Riley, Davis",
+    "29461": {
+      "name": "Grinberg, Lev",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0328,
       "empirical_top10_prob": 0.065,
@@ -1924,8 +1924,8 @@
       "p95": 72.18,
       "points_std": 17.41
     },
-    "14975": {
-      "name": "Otaegui, Adrian",
+    "33657": {
+      "name": "Howard, David",
       "empirical_win_prob": 0.0063,
       "empirical_top5_prob": 0.0319,
       "empirical_top10_prob": 0.0634,
@@ -1938,8 +1938,8 @@
       "p95": 71.81,
       "points_std": 17.28
     },
-    "20448": {
-      "name": "Katsuragawa, Yuto",
+    "3523": {
+      "name": "Clarke, Darren",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0323,
       "empirical_top10_prob": 0.0639,
@@ -1952,8 +1952,8 @@
       "p95": 71.63,
       "points_std": 17.13
     },
-    "12920": {
-      "name": "Willett, Danny",
+    "15756": {
+      "name": "Higa, Kazuki",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.0302,
       "empirical_top10_prob": 0.0633,
@@ -1966,8 +1966,8 @@
       "p95": 71.9,
       "points_std": 17.26
     },
-    "27759": {
-      "name": "Kim, Baekjun",
+    "18994": {
+      "name": "Kataoka, Naoyuki",
       "empirical_win_prob": 0.0079,
       "empirical_top5_prob": 0.0353,
       "empirical_top10_prob": 0.0661,
@@ -1980,8 +1980,8 @@
       "p95": 72.38,
       "points_std": 17.42
     },
-    "17786": {
-      "name": "Davis, Cam",
+    "15191": {
+      "name": "Southgate, Matthew",
       "empirical_win_prob": 0.0062,
       "empirical_top5_prob": 0.0327,
       "empirical_top10_prob": 0.0629,
@@ -1994,8 +1994,8 @@
       "p95": 72.03,
       "points_std": 17.25
     },
-    "23892": {
-      "name": "Gumberg, Jordan",
+    "31844": {
+      "name": "Buchanan, Jack",
       "empirical_win_prob": 0.0061,
       "empirical_top5_prob": 0.0312,
       "empirical_top10_prob": 0.0609,
@@ -2008,8 +2008,8 @@
       "p95": 71.68,
       "points_std": 17.07
     },
-    "7049": {
-      "name": "Sterne, Richard",
+    "29810": {
+      "name": "De Castro Piera, Alejandro",
       "empirical_win_prob": 0.0055,
       "empirical_top5_prob": 0.0297,
       "empirical_top10_prob": 0.0624,
@@ -2022,8 +2022,8 @@
       "p95": 71.85,
       "points_std": 17.19
     },
-    "10158": {
-      "name": "Luiten, Joost",
+    "29716": {
+      "name": "Plunkett, Marcus",
       "empirical_win_prob": 0.0079,
       "empirical_top5_prob": 0.0306,
       "empirical_top10_prob": 0.0635,
@@ -2036,8 +2036,8 @@
       "p95": 71.91,
       "points_std": 17.3
     },
-    "19190": {
-      "name": "Hoshino, Rikuya",
+    "33707": {
+      "name": "Ruiter, Nevill",
       "empirical_win_prob": 0.007,
       "empirical_top5_prob": 0.0344,
       "empirical_top10_prob": 0.0671,
@@ -2050,8 +2050,8 @@
       "p95": 72.28,
       "points_std": 17.33
     },
-    "13498": {
-      "name": "Lee, Junghwan",
+    "27019": {
+      "name": "Laopakdee, Fifa",
       "empirical_win_prob": 0.008,
       "empirical_top5_prob": 0.0325,
       "empirical_top10_prob": 0.0646,
@@ -2064,8 +2064,8 @@
       "p95": 72.19,
       "points_std": 17.31
     },
-    "18628": {
-      "name": "Campbell, Brian",
+    "29971": {
+      "name": "Bradbury, Dan",
       "empirical_win_prob": 0.0069,
       "empirical_top5_prob": 0.0312,
       "empirical_top10_prob": 0.065,
@@ -2078,8 +2078,8 @@
       "p95": 72.11,
       "points_std": 17.41
     },
-    "28469": {
-      "name": "Highsmith, Joe",
+    "19232": {
+      "name": "Smyth, Trav",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0339,
       "empirical_top10_prob": 0.0659,
@@ -2092,8 +2092,8 @@
       "p95": 72.5,
       "points_std": 17.38
     },
-    "32449": {
-      "name": "Johnston, Ryggs",
+    "13344": {
+      "name": "Baldwin, Matthew",
       "empirical_win_prob": 0.0065,
       "empirical_top5_prob": 0.0316,
       "empirical_top10_prob": 0.0649,
@@ -2106,8 +2106,8 @@
       "p95": 71.84,
       "points_std": 17.38
     },
-    "11397": {
-      "name": "Jamieson, Scott",
+    "31123": {
+      "name": "Christensen, Tiger",
       "empirical_win_prob": 0.0059,
       "empirical_top5_prob": 0.0298,
       "empirical_top10_prob": 0.062,
@@ -2120,8 +2120,8 @@
       "p95": 71.82,
       "points_std": 17.17
     },
-    "20522": {
-      "name": "Veerman, Johannes",
+    "35013": {
+      "name": "Pulcini, Mateo",
       "empirical_win_prob": 0.0083,
       "empirical_top5_prob": 0.0342,
       "empirical_top10_prob": 0.0666,
@@ -2134,8 +2134,8 @@
       "p95": 72.41,
       "points_std": 17.37
     },
-    "19429": {
-      "name": "Naidoo, Dylan",
+    "27811": {
+      "name": "Couvra, Martin",
       "empirical_win_prob": 0.0056,
       "empirical_top5_prob": 0.0311,
       "empirical_top10_prob": 0.0623,
@@ -2148,8 +2148,8 @@
       "p95": 71.95,
       "points_std": 17.28
     },
-    "9133": {
-      "name": "Larrazabal, Pablo",
+    "23733": {
+      "name": "LaCroix, Frederic",
       "empirical_win_prob": 0.0054,
       "empirical_top5_prob": 0.0328,
       "empirical_top10_prob": 0.0691,
@@ -2162,8 +2162,8 @@
       "p95": 72.23,
       "points_std": 17.36
     },
-    "5768": {
-      "name": "Hoffman, Charley",
+    "33759": {
+      "name": "Howell, Mason",
       "empirical_win_prob": 0.0073,
       "empirical_top5_prob": 0.0344,
       "empirical_top10_prob": 0.0651,
@@ -2176,8 +2176,8 @@
       "p95": 72.22,
       "points_std": 17.36
     },
-    "13731": {
-      "name": "Strydom, Ockie",
+    "4761": {
+      "name": "Duval, David",
       "empirical_win_prob": 0.0054,
       "empirical_top5_prob": 0.0303,
       "empirical_top10_prob": 0.0619,
@@ -2203,8 +2203,8 @@
       "delta_top10": 0.0664
     },
     {
-      "name": "McIlroy, Rory",
-      "dg_id": 10091,
+      "name": "Fleetwood, Tommy",
+      "dg_id": 12294,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0076,
       "delta_win": 0.0076,
@@ -2213,8 +2213,8 @@
       "delta_top10": 0.0639
     },
     {
-      "name": "Fleetwood, Tommy",
-      "dg_id": 12294,
+      "name": "McIlroy, Rory",
+      "dg_id": 10091,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2233,8 +2233,8 @@
       "delta_top10": 0.0628
     },
     {
-      "name": "Clark, Wyndham",
-      "dg_id": 23604,
+      "name": "Rahm, Jon",
+      "dg_id": 19195,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0071,
       "delta_win": 0.0071,
@@ -2243,8 +2243,8 @@
       "delta_top10": 0.0656
     },
     {
-      "name": "Schauffele, Xander",
-      "dg_id": 19895,
+      "name": "Gotterup, Chris",
+      "dg_id": 27774,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2253,8 +2253,8 @@
       "delta_top10": 0.0597
     },
     {
-      "name": "Aberg, Ludvig",
-      "dg_id": 23950,
+      "name": "Hovland, Viktor",
+      "dg_id": 18841,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.005,
       "delta_win": 0.005,
@@ -2263,8 +2263,8 @@
       "delta_top10": 0.0636
     },
     {
-      "name": "Gotterup, Chris",
-      "dg_id": 27774,
+      "name": "Schauffele, Xander",
+      "dg_id": 19895,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0076,
       "delta_win": 0.0076,
@@ -2273,8 +2273,8 @@
       "delta_top10": 0.0659
     },
     {
-      "name": "Thomas, Justin",
-      "dg_id": 14139,
+      "name": "Clark, Wyndham",
+      "dg_id": 23604,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0081,
       "delta_win": 0.0081,
@@ -2283,8 +2283,8 @@
       "delta_top10": 0.0669
     },
     {
-      "name": "Rahm, Jon",
-      "dg_id": 19195,
+      "name": "Hatton, Tyrrell",
+      "dg_id": 14796,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0052,
       "delta_win": 0.0052,
@@ -2293,8 +2293,8 @@
       "delta_top10": 0.0606
     },
     {
-      "name": "Hovland, Viktor",
-      "dg_id": 18841,
+      "name": "MacIntyre, Robert",
+      "dg_id": 23323,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0048,
       "delta_win": 0.0048,
@@ -2303,8 +2303,8 @@
       "delta_top10": 0.0607
     },
     {
-      "name": "Kim, Si Woo",
-      "dg_id": 14609,
+      "name": "Rose, Justin",
+      "dg_id": 6093,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -2313,8 +2313,8 @@
       "delta_top10": 0.0645
     },
     {
-      "name": "MacIntyre, Robert",
-      "dg_id": 23323,
+      "name": "Burns, Sam",
+      "dg_id": 19483,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0076,
       "delta_win": 0.0076,
@@ -2323,8 +2323,8 @@
       "delta_top10": 0.0629
     },
     {
-      "name": "Fitzpatrick, Alex",
-      "dg_id": 25362,
+      "name": "Spaun, J.J.",
+      "dg_id": 17536,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0076,
       "delta_win": 0.0076,
@@ -2333,8 +2333,8 @@
       "delta_top10": 0.0639
     },
     {
-      "name": "Rai, Aaron",
-      "dg_id": 18554,
+      "name": "Lowry, Shane",
+      "dg_id": 13900,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -2343,8 +2343,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Cauley, Bud",
-      "dg_id": 14502,
+      "name": "Henley, Russell",
+      "dg_id": 14578,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0069,
       "delta_win": 0.0069,
@@ -2353,8 +2353,8 @@
       "delta_top10": 0.0658
     },
     {
-      "name": "Reitan, Kristoffer",
-      "dg_id": 21407,
+      "name": "Kim, Tom",
+      "dg_id": 24766,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0066,
       "delta_win": 0.0066,
@@ -2363,8 +2363,8 @@
       "delta_top10": 0.0624
     },
     {
-      "name": "Kim, Tom",
-      "dg_id": 24766,
+      "name": "Aberg, Ludvig",
+      "dg_id": 23950,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -2373,8 +2373,8 @@
       "delta_top10": 0.0661
     },
     {
-      "name": "Hojgaard, Nicolai",
-      "dg_id": 23602,
+      "name": "Fitzpatrick, Alex",
+      "dg_id": 25362,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -2383,8 +2383,8 @@
       "delta_top10": 0.0617
     },
     {
-      "name": "English, Harris",
-      "dg_id": 14577,
+      "name": "Thomas, Justin",
+      "dg_id": 14139,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0074,
       "delta_win": 0.0074,
@@ -2393,8 +2393,8 @@
       "delta_top10": 0.0601
     },
     {
-      "name": "Hatton, Tyrrell",
-      "dg_id": 14796,
+      "name": "Harman, Brian",
+      "dg_id": 8825,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0058,
       "delta_win": 0.0058,
@@ -2403,8 +2403,8 @@
       "delta_top10": 0.0602
     },
     {
-      "name": "Gerard, Ryan",
-      "dg_id": 29767,
+      "name": "Kim, Si Woo",
+      "dg_id": 14609,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0056,
       "delta_win": 0.0056,
@@ -2423,8 +2423,8 @@
       "delta_top10": 0.0638
     },
     {
-      "name": "Spaun, J.J.",
-      "dg_id": 17536,
+      "name": "English, Harris",
+      "dg_id": 14577,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0061,
       "delta_win": 0.0061,
@@ -2433,8 +2433,8 @@
       "delta_top10": 0.0613
     },
     {
-      "name": "Wallace, Matt",
-      "dg_id": 20706,
+      "name": "Niemann, Joaquin",
+      "dg_id": 18079,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -2443,8 +2443,8 @@
       "delta_top10": 0.0706
     },
     {
-      "name": "Svensson, Jesper",
-      "dg_id": 26850,
+      "name": "Young, Cameron",
+      "dg_id": 26651,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2453,8 +2453,8 @@
       "delta_top10": 0.0628
     },
     {
-      "name": "Ghim, Doug",
-      "dg_id": 24550,
+      "name": "Morikawa, Collin",
+      "dg_id": 22085,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0073,
       "delta_win": 0.0073,
@@ -2463,8 +2463,8 @@
       "delta_top10": 0.0637
     },
     {
-      "name": "Yu, Kevin",
-      "dg_id": 17881,
+      "name": "Rai, Aaron",
+      "dg_id": 18554,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -2473,8 +2473,8 @@
       "delta_top10": 0.0638
     },
     {
-      "name": "Kitayama, Kurt",
-      "dg_id": 21891,
+      "name": "Bradley, Keegan",
+      "dg_id": 13872,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0058,
       "delta_win": 0.0058,
@@ -2483,8 +2483,8 @@
       "delta_top10": 0.0653
     },
     {
-      "name": "Perez, Victor",
-      "dg_id": 20730,
+      "name": "Reitan, Kristoffer",
+      "dg_id": 21407,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -2493,8 +2493,8 @@
       "delta_top10": 0.0666
     },
     {
-      "name": "Scott, Adam",
-      "dg_id": 6430,
+      "name": "Hojgaard, Nicolai",
+      "dg_id": 23602,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -2503,8 +2503,8 @@
       "delta_top10": 0.0644
     },
     {
-      "name": "Harman, Brian",
-      "dg_id": 8825,
+      "name": "Bhatia, Akshay",
+      "dg_id": 26096,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0048,
       "delta_win": 0.0048,
@@ -2513,8 +2513,8 @@
       "delta_top10": 0.0611
     },
     {
-      "name": "Conners, Corey",
-      "dg_id": 17576,
+      "name": "Perez, Victor",
+      "dg_id": 20730,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -2523,8 +2523,8 @@
       "delta_top10": 0.0641
     },
     {
-      "name": "Chacarra, Eugenio",
-      "dg_id": 26745,
+      "name": "Conners, Corey",
+      "dg_id": 17576,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -2533,8 +2533,8 @@
       "delta_top10": 0.0599
     },
     {
-      "name": "Smalley, Alex",
-      "dg_id": 18474,
+      "name": "Lee, Min Woo",
+      "dg_id": 16841,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -2543,8 +2543,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Lowry, Shane",
-      "dg_id": 13900,
+      "name": "McNealy, Maverick",
+      "dg_id": 18634,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0058,
       "delta_win": 0.0058,
@@ -2553,8 +2553,8 @@
       "delta_top10": 0.06
     },
     {
-      "name": "Cole, Eric",
-      "dg_id": 21756,
+      "name": "DeChambeau, Bryson",
+      "dg_id": 19841,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -2563,8 +2563,8 @@
       "delta_top10": 0.068
     },
     {
-      "name": "Fox, Ryan",
-      "dg_id": 11889,
+      "name": "Fowler, Rickie",
+      "dg_id": 12965,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0067,
       "delta_win": 0.0067,
@@ -2573,8 +2573,8 @@
       "delta_top10": 0.0664
     },
     {
-      "name": "Novak, Andrew",
-      "dg_id": 23475,
+      "name": "Reed, Patrick",
+      "dg_id": 14838,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -2583,8 +2583,8 @@
       "delta_top10": 0.0602
     },
     {
-      "name": "Hillier, Daniel",
-      "dg_id": 21362,
+      "name": "Detry, Thomas",
+      "dg_id": 14181,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -2593,8 +2593,8 @@
       "delta_top10": 0.066
     },
     {
-      "name": "Taylor, Nick",
-      "dg_id": 13126,
+      "name": "Griffin, Ben",
+      "dg_id": 24968,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0057,
       "delta_win": 0.0057,
@@ -2603,8 +2603,8 @@
       "delta_top10": 0.0672
     },
     {
-      "name": "Kim, Michael",
-      "dg_id": 17543,
+      "name": "Wallace, Matt",
+      "dg_id": 20706,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0066,
       "delta_win": 0.0066,
@@ -2613,8 +2613,8 @@
       "delta_top10": 0.0645
     },
     {
-      "name": "Knapp, Jake",
-      "dg_id": 19396,
+      "name": "Smith, Jordan",
+      "dg_id": 18586,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0053,
       "delta_win": 0.0053,
@@ -2623,8 +2623,8 @@
       "delta_top10": 0.0586
     },
     {
-      "name": "Smith, Jordan",
-      "dg_id": 18586,
+      "name": "Matsuyama, Hideki",
+      "dg_id": 13562,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0066,
       "delta_win": 0.0066,
@@ -2633,8 +2633,8 @@
       "delta_top10": 0.0677
     },
     {
-      "name": "Lee, Min Woo",
-      "dg_id": 16841,
+      "name": "Svensson, Jesper",
+      "dg_id": 26850,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0046,
       "delta_win": 0.0046,
@@ -2643,8 +2643,8 @@
       "delta_top10": 0.0586
     },
     {
-      "name": "Hall, Harry",
-      "dg_id": 27194,
+      "name": "Gerard, Ryan",
+      "dg_id": 29767,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0058,
       "delta_win": 0.0058,
@@ -2653,8 +2653,8 @@
       "delta_top10": 0.0649
     },
     {
-      "name": "Meissner, Mac",
-      "dg_id": 28159,
+      "name": "Spieth, Jordan",
+      "dg_id": 14636,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0076,
       "delta_win": 0.0076,
@@ -2663,8 +2663,8 @@
       "delta_top10": 0.0651
     },
     {
-      "name": "Stevens, Sam",
-      "dg_id": 25569,
+      "name": "Molinari, Francesco",
+      "dg_id": 7655,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -2673,8 +2673,8 @@
       "delta_top10": 0.067
     },
     {
-      "name": "Puig, David",
-      "dg_id": 28984,
+      "name": "Hall, Harry",
+      "dg_id": 27194,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0058,
       "delta_win": 0.0058,
@@ -2683,8 +2683,8 @@
       "delta_top10": 0.0651
     },
     {
-      "name": "Del Rey, Alejandro",
-      "dg_id": 22259,
+      "name": "Homa, Max",
+      "dg_id": 17538,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -2693,8 +2693,8 @@
       "delta_top10": 0.0662
     },
     {
-      "name": "Brennan, Michael",
-      "dg_id": 29197,
+      "name": "Kitayama, Kurt",
+      "dg_id": 21891,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2703,8 +2703,8 @@
       "delta_top10": 0.0657
     },
     {
-      "name": "Greyserman, Max",
-      "dg_id": 23465,
+      "name": "Smith, Cameron",
+      "dg_id": 15856,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -2713,8 +2713,8 @@
       "delta_top10": 0.0648
     },
     {
-      "name": "Reed, Patrick",
-      "dg_id": 14838,
+      "name": "Jordan, Matthew",
+      "dg_id": 25601,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -2723,8 +2723,8 @@
       "delta_top10": 0.064
     },
     {
-      "name": "Parry, John",
-      "dg_id": 13764,
+      "name": "Thorbjornsen, Michael",
+      "dg_id": 26649,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -2733,8 +2733,8 @@
       "delta_top10": 0.0664
     },
     {
-      "name": "Canter, Laurie",
-      "dg_id": 14795,
+      "name": "Parry, John",
+      "dg_id": 13764,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2743,8 +2743,8 @@
       "delta_top10": 0.0639
     },
     {
-      "name": "Potgieter, Aldrich",
-      "dg_id": 27900,
+      "name": "Noren, Alex",
+      "dg_id": 10419,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -2753,8 +2753,8 @@
       "delta_top10": 0.0662
     },
     {
-      "name": "Moore, Taylor",
-      "dg_id": 21944,
+      "name": "Cole, Eric",
+      "dg_id": 21756,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0069,
       "delta_win": 0.0069,
@@ -2763,8 +2763,8 @@
       "delta_top10": 0.063
     },
     {
-      "name": "Echavarria, Nico",
-      "dg_id": 22833,
+      "name": "Suber, Jackson",
+      "dg_id": 29279,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -2773,8 +2773,8 @@
       "delta_top10": 0.068
     },
     {
-      "name": "Coody, Pierceson",
-      "dg_id": 28309,
+      "name": "Berger, Daniel",
+      "dg_id": 17606,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0065,
       "delta_win": 0.0065,
@@ -2783,8 +2783,8 @@
       "delta_top10": 0.0624
     },
     {
-      "name": "Neergaard-Petersen, Rasmus",
-      "dg_id": 23841,
+      "name": "Fox, Ryan",
+      "dg_id": 11889,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -2793,8 +2793,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Penge, Marco",
-      "dg_id": 22465,
+      "name": "Im, Sungjae",
+      "dg_id": 17488,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0069,
       "delta_win": 0.0069,
@@ -2803,8 +2803,8 @@
       "delta_top10": 0.0661
     },
     {
-      "name": "Noren, Alex",
-      "dg_id": 10419,
+      "name": "Mitchell, Keith",
+      "dg_id": 17365,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -2813,8 +2813,8 @@
       "delta_top10": 0.062
     },
     {
-      "name": "Ayora, Angel",
-      "dg_id": 30445,
+      "name": "Keefer, Johnny",
+      "dg_id": 32457,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2823,8 +2823,8 @@
       "delta_top10": 0.0648
     },
     {
-      "name": "Schmid, Matti",
-      "dg_id": 20722,
+      "name": "Scott, Adam",
+      "dg_id": 6430,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0056,
       "delta_win": 0.0056,
@@ -2833,8 +2833,8 @@
       "delta_top10": 0.0633
     },
     {
-      "name": "McCarty, Matt",
-      "dg_id": 28635,
+      "name": "Li, Haotong",
+      "dg_id": 15310,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0082,
       "delta_win": 0.0082,
@@ -2843,8 +2843,8 @@
       "delta_top10": 0.0656
     },
     {
-      "name": "Hill, Calum",
-      "dg_id": 25131,
+      "name": "Day, Jason",
+      "dg_id": 9771,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -2853,8 +2853,8 @@
       "delta_top10": 0.0652
     },
     {
-      "name": "Rozner, Antoine",
-      "dg_id": 18770,
+      "name": "Horschel, Billy",
+      "dg_id": 11276,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0071,
       "delta_win": 0.0071,
@@ -2863,8 +2863,8 @@
       "delta_top10": 0.0682
     },
     {
-      "name": "Nakajima, Keita",
-      "dg_id": 21074,
+      "name": "Rozner, Antoine",
+      "dg_id": 18770,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0056,
       "delta_win": 0.0056,
@@ -2873,8 +2873,8 @@
       "delta_top10": 0.0602
     },
     {
-      "name": "Theegala, Sahith",
-      "dg_id": 23014,
+      "name": "McKibbin, Tom",
+      "dg_id": 22322,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0065,
       "delta_win": 0.0065,
@@ -2883,8 +2883,8 @@
       "delta_top10": 0.0625
     },
     {
-      "name": "Im, Sungjae",
-      "dg_id": 17488,
+      "name": "Jarvis, Casey",
+      "dg_id": 26947,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2893,8 +2893,8 @@
       "delta_top10": 0.0627
     },
     {
-      "name": "Koepka, Brooks",
-      "dg_id": 16243,
+      "name": "Bridgeman, Jacob",
+      "dg_id": 29433,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -2903,8 +2903,8 @@
       "delta_top10": 0.0679
     },
     {
-      "name": "Keefer, Johnny",
-      "dg_id": 32457,
+      "name": "Chacarra, Eugenio",
+      "dg_id": 26745,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -2913,8 +2913,8 @@
       "delta_top10": 0.0654
     },
     {
-      "name": "Lindell, Oliver",
-      "dg_id": 20085,
+      "name": "Hojgaard, Rasmus",
+      "dg_id": 23838,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0048,
       "delta_win": 0.0048,
@@ -2923,8 +2923,8 @@
       "delta_top10": 0.0634
     },
     {
-      "name": "McKibbin, Tom",
-      "dg_id": 22322,
+      "name": "Poston, J.T.",
+      "dg_id": 21554,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -2933,8 +2933,8 @@
       "delta_top10": 0.0655
     },
     {
-      "name": "Thorbjornsen, Michael",
-      "dg_id": 26649,
+      "name": "Taylor, Nick",
+      "dg_id": 13126,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -2943,8 +2943,8 @@
       "delta_top10": 0.0661
     },
     {
-      "name": "Sullivan, Andy",
-      "dg_id": 15326,
+      "name": "Greyserman, Max",
+      "dg_id": 23465,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -2953,8 +2953,8 @@
       "delta_top10": 0.067
     },
     {
-      "name": "Olesen, Thorbjorn",
-      "dg_id": 13412,
+      "name": "Canter, Laurie",
+      "dg_id": 14795,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -2963,8 +2963,8 @@
       "delta_top10": 0.0643
     },
     {
-      "name": "Forrest, Grant",
-      "dg_id": 16475,
+      "name": "Novak, Andrew",
+      "dg_id": 23475,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0058,
       "delta_win": 0.0058,
@@ -2973,8 +2973,8 @@
       "delta_top10": 0.0599
     },
     {
-      "name": "Pavon, Matthieu",
-      "dg_id": 19960,
+      "name": "Herbert, Lucas",
+      "dg_id": 17064,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -2983,8 +2983,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Lindberg, Mikael",
-      "dg_id": 20084,
+      "name": "Smalley, Alex",
+      "dg_id": 18474,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0071,
       "delta_win": 0.0071,
@@ -2993,8 +2993,8 @@
       "delta_top10": 0.0651
     },
     {
-      "name": "Ferguson, Ewen",
-      "dg_id": 21646,
+      "name": "Hillier, Daniel",
+      "dg_id": 21362,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0079,
       "delta_win": 0.0079,
@@ -3003,8 +3003,8 @@
       "delta_top10": 0.0658
     },
     {
-      "name": "Li, Haotong",
-      "dg_id": 15310,
+      "name": "Koepka, Brooks",
+      "dg_id": 16243,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0076,
       "delta_win": 0.0076,
@@ -3013,8 +3013,8 @@
       "delta_top10": 0.0672
     },
     {
-      "name": "Yellamaraju, Sudarshan",
-      "dg_id": 29925,
+      "name": "Neergaard-Petersen, Rasmus",
+      "dg_id": 23841,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3023,8 +3023,8 @@
       "delta_top10": 0.0644
     },
     {
-      "name": "Norgaard, Niklas",
-      "dg_id": 15676,
+      "name": "Cauley, Bud",
+      "dg_id": 14502,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -3033,8 +3033,8 @@
       "delta_top10": 0.0613
     },
     {
-      "name": "Van Rooyen, Erik",
-      "dg_id": 17550,
+      "name": "Brennan, Michael",
+      "dg_id": 29197,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -3043,8 +3043,8 @@
       "delta_top10": 0.0664
     },
     {
-      "name": "Mansell, Richard",
-      "dg_id": 24185,
+      "name": "Saddier, Adrien",
+      "dg_id": 14792,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0051,
       "delta_win": 0.0051,
@@ -3053,8 +3053,8 @@
       "delta_top10": 0.0593
     },
     {
-      "name": "Hojgaard, Rasmus",
-      "dg_id": 23838,
+      "name": "Coody, Pierceson",
+      "dg_id": 28309,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0046,
       "delta_win": 0.0046,
@@ -3063,8 +3063,8 @@
       "delta_top10": 0.0605
     },
     {
-      "name": "Castillo, Ricky",
-      "dg_id": 27819,
+      "name": "Ayora, Angel",
+      "dg_id": 30445,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0054,
       "delta_win": 0.0054,
@@ -3073,8 +3073,8 @@
       "delta_top10": 0.0617
     },
     {
-      "name": "Jarvis, Casey",
-      "dg_id": 26947,
+      "name": "Kim, Michael",
+      "dg_id": 17543,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0073,
       "delta_win": 0.0073,
@@ -3083,8 +3083,8 @@
       "delta_top10": 0.0649
     },
     {
-      "name": "Couvra, Martin",
-      "dg_id": 27811,
+      "name": "Sullivan, Andy",
+      "dg_id": 15326,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0071,
       "delta_win": 0.0071,
@@ -3093,8 +3093,8 @@
       "delta_top10": 0.0642
     },
     {
-      "name": "McGreevy, Max",
-      "dg_id": 23505,
+      "name": "Echavarria, Nico",
+      "dg_id": 22833,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -3103,8 +3103,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Du Plessis, Hennie",
-      "dg_id": 19421,
+      "name": "Straka, Sepp",
+      "dg_id": 17511,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -3113,8 +3113,8 @@
       "delta_top10": 0.0627
     },
     {
-      "name": "Bauchou, Zach",
-      "dg_id": 19846,
+      "name": "Vincent, Scott",
+      "dg_id": 14559,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0057,
       "delta_win": 0.0057,
@@ -3123,8 +3123,8 @@
       "delta_top10": 0.0634
     },
     {
-      "name": "Armitage, Marcus",
-      "dg_id": 17813,
+      "name": "Dean, Joe",
+      "dg_id": 16497,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0065,
       "delta_win": 0.0065,
@@ -3133,8 +3133,8 @@
       "delta_top10": 0.0628
     },
     {
-      "name": "Horschel, Billy",
-      "dg_id": 11276,
+      "name": "Theegala, Sahith",
+      "dg_id": 23014,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3143,8 +3143,8 @@
       "delta_top10": 0.0626
     },
     {
-      "name": "Harrington, Padraig",
-      "dg_id": 5716,
+      "name": "Cink, Stewart",
+      "dg_id": 5665,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0081,
       "delta_win": 0.0081,
@@ -3153,8 +3153,8 @@
       "delta_top10": 0.0627
     },
     {
-      "name": "Wiesberger, Bernd",
-      "dg_id": 9531,
+      "name": "Nakajima, Keita",
+      "dg_id": 21074,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -3163,8 +3163,8 @@
       "delta_top10": 0.0601
     },
     {
-      "name": "Straka, Sepp",
-      "dg_id": 17511,
+      "name": "McCarty, Matt",
+      "dg_id": 28635,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0077,
       "delta_win": 0.0077,
@@ -3173,8 +3173,8 @@
       "delta_top10": 0.0643
     },
     {
-      "name": "Schott, Freddy",
-      "dg_id": 27588,
+      "name": "Stenson, Henrik",
+      "dg_id": 5994,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0068,
       "delta_win": 0.0068,
@@ -3183,8 +3183,8 @@
       "delta_top10": 0.0641
     },
     {
-      "name": "Kaneko, Kota",
-      "dg_id": 28268,
+      "name": "Stevens, Sam",
+      "dg_id": 25569,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -3203,8 +3203,8 @@
       "delta_top10": 0.0637
     },
     {
-      "name": "Waring, Paul",
-      "dg_id": 12426,
+      "name": "Woodland, Gary",
+      "dg_id": 12577,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0074,
       "delta_win": 0.0074,
@@ -3213,8 +3213,8 @@
       "delta_top10": 0.0679
     },
     {
-      "name": "Eckroat, Austin",
-      "dg_id": 26653,
+      "name": "Hisatsune, Ryo",
+      "dg_id": 22760,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0071,
       "delta_win": 0.0071,
@@ -3223,8 +3223,8 @@
       "delta_top10": 0.0654
     },
     {
-      "name": "Putnam, Andrew",
-      "dg_id": 14704,
+      "name": "Knapp, Jake",
+      "dg_id": 19396,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0066,
       "delta_win": 0.0066,
@@ -3233,8 +3233,8 @@
       "delta_top10": 0.0637
     },
     {
-      "name": "Bradbury, Dan",
-      "dg_id": 29971,
+      "name": "Valimaki, Sami",
+      "dg_id": 23816,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0061,
       "delta_win": 0.0061,
@@ -3243,8 +3243,8 @@
       "delta_top10": 0.0652
     },
     {
-      "name": "Guerrier, Julien",
-      "dg_id": 10201,
+      "name": "Schaper, Jayden",
+      "dg_id": 26991,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0073,
       "delta_win": 0.0073,
@@ -3253,8 +3253,8 @@
       "delta_top10": 0.0666
     },
     {
-      "name": "Vilips, Karl",
-      "dg_id": 24304,
+      "name": "Du Plessis, Hennie",
+      "dg_id": 19421,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0069,
       "delta_win": 0.0069,
@@ -3263,8 +3263,8 @@
       "delta_top10": 0.066
     },
     {
-      "name": "Lagergren, Joakim",
-      "dg_id": 14780,
+      "name": "Ballester, Jose Luis",
+      "dg_id": 28473,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0045,
       "delta_win": 0.0045,
@@ -3273,8 +3273,8 @@
       "delta_top10": 0.0599
     },
     {
-      "name": "Smotherman, Austin",
-      "dg_id": 22985,
+      "name": "Norris, Shaun",
+      "dg_id": 7677,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -3283,8 +3283,8 @@
       "delta_top10": 0.0591
     },
     {
-      "name": "Da Costa Rodrigues, Daniel",
-      "dg_id": 27149,
+      "name": "Yonezawa, Ren",
+      "dg_id": 25739,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3293,8 +3293,8 @@
       "delta_top10": 0.0631
     },
     {
-      "name": "Schaper, Jayden",
-      "dg_id": 26991,
+      "name": "Daffue, MJ",
+      "dg_id": 17068,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -3303,8 +3303,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Snedeker, Brandt",
-      "dg_id": 8820,
+      "name": "Kobori, Kazuma",
+      "dg_id": 24369,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0077,
       "delta_win": 0.0077,
@@ -3313,8 +3313,8 @@
       "delta_top10": 0.0642
     },
     {
-      "name": "LaCroix, Frederic",
-      "dg_id": 23733,
+      "name": "Laporta, Francesco",
+      "dg_id": 14987,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0079,
       "delta_win": 0.0079,
@@ -3323,8 +3323,8 @@
       "delta_top10": 0.0678
     },
     {
-      "name": "Saddier, Adrien",
-      "dg_id": 14792,
+      "name": "Kaneko, Kota",
+      "dg_id": 28268,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -3333,8 +3333,8 @@
       "delta_top10": 0.061
     },
     {
-      "name": "Migliozzi, Guido",
-      "dg_id": 17357,
+      "name": "Nagano, Ryutaro",
+      "dg_id": 10523,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0074,
       "delta_win": 0.0074,
@@ -3343,8 +3343,8 @@
       "delta_top10": 0.0649
     },
     {
-      "name": "Ravetto, David",
-      "dg_id": 23416,
+      "name": "Truslow, Austen",
+      "dg_id": 18239,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0078,
       "delta_win": 0.0078,
@@ -3353,8 +3353,8 @@
       "delta_top10": 0.0701
     },
     {
-      "name": "Kruyswijk, Jacques",
-      "dg_id": 16896,
+      "name": "Puig, David",
+      "dg_id": 28984,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.008,
       "delta_win": 0.008,
@@ -3363,8 +3363,8 @@
       "delta_top10": 0.0687
     },
     {
-      "name": "Lawrence, Thriston",
-      "dg_id": 18105,
+      "name": "Penge, Marco",
+      "dg_id": 22465,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3373,8 +3373,8 @@
       "delta_top10": 0.0659
     },
     {
-      "name": "Kirk, Chris",
-      "dg_id": 12423,
+      "name": "Skogen, Baard",
+      "dg_id": 22489,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0056,
       "delta_win": 0.0056,
@@ -3383,8 +3383,8 @@
       "delta_top10": 0.0666
     },
     {
-      "name": "Frittelli, Dylan",
-      "dg_id": 11955,
+      "name": "Grehan, Stuart",
+      "dg_id": 22633,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0073,
       "delta_win": 0.0073,
@@ -3393,8 +3393,8 @@
       "delta_top10": 0.0614
     },
     {
-      "name": "Hidalgo Portillo, Angel",
-      "dg_id": 24127,
+      "name": "McDonald, Jack",
+      "dg_id": 16372,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0054,
       "delta_win": 0.0054,
@@ -3403,8 +3403,8 @@
       "delta_top10": 0.0673
     },
     {
-      "name": "Von Dellingshausen, Nicolai",
-      "dg_id": 22231,
+      "name": "Bairstow, Sam",
+      "dg_id": 28615,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0053,
       "delta_win": 0.0053,
@@ -3413,8 +3413,8 @@
       "delta_top10": 0.0625
     },
     {
-      "name": "Hubbard, Mark",
-      "dg_id": 16333,
+      "name": "Docherty, Alistair",
+      "dg_id": 24962,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0065,
       "delta_win": 0.0065,
@@ -3423,8 +3423,8 @@
       "delta_top10": 0.0651
     },
     {
-      "name": "Manassero, Matteo",
-      "dg_id": 11460,
+      "name": "John, Cameron",
+      "dg_id": 19390,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -3433,8 +3433,8 @@
       "delta_top10": 0.0605
     },
     {
-      "name": "Syme, Connor",
-      "dg_id": 22089,
+      "name": "Harrington, Padraig",
+      "dg_id": 5716,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0057,
       "delta_win": 0.0057,
@@ -3443,8 +3443,8 @@
       "delta_top10": 0.0617
     },
     {
-      "name": "Choi, Seungbin",
-      "dg_id": 26580,
+      "name": "Potgieter, Aldrich",
+      "dg_id": 27900,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0074,
       "delta_win": 0.0074,
@@ -3453,8 +3453,8 @@
       "delta_top10": 0.0671
     },
     {
-      "name": "Elvira Mijares, Ignacio",
-      "dg_id": 12988,
+      "name": "Lagergren, Joakim",
+      "dg_id": 14780,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3463,8 +3463,8 @@
       "delta_top10": 0.0628
     },
     {
-      "name": "Molinari, Francesco",
-      "dg_id": 7655,
+      "name": "Nicholas, James",
+      "dg_id": 27598,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0067,
       "delta_win": 0.0067,
@@ -3473,8 +3473,8 @@
       "delta_top10": 0.0628
     },
     {
-      "name": "Siem, Marcel",
-      "dg_id": 6950,
+      "name": "Surratt, Caleb",
+      "dg_id": 30463,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -3483,8 +3483,8 @@
       "delta_top10": 0.0647
     },
     {
-      "name": "Meronk, Adrian",
-      "dg_id": 14196,
+      "name": "Yang, Jiho",
+      "dg_id": 14419,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.005,
       "delta_win": 0.005,
@@ -3493,8 +3493,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Van Driel, Darius",
-      "dg_id": 13374,
+      "name": "Wiedemeyer, Tim",
+      "dg_id": 29973,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -3503,8 +3503,8 @@
       "delta_top10": 0.0684
     },
     {
-      "name": "Norris, Shaun",
-      "dg_id": 7677,
+      "name": "Ham, Jeong Woo",
+      "dg_id": 17872,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0071,
       "delta_win": 0.0071,
@@ -3513,8 +3513,8 @@
       "delta_top10": 0.0625
     },
     {
-      "name": "Ok, Taehoon",
-      "dg_id": 21072,
+      "name": "Hollick, Michael",
+      "dg_id": 15993,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0051,
       "delta_win": 0.0051,
@@ -3523,8 +3523,8 @@
       "delta_top10": 0.0621
     },
     {
-      "name": "Premlall, Yurav",
-      "dg_id": 25890,
+      "name": "Wiesberger, Bernd",
+      "dg_id": 9531,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0074,
       "delta_win": 0.0074,
@@ -3533,8 +3533,8 @@
       "delta_top10": 0.0611
     },
     {
-      "name": "Roy, Kevin",
-      "dg_id": 18424,
+      "name": "Sloman, Tom",
+      "dg_id": 24055,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.006,
       "delta_win": 0.006,
@@ -3543,8 +3543,8 @@
       "delta_top10": 0.0648
     },
     {
-      "name": "Wu, Ashun",
-      "dg_id": 11763,
+      "name": "Uihlein, Peter",
+      "dg_id": 11357,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0064,
       "delta_win": 0.0064,
@@ -3553,8 +3553,8 @@
       "delta_top10": 0.0652
     },
     {
-      "name": "Riley, Davis",
-      "dg_id": 19872,
+      "name": "Grinberg, Lev",
+      "dg_id": 29461,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -3563,8 +3563,8 @@
       "delta_top10": 0.065
     },
     {
-      "name": "Otaegui, Adrian",
-      "dg_id": 14975,
+      "name": "Howard, David",
+      "dg_id": 33657,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0063,
       "delta_win": 0.0063,
@@ -3573,8 +3573,8 @@
       "delta_top10": 0.0634
     },
     {
-      "name": "Katsuragawa, Yuto",
-      "dg_id": 20448,
+      "name": "Clarke, Darren",
+      "dg_id": 3523,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3583,8 +3583,8 @@
       "delta_top10": 0.0639
     },
     {
-      "name": "Willett, Danny",
-      "dg_id": 12920,
+      "name": "Higa, Kazuki",
+      "dg_id": 15756,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -3593,8 +3593,8 @@
       "delta_top10": 0.0633
     },
     {
-      "name": "Kim, Baekjun",
-      "dg_id": 27759,
+      "name": "Kataoka, Naoyuki",
+      "dg_id": 18994,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0079,
       "delta_win": 0.0079,
@@ -3603,8 +3603,8 @@
       "delta_top10": 0.0661
     },
     {
-      "name": "Davis, Cam",
-      "dg_id": 17786,
+      "name": "Southgate, Matthew",
+      "dg_id": 15191,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0062,
       "delta_win": 0.0062,
@@ -3613,8 +3613,8 @@
       "delta_top10": 0.0629
     },
     {
-      "name": "Gumberg, Jordan",
-      "dg_id": 23892,
+      "name": "Buchanan, Jack",
+      "dg_id": 31844,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0061,
       "delta_win": 0.0061,
@@ -3623,8 +3623,8 @@
       "delta_top10": 0.0609
     },
     {
-      "name": "Sterne, Richard",
-      "dg_id": 7049,
+      "name": "De Castro Piera, Alejandro",
+      "dg_id": 29810,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0055,
       "delta_win": 0.0055,
@@ -3633,8 +3633,8 @@
       "delta_top10": 0.0624
     },
     {
-      "name": "Luiten, Joost",
-      "dg_id": 10158,
+      "name": "Plunkett, Marcus",
+      "dg_id": 29716,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0079,
       "delta_win": 0.0079,
@@ -3643,8 +3643,8 @@
       "delta_top10": 0.0635
     },
     {
-      "name": "Hoshino, Rikuya",
-      "dg_id": 19190,
+      "name": "Ruiter, Nevill",
+      "dg_id": 33707,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.007,
       "delta_win": 0.007,
@@ -3653,8 +3653,8 @@
       "delta_top10": 0.0671
     },
     {
-      "name": "Lee, Junghwan",
-      "dg_id": 13498,
+      "name": "Laopakdee, Fifa",
+      "dg_id": 27019,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.008,
       "delta_win": 0.008,
@@ -3663,8 +3663,8 @@
       "delta_top10": 0.0646
     },
     {
-      "name": "Campbell, Brian",
-      "dg_id": 18628,
+      "name": "Bradbury, Dan",
+      "dg_id": 29971,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0069,
       "delta_win": 0.0069,
@@ -3673,8 +3673,8 @@
       "delta_top10": 0.065
     },
     {
-      "name": "Highsmith, Joe",
-      "dg_id": 28469,
+      "name": "Smyth, Trav",
+      "dg_id": 19232,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -3683,8 +3683,8 @@
       "delta_top10": 0.0659
     },
     {
-      "name": "Johnston, Ryggs",
-      "dg_id": 32449,
+      "name": "Baldwin, Matthew",
+      "dg_id": 13344,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0065,
       "delta_win": 0.0065,
@@ -3693,8 +3693,8 @@
       "delta_top10": 0.0649
     },
     {
-      "name": "Jamieson, Scott",
-      "dg_id": 11397,
+      "name": "Christensen, Tiger",
+      "dg_id": 31123,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0059,
       "delta_win": 0.0059,
@@ -3703,8 +3703,8 @@
       "delta_top10": 0.062
     },
     {
-      "name": "Veerman, Johannes",
-      "dg_id": 20522,
+      "name": "Pulcini, Mateo",
+      "dg_id": 35013,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0083,
       "delta_win": 0.0083,
@@ -3713,8 +3713,8 @@
       "delta_top10": 0.0666
     },
     {
-      "name": "Naidoo, Dylan",
-      "dg_id": 19429,
+      "name": "Couvra, Martin",
+      "dg_id": 27811,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0056,
       "delta_win": 0.0056,
@@ -3723,8 +3723,8 @@
       "delta_top10": 0.0623
     },
     {
-      "name": "Larrazabal, Pablo",
-      "dg_id": 9133,
+      "name": "LaCroix, Frederic",
+      "dg_id": 23733,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0054,
       "delta_win": 0.0054,
@@ -3733,8 +3733,8 @@
       "delta_top10": 0.0691
     },
     {
-      "name": "Hoffman, Charley",
-      "dg_id": 5768,
+      "name": "Howell, Mason",
+      "dg_id": 33759,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0073,
       "delta_win": 0.0073,
@@ -3743,8 +3743,8 @@
       "delta_top10": 0.0651
     },
     {
-      "name": "Strydom, Ockie",
-      "dg_id": 13731,
+      "name": "Duval, David",
+      "dg_id": 4761,
       "bbi_win_prob": null,
       "empirical_win_prob": 0.0054,
       "delta_win": 0.0054,
