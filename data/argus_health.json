@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-07-14T14:28:24Z",
-  "phase_checked": "preview",
-  "next_phase": "phase2_preview",
+  "timestamp": "2026-07-15T10:30:12Z",
+  "phase_checked": "lock",
+  "next_phase": "phase2_lock",
   "status": "red",
   "checks": {
     "current_event": {
@@ -9,21 +9,21 @@
       "error": "current_event is stale",
       "event_id": 541,
       "event_name": "Genesis Scottish Open",
-      "days_until_start": -6,
+      "days_until_start": -7,
       "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.15,
+      "duration_s": 0.31,
       "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "pass",
       "checked": [
-        "themis.json (0.0h)",
-        "bbi_rankings.json (0.0h)"
+        "bbi_rankings.json (0.0h)",
+        "themis.json (0.0h)"
       ]
     }
   },
