@@ -908,9 +908,64 @@
       },
       "leader_this_week": "v8.6-cf",
       "logged_utc": "2026-07-08T20:02:01Z"
+    },
+    {
+      "week": 23,
+      "year": 2026,
+      "event": "Genesis Scottish Open",
+      "event_id": 541,
+      "date": "2026-07-12",
+      "field_size": 156,
+      "baseline_variant_id": "v8.5",
+      "scorecard": {
+        "v8.5": {
+          "spearman": 0.3991,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        },
+        "v8.6-cf": {
+          "spearman": 0.4175,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.9
+        },
+        "v8.6-tal": {
+          "spearman": 0.41,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        },
+        "v8.6-form": {
+          "spearman": 0.4337,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.85
+        },
+        "v8.6-dyn": {
+          "spearman": 0.4119,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 1.0
+        },
+        "v8.7-cfgate": {
+          "spearman": 0.4151,
+          "brier_top_10": null,
+          "brier_win": null,
+          "brier_make_cut": null,
+          "rank_vs_baseline_top20_overlap": 0.95
+        }
+      },
+      "leader_this_week": "v8.6-form",
+      "logged_utc": "2026-07-15T14:13:19Z"
     }
   ],
-  "current_leader": "v8.6-cf",
+  "current_leader": "v8.6-form",
   "consecutive_weeks_leading": {
     "v8.5": 0,
     "v8.6-cf": 5,
@@ -927,7 +982,7 @@
     "flagged_for": "MANUAL_REVIEW",
     "description": "Heavier course-fit weighting variant. Beats baseline by \u22650.03 Spearman AND \u22655% Brier for 4 consecutive weeks across 15 events."
   },
-  "last_updated": "2026-07-08T20:02:01Z",
+  "last_updated": "2026-07-15T14:13:19Z",
   "numbering_scheme": "bbi_tracking_week",
   "numbering_notes": "Wk 1 = WM Phoenix Open 2026 (Feb 5-8, BBI tracking start). Cal-week entries before WM Phoenix were dropped 2026-04-28."
 }
