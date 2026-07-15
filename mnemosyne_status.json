@@ -1,0 +1,112 @@
+{
+  "task": "mnemosyne-postmortem",
+  "state": "done",
+  "timestamp_utc": "2026-07-15T14:16:30.616801+00:00",
+  "argus_note": "argus_health.json stale (2026-04-27). Proceeded autonomously \u2014 same established pattern as prior Mnemosyne runs.",
+  "last_event": {
+    "event_name": "Genesis Scottish Open",
+    "event_id": 541,
+    "week": 23,
+    "course": "The Renaissance Club",
+    "completed": "2026-07-12",
+    "winner": "Kim, Tom",
+    "winner_score": -17,
+    "winner_bbi_rank": 18,
+    "pipeline_ran": true
+  },
+  "next_event": {
+    "event_id": 100,
+    "event_name": "The Open Championship",
+    "week": 24,
+    "course": "Royal Birkdale Golf Club",
+    "start_date": "2026-07-16",
+    "is_major": true
+  },
+  "spearman_bbi": 0.3543,
+  "spearman_dg": 0.4368,
+  "spearman_delta": -0.0825,
+  "beat_dg": false,
+  "brier_bbi_top10": 0.0553,
+  "brier_skill_top10_pct": 7.84,
+  "winning_factors": [
+    "ceiling",
+    "leverage",
+    "floor"
+  ],
+  "underperforming_factors": [
+    "talent",
+    "form",
+    "contrarian"
+  ],
+  "shadow_variants_scored": {
+    "v8.6-cf": {
+      "spearman": 0.3733,
+      "brier_top10": 0.0553,
+      "delta_spearman": 0.019
+    },
+    "v8.6-tal": {
+      "spearman": 0.3655,
+      "brier_top10": 0.0553,
+      "delta_spearman": 0.0112
+    },
+    "v8.6-form": {
+      "spearman": 0.3912,
+      "brier_top10": 0.0553,
+      "delta_spearman": 0.0369
+    },
+    "v8.6-dyn": {
+      "spearman": 0.3673,
+      "brier_top10": 0.0553,
+      "delta_spearman": 0.013
+    },
+    "v8.7-cfgate": {
+      "spearman": 0.3707,
+      "brier_top10": 0.0553,
+      "delta_spearman": 0.0164
+    }
+  },
+  "current_competition_leader": "v8.6-form",
+  "week_competition_winner": "v8.6-form",
+  "promotion_candidate": null,
+  "overrides_reset": {
+    "prior_event_id": 34,
+    "prior_event_name": "Travelers Championship",
+    "prior_count": 0,
+    "new_event_id": 100,
+    "new_event_name": "The Open Championship"
+  },
+  "jobs_run": {
+    "job_a_postmortem": "done \u2014 postmortem_week23.md written. Spearman 0.3543. BBI LOSES to DG (0.4368, delta -0.082). Kim BBI#18 wins. 71/71 coverage (100%).",
+    "job_b_calibration": "done \u2014 calibration_week23.json written. ceiling/leverage/floor top factors. top_10 skill=7.8%. courseFit empty (Renaissance Club NO_HISTORY).",
+    "job_c_shadow_variants": "done \u2014 all 5 variants beat baseline. v8.6-form wins week 23 (+0.037). Consecutive streak: v8.6-form=2 weeks. Promotion condition not met (Brier unchanged=0% improvement).",
+    "job_d_next_event": "done \u2014 The Open Championship (event_id=100, Royal Birkdale, 2026-07-16, week 24, MAJOR). CURRENT_EVENT.json written."
+  },
+  "files_written": [
+    "Outputs/postmortem_week23.md",
+    "Outputs/calibration_week23.json",
+    "Context/SPEARMAN_TRACKER.json (week 23 appended, 13 events)",
+    "Context/CALIBRATION_TRACKER.json (week 23 appended, 12 entries)",
+    "Context/MODEL_COMPETITION_TRACKER.json (week 23 appended, v8.6-form streak=2)",
+    "Context/CURRENT_EVENT.json (week 24 The Open Championship at Royal Birkdale)",
+    "Context/CURRENT_EVENT_prev.json (backed up Genesis Scottish Open)",
+    "Context/MANUAL_OVERRIDES.json (reset for event_id=100, 0 overrides)"
+  ],
+  "alerts": [
+    "CRITICAL: courseFit layer EMPTY at Renaissance Club \u2014 same failure as Memorial Tournament (week 18). Apollo Phase 1 returned NO_HISTORY for all 71 made-cut players. Must fix before The Open (also Scottish links).",
+    "BBI LOST to DG (skill proxy) this week: 0.3543 vs 0.4368, delta=-0.083. Season record now 7W-4L vs DG proxy. Links courses continue to challenge the model.",
+    "MAJOR WEEK AHEAD: The Open Championship at Royal Birkdale (event_id=100). is_major=True. Expand BBI field to 60+ players. Consider ceiling boost (0.05\u21920.08) and contrarian reduction (0.05\u21920.01) per prior improvement suggestions.",
+    "v8.6-form consecutive streak now 2 weeks (weeks 20+23 at +0.03 threshold). Still needs 3 consecutive AND Brier >=5% improvement for promotion flag. Brier never improves since probabilities unchanged \u2014 promotion condition structurally blocked.",
+    "GAP NOTE: Weeks 21-22 (Travelers Championship, John Deere Classic) have shadow model files but no Mnemosyne postmortem. Season avg computed from 13 events with those gaps. Consider backfill run.",
+    "Royal Birkdale course history: last hosted Open in 2017 (Spieth wins). Apollo should use event_id=100 history filtered by course_key=541 (Birkdale). No COURSE_HISTORY_FALLBACKS entry needed (same event_id)."
+  ],
+  "season_summary_through_week23": {
+    "events_scored": 13,
+    "season_avg_bbi_spearman": 0.38,
+    "last_5_avg_bbi_spearman": 0.3753,
+    "events_above_040": 5,
+    "events_bbi_beat_dg": 7,
+    "events_with_dg_comparison": 11,
+    "dg_head_to_head_record": "7W-4L",
+    "best_event": "Valero Texas Open (0.5736)"
+  }
+}
