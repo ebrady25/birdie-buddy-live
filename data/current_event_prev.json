@@ -13,18 +13,6 @@
   "yardage": 7547,
   "team_event": false,
   "is_major": false,
-  "sg_weights": {
-    "sg_app": 1.2,
-    "sg_putt": 1.15,
-    "sg_arg": 1.1,
-    "sg_ott": 0.95,
-    "_note": "Muirfield Village: Demanding Jack Nicklaus design, 7547y Par-72. APP elevated (long demanding par-4s, approach angles critical). PUTT elevated (bentgrass at 13 stimp, severe undulation). ARG moderate (thick rough demands recovery). OTT reduced (accuracy over distance, tight tee shots). Derived from COURSE_DNA_LIBRARY profile (no explicit sg_weights entry \u2014 knowledge-based)."
-  },
-  "course_weight_override": {
-    "courseFit_pool": 0.22,
-    "courseFit_dfs": 0.17,
-    "_note": "Standard weights. Memorial has rich modern course history (hosted since 1976, annual event). Course fit layer has HIGH confidence \u2014 increase to 0.24/0.19 if Phase 1 coverage > 50%."
-  },
   "course_form_name": "Memorial Form",
   "course_history_event_id_fallbacks": [
     23

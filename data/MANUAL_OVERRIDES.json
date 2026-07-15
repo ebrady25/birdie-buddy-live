@@ -1,8 +1,0 @@
-{
-  "schema_version": "1.0",
-  "description": "Ethan's manual overrides. Cleared each Monday by Mnemosyne when CURRENT_EVENT.json rolls forward.",
-  "event_id": 26,
-  "event_name": "U.S. Open",
-  "last_updated": "2026-06-15T00:00:00Z",
-  "overrides": []
-}

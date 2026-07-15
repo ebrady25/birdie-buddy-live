@@ -51,18 +51,6 @@
   "bbi_pipeline_action": "FULL \u2014 The Open Championship at Royal Birkdale. MAJOR event. Expand field to 156 players.",
   "auto_detected_at": "2026-07-15T14:15:33.440632+00:00",
   "detected_by": "mnemosyne_auto",
-  "sg_weights": {
-    "sg_app": 1.2,
-    "sg_ott": 1.1,
-    "sg_arg": 1.1,
-    "sg_putt": 1.0,
-    "_note": "Royal Birkdale (154th Open, tuned by Claude 2026-07-15 from course research): APP premium (par-70, four par 3s incl. new 241y 15th, firm/fast greens demanding distance control); OTT accuracy-weighted (flat valley fairways between dunes, willow scrub + revetted pots, re-bunkered 18th) \u2014 note our SG:OTT input blends accuracy+distance, so bump kept moderate; ARG up for links scrambling/runoffs; PUTT neutral (docile greens by Open standards). Weather: benign (8-14mph, firm/fast, EAST wind early \u2014 opposite prevailing) \u2192 wind less of a separator, precision more."
-  },
-  "course_weight_override": {
-    "courseFit_pool": 0.22,
-    "courseFit_dfs": 0.17,
-    "_note": "Standard weights. Royal Birkdale 2017 history available \u2014 if coverage >50% consider raising to 0.25/0.20."
-  },
   "course_dna": {
     "sg_importance": {
       "sg_app": 0.32,
