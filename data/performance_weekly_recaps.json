@@ -155,6 +155,17 @@
    "dg_spearman": 0.3224,
    "summary": "Gotterup wins; BBI had him #2 pre-tournament. BBI Spearman 0.3633 vs DG 0.3224 (+0.0409).",
    "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p><strong>BBI Spearman 0.3633</strong> vs DataGolf <strong>0.3224</strong> \u2014 BBI beat the industry baseline by <strong>+0.0409</strong> (141/144 players matched).</p><p><strong>Gotterup, Chris</strong> won; BBI had him ranked <strong>#2</strong> pre-tournament (DataGolf: #2). Top-20 hit rate: 6/20.</p></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (14 events):</strong> averaging <strong>0.382</strong>. Target 0.40; 0.50 is the best-in-world stretch goal.</li></ul></section></div>"
+  },
+  {
+   "week": 23,
+   "year": 2026,
+   "event": "Genesis Scottish Open",
+   "date": "2026-07-12",
+   "course": "The Renaissance Club",
+   "bbi_spearman": 0.3043,
+   "dg_spearman": 0.2999,
+   "summary": "Kim wins; BBI had him #18 pre-tournament. BBI Spearman 0.3043 vs DG 0.2999 (+0.0044).",
+   "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p><strong>BBI Spearman 0.3043</strong> vs DataGolf <strong>0.2999</strong> \u2014 BBI beat the industry baseline by <strong>+0.0044</strong> (152/156 players matched).</p><p><strong>Kim, Tom</strong> won; BBI had him ranked <strong>#18</strong> pre-tournament (DataGolf: #27). Top-20 hit rate: 9/20.</p></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (15 events):</strong> averaging <strong>0.377</strong>. Target 0.40; 0.50 is the best-in-world stretch goal.</li></ul></section></div>"
   }
  ],
  "last_updated": "2026-07-08T18:24:10Z"
