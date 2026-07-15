@@ -57,7 +57,21 @@
         "year": 2026,
         "completed": "2026-04-19",
         "event_id": 12,
-        "description": "Per-factor attribution for top-10 finishers in Week 11 RBC Heritage. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 11 RBC Heritage. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {
+          "pool": {
+            "talent": 0.18,
+            "courseFit": 0.26,
+            "form": 0.13,
+            "cutSafety": 0.12,
+            "floor": 0.05,
+            "ceiling": 0.05,
+            "leverage": 0.09,
+            "contrarian": 0.05,
+            "dfsValue": 0.02,
+            "strategic": 0.05
+          }
+        }
       },
       "players": [
         {
@@ -619,7 +633,21 @@
         "year": 2026,
         "completed": "2026-05-03",
         "event_id": 556,
-        "description": "Per-factor attribution for top-10 finishers in Week 13 Cadillac Championship. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 13 Cadillac Championship. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {
+          "pool": {
+            "talent": 0.24,
+            "courseFit": 0.2,
+            "form": 0.13,
+            "cutSafety": 0.12,
+            "floor": 0.05,
+            "ceiling": 0.05,
+            "leverage": 0.09,
+            "contrarian": 0.05,
+            "dfsValue": 0.02,
+            "strategic": 0.05
+          }
+        }
       },
       "players": [
         {
@@ -1281,7 +1309,8 @@
         "year": 2026,
         "completed": "2026-05-10",
         "event_id": 480,
-        "description": "Per-factor attribution for top-10 finishers in Week 14 Truist Championship. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 14 Truist Championship. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -1893,7 +1922,8 @@
         "year": 2026,
         "completed": "2026-05-17",
         "event_id": 33,
-        "description": "Per-factor attribution for top-10 finishers in Week 15 PGA Championship. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 15 PGA Championship. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -2555,7 +2585,8 @@
         "year": 2026,
         "completed": "2026-06-07",
         "event_id": 23,
-        "description": "Per-factor attribution for top-10 finishers in Week 18 Memorial Tournament. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 18 Memorial Tournament. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -3117,7 +3148,8 @@
         "year": 2026,
         "completed": "2026-06-14",
         "event_id": 32,
-        "description": "Per-factor attribution for top-10 finishers in Week 19 RBC Canadian Open. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 19 RBC Canadian Open. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -3624,12 +3656,13 @@
     },
     {
       "metadata": {
-        "event": "US Open",
+        "event": "US_Open",
         "week": 20,
         "year": 2026,
         "completed": "2026-06-22",
         "event_id": 26,
-        "description": "Per-factor attribution for top-10 finishers in Week 20 US Open. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 20 US_Open. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -3841,7 +3874,8 @@
         "year": 2026,
         "completed": "",
         "event_id": 34,
-        "description": "Per-factor attribution for top-10 finishers in Week 21 Travelers Championship. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 21 Travelers Championship. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -4403,7 +4437,8 @@
         "year": 2026,
         "completed": "2026-07-05",
         "event_id": 30,
-        "description": "Per-factor attribution for top-10 finishers in Week 22 John Deere Classic. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 22 John Deere Classic. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -4965,7 +5000,8 @@
         "year": 2026,
         "completed": "2026-07-12",
         "event_id": 541,
-        "description": "Per-factor attribution for top-10 finishers in Week 23 Genesis Scottish Open. Shows how each of the 10 BBI factors contributed to final composite scores."
+        "description": "Per-factor attribution for top-10 finishers in Week 23 Genesis Scottish Open. Shows how each of the 10 BBI factors contributed to final composite scores.",
+        "weights_used": {}
       },
       "players": [
         {
@@ -5471,5 +5507,5 @@
       ]
     }
   ],
-  "last_updated": "2026-07-15T14:13:19Z"
+  "last_updated": "2026-07-15T14:31:38Z"
 }

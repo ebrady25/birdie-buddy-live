@@ -212,7 +212,259 @@
       "underperforming_factors": [],
       "notes": "Pipeline miss. Wyndham Clark won at -30. No BBI predictions were produced.",
       "logged_utc": "2026-05-25T14:17:31.058999+00:00"
+    },
+    {
+      "week": 17,
+      "event": "Charles Schwab Challenge",
+      "event_id": 21,
+      "date": "2026-05-28",
+      "year": 2026,
+      "field_size": 132,
+      "bbi_spearman": 0.4076,
+      "bbi_brier_top10": null,
+      "bbi_brier_win": null,
+      "bbi_skill_top10_pct": null,
+      "winning_factors": [],
+      "underperforming_factors": [],
+      "notes": "Backfilled 2026-06-08. Calibration not computed (no calibration helper run for week 17). Spearman backfilled from DataGolf historical results.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 18,
+      "event": "the Memorial Tournament presented by Workday",
+      "event_id": 23,
+      "date": "2026-06-04",
+      "year": 2026,
+      "field_size": 72,
+      "bbi_spearman": 0.3876,
+      "bbi_brier_top10": 0.1368,
+      "bbi_brier_win": 0.0145,
+      "bbi_brier_top5": 0.0696,
+      "bbi_brier_top20": 0.184,
+      "bbi_skill_top10_pct": -5.66,
+      "bbi_skill_win_pct": -5.61,
+      "winning_factors": [
+        "dfsValue",
+        "form",
+        "talent"
+      ],
+      "underperforming_factors": [
+        "ceiling"
+      ],
+      "factor_attribution_top10": {
+        "talent": {
+          "topk_avg": 11.6727,
+          "field_avg": 10.6239,
+          "ratio": 1.099
+        },
+        "form": {
+          "topk_avg": 7.4791,
+          "field_avg": 6.3593,
+          "ratio": 1.176
+        },
+        "cutSafety": {
+          "topk_avg": 7.6991,
+          "field_avg": 7.0247,
+          "ratio": 1.096
+        },
+        "floor": {
+          "topk_avg": 1.7473,
+          "field_avg": 1.5925,
+          "ratio": 1.097
+        },
+        "ceiling": {
+          "topk_avg": 0.3409,
+          "field_avg": 0.3807,
+          "ratio": 0.895
+        },
+        "leverage": {
+          "topk_avg": 1.3373,
+          "field_avg": 1.3067,
+          "ratio": 1.023
+        },
+        "contrarian": {
+          "topk_avg": 4.0355,
+          "field_avg": 3.9904,
+          "ratio": 1.011
+        },
+        "dfsValue": {
+          "topk_avg": 1.3191,
+          "field_avg": 1.0704,
+          "ratio": 1.232
+        }
+      },
+      "notes": "Poston wins playoff (BBI #51). Course fit layer absent \u2014 all NO_HISTORY. Form, talent, dfsValue factors over-indexed top-10. Negative skill% for top-5 and win indicates BBI probabilities over-confident on top-ranked players.",
+      "logged_utc": "2026-06-08T13:17:13.398984+00:00"
+    },
+    {
+      "week": 19,
+      "event": "RBC Canadian Open",
+      "event_id": 32,
+      "date": "2026-06-14",
+      "year": 2026,
+      "field_size": 146,
+      "n_calibrated": 142,
+      "bbi_spearman": 0.199,
+      "bbi_brier_top10": 0.0646,
+      "bbi_brier_win": 0.007,
+      "bbi_brier_top5": 0.0321,
+      "bbi_brier_top20": 0.1861,
+      "bbi_skill_top10_pct": 1.3,
+      "bbi_skill_win_pct": 0.6,
+      "winning_factors": [
+        "courseFit",
+        "form",
+        "ceiling"
+      ],
+      "underperforming_factors": [
+        "contrarian",
+        "dfsValue",
+        "strategic"
+      ],
+      "factor_attribution_top10": {
+        "courseFit": {
+          "top10_avg": 16.7,
+          "field_avg": 14.65,
+          "ratio": 1.14
+        },
+        "form": {
+          "top10_avg": 7.34,
+          "field_avg": 6.44,
+          "ratio": 1.139
+        },
+        "ceiling": {
+          "top10_avg": 2.62,
+          "field_avg": 2.37,
+          "ratio": 1.108
+        },
+        "leverage": {
+          "top10_avg": 4.63,
+          "field_avg": 4.2,
+          "ratio": 1.102
+        },
+        "talent": {
+          "top10_avg": 9.44,
+          "field_avg": 8.9,
+          "ratio": 1.061
+        },
+        "contrarian": {
+          "top10_avg": 2.5,
+          "field_avg": 2.4,
+          "ratio": 1.043
+        },
+        "dfsValue": {
+          "top10_avg": 1.0,
+          "field_avg": 0.96,
+          "ratio": 1.043
+        }
+      },
+      "notes": "Weak week. Spearman 0.199, DG beat BBI (DG=0.245). Top-20 Brier severely negative (-53.8% skill) \u2014 inflated prob_top20 across large field. Baseline v8.5 beat all 5 shadow variants. RBC course history only 2025 relevant \u2014 prior years at different venues. Winning factors: courseFit, form, ceiling.",
+      "logged_utc": "2026-06-15T00:00:00Z"
+    },
+    {
+      "week": 20,
+      "event": "U.S. Open",
+      "event_id": 26,
+      "date": "2026-06-22",
+      "year": 2026,
+      "field_size": 156,
+      "n_made_cut": 72,
+      "n_matched_bbi": 28,
+      "field_coverage_pct": 38.9,
+      "bbi_spearman": 0.5282,
+      "bbi_brier_top10": 0.0265,
+      "bbi_brier_win": 0.0067,
+      "bbi_brier_top5": 0.0244,
+      "bbi_brier_top20": 0.053,
+      "bbi_brier_make_cut": 0.2113,
+      "bbi_skill_top10_pct": 0.0,
+      "bbi_skill_win_pct": 4.1,
+      "winning_factors": [
+        "strategic",
+        "ceiling",
+        "form"
+      ],
+      "underperforming_factors": [
+        "contrarian",
+        "leverage",
+        "courseFit"
+      ],
+      "factor_attribution_top10": {
+        "strategic": {
+          "topk_avg": 1.711,
+          "field_avg": 1.078,
+          "ratio": 1.587
+        },
+        "ceiling": {
+          "topk_avg": 2.08,
+          "field_avg": 1.368,
+          "ratio": 1.52
+        },
+        "form": {
+          "topk_avg": 6.688,
+          "field_avg": 4.855,
+          "ratio": 1.378
+        },
+        "talent": {
+          "topk_avg": 15.888,
+          "field_avg": 12.804,
+          "ratio": 1.241
+        },
+        "cutSafety": {
+          "topk_avg": 9.928,
+          "field_avg": 8.943,
+          "ratio": 1.11
+        },
+        "floor": {
+          "topk_avg": 4.141,
+          "field_avg": 3.801,
+          "ratio": 1.09
+        },
+        "dfsValue": {
+          "topk_avg": 1.805,
+          "field_avg": 1.789,
+          "ratio": 1.009
+        },
+        "courseFit": {
+          "topk_avg": 11.212,
+          "field_avg": 11.582,
+          "ratio": 0.968
+        },
+        "leverage": {
+          "topk_avg": 0.667,
+          "field_avg": 0.748,
+          "ratio": 0.892
+        },
+        "contrarian": {
+          "topk_avg": 0.026,
+          "field_avg": 0.105,
+          "ratio": 0.251
+        }
+      },
+      "notes": "Spearman 0.5282, BBI beats DG (+0.049). Only 28/72 made-cut in BBI (38.9% \u2014 LIV exemptions, late adds not in DG pre-tourney feed). Make_cut Brier -37% skill (severe US Open setup; many BBI high-MC players missed cut). Strategic and ceiling over-indexed top-10. Contrarian major drag (ratio 0.251 \u2014 chalk results at major). Winner Clark (BBI #6). Burns runner-up (BBI #3).",
+      "logged_utc": "2026-06-22T00:00:00Z"
+    },
+    {
+      "week": 23,
+      "event": "Genesis Scottish Open",
+      "event_id": 541,
+      "date": "2026-07-12",
+      "bbi_brier_top10": 0.0553,
+      "bbi_brier_win": 0.0065,
+      "bbi_spearman": 0.3543,
+      "bbi_skill_top10_pct": 7.84,
+      "winning_factors": [
+        "ceiling",
+        "leverage",
+        "floor"
+      ],
+      "underperforming_factors": [
+        "talent",
+        "form",
+        "contrarian"
+      ],
+      "courseFit_alert": "EMPTY \u2014 all players NO_HISTORY at Renaissance Club"
     }
   ],
-  "last_updated": "2026-05-21T01:20:20.031101+00:00"
+  "last_updated": "2026-07-15T14:14:58.181842+00:00"
 }

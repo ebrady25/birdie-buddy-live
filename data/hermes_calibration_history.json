@@ -92,6 +92,46 @@
       }
     },
     {
+      "event": "US_Open",
+      "event_id": 26,
+      "year": 2026,
+      "completed": "2026-06-22",
+      "scored_at_utc": "2026-07-15T14:32:56Z",
+      "n_compared": 49,
+      "summary": {
+        "mae": 4.26,
+        "bias": -4.26,
+        "rmse": 8.06,
+        "clean_mae": 4.26,
+        "clean_bias": -4.26,
+        "clean_rmse": 8.06,
+        "n_suspect_excluded": 0,
+        "suspect_threshold_pct": 50.0
+      },
+      "by_tier": {
+        "anchors": {
+          "n": 4,
+          "mae": 19.82,
+          "bias": -19.82
+        },
+        "mid-tier": {
+          "n": 4,
+          "mae": 12.34,
+          "bias": -12.34
+        },
+        "value": {
+          "n": 9,
+          "mae": 5.55,
+          "bias": -5.55
+        },
+        "punt": {
+          "n": 32,
+          "mae": 0.94,
+          "bias": -0.94
+        }
+      }
+    },
+    {
       "event": "RBC Canadian Open",
       "event_id": 32,
       "year": 2026,
@@ -318,9 +358,9 @@
     }
   ],
   "season": {
-    "n_events": 7,
-    "mean_mae": 11.19,
-    "mean_bias": 9.54
+    "n_events": 8,
+    "mean_mae": 10.33,
+    "mean_bias": 7.82
   },
-  "last_updated": "2026-07-08T18:27:03Z"
+  "last_updated": "2026-07-15T14:32:56Z"
 }
