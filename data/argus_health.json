@@ -1,30 +1,27 @@
 {
-  "timestamp": "2026-07-15T10:30:12Z",
-  "phase_checked": "lock",
-  "next_phase": "phase2_lock",
+  "timestamp": "2026-07-20T12:28:43Z",
+  "phase_checked": "mnemosyne",
+  "next_phase": "mnemosyne_postmortem",
   "status": "red",
   "checks": {
     "current_event": {
       "status": "fail",
       "error": "current_event is stale",
-      "event_id": 541,
-      "event_name": "Genesis Scottish Open",
-      "days_until_start": -7,
+      "event_id": 100,
+      "event_name": "The Open Championship",
+      "days_until_start": -5,
       "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.31,
+      "duration_s": 0.17,
       "players_returned": 156,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "pass",
-      "checked": [
-        "bbi_rankings.json (0.0h)",
-        "themis.json (0.0h)"
-      ]
+      "status": "n/a",
+      "note": "mnemosyne has no prior-output gate (first or independent phase)."
     }
   },
   "recommendations": [
