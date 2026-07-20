@@ -1,12 +1,12 @@
 {
-  "run_at_utc": "2026-07-13T06:25:53Z",
+  "run_at_utc": "2026-07-20T06:22:43Z",
   "reference_season": 2025,
   "seasons_included": [
     2025,
     2026
   ],
   "model_source": "DataGolf pre-tournament baseline. Reference benchmark for shadow-variant promotion decisions.",
-  "n_events_attempted": 75,
+  "n_events_attempted": 77,
   "n_events_scored": 75,
   "aborted_after_429s": false,
   "aggregate": {
@@ -17219,9 +17219,34 @@
         }
       },
       "event_name_input": "Genesis Scottish Open"
+    },
+    {
+      "error": "HTTP Error 400: Bad Request",
+      "event_id": 100,
+      "year": 2026,
+      "event_name_input": "The Open Championship"
+    },
+    {
+      "error": "HTTP Error 400: Bad Request",
+      "event_id": 522,
+      "year": 2026,
+      "event_name_input": "Corales Puntacana Championship"
     }
   ],
-  "failed_events": [],
+  "failed_events": [
+    {
+      "event_id": 100,
+      "year": 2026,
+      "event_name": "The Open Championship",
+      "error": "HTTP Error 400: Bad Request"
+    },
+    {
+      "event_id": 522,
+      "year": 2026,
+      "event_name": "Corales Puntacana Championship",
+      "error": "HTTP Error 400: Bad Request"
+    }
+  ],
   "notes": "Resume-safe. Spearman on made-cut players only. Brier on full-field binary outcomes.",
   "auto_generated_by": "github-actions / refresh_prometheus.py"
 }
