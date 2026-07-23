@@ -1,10 +1,10 @@
 {
  "schema_version": "1.0",
  "description": "Reference percentile tiers for golf prediction models, used to position BBI in the global landscape. Estimates based on publicly observable Spearman performance across published forecasters; closed proprietary models are inferred from research-paper benchmarks and tournament-pool track records.",
- "asof": "2026-07-15",
+ "asof": "2026-07-23",
  "current_state": {
-  "bbi_season_mean_spearman": 0.377,
-  "bbi_season_median_spearman": 0.3876,
+  "bbi_season_mean_spearman": 0.3816,
+  "bbi_season_median_spearman": 0.3935,
   "bbi_best_week": {
    "value": 0.5736,
    "event": "Valero Texas Open",
@@ -12,19 +12,19 @@
   },
   "industry_baseline_mean_spearman": 0.3984,
   "industry_baseline_source": "Published industry pre-tournament odds, mean of 72 events across 2025 + completed 2026 (PROMETHEUS backtest, refreshed weekly)",
-  "events_scored_2026": 15,
+  "events_scored_2026": 16,
   "head_to_head_record_vs_baseline": {
-   "events_compared": 15,
+   "events_compared": 16,
    "bbi_won": 10,
    "tied_within_004": 0,
-   "lost": 5,
+   "lost": 6,
    "note": "Complete head-to-head: every scored 2026 event now has a published-baseline comparison (wk15/wk17 backfilled 2026-07-08 from the DG pre-tournament archive)."
   },
   "estimated_global_percentile_range": [
    88,
    94
   ],
-  "honest_summary": "BBI averages 0.377 Spearman across 2026's 15 scored events, ranging from 0.18 (Truist Championship) to 0.57 (Valero Texas Open). Head-to-head we've beaten the published industry baseline in 10 of 15 weeks, while our season mean sits just under the baseline's long-run 0.398 \u2014 squarely inside the top-tier commercial bracket, roughly the 88th\u201394th percentile of golf forecasting approaches. We're not yet best-in-world (0.55+ sustained); we publish every week either way."
+  "honest_summary": "BBI averages 0.382 Spearman across 2026's 16 scored events, ranging from 0.18 (Truist Championship) to 0.57 (Valero Texas Open). Head-to-head we've beaten the published industry baseline in 10 of 16 weeks, while our season mean sits just under the baseline's long-run 0.398 \u2014 squarely inside the top-tier commercial bracket, roughly the 88th\u201394th percentile of golf forecasting approaches. We're not yet best-in-world (0.55+ sustained); we publish every week either way."
  },
  "tiers": [
   {
@@ -75,7 +75,7 @@
  ],
  "bbi_marker": {
   "tier_id": "top_tier",
-  "spearman_value": 0.377,
+  "spearman_value": 0.3816,
   "label": "BBI v8.5 \u2014 2026 season avg",
   "weekly_range": {
    "min": 0.1766,
