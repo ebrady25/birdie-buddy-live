@@ -1,275 +1,276 @@
 {
-  "generated_at": "2026-07-15T14:22:40.198Z",
+  "generated_at": "2026-07-23T23:25:37.760Z",
   "tour_baselines": {
     "pressure_sunday": {
-      "avg": -0.653,
-      "p25": -2.764,
-      "p50": -0.681,
-      "p75": 1.569,
-      "player_count_with_data": 106
+      "avg": -0.956,
+      "p25": -2.851,
+      "p50": -0.996,
+      "p75": 0.98,
+      "player_count_with_data": 137
     },
     "weekend_surge": {
-      "avg": -0.956,
-      "p25": -2.643,
-      "p50": -1.042,
-      "p75": 0.932,
-      "player_count_with_data": 106
+      "avg": -1.456,
+      "p25": -2.939,
+      "p50": -1.5,
+      "p75": -0.005,
+      "player_count_with_data": 137
     }
   },
   "players": {
-    "5716": {},
-    "6093": {
+    "5768": {},
+    "6169": {
       "pressure_sunday": {
-        "value": -0.41,
+        "value": 0.45,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": 0.098,
+        "sample": 5
+      }
+    },
+    "7399": {
+      "pressure_sunday": {
+        "value": -2.176,
         "sample": 8
       },
       "weekend_surge": {
-        "value": -0.244,
+        "value": -1.951,
         "sample": 8
       }
     },
-    "6430": {
+    "7960": {
       "pressure_sunday": {
-        "value": 0.651,
-        "sample": 8
+        "value": 0.406,
+        "sample": 3
       },
       "weekend_surge": {
-        "value": 1.295,
-        "sample": 8
+        "value": -0.598,
+        "sample": 3
       }
     },
-    "7655": {},
-    "7677": {},
+    "8480": {
+      "pressure_sunday": {
+        "value": 0.018,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -2.142,
+        "sample": 3
+      }
+    },
+    "8571": {
+      "pressure_sunday": {
+        "value": -0.627,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -1.751,
+        "sample": 4
+      }
+    },
+    "8820": {
+      "pressure_sunday": {
+        "value": 0.842,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -0.761,
+        "sample": 6
+      }
+    },
     "8825": {
       "pressure_sunday": {
-        "value": -2.696,
-        "sample": 11
+        "value": -2.633,
+        "sample": 10
       },
       "weekend_surge": {
-        "value": -1.13,
-        "sample": 11
+        "value": -1.024,
+        "sample": 10
       }
     },
-    "9771": {
+    "9171": {
       "pressure_sunday": {
-        "value": -1.53,
-        "sample": 8
+        "value": -1.211,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.646,
-        "sample": 8
+        "value": -2.325,
+        "sample": 5
       }
     },
-    "10091": {
+    "10104": {
       "pressure_sunday": {
-        "value": 0.554,
-        "sample": 7
+        "value": 1.929,
+        "sample": 4
       },
       "weekend_surge": {
-        "value": -2.23,
-        "sample": 7
+        "value": -0.893,
+        "sample": 4
       }
     },
-    "10419": {
+    "10423": {},
+    "10873": {
       "pressure_sunday": {
-        "value": 0.4,
-        "sample": 9
+        "value": -0.641,
+        "sample": 4
       },
       "weekend_surge": {
-        "value": 1.199,
-        "sample": 9
+        "value": 0.985,
+        "sample": 4
       }
     },
     "11276": {
       "pressure_sunday": {
-        "value": -2.125,
-        "sample": 6
+        "value": -2.057,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.723,
-        "sample": 6
+        "value": -0.998,
+        "sample": 5
       }
     },
-    "11357": {},
-    "11889": {
+    "11451": {
       "pressure_sunday": {
-        "value": 0.562,
+        "value": -0.216,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -2.103,
+        "sample": 4
+      }
+    },
+    "11676": {
+      "pressure_sunday": {
+        "value": -1.675,
         "sample": 9
       },
       "weekend_surge": {
-        "value": 0.046,
+        "value": -1.474,
         "sample": 9
       }
     },
-    "12294": {
+    "12423": {
       "pressure_sunday": {
-        "value": -0.021,
-        "sample": 11
+        "value": -4.282,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.504,
-        "sample": 11
+        "value": -2.247,
+        "sample": 5
       }
     },
     "12577": {
       "pressure_sunday": {
-        "value": 0.252,
-        "sample": 10
+        "value": 0.407,
+        "sample": 9
       },
       "weekend_surge": {
-        "value": -1.67,
-        "sample": 10
+        "value": -1.595,
+        "sample": 9
       }
     },
-    "12965": {
+    "12808": {
       "pressure_sunday": {
-        "value": -0.283,
-        "sample": 7
+        "value": -2.037,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": -0.722,
-        "sample": 7
+        "value": -2.043,
+        "sample": 6
       }
     },
-    "13126": {
+    "12909": {},
+    "13367": {
       "pressure_sunday": {
-        "value": -1.113,
-        "sample": 11
+        "value": -5.361,
+        "sample": 4
       },
       "weekend_surge": {
-        "value": -0.947,
-        "sample": 11
+        "value": -4.492,
+        "sample": 4
       }
     },
+    "13412": {
+      "pressure_sunday": {
+        "value": 0.04,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -2.936,
+        "sample": 4
+      }
+    },
+    "13470": {},
     "13562": {
       "pressure_sunday": {
-        "value": -0.357,
+        "value": -1.099,
         "sample": 10
       },
       "weekend_surge": {
-        "value": -2.274,
+        "value": -2.102,
         "sample": 10
       }
     },
     "13764": {
       "pressure_sunday": {
-        "value": -1.513,
+        "value": -0.41,
         "sample": 7
       },
       "weekend_surge": {
-        "value": -1.546,
+        "value": -1.562,
         "sample": 7
       }
     },
-    "13872": {
+    "13965": {},
+    "13997": {
       "pressure_sunday": {
-        "value": -0.045,
-        "sample": 11
+        "value": -0.884,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.014,
-        "sample": 11
+        "value": -1.668,
+        "sample": 5
       }
     },
-    "13900": {
+    "14007": {},
+    "14140": {
       "pressure_sunday": {
-        "value": -2.366,
-        "sample": 8
-      },
-      "weekend_surge": {
-        "value": -0.809,
-        "sample": 8
-      }
-    },
-    "14139": {
-      "pressure_sunday": {
-        "value": 0.755,
-        "sample": 12
-      },
-      "weekend_surge": {
-        "value": -0.227,
-        "sample": 12
-      }
-    },
-    "14502": {
-      "pressure_sunday": {
-        "value": -0.812,
-        "sample": 11
-      },
-      "weekend_surge": {
-        "value": -0.954,
-        "sample": 11
-      }
-    },
-    "14577": {
-      "pressure_sunday": {
-        "value": -0.011,
-        "sample": 8
-      },
-      "weekend_surge": {
-        "value": -1.305,
-        "sample": 8
-      }
-    },
-    "14578": {
-      "pressure_sunday": {
-        "value": 0.359,
-        "sample": 8
-      },
-      "weekend_surge": {
-        "value": -0.257,
-        "sample": 8
-      }
-    },
-    "14609": {
-      "pressure_sunday": {
-        "value": -0.947,
-        "sample": 11
-      },
-      "weekend_surge": {
-        "value": -0.623,
-        "sample": 11
-      }
-    },
-    "14636": {
-      "pressure_sunday": {
-        "value": 0.256,
-        "sample": 12
-      },
-      "weekend_surge": {
-        "value": -1.339,
-        "sample": 12
-      }
-    },
-    "14792": {
-      "pressure_sunday": {
-        "value": -0.579,
-        "sample": 4
-      },
-      "weekend_surge": {
-        "value": -0.842,
-        "sample": 4
-      }
-    },
-    "14795": {},
-    "14796": {
-      "pressure_sunday": {
-        "value": 1.965,
+        "value": 0.001,
         "sample": 3
       },
       "weekend_surge": {
-        "value": -0.095,
+        "value": -2.709,
         "sample": 3
       }
     },
-    "14838": {
+    "14509": {
       "pressure_sunday": {
-        "value": -1.819,
-        "sample": 3
+        "value": -0.051,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -2.387,
-        "sample": 3
+        "value": -1.148,
+        "sample": 5
+      }
+    },
+    "14704": {
+      "pressure_sunday": {
+        "value": -2.848,
+        "sample": 10
+      },
+      "weekend_surge": {
+        "value": -1.948,
+        "sample": 10
+      }
+    },
+    "14926": {
+      "pressure_sunday": {
+        "value": -1.02,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -2.242,
+        "sample": 6
       }
     },
     "15310": {
@@ -282,198 +283,299 @@
         "sample": 3
       }
     },
-    "15326": {},
-    "15466": {
+    "15330": {
       "pressure_sunday": {
-        "value": -0.482,
-        "sample": 8
-      },
-      "weekend_surge": {
-        "value": -0.948,
-        "sample": 8
-      }
-    },
-    "15756": {},
-    "15856": {},
-    "16243": {
-      "pressure_sunday": {
-        "value": -2.303,
+        "value": 1.823,
         "sample": 6
       },
       "weekend_surge": {
-        "value": -2.075,
+        "value": -0.886,
+        "sample": 6
+      }
+    },
+    "15470": {
+      "pressure_sunday": {
+        "value": -0.943,
+        "sample": 7
+      },
+      "weekend_surge": {
+        "value": -0.592,
         "sample": 7
       }
     },
-    "16841": {
+    "15556": {
       "pressure_sunday": {
-        "value": 0.069,
-        "sample": 8
+        "value": 1.063,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": -0.429,
-        "sample": 8
+        "value": -0.471,
+        "sample": 6
+      }
+    },
+    "15575": {
+      "pressure_sunday": {
+        "value": -2.361,
+        "sample": 11
+      },
+      "weekend_surge": {
+        "value": -2.244,
+        "sample": 11
+      }
+    },
+    "15651": {},
+    "15980": {
+      "pressure_sunday": {
+        "value": -2.129,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -1.868,
+        "sample": 5
+      }
+    },
+    "16283": {
+      "pressure_sunday": {
+        "value": -1.556,
+        "sample": 7
+      },
+      "weekend_surge": {
+        "value": -1.786,
+        "sample": 7
+      }
+    },
+    "16333": {
+      "pressure_sunday": {
+        "value": -0.401,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -1.444,
+        "sample": 6
+      }
+    },
+    "16341": {
+      "pressure_sunday": {
+        "value": -0.874,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -1.746,
+        "sample": 4
+      }
+    },
+    "16394": {
+      "pressure_sunday": {
+        "value": -3.382,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -1.905,
+        "sample": 6
+      }
+    },
+    "16395": {
+      "pressure_sunday": {
+        "value": -0.187,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -0.357,
+        "sample": 5
+      }
+    },
+    "16591": {},
+    "16713": {},
+    "16757": {
+      "pressure_sunday": {
+        "value": -1.212,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -0.757,
+        "sample": 3
+      }
+    },
+    "17032": {
+      "pressure_sunday": {
+        "value": -3.204,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -2.286,
+        "sample": 3
       }
     },
     "17365": {
       "pressure_sunday": {
-        "value": -0.215,
-        "sample": 9
+        "value": 0.382,
+        "sample": 8
       },
       "weekend_surge": {
-        "value": -1.309,
-        "sample": 9
+        "value": -0.887,
+        "sample": 8
+      }
+    },
+    "17381": {
+      "pressure_sunday": {
+        "value": -0.396,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": 0.266,
+        "sample": 3
       }
     },
     "17488": {
       "pressure_sunday": {
-        "value": -3.465,
+        "value": -2.793,
         "sample": 11
       },
       "weekend_surge": {
-        "value": -2.512,
+        "value": -2.022,
         "sample": 11
-      }
-    },
-    "17511": {
-      "pressure_sunday": {
-        "value": -2.814,
-        "sample": 7
-      },
-      "weekend_surge": {
-        "value": -1.937,
-        "sample": 7
-      }
-    },
-    "17536": {
-      "pressure_sunday": {
-        "value": -0.8,
-        "sample": 9
-      },
-      "weekend_surge": {
-        "value": 0.265,
-        "sample": 9
       }
     },
     "17538": {
       "pressure_sunday": {
-        "value": 1.089,
+        "value": 1.042,
         "sample": 9
       },
       "weekend_surge": {
-        "value": -0.363,
+        "value": -0.226,
         "sample": 9
       }
     },
     "17543": {
       "pressure_sunday": {
-        "value": 0.28,
-        "sample": 10
+        "value": 0.178,
+        "sample": 9
       },
       "weekend_surge": {
-        "value": 0.648,
-        "sample": 10
+        "value": 0.592,
+        "sample": 9
+      }
+    },
+    "17550": {
+      "pressure_sunday": {
+        "value": -2.113,
+        "sample": 7
+      },
+      "weekend_surge": {
+        "value": -0.52,
+        "sample": 7
       }
     },
     "17576": {
       "pressure_sunday": {
-        "value": -1.364,
-        "sample": 11
+        "value": -0.563,
+        "sample": 10
       },
       "weekend_surge": {
-        "value": -2.495,
-        "sample": 11
+        "value": -1.987,
+        "sample": 10
       }
     },
-    "17606": {
+    "17639": {
       "pressure_sunday": {
-        "value": 0.679,
+        "value": -3.288,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -2.845,
+        "sample": 5
+      }
+    },
+    "17723": {
+      "pressure_sunday": {
+        "value": -1.083,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -1.605,
+        "sample": 4
+      }
+    },
+    "17780": {
+      "pressure_sunday": {
+        "value": 0.782,
+        "sample": 9
+      },
+      "weekend_surge": {
+        "value": -1.202,
+        "sample": 9
+      }
+    },
+    "17786": {},
+    "17881": {
+      "pressure_sunday": {
+        "value": 0.079,
         "sample": 6
       },
       "weekend_surge": {
-        "value": 1.442,
+        "value": -0.476,
         "sample": 6
       }
     },
-    "17646": {
+    "18103": {
       "pressure_sunday": {
-        "value": -0.336,
-        "sample": 11
+        "value": -1.321,
+        "sample": 9
       },
       "weekend_surge": {
-        "value": -1.05,
-        "sample": 11
+        "value": -0.895,
+        "sample": 9
       }
     },
-    "18079": {},
+    "18187": {},
     "18417": {
       "pressure_sunday": {
-        "value": -1.154,
+        "value": -0.978,
         "sample": 9
       },
       "weekend_surge": {
-        "value": -0.101,
+        "value": -0.52,
         "sample": 9
       }
     },
-    "18474": {
+    "18424": {
       "pressure_sunday": {
-        "value": -0.069,
-        "sample": 9
+        "value": -2.856,
+        "sample": 7
       },
       "weekend_surge": {
-        "value": -1.659,
-        "sample": 9
-      }
-    },
-    "18554": {
-      "pressure_sunday": {
-        "value": -0.167,
-        "sample": 6
-      },
-      "weekend_surge": {
-        "value": -1.731,
-        "sample": 6
+        "value": -3.104,
+        "sample": 7
       }
     },
     "18586": {
       "pressure_sunday": {
-        "value": 0.59,
+        "value": 0.217,
         "sample": 7
       },
       "weekend_surge": {
-        "value": -1.311,
+        "value": -1.256,
         "sample": 7
+      }
+    },
+    "18628": {
+      "pressure_sunday": {
+        "value": -0.203,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -2.758,
+        "sample": 6
       }
     },
     "18634": {
       "pressure_sunday": {
-        "value": -0.473,
-        "sample": 10
+        "value": -0.045,
+        "sample": 9
       },
       "weekend_surge": {
-        "value": -0.746,
-        "sample": 10
-      }
-    },
-    "18841": {
-      "pressure_sunday": {
-        "value": -0.129,
-        "sample": 8
-      },
-      "weekend_surge": {
-        "value": -0.539,
-        "sample": 8
-      }
-    },
-    "19195": {
-      "pressure_sunday": {
-        "value": 1.292,
-        "sample": 3
-      },
-      "weekend_surge": {
-        "value": 0.28,
-        "sample": 3
+        "value": -0.197,
+        "sample": 9
       }
     },
     "19396": {
@@ -486,39 +588,98 @@
         "sample": 4
       }
     },
-    "19421": {},
-    "19483": {
+    "19477": {
       "pressure_sunday": {
-        "value": 0.023,
-        "sample": 11
+        "value": -3.463,
+        "sample": 3
       },
       "weekend_surge": {
-        "value": -0.405,
-        "sample": 11
+        "value": -0.766,
+        "sample": 3
       }
     },
-    "19895": {
+    "19729": {
       "pressure_sunday": {
-        "value": -0.206,
+        "value": -0.423,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -1.843,
+        "sample": 6
+      }
+    },
+    "19840": {
+      "pressure_sunday": {
+        "value": -1.3,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -2.25,
+        "sample": 5
+      }
+    },
+    "19846": {
+      "pressure_sunday": {
+        "value": 1.496,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -0.383,
+        "sample": 6
+      }
+    },
+    "19865": {},
+    "19870": {
+      "pressure_sunday": {
+        "value": 1.021,
         "sample": 9
       },
       "weekend_surge": {
-        "value": -1.593,
+        "value": 0.472,
         "sample": 9
       }
     },
-    "20706": {
+    "19872": {
       "pressure_sunday": {
-        "value": 0.56,
-        "sample": 8
+        "value": -1.502,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": 0.294,
-        "sample": 8
+        "value": -2.893,
+        "sample": 6
       }
     },
-    "20730": {},
-    "20766": {},
+    "19960": {
+      "pressure_sunday": {
+        "value": 0.257,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": 0.663,
+        "sample": 3
+      }
+    },
+    "20722": {
+      "pressure_sunday": {
+        "value": -1.846,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -1.571,
+        "sample": 3
+      }
+    },
+    "20844": {},
+    "20954": {
+      "pressure_sunday": {
+        "value": -3.582,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -3.899,
+        "sample": 3
+      }
+    },
     "21074": {
       "pressure_sunday": {
         "value": 0.123,
@@ -529,106 +690,105 @@
         "sample": 5
       }
     },
-    "21362": {},
-    "21407": {
+    "21883": {
       "pressure_sunday": {
-        "value": -1.85,
-        "sample": 9
+        "value": -0.164,
+        "sample": 7
       },
       "weekend_surge": {
-        "value": -1.308,
-        "sample": 9
+        "value": -1.41,
+        "sample": 7
       }
     },
-    "21554": {
+    "21889": {
       "pressure_sunday": {
-        "value": -0.376,
-        "sample": 10
+        "value": -0.89,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -0.994,
-        "sample": 10
-      }
-    },
-    "21756": {
-      "pressure_sunday": {
-        "value": 0.157,
-        "sample": 10
-      },
-      "weekend_surge": {
-        "value": -0.639,
-        "sample": 10
+        "value": -2.28,
+        "sample": 5
       }
     },
     "21891": {
       "pressure_sunday": {
-        "value": 0.275,
-        "sample": 10
+        "value": 0.334,
+        "sample": 11
       },
       "weekend_surge": {
-        "value": -1.684,
-        "sample": 10
+        "value": -1.527,
+        "sample": 11
       }
     },
-    "22085": {
+    "21943": {
       "pressure_sunday": {
-        "value": 0.659,
-        "sample": 7
-      },
-      "weekend_surge": {
-        "value": -0.047,
-        "sample": 7
-      }
-    },
-    "22322": {},
-    "22465": {
-      "pressure_sunday": {
-        "value": -3.633,
+        "value": -4.008,
         "sample": 4
       },
       "weekend_surge": {
-        "value": -0.813,
+        "value": -3.701,
         "sample": 4
       }
     },
-    "22760": {
+    "21944": {
       "pressure_sunday": {
-        "value": -1.52,
-        "sample": 13
+        "value": -1.341,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.071,
-        "sample": 13
+        "value": -1.799,
+        "sample": 5
       }
     },
-    "22833": {
+    "21995": {
       "pressure_sunday": {
-        "value": -0.724,
-        "sample": 9
+        "value": -0.739,
+        "sample": 3
       },
       "weekend_surge": {
-        "value": -0.929,
-        "sample": 9
+        "value": -1.331,
+        "sample": 3
       }
     },
-    "23014": {
+    "22002": {
       "pressure_sunday": {
-        "value": -1.631,
-        "sample": 12
+        "value": 0.838,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": -1.583,
-        "sample": 12
+        "value": -0.696,
+        "sample": 6
       }
     },
-    "23323": {
+    "22051": {
       "pressure_sunday": {
-        "value": -1.45,
-        "sample": 9
+        "value": -4.108,
+        "sample": 3
       },
       "weekend_surge": {
-        "value": -1.058,
-        "sample": 9
+        "value": -2.333,
+        "sample": 3
+      }
+    },
+    "22087": {},
+    "22985": {
+      "pressure_sunday": {
+        "value": 0.731,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": 0.166,
+        "sample": 6
+      }
+    },
+    "23048": {
+      "pressure_sunday": {
+        "value": -0.753,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -1.044,
+        "sample": 3
       }
     },
     "23465": {
@@ -641,270 +801,420 @@
         "sample": 6
       }
     },
-    "23475": {
+    "23504": {
       "pressure_sunday": {
-        "value": -0.058,
-        "sample": 9
+        "value": 0.625,
+        "sample": 8
       },
       "weekend_surge": {
-        "value": -0.328,
-        "sample": 9
+        "value": -1.036,
+        "sample": 8
       }
     },
-    "23602": {
+    "23505": {
       "pressure_sunday": {
-        "value": 0.232,
-        "sample": 9
+        "value": -1.719,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": -0.087,
-        "sample": 9
+        "value": -1.236,
+        "sample": 6
       }
     },
-    "23604": {
-      "pressure_sunday": {
-        "value": -1.395,
-        "sample": 9
-      },
-      "weekend_surge": {
-        "value": -0.949,
-        "sample": 9
-      }
-    },
-    "23816": {
-      "pressure_sunday": {
-        "value": -2.266,
-        "sample": 3
-      },
-      "weekend_surge": {
-        "value": -2.049,
-        "sample": 3
-      }
-    },
+    "23542": {},
     "23838": {
       "pressure_sunday": {
-        "value": -0.717,
-        "sample": 7
+        "value": -0.87,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": -1.725,
-        "sample": 7
+        "value": -1.621,
+        "sample": 6
       }
     },
     "23841": {
       "pressure_sunday": {
-        "value": -3.185,
+        "value": -2.732,
         "sample": 6
       },
       "weekend_surge": {
-        "value": -1.913,
+        "value": -1.515,
         "sample": 6
       }
     },
-    "23950": {
+    "24304": {
       "pressure_sunday": {
-        "value": -1.301,
-        "sample": 10
+        "value": -1.446,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.679,
-        "sample": 10
+        "value": -2.583,
+        "sample": 5
+      }
+    },
+    "24342": {
+      "pressure_sunday": {
+        "value": 1.876,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -1.085,
+        "sample": 6
+      }
+    },
+    "24343": {
+      "pressure_sunday": {
+        "value": -2.963,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -1.59,
+        "sample": 3
+      }
+    },
+    "24550": {
+      "pressure_sunday": {
+        "value": -1.405,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -1.2,
+        "sample": 6
       }
     },
     "24766": {
       "pressure_sunday": {
-        "value": -1.896,
-        "sample": 9
+        "value": -1.7,
+        "sample": 8
       },
       "weekend_surge": {
-        "value": -1.708,
-        "sample": 9
+        "value": -1.691,
+        "sample": 8
       }
     },
-    "24968": {
+    "24956": {
       "pressure_sunday": {
-        "value": -0.124,
-        "sample": 10
+        "value": -2.15,
+        "sample": 6
       },
       "weekend_surge": {
-        "value": -0.823,
-        "sample": 10
+        "value": -1.247,
+        "sample": 6
       }
     },
-    "25362": {
+    "25002": {
       "pressure_sunday": {
-        "value": -0.575,
-        "sample": 7
+        "value": 0.445,
+        "sample": 3
       },
       "weekend_surge": {
-        "value": -0.992,
-        "sample": 7
+        "value": -2.485,
+        "sample": 3
+      }
+    },
+    "25003": {
+      "pressure_sunday": {
+        "value": -1.313,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -2.052,
+        "sample": 4
+      }
+    },
+    "25094": {
+      "pressure_sunday": {
+        "value": -0.892,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -2.224,
+        "sample": 6
+      }
+    },
+    "25157": {
+      "pressure_sunday": {
+        "value": -2.144,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -2.513,
+        "sample": 4
+      }
+    },
+    "25319": {
+      "pressure_sunday": {
+        "value": -3.67,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -2.43,
+        "sample": 3
+      }
+    },
+    "25475": {
+      "pressure_sunday": {
+        "value": -1.114,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -1.212,
+        "sample": 5
       }
     },
     "25569": {
       "pressure_sunday": {
-        "value": -1.25,
-        "sample": 10
-      },
-      "weekend_surge": {
-        "value": -0.771,
-        "sample": 10
-      }
-    },
-    "26096": {
-      "pressure_sunday": {
-        "value": -1.692,
-        "sample": 7
-      },
-      "weekend_surge": {
-        "value": -1.965,
-        "sample": 7
-      }
-    },
-    "26649": {
-      "pressure_sunday": {
-        "value": -2.603,
-        "sample": 7
-      },
-      "weekend_surge": {
-        "value": -1.583,
-        "sample": 7
-      }
-    },
-    "26651": {
-      "pressure_sunday": {
-        "value": -1.56,
+        "value": -1.094,
         "sample": 9
       },
       "weekend_surge": {
-        "value": -1.272,
+        "value": -0.614,
         "sample": 9
       }
     },
-    "26745": {},
+    "25908": {
+      "pressure_sunday": {
+        "value": -0.133,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -1.674,
+        "sample": 3
+      }
+    },
+    "26653": {
+      "pressure_sunday": {
+        "value": -2.203,
+        "sample": 8
+      },
+      "weekend_surge": {
+        "value": -2.223,
+        "sample": 8
+      }
+    },
+    "26657": {
+      "pressure_sunday": {
+        "value": -1.775,
+        "sample": 8
+      },
+      "weekend_surge": {
+        "value": -1.713,
+        "sample": 8
+      }
+    },
+    "26660": {},
     "26850": {
       "pressure_sunday": {
-        "value": -2.181,
-        "sample": 4
+        "value": -1.96,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -1.539,
-        "sample": 4
+        "value": -2.424,
+        "sample": 5
       }
     },
     "26947": {
       "pressure_sunday": {
-        "value": 1.648,
+        "value": 2.05,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -0.465,
+        "sample": 4
+      }
+    },
+    "27164": {
+      "pressure_sunday": {
+        "value": -1.353,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -0.355,
+        "sample": 4
+      }
+    },
+    "27364": {
+      "pressure_sunday": {
+        "value": -0.783,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -0.34,
+        "sample": 5
+      }
+    },
+    "27780": {
+      "pressure_sunday": {
+        "value": -0.961,
         "sample": 3
       },
       "weekend_surge": {
-        "value": -1.466,
+        "value": -0.998,
         "sample": 3
       }
     },
-    "27194": {
+    "27819": {
       "pressure_sunday": {
-        "value": -0.544,
+        "value": -0.82,
         "sample": 7
       },
       "weekend_surge": {
-        "value": -1.499,
+        "value": -1.419,
         "sample": 7
-      }
-    },
-    "27598": {},
-    "27774": {
-      "pressure_sunday": {
-        "value": -0.552,
-        "sample": 12
-      },
-      "weekend_surge": {
-        "value": 0.438,
-        "sample": 12
       }
     },
     "27900": {
       "pressure_sunday": {
-        "value": -0.165,
-        "sample": 6
+        "value": -0.057,
+        "sample": 7
       },
       "weekend_surge": {
-        "value": -1.356,
-        "sample": 6
+        "value": -1.229,
+        "sample": 7
+      }
+    },
+    "28159": {
+      "pressure_sunday": {
+        "value": -0.567,
+        "sample": 9
+      },
+      "weekend_surge": {
+        "value": -0.022,
+        "sample": 9
+      }
+    },
+    "28270": {
+      "pressure_sunday": {
+        "value": 0.105,
+        "sample": 5
+      },
+      "weekend_surge": {
+        "value": -0.081,
+        "sample": 5
       }
     },
     "28309": {
       "pressure_sunday": {
-        "value": -0.53,
+        "value": -0.398,
         "sample": 8
       },
       "weekend_surge": {
-        "value": -0.013,
+        "value": 0.098,
         "sample": 8
       }
     },
-    "28615": {},
-    "28635": {
+    "28469": {
       "pressure_sunday": {
-        "value": -0.118,
-        "sample": 7
+        "value": -2.858,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": 0.184,
-        "sample": 7
+        "value": -3.874,
+        "sample": 5
       }
     },
-    "28984": {},
     "29197": {
       "pressure_sunday": {
-        "value": -2.063,
+        "value": -1.888,
         "sample": 9
       },
       "weekend_surge": {
-        "value": -2.226,
+        "value": -2.09,
         "sample": 9
       }
     },
     "29279": {
       "pressure_sunday": {
-        "value": -2.252,
+        "value": -2.73,
+        "sample": 8
+      },
+      "weekend_surge": {
+        "value": -2.452,
+        "sample": 8
+      }
+    },
+    "29770": {
+      "pressure_sunday": {
+        "value": -2.124,
         "sample": 7
       },
       "weekend_surge": {
-        "value": -2.022,
+        "value": -2.319,
         "sample": 7
       }
     },
-    "29433": {
+    "29827": {
       "pressure_sunday": {
-        "value": -0.931,
-        "sample": 11
+        "value": -1.12,
+        "sample": 5
       },
       "weekend_surge": {
-        "value": -0.086,
-        "sample": 11
+        "value": -4.129,
+        "sample": 5
       }
     },
-    "29767": {
+    "29925": {
       "pressure_sunday": {
-        "value": -0.715,
-        "sample": 10
+        "value": -0.875,
+        "sample": 8
       },
       "weekend_surge": {
-        "value": -1.162,
-        "sample": 10
+        "value": -0.515,
+        "sample": 8
       }
     },
-    "30463": {},
+    "30620": {
+      "pressure_sunday": {
+        "value": 2.115,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -0.999,
+        "sample": 3
+      }
+    },
+    "30814": {
+      "pressure_sunday": {
+        "value": -1.896,
+        "sample": 3
+      },
+      "weekend_surge": {
+        "value": -4.628,
+        "sample": 3
+      }
+    },
+    "32055": {
+      "pressure_sunday": {
+        "value": -0.602,
+        "sample": 4
+      },
+      "weekend_surge": {
+        "value": -0.989,
+        "sample": 4
+      }
+    },
+    "32089": {},
+    "32319": {},
+    "32330": {
+      "pressure_sunday": {
+        "value": -1.123,
+        "sample": 6
+      },
+      "weekend_surge": {
+        "value": -3.656,
+        "sample": 6
+      }
+    },
     "32457": {
       "pressure_sunday": {
-        "value": -0.628,
-        "sample": 9
+        "value": -0.906,
+        "sample": 10
       },
       "weekend_surge": {
-        "value": -0.217,
-        "sample": 9
+        "value": -0.541,
+        "sample": 10
       }
-    }
+    },
+    "35481": {}
   }
 }
