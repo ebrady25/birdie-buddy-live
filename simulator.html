@@ -3028,6 +3028,32 @@
     }
     window.addEventListener('resize', syncPoolHeight);
     syncPoolHeight();
+
+    // ---------- MOBILE LINEUP TRAY (≤767px) ----------
+    // On a phone the lineup builder scrolls out of view while browsing the
+    // 144-player pool. This floating tray mirrors slots-filled + salary and
+    // jumps back to the builder on tap. Purely additive; desktop unaffected.
+    (function mobileTray() {
+      if (!window.matchMedia || !matchMedia('(max-width: 767px)').matches) return;
+      const slotsEl = document.getElementById('slotsFilled');
+      const capEl = document.getElementById('capUsed');
+      const builder = document.querySelector('.builder-card');
+      if (!slotsEl || !capEl || !builder) return;
+      const tray = document.createElement('div');
+      tray.className = 'm-simtray';
+      tray.innerHTML = `<span><strong id="mTraySlots">0/6</strong> picked · <span id="mTraySal">$0</span> used</span>
+        <button type="button" class="btn btn-primary" id="mTrayJump">Lineup ↑</button>`;
+      document.body.appendChild(tray);
+      const sync = () => {
+        document.getElementById('mTraySlots').textContent = (slotsEl.textContent || '0') + '/6';
+        document.getElementById('mTraySal').textContent = capEl.textContent || '$0';
+      };
+      new MutationObserver(sync).observe(slotsEl, { childList: true, characterData: true, subtree: true });
+      new MutationObserver(sync).observe(capEl, { childList: true, characterData: true, subtree: true });
+      document.getElementById('mTrayJump').addEventListener('click', () =>
+        builder.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      sync();
+    })();
   </script>
 </body>
 </html>

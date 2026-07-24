@@ -217,6 +217,93 @@ window.BBI = window.BBI || {};
       track.innerHTML = html + html;
     }
 
+    // ---------- MOBILE SHELL (≤767px): bottom tab bar + More sheet ----------
+    // Rendered centrally so every page gets the app-like mobile chrome with
+    // zero per-page edits. Desktop is untouched (CSS hides all of this ≥768px).
+    window.BBI.renderMobileShell(activeKey);
+  };
+
+  // Standalone pages without the shared header (full_rankings funnel) call
+  // this directly; renderHeader calls it for everything else.
+  window.BBI.renderMobileShell = (activeKey) => {
+    (function mobileShell() {
+      if (document.getElementById('mTabbar')) return;
+      if (!document.querySelector('link[href*="mobile.css"]')) {
+        const l = document.createElement('link');
+        l.rel = 'stylesheet'; l.href = 'assets/css/mobile.css';
+        document.head.appendChild(l);
+      }
+      const page = (activeKey || '').replace('.html', '') || 'index';
+      document.body.dataset.mpage = page;
+      const I = {
+        home: '<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a2 2 0 01-2 2h-4v-7h-6v7H5a2 2 0 01-2-2z"/></svg>',
+        rank: '<svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1.3"/><circle cx="4" cy="12" r="1.3"/><circle cx="4" cy="18" r="1.3"/></svg>',
+        cards: '<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/></svg>',
+        dial: '<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13l4-4"/><path d="M12 5V3M5 13H3M21 13h-2"/></svg>',
+        more: '<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>',
+      };
+      // Rankings tab smart-routes by tier (site convention, see index.html):
+      // free/logged-out → full_rankings teaser, Pro+ → the full board. Both
+      // page keys light the tab.
+      const tabs = [
+        { href: 'index.html', key: 'index', label: 'Home', icon: I.home },
+        { href: 'full_rankings.html', key: 'rankings', altKey: 'full_rankings', label: 'Rankings', icon: I.rank, smart: true },
+        { href: 'lineups.html', key: 'lineups', label: 'Lineups', icon: I.cards },
+        { href: 'simulator.html', key: 'simulator', label: 'Simulator', icon: I.dial },
+      ];
+      const moreKeys = ['compare','watchlist','live','market','courses','pricing','account','login','performance','recap','archive','methodology'];
+      const moreActive = moreKeys.includes(page);
+      const bar = document.createElement('nav');
+      bar.className = 'm-tabbar'; bar.id = 'mTabbar';
+      bar.setAttribute('aria-label', 'Mobile navigation');
+      bar.innerHTML = tabs.map(t =>
+        `<a class="m-tab ${(page === t.key || page === t.altKey) ? 'active' : ''}" href="${t.href}" ${t.smart ? 'data-rankings-link' : ''}>${t.icon}<span>${t.label}</span></a>`
+      ).join('') + `<button type="button" class="m-tab ${moreActive ? 'active' : ''}" id="mMoreBtn" style="background:none;border:none;">${I.more}<span>More</span></button>`;
+      const backdrop = document.createElement('div');
+      backdrop.className = 'm-sheet-backdrop'; backdrop.id = 'mSheetBackdrop';
+      const sheet = document.createElement('div');
+      sheet.className = 'm-sheet'; sheet.id = 'mSheet';
+      sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-label', 'More pages');
+      const link = (href, label, sub) =>
+        `<a class="m-sheet-link" href="${href}">${label}${sub ? `<small>${sub}</small>` : ''}</a>`;
+      sheet.innerHTML = `
+        <div class="m-sheet-grab"></div>
+        <div class="m-sheet-label">Predict</div>
+        <div class="m-sheet-grid">
+          ${link('compare.html', 'Compare', 'Head-to-head')}
+          ${link('live.html', 'Live pivots', 'Thu–Sun')}
+          ${link('market.html', 'Market', 'Betting edges')}
+          ${link('watchlist.html', 'Watchlist', 'Starred players')}
+        </div>
+        <div class="m-sheet-label">Explore</div>
+        <div class="m-sheet-grid">
+          ${link('courses.html', 'Courses', 'Venue DNA')}
+          ${link('performance.html', 'Report card', 'Every week, scored')}
+        </div>
+        <div class="m-sheet-label">Account</div>
+        <div class="m-sheet-grid">
+          ${link('pricing.html', 'Pricing', 'Free · Pro · All-Access')}
+          ${link('account.html', 'My account', '')}
+        </div>`;
+      document.body.append(bar, backdrop, sheet);
+      const toggle = (open) => document.body.classList.toggle('m-sheet-open', open);
+      document.getElementById('mMoreBtn').addEventListener('click', () => toggle(!document.body.classList.contains('m-sheet-open')));
+      backdrop.addEventListener('click', () => toggle(false));
+      sheet.addEventListener('click', (e) => { if (e.target.closest('a')) toggle(false); });
+      // Smart Rankings routing once auth is live (auth.js loads lazily after header)
+      const routeRankings = () => {
+        const paid = window.BBI?.auth?.hasTier ? window.BBI.auth.hasTier('pro') : false;
+        bar.querySelectorAll('[data-rankings-link]').forEach(a =>
+          a.setAttribute('href', paid ? 'rankings.html' : 'full_rankings.html'));
+      };
+      const armRouting = () => {
+        if (window.BBI?.auth?.onChange) window.BBI.auth.onChange(routeRankings);
+        routeRankings();
+      };
+      if (window.BBI?.auth) armRouting();
+      else document.getElementById('bbi-auth-js')?.addEventListener('load', armRouting);
+    })();
+
     // ---------- Auth + tiered entitlements (site-wide, zero per-page edits) ----------
     // auth.js powers the login system and the 3 paid tiers. Loaded lazily once
     // so every page that renders this shared header gets the account control,

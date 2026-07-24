@@ -1,0 +1,201 @@
+/* =====================================================================
+   BIRDIEBUDDY — MOBILE LAYER (≤767px)
+   App-like mass-appeal experience: bottom tab bar, card-first data,
+   thumb-reachable actions. Desktop (768px+) is untouched — it remains
+   the drill-down surface. Injected on every page after vault-theme.css.
+   ===================================================================== */
+
+/* Default: mobile chrome hidden on desktop */
+.m-tabbar, .m-sheet, .m-sheet-backdrop { display: none; }
+
+@media (max-width: 767px) {
+
+  /* ---------- 1 · GLOBAL FRAME ---------- */
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    overflow-x: hidden;
+  }
+  .container { padding-left: 16px; padding-right: 16px; }
+
+  /* Slim top bar: brand + watchlist + auth only; desktop nav links hidden.
+     Search + event pill are desktop chrome — the pages themselves carry the
+     event context on mobile, and search lives with the content. */
+  .site-nav-inner { padding: 10px 16px; }
+  .nav-links { display: none !important; }
+  .brand-lockup { font-size: 1.05rem; }
+  .site-nav .search-input, .site-nav .event-pill { display: none !important; }
+  .site-nav .row-tight { gap: 8px; }
+
+  /* full_rankings' standalone vault-nav: brand + auth only (tab bar handles nav) */
+  .vault-nav .links { display: none !important; }
+  .vault-nav { padding: 10px 16px; }
+  .vault-nav + main .container, main > div[style*="border-bottom"] span { letter-spacing: 0.08em !important; }
+
+  /* Status ticker: one compact scrollable line — the "alive" strip, not a wall */
+  .status-bar { font-size: 10px; }
+  .status-bar-inner {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; gap: 14px; padding: 6px 14px;
+  }
+  .status-bar-inner::-webkit-scrollbar { display: none; }
+  .status-item { white-space: nowrap; flex: 0 0 auto; }
+  /* the animated ticker track is thousands of px wide by design — it must be
+     clipped by its container, never widen the document */
+  .marquee { overflow: hidden; flex: 1 1 140px; min-width: 100px; max-width: 55vw; }
+
+  /* Any wide table anywhere: never break the page */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Touch targets */
+  .btn, button, .chip, .nav-link, select, input[type="submit"] {
+    min-height: 44px;
+  }
+  input, select, textarea { font-size: 16px !important; } /* no iOS zoom */
+
+  /* Type scale: headlines sized for a phone, not a billboard */
+  h1 { font-size: clamp(1.6rem, 7.5vw, 2.2rem) !important; line-height: 1.15 !important; }
+  h2 { font-size: clamp(1.25rem, 5.5vw, 1.6rem) !important; }
+  .page-head { padding-top: 18px; }
+  .page-head-meta { flex-wrap: wrap; gap: 8px 14px; font-size: 11px; }
+
+  /* KPI strips → 2-up grid */
+  .kpi-strip { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-strip .stat { padding: 12px; }
+
+  /* ---------- 2 · BOTTOM TAB BAR ---------- */
+  .m-tabbar {
+    display: flex;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 900;
+    height: calc(58px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: rgba(10, 10, 15, 0.92);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(212, 168, 67, 0.18);
+  }
+  .m-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--text-muted, #9a9aa5);
+    text-decoration: none;
+    font-family: var(--font-mono, monospace);
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .m-tab svg { width: 21px; height: 21px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+  .m-tab.active { color: var(--gold-400, #e6b94e); }
+  .m-tab.active svg { filter: drop-shadow(0 0 6px rgba(212, 168, 67, 0.45)); }
+  .m-tab:active { transform: scale(0.94); transition: transform 80ms; }
+
+  /* ---------- 3 · MORE SHEET ---------- */
+  .m-sheet-backdrop {
+    position: fixed; inset: 0; z-index: 950;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0; pointer-events: none;
+    transition: opacity 200ms;
+  }
+  .m-sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 960;
+    display: block;
+    background: var(--surface-2, #101017);
+    border-top: 1px solid rgba(212, 168, 67, 0.28);
+    border-radius: 18px 18px 0 0;
+    padding: 10px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+    transform: translateY(105%);
+    transition: transform 240ms cubic-bezier(0.32, 0.72, 0.22, 1);
+    max-height: 78vh; overflow-y: auto;
+  }
+  body.m-sheet-open .m-sheet { transform: translateY(0); }
+  body.m-sheet-open .m-sheet-backdrop { opacity: 1; pointer-events: auto; }
+  .m-sheet-grab { width: 38px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.18); margin: 4px auto 12px; }
+  .m-sheet-label {
+    font-family: var(--font-mono, monospace); font-size: 10px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold-600, #b08828); margin: 14px 2px 6px;
+  }
+  .m-sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .m-sheet-link {
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 12px 14px; border-radius: 12px;
+    background: var(--surface-3, #16161f);
+    border: 1px solid rgba(255,255,255,0.06);
+    text-decoration: none; color: var(--text-primary, #f2f2f5);
+    font-size: 14px; font-weight: 600;
+  }
+  .m-sheet-link small { font-size: 11px; font-weight: 400; color: var(--text-muted, #9a9aa5); }
+  .m-sheet-link:active { border-color: var(--gold-500); }
+
+  /* ---------- 4 · RANKINGS: table → hero + cards ---------- */
+  body[data-mpage="rankings"] #rankTableWrap,
+  body[data-mpage="rankings"] .perf-toc { display: none; }
+  .m-rank-cards { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  .m-rank-card {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center; gap: 12px;
+    padding: 13px 14px;
+    background: linear-gradient(180deg, rgba(23,23,29,0.65), rgba(13,13,17,0.6));
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    text-decoration: none; color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .m-rank-card:active { border-color: var(--gold-500); }
+  .m-rank-card.podium { border-color: rgba(212, 168, 67, 0.4); background: linear-gradient(180deg, rgba(46,35,16,0.5), rgba(13,13,17,0.7)); }
+  .m-rank-num {
+    font-family: var(--font-mono, monospace); font-weight: 700; font-size: 15px;
+    color: var(--text-muted); text-align: center;
+  }
+  .m-rank-card.podium .m-rank-num { color: var(--gold-400); }
+  .m-rank-name { font-weight: 700; font-size: 15px; line-height: 1.2; }
+  .m-rank-sub { display: flex; gap: 10px; margin-top: 3px; font-family: var(--font-mono, monospace); font-size: 10.5px; color: var(--text-muted); }
+  .m-rank-sub .hot { color: #6ee7a0; }
+  .m-rank-sub .cold { color: #7aa7fa; }
+  .m-rank-score { text-align: right; }
+  .m-rank-bbi { font-family: var(--font-mono, monospace); font-weight: 700; font-size: 19px; color: var(--gold-300); }
+  .m-rank-win { font-family: var(--font-mono, monospace); font-size: 10px; color: var(--text-muted); }
+
+  /* ---------- 5 · LINEUPS ---------- */
+  .lineup-card { min-width: 0; }
+  .grade-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .chip-row { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; padding-bottom: 6px; scrollbar-width: none; }
+  .chip-row::-webkit-scrollbar { display: none; }
+  .chip { white-space: nowrap; }
+
+  /* ---------- 6 · SIMULATOR: single-column app flow ---------- */
+  .builder-grid { grid-template-columns: 1fr !important; }
+  body[data-mpage="simulator"] .m-simtray {
+    position: fixed; left: 10px; right: 10px;
+    bottom: calc(66px + env(safe-area-inset-bottom, 0px));
+    z-index: 880;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    background: rgba(16, 16, 23, 0.96);
+    border: 1px solid rgba(212, 168, 67, 0.35);
+    border-radius: 14px;
+    padding: 10px 14px;
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    font-family: var(--font-mono, monospace); font-size: 12px;
+  }
+  .m-simtray strong { color: var(--gold-300); }
+  .m-simtray .btn { min-height: 38px; padding: 6px 14px; }
+
+  /* ---------- 7 · GENERIC PAGE POLISH ---------- */
+  /* grids collapse */
+  .backtest-hero, .rank-tiers-grid, .saved-grid, .attr-grid,
+  .pricing-grid, .tier-grid, .course-grid, .cmp-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* pricing: sticky CTA feel */
+  body[data-mpage="pricing"] .tier-card.popular { order: -1; }
+  /* footer clearance handled by body padding */
+  .perf-mini { display: none; }
+}

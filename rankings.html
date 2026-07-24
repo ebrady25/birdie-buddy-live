@@ -381,8 +381,45 @@
         `;
       };
 
+      // ---------- MOBILE CARDS (≤767px) ----------
+      // The 15-column table is the desktop drill-down; on a phone the product
+      // is a ranked card feed: name, BBI, win%, form at a glance, tap → player.
+      // Renders from the SAME normalized players array (no second data path).
+      const renderMobileCards = () => {
+        let mount = document.getElementById('mRankCards');
+        if (!mount) {
+          mount = document.createElement('div');
+          mount.id = 'mRankCards';
+          mount.className = 'm-rank-cards';
+          document.getElementById('rankTableWrap').after(mount);
+        }
+        const formChip = (f) => {
+          if (f == null) return '';
+          const cls = f >= 60 ? 'hot' : (f <= 35 ? 'cold' : '');
+          const ico = f >= 60 ? '▲' : (f <= 35 ? '▼' : '·');
+          return `<span class="${cls}">${ico} form ${f}</span>`;
+        };
+        mount.innerHTML = players.map((p, i) => `
+          <a class="m-rank-card ${i < 3 ? 'podium' : ''}" href="player.html?id=${p.dg_id}">
+            <span class="m-rank-num">${i + 1}</span>
+            <span>
+              <span class="m-rank-name">${p.name || ''}</span>
+              <span class="m-rank-sub">
+                ${formChip(p.form_score)}
+                <span>${p.salary ? '$' + (p.salary / 1000).toFixed(1) + 'k' : ''}</span>
+                <span>${p.proj_own != null ? Number(p.proj_own).toFixed(0) + '% own' : ''}</span>
+              </span>
+            </span>
+            <span class="m-rank-score">
+              <div class="m-rank-bbi">${p.bbi_pool != null ? p.bbi_pool.toFixed(1) : '—'}</div>
+              <div class="m-rank-win">${p.win_pct != null ? p.win_pct.toFixed(1) + '% win' : ''}</div>
+            </span>
+          </a>`).join('');
+      };
+
       const render = () => {
         rb.innerHTML = players.map((p, i) => rowHTML(p, i)).join('');
+        renderMobileCards();
         // Bind stars
         $$('.star-btn', rb).forEach(btn => {
           btn.addEventListener('click', e => {
