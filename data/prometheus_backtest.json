@@ -1,5 +1,5 @@
 {
-  "run_at_utc": "2026-07-20T06:22:43Z",
+  "run_at_utc": "2026-07-27T06:35:53Z",
   "reference_season": 2025,
   "seasons_included": [
     2025,
@@ -7,21 +7,21 @@
   ],
   "model_source": "DataGolf pre-tournament baseline. Reference benchmark for shadow-variant promotion decisions.",
   "n_events_attempted": 77,
-  "n_events_scored": 75,
+  "n_events_scored": 77,
   "aborted_after_429s": false,
   "aggregate": {
-    "n_events": 75,
-    "mean_spearman": 0.3975,
+    "n_events": 77,
+    "mean_spearman": 0.396,
     "median_spearman": 0.3991,
-    "mean_brier_win": 0.0124,
-    "median_brier_win": 0.008,
-    "mean_brier_top_5": 0.0504,
-    "median_brier_top_5": 0.0401,
-    "mean_brier_top_10": 0.0877,
-    "median_brier_top_10": 0.0737,
-    "mean_brier_top_20": 0.1411,
-    "median_brier_top_20": 0.1331,
-    "mean_brier_make_cut": 0.1742,
+    "mean_brier_win": 0.0122,
+    "median_brier_win": 0.0079,
+    "mean_brier_top_5": 0.0499,
+    "median_brier_top_5": 0.0394,
+    "mean_brier_top_10": 0.0871,
+    "median_brier_top_10": 0.0733,
+    "mean_brier_top_20": 0.1407,
+    "median_brier_top_20": 0.1317,
+    "mean_brier_make_cut": 0.1753,
     "median_brier_make_cut": 0.2155
   },
   "per_event": [
@@ -17221,32 +17221,479 @@
       "event_name_input": "Genesis Scottish Open"
     },
     {
-      "error": "HTTP Error 400: Bad Request",
-      "event_id": 100,
-      "year": 2026,
-      "event_name_input": "The Open Championship"
-    },
-    {
-      "error": "HTTP Error 400: Bad Request",
-      "event_id": 522,
-      "year": 2026,
-      "event_name_input": "Corales Puntacana Championship"
-    }
-  ],
-  "failed_events": [
-    {
       "event_id": 100,
       "year": 2026,
       "event_name": "The Open Championship",
-      "error": "HTTP Error 400: Bad Request"
+      "field_size": 156,
+      "made_cut": 78,
+      "spearman_dg_baseline": 0.4762,
+      "calibration": {
+        "win": {
+          "n": 156,
+          "scale_detected": "unit",
+          "brier": 0.0066,
+          "log_loss": 0.0414,
+          "mean_pred": 0.0064,
+          "mean_actual": 0.0064,
+          "naive_brier": 0.0064,
+          "skill_pct": -3.03,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 155,
+              "mean_pred": 0.0058,
+              "actual_rate": 0.0065
+            },
+            {
+              "bin": "10-20%",
+              "n": 1,
+              "mean_pred": 0.1047,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_10": {
+          "n": 156,
+          "scale_detected": "unit",
+          "brier": 0.0681,
+          "log_loss": 0.2378,
+          "mean_pred": 0.0641,
+          "mean_actual": 0.0833,
+          "naive_brier": 0.0764,
+          "skill_pct": 10.84,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 123,
+              "mean_pred": 0.032,
+              "actual_rate": 0.0488
+            },
+            {
+              "bin": "10-20%",
+              "n": 24,
+              "mean_pred": 0.1427,
+              "actual_rate": 0.1667
+            },
+            {
+              "bin": "20-30%",
+              "n": 5,
+              "mean_pred": 0.2359,
+              "actual_rate": 0.2
+            },
+            {
+              "bin": "30-40%",
+              "n": 3,
+              "mean_pred": 0.3339,
+              "actual_rate": 0.3333
+            },
+            {
+              "bin": "40-50%",
+              "n": 1,
+              "mean_pred": 0.4566,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_5": {
+          "n": 156,
+          "scale_detected": "unit",
+          "brier": 0.0261,
+          "log_loss": 0.1003,
+          "mean_pred": 0.0321,
+          "mean_actual": 0.0321,
+          "naive_brier": 0.031,
+          "skill_pct": 15.94,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 146,
+              "mean_pred": 0.0226,
+              "actual_rate": 0.0205
+            },
+            {
+              "bin": "10-20%",
+              "n": 8,
+              "mean_pred": 0.1435,
+              "actual_rate": 0.125
+            },
+            {
+              "bin": "20-30%",
+              "n": 1,
+              "mean_pred": 0.2475,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "30-40%",
+              "n": 1,
+              "mean_pred": 0.3115,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_20": {
+          "n": 156,
+          "scale_detected": "unit",
+          "brier": 0.126,
+          "log_loss": 0.3864,
+          "mean_pred": 0.1282,
+          "mean_actual": 0.1731,
+          "naive_brier": 0.1431,
+          "skill_pct": 11.93,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 76,
+              "mean_pred": 0.0377,
+              "actual_rate": 0.0526
+            },
+            {
+              "bin": "10-20%",
+              "n": 47,
+              "mean_pred": 0.1396,
+              "actual_rate": 0.2553
+            },
+            {
+              "bin": "20-30%",
+              "n": 18,
+              "mean_pred": 0.2544,
+              "actual_rate": 0.2222
+            },
+            {
+              "bin": "30-40%",
+              "n": 10,
+              "mean_pred": 0.3407,
+              "actual_rate": 0.5
+            },
+            {
+              "bin": "40-50%",
+              "n": 3,
+              "mean_pred": 0.4741,
+              "actual_rate": 0.3333
+            },
+            {
+              "bin": "50-60%",
+              "n": 1,
+              "mean_pred": 0.5435,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "60-70%",
+              "n": 1,
+              "mean_pred": 0.625,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        "make_cut": {
+          "n": 156,
+          "scale_detected": "unit",
+          "brier": 0.211,
+          "log_loss": 0.6108,
+          "mean_pred": 0.4917,
+          "mean_actual": 0.5,
+          "naive_brier": 0.25,
+          "skill_pct": 15.6,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 4,
+              "mean_pred": 0.0662,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "10-20%",
+              "n": 14,
+              "mean_pred": 0.1482,
+              "actual_rate": 0.2857
+            },
+            {
+              "bin": "20-30%",
+              "n": 14,
+              "mean_pred": 0.248,
+              "actual_rate": 0.2143
+            },
+            {
+              "bin": "30-40%",
+              "n": 13,
+              "mean_pred": 0.3402,
+              "actual_rate": 0.2308
+            },
+            {
+              "bin": "40-50%",
+              "n": 20,
+              "mean_pred": 0.4554,
+              "actual_rate": 0.45
+            },
+            {
+              "bin": "50-60%",
+              "n": 40,
+              "mean_pred": 0.5485,
+              "actual_rate": 0.55
+            },
+            {
+              "bin": "60-70%",
+              "n": 29,
+              "mean_pred": 0.6457,
+              "actual_rate": 0.6897
+            },
+            {
+              "bin": "70-80%",
+              "n": 17,
+              "mean_pred": 0.7348,
+              "actual_rate": 0.7647
+            },
+            {
+              "bin": "80-90%",
+              "n": 5,
+              "mean_pred": 0.8411,
+              "actual_rate": 0.8
+            },
+            null
+          ]
+        }
+      },
+      "event_name_input": "The Open Championship"
     },
     {
       "event_id": 522,
       "year": 2026,
       "event_name": "Corales Puntacana Championship",
-      "error": "HTTP Error 400: Bad Request"
+      "field_size": 144,
+      "made_cut": 82,
+      "spearman_dg_baseline": 0.209,
+      "calibration": {
+        "win": {
+          "n": 143,
+          "scale_detected": "unit",
+          "brier": 0.0071,
+          "log_loss": 0.0476,
+          "mean_pred": 0.0068,
+          "mean_actual": 0.007,
+          "naive_brier": 0.0069,
+          "skill_pct": -1.64,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 143,
+              "mean_pred": 0.0068,
+              "actual_rate": 0.007
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_10": {
+          "n": 143,
+          "scale_detected": "unit",
+          "brier": 0.0646,
+          "log_loss": 0.2474,
+          "mean_pred": 0.0686,
+          "mean_actual": 0.0699,
+          "naive_brier": 0.065,
+          "skill_pct": 0.75,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 116,
+              "mean_pred": 0.0471,
+              "actual_rate": 0.0517
+            },
+            {
+              "bin": "10-20%",
+              "n": 21,
+              "mean_pred": 0.1415,
+              "actual_rate": 0.1429
+            },
+            {
+              "bin": "20-30%",
+              "n": 6,
+              "mean_pred": 0.2281,
+              "actual_rate": 0.1667
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_5": {
+          "n": 143,
+          "scale_detected": "unit",
+          "brier": 0.0339,
+          "log_loss": 0.1547,
+          "mean_pred": 0.0342,
+          "mean_actual": 0.035,
+          "naive_brier": 0.0337,
+          "skill_pct": -0.37,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 133,
+              "mean_pred": 0.0277,
+              "actual_rate": 0.0301
+            },
+            {
+              "bin": "10-20%",
+              "n": 10,
+              "mean_pred": 0.1205,
+              "actual_rate": 0.1
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_20": {
+          "n": 143,
+          "scale_detected": "unit",
+          "brier": 0.126,
+          "log_loss": 0.4028,
+          "mean_pred": 0.1376,
+          "mean_actual": 0.1608,
+          "naive_brier": 0.135,
+          "skill_pct": 6.64,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 55,
+              "mean_pred": 0.0484,
+              "actual_rate": 0.1091
+            },
+            {
+              "bin": "10-20%",
+              "n": 59,
+              "mean_pred": 0.1502,
+              "actual_rate": 0.1017
+            },
+            {
+              "bin": "20-30%",
+              "n": 17,
+              "mean_pred": 0.2326,
+              "actual_rate": 0.3529
+            },
+            {
+              "bin": "30-40%",
+              "n": 11,
+              "mean_pred": 0.343,
+              "actual_rate": 0.4545
+            },
+            {
+              "bin": "40-50%",
+              "n": 1,
+              "mean_pred": 0.4274,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "make_cut": {
+          "n": 143,
+          "scale_detected": "unit",
+          "brier": 0.2181,
+          "log_loss": 0.6178,
+          "mean_pred": 0.4934,
+          "mean_actual": 0.5734,
+          "naive_brier": 0.2446,
+          "skill_pct": 10.85,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 8,
+              "mean_pred": 0.0489,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "10-20%",
+              "n": 4,
+              "mean_pred": 0.147,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "20-30%",
+              "n": 10,
+              "mean_pred": 0.2387,
+              "actual_rate": 0.3
+            },
+            {
+              "bin": "30-40%",
+              "n": 8,
+              "mean_pred": 0.3554,
+              "actual_rate": 0.5
+            },
+            {
+              "bin": "40-50%",
+              "n": 29,
+              "mean_pred": 0.4591,
+              "actual_rate": 0.7241
+            },
+            {
+              "bin": "50-60%",
+              "n": 48,
+              "mean_pred": 0.5574,
+              "actual_rate": 0.5833
+            },
+            {
+              "bin": "60-70%",
+              "n": 24,
+              "mean_pred": 0.6418,
+              "actual_rate": 0.7083
+            },
+            {
+              "bin": "70-80%",
+              "n": 12,
+              "mean_pred": 0.74,
+              "actual_rate": 0.75
+            },
+            null,
+            null
+          ]
+        }
+      },
+      "event_name_input": "Corales Puntacana Championship"
     }
   ],
+  "failed_events": [],
   "notes": "Resume-safe. Spearman on made-cut players only. Brier on full-field binary outcomes.",
   "auto_generated_by": "github-actions / refresh_prometheus.py"
 }
