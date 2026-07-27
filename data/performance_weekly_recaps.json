@@ -177,6 +177,17 @@
    "dg_spearman": 0.468,
    "summary": "Fox wins; BBI had him #60 pre-tournament. BBI Spearman 0.4511 vs DG 0.468 (-0.0169).",
    "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p><strong>BBI Spearman 0.4511</strong> vs DataGolf <strong>0.468</strong> \u2014 BBI trailed the industry baseline by <strong>-0.0169</strong> (156/156 players matched).</p><p><strong>Fox, Ryan</strong> won; BBI had him ranked <strong>#60</strong> pre-tournament (DataGolf: #52). Top-20 hit rate: 7/20.</p></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (16 events):</strong> averaging <strong>0.382</strong>. Target 0.40; 0.50 is the best-in-world stretch goal.</li></ul></section></div>"
+  },
+  {
+   "week": 25,
+   "year": 2026,
+   "event": "3M Open",
+   "date": "2026-07-26",
+   "course": "TPC Twin Cities",
+   "bbi_spearman": 0.3542,
+   "dg_spearman": 0.4301,
+   "summary": "Koivun wins; BBI had him #32 pre-tournament. BBI Spearman 0.3542 vs DG 0.4301 (-0.0759).",
+   "body_html": "<div class=\"weekly-recap-body\"><section><h3>Head-to-Head vs DataGolf</h3><p><strong>BBI Spearman 0.3542</strong> vs DataGolf <strong>0.4301</strong> \u2014 BBI trailed the industry baseline by <strong>-0.0759</strong> (142/144 players matched).</p><p><strong>Koivun, Jackson</strong> won; BBI had him ranked <strong>#32</strong> pre-tournament (DataGolf: #7). Top-20 hit rate: 7/20.</p></section><section><h3>Building a Multi-Event Track Record</h3><ul><li><strong>Season Spearman (17 events):</strong> averaging <strong>0.38</strong>. Target 0.40; 0.50 is the best-in-world stretch goal.</li></ul></section></div>"
   }
  ],
  "last_updated": "2026-07-08T18:24:10Z"
