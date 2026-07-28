@@ -2,8 +2,8 @@
   "event": "Rocket_Classic",
   "event_slug": "Rocket_Classic",
   "year": 2026,
-  "generated_at": "2026-07-27T22:45:59Z",
-  "n_lineups": 9,
+  "generated_at": "2026-07-28T01:00:52Z",
+  "n_lineups": 10,
   "constraints": {
     "cap": 50000,
     "size": 6,
@@ -18,772 +18,836 @@
   "lineups": [
     {
       "archetype": "CASH",
-      "salary": 46300,
-      "salary_remaining": 3700,
-      "proj_total": 268.5,
-      "avg_own": 8.0,
-      "floor_score": 118.0,
-      "ceiling_score": 780.8,
-      "players": [
-        {
-          "dg_id": 13562,
-          "name": "Matsuyama, Hideki",
-          "salary": 9700,
-          "zeus_dfs": 46.5,
-          "proj_own": 16.04,
-          "leverage": false
-        },
-        {
-          "dg_id": 27364,
-          "name": "Thompson, Davis",
-          "salary": 7600,
-          "zeus_dfs": 46.8,
-          "proj_own": 3.07,
-          "leverage": false
-        },
-        {
-          "dg_id": 16395,
-          "name": "Kohles, Ben",
-          "salary": 7300,
-          "zeus_dfs": 45.4,
-          "proj_own": 15.75,
-          "leverage": false
-        },
-        {
-          "dg_id": 15470,
-          "name": "Hossler, Beau",
-          "salary": 7300,
-          "zeus_dfs": 42.2,
-          "proj_own": 2.39,
-          "leverage": false
-        },
-        {
-          "dg_id": 17543,
-          "name": "Kim, Michael",
-          "salary": 7200,
-          "zeus_dfs": 46.0,
-          "proj_own": 4.34,
-          "leverage": false
-        },
-        {
-          "dg_id": 25157,
-          "name": "Hodges, Lee",
-          "salary": 7200,
-          "zeus_dfs": 41.6,
-          "proj_own": 6.41,
-          "leverage": false
-        }
-      ],
-      "total_salary": 46300
-    },
-    {
-      "archetype": "CORE",
-      "salary": 42800,
-      "salary_remaining": 7200,
-      "proj_total": 259.7,
-      "avg_own": 5.46,
-      "floor_score": 96.7,
-      "ceiling_score": 744.9,
-      "players": [
-        {
-          "dg_id": 27364,
-          "name": "Thompson, Davis",
-          "salary": 7600,
-          "zeus_dfs": 46.8,
-          "proj_own": 3.07,
-          "leverage": false
-        },
-        {
-          "dg_id": 16395,
-          "name": "Kohles, Ben",
-          "salary": 7300,
-          "zeus_dfs": 45.4,
-          "proj_own": 15.75,
-          "leverage": false
-        },
-        {
-          "dg_id": 17543,
-          "name": "Kim, Michael",
-          "salary": 7200,
-          "zeus_dfs": 46.0,
-          "proj_own": 4.34,
-          "leverage": false
-        },
-        {
-          "dg_id": 25157,
-          "name": "Hodges, Lee",
-          "salary": 7200,
-          "zeus_dfs": 41.6,
-          "proj_own": 6.41,
-          "leverage": false
-        },
-        {
-          "dg_id": 18424,
-          "name": "Roy, Kevin",
-          "salary": 6800,
-          "zeus_dfs": 41.0,
-          "proj_own": 2.62,
-          "leverage": false
-        },
-        {
-          "dg_id": 27164,
-          "name": "Phillips, Chandler",
-          "salary": 6700,
-          "zeus_dfs": 38.9,
-          "proj_own": 0.55,
-          "leverage": false
-        }
-      ],
-      "total_salary": 42800
-    },
-    {
-      "archetype": "CORE",
       "salary": 50000,
       "salary_remaining": 0,
-      "proj_total": 225.6,
-      "avg_own": 12.21,
-      "floor_score": 126.0,
-      "ceiling_score": 785.4,
+      "proj_total": 277.4,
+      "avg_own": 0.0,
+      "floor_score": 135.4,
+      "ceiling_score": 764.8,
       "players": [
         {
-          "dg_id": 13562,
-          "name": "Matsuyama, Hideki",
-          "salary": 9700,
-          "zeus_dfs": 46.5,
-          "proj_own": 16.04,
-          "leverage": false
-        },
-        {
-          "dg_id": 32319,
-          "name": "Koivun, Jackson",
-          "salary": 9200,
-          "zeus_dfs": 41.1,
-          "proj_own": 13.25,
-          "leverage": false
-        },
-        {
-          "dg_id": 24550,
-          "name": "Ghim, Doug",
-          "salary": 9000,
-          "zeus_dfs": 39.9,
-          "proj_own": 12.2,
-          "leverage": false
-        },
-        {
-          "dg_id": 17576,
-          "name": "Conners, Corey",
-          "salary": 8700,
-          "zeus_dfs": 36.0,
-          "proj_own": 16.01,
-          "leverage": false
-        },
-        {
-          "dg_id": 16395,
-          "name": "Kohles, Ben",
-          "salary": 7300,
-          "zeus_dfs": 45.4,
-          "proj_own": 15.75,
-          "leverage": false
-        },
-        {
-          "dg_id": 19477,
-          "name": "Schenk, Adam",
-          "salary": 6100,
-          "zeus_dfs": 16.7,
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10500,
+          "zeus_dfs": 67.2,
           "proj_own": 0,
           "leverage": false
-        }
-      ]
-    },
-    {
-      "archetype": "CORE",
-      "salary": 50000,
-      "salary_remaining": 0,
-      "proj_total": 246.4,
-      "avg_own": 12.48,
-      "floor_score": 138.1,
-      "ceiling_score": 810.6,
-      "players": [
+        },
         {
-          "dg_id": 13562,
-          "name": "Matsuyama, Hideki",
-          "salary": 9700,
-          "zeus_dfs": 46.5,
-          "proj_own": 16.04,
+          "dg_id": 27774,
+          "name": "Gotterup, Chris",
+          "salary": 9800,
+          "zeus_dfs": 59.8,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 24550,
-          "name": "Ghim, Doug",
-          "salary": 9000,
-          "zeus_dfs": 39.9,
-          "proj_own": 12.2,
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "salary": 9600,
+          "zeus_dfs": 57.9,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 17576,
-          "name": "Conners, Corey",
-          "salary": 8700,
-          "zeus_dfs": 36.0,
-          "proj_own": 16.01,
-          "leverage": false
-        },
-        {
-          "dg_id": 18586,
-          "name": "Smith, Jordan",
-          "salary": 8300,
-          "zeus_dfs": 40.0,
-          "proj_own": 10.33,
-          "leverage": false
-        },
-        {
-          "dg_id": 16395,
-          "name": "Kohles, Ben",
-          "salary": 7300,
-          "zeus_dfs": 45.4,
-          "proj_own": 15.75,
-          "leverage": false
-        },
-        {
-          "dg_id": 14704,
-          "name": "Putnam, Andrew",
-          "salary": 7000,
-          "zeus_dfs": 38.6,
-          "proj_own": 4.58,
-          "leverage": false
-        }
-      ]
-    },
-    {
-      "archetype": "LEVERAGE",
-      "salary": 40700,
-      "salary_remaining": 9300,
-      "proj_total": 177.4,
-      "avg_own": 1.55,
-      "floor_score": 63.9,
-      "ceiling_score": 664.8,
-      "players": [
-        {
-          "dg_id": 23465,
-          "name": "Greyserman, Max",
+          "dg_id": 27364,
+          "name": "Thompson, Davis",
           "salary": 7700,
-          "zeus_dfs": 41.4,
-          "proj_own": 6.26,
-          "leverage": false
-        },
-        {
-          "dg_id": 27364,
-          "name": "Thompson, Davis",
-          "salary": 7600,
-          "zeus_dfs": 46.8,
-          "proj_own": 3.07,
-          "leverage": false
-        },
-        {
-          "dg_id": 25908,
-          "name": "Whaley, Vince",
-          "salary": 6500,
-          "zeus_dfs": 25.1,
+          "zeus_dfs": 45.4,
           "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 17723,
-          "name": "Lower, Justin",
+          "dg_id": 16333,
+          "name": "Hubbard, Mark",
           "salary": 6400,
-          "zeus_dfs": 22.8,
-          "proj_own": 0,
-          "leverage": false
-        },
-        {
-          "dg_id": 25319,
-          "name": "VanDerLaan, John",
-          "salary": 6300,
-          "zeus_dfs": 21.8,
+          "zeus_dfs": 29.7,
           "proj_own": 0,
           "leverage": false
         },
         {
           "dg_id": 14926,
           "name": "Malnati, Peter",
-          "salary": 6200,
-          "zeus_dfs": 19.5,
+          "salary": 6000,
+          "zeus_dfs": 17.4,
           "proj_own": 0,
           "leverage": false
         }
-      ],
-      "total_salary": 40700
+      ]
     },
     {
-      "archetype": "LEVERAGE",
+      "archetype": "CASH",
       "salary": 50000,
       "salary_remaining": 0,
-      "proj_total": 251.3,
-      "avg_own": 10.31,
-      "floor_score": 130.8,
-      "ceiling_score": 805.4,
+      "proj_total": 265.4,
+      "avg_own": 0.0,
+      "floor_score": 132.8,
+      "ceiling_score": 757.5,
       "players": [
         {
-          "dg_id": 13562,
-          "name": "Matsuyama, Hideki",
-          "salary": 9700,
-          "zeus_dfs": 46.5,
-          "proj_own": 16.04,
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10500,
+          "zeus_dfs": 67.2,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 32319,
-          "name": "Koivun, Jackson",
-          "salary": 9200,
-          "zeus_dfs": 41.1,
-          "proj_own": 13.25,
+          "dg_id": 27774,
+          "name": "Gotterup, Chris",
+          "salary": 9800,
+          "zeus_dfs": 59.8,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 15466,
+          "name": "Cantlay, Patrick",
+          "salary": 9100,
+          "zeus_dfs": 52.7,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 29767,
+          "name": "Gerard, Ryan",
+          "salary": 8600,
+          "zeus_dfs": 51.1,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 14926,
+          "name": "Malnati, Peter",
+          "salary": 6000,
+          "zeus_dfs": 17.4,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 19477,
+          "name": "Schenk, Adam",
+          "salary": 6000,
+          "zeus_dfs": 17.2,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 280.6,
+      "avg_own": 0.0,
+      "floor_score": 137.8,
+      "ceiling_score": 769.9,
+      "players": [
+        {
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10500,
+          "zeus_dfs": 67.2,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 27774,
+          "name": "Gotterup, Chris",
+          "salary": 9800,
+          "zeus_dfs": 59.8,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "salary": 9600,
+          "zeus_dfs": 57.9,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 24550,
+          "name": "Ghim, Doug",
+          "salary": 7400,
+          "zeus_dfs": 44.4,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 14704,
+          "name": "Putnam, Andrew",
+          "salary": 6600,
+          "zeus_dfs": 31.7,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 25002,
+          "name": "Wu, Dylan",
+          "salary": 6100,
+          "zeus_dfs": 19.6,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 249.0,
+      "avg_own": 0.0,
+      "floor_score": 130.1,
+      "ceiling_score": 754.5,
+      "players": [
+        {
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10500,
+          "zeus_dfs": 67.2,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 19895,
+          "name": "Schauffele, Xander",
+          "salary": 10200,
+          "zeus_dfs": 48.5,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 27774,
+          "name": "Gotterup, Chris",
+          "salary": 9800,
+          "zeus_dfs": 59.8,
+          "proj_own": 0,
           "leverage": false
         },
         {
           "dg_id": 17576,
           "name": "Conners, Corey",
-          "salary": 8700,
-          "zeus_dfs": 36.0,
-          "proj_own": 16.01,
+          "salary": 7500,
+          "zeus_dfs": 38.9,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 23841,
-          "name": "Neergaard-Petersen, Rasmus",
-          "salary": 7700,
-          "zeus_dfs": 41.4,
-          "proj_own": 7.61,
+          "dg_id": 19477,
+          "name": "Schenk, Adam",
+          "salary": 6000,
+          "zeus_dfs": 17.2,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 27364,
-          "name": "Thompson, Davis",
-          "salary": 7600,
-          "zeus_dfs": 46.8,
-          "proj_own": 3.07,
+          "dg_id": 14926,
+          "name": "Malnati, Peter",
+          "salary": 6000,
+          "zeus_dfs": 17.4,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "CORE",
+      "salary": 49900,
+      "salary_remaining": 100,
+      "proj_total": 267.2,
+      "avg_own": 0.0,
+      "floor_score": 136.1,
+      "ceiling_score": 762.6,
+      "players": [
+        {
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10500,
+          "zeus_dfs": 67.2,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 23505,
-          "name": "McGreevy, Max",
-          "salary": 7100,
-          "zeus_dfs": 39.5,
-          "proj_own": 5.87,
+          "dg_id": 27774,
+          "name": "Gotterup, Chris",
+          "salary": 9800,
+          "zeus_dfs": 59.8,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 24968,
+          "name": "Griffin, Ben",
+          "salary": 8900,
+          "zeus_dfs": 52.3,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 29767,
+          "name": "Gerard, Ryan",
+          "salary": 8600,
+          "zeus_dfs": 51.1,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 25002,
+          "name": "Wu, Dylan",
+          "salary": 6100,
+          "zeus_dfs": 19.6,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 19477,
+          "name": "Schenk, Adam",
+          "salary": 6000,
+          "zeus_dfs": 17.2,
+          "proj_own": 0,
           "leverage": false
         }
       ]
     },
     {
       "archetype": "LEVERAGE",
-      "salary": 48700,
-      "salary_remaining": 1300,
-      "proj_total": 267.2,
-      "avg_own": 9.78,
-      "floor_score": 125.5,
-      "ceiling_score": 799.0,
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 262.7,
+      "avg_own": 0.0,
+      "floor_score": 130.8,
+      "ceiling_score": 752.8,
       "players": [
+        {
+          "dg_id": 26651,
+          "name": "Young, Cameron",
+          "salary": 10500,
+          "zeus_dfs": 67.2,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 23604,
+          "name": "Clark, Wyndham",
+          "salary": 9300,
+          "zeus_dfs": 50.4,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 15466,
+          "name": "Cantlay, Patrick",
+          "salary": 9100,
+          "zeus_dfs": 52.7,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 24968,
+          "name": "Griffin, Ben",
+          "salary": 8900,
+          "zeus_dfs": 52.3,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 11049,
+          "name": "Simpson, Webb",
+          "salary": 6200,
+          "zeus_dfs": 22.7,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 14926,
+          "name": "Malnati, Peter",
+          "salary": 6000,
+          "zeus_dfs": 17.4,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "LEVERAGE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 250.6,
+      "avg_own": 0.0,
+      "floor_score": 128.6,
+      "ceiling_score": 760.4,
+      "players": [
+        {
+          "dg_id": 19895,
+          "name": "Schauffele, Xander",
+          "salary": 10200,
+          "zeus_dfs": 48.5,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 27774,
+          "name": "Gotterup, Chris",
+          "salary": 9800,
+          "zeus_dfs": 59.8,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 15466,
+          "name": "Cantlay, Patrick",
+          "salary": 9100,
+          "zeus_dfs": 52.7,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 29767,
+          "name": "Gerard, Ryan",
+          "salary": 8600,
+          "zeus_dfs": 51.1,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 14792,
+          "name": "Saddier, Adrien",
+          "salary": 6300,
+          "zeus_dfs": 21.3,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 19477,
+          "name": "Schenk, Adam",
+          "salary": 6000,
+          "zeus_dfs": 17.2,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "LEVERAGE",
+      "salary": 50000,
+      "salary_remaining": 0,
+      "proj_total": 278.2,
+      "avg_own": 0.0,
+      "floor_score": 133.8,
+      "ceiling_score": 773.3,
+      "players": [
+        {
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "salary": 9600,
+          "zeus_dfs": 57.9,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 23604,
+          "name": "Clark, Wyndham",
+          "salary": 9300,
+          "zeus_dfs": 50.4,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 15466,
+          "name": "Cantlay, Patrick",
+          "salary": 9100,
+          "zeus_dfs": 52.7,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 24968,
+          "name": "Griffin, Ben",
+          "salary": 8900,
+          "zeus_dfs": 52.3,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 29770,
+          "name": "Mouw, William",
+          "salary": 6800,
+          "zeus_dfs": 39.9,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 28469,
+          "name": "Highsmith, Joe",
+          "salary": 6300,
+          "zeus_dfs": 25.0,
+          "proj_own": 0,
+          "leverage": false
+        }
+      ]
+    },
+    {
+      "archetype": "LEVERAGE",
+      "salary": 49600,
+      "salary_remaining": 400,
+      "proj_total": 291.7,
+      "avg_own": 0.0,
+      "floor_score": 137.2,
+      "ceiling_score": 783.5,
+      "players": [
+        {
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "salary": 9600,
+          "zeus_dfs": 57.9,
+          "proj_own": 0,
+          "leverage": false
+        },
         {
           "dg_id": 13562,
           "name": "Matsuyama, Hideki",
-          "salary": 9700,
-          "zeus_dfs": 46.5,
-          "proj_own": 16.04,
+          "salary": 9000,
+          "zeus_dfs": 49.9,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 32319,
-          "name": "Koivun, Jackson",
-          "salary": 9200,
-          "zeus_dfs": 41.1,
-          "proj_own": 13.25,
-          "leverage": false
-        },
-        {
-          "dg_id": 23465,
-          "name": "Greyserman, Max",
-          "salary": 7700,
-          "zeus_dfs": 41.4,
-          "proj_own": 6.26,
+          "dg_id": 29767,
+          "name": "Gerard, Ryan",
+          "salary": 8600,
+          "zeus_dfs": 51.1,
+          "proj_own": 0,
           "leverage": false
         },
         {
           "dg_id": 27364,
           "name": "Thompson, Davis",
-          "salary": 7600,
-          "zeus_dfs": 46.8,
-          "proj_own": 3.07,
+          "salary": 7700,
+          "zeus_dfs": 45.4,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 24550,
+          "name": "Ghim, Doug",
+          "salary": 7400,
+          "zeus_dfs": 44.4,
+          "proj_own": 0,
           "leverage": false
         },
         {
           "dg_id": 16395,
           "name": "Kohles, Ben",
           "salary": 7300,
-          "zeus_dfs": 45.4,
-          "proj_own": 15.75,
-          "leverage": false
-        },
-        {
-          "dg_id": 17543,
-          "name": "Kim, Michael",
-          "salary": 7200,
-          "zeus_dfs": 46.0,
-          "proj_own": 4.34,
+          "zeus_dfs": 43.0,
+          "proj_own": 0,
           "leverage": false
         }
       ]
     },
     {
-      "archetype": "LEVERAGE",
-      "salary": 44100,
-      "salary_remaining": 5900,
-      "proj_total": 254.1,
-      "avg_own": 4.99,
-      "floor_score": 100.9,
-      "ceiling_score": 755.3,
-      "players": [
-        {
-          "dg_id": 28159,
-          "name": "Meissner, Mac",
-          "salary": 8100,
-          "zeus_dfs": 40.0,
-          "proj_own": 11.72,
-          "leverage": false
-        },
-        {
-          "dg_id": 23841,
-          "name": "Neergaard-Petersen, Rasmus",
-          "salary": 7700,
-          "zeus_dfs": 41.4,
-          "proj_own": 7.61,
-          "leverage": false
-        },
-        {
-          "dg_id": 27364,
-          "name": "Thompson, Davis",
-          "salary": 7600,
-          "zeus_dfs": 46.8,
-          "proj_own": 3.07,
-          "leverage": false
-        },
-        {
-          "dg_id": 17543,
-          "name": "Kim, Michael",
-          "salary": 7200,
-          "zeus_dfs": 46.0,
-          "proj_own": 4.34,
-          "leverage": false
-        },
-        {
-          "dg_id": 18424,
-          "name": "Roy, Kevin",
-          "salary": 6800,
-          "zeus_dfs": 41.0,
-          "proj_own": 2.62,
-          "leverage": false
-        },
-        {
-          "dg_id": 27164,
-          "name": "Phillips, Chandler",
-          "salary": 6700,
-          "zeus_dfs": 38.9,
-          "proj_own": 0.55,
-          "leverage": false
-        }
-      ],
-      "total_salary": 44100
-    },
-    {
       "archetype": "MOONSHOT",
-      "salary": 43000,
-      "salary_remaining": 7000,
-      "proj_total": 236.0,
-      "avg_own": 5.73,
-      "floor_score": 96.7,
-      "ceiling_score": 730.8,
+      "salary": 43700,
+      "salary_remaining": 6300,
+      "proj_total": 244.6,
+      "avg_own": 0.0,
+      "floor_score": 97.0,
+      "ceiling_score": 716.0,
       "players": [
         {
-          "dg_id": 13562,
-          "name": "Matsuyama, Hideki",
-          "salary": 9700,
-          "zeus_dfs": 46.5,
-          "proj_own": 16.04,
+          "dg_id": 14609,
+          "name": "Kim, Si Woo",
+          "salary": 9600,
+          "zeus_dfs": 57.9,
+          "proj_own": 0,
           "leverage": false
         },
         {
-          "dg_id": 17639,
-          "name": "Blair, Zac",
+          "dg_id": 12423,
+          "name": "Kirk, Chris",
           "salary": 6900,
-          "zeus_dfs": 37.8,
-          "proj_own": 8.0,
+          "zeus_dfs": 36.1,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 29770,
+          "name": "Mouw, William",
+          "salary": 6800,
+          "zeus_dfs": 39.9,
+          "proj_own": 0,
+          "leverage": false
+        },
+        {
+          "dg_id": 25157,
+          "name": "Hodges, Lee",
+          "salary": 6800,
+          "zeus_dfs": 39.4,
+          "proj_own": 0,
           "leverage": false
         },
         {
           "dg_id": 18424,
           "name": "Roy, Kevin",
           "salary": 6800,
-          "zeus_dfs": 41.0,
-          "proj_own": 2.62,
+          "zeus_dfs": 35.8,
+          "proj_own": 0,
           "leverage": false
         },
         {
           "dg_id": 27164,
           "name": "Phillips, Chandler",
-          "salary": 6700,
-          "zeus_dfs": 38.9,
-          "proj_own": 0.55,
-          "leverage": false
-        },
-        {
-          "dg_id": 19729,
-          "name": "Kanaya, Takumi",
-          "salary": 6700,
-          "zeus_dfs": 37.6,
-          "proj_own": 3.34,
-          "leverage": false
-        },
-        {
-          "dg_id": 30620,
-          "name": "Chatfield, Davis",
-          "salary": 6200,
-          "zeus_dfs": 34.2,
-          "proj_own": 3.81,
+          "salary": 6800,
+          "zeus_dfs": 35.5,
+          "proj_own": 0,
           "leverage": false
         }
       ],
-      "total_salary": 43000
+      "total_salary": 43700
     }
   ],
   "exposure": [
     {
-      "dg_id": 13562,
-      "name": "Matsuyama, Hideki",
+      "dg_id": 26651,
+      "name": "Young, Cameron",
       "n_lineups": 6,
-      "exposure_pct": 66.7,
-      "salary": 9700,
-      "proj": 46.5,
-      "proj_own": 16.04
+      "exposure_pct": 60.0,
+      "salary": 10500,
+      "proj": 67.2,
+      "proj_own": 0
     },
     {
-      "dg_id": 27364,
-      "name": "Thompson, Davis",
+      "dg_id": 27774,
+      "name": "Gotterup, Chris",
       "n_lineups": 6,
-      "exposure_pct": 66.7,
-      "salary": 7600,
-      "proj": 46.8,
-      "proj_own": 3.07
+      "exposure_pct": 60.0,
+      "salary": 9800,
+      "proj": 59.8,
+      "proj_own": 0
     },
     {
-      "dg_id": 16395,
-      "name": "Kohles, Ben",
+      "dg_id": 14609,
+      "name": "Kim, Si Woo",
       "n_lineups": 5,
-      "exposure_pct": 55.6,
-      "salary": 7300,
-      "proj": 45.4,
-      "proj_own": 15.75
-    },
-    {
-      "dg_id": 17543,
-      "name": "Kim, Michael",
-      "n_lineups": 4,
-      "exposure_pct": 44.4,
-      "salary": 7200,
-      "proj": 46.0,
-      "proj_own": 4.34
-    },
-    {
-      "dg_id": 18424,
-      "name": "Roy, Kevin",
-      "n_lineups": 3,
-      "exposure_pct": 33.3,
-      "salary": 6800,
-      "proj": 41.0,
-      "proj_own": 2.62
-    },
-    {
-      "dg_id": 27164,
-      "name": "Phillips, Chandler",
-      "n_lineups": 3,
-      "exposure_pct": 33.3,
-      "salary": 6700,
-      "proj": 38.9,
-      "proj_own": 0.55
-    },
-    {
-      "dg_id": 32319,
-      "name": "Koivun, Jackson",
-      "n_lineups": 3,
-      "exposure_pct": 33.3,
-      "salary": 9200,
-      "proj": 41.1,
-      "proj_own": 13.25
-    },
-    {
-      "dg_id": 17576,
-      "name": "Conners, Corey",
-      "n_lineups": 3,
-      "exposure_pct": 33.3,
-      "salary": 8700,
-      "proj": 36.0,
-      "proj_own": 16.01
-    },
-    {
-      "dg_id": 25157,
-      "name": "Hodges, Lee",
-      "n_lineups": 2,
-      "exposure_pct": 22.2,
-      "salary": 7200,
-      "proj": 41.6,
-      "proj_own": 6.41
-    },
-    {
-      "dg_id": 24550,
-      "name": "Ghim, Doug",
-      "n_lineups": 2,
-      "exposure_pct": 22.2,
-      "salary": 9000,
-      "proj": 39.9,
-      "proj_own": 12.2
-    },
-    {
-      "dg_id": 23465,
-      "name": "Greyserman, Max",
-      "n_lineups": 2,
-      "exposure_pct": 22.2,
-      "salary": 7700,
-      "proj": 41.4,
-      "proj_own": 6.26
-    },
-    {
-      "dg_id": 23841,
-      "name": "Neergaard-Petersen, Rasmus",
-      "n_lineups": 2,
-      "exposure_pct": 22.2,
-      "salary": 7700,
-      "proj": 41.4,
-      "proj_own": 7.61
-    },
-    {
-      "dg_id": 15470,
-      "name": "Hossler, Beau",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 7300,
-      "proj": 42.2,
-      "proj_own": 2.39
-    },
-    {
-      "dg_id": 19477,
-      "name": "Schenk, Adam",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6100,
-      "proj": 16.7,
-      "proj_own": 0
-    },
-    {
-      "dg_id": 18586,
-      "name": "Smith, Jordan",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 8300,
-      "proj": 40.0,
-      "proj_own": 10.33
-    },
-    {
-      "dg_id": 14704,
-      "name": "Putnam, Andrew",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 7000,
-      "proj": 38.6,
-      "proj_own": 4.58
-    },
-    {
-      "dg_id": 25908,
-      "name": "Whaley, Vince",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6500,
-      "proj": 25.1,
-      "proj_own": 0
-    },
-    {
-      "dg_id": 17723,
-      "name": "Lower, Justin",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6400,
-      "proj": 22.8,
-      "proj_own": 0
-    },
-    {
-      "dg_id": 25319,
-      "name": "VanDerLaan, John",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6300,
-      "proj": 21.8,
+      "exposure_pct": 50.0,
+      "salary": 9600,
+      "proj": 57.9,
       "proj_own": 0
     },
     {
       "dg_id": 14926,
       "name": "Malnati, Peter",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6200,
-      "proj": 19.5,
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 6000,
+      "proj": 17.4,
       "proj_own": 0
     },
     {
-      "dg_id": 23505,
-      "name": "McGreevy, Max",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 7100,
-      "proj": 39.5,
-      "proj_own": 5.87
+      "dg_id": 15466,
+      "name": "Cantlay, Patrick",
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 9100,
+      "proj": 52.7,
+      "proj_own": 0
     },
     {
-      "dg_id": 28159,
-      "name": "Meissner, Mac",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 8100,
-      "proj": 40.0,
-      "proj_own": 11.72
+      "dg_id": 29767,
+      "name": "Gerard, Ryan",
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 8600,
+      "proj": 51.1,
+      "proj_own": 0
     },
     {
-      "dg_id": 17639,
-      "name": "Blair, Zac",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6900,
-      "proj": 37.8,
-      "proj_own": 8.0
+      "dg_id": 19477,
+      "name": "Schenk, Adam",
+      "n_lineups": 4,
+      "exposure_pct": 40.0,
+      "salary": 6000,
+      "proj": 17.2,
+      "proj_own": 0
     },
     {
-      "dg_id": 19729,
-      "name": "Kanaya, Takumi",
-      "n_lineups": 1,
-      "exposure_pct": 11.1,
-      "salary": 6700,
-      "proj": 37.6,
-      "proj_own": 3.34
+      "dg_id": 24968,
+      "name": "Griffin, Ben",
+      "n_lineups": 3,
+      "exposure_pct": 30.0,
+      "salary": 8900,
+      "proj": 52.3,
+      "proj_own": 0
     },
     {
-      "dg_id": 30620,
-      "name": "Chatfield, Davis",
+      "dg_id": 27364,
+      "name": "Thompson, Davis",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 7700,
+      "proj": 45.4,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 24550,
+      "name": "Ghim, Doug",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 7400,
+      "proj": 44.4,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 25002,
+      "name": "Wu, Dylan",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 6100,
+      "proj": 19.6,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 19895,
+      "name": "Schauffele, Xander",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 10200,
+      "proj": 48.5,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 23604,
+      "name": "Clark, Wyndham",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 9300,
+      "proj": 50.4,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 29770,
+      "name": "Mouw, William",
+      "n_lineups": 2,
+      "exposure_pct": 20.0,
+      "salary": 6800,
+      "proj": 39.9,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 16333,
+      "name": "Hubbard, Mark",
       "n_lineups": 1,
-      "exposure_pct": 11.1,
+      "exposure_pct": 10.0,
+      "salary": 6400,
+      "proj": 29.7,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 14704,
+      "name": "Putnam, Andrew",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6600,
+      "proj": 31.7,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 17576,
+      "name": "Conners, Corey",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 7500,
+      "proj": 38.9,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 11049,
+      "name": "Simpson, Webb",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
       "salary": 6200,
-      "proj": 34.2,
-      "proj_own": 3.81
+      "proj": 22.7,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 14792,
+      "name": "Saddier, Adrien",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6300,
+      "proj": 21.3,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 28469,
+      "name": "Highsmith, Joe",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6300,
+      "proj": 25.0,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 13562,
+      "name": "Matsuyama, Hideki",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 9000,
+      "proj": 49.9,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 16395,
+      "name": "Kohles, Ben",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 7300,
+      "proj": 43.0,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 12423,
+      "name": "Kirk, Chris",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6900,
+      "proj": 36.1,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 25157,
+      "name": "Hodges, Lee",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6800,
+      "proj": 39.4,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 18424,
+      "name": "Roy, Kevin",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6800,
+      "proj": 35.8,
+      "proj_own": 0
+    },
+    {
+      "dg_id": 27164,
+      "name": "Phillips, Chandler",
+      "n_lineups": 1,
+      "exposure_pct": 10.0,
+      "salary": 6800,
+      "proj": 35.5,
+      "proj_own": 0
     }
   ],
   "_built_by": "lineup_constructor.py",
   "_floor_enforced": {
     "min_salary": 47000,
     "fixed": 0,
-    "short": 5
+    "short": 1
   }
 }
