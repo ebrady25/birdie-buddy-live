@@ -1,32 +1,33 @@
 {
-  "timestamp": "2026-07-27T17:24:11Z",
-  "phase_checked": "phase1",
-  "next_phase": "phase1_apollo_atlas",
-  "status": "red",
+  "timestamp": "2026-07-28T12:26:57Z",
+  "phase_checked": "phase15",
+  "next_phase": "phase15_aeolus_zeus",
+  "status": "green",
   "checks": {
     "current_event": {
-      "status": "fail",
-      "error": "current_event is stale",
-      "event_id": 525,
-      "event_name": "3M Open",
-      "days_until_start": -5,
-      "team_event": false
+      "status": "pass",
+      "event_id": 524,
+      "event_name": "Rocket Classic",
+      "start_date": "2026-07-30",
+      "days_until_start": 1,
+      "team_event": false,
+      "required_fields_present": true
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.18,
-      "players_returned": 144,
+      "duration_s": 0.17,
+      "players_returned": 147,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "n/a",
-      "note": "phase1 has no prior-output gate (first or independent phase)."
+      "status": "pass",
+      "checked": [
+        "bbi_rankings.json (0.0h)"
+      ]
     }
   },
-  "recommendations": [
-    "MNEMOSYNE has not advanced CURRENT_EVENT \u2014 pipeline will cascade-abort."
-  ],
-  "action_required": true,
+  "recommendations": [],
+  "action_required": false,
   "auto_generated_by": "github-actions / argus_health.py"
 }
