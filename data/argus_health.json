@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-08-04T15:09:26Z",
-  "phase_checked": "preview",
-  "next_phase": "phase2_preview",
+  "timestamp": "2026-08-05T11:07:42Z",
+  "phase_checked": "lock",
+  "next_phase": "phase2_lock",
   "status": "red",
   "checks": {
     "current_event": {
@@ -9,21 +9,21 @@
       "error": "current_event is stale",
       "event_id": 524,
       "event_name": "Rocket Classic",
-      "days_until_start": -6,
+      "days_until_start": -7,
       "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.31,
+      "duration_s": 0.2,
       "players_returned": 147,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
       "status": "pass",
       "checked": [
-        "themis.json (0.0h)",
-        "bbi_rankings.json (0.0h)"
+        "bbi_rankings.json (0.0h)",
+        "themis.json (0.0h)"
       ]
     }
   },
