@@ -1,27 +1,27 @@
 {
-  "run_at_utc": "2026-08-03T06:30:00Z",
+  "run_at_utc": "2026-08-10T04:44:35Z",
   "reference_season": 2025,
   "seasons_included": [
     2025,
     2026
   ],
   "model_source": "DataGolf pre-tournament baseline. Reference benchmark for shadow-variant promotion decisions.",
-  "n_events_attempted": 78,
-  "n_events_scored": 78,
+  "n_events_attempted": 79,
+  "n_events_scored": 79,
   "aborted_after_429s": false,
   "aggregate": {
-    "n_events": 78,
-    "mean_spearman": 0.3955,
+    "n_events": 79,
+    "mean_spearman": 0.396,
     "median_spearman": 0.3991,
-    "mean_brier_win": 0.0122,
+    "mean_brier_win": 0.0121,
     "median_brier_win": 0.0079,
-    "mean_brier_top_5": 0.0497,
+    "mean_brier_top_5": 0.0496,
     "median_brier_top_5": 0.0394,
-    "mean_brier_top_10": 0.0869,
+    "mean_brier_top_10": 0.0867,
     "median_brier_top_10": 0.0733,
-    "mean_brier_top_20": 0.1404,
-    "median_brier_top_20": 0.1317,
-    "mean_brier_make_cut": 0.1758,
+    "mean_brier_top_20": 0.1402,
+    "median_brier_top_20": 0.1313,
+    "mean_brier_make_cut": 0.1763,
     "median_brier_make_cut": 0.216
   },
   "per_event": [
@@ -17932,6 +17932,242 @@
         }
       },
       "event_name_input": "3M Open"
+    },
+    {
+      "event_id": 524,
+      "year": 2026,
+      "event_name": "Rocket Classic",
+      "field_size": 147,
+      "made_cut": 73,
+      "spearman_dg_baseline": 0.4338,
+      "calibration": {
+        "win": {
+          "n": 146,
+          "scale_detected": "unit",
+          "brier": 0.0068,
+          "log_loss": 0.0347,
+          "mean_pred": 0.0068,
+          "mean_actual": 0.0068,
+          "naive_brier": 0.0068,
+          "skill_pct": 0.53,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 146,
+              "mean_pred": 0.0068,
+              "actual_rate": 0.0068
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_10": {
+          "n": 146,
+          "scale_detected": "unit",
+          "brier": 0.0772,
+          "log_loss": 0.2703,
+          "mean_pred": 0.0681,
+          "mean_actual": 0.0959,
+          "naive_brier": 0.0867,
+          "skill_pct": 11.0,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 115,
+              "mean_pred": 0.0407,
+              "actual_rate": 0.0435
+            },
+            {
+              "bin": "10-20%",
+              "n": 22,
+              "mean_pred": 0.136,
+              "actual_rate": 0.2727
+            },
+            {
+              "bin": "20-30%",
+              "n": 8,
+              "mean_pred": 0.2398,
+              "actual_rate": 0.25
+            },
+            {
+              "bin": "30-40%",
+              "n": 1,
+              "mean_pred": 0.3509,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_5": {
+          "n": 146,
+          "scale_detected": "unit",
+          "brier": 0.0442,
+          "log_loss": 0.1848,
+          "mean_pred": 0.034,
+          "mean_actual": 0.0479,
+          "naive_brier": 0.0456,
+          "skill_pct": 3.15,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 135,
+              "mean_pred": 0.0252,
+              "actual_rate": 0.037
+            },
+            {
+              "bin": "10-20%",
+              "n": 10,
+              "mean_pred": 0.1338,
+              "actual_rate": 0.2
+            },
+            {
+              "bin": "20-30%",
+              "n": 1,
+              "mean_pred": 0.2304,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_20": {
+          "n": 146,
+          "scale_detected": "unit",
+          "brier": 0.1238,
+          "log_loss": 0.3922,
+          "mean_pred": 0.136,
+          "mean_actual": 0.1712,
+          "naive_brier": 0.1419,
+          "skill_pct": 12.79,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 64,
+              "mean_pred": 0.0491,
+              "actual_rate": 0.0469
+            },
+            {
+              "bin": "10-20%",
+              "n": 51,
+              "mean_pred": 0.1471,
+              "actual_rate": 0.1373
+            },
+            {
+              "bin": "20-30%",
+              "n": 19,
+              "mean_pred": 0.242,
+              "actual_rate": 0.4737
+            },
+            {
+              "bin": "30-40%",
+              "n": 8,
+              "mean_pred": 0.3514,
+              "actual_rate": 0.5
+            },
+            {
+              "bin": "40-50%",
+              "n": 3,
+              "mean_pred": 0.433,
+              "actual_rate": 0.3333
+            },
+            {
+              "bin": "50-60%",
+              "n": 1,
+              "mean_pred": 0.5076,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "make_cut": {
+          "n": 146,
+          "scale_detected": "unit",
+          "brier": 0.2169,
+          "log_loss": 0.6192,
+          "mean_pred": 0.4874,
+          "mean_actual": 0.5,
+          "naive_brier": 0.25,
+          "skill_pct": 13.25,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 4,
+              "mean_pred": 0.0518,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "10-20%",
+              "n": 5,
+              "mean_pred": 0.1346,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "20-30%",
+              "n": 6,
+              "mean_pred": 0.2619,
+              "actual_rate": 0.3333
+            },
+            {
+              "bin": "30-40%",
+              "n": 25,
+              "mean_pred": 0.3549,
+              "actual_rate": 0.4
+            },
+            {
+              "bin": "40-50%",
+              "n": 26,
+              "mean_pred": 0.4425,
+              "actual_rate": 0.3846
+            },
+            {
+              "bin": "50-60%",
+              "n": 45,
+              "mean_pred": 0.5468,
+              "actual_rate": 0.5333
+            },
+            {
+              "bin": "60-70%",
+              "n": 23,
+              "mean_pred": 0.6409,
+              "actual_rate": 0.7826
+            },
+            {
+              "bin": "70-80%",
+              "n": 11,
+              "mean_pred": 0.7424,
+              "actual_rate": 0.7273
+            },
+            {
+              "bin": "80-90%",
+              "n": 1,
+              "mean_pred": 0.813,
+              "actual_rate": 1.0
+            },
+            null
+          ]
+        }
+      },
+      "event_name_input": "Rocket Classic"
     }
   ],
   "failed_events": [],
