@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-08-19T09:17:21Z",
-  "phase_checked": "lock",
-  "next_phase": "phase2_lock",
+  "timestamp": "2026-08-24T10:59:57Z",
+  "phase_checked": "mnemosyne",
+  "next_phase": "mnemosyne_postmortem",
   "status": "red",
   "checks": {
     "current_event": {
@@ -9,22 +9,19 @@
       "error": "current_event is stale",
       "event_id": 524,
       "event_name": "Rocket Classic",
-      "days_until_start": -21,
+      "days_until_start": -26,
       "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.14,
+      "duration_s": 0.19,
       "players_returned": 50,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "pass",
-      "checked": [
-        "bbi_rankings.json (0.0h)",
-        "themis.json (0.0h)"
-      ]
+      "status": "n/a",
+      "note": "mnemosyne has no prior-output gate (first or independent phase)."
     }
   },
   "recommendations": [
