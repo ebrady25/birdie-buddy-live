@@ -1,27 +1,27 @@
 {
-  "run_at_utc": "2026-08-24T03:59:11Z",
+  "run_at_utc": "2026-08-31T09:35:14Z",
   "reference_season": 2025,
   "seasons_included": [
     2025,
     2026
   ],
   "model_source": "DataGolf pre-tournament baseline. Reference benchmark for shadow-variant promotion decisions.",
-  "n_events_attempted": 81,
-  "n_events_scored": 81,
+  "n_events_attempted": 82,
+  "n_events_scored": 82,
   "aborted_after_429s": false,
   "aggregate": {
-    "n_events": 81,
-    "mean_spearman": 0.3964,
+    "n_events": 82,
+    "mean_spearman": 0.394,
     "median_spearman": 0.3991,
-    "mean_brier_win": 0.012,
+    "mean_brier_win": 0.0121,
     "median_brier_win": 0.0079,
-    "mean_brier_top_5": 0.0497,
-    "median_brier_top_5": 0.0394,
-    "mean_brier_top_10": 0.0868,
-    "median_brier_top_10": 0.0733,
-    "mean_brier_top_20": 0.1406,
-    "median_brier_top_20": 0.1313,
-    "mean_brier_make_cut": 0.1749,
+    "mean_brier_top_5": 0.0504,
+    "median_brier_top_5": 0.0401,
+    "mean_brier_top_10": 0.088,
+    "median_brier_top_10": 0.0737,
+    "mean_brier_top_20": 0.1419,
+    "median_brier_top_20": 0.1317,
+    "mean_brier_make_cut": 0.1728,
     "median_brier_make_cut": 0.216
   },
   "per_event": [
@@ -18615,6 +18615,222 @@
         }
       },
       "event_name_input": "FedEx St. Jude Championship"
+    },
+    {
+      "event_id": 28,
+      "year": 2026,
+      "event_name": "BMW Championship",
+      "field_size": 50,
+      "made_cut": 50,
+      "spearman_dg_baseline": 0.197,
+      "calibration": {
+        "win": {
+          "n": 50,
+          "scale_detected": "unit",
+          "brier": 0.0202,
+          "log_loss": 0.0978,
+          "mean_pred": 0.02,
+          "mean_actual": 0.02,
+          "naive_brier": 0.0196,
+          "skill_pct": -3.2,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 49,
+              "mean_pred": 0.0168,
+              "actual_rate": 0.0204
+            },
+            {
+              "bin": "10-20%",
+              "n": 1,
+              "mean_pred": 0.1745,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_10": {
+          "n": 50,
+          "scale_detected": "unit",
+          "brier": 0.1807,
+          "log_loss": 0.5444,
+          "mean_pred": 0.2,
+          "mean_actual": 0.22,
+          "naive_brier": 0.1716,
+          "skill_pct": -5.3,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 7,
+              "mean_pred": 0.0831,
+              "actual_rate": 0.1429
+            },
+            {
+              "bin": "10-20%",
+              "n": 22,
+              "mean_pred": 0.1493,
+              "actual_rate": 0.1818
+            },
+            {
+              "bin": "20-30%",
+              "n": 12,
+              "mean_pred": 0.2335,
+              "actual_rate": 0.4167
+            },
+            {
+              "bin": "30-40%",
+              "n": 8,
+              "mean_pred": 0.3357,
+              "actual_rate": 0.125
+            },
+            null,
+            null,
+            {
+              "bin": "60-70%",
+              "n": 1,
+              "mean_pred": 0.6452,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        "top_5": {
+          "n": 50,
+          "scale_detected": "unit",
+          "brier": 0.1056,
+          "log_loss": 0.3563,
+          "mean_pred": 0.1,
+          "mean_actual": 0.12,
+          "naive_brier": 0.1056,
+          "skill_pct": -0.02,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 33,
+              "mean_pred": 0.062,
+              "actual_rate": 0.0303
+            },
+            {
+              "bin": "10-20%",
+              "n": 14,
+              "mean_pred": 0.1478,
+              "actual_rate": 0.3571
+            },
+            {
+              "bin": "20-30%",
+              "n": 2,
+              "mean_pred": 0.2091,
+              "actual_rate": 0.0
+            },
+            null,
+            {
+              "bin": "40-50%",
+              "n": 1,
+              "mean_pred": 0.4651,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_20": {
+          "n": 50,
+          "scale_detected": "unit",
+          "brier": 0.247,
+          "log_loss": 0.6856,
+          "mean_pred": 0.4,
+          "mean_actual": 0.42,
+          "naive_brier": 0.2436,
+          "skill_pct": -1.41,
+          "bins": [
+            null,
+            {
+              "bin": "10-20%",
+              "n": 1,
+              "mean_pred": 0.1718,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "20-30%",
+              "n": 10,
+              "mean_pred": 0.2477,
+              "actual_rate": 0.4
+            },
+            {
+              "bin": "30-40%",
+              "n": 15,
+              "mean_pred": 0.3441,
+              "actual_rate": 0.4
+            },
+            {
+              "bin": "40-50%",
+              "n": 13,
+              "mean_pred": 0.4406,
+              "actual_rate": 0.5385
+            },
+            {
+              "bin": "50-60%",
+              "n": 9,
+              "mean_pred": 0.5586,
+              "actual_rate": 0.2222
+            },
+            {
+              "bin": "60-70%",
+              "n": 1,
+              "mean_pred": 0.6024,
+              "actual_rate": 1.0
+            },
+            null,
+            {
+              "bin": "80-90%",
+              "n": 1,
+              "mean_pred": 0.8333,
+              "actual_rate": 1.0
+            },
+            null
+          ]
+        },
+        "make_cut": {
+          "n": 50,
+          "scale_detected": "unit",
+          "brier": 0.0,
+          "log_loss": 0.001,
+          "mean_pred": 1.0,
+          "mean_actual": 1.0,
+          "naive_brier": 0.0,
+          "skill_pct": 0,
+          "bins": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "bin": "90-100%",
+              "n": 50,
+              "mean_pred": 1.0,
+              "actual_rate": 1.0
+            }
+          ]
+        }
+      },
+      "event_name_input": "BMW Championship"
     }
   ],
   "failed_events": [],
