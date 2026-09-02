@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-01T16:55:22Z",
-  "phase_checked": "preview",
-  "next_phase": "phase2_preview",
+  "timestamp": "2026-09-02T12:59:22Z",
+  "phase_checked": "lock",
+  "next_phase": "phase2_lock",
   "status": "red",
   "checks": {
     "current_event": {
@@ -9,7 +9,7 @@
       "error": "current_event is stale",
       "event_id": 524,
       "event_name": "Rocket Classic",
-      "days_until_start": -34,
+      "days_until_start": -35,
       "team_event": false
     },
     "datagolf_api": {
@@ -22,8 +22,8 @@
     "prior_outputs": {
       "status": "pass",
       "checked": [
-        "themis.json (0.0h)",
-        "bbi_rankings.json (0.0h)"
+        "bbi_rankings.json (0.0h)",
+        "themis.json (0.0h)"
       ]
     }
   },
