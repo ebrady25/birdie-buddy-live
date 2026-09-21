@@ -132,6 +132,15 @@ window.BBI = window.BBI || {};
   const flexChips = flex => { const first = flex.split(';')[0].replace(/^[^:]*template:\s*/i, ''); return first.split(/\s*\+\s*|,\s*/).map(x => x.trim()).filter(Boolean); };
   const flexNotes = flex => flex.split(';').slice(1).map(x => x.trim()).filter(x => x && !/^bring/i.test(x));  // bring-back has its own row
 
+  // Role → player name from the selected preset (v0.2 pipeline fills these).
+  const nameFor = (preset, side, role) => preset && preset.players && preset.players[side] && preset.players[side][role] || null;
+  const seatName = (preset, seat) => { const m = /^(Fav|Dog) (WR1|RB|QB|TE1)/.exec(seat); if (!m) return null; return nameFor(preset, m[1].toLowerCase(), m[2]); };
+  // "fav WR1" / "dog QB" tokens inside codex text → "Adams (fav WR1)" when the name is known.
+  const withNames = (preset, text) => !preset ? text : String(text).replace(/\b(fav|dog|own|opp)\s+(WR1|WR|RB|QB|TE1|TE|K|DST)\b/gi, (m0, side, role) => {
+    const sd = side.toLowerCase(); if (sd !== 'fav' && sd !== 'dog') return m0;
+    const r = role.toUpperCase() === 'WR' ? 'WR1' : role.toUpperCase() === 'TE' ? 'TE1' : role.toUpperCase();
+    const n = nameFor(preset, sd, r); return n ? `${n} (${m0})` : m0; });
+
   const pinnedLawsFor = (spread, total) => {
     const set = new Set([1, 10]);
     if (+spread >= 7) { set.add(4); set.add(8); }
@@ -342,6 +351,24 @@ window.BBI = window.BBI || {};
       <div class="sd-caption">2,761 games 2016–25 · fav controls = fav wins ${b.fav_wins} − blowout ${b.blowout14}</div>`;
   };
 
+  const gameRead = d => {
+    const b = data.base_rates.by_spread[d.sb], t = data.base_rates.by_total[d.tb];
+    const parts = [['Blowout-prone', b.blowout14], ['Favorite-controlled', b.fav_wins - b.blowout14], ['Coin flip', b.within3], ['Upset-prone', b.dog_wins]].sort((x, y) => y[1] - x[1]);
+    const ovs = Object.keys(d.ov).filter(k => d.ov[k]).map(k => k === 'wind' ? 'Wind ≥15' : k[0].toUpperCase() + k.slice(1));
+    return { script: parts[0][0], scriptPct: parts[0][1], runner: parts[1][0], runnerPct: parts[1][1], mean: t.mean_actual, ovs };
+  };
+  const renderRead = d => {
+    const r = gameRead(d);
+    $id('sdRead').innerHTML = `
+      <div class="card-title card-title-accent">The game · one line</div>
+      <div class="sd-verdict sd-verdict-4">
+        <div class="sd-vd"><span>Script</span><b>${r.script} game</b><small>${r.scriptPct}% most likely · ${r.runner.toLowerCase()} ${r.runnerPct}% next</small></div>
+        <div class="sd-vd"><span>Points</span><b>${r.mean} mean</b><small>${esc(d.totalBucket.label)} total band · line ${num(state.total)}</small></div>
+        <div class="sd-vd"><span>Environment</span><b>${esc(ENV_LABEL[state.env])}</b><small>over rate ${data.base_rates.weather[state.env].over_rate}%</small></div>
+        <div class="sd-vd"><span>Overlay</span><b>${r.ovs.length ? r.ovs.join(' + ') : 'None'}</b><small>${r.ovs.length ? 'changes the dials below' : 'base allocation applies'}</small></div>
+      </div>`;
+  };
+
   const renderTotalStrip = d => {
     const t = data.base_rates.by_total[d.tb];
     const w = data.base_rates.weather;
@@ -448,29 +475,38 @@ window.BBI = window.BBI || {};
   const renderCheat = d => {
     const c = data.captain_by_spread_x_total, e = data.captain_by_environment, rw = data.roof_weather_winners;
     const rowLabel = { le3: 'Spread ≤3', '3.5_6.5': '3.5–6.5', ge7: '≥7' };
-    const cellHtml = (r, col) => { const v = c[r][col]; const on = r === d.cell.row && col === d.cell.col;
-      return `<div class="sd-cell${on ? ' active' : ''}" ${on ? 'aria-current="true"' : ''}>
-        <div class="sd-cell-nums">${POS.map(k => `<span>${k} <b>${v[k]}</b></span>`).join('')}</div>
-        <div class="sd-minibar" aria-hidden="true">${POS.map((k, i) => `<i class="${SEG[i]}" style="width:${v[k]}%"></i>`).join('')}</div>
-        <div class="sd-cell-foot">fav <b>${v.fav}%</b> · K <b>${v.K}%</b></div></div>`; };
+    const heat = (v, max) => { const lvl = v <= 0 ? 0 : Math.min(5, Math.max(1, Math.ceil(v / max * 5))); return `<span class="sd-heat" data-level="${lvl}"><b>${v}</b></span>`; };
+    // one intensity scale per table so cells compare across the whole grid
+    const maxPos = Math.max(...Object.values(c).flatMap(r => Object.values(r).flatMap(v => POS.map(k => v[k]))));
+    const cell = (r, col) => { const v = c[r][col]; const on = r === d.cell.row && col === d.cell.col;
+      return `<div class="sd-hcell${on ? ' active' : ''}" ${on ? 'aria-current="true"' : ''}>
+        <span class="sd-hcell-tag">${rowLabel[r]} · ${col === 'total_ge46' ? 'total ≥46' : 'total ≤45.5'}</span>
+        <div class="sd-heat-row">${POS.map(k => `<span class="sd-heat-k">${k}</span>${heat(v[k], maxPos)}`).join('')}</div>
+        <div class="sd-cell-foot">fav CPT <b>${v.fav}%</b> · K <b>${v.K}%</b></div></div>`; };
     const ek = envRow(state.total), rk = roofRow(state.env);
     const envLabel = { grind_le42: 'Grind ≤42', 'avg_42.5_48.5': 'Avg 42.5–48.5', shootout_ge49: 'Shootout ≥49' };
     const roofLabel = { dome: 'Dome', outdoor_mild: 'Outdoor mild', cold_le35: 'Cold ≤35°', wind_ge15: 'Wind ≥15' };
+    const maxEnv = Math.max(...Object.values(e).flatMap(v => POS.map(k => v[k])));
+    const maxRoof = Math.max(...Object.values(rw).flatMap(v => [...POS.map(k => v.cpt_pos[k]), v.K, v.DST, v.both_qb]));
+    const hrow = (label, on, cells, tail) => `<div class="sd-hrow${on ? ' active' : ''}"><span class="k">${label}</span><span class="sd-heat-row">${cells}</span><span class="sd-hrow-tail">${tail || ''}</span></div>`;
     $id('sdCheat').innerHTML = `
       <div class="card-title">Captain cheat-sheet · <span class="card-title-accent">${rowLabel[d.cell.row]} × ${d.cell.col === 'total_ge46' ? 'total ≥46' : 'total ≤45.5'}</span></div>
-      <div class="sd-cheat" role="table" aria-label="Captain position share of winners by spread and total">
+      <p class="sd-lede">Where the winning captain came from, by position. Darker gold = bigger share; your cell is outlined.</p>
+      <div class="sd-hgrid" role="table" aria-label="Captain position share of winners by spread and total">
         <div class="sd-cheat-h"></div><div class="sd-cheat-h">Total ≤45.5</div><div class="sd-cheat-h">Total ≥46</div>
-        ${['le3', '3.5_6.5', 'ge7'].map(r => `<div class="sd-cheat-h" style="align-self:center">${rowLabel[r]}</div>${cellHtml(r, 'total_le45.5')}${cellHtml(r, 'total_ge46')}`).join('')}
+        ${['le3', '3.5_6.5', 'ge7'].map(r => `<div class="sd-cheat-h" style="align-self:center">${rowLabel[r]}</div>${cell(r, 'total_le45.5')}${cell(r, 'total_ge46')}`).join('')}
       </div>
       <div class="sd-caption">120 DK showdown winners 2018–25 · % of winning captains by position · fav = captain from the favorite</div>
-      <div class="sd-rows" style="margin-top:6px">
-        ${Object.keys(e).map(k => `<div class="sd-row${k === ek ? ' active' : ''}"><span class="k">${envLabel[k]}</span><span>${POS.map(p => `${p} ${e[k][p]}`).join(' · ')} · default: ${esc(e[k].default)}</span></div>`).join('')}
+      <div class="sd-hrows">
+        <div class="sd-caption">By total band · winning captain position</div>
+        ${Object.keys(e).map(k => hrow(envLabel[k], k === ek, POS.map(p => `<span class="sd-heat-k">${p}</span>${heat(e[k][p], maxEnv)}`).join(''), `default: ${esc(e[k].default)}`)).join('')}
       </div>
-      <div class="sd-rows" style="margin-top:6px">
-        ${Object.keys(rw).map(k => `<div class="sd-row${k === rk ? ' active' : ''}"><span class="k">${roofLabel[k]}</span><span>CPT ${POS.map(p => `${p} ${rw[k].cpt_pos[p]}`).join(' · ')} · K ${rw[k].K} · DST ${rw[k].DST} · both-QB ${rw[k].both_qb} · own ${rw[k].cum_own}% · ${nTag(rw[k].n)}</span></div>`).join('')}
+      <div class="sd-hrows">
+        <div class="sd-caption">By roof / weather · captain position, then K · DST · both QBs in the lineup</div>
+        ${Object.keys(rw).map(k => hrow(roofLabel[k], k === rk, `<span class="sd-heat-row-7">${[...POS.map(p => [p, rw[k].cpt_pos[p]]), ['K', rw[k].K], ['DST', rw[k].DST], ['2QB', rw[k].both_qb]].map(([kk, v]) => `<span class="sd-heat-k">${kk}</span>${heat(v, maxRoof)}`).join('')}</span>`, `own ${rw[k].cum_own}% · ${nTag(rw[k].n)}`)).join('')}
         ${!rk ? `<div class="sd-caption">No 10–14 mph wind cut in the winner set — the wind ≥10 effect shows in the total strip (over rate ${data.base_rates.weather.wind_10_14.over_rate}%).</div>` : ''}
       </div>
-      <div class="sd-caption">Environment rows: 120 winners by total band and by roof/weather.</div>`;
+      <div class="sd-caption">Rows: 120 winners by total band (captain position) and by roof/weather (captain position · K · DST · both QBs)</div>`;
   };
 
   /* ---------- Step 3: build it ---------- */
@@ -482,7 +518,7 @@ window.BBI = window.BBI || {};
       <div class="sd-seats">${d.shortlist.map((s, i) => { const max = d.shortlist[0].weight || 1; return `
         <div class="sd-seat">
           <span class="sd-seat-rank">SEAT ${i + 1}</span>
-          <span class="sd-seat-name">${esc(s.seat)}</span>
+          <span class="sd-seat-name">${esc(seatName(d.preset, s.seat) || s.seat)}${seatName(d.preset, s.seat) ? `<small>${esc(s.seat)}</small>` : ''}</span>
           <span class="sd-seat-big">≈${Math.round(s.weight)}%<small>of winners here</small></span>
           <span class="bar bar-thick"><span class="bar-fill" style="width:${s.weight / max * 100}%"></span></span>
           <span class="sd-seat-share">${s.pos} CPT ${s.posShare}% × ${s.side} ${s.sideShare}%</span>
@@ -547,23 +583,23 @@ window.BBI = window.BBI || {};
           <div class="sd-odd"><span class="sd-odd-k">Batch share</span><span class="bar"><span class="bar-fill" style="width:${d.alloc[k]}%"></span></span><b>${Math.round(d.alloc[k])}%</b></div>
           <div class="sd-odd"><span class="sd-odd-k">Happens</span><span class="bar"><span class="bar-fill dim" style="width:${odds[k]}%"></span></span><b>${Math.round(odds[k])}%</b><span class="sd-odd-n">of ${esc(d.spreadBucket.label.toLowerCase())} games</span></div>
         </div>
-        <div class="sd-recipe-cpt"><small>Captain</small>${esc(a.captain)}</div>
+        <div class="sd-recipe-cpt"><small>Captain</small>${esc(withNames(d.preset, a.captain))}</div>
         <div class="sd-recipe-stats">
           <div class="sd-stat-tile"><span class="sd-stat-k">Shape</span><div class="sd-tmpl">${a.shape.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}</div></div>
           <div class="sd-stat-tile"><span class="sd-stat-k">Kicker</span><b class="sd-stat-v">${a.k}%</b><span class="bar"><span class="bar-fill" style="width:${a.k}%"></span></span><span class="sd-stat-n">of these winners${kDial ? ` · dial ${range(kDial)}` : ''}</span></div>
           <div class="sd-stat-tile"><span class="sd-stat-k">DST</span><b class="sd-stat-v">${a.dst}%</b><span class="bar"><span class="bar-fill" style="width:${a.dst}%"></span></span><span class="sd-stat-n">of these winners${dDial ? ` · dial ${range(dDial)}` : ''}</span></div>
         </div>
         <div class="sd-recipe-rows">
-          <div class="sd-rrow"><span class="sd-rrow-k">Flex</span><span class="sd-rrow-v"><span class="sd-tmpl">${flexChips(a.flex).map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}</span>${flexNotes(a.flex).length ? `<span class="sd-rrow-note">${esc(flexNotes(a.flex).join(' · '))}</span>` : ''}</span></div>
-          <div class="sd-rrow"><span class="sd-rrow-k">Bring-back</span><span class="sd-rrow-v">${esc(m.bring)}</span></div>
+          <div class="sd-rrow"><span class="sd-rrow-k">Flex</span><span class="sd-rrow-v"><span class="sd-tmpl">${flexChips(a.flex).map(x => `<span class="sd-chip-n">${esc(withNames(d.preset, x))}</span>`).join('')}</span>${flexNotes(a.flex).length ? `<span class="sd-rrow-note">${esc(flexNotes(a.flex).join(' · '))}</span>` : ''}</span></div>
+          <div class="sd-rrow"><span class="sd-rrow-k">Bring-back</span><span class="sd-rrow-v">${esc(withNames(d.preset, m.bring))}</span></div>
         </div>
         <div class="sd-say">Captain ${esc(m.seat)} wins because ${esc(m.because)}; the flex is ${esc(a.flex.split(';')[0])}; the bring-back is ${esc(m.bring.split(' — ')[0].split(' (')[0])}.</div>
         ${banners.join('')}
-        ${t ? `<div class="sd-tmpl-groups">
-          <div class="sd-tmpl-group"><span class="sd-tmpl-k">${m.tmpl} · include</span><div class="sd-tmpl">${t.include.map(x => `<span class="sd-chip-ok">✓ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
+        ${t ? `<details class="sd-fold"><summary>Captain template ${m.tmpl} · ${t.include.length} include · ${t.avoid.length} avoid <span class="sd-fold-arrow">▸</span></summary><div class="sd-tmpl-groups">
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">include</span><div class="sd-tmpl">${t.include.map(x => `<span class="sd-chip-ok">✓ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
           <div class="sd-tmpl-group"><span class="sd-tmpl-k">avoid</span><div class="sd-tmpl">${t.avoid.map(x => `<span class="sd-chip-no">✗ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
           <div class="sd-tmpl-group"><span class="sd-tmpl-k">template rates</span><div class="sd-tmpl">${t.shapes.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}<span class="sd-chip-n">K ${pct(t.k_rate)}</span><span class="sd-chip-n">DST ${pct(t.dst_rate)}</span></div></div>
-        </div>` : ''}
+        </div></details>` : ''}
       </div>`;
     });
     $id('sdRecipes').innerHTML = `<div class="sd-recipes">${cards.join('')}</div>
@@ -588,7 +624,7 @@ window.BBI = window.BBI || {};
     $id('sdVerdict').innerHTML = `
       <div class="card-title card-title-accent">The play · one glance</div>
       <div class="sd-verdict">
-        <div class="sd-vd"><span>Captain</span><b>${esc(d.shortlist[0].seat)}</b><small>then ${esc(d.shortlist[1].seat)}</small></div>
+        <div class="sd-vd"><span>Captain</span><b>${esc(seatName(d.preset, d.shortlist[0].seat) || d.shortlist[0].seat)}</b><small>${seatName(d.preset, d.shortlist[0].seat) ? esc(d.shortlist[0].seat) + ' · ' : ''}then ${esc(seatName(d.preset, d.shortlist[1].seat) || d.shortlist[1].seat)}</small></div>
         <div class="sd-vd"><span>Batch</span><b>${scripts}</b><small>${state.entries} lineup${state.entries === 1 ? '' : 's'} · A ${Math.round(d.alloc.A)} / B ${Math.round(d.alloc.B)} / C ${Math.round(d.alloc.C)} / D ${Math.round(d.alloc.D)}</small></div>
         <div class="sd-vd"><span>Kicker · DST</span><b>${esc(dial('K share').v)} · ${esc(dial('DST share').v)}</b><small>share of the batch</small></div>
         <div class="sd-vd"><span>Both QBs</span><b>≤ ${esc(dial('Both-QB max').v)}</b><small>${ovs.length ? ovs.join(' + ') + ' overlay' : 'no overlay'}</small></div>
@@ -597,10 +633,12 @@ window.BBI = window.BBI || {};
   };
 
   const renderLaws = d => {
-    const laws = data.ten_laws.slice().sort((a, b) => (d.laws.has(b.n) - d.laws.has(a.n)) || a.n - b.n);
+    const pinned = data.ten_laws.filter(l => d.laws.has(l.n)), rest = data.ten_laws.filter(l => !d.laws.has(l.n));
+    const law = (l, open) => `<details class="sd-law${open ? ' pinned' : ''}" ${open ? 'open' : ''}><summary><span class="no">${l.n}</span><span>${esc(l.law)}</span></summary><p>${esc(l.evidence)}</p></details>`;
     $id('sdLaws').innerHTML = `
-      <div class="card-title">Ten laws · <span class="card-title-accent">${[...d.laws].sort((a, b) => a - b).join(', ')} pinned for this cell</span></div>
-      <div class="sd-laws">${laws.map(l => `<details class="sd-law${d.laws.has(l.n) ? ' pinned' : ''}" ${d.laws.has(l.n) ? 'open' : ''}><summary><span class="no">${l.n}</span><span>${esc(l.law)}</span></summary><p>${esc(l.evidence)}</p></details>`).join('')}</div>`;
+      <div class="card-title">Ten laws · <span class="card-title-accent">${pinned.map(l => l.n).join(', ')} pinned for this cell</span></div>
+      <div class="sd-laws">${pinned.map(l => law(l, true)).join('')}</div>
+      <details class="sd-fold"><summary>The other ${rest.length} laws <span class="sd-fold-arrow">▸</span></summary><div class="sd-laws" style="margin-top:8px">${rest.map(l => law(l, false)).join('')}</div></details>`;
   };
 
   /* ---------- Step 4: ship it ---------- */
@@ -634,9 +672,11 @@ window.BBI = window.BBI || {};
     const soft = Object.keys(s).filter(k => !k.startsWith('_')).map(k => { const v = s[k]; const pen = typeof v === 'object' ? v.penalty : v; return `<span class="sd-chip-n" title="${esc(k)}">${esc(humanize(k))}${pen != null ? ` −${pen}` : ''}</span>`; });
     $id('sdCheck').innerHTML = `
       <div class="card-title">Would the engine reject this? · <span class="card-title-accent">${items.length} hard rules</span></div>
-      <div class="sd-check">${items.map(i => `<label><input type="checkbox" data-check="${esc(i.k)}"><span>${esc(i.label)}</span><small>${esc(i.k)}</small></label>`).join('')}</div>
-      <div class="card-title" style="margin-top:8px">The engine would frown at</div>
-      <div class="sd-frown">${soft.join('')}</div>
+      <p class="sd-lede">Tick your lineup against the rules the engine enforces before it scores anything.</p>
+      <details class="sd-fold"><summary>Open the ${items.length}-rule checklist <span class="sd-fold-arrow">▸</span></summary>
+      <div class="sd-check" style="margin-top:8px">${items.map(i => `<label><input type="checkbox" data-check="${esc(i.k)}"><span>${esc(i.label)}</span><small>${esc(i.k)}</small></label>`).join('')}</div></details>
+      <details class="sd-fold"><summary>The engine would frown at · ${soft.length} soft penalties <span class="sd-fold-arrow">▸</span></summary>
+      <div class="sd-frown" style="margin-top:8px">${soft.join('')}</div></details>
       <div class="sd-caption">hard_rules + soft_penalties from rules.json v1.2 · a soft penalty is subtracted from the lineup score (1.0 ≈ one sim-rank bucket)</div>`;
   };
 
@@ -697,14 +737,74 @@ window.BBI = window.BBI || {};
     if (!ok) { try { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); ok = document.execCommand('copy'); ta.remove(); } catch {} }
     const old = btn.textContent; btn.textContent = ok ? 'Copied ✓' : 'Copy failed'; setTimeout(() => { btn.textContent = old; }, 1600);
   };
+  // Play card image: verdict strip + one block per script, drawn on a canvas (no library).
+  const playCardPng = async d => {
+    const counts = largestRemainder(d.alloc, state.entries);
+    const ct = data.inputs.contest_types.find(c => c.key === state.contest);
+    const r = gameRead(d);
+    const scripts = ['A', 'B', 'C', 'D'].filter(k => d.alloc[k] > 0);
+    const W = 1200, S = 2, pad = 48, colW = (W - pad * 2 - 24) / 2;
+    const rows = Math.ceil(scripts.length / 2), cardH = 272, H = 330 + rows * (cardH + 24) + 70;
+    const cv = document.createElement('canvas'); cv.width = W * S; cv.height = H * S;
+    const g = cv.getContext('2d'); g.scale(S, S);
+    try { await document.fonts.ready; } catch {}
+    const mono = "'JetBrains Mono', Menlo, monospace", sans = "'Inter', -apple-system, Helvetica, sans-serif";
+    const gold = '#d4a843', ink = '#f4f4f8', muted = '#8a8a98', dim = '#5a5a68';
+    const rr = (x, y, w, h, rad, fill, stroke) => { g.beginPath(); g.roundRect(x, y, w, h, rad); if (fill) { g.fillStyle = fill; g.fill(); } if (stroke) { g.strokeStyle = stroke; g.lineWidth = 1; g.stroke(); } };
+    const txt = (t, x, y, opt = {}) => { g.font = `${opt.weight || 400} ${opt.size || 14}px ${opt.font || sans}`; g.fillStyle = opt.color || ink; g.textAlign = opt.align || 'left'; g.fillText(String(t), x, y); };
+    const wrap = (t, x, y, maxW, lh, opt = {}) => { g.font = `${opt.weight || 400} ${opt.size || 13}px ${opt.font || sans}`; const words = String(t).split(' '); let line = '', yy = y, n = 0;
+      for (const w of words) { const test = line ? line + ' ' + w : w; if (g.measureText(test).width > maxW && line) { txt(line, x, yy, opt); line = w; yy += lh; n++; if (opt.max && n >= opt.max) return yy; } else line = test; }
+      if (line) txt(line, x, yy, opt); return yy + lh; };
+    const bar = (x, y, w, v, color) => { rr(x, y, w, 6, 3, '#101017'); rr(x, y, Math.max(6, w * Math.min(1, v)), 6, 3, color || gold); };
+    g.fillStyle = '#0a0a0f'; g.fillRect(0, 0, W, H);
+    txt('BIRDIEBUDDY NFL · SHOWDOWN PLAYBOOK', pad, 46, { font: mono, size: 12, color: gold });
+    txt(`${spreadLabel(state.spread, d.preset && d.preset.fav)}${d.preset ? `  ·  ${d.preset.label}` : ''}  ·  ${num(state.total)}  ·  ${ENV_LABEL[state.env]}  ·  ${ct.label}  ·  ${state.entries} entr${state.entries === 1 ? 'y' : 'ies'}`, pad, 84, { size: 26, weight: 800 });
+    txt(`${r.script} game (${r.scriptPct}%) · ${r.mean} mean points · ${r.ovs.length ? r.ovs.join(' + ') + ' overlay' : 'no overlay'}`, pad, 112, { size: 15, color: muted });
+    // verdict tiles
+    const tiles = [['CAPTAIN', seatName(d.preset, d.shortlist[0].seat) || d.shortlist[0].seat, `then ${seatName(d.preset, d.shortlist[1].seat) || d.shortlist[1].seat}`],
+      ['BATCH', scripts.map(k => `${counts[k]}×${k}`).join(' · '), `A ${Math.round(d.alloc.A)} / B ${Math.round(d.alloc.B)} / C ${Math.round(d.alloc.C)} / D ${Math.round(d.alloc.D)}`],
+      ['KICKER · DST', `${d.dials.rows[0].v} · ${d.dials.rows[1].v}`, 'share of the batch'],
+      ['BOTH QBS', `≤ ${d.dials.rows[2].v}`, r.ovs.length ? r.ovs.join(' + ') : 'portfolio default'],
+      ['OWNERSHIP', ct.own_target, `dupes ≤ ${ct.dupe_cap}`]];
+    const tw = (W - pad * 2 - 4 * 12) / 5;
+    tiles.forEach((t, i) => { const x = pad + i * (tw + 12); rr(x, 140, tw, 110, 10, '#101017', 'rgba(212,168,67,0.3)');
+      txt(t[0], x + 14, 166, { font: mono, size: 10, color: dim }); wrap(t[1], x + 14, 196, tw - 28, 24, { size: 20, weight: 700, max: 2 }); txt(t[2], x + 14, 236, { font: mono, size: 10.5, color: muted }); });
+    // script cards
+    scripts.forEach((k, i) => { const a = data.archetypes[k], m = SCRIPT_META[k]; const x = pad + (i % 2) * (colW + 24), y = 290 + Math.floor(i / 2) * (cardH + 24);
+      rr(x, y, colW, cardH, 12, '#141419', 'rgba(255,255,255,0.08)');
+      rr(x + 18, y + 18, 34, 34, 8, gold); txt(k, x + 35, y + 42, { font: mono, size: 18, weight: 700, color: '#1a1408', align: 'center' });
+      txt(a.name, x + 64, y + 34, { size: 17, weight: 700 }); txt(`${counts[k]} of ${state.entries} lineup${state.entries === 1 ? '' : 's'}`, x + 64, y + 52, { font: mono, size: 11, color: muted });
+      txt(`${Math.round(d.alloc[k])}%`, x + colW - 18, y + 40, { font: mono, size: 22, weight: 700, color: gold, align: 'right' });
+      txt('CAPTAIN', x + 18, y + 84, { font: mono, size: 10, color: dim }); wrap(withNames(d.preset, a.captain), x + 18, y + 104, colW - 36, 20, { size: 15, weight: 700, max: 2 });
+      txt('FLEX', x + 18, y + 148, { font: mono, size: 10, color: dim }); wrap(flexChips(a.flex).map(c => withNames(d.preset, c)).join('  ·  '), x + 18, y + 166, colW - 36, 17, { size: 13, color: ink, max: 2 });
+      txt(`K ${a.k}%`, x + 18, y + 214, { font: mono, size: 11, color: muted }); bar(x + 66, y + 208, 110, a.k / 100);
+      txt(`DST ${a.dst}%`, x + 200, y + 214, { font: mono, size: 11, color: muted }); bar(x + 258, y + 208, 110, a.dst / 100);
+      txt(`shape ${a.shape.join(' / ')}`, x + 18, y + 238, { font: mono, size: 11, color: muted });
+      wrap(`Bring-back: ${withNames(d.preset, m.bring)}`, x + 18, y + 260, colW - 36, 15, { size: 11.5, color: muted, max: 1 }); });
+    txt(`120 DK showdown winners 2018–25 · 2,761 games 2016–25 · data ${data.meta.version} · birdiebuddy.io/nfl/showdown`, pad, H - 28, { font: mono, size: 11, color: dim });
+    return new Promise(res => cv.toBlob(res, 'image/png'));
+  };
+  const sharePng = async (mode, btn) => {
+    const old = btn.textContent; btn.textContent = 'Rendering…';
+    try {
+      const blob = await playCardPng(derive());
+      if (mode === 'copy' && navigator.clipboard && window.ClipboardItem) { await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); btn.textContent = 'Copied image ✓'; }
+      else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `showdown-playcard-${(state.preset || 'custom')}-${num(state.spread)}-${num(state.total)}.png`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); btn.textContent = 'Downloaded ✓'; }
+    } catch (e) { console.warn('[showdown] play card export failed', e); btn.textContent = 'Export failed'; }
+    setTimeout(() => { btn.textContent = old; }, 1800);
+  };
+
   const renderExport = () => {
     $id('sdExport').innerHTML = `
       <div class="card-title">Export</div>
       <div class="sd-export">
         <button type="button" class="btn btn-primary" data-copy="playbook">Copy playbook</button>
         <button type="button" class="btn" data-copy="stokastic">Copy Stokastic settings</button>
+        <button type="button" class="btn" data-share="download">Download play card (PNG)</button>
+        <button type="button" class="btn" data-share="copy">Copy play card image</button>
+        <button type="button" class="btn btn-ghost" data-print>Print</button>
       </div>
-      <div class="sd-caption">plain text of steps 2–4 for this slate · the settings block is the dials table</div>`;
+      <div class="sd-caption">text = steps 2–4 for this slate · play card = the one-glance strip + the script cards as one image for Discord</div>`;
   };
 
   /* ---------- master render ---------- */
@@ -712,7 +812,7 @@ window.BBI = window.BBI || {};
     if (!data) return;
     const d = derive();
     renderInputs();
-    renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderCheat(d);
+    renderRead(d); renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderCheat(d);
     renderShortlist(d);
     const counts = renderAlloc(d);
     renderVerdict(d, counts); renderRecipes(d, counts); renderDials(d); renderLaws(d);
@@ -738,6 +838,8 @@ window.BBI = window.BBI || {};
       }
       const v = e.target.closest('[data-view]'); if (v) { state.view = v.dataset.view; render(); return; }
       const r = e.target.closest('[data-realized]'); if (r) { state.realized = r.dataset.realized; render(); return; }
+      const sh = e.target.closest('[data-share]'); if (sh) { sharePng(sh.dataset.share, sh); return; }
+      if (e.target.closest('[data-print]')) { window.print(); return; }
       const c = e.target.closest('[data-copy]'); if (c) { const d = derive(); copy(c.dataset.copy === 'playbook' ? playbookText(d) : stokasticText(d), c); return; }
       if (e.target.closest('[data-edit]')) { e.preventDefault(); document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
       if (e.target.closest('#sdReset')) { store.clear(); Object.assign(state, { spread: 7.5, total: 48.5, env: 'dome', contest: 'se_small', entries: 1, lean: 'none', preset: null, realized: null }); render(); }
@@ -776,7 +878,7 @@ window.BBI = window.BBI || {};
 
   // Public surface (also used by the verification harness).
   window.BBI.showdown = { bucketSpread, bucketTotal, expectedSpreadRow, expectedTotalRow, cheatCell, envRow, roofRow, overlaysFor, allocationFor, largestRemainder, shortlistFor, dialsFor, pinnedLawsFor, LEANS, state, get data() { return data; }, render, init,
-    playbookText: () => playbookText(derive()), stokasticText: () => stokasticText(derive()) };
+    playbookText: () => playbookText(derive()), stokasticText: () => stokasticText(derive()), playCardPng: () => playCardPng(derive()) };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

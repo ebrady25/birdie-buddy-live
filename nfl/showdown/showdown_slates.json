@@ -1,8 +1,60 @@
 {
-  "week": "2026 Week 2 (stub — v0.2 writes this from the pipeline)",
+  "week": "2026 Week 2 (stub \u2014 v0.2 writes this from the pipeline)",
   "slates": [
-    { "id": "det_buf", "label": "DET @ BUF", "fav": "BUF", "dog": "DET", "spread": 5.5, "total": 54.5, "env": "outdoor_mild" },
-    { "id": "ind_kc",  "label": "IND @ KC",  "fav": "KC",  "dog": "IND", "spread": 6.5, "total": 46.5, "env": "outdoor_mild" },
-    { "id": "nyg_lar", "label": "NYG @ LAR", "fav": "LAR", "dog": "NYG", "spread": 7.5, "total": 48.5, "env": "dome" }
-  ]
+    {
+      "id": "det_buf",
+      "label": "DET @ BUF",
+      "fav": "BUF",
+      "dog": "DET",
+      "spread": 5.5,
+      "total": 54.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Allen"
+        },
+        "dog": {
+          "QB": "Goff"
+        }
+      }
+    },
+    {
+      "id": "ind_kc",
+      "label": "IND @ KC",
+      "fav": "KC",
+      "dog": "IND",
+      "spread": 6.5,
+      "total": 46.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Mahomes",
+          "K": "Butker"
+        },
+        "dog": {}
+      }
+    },
+    {
+      "id": "nyg_lar",
+      "label": "NYG @ LAR",
+      "fav": "LAR",
+      "dog": "NYG",
+      "spread": 7.5,
+      "total": 48.5,
+      "env": "dome",
+      "players": {
+        "fav": {
+          "QB": "Stafford",
+          "WR1": "Adams",
+          "RB": "K. Williams",
+          "TE1": "Ferguson",
+          "K": "Mevis"
+        },
+        "dog": {
+          "WR1": "Nabers"
+        }
+      }
+    }
+  ],
+  "note": "players: role \u2192 name map used in the recipes/shortlist when the preset is selected. v0.2 pipeline fills every seat; blanks fall back to role labels."
 }
