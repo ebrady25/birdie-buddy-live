@@ -1,12 +1,12 @@
 {
-  "run_at_utc": "2026-09-14T08:46:17Z",
+  "run_at_utc": "2026-09-21T08:47:51Z",
   "reference_season": 2025,
   "seasons_included": [
     2025,
     2026
   ],
   "model_source": "DataGolf pre-tournament baseline. Reference benchmark for shadow-variant promotion decisions.",
-  "n_events_attempted": 83,
+  "n_events_attempted": 84,
   "n_events_scored": 83,
   "aborted_after_429s": false,
   "aggregate": {
@@ -19052,9 +19052,22 @@
         }
       },
       "event_name_input": "TOUR Championship"
+    },
+    {
+      "error": "HTTP Error 400: Bad Request",
+      "event_id": 557,
+      "year": 2026,
+      "event_name_input": "Biltmore Championship Asheville"
     }
   ],
-  "failed_events": [],
+  "failed_events": [
+    {
+      "event_id": 557,
+      "year": 2026,
+      "event_name": "Biltmore Championship Asheville",
+      "error": "HTTP Error 400: Bad Request"
+    }
+  ],
   "notes": "Resume-safe. Spearman on made-cut players only. Brier on full-field binary outcomes.",
   "auto_generated_by": "github-actions / refresh_prometheus.py"
 }
