@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Showdown Playbook — BirdieBuddy</title>
+<!-- bb-favicon-og -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BirdieBuddy">
+<meta property="og:title" content="Showdown Playbook — BirdieBuddy NFL">
+<meta property="og:description" content="Set the game — spread, total, roof, contest — and get the codex's answer: this is the game you're in, this is who wins it, this is how the lineup is built. Every number is a winner rate with an n.">
+<meta property="og:image" content="https://birdiebuddy.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://birdiebuddy.io/assets/img/og-image.png">
+<meta name="description" content="NFL DraftKings Showdown playbook: script distribution, what winners looked like, captain shortlist, allocation, lineup recipes, contest fit — from 120 showdown winners and 2,761 games.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css" />
+  <link rel="stylesheet" href="assets/css/showdown.css" />
+  <style>
+    :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <!-- PAGE HEAD -->
+    <header class="page-head">
+      <div class="eyebrow">DraftKings Showdown · the codex as a play card</div>
+      <h1>Showdown Playbook</h1>
+      <p>Set the game — spread, total, roof, contest, entries — and get the codex's answer: <strong>this is the game you're in, this is who wins it, this is how the lineup is built.</strong> Every number on this page is a winner rate with an n, not an opinion.</p>
+      <div class="page-head-meta">
+        <span><strong>120</strong> DK showdown winners 2018–25</span>
+        <span><strong>2,761</strong> games 2016–25</span>
+        <span><strong>55</strong> Sundays · Power Sweep / Spy</span>
+        <span>Slate: <strong class="gold" id="sdSummary">—</strong></span>
+      </div>
+    </header>
+
+    <div id="sdError" hidden></div>
+
+    <div class="sd-layout" id="sdPage">
+      <!-- ===================== STEP 1 · SET THE SLATE (rail) ===================== -->
+      <aside class="sd-rail" id="step1" aria-label="Step 1 — set the slate">
+        <div class="sd-step-head">
+          <span class="sd-step-num">Step 1</span>
+          <h2>Set the slate</h2>
+        </div>
+        <div class="card sd-panel">
+          <div class="sd-field">
+            <div class="sd-field-label"><span>This week</span></div>
+            <div class="sd-presets" id="sdPresets"></div>
+          </div>
+        </div>
+        <div class="card sd-panel">
+          <div class="sd-field">
+            <div class="sd-field-label"><label for="sdSpreadNum">Spread</label><span class="sd-val" id="sdSpreadVal"></span></div>
+            <div class="sd-pills" id="sdSpreadPills" role="radiogroup" aria-label="Spread bucket"></div>
+            <div class="sd-num-row"><input class="sd-num" id="sdSpreadNum" type="number" inputmode="decimal" step="0.5" min="0" max="30" aria-label="Spread (favorite, points)" /><span class="sd-num-hint">favorite by · snaps to the bucket</span></div>
+          </div>
+          <div class="sd-field">
+            <div class="sd-field-label"><label for="sdTotalNum">Total</label><span class="sd-val" id="sdTotalVal"></span></div>
+            <div class="sd-pills" id="sdTotalPills" role="radiogroup" aria-label="Total bucket"></div>
+            <div class="sd-num-row"><input class="sd-num" id="sdTotalNum" type="number" inputmode="decimal" step="0.5" min="20" max="80" aria-label="Game total" /><span class="sd-num-hint">game total · snaps to the bucket</span></div>
+          </div>
+          <div class="sd-field">
+            <div class="sd-field-label"><span>Environment</span></div>
+            <div class="sd-pills" id="sdEnvPills" role="radiogroup" aria-label="Environment"></div>
+          </div>
+        </div>
+        <div class="card sd-panel">
+          <div class="sd-field">
+            <div class="sd-field-label"><span>Contest</span></div>
+            <div class="sd-pills" id="sdContestPills" role="radiogroup" aria-label="Contest size"></div>
+          </div>
+          <div class="sd-field">
+            <div class="sd-field-label"><label for="sdEntriesNum">Entries</label></div>
+            <div class="sd-pills" id="sdEntriesPills" role="radiogroup" aria-label="Number of entries"></div>
+            <div class="sd-num-row"><input class="sd-num" id="sdEntriesNum" type="number" inputmode="numeric" step="1" min="1" max="150" aria-label="Number of entries" /><span class="sd-num-hint">lineups you'll enter</span></div>
+          </div>
+          <div class="sd-field">
+            <div class="sd-field-label"><span>Lean <span style="letter-spacing:0;text-transform:none;color:var(--text-dimmed)">(optional)</span></span></div>
+            <div class="sd-pills" id="sdLeanPills" role="radiogroup" aria-label="Game-script lean"></div>
+            <div class="sd-lean-note">A lean shifts the A/B/C/D allocation ±10 points toward its script. It <strong>never switches off an overlay</strong> — the shootout, grind, dome and wind rules come from the total and the environment only.</div>
+          </div>
+        </div>
+        <div class="sd-rail-foot"><span>Inputs are remembered on this device.</span><button type="button" id="sdReset">Reset</button></div>
+      </aside>
+
+      <div class="sd-main">
+        <!-- Mobile sticky summary chip (hidden on desktop) -->
+        <div class="sd-chip" id="sdChip" aria-live="polite"><span id="sdChipText">—</span><a href="nfl/showdown/#step1" data-edit>Edit</a></div>
+
+        <!-- ===================== STEP 2 · READ THE GAME ===================== -->
+        <section class="sd-step" id="step2" aria-labelledby="step2h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 2</span>
+            <h2 id="step2h">Read the game</h2>
+            <span class="sd-gate-tag">free</span>
+            <p>What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite.</p>
+          </div>
+          <div class="sd-grid-2">
+            <div class="card sd-panel" id="sdScript"></div>
+            <div class="card sd-panel" id="sdTotalStrip"></div>
+          </div>
+          <div class="card sd-panel" id="sdOverlays"></div>
+          <div class="card sd-panel" id="sdWinners"></div>
+          <div class="card sd-panel" id="sdCheat"></div>
+        </section>
+
+        <!-- ===================== STEP 3 · BUILD IT ===================== -->
+        <section class="sd-step" id="step3" aria-labelledby="step3h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 3</span>
+            <h2 id="step3h">Build it</h2>
+            <span class="sd-gate-tag">shortlist free · rest Pro</span>
+            <p>Who sits at captain, how many lineups go to each script, and the recipe for each one — with the dials to type into the Contest Generator.</p>
+          </div>
+          <div class="card sd-panel card-premium" id="sdShortlist"></div>
+          <div data-gate="pro" data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
+            <div class="sd-step" style="gap:var(--space-4)">
+              <div class="card sd-panel card-premium" id="sdVerdict"></div>
+              <div class="card sd-panel" id="sdAlloc"></div>
+              <div id="sdRecipes"></div>
+              <div class="card sd-panel" id="sdDials"></div>
+              <div class="card sd-panel" id="sdLaws"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== STEP 4 · SHIP IT ===================== -->
+        <section class="sd-step" id="step4" aria-labelledby="step4h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 4</span>
+            <h2 id="step4h">Ship it</h2>
+            <span class="sd-gate-tag">Pro</span>
+            <p>Ownership target and dupe gate for the field you're in, the engine's hard rules as a self-check, and the playbook as text.</p>
+          </div>
+          <div data-gate="pro" data-gate-msg="Contest fit, the hard-rules self-check and the copy-to-clipboard playbook are a Pro feature.">
+            <div class="sd-step" style="gap:var(--space-4)">
+              <div class="card sd-panel" id="sdFit"></div>
+              <div class="sd-grid-2">
+                <div class="card sd-panel" id="sdCheck"></div>
+                <div class="sd-step" style="gap:var(--space-4)">
+                  <div class="card sd-panel" id="sdExport"></div>
+                  <div class="card sd-panel" id="sdLessons"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="sd-caption" style="text-align:right">Sources: codex v1.0 · rules.json v1.2 · LINEUP_BIBLE v1.2 · Power Sweep/Spy study</div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/nfl.js"></script>
+  <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
+  <script src="assets/js/showdown.js"></script>
+</body>
+</html>

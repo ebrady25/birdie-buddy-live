@@ -11,8 +11,8 @@ window.BBI = window.BBI || {};
 (() => {
   'use strict';
 
-  const DATA_PATH   = 'assets/data/showdown_playbook.json';
-  const SLATES_PATH = 'assets/data/showdown_slates.json';
+  const DATA_PATH   = 'nfl/showdown/showdown_playbook.json';
+  const SLATES_PATH = 'nfl/showdown/showdown_slates.json';
   const LS_KEY      = 'bbi_showdown_inputs';
   const SMALL_N     = 15;
 
@@ -126,6 +126,12 @@ window.BBI = window.BBI || {};
     D: { seat: 'Dog WR1', tmpl: 'WR_DOG', because: 'the dog wins outright', bring: 'the fav TE (57% with a dog-WR captain) or the fav QB (73% with a dog-RB captain)' }
   };
 
+  // How often each script actually happens at this spread (base_rates.by_spread).
+  const scriptOdds = b => ({ A: b.blowout14, B: b.fav_wins - b.blowout14, C: b.within3, D: b.dog_wins });
+  // Flex construction text → chips: first clause of the archetype's flex string.
+  const flexChips = flex => { const first = flex.split(';')[0].replace(/^[^:]*template:\s*/i, ''); return first.split(/\s*\+\s*|,\s*/).map(x => x.trim()).filter(Boolean); };
+  const flexNotes = flex => flex.split(';').slice(1).map(x => x.trim()).filter(x => x && !/^bring/i.test(x));  // bring-back has its own row
+
   const pinnedLawsFor = (spread, total) => {
     const set = new Set([1, 10]);
     if (+spread >= 7) { set.add(4); set.add(8); }
@@ -150,16 +156,16 @@ window.BBI = window.BBI || {};
     if (ov.dome) { k = k.map(x => Math.min(x + o.dome.k_share_bump, p.share_ceilings.k)); notes.push(`K +${pct(o.dome.k_share_bump)} (dome)`); }
     const bothQb = ov.grind ? o.grind.both_qbs_share_max : ov.shootout ? o.shootout.both_qbs_share_max : p.both_qbs_share_max;
     const rows = [
-      { k: 'K share', v: range(k), adj: mode !== 'default' || ov.dome, note: `${mode} · ceiling ${pct(p.share_ceilings.k)}` + (ov.dome ? ' · dome bump' : '') },
-      { k: 'DST share', v: range(p.dst_share[dstMode]), adj: dstMode !== 'default', note: `${dstMode}` + (ov.wind ? ' (wind ≥15 → grind)' : '') + ` · ceiling ${pct(p.share_ceilings.dst)}` },
-      { k: 'Both-QB max', v: pct(bothQb), adj: bothQb !== p.both_qbs_share_max, note: ov.grind ? 'grind overlay' : ov.shootout ? 'shootout overlay' : 'portfolio default' },
+      { k: 'K share', v: range(k), bar: k, adj: mode !== 'default' || ov.dome, note: `${mode} · ceiling ${pct(p.share_ceilings.k)}` + (ov.dome ? ' · dome bump' : '') },
+      { k: 'DST share', v: range(p.dst_share[dstMode]), bar: p.dst_share[dstMode], adj: dstMode !== 'default', note: `${dstMode}` + (ov.wind ? ' (wind ≥15 → grind)' : '') + ` · ceiling ${pct(p.share_ceilings.dst)}` },
+      { k: 'Both-QB max', v: pct(bothQb), bar: [0, bothQb], adj: bothQb !== p.both_qbs_share_max, note: ov.grind ? 'grind overlay' : ov.shootout ? 'shootout overlay' : 'portfolio default' },
       { k: '5-1 fav minimum', v: +spread >= p.big_spread ? `${p.five_one_fav_min_count_big_spread} lineups` : +spread >= p.five_one_fav_min_spread ? `${p.five_one_fav_min_count} lineup` : '—',
         adj: +spread >= p.five_one_fav_min_spread, note: +spread >= p.five_one_fav_min_spread ? `spread ≥ ${+spread >= p.big_spread ? p.big_spread : p.five_one_fav_min_spread}` : `only when spread ≥ ${p.five_one_fav_min_spread}` },
-      { k: 'Fav captain share min', v: +spread >= p.big_spread ? pct(p.fav_captain_share_min_big_spread) : '—', adj: +spread >= p.big_spread, note: `spread ≥ ${p.big_spread}` },
+      { k: 'Fav captain share min', v: +spread >= p.big_spread ? pct(p.fav_captain_share_min_big_spread) : '—', bar: +spread >= p.big_spread ? [p.fav_captain_share_min_big_spread, 1] : null, adj: +spread >= p.big_spread, note: `spread ≥ ${p.big_spread}` },
       { k: 'Per-captain share cap', v: `${pct(p.max_per_captain_share)} · max ${p.max_per_captain_abs}`, note: 'share of batch · absolute' },
       { k: 'Captain position cap', v: Object.entries(p.captain_position_share_max).map(([a, b]) => `${a} ${pct(b)}`).join(' · '), note: 'share of batch at captain', adj: false },
       { k: 'Max overlap between lineups', v: `${p.max_overlap_players} players`, note: 'any two lineups' },
-      { k: 'Punt share max', v: pct(p.sub_1k_share_max), note: 'lineups with a sub-$1k player' },
+      { k: 'Punt share max', v: pct(p.sub_1k_share_max), bar: [0, p.sub_1k_share_max], note: 'lineups with a sub-$1k player' },
       { k: 'Dupes max', v: `${dupesFor(data, contestKey)}`, note: `for ${CONTEST_SHORT[contestKey] || contestKey}` }
     ];
     return { rows, notes, mode, dstMode, bothQb, k };
@@ -400,14 +406,14 @@ window.BBI = window.BBI || {};
     const head = `<div class="sd-winners-head">
       <div class="card-title">What winners looked like here</div>
       <div class="seg" role="tablist" aria-label="Winner view">
-        <button type="button" role="tab" data-view="expected" class="${state.view === 'expected' ? 'active' : ''}" aria-selected="${state.view === 'expected'}">By expected script (Vegas)</button>
+        <button type="button" role="tab" data-view="expected" class="${state.view === 'expected' ? 'active' : ''}" aria-selected="${state.view === 'expected'}">Build for the distribution</button>
         <button type="button" role="tab" data-view="realized" class="${state.view === 'realized' ? 'active' : ''}" aria-selected="${state.view === 'realized'}">If you're right about the game</button>
       </div></div>`;
     let body;
     if (state.view === 'expected') {
       const sk = expectedSpreadRow(d.sb), tk = expectedTotalRow(d.tb, state.total);
       const sr = data.winners_by_expected_script[sk], tr = data.winners_by_expected_script[tk];
-      body = `<p class="sd-lede">Build for the distribution: winners in games the market priced like this one.</p>
+      body = `<p class="sd-lede">Winners in games the market priced like this one — the view you build the batch for.</p>
         <div class="sd-grid-2">
           ${winnerCol(`Spread ${esc(d.spreadBucket.label)} · <span style="color:var(--text-dimmed)">${sk}</span>`, sr, sr.n, src)}
           ${winnerCol(`Total ${esc(d.totalBucket.label)} · <span style="color:var(--text-dimmed)">${tk}</span>`, tr, tr.n, src)}
@@ -415,12 +421,24 @@ window.BBI = window.BBI || {};
     } else {
       const rr = data.winners_by_realized_script[state.realized];
       const cur = REALIZED.find(r => r.key === state.realized);
-      body = `<p class="sd-lede">If you're right about the game: winners by how the game actually went. Pick the script you believe — the % is how often a ${esc(d.spreadBucket.label.toLowerCase())} favorite produced it.</p>
-        <div class="sd-realized-tabs" role="tablist">${REALIZED.map(r => `<button type="button" class="chip" role="tab" data-realized="${r.key}" aria-pressed="${r.key === state.realized}" aria-selected="${r.key === state.realized}">${r.label} <span class="count">${Math.round(r.dist(b))}%</span></button>`).join('')}</div>
+      const max = Math.max(...REALIZED.map(r => r.dist(b)));
+      body = `<p class="sd-lede">Pick the script you believe. The % is how often a <strong>${esc(d.spreadBucket.label.toLowerCase())}</strong> favorite produced it; the card shows what won when it did.</p>
+        <div class="sd-scripts" role="tablist" aria-label="Realized script">${REALIZED.map(r => { const v = r.dist(b), on = r.key === state.realized; return `
+          <button type="button" class="sd-script-tile${on ? ' on' : ''}" role="tab" data-realized="${r.key}" aria-selected="${on}">
+            <span class="sd-script-tile-label">${esc(r.label)}</span>
+            <span class="sd-script-tile-pct">${Math.round(v)}%</span>
+            <span class="bar"><span class="bar-fill" style="width:${v / max * 100}%"></span></span>
+            <span class="sd-script-tile-sub">of games at this spread</span>
+          </button>`; }).join('')}</div>
         <div class="sd-grid-2">${winnerCol(`${esc(cur.label)} · <span style="color:var(--text-dimmed)">${cur.key}</span>`, rr, rr.n, src)}
           <div class="sd-winner-col" style="justify-content:center"><h4>Read it</h4>
-            <p class="sd-lede">CPT from the favorite <strong>${rr.cpt_fav}%</strong> · 5-1 fav <strong>${rr.five_one_fav}%</strong> · both QBs <strong>${rr.both_qb}%</strong> · dog QB in the lineup <strong>${rr.dog_qb_in_lineup}%</strong>.</p>
-            <p class="sd-lede" style="color:var(--text-muted)">This is the "if" view. The expected view is what you build the batch for; this is what one lineup looks like when you call the script.</p>
+            <div class="sd-kpis">
+              <div class="sd-kpi"><b>${rr.cpt_fav}%</b><span>CPT from the favorite</span></div>
+              <div class="sd-kpi"><b>${rr.five_one_fav}%</b><span>5-1 fav shape</span></div>
+              <div class="sd-kpi"><b>${rr.both_qb}%</b><span>both QBs</span></div>
+              <div class="sd-kpi"><b>${rr.dog_qb_in_lineup}%</b><span>dog QB in lineup</span></div>
+            </div>
+            <p class="sd-lede" style="color:var(--text-muted)">This is the "if" view — what one lineup looks like when you call the script. The other tab is what you build the batch for.</p>
             <div class="sd-caption">${nTag(rr.n)} · ${src}</div></div>
         </div>`;
     }
@@ -431,7 +449,10 @@ window.BBI = window.BBI || {};
     const c = data.captain_by_spread_x_total, e = data.captain_by_environment, rw = data.roof_weather_winners;
     const rowLabel = { le3: 'Spread ≤3', '3.5_6.5': '3.5–6.5', ge7: '≥7' };
     const cellHtml = (r, col) => { const v = c[r][col]; const on = r === d.cell.row && col === d.cell.col;
-      return `<div class="sd-cell${on ? ' active' : ''}" ${on ? 'aria-current="true"' : ''}>${POS.map(k => `${k} <b>${v[k]}</b>`).join(' · ')}<br>fav <b>${v.fav}%</b> · K <b>${v.K}%</b></div>`; };
+      return `<div class="sd-cell${on ? ' active' : ''}" ${on ? 'aria-current="true"' : ''}>
+        <div class="sd-cell-nums">${POS.map(k => `<span>${k} <b>${v[k]}</b></span>`).join('')}</div>
+        <div class="sd-minibar" aria-hidden="true">${POS.map((k, i) => `<i class="${SEG[i]}" style="width:${v[k]}%"></i>`).join('')}</div>
+        <div class="sd-cell-foot">fav <b>${v.fav}%</b> · K <b>${v.K}%</b></div></div>`; };
     const ek = envRow(state.total), rk = roofRow(state.env);
     const envLabel = { grind_le42: 'Grind ≤42', 'avg_42.5_48.5': 'Avg 42.5–48.5', shootout_ge49: 'Shootout ≥49' };
     const roofLabel = { dome: 'Dome', outdoor_mild: 'Outdoor mild', cold_le35: 'Cold ≤35°', wind_ge15: 'Wind ≥15' };
@@ -458,13 +479,15 @@ window.BBI = window.BBI || {};
     const law = n => laws.find(l => l.n === n) || {};
     $id('sdShortlist').innerHTML = `
       <div class="card-title">Captain shortlist · <span class="card-title-accent">ranked for this cell</span></div>
-      <div class="sd-seats">${d.shortlist.map((s, i) => `
+      <div class="sd-seats">${d.shortlist.map((s, i) => { const max = d.shortlist[0].weight || 1; return `
         <div class="sd-seat">
           <span class="sd-seat-rank">SEAT ${i + 1}</span>
           <span class="sd-seat-name">${esc(s.seat)}</span>
-          <span class="sd-seat-share">${s.pos} ${s.posShare}% · ${s.side} ${s.sideShare}% <small>≈ ${Math.round(s.weight)}% of winners here</small></span>
+          <span class="sd-seat-big">≈${Math.round(s.weight)}%<small>of winners here</small></span>
+          <span class="bar bar-thick"><span class="bar-fill" style="width:${s.weight / max * 100}%"></span></span>
+          <span class="sd-seat-share">${s.pos} CPT ${s.posShare}% × ${s.side} ${s.sideShare}%</span>
           <span class="sd-seat-why">${esc(s.why)}</span>
-        </div>`).join('')}</div>
+        </div>`; }).join('')}</div>
       <div class="sd-leverage"><b>Leverage test.</b> CPT-optimal 7% / CPT-own 2% = <b>a seat</b> · 6% / 14% = <b>a flex</b> · sweet spot <b>5–15% owned</b> with top-3 CPT-optimal.</div>
       <div class="sd-never">
         <div class="sd-never-item"><b>Dog pocket QB at +3.5 or more</b><span>${esc(law(5).evidence)}</span></div>
@@ -505,39 +528,72 @@ window.BBI = window.BBI || {};
   };
   const renderRecipes = (d, counts) => {
     const ar = data.archetypes, p = data.portfolio, o = data.overlays;
+    const odds = scriptOdds(data.base_rates.by_spread[d.sb]);
     const cards = ['A', 'B', 'C', 'D'].filter(k => d.alloc[k] > 0).map(k => {
       const a = ar[k], m = SCRIPT_META[k];
       const banners = [];
-      if (d.ov.shootout) banners.push(`<div class="sd-ovl-banner"><b>E overlay</b><span>${esc(ar.E.overlay)} · captains ${esc(ar.E.captain)} · shape ${ar.E.shape.join('/')}</span></div>`);
-      if (d.ov.grind) banners.push(`<div class="sd-ovl-banner"><b>F overlay</b><span>${esc(ar.F.overlay)} · captain ${esc(ar.F.captain)} · shape ${ar.F.shape.join('/')}</span></div>`);
+      if (d.ov.shootout) banners.push(`<div class="sd-ovl-banner"><b>E · Shootout</b><span>${esc(ar.E.overlay)} · captains ${esc(ar.E.captain)} · shape ${ar.E.shape.join('/')}</span></div>`);
+      if (d.ov.grind) banners.push(`<div class="sd-ovl-banner"><b>F · Grind</b><span>${esc(ar.F.overlay)} · captain ${esc(ar.F.captain)} · shape ${ar.F.shape.join('/')}</span></div>`);
+      const kDial = d.ov.grind ? p.k_share.grind : d.ov.shootout ? p.k_share.shootout : null;
+      const dDial = (d.ov.grind || d.ov.wind) ? p.dst_share.grind : d.ov.shootout ? p.dst_share.shootout : null;
+      const t = data.captain_templates[m.tmpl];
       return `<div class="card sd-recipe">
-        <div class="sd-recipe-top">
-          <div><div class="sd-recipe-script">Script ${k} · ${Math.round(d.alloc[k])}%</div><div class="sd-recipe-name">${esc(a.name)}</div><div class="sd-caption">trigger: ${esc(a.trigger)}</div></div>
-          <div class="sd-recipe-count">${counts[k]}<small>lineup${counts[k] === 1 ? '' : 's'}</small></div>
+        <div class="sd-recipe-head">
+          <span class="sd-script-badge">${k}</span>
+          <div class="sd-recipe-title"><div class="sd-recipe-name">${esc(a.name)}</div><div class="sd-recipe-trig">fires: ${esc(a.trigger)}</div></div>
+          <div class="sd-recipe-count">${counts[k]}<small>of ${state.entries} lineup${state.entries === 1 ? '' : 's'}</small></div>
+        </div>
+        <div class="sd-recipe-odds">
+          <div class="sd-odd"><span class="sd-odd-k">Batch share</span><span class="bar"><span class="bar-fill" style="width:${d.alloc[k]}%"></span></span><b>${Math.round(d.alloc[k])}%</b></div>
+          <div class="sd-odd"><span class="sd-odd-k">Happens</span><span class="bar"><span class="bar-fill dim" style="width:${odds[k]}%"></span></span><b>${Math.round(odds[k])}%</b><span class="sd-odd-n">of ${esc(d.spreadBucket.label.toLowerCase())} games</span></div>
         </div>
         <div class="sd-recipe-cpt"><small>Captain</small>${esc(a.captain)}</div>
-        <div class="sd-tmpl">${a.shape.map(s => `<span class="sd-chip-n">${esc(s)}</span>`).join('')}<span class="sd-chip-n">K ${a.k}%</span><span class="sd-chip-n">DST ${a.dst}%</span></div>
-        <div class="sd-recipe-lines">
-          <div><span>Flex</span><span>${esc(a.flex)}</span></div>
-          <div><span>K / DST</span><span>K in ${a.k}% of these winners · DST in ${a.dst}%${d.ov.shootout ? ` · shootout dials K ${range(p.k_share.shootout)} / DST ${range(p.dst_share.shootout)}` : d.ov.grind ? ` · grind dials K ${range(p.k_share.grind)} / DST ${range(p.dst_share.grind)}` : ''}</span></div>
-          <div><span>Bring-back</span><span>${esc(m.bring)}</span></div>
+        <div class="sd-recipe-stats">
+          <div class="sd-stat-tile"><span class="sd-stat-k">Shape</span><div class="sd-tmpl">${a.shape.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}</div></div>
+          <div class="sd-stat-tile"><span class="sd-stat-k">Kicker</span><b class="sd-stat-v">${a.k}%</b><span class="bar"><span class="bar-fill" style="width:${a.k}%"></span></span><span class="sd-stat-n">of these winners${kDial ? ` · dial ${range(kDial)}` : ''}</span></div>
+          <div class="sd-stat-tile"><span class="sd-stat-k">DST</span><b class="sd-stat-v">${a.dst}%</b><span class="bar"><span class="bar-fill" style="width:${a.dst}%"></span></span><span class="sd-stat-n">of these winners${dDial ? ` · dial ${range(dDial)}` : ''}</span></div>
+        </div>
+        <div class="sd-recipe-rows">
+          <div class="sd-rrow"><span class="sd-rrow-k">Flex</span><span class="sd-rrow-v"><span class="sd-tmpl">${flexChips(a.flex).map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}</span>${flexNotes(a.flex).length ? `<span class="sd-rrow-note">${esc(flexNotes(a.flex).join(' · '))}</span>` : ''}</span></div>
+          <div class="sd-rrow"><span class="sd-rrow-k">Bring-back</span><span class="sd-rrow-v">${esc(m.bring)}</span></div>
         </div>
         <div class="sd-say">Captain ${esc(m.seat)} wins because ${esc(m.because)}; the flex is ${esc(a.flex.split(';')[0])}; the bring-back is ${esc(m.bring.split(' — ')[0].split(' (')[0])}.</div>
         ${banners.join('')}
-        ${tmplChips(m.tmpl)}
+        ${t ? `<div class="sd-tmpl-groups">
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">${m.tmpl} · include</span><div class="sd-tmpl">${t.include.map(x => `<span class="sd-chip-ok">✓ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">avoid</span><div class="sd-tmpl">${t.avoid.map(x => `<span class="sd-chip-no">✗ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">template rates</span><div class="sd-tmpl">${t.shapes.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}<span class="sd-chip-n">K ${pct(t.k_rate)}</span><span class="sd-chip-n">DST ${pct(t.dst_rate)}</span></div></div>
+        </div>` : ''}
       </div>`;
     });
     $id('sdRecipes').innerHTML = `<div class="sd-recipes">${cards.join('')}</div>
-      <div class="sd-caption" style="margin-top:8px">Recipes from the codex archetypes A–D · include/avoid chips from the captain templates (winner rates) · E/F show as banners on the cards they modify</div>`;
+      <div class="sd-caption" style="margin-top:8px">Recipes from the codex archetypes A–D · "happens" = how often the script occurs at this spread (2,761 games) · include/avoid chips are captain-template winner rates · E/F overlays banner the cards they modify</div>`;
   };
 
   const renderDials = d => {
+    const bar = r => r.bar ? `<span class="sd-dial-bar" aria-hidden="true"><i style="left:${Math.round(r.bar[0] * 100)}%;width:${Math.max(2, Math.round((r.bar[1] - r.bar[0]) * 100))}%"></i></span>` : '';
     $id('sdDials').innerHTML = `
       <div class="card-title">Dials · <span class="card-title-accent">enter these in the Contest Generator</span></div>
       <table class="sd-dials"><thead><tr><th>Dial</th><th>Target</th><th>Why</th></tr></thead><tbody>
-        ${d.dials.rows.map(r => `<tr><td>${esc(r.k)}</td><td class="v${r.adj ? ' adj' : ''}">${esc(r.v)}</td><td>${esc(r.note || '')}</td></tr>`).join('')}
+        ${d.dials.rows.map(r => `<tr><td>${esc(r.k)}</td><td class="v${r.adj ? ' adj' : ''}">${esc(r.v)}${bar(r)}</td><td>${esc(r.note || '')}</td></tr>`).join('')}
       </tbody></table>
-      <div class="sd-caption">portfolio dials from rules.json v1.2 · gold = overlay-adjusted for this slate · dupes cap by field size</div>`;
+      <div class="sd-caption">portfolio dials from rules.json v1.2 · gold = overlay-adjusted for this slate · bars show the target band on a 0–100% scale</div>`;
+  };
+
+  const renderVerdict = (d, counts) => {
+    const ct = data.inputs.contest_types.find(c => c.key === state.contest);
+    const ovs = Object.keys(d.ov).filter(k => d.ov[k]).map(k => k[0].toUpperCase() + k.slice(1));
+    const dial = k => d.dials.rows.find(r => r.k === k);
+    const scripts = ['A', 'B', 'C', 'D'].filter(k => counts[k] > 0).map(k => `${counts[k]}×${k}`).join(' · ') || `A ${Math.round(d.alloc.A)}%`;
+    $id('sdVerdict').innerHTML = `
+      <div class="card-title card-title-accent">The play · one glance</div>
+      <div class="sd-verdict">
+        <div class="sd-vd"><span>Captain</span><b>${esc(d.shortlist[0].seat)}</b><small>then ${esc(d.shortlist[1].seat)}</small></div>
+        <div class="sd-vd"><span>Batch</span><b>${scripts}</b><small>${state.entries} lineup${state.entries === 1 ? '' : 's'} · A ${Math.round(d.alloc.A)} / B ${Math.round(d.alloc.B)} / C ${Math.round(d.alloc.C)} / D ${Math.round(d.alloc.D)}</small></div>
+        <div class="sd-vd"><span>Kicker · DST</span><b>${esc(dial('K share').v)} · ${esc(dial('DST share').v)}</b><small>share of the batch</small></div>
+        <div class="sd-vd"><span>Both QBs</span><b>≤ ${esc(dial('Both-QB max').v)}</b><small>${ovs.length ? ovs.join(' + ') + ' overlay' : 'no overlay'}</small></div>
+        <div class="sd-vd"><span>Ownership</span><b>${esc(ct.own_target)}</b><small>dupes ≤ ${ct.dupe_cap} · ${esc(CONTEST_SHORT[state.contest])}</small></div>
+      </div>`;
   };
 
   const renderLaws = d => {
@@ -659,7 +715,7 @@ window.BBI = window.BBI || {};
     renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderCheat(d);
     renderShortlist(d);
     const counts = renderAlloc(d);
-    renderRecipes(d, counts); renderDials(d); renderLaws(d);
+    renderVerdict(d, counts); renderRecipes(d, counts); renderDials(d); renderLaws(d);
     renderFit(d); renderCheck(); renderExport(); renderLessons();
     store.save(state);
   };
@@ -683,6 +739,7 @@ window.BBI = window.BBI || {};
       const v = e.target.closest('[data-view]'); if (v) { state.view = v.dataset.view; render(); return; }
       const r = e.target.closest('[data-realized]'); if (r) { state.realized = r.dataset.realized; render(); return; }
       const c = e.target.closest('[data-copy]'); if (c) { const d = derive(); copy(c.dataset.copy === 'playbook' ? playbookText(d) : stokasticText(d), c); return; }
+      if (e.target.closest('[data-edit]')) { e.preventDefault(); document.getElementById('step1')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
       if (e.target.closest('#sdReset')) { store.clear(); Object.assign(state, { spread: 7.5, total: 48.5, env: 'dome', contest: 'se_small', entries: 1, lean: 'none', preset: null, realized: null }); render(); }
     });
     const onNum = (id, key, lo, hi) => { const el = $id(id); const h = () => { setNum(key, el.value, lo, hi); if (key === 'total') state.realized = null; render(); }; el.addEventListener('change', h); el.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); h(); el.blur(); } }); };

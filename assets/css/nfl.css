@@ -1,0 +1,49 @@
+/* =====================================================================
+   BIRDIEBUDDY — NFL SECTION CHROME
+   Header / footer / hub for /nfl/*. Loads after design-system.css +
+   components.css; reuses their tokens and the .brand / footer classes.
+   ===================================================================== */
+.nfl-nav { position: sticky; top: 0; z-index: var(--z-nav); background: rgba(10,10,15,0.92); -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px); border-bottom: 1px solid var(--border-soft); }
+.nfl-nav-inner { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--container-pad); height: var(--nav-h); display: flex; align-items: center; gap: var(--space-6); }
+.nfl-brand { display: flex; align-items: center; gap: var(--space-2); }
+.nfl-tag { font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 700; letter-spacing: var(--tracking-widest); color: var(--gold-300); border: 1px solid var(--border-gold); border-radius: var(--radius-sm); padding: 2px 6px; line-height: 1.2; }
+.nfl-links { display: flex; align-items: center; gap: var(--space-1); flex: 1; min-width: 0; }
+.nfl-link { position: relative; padding: 8px 12px; border-radius: var(--radius-md); font-size: var(--fs-sm); font-weight: 500; color: var(--text-muted); white-space: nowrap; transition: color var(--dur-fast), background var(--dur-fast); }
+.nfl-link:hover { color: var(--text-primary); background: var(--surface-3); }
+.nfl-link.active { color: var(--gold-300); }
+.nfl-link.active::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: var(--gold-500); border-radius: 1px; }
+.nfl-right { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
+.nfl-link-golf { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-dimmed); }
+.nfl-link-golf:hover { color: var(--gold-300); }
+body[data-section="nfl"] { --status-h: 0px; }
+
+.nfl-footer { margin-top: var(--space-16); border-top: 1px solid var(--border-soft); background: var(--surface-0); }
+.nfl-footer-inner { max-width: var(--container-max); margin: 0 auto; padding: var(--space-10) var(--container-pad); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-8); }
+.nfl-footer-brand .brand { display: inline-flex; align-items: center; gap: var(--space-2); }
+.nfl-footer-brand p { margin-top: var(--space-3); font-size: var(--fs-xs); line-height: 1.6; max-width: 40ch; }
+.nfl-footer-links { display: flex; flex-direction: column; gap: var(--space-2); }
+.nfl-footer .footer-credit { max-width: var(--container-max); margin: 0 auto; }
+
+/* Hub */
+.nfl-hero { padding: var(--space-16) 0 var(--space-10); }
+.nfl-hero h1 { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, var(--fs-5xl)); font-weight: 800; letter-spacing: -0.03em; line-height: 1.02; color: var(--text-primary); max-width: 18ch; }
+.nfl-hero p { margin-top: var(--space-5); font-size: var(--fs-lg); color: var(--text-body); max-width: 60ch; line-height: 1.6; }
+.nfl-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.nfl-card { display: flex; flex-direction: column; gap: var(--space-3); min-height: 200px; }
+.nfl-card h3 { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--text-primary); letter-spacing: -0.015em; }
+.nfl-card p { font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.55; }
+.nfl-card .nfl-card-cta { margin-top: auto; }
+.nfl-card.soon { opacity: 0.6; }
+.nfl-card .badge { align-self: flex-start; }
+
+@media (max-width: 767px) {
+  .nfl-nav-inner { gap: var(--space-3); height: auto; min-height: 52px; padding-top: 6px; padding-bottom: 6px; flex-wrap: wrap; }
+  .nfl-brand .brand-lockup { font-size: 1rem; }
+  .nfl-links { order: 3; flex-basis: 100%; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .nfl-links::-webkit-scrollbar { display: none; }
+  .nfl-link { padding: 6px 10px; font-size: var(--fs-xs); }
+  .nfl-right { margin-left: auto; }
+  .nfl-footer-inner { grid-template-columns: 1fr; gap: var(--space-6); }
+  .nfl-cards { grid-template-columns: 1fr; }
+  .nfl-hero { padding: var(--space-10) 0 var(--space-6); }
+}

@@ -1,0 +1,1060 @@
+{
+ "meta": {
+  "name": "BirdieBuddy Showdown Playbook data",
+  "version": "0.1 (2026-09-21)",
+  "sources": [
+   "codex/CODEX.md v1.0 (120 DK showdown winners 2018-25; 2,761 games 2016-25)",
+   "codex/rules.json v1.2",
+   "LINEUP_BIBLE.md v1.2",
+   "Stokastic Power Sweep/Spy study (55 Sundays 2023-26)",
+   "fantasy.vip Milly Maker almanac 2025",
+   "MMT 169 classic winners 2016-25"
+  ],
+  "lift_note": "lift = winners-with-trait minus all-winners rate; |lift|<12 noise, >=15 with n>=15 signal"
+ },
+ "inputs": {
+  "spread_buckets": [
+   {
+    "key": "pk_3",
+    "label": "Pick'em to 3",
+    "min": 0,
+    "max": 3
+   },
+   {
+    "key": "3.5_6.5",
+    "label": "3.5 to 6.5",
+    "min": 3.5,
+    "max": 6.5
+   },
+   {
+    "key": "7_9.5",
+    "label": "7 to 9.5",
+    "min": 7,
+    "max": 9.5
+   },
+   {
+    "key": "10_plus",
+    "label": "10 or more",
+    "min": 10,
+    "max": 99
+   }
+  ],
+  "total_buckets": [
+   {
+    "key": "grind",
+    "label": "41 or under",
+    "max": 41
+   },
+   {
+    "key": "low",
+    "label": "41.5 to 45.5",
+    "min": 41.5,
+    "max": 45.5
+   },
+   {
+    "key": "mid",
+    "label": "46 to 49.5",
+    "min": 46,
+    "max": 49.5
+   },
+   {
+    "key": "high",
+    "label": "50 to 53.5",
+    "min": 50,
+    "max": 53.5
+   },
+   {
+    "key": "shootout",
+    "label": "54 or more",
+    "min": 54
+   }
+  ],
+  "environment": [
+   "dome",
+   "outdoor_mild",
+   "cold_le32",
+   "wind_10_14",
+   "wind_15_plus"
+  ],
+  "contest_types": [
+   {
+    "key": "se_small",
+    "label": "Single entry / 3-max, under 5k",
+    "own_target": "140-160%",
+    "dupe_cap": 2,
+    "note": "Spy/Power Sweep winners: chalky flex, contrarian captain, 1 sub-5% piece"
+   },
+   {
+    "key": "mid",
+    "label": "5k-25k",
+    "own_target": "130-150%",
+    "dupe_cap": 8
+   },
+   {
+    "key": "large",
+    "label": "25k+",
+    "own_target": "110-130%",
+    "dupe_cap": 20,
+    "note": "dupes are the rake; product of ownership predicts dupes"
+   }
+  ]
+ },
+ "base_rates": {
+  "by_spread": {
+   "pk_3": {
+    "fav_wins": 55,
+    "fav_by7": 31,
+    "blowout14": 17,
+    "dog_wins": 44,
+    "within3": 27
+   },
+   "3.5_6.5": {
+    "fav_wins": 66,
+    "fav_by7": 42,
+    "blowout14": 24,
+    "dog_wins": 34,
+    "within3": 25
+   },
+   "7_9.5": {
+    "fav_wins": 76,
+    "fav_by7": 56,
+    "blowout14": 37,
+    "dog_wins": 23,
+    "within3": 21
+   },
+   "10_plus": {
+    "fav_wins": 87,
+    "fav_by7": 66,
+    "blowout14": 48,
+    "dog_wins": 13,
+    "within3": 18
+   }
+  },
+  "by_total": {
+   "grind": {
+    "mean_actual": 40.1,
+    "over7": 30,
+    "under7": 30,
+    "ge55": 14,
+    "le37": 45
+   },
+   "low": {
+    "mean_actual": 43.7,
+    "over7": 28,
+    "under7": 31,
+    "ge55": 19,
+    "le37": 34
+   },
+   "mid": {
+    "mean_actual": 47.9,
+    "over7": 30,
+    "under7": 31,
+    "ge55": 30,
+    "le37": 23
+   },
+   "high": {
+    "mean_actual": 52.2,
+    "over7": 31,
+    "under7": 28,
+    "ge55": 39,
+    "le37": 13
+   },
+   "shootout": {
+    "mean_actual": 55.3,
+    "over7": 34,
+    "under7": 38,
+    "ge55": 50,
+    "le37": 12
+   }
+  },
+  "weather": {
+   "dome": {
+    "n": 793,
+    "over_rate": 50
+   },
+   "outdoor_mild": {
+    "n": 1113,
+    "over_rate": 52
+   },
+   "cold_le32": {
+    "n": 73,
+    "over_rate": 53
+   },
+   "wind_10_14": {
+    "n": 404,
+    "over_rate": 41
+   },
+   "wind_15_plus": {
+    "n": 204,
+    "over_rate": 44
+   }
+  }
+ },
+ "winners_by_expected_script": {
+  "spread_le3": {
+   "n": 48,
+   "cpt_fav": 54,
+   "cpt_pos": {
+    "WR": 29,
+    "RB": 25,
+    "QB": 21,
+    "TE": 15
+   },
+   "five_one_fav": 8,
+   "four_two": 38,
+   "three_three": 38,
+   "K": 40,
+   "DST": 42,
+   "both_qb": 35,
+   "dog_qb_in_lineup": 67
+  },
+  "spread_3.5_6.5": {
+   "n": 41,
+   "cpt_fav": 59,
+   "cpt_pos": {
+    "WR": 49,
+    "RB": 12,
+    "QB": 22,
+    "TE": 15
+   },
+   "five_one_fav": 5,
+   "four_two": 41,
+   "three_three": 34,
+   "K": 41,
+   "DST": 22,
+   "both_qb": 41,
+   "dog_qb_in_lineup": 63
+  },
+  "spread_ge7": {
+   "n": 31,
+   "cpt_fav": 61,
+   "cpt_pos": {
+    "WR": 39,
+    "RB": 29,
+    "QB": 16,
+    "TE": 16
+   },
+   "five_one_fav": 13,
+   "four_two": 32,
+   "three_three": 39,
+   "K": 45,
+   "DST": 35,
+   "both_qb": 23,
+   "dog_qb_in_lineup": 39
+  },
+  "total_le42": {
+   "n": 27,
+   "cpt_fav": 52,
+   "cpt_pos": {
+    "WR": 37,
+    "RB": 30,
+    "QB": 19,
+    "TE": 7
+   },
+   "five_one_fav": 11,
+   "four_two": 52,
+   "three_three": 30,
+   "K": 41,
+   "DST": 41,
+   "both_qb": 33,
+   "dog_qb_in_lineup": 59
+  },
+  "total_42.5_47.5": {
+   "n": 60,
+   "cpt_fav": 53,
+   "cpt_pos": {
+    "WR": 35,
+    "RB": 23,
+    "QB": 20,
+    "TE": 17
+   },
+   "five_one_fav": 5,
+   "four_two": 35,
+   "three_three": 37,
+   "K": 47,
+   "DST": 30,
+   "both_qb": 43,
+   "dog_qb_in_lineup": 67
+  },
+  "total_48_51.5": {
+   "n": 20,
+   "cpt_fav": 70,
+   "cpt_pos": {
+    "WR": 40,
+    "RB": 15,
+    "QB": 25,
+    "TE": 15
+   },
+   "five_one_fav": 15,
+   "four_two": 25,
+   "three_three": 45,
+   "K": 35,
+   "DST": 35,
+   "both_qb": 20,
+   "dog_qb_in_lineup": 35
+  },
+  "total_ge52": {
+   "n": 13,
+   "cpt_fav": 69,
+   "cpt_pos": {
+    "WR": 54,
+    "RB": 8,
+    "QB": 15,
+    "TE": 23
+   },
+   "five_one_fav": 8,
+   "four_two": 38,
+   "three_three": 38,
+   "K": 31,
+   "DST": 31,
+   "both_qb": 15,
+   "dog_qb_in_lineup": 54
+  }
+ },
+ "winners_by_realized_script": {
+  "fav_by_14_plus": {
+   "n": 27,
+   "cpt_fav": 89,
+   "cpt_pos": {
+    "WR": 44,
+    "RB": 7,
+    "QB": 26,
+    "TE": 7
+   },
+   "five_one_fav": 26,
+   "four_two": 44,
+   "three_three": 22,
+   "K": 37,
+   "DST": 41,
+   "both_qb": 26,
+   "dog_qb_in_lineup": 33
+  },
+  "fav_by_4_13": {
+   "n": 29,
+   "cpt_fav": 66,
+   "cpt_pos": {
+    "WR": 34,
+    "RB": 31,
+    "QB": 14,
+    "TE": 21
+   },
+   "five_one_fav": 3,
+   "four_two": 31,
+   "three_three": 45,
+   "K": 28,
+   "DST": 45,
+   "both_qb": 31,
+   "dog_qb_in_lineup": 52
+  },
+  "within_3": {
+   "n": 35,
+   "cpt_fav": 51,
+   "cpt_pos": {
+    "WR": 34,
+    "RB": 20,
+    "QB": 26,
+    "TE": 17
+   },
+   "five_one_fav": 6,
+   "four_two": 37,
+   "three_three": 43,
+   "K": 49,
+   "DST": 17,
+   "both_qb": 43,
+   "dog_qb_in_lineup": 69
+  },
+  "dog_by_4_plus": {
+   "n": 29,
+   "cpt_fav": 28,
+   "cpt_pos": {
+    "WR": 41,
+    "RB": 28,
+    "QB": 14,
+    "TE": 14
+   },
+   "five_one_fav": 0,
+   "four_two": 38,
+   "three_three": 34,
+   "K": 52,
+   "DST": 34,
+   "both_qb": 34,
+   "dog_qb_in_lineup": 76
+  }
+ },
+ "captain_by_spread_x_total": {
+  "le3": {
+   "total_le45.5": {
+    "RB": 35,
+    "WR": 23,
+    "QB": 15,
+    "TE": 15,
+    "fav": 42,
+    "K": 42
+   },
+   "total_ge46": {
+    "WR": 36,
+    "QB": 27,
+    "RB": 14,
+    "TE": 14,
+    "fav": 68,
+    "K": 36
+   }
+  },
+  "3.5_6.5": {
+   "total_le45.5": {
+    "WR": 44,
+    "QB": 20,
+    "RB": 16,
+    "TE": 16,
+    "fav": 60,
+    "K": 48
+   },
+   "total_ge46": {
+    "WR": 56,
+    "QB": 25,
+    "TE": 12,
+    "RB": 6,
+    "fav": 56,
+    "K": 31
+   }
+  },
+  "ge7": {
+   "total_le45.5": {
+    "WR": 47,
+    "RB": 27,
+    "QB": 13,
+    "TE": 13,
+    "fav": 67,
+    "K": 27
+   },
+   "total_ge46": {
+    "WR": 31,
+    "RB": 31,
+    "QB": 19,
+    "TE": 19,
+    "fav": 56,
+    "K": 62
+   }
+  }
+ },
+ "captain_by_environment": {
+  "grind_le42": {
+   "RB": 46,
+   "WR": 31,
+   "QB": 12,
+   "TE": 4,
+   "default": "Favorite RB"
+  },
+  "avg_42.5_48.5": {
+   "RB": 27,
+   "WR": 29,
+   "QB": 25,
+   "TE": 10,
+   "default": "WR1 or RB, multiple scripts"
+  },
+  "shootout_ge49": {
+   "RB": 19,
+   "WR": 47,
+   "QB": 17,
+   "TE": 11,
+   "default": "WR1"
+  }
+ },
+ "roof_weather_winners": {
+  "dome": {
+   "n": 38,
+   "cpt_pos": {
+    "WR": 50,
+    "RB": 26,
+    "QB": 18,
+    "TE": 3
+   },
+   "K": 58,
+   "DST": 45,
+   "both_qb": 29,
+   "cum_own": 192
+  },
+  "outdoor_mild": {
+   "n": 49,
+   "cpt_pos": {
+    "WR": 24,
+    "RB": 22,
+    "QB": 22,
+    "TE": 22
+   },
+   "K": 33,
+   "DST": 16,
+   "both_qb": 43,
+   "cum_own": 211
+  },
+  "cold_le35": {
+   "n": 9,
+   "cpt_pos": {
+    "WR": 44,
+    "RB": 22,
+    "QB": 22,
+    "TE": 11
+   },
+   "K": 33,
+   "DST": 33,
+   "both_qb": 44,
+   "cum_own": 176
+  },
+  "wind_ge15": {
+   "n": 6,
+   "cpt_pos": {
+    "WR": 67,
+    "RB": 17,
+    "QB": 0,
+    "TE": 17
+   },
+   "K": 33,
+   "DST": 67,
+   "both_qb": 17,
+   "cum_own": 207
+  }
+ },
+ "archetypes": {
+  "A": {
+   "name": "Favorite blowout",
+   "trigger": "spread >=7 (37-48% realized); 3.5-6.5 (24%)",
+   "captain": "Fav WR1 / fav RB / fav QB - never dog",
+   "shape": [
+    "5-1 fav (>=1 per batch)",
+    "4-2 fav"
+   ],
+   "flex": "fav QB + fav WR1 + fav RB + fav DST/K; bring-back = dog's single best pass-catcher, never the dog QB",
+   "k": 37,
+   "dst": 41
+  },
+  "B": {
+   "name": "Favorite controls, competitive (by 4-13)",
+   "trigger": "modal outcome at every spread",
+   "captain": "Fav RB (31%) or fav WR1; TE CPT live (21%)",
+   "shape": [
+    "4-2",
+    "3-3"
+   ],
+   "flex": "RB-CPT template: own WR1 + own TE + own K/DST, opp RB/TE bring-back; low both-QB",
+   "k": 28,
+   "dst": 45
+  },
+  "C": {
+   "name": "Coin flip / back-and-forth (within 3)",
+   "trigger": "spread <=3 (27%); every spread (18-27%)",
+   "captain": "Either WR1, either QB; RB less",
+   "shape": [
+    "3-3"
+   ],
+   "flex": "both QBs 43%; both WR1s; K 49% (FG games)",
+   "k": 49,
+   "dst": 17
+  },
+  "D": {
+   "name": "Dog upset",
+   "trigger": "spread <=3 (44%); 3.5-6.5 (34%); >=7 (23%); >=10 (13%)",
+   "captain": "Dog WR1 (the only dog captain that survives), dog RB, dog QB only if he runs",
+   "shape": [
+    "3-3",
+    "2-4 dog-heavy"
+   ],
+   "flex": "dog QB in flex (76%), dog WR1, dog K (52%); bring back fav TE (57% w/ dog-WR CPT) or fav QB (73% w/ dog-RB CPT)",
+   "k": 52,
+   "dst": 34
+  },
+  "E": {
+   "name": "Shootout overlay",
+   "trigger": "total >=50 (31%); dome +2 pts; any spread",
+   "overlay": "raise both-QB to 50%, TE CPT to ~25%, drop K to ~30% and DST to ~25%",
+   "captain": "WR1s, TE1s, QBs",
+   "shape": [
+    "3-3"
+   ]
+  },
+  "F": {
+   "name": "Grind overlay",
+   "trigger": "total <=41 (30%); wind >=10 (+10 pts under rate)",
+   "overlay": "DST to 55%, K to 50%, both-QB to 20%, RB CPT to 30%",
+   "captain": "RB, favorite side",
+   "shape": [
+    "4-2"
+   ]
+  }
+ },
+ "allocation_by_spread": {
+  "pk_3": {
+   "A": 0.15,
+   "B": 0.35,
+   "C": 0.25,
+   "D": 0.25
+  },
+  "3.5_6.5": {
+   "A": 0.25,
+   "B": 0.35,
+   "C": 0.2,
+   "D": 0.2
+  },
+  "7_9.5": {
+   "A": 0.4,
+   "B": 0.35,
+   "C": 0.15,
+   "D": 0.1
+  },
+  "10_plus": {
+   "A": 0.45,
+   "B": 0.35,
+   "C": 0.15,
+   "D": 0.05
+  }
+ },
+ "overlays": {
+  "shootout": {
+   "trigger": {
+    "total_min": 50
+   },
+   "k_share": "shootout",
+   "dst_share": "shootout",
+   "both_qbs_share_max": 0.5,
+   "te_cpt_bonus": 0.3,
+   "rb_cpt_penalty": 0.2
+  },
+  "grind": {
+   "trigger": {
+    "total_max": 41,
+    "or_wind_min": 10
+   },
+   "k_share": "grind",
+   "dst_share": "grind",
+   "both_qbs_share_max": 0.2,
+   "rb_cpt_bonus": 0.3,
+   "qb_cpt_penalty": 0.2
+  },
+  "dome": {
+   "trigger": {
+    "roof": [
+     "dome",
+     "closed"
+    ]
+   },
+   "te_cpt_penalty": 0.3,
+   "k_share_bump": 0.05
+  },
+  "wind": {
+   "trigger": {
+    "wind_min": 15
+   },
+   "qb_cpt_penalty": 0.5,
+   "dst_share": "grind"
+  }
+ },
+ "captain_templates": {
+  "_note": "expected flex composition by captain type (winner rates). Used to score 'story fit' 0..1 = fraction of include-items present minus avoid-items present.",
+  "WR_FAV": {
+   "include": [
+    "own_QB",
+    "own_RB",
+    "own_DST",
+    "opp_WR"
+   ],
+   "avoid": [
+    "own_second_catcher",
+    "both_qbs"
+   ],
+   "shapes": [
+    "3-3",
+    "4-2",
+    "5-1"
+   ],
+   "k_rate": 0.26,
+   "dst_rate": 0.48
+  },
+  "WR_DOG": {
+   "include": [
+    "own_QB",
+    "own_K",
+    "opp_TE",
+    "opp_WR"
+   ],
+   "avoid": [
+    "own_second_catcher",
+    "both_qbs"
+   ],
+   "shapes": [
+    "3-3",
+    "4-2",
+    "2-4"
+   ],
+   "k_rate": 0.61,
+   "dst_rate": 0.35
+  },
+  "RB_FAV": {
+   "include": [
+    "own_WR",
+    "own_TE",
+    "own_K",
+    "own_DST",
+    "opp_RB"
+   ],
+   "avoid": [
+    "own_second_rb",
+    "own_QB",
+    "both_qbs",
+    "opp_WR"
+   ],
+   "shapes": [
+    "4-2",
+    "3-3",
+    "5-1"
+   ],
+   "k_rate": 0.53,
+   "dst_rate": 0.47
+  },
+  "RB_DOG": {
+   "include": [
+    "own_K",
+    "own_DST",
+    "opp_QB",
+    "opp_WR"
+   ],
+   "avoid": [
+    "own_second_rb",
+    "own_TE"
+   ],
+   "shapes": [
+    "3-3",
+    "4-2"
+   ],
+   "k_rate": 0.55,
+   "dst_rate": 0.55
+  },
+  "QB_FAV": {
+   "include": [
+    "own_TE",
+    "own_WR",
+    "own_RB",
+    "opp_QB",
+    "opp_RB",
+    "opp_WR"
+   ],
+   "avoid": [
+    "own_DST",
+    "own_K"
+   ],
+   "shapes": [
+    "4-2",
+    "3-3"
+   ],
+   "k_rate": 0.27,
+   "dst_rate": 0.13,
+   "_v1.2": "\ud83d\udd27 opp_WR + 3-3 added: W2 top-1% QB-FAV lineups were 100% opp WR1, 65% 3-3 in the top-0.1%; codex baseline opp WR 69% of all winners. Needs 3 more slates to lock."
+  },
+  "QB_DOG": {
+   "include": [
+    "own_WR",
+    "own_second_catcher",
+    "opp_RB",
+    "opp_K",
+    "opp_DST"
+   ],
+   "avoid": [
+    "opp_TE"
+   ],
+   "shapes": [
+    "4-2",
+    "3-3"
+   ],
+   "k_rate": 0.56,
+   "dst_rate": 0.44
+  },
+  "TE_FAV": {
+   "include": [
+    "own_QB",
+    "own_WR",
+    "opp_WR"
+   ],
+   "avoid": [
+    "own_K",
+    "own_DST",
+    "opp_DST",
+    "own_second_te"
+   ],
+   "shapes": [
+    "3-3"
+   ],
+   "k_rate": 0.22,
+   "dst_rate": 0.11
+  },
+  "TE_DOG": {
+   "include": [
+    "own_QB",
+    "own_WR",
+    "opp_WR"
+   ],
+   "avoid": [
+    "own_K",
+    "own_DST",
+    "opp_DST",
+    "own_second_te"
+   ],
+   "shapes": [
+    "3-3"
+   ],
+   "k_rate": 0.22,
+   "dst_rate": 0.11
+  },
+  "DST_FAV": {
+   "include": [
+    "own_WR",
+    "opp_WR",
+    "own_QB"
+   ],
+   "avoid": [
+    "opp_DST",
+    "own_K"
+   ],
+   "shapes": [
+    "3-3",
+    "4-2"
+   ],
+   "k_rate": 0.4,
+   "dst_rate": 0.0
+  },
+  "DST_DOG": {
+   "include": [
+    "own_WR",
+    "opp_WR",
+    "own_QB"
+   ],
+   "avoid": [
+    "opp_DST",
+    "own_K"
+   ],
+   "shapes": [
+    "3-3",
+    "4-2"
+   ],
+   "k_rate": 0.4,
+   "dst_rate": 0.0
+  }
+ },
+ "hard_rules": {
+  "max_kickers": 1,
+  "max_k_plus_dst": 2,
+  "max_dst": 1,
+  "dst_max_opposing_skill": 3,
+  "no_dog_pocket_qb_captain_spread_min": 3.5,
+  "captain_positions_never": [
+   "K"
+  ],
+  "captain_dst_max_per_batch": 1,
+  "min_salary_used": 44000,
+  "max_sub_1k_players": 1,
+  "max_sub3pct_owned_players": 1,
+  "wr_cpt_max_other_own_catchers": 1,
+  "rb_cpt_max_other_own_rb": 0,
+  "rb_cpt_max_own_skill_wide": 2,
+  "pocket_qb_cpt_min_own_catchers": 2,
+  "rushing_qb_cpt_min_own_catchers": 1,
+  "te_cpt_require_own_qb": true,
+  "te_cpt_max_own_k": 0,
+  "te_cpt_max_other_own_te": 0,
+  "captain_min_cpt_optimal_pct": 1.5,
+  "min_players_from_captain_team": 2,
+  "max_salary": 50000
+ },
+ "soft_penalties": {
+  "_note": "penalty points subtracted from the lineup score (score = sim rank percentile or projection z). 1.0 ~ one bucket of the sim ranking.",
+  "qb_cpt_own_k": 0.6,
+  "qb_cpt_fav_own_dst": 0.6,
+  "wr_cpt_no_own_qb": 0.5,
+  "rb_cpt_fav_no_own_wr": 0.5,
+  "rb_cpt_own_qb_and_two_catchers": 0.8,
+  "rb_cpt_dog_own_te": 0.5,
+  "te_cpt_any_dst": 0.5,
+  "te_cpt_no_opp_wr": 0.4,
+  "both_qbs_with_fav_rb_cpt": 0.6,
+  "both_qbs_with_dog_wr_cpt": 0.5,
+  "dog_qb_in_lineup_when_field_own_over": {
+   "own_threshold": 50,
+   "penalty": 0.7
+  },
+  "opp_wr_with_fav_rb_or_fav_qb_cpt": 0.3,
+  "two_k_sim_override_allowed_per_batch": 1,
+  "two_k_min_total": 52,
+  "sub_1k_player_low_proj": {
+   "proj_threshold": 6.0,
+   "penalty": 0.4
+  },
+  "_opp_wr_note": "v1.2: the QB-CPT half of this penalty is skipped when the shootout overlay is on (total >= 50). RB-CPT half unchanged."
+ },
+ "portfolio": {
+  "max_per_captain_share": 0.25,
+  "max_per_captain_abs": 3,
+  "max_overlap_players": 4,
+  "both_qbs_share_max": 0.35,
+  "k_share": {
+   "default": [
+    0.4,
+    0.5
+   ],
+   "shootout": [
+    0.25,
+    0.35
+   ],
+   "grind": [
+    0.45,
+    0.55
+   ]
+  },
+  "dst_share": {
+   "default": [
+    0.3,
+    0.4
+   ],
+   "shootout": [
+    0.2,
+    0.3
+   ],
+   "grind": [
+    0.5,
+    0.6
+   ]
+  },
+  "two_k_max": 1,
+  "five_one_fav_min_spread": 6.5,
+  "five_one_fav_min_count": 1,
+  "five_one_fav_min_count_big_spread": 2,
+  "big_spread": 7.0,
+  "fav_captain_share_min_big_spread": 0.5,
+  "dog_qb_in_lineup_share_max_over_dog_winprob": 0.15,
+  "nonchalk_flex_share_max": 0.5,
+  "nonchalk_own_threshold": 25,
+  "captain_shortlist_min_coverage": [
+   "FAV_WR1",
+   "FAV_RB1",
+   "FAV_QB",
+   "DOG_WR1"
+  ],
+  "dupes_max_by_field": [
+   [
+    2500,
+    2
+   ],
+   [
+    25000,
+    8
+   ],
+   [
+    1000000,
+    20
+   ]
+  ],
+  "sim_rank_max_percentile": 0.5,
+  "dst_captain_per_20": 1,
+  "captain_position_share_max": {
+   "WR": 0.5,
+   "RB": 0.4,
+   "QB": 0.4,
+   "TE": 0.25,
+   "DST": 0.05,
+   "K": 0.0
+  },
+  "sim_override_pctl": 0.1,
+  "share_ceilings": {
+   "k": 0.5,
+   "dst": 0.65,
+   "both_qbs": 0.6,
+   "_v1.2": "k 0.65\u21920.5: sim wanted K in ~90% of W2 DET@BUF lineups; our batch ended at 76% K; K was in 7% of the top-1%. Codex K rate never exceeds 50% in any total bucket."
+  },
+  "sub_1k_share_max": 0.25
+ },
+ "ten_laws": [
+  {
+   "n": 1,
+   "law": "Leverage lives at captain. Chalk lives in the flex.",
+   "evidence": "Winners' CPT own median 9.5% (54% under 10%); the same winners carry ~1.5 players >=50% owned and cum own ~204%."
+  },
+  {
+   "n": 2,
+   "law": "Captain the player who can be the game's highest scorer, not the best value.",
+   "evidence": "Winning CPT median salary $13,500 (1.5x); cheap captains that won scored 2.6x projection."
+  },
+  {
+   "n": 3,
+   "law": "WR and RB win the seat more than the field's QB habit.",
+   "evidence": "CPT position of winners WR 39 / RB 22 / QB 20 / TE 15 / DST 4 / K 1; field captains QBs 30-35%."
+  },
+  {
+   "n": 4,
+   "law": "Favorite side by default; big favorite = the cleanest rule in the sport.",
+   "evidence": "Nut CPT from favorite: spread <=3 66%, 3.5-7 58%, >7 80% (RB 44% of those)."
+  },
+  {
+   "n": 5,
+   "law": "The dog pocket-QB captain is a graveyard.",
+   "evidence": "Dog QB at +3.5 or more = nut CPT 3 of 205 games (1.5%)."
+  },
+  {
+   "n": 6,
+   "law": "Almost no punts. Winners are not unique because of a $200 guy.",
+   "evidence": "Sub-5%-owned players per winning lineup: 0.18."
+  },
+  {
+   "n": 7,
+   "law": "Kickers are in ~half of winning lineups. Never two. Never at captain.",
+   "evidence": "K in lineup 41% overall, 49% in 2025; double-K 1.1% of top-1%; K captain 1%."
+  },
+  {
+   "n": 8,
+   "law": "Shape follows the spread: 4-2 modal, 5-1 the blowout weapon, 3-3 the field's comfort zone.",
+   "evidence": "Winners 4-2 47% / 3-3 36% / 5-1 17%; spread >7 top-0.1% was 5-1 89-98%."
+  },
+  {
+   "n": 9,
+   "law": "Both QBs is a shape, not a leak - in ~1/3 of the batch.",
+   "evidence": "Both QBs in 34% of winners; 84% in the W2 DET@BUF 72-point shootout, 2-3% in W1 blowouts."
+  },
+  {
+   "n": 10,
+   "law": "Dupes are the silent rake.",
+   "evidence": "DEN@KC winner shared 1st 102 ways; product of ownership predicts dupes (r^2 0.43)."
+  }
+ ],
+ "lessons_2026": [
+  {
+   "slate": "W1 DEN@KC / SF@LAR (blowouts)",
+   "lesson": "Both-QB lineups and dog captains died; top-1% was 97-100% favorite captain, 5-1 in 89-98%."
+  },
+  {
+   "slate": "W2 DET@BUF (54.5 total -> 72)",
+   "lesson": "Top-1% 84% both-QB, 7% K, 92% no K/DST, 75% two TE. A user lean must never switch off the total overlay (rules v1.2)."
+  },
+  {
+   "slate": "W2 IND@KC (46.5)",
+   "lesson": "Field 47/45/50% on the three stars; every three-star build duplicated 50+ times even in a 20k field. Sim's #1 was a 4% dog-WR captain with both QBs."
+  }
+ ],
+ "contest_fit_small_field": {
+  "source": "Stokastic Power Sweep (3-max) & Spy (SE), 55 Sundays",
+  "qb_under_10pct": {
+   "winners": "71-73%",
+   "field": "54-59%"
+  },
+  "qb_plus_2": {
+   "winners": "51-53%",
+   "field": "39-44%"
+  },
+  "run_back": {
+   "power_sweep": "60% vs 57%, 2025: 78%",
+   "spy": "no edge"
+  },
+  "total_own": {
+   "power_sweep": 141,
+   "spy": 158
+  },
+  "flex_rb": "no lift (38%)",
+  "te_under_4k_spy": "60% vs 50%",
+  "dupes": "2 of 55",
+  "sim_roi_positive": "49% vs 34%"
+ }
+}

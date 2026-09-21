@@ -125,7 +125,7 @@ window.BBI = window.BBI || {};
         { href: 'archive.html',     label: 'Archive',      sub: '47 scored events' },
         { href: 'methodology.html', label: 'Methodology',  sub: 'How BBI scores' }
       ]},
-      { type: 'link', href: 'showdown.html', label: 'Showdown' },
+      { type: 'link', href: 'nfl/', label: 'NFL' },
       { type: 'link', href: 'courses.html', label: 'Courses' },
       { type: 'link', href: 'market.html',  label: 'Market' },
       { type: 'link', href: 'pricing.html', label: 'Pricing' }
@@ -252,7 +252,7 @@ window.BBI = window.BBI || {};
         { href: 'lineups.html', key: 'lineups', label: 'Lineups', icon: I.cards },
         { href: 'simulator.html', key: 'simulator', label: 'Simulator', icon: I.dial },
       ];
-      const moreKeys = ['compare','watchlist','live','market','courses','pricing','account','login','performance','recap','archive','methodology','showdown'];
+      const moreKeys = ['compare','watchlist','live','market','courses','pricing','account','login','performance','recap','archive','methodology'];
       const moreActive = moreKeys.includes(page);
       const bar = document.createElement('nav');
       bar.className = 'm-tabbar'; bar.id = 'mTabbar';
@@ -283,7 +283,7 @@ window.BBI = window.BBI || {};
         </div>
         <div class="m-sheet-label">NFL</div>
         <div class="m-sheet-grid">
-          ${link('showdown.html', 'Showdown', 'DK showdown playbook')}
+          ${link('nfl/', 'Showdown Playbook', 'BirdieBuddy NFL')}
         </div>
         <div class="m-sheet-label">Account</div>
         <div class="m-sheet-grid">
