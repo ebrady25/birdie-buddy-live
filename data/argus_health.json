@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-21T20:07:50Z",
-  "phase_checked": "phase1",
-  "next_phase": "phase1_apollo_atlas",
+  "timestamp": "2026-09-22T15:11:41Z",
+  "phase_checked": "phase15",
+  "next_phase": "phase15_aeolus_zeus",
   "status": "red",
   "checks": {
     "current_event": {
@@ -9,19 +9,21 @@
       "error": "current_event is stale",
       "event_id": 524,
       "event_name": "Rocket Classic",
-      "days_until_start": -54,
+      "days_until_start": -55,
       "team_event": false
     },
     "datagolf_api": {
       "status": "pass",
       "http_code": 200,
-      "duration_s": 0.33,
+      "duration_s": 0.18,
       "players_returned": 132,
       "endpoint": "preds/pre-tournament"
     },
     "prior_outputs": {
-      "status": "n/a",
-      "note": "phase1 has no prior-output gate (first or independent phase)."
+      "status": "pass",
+      "checked": [
+        "bbi_rankings.json (0.0h)"
+      ]
     }
   },
   "recommendations": [
