@@ -14,13 +14,13 @@
 <meta property="og:description" content="DraftKings Showdown, decoded from 120 winning lineups and 2,761 games. Every number is a winner rate with an n.">
 <meta property="og:image" content="https://birdiebuddy.io/assets/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="description" content="BirdieBuddy NFL — the Showdown Playbook and, soon, more DFS tools built on winner data, not opinions.">
+<meta name="description" content="BirdieBuddy NFL — the Showdown Playbook and Lineup Lab: DFS tools built on winner data, not opinions.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.3.1" />
 </head>
 <body>
   <div id="site-header"></div>
@@ -32,26 +32,27 @@
     </section>
     <section class="nfl-cards">
       <a class="card card-hover nfl-card" href="nfl/showdown/">
-        <span class="badge badge-gold">Live · v0.1</span>
+        <span class="badge badge-gold">Live · v0.3</span>
         <h3>Showdown Playbook</h3>
-        <p>Set the game — spread, total, roof, contest, entries — and get the answer as a play card: the game you're in, who wins it, how the lineup is built.</p>
+        <p>Set the game — spread, total, roof, contest, entries — with live sliders, and get the answer as a play card: the game you're in, who wins it, how the lineup is built.</p>
         <span class="btn btn-primary nfl-card-cta">Open the playbook →</span>
+      </a>
+      <a class="card card-hover nfl-card" href="nfl/showdown/#step4">
+        <span class="badge badge-gold">New · Lineup Lab</span>
+        <h3>Score my lineup</h3>
+        <p>Build or paste a DraftKings showdown lineup and the rules engine grades it live — hard rules, penalties, the script it plays, template fit. Pro: score a whole book and let the engine pick your batch from a pool.</p>
+        <span class="btn nfl-card-cta">Open the Lab →</span>
       </a>
       <div class="card nfl-card soon">
         <span class="badge">Next</span>
         <h3>This week's slates</h3>
-        <p>Thursday, Sunday and Monday showdowns pre-set from the pipeline with real player names in the recipes.</p>
-      </div>
-      <div class="card nfl-card soon">
-        <span class="badge">Later</span>
-        <h3>Score my lineup</h3>
-        <p>Paste a DraftKings lineup and get the rules engine's hard and soft verdict in the browser.</p>
+        <p>Thursday, Sunday and Monday showdowns pre-set from the pipeline — lines, roof and wind, real player names in the recipes, and a fresh player pool in the Lab.</p>
       </div>
     </section>
   </main>
   <div id="site-footer"></div>
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js"></script>
+  <script src="assets/js/nfl.js?v=0.3.1"></script>
   <script>BBI.renderNflHeader('nfl'); BBI.renderNflFooter();</script>
 </body>
 </html>

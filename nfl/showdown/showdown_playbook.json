@@ -1,7 +1,7 @@
 {
  "meta": {
   "name": "BirdieBuddy Showdown Playbook data",
-  "version": "0.1 (2026-09-21)",
+  "version": "0.3 (2026-09-22)",
   "sources": [
    "codex/CODEX.md v1.0 (120 DK showdown winners 2018-25; 2,761 games 2016-25)",
    "codex/rules.json v1.2",
@@ -10,7 +10,11 @@
    "fantasy.vip Milly Maker almanac 2025",
    "MMT 169 classic winners 2016-25"
   ],
-  "lift_note": "lift = winners-with-trait minus all-winners rate; |lift|<12 noise, >=15 with n>=15 signal"
+  "lift_note": "lift = winners-with-trait minus all-winners rate; |lift|<12 noise, >=15 with n>=15 signal",
+  "generated_by": "codex/build_playbook_data.py",
+  "rules_version": "1.2 (2026-09-18) \u2014 W2 DET@BUF review",
+  "n_winners": 120,
+  "n_games": 2761
  },
  "inputs": {
   "spread_buckets": [
@@ -106,28 +110,32 @@
     "fav_by7": 31,
     "blowout14": 17,
     "dog_wins": 44,
-    "within3": 27
+    "within3": 27,
+    "n": 1029
    },
    "3.5_6.5": {
     "fav_wins": 66,
     "fav_by7": 42,
     "blowout14": 24,
     "dog_wins": 34,
-    "within3": 25
+    "within3": 25,
+    "n": 939
    },
    "7_9.5": {
     "fav_wins": 76,
     "fav_by7": 56,
     "blowout14": 37,
     "dog_wins": 23,
-    "within3": 21
+    "within3": 21,
+    "n": 450
    },
    "10_plus": {
     "fav_wins": 87,
     "fav_by7": 66,
     "blowout14": 48,
     "dog_wins": 13,
-    "within3": 18
+    "within3": 18,
+    "n": 343
    }
   },
   "by_total": {
@@ -136,35 +144,40 @@
     "over7": 30,
     "under7": 30,
     "ge55": 14,
-    "le37": 45
+    "le37": 45,
+    "n": 484
    },
    "low": {
     "mean_actual": 43.7,
     "over7": 28,
     "under7": 31,
     "ge55": 19,
-    "le37": 34
+    "le37": 34,
+    "n": 1043
    },
    "mid": {
     "mean_actual": 47.9,
     "over7": 30,
     "under7": 31,
     "ge55": 30,
-    "le37": 23
+    "le37": 23,
+    "n": 829
    },
    "high": {
     "mean_actual": 52.2,
     "over7": 31,
     "under7": 28,
     "ge55": 39,
-    "le37": 13
+    "le37": 13,
+    "n": 301
    },
    "shootout": {
     "mean_actual": 55.3,
     "over7": 34,
     "under7": 38,
     "ge55": 50,
-    "le37": 12
+    "le37": 12,
+    "n": 104
    }
   },
   "weather": {
@@ -389,7 +402,8 @@
     "QB": 15,
     "TE": 15,
     "fav": 42,
-    "K": 42
+    "K": 42,
+    "n": 26
    },
    "total_ge46": {
     "WR": 36,
@@ -397,7 +411,8 @@
     "RB": 14,
     "TE": 14,
     "fav": 68,
-    "K": 36
+    "K": 36,
+    "n": 22
    }
   },
   "3.5_6.5": {
@@ -407,7 +422,8 @@
     "RB": 16,
     "TE": 16,
     "fav": 60,
-    "K": 48
+    "K": 48,
+    "n": 25
    },
    "total_ge46": {
     "WR": 56,
@@ -415,7 +431,8 @@
     "TE": 12,
     "RB": 6,
     "fav": 56,
-    "K": 31
+    "K": 31,
+    "n": 16
    }
   },
   "ge7": {
@@ -425,7 +442,8 @@
     "QB": 13,
     "TE": 13,
     "fav": 67,
-    "K": 27
+    "K": 27,
+    "n": 15
    },
    "total_ge46": {
     "WR": 31,
@@ -433,7 +451,8 @@
     "QB": 19,
     "TE": 19,
     "fav": 56,
-    "K": 62
+    "K": 62,
+    "n": 16
    }
   }
  },
@@ -1056,5 +1075,69 @@
   "te_under_4k_spy": "60% vs 50%",
   "dupes": "2 of 55",
   "sim_roi_positive": "49% vs 34%"
+ },
+ "engine": {
+  "_note": "Inputs for assets/js/showdown_engine.js (the browser port of codex/rules_engine.py) that are not elsewhere in this file. rushing_qbs is parsed from the RUSHING_QBS literal in rules_engine.py; shape_off_template_penalty is the constant in soft_score().",
+  "rules_version": "1.2 (2026-09-18) \u2014 W2 DET@BUF review",
+  "dog_win_prob_by_spread": {
+   "pk_3": 0.44,
+   "3.5_6.5": 0.34,
+   "7_9.5": 0.23,
+   "10_plus": 0.13
+  },
+  "user_leans": {
+   "_note": "Ethan's game read as a tilt, applied with --lean. Logged per slate so Tuesday can score the lean vs the no-lean build. v1.2: a lean may shift allocation/shares but may NOT disable a total-based overlay (W2 DET@BUF: 54.5 total, fav_under lean switched the shootout overlay off; game went 41-31, top-1% was 84% both-QB / 7% K).",
+   "fav_under": {
+    "allocation": {
+     "A": 0.35,
+     "B": 0.35,
+     "C": 0.2,
+     "D": 0.1
+    },
+    "k_share": [
+     0.3,
+     0.4
+    ],
+    "dst_share": [
+     0.3,
+     0.45
+    ],
+    "both_qbs_share_max": 0.35,
+    "dog_qb_share_extra": 0.0,
+    "fav_captain_share_min": 0.6,
+    "five_one_fav_min_count": 2,
+    "captain_position_share_max": {
+     "TE": 0.25,
+     "WR": 0.5,
+     "RB": 0.5,
+     "QB": 0.4,
+     "DST": 0.05,
+     "K": 0.0
+    },
+    "dog_captain_share_max": 0.35,
+    "disable_shootout_overlay": false
+   }
+  },
+  "rushing_qbs": [
+   "Anthony Richardson",
+   "Baker Mayfield",
+   "Bo Nix",
+   "Brock Purdy",
+   "Caleb Williams",
+   "Cam Ward",
+   "Drake Maye",
+   "Jalen Hurts",
+   "Jayden Daniels",
+   "Jordan Love",
+   "Josh Allen",
+   "Justin Fields",
+   "Kyler Murray",
+   "Lamar Jackson",
+   "Patrick Mahomes",
+   "Sam Darnold",
+   "Trevor Lawrence",
+   "Tyler Shough"
+  ],
+  "shape_off_template_penalty": 0.3
  }
 }

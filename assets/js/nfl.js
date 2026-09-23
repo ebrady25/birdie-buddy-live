@@ -13,7 +13,8 @@ window.BBI = window.BBI || {};
 
   const NAV = [
     { href: 'nfl/',          key: 'nfl',      label: 'Overview' },
-    { href: 'nfl/showdown/', key: 'showdown', label: 'Showdown', sub: 'DK captain-mode playbook' }
+    { href: 'nfl/showdown/', key: 'showdown', label: 'Showdown', sub: 'DK captain-mode playbook' },
+    { href: 'nfl/showdown/#step4', key: 'lab', label: 'Lineup Lab', sub: 'score a lineup with the rules engine' }
   ];
 
   window.BBI.renderNflHeader = (activeKey) => {

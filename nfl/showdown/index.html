@@ -16,14 +16,14 @@
 <meta property="og:image" content="https://birdiebuddy.io/assets/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://birdiebuddy.io/assets/img/og-image.png">
-<meta name="description" content="NFL DraftKings Showdown playbook: script distribution, what winners looked like, captain shortlist, allocation, lineup recipes, contest fit — from 120 showdown winners and 2,761 games.">
+<meta name="description" content="NFL DraftKings Showdown playbook and Lineup Lab: script distribution, what winners looked like, captain shortlist, allocation, recipes, and a live lineup scorer running the same rules engine — from 120 showdown winners and 2,761 games.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css" />
-  <link rel="stylesheet" href="assets/css/showdown.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.3.1" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.3.1" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
   </style>
@@ -31,13 +31,14 @@
 <body>
   <div id="site-header"></div>
 
-  <main class="container">
-    <!-- PAGE HEAD -->
-    <header class="page-head">
-      <div class="eyebrow">DraftKings Showdown · the codex as a play card</div>
+  <main class="container sd-page">
+    <!-- PAGE HEAD + LIVE CONSOLE -->
+    <header class="page-head sd-hero">
+      <div class="eyebrow">DraftKings Showdown · the codex as a control center</div>
       <h1>Showdown Playbook</h1>
-      <p>Set the game — spread, total, roof, contest, entries — and get the codex's answer: <strong>this is the game you're in, this is who wins it, this is how the lineup is built.</strong> Every number on this page is a winner rate with an n, not an opinion.</p>
-      <div class="page-head-meta">
+      <p>Set the game, read what it does, build to the distribution — then <strong>score your lineup against the same engine we play with</strong>. Every number on this page is a winner rate with an n, not an opinion.</p>
+      <div class="sd-console" id="sdConsole"></div>
+      <div class="page-head-meta sd-provenance">
         <span><strong>120</strong> DK showdown winners 2018–25</span>
         <span><strong>2,761</strong> games 2016–25</span>
         <span><strong>55</strong> Sundays · Power Sweep / Spy</span>
@@ -45,58 +46,108 @@
       </div>
     </header>
 
-    <div id="sdError" hidden></div>
-
-    <div class="sd-layout" id="sdPage">
-      <!-- ===================== STEP 1 · SET THE SLATE (rail) ===================== -->
-      <aside class="sd-rail" id="step1" aria-label="Step 1 — set the slate">
-        <div class="sd-step-head">
-          <span class="sd-step-num">Step 1</span>
-          <h2>Set the slate</h2>
-        </div>
-        <div class="card sd-panel">
+    <!-- STICKY DOCK: step tabs + live readouts + Tune drawer (what-if sliders from anywhere) -->
+    <div class="sd-dock-wrap" id="sdDockWrap">
+      <nav class="sd-dock" id="sdDock" aria-label="Playbook steps"></nav>
+      <div class="sd-tune" id="sdTune" hidden>
+        <div class="sd-tune-inner">
           <div class="sd-field">
-            <div class="sd-field-label"><span>This week</span></div>
-            <div class="sd-presets" id="sdPresets"></div>
-          </div>
-        </div>
-        <div class="card sd-panel">
-          <div class="sd-field">
-            <div class="sd-field-label"><label for="sdSpreadNum">Spread</label><span class="sd-val" id="sdSpreadVal"></span></div>
-            <div class="sd-pills" id="sdSpreadPills" role="radiogroup" aria-label="Spread bucket"></div>
-            <div class="sd-num-row"><input class="sd-num" id="sdSpreadNum" type="number" inputmode="decimal" step="0.5" min="0" max="30" aria-label="Spread (favorite, points)" /><span class="sd-num-hint">favorite by · snaps to the bucket</span></div>
+            <div class="sd-field-label"><label for="sdTSpreadRange">Spread</label><span class="sd-val" id="sdTSpreadVal"></span></div>
+            <div class="sd-slider sd-slider-tune" id="sdTSpreadSlider"><input type="range" id="sdTSpreadRange" min="0" max="17" step="0.5" aria-label="Spread — favorite by, points" /><output class="sd-slider-bubble" id="sdTSpreadBubble"></output></div>
           </div>
           <div class="sd-field">
-            <div class="sd-field-label"><label for="sdTotalNum">Total</label><span class="sd-val" id="sdTotalVal"></span></div>
-            <div class="sd-pills" id="sdTotalPills" role="radiogroup" aria-label="Total bucket"></div>
-            <div class="sd-num-row"><input class="sd-num" id="sdTotalNum" type="number" inputmode="decimal" step="0.5" min="20" max="80" aria-label="Game total" /><span class="sd-num-hint">game total · snaps to the bucket</span></div>
+            <div class="sd-field-label"><label for="sdTTotalRange">Total</label><span class="sd-val" id="sdTTotalVal"></span></div>
+            <div class="sd-slider sd-slider-tune" id="sdTTotalSlider"><input type="range" id="sdTTotalRange" min="34" max="62" step="0.5" aria-label="Game total" /><output class="sd-slider-bubble" id="sdTTotalBubble"></output></div>
           </div>
           <div class="sd-field">
             <div class="sd-field-label"><span>Environment</span></div>
-            <div class="sd-pills" id="sdEnvPills" role="radiogroup" aria-label="Environment"></div>
+            <div class="sd-envs sd-envs-tune" id="sdTEnvPills" role="radiogroup" aria-label="Environment"></div>
           </div>
+          <button type="button" class="sd-tune-close" data-tune-toggle aria-label="Close tune">Done</button>
         </div>
-        <div class="card sd-panel">
-          <div class="sd-field">
-            <div class="sd-field-label"><span>Contest</span></div>
-            <div class="sd-pills" id="sdContestPills" role="radiogroup" aria-label="Contest size"></div>
-          </div>
-          <div class="sd-field">
-            <div class="sd-field-label"><label for="sdEntriesNum">Entries</label></div>
-            <div class="sd-pills" id="sdEntriesPills" role="radiogroup" aria-label="Number of entries"></div>
-            <div class="sd-num-row"><input class="sd-num" id="sdEntriesNum" type="number" inputmode="numeric" step="1" min="1" max="150" aria-label="Number of entries" /><span class="sd-num-hint">lineups you'll enter</span></div>
-          </div>
-          <div class="sd-field">
-            <div class="sd-field-label"><span>Lean <span style="letter-spacing:0;text-transform:none;color:var(--text-dimmed)">(optional)</span></span></div>
-            <div class="sd-pills" id="sdLeanPills" role="radiogroup" aria-label="Game-script lean"></div>
-            <div class="sd-lean-note">A lean shifts the A/B/C/D allocation ±10 points toward its script. It <strong>never switches off an overlay</strong> — the shootout, grind, dome and wind rules come from the total and the environment only.</div>
-          </div>
-        </div>
-        <div class="sd-rail-foot"><span>Inputs are remembered on this device.</span><button type="button" id="sdReset">Reset</button></div>
-      </aside>
+      </div>
+    </div>
 
+    <div id="sdError" hidden></div>
+
+    <div class="sd-layout" id="sdPage">
       <div class="sd-main">
-        <!-- Mobile sticky summary chip (hidden on desktop) -->
+        <!-- ===================== STEP 1 · SET THE SLATE (full width) ===================== -->
+        <section class="sd-step sd-set" id="step1" aria-labelledby="step1h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 1</span>
+            <h2 id="step1h">Set the slate</h2>
+            <span class="sd-gate-tag">free</span>
+            <p>Pick this week's game or dial in any line. Everything below — the read, the build, the Lab's grade — recomputes live as you move a slider.</p>
+          </div>
+          <div class="card sd-panel sd-set-presets fx-reveal">
+            <div class="sd-field">
+              <div class="sd-field-label"><span>This week</span><span class="sd-val" id="sdPresetVal"></span></div>
+              <div class="sd-presets" id="sdPresets"></div>
+            </div>
+          </div>
+          <div class="sd-set-grid">
+            <div class="card sd-panel sd-set-card fx-reveal">
+              <div class="sd-field">
+                <div class="sd-field-label"><label for="sdSpreadRange">Spread</label><span class="sd-val" id="sdSpreadVal"></span></div>
+                <div class="sd-slider" id="sdSpreadSlider">
+                  <input type="range" id="sdSpreadRange" min="0" max="17" step="0.5" aria-label="Spread — favorite by, points" />
+                  <output class="sd-slider-bubble" id="sdSpreadBubble" for="sdSpreadRange"></output>
+                  <div class="sd-slider-bands" id="sdSpreadBands" aria-hidden="true"></div>
+                </div>
+                <div class="sd-pills" id="sdSpreadPills" role="radiogroup" aria-label="Spread bucket"></div>
+                <div class="sd-num-row"><input class="sd-num" id="sdSpreadNum" type="number" inputmode="decimal" step="0.5" min="0" max="30" aria-label="Spread (favorite, points)" /><span class="sd-num-hint">drag, tap a bucket, or type · ←/→ nudges 0.5</span></div>
+              </div>
+            </div>
+            <div class="card sd-panel sd-set-card fx-reveal">
+              <div class="sd-field">
+                <div class="sd-field-label"><label for="sdTotalRange">Total</label><span class="sd-val" id="sdTotalVal"></span></div>
+                <div class="sd-slider" id="sdTotalSlider">
+                  <input type="range" id="sdTotalRange" min="34" max="62" step="0.5" aria-label="Game total" />
+                  <output class="sd-slider-bubble" id="sdTotalBubble" for="sdTotalRange"></output>
+                  <div class="sd-slider-bands" id="sdTotalBands" aria-hidden="true"></div>
+                </div>
+                <div class="sd-pills" id="sdTotalPills" role="radiogroup" aria-label="Total bucket"></div>
+                <div class="sd-num-row"><input class="sd-num" id="sdTotalNum" type="number" inputmode="decimal" step="0.5" min="20" max="80" aria-label="Game total" /><span class="sd-num-hint">≤41 lights GRIND · ≥50 lights SHOOTOUT</span></div>
+              </div>
+            </div>
+            <div class="card sd-panel sd-set-card fx-reveal">
+              <div class="sd-field">
+                <div class="sd-field-label"><span>Environment</span><span class="sd-val" id="sdEnvVal"></span></div>
+                <div class="sd-envs" id="sdEnvPills" role="radiogroup" aria-label="Environment"></div>
+                <div class="sd-lean-note">Wind is the only weather the line doesn't already price: 10+ mph drops the over rate to 41–44%. Dome, cold and mild all land at 50–53%.</div>
+              </div>
+            </div>
+            <div class="card sd-panel sd-set-card fx-reveal">
+              <div class="sd-field">
+                <div class="sd-field-label"><span>Contest</span></div>
+                <div class="sd-seg-full" id="sdContestPills" role="radiogroup" aria-label="Contest size"></div>
+                <div class="sd-lean-note">Field size decides how contrarian to be: it sets the cumulative-ownership target and the dupe gate in Step 5, and the Lab's default field for its dupe check.</div>
+              </div>
+            </div>
+            <div class="card sd-panel sd-set-card fx-reveal">
+              <div class="sd-field">
+                <div class="sd-field-label"><label for="sdEntriesRange">Entries</label><span class="sd-val" id="sdEntriesVal"></span></div>
+                <div class="sd-slider sd-slider-plain" id="sdEntriesSlider">
+                  <input type="range" id="sdEntriesRange" min="0" max="23" step="1" aria-label="Number of entries" />
+                  <output class="sd-slider-bubble" id="sdEntriesBubble" for="sdEntriesRange"></output>
+                </div>
+                <div class="sd-pills" id="sdEntriesPills" role="radiogroup" aria-label="Number of entries"></div>
+                <div class="sd-num-row"><input class="sd-num" id="sdEntriesNum" type="number" inputmode="numeric" step="1" min="1" max="150" aria-label="Number of entries" /><span class="sd-num-hint">lineups you'll enter</span></div>
+              </div>
+            </div>
+            <div class="card sd-panel sd-set-card fx-reveal">
+              <div class="sd-field">
+                <div class="sd-field-label"><span>Lean <span style="letter-spacing:0;text-transform:none;color:var(--text-dimmed)">(optional)</span></span></div>
+                <div class="sd-seg-full" id="sdLeanPills" role="radiogroup" aria-label="Game-script lean"></div>
+                <div class="sd-lean-note">A lean shifts the A/B/C/D allocation ±10 points toward its script. It <strong>never switches off an overlay</strong> — the shootout, grind, dome and wind rules come from the total and the environment only.</div>
+              </div>
+            </div>
+          </div>
+          <div class="sd-rail-foot"><span>Inputs are remembered on this device · the dock's <b>Tune</b> button brings these sliders anywhere on the page.</span><button type="button" id="sdReset">Reset</button></div>
+        </section>
+
+        <!-- Mobile sticky summary chip (kept for print/legacy; the dock replaces it) -->
         <div class="sd-chip" id="sdChip" aria-live="polite"><span id="sdChipText">—</span><a href="nfl/showdown/#step1" data-edit>Edit</a></div>
 
         <!-- ===================== STEP 2 · READ THE GAME ===================== -->
@@ -107,14 +158,14 @@
             <span class="sd-gate-tag">free</span>
             <p>What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite.</p>
           </div>
-          <div class="card sd-panel card-premium" id="sdRead"></div>
+          <div class="card sd-panel card-premium fx-reveal" id="sdRead"></div>
           <div class="sd-grid-2">
-            <div class="card sd-panel" id="sdScript"></div>
-            <div class="card sd-panel" id="sdTotalStrip"></div>
+            <div class="card sd-panel fx-reveal" id="sdScript"></div>
+            <div class="card sd-panel fx-reveal" id="sdTotalStrip"></div>
           </div>
-          <div class="card sd-panel" id="sdOverlays"></div>
-          <div class="card sd-panel" id="sdWinners"></div>
-          <div class="card sd-panel" id="sdCheat"></div>
+          <div class="card sd-panel fx-reveal" id="sdOverlays"></div>
+          <div class="card sd-panel fx-reveal" id="sdWinners"></div>
+          <div class="card sd-panel fx-reveal" id="sdCheat"></div>
         </section>
 
         <!-- ===================== STEP 3 · BUILD IT ===================== -->
@@ -125,7 +176,7 @@
             <span class="sd-gate-tag">shortlist free · rest Pro</span>
             <p>Who sits at captain, how many lineups go to each script, and the recipe for each one — with the dials to type into the Contest Generator.</p>
           </div>
-          <div class="card sd-panel card-premium" id="sdShortlist"></div>
+          <div class="card sd-panel card-premium fx-reveal" id="sdShortlist"></div>
           <div data-gate="pro" data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
             <div class="sd-step" style="gap:var(--space-4)">
               <div class="card sd-panel card-premium" id="sdVerdict"></div>
@@ -137,15 +188,29 @@
           </div>
         </section>
 
-        <!-- ===================== STEP 4 · SHIP IT ===================== -->
+        <!-- ===================== STEP 4 · SCORE IT (LINEUP LAB) ===================== -->
         <section class="sd-step" id="step4" aria-labelledby="step4h">
           <div class="sd-step-head">
             <span class="sd-step-num">Step 4</span>
-            <h2 id="step4h">Ship it</h2>
-            <span class="sd-gate-tag">Pro</span>
-            <p>Ownership target and dupe gate for the field you're in, the engine's hard rules as a self-check, and the playbook as text.</p>
+            <h2 id="step4h">Score it · Lineup Lab</h2>
+            <span class="sd-gate-tag">sample slates free · your files Pro</span>
+            <p>Build a lineup and watch the engine grade it live — the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template. Same rules, same math as the engine we build our books with.</p>
           </div>
-          <div data-gate="pro" data-gate-msg="Contest fit, the hard-rules self-check and the copy-to-clipboard playbook are a Pro feature.">
+          <div class="sd-lab" id="sdLab"></div>
+          <div data-gate="pro" data-gate-msg="Score your own slate: drop your DraftKings salary file and Stokastic Data Hub export, paste or upload a whole book, get the portfolio report and let the engine pick your batch from a pool. Sample slates stay free.">
+            <div class="card sd-panel" id="sdLabPro"></div>
+          </div>
+        </section>
+
+        <!-- ===================== STEP 5 · SHIP IT ===================== -->
+        <section class="sd-step" id="step5" aria-labelledby="step5h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 5</span>
+            <h2 id="step5h">Ship it</h2>
+            <span class="sd-gate-tag">Pro</span>
+            <p>Ownership target and dupe gate for the field you're in, the engine's rules as a reference, and the playbook as text or a play card.</p>
+          </div>
+          <div data-gate="pro" data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
             <div class="sd-step" style="gap:var(--space-4)">
               <div class="card sd-panel" id="sdFit"></div>
               <div class="sd-grid-2">
@@ -159,16 +224,20 @@
           </div>
         </section>
 
-        <div class="sd-caption" style="text-align:right">Sources: codex v1.0 · rules.json v1.2 · LINEUP_BIBLE v1.2 · Power Sweep/Spy study</div>
+        <div class="sd-caption" style="text-align:right">Sources: codex v1.0 · rules.json <span id="sdRulesVersion">v1.2</span> · LINEUP_BIBLE v1.2 · Power Sweep/Spy study · engine parity-tested against rules_engine.py</div>
       </div>
     </div>
+    <div class="sd-toast" id="sdToast" role="status" aria-live="polite"></div>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js"></script>
+  <script src="assets/js/nfl.js?v=0.3.1"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
-  <script src="assets/js/showdown.js"></script>
+  <script src="assets/js/showdown_fx.js?v=0.3.1"></script>
+  <script src="assets/js/showdown_engine.js?v=0.3.1"></script>
+  <script src="assets/js/showdown.js?v=0.3.1"></script>
+  <script src="assets/js/showdown_lab.js?v=0.3.1"></script>
 </body>
 </html>
