@@ -22,15 +22,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.3.2" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.3.2" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.4.1" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.4.1" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
   </style>
 </head>
 <body>
   <!-- OPEN PREVIEW (2026-09-22): Pro gates paused while we iterate — data-gate-paused="pro" marks them.
-       Re-gate by renaming data-gate-paused → data-gate and restoring the step 3/4/5 gate tags (see git history). -->
+       Re-gate by renaming data-gate-paused → data-gate and restoring the step 3/4/5 gate tags (see git history).
+       Server-side gating is built but inactive (showdown.js GATING_MODE = 'open'): the [data-pro-data] wrappers hold the
+       sections that read the Pro part of the data; in 'server' mode showdown.js gates those itself (upgrade card), so at
+       go-live only the Lab wrapper (#sdLabPro) gets data-gate back. Steps: docs/GATING_GO_LIVE.md. -->
   <div id="site-header"></div>
 
   <main class="container sd-page">
@@ -43,7 +46,7 @@
       <div class="page-head-meta sd-provenance">
         <span><strong>120</strong> DK showdown winners 2018–25</span>
         <span><strong>2,761</strong> games 2016–25</span>
-        <span><strong>55</strong> Sundays · Power Sweep / Spy</span>
+        <span><strong>7</strong> primetime fields 2026 · ~3M lineups</span>
         <span>Slate: <strong class="gold" id="sdSummary">—</strong></span>
       </div>
     </header>
@@ -51,7 +54,7 @@
     <!-- STICKY DOCK: step tabs + live readouts + Tune drawer (what-if sliders from anywhere) -->
     <div class="sd-dock-wrap" id="sdDockWrap">
       <nav class="sd-dock" id="sdDock" aria-label="Playbook steps"></nav>
-      <div class="sd-tune" id="sdTune" hidden>
+      <div class="sd-tune" id="sdTune" role="region" aria-label="Tune the line" hidden>
         <div class="sd-tune-inner">
           <div class="sd-field">
             <div class="sd-field-label"><label for="sdTSpreadRange">Spread</label><span class="sd-val" id="sdTSpreadVal"></span></div>
@@ -65,7 +68,7 @@
             <div class="sd-field-label"><span>Environment</span></div>
             <div class="sd-envs sd-envs-tune" id="sdTEnvPills" role="radiogroup" aria-label="Environment"></div>
           </div>
-          <button type="button" class="sd-tune-close" data-tune-toggle aria-label="Close tune">Done</button>
+          <button type="button" class="sd-tune-close" data-tune-toggle aria-controls="sdTune">Done</button>
         </div>
       </div>
     </div>
@@ -85,7 +88,7 @@
           <div class="card sd-panel sd-set-presets fx-reveal">
             <div class="sd-field">
               <div class="sd-field-label"><span>This week</span><span class="sd-val" id="sdPresetVal"></span></div>
-              <div class="sd-presets" id="sdPresets"></div>
+              <div class="sd-presets" id="sdPresets" role="radiogroup" aria-label="This week's slates"></div>
             </div>
           </div>
           <div class="sd-set-grid">
@@ -150,7 +153,7 @@
         </section>
 
         <!-- Mobile sticky summary chip (kept for print/legacy; the dock replaces it) -->
-        <div class="sd-chip" id="sdChip" aria-live="polite"><span id="sdChipText">—</span><a href="nfl/showdown/#step1" data-edit>Edit</a></div>
+        <div class="sd-chip" id="sdChip"><span id="sdChipText">—</span><a href="nfl/showdown/#step1" data-edit>Edit</a></div>
 
         <!-- ===================== STEP 2 · READ THE GAME ===================== -->
         <section class="sd-step" id="step2" aria-labelledby="step2h">
@@ -167,6 +170,7 @@
           </div>
           <div class="card sd-panel fx-reveal" id="sdOverlays"></div>
           <div class="card sd-panel fx-reveal" id="sdWinners"></div>
+          <div class="card sd-panel fx-reveal" id="sdSure"></div>
           <div class="card sd-panel fx-reveal" id="sdCheat"></div>
         </section>
 
@@ -179,7 +183,7 @@
             <p>Who sits at captain, how many lineups go to each script, and the recipe for each one — with the dials to type into the Contest Generator.</p>
           </div>
           <div class="card sd-panel card-premium fx-reveal" id="sdShortlist"></div>
-          <div data-gate-paused="pro" data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
+          <div data-gate-paused="pro" data-pro-data data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
             <div class="sd-step" style="gap:var(--space-4)">
               <div class="card sd-panel card-premium" id="sdVerdict"></div>
               <div class="card sd-panel" id="sdAlloc"></div>
@@ -196,7 +200,7 @@
             <span class="sd-step-num">Step 4</span>
             <h2 id="step4h">Score it · Lineup Lab</h2>
             <span class="sd-gate-tag">open preview</span>
-            <p>Build a lineup and watch the engine grade it live — the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template. Same rules, same math as the engine we build our books with.</p>
+            <p>Build a lineup and watch the engine grade it live — the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template — or let it search the pool and build them for you. Same rules, same math as the engine we build our books with.</p>
           </div>
           <div class="sd-lab" id="sdLab"></div>
           <div data-gate-paused="pro" data-gate-msg="Score your own slate: drop your DraftKings salary file and Stokastic Data Hub export, paste or upload a whole book, get the portfolio report and let the engine pick your batch from a pool. Sample slates stay free.">
@@ -210,11 +214,13 @@
             <span class="sd-step-num">Step 5</span>
             <h2 id="step5h">Ship it</h2>
             <span class="sd-gate-tag">open preview</span>
-            <p>Ownership target and dupe gate for the field you're in, the engine's rules as a reference, and the playbook as text or a play card.</p>
+            <p>Ownership target and dupe gate for the field you're in, the score each finishing tier took in past contests of that size, a Tuesday review of any contest you played, the engine's rules as a reference, and the playbook as text or a play card.</p>
           </div>
-          <div data-gate-paused="pro" data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
+          <div data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
             <div class="sd-step" style="gap:var(--space-4)">
               <div class="card sd-panel" id="sdFit"></div>
+              <div class="card sd-panel" id="sdCuts"></div>
+              <div class="card sd-panel sd-review" id="sdReview"></div>
               <div class="sd-grid-2">
                 <div class="card sd-panel" id="sdCheck"></div>
                 <div class="sd-step" style="gap:var(--space-4)">
@@ -226,20 +232,24 @@
           </div>
         </section>
 
-        <div class="sd-caption" style="text-align:right">Sources: codex v1.0 · rules.json <span id="sdRulesVersion">v1.2</span> · LINEUP_BIBLE v1.2 · Power Sweep/Spy study · engine parity-tested against rules_engine.py</div>
+        <div class="sd-caption" style="text-align:right">Sources: codex v1.0 · rules.json <span id="sdRulesVersion">v1.3</span> · LINEUP_BIBLE v1.2 · 2026 field archive (Stokastic post-contest, aggregates only) · engine parity-tested against rules_engine.py</div>
       </div>
     </div>
     <div class="sd-toast" id="sdToast" role="status" aria-live="polite"></div>
+    <div class="sr-only" id="sdStatus" role="status" aria-live="polite"></div>
   </main>
 
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.3.2"></script>
+  <script src="assets/js/nfl.js?v=0.4.1"></script>
+  <script src="assets/js/track.js?v=0.4.1"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
-  <script src="assets/js/showdown_fx.js?v=0.3.2"></script>
-  <script src="assets/js/showdown_engine.js?v=0.3.2"></script>
-  <script src="assets/js/showdown.js?v=0.3.2"></script>
-  <script src="assets/js/showdown_lab.js?v=0.3.2"></script>
+  <script src="assets/js/showdown_fx.js?v=0.4.1"></script>
+  <script src="assets/js/showdown_engine.js?v=0.4.1"></script>
+  <script src="assets/js/showdown.js?v=0.4.1"></script>
+  <script src="assets/js/showdown_build.js?v=0.4.1"></script>
+  <script src="assets/js/showdown_lab.js?v=0.4.1"></script>
+  <script src="assets/js/showdown_review.js?v=0.4.1"></script>
 </body>
 </html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Classic Playbook — BirdieBuddy</title>
+<!-- bb-favicon-og -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BirdieBuddy">
+<meta property="og:title" content="Classic Playbook — BirdieBuddy NFL">
+<meta property="og:description" content="DraftKings classic, decoded from 169 Milly Maker winners: which games the winning stacks came from, the stack rules, and a lineup checker running the same engine we build with.">
+<meta property="og:image" content="https://birdiebuddy.io/assets/img/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://birdiebuddy.io/assets/img/og-image.png">
+<meta name="description" content="NFL DraftKings classic (main slate) playbook: set the slate, see which games the 169 Milly Maker winning QB stacks came from, the stack / bring-back / chalk rules with winner pass rates, and a lineup checker.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.4.1" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.4.1" />
+  <link rel="stylesheet" href="assets/css/classic.css?v=0.4.1" />
+</head>
+<body>
+  <!-- OPEN PREVIEW (2026-09-22): open to every visitor, free included, while we iterate — no data-gate on this page.
+       To gate later, wrap Step 3 / Step 4 in data-gate="pro" the way the showdown page does. -->
+  <div id="site-header"></div>
+
+  <main class="container sd-page cl-page">
+    <header class="page-head sd-hero">
+      <div class="eyebrow">DraftKings Classic · main slate · open preview</div>
+      <h1>Classic Playbook</h1>
+      <p>Set the slate, see which games the winning stacks came from, build to the stack rules — then <strong>check your lineup against the same engine we build with</strong>. Every number is a winner rate with an n.</p>
+      <div class="page-head-meta sd-provenance" id="clProv"></div>
+    </header>
+
+    <nav class="cl-dock" id="clDock" aria-label="Playbook steps"></nav>
+
+    <div id="clError" hidden></div>
+
+    <div class="sd-layout" id="clPage">
+      <div class="sd-main">
+        <!-- ===================== STEP 1 · SET THE SLATE ===================== -->
+        <section class="sd-step" id="step1" aria-labelledby="step1h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 1</span>
+            <h2 id="step1h">Set the slate</h2>
+            <span class="sd-gate-tag">free</span>
+            <p>Load a week's main slate or type your own games. The stack ranking and the checker's QB-game rules read these lines.</p>
+          </div>
+          <div class="card sd-panel fx-reveal">
+            <div class="sd-field-label"><span>Main slate</span></div>
+            <div class="sd-pills cl-presets" id="clPresets" role="group" aria-label="Load a slate"></div>
+            <div class="cl-chips" id="clChips"></div>
+            <details class="sd-fold cl-edit" id="clEdit">
+              <summary><span id="clEditSum">Edit games</span><span class="sd-fold-arrow">›</span></summary>
+              <div class="cl-games" id="clGames"></div>
+              <div class="cl-games-foot"><button type="button" class="btn btn-sm" id="clAdd">+ Add game</button><span class="sd-num-hint">spread = points the favorite gives · preset lines: nflverse closing lines</span></div>
+            </details>
+          </div>
+          <div class="card sd-panel card-premium fx-reveal" id="clRead"></div>
+          <div class="sd-rail-foot"><span>Your slate and lineup are remembered on this device.</span><button type="button" id="clReset">Reset</button></div>
+        </section>
+
+        <!-- ===================== STEP 2 · WHICH GAMES ===================== -->
+        <section class="sd-step" id="step2" aria-labelledby="step2h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 2</span>
+            <h2 id="step2h">Where the winning stacks came from</h2>
+            <span class="sd-gate-tag">free</span>
+            <p>Every Milly Maker winner's QB game, joined to its closing line and final score, against every game since 2016. High totals and favorites — and games that went over.</p>
+          </div>
+          <div class="card sd-panel fx-reveal" id="clWhere"></div>
+          <div class="sd-grid-2">
+            <div class="card sd-panel fx-reveal" id="clTotals"></div>
+            <div class="card sd-panel fx-reveal" id="clSides"></div>
+          </div>
+        </section>
+
+        <!-- ===================== STEP 3 · THE RULES ===================== -->
+        <section class="sd-step" id="step3" aria-labelledby="step3h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 3</span>
+            <h2 id="step3h">The stack rules</h2>
+            <span class="sd-gate-tag">open preview</span>
+            <p>QB + catchers, the bring-back, one-offs, chalk and the portfolio limits — straight from rules.json, each with the share of winners that pass it.</p>
+          </div>
+          <div class="card sd-panel card-premium fx-reveal" id="clRulesHead"></div>
+          <div id="clRules"></div>
+          <div class="card sd-panel fx-reveal" id="clSmallField" hidden></div>
+        </section>
+
+        <!-- ===================== STEP 4 · CHECK A LINEUP ===================== -->
+        <section class="sd-step" id="step4" aria-labelledby="step4h">
+          <div class="sd-step-head">
+            <span class="sd-step-num">Step 4</span>
+            <h2 id="step4h">Check a lineup</h2>
+            <span class="sd-gate-tag">open preview</span>
+            <p>Paste 9 players. The engine runs every classic hard rule and soft rule — the same code path as classic_engine.py, byte-for-byte parity-tested — using your DK salary file or the sample pool.</p>
+          </div>
+          <div id="clLab"></div>
+        </section>
+
+        <div class="sd-caption" style="text-align:right">Sources: CLASSIC_BIBLE v1.1 · CODEX Part 3 · rules.json classic · Milly Maker Tracker × nflverse · data <span id="clVersion">—</span></div>
+      </div>
+    </div>
+    <div class="sd-toast" id="clToast" role="status" aria-live="polite"></div>
+    <div class="sr-only" id="clStatus" role="status" aria-live="polite"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/nfl.js?v=0.4.1"></script>
+  <script src="assets/js/track.js?v=0.4.1"></script>
+  <script>BBI.renderNflHeader('classic'); BBI.renderNflFooter('Classic Playbook · open preview');</script>
+  <script src="assets/js/showdown_fx.js?v=0.4.1"></script>
+  <script src="assets/js/showdown_engine.js?v=0.4.1"></script>
+  <script src="assets/js/classic_engine.js?v=0.4.1"></script>
+  <script src="assets/js/classic.js?v=0.4.1"></script>
+</body>
+</html>

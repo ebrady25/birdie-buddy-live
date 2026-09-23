@@ -12,11 +12,21 @@ window.BBI = window.BBI || {};
   'use strict';
 
   const DATA_PATH   = 'nfl/showdown/showdown_playbook.json';
+  // Server-side gating: BUILT, INACTIVE. 'open' (the open preview) loads the combined file above and every step
+  // renders for everyone. 'server' loads the public part statically and asks the vercel-app route
+  // /api/nfl/showdown-pro for the Pro part (recipes, laws, contest fit, cut ladder, lessons); that route checks the
+  // Supabase JWT + tier the way /api/rankings does, and a caller who isn't entitled gets the upgrade card instead.
+  // Go-live steps: docs/GATING_GO_LIVE.md.
+  const GATING_MODE = 'open';
+  const PUBLIC_PATH = 'nfl/showdown/showdown_playbook_public.json';
+  const PRO_ROUTE   = '/api/nfl/showdown-pro';
   const SLATES_PATH = 'nfl/showdown/showdown_slates.json';
   const LS_KEY      = 'bbi_showdown_inputs';
   const SMALL_N     = 15;
   // Motion helpers (showdown_fx.js); plain fallbacks keep the pure logic loadable in node.
-  const FX = window.BBI.fx || { num: (k, v, d = 0, o = {}) => `${o.pre || ''}${(+v).toFixed(d)}${o.post || ''}`, snapshot: () => null, morph() {}, reveal() {}, confetti() {}, reduced: () => true };
+  const FX = window.BBI.fx || { num: (k, v, d = 0, o = {}) => `${o.pre || ''}${(+v).toFixed(d)}${o.post || ''}`, snapshot: () => null, morph() {}, reveal() {}, confetti() {}, reduced: () => true, keepFocus: () => () => {}, rove() {} };
+  // First-party analytics (track.js); a no-op when it isn't loaded, opted out or offline.
+  const track = (e, p) => { try { if (window.BBI.track) window.BBI.track(e, p); } catch {} };
 
   /* =================================================================
      1. PURE LOGIC
@@ -197,7 +207,8 @@ window.BBI = window.BBI || {};
   const HARD_LABELS = {
     max_kickers: v => `Max ${v} kicker`,
     max_k_plus_dst: v => `K + DST combined ≤ ${v}`,
-    max_dst: v => `Max ${v} DST`,
+    max_dst: v => v >= 2 ? 'Two DSTs only as a grind-script dart (see below)' : `Max ${v} DST`,
+    two_dst_requires: v => `Two DSTs: only when total ≤ ${v.total_max}${v.or_grind_overlay ? ' or the grind overlay is on (total ≤ 41 / wind ≥ 10)' : ''}${v.allow_k ? '' : ', never with a kicker'} · max 1 per batch — 5 of 120 winners, mostly games that finished 17–21`,
     dst_max_opposing_skill: v => `DST with at most ${v} opposing skill players`,
     no_dog_pocket_qb_captain_spread_min: v => `No dog pocket-QB captain at +${v} or more`,
     captain_positions_never: v => `Never ${[].concat(v).join('/')} at captain`,
@@ -222,6 +233,51 @@ window.BBI = window.BBI || {};
     opp_QB: 'opp QB', opp_RB: 'opp RB', opp_WR: 'opp WR', opp_TE: 'opp TE', opp_K: 'opp K', opp_DST: 'opp DST',
     own_second_catcher: '2nd own catcher', own_second_rb: '2nd own RB', own_second_te: '2nd own TE', both_qbs: 'both QBs' }[k] || humanize(k));
 
+  /* ---------- URL state (shareable links) ----------
+     ?slate=<id>&s=<spread>&t=<total>&env=<env>&c=<contest>&n=<entries>&lu=<cpt-flex-flex-…>
+     lu tokens are DK ids (captain's CPT id, then FLEX ids) when every player in
+     the lineup has them, else name slugs ("amon_ra_st_brown"); '' = empty captain. */
+  const URL_ORDER = [['slate', 'slate'], ['s', 'spread'], ['t', 'total'], ['env', 'env'], ['c', 'contest'], ['n', 'entries'], ['lu', 'lu']];
+  const nameSlug = n => String(n ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  const halfStep = (v, lo, hi) => { v = parseFloat(v); return isNaN(v) ? null : Math.max(lo, Math.min(hi, Math.round(v * 2) / 2)); };
+  // Accepts "?a=1&b=2", "a=1", or a whole href; keeps only well-formed values.
+  const urlParse = search => {
+    const q = new URLSearchParams(String(search || '').replace(/^[^?]*\?/, '').replace(/#.*$/, ''));
+    const out = {}, word = /^[a-z0-9_]{1,40}$/i;
+    const g = k => { const v = q.get(k); return v == null ? null : v.trim(); };
+    if (g('slate') && word.test(g('slate'))) out.slate = g('slate');
+    if (g('s')) { const v = halfStep(Math.abs(parseFloat(g('s'))), 0, 30); if (v != null) out.spread = v; }
+    if (g('t')) { const v = halfStep(g('t'), 20, 80); if (v != null) out.total = v; }
+    if (g('env') && word.test(g('env'))) out.env = g('env');
+    if (g('c') && word.test(g('c'))) out.contest = g('c');
+    if (g('n')) { const v = parseInt(g('n'), 10); if (v >= 1) out.entries = Math.min(150, v); }
+    if (g('lu') != null) { const t = g('lu').split('-').slice(0, 6); if (t.some(Boolean) && t.every(x => /^[a-z0-9_]{0,60}$/i.test(x))) out.lu = t; }
+    return out;
+  };
+  const urlSerialize = o => URL_ORDER.map(([k, f]) => {
+    let v = o[f]; if (v == null || v === '' || (Array.isArray(v) && !v.some(Boolean))) return null;
+    if (f === 'lu') v = v.join('-');
+    return `${k}=${encodeURIComponent(String(v))}`;
+  }).filter(Boolean).join('&');
+  // L = {cpt, flex:[names]}; ids = Map name → [flexId, cptId] (engine players().ids).
+  const lineupTokens = (L, ids) => {
+    const flex = (L.flex || []).filter(Boolean), all = [L.cpt, ...flex].filter(Boolean);
+    if (!all.length) return null;
+    const idOk = ids && ids.size && all.every(n => ids.has(n) && ids.get(n)[0] && ids.get(n)[1]);
+    if (idOk) return [L.cpt ? ids.get(L.cpt)[1] : '', ...flex.map(n => ids.get(n)[0])];
+    return [L.cpt ? nameSlug(L.cpt) : '', ...flex.map(nameSlug)];
+  };
+  // tokens → {cpt, flex, bad:[unmatched tokens]}; ambiguous slugs never match.
+  const lineupFromTokens = (tokens, names, ids) => {
+    const byId = new Map(), bySlug = new Map();
+    if (ids) for (const [n, pair] of ids) pair.forEach(id => { if (id) byId.set(String(id), n); });
+    for (const n of names) { const s = nameSlug(n); bySlug.set(s, bySlug.has(s) ? null : n); }
+    const bad = [], seen = new Set();
+    const hit = t => { if (!t) return null; const n = (/^\d+$/.test(t) && byId.get(t)) || bySlug.get(t.toLowerCase()) || null; if (!n || seen.has(n)) { bad.push(t); return null; } seen.add(n); return n; };
+    const cpt = hit(tokens[0]);
+    return { cpt, flex: tokens.slice(1).map(hit).filter(Boolean), bad };
+  };
+
   /* ---------- formatting ---------- */
   const pct   = x => `${Math.round(x * 100)}%`;
   const range = a => `${Math.round(a[0] * 100)}–${Math.round(a[1] * 100)}%`;
@@ -229,6 +285,137 @@ window.BBI = window.BBI || {};
   const esc   = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const nTag  = n => `<span class="n${n < SMALL_N ? ' small' : ''}">n = ${n}${n < SMALL_N ? ' · small sample' : ''}</span>`;
   const spreadLabel = (s, fav) => `${fav || 'Fav'} −${num(Math.abs(+s))}`;
+
+  /* =================================================================
+     1b. RULES, HISTORY FIRST (v0.4.1) — every rule comes from the 120
+     historical winners; the 2026 field archive only *checks* it.
+     rule_verdicts.rules[i] = { hist:{rate,n,basis}, check, slates_n,
+     slates_with, slates_against, pooled_lift, lift/field/top1[] … }.
+     `check` is neutral: agrees / aligned / split / mixed / not_enough /
+     watch. Nothing on the page ever says a historical rule is overturned;
+     a `watch` item is re-examined in the winner data as slates accrue.
+     Effective n for the 2026 check = primetime SLATES, never lineups.
+     ================================================================= */
+  const CHECK = {
+    agrees:     { icon: '✓', word: 'agrees',                cls: 'ok' },
+    aligned:    { icon: '✓', word: 'aligned',               cls: 'ok' },
+    split:      { icon: '↔', word: 'split by script',       cls: 'unk' },
+    mixed:      { icon: '–', word: 'mixed',                 cls: 'unk' },
+    not_enough: { icon: '…', word: 'not enough slates yet', cls: 'unk' },
+    watch:      { icon: '!', word: 'watch list',            cls: 'warn' },
+    untested:   { icon: '–', word: 'no 2026 test',          cls: 'unk' }
+  };
+  const VERDICT = CHECK;   // older name, kept for the Lab / review modules
+  // Law → the rule ids that check it. Laws 1, 2, 6 and 10 have no field check yet.
+  const LAW_RULES = { 3: ['cpt_WR', 'cpt_RB', 'cpt_QB'], 4: ['cpt_fav'], 5: ['cpt_QB_DOG'], 7: ['K', 'two_K', 'cpt_K'], 8: ['five_one_fav', 'four_two', 'three_three'], 9: ['both_qb'] };
+  const rvIndex = new WeakMap();
+  const ruleById = (dt, id) => {
+    const rs = dt && dt.rule_verdicts && dt.rule_verdicts.rules; if (!rs) return null;
+    let m = rvIndex.get(rs); if (!m) { m = new Map(rs.map(r => [r.id, r])); rvIndex.set(rs, m); }
+    return m.get(id) || null;
+  };
+  // Captain-template chip → its rule id ("QB_FAV|+own_TE", "QB_FAV|-own_K", "QB_FAV|shape").
+  const tmplRuleId = (tmpl, kind, item) => kind === 'shape' ? `${tmpl}|shape` : `${tmpl}|${kind === 'inc' ? '+' : '-'}${item}`;
+  const checkOf = r => r ? (CHECK[r.check] ? r.check : 'untested') : 'untested';
+  // A law's 2026 check rolls its rules up without ever overriding them: any watch → watch; all agree/aligned → agrees;
+  // any split → split; all not_enough → not_enough; else mixed. No rules → untested.
+  const lawVerdict = (dt, n) => {
+    const rules = (LAW_RULES[n] || []).map(id => ruleById(dt, id)).filter(Boolean);
+    const counts = {}; Object.keys(CHECK).forEach(k => { counts[k] = rules.filter(r => checkOf(r) === k).length; });
+    const all = k => rules.every(r => k.includes(checkOf(r)));
+    const verdict = !rules.length ? 'untested' : counts.watch ? 'watch' : all(['agrees', 'aligned']) ? 'agrees' : counts.split ? 'split' : all(['not_enough']) ? 'not_enough' : 'mixed';
+    return { verdict, rules, counts };
+  };
+  const sgn = x => x == null ? '—' : `${x > 0 ? '+' : x < 0 ? '−' : '±'}${Math.abs(x).toFixed(1)}`;
+  const pc = x => x == null ? '—' : `${Number.isInteger(+x) ? x : (+x).toFixed(1)}%`;
+  const rvSlates = dt => (dt.rule_verdicts && dt.rule_verdicts.slates) || [];
+  const slateLabels = dt => rvSlates(dt).map(s => s.label.replace(/\s+/g, ''));
+  const minSlates = dt => ((dt.rule_verdicts || {}).thresholds || {}).min_slates || 4;
+  // Historical basis: always first.
+  const histText = (dt, r) => {
+    if (!r || !r.hist || r.hist.rate == null) return 'History: the 120-winner codex';
+    // approved copy: 50 of 120 winners (41.7%); 2025 = 49% of all 49 winners, 50% of the 46 that join to lines
+    if (r.id === 'K') return `K in about half of winning lineups (41% of ${r.hist.n_all}; 49–50% in 2025) — hold 40–50% of the batch`;
+    return `History: ${pc(r.hist.rate)} of ${r.hist.basis}`;
+  };
+  // The neutral 2026 check (primetime tier).
+  const checkText = (dt, r) => {
+    const k = checkOf(r), n = r ? r.slates_n || 0 : 0;
+    if (!r) return '2026 check: no field test for this yet';
+    if (r.type === 'portfolio_share') {
+      if (k === 'not_enough' || k === 'untested') return '2026 check: not enough primetime slates yet';
+      const sw = r.top1_min != null && r.top1_max != null && r.top1_max - r.top1_min >= 40;
+      if (k === 'aligned') return `2026 check: aligned${sw ? `; the top 1% swings ${Math.round(r.top1_min)}–${Math.round(r.top1_max)}% by script` : ''} (top 1% ${pc(r.top1_2026)} over ${n} primetime slates)`;
+      return `2026 check: top 1% ${pc(r.top1_2026)} over ${n} slates — outside the band, watch list`;
+    }
+    if (k === 'agrees') return `2026 check: agrees ${r.slates_with}/${n} primetime slates`;
+    if (k === 'watch') return `2026 check: disagrees ${r.slates_against}/${n} — watch list`;
+    if (k === 'split') return `2026 check: split by script (${r.slates_with} with, ${r.slates_against} against)`;
+    if (k === 'mixed') return `2026 check: mixed (${r.slates_with} with, ${r.slates_against} against, ${n} slates)`;
+    return `2026 check: not enough slates yet (${n} of ${minSlates(dt)} needed)`;
+  };
+  // Tooltip: history, then the check, per-slate lifts, excluded slates, the Sunday tier.
+  const verdictTip = (dt, r) => {
+    if (!r) return 'History: the 120-winner codex. 2026 check: no field test for this yet.';
+    const lbl = slateLabels(dt), sl = rvSlates(dt);
+    const per = (r.lift || []).map((x, i) => x == null ? null : `${lbl[i]} ${sgn(x)}`).filter(Boolean).join(', ');
+    const ex = sl.filter(s => s.excluded).map(s => `${s.label} excluded (${s.excluded})`).join('; ');
+    const sun = r.sunday && r.sunday.slates_n ? ` Sunday slates (supporting, not pooled): ${CHECK[r.sunday.check] ? CHECK[r.sunday.check].word : r.sunday.check}, ${r.sunday.slates_n} slates.` : '';
+    return `${r.label}. ${histText(dt, r)}. ${checkText(dt, r)}.${r.pooled_lift != null && r.type !== 'portfolio_share' ? ` Top 1% − field, pooled ${sgn(r.pooled_lift)} pts.` : ''}${per ? ` Per slate: ${per}.` : ''}${ex ? ` ${ex}.` : ''}${sun} Rules come from the historical winners; 2026 only annotates.`;
+  };
+  // The badge's fraction: slates that went the check's way / slates checked.
+  const vFrac = (dt, r) => {
+    if (!r || !r.slates_n || r.type === 'portfolio_share') return '';
+    const k = checkOf(r);
+    return k === 'watch' ? `${r.slates_against}/${r.slates_n} against` : k === 'agrees' ? `${r.slates_with}/${r.slates_n} agree` : `${r.slates_n} slates`;
+  };
+  // 2026-check badge. mini = glyph only (for chips); the tooltip always leads with the history.
+  const vBadge = (dt, r, opts = {}) => {
+    const k = checkOf(r), v = CHECK[k], tip = verdictTip(dt, r), fr = vFrac(dt, r);
+    return `<span class="sd-vb ${v.cls}${opts.mini ? ' mini' : ''}" title="${esc(tip)}" aria-label="${esc(tip)}" data-check="${k}">${v.icon}${opts.mini ? '' : ` 2026: ${v.word}${fr ? ` <small>${fr}</small>` : ''}`}</span>`;
+  };
+  // One small, neutral 2026-check line per law (under the law, never beside it as a verdict).
+  const lawBadge = (dt, lv) => {
+    if (lv.rules.length <= 1) return lv.rules[0] ? vBadge(dt, lv.rules[0]) : vBadge(dt, null);
+    const v = CHECK[lv.verdict], tip = lv.rules.map(r => verdictTip(dt, r)).join('\n');
+    const parts = Object.keys(CHECK).filter(k => lv.counts[k]).map(k => `${lv.counts[k]} ${CHECK[k].word}`).join(' · ');
+    return `<span class="sd-vb ${v.cls}" title="${esc(tip)}" aria-label="${esc(tip)}" data-check="${lv.verdict}">${v.icon} 2026: <small>${parts}</small></span>`;
+  };
+  const vIcon = k => { const v = CHECK[k] || CHECK[{ confirmed: 'agrees', no_edge_yet: 'mixed' }[k]] || CHECK.untested; return `<span class="sd-vb ${v.cls} mini" aria-hidden="true">${v.icon}</span>`; };
+  const checkLegend = () => ['agrees', 'aligned', 'split', 'not_enough', 'watch'].map(k => `${vIcon(k)} ${CHECK[k].word}`).join(' · ');
+
+  // Winners (120, 2018–25) · top 1% · field (2026 contest archive) for one expected-script row.
+  // tier 'sunday' reads the supporting tier (field_tiers.sunday); the default is primetime.
+  const cohortRows = (dt, key, tier = 'primetime') => {
+    const T = tier === 'sunday' ? (((dt.field_tiers || {}).sunday) || {}) : { top1: dt.top1pct_by_expected_script, field: dt.field_by_expected_script };
+    return { winners: (dt.winners_by_expected_script || {})[key] || null, top1: (T.top1 || {})[key] || null, field: (T.field || {})[key] || null };
+  };
+
+  // Cut lines. Field-size buckets match the contest pills (SE <5k, 5k–25k, 25k+).
+  const CUT_TIERS = [['winner_score', 'Winner'], ['cut_top0_1', 'Top 0.1%'], ['cut_top1', 'Top 1%'], ['cut_top5', 'Top 5%'], ['cut_top20', 'Top 20%'], ['min_cash_score', 'Min cash']];
+  const fieldBucket = size => +size < 5000 ? 'se_small' : +size < 25000 ? 'mid' : 'large';
+  const median = a => { const s = a.filter(v => v != null && isFinite(v)).sort((x, y) => x - y), m = s.length >> 1; return !s.length ? null : s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+  const cutLadder = (cuts, contestKey) => {
+    const rows = (cuts || []).filter(c => fieldBucket(c.field_size) === contestKey);
+    const slates = [...new Set(rows.map(c => c.slate))];
+    const tiers = CUT_TIERS.map(([key, label]) => {
+      const withV = rows.filter(c => c[key] != null);
+      const vals = withV.map(c => c[key]);
+      return { key, label, n: vals.length,
+        median: median(vals), min: vals.length ? Math.min(...vals) : null, max: vals.length ? Math.max(...vals) : null,
+        bySlate: slates.map(s => median(withV.filter(c => c.slate === s).map(c => c[key]))),
+        ratio: median(withV.filter(c => c.winner_score).map(c => c[key] / c.winner_score * 100)) };
+    });
+    const sizes = rows.map(c => c.field_size);
+    return { key: contestKey, contests: rows.length, slates, tiers,
+      field: sizes.length ? [Math.min(...sizes), Math.max(...sizes)] : null,
+      cashPct: median(rows.map(c => c.min_cash_pct)) };
+  };
+  // DK showdown points: captain scores 1.5×.
+  const lineupProj = (cptProj, flexProj) => Math.round((1.5 * (+cptProj || 0) + flexProj.reduce((a, v) => a + (+v || 0), 0)) * 100) / 100;
+  // Where a projected score sits against each cut tier of a ladder.
+  const projVsCuts = (proj, ladder) => ladder.tiers.filter(t => t.key !== 'winner_score' && t.median != null)
+    .map(t => ({ key: t.key, label: t.label, median: t.median, min: t.min, max: t.max, gap: Math.round((proj - t.median) * 10) / 10, clearsAll: proj >= t.max, clearsNone: proj < t.min }));
 
   /* =================================================================
      2. SVG CHARTS (inline, no library)
@@ -322,8 +509,55 @@ window.BBI = window.BBI || {};
   const SEG = ['sd-seg-1', 'sd-seg-2', 'sd-seg-3', 'sd-seg-4'];
   const POS = ['WR', 'RB', 'QB', 'TE'];
 
-  let data = null, slates = [];
-  const state = { spread: 7.5, total: 48.5, env: 'dome', contest: 'se_small', entries: 1, lean: 'none', preset: null, view: 'expected', realized: null };
+  let data = null, slates = [], urlIn = {};   // urlIn: what the page was opened with (urlParse)
+  /* ---------- gating (see GATING_MODE) ---------- */
+  // ?gating=open|server previews either mode anywhere but birdiebuddy.io (the route still decides entitlement).
+  const gatingMode = (loc = window.location) => {
+    const q = /[?&]gating=(open|server)\b/.exec((loc && loc.search) || '');
+    return q && !/(^|\.)birdiebuddy\.io$/i.test((loc && loc.hostname) || '') ? q[1] : GATING_MODE;
+  };
+  // Public part + Pro part → the combined shape the renderers read. Pro top-level keys replace the public slices
+  // (archetypes, ten_laws) and add the Pro-only ones; `_split` is bookkeeping. mergePro(pub, null) = public only.
+  const mergePro = (pub, pro) => {
+    const out = {};
+    for (const k of Object.keys(pub || {})) if (k !== '_split') out[k] = pub[k];
+    for (const k of Object.keys(pro || {})) if (k !== '_split') out[k] = pro[k];
+    return out;
+  };
+  // The route's answer → the Pro part, or null (gated, malformed, or not the Pro file).
+  const proFrom = env => env && env.gated === false && env.data && env.data._split && env.data._split.part === 'pro' ? env.data : null;
+  let gating = GATING_MODE, pub = null, proState = 'open';   // proState: open (Pro data in `data`) | pending | locked | error
+  const hasPro = () => proState === 'open';
+  const state = { spread: 7.5, total: 48.5, env: 'dome', contest: 'se_small', entries: 1, lean: 'none', preset: null, view: 'expected', realized: null, cutKey: null, attack: false };
+
+  /* ---------- primetime-first slates (+ opt-in Sunday attack mode) ----------
+     The codex, playbook and engine are primetime-focused (TNF / SNF / MNF / Wed / Sat /
+     holiday standalone). Sunday single-game slates stay hidden unless the reader turns on
+     "Attack a Sunday game", and within it only an extreme script signal earns an attack badge. */
+  const slateTier = sl => {
+    if (!sl) return 'primetime';
+    if (sl.tier) return sl.tier;
+    if (/TNF|SNF|MNF|Thu|Mon|Wed|Sat/.test(sl.week || '')) return 'primetime';
+    if (sl.kickoff) { const d = new Date(sl.kickoff); if (!isNaN(d)) return d.getDay() !== 0 || d.getHours() >= 19 ? 'primetime' : 'sunday'; }
+    return 'primetime';
+  };
+  // Attack signal from the page's own base rates (never invented numbers): a 10+ favorite (blowout-prone),
+  // a grind total, or 15+ mph wind.
+  const attackFor = sl => {
+    if (!sl || !data) return { on: false, reasons: [] };
+    const R = [], br = data.base_rates, o = data.overlays;
+    if (bucketSpread(sl.spread) === '10_plus') { const b = br.by_spread['10_plus']; R.push(`${sl.fav} −${num(sl.spread)}: a 10+ favorite blows it out ${b.blowout14}% of the time${b.n ? ` (n = ${b.n} games)` : ''}`); }
+    if (+sl.total <= o.grind.trigger.total_max) { const t = br.by_total.grind; R.push(`total ${num(sl.total)}: grind — ${t.le37}% of these games finish at 37 or less${t.n ? ` (n = ${t.n})` : ''}`); }
+    if (sl.env === 'wind_15_plus') { const w = br.weather.wind_15_plus; R.push(`wind 15+: over rate ${w.over_rate}% (n = ${w.n})`); }
+    return { on: R.length > 0, reasons: R };
+  };
+  // The next primetime slate this week (earliest kickoff), else a primetime replay.
+  const nextPrimetime = () => {
+    const live = slates.filter(x => !x.replay && slateTier(x) === 'primetime').sort((a, b) => String(a.kickoff || '').localeCompare(String(b.kickoff || '')));
+    return live[0] || slates.find(x => slateTier(x) === 'primetime') || slates[0] || null;
+  };
+  // Slates offered in Step 1 and the Lab: primetime always; Sunday only in attack mode; the current preset always.
+  const visibleSlates = () => slates.filter(x => slateTier(x) === 'primetime' || state.attack || x.id === state.preset);
 
   const store = {
     load() { try { return JSON.parse(localStorage.getItem(LS_KEY)); } catch { return null; } },
@@ -402,9 +636,16 @@ window.BBI = window.BBI || {};
     $id('sdEnvVal').textContent = `over rate ${data.base_rates.weather[state.env].over_rate}%`;
     $id('sdEntriesVal').textContent = `${state.entries} lineup${state.entries === 1 ? '' : 's'}`;
     $id('sdPresetVal').textContent = d.preset ? `${d.preset.label} loaded` : 'custom slate';
-    $id('sdPresets').innerHTML = slates.length
-      ? slates.map(p => pill('preset', p.id, `<b>${esc(p.label)}</b> <span>${esc(p.fav)} −${num(p.spread)} · ${num(p.total)} · ${esc(ENV_SHORT[p.env] || p.env).toLowerCase()}</span>`, p.id === state.preset)).join('')
-      : '<span class="sd-num-hint">No presets this week.</span>';
+    const chipOf = p => pill('preset', p.id, `<b>${esc(p.label)}</b> <span>${esc(p.fav)} −${num(p.spread)} · ${num(p.total)} · ${esc(ENV_SHORT[p.env] || p.env).toLowerCase()}</span>`, p.id === state.preset);
+    const prime = slates.filter(x => slateTier(x) === 'primetime'), live = prime.filter(x => !x.replay), rep = prime.filter(x => x.replay);
+    const sun = slates.filter(x => slateTier(x) === 'sunday'), atk = sun.filter(x => attackFor(x).on);
+    $id('sdPresets').innerHTML = !slates.length ? '<span class="sd-num-hint">No presets this week.</span>' : `
+      ${live.length ? `<div class="sd-preset-group"><span class="sd-preset-k">This week · primetime</span>${live.map(chipOf).join('')}</div>` : ''}
+      ${rep.length ? `<div class="sd-preset-group"><span class="sd-preset-k">Practice · W2 primetime replays</span>${rep.map(chipOf).join('')}</div>` : ''}
+      ${sun.length ? `<div class="sd-preset-group sd-attack">
+        <button type="button" class="sd-attack-toggle${state.attack ? ' on' : ''}" data-attack aria-pressed="${state.attack}">${state.attack ? '▾' : '▸'} Attack a Sunday game <small>${sun.length} Sunday slate${sun.length === 1 ? '' : 's'}${atk.length ? ` · ${atk.length} with an extreme script` : ''} · primetime-first</small></button>
+        ${state.attack ? sun.slice().sort((a, b) => attackFor(b).on - attackFor(a).on).map(x => { const a = attackFor(x); return `<div class="sd-attack-row${a.on ? ' on' : ''}">${chipOf(x)}${a.on ? `<span class="sd-attack-badge" title="${esc(a.reasons.join(' · '))}">attack</span><small>${esc(a.reasons.join(' · '))}</small>` : '<small class="dim">no edge from the script — primetime-first</small>'}</div>`; }).join('') : ''}
+      </div>` : ''}`;
     const chip = `${spreadLabel(state.spread, d.preset && d.preset.fav)} · ${num(state.total)} · ${ENV_SHORT[state.env]} · ${CONTEST_SHORT[state.contest]} · ${state.entries} ${state.entries === 1 ? 'entry' : 'entries'}`;
     $id('sdChipText').textContent = chip;
     $id('sdSummary').textContent = chip;
@@ -444,6 +685,7 @@ window.BBI = window.BBI || {};
       <div class="sd-dock-read"><span class="sd-dock-slate">${esc(spreadLabel(state.spread, d.preset && d.preset.fav))} · ${num(state.total)} · ${esc(ENV_SHORT[state.env])}</span>
         <span class="sd-dock-lights">${OV_LIGHTS.map(([k, l]) => `<i class="${d.ov[k] ? 'on' : ''}" title="${l}${d.ov[k] ? ' overlay on' : ''}"></i>`).join('')}</span>
         <button type="button" class="sd-dock-tune${$id('sdTune') && !$id('sdTune').hidden ? ' on' : ''}" data-tune-toggle aria-expanded="${$id('sdTune') && !$id('sdTune').hidden}" aria-controls="sdTune" title="Adjust the line from anywhere">Tune</button>
+        <button type="button" class="sd-dock-link" data-copy-link="" title="Copy a link to this slate${s ? ' and your Lab lineup' : ''}" aria-label="Copy a link to this slate">${svgI('<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/>')}</button>
         <a class="sd-dock-score ${s ? (!s.legal ? 'bad' : s.score >= 70 && !s.partial ? 'good' : '') : 'idle'}" href="nfl/showdown/#step4" data-jump="step4">${scoreRing('dock.score', s, false)}<b>${s && s.score != null ? s.score : '—'}</b></a></div>
       </div><div class="sd-dock-progress"><i id="sdDockProgress"></i></div>`;
     spy();
@@ -542,14 +784,18 @@ window.BBI = window.BBI || {};
       <div class="sd-caption">Overlays fire from the total and the environment only. A lean reallocates A/B/C/D — it can never switch one off (W2 DET@BUF, rules v1.2).</div>`;
   };
 
+  // Rate bar with a 90% Wilson whisker (ci = [lo, hi] in %, from the row's `ci` object).
+  const ciBar = (v, ci, key) => `<span class="sd-cibar"><span class="bar"><span class="bar-fill" data-m="${key}" style="width:${Math.max(0, Math.min(100, v))}%"></span></span>${ci ? `<i class="sd-ci" data-m="${key}.ci" style="left:${ci[0]}%;width:${Math.max(0, ci[1] - ci[0])}%" title="90% Wilson interval ${ci[0]}–${ci[1]}%"></i>` : ''}</span>`;
   const winnerCol = (title, row, n, source, key = 'w') => {
-    const cp = row.cpt_pos;
+    const cp = row.cpt_pos, ci = row.ci || {}, cpci = ci.cpt_pos || {};
     return `<div class="sd-winner-col">
       <h4>${title}</h4>
       <div class="sd-donut-wrap">
         <div style="position:relative">${ring(key + '.ring', POS.map((k, i) => ({ label: k, value: cp[k] || 0, cls: SEG[i] })), `Captain position: ${POS.map(k => `${k} ${cp[k]}%`).join(', ')}`)}
-          <div class="sd-donut-center" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center"><b>${FX.num(key + '.fav', row.cpt_fav, 0, { post: '%' })}</b><span>CPT fav</span></div></div>
-        <div class="sd-rates">${POS.map((k, i) => `<div class="sd-rate"><span><i class="sd-legend"><i class="${SEG[i]}"></i></i>CPT ${k}</span><span class="bar"><span class="bar-fill" data-m="${key}.cp.${k}" style="width:${cp[k]}%"></span></span><span class="v">${FX.num(key + '.cp.' + k + '.v', cp[k], 0, { post: '%' })}</span></div>`).join('')}</div>
+          <div class="sd-donut-center" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center"><b>${FX.num(key + '.fav', row.cpt_fav, 0, { post: '%' })}</b><span>CPT fav</span>${ci.cpt_fav ? `<small class="sd-ci-txt">${ci.cpt_fav[0]}–${ci.cpt_fav[1]}</small>` : ''}</div></div>
+        <div class="sd-rates">
+          <div class="sd-rate" title="${ci.cpt_fav ? `CPT fav ${row.cpt_fav}% · 90% Wilson interval ${ci.cpt_fav[0]}–${ci.cpt_fav[1]}% (n = ${n})` : ''}"><span>CPT fav</span>${ciBar(row.cpt_fav, ci.cpt_fav, key + '.fv')}<span class="v">${FX.num(key + '.fv.v', row.cpt_fav, 0, { post: '%' })}</span></div>
+          ${POS.map((k, i) => `<div class="sd-rate" title="${cpci[k] ? `CPT ${k} ${cp[k]}% · 90% Wilson interval ${cpci[k][0]}–${cpci[k][1]}% (n = ${n})` : ''}"><span><i class="sd-legend"><i class="${SEG[i]}"></i></i>CPT ${k}</span>${ciBar(cp[k], cpci[k], `${key}.cp.${k}`)}<span class="v">${FX.num(key + '.cp.' + k + '.v', cp[k], 0, { post: '%' })}</span></div>`).join('')}</div>
       </div>
       <div class="sd-rates">
         ${rate('5-1 fav', row.five_one_fav, false, key + '.51')}${rate('4-2', row.four_two, false, key + '.42')}${rate('3-3', row.three_three, false, key + '.33')}
@@ -557,7 +803,36 @@ window.BBI = window.BBI || {};
       <div class="sd-rates">
         ${rate('K in lineup', row.K, true, key + '.k')}${rate('DST in lineup', row.DST, true, key + '.dst')}${rate('Both QBs', row.both_qb, true, key + '.bq')}${rate('Dog QB in lineup', row.dog_qb_in_lineup, true, key + '.dq')}
       </div>
-      <div class="sd-caption">${nTag(n)} · ${source}</div>
+      <div class="sd-caption">${nTag(n)} · ${source}${row.ci ? ' · whisker = 90% Wilson interval on the captain rates' : ''}</div>
+    </div>`;
+  };
+
+  // Winners · Top 1% · Field on one row key: a dot plot per metric (0–100%).
+  const COH_METRICS = [['cpt_fav', 'CPT fav'], ['cpt_pos.WR', 'CPT WR'], ['cpt_pos.RB', 'CPT RB'], ['cpt_pos.QB', 'CPT QB'], ['cpt_pos.TE', 'CPT TE'],
+    ['five_one_fav', '5-1 fav'], ['four_two', '4-2'], ['three_three', '3-3'], ['K', 'K in lineup'], ['DST', 'DST in lineup'], ['both_qb', 'Both QBs'], ['dog_qb_in_lineup', 'Dog QB in']];
+  const getv = (row, path) => { if (!row) return null; const [a, b] = path.split('.'); const v = b ? (row[a] || {})[b] : row[a]; return v == null ? null : +v; };
+  const getci = (row, path) => { if (!row || !row.ci) return null; const [a, b] = path.split('.'); return b ? (row.ci[a] || {})[b] || null : row.ci[a] || null; };
+  const slatesTag = r => r ? `<span class="n${r.slates_n < 3 ? ' small' : ''}">${r.slates_n} slate${r.slates_n === 1 ? '' : 's'} · ${(+r.lineups_n).toLocaleString('en-US')} lineups${r.slates_n < 3 ? ' · small sample' : ''}</span>` : '<span class="n small">no archive slate in this bucket yet</span>';
+  const cohortCol = (title, key, mk, tier = 'primetime') => {
+    const c = cohortRows(data, key, tier), w = c.winners, t = c.top1, f = c.field;
+    const fa = data.field_archive || {};
+    const labels = Object.fromEntries([...(fa.slates || []), ...((fa.sunday || {}).slates || [])].map(s => [s.id, s.label]));
+    const rows = COH_METRICS.map(([m, label]) => {
+      const vw = getv(w, m), vt = getv(t, m), vf = getv(f, m), ci = getci(w, m);
+      const dot = (cls, v, k) => v == null ? '' : `<i class="sd-coh-dot ${cls}" data-m="${mk}.${m}.${k}" style="left:${Math.max(0, Math.min(100, v))}%"></i>`;
+      const delta = vt != null && vf != null ? vt - vf : null;
+      return `<div class="sd-coh-row" title="${esc(`${label}: winners ${vw ?? '—'}% · top 1% ${vt ?? '—'}% · field ${vf ?? '—'}%`)}">
+        <span class="sd-coh-k">${label}<small class="sd-coh-m"><b>${vw ?? '—'}</b>·<b class="t">${vt ?? '—'}</b>·<b class="f">${vf ?? '—'}</b></small></span>
+        <span class="sd-coh-track">${ci ? `<i class="sd-coh-ci" data-m="${mk}.${m}.ci" style="left:${ci[0]}%;width:${Math.max(0, ci[1] - ci[0])}%"></i>` : ''}${dot('f', vf, 'f')}${dot('w', vw, 'w')}${dot('t', vt, 't')}</span>
+        <span class="sd-coh-v"><span class="sd-coh-vals"><b>${vw ?? '—'}</b>·<b class="t">${vt ?? '—'}</b>·<b class="f">${vf ?? '—'}</b></span>${delta != null ? `<em class="${t && t.slates_n < 3 ? 'small' : ''}">${sgn(delta).replace('.0', '')}</em>` : ''}</span>
+      </div>`;
+    }).join('');
+    const sl = r => r && r.slates ? ` (${r.slates.map(s => esc(labels[s] || s)).join(', ')})` : '';
+    return `<div class="sd-winner-col sd-coh-col">
+      <h4>${title}</h4>
+      <div class="sd-coh-head"><span></span><span class="sd-coh-legend"><span><i class="sd-coh-dot w"></i>Winners</span><span><i class="sd-coh-dot t"></i>Top 1%</span><span><i class="sd-coh-dot f"></i>Field</span></span><span class="sd-coh-v"><span class="sd-coh-vals">W·1%·F</span> <em>Δ</em></span></div>
+      <div class="sd-coh-rows">${rows}</div>
+      <div class="sd-caption">Winners ${w ? nTag(w.n) : '—'} · 120 DK winners 2018–25 (the rules)<br>2026 top 1% ${slatesTag(t)}${sl(t)}<br>2026 field ${slatesTag(f)}${sl(f)}${tier === 'sunday' ? '<br>Sunday single-game slates · supporting only, never pooled with primetime' : ''}</div>
     </div>`;
   };
 
@@ -576,9 +851,22 @@ window.BBI = window.BBI || {};
       <div class="seg" role="tablist" aria-label="Winner view">
         <button type="button" role="tab" data-view="expected" class="${state.view === 'expected' ? 'active' : ''}" aria-selected="${state.view === 'expected'}">Build for the distribution</button>
         <button type="button" role="tab" data-view="realized" class="${state.view === 'realized' ? 'active' : ''}" aria-selected="${state.view === 'realized'}">If you're right about the game</button>
+        ${data.top1pct_by_expected_script ? `<button type="button" role="tab" data-view="cohorts" class="${state.view === 'cohorts' ? 'active' : ''}" aria-selected="${state.view === 'cohorts'}">Winners · Top 1% · Field</button>` : ''}
       </div></div>`;
     let body;
-    if (state.view === 'expected') {
+    if (state.view === 'cohorts' && data.top1pct_by_expected_script) {
+      const sk = expectedSpreadRow(d.sb), tk = expectedTotalRow(d.tb, state.total), tier = state.cohTier === 'sunday' ? 'sunday' : 'primetime';
+      const fa = data.field_archive || {}, anom = fa.anomalies || [];
+      body = `<p class="sd-lede">The rules come from the <strong>120 historical winners</strong> (gold). Beside them, the <strong>top 1%</strong> and the <strong>whole field</strong> of the 2026 contest archive in games priced like this one — a check on the rules, not a replacement. Δ = top 1% − field, in points. The archive's n is <strong>slates</strong>, not lineups: every lineup in a slate shares one game.</p>
+        <div class="sd-coh-tier"><div class="seg" role="tablist" aria-label="Archive tier">
+          <button type="button" role="tab" data-coh-tier="primetime" class="${tier === 'primetime' ? 'active' : ''}" aria-selected="${tier === 'primetime'}">Primetime (primary)</button>
+          <button type="button" role="tab" data-coh-tier="sunday" class="${tier === 'sunday' ? 'active' : ''}" aria-selected="${tier === 'sunday'}">Sunday slates (supporting)</button></div>
+          ${anom.length ? `<span class="sd-caption">${anom.map(a => `${esc(a.label)} excluded: ${esc(a.reason)}`).join(' · ')}</span>` : ''}</div>
+        <div class="sd-grid-2">
+          ${cohortCol(`Spread ${esc(d.spreadBucket.label)} · <span style="color:var(--text-dimmed)">${sk}</span>`, sk, 'cS', tier)}
+          ${cohortCol(`Total ${esc(d.totalBucket.label)} · <span style="color:var(--text-dimmed)">${tk}</span>`, tk, 'cT', tier)}
+        </div>`;
+    } else if (state.view === 'expected' || state.view === 'cohorts') {
       const sk = expectedSpreadRow(d.sb), tk = expectedTotalRow(d.tb, state.total);
       const sr = data.winners_by_expected_script[sk], tr = data.winners_by_expected_script[tk];
       body = `<p class="sd-lede">Winners in games the market priced like this one — the view you build the batch for.</p>
@@ -611,6 +899,35 @@ window.BBI = window.BBI || {};
         </div>`;
     }
     $id('sdWinners').innerHTML = head + body;
+  };
+
+  // "How sure are we?" — rules come from history; the 2026 archive checks them (effective n = primetime slates).
+  const GAP_LABEL = { cpt_pos_RB: 'RB captain', cpt_pos_TE: 'TE captain', cpt_pos_WR: 'WR captain', cpt_pos_QB: 'QB captain', DST: 'DST in lineup', K: 'Kicker in lineup', both_qb: 'Both QBs', cpt_fav: 'Favorite captain', four_two: '4-2 shape', three_three: '3-3 shape' };
+  const renderSure = d => {
+    const host = $id('sdSure'); if (!host) return;
+    const fa = data.field_archive, rv = data.rule_verdicts;
+    if (!fa || !rv) { host.hidden = true; return; }
+    host.hidden = false;
+    const c = rv.counts, total = Object.values(c).reduce((a, v) => a + v, 0);
+    const sk = expectedSpreadRow(d.sb), sr = data.winners_by_expected_script[sk];
+    const watch = rv.rules.filter(r => r.check === 'watch');
+    const gaps = (rv.field_gaps || []).filter(g => g.leverage);
+    const sun = fa.sunday || {};
+    const seg = (k, cls) => ({ k, label: CHECK[k].word, value: (c[k] || 0) / total * 100, cls: `sd-vseg ${cls}` });
+    host.innerHTML = `
+      <div class="card-title">How sure are we? · <span class="card-title-accent">rules from history · 2026 checks them</span></div>
+      <p class="sd-lede">Every rule on this page comes from the <strong>120 historical DK showdown winners</strong> (113 of them primetime). The 2026 contest archive — <strong>${(+fa.n_entries).toLocaleString('en-US')}</strong> lineups from ${fa.n_contests} contests, but only <strong>${fa.n_slates} primetime games</strong> — checks those rules; it never overrides them. Every lineup in a slate shares one outcome, so the 2026 sample is ${fa.n_slates} slates, and most checks honestly read <em>not enough slates yet</em>.</p>
+      <div class="sd-sure-slates">${fa.slates.map(s => `<div${s.anomaly ? ' class="excluded"' : ''}><b>${esc(s.label)}</b><span>${esc(s.fav)} −${num(s.spread)} · ${num(s.total)}${s.realized_script ? ` · played ${esc(s.realized_script)}` : ''}</span><small>${s.anomaly ? `excluded — ${esc(s.anomaly)}` : `${(+s.entries).toLocaleString('en-US')} entries · ${s.contests} contest${s.contests === 1 ? '' : 's'}`}</small></div>`).join('')}</div>
+      <div class="sd-sure-tally">
+        ${hbar('sure', [seg('agrees', 'ok'), seg('aligned', 'ok'), seg('split', 'unk'), seg('mixed', 'unk'), seg('not_enough', 'unk'), seg('watch', 'warn')].filter(x => x.value > 0), { aria: `${total} rules checked: ${Object.keys(c).map(k => `${c[k]} ${CHECK[k].word}`).join(', ')}` })}
+        <div class="sd-legend">${Object.keys(c).filter(k => c[k]).map(k => `<span>${vIcon(k)} ${c[k]} ${CHECK[k].word}</span>`).join('')}<span>of ${total} rules</span></div>
+      </div>
+      ${gaps.length ? `<div class="sd-sure-gaps"><span class="sd-lab-k">Field gaps this season <small>ownership leverage, not rules</small></span>${gaps.map(g => `<div><b>${esc(GAP_LABEL[g.feature] || g.feature)}</b><span>History ${pc(g.hist)} · 2026 field ${pc(g.field_2026)} · 2026 top 1% ${pc(g.top1_2026)}</span><small>the field ${g.direction === 'over' ? 'over' : 'under'}-plays it by ${Math.abs(g.field_minus_hist).toFixed(1)} pts vs history and the top 1% moved back toward history (${g.slates_n} slates)</small></div>`).join('')}</div>` : ''}
+      <details class="sd-fold"><summary>Watch list · ${watch.length} rule${watch.length === 1 ? '' : 's'} the 2026 sample leans against <span class="sd-fold-arrow">▸</span></summary>
+        <p class="sd-lede" style="margin-top:6px">No rule changes. Each stays as the historical winners wrote it and is re-examined in the winner data as more slates land.</p>
+        <div class="sd-sure-hits">${watch.map(r => `<div>${vBadge(data, r)}<span>${esc(r.label)}<small>${esc(histText(data, r))} · 2026 field ${pc(r.field_2026)} → top 1% ${pc(r.top1_2026)}</small></span></div>`).join('')}</div></details>
+      <p class="sd-lede" style="color:var(--text-muted)">The winner bars carry 90% Wilson whiskers: in this spread bucket (${nTag(sr.n)}) CPT fav ${sr.cpt_fav}% could be anywhere from ${sr.ci ? sr.ci.cpt_fav[0] : '—'}% to ${sr.ci ? sr.ci.cpt_fav[1] : '—'}%.</p>
+      <div class="sd-caption">2026 archive: ${fa.n_slates} primetime slates (primary)${sun.n_slates ? ` · ${sun.n_slates} Sunday slates kept separate as supporting evidence` : ''} · lift = top-1% rate − field rate within a slate · anomalous slates listed but never counted · checks: ${checkLegend()}</div>`;
   };
 
   const renderCheat = d => {
@@ -667,9 +984,9 @@ window.BBI = window.BBI || {};
         </div>`; }).join('')}</div>
       <div class="sd-leverage"><b>Leverage test.</b> CPT-optimal 7% / CPT-own 2% = <b>a seat</b> · 6% / 14% = <b>a flex</b> · sweet spot <b>5–15% owned</b> with top-3 CPT-optimal.</div>
       <div class="sd-never">
-        <div class="sd-never-item"><b>Dog pocket QB at +3.5 or more</b><span>${esc(law(5).evidence)}</span></div>
-        <div class="sd-never-item"><b>Kicker</b><span>${esc(law(7).evidence)}</span></div>
-        <div class="sd-never-item"><b>DST</b><span>${esc(law(3).evidence)}</span></div>
+        <div class="sd-never-item"><b>Dog pocket QB at +3.5 or more ${vBadge(data, ruleById(data, 'cpt_QB_DOG'), { mini: true })}</b><span>${esc(law(5).evidence)}</span></div>
+        <div class="sd-never-item"><b>Kicker ${vBadge(data, ruleById(data, 'cpt_K'), { mini: true })}</b><span>${esc(law(7).evidence)}</span></div>
+        <div class="sd-never-item"><b>DST ${vBadge(data, null, { mini: true })}</b><span>${esc(law(3).evidence)}</span></div>
       </div>
       <div class="sd-caption">120 DK showdown winners 2018–25 · seat weight ≈ position share × side share in the active cheat-sheet cell (independence estimate)</div>`;
   };
@@ -689,7 +1006,7 @@ window.BBI = window.BBI || {};
       <div class="card-title">Allocation · <span class="card-title-accent">${esc(d.spreadBucket.label)}${lean && lean.script ? ` · lean ${lean.label.toLowerCase()} → ${lean.script}` : ''}</span></div>
       ${hbar('alloc', segs.map(x => ({ ...x, k: x.label })), { tall: true, aria: `Allocation: ${segs.map(s => `${s.label} ${Math.round(s.value)}%`).join(', ')}` })}
       <div class="sd-legend">${['A', 'B', 'C', 'D'].map((k, i) => `<span><i class="${SEG[i]}"></i>${k} · ${esc(names[k])} ${Math.round(a[k])}%</span>`).join('')}</div>
-      <div class="sd-counts"><span>${state.entries} lineup${state.entries === 1 ? '' : 's'} →</span>${['A', 'B', 'C', 'D'].map(k => `<span class="chip sd-count-chip" aria-pressed="${counts[k] > 0}">${FX.num('cnt.' + k, counts[k], 0)} ${k}</span>`).join('')}</div>
+      <div class="sd-counts"><span>${state.entries} lineup${state.entries === 1 ? '' : 's'} →</span>${['A', 'B', 'C', 'D'].map(k => `<span class="chip sd-count-chip${counts[k] > 0 ? ' active' : ''}">${FX.num('cnt.' + k, counts[k], 0)} ${k}</span>`).join('')}</div>
       ${adj.length ? `<div class="sd-overlay-adj">${adj.join('')}</div>` : ''}
       <div class="sd-caption">Base shares from the codex allocation table for this spread bucket${lean && lean.script ? ` · lean moved ${LEAN_PTS} pts from ${lean.from.join('+')} into ${lean.script}` : ''} · counts by largest remainder · overlay values untouched by the lean</div>`;
     return counts;
@@ -702,6 +1019,13 @@ window.BBI = window.BBI || {};
       ${t.avoid.map(x => `<span class="sd-chip-no">✗ ${esc(chipLabel(x))}</span>`).join('')}
       ${t.shapes.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}
       <span class="sd-chip-n">K ${pct(t.k_rate)}</span><span class="sd-chip-n">DST ${pct(t.dst_rate)}</span></div>`;
+  };
+  // " · 2026: 1 agrees · 1 watch" after a template's name — the 2026 check tally; the template itself is historical.
+  const tmplTally = (key, t) => {
+    const rs = [...t.include.map(x => tmplRuleId(key, 'inc', x)), ...t.avoid.map(x => tmplRuleId(key, 'avd', x)), tmplRuleId(key, 'shape')].map(id => ruleById(data, id)).filter(Boolean);
+    const c = k => rs.filter(r => checkOf(r) === k).length;
+    const parts = ['agrees', 'watch'].filter(k => c(k)).map(k => `${c(k)} ${CHECK[k].word}`);
+    return rs.length ? ` · <span class="sd-tmpl-tally">2026 check: ${parts.length ? parts.join(' · ') : 'nothing settled yet'} of ${rs.length} items</span>` : '';
   };
   const renderRecipes = (d, counts) => {
     const ar = data.archetypes, p = data.portfolio, o = data.overlays;
@@ -736,10 +1060,11 @@ window.BBI = window.BBI || {};
         </div>
         <div class="sd-say">Captain ${esc(m.seat)} wins because ${esc(m.because)}; the flex is ${esc(a.flex.split(';')[0])}; the bring-back is ${esc(m.bring.split(' — ')[0].split(' (')[0])}.</div>
         ${banners.join('')}
-        ${t ? `<details class="sd-fold"><summary>Captain template ${m.tmpl} · ${t.include.length} include · ${t.avoid.length} avoid <span class="sd-fold-arrow">▸</span></summary><div class="sd-tmpl-groups">
-          <div class="sd-tmpl-group"><span class="sd-tmpl-k">include</span><div class="sd-tmpl">${t.include.map(x => `<span class="sd-chip-ok">✓ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
-          <div class="sd-tmpl-group"><span class="sd-tmpl-k">avoid</span><div class="sd-tmpl">${t.avoid.map(x => `<span class="sd-chip-no">✗ ${esc(chipLabel(x))}</span>`).join('')}</div></div>
-          <div class="sd-tmpl-group"><span class="sd-tmpl-k">template rates</span><div class="sd-tmpl">${t.shapes.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}<span class="sd-chip-n">K ${pct(t.k_rate)}</span><span class="sd-chip-n">DST ${pct(t.dst_rate)}</span></div></div>
+        ${t ? `<details class="sd-fold"><summary>Captain template ${m.tmpl} · ${t.include.length} include · ${t.avoid.length} avoid${tmplTally(m.tmpl, t)} <span class="sd-fold-arrow">▸</span></summary><div class="sd-tmpl-groups">
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">include</span><div class="sd-tmpl">${t.include.map(x => `<span class="sd-chip-ok">✓ ${esc(chipLabel(x))}${vBadge(data, ruleById(data, tmplRuleId(m.tmpl, 'inc', x)), { mini: true })}</span>`).join('')}</div></div>
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">avoid</span><div class="sd-tmpl">${t.avoid.map(x => `<span class="sd-chip-no">✗ ${esc(chipLabel(x))}${vBadge(data, ruleById(data, tmplRuleId(m.tmpl, 'avd', x)), { mini: true })}</span>`).join('')}</div></div>
+          <div class="sd-tmpl-group"><span class="sd-tmpl-k">template rates</span><div class="sd-tmpl">${t.shapes.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}${vBadge(data, ruleById(data, tmplRuleId(m.tmpl, 'shape')), { mini: true })}<span class="sd-chip-n">K ${pct(t.k_rate)}</span><span class="sd-chip-n">DST ${pct(t.dst_rate)}</span></div></div>
+          <div class="sd-caption">Template = the historical winners with this captain type. Square = its 2026 check: ${checkLegend()} · hover for the history and the slates</div>
         </div></details>` : ''}
       </div>`;
     });
@@ -775,36 +1100,59 @@ window.BBI = window.BBI || {};
 
   const renderLaws = d => {
     const pinned = data.ten_laws.filter(l => d.laws.has(l.n)), rest = data.ten_laws.filter(l => !d.laws.has(l.n));
-    const law = (l, open) => `<details class="sd-law${open ? ' pinned' : ''}" ${open ? 'open' : ''}><summary><span class="no">${l.n}</span><span>${esc(l.law)}</span></summary><p>${esc(l.evidence)}</p></details>`;
+    const law = (l, open) => { const lv = lawVerdict(data, l.n);
+      return `<details class="sd-law${open ? ' pinned' : ''}" ${open ? 'open' : ''}><summary><span class="no">${l.n}</span><span class="sd-law-txt">${esc(l.law)}<small class="sd-law-chk">${lv.rules.length ? lawBadge(data, lv) : vBadge(data, null)}</small></span></summary><p>${esc(l.evidence)}</p>
+        ${lv.rules.length ? `<div class="sd-law-tests">${lv.rules.map(r => `<div><span>${esc(r.label)}<small class="sd-hist">${esc(histText(data, r))}</small><small>${vBadge(data, r, { mini: true })} ${esc(checkText(data, r))}</small></span></div>`).join('')}</div>` : '<p class="sd-law-untested">No 2026 field check for this law yet: it rests on the 120-winner study, as every rule does.</p>'}</details>`; };
     $id('sdLaws').innerHTML = `
       <div class="card-title">Ten laws · <span class="card-title-accent">${pinned.map(l => l.n).join(', ')} pinned for this cell</span></div>
       <div class="sd-laws">${pinned.map(l => law(l, true)).join('')}</div>
-      <details class="sd-fold"><summary>The other ${rest.length} laws <span class="sd-fold-arrow">▸</span></summary><div class="sd-laws" style="margin-top:8px">${rest.map(l => law(l, false)).join('')}</div></details>`;
+      <details class="sd-fold"><summary>The other ${rest.length} laws <span class="sd-fold-arrow">▸</span></summary><div class="sd-laws" style="margin-top:8px">${rest.map(l => law(l, false)).join('')}</div></details>
+      <div class="sd-caption">Each law is the historical winners' (evidence under it). The small line is its 2026 check over ${(data.field_archive || {}).n_slates || 0} primetime slates: ${checkLegend()}. Open a law for the history and the check per test.</div>`;
   };
 
   /* ---------- Step 4: ship it ---------- */
   const renderFit = d => {
     const ct = data.inputs.contest_types.find(c => c.key === state.contest);
-    const sf = data.contest_fit_small_field;
-    const small = state.contest === 'se_small' ? `
-      <div class="sd-small-field" role="img" aria-label="Small-field study: QB under 10% owned in ${sf.qb_under_10pct.winners} of winners vs ${sf.qb_under_10pct.field} of the field">
-        <div><b>${esc(sf.qb_under_10pct.winners)}</b><span>QB under 10% owned</span><em>field ${esc(sf.qb_under_10pct.field)}</em></div>
-        <div><b>${esc(sf.qb_plus_2.winners)}</b><span>QB + 2 own catchers</span><em>field ${esc(sf.qb_plus_2.field)}</em></div>
-        <div><b>${esc(sf.run_back.power_sweep)}</b><span>Run-back · Power Sweep</span><em>Spy: ${esc(sf.run_back.spy)}</em></div>
-        <div><b>${sf.total_own.power_sweep}% / ${sf.total_own.spy}%</b><span>Total own · PS / Spy</span></div>
-        <div><b>${esc(sf.te_under_4k_spy)}</b><span>TE under $4k (Spy)</span><em>flex RB ${esc(sf.flex_rb)}</em></div>
-        <div><b>${esc(sf.dupes)}</b><span>Winners duplicated</span><em>sim ROI+ ${esc(sf.sim_roi_positive)}</em></div>
-      </div>
-      <div class="sd-caption">${esc(sf.source)}</div>` : '';
+    // The Power Sweep / Spy small-field study is a DK CLASSIC main-slate study: it lives on the Classic page, not here.
+    const small = '';
     $id('sdFit').innerHTML = `
       <div class="card-title">Contest fit · <span class="card-title-accent">${esc(ct.label)}</span></div>
       <div class="sd-fit-row">
         <div class="sd-fit-big">${esc(ct.own_target)}<small>cumulative ownership target</small></div>
         <div class="sd-fit-big">≤ ${ct.dupe_cap}<small>dupe gate</small></div>
       </div>
-      ${ct.note ? `<p class="sd-lede">${esc(ct.note)}</p>` : ''}
+      ${ct.note && !/Spy|Power Sweep/.test(ct.note) ? `<p class="sd-lede">${esc(ct.note)}</p>` : ''}
       ${small}
       <div class="sd-caption">contest fit from the codex contest table · dupes: ${esc(data.ten_laws[9].evidence)}</div>`;
+  };
+
+  // Score you need: cut ladder by field size (cut_lines). Follows the Step 1 contest unless a bucket is picked here.
+  const renderCuts = () => {
+    const host = $id('sdCuts'); if (!host) return;
+    const cuts = data.cut_lines || [];
+    if (!cuts.length) { host.hidden = true; return; }
+    host.hidden = false;
+    const tier = state.cutTier === 'sunday' ? 'sunday' : 'primetime';
+    const key = state.cutKey || state.contest, L = cutLadder(cuts.filter(c => (c.tier || 'primetime') === tier), key);
+    const fa = data.field_archive || {};
+    const labels = Object.fromEntries([...(fa.slates || []), ...((fa.sunday || {}).slates || [])].map(s => [s.id, s.label]));
+    const small = L.slates.length < 3;
+    const top1 = L.tiers.find(t => t.key === 'cut_top1');
+    const body = !L.contests ? `<p class="sd-lede">No archived contest of this size yet.</p>` : `
+      <div class="sd-cuts">${L.tiers.map(t => `
+        <div class="sd-cut${t.key === 'cut_top1' ? ' hl' : ''}">
+          <span class="sd-cut-k">${esc(t.label)}${t.key === 'min_cash_score' && L.cashPct != null ? `<small>top ~${Math.round(L.cashPct)}% paid</small>` : ''}</span>
+          <span class="sd-cut-bar"><span class="bar"><span class="bar-fill" data-m="cut.${t.key}" style="width:${t.ratio != null ? Math.min(100, t.ratio).toFixed(1) : 0}%"></span></span></span>
+          <span class="sd-cut-v"><b>${t.ratio != null ? FX.num('cut.' + t.key + '.r', t.ratio, 0, { post: '%' }) : '—'}</b><small>of winner</small></span>
+          <span class="sd-cut-pts">${L.slates.map((s, i) => `<span>${esc(labels[s] || s)} <b>${t.bySlate[i] != null ? t.bySlate[i].toFixed(1) : '—'}</b></span>`).join('')}</span>
+        </div>`).join('')}</div>`;
+    host.innerHTML = `
+      <div class="sd-winners-head"><div class="card-title">Score you need · <span class="card-title-accent">${esc(CONTEST_SHORT[key] || key)} fields</span></div>
+        <div class="seg" role="tablist" aria-label="Field size">${Object.keys(CONTEST_SHORT).map(k => `<button type="button" role="tab" data-cut="${k}" class="${k === key ? 'active' : ''}" aria-selected="${k === key}">${esc(CONTEST_SHORT[k])}</button>`).join('')}</div>
+        <div class="seg" role="tablist" aria-label="Slate tier"><button type="button" role="tab" data-cut-tier="primetime" class="${tier === 'primetime' ? 'active' : ''}" aria-selected="${tier === 'primetime'}">Primetime</button><button type="button" role="tab" data-cut-tier="sunday" class="${tier === 'sunday' ? 'active' : ''}" aria-selected="${tier === 'sunday'}">Sunday (supporting)</button></div></div>
+      <p class="sd-lede">What past DK showdown contests of this size took to finish in each tier. The points move with the game${top1 && top1.min != null ? ` (the top-1% cut ran ${top1.min.toFixed(1)}–${top1.max.toFixed(1)} here)` : ''}, so the number that travels is the <strong>share of the winning score</strong>; the points per slate are below each bar.</p>
+      ${body}
+      <div class="sd-caption"><span class="n${small ? ' small' : ''}">n = ${L.contests} contest${L.contests === 1 ? '' : 's'} · ${L.slates.length} slate${L.slates.length === 1 ? '' : 's'}${small ? ' · small sample' : ''}</span>${L.field ? ` · fields ${L.field[0].toLocaleString('en-US')}–${L.field[1].toLocaleString('en-US')}` : ''} · % = median of cut ÷ winner score across contests · points = median per slate · min cash = lowest paid score (DK entry history) · cut_lines from the contest archive</div>`;
   };
 
   const renderCheck = () => {
@@ -860,7 +1208,7 @@ window.BBI = window.BBI || {};
     L.push('');
     L.push('SHIP IT');
     L.push(`  Ownership target ${ct.own_target} · dupes ≤ ${ct.dupe_cap}${ct.note ? ` · ${ct.note}` : ''}`);
-    L.push(`  Laws pinned: ${[...d.laws].sort((a, b) => a - b).map(n => `${n}. ${data.ten_laws[n - 1].law}`).join(' | ')}`);
+    L.push(`  Laws pinned: ${[...d.laws].sort((a, b) => a - b).map(n => `${n}. ${data.ten_laws[n - 1].law} [field: ${VERDICT[lawVerdict(data, n).verdict].word}]`).join(' | ')}`);
     return L.join('\n');
   };
   const stokasticText = d => {
@@ -872,20 +1220,52 @@ window.BBI = window.BBI || {};
     L.push(`${'Never captain'.padEnd(30)} dog pocket QB (+3.5 or more), K, DST`);
     return L.join('\n');
   };
-  const copy = async (text, btn) => {
+  const clip = async text => {
     let ok = false;
     try { await navigator.clipboard.writeText(text); ok = true; } catch {}
     if (!ok) { try { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); ok = document.execCommand('copy'); ta.remove(); } catch {} }
+    return ok;
+  };
+  const copy = async (text, btn) => {
+    const ok = await clip(text);
     const old = btn.textContent; btn.textContent = ok ? 'Copied ✓' : 'Copy failed'; setTimeout(() => { btn.textContent = old; }, 1600);
   };
+
+  /* ---------- shareable link (URL state) ---------- */
+  // The Lab (showdown_lab.js) reports its pool + lineup tokens; before it boots, the slate is the preset.
+  const urlState = () => {
+    const li = window.BBI.showdownLab && window.BBI.showdownLab.urlInfo ? window.BBI.showdownLab.urlInfo() : null;
+    return { slate: li ? li.slate || state.preset : state.preset || urlIn.slate, spread: state.spread, total: state.total, env: state.env, contest: state.contest, entries: state.entries, lu: li ? li.lu : urlIn.lu };
+  };
+  const cleanHash = () => (location.hash || '').replace(/\?.*$/, '');
+  const shareUrl = hash => `${location.origin}${location.pathname}?${urlSerialize(urlState())}${hash == null ? cleanHash() : hash}`;
+  // Written only once the reader has touched something (or arrived on a link), so a
+  // plain visit keeps a plain URL. Debounced: sliders re-render every frame.
+  let urlArmed = false, urlT = 0;
+  const syncUrl = () => {
+    if (!urlArmed || !data) return;
+    clearTimeout(urlT);
+    urlT = setTimeout(() => { try { history.replaceState(history.state, '', shareUrl()); } catch {} }, 300);
+  };
+  const copyLink = async (hash, btn) => {
+    const u = urlState(), ok = await clip(shareUrl(hash));
+    track('share_link_copy', { ok, lineup: !!u.lu, target: hash || 'page', preset: !!state.preset });
+    if (btn && btn.dataset.copyLink != null && btn.textContent.trim()) { const old = btn.textContent; btn.textContent = ok ? 'Link copied ✓' : 'Copy failed'; setTimeout(() => { btn.textContent = old; }, 1600); }
+    const pre = slates.find(x => x.id === state.preset);
+    toast(ok ? `<b>Link copied</b> — opens ${pre ? esc(pre.label) + ' · ' : ''}${esc(spreadLabel(state.spread, pre && pre.fav))} · ${num(state.total)}${u.lu ? ' with this lineup in the Lab' : ''}` : 'Copy failed — your browser blocked the clipboard', ok ? '' : 'warn');
+  };
   // Play card image: verdict strip + one block per script, drawn on a canvas (no library).
+  // With a complete Lab lineup, a lineup panel (six slots, codex ring, verdict, script,
+  // top 3 report lines) sits between the strip and the script cards.
   const playCardPng = async d => {
     const counts = largestRemainder(d.alloc, state.entries);
     const ct = data.inputs.contest_types.find(c => c.key === state.contest);
     const r = gameRead(d);
-    const scripts = ['A', 'B', 'C', 'D'].filter(k => d.alloc[k] > 0);
+    const scripts = hasPro() ? ['A', 'B', 'C', 'D'].filter(k => d.alloc[k] > 0) : [];   // the recipe cards are Pro
+    const lu = window.BBI.showdownLab && window.BBI.showdownLab.cardData ? window.BBI.showdownLab.cardData() : null;
+    const LP_H = 318, lpOff = lu ? LP_H + 24 : 0;
     const W = 1200, S = 2, pad = 48, colW = (W - pad * 2 - 24) / 2;
-    const rows = Math.ceil(scripts.length / 2), cardH = 272, H = 330 + rows * (cardH + 24) + 70;
+    const rows = Math.ceil(scripts.length / 2), cardH = 272, H = 330 + lpOff + rows * (cardH + 24) + 70;
     const cv = document.createElement('canvas'); cv.width = W * S; cv.height = H * S;
     const g = cv.getContext('2d'); g.scale(S, S);
     try { await document.fonts.ready; } catch {}
@@ -910,8 +1290,9 @@ window.BBI = window.BBI || {};
     const tw = (W - pad * 2 - 4 * 12) / 5;
     tiles.forEach((t, i) => { const x = pad + i * (tw + 12); rr(x, 140, tw, 110, 10, '#101017', 'rgba(212,168,67,0.3)');
       txt(t[0], x + 14, 166, { font: mono, size: 10, color: dim }); wrap(t[1], x + 14, 196, tw - 28, 24, { size: 20, weight: 700, max: 2 }); txt(t[2], x + 14, 236, { font: mono, size: 10.5, color: muted }); });
+    if (lu) lineupPanel(g, { rr, txt, wrap, pad, y: 290, w: W - pad * 2, h: LP_H, mono, sans, gold, ink, muted, dim }, lu);
     // script cards
-    scripts.forEach((k, i) => { const a = data.archetypes[k], m = SCRIPT_META[k]; const x = pad + (i % 2) * (colW + 24), y = 290 + Math.floor(i / 2) * (cardH + 24);
+    scripts.forEach((k, i) => { const a = data.archetypes[k], m = SCRIPT_META[k]; const x = pad + (i % 2) * (colW + 24), y = 290 + lpOff + Math.floor(i / 2) * (cardH + 24);
       rr(x, y, colW, cardH, 12, '#141419', 'rgba(255,255,255,0.08)');
       rr(x + 18, y + 18, 34, 34, 8, gold); txt(k, x + 35, y + 42, { font: mono, size: 18, weight: 700, color: '#1a1408', align: 'center' });
       txt(a.name, x + 64, y + 34, { size: 17, weight: 700 }); txt(`${counts[k]} of ${state.entries} lineup${state.entries === 1 ? '' : 's'}`, x + 64, y + 52, { font: mono, size: 11, color: muted });
@@ -925,12 +1306,65 @@ window.BBI = window.BBI || {};
     txt(`120 DK showdown winners 2018–25 · 2,761 games 2016–25 · data ${data.meta.version} · birdiebuddy.io/nfl/showdown`, pad, H - 28, { font: mono, size: 11, color: dim });
     return new Promise(res => cv.toBlob(res, 'image/png'));
   };
+  // Lineup panel on the play card. lu = showdownLab.cardData(): {slots, score, legal, verdict, tag, scriptName, odds, plan, lines, pool, salary}.
+  const lineupPanel = (g, k, lu) => {
+    const { rr, txt, wrap, pad, y, w, h, mono, gold, ink, muted, dim } = k;
+    const red = '#f87171', green = '#4ade80';
+    const fit = (t, maxW, font) => { g.font = font; if (g.measureText(t).width <= maxW) return t; while (t.length > 1 && g.measureText(t + '…').width > maxW) t = t.slice(0, -1); return t + '…'; };
+    rr(pad, y, w, h, 12, '#141419', 'rgba(212,168,67,0.35)');
+    txt('YOUR LINEUP · LINEUP LAB', pad + 22, y + 32, { font: mono, size: 11, color: gold });
+    txt(`${lu.pool} · $${Math.round(lu.salary).toLocaleString('en-US')} of $50,000`, pad + w - 22, y + 32, { font: mono, size: 11, color: muted, align: 'right' });
+    // codex score ring
+    const cx = pad + 92, cy = y + 124, R = 52;
+    g.lineWidth = 10; g.lineCap = 'round';
+    g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.strokeStyle = '#23232c'; g.stroke();
+    if (lu.score > 0) { g.beginPath(); g.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.min(100, lu.score) / 100); g.strokeStyle = lu.legal ? gold : red; g.stroke(); }
+    g.lineCap = 'butt';
+    txt(lu.score, cx, cy + 10, { font: mono, size: 34, weight: 700, align: 'center', color: lu.legal ? ink : red });
+    txt('codex score', cx, cy + 30, { font: mono, size: 9.5, color: dim, align: 'center' });
+    // verdict + script
+    const x0 = pad + 176;
+    txt('VERDICT', x0, y + 72, { font: mono, size: 10, color: dim });
+    txt(fit(lu.verdict.title, 340, `800 22px ${k.sans}`), x0, y + 100, { size: 22, weight: 800, color: lu.legal ? ink : red });
+    wrap(lu.verdict.sub, x0, y + 124, 340, 17, { size: 13, color: muted, max: 2 });
+    if (lu.tag) {
+      rr(x0, y + 164, 30, 30, 7, gold); txt(lu.tag, x0 + 15, y + 185, { font: mono, size: 16, weight: 700, color: '#1a1408', align: 'center' });
+      txt(lu.scriptName, x0 + 42, y + 177, { size: 15, weight: 700 });
+      txt(`plays script ${lu.tag} · ${lu.odds}% at this spread · plan ${lu.plan}%`, x0 + 42, y + 194, { font: mono, size: 10.5, color: muted });
+    }
+    // six slots, 2 columns × 3 rows
+    const sx0 = pad + 560, sw = (w - 560 - 22 - 12) / 2, sh = 50;
+    lu.slots.forEach((p, i) => {
+      const sx = sx0 + (i % 2) * (sw + 12), sy = y + 52 + Math.floor(i / 2) * (sh + 10);
+      rr(sx, sy, sw, sh, 9, '#101017', p.cpt ? 'rgba(212,168,67,0.6)' : 'rgba(255,255,255,0.08)');
+      txt(p.cpt ? 'CPT' : 'FLEX', sx + 12, sy + 19, { font: mono, size: 9, color: p.cpt ? gold : dim });
+      rr(sx + 10, sy + 26, 36, 17, 4, '#1c1c24'); txt(p.pos, sx + 28, sy + 38.5, { font: mono, size: 10, weight: 600, color: muted, align: 'center' });
+      txt(fit(p.name, sw - 58 - 74, `700 14px ${k.sans}`), sx + 58, sy + 23, { size: 14, weight: 700 });
+      txt(`${p.team} · ${p.side}`, sx + 58, sy + 40, { font: mono, size: 10, color: dim });
+      txt(`$${Math.round(p.sal).toLocaleString('en-US')}`, sx + sw - 12, sy + 23, { font: mono, size: 12, color: p.cpt ? gold : ink, align: 'right' });
+      if (p.cpt) txt('1.5×', sx + sw - 12, sy + 40, { font: mono, size: 9.5, color: dim, align: 'right' });
+    });
+    // top 3 report lines
+    g.fillStyle = 'rgba(255,255,255,0.08)'; g.fillRect(pad + 22, y + 236, w - 44, 1);
+    txt('ENGINE REPORT · TOP 3', pad + 22, y + 258, { font: mono, size: 10, color: dim });
+    const lw = (w - 44 - 32) / 3, ICON = { fail: ['✗', red], pen: ['−', muted], bonus: ['+', gold], pass: ['✓', green], info: ['·', muted] };
+    lu.lines.slice(0, 3).forEach((l, i) => {
+      const lx = pad + 22 + i * (lw + 16), [ic, col] = ICON[l.kind] || ICON.info;
+      txt(ic, lx, y + 281, { font: mono, size: 13, weight: 700, color: col });
+      wrap(l.text, lx + 18, y + 281, lw - 18, 16, { size: 12.5, color: l.kind === 'fail' ? red : ink, max: 2 });
+    });
+  };
+  // mode: 'download' | 'copy' | 'lineup' (the Lab's share button: copy the image when the browser allows, and download it).
   const sharePng = async (mode, btn) => {
     const old = btn.textContent; btn.textContent = 'Rendering…';
     try {
       const blob = await playCardPng(derive());
-      if (mode === 'copy' && navigator.clipboard && window.ClipboardItem) { await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); btn.textContent = 'Copied image ✓'; }
-      else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `showdown-playcard-${(state.preset || 'custom')}-${num(state.spread)}-${num(state.total)}.png`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); btn.textContent = 'Downloaded ✓'; }
+      let copied = false;
+      if (mode !== 'download' && navigator.clipboard && window.ClipboardItem) {
+        try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); copied = true; } catch (e) { if (mode === 'copy') throw e; }
+      }
+      if (mode === 'copy' && copied) btn.textContent = 'Copied image ✓';
+      else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `showdown-${mode === 'lineup' ? 'lineup' : 'playcard'}-${(state.preset || 'custom')}-${num(state.spread)}-${num(state.total)}.png`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); btn.textContent = copied ? 'Downloaded + copied ✓' : 'Downloaded ✓'; }
     } catch (e) { console.warn('[showdown] play card export failed', e); btn.textContent = 'Export failed'; }
     setTimeout(() => { btn.textContent = old; }, 1800);
   };
@@ -945,23 +1379,30 @@ window.BBI = window.BBI || {};
         <button type="button" class="btn" data-share="copy">Copy play card image</button>
         <button type="button" class="btn btn-ghost" data-print>Print</button>
       </div>
-      <div class="sd-caption">text = steps 2–4 for this slate · play card = the one-glance strip + the script cards as one image for Discord</div>`;
+      <div class="sd-caption">text = steps 2–4 for this slate · play card = the one-glance strip + the script cards as one image for Discord, plus your Lab lineup once it has all six · <button type="button" class="sd-link" data-copy-link="">copy a link to this slate</button></div>`;
   };
 
   /* ---------- master render ---------- */
   // Snapshot keyed elements → re-render → morph from the old values.
   const render = () => {
     if (!data) return;
-    const prev = FX.snapshot();
+    const prev = FX.snapshot(), restore = FX.keepFocus();
     const d = derive();
     renderInputs(); renderConsole(d); renderDock(d);
-    renderRead(d); renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderCheat(d);
+    renderRead(d); renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderSure(d); renderCheat(d);
     renderShortlist(d);
-    const counts = renderAlloc(d);
-    renderVerdict(d, counts); renderRecipes(d, counts); renderDials(d); renderLaws(d);
-    renderFit(d); renderCheck(); renderExport(); renderLessons();
+    // The Pro sections render only with the Pro part loaded (always, in open mode); otherwise the upgrade card.
+    const counts = hasPro() ? renderAlloc(d) : largestRemainder(d.alloc, state.entries);
+    if (hasPro()) {
+      renderVerdict(d, counts); renderRecipes(d, counts); renderDials(d); renderLaws(d);
+      renderFit(d); renderCuts(); renderCheck(); renderExport(); renderLessons();
+    }
+    renderProLocks();
     store.save(state);
+    syncUrl();
     document.dispatchEvent(new CustomEvent('sd:render', { detail: { d, state, counts } }));
+    FX.rove();
+    restore();
     FX.morph(prev);
     FX.reveal();
   };
@@ -970,8 +1411,8 @@ window.BBI = window.BBI || {};
   // The Lab reports its live score here; only the console + dock re-render.
   const setLabScore = s => {
     labScore = s; if (!data) return;
-    const prev = FX.snapshot($id('sdConsole')), prevDock = FX.snapshot($id('sdDock')), d = derive();
-    renderConsole(d); renderDock(d); FX.morph(prev, $id('sdConsole')); FX.morph(prevDock, $id('sdDock'));
+    const prev = FX.snapshot($id('sdConsole')), prevDock = FX.snapshot($id('sdDock')), d = derive(), restore = FX.keepFocus();
+    renderConsole(d); renderDock(d); restore(); FX.morph(prev, $id('sdConsole')); FX.morph(prevDock, $id('sdDock'));
   };
   let toastT = 0;
   const toast = (msg, kind = '') => { const t = $id('sdToast'); if (!t) return; t.className = `sd-toast show ${kind}`; t.innerHTML = msg; clearTimeout(toastT); toastT = setTimeout(() => { t.className = 'sd-toast'; }, 2600); };
@@ -979,6 +1420,15 @@ window.BBI = window.BBI || {};
   /* ---------- events ---------- */
   const setNum = (key, v, lo, hi) => { v = parseFloat(v); if (isNaN(v)) return; state[key] = Math.max(lo, Math.min(hi, key === 'entries' ? Math.round(v) : Math.round(v * 2) / 2)); state.preset = null; };
   const jump = id => { const el = document.getElementById(id); if (!el) return; el.scrollIntoView({ behavior: FX.reduced() ? 'auto' : 'smooth', block: 'start' }); };
+  // The dock's Tune drawer is a disclosure: the toggle carries aria-expanded; opening moves focus to the
+  // first slider, closing (Done, the toggle, Escape) hands focus back to the toggle if it was inside.
+  const setTune = open => {
+    const t = $id('sdTune'); if (!t || t.hidden === !open) return;
+    const inside = t.contains(document.activeElement);
+    t.hidden = !open; renderDock(derive()); setDockTop();
+    if (open) $id('sdTSpreadRange').focus({ preventScroll: true });
+    else if (inside || document.activeElement === document.body) { const b = $id('sdDock').querySelector('[data-tune-toggle]'); if (b) b.focus({ preventScroll: true }); }
+  };
   const bind = () => {
     document.addEventListener('click', e => {
       const p = e.target.closest('[data-group]');
@@ -987,19 +1437,25 @@ window.BBI = window.BBI || {};
         if (g === 'spread') { state.spread = SPREAD_REP[k]; state.preset = null; }
         else if (g === 'total') { state.total = TOTAL_REP[k]; state.preset = null; state.realized = null; }
         else if (g === 'env') { state.env = k; state.preset = null; }
-        else if (g === 'contest') state.contest = k;
+        else if (g === 'contest') { state.contest = k; state.cutKey = null; }
         else if (g === 'entries') state.entries = ENTRY_PILLS.find(x => x.key === k).rep;
         else if (g === 'lean') state.lean = k;
-        else if (g === 'preset') { const s = slates.find(x => x.id === k); if (s) { state.spread = s.spread; state.total = s.total; state.env = s.env; state.preset = s.id; state.realized = null; toast(`<b>${esc(s.label)}</b> loaded · ${esc(s.fav)} −${num(s.spread)} · ${num(s.total)}`); } }
+        else if (g === 'preset') { const s = slates.find(x => x.id === k); if (s) { state.spread = s.spread; state.total = s.total; state.env = s.env; state.preset = s.id; state.realized = null; toast(`<b>${esc(s.label)}</b> loaded · ${esc(s.fav)} −${num(s.spread)} · ${num(s.total)}`); track('preset_select', { id: s.id, from: 'step1', replay: !!s.replay }); } }
         else return;
         render(); return;
       }
       const v = e.target.closest('[data-view]'); if (v) { state.view = v.dataset.view; render(); return; }
       const r = e.target.closest('[data-realized]'); if (r) { state.realized = r.dataset.realized; render(); return; }
+      const cu = e.target.closest('[data-cut]'); if (cu) { state.cutKey = cu.dataset.cut; render(); return; }
+      const ctr = e.target.closest('[data-cut-tier]'); if (ctr) { state.cutTier = ctr.dataset.cutTier; render(); return; }
+      const coh = e.target.closest('[data-coh-tier]'); if (coh) { state.cohTier = coh.dataset.cohTier; render(); return; }
+      if (e.target.closest('[data-attack]')) { state.attack = !state.attack; track('attack_toggle', { on: state.attack }); render(); return; }
       const sh = e.target.closest('[data-share]'); if (sh) { sharePng(sh.dataset.share, sh); return; }
+      const cl = e.target.closest('[data-copy-link]'); if (cl) { copyLink(cl.dataset.copyLink || '', cl); return; }
       if (e.target.closest('[data-print]')) { window.print(); return; }
-      const c = e.target.closest('[data-copy]'); if (c) { const d = derive(); copy(c.dataset.copy === 'playbook' ? playbookText(d) : stokasticText(d), c); return; }
-      if (e.target.closest('[data-tune-toggle]')) { const t = $id('sdTune'); t.hidden = !t.hidden; renderDock(derive()); if (!t.hidden) $id('sdTSpreadRange').focus({ preventScroll: true }); return; }
+      if (e.target.closest('[data-pro-retry]')) { loadPro(); return; }
+      const c = e.target.closest('[data-copy]'); if (c && hasPro()) { const d = derive(); copy(c.dataset.copy === 'playbook' ? playbookText(d) : stokasticText(d), c); return; }
+      if (e.target.closest('[data-tune-toggle]')) { setTune($id('sdTune').hidden); return; }
       const j = e.target.closest('[data-jump]'); if (j) { e.preventDefault(); jump(j.dataset.jump); return; }
       if (e.target.closest('[data-edit]')) { e.preventDefault(); jump('step1'); return; }
       if (e.target.closest('#sdReset')) { store.clear(); Object.assign(state, { spread: 7.5, total: 48.5, env: 'dome', contest: 'se_small', entries: 1, lean: 'none', preset: null, realized: null }); render(); }
@@ -1007,16 +1463,101 @@ window.BBI = window.BBI || {};
     const onNum = (id, key, lo, hi) => { const el = $id(id); const h = () => { setNum(key, el.value, lo, hi); if (key === 'total') state.realized = null; render(); }; el.addEventListener('change', h); el.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); h(); el.blur(); } }); };
     onNum('sdSpreadNum', 'spread', 0, 30); onNum('sdTotalNum', 'total', 20, 80); onNum('sdEntriesNum', 'entries', 1, 150);
     // Sliders: live while dragging (one render per frame).
-    const onRange = (id, fn) => { const el = $id(id); el.addEventListener('input', () => { fn(+el.value); scheduleRender(); }); el.addEventListener('change', () => { fn(+el.value); render(); }); };
+    const SLIDER = { sdSpreadRange: ['spread', 'set'], sdTotalRange: ['total', 'set'], sdEntriesRange: ['entries', 'set'], sdTSpreadRange: ['spread', 'tune'], sdTTotalRange: ['total', 'tune'] };
+    // Touch: a thumb that lands on a full-width track while the reader scrolls the page must not move the
+    // line. The track is touch-action: pan-y (CSS), so a vertical swipe becomes a scroll and the browser
+    // cancels the pointer: put back the value the touch started from.
+    const onRange = (id, fn) => {
+      const el = $id(id); let start = null, cancelled = false;
+      el.addEventListener('pointerdown', e => { start = e.pointerType === 'mouse' ? null : el.value; cancelled = false; });
+      el.addEventListener('pointercancel', () => { if (start != null && el.value !== start) { cancelled = true; setTimeout(() => { cancelled = false; }, 400); el.value = start; fn(+start); render(); } start = null; });
+      el.addEventListener('pointerup', () => { start = null; });
+      el.addEventListener('input', () => { if (cancelled) return; fn(+el.value); scheduleRender(); });
+      el.addEventListener('change', () => { if (cancelled) return; fn(+el.value); render(); const [k, where] = SLIDER[id]; track('slider_commit', { slider: k, where, value: state[k] }); });
+    };
     onRange('sdSpreadRange', v => { state.spread = v; state.preset = null; });
     onRange('sdTotalRange', v => { state.total = v; state.preset = null; state.realized = null; });
     onRange('sdEntriesRange', v => { state.entries = ENTRY_STEPS[v]; });
     onRange('sdTSpreadRange', v => { state.spread = v; state.preset = null; });
     onRange('sdTTotalRange', v => { state.total = v; state.preset = null; state.realized = null; });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$id('sdTune').hidden) { $id('sdTune').hidden = true; renderDock(derive()); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$id('sdTune').hidden) setTune(false); });
     let st = 0;
     window.addEventListener('scroll', () => { if (st) return; st = requestAnimationFrame(() => { st = 0; spy(); }); }, { passive: true });
     window.addEventListener('resize', () => { setDockTop(); spy(); });
+  };
+
+  /* ---------- server gating: the Pro part + the upgrade card ---------- */
+  // Each [data-pro-data] wrapper holds sections that read the Pro part. Without it: content hidden, one card
+  // in its place (the auth.js upgrade card when locked). Rewritten only when the state changes.
+  let lockIO = null;
+  const lockSeen = new WeakSet();
+  const lockCard = (wrap, st) => {
+    if (st === 'pending') return `<p class="sd-lede">Checking your plan…</p>`;
+    if (st === 'error') return `<p class="sd-lede">The Pro sections didn't load. <button type="button" class="sd-link" data-pro-retry>Try again</button></p>`;
+    const msg = wrap.getAttribute('data-gate-msg') || '';
+    const A = window.BBI.auth;
+    if (A && A.lockCard) return A.lockCard('pro', msg);
+    return `<div class="bbi-lock-card"><div class="eyebrow">Pro feature</div><h4>Unlock this with Pro</h4><p>${esc(msg)}</p><a class="bbi-auth-btn" href="pricing.html">See plans</a></div>`;
+  };
+  // The hosts showdown.js fills from the Pro part: emptied on sign-out so nothing Pro stays in the DOM.
+  const PRO_HOSTS = ['sdVerdict', 'sdAlloc', 'sdRecipes', 'sdDials', 'sdLaws', 'sdFit', 'sdCuts', 'sdCheck', 'sdExport', 'sdLessons'];
+  const renderProLocks = () => {
+    if (gating === 'open' || typeof document.querySelectorAll !== 'function') return;
+    if (!hasPro()) PRO_HOSTS.forEach(id => { const el = $id(id); if (el && el.firstChild) el.innerHTML = ''; });
+    document.querySelectorAll('[data-pro-data]').forEach(wrap => {
+      let lk = wrap.querySelector(':scope > .sd-pro-lock');
+      const st = hasPro() ? null : proState;
+      [...wrap.children].forEach(c => { if (c !== lk) c.hidden = !!st; });
+      if (!st) { if (lk) lk.remove(); return; }
+      if (!lk) { lk = document.createElement('div'); lk.className = 'sd-pro-lock'; wrap.appendChild(lk); }
+      if (lk.dataset.state === st) return;
+      lk.dataset.state = st;
+      lk.innerHTML = lockCard(wrap, st);
+      // gate_view, as track.js logs for [data-gate] locks: once per region, when the card scrolls into view.
+      if (st !== 'locked' || lockSeen.has(wrap) || !('IntersectionObserver' in window)) return;
+      if (!lockIO) lockIO = new IntersectionObserver(es => es.forEach(e => {
+        const w = e.target.closest('[data-pro-data]');
+        if (!e.isIntersecting || !w || lockSeen.has(w)) return;
+        lockSeen.add(w); lockIO.unobserve(e.target);
+        const sec = w.closest('section[id]');
+        track('gate_view', { tier: 'pro', section: sec ? sec.id : '' });
+      }), { threshold: 0.25 });
+      lockIO.observe(lk);
+    });
+  };
+  // auth.js is lazy-loaded by nfl.js; wait for it (no auth → anonymous → locked).
+  const waitAuth = (ms = 15000) => new Promise(res => {
+    const t0 = Date.now();
+    const tick = () => { if (window.BBI.auth) res(window.BBI.auth); else if (Date.now() - t0 > ms) res(null); else setTimeout(tick, 100); };
+    tick();
+  });
+  let proSeq = 0;
+  const loadPro = async () => {
+    const seq = ++proSeq;
+    if (proState !== 'open') { proState = 'pending'; renderProLocks(); }
+    const A = await waitAuth();
+    let pro = null, st = 'locked';
+    try {
+      const token = A && A.backend && A.backend.accessToken ? await A.backend.accessToken() : null;
+      if (token) {   // signed out → locked without a round trip; the route would answer gated anyway
+        const r = await fetch(`${(A && A.API_BASE) || ''}${PRO_ROUTE}`, { cache: 'no-store', headers: { Authorization: `Bearer ${token}` } });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        pro = proFrom(await r.json());
+        if (pro) st = 'open';
+      }
+    } catch (e) { console.warn('[showdown] Pro part unavailable:', e.message || e); st = 'error'; }
+    if (seq !== proSeq) return;   // a newer sign-in / sign-out took over
+    if (pro && pro._split.version !== pub.meta.version) console.warn(`[showdown] Pro part is data ${pro._split.version}, public part ${pub.meta.version}: redeploy the route with the site`);
+    proState = st;
+    data = mergePro(pub, pro);
+    render();
+  };
+  const watchPro = async () => {
+    const A = await waitAuth();
+    const who = () => { const u = A && A.user && A.user(); return u ? `${u.email}|${u.tier}` : ''; };
+    let last = who();
+    loadPro();
+    if (A && A.onChange) A.onChange(() => { const k = who(); if (k !== last) { last = k; loadPro(); } });
   };
 
   const showError = msg => {
@@ -1028,10 +1569,12 @@ window.BBI = window.BBI || {};
 
   const init = async () => {
     try {
-      const res = await fetch(DATA_PATH, { cache: 'no-cache' });
+      gating = gatingMode();
+      const res = await fetch(gating === 'server' ? PUBLIC_PATH : DATA_PATH, { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       data = await res.json();
       if (!data || !data.base_rates || !data.archetypes) throw new Error('unexpected JSON shape');
+      if (gating === 'server') { pub = data; data = mergePro(pub, null); proState = 'pending'; }
     } catch (e) { showError(e.message || String(e)); return; }
     try { const r = await fetch(SLATES_PATH, { cache: 'no-cache' }); if (r.ok) slates = (await r.json()).slates || []; } catch {}
     const saved = store.load();
@@ -1042,28 +1585,60 @@ window.BBI = window.BBI || {};
       if (!LEANS.some(l => l.key === state.lean)) state.lean = 'none';
       state.entries = Math.max(1, Math.round(+state.entries || 1));
     }
+    // A shared link wins over localStorage. A slate with no line of its own loads the
+    // slate's line; a line that differs from the slate's is a what-if (no preset).
+    const u = urlIn = urlParse(location.href);
+    if (Object.keys(u).length) {
+      const sl = slates.find(x => x.id === u.slate);
+      if (sl && u.spread == null && u.total == null && u.env == null) Object.assign(state, { spread: sl.spread, total: sl.total, env: sl.env });
+      if (u.spread != null) state.spread = u.spread;
+      if (u.total != null) state.total = u.total;
+      if (u.env && data.inputs.environment.includes(u.env)) state.env = u.env;
+      if (u.contest && data.inputs.contest_types.some(c => c.key === u.contest)) { state.contest = u.contest; state.cutKey = null; }
+      if (u.entries) state.entries = u.entries;
+      state.preset = sl && +sl.spread === +state.spread && +sl.total === +state.total && sl.env === state.env ? sl.id : null;
+      state.realized = null;
+      urlArmed = true;
+    } else if (!(saved && typeof saved === 'object')) {
+      // First visit (no saved inputs, no link): Step 1 starts on the Lab's default pool (this week's first
+      // game), so the Lab grades that game against its own line instead of opening as a what-if.
+      const fresh = nextPrimetime();
+      if (fresh && data.inputs.environment.includes(fresh.env)) Object.assign(state, { spread: fresh.spread, total: fresh.total, env: fresh.env, preset: fresh.id });
+    }
+    ['pointerdown', 'keydown', 'input'].forEach(ev => document.addEventListener(ev, () => { urlArmed = true; }, { once: true, capture: true, passive: true }));
     const v = $id('sdVersion'); if (v) v.textContent = data.meta.version;
     const rv = $id('sdRulesVersion'); if (rv && data.engine && data.engine.rules_version) rv.textContent = 'v' + data.engine.rules_version.split(' ')[0];
     bind();
     render();
     setDockTop(); spy();
     document.dispatchEvent(new CustomEvent('sd:ready', { detail: { data, slates } }));
-    // Deep links (#step4 from the hub / nav) land before the page has content — re-jump once it does.
-    const h = (location.hash || '').slice(1);
-    // Late layout (auth gate wrapping, fonts) can shift things after the first jump,
-    // so re-land once more unless the reader has started scrolling themselves.
+    if (gating === 'server') watchPro();
+    // Deep links (#step4 from the hub / nav / a shared link) land before the page has content.
+    // Late layout (the Lab's pool fetch, auth gate wrapping, fonts) keeps shifting things for a
+    // moment, so re-land on every layout change for ~3 s unless the reader takes over first.
+    const h = cleanHash().slice(1);
     if (/^step[1-5]$|^sdLabPro$/.test(h)) {
-      let moved = false; const stop = () => { moved = true; };
-      ['wheel', 'touchstart', 'keydown'].forEach(ev => window.addEventListener(ev, stop, { once: true, passive: true }));
-      [120, 900].forEach(t => setTimeout(() => { const el = document.getElementById(h); if (el && !moved) el.scrollIntoView({ block: 'start' }); }, t));
+      let stopped = false, ro = null;
+      const land = () => { const el = document.getElementById(h); if (el && !stopped) el.scrollIntoView({ block: 'start' }); };
+      const stop = () => { stopped = true; if (ro) ro.disconnect(); };
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => window.addEventListener(ev, stop, { once: true, passive: true, capture: true }));
+      land();
+      if (window.ResizeObserver) {
+        let q = 0; ro = new ResizeObserver(() => { if (q) return; q = requestAnimationFrame(() => { q = 0; land(); }); });
+        [document.querySelector('.sd-main'), document.body].forEach(el => el && ro.observe(el));
+      } else [120, 900].forEach(t => setTimeout(land, t));
+      setTimeout(stop, 3000);
     }
-    window.addEventListener('hashchange', () => { const id = location.hash.slice(1); if (/^step[1-5]$/.test(id)) jump(id); });
+    window.addEventListener('hashchange', () => { const id = cleanHash().slice(1); if (/^step[1-5]$/.test(id)) jump(id); });
   };
 
   // Public surface (also used by the verification harness).
-  window.BBI.showdown = { bucketSpread, bucketTotal, expectedSpreadRow, expectedTotalRow, cheatCell, envRow, roofRow, overlaysFor, allocationFor, largestRemainder, shortlistFor, dialsFor, pinnedLawsFor, LEANS, state, get data() { return data; }, get slates() { return slates; }, render, init,
-    derive: () => derive(), setLabScore, toast, scriptOdds, ENV_LABEL, ENV_SHORT, CONTEST_SHORT, SCRIPT_META,
-    playbookText: () => playbookText(derive()), stokasticText: () => stokasticText(derive()), playCardPng: () => playCardPng(derive()) };
+  window.BBI.showdown = { bucketSpread, bucketTotal, expectedSpreadRow, expectedTotalRow, cheatCell, envRow, roofRow, overlaysFor, allocationFor, largestRemainder, shortlistFor, dialsFor, pinnedLawsFor, LEANS, state, get data() { return data; }, set data(v) { data = v; }, get slates() { return slates; }, set slates(v) { slates = v; }, render, init,   // setters: test seam
+    derive: () => derive(), slateTier, attackFor, nextPrimetime, visibleSlates, histText, checkText, checkLegend, CHECK, setLabScore, toast, scriptOdds, ENV_LABEL, ENV_SHORT, CONTEST_SHORT, SCRIPT_META,
+    VERDICT, LAW_RULES, ruleById, tmplRuleId, lawVerdict, verdictTip, vBadge, vIcon, lawBadge, cohortRows, fieldBucket, cutLadder, lineupProj, projVsCuts, median,
+    urlParse, urlSerialize, nameSlug, lineupTokens, lineupFromTokens, get urlIn() { return urlIn; }, syncUrl, copyLink, sharePng,
+    playbookText: () => playbookText(derive()), stokasticText: () => stokasticText(derive()), playCardPng: () => playCardPng(derive()),
+    GATING_MODE, PUBLIC_PATH, PRO_ROUTE, gatingMode, mergePro, proFrom, hasPro, get gating() { return gating; }, get proState() { return proState; } };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

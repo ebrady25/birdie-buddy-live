@@ -293,6 +293,8 @@ window.BBI = window.BBI || {};
 
   const auth = {
     TIERS, PAID, PROMO_CODES, backend: supabaseBackend, API_BASE,
+    // The shared Supabase client + its public config (track.js batches events through it).
+    client: getSupabase, supabaseConfig: { url: SUPABASE_URL, key: SUPABASE_ANON_KEY },
     validatePromo: lookupPromo,
     user: () => current,
     tier: () => tierOf(current?.tier).key,
@@ -420,7 +422,7 @@ window.BBI = window.BBI || {};
     },
     openModal, openLogin: () => openModal('login'), openSignup: () => openModal('signup'),
     mountHeaderControl: renderHeaderControl,
-    applyGates
+    applyGates, lockCard: lockCardHTML
   };
   window.BBI.auth = auth;
 
@@ -733,24 +735,31 @@ window.BBI = window.BBI || {};
         return;
       }
       if (already) return;
-      const t = tierOf(need);
       const wrap = document.createElement('div');
       wrap.className = 'bbi-lock-content';
       while (node.firstChild) wrap.appendChild(node.firstChild);
       node.appendChild(wrap);
       const ovl = document.createElement('div');
       ovl.className = 'bbi-lock-ovl';
-      ovl.innerHTML = `
-        <div class="bbi-lock-card">
-          <div class="eyebrow">${t.name} feature</div>
-          <h4>Unlock this with ${t.name}</h4>
-          <p>${escapeHtml(node.getAttribute('data-gate-msg') ||
-              (t.name + ' members get ' + t.tagline.toLowerCase() + '.'))}</p>
-          <a class="bbi-auth-btn" href="pricing.html">See plans — from $${t.priceM}/mo</a>
-        </div>`;
+      ovl.innerHTML = lockCardHTML(need, node.getAttribute('data-gate-msg'));
       node.classList.add('bbi-locked');
       node.appendChild(ovl);
     });
+  }
+
+  // The upgrade card. applyGates overlays it on a locked [data-gate] region; pages that gate server-side
+  // (showdown.js, GATING_MODE 'server') render it in place of the sections they didn't receive.
+  function lockCardHTML(need, msg) {
+    injectCSS();
+    const t = tierOf(need);
+    return `
+        <div class="bbi-lock-card">
+          <div class="eyebrow">${t.name} feature</div>
+          <h4>Unlock this with ${t.name}</h4>
+          <p>${escapeHtml(msg ||
+              (t.name + ' members get ' + t.tagline.toLowerCase() + '.'))}</p>
+          <a class="bbi-auth-btn" href="pricing.html">See plans — from $${t.priceM}/mo</a>
+        </div>`;
   }
 
   function escapeHtml(s) { return String(s ?? '').replace(/[&<>"]/g,

@@ -110,5 +110,52 @@ window.BBI = window.BBI || {};
     return `<span class="fx-num${opts.cls ? ' ' + opts.cls : ''}" data-m="${key}" data-n="${v}" data-d="${d}"${opts.sep ? ' data-sep="1"' : ''}${opts.from != null ? ` data-from="${opts.from}"` : ''}>${txt}</span>`;
   };
 
-  window.BBI.fx = { reduced, snapshot, morph, reveal, confetti, tween, num };
+  /* ---------- keyboard + focus (a11y) ----------
+     The page re-renders regions with innerHTML, which drops the focused
+     control. keepFocus() is called before a render and returns a restore()
+     to call after it: it re-focuses the control with the same data-*
+     attributes inside the same #id host (or, failing that, the first
+     control of the same kind there), so keyboard focus survives renders. */
+  const SKIP_ATTR = /^data-(m|n|d|from|sep|from-style)$/;
+  const keepFocus = () => {
+    const a = document.activeElement;
+    if (!a || a === document.body || !a.closest) return () => {};
+    const host = a.parentElement && a.parentElement.closest('[id]');
+    const attrs = [...a.attributes].filter(x => x.name.startsWith('data-') && !SKIP_ATTR.test(x.name)).map(x => [x.name, x.value]);
+    const tag = a.tagName;
+    return () => {
+      if (a.isConnected) return;
+      if (a.id) { const same = document.getElementById(a.id); if (same) { same.focus({ preventScroll: true }); return; } }
+      if (!host || !attrs.length) return;
+      const h = document.getElementById(host.id); if (!h) return;
+      const q = sel => { try { return [...h.querySelectorAll(sel)].find(el => el.tagName === tag && el.getClientRects().length); } catch { return null; } };
+      const el = q(attrs.map(([k, v]) => `[${k}="${CSS.escape(v)}"]`).join('')) || q(attrs.map(([k]) => `[${k}]`).join(''));
+      if (el) el.focus({ preventScroll: true });
+    };
+  };
+  // Roving tabindex for [role=radiogroup]: one tab stop per group (the checked radio,
+  // or the first when none is checked); the arrow keys move and select (keydown below).
+  const rove = (root = document) => {
+    root.querySelectorAll('[role=radiogroup]').forEach(g => {
+      const rs = [...g.querySelectorAll('[role=radio]')]; if (!rs.length) return;
+      const on = rs.find(r => r.getAttribute('aria-checked') === 'true') || rs[0];
+      rs.forEach(r => r.setAttribute('tabindex', r === on ? '0' : '-1'));
+    });
+  };
+  document.addEventListener('keydown', e => {
+    const r = e.target && e.target.closest && e.target.closest('[role=radio]');
+    const g = r && r.closest('[role=radiogroup]');
+    if (!g || e.altKey || e.ctrlKey || e.metaKey) return;
+    const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1, Home: -1e3, End: 1e3 }[e.key]; if (!d) return;
+    e.preventDefault();
+    const rs = [...g.querySelectorAll('[role=radio]')], i = rs.indexOf(r);
+    const n = Math.abs(d) > 1 ? (d < 0 ? 0 : rs.length - 1) : (i + d + rs.length) % rs.length;
+    const hostId = g.id, key = rs[n].dataset.key;
+    rs[n].click();                                           // selects → the page re-renders the group
+    const g2 = (hostId && document.getElementById(hostId)) || g;
+    const t = [...g2.querySelectorAll('[role=radio]')].find(x => x.dataset.key === key) || [...g2.querySelectorAll('[role=radio]')][n];
+    if (t) t.focus({ preventScroll: false });
+  });
+
+  window.BBI.fx = { reduced, snapshot, morph, reveal, confetti, tween, num, keepFocus, rove };
 })();

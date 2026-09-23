@@ -319,7 +319,15 @@
         out.push({ key, label, status, msg: status === 'fail' || status === 'pending' ? msg : '' });
       };
       add('max_kickers', `Max ${H.max_kickers} kicker`, true, X.k_n > H.max_kickers, `${X.k_n} kickers`);
-      add('max_dst', `Max ${H.max_dst} DST`, true, X.dst_n > H.max_dst, '2 DST');
+      {
+        // v1.3: DSTs counted in every slot (captain included); two DSTs only as a grind-script dart, never with a K.
+        const dstAll = X.dst_n + (c.pos === 'DST' ? 1 : 0), req = H.two_dst_requires || {}, gt = RULES.scripts.overlays.grind.trigger;
+        add('max_dst', `Max ${H.max_dst} DST`, true, dstAll > H.max_dst, `${dstAll} DST`);
+        const grindOk = (req.or_grind_overlay ?? true) && (A.total <= gt.total_max || A.wind >= gt.or_wind_min);
+        add('two_dst_requires', `Two DSTs: grind dart only (total ≤ ${req.total_max ?? '—'} or grind overlay)`, dstAll >= 2,
+          !(grindOk || A.total <= (req.total_max ?? -1)), `2 DST outside a grind (total ${pyFloatRepr(A.total)})`);
+        add('two_dst_no_k', 'Two DSTs: no kicker', dstAll >= 2, !!X.k_n && !req.allow_k, '2 DST + K');
+      }
       add('max_k_plus_dst', `K + DST ≤ ${H.max_k_plus_dst}`, true, X.k_n + X.dst_n > H.max_k_plus_dst, 'K+DST>2');
       {
         let facing = 0, bad = false;
@@ -455,6 +463,8 @@
         if (X.feats.both_qbs && (c_(q => q.feats.both_qbs) + 1) / N > bqCap + 1e-9) return 'both-QB share';
         if (X.k_n >= 2 && c_(q => q.k_n >= 2) >= PF.two_k_max) return 'two-K cap';
         if (X.k_n >= 2 && A.total < S.two_k_min_total) return 'two-K needs total ≥52';
+        const twoDst = Y => Y.dst_n + (Y.cpt.pos === 'DST' ? 1 : 0) >= 2;
+        if (twoDst(X) && c_(twoDst) >= (PF.two_dst_max_per_batch ?? 0)) return 'two-DST cap';
         const kCap = top ? (CE.k ?? K_SHARE[1]) : K_SHARE[1], dCap = top ? (CE.dst ?? DST_SHARE[1]) : DST_SHARE[1];
         if (X.k_n && (c_(q => q.k_n) + 1) / N > kCap + 1e-9) return 'K share max' + (top ? ' (ceiling)' : '');
         if (X.dst_n && (c_(q => q.dst_n) + 1) / N > dCap + 1e-9) return 'DST share max' + (top ? ' (ceiling)' : '');

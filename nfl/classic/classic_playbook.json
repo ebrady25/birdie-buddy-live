@@ -1,0 +1,1950 @@
+{
+ "meta": {
+  "source": "curated",
+  "version": "classic-1.0",
+  "title": "Classic Playbook",
+  "updated": "2026-09-22",
+  "bible": "CLASSIC_BIBLE v1.1",
+  "codex": "CODEX v1.0 Part 3",
+  "engine": "classic_engine.py v0 (per-lineup audit: hard rules + soft flags)",
+  "sources": [
+   {
+    "key": "W",
+    "label": "Milly Maker Tracker",
+    "text": "169 DK Milly Maker winners 2016–25, every roster slot",
+    "derived": true
+   },
+   {
+    "key": "N",
+    "label": "nflverse",
+    "text": "closing lines + final scores, 2,639 regular-season games 2016–25",
+    "derived": true
+   },
+   {
+    "key": "V",
+    "label": "fantasy.vip 2025",
+    "text": "Milly field-composition cohorts: field 3.46M → top-1% 34,767 → top-3 54",
+    "derived": false
+   },
+   {
+    "key": "E",
+    "label": "ETR / Levitan",
+    "text": "Milly studies 2017–22",
+    "derived": false
+   }
+  ],
+  "provenance": {
+   "meta": "curated",
+   "rules": "rules",
+   "winner_games": "derived",
+   "winners": "derived",
+   "winner_checks": "derived",
+   "presets": "derived",
+   "cohort": "curated",
+   "rule_groups": "curated",
+   "rule_cards": "curated",
+   "laws": "curated",
+   "samples": "curated",
+   "small_field_study": "curated",
+   "sample_pools": "derived"
+  }
+ },
+ "rules": {
+  "source": "rules",
+  "version": "1.3 (2026-09-23) — two-DST grind dart (history: 5/120 winners)",
+  "hard": {
+   "qb_min_same_team_catchers": 1,
+   "max_secondary_same_team_pairs": 0,
+   "offense_vs_own_dst_max": 0,
+   "max_players_one_team": 3,
+   "max_players_one_game": 5,
+   "max_negative_leverage_chalk_per_lineup": 1,
+   "chalk_own_threshold": 20,
+   "min_salary_used": 49500
+  },
+  "soft": {
+   "qb_catchers_default": 2,
+   "bring_back_lean": "RB",
+   "secondary_opposing_pair_required": true,
+   "games_represented": [
+    4,
+    6
+   ],
+   "flex_default": "RB",
+   "qb_salary_max": 6800,
+   "qb_own_max": 15,
+   "qb_game_total_min": 46,
+   "qb_team_dog_max": 6.5,
+   "sub5_ceiling_plays": [
+    1,
+    2
+   ],
+   "dst_salary_max": 3500
+  },
+  "portfolio": {
+   "exposure_max_non_qb": 0.35,
+   "exposure_max_chalk": 0.25,
+   "distinct_qbs_min_for_4plus": 3,
+   "single_stack_share_max": 0.4,
+   "max_overlap_players": 5,
+   "dupes_max_by_field": [
+    [
+     5000,
+     1
+    ],
+    [
+     150000,
+     3
+    ],
+    [
+     1000000,
+     10
+    ]
+   ]
+  }
+ },
+ "winner_games": {
+  "source": "derived",
+  "about": "Every Milly Maker winner's QB game joined to its nflverse closing line and final score, against every regular-season game 2016–25 (game rows) or both sides of it (team rows).",
+  "n": 169,
+  "n_winners": 169,
+  "baseline_games": 2639,
+  "baseline_team_games": 5278,
+  "rows": [
+   {
+    "key": "total_ge48",
+    "label": "Game total ≥48",
+    "unit": "game",
+    "winners": {
+     "pct": 50,
+     "k": 85,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 27,
+     "k": 722,
+     "n": 2639
+    }
+   },
+   {
+    "key": "total_le42",
+    "label": "Game total ≤42",
+    "unit": "game",
+    "winners": {
+     "pct": 13,
+     "k": 22,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 26,
+     "k": 682,
+     "n": 2639
+    }
+   },
+   {
+    "key": "team_fav",
+    "label": "QB's team favored",
+    "unit": "team",
+    "winners": {
+     "pct": 70,
+     "k": 118,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 50,
+     "k": 2635,
+     "n": 5278
+    }
+   },
+   {
+    "key": "team_fav7",
+    "label": "QB's team favored by 7+",
+    "unit": "team",
+    "winners": {
+     "pct": 25,
+     "k": 43,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 14,
+     "k": 753,
+     "n": 5278
+    }
+   },
+   {
+    "key": "team_dog7",
+    "label": "QB's team a 7+ dog",
+    "unit": "team",
+    "winners": {
+     "pct": 5,
+     "k": 8,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 14,
+     "k": 753,
+     "n": 5278
+    }
+   },
+   {
+    "key": "went_over",
+    "label": "Game went over the total",
+    "unit": "game",
+    "winners": {
+     "pct": 84,
+     "k": 142,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 49,
+     "k": 1282,
+     "n": 2639
+    }
+   },
+   {
+    "key": "actual_ge55",
+    "label": "Actual game total ≥55",
+    "unit": "game",
+    "winners": {
+     "pct": 66,
+     "k": 112,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 25,
+     "k": 652,
+     "n": 2639
+    }
+   },
+   {
+    "key": "team_won",
+    "label": "QB's team won",
+    "unit": "team",
+    "winners": {
+     "pct": 65,
+     "k": 110,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 50,
+     "k": 2629,
+     "n": 5278
+    }
+   },
+   {
+    "key": "within7",
+    "label": "Final margin within 7",
+    "unit": "game",
+    "winners": {
+     "pct": 51,
+     "k": 87,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 49,
+     "k": 1284,
+     "n": 2639
+    }
+   },
+   {
+    "key": "dome",
+    "label": "Dome / closed roof",
+    "unit": "game",
+    "winners": {
+     "pct": 43,
+     "k": 72,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 29,
+     "k": 761,
+     "n": 2639
+    }
+   }
+  ],
+  "medians": {
+   "winners_total": 48.0,
+   "winners_implied": 25.2,
+   "baseline_total": 45.0,
+   "baseline_implied": 22.5
+  },
+  "total_bands": [
+   {
+    "key": "le42",
+    "label": "≤42",
+    "lo": null,
+    "hi": 42,
+    "winners": {
+     "pct": 13,
+     "k": 22,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 26,
+     "k": 682,
+     "n": 2639
+    },
+    "lift": 0.5
+   },
+   {
+    "key": "42.5_45.5",
+    "label": "42.5–45.5",
+    "lo": 42.5,
+    "hi": 45.5,
+    "winners": {
+     "pct": 21,
+     "k": 35,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 30,
+     "k": 795,
+     "n": 2639
+    },
+    "lift": 0.69
+   },
+   {
+    "key": "46_47.5",
+    "label": "46–47.5",
+    "lo": 46,
+    "hi": 47.5,
+    "winners": {
+     "pct": 16,
+     "k": 27,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 17,
+     "k": 440,
+     "n": 2639
+    },
+    "lift": 0.96
+   },
+   {
+    "key": "48_50.5",
+    "label": "48–50.5",
+    "lo": 48,
+    "hi": 50.5,
+    "winners": {
+     "pct": 29,
+     "k": 49,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 16,
+     "k": 429,
+     "n": 2639
+    },
+    "lift": 1.78
+   },
+   {
+    "key": "ge51",
+    "label": "≥51",
+    "lo": 51,
+    "hi": null,
+    "winners": {
+     "pct": 21,
+     "k": 36,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 11,
+     "k": 293,
+     "n": 2639
+    },
+    "lift": 1.92
+   }
+  ],
+  "side_bands": [
+   {
+    "key": "fav7",
+    "label": "Fav by 7+",
+    "lo": null,
+    "hi": -7,
+    "winners": {
+     "pct": 25,
+     "k": 43,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 14,
+     "k": 753,
+     "n": 5278
+    },
+    "lift": 1.78
+   },
+   {
+    "key": "fav3.5_6.5",
+    "label": "Fav by 3.5–6.5",
+    "lo": -6.5,
+    "hi": -3.5,
+    "winners": {
+     "pct": 19,
+     "k": 32,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 17,
+     "k": 901,
+     "n": 5278
+    },
+    "lift": 1.11
+   },
+   {
+    "key": "fav0.5_3",
+    "label": "Fav by ½–3",
+    "lo": -3,
+    "hi": -0.5,
+    "winners": {
+     "pct": 25,
+     "k": 43,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 19,
+     "k": 981,
+     "n": 5278
+    },
+    "lift": 1.37
+   },
+   {
+    "key": "pk_dog3",
+    "label": "Pick'em / dog ≤3",
+    "lo": 0,
+    "hi": 3,
+    "winners": {
+     "pct": 14,
+     "k": 23,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 19,
+     "k": 989,
+     "n": 5278
+    },
+    "lift": 0.73
+   },
+   {
+    "key": "dog3.5_6.5",
+    "label": "Dog by 3.5–6.5",
+    "lo": 3.5,
+    "hi": 6.5,
+    "winners": {
+     "pct": 12,
+     "k": 20,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 17,
+     "k": 901,
+     "n": 5278
+    },
+    "lift": 0.69
+   },
+   {
+    "key": "dog7",
+    "label": "Dog by 7+",
+    "lo": 7,
+    "hi": null,
+    "winners": {
+     "pct": 5,
+     "k": 8,
+     "n": 169
+    },
+    "baseline": {
+     "pct": 14,
+     "k": 753,
+     "n": 5278
+    },
+    "lift": 0.33
+   }
+  ]
+ },
+ "winners": {
+  "source": "derived",
+  "about": "169 DraftKings Milly Maker winning lineups, 2016–2025 main slates, every roster slot (Milly Maker Tracker export). Recomputed on every build.",
+  "n": 169,
+  "stack_shape": [
+   {
+    "key": "NA",
+    "label": "QB alone (naked)",
+    "catchers": 0,
+    "pct": 14,
+    "k": 24,
+    "n": 169
+   },
+   {
+    "key": "WR",
+    "label": "QB + WR",
+    "catchers": 1,
+    "pct": 41,
+    "k": 69,
+    "n": 169
+   },
+   {
+    "key": "TE",
+    "label": "QB + TE",
+    "catchers": 1,
+    "pct": 11,
+    "k": 19,
+    "n": 169
+   },
+   {
+    "key": "WRx2",
+    "label": "QB + 2 WR",
+    "catchers": 2,
+    "pct": 15,
+    "k": 26,
+    "n": 169
+   },
+   {
+    "key": "TE, WR",
+    "label": "QB + WR + TE",
+    "catchers": 2,
+    "pct": 17,
+    "k": 28,
+    "n": 169
+   },
+   {
+    "key": "TE, WRx2",
+    "label": "QB + 2 WR + TE",
+    "catchers": 3,
+    "pct": 2,
+    "k": 3,
+    "n": 169
+   }
+  ],
+  "catchers": {
+   "naked": {
+    "pct": 14,
+    "k": 24,
+    "n": 169
+   },
+   "one": {
+    "pct": 52,
+    "k": 88,
+    "n": 169
+   },
+   "two_plus": {
+    "pct": 34,
+    "k": 57,
+    "n": 169
+   },
+   "three_plus": {
+    "pct": 2,
+    "k": 3,
+    "n": 169
+   }
+  },
+  "bring_back": {
+   "none": {
+    "pct": 56,
+    "k": 94,
+    "n": 169
+   },
+   "RB": {
+    "pct": 17,
+    "k": 29,
+    "n": 169
+   },
+   "WR": {
+    "pct": 24,
+    "k": 40,
+    "n": 169
+   },
+   "TE": {
+    "pct": 4,
+    "k": 6,
+    "n": 169
+   },
+   "any": {
+    "pct": 44,
+    "k": 75,
+    "n": 169
+   },
+   "includes_rb": {
+    "pct": 17,
+    "k": 29,
+    "n": 169
+   }
+  },
+  "secondary": {
+   "opp_pair_any": {
+    "pct": 42,
+    "k": 71,
+    "n": 169
+   },
+   "rb_vs_wr_any": {
+    "pct": 22,
+    "k": 37,
+    "n": 169
+   },
+   "same_team_pair_any": {
+    "pct": 28,
+    "k": 47,
+    "n": 169
+   }
+  },
+  "games_represented": {
+   "3": {
+    "pct": 1,
+    "k": 2,
+    "n": 169
+   },
+   "4": {
+    "pct": 9,
+    "k": 15,
+    "n": 169
+   },
+   "5": {
+    "pct": 27,
+    "k": 45,
+    "n": 169
+   },
+   "6": {
+    "pct": 36,
+    "k": 61,
+    "n": 169
+   },
+   "7": {
+    "pct": 20,
+    "k": 33,
+    "n": 169
+   },
+   "8": {
+    "pct": 8,
+    "k": 13,
+    "n": 169
+   }
+  },
+  "max_from_team": {
+   "1": {
+    "pct": 4,
+    "k": 7,
+    "n": 169
+   },
+   "2": {
+    "pct": 49,
+    "k": 82,
+    "n": 169
+   },
+   "3": {
+    "pct": 40,
+    "k": 68,
+    "n": 169
+   },
+   "4": {
+    "pct": 6,
+    "k": 10,
+    "n": 169
+   },
+   "5": {
+    "pct": 1,
+    "k": 2,
+    "n": 169
+   }
+  },
+  "max_from_game": {
+   "2": {
+    "pct": 33,
+    "k": 55,
+    "n": 169
+   },
+   "3": {
+    "pct": 37,
+    "k": 62,
+    "n": 169
+   },
+   "4": {
+    "pct": 22,
+    "k": 37,
+    "n": 169
+   },
+   "5": {
+    "pct": 7,
+    "k": 11,
+    "n": 169
+   },
+   "6": {
+    "pct": 2,
+    "k": 4,
+    "n": 169
+   }
+  },
+  "salary": {
+   "full_cap": {
+    "pct": 57,
+    "k": 97,
+    "n": 169
+   },
+   "within_500": {
+    "pct": 99,
+    "k": 167,
+    "n": 169
+   },
+   "median_left": 0.0
+  },
+  "ownership": {
+   "cum_median": 113.2,
+   "cum_under_100": {
+    "pct": 36,
+    "k": 61,
+    "n": 169
+   },
+   "cum_over_150": {
+    "pct": 12,
+    "k": 21,
+    "n": 169
+   },
+   "le10_mean": 4.4,
+   "ge20_mean": 1.8,
+   "ge20_count": {
+    "0": {
+     "pct": 15,
+     "k": 26,
+     "n": 169
+    },
+    "1": {
+     "pct": 30,
+     "k": 50,
+     "n": 169
+    },
+    "2": {
+     "pct": 31,
+     "k": 52,
+     "n": 169
+    },
+    "3": {
+     "pct": 15,
+     "k": 25,
+     "n": 169
+    },
+    "4": {
+     "pct": 7,
+     "k": 12,
+     "n": 169
+    },
+    "5": {
+     "pct": 2,
+     "k": 4,
+     "n": 169
+    }
+   },
+   "sub5_count": {
+    "0": {
+     "pct": 12,
+     "k": 20,
+     "n": 169
+    },
+    "1": {
+     "pct": 26,
+     "k": 44,
+     "n": 169
+    },
+    "2": {
+     "pct": 24,
+     "k": 41,
+     "n": 169
+    },
+    "3": {
+     "pct": 23,
+     "k": 39,
+     "n": 169
+    },
+    "4": {
+     "pct": 7,
+     "k": 12,
+     "n": 169
+    },
+    "5": {
+     "pct": 6,
+     "k": 10,
+     "n": 169
+    },
+    "6": {
+     "pct": 1,
+     "k": 2,
+     "n": 169
+    },
+    "8": {
+     "pct": 1,
+     "k": 1,
+     "n": 169
+    }
+   },
+   "max_own_median": 28.9,
+   "has_ge30": {
+    "pct": 46,
+    "k": 78,
+    "n": 169
+   },
+   "has_lt2": {
+    "pct": 49,
+    "k": 83,
+    "n": 169
+   }
+  },
+  "qb": {
+   "salary_median": 6200.0,
+   "own_median": 7.0,
+   "salary_le_max": {
+    "pct": 75,
+    "k": 126,
+    "n": 169
+   },
+   "own_le_max": {
+    "pct": 88,
+    "k": 148,
+    "n": 169
+   },
+   "own_ge20": {
+    "pct": 4,
+    "k": 7,
+    "n": 169
+   }
+  },
+  "dst": {
+   "salary_median": 3100.0,
+   "salary_le_max": {
+    "pct": 78,
+    "k": 132,
+    "n": 169
+   },
+   "vs_non_franchise_qb": {
+    "pct": 76,
+    "k": 128,
+    "n": 169
+   },
+   "rb_with_own_dst": {
+    "pct": 20,
+    "k": 33,
+    "n": 169
+   },
+   "offense_vs_own_dst": {
+    "pct": 5,
+    "k": 9,
+    "n": 169
+   }
+  },
+  "flex": {
+   "RB": {
+    "pct": 47,
+    "k": 79,
+    "n": 169
+   },
+   "WR": {
+    "pct": 43,
+    "k": 72,
+    "n": 169
+   },
+   "TE": {
+    "pct": 11,
+    "k": 18,
+    "n": 169
+   }
+  }
+ },
+ "winner_checks": {
+  "source": "derived",
+  "about": "Share of the 169 winners that pass each classic rule, computed from their slots. The negative-leverage chalk rule needs Optimal %, which the winner export does not carry.",
+  "n": 169,
+  "hard": {
+   "qb_min_same_team_catchers": {
+    "pct": 86,
+    "k": 145,
+    "n": 169
+   },
+   "max_secondary_same_team_pairs": {
+    "pct": 72,
+    "k": 122,
+    "n": 169
+   },
+   "offense_vs_own_dst_max": {
+    "pct": 95,
+    "k": 160,
+    "n": 169
+   },
+   "max_players_one_team": {
+    "pct": 93,
+    "k": 157,
+    "n": 169
+   },
+   "max_players_one_game": {
+    "pct": 98,
+    "k": 165,
+    "n": 169
+   },
+   "max_negative_leverage_chalk_per_lineup": null,
+   "min_salary_used": {
+    "pct": 98,
+    "k": 166,
+    "n": 169
+   },
+   "_all_checkable": {
+    "pct": 53,
+    "k": 89,
+    "n": 169
+   }
+  },
+  "soft": {
+   "qb_catchers_default": {
+    "pct": 34,
+    "k": 57,
+    "n": 169
+   },
+   "bring_back_lean": {
+    "pct": 17,
+    "k": 29,
+    "n": 169
+   },
+   "secondary_opposing_pair_required": {
+    "pct": 42,
+    "k": 71,
+    "n": 169
+   },
+   "games_represented": {
+    "pct": 72,
+    "k": 121,
+    "n": 169
+   },
+   "flex_default": {
+    "pct": 47,
+    "k": 79,
+    "n": 169
+   },
+   "qb_salary_max": {
+    "pct": 75,
+    "k": 126,
+    "n": 169
+   },
+   "qb_own_max": {
+    "pct": 88,
+    "k": 148,
+    "n": 169
+   },
+   "sub5_ceiling_plays": {
+    "pct": 50,
+    "k": 85,
+    "n": 169
+   },
+   "dst_salary_max": {
+    "pct": 78,
+    "k": 132,
+    "n": 169
+   },
+   "qb_game_total_min": {
+    "pct": 66,
+    "k": 112,
+    "n": 169
+   },
+   "qb_team_dog_max": {
+    "pct": 95,
+    "k": 161,
+    "n": 169
+   }
+  }
+ },
+ "presets": {
+  "source": "derived",
+  "about": "nflverse closing lines for each 2026 Sunday main slate (13:00–16:25 ET kickoffs). Primetime games are not on the DK main slate.",
+  "slates": [
+   {
+    "id": "2026-w4-main",
+    "label": "Week 4 main",
+    "week": 4,
+    "date": "2026-10-04",
+    "games": [
+     {
+      "away": "TEN",
+      "home": "BAL",
+      "fav": "BAL",
+      "spread": 10.5,
+      "total": 44.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NE",
+      "home": "BUF",
+      "fav": "BUF",
+      "spread": 5.5,
+      "total": 49.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYJ",
+      "home": "CHI",
+      "fav": "CHI",
+      "spread": 3.0,
+      "total": 43.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "JAX",
+      "home": "CIN",
+      "fav": "CIN",
+      "spread": 3.0,
+      "total": 49.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "DAL",
+      "home": "HOU",
+      "fav": "HOU",
+      "spread": 3.0,
+      "total": 47.5,
+      "kick": "13:00",
+      "roof": ""
+     },
+     {
+      "away": "ARI",
+      "home": "NYG",
+      "fav": "NYG",
+      "spread": 2.5,
+      "total": 43.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LAR",
+      "home": "PHI",
+      "fav": "LAR",
+      "spread": 2.5,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "GB",
+      "home": "TB",
+      "fav": "GB",
+      "spread": 1.5,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "MIA",
+      "home": "MIN",
+      "fav": "MIN",
+      "spread": 10.5,
+      "total": 42.5,
+      "kick": "16:05",
+      "roof": "dome"
+     },
+     {
+      "away": "KC",
+      "home": "LV",
+      "fav": "KC",
+      "spread": 6.0,
+      "total": 45.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "LAC",
+      "home": "SEA",
+      "fav": "SEA",
+      "spread": 6.5,
+      "total": 42.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     },
+     {
+      "away": "DEN",
+      "home": "SF",
+      "fav": "SF",
+      "spread": 4.5,
+      "total": 45.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     }
+    ]
+   },
+   {
+    "id": "2026-w3-main",
+    "label": "Week 3 main",
+    "week": 3,
+    "date": "2026-09-27",
+    "games": [
+     {
+      "away": "LAC",
+      "home": "BUF",
+      "fav": "BUF",
+      "spread": 7.0,
+      "total": 50.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CAR",
+      "home": "CLE",
+      "fav": "CAR",
+      "spread": 2.5,
+      "total": 42.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYJ",
+      "home": "DET",
+      "fav": "DET",
+      "spread": 6.5,
+      "total": 47.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "HOU",
+      "home": "IND",
+      "fav": "HOU",
+      "spread": 3.0,
+      "total": 42.5,
+      "kick": "13:00",
+      "roof": ""
+     },
+     {
+      "away": "NE",
+      "home": "JAX",
+      "fav": "JAX",
+      "spread": 3.0,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "KC",
+      "home": "MIA",
+      "fav": "KC",
+      "spread": 11.5,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "TEN",
+      "home": "NYG",
+      "fav": "NYG",
+      "spread": 2.5,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CIN",
+      "home": "PIT",
+      "fav": "CIN",
+      "spread": 3.5,
+      "total": 42.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "SEA",
+      "home": "WAS",
+      "fav": "SEA",
+      "spread": 7.0,
+      "total": 40.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ARI",
+      "home": "SF",
+      "fav": "SF",
+      "spread": 8.5,
+      "total": 47.5,
+      "kick": "16:05",
+      "roof": "outdoor"
+     },
+     {
+      "away": "MIN",
+      "home": "TB",
+      "fav": "MIN",
+      "spread": 1.5,
+      "total": 42.5,
+      "kick": "16:05",
+      "roof": "outdoor"
+     },
+     {
+      "away": "BAL",
+      "home": "DAL",
+      "fav": "BAL",
+      "spread": 3.5,
+      "total": 52.5,
+      "kick": "16:25",
+      "roof": ""
+     },
+     {
+      "away": "LV",
+      "home": "NO",
+      "fav": "NO",
+      "spread": 3.0,
+      "total": 43.5,
+      "kick": "16:25",
+      "roof": "dome"
+     }
+    ]
+   },
+   {
+    "id": "2026-w2-main",
+    "label": "Week 2 main",
+    "week": 2,
+    "date": "2026-09-20",
+    "games": [
+     {
+      "away": "CAR",
+      "home": "ATL",
+      "fav": "CAR",
+      "spread": 2.5,
+      "total": 43.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "NO",
+      "home": "BAL",
+      "fav": "BAL",
+      "spread": 8.5,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "MIN",
+      "home": "CHI",
+      "fav": "CHI",
+      "spread": 4.5,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CIN",
+      "home": "HOU",
+      "fav": "HOU",
+      "spread": 3.0,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "PIT",
+      "home": "NE",
+      "fav": "NE",
+      "spread": 4.5,
+      "total": 41.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "GB",
+      "home": "NYJ",
+      "fav": "GB",
+      "spread": 3.5,
+      "total": 44.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CLE",
+      "home": "TB",
+      "fav": "TB",
+      "spread": 8.5,
+      "total": 41.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "PHI",
+      "home": "TEN",
+      "fav": "PHI",
+      "spread": 7.0,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "JAX",
+      "home": "DEN",
+      "fav": "DEN",
+      "spread": 2.5,
+      "total": 45.5,
+      "kick": "16:05",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LV",
+      "home": "LAC",
+      "fav": "LAC",
+      "spread": 6.5,
+      "total": 43.5,
+      "kick": "16:05",
+      "roof": "dome"
+     },
+     {
+      "away": "SEA",
+      "home": "ARI",
+      "fav": "SEA",
+      "spread": 3.5,
+      "total": 40.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "WAS",
+      "home": "DAL",
+      "fav": "DAL",
+      "spread": 3.5,
+      "total": 51.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "MIA",
+      "home": "SF",
+      "fav": "SF",
+      "spread": 12.5,
+      "total": 44.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     }
+    ]
+   },
+   {
+    "id": "2026-w1-main",
+    "label": "Week 1 main",
+    "week": 1,
+    "date": "2026-09-13",
+    "games": [
+     {
+      "away": "CHI",
+      "home": "CAR",
+      "fav": "CHI",
+      "spread": 3.0,
+      "total": 47.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "TB",
+      "home": "CIN",
+      "fav": "CIN",
+      "spread": 3.5,
+      "total": 50.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NO",
+      "home": "DET",
+      "fav": "DET",
+      "spread": 7.0,
+      "total": 49.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "BUF",
+      "home": "HOU",
+      "fav": "BUF",
+      "spread": 1.5,
+      "total": 44.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "BAL",
+      "home": "IND",
+      "fav": "BAL",
+      "spread": 3.0,
+      "total": 48.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "CLE",
+      "home": "JAX",
+      "fav": "JAX",
+      "spread": 8.5,
+      "total": 40.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ATL",
+      "home": "PIT",
+      "fav": "PIT",
+      "spread": 6.5,
+      "total": 40.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYJ",
+      "home": "TEN",
+      "fav": "TEN",
+      "spread": 1.5,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ARI",
+      "home": "LAC",
+      "fav": "LAC",
+      "spread": 8.5,
+      "total": 47.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "MIA",
+      "home": "LV",
+      "fav": "LV",
+      "spread": 3.0,
+      "total": 40.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "GB",
+      "home": "MIN",
+      "fav": "MIN",
+      "spread": 1.5,
+      "total": 46.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "WAS",
+      "home": "PHI",
+      "fav": "PHI",
+      "spread": 6.0,
+      "total": 43.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     }
+    ]
+   }
+  ]
+ },
+ "cohort": {
+  "source": "curated",
+  "about": "Direction only: whether each shape shows up more (over), less (under) or about as often (neutral) in the top 1% and top 3 than in the field, from the fantasy.vip 2025 Milly Maker field-composition study quoted in CLASSIC_BIBLE.md Part C. External study, not recomputed from our data; its rates are not republished here.",
+  "cohorts": [
+   {
+    "key": "field",
+    "label": "Field",
+    "n": 3460000
+   },
+   {
+    "key": "top1",
+    "label": "Top 1%",
+    "n": 34767
+   },
+   {
+    "key": "top3",
+    "label": "Top 3",
+    "n": 54
+   }
+  ],
+  "rates_published": false,
+  "tables": {
+   "stack_shape": {
+    "title": "QB stack shape",
+    "rows": [
+     {
+      "label": "QB + WR",
+      "verdict": "neutral"
+     },
+     {
+      "label": "QB + WR + TE",
+      "verdict": "over"
+     },
+     {
+      "label": "QB + 2 WR",
+      "verdict": "over"
+     },
+     {
+      "label": "QB + 2 WR + TE",
+      "verdict": "over"
+     },
+     {
+      "label": "QB + RB + WR",
+      "verdict": "neutral"
+     },
+     {
+      "label": "QB alone (naked)",
+      "verdict": "under"
+     },
+     {
+      "label": "QB + TE only",
+      "verdict": "under"
+     }
+    ]
+   },
+   "bring_back": {
+    "title": "Bring-back from the QB's opponent",
+    "rows": [
+     {
+      "label": "None",
+      "verdict": "under"
+     },
+     {
+      "label": "WR",
+      "verdict": "neutral"
+     },
+     {
+      "label": "RB",
+      "verdict": "over"
+     },
+     {
+      "label": "TE",
+      "verdict": "neutral"
+     }
+    ]
+   },
+   "secondary": {
+    "title": "One-offs outside the QB game",
+    "rows": [
+     {
+      "label": "≥1 secondary opposing pair",
+      "verdict": "over"
+     },
+     {
+      "label": "Secondary RB vs WR",
+      "verdict": "over"
+     },
+     {
+      "label": "Any secondary teammate pair",
+      "verdict": "under"
+     },
+     {
+      "label": "Secondary RB + WR teammates",
+      "verdict": "under"
+     }
+    ]
+   },
+   "games": {
+    "title": "Games represented",
+    "rows": [
+     {
+      "label": "4 games",
+      "verdict": "over"
+     },
+     {
+      "label": "7 games",
+      "verdict": "under"
+     }
+    ]
+   },
+   "dst": {
+    "title": "DST correlation",
+    "rows": [
+     {
+      "label": "RB + own DST",
+      "verdict": "over"
+     },
+     {
+      "label": "Offense vs own DST",
+      "verdict": "under"
+     }
+    ]
+   }
+  }
+ },
+ "rule_groups": [
+  {
+   "key": "stack",
+   "title": "The stack",
+   "sub": "QB + catchers, from the right game"
+  },
+  {
+   "key": "oneoffs",
+   "title": "Bring-back & one-offs",
+   "sub": "correlate the rest, never double up"
+  },
+  {
+   "key": "chalk",
+   "title": "Chalk & leverage",
+   "sub": "own the right chalk, never two busts"
+  },
+  {
+   "key": "build",
+   "title": "Salary, DST, FLEX",
+   "sub": "spend it all, cheap DST, RB flex"
+  },
+  {
+   "key": "portfolio",
+   "title": "Portfolio",
+   "sub": "per batch, for 2+ entries"
+  }
+ ],
+ "rule_cards": [
+  {
+   "group": "stack",
+   "path": "hard.qb_min_same_team_catchers",
+   "fmt": "int",
+   "title": "Never a naked QB",
+   "rule": "QB + at least {v} same-team pass-catcher (WR or TE)",
+   "why": "The pass-catcher is the correlation. The naked QB under-indexes from field to top 1% in the cohort study.",
+   "stat": "winners.catchers.naked",
+   "stat_label": "winners were naked anyway",
+   "cohort": "stack_shape"
+  },
+  {
+   "group": "stack",
+   "path": "soft.qb_catchers_default",
+   "fmt": "int",
+   "title": "Default to QB + 2",
+   "rule": "QB + {v} pass-catchers is the default build; QB + 3 (2 WR + TE) in ≥48 totals",
+   "why": "The second (and third) catcher is the correlation the field skips — QB + 2 WR + TE is the biggest field-to-top-3 ratio in the cohort table.",
+   "cohort": "stack_shape"
+  },
+  {
+   "group": "stack",
+   "path": "soft.qb_game_total_min",
+   "fmt": "num",
+   "title": "Stack a real game",
+   "rule": "QB game total ≥ {v}",
+   "why": "Winning QB games come from high totals and almost never from grind totals. The winning QB game is not always the slate's highest total — but it is rarely a low one.",
+   "stat": "winner_games.rows.total_ge48",
+   "stat_label": "winning QB games had a 48+ total"
+  },
+  {
+   "group": "stack",
+   "path": "soft.qb_team_dog_max",
+   "fmt": "num",
+   "title": "Favorite or a small dog",
+   "rule": "QB's team no bigger than a +{v} dog",
+   "why": "Winning QBs are usually favored; a big dog almost never produces the winning stack. The bring-back rate is the same either way — the bring-back is about the game going over.",
+   "stat": "winner_games.rows.team_dog7",
+   "stat_label": "winning QBs were 7+ dogs"
+  },
+  {
+   "group": "stack",
+   "path": "soft.qb_salary_max",
+   "fmt": "money",
+   "title": "The QB is cheap",
+   "rule": "QB salary ≤ {v}",
+   "why": "The field pays up for the name QB. Winners pay for a 30-point path at $5.5–6.5k and let the savings buy the RB1.",
+   "stat": "winners.qb.salary_le_max",
+   "stat_label": "winning QBs at or under the cap"
+  },
+  {
+   "group": "stack",
+   "path": "soft.qb_own_max",
+   "fmt": "pct_raw",
+   "title": "…and low-owned",
+   "rule": "QB ownership ≤ {v}",
+   "why": "The QB is the correlation engine, not the star — a low-owned one is where the lineup gets unique.",
+   "stat": "winners.qb.own_le_max",
+   "stat_label": "winning QBs at or under the cap"
+  },
+  {
+   "group": "oneoffs",
+   "path": "soft.bring_back_lean",
+   "fmt": "text",
+   "title": "Bring it back, lean {v}",
+   "rule": "One bring-back from the QB's opponent, preferably the {v}",
+   "why": "The field brings back the WR. The opposing RB — who scores when your QB's team is throwing to catch up, or salts it away — is the under-built version.",
+   "stat": "winners.bring_back.any",
+   "stat_label": "winners had any bring-back",
+   "cohort": "bring_back"
+  },
+  {
+   "group": "oneoffs",
+   "path": "soft.secondary_opposing_pair_required",
+   "fmt": "bool",
+   "title": "Build a second game",
+   "rule": "At least one opposing pair from a game your QB isn't in",
+   "why": "The field concentrates correlation in the QB game and scatters the rest. Winners build a second, opposing mini-stack — RB vs WR is the best version.",
+   "stat": "winners.secondary.opp_pair_any",
+   "stat_label": "winners had a secondary opposing pair",
+   "cohort": "secondary"
+  },
+  {
+   "group": "oneoffs",
+   "path": "hard.max_secondary_same_team_pairs",
+   "fmt": "int",
+   "title": "One-offs never double up",
+   "rule": "At most {v} teammate pairs outside the QB game",
+   "why": "Two players from a non-QB team split one offense's points. Outside the QB game, correlate opposing players or play singles.",
+   "stat": "winners.secondary.same_team_pair_any",
+   "stat_label": "winners had one anyway",
+   "cohort": "secondary"
+  },
+  {
+   "group": "oneoffs",
+   "path": "soft.games_represented",
+   "fmt": "range",
+   "title": "Cluster into 4–6 games",
+   "rule": "{v} games represented",
+   "why": "Winners cluster into fewer games than the field; 7+ games represented under-indexes.",
+   "stat": "winner_checks.soft.games_represented",
+   "stat_label": "winners in the band",
+   "cohort": "games"
+  },
+  {
+   "group": "oneoffs",
+   "path": "hard.max_players_one_team",
+   "fmt": "int",
+   "title": "Max from one team",
+   "rule": "No more than {v} players from one team",
+   "why": "Three from one team is a stack; four is a bet on one offense doing everything.",
+   "stat": "winner_checks.hard.max_players_one_team",
+   "stat_label": "winners within the cap"
+  },
+  {
+   "group": "oneoffs",
+   "path": "hard.max_players_one_game",
+   "fmt": "int",
+   "title": "Max from one game",
+   "rule": "No more than {v} players from one game",
+   "why": "Game stacks past five players are rare in winners and heavily duplicated in the field.",
+   "stat": "winner_checks.hard.max_players_one_game",
+   "stat_label": "winners within the cap"
+  },
+  {
+   "group": "chalk",
+   "path": "hard.max_negative_leverage_chalk_per_lineup",
+   "fmt": "int",
+   "title": "Never two chalk busts",
+   "rule": "At most {v} negative-leverage chalk piece (owned ≥ {chalk}% with Optimal % below ownership)",
+   "why": "\"Fade chalk\" is wrong — winners carry one or two chalk pieces. The rule is never two the sim rates negative-leverage: either bust kills the lineup.",
+   "stat": "winners.ownership.has_ge30",
+   "stat_label": "winners carried a 30%+ player",
+   "needs": "ownership + Optimal % (a Stokastic Data Hub file)"
+  },
+  {
+   "group": "chalk",
+   "path": "soft.sub5_ceiling_plays",
+   "fmt": "range",
+   "title": "1–2 sub-5% ceiling plays",
+   "rule": "{v} players under 5% owned — chosen by Optimal %, not salary",
+   "why": "The low-owned pieces make the lineup yours — but each needs a 20-point path (Optimal % above ownership), not salary relief.",
+   "stat": "winner_checks.soft.sub5_ceiling_plays",
+   "stat_label": "winners had 1–2",
+   "needs": "ownership"
+  },
+  {
+   "group": "chalk",
+   "path": "portfolio.exposure_max_chalk",
+   "fmt": "share",
+   "title": "Cap chalk exposure",
+   "rule": "≤ {v} of the batch on any negative-leverage chalk player",
+   "why": "One chalk bust shouldn't sink half the batch. (Ethan, W1 2026: four players at 44–61% exposure put two busts in 14 of 18 lineups.)"
+  },
+  {
+   "group": "chalk",
+   "path": "portfolio.exposure_max_non_qb",
+   "fmt": "share",
+   "title": "Cap everyone else",
+   "rule": "≤ {v} of the batch on any non-QB player",
+   "why": "Exposure caps and contest selection are worth more than any single build rule."
+  },
+  {
+   "group": "build",
+   "path": "hard.min_salary_used",
+   "fmt": "money",
+   "title": "Spend the cap",
+   "rule": "Salary used ≥ {v}",
+   "why": "Opposite of showdown: winners spend the whole cap. Uniqueness comes from the stack shape, not salary left.",
+   "stat": "winners.salary.full_cap",
+   "stat_label": "winners used the full cap"
+  },
+  {
+   "group": "build",
+   "path": "hard.offense_vs_own_dst_max",
+   "fmt": "int",
+   "title": "No offense vs your DST",
+   "rule": "{v} players facing your own DST",
+   "why": "Your DST scores when that offense doesn't. Rostering both is a hedge, not a stack.",
+   "stat": "winners.dst.offense_vs_own_dst",
+   "stat_label": "winners did it anyway",
+   "cohort": "dst"
+  },
+  {
+   "group": "build",
+   "path": "soft.dst_salary_max",
+   "fmt": "money",
+   "title": "Cheap DST vs a bad QB",
+   "rule": "DST salary ≤ {v}",
+   "why": "Cheap DST against a replacement, backup or rookie QB — never the $4k+ name DST.",
+   "stat": "winners.dst.vs_non_franchise_qb",
+   "stat_label": "winning DSTs faced a non-franchise QB"
+  },
+  {
+   "group": "build",
+   "path": "soft.flex_default",
+   "fmt": "text",
+   "title": "FLEX = {v}",
+   "rule": "Default the FLEX to a {v}; TE-FLEX when the cheap TE is a stack or bring-back piece",
+   "why": "The FLEX position is regime-dependent, but RB has led in the winners and WR-FLEX is the field's habit.",
+   "stat": "winners.flex.RB",
+   "stat_label": "winning FLEX was an RB"
+  },
+  {
+   "group": "portfolio",
+   "path": "portfolio.distinct_qbs_min_for_4plus",
+   "fmt": "int",
+   "title": "Spread the QBs",
+   "rule": "At least {v} distinct QBs in a batch of 4+",
+   "why": "A portfolio is not one bet made N times."
+  },
+  {
+   "group": "portfolio",
+   "path": "portfolio.single_stack_share_max",
+   "fmt": "share",
+   "title": "No stack over 40%",
+   "rule": "No single QB stack in more than {v} of the batch",
+   "why": "A batch should hold more than one game story."
+  },
+  {
+   "group": "portfolio",
+   "path": "portfolio.max_overlap_players",
+   "fmt": "int",
+   "title": "Lineup overlap",
+   "rule": "At most {v} shared players between any two lineups",
+   "why": "Overlap is how one bust takes down a whole batch."
+  },
+  {
+   "group": "portfolio",
+   "path": "portfolio.dupes_max_by_field",
+   "fmt": "dupes",
+   "title": "Dupe gate",
+   "rule": "Max expected dupes by field size: {v}",
+   "why": "Every 2025 Milly winner was unique. Product ownership, not the sum, is what duplicates a lineup."
+  }
+ ],
+ "laws": [
+  {
+   "n": 1,
+   "title": "~113% cumulative ownership",
+   "text": "4–5 players under 10%, about 2 over 20%."
+  },
+  {
+   "n": 2,
+   "title": "Own the right chalk",
+   "text": "One or two chalk pieces, never two negative-leverage busts."
+  },
+  {
+   "n": 3,
+   "title": "Cheap, low-owned QB",
+   "text": "The stud money goes to RB and WR."
+  },
+  {
+   "n": 4,
+   "title": "Stack the QB",
+   "text": "QB + 2 over-indexes; the naked QB under-indexes."
+  },
+  {
+   "n": 5,
+   "title": "Bring it back with the RB",
+   "text": "The opposing RB is the bring-back the field skips."
+  },
+  {
+   "n": 6,
+   "title": "Build a second game",
+   "text": "An opposing pair from a game the QB isn't in."
+  },
+  {
+   "n": 7,
+   "title": "No teammates outside the stack",
+   "text": "One-offs should be opposing pairs or singles."
+  },
+  {
+   "n": 8,
+   "title": "Spend the cap",
+   "text": "Salary left is not a classic lever."
+  },
+  {
+   "n": 9,
+   "title": "No dupes",
+   "text": "Product ownership, not the sum."
+  },
+  {
+   "n": 10,
+   "title": "A portfolio, not one bet N times",
+   "text": "Exposure caps and contest choice beat any single rule."
+  }
+ ],
+ "samples": [
+  {
+   "id": "clean",
+   "label": "Codex-shaped",
+   "pool": "2026-w2-main",
+   "preset": "2026-w2-main",
+   "note": "QB + 2, RB bring-back, a secondary opposing pair, 5 games, RB FLEX, cheap DST.",
+   "lineup": [
+    "Caleb Williams",
+    "Bijan Robinson",
+    "Aaron Jones Sr.",
+    "Rome Odunze",
+    "Tetairoa McMillan",
+    "Wan'Dale Robinson",
+    "Colston Loveland",
+    "Javonte Williams",
+    "Dolphins"
+   ]
+  },
+  {
+   "id": "broken",
+   "label": "Rule-breaker",
+   "pool": "2026-w2-main",
+   "preset": "2026-w2-main",
+   "note": "A naked QB and a teammate pair outside the QB game, scattered across 8 games.",
+   "lineup": [
+    "Justin Herbert",
+    "Travis Etienne Jr.",
+    "Tony Pollard",
+    "Chris Olave",
+    "Tee Higgins",
+    "Tetairoa McMillan",
+    "Trey McBride",
+    "Josh Cameron",
+    "Packers"
+   ]
+  }
+ ],
+ "small_field_study": {
+  "source": "curated",
+  "title": "Power Sweep & Spy classic study",
+  "about": "Stokastic's study of the winners of two DraftKings CLASSIC main-slate small-field contests — Power Sweep (3-max) and The Spy (single entry) — 55 Sundays, 2023–25 plus 2026 Week 1. Winners vs the field.",
+  "study": {
+   "source": "Stokastic Power Sweep (3-max) & Spy (SE), 55 Sundays",
+   "qb_under_10pct": {
+    "winners": "71-73%",
+    "field": "54-59%"
+   },
+   "qb_plus_2": {
+    "winners": "51-53%",
+    "field": "39-44%"
+   },
+   "run_back": {
+    "power_sweep": "60% vs 57%, 2025: 78%",
+    "spy": "no edge"
+   },
+   "total_own": {
+    "power_sweep": 141,
+    "spy": 158
+   },
+   "flex_rb": "no lift (38%)",
+   "te_under_4k_spy": "60% vs 50%",
+   "dupes": "2 of 55",
+   "sim_roi_positive": "49% vs 34%"
+  }
+ },
+ "sample_pools": [
+  {
+   "id": "2026-w2-main",
+   "label": "Week 2 main · sample pool",
+   "file": "pools/2026-w2-main.json",
+   "n_players": 658
+  }
+ ]
+}
