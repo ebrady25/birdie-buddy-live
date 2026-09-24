@@ -647,7 +647,7 @@ window.BBI = window.BBI || {};
         ${state.attack ? sun.slice().sort((a, b) => attackFor(b).on - attackFor(a).on).map(x => { const a = attackFor(x); return `<div class="sd-attack-row${a.on ? ' on' : ''}">${chipOf(x)}${a.on ? `<span class="sd-attack-badge" title="${esc(a.reasons.join(' · '))}">attack</span><small>${esc(a.reasons.join(' · '))}</small>` : '<small class="dim">no edge from the script — primetime-first</small>'}</div>`; }).join('') : ''}
       </div>` : ''}`;
     const chip = `${spreadLabel(state.spread, d.preset && d.preset.fav)} · ${num(state.total)} · ${ENV_SHORT[state.env]} · ${CONTEST_SHORT[state.contest]} · ${state.entries} ${state.entries === 1 ? 'entry' : 'entries'}`;
-    $id('sdChipText').textContent = chip;
+    const chipEl = $id('sdChipText'); if (chipEl) chipEl.textContent = chip;
     $id('sdSummary').textContent = chip;
   };
 
@@ -677,7 +677,7 @@ window.BBI = window.BBI || {};
       <a class="sd-con-tile sd-con-score" href="nfl/showdown/#step4" data-jump="step4"><span class="k">Lineup Lab</span>
         <span class="sd-con-score-row">${scoreRing('con.score', s, true)}<span class="sd-con-score-txt">${s && s.score != null ? `<b>${FX.num('con.score.v', s.score, 0)}</b><small>${esc(s.verdict)}</small>` : '<b class="dim">—</b><small>build a lineup ↓</small>'}</span></span></a>`;
   };
-  const STEPS = [['step1', 'Set'], ['step2', 'Read'], ['step3', 'Build'], ['step4', 'Score'], ['step5', 'Ship']];
+  const STEPS = [['step1', 'Set'], ['step2', 'Read'], ['step3', 'Build'], ['step4', 'Score'], ['step5', 'Ship'], ['step6', 'Review']];
   const renderDock = d => {
     const s = labScore;
     $id('sdDock').innerHTML = `<div class="sd-dock-inner">
@@ -901,35 +901,6 @@ window.BBI = window.BBI || {};
     $id('sdWinners').innerHTML = head + body;
   };
 
-  // "How sure are we?" — rules come from history; the 2026 archive checks them (effective n = primetime slates).
-  const GAP_LABEL = { cpt_pos_RB: 'RB captain', cpt_pos_TE: 'TE captain', cpt_pos_WR: 'WR captain', cpt_pos_QB: 'QB captain', DST: 'DST in lineup', K: 'Kicker in lineup', both_qb: 'Both QBs', cpt_fav: 'Favorite captain', four_two: '4-2 shape', three_three: '3-3 shape' };
-  const renderSure = d => {
-    const host = $id('sdSure'); if (!host) return;
-    const fa = data.field_archive, rv = data.rule_verdicts;
-    if (!fa || !rv) { host.hidden = true; return; }
-    host.hidden = false;
-    const c = rv.counts, total = Object.values(c).reduce((a, v) => a + v, 0);
-    const sk = expectedSpreadRow(d.sb), sr = data.winners_by_expected_script[sk];
-    const watch = rv.rules.filter(r => r.check === 'watch');
-    const gaps = (rv.field_gaps || []).filter(g => g.leverage);
-    const sun = fa.sunday || {};
-    const seg = (k, cls) => ({ k, label: CHECK[k].word, value: (c[k] || 0) / total * 100, cls: `sd-vseg ${cls}` });
-    host.innerHTML = `
-      <div class="card-title">How sure are we? · <span class="card-title-accent">rules from history · 2026 checks them</span></div>
-      <p class="sd-lede">Every rule on this page comes from the <strong>120 historical DK showdown winners</strong> (113 of them primetime). The 2026 contest archive — <strong>${(+fa.n_entries).toLocaleString('en-US')}</strong> lineups from ${fa.n_contests} contests, but only <strong>${fa.n_slates} primetime games</strong> — checks those rules; it never overrides them. Every lineup in a slate shares one outcome, so the 2026 sample is ${fa.n_slates} slates, and most checks honestly read <em>not enough slates yet</em>.</p>
-      <div class="sd-sure-slates">${fa.slates.map(s => `<div${s.anomaly ? ' class="excluded"' : ''}><b>${esc(s.label)}</b><span>${esc(s.fav)} −${num(s.spread)} · ${num(s.total)}${s.realized_script ? ` · played ${esc(s.realized_script)}` : ''}</span><small>${s.anomaly ? `excluded — ${esc(s.anomaly)}` : `${(+s.entries).toLocaleString('en-US')} entries · ${s.contests} contest${s.contests === 1 ? '' : 's'}`}</small></div>`).join('')}</div>
-      <div class="sd-sure-tally">
-        ${hbar('sure', [seg('agrees', 'ok'), seg('aligned', 'ok'), seg('split', 'unk'), seg('mixed', 'unk'), seg('not_enough', 'unk'), seg('watch', 'warn')].filter(x => x.value > 0), { aria: `${total} rules checked: ${Object.keys(c).map(k => `${c[k]} ${CHECK[k].word}`).join(', ')}` })}
-        <div class="sd-legend">${Object.keys(c).filter(k => c[k]).map(k => `<span>${vIcon(k)} ${c[k]} ${CHECK[k].word}</span>`).join('')}<span>of ${total} rules</span></div>
-      </div>
-      ${gaps.length ? `<div class="sd-sure-gaps"><span class="sd-lab-k">Field gaps this season <small>ownership leverage, not rules</small></span>${gaps.map(g => `<div><b>${esc(GAP_LABEL[g.feature] || g.feature)}</b><span>History ${pc(g.hist)} · 2026 field ${pc(g.field_2026)} · 2026 top 1% ${pc(g.top1_2026)}</span><small>the field ${g.direction === 'over' ? 'over' : 'under'}-plays it by ${Math.abs(g.field_minus_hist).toFixed(1)} pts vs history and the top 1% moved back toward history (${g.slates_n} slates)</small></div>`).join('')}</div>` : ''}
-      <details class="sd-fold"><summary>Watch list · ${watch.length} rule${watch.length === 1 ? '' : 's'} the 2026 sample leans against <span class="sd-fold-arrow">▸</span></summary>
-        <p class="sd-lede" style="margin-top:6px">No rule changes. Each stays as the historical winners wrote it and is re-examined in the winner data as more slates land.</p>
-        <div class="sd-sure-hits">${watch.map(r => `<div>${vBadge(data, r)}<span>${esc(r.label)}<small>${esc(histText(data, r))} · 2026 field ${pc(r.field_2026)} → top 1% ${pc(r.top1_2026)}</small></span></div>`).join('')}</div></details>
-      <p class="sd-lede" style="color:var(--text-muted)">The winner bars carry 90% Wilson whiskers: in this spread bucket (${nTag(sr.n)}) CPT fav ${sr.cpt_fav}% could be anywhere from ${sr.ci ? sr.ci.cpt_fav[0] : '—'}% to ${sr.ci ? sr.ci.cpt_fav[1] : '—'}%.</p>
-      <div class="sd-caption">2026 archive: ${fa.n_slates} primetime slates (primary)${sun.n_slates ? ` · ${sun.n_slates} Sunday slates kept separate as supporting evidence` : ''} · lift = top-1% rate − field rate within a slate · anomalous slates listed but never counted · checks: ${checkLegend()}</div>`;
-  };
-
   const renderCheat = d => {
     const c = data.captain_by_spread_x_total, e = data.captain_by_environment, rw = data.roof_weather_winners;
     const rowLabel = { le3: 'Spread ≤3', '3.5_6.5': '3.5–6.5', ge7: '≥7' };
@@ -1038,12 +1009,15 @@ window.BBI = window.BBI || {};
       const kDial = d.ov.grind ? p.k_share.grind : d.ov.shootout ? p.k_share.shootout : null;
       const dDial = (d.ov.grind || d.ov.wind) ? p.dst_share.grind : d.ov.shootout ? p.dst_share.shootout : null;
       const t = data.captain_templates[m.tmpl];
-      return `<div class="card sd-recipe" data-script="${k}">
-        <div class="sd-recipe-head">
+      const open = FOLDS() ? FOLDS().isOpen('recipe-' + k, counts[k] > 0) : true;
+      return `<details class="card sd-recipe" data-script="${k}" data-fold-id="recipe-${k}"${open ? ' open' : ''}>
+        <summary class="sd-recipe-head">
           <span class="sd-script-badge">${k}</span>
           <div class="sd-recipe-title"><div class="sd-recipe-name">${esc(a.name)}</div><div class="sd-recipe-trig">fires: ${esc(a.trigger)}</div></div>
           <div class="sd-recipe-count">${FX.num('rc.' + k, counts[k], 0)}<small>of ${state.entries} lineup${state.entries === 1 ? '' : 's'}</small></div>
-        </div>
+          <span class="sd-fold-chev" aria-hidden="true"></span>
+        </summary>
+        <div class="sd-recipe-body">
         <div class="sd-recipe-odds">
           <div class="sd-odd"><span class="sd-odd-k">Batch share</span><span class="bar"><span class="bar-fill" data-m="rb.${k}" style="width:${d.alloc[k]}%"></span></span><b>${FX.num('rbv.' + k, Math.round(d.alloc[k]), 0, { post: '%' })}</b></div>
           <div class="sd-odd"><span class="sd-odd-k">Happens</span><span class="bar"><span class="bar-fill dim" data-m="ro.${k}" style="width:${odds[k]}%"></span></span><b>${FX.num('rov.' + k, Math.round(odds[k]), 0, { post: '%' })}</b><span class="sd-odd-n">of ${esc(d.spreadBucket.label.toLowerCase())} games</span></div>
@@ -1066,7 +1040,8 @@ window.BBI = window.BBI || {};
           <div class="sd-tmpl-group"><span class="sd-tmpl-k">template rates</span><div class="sd-tmpl">${t.shapes.map(x => `<span class="sd-chip-n">${esc(x)}</span>`).join('')}${vBadge(data, ruleById(data, tmplRuleId(m.tmpl, 'shape')), { mini: true })}<span class="sd-chip-n">K ${pct(t.k_rate)}</span><span class="sd-chip-n">DST ${pct(t.dst_rate)}</span></div></div>
           <div class="sd-caption">Template = the historical winners with this captain type. Square = its 2026 check: ${checkLegend()} · hover for the history and the slates</div>
         </div></details>` : ''}
-      </div>`;
+        </div>
+      </details>`;
     });
     $id('sdRecipes').innerHTML = `<div class="sd-recipes">${cards.join('')}</div>
       <div class="sd-caption" style="margin-top:8px">Recipes from the codex archetypes A–D · "happens" = how often the script occurs at this spread (2,761 games) · include/avoid chips are captain-template winner rates · E/F overlays banner the cards they modify</div>`;
@@ -1146,6 +1121,7 @@ window.BBI = window.BBI || {};
           <span class="sd-cut-v"><b>${t.ratio != null ? FX.num('cut.' + t.key + '.r', t.ratio, 0, { post: '%' }) : '—'}</b><small>of winner</small></span>
           <span class="sd-cut-pts">${L.slates.map((s, i) => `<span>${esc(labels[s] || s)} <b>${t.bySlate[i] != null ? t.bySlate[i].toFixed(1) : '—'}</b></span>`).join('')}</span>
         </div>`).join('')}</div>`;
+    ANS('cuts', top1 && top1.min != null ? `Top-1% cut ran <b>${top1.min.toFixed(1)}–${top1.max.toFixed(1)}</b> pts in ${esc(CONTEST_SHORT[key] || key)} ${tier} fields · <span class="n">${L.contests} contest${L.contests === 1 ? '' : 's'}</span>` : `No archived ${esc(CONTEST_SHORT[key] || key)} ${tier} contest yet`);
     host.innerHTML = `
       <div class="sd-winners-head"><div class="card-title">Score you need · <span class="card-title-accent">${esc(CONTEST_SHORT[key] || key)} fields</span></div>
         <div class="seg" role="tablist" aria-label="Field size">${Object.keys(CONTEST_SHORT).map(k => `<button type="button" role="tab" data-cut="${k}" class="${k === key ? 'active' : ''}" aria-selected="${k === key}">${esc(CONTEST_SHORT[k])}</button>`).join('')}</div>
@@ -1382,6 +1358,54 @@ window.BBI = window.BBI || {};
       <div class="sd-caption">text = steps 2–4 for this slate · play card = the one-glance strip + the script cards as one image for Discord, plus your Lab lineup once it has all six · <button type="button" class="sd-link" data-copy-link="">copy a link to this slate</button></div>`;
   };
 
+  /* ---------- fold summary lines (showdown_folds.js draws the folds) ---------- */
+  const FOLDS = () => window.BBI.showdownFolds;
+  const ANS = (k, html) => { if (FOLDS()) FOLDS().ans(k, html); };
+  const DEEP_LINK = id => !!id && (/^step[1-6]$|^sdLabPro$/.test(id) || !!(document.getElementById(id) && document.getElementById(id).matches('details.sd-sec')));
+  const lawShort = t => esc(String(t).split('. ')[0].replace(/\.$/, ''));
+  const stepFourAns = () => {
+    const s = labScore;
+    ANS('step4', s && s.score != null ? `Lab lineup scores <b>${s.score}</b>${s.verdict ? ` · ${esc(s.verdict)}` : ''}${s.partial ? ' · partial' : ''}` : 'No Lab lineup yet · build one, or let <b>Build it for me</b> search the pool');
+  };
+  const renderAnswers = (d, counts) => {
+    const r = gameRead(d), b = data.base_rates.by_spread[d.sb], t = data.base_rates.by_total[d.tb];
+    const pre = d.preset;
+    const lean = LEANS.find(l => l.key === state.lean);
+    ANS('step1', `${pre ? `<b>${esc(pre.label)}</b> · ` : '<b>Custom line</b> · '}${esc(spreadLabel(state.spread, pre && pre.fav))} · ${num(state.total)} · ${esc(ENV_SHORT[state.env])} · ${esc(CONTEST_SHORT[state.contest])} · ${state.entries} ${state.entries === 1 ? 'entry' : 'entries'}${lean && lean.script ? ` · lean ${esc(lean.label.toLowerCase())}` : ''}`);
+    const ov = r.ovs.length ? `<b>${esc(r.ovs.join(' + '))}</b> overlay` : 'no overlay';
+    ANS('step2', `<b>${esc(r.script)} ${r.scriptPct}%</b> · ${esc(r.runner.toLowerCase())} ${r.runnerPct}% · total mean ${r.mean} · ${ov}`);
+    ANS('read', `${esc(r.script)} game, ${r.scriptPct}% most likely · ${esc(r.runner.toLowerCase())} ${r.runnerPct}% next · ${r.mean} mean points`);
+    ANS('overlay', r.ovs.length ? `<b>${esc(r.ovs.join(' + '))}</b> on · changes the dials and the recipes` : 'None · the base allocation applies');
+    ANS('script', `Blowout ${b.blowout14}% · fav controls ${b.fav_wins - b.blowout14}% · dog wins ${b.dog_wins}% · within 3 ${b.within3}%${b.n ? ` · <span class="n">n = ${b.n.toLocaleString('en-US')}</span>` : ''}`);
+    ANS('total', `Mean actual ${t.mean_actual} · over by 7+ ${t.over7}% · under by 7+ ${t.under7}%${t.n ? ` · <span class="n">n = ${t.n.toLocaleString('en-US')}</span>` : ''}`);
+    const sr = data.winners_by_expected_script[expectedSpreadRow(d.sb)];
+    if (sr) ANS('winners', `CPT fav ${sr.cpt_fav}% · 4-2 ${sr.four_two}% · 3-3 ${sr.three_three}% · K ${sr.K}% · both QBs ${sr.both_qb}% · <span class="n">n = ${sr.n}</span>`);
+    const c = d.cellData;
+    ANS('cheat', `Your cell: ${POS.map(p => `${p} ${c[p]}`).join(' · ')} · fav CPT ${c.fav}%`);
+    const cap = x => esc(seatName(pre, x.seat) || x.seat);
+    ANS('shortlist', d.shortlist.slice(0, 4).map((x, i) => `${i + 1} <b>${cap(x)}</b> ≈${Math.round(x.weight)}%`).join(' · ') + ' of winners here');
+    const ct = data.inputs.contest_types.find(x => x.key === state.contest);
+    ANS('step5', `${esc(CONTEST_SHORT[state.contest])} fields · own <b>${esc(ct.own_target)}</b> · dupes <b>≤ ${ct.dupe_cap}</b>`);
+    stepFourAns();
+    if (!hasPro()) { ANS('step3', `CPT <b>${cap(d.shortlist[0])}</b> → ${cap(d.shortlist[1])}`); return; }
+    const dial = k => (d.dials.rows.find(x => x.k === k) || {}).v || '—';
+    const batch = ['A', 'B', 'C', 'D'].filter(k => counts[k] > 0);
+    const batchTxt = batch.map(k => `${counts[k]}×${k}`).join(' · ') || '—';
+    ANS('step3', `CPT <b>${cap(d.shortlist[0])}</b> → ${cap(d.shortlist[1])} · batch <b>${batchTxt}</b> · K ${esc(dial('K share'))} · DST ${esc(dial('DST share'))} · both QBs ≤ ${esc(dial('Both-QB max'))}`);
+    ANS('play', `<b>${cap(d.shortlist[0])}</b>, then ${cap(d.shortlist[1])} · batch ${batchTxt} · own ${esc(ct.own_target)}`);
+    ANS('alloc', `${state.entries} lineup${state.entries === 1 ? '' : 's'} → ${['A', 'B', 'C', 'D'].map(k => counts[k] > 0 ? `<b>${counts[k]} ${k}</b>` : `0 ${k}`).join(' · ')} · A ${Math.round(d.alloc.A)} / B ${Math.round(d.alloc.B)} / C ${Math.round(d.alloc.C)} / D ${Math.round(d.alloc.D)}`);
+    ANS('recipes', batch.length ? `Your batch plays <b>${batch.join(', ')}</b>${FOLDS() && FOLDS().mode === 'game' ? ': those recipes open' : ''}` : 'No lineups in the batch yet');
+    ANS('dials', `K <b>${esc(dial('K share'))}</b> · DST <b>${esc(dial('DST share'))}</b> · both QBs <b>≤ ${esc(dial('Both-QB max'))}</b> · CPT cap ${esc(dial('Per-captain share cap'))} · overlap ${esc(dial('Max overlap between lineups'))} · dupes ≤ ${esc(dial('Dupes max'))}`);
+    const pinned = data.ten_laws.filter(l => d.laws.has(l.n));
+    ANS('laws', pinned.length ? `Pinned for this game: ${pinned.map(l => `<b>${l.n}</b> ${lawShort(l.law)}`).join(' · ')}` : 'The ten laws from the 120 winners');
+    const nh = Object.keys(data.hard_rules).filter(k => !k.startsWith('_')).length, ns = Object.keys(data.soft_penalties).filter(k => !k.startsWith('_')).length;
+    ANS('rules', `${nh} hard · ${ns} soft · rules.json ${esc((data.engine && data.engine.rules_version || '').split(' ')[0] || '')} · the Lab runs all of them`);
+    ANS('export', 'Copy the playbook or the Stokastic settings · play card image for Discord');
+    ANS('lessons', (data.lessons_2026 || []).map(l => esc(l.slate.split(' (')[0])).join(' · '));
+    ANS('step6', 'After the slate: drop DK contest standings · what 2026 taught us');
+    ANS('review', 'Drop a DK contest-standings export: the winner graded, the cut ladder, where your entries finished');
+  };
+
   /* ---------- master render ---------- */
   // Snapshot keyed elements → re-render → morph from the old values.
   const render = () => {
@@ -1389,7 +1413,7 @@ window.BBI = window.BBI || {};
     const prev = FX.snapshot(), restore = FX.keepFocus();
     const d = derive();
     renderInputs(); renderConsole(d); renderDock(d);
-    renderRead(d); renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderSure(d); renderCheat(d);
+    renderRead(d); renderScript(d); renderTotalStrip(d); renderOverlays(d); renderWinners(d); renderCheat(d);
     renderShortlist(d);
     // The Pro sections render only with the Pro part loaded (always, in open mode); otherwise the upgrade card.
     const counts = hasPro() ? renderAlloc(d) : largestRemainder(d.alloc, state.entries);
@@ -1398,6 +1422,7 @@ window.BBI = window.BBI || {};
       renderFit(d); renderCuts(); renderCheck(); renderExport(); renderLessons();
     }
     renderProLocks();
+    renderAnswers(d, counts);
     store.save(state);
     syncUrl();
     document.dispatchEvent(new CustomEvent('sd:render', { detail: { d, state, counts } }));
@@ -1413,13 +1438,16 @@ window.BBI = window.BBI || {};
     labScore = s; if (!data) return;
     const prev = FX.snapshot($id('sdConsole')), prevDock = FX.snapshot($id('sdDock')), d = derive(), restore = FX.keepFocus();
     renderConsole(d); renderDock(d); restore(); FX.morph(prev, $id('sdConsole')); FX.morph(prevDock, $id('sdDock'));
+    stepFourAns();
   };
   let toastT = 0;
   const toast = (msg, kind = '') => { const t = $id('sdToast'); if (!t) return; t.className = `sd-toast show ${kind}`; t.innerHTML = msg; clearTimeout(toastT); toastT = setTimeout(() => { t.className = 'sd-toast'; }, 2600); };
 
   /* ---------- events ---------- */
   const setNum = (key, v, lo, hi) => { v = parseFloat(v); if (isNaN(v)) return; state[key] = Math.max(lo, Math.min(hi, key === 'entries' ? Math.round(v) : Math.round(v * 2) / 2)); state.preset = null; };
-  const jump = id => { const el = document.getElementById(id); if (!el) return; el.scrollIntoView({ behavior: FX.reduced() ? 'auto' : 'smooth', block: 'start' }); };
+  const jump = id => { let el = document.getElementById(id); if (!el) return; if (FOLDS()) FOLDS().openTo(el);
+    const sec = el.closest('details.sd-sec'); if (sec && el.parentElement && el.parentElement.classList.contains('sd-sec-body') && el === el.parentElement.firstElementChild) el = sec;   // land on the fold's header
+    el.scrollIntoView({ behavior: FX.reduced() ? 'auto' : 'smooth', block: 'start' }); };
   // The dock's Tune drawer is a disclosure: the toggle carries aria-expanded; opening moves focus to the
   // first slider, closing (Done, the toggle, Escape) hands focus back to the toggle if it was inside.
   const setTune = open => {
@@ -1617,7 +1645,8 @@ window.BBI = window.BBI || {};
     // Late layout (the Lab's pool fetch, auth gate wrapping, fonts) keeps shifting things for a
     // moment, so re-land on every layout change for ~3 s unless the reader takes over first.
     const h = cleanHash().slice(1);
-    if (/^step[1-5]$|^sdLabPro$/.test(h)) {
+    if (DEEP_LINK(h)) {
+      if (FOLDS()) FOLDS().openTo(document.getElementById(h));
       let stopped = false, ro = null;
       const land = () => { const el = document.getElementById(h); if (el && !stopped) el.scrollIntoView({ block: 'start' }); };
       const stop = () => { stopped = true; if (ro) ro.disconnect(); };
@@ -1629,7 +1658,7 @@ window.BBI = window.BBI || {};
       } else [120, 900].forEach(t => setTimeout(land, t));
       setTimeout(stop, 3000);
     }
-    window.addEventListener('hashchange', () => { const id = cleanHash().slice(1); if (/^step[1-5]$/.test(id)) jump(id); });
+    window.addEventListener('hashchange', () => { const id = cleanHash().slice(1); if (DEEP_LINK(id)) jump(id); });
   };
 
   /* ---------- ownership correction + role leverage (pure; the Lab draws them) ---------- */

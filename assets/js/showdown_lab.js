@@ -667,7 +667,7 @@ window.BBI = window.BBI || {};
     simStep();   // draws for this player set when projections are loaded (cached; a no-op otherwise)
     const fld = $('sdLabField'); if (fld && document.activeElement !== fld) fld.value = fieldSize();
     const fl = $('sdLabFieldLink'); if (fl) { const t = linkOn() ? `from Step 5: ${shortName(lab.link.name)}` : lab.field ? 'set by hand' : `Step 1 default (${SD().CONTEST_SHORT[SD().state.contest] || ''})`; if (fl.textContent !== t) fl.textContent = t; }
-    renderWhere(); renderRoutine();
+    renderWhere(); renderRoutine(); foldAns();
     const go = $('sdBatchGo'); if (go) go.disabled = !engine;
     const lbl = $('sdBatchLabel'); if (lbl) lbl.textContent = `${pro.lineupsName ? pro.lineupsName + ' · ' : ''}scored against ${lab.source === 'mine' && lab.mine ? 'your slate' : curPool() ? curPool().label : 'the selected pool'} and the Step 1 line`;
     syncBatch();
@@ -1141,6 +1141,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
     drop.addEventListener('drop', e => readFiles([...(e.dataTransfer?.files || [])]));
     $('sdBatchText').addEventListener('input', e => { pro.lineupsText = e.target.value; });
     if (lab.batch) renderBatch();
+    foldAns();
   };
   const readFiles = async files => {
     let base = lab.mine ? lab.mine.players : null, gotPlayers = false;
@@ -1271,7 +1272,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
       if (a === 'book-dk' && lab.book) {
         const csv = 'CPT,FLEX,FLEX,FLEX,FLEX,FLEX\n' + lab.book.chosen.map(r => [idsOf(r.X.cpt.name)[1], ...r.X.fl.map(p => idsOf(p.name)[0])].join(',')).join('\n') + '\n';
         const a2 = document.createElement('a'); a2.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a2.download = `DK_upload_showdown_${Date.now()}.csv`; document.body.appendChild(a2); a2.click(); a2.remove();
-        tick('export', true); renderRoutine();
+        tick('export', true); renderRoutine(); foldAns();
       }
       return;
     }
@@ -1544,10 +1545,25 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
     if (host.dataset.drawn === html) return;
     host.innerHTML = html; host.dataset.drawn = html;
   };
+  // Summary lines for the folds this file draws into (showdown_folds.js). A hint, like the routine's grey lines.
+  const foldAns = () => {
+    const F = window.BBI.showdownFolds, S = SD(); if (!F || !S || !S.data) return;
+    try {
+      const H = routineHints(Date.now()), cap = t => t ? t[0].toUpperCase() + t.slice(1) : '';
+      const key = routineKey(), T = ticksFor(key), done = ROUTINE.filter(x => T[x.id]).length, next = ROUTINE.find(x => !T[x.id]);
+      F.ans('routine', `<b>${done}</b> of ${ROUTINE.length} done${next ? ` · next: ${esc(next.t)} <a href="nfl/showdown/#${next.jump}" data-jump="${next.jump}" class="sd-link">Go</a>` : ' · all done'}`);
+      F.ans('leverage', esc(cap(H.lev.t)));
+      const n = (lab.cpt ? 1 : 0) + lab.flex.filter(Boolean).length, pool = lab.source === 'mine' ? 'your slate' : curPool() ? curPool().label : '';
+      F.ans('lab', `${n ? `<b>${n} of 6</b> picked` : 'Build a lineup and the engine grades it live, or let <b>Build it for me</b> search the pool'}${pool ? ` · pool ${esc(pool)}` : ''}`);
+      F.ans('files', lab.mine ? `Your slate loaded · ${esc(H.proj.t)}${lab.batch ? ` · ${esc(H.port.t)}` : ''}` : 'No files yet · DK salaries, Data Hub export, lineup CSVs · read in your browser, nothing uploaded');
+      const q = whereQuery(), ct = S.data.inputs.contest_types.find(c => c.key === S.state.contest);
+      F.ans('where', linkOn() ? `Entering <b>${esc(shortName(lab.link.name))}</b> · ${lab.link.field.toLocaleString('en-US')} field` : `This week's DK showdown GPPs${q ? ` for ${esc(q.label)}` : ''}${ct ? ` · fit: own <b>${esc(ct.own_target)}</b>, dupes <b>≤ ${ct.dupe_cap}</b>` : ''}`);
+    } catch (err) { /* a summary line is a hint; never let it break the Lab */ }
+  };
   const onRoutine = e => {
     const c = e.target.closest('[data-routine]');
-    if (c && e.type === 'change') { tick(c.dataset.routine, c.checked); renderRoutine(); return; }
-    if (e.type === 'click' && e.target.closest('[data-routine-clear]')) { const j = loadTicks(); delete j.s[routineKey()]; lsSet(LS_ROUTINE, JSON.stringify(j)); renderRoutine(); }
+    if (c && e.type === 'change') { tick(c.dataset.routine, c.checked); renderRoutine(); foldAns(); return; }
+    if (e.type === 'click' && e.target.closest('[data-routine-clear]')) { const j = loadTicks(); delete j.s[routineKey()]; lsSet(LS_ROUTINE, JSON.stringify(j)); renderRoutine(); foldAns(); }
   };
 
   /* ---------------- boot ---------------- */

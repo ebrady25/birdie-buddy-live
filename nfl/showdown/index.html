@@ -22,8 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.5.0" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.5.0" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.0" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.0" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
   </style>
@@ -77,14 +77,34 @@
 
     <div class="sd-layout" id="sdPage">
       <div class="sd-main">
-        <!-- ===================== STEP 1 · SET THE SLATE (full width) ===================== -->
-        <section class="sd-step sd-set" id="step1" aria-labelledby="step1h">
-          <div class="sd-step-head">
+        <!-- Game day / Study: which sections open by default (showdown_folds.js). -->
+        <div class="sd-modebar">
+          <div class="seg sd-mode" role="group" aria-label="How much of the playbook to open">
+            <button type="button" data-fold-mode="game" aria-pressed="true">Game day</button>
+            <button type="button" data-fold-mode="study" aria-pressed="false">Study</button>
+          </div>
+          <span class="sd-mode-note" id="sdModeNote">Game day opens the answers and tools. Evidence and reference stay one click away.</span>
+          <button type="button" class="sd-link sd-mode-all" data-fold-all="close">Collapse all</button>
+        </div>
+
+        <!-- This week's routine: the spine of the week; each Go opens its section. -->
+        <details class="sd-sec" id="routine" data-tier="tool" data-default="closed">
+              <summary><span class="sd-sec-title">This week's routine</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="routine"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel sd-routine" id="sdRoutine"></div>
+              </div>
+            </details>
+
+        <!-- ===================== STEP 1 · SET THE SLATE ===================== -->
+        <details class="sd-step" id="step1">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 1</span>
             <h2 id="step1h">Set the slate</h2>
-            <span class="sd-gate-tag">free</span>
-            <p>Pick this week's game or dial in any line. Everything below — the read, the build, the Lab's grade — recomputes live as you move a slider.</p>
-          </div>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+            <span class="sd-ans sd-step-ans" data-ans="step1"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Pick this week's game or dial in any line. Everything below recomputes live as you move a slider. <span class="sd-gate-tag">free</span></p>
           <div class="card sd-panel sd-set-presets fx-reveal">
             <div class="sd-field">
               <div class="sd-field-label"><span>This week</span><span class="sd-val" id="sdPresetVal"></span></div>
@@ -150,90 +170,210 @@
             </div>
           </div>
           <div class="sd-rail-foot"><span>Inputs are remembered on this device · the dock's <b>Tune</b> button brings these sliders anywhere on the page.</span><button type="button" id="sdReset">Reset</button></div>
-        </section>
-
-        <!-- Mobile sticky summary chip (kept for print/legacy; the dock replaces it) -->
-        <div class="sd-chip" id="sdChip"><span id="sdChipText">—</span><a href="nfl/showdown/#step1" data-edit>Edit</a></div>
+          </div>
+        </details>
 
         <!-- ===================== STEP 2 · READ THE GAME ===================== -->
-        <section class="sd-step" id="step2" aria-labelledby="step2h">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step2">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 2</span>
             <h2 id="step2h">Read the game</h2>
-            <span class="sd-gate-tag">free</span>
-            <p>What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite.</p>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+            <span class="sd-ans sd-step-ans" data-ans="step2"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite. <span class="sd-gate-tag">free</span></p>
+            <details class="sd-sec" id="read" data-tier="answer">
+              <summary><span class="sd-sec-title">The game · one line</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="read"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel card-premium fx-reveal" id="sdRead"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="overlay" data-tier="answer">
+              <summary><span class="sd-sec-title">Overlay</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="overlay"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel fx-reveal" id="sdOverlays"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="script" data-tier="evidence">
+              <summary><span class="sd-sec-title">Script distribution</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="script"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel fx-reveal" id="sdScript"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="total" data-tier="evidence">
+              <summary><span class="sd-sec-title">Total reality</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="total"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel fx-reveal" id="sdTotalStrip"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="winners" data-tier="evidence">
+              <summary><span class="sd-sec-title">What winners looked like here</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="winners"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel fx-reveal" id="sdWinners"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="cheat" data-tier="reference">
+              <summary><span class="sd-sec-title">Captain cheat-sheet</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="cheat"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel fx-reveal" id="sdCheat"></div>
+              </div>
+            </details>
           </div>
-          <div class="card sd-panel card-premium fx-reveal" id="sdRead"></div>
-          <div class="sd-grid-2">
-            <div class="card sd-panel fx-reveal" id="sdScript"></div>
-            <div class="card sd-panel fx-reveal" id="sdTotalStrip"></div>
-          </div>
-          <div class="card sd-panel fx-reveal" id="sdOverlays"></div>
-          <div class="card sd-panel fx-reveal" id="sdWinners"></div>
-          <div class="card sd-panel fx-reveal" id="sdSure"></div>
-          <div class="card sd-panel fx-reveal" id="sdCheat"></div>
-        </section>
+        </details>
 
         <!-- ===================== STEP 3 · BUILD IT ===================== -->
-        <section class="sd-step" id="step3" aria-labelledby="step3h">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step3">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 3</span>
             <h2 id="step3h">Build it</h2>
-            <span class="sd-gate-tag">open preview</span>
-            <p>Who sits at captain, how many lineups go to each script, and the recipe for each one — with the dials to type into the Contest Generator.</p>
-          </div>
-          <div class="card sd-panel card-premium fx-reveal" id="sdShortlist"></div>
-          <div class="card sd-panel sd-levb fx-reveal" id="sdLevBoard"></div>
-          <div data-gate-paused="pro" data-pro-data data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
-            <div class="sd-step" style="gap:var(--space-4)">
-              <div class="card sd-panel card-premium" id="sdVerdict"></div>
-              <div class="card sd-panel" id="sdAlloc"></div>
-              <div id="sdRecipes"></div>
-              <div class="card sd-panel" id="sdDials"></div>
-              <div class="card sd-panel" id="sdLaws"></div>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+            <span class="sd-ans sd-step-ans" data-ans="step3"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Who sits at captain, how many lineups go to each script, and the recipe for each one, with the dials to type into the Contest Generator. <span class="sd-gate-tag">open preview</span></p>
+            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The one-glance play for this slate is a Pro feature. Free members get the game read and the captain shortlist.">
+            <details class="sd-sec" id="play" data-tier="answer">
+              <summary><span class="sd-sec-title">The play · one glance</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="play"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel card-premium" id="sdVerdict"></div>
+              </div>
+            </details>
+            </div>
+            <details class="sd-sec" id="shortlist" data-tier="answer">
+              <summary><span class="sd-sec-title">Captain shortlist</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="shortlist"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel card-premium fx-reveal" id="sdShortlist"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="leverage" data-tier="tool">
+              <summary><span class="sd-sec-title">Leverage board</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="leverage"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel sd-levb fx-reveal" id="sdLevBoard"></div>
+              </div>
+            </details>
+            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
+            <details class="sd-sec" id="alloc" data-tier="answer">
+              <summary><span class="sd-sec-title">Allocation</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="alloc"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdAlloc"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="recipes" data-tier="answer">
+              <summary><span class="sd-sec-title">Lineup recipes</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="recipes"></span></summary>
+              <div class="sd-sec-body">
+                <div id="sdRecipes"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="dials" data-tier="tool">
+              <summary><span class="sd-sec-title">Contest Generator dials</span><span class="sd-sec-end"><button type="button" class="sd-sec-btn" data-copy="stokastic" title="Copy the dials as Contest Generator settings">Copy dials</button><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="dials"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdDials"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="laws" data-tier="reference">
+              <summary><span class="sd-sec-title">Ten laws</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="laws"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdLaws"></div>
+              </div>
+            </details>
             </div>
           </div>
-        </section>
+        </details>
 
-        <!-- ===================== STEP 4 · SCORE IT (LINEUP LAB) ===================== -->
-        <section class="sd-step" id="step4" aria-labelledby="step4h">
-          <div class="sd-step-head">
+        <!-- ===================== STEP 4 · SCORE IT · LINEUP LAB ===================== -->
+        <details class="sd-step" id="step4">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 4</span>
             <h2 id="step4h">Score it · Lineup Lab</h2>
-            <span class="sd-gate-tag">open preview</span>
-            <p>Build a lineup and watch the engine grade it live — the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template — or let it search the pool and build them for you. Same rules, same math as the engine we build our books with.</p>
-          </div>
-          <div class="card sd-panel sd-routine" id="sdRoutine"></div>
-          <div class="sd-lab" id="sdLab"></div>
-          <div data-gate-paused="pro" data-gate-msg="Score your own slate: drop your DraftKings salary file and Stokastic Data Hub export, paste or upload a whole book, get the portfolio report and let the engine pick your batch from a pool. Sample slates stay free.">
-            <div class="card sd-panel" id="sdLabPro"></div>
-          </div>
-        </section>
-
-        <!-- ===================== STEP 5 · SHIP IT ===================== -->
-        <section class="sd-step" id="step5" aria-labelledby="step5h">
-          <div class="sd-step-head">
-            <span class="sd-step-num">Step 5</span>
-            <h2 id="step5h">Ship it</h2>
-            <span class="sd-gate-tag">open preview</span>
-            <p>Where to enter this week's contests for the lineups you have, the ownership target and dupe gate for the field you're in, the score each finishing tier took in past contests of that size, a Tuesday review of any contest you played, the engine's rules as a reference, and the playbook as text or a play card.</p>
-          </div>
-          <div data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
-            <div class="sd-step" style="gap:var(--space-4)">
-              <div class="card sd-panel sd-where" id="sdWhere"></div>
-              <div class="card sd-panel" id="sdFit"></div>
-              <div class="card sd-panel" id="sdCuts"></div>
-              <div class="card sd-panel sd-review" id="sdReview"></div>
-              <div class="sd-grid-2">
-                <div class="card sd-panel" id="sdCheck"></div>
-                <div class="sd-step" style="gap:var(--space-4)">
-                  <div class="card sd-panel" id="sdExport"></div>
-                  <div class="card sd-panel" id="sdLessons"></div>
-                </div>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+            <span class="sd-ans sd-step-ans" data-ans="step4"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Build a lineup and watch the engine grade it live: the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template. Or let it search the pool and build them for you. Same rules, same math as the engine we build our books with. <span class="sd-gate-tag">open preview</span></p>
+            <details class="sd-sec" id="lab" data-tier="tool">
+              <summary><span class="sd-sec-title">Lineup Lab</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="lab"></span></summary>
+              <div class="sd-sec-body">
+                <div class="sd-lab" id="sdLab"></div>
               </div>
+            </details>
+            <div class="sd-stack" data-gate-paused="pro" data-gate-msg="Score your own slate: drop your DraftKings salary file and Stokastic Data Hub export, paste or upload a whole book, get the portfolio report and let the engine pick your batch from a pool. Sample slates stay free.">
+            <details class="sd-sec" id="files" data-tier="tool">
+              <summary><span class="sd-sec-title">Score your own files</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="files"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdLabPro"></div>
+              </div>
+            </details>
             </div>
           </div>
-        </section>
+        </details>
+
+        <!-- ===================== STEP 5 · SHIP IT ===================== -->
+        <details class="sd-step" id="step5">
+          <summary class="sd-step-head">
+            <span class="sd-step-num">Step 5</span>
+            <h2 id="step5h">Ship it</h2>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+            <span class="sd-ans sd-step-ans" data-ans="step5"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Where to enter this week's contests with the ownership target and dupe gate for your field, the playbook as text or a play card, the score each finishing tier took in past contests of that size, and the engine's rules as a reference. <span class="sd-gate-tag">open preview</span></p>
+            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
+            <details class="sd-sec" id="where" data-tier="answer">
+              <summary><span class="sd-sec-title">Where to enter</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="where"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel sd-where" id="sdWhere"></div>
+                <div class="card sd-panel sd-fit" id="sdFit"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="export" data-tier="tool">
+              <summary><span class="sd-sec-title">Export</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="export"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdExport"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="cuts" data-tier="evidence">
+              <summary><span class="sd-sec-title">Score you need</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="cuts"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdCuts"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="rules" data-tier="reference">
+              <summary><span class="sd-sec-title">The engine's rules</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="rules"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdCheck"></div>
+              </div>
+            </details>
+            </div>
+          </div>
+        </details>
+
+        <!-- ===================== STEP 6 · REVIEW IT · TUESDAY ===================== -->
+        <details class="sd-step" id="step6">
+          <summary class="sd-step-head">
+            <span class="sd-step-num">Step 6</span>
+            <h2 id="step6h">Review it · Tuesday</h2>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+            <span class="sd-ans sd-step-ans" data-ans="step6"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">After the slate: grade a contest you played from its DraftKings standings, and what each 2026 primetime slate taught us. <span class="sd-gate-tag">open preview</span></p>
+            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The Tuesday review and the 2026 notes are a Pro feature.">
+            <details class="sd-sec" id="review" data-tier="tool">
+              <summary><span class="sd-sec-title">Tuesday review</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="review"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel sd-review" id="sdReview"></div>
+              </div>
+            </details>
+            <details class="sd-sec" id="lessons" data-tier="reference">
+              <summary><span class="sd-sec-title">What 2026 taught us</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="lessons"></span></summary>
+              <div class="sd-sec-body">
+                <div class="card sd-panel" id="sdLessons"></div>
+              </div>
+            </details>
+            </div>
+          </div>
+        </details>
 
         <div class="sd-caption" style="text-align:right">Sources: codex v1.0 · rules.json <span id="sdRulesVersion">v1.3</span> · LINEUP_BIBLE v1.2 · 2026 field archive (Stokastic post-contest, aggregates only) · engine parity-tested against rules_engine.py</div>
       </div>
@@ -245,14 +385,15 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.5.0"></script>
-  <script src="assets/js/track.js?v=0.5.0"></script>
+  <script src="assets/js/nfl.js?v=0.6.0"></script>
+  <script src="assets/js/track.js?v=0.6.0"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
-  <script src="assets/js/showdown_fx.js?v=0.5.0"></script>
-  <script src="assets/js/showdown_engine.js?v=0.5.0"></script>
-  <script src="assets/js/showdown.js?v=0.5.0"></script>
-  <script src="assets/js/showdown_build.js?v=0.5.0"></script>
-  <script src="assets/js/showdown_lab.js?v=0.5.0"></script>
-  <script src="assets/js/showdown_review.js?v=0.5.0"></script>
+  <script src="assets/js/showdown_fx.js?v=0.6.0"></script>
+  <script src="assets/js/showdown_engine.js?v=0.6.0"></script>
+  <script src="assets/js/showdown_folds.js?v=0.6.0"></script>
+  <script src="assets/js/showdown.js?v=0.6.0"></script>
+  <script src="assets/js/showdown_build.js?v=0.6.0"></script>
+  <script src="assets/js/showdown_lab.js?v=0.6.0"></script>
+  <script src="assets/js/showdown_review.js?v=0.6.0"></script>
 </body>
 </html>
