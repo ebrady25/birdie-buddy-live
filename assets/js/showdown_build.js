@@ -191,5 +191,225 @@
       blockers: [...why].sort((a, b) => b[1] - a[1]).slice(0, 3), ceilings };
   };
 
-  return { TOP, PER_BUCKET, BUDGET, YIELD_EVERY, codexScore, candidates, search, ranked, topCards, pickBatch, ORDER };
+  /* =================================================================
+     SIM (2026-09-23) — correlated Monte Carlo of the game, for the
+     "top-1% chance" of each kept lineup. Needs a projections file
+     (Projection, and Std Dev when the file has it).
+
+     1. Marginals: each player's DK points ~ lognormal with mean =
+        projection and sd = the file's Std Dev (else the role's
+        coefficient of variation, capped at 2, × projection;
+        role_correlations.json):
+        never below 0, right-skewed like real DK scores.
+     2. Dependence: a Gaussian copula on the role correlations computed
+        from nflverse box scores 2016–25 (codex/role_correlations.py;
+        primetime cohort for primetime slates). Roles = rank by
+        projection within team + position (QB1–2, RB1–3, WR1–5, TE1–3,
+        K, DST); anyone deeper is drawn independently. The player matrix
+        is a principal submatrix of the (PSD) game matrix; if rounding
+        ever breaks Cholesky, off-diagonals shrink until it passes.
+     3. Cut lines move with the game: in each draw the slate's best
+        legal DK lineup (CPT 1.5×, $50k, both teams) is found exactly
+        (branch and bound), and the top-1% / min-cash cut = the
+        contest_economics.json share of the slate best for the field
+        bucket (median over its n contests). A lineup's P(top 1%) is the
+        share of draws in which it clears that draw's cut.
+     All draws are shared by every lineup (common random numbers), so a
+     lineup costs D × 6 additions. Seeded RNG: the same file gives the
+     same numbers. Generators, like search(): the page drives them in
+     chunks; node runs them to the end in tests.
+     ================================================================= */
+  const SIM_DRAWS = 2000;
+  const SIM_DEPTH = { QB: 2, RB: 3, WR: 5, TE: 3 };
+  const mulberry32 = seed => { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+  const gaussian = rand => { let spare = null; return () => {
+    if (spare !== null) { const s = spare; spare = null; return s; }
+    let u = 0; while (u === 0) u = rand();
+    const v = rand(), r = Math.sqrt(-2 * Math.log(u)); spare = r * Math.sin(2 * Math.PI * v); return r * Math.cos(2 * Math.PI * v); }; };
+  const fnv = str => { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; };
+
+  // The Std Dev column of a Stokastic Data Hub export (the engine reads the rest): Map name → sd. rows = parseCSV output.
+  // In memory only, like every number from the reader's file.
+  const readStd = rows => {
+    const out = new Map(); if (!rows || !rows.length) return out;
+    const H = rows[0].map(h => String(h).trim().toLowerCase()), iN = H.indexOf('player'), iS = H.findIndex(h => h === 'std dev' || h === 'stddev' || h === 'std');
+    if (iN < 0 || iS < 0) return out;
+    for (const r of rows.slice(1)) { const nm = String(r[iN] ?? '').trim(), v = parseFloat(r[iS]); if (nm && isFinite(v) && v >= 0) out.set(nm, v); }
+    return out;
+  };
+  // Showdown role of each player: rank by projection (then salary) within team + position. null = deeper than the table.
+  const simRoles = players => {
+    const role = new Map();
+    for (const t of new Set(players.map(p => p.team))) for (const pos of ['QB', 'RB', 'WR', 'TE', 'K', 'DST']) {
+      players.filter(p => p.team === t && p.pos === pos).sort((a, b) => b.proj - a.proj || b.sal - a.sal || (a.name < b.name ? -1 : 1))
+        .forEach((p, i) => role.set(p.name, SIM_DEPTH[pos] ? (i < SIM_DEPTH[pos] ? `${pos}${i + 1}` : null) : (i === 0 ? pos : null)));
+    }
+    return role;
+  };
+  const cholesky = (A, n) => {
+    const L = new Float64Array(n * n);
+    for (let i = 0; i < n; i++) for (let j = 0; j <= i; j++) {
+      let s = A[i * n + j]; for (let k = 0; k < j; k++) s -= L[i * n + k] * L[j * n + k];
+      if (i === j) { if (!(s > 1e-10)) return null; L[i * n + i] = Math.sqrt(s); } else L[i * n + j] = s / L[j * n + j];
+    }
+    return L;
+  };
+  // The cohort a slate uses: primetime for primetime slates (the page's core), all games otherwise.
+  const simCohort = (rc, tier) => { const C = rc && rc.cohorts; if (!C) return null; const k = tier === 'sunday' || !C.primetime ? 'all' : 'primetime'; return C[k] ? { key: k, ...C[k] } : null; };
+  // players: [{name, team, pos, sal, proj}] (the engine's P values); sd: Map name → Std Dev (may be empty); rc: role_correlations.json.
+  const simPrepare = (players, sd, rc, tier) => {
+    const C = simCohort(rc, tier); if (!C) throw new Error('role correlations missing');
+    const R = rc.roles, ri = new Map(R.map((r, i) => [r, i])), ps = players.filter(p => p.proj > 0 && p.sal > 0).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+    const n = ps.length, role = simRoles(ps), teams = [...new Set(ps.map(p => p.team))].sort();
+    const deepest = { QB: 'QB2', RB: 'RB3', WR: 'WR5', TE: 'TE3', K: 'K', DST: 'DST' };
+    const mu = new Float64Array(n), sig = new Float64Array(n), sal = new Float64Array(n), team = new Int8Array(n);
+    let fromFile = 0, fromCv = 0;
+    ps.forEach((p, i) => {
+      const r = role.get(p.name), st = C.roles[r || deepest[p.pos]] || {};
+      let s = sd && sd.has(p.name) ? sd.get(p.name) : null;
+      // role CV fallback capped at 2: the deep roles' CVs (up to ~5) come from zero-inflated tiny means, and past 2 a lognormal is all tail
+      if (s != null && s > 0) fromFile++; else { s = Math.min(2, st.cv || 1) * p.proj; fromCv++; }
+      const v = Math.log(1 + (s * s) / (p.proj * p.proj));
+      sig[i] = Math.sqrt(v); mu[i] = Math.log(p.proj) - v / 2; sal[i] = p.sal; team[i] = teams.indexOf(p.team);
+    });
+    const A = new Float64Array(n * n);
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
+      if (i === j) { A[i * n + j] = 1; continue; }
+      const a = ri.get(role.get(ps[i].name)), b = ri.get(role.get(ps[j].name));
+      A[i * n + j] = a == null || b == null ? 0 : ps[i].team === ps[j].team ? C.copula.own[a][b] : C.copula.opp[a][b];
+    }
+    let L = cholesky(A, n), shrink = 1;
+    while (!L && shrink > 0.05) { shrink *= 0.9; const B = A.map((v, k) => (k % (n + 1) === 0 ? 1 : v * shrink)); L = cholesky(B, n); }
+    if (!L) { L = new Float64Array(n * n); for (let i = 0; i < n; i++) L[i * n + i] = 1; shrink = 0; }
+    const sig8 = ps.map(p => `${p.name}:${p.team}:${p.pos}:${p.sal}:${p.proj}:${sd && sd.has(p.name) ? sd.get(p.name) : ''}`).join('|');
+    return { n, names: ps.map(p => p.name), idx: new Map(ps.map((p, i) => [p.name, i])), role, mu, sig, sal, team, A, L, shrink,
+      cohort: C.key, cohortN: C.n_games, fromFile, fromCv, teams, key: `${C.key}|${rc.generated}|${fnv(sig8)}` };
+  };
+  // Best DK showdown lineup for one draw's scores x (exact: branch and bound over players sorted by score).
+  const makeBest = (spec, cap = 50000) => {
+    const n = spec.n, sal = spec.sal, team = spec.team, ord = new Int32Array(n), S = new Float64Array(n), pre = new Float64Array(n + 1);
+    const cheap = Array.from(sal).sort((a, b) => a - b), minSal = [0]; for (let k = 1; k <= 5; k++) minSal.push(minSal[k - 1] + (cheap[k - 1] || 0));
+    const idx = Array.from({ length: n }, (_, i) => i);
+    let best = 0, a = 0, cTeam = 0;
+    const dfs = (j, k, cur, s, mixed) => {
+      for (let b = j; b < n; b++) {
+        if (cur + pre[Math.min(n, b + k)] - pre[b] <= best) return;       // even the next k best can't beat it
+        if (b === a) continue;
+        const p = ord[b], s2 = s + sal[p]; if (s2 + minSal[k - 1] > cap) continue;
+        const cur2 = cur + S[b], mix2 = mixed || team[p] !== cTeam;
+        if (k === 1) { if (mix2 && cur2 > best) best = cur2; } else dfs(b + 1, k - 1, cur2, s2, mix2);
+      }
+    };
+    return x => {
+      idx.sort((i, j) => x[j] - x[i]);
+      for (let i = 0; i < n; i++) { ord[i] = idx[i]; S[i] = x[idx[i]]; pre[i + 1] = pre[i] + S[i]; }
+      best = 0; const top5 = pre[Math.min(5, n)];
+      for (a = 0; a < n; a++) {
+        const c = ord[a]; if (1.5 * S[a] + top5 <= best) break;
+        const cs = 1.5 * sal[c]; if (cs + minSal[5] > cap) continue;
+        cTeam = team[c]; dfs(0, 5, 1.5 * S[a], cs, false);
+      }
+      return best;
+    };
+  };
+  // The draws: X[i * D + d] = player i's DK points in draw d; best[d] = that draw's best lineup. Yields {phase, frac}.
+  function* simWorld(spec, o = {}) {
+    const D = o.draws || SIM_DRAWS, n = spec.n, L = spec.L, X = new Float64Array(n * D), best = new Float64Array(D);
+    const g = gaussian(mulberry32(o.seed != null ? o.seed : fnv(spec.key))), e = new Float64Array(n), x = new Float64Array(n), bestOf = makeBest(spec, o.cap || 50000);
+    const every = o.chunk || 100, prog = { phase: 'draws', frac: 0, done: 0 };
+    for (let d = 0; d < D; d++) {
+      for (let i = 0; i < n; i++) e[i] = g();
+      for (let i = 0; i < n; i++) { let z = 0; const r = i * n; for (let k = 0; k <= i; k++) z += L[r + k] * e[k]; x[i] = Math.exp(spec.mu[i] + spec.sig[i] * z); X[i * D + d] = x[i]; }
+      best[d] = bestOf(x);
+      if ((d + 1) % every === 0 && d + 1 < D) { prog.done = d + 1; prog.frac = (d + 1) / D; yield prog; }
+    }
+    const sb = Array.from(best).sort((a, b) => a - b);
+    return { spec, D, X, best, bestMed: sb[D >> 1], cache: new Map() };
+  }
+  const q = (sorted, p) => sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(p * (sorted.length - 1) + 0.5)))];
+  // One lineup's score in every draw (players outside the sim — no projection — score 0).
+  const simScores = (W, cpt, flex) => {
+    const D = W.D, out = new Float64Array(D), X = W.X, c = W.spec.idx.get(cpt);
+    if (c != null) for (let d = 0, o = c * D; d < D; d++) out[d] = 1.5 * X[o + d];
+    for (const f of flex) { const i = W.spec.idx.get(f); if (i == null) continue; for (let d = 0, o = i * D; d < D; d++) out[d] += X[o + d]; }
+    return out;
+  };
+  // Cut lines as a share of the slate's best score, for the field size: contest_economics.json (by field bucket, tier),
+  // else the playbook's cut_lines (contest cut / contest winner, same field bucket). Each carries its n.
+  const ECON_BUCKETS = [[5000, 'lt5k'], [25000, '5k_25k'], [100000, '25k_100k'], [Infinity, '100k_plus']];
+  const simCuts = (econ, cutLines, tier, field) => {
+    const t = tier === 'sunday' ? 'sunday' : 'primetime', key = ECON_BUCKETS.find(([hi]) => +field < hi)[1];
+    const T = econ && econ[t];
+    if (T && T.by_field) {
+      const row = T.by_field.find(r => r.field === key), use = row && row.cut_top1_pct_best != null ? row : T.overall;
+      if (use && use.cut_top1_pct_best != null) {
+        const lbl = row && use === row ? `${row.field_label} ${t}` : `all ${t} fields (no ${key} cell)`;
+        return { src: 'econ', key: `econ|${t}|${use.field || 'all'}`, label: lbl, tier: t,
+          top1: { pct: use.cut_top1_pct_best, n: use.n_contests, slates: use.n_slates, small: !!use.small },
+          cash: use.min_cash_pct_best != null ? { pct: use.min_cash_pct_best, n: use.n_min_cash, slates: use.n_slates, small: !!use.small || use.n_min_cash < 3 } : null };
+      }
+    }
+    const fb = +field < 5000 ? 'se_small' : +field < 25000 ? 'mid' : 'large', lab = { se_small: '<5k', mid: '5k–25k', large: '25k+' }[fb];
+    const rows = (cutLines || []).filter(c => (c.tier || 'primetime') === t && c.winner_score > 0 && (+c.field_size < 5000 ? 'se_small' : +c.field_size < 25000 ? 'mid' : 'large') === fb);
+    const med = a => { const s = a.slice().sort((x, y) => x - y), m = s.length >> 1; return !s.length ? null : s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+    const t1 = rows.filter(c => c.cut_top1 != null), mc = rows.filter(c => c.min_cash_score != null);
+    if (!t1.length) return null;
+    const sl = r => new Set(r.map(c => c.slate)).size;
+    return { src: 'playbook', key: `pb|${t}|${fb}`, label: `${lab} ${t} (playbook cut lines, % of the contest winner)`, tier: t,
+      top1: { pct: Math.round(med(t1.map(c => c.cut_top1 / c.winner_score * 100)) * 100) / 100, n: t1.length, slates: sl(t1), small: sl(t1) < 3 },
+      cash: mc.length ? { pct: Math.round(med(mc.map(c => c.min_cash_score / c.winner_score * 100)) * 100) / 100, n: mc.length, slates: sl(mc), small: mc.length < 3 } : null };
+  };
+  // What the cut lines come to in this sim (points): median and 10th–90th percentile over the draws.
+  const cutPoints = (W, pct) => { const s = Array.from(W.best, b => b * pct / 100).sort((a, b) => a - b); return { med: q(s, 0.5), lo: q(s, 0.1), hi: q(s, 0.9) }; };
+  // P(score ≥ cut) for a fixed cut in points or a per-draw share of the slate best (pct).
+  const pAtLeast = (scores, W, pct, fixed) => { let k = 0; const D = scores.length; for (let d = 0; d < D; d++) if (scores[d] >= (fixed != null ? fixed : W.best[d] * pct / 100)) k++; return k / D; };
+  // Full stats for one lineup (cards, the Lab's own lineup): P(top 1%), P(min cash), median, 90th percentile.
+  const simStats = (W, cpt, flex, cuts) => {
+    const s = simScores(W, cpt, flex), top1 = cuts ? pAtLeast(s, W, cuts.top1.pct) : null, cash = cuts && cuts.cash ? pAtLeast(s, W, cuts.cash.pct) : null;
+    const sorted = Array.from(s).sort((a, b) => a - b);
+    return { top1, cash, med: q(sorted, 0.5), p90: q(sorted, 0.9), mean: sorted.reduce((a, v) => a + v, 0) / sorted.length, D: W.D,
+      se: top1 != null ? Math.sqrt(Math.max(top1 * (1 - top1), 1 / W.D) / W.D) : null };
+  };
+  // P(top 1%) and P(min cash) for every kept lineup (rows from ranked()); results cached per lineup × cut in the world.
+  // Sets r.top1 / r.cash (0–1). Yields {phase: 'lineups', frac}.
+  function* simLineups(W, rows, cuts, o = {}) {
+    const D = W.D, X = W.X, best = W.best, idx = W.spec.idx, t1 = new Float64Array(D), mc = new Float64Array(D);
+    for (let d = 0; d < D; d++) { t1[d] = best[d] * cuts.top1.pct / 100; mc[d] = cuts.cash ? best[d] * cuts.cash.pct / 100 : Infinity; }
+    const every = o.chunk || 250, prog = { phase: 'lineups', frac: 0, done: 0, total: rows.length }, off = new Int32Array(6);
+    for (let r = 0; r < rows.length; r++) {
+      const row = rows[r], ck = `${row.key}|${cuts.key}`, hit = W.cache.get(ck);
+      if (hit) { row.top1 = hit[0]; row.cash = hit[1]; }
+      else {
+        const c = idx.get(row.cpt); off[0] = c == null ? -1 : c * D;
+        for (let f = 0; f < 5; f++) { const i = idx.get(row.flex[f]); off[f + 1] = i == null ? -1 : i * D; }
+        let k1 = 0, kc = 0;
+        for (let d = 0; d < D; d++) {
+          let s = off[0] < 0 ? 0 : 1.5 * X[off[0] + d];
+          for (let f = 1; f < 6; f++) if (off[f] >= 0) s += X[off[f] + d];
+          if (s >= t1[d]) k1++; if (s >= mc[d]) kc++;
+        }
+        row.top1 = k1 / D; row.cash = cuts.cash ? kc / D : null; W.cache.set(ck, [row.top1, row.cash]);
+      }
+      if ((r + 1) % every === 0) { prog.done = r + 1; prog.frac = (r + 1) / rows.length; yield prog; }
+    }
+    return rows;
+  }
+  // Blend = the mean of a lineup's percentile rank on codex fit (unclamped fit − penalties) and on P(top 1%),
+  // both among the rows given (the kept lineups), 0–100. Ties share the average rank.
+  const pctRanks = (rows, val) => {
+    const n = rows.length, ord = rows.map((r, i) => i).sort((i, j) => val(rows[i]) - val(rows[j])), out = new Float64Array(n);
+    for (let i = 0; i < n;) { let j = i; while (j + 1 < n && val(rows[ord[j + 1]]) === val(rows[ord[i]])) j++; const pr = n > 1 ? ((i + j) / 2) / (n - 1) * 100 : 100; for (let k = i; k <= j; k++) out[ord[k]] = pr; i = j + 1; }
+    return out;
+  };
+  const applyBlend = rows => {
+    const a = pctRanks(rows, r => r.raw), b = pctRanks(rows, r => (r.top1 == null ? -1 : r.top1));
+    rows.forEach((r, i) => { r.blend = Math.round((a[i] + b[i]) / 2 * 10) / 10; });
+    return rows;
+  };
+  const tieBreak = (a, b) => b.codex - a.codex || b.raw - a.raw || b.proj - a.proj || b.sal - a.sal || (a.key < b.key ? -1 : a.key > b.key ? 1 : 0);
+  ORDER.top1 = (a, b) => (b.top1 ?? -1) - (a.top1 ?? -1) || tieBreak(a, b);
+  ORDER.blend = (a, b) => (b.blend ?? -1) - (a.blend ?? -1) || (b.top1 ?? -1) - (a.top1 ?? -1) || tieBreak(a, b);
+
+  return { TOP, PER_BUCKET, BUDGET, YIELD_EVERY, codexScore, candidates, search, ranked, topCards, pickBatch, ORDER,
+    SIM_DRAWS, mulberry32, gaussian, readStd, simRoles, cholesky, simCohort, simPrepare, makeBest, simWorld, simScores, simCuts, cutPoints, pAtLeast, simStats, simLineups, pctRanks, applyBlend };
 });

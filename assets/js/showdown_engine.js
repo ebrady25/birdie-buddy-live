@@ -385,7 +385,7 @@
       if (lp && has.proj) for (const p of X.fl) if (p.sal < 1000 && p.proj < lp.proj_threshold) pen.push([`punt ${p.name} proj ${pyFixed(p.proj, 1)}`, lp.penalty]);
       const dq = S.dog_qb_in_lineup_when_field_own_over;
       if (has.own && X.dog_qb && X.dog_qb_own >= dq.own_threshold) pen.push([`dog QB at ${pyFixed(X.dog_qb_own, 0)}% own`, dq.penalty]);
-      if (f.opp_WR && X.side === 'FAV' && (c.pos === 'RB' || (c.pos === 'QB' && !SHOOTOUT))) pen.push([`opp WR w/ fav ${c.pos} CPT`, S.opp_wr_with_fav_rb_or_fav_qb_cpt]);
+      if (f.opp_WR && X.side === 'FAV' && (c.pos === 'RB' || c.pos === 'QB')) pen.push([`opp WR w/ fav ${c.pos} CPT`, S.opp_wr_with_fav_rb_or_fav_qb_cpt]);   // v1.4: applies in shootouts too
       const t = T[X.ctype]; let fit = 0.0, inc_ = [], avd_ = [];
       if (t) {
         inc_ = t.include.filter(k => f[k]); avd_ = t.avoid.filter(k => f[k]);

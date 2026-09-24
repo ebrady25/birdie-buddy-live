@@ -22,8 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.4.1" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.4.1" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.5.0" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.5.0" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
   </style>
@@ -183,6 +183,7 @@
             <p>Who sits at captain, how many lineups go to each script, and the recipe for each one — with the dials to type into the Contest Generator.</p>
           </div>
           <div class="card sd-panel card-premium fx-reveal" id="sdShortlist"></div>
+          <div class="card sd-panel sd-levb fx-reveal" id="sdLevBoard"></div>
           <div data-gate-paused="pro" data-pro-data data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are a Pro feature. Free members get the game read and the captain shortlist.">
             <div class="sd-step" style="gap:var(--space-4)">
               <div class="card sd-panel card-premium" id="sdVerdict"></div>
@@ -202,6 +203,7 @@
             <span class="sd-gate-tag">open preview</span>
             <p>Build a lineup and watch the engine grade it live — the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template — or let it search the pool and build them for you. Same rules, same math as the engine we build our books with.</p>
           </div>
+          <div class="card sd-panel sd-routine" id="sdRoutine"></div>
           <div class="sd-lab" id="sdLab"></div>
           <div data-gate-paused="pro" data-gate-msg="Score your own slate: drop your DraftKings salary file and Stokastic Data Hub export, paste or upload a whole book, get the portfolio report and let the engine pick your batch from a pool. Sample slates stay free.">
             <div class="card sd-panel" id="sdLabPro"></div>
@@ -214,10 +216,11 @@
             <span class="sd-step-num">Step 5</span>
             <h2 id="step5h">Ship it</h2>
             <span class="sd-gate-tag">open preview</span>
-            <p>Ownership target and dupe gate for the field you're in, the score each finishing tier took in past contests of that size, a Tuesday review of any contest you played, the engine's rules as a reference, and the playbook as text or a play card.</p>
+            <p>Where to enter this week's contests for the lineups you have, the ownership target and dupe gate for the field you're in, the score each finishing tier took in past contests of that size, a Tuesday review of any contest you played, the engine's rules as a reference, and the playbook as text or a play card.</p>
           </div>
           <div data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
             <div class="sd-step" style="gap:var(--space-4)">
+              <div class="card sd-panel sd-where" id="sdWhere"></div>
               <div class="card sd-panel" id="sdFit"></div>
               <div class="card sd-panel" id="sdCuts"></div>
               <div class="card sd-panel sd-review" id="sdReview"></div>
@@ -242,14 +245,14 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.4.1"></script>
-  <script src="assets/js/track.js?v=0.4.1"></script>
+  <script src="assets/js/nfl.js?v=0.5.0"></script>
+  <script src="assets/js/track.js?v=0.5.0"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
-  <script src="assets/js/showdown_fx.js?v=0.4.1"></script>
-  <script src="assets/js/showdown_engine.js?v=0.4.1"></script>
-  <script src="assets/js/showdown.js?v=0.4.1"></script>
-  <script src="assets/js/showdown_build.js?v=0.4.1"></script>
-  <script src="assets/js/showdown_lab.js?v=0.4.1"></script>
-  <script src="assets/js/showdown_review.js?v=0.4.1"></script>
+  <script src="assets/js/showdown_fx.js?v=0.5.0"></script>
+  <script src="assets/js/showdown_engine.js?v=0.5.0"></script>
+  <script src="assets/js/showdown.js?v=0.5.0"></script>
+  <script src="assets/js/showdown_build.js?v=0.5.0"></script>
+  <script src="assets/js/showdown_lab.js?v=0.5.0"></script>
+  <script src="assets/js/showdown_review.js?v=0.5.0"></script>
 </body>
 </html>

@@ -1632,13 +1632,95 @@ window.BBI = window.BBI || {};
     window.addEventListener('hashchange', () => { const id = cleanHash().slice(1); if (/^step[1-5]$/.test(id)) jump(id); });
   };
 
+  /* ---------- ownership correction + role leverage (pure; the Lab draws them) ---------- */
+  // ownership_correction.json (codex/ownership_correction.py): OUR role-cell coefficients for how a pre-contest
+  // ownership projection misses DK ownership, plus error bands. correctOwn mirrors correct() there: cell → effect
+  // (a cell that didn't ship carries the identity) → floor 0 → rescale FLEX to 500 % / CPT to 100 % → the q10–q90
+  // band of the corrected value's chalk bucket. Runs in the browser on the reader's own file; nothing is stored.
+  const ownBucket = (v, table) => { const ks = Object.keys(table); for (const k of ks) { const [lo, hi] = table[k].range; if (v >= lo && (hi == null || v < hi)) return k; } return ks[ks.length - 1]; };
+  const ownCell = (kind, pos, side, proj) => {
+    if (pos === 'K' || pos === 'DST') return `${pos}_${side}`;
+    if (kind === 'flex') {
+      if (pos === 'QB' && proj >= 5) return `QB_${side}`;
+      if (proj < 5) return 'tail_lt5';
+      return `${pos}_${side}_${proj < 15 ? '5_15' : proj < 30 ? '15_30' : '30_plus'}`;
+    }
+    if (pos === 'QB' && proj >= 2) return `QB_${side}`;
+    if (proj < 1) return 'tail_lt1';
+    return `${pos}_${side}_${proj < 5 ? '1_5' : '5_plus'}`;
+  };
+  // v ± the band's q10 / q90 (floored at 0). which: 'corrected' | 'raw' | 'bb_model'.
+  const ownBand = (P, kind, v, which) => {
+    const B = P && P.bands && P.bands[kind] && P.bands[kind][which]; if (!B) return null;
+    const b = B[ownBucket(v, B)]; return { lo: Math.max(0, v + (b.q10 || 0)), hi: Math.max(0, v + (b.q90 || 0)), n: b.n, bucket: ownBucket(v, B) };
+  };
+  // players: [{name, pos, team, own, cpt_own}] of ONE slate → Map name → {own, cpt_own (corrected), own_raw, cpt_own_raw, own_lo/hi, cpt_own_lo/hi, own_n, cpt_own_n, cell_flex, cell_cpt}
+  const correctOwn = (players, fav, P) => {
+    const out = new Map(players.map(p => [p.name, {}]));
+    for (const [kind, key] of [['flex', 'own'], ['cpt', 'cpt_own']]) {
+      const M = P[kind], form = M.form, idn = M.identity_effect ?? (form === 'add' ? 0 : 1);
+      const cells = players.map(p => ownCell(kind, p.pos, p.team === fav ? 'fav' : 'dog', +p[key] || 0));
+      const adj = players.map((p, i) => { const c = M.cells[cells[i]], e = c ? c.effect : idn, v = +p[key] || 0; return Math.max(0, form === 'add' ? v + e : v * e); });
+      const s = adj.reduce((a, b) => a + b, 0), q = s > 0 ? adj.map(a => a * M.target_sum / s) : adj;
+      players.forEach((p, i) => {
+        const o = out.get(p.name), b = ownBand(P, kind, q[i], 'corrected');
+        Object.assign(o, { [key]: q[i], [`${key}_raw`]: +p[key] || 0, [`cell_${kind}`]: cells[i], [`${key}_lo`]: b ? b.lo : q[i], [`${key}_hi`]: b ? b.hi : q[i], [`${key}_n`]: b ? b.n : 0 });
+      });
+    }
+    return out;
+  };
+  // est. dupes = field × Π own × 6 (the engine's formula, own floored at 0.05 %); cpt: {cpt_own}, fl: [{own}].
+  const estDupes = (field, cptOwn, flexOwns) => field * (Math.max(cptOwn, 0.05) / 100) * flexOwns.reduce((a, o) => a * (Math.max(o, 0.05) / 100), 1) * 6;
+
+  // role_rates (codex/role_rates.py): how often each depth role was the captain / in FLEX of the historical winners.
+  // Leverage = that rate − the summed projected ownership of the pool players in the role (points), CPT and FLEX
+  // separately — the definition in role_rates.leverage and LEVERAGE_METHOD.md. players = the active pool.
+  // split: a K or DST role holding more than one player projected ≥ 5 % FLEX own (e.g. two kickers listed for one
+  // team). The role sums them while the field splits one player's worth, so its "over-owned" number is an
+  // ownership-model artifact, not leverage: the board leaves it unranked (LEVERAGE_METHOD.md, GB kickers).
+  const ROLE_DEPTH = { QB: ['QB1', 'QB2+'], RB: ['RB1', 'RB2+'], WR: ['WR1', 'WR2', 'WR3+'], TE: ['TE1', 'TE2+'] };
+  const roleMap = (players, fav) => {
+    const role = new Map();
+    for (const t of new Set(players.map(p => p.team))) for (const pos of ['QB', 'RB', 'WR', 'TE', 'K', 'DST'])
+      players.filter(p => p.team === t && p.pos === pos).sort((a, b) => b.sal - a.sal)
+        .forEach((p, i) => role.set(p.name, `${t === fav ? 'FAV' : 'DOG'}_${ROLE_DEPTH[pos] ? ROLE_DEPTH[pos][Math.min(i, ROLE_DEPTH[pos].length - 1)] : pos}`));
+    return role;
+  };
+  const levBucket = s => s <= 3 ? 'spread_le3' : s <= 6.5 ? 'spread_3.5_6.5' : 'spread_ge7';
+  const LEV_BUCKET_LABEL = { spread_le3: 'spread ≤ 3', 'spread_3.5_6.5': 'spread 3.5–6.5', spread_ge7: 'spread ≥ 7', all: 'all spreads' };
+  const leverageFor = (players, fav, spread, rr) => {
+    if (!rr || !rr.cohorts || !rr.roles) return null;
+    const C = rr.cohorts[rr.default_cohort], b = levBucket(+spread), row = C.by_spread && C.by_spread[b];
+    const useRow = !!(row && row.roles && row.n >= rr.min_bucket_n), R = useRow ? row.roles : C.roles;
+    const role = roleMap(players, fav), SAL = (rr.depth && rr.depth.salary_by_role) || {};
+    const thinOf = p => { const s = SAL[role.get(p.name)]; return !s || !(s.n >= 5) || p.sal < s.p5 || p.sal > s.p95; };
+    const roles = {};
+    for (const r of rr.roles) {
+      const h = R[r.id]; if (!h) continue;
+      const mem = players.filter(p => role.get(p.name) === r.id), hf = r.multi ? h.flex.per100 : h.flex.pct;
+      const oc = mem.reduce((s, p) => s + (+p.cpt_own || 0), 0), of = mem.reduce((s, p) => s + (+p.own || 0), 0);
+      roles[r.id] = { id: r.id, label: r.label, side: r.side, pos: r.pos, multi: r.multi, players: mem.map(p => p.name), thin: mem.length > 0 && mem.every(thinOf),
+        split: (r.pos === 'K' || r.pos === 'DST') && mem.filter(p => (+p.own || 0) >= 5).length > 1,
+        cpt: { hist: h.cpt.pct, k: h.cpt.k, ci: h.cpt.ci90, own: oc, lev: h.cpt.pct - oc },
+        flex: { hist: hf, pct: h.flex.pct, k: h.flex.k, ci: h.flex.ci90, own: of, lev: hf - of, per100: !!r.multi } };
+    }
+    const byPlayer = new Map(players.map(p => [p.name, { role: role.get(p.name), thin: thinOf(p), sal: SAL[role.get(p.name)] || null }]));
+    return { bucket: useRow ? b : 'all', n: useRow ? row.n : C.n, cohort: rr.default_cohort, cohortN: C.n, roles, byPlayer };
+  };
+  // The 2026 field-gap note for a role family (FAV_QB …) and slot ('cpt' | 'flex'), or null when the field is aligned.
+  const fieldGapFor = (rr, side, pos, slot) => {
+    const f = rr && rr.field_gap && rr.field_gap.families && rr.field_gap.families[`${side}_${pos}`];
+    const g = f && f[slot]; return g && g.label !== 'aligned' ? g : null;
+  };
+
   // Public surface (also used by the verification harness).
   window.BBI.showdown = { bucketSpread, bucketTotal, expectedSpreadRow, expectedTotalRow, cheatCell, envRow, roofRow, overlaysFor, allocationFor, largestRemainder, shortlistFor, dialsFor, pinnedLawsFor, LEANS, state, get data() { return data; }, set data(v) { data = v; }, get slates() { return slates; }, set slates(v) { slates = v; }, render, init,   // setters: test seam
     derive: () => derive(), slateTier, attackFor, nextPrimetime, visibleSlates, histText, checkText, checkLegend, CHECK, setLabScore, toast, scriptOdds, ENV_LABEL, ENV_SHORT, CONTEST_SHORT, SCRIPT_META,
     VERDICT, LAW_RULES, ruleById, tmplRuleId, lawVerdict, verdictTip, vBadge, vIcon, lawBadge, cohortRows, fieldBucket, cutLadder, lineupProj, projVsCuts, median,
     urlParse, urlSerialize, nameSlug, lineupTokens, lineupFromTokens, get urlIn() { return urlIn; }, syncUrl, copyLink, sharePng,
     playbookText: () => playbookText(derive()), stokasticText: () => stokasticText(derive()), playCardPng: () => playCardPng(derive()),
-    GATING_MODE, PUBLIC_PATH, PRO_ROUTE, gatingMode, mergePro, proFrom, hasPro, get gating() { return gating; }, get proState() { return proState; } };
+    GATING_MODE, PUBLIC_PATH, PRO_ROUTE, gatingMode, mergePro, proFrom, hasPro, get gating() { return gating; }, get proState() { return proState; },
+    ownBucket, ownCell, ownBand, correctOwn, estDupes, roleMap, levBucket, LEV_BUCKET_LABEL, leverageFor, fieldGapFor };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

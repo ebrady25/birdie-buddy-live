@@ -1,0 +1,1433 @@
+{
+ "_note": "BirdieBuddy ownership correction layer (showdown). Our coefficients, error bands and CV results, computed from how a commercial pre-contest ownership projection missed actual DraftKings ownership. Contains no player-level projections. Effective sample = slates; with 3 slates treat every number as a first read.",
+ "version": "1.0",
+ "generated": "2026-09-23 22:43",
+ "training": {
+  "slates": [
+   "2026-wk2-det-buf",
+   "2026-wk2-ind-kc",
+   "2026-wk2-nyg-lar"
+  ],
+  "exports": "latest Data Hub export per slate (T-1.3h to T-5.2h)",
+  "source": "codex/ownership/own_tracking.csv",
+  "players": {
+   "2026-wk2-det-buf": 47,
+   "2026-wk2-ind-kc": 54,
+   "2026-wk2-nyg-lar": 53
+  }
+ },
+ "method": {
+  "cells_flex": "K_<side>, DST_<side>, QB_<side> (proj \u2265 5), tail_lt5, <RB|WR|TE>_<side>_<5_15|15_30|30_plus> (by projected own)",
+  "cells_cpt": "K_<side>, DST_<side>, QB_<side> (proj CPT \u2265 2), tail_lt1, <RB|WR|TE>_<side>_<1_5|5_plus>",
+  "shrinkage": "effect \u00d7 n/(n+k); k and form (additive / multiplicative) chosen by leave-one-slate-out CV; k=inf = identity",
+  "gating": "a cell ships only if it holds \u2265 3 players in \u2265 2 slates and its LOSO MAE beats raw by \u2265 1 %; otherwise identity",
+  "public": "per-cell statistics are published only for cells with \u2265 3 players in \u2265 2 slates; smaller cells show n and the identity effect",
+  "renormalise": "floor at 0, then proportional rescale to FLEX 500 % / CPT 100 %",
+  "bands": "empirical quantiles of actual \u2212 projected per projected-chalk bucket (held-out residuals), with n",
+  "k_grid": [
+   0,
+   1,
+   2,
+   3,
+   5,
+   8,
+   12,
+   20,
+   35,
+   60,
+   100,
+   "inf"
+  ],
+  "forms": [
+   "add",
+   "mult"
+  ]
+ },
+ "flex": {
+  "form": "mult",
+  "k": 20,
+  "target_sum": 500.0,
+  "identity_effect": 1.0,
+  "cells": {
+   "DST_dog": {
+    "definition": "DST, underdog",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.659,
+    "shrink": 0.13,
+    "fitted_effect": 0.956,
+    "effect": 0.956,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 4.387,
+    "loso_mae_corr": 3.893
+   },
+   "DST_fav": {
+    "definition": "DST, favourite",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 1.011,
+    "shrink": 0.13,
+    "fitted_effect": 1.001,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 3.95,
+    "loso_mae_corr": 4.1
+   },
+   "K_dog": {
+    "definition": "kicker, underdog",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.762,
+    "shrink": 0.13,
+    "fitted_effect": 0.969,
+    "effect": 0.969,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 5.143,
+    "loso_mae_corr": 4.503
+   },
+   "K_fav": {
+    "definition": "kicker, favourite",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.862,
+    "shrink": 0.13,
+    "fitted_effect": 0.982,
+    "effect": 0.982,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 3.773,
+    "loso_mae_corr": 3.223
+   },
+   "QB_dog": {
+    "definition": "underdog QB (starter)",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.965,
+    "shrink": 0.13,
+    "fitted_effect": 0.995,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 3.36,
+    "loso_mae_corr": 3.683
+   },
+   "QB_fav": {
+    "definition": "favourite QB (starter: proj FLEX \u2265 5 % / CPT \u2265 2 %)",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 1.09,
+    "shrink": 0.13,
+    "fitted_effect": 1.012,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 4.577,
+    "loso_mae_corr": 4.576
+   },
+   "RB_dog_30_plus": {
+    "definition": "RB, underdog, projected 30-+ %",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 1.027,
+    "shrink": 0.13,
+    "fitted_effect": 1.004,
+    "effect": 1.004,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 2.073,
+    "loso_mae_corr": 2.022
+   },
+   "RB_dog_5_15": {
+    "definition": "RB, underdog, projected 5-15 %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "RB_fav_15_30": {
+    "definition": "RB, favourite, projected 15-30 %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "RB_fav_30_plus": {
+    "definition": "RB, favourite, projected 30-+ %",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.895,
+    "shrink": 0.13,
+    "fitted_effect": 0.986,
+    "effect": 0.986,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 4.797,
+    "loso_mae_corr": 4.549
+   },
+   "RB_fav_5_15": {
+    "definition": "RB, favourite, projected 5-15 %",
+    "n": 2,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_dog_15_30": {
+    "definition": "TE, underdog, projected 15-30 %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_dog_30_plus": {
+    "definition": "TE, underdog, projected 30-+ %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_fav_15_30": {
+    "definition": "TE, favourite, projected 15-30 %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_fav_30_plus": {
+    "definition": "TE, favourite, projected 30-+ %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_fav_5_15": {
+    "definition": "TE, favourite, projected 5-15 %",
+    "n": 4,
+    "slates": 3,
+    "raw_effect": 1.063,
+    "shrink": 0.167,
+    "fitted_effect": 1.011,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 4,
+    "loso_mae_raw": 2.553,
+    "loso_mae_corr": 2.625
+   },
+   "WR_dog_15_30": {
+    "definition": "WR, underdog, projected 15-30 %",
+    "n": 4,
+    "slates": 2,
+    "raw_effect": 0.899,
+    "shrink": 0.167,
+    "fitted_effect": 0.983,
+    "effect": 0.983,
+    "shipped": true,
+    "loso_n": 4,
+    "loso_mae_raw": 2.338,
+    "loso_mae_corr": 2.14
+   },
+   "WR_dog_30_plus": {
+    "definition": "WR, underdog, projected 30-+ %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "WR_dog_5_15": {
+    "definition": "WR, underdog, projected 5-15 %",
+    "n": 3,
+    "slates": 2,
+    "raw_effect": 1.189,
+    "shrink": 0.13,
+    "fitted_effect": 1.025,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 1.6,
+    "loso_mae_corr": 1.601
+   },
+   "WR_fav_15_30": {
+    "definition": "WR, favourite, projected 15-30 %",
+    "n": 3,
+    "slates": 2,
+    "raw_effect": 0.978,
+    "shrink": 0.13,
+    "fitted_effect": 0.997,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 4.503,
+    "loso_mae_corr": 4.488
+   },
+   "WR_fav_30_plus": {
+    "definition": "WR, favourite, projected 30-+ %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "WR_fav_5_15": {
+    "definition": "WR, favourite, projected 5-15 %",
+    "n": 5,
+    "slates": 3,
+    "raw_effect": 1.224,
+    "shrink": 0.2,
+    "fitted_effect": 1.045,
+    "effect": 1.045,
+    "shipped": true,
+    "loso_n": 5,
+    "loso_mae_raw": 2.042,
+    "loso_mae_corr": 1.895
+   },
+   "tail_lt5": {
+    "definition": "any other player projected under 5 % FLEX",
+    "n": 96,
+    "slates": 3,
+    "raw_effect": 1.504,
+    "shrink": 0.828,
+    "fitted_effect": 1.418,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 96,
+    "loso_mae_raw": 0.502,
+    "loso_mae_corr": 0.555
+   }
+  },
+  "cells_shipped": [
+   "DST_dog",
+   "K_dog",
+   "K_fav",
+   "RB_dog_30_plus",
+   "RB_fav_30_plus",
+   "WR_dog_15_30",
+   "WR_fav_5_15"
+  ]
+ },
+ "cv": {
+  "flex": {
+   "verdict": "marginal: MAE 1.645 \u2192 1.644 (-0.1 %, nested LOSO); better in 1/3 folds, worse in 0/3",
+   "nested_loso": {
+    "mae_raw": 1.645,
+    "mae_corr": 1.644,
+    "folds": [
+     {
+      "held_out": "2026-wk2-det-buf",
+      "form": "add",
+      "k": 5,
+      "cells_shipped": [
+       "WR_fav_5_15"
+      ],
+      "n": 47,
+      "mae_raw": 2.615,
+      "mae_corr": 2.61,
+      "mae_raw_relevant": 4.187,
+      "mae_corr_relevant": 4.179
+     },
+     {
+      "held_out": "2026-wk2-ind-kc",
+      "form": "add",
+      "k": "inf",
+      "cells_shipped": [],
+      "n": 54,
+      "mae_raw": 1.318,
+      "mae_corr": 1.318,
+      "mae_raw_relevant": 2.675,
+      "mae_corr_relevant": 2.675
+     },
+     {
+      "held_out": "2026-wk2-nyg-lar",
+      "form": "mult",
+      "k": 1,
+      "cells_shipped": [
+       "WR_dog_15_30"
+      ],
+      "n": 53,
+      "mae_raw": 1.119,
+      "mae_corr": 1.119,
+      "mae_raw_relevant": 2.34,
+      "mae_corr_relevant": 2.34
+     }
+    ],
+    "note": "form, k and cell gates re-chosen inside each fold from the other two slates only: the honest number"
+   },
+   "loso_shipped": {
+    "mae_raw": 1.645,
+    "mae_corr": 1.613,
+    "per_slate": [
+     {
+      "slate": "2026-wk2-det-buf",
+      "n": 47,
+      "mae_raw": 2.615,
+      "mae_corr": 2.578,
+      "rho_raw": 0.909,
+      "rho_corr": 0.909,
+      "mae_bb_model": 2.739
+     },
+     {
+      "slate": "2026-wk2-ind-kc",
+      "n": 54,
+      "mae_raw": 1.318,
+      "mae_corr": 1.286,
+      "rho_raw": 0.948,
+      "rho_corr": 0.948,
+      "mae_bb_model": 2.844
+     },
+     {
+      "slate": "2026-wk2-nyg-lar",
+      "n": 53,
+      "mae_raw": 1.119,
+      "mae_corr": 1.092,
+      "rho_raw": 0.94,
+      "rho_corr": 0.941,
+      "mae_bb_model": 3.05
+     }
+    ],
+    "note": "k and gates chosen on these same folds: optimistic"
+   },
+   "grid": [
+    {
+     "form": "add",
+     "k": 0,
+     "mae": 1.833
+    },
+    {
+     "form": "add",
+     "k": 1,
+     "mae": 1.694
+    },
+    {
+     "form": "add",
+     "k": 2,
+     "mae": 1.661
+    },
+    {
+     "form": "add",
+     "k": 3,
+     "mae": 1.651
+    },
+    {
+     "form": "add",
+     "k": 5,
+     "mae": 1.645
+    },
+    {
+     "form": "add",
+     "k": 8,
+     "mae": 1.647
+    },
+    {
+     "form": "add",
+     "k": 12,
+     "mae": 1.652
+    },
+    {
+     "form": "add",
+     "k": 20,
+     "mae": 1.661
+    },
+    {
+     "form": "add",
+     "k": 35,
+     "mae": 1.665
+    },
+    {
+     "form": "add",
+     "k": 60,
+     "mae": 1.662
+    },
+    {
+     "form": "add",
+     "k": 100,
+     "mae": 1.654
+    },
+    {
+     "form": "add",
+     "k": "inf",
+     "mae": 1.645
+    },
+    {
+     "form": "mult",
+     "k": 0,
+     "mae": 1.918
+    },
+    {
+     "form": "mult",
+     "k": 1,
+     "mae": 1.72
+    },
+    {
+     "form": "mult",
+     "k": 2,
+     "mae": 1.676
+    },
+    {
+     "form": "mult",
+     "k": 3,
+     "mae": 1.66
+    },
+    {
+     "form": "mult",
+     "k": 5,
+     "mae": 1.648
+    },
+    {
+     "form": "mult",
+     "k": 8,
+     "mae": 1.639
+    },
+    {
+     "form": "mult",
+     "k": 12,
+     "mae": 1.639
+    },
+    {
+     "form": "mult",
+     "k": 20,
+     "mae": 1.64
+    },
+    {
+     "form": "mult",
+     "k": 35,
+     "mae": 1.648
+    },
+    {
+     "form": "mult",
+     "k": 60,
+     "mae": 1.651
+    },
+    {
+     "form": "mult",
+     "k": 100,
+     "mae": 1.65
+    },
+    {
+     "form": "mult",
+     "k": "inf",
+     "mae": 1.645
+    }
+   ],
+   "every_export": [
+    {
+     "slate": "2026-wk2-det-buf",
+     "export_is_latest": false,
+     "n": 46,
+     "mae_raw": 2.541,
+     "mae_corr": 2.506
+    },
+    {
+     "slate": "2026-wk2-det-buf",
+     "export_is_latest": false,
+     "n": 46,
+     "mae_raw": 2.541,
+     "mae_corr": 2.506
+    },
+    {
+     "slate": "2026-wk2-det-buf",
+     "export_is_latest": true,
+     "n": 47,
+     "mae_raw": 2.615,
+     "mae_corr": 2.578
+    },
+    {
+     "slate": "2026-wk2-ind-kc",
+     "export_is_latest": true,
+     "n": 54,
+     "mae_raw": 1.318,
+     "mae_corr": 1.286
+    },
+    {
+     "slate": "2026-wk2-nyg-lar",
+     "export_is_latest": true,
+     "n": 53,
+     "mae_raw": 1.119,
+     "mae_corr": 1.092
+    },
+    {
+     "slate": "2026-wk2-nyg-lar",
+     "export_is_latest": false,
+     "n": 53,
+     "mae_raw": 1.119,
+     "mae_corr": 1.092
+    }
+   ]
+  },
+  "cpt": {
+   "verdict": "improves: MAE 0.428 \u2192 0.411 (-3.9 %, nested LOSO); better in 3/3 folds, worse in 0/3",
+   "nested_loso": {
+    "mae_raw": 0.428,
+    "mae_corr": 0.411,
+    "folds": [
+     {
+      "held_out": "2026-wk2-det-buf",
+      "form": "mult",
+      "k": 5,
+      "cells_shipped": [
+       "WR_fav_5_plus",
+       "tail_lt1"
+      ],
+      "n": 47,
+      "mae_raw": 0.43,
+      "mae_corr": 0.428,
+      "mae_raw_relevant": 1.292,
+      "mae_corr_relevant": 1.225
+     },
+     {
+      "held_out": "2026-wk2-ind-kc",
+      "form": "mult",
+      "k": 100,
+      "cells_shipped": [
+       "WR_dog_5_plus",
+       "tail_lt1"
+      ],
+      "n": 54,
+      "mae_raw": 0.379,
+      "mae_corr": 0.371,
+      "mae_raw_relevant": 1.36,
+      "mae_corr_relevant": 1.349
+     },
+     {
+      "held_out": "2026-wk2-nyg-lar",
+      "form": "mult",
+      "k": 5,
+      "cells_shipped": [
+       "WR_fav_5_plus",
+       "tail_lt1"
+      ],
+      "n": 53,
+      "mae_raw": 0.476,
+      "mae_corr": 0.438,
+      "mae_raw_relevant": 1.734,
+      "mae_corr_relevant": 1.6
+     }
+    ],
+    "note": "form, k and cell gates re-chosen inside each fold from the other two slates only: the honest number"
+   },
+   "loso_shipped": {
+    "mae_raw": 0.428,
+    "mae_corr": 0.408,
+    "per_slate": [
+     {
+      "slate": "2026-wk2-det-buf",
+      "n": 47,
+      "mae_raw": 0.43,
+      "mae_corr": 0.417,
+      "rho_raw": 0.917,
+      "rho_corr": 0.917,
+      "mae_bb_model": 0.707
+     },
+     {
+      "slate": "2026-wk2-ind-kc",
+      "n": 54,
+      "mae_raw": 0.379,
+      "mae_corr": 0.362,
+      "rho_raw": 0.931,
+      "rho_corr": 0.931,
+      "mae_bb_model": 0.882
+     },
+     {
+      "slate": "2026-wk2-nyg-lar",
+      "n": 53,
+      "mae_raw": 0.476,
+      "mae_corr": 0.448,
+      "rho_raw": 0.893,
+      "rho_corr": 0.893,
+      "mae_bb_model": 0.729
+     }
+    ],
+    "note": "k and gates chosen on these same folds: optimistic"
+   },
+   "grid": [
+    {
+     "form": "add",
+     "k": 0,
+     "mae": 0.521
+    },
+    {
+     "form": "add",
+     "k": 1,
+     "mae": 0.463
+    },
+    {
+     "form": "add",
+     "k": 2,
+     "mae": 0.448
+    },
+    {
+     "form": "add",
+     "k": 3,
+     "mae": 0.441
+    },
+    {
+     "form": "add",
+     "k": 5,
+     "mae": 0.433
+    },
+    {
+     "form": "add",
+     "k": 8,
+     "mae": 0.431
+    },
+    {
+     "form": "add",
+     "k": 12,
+     "mae": 0.431
+    },
+    {
+     "form": "add",
+     "k": 20,
+     "mae": 0.433
+    },
+    {
+     "form": "add",
+     "k": 35,
+     "mae": 0.434
+    },
+    {
+     "form": "add",
+     "k": 60,
+     "mae": 0.433
+    },
+    {
+     "form": "add",
+     "k": 100,
+     "mae": 0.432
+    },
+    {
+     "form": "add",
+     "k": "inf",
+     "mae": 0.428
+    },
+    {
+     "form": "mult",
+     "k": 0,
+     "mae": 0.511
+    },
+    {
+     "form": "mult",
+     "k": 1,
+     "mae": 0.45
+    },
+    {
+     "form": "mult",
+     "k": 2,
+     "mae": 0.432
+    },
+    {
+     "form": "mult",
+     "k": 3,
+     "mae": 0.421
+    },
+    {
+     "form": "mult",
+     "k": 5,
+     "mae": 0.411
+    },
+    {
+     "form": "mult",
+     "k": 8,
+     "mae": 0.408
+    },
+    {
+     "form": "mult",
+     "k": 12,
+     "mae": 0.41
+    },
+    {
+     "form": "mult",
+     "k": 20,
+     "mae": 0.414
+    },
+    {
+     "form": "mult",
+     "k": 35,
+     "mae": 0.416
+    },
+    {
+     "form": "mult",
+     "k": 60,
+     "mae": 0.417
+    },
+    {
+     "form": "mult",
+     "k": 100,
+     "mae": 0.419
+    },
+    {
+     "form": "mult",
+     "k": "inf",
+     "mae": 0.428
+    }
+   ],
+   "every_export": [
+    {
+     "slate": "2026-wk2-det-buf",
+     "export_is_latest": false,
+     "n": 46,
+     "mae_raw": 0.555,
+     "mae_corr": 0.541
+    },
+    {
+     "slate": "2026-wk2-det-buf",
+     "export_is_latest": false,
+     "n": 46,
+     "mae_raw": 0.555,
+     "mae_corr": 0.541
+    },
+    {
+     "slate": "2026-wk2-det-buf",
+     "export_is_latest": true,
+     "n": 47,
+     "mae_raw": 0.43,
+     "mae_corr": 0.417
+    },
+    {
+     "slate": "2026-wk2-ind-kc",
+     "export_is_latest": true,
+     "n": 54,
+     "mae_raw": 0.379,
+     "mae_corr": 0.362
+    },
+    {
+     "slate": "2026-wk2-nyg-lar",
+     "export_is_latest": true,
+     "n": 53,
+     "mae_raw": 0.476,
+     "mae_corr": 0.448
+    },
+    {
+     "slate": "2026-wk2-nyg-lar",
+     "export_is_latest": false,
+     "n": 53,
+     "mae_raw": 0.476,
+     "mae_corr": 0.448
+    }
+   ]
+  }
+ },
+ "bands": {
+  "flex": {
+   "corrected": {
+    "lt1": {
+     "range": [
+      0,
+      1
+     ],
+     "n": 80,
+     "q10": 0.0,
+     "q25": 0.0,
+     "q50": 0.01,
+     "q75": 0.06,
+     "q90": 0.41,
+     "mean": 0.27,
+     "mae": 0.29
+    },
+    "1_5": {
+     "range": [
+      1,
+      5
+     ],
+     "n": 16,
+     "q10": -2.37,
+     "q25": -1.52,
+     "q50": 0.06,
+     "q75": 1.15,
+     "q90": 3.26,
+     "mean": 0.14,
+     "mae": 1.55
+    },
+    "5_15": {
+     "range": [
+      5,
+      15
+     ],
+     "n": 17,
+     "q10": -3.41,
+     "q25": -2.64,
+     "q50": 0.49,
+     "q75": 0.99,
+     "q90": 6.25,
+     "mean": 0.68,
+     "mae": 2.65
+    },
+    "15_30": {
+     "range": [
+      15,
+      30
+     ],
+     "n": 23,
+     "q10": -5.35,
+     "q25": -4.27,
+     "q50": -3.46,
+     "q75": -0.08,
+     "q90": 4.68,
+     "mean": -1.94,
+     "mae": 4.15
+    },
+    "30_plus": {
+     "range": [
+      30,
+      null
+     ],
+     "n": 18,
+     "q10": -3.65,
+     "q25": -1.84,
+     "q50": 0.38,
+     "q75": 3.39,
+     "q90": 5.14,
+     "mean": 0.53,
+     "mae": 3.32
+    }
+   },
+   "raw": {
+    "lt1": {
+     "range": [
+      0,
+      1
+     ],
+     "n": 80,
+     "q10": 0.0,
+     "q25": 0.0,
+     "q50": 0.01,
+     "q75": 0.06,
+     "q90": 0.41,
+     "mean": 0.27,
+     "mae": 0.29
+    },
+    "1_5": {
+     "range": [
+      1,
+      5
+     ],
+     "n": 16,
+     "q10": -2.36,
+     "q25": -1.51,
+     "q50": 0.06,
+     "q75": 1.15,
+     "q90": 3.27,
+     "mean": 0.14,
+     "mae": 1.55
+    },
+    "5_15": {
+     "range": [
+      5,
+      15
+     ],
+     "n": 17,
+     "q10": -3.56,
+     "q25": -2.62,
+     "q50": 0.53,
+     "q75": 1.0,
+     "q90": 6.27,
+     "mean": 0.75,
+     "mae": 2.73
+    },
+    "15_30": {
+     "range": [
+      15,
+      30
+     ],
+     "n": 21,
+     "q10": -5.49,
+     "q25": -4.16,
+     "q50": -3.69,
+     "q75": 0.04,
+     "q90": 4.79,
+     "mean": -1.87,
+     "mae": 4.32
+    },
+    "30_plus": {
+     "range": [
+      30,
+      null
+     ],
+     "n": 20,
+     "q10": -3.97,
+     "q25": -2.55,
+     "q50": -0.08,
+     "q75": 3.18,
+     "q90": 5.0,
+     "mean": 0.14,
+     "mae": 3.4
+    }
+   },
+   "note": "actual \u2212 projected, percentage points; held-out residuals; lo = projected + q10, hi = projected + q90 (floored at 0)",
+   "bb_model": {
+    "lt1": {
+     "range": [
+      0,
+      1
+     ],
+     "n": 60,
+     "q10": -0.77,
+     "q25": -0.71,
+     "q50": -0.61,
+     "q75": -0.56,
+     "q90": -0.42,
+     "mean": -0.43,
+     "mae": 0.76
+    },
+    "1_5": {
+     "range": [
+      1,
+      5
+     ],
+     "n": 68,
+     "q10": -2.41,
+     "q25": -1.62,
+     "q50": -1.11,
+     "q75": -0.93,
+     "q90": 4.55,
+     "mean": -0.1,
+     "mae": 2.35
+    },
+    "5_15": {
+     "range": [
+      5,
+      15
+     ],
+     "n": 32,
+     "q10": -4.83,
+     "q25": -3.76,
+     "q50": -1.24,
+     "q75": 3.25,
+     "q90": 9.5,
+     "mean": 0.27,
+     "mae": 4.52
+    },
+    "15_30": {
+     "range": [
+      15,
+      30
+     ],
+     "n": 24,
+     "q10": -6.54,
+     "q25": -1.27,
+     "q50": 2.74,
+     "q75": 5.24,
+     "q90": 6.35,
+     "mean": 2.05,
+     "mae": 5.02
+    },
+    "30_plus": {
+     "range": [
+      30,
+      null
+     ],
+     "n": 24,
+     "q10": -13.04,
+     "q25": -10.63,
+     "q50": -1.51,
+     "q75": 6.19,
+     "q90": 11.77,
+     "mean": -1.41,
+     "mae": 8.56
+    }
+   }
+  },
+  "cpt": {
+   "corrected": {
+    "lt1": {
+     "range": [
+      0,
+      1
+     ],
+     "n": 115,
+     "q10": -0.0,
+     "q25": 0.0,
+     "q50": 0.0,
+     "q75": 0.02,
+     "q90": 0.18,
+     "mean": 0.05,
+     "mae": 0.08
+    },
+    "1_5": {
+     "range": [
+      1,
+      5
+     ],
+     "n": 17,
+     "q10": -1.0,
+     "q25": -0.83,
+     "q50": -0.61,
+     "q75": -0.04,
+     "q90": 1.05,
+     "mean": -0.2,
+     "mae": 0.92
+    },
+    "5_10": {
+     "range": [
+      5,
+      10
+     ],
+     "n": 11,
+     "q10": -1.12,
+     "q25": -0.89,
+     "q50": 0.03,
+     "q75": 0.4,
+     "q90": 2.4,
+     "mean": 0.15,
+     "mae": 1.0
+    },
+    "10_plus": {
+     "range": [
+      10,
+      null
+     ],
+     "n": 11,
+     "q10": -2.21,
+     "q25": -1.59,
+     "q50": -0.64,
+     "q75": 0.98,
+     "q90": 2.42,
+     "mean": -0.39,
+     "mae": 2.47
+    }
+   },
+   "raw": {
+    "lt1": {
+     "range": [
+      0,
+      1
+     ],
+     "n": 115,
+     "q10": 0.0,
+     "q25": 0.0,
+     "q50": 0.0,
+     "q75": 0.02,
+     "q90": 0.18,
+     "mean": 0.05,
+     "mae": 0.08
+    },
+    "1_5": {
+     "range": [
+      1,
+      5
+     ],
+     "n": 17,
+     "q10": -0.99,
+     "q25": -0.96,
+     "q50": -0.69,
+     "q75": -0.02,
+     "q90": 1.06,
+     "mean": -0.23,
+     "mae": 0.96
+    },
+    "5_10": {
+     "range": [
+      5,
+      10
+     ],
+     "n": 11,
+     "q10": -1.1,
+     "q25": -0.88,
+     "q50": 0.02,
+     "q75": 0.56,
+     "q90": 2.61,
+     "mean": 0.21,
+     "mae": 1.08
+    },
+    "10_plus": {
+     "range": [
+      10,
+      null
+     ],
+     "n": 11,
+     "q10": -2.21,
+     "q25": -1.59,
+     "q50": -1.31,
+     "q75": 1.01,
+     "q90": 3.05,
+     "mean": -0.39,
+     "mae": 2.61
+    }
+   },
+   "note": "actual \u2212 projected, percentage points; held-out residuals; lo = projected + q10, hi = projected + q90 (floored at 0)",
+   "bb_model": {
+    "lt1": {
+     "range": [
+      0,
+      1
+     ],
+     "n": 155,
+     "q10": -0.24,
+     "q25": -0.17,
+     "q50": -0.07,
+     "q75": -0.06,
+     "q90": 0.13,
+     "mean": -0.06,
+     "mae": 0.19
+    },
+    "1_5": {
+     "range": [
+      1,
+      5
+     ],
+     "n": 26,
+     "q10": -1.24,
+     "q25": -0.75,
+     "q50": 0.01,
+     "q75": 1.85,
+     "q90": 2.86,
+     "mean": 0.53,
+     "mae": 1.26
+    },
+    "5_10": {
+     "range": [
+      5,
+      10
+     ],
+     "n": 12,
+     "q10": -2.77,
+     "q25": -1.81,
+     "q50": 0.33,
+     "q75": 1.86,
+     "q90": 3.58,
+     "mean": 0.4,
+     "mae": 2.61
+    },
+    "10_plus": {
+     "range": [
+      10,
+      null
+     ],
+     "n": 15,
+     "q10": -5.92,
+     "q25": -4.89,
+     "q50": -2.19,
+     "q75": 2.51,
+     "q90": 6.89,
+     "mean": -0.78,
+     "mae": 4.39
+    }
+   }
+  },
+  "bb_model_note": "BirdieBuddy model (codex/ownership_model.py, public DK fields only): leave-one-slate-out residuals over its 4 training slates (w1_sf_lar, w1_den_kc, w2_det_buf, w2_nyg_lar), bucketed by the model's own projection. Wider than the corrected bands: use it for the Lab's sample pools."
+ },
+ "cpt": {
+  "form": "mult",
+  "k": 12,
+  "target_sum": 100.0,
+  "identity_effect": 1.0,
+  "cells": {
+   "DST_dog": {
+    "definition": "DST, underdog",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.722,
+    "shrink": 0.2,
+    "fitted_effect": 0.944,
+    "effect": 0.944,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 0.303,
+    "loso_mae_corr": 0.292
+   },
+   "DST_fav": {
+    "definition": "DST, favourite",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 1.342,
+    "shrink": 0.2,
+    "fitted_effect": 1.068,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 0.57,
+    "loso_mae_corr": 0.586
+   },
+   "K_dog": {
+    "definition": "kicker, underdog",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.298,
+    "shrink": 0.2,
+    "fitted_effect": 0.86,
+    "effect": 0.86,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 0.95,
+    "loso_mae_corr": 0.798
+   },
+   "K_fav": {
+    "definition": "kicker, favourite",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.644,
+    "shrink": 0.2,
+    "fitted_effect": 0.929,
+    "effect": 0.929,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 0.55,
+    "loso_mae_corr": 0.451
+   },
+   "QB_dog": {
+    "definition": "underdog QB (starter)",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.839,
+    "shrink": 0.2,
+    "fitted_effect": 0.968,
+    "effect": 0.968,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 1.69,
+    "loso_mae_corr": 1.149
+   },
+   "QB_fav": {
+    "definition": "favourite QB (starter: proj FLEX \u2265 5 % / CPT \u2265 2 %)",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.85,
+    "shrink": 0.2,
+    "fitted_effect": 0.97,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 3.9,
+    "loso_mae_corr": 3.998
+   },
+   "RB_dog_5_plus": {
+    "definition": "RB, underdog, projected 5-+ %",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 0.94,
+    "shrink": 0.2,
+    "fitted_effect": 0.988,
+    "effect": 0.988,
+    "shipped": true,
+    "loso_n": 3,
+    "loso_mae_raw": 0.747,
+    "loso_mae_corr": 0.572
+   },
+   "RB_fav_1_5": {
+    "definition": "RB, favourite, projected 1-5 %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "RB_fav_5_plus": {
+    "definition": "RB, favourite, projected 5-+ %",
+    "n": 3,
+    "slates": 3,
+    "raw_effect": 1.122,
+    "shrink": 0.2,
+    "fitted_effect": 1.024,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 2.95,
+    "loso_mae_corr": 3.156
+   },
+   "TE_dog_1_5": {
+    "definition": "TE, underdog, projected 1-5 %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_dog_5_plus": {
+    "definition": "TE, underdog, projected 5-+ %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_fav_1_5": {
+    "definition": "TE, favourite, projected 1-5 %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "TE_fav_5_plus": {
+    "definition": "TE, favourite, projected 5-+ %",
+    "n": 2,
+    "slates": 2,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "WR_dog_1_5": {
+    "definition": "WR, underdog, projected 1-5 %",
+    "n": 3,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "WR_dog_5_plus": {
+    "definition": "WR, underdog, projected 5-+ %",
+    "n": 3,
+    "slates": 2,
+    "raw_effect": 0.932,
+    "shrink": 0.2,
+    "fitted_effect": 0.986,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 3,
+    "loso_mae_raw": 0.997,
+    "loso_mae_corr": 1.021
+   },
+   "WR_fav_1_5": {
+    "definition": "WR, favourite, projected 1-5 %",
+    "n": 1,
+    "slates": 1,
+    "effect": 1.0,
+    "shipped": false,
+    "note": "under 3 players or under 2 slates: statistics withheld"
+   },
+   "WR_fav_5_plus": {
+    "definition": "WR, favourite, projected 5-+ %",
+    "n": 4,
+    "slates": 3,
+    "raw_effect": 1.198,
+    "shrink": 0.25,
+    "fitted_effect": 1.049,
+    "effect": 1.049,
+    "shipped": true,
+    "loso_n": 4,
+    "loso_mae_raw": 1.62,
+    "loso_mae_corr": 1.424
+   },
+   "tail_lt1": {
+    "definition": "any other player projected under 1 % CPT",
+    "n": 112,
+    "slates": 3,
+    "raw_effect": 2.038,
+    "shrink": 0.903,
+    "fitted_effect": 1.938,
+    "effect": 1.0,
+    "shipped": false,
+    "loso_n": 112,
+    "loso_mae_raw": 0.073,
+    "loso_mae_corr": 0.073
+   }
+  },
+  "cells_shipped": [
+   "DST_dog",
+   "K_dog",
+   "K_fav",
+   "QB_dog",
+   "RB_dog_5_plus",
+   "WR_fav_5_plus"
+  ]
+ },
+ "_public": "Public view: per-cell statistics withheld for cells with under 3 players or seen in under 2 slates (they would identify individual licensed projections)."
+}

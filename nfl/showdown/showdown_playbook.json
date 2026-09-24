@@ -12,7 +12,7 @@
   ],
   "lift_note": "lift = winners-with-trait minus all-winners rate; |lift|<12 noise, >=15 with n>=15 signal",
   "generated_by": "codex/build_playbook_data.py",
-  "rules_version": "1.3 (2026-09-23) \u2014 two-DST grind dart (history: 5/120 winners)",
+  "rules_version": "1.4 (2026-09-23) \u2014 history re-check: v1.2 single-slate edits reverted, two-K config = never",
   "n_winners": 120,
   "n_games": 2761
  },
@@ -1016,21 +1016,18 @@
     "own_WR",
     "own_RB",
     "opp_QB",
-    "opp_RB",
-    "opp_WR"
+    "opp_RB"
    ],
    "avoid": [
     "own_DST",
     "own_K"
    ],
    "shapes": [
-    "4-2",
-    "3-3"
+    "4-2"
    ],
    "k_rate": 0.27,
    "dst_rate": 0.13,
-   "_v1.2": "\ud83d\udd27 opp_WR + 3-3 added: W2 top-1% QB-FAV lineups were 100% opp WR1, 65% 3-3 in the top-0.1%; codex baseline opp WR 69% of all winners. Needs 3 more slates to lock.",
-   "_provisional": "v1.2 addition (opp_WR include + 3-3 shape) came from ONE 2026 slate (W2 DET@BUF). Provisional until re-checked against historical winners."
+   "_v1.4": "Reverted to v1.0 (history re-check, codex/HISTORY_RECHECK_v1.3.md): fav-QB-captain winners had an opp WR 8/15 = 53% vs 71% for other captains; 3-3 only 2/15 (p=0.04). The v1.2 additions came from one 2026 slate."
   },
   "QB_DOG": {
    "include": [
@@ -1169,14 +1166,14 @@
    "penalty": 0.7
   },
   "opp_wr_with_fav_rb_or_fav_qb_cpt": 0.3,
-  "two_k_sim_override_allowed_per_batch": 1,
+  "two_k_sim_override_allowed_per_batch": 0,
   "two_k_min_total": 52,
   "sub_1k_player_low_proj": {
    "proj_threshold": 6.0,
    "penalty": 0.4
   },
-  "_opp_wr_note": "v1.2: the QB-CPT half of this penalty is skipped when the shootout overlay is on (total >= 50). RB-CPT half unchanged.",
-  "_provisional": "v1.2: skipping the QB-CPT half of opp_wr_with_fav_rb_or_fav_qb_cpt in shootouts came from ONE 2026 slate (W2 DET@BUF). Provisional until re-checked against historical winners."
+  "_opp_wr_v1.4": "v1.4: the opp-WR penalty applies to fav QB captains in shootouts again (v1.2 exception reverted). History: in games that scored >=50, fav-QB-captain winners had an opp WR 1/5 vs 26/31 (p=0.009).",
+  "_two_k_v1.4": "v1.4: two kickers = never (the hard max_kickers 1 already enforced it; the >=52 allowance was dead code and pointed the wrong way: all 3 two-K winners came from lines 41.5-46.5). two_k_min_total kept only for engine compatibility."
  },
  "portfolio": {
   "max_per_captain_share": 0.25,
@@ -1211,7 +1208,7 @@
     0.6
    ]
   },
-  "two_k_max": 1,
+  "two_k_max": 0,
   "five_one_fav_min_spread": 6.5,
   "five_one_fav_min_count": 1,
   "five_one_fav_min_count_big_spread": 2,
@@ -1351,7 +1348,7 @@
  },
  "engine": {
   "_note": "Inputs for assets/js/showdown_engine.js (the browser port of codex/rules_engine.py) that are not elsewhere in this file. rushing_qbs is parsed from the RUSHING_QBS literal in rules_engine.py; shape_off_template_penalty is the constant in soft_score().",
-  "rules_version": "1.3 (2026-09-23) \u2014 two-DST grind dart (history: 5/120 winners)",
+  "rules_version": "1.4 (2026-09-23) \u2014 history re-check: v1.2 single-slate edits reverted, two-K config = never",
   "dog_win_prob_by_spread": {
    "pk_3": 0.44,
    "3.5_6.5": 0.34,
@@ -9726,13 +9723,13 @@
    {
     "id": "QB_FAV|shape",
     "type": "directional",
-    "label": "Qb Fav captain: shape 4-2/3-3",
+    "label": "Qb Fav captain: shape 4-2",
     "group": "template",
     "cond": "QB_FAV",
     "direction": 1,
     "source": "captain_templates.QB_FAV.shapes",
     "hist": {
-     "rate": 73.3,
+     "rate": 60.0,
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
@@ -10214,5 +10211,4118 @@
     "direction": "under"
    }
   ]
+ },
+ "role_rates": {
+  "_note": "Role rates from the HISTORICAL showdown winners (codex/showdown_winners_joined.csv + showdown_slots_joined.csv). cpt.pct = % of winning lineups whose captain holds the role; flex.pct = % with >= 1 player of the role in FLEX; flex.per100 (multi-player roles) = role players per 100 winning lineups; ci90 = 90% Wilson interval in %. \"primetime\" (TNF/SNF/MNF/Super Bowl) is the default cohort. These are how often a role shows up in winning lineups - not a projection for any game.",
+  "generated_by": "codex/role_rates.py",
+  "default_cohort": "primetime",
+  "min_bucket_n": 15,
+  "roles": [
+   {
+    "id": "FAV_QB1",
+    "side": "FAV",
+    "pos": "QB",
+    "depth": "QB1",
+    "label": "Fav QB1",
+    "multi": false
+   },
+   {
+    "id": "FAV_QB2+",
+    "side": "FAV",
+    "pos": "QB",
+    "depth": "QB2+",
+    "label": "Fav QB2+",
+    "multi": true
+   },
+   {
+    "id": "FAV_RB1",
+    "side": "FAV",
+    "pos": "RB",
+    "depth": "RB1",
+    "label": "Fav RB1",
+    "multi": false
+   },
+   {
+    "id": "FAV_RB2+",
+    "side": "FAV",
+    "pos": "RB",
+    "depth": "RB2+",
+    "label": "Fav RB2+",
+    "multi": true
+   },
+   {
+    "id": "FAV_WR1",
+    "side": "FAV",
+    "pos": "WR",
+    "depth": "WR1",
+    "label": "Fav WR1",
+    "multi": false
+   },
+   {
+    "id": "FAV_WR2",
+    "side": "FAV",
+    "pos": "WR",
+    "depth": "WR2",
+    "label": "Fav WR2",
+    "multi": false
+   },
+   {
+    "id": "FAV_WR3+",
+    "side": "FAV",
+    "pos": "WR",
+    "depth": "WR3+",
+    "label": "Fav WR3+",
+    "multi": true
+   },
+   {
+    "id": "FAV_TE1",
+    "side": "FAV",
+    "pos": "TE",
+    "depth": "TE1",
+    "label": "Fav TE1",
+    "multi": false
+   },
+   {
+    "id": "FAV_TE2+",
+    "side": "FAV",
+    "pos": "TE",
+    "depth": "TE2+",
+    "label": "Fav TE2+",
+    "multi": true
+   },
+   {
+    "id": "FAV_K",
+    "side": "FAV",
+    "pos": "K",
+    "depth": "K",
+    "label": "Fav K",
+    "multi": true
+   },
+   {
+    "id": "FAV_DST",
+    "side": "FAV",
+    "pos": "DST",
+    "depth": "DST",
+    "label": "Fav DST",
+    "multi": true
+   },
+   {
+    "id": "DOG_QB1",
+    "side": "DOG",
+    "pos": "QB",
+    "depth": "QB1",
+    "label": "Dog QB1",
+    "multi": false
+   },
+   {
+    "id": "DOG_QB2+",
+    "side": "DOG",
+    "pos": "QB",
+    "depth": "QB2+",
+    "label": "Dog QB2+",
+    "multi": true
+   },
+   {
+    "id": "DOG_RB1",
+    "side": "DOG",
+    "pos": "RB",
+    "depth": "RB1",
+    "label": "Dog RB1",
+    "multi": false
+   },
+   {
+    "id": "DOG_RB2+",
+    "side": "DOG",
+    "pos": "RB",
+    "depth": "RB2+",
+    "label": "Dog RB2+",
+    "multi": true
+   },
+   {
+    "id": "DOG_WR1",
+    "side": "DOG",
+    "pos": "WR",
+    "depth": "WR1",
+    "label": "Dog WR1",
+    "multi": false
+   },
+   {
+    "id": "DOG_WR2",
+    "side": "DOG",
+    "pos": "WR",
+    "depth": "WR2",
+    "label": "Dog WR2",
+    "multi": false
+   },
+   {
+    "id": "DOG_WR3+",
+    "side": "DOG",
+    "pos": "WR",
+    "depth": "WR3+",
+    "label": "Dog WR3+",
+    "multi": true
+   },
+   {
+    "id": "DOG_TE1",
+    "side": "DOG",
+    "pos": "TE",
+    "depth": "TE1",
+    "label": "Dog TE1",
+    "multi": false
+   },
+   {
+    "id": "DOG_TE2+",
+    "side": "DOG",
+    "pos": "TE",
+    "depth": "TE2+",
+    "label": "Dog TE2+",
+    "multi": true
+   },
+   {
+    "id": "DOG_K",
+    "side": "DOG",
+    "pos": "K",
+    "depth": "K",
+    "label": "Dog K",
+    "multi": true
+   },
+   {
+    "id": "DOG_DST",
+    "side": "DOG",
+    "pos": "DST",
+    "depth": "DST",
+    "label": "Dog DST",
+    "multi": true
+   }
+  ],
+  "depth": {
+   "basis": "salary_class_plus_lineup_order",
+   "note": "Winner files hold only the six rostered players, not the slate pool, so depth is reconstructed: salary class from FLEX salary (captain = CPT salary / 1.5), then same-team same-position players in a lineup take strictly increasing depth by salary. Live pools use the true salary rank (engine rank over players not ruled OUT/IR).",
+   "thresholds_flex_salary": {
+    "QB": [
+     7000
+    ],
+    "RB": [
+     7600
+    ],
+    "WR": [
+     8000,
+     5200
+    ],
+    "TE": [
+     3600
+    ]
+   },
+   "calibration_2026": {
+    "slates": 14,
+    "note": "share of 2026 DK pool players (FLEX salary >= $1,000) whose salary class equals their true salary rank class; thresholds were fit on the 2026 pools weighted by BB-model ownership",
+    "QB": {
+     "players": 92,
+     "match_pct": 91.3
+    },
+    "RB": {
+     "players": 84,
+     "match_pct": 97.6
+    },
+    "WR": {
+     "players": 134,
+     "match_pct": 87.3
+    },
+    "TE": {
+     "players": 66,
+     "match_pct": 97.0
+    }
+   },
+   "primetime_player_slots_by_role": {
+    "FAV_QB1": 72,
+    "FAV_QB2+": 0,
+    "FAV_RB1": 47,
+    "FAV_RB2+": 28,
+    "FAV_WR1": 59,
+    "FAV_WR2": 25,
+    "FAV_WR3+": 26,
+    "FAV_TE1": 37,
+    "FAV_TE2+": 14,
+    "FAV_K": 26,
+    "FAV_DST": 29,
+    "DOG_QB1": 66,
+    "DOG_QB2+": 0,
+    "DOG_RB1": 41,
+    "DOG_RB2+": 24,
+    "DOG_WR1": 42,
+    "DOG_WR2": 30,
+    "DOG_WR3+": 33,
+    "DOG_TE1": 25,
+    "DOG_TE2+": 12,
+    "DOG_K": 24,
+    "DOG_DST": 18
+   },
+   "salary_by_role": {
+    "FAV_QB1": {
+     "n": 72,
+     "p5": 9400,
+     "p50": 10600,
+     "p95": 12400
+    },
+    "FAV_QB2+": {
+     "n": 0
+    },
+    "FAV_RB1": {
+     "n": 47,
+     "p5": 8200,
+     "p50": 10600,
+     "p95": 12400
+    },
+    "FAV_RB2+": {
+     "n": 28,
+     "p5": 1800,
+     "p50": 6600,
+     "p95": 7400
+    },
+    "FAV_WR1": {
+     "n": 59,
+     "p5": 8000,
+     "p50": 9600,
+     "p95": 11800
+    },
+    "FAV_WR2": {
+     "n": 25,
+     "p5": 5200,
+     "p50": 6800,
+     "p95": 9400
+    },
+    "FAV_WR3+": {
+     "n": 26,
+     "p5": 200,
+     "p50": 3200,
+     "p95": 4600
+    },
+    "FAV_TE1": {
+     "n": 37,
+     "p5": 5000,
+     "p50": 6600,
+     "p95": 10800
+    },
+    "FAV_TE2+": {
+     "n": 14,
+     "p5": 200,
+     "p50": 1800,
+     "p95": 3000
+    },
+    "FAV_K": {
+     "n": 26,
+     "p5": 4000,
+     "p50": 4800,
+     "p95": 5400
+    },
+    "FAV_DST": {
+     "n": 29,
+     "p5": 3600,
+     "p50": 4400,
+     "p95": 5400
+    },
+    "DOG_QB1": {
+     "n": 66,
+     "p5": 8800,
+     "p50": 9600,
+     "p95": 11200
+    },
+    "DOG_QB2+": {
+     "n": 0
+    },
+    "DOG_RB1": {
+     "n": 41,
+     "p5": 7800,
+     "p50": 9800,
+     "p95": 12000
+    },
+    "DOG_RB2+": {
+     "n": 24,
+     "p5": 1200,
+     "p50": 5400,
+     "p95": 7200
+    },
+    "DOG_WR1": {
+     "n": 42,
+     "p5": 8000,
+     "p50": 9600,
+     "p95": 12000
+    },
+    "DOG_WR2": {
+     "n": 30,
+     "p5": 5400,
+     "p50": 7000,
+     "p95": 7800
+    },
+    "DOG_WR3+": {
+     "n": 33,
+     "p5": 200,
+     "p50": 3000,
+     "p95": 5200
+    },
+    "DOG_TE1": {
+     "n": 25,
+     "p5": 4200,
+     "p50": 5600,
+     "p95": 8800
+    },
+    "DOG_TE2+": {
+     "n": 12,
+     "p5": 200,
+     "p50": 1600,
+     "p95": 3000
+    },
+    "DOG_K": {
+     "n": 24,
+     "p5": 3800,
+     "p50": 4600,
+     "p95": 5200
+    },
+    "DOG_DST": {
+     "n": 18,
+     "p5": 3200,
+     "p50": 3600,
+     "p95": 4200
+    }
+   }
+  },
+  "cohorts": {
+   "primetime": {
+    "n": 113,
+    "types": [
+     "TNF",
+     "SNF",
+     "MNF",
+     "SUPER_BOWL"
+    ],
+    "roles": {
+     "FAV_QB1": {
+      "cpt": {
+       "k": 15,
+       "pct": 13.3,
+       "ci90": [
+        8.9,
+        19.4
+       ]
+      },
+      "flex": {
+       "k": 57,
+       "pct": 50.4,
+       "ci90": [
+        42.8,
+        58.1
+       ]
+      }
+     },
+     "FAV_QB2+": {
+      "cpt": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.3
+       ]
+      },
+      "flex": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.3
+       ],
+       "per100": 0.0,
+       "doubled": 0
+      }
+     },
+     "FAV_RB1": {
+      "cpt": {
+       "k": 12,
+       "pct": 10.6,
+       "ci90": [
+        6.7,
+        16.3
+       ]
+      },
+      "flex": {
+       "k": 35,
+       "pct": 31.0,
+       "ci90": [
+        24.3,
+        38.5
+       ]
+      }
+     },
+     "FAV_RB2+": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.7,
+       "ci90": [
+        1.1,
+        6.5
+       ]
+      },
+      "flex": {
+       "k": 22,
+       "pct": 19.5,
+       "ci90": [
+        14.1,
+        26.3
+       ],
+       "per100": 22.1,
+       "doubled": 3
+      }
+     },
+     "FAV_WR1": {
+      "cpt": {
+       "k": 14,
+       "pct": 12.4,
+       "ci90": [
+        8.2,
+        18.4
+       ]
+      },
+      "flex": {
+       "k": 45,
+       "pct": 39.8,
+       "ci90": [
+        32.6,
+        47.6
+       ]
+      }
+     },
+     "FAV_WR2": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.7,
+       "ci90": [
+        1.1,
+        6.5
+       ]
+      },
+      "flex": {
+       "k": 22,
+       "pct": 19.5,
+       "ci90": [
+        14.1,
+        26.3
+       ]
+      }
+     },
+     "FAV_WR3+": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.7,
+       "ci90": [
+        1.1,
+        6.5
+       ]
+      },
+      "flex": {
+       "k": 22,
+       "pct": 19.5,
+       "ci90": [
+        14.1,
+        26.3
+       ],
+       "per100": 20.4,
+       "doubled": 1
+      }
+     },
+     "FAV_TE1": {
+      "cpt": {
+       "k": 9,
+       "pct": 8.0,
+       "ci90": [
+        4.7,
+        13.2
+       ]
+      },
+      "flex": {
+       "k": 28,
+       "pct": 24.8,
+       "ci90": [
+        18.7,
+        32.0
+       ]
+      }
+     },
+     "FAV_TE2+": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.9,
+       "ci90": [
+        0.2,
+        3.9
+       ]
+      },
+      "flex": {
+       "k": 13,
+       "pct": 11.5,
+       "ci90": [
+        7.4,
+        17.4
+       ],
+       "per100": 11.5,
+       "doubled": 0
+      }
+     },
+     "FAV_K": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.9,
+       "ci90": [
+        0.2,
+        3.9
+       ]
+      },
+      "flex": {
+       "k": 25,
+       "pct": 22.1,
+       "ci90": [
+        16.4,
+        29.2
+       ],
+       "per100": 22.1,
+       "doubled": 0
+      }
+     },
+     "FAV_DST": {
+      "cpt": {
+       "k": 4,
+       "pct": 3.5,
+       "ci90": [
+        1.6,
+        7.7
+       ]
+      },
+      "flex": {
+       "k": 25,
+       "pct": 22.1,
+       "ci90": [
+        16.4,
+        29.2
+       ],
+       "per100": 22.1,
+       "doubled": 0
+      }
+     },
+     "DOG_QB1": {
+      "cpt": {
+       "k": 8,
+       "pct": 7.1,
+       "ci90": [
+        4.0,
+        12.1
+       ]
+      },
+      "flex": {
+       "k": 58,
+       "pct": 51.3,
+       "ci90": [
+        43.7,
+        58.9
+       ]
+      }
+     },
+     "DOG_QB2+": {
+      "cpt": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.3
+       ]
+      },
+      "flex": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.3
+       ],
+       "per100": 0.0,
+       "doubled": 0
+      }
+     },
+     "DOG_RB1": {
+      "cpt": {
+       "k": 7,
+       "pct": 6.2,
+       "ci90": [
+        3.4,
+        11.0
+       ]
+      },
+      "flex": {
+       "k": 34,
+       "pct": 30.1,
+       "ci90": [
+        23.5,
+        37.6
+       ]
+      }
+     },
+     "DOG_RB2+": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.7,
+       "ci90": [
+        1.1,
+        6.5
+       ]
+      },
+      "flex": {
+       "k": 20,
+       "pct": 17.7,
+       "ci90": [
+        12.6,
+        24.3
+       ],
+       "per100": 18.6,
+       "doubled": 1
+      }
+     },
+     "DOG_WR1": {
+      "cpt": {
+       "k": 10,
+       "pct": 8.8,
+       "ci90": [
+        5.4,
+        14.3
+       ]
+      },
+      "flex": {
+       "k": 32,
+       "pct": 28.3,
+       "ci90": [
+        21.9,
+        35.7
+       ]
+      }
+     },
+     "DOG_WR2": {
+      "cpt": {
+       "k": 11,
+       "pct": 9.7,
+       "ci90": [
+        6.0,
+        15.3
+       ]
+      },
+      "flex": {
+       "k": 19,
+       "pct": 16.8,
+       "ci90": [
+        11.8,
+        23.4
+       ]
+      }
+     },
+     "DOG_WR3+": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.9,
+       "ci90": [
+        0.2,
+        3.9
+       ]
+      },
+      "flex": {
+       "k": 32,
+       "pct": 28.3,
+       "ci90": [
+        21.9,
+        35.7
+       ],
+       "per100": 28.3,
+       "doubled": 0
+      }
+     },
+     "DOG_TE1": {
+      "cpt": {
+       "k": 5,
+       "pct": 4.4,
+       "ci90": [
+        2.2,
+        8.8
+       ]
+      },
+      "flex": {
+       "k": 20,
+       "pct": 17.7,
+       "ci90": [
+        12.6,
+        24.3
+       ]
+      }
+     },
+     "DOG_TE2+": {
+      "cpt": {
+       "k": 2,
+       "pct": 1.8,
+       "ci90": [
+        0.6,
+        5.2
+       ]
+      },
+      "flex": {
+       "k": 10,
+       "pct": 8.8,
+       "ci90": [
+        5.4,
+        14.3
+       ],
+       "per100": 8.8,
+       "doubled": 0
+      }
+     },
+     "DOG_K": {
+      "cpt": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.3
+       ]
+      },
+      "flex": {
+       "k": 24,
+       "pct": 21.2,
+       "ci90": [
+        15.6,
+        28.2
+       ],
+       "per100": 21.2,
+       "doubled": 0
+      }
+     },
+     "DOG_DST": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.9,
+       "ci90": [
+        0.2,
+        3.9
+       ]
+      },
+      "flex": {
+       "k": 17,
+       "pct": 15.0,
+       "ci90": [
+        10.3,
+        21.4
+       ],
+       "per100": 15.0,
+       "doubled": 0
+      }
+     }
+    },
+    "by_spread": {
+     "spread_le3": {
+      "n": 45,
+      "roles": {
+       "FAV_QB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 8.9,
+         "ci90": [
+          4.1,
+          18.4
+         ]
+        },
+        "flex": {
+         "k": 21,
+         "pct": 46.7,
+         "ci90": [
+          35.0,
+          58.7
+         ]
+        }
+       },
+       "FAV_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "FAV_RB1": {
+        "cpt": {
+         "k": 6,
+         "pct": 13.3,
+         "ci90": [
+          7.1,
+          23.8
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 24.4,
+         "ci90": [
+          15.6,
+          36.2
+         ]
+        }
+       },
+       "FAV_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.2,
+         "ci90": [
+          0.5,
+          9.4
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 24.4,
+         "ci90": [
+          15.6,
+          36.2
+         ],
+         "per100": 24.4,
+         "doubled": 0
+        }
+       },
+       "FAV_WR1": {
+        "cpt": {
+         "k": 7,
+         "pct": 15.6,
+         "ci90": [
+          8.7,
+          26.4
+         ]
+        },
+        "flex": {
+         "k": 20,
+         "pct": 44.4,
+         "ci90": [
+          32.9,
+          56.6
+         ]
+        }
+       },
+       "FAV_WR2": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 17.8,
+         "ci90": [
+          10.3,
+          28.9
+         ]
+        }
+       },
+       "FAV_WR3+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.2,
+         "ci90": [
+          0.5,
+          9.4
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 20.0,
+         "ci90": [
+          12.0,
+          31.4
+         ],
+         "per100": 22.2,
+         "doubled": 1
+        }
+       },
+       "FAV_TE1": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.4,
+         "ci90": [
+          1.5,
+          12.6
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 20.0,
+         "ci90": [
+          12.0,
+          31.4
+         ]
+        }
+       },
+       "FAV_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 13.3,
+         "ci90": [
+          7.1,
+          23.8
+         ],
+         "per100": 13.3,
+         "doubled": 0
+        }
+       },
+       "FAV_K": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.2,
+         "ci90": [
+          0.5,
+          9.4
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 20.0,
+         "ci90": [
+          12.0,
+          31.4
+         ],
+         "per100": 20.0,
+         "doubled": 0
+        }
+       },
+       "FAV_DST": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.7,
+         "ci90": [
+          2.7,
+          15.6
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 28.9,
+         "ci90": [
+          19.2,
+          40.9
+         ],
+         "per100": 28.9,
+         "doubled": 0
+        }
+       },
+       "DOG_QB1": {
+        "cpt": {
+         "k": 5,
+         "pct": 11.1,
+         "ci90": [
+          5.5,
+          21.1
+         ]
+        },
+        "flex": {
+         "k": 24,
+         "pct": 53.3,
+         "ci90": [
+          41.3,
+          65.0
+         ]
+        }
+       },
+       "DOG_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "DOG_RB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 8.9,
+         "ci90": [
+          4.1,
+          18.4
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 28.9,
+         "ci90": [
+          19.2,
+          40.9
+         ]
+        }
+       },
+       "DOG_RB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 13.3,
+         "ci90": [
+          7.1,
+          23.8
+         ],
+         "per100": 13.3,
+         "doubled": 0
+        }
+       },
+       "DOG_WR1": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.7,
+         "ci90": [
+          2.7,
+          15.6
+         ]
+        },
+        "flex": {
+         "k": 12,
+         "pct": 26.7,
+         "ci90": [
+          17.4,
+          38.6
+         ]
+        }
+       },
+       "DOG_WR2": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.7,
+         "ci90": [
+          2.7,
+          15.6
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 24.4,
+         "ci90": [
+          15.6,
+          36.2
+         ]
+        }
+       },
+       "DOG_WR3+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 12,
+         "pct": 26.7,
+         "ci90": [
+          17.4,
+          38.6
+         ],
+         "per100": 26.7,
+         "doubled": 0
+        }
+       },
+       "DOG_TE1": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.4,
+         "ci90": [
+          1.5,
+          12.6
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 22.2,
+         "ci90": [
+          13.8,
+          33.8
+         ]
+        }
+       },
+       "DOG_TE2+": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.4,
+         "ci90": [
+          1.5,
+          12.6
+         ]
+        },
+        "flex": {
+         "k": 2,
+         "pct": 4.4,
+         "ci90": [
+          1.5,
+          12.6
+         ],
+         "per100": 4.4,
+         "doubled": 0
+        }
+       },
+       "DOG_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.7
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 20.0,
+         "ci90": [
+          12.0,
+          31.4
+         ],
+         "per100": 20.0,
+         "doubled": 0
+        }
+       },
+       "DOG_DST": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.2,
+         "ci90": [
+          0.5,
+          9.4
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 17.8,
+         "ci90": [
+          10.3,
+          28.9
+         ],
+         "per100": 17.8,
+         "doubled": 0
+        }
+       }
+      }
+     },
+     "spread_3.5_6.5": {
+      "n": 40,
+      "roles": {
+       "FAV_QB1": {
+        "cpt": {
+         "k": 7,
+         "pct": 17.5,
+         "ci90": [
+          9.8,
+          29.3
+         ]
+        },
+        "flex": {
+         "k": 20,
+         "pct": 50.0,
+         "ci90": [
+          37.4,
+          62.6
+         ]
+        }
+       },
+       "FAV_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "FAV_RB1": {
+        "cpt": {
+         "k": 2,
+         "pct": 5.0,
+         "ci90": [
+          1.7,
+          14.0
+         ]
+        },
+        "flex": {
+         "k": 16,
+         "pct": 40.0,
+         "ci90": [
+          28.3,
+          53.0
+         ]
+        }
+       },
+       "FAV_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 20.0,
+         "ci90": [
+          11.7,
+          32.1
+         ],
+         "per100": 27.5,
+         "doubled": 3
+        }
+       },
+       "FAV_WR1": {
+        "cpt": {
+         "k": 6,
+         "pct": 15.0,
+         "ci90": [
+          8.0,
+          26.5
+         ]
+        },
+        "flex": {
+         "k": 15,
+         "pct": 37.5,
+         "ci90": [
+          26.1,
+          50.5
+         ]
+        }
+       },
+       "FAV_WR2": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.5,
+         "ci90": [
+          9.8,
+          29.3
+         ]
+        }
+       },
+       "FAV_WR3+": {
+        "cpt": {
+         "k": 2,
+         "pct": 5.0,
+         "ci90": [
+          1.7,
+          14.0
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.5,
+         "ci90": [
+          9.8,
+          29.3
+         ],
+         "per100": 17.5,
+         "doubled": 0
+        }
+       },
+       "FAV_TE1": {
+        "cpt": {
+         "k": 2,
+         "pct": 5.0,
+         "ci90": [
+          1.7,
+          14.0
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.5,
+         "ci90": [
+          9.8,
+          29.3
+         ]
+        }
+       },
+       "FAV_TE2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 12.5,
+         "ci90": [
+          6.2,
+          23.5
+         ],
+         "per100": 12.5,
+         "doubled": 0
+        }
+       },
+       "FAV_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 27.5,
+         "ci90": [
+          17.6,
+          40.3
+         ],
+         "per100": 27.5,
+         "doubled": 0
+        }
+       },
+       "FAV_DST": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 15.0,
+         "ci90": [
+          8.0,
+          26.5
+         ],
+         "per100": 15.0,
+         "doubled": 0
+        }
+       },
+       "DOG_QB1": {
+        "cpt": {
+         "k": 2,
+         "pct": 5.0,
+         "ci90": [
+          1.7,
+          14.0
+         ]
+        },
+        "flex": {
+         "k": 24,
+         "pct": 60.0,
+         "ci90": [
+          47.0,
+          71.7
+         ]
+        }
+       },
+       "DOG_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "DOG_RB1": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 32.5,
+         "ci90": [
+          21.8,
+          45.4
+         ]
+        }
+       },
+       "DOG_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 4,
+         "pct": 10.0,
+         "ci90": [
+          4.6,
+          20.5
+         ],
+         "per100": 10.0,
+         "doubled": 0
+        }
+       },
+       "DOG_WR1": {
+        "cpt": {
+         "k": 4,
+         "pct": 10.0,
+         "ci90": [
+          4.6,
+          20.5
+         ]
+        },
+        "flex": {
+         "k": 14,
+         "pct": 35.0,
+         "ci90": [
+          23.9,
+          48.0
+         ]
+        }
+       },
+       "DOG_WR2": {
+        "cpt": {
+         "k": 5,
+         "pct": 12.5,
+         "ci90": [
+          6.2,
+          23.5
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 7.5,
+         "ci90": [
+          3.0,
+          17.3
+         ]
+        }
+       },
+       "DOG_WR3+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.5,
+         "ci90": [
+          0.6,
+          10.5
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 32.5,
+         "ci90": [
+          21.8,
+          45.4
+         ],
+         "per100": 32.5,
+         "doubled": 0
+        }
+       },
+       "DOG_TE1": {
+        "cpt": {
+         "k": 3,
+         "pct": 7.5,
+         "ci90": [
+          3.0,
+          17.3
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.5,
+         "ci90": [
+          9.8,
+          29.3
+         ]
+        }
+       },
+       "DOG_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 12.5,
+         "ci90": [
+          6.2,
+          23.5
+         ],
+         "per100": 12.5,
+         "doubled": 0
+        }
+       },
+       "DOG_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.5,
+         "ci90": [
+          9.8,
+          29.3
+         ],
+         "per100": 17.5,
+         "doubled": 0
+        }
+       },
+       "DOG_DST": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.3
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 12.5,
+         "ci90": [
+          6.2,
+          23.5
+         ],
+         "per100": 12.5,
+         "doubled": 0
+        }
+       }
+      }
+     },
+     "spread_ge7": {
+      "n": 28,
+      "roles": {
+       "FAV_QB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 14.3,
+         "ci90": [
+          6.6,
+          28.3
+         ]
+        },
+        "flex": {
+         "k": 16,
+         "pct": 57.1,
+         "ci90": [
+          41.8,
+          71.2
+         ]
+        }
+       },
+       "FAV_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "FAV_RB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 14.3,
+         "ci90": [
+          6.6,
+          28.3
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 28.6,
+         "ci90": [
+          16.9,
+          44.0
+         ]
+        }
+       },
+       "FAV_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 3.6,
+         "ci90": [
+          0.8,
+          14.5
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 10.7,
+         "ci90": [
+          4.4,
+          24.0
+         ],
+         "per100": 10.7,
+         "doubled": 0
+        }
+       },
+       "FAV_WR1": {
+        "cpt": {
+         "k": 1,
+         "pct": 3.6,
+         "ci90": [
+          0.8,
+          14.5
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 35.7,
+         "ci90": [
+          22.7,
+          51.3
+         ]
+        }
+       },
+       "FAV_WR2": {
+        "cpt": {
+         "k": 2,
+         "pct": 7.1,
+         "ci90": [
+          2.4,
+          19.4
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 25.0,
+         "ci90": [
+          14.2,
+          40.2
+         ]
+        }
+       },
+       "FAV_WR3+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 21.4,
+         "ci90": [
+          11.5,
+          36.4
+         ],
+         "per100": 21.4,
+         "doubled": 0
+        }
+       },
+       "FAV_TE1": {
+        "cpt": {
+         "k": 5,
+         "pct": 17.9,
+         "ci90": [
+          9.0,
+          32.4
+         ]
+        },
+        "flex": {
+         "k": 12,
+         "pct": 42.9,
+         "ci90": [
+          28.8,
+          58.2
+         ]
+        }
+       },
+       "FAV_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 2,
+         "pct": 7.1,
+         "ci90": [
+          2.4,
+          19.4
+         ],
+         "per100": 7.1,
+         "doubled": 0
+        }
+       },
+       "FAV_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 17.9,
+         "ci90": [
+          9.0,
+          32.4
+         ],
+         "per100": 17.9,
+         "doubled": 0
+        }
+       },
+       "FAV_DST": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 21.4,
+         "ci90": [
+          11.5,
+          36.4
+         ],
+         "per100": 21.4,
+         "doubled": 0
+        }
+       },
+       "DOG_QB1": {
+        "cpt": {
+         "k": 1,
+         "pct": 3.6,
+         "ci90": [
+          0.8,
+          14.5
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 35.7,
+         "ci90": [
+          22.7,
+          51.3
+         ]
+        }
+       },
+       "DOG_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "DOG_RB1": {
+        "cpt": {
+         "k": 2,
+         "pct": 7.1,
+         "ci90": [
+          2.4,
+          19.4
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 28.6,
+         "ci90": [
+          16.9,
+          44.0
+         ]
+        }
+       },
+       "DOG_RB2+": {
+        "cpt": {
+         "k": 2,
+         "pct": 7.1,
+         "ci90": [
+          2.4,
+          19.4
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 35.7,
+         "ci90": [
+          22.7,
+          51.3
+         ],
+         "per100": 39.3,
+         "doubled": 1
+        }
+       },
+       "DOG_WR1": {
+        "cpt": {
+         "k": 3,
+         "pct": 10.7,
+         "ci90": [
+          4.4,
+          24.0
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 21.4,
+         "ci90": [
+          11.5,
+          36.4
+         ]
+        }
+       },
+       "DOG_WR2": {
+        "cpt": {
+         "k": 3,
+         "pct": 10.7,
+         "ci90": [
+          4.4,
+          24.0
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 17.9,
+         "ci90": [
+          9.0,
+          32.4
+         ]
+        }
+       },
+       "DOG_WR3+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 25.0,
+         "ci90": [
+          14.2,
+          40.2
+         ],
+         "per100": 25.0,
+         "doubled": 0
+        }
+       },
+       "DOG_TE1": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 10.7,
+         "ci90": [
+          4.4,
+          24.0
+         ]
+        }
+       },
+       "DOG_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 10.7,
+         "ci90": [
+          4.4,
+          24.0
+         ],
+         "per100": 10.7,
+         "doubled": 0
+        }
+       },
+       "DOG_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 28.6,
+         "ci90": [
+          16.9,
+          44.0
+         ],
+         "per100": 28.6,
+         "doubled": 0
+        }
+       },
+       "DOG_DST": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 4,
+         "pct": 14.3,
+         "ci90": [
+          6.6,
+          28.3
+         ],
+         "per100": 14.3,
+         "doubled": 0
+        }
+       }
+      }
+     }
+    }
+   },
+   "all": {
+    "n": 120,
+    "types": [
+     "MNF",
+     "SHOWDOWN",
+     "SNF",
+     "SUPER_BOWL",
+     "TNF"
+    ],
+    "roles": {
+     "FAV_QB1": {
+      "cpt": {
+       "k": 15,
+       "pct": 12.5,
+       "ci90": [
+        8.3,
+        18.3
+       ]
+      },
+      "flex": {
+       "k": 62,
+       "pct": 51.7,
+       "ci90": [
+        44.2,
+        59.1
+       ]
+      }
+     },
+     "FAV_QB2+": {
+      "cpt": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.2
+       ]
+      },
+      "flex": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.2
+       ],
+       "per100": 0.0,
+       "doubled": 0
+      }
+     },
+     "FAV_RB1": {
+      "cpt": {
+       "k": 12,
+       "pct": 10.0,
+       "ci90": [
+        6.3,
+        15.4
+       ]
+      },
+      "flex": {
+       "k": 36,
+       "pct": 30.0,
+       "ci90": [
+        23.6,
+        37.3
+       ]
+      }
+     },
+     "FAV_RB2+": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.5,
+       "ci90": [
+        1.0,
+        6.1
+       ]
+      },
+      "flex": {
+       "k": 23,
+       "pct": 19.2,
+       "ci90": [
+        14.0,
+        25.7
+       ],
+       "per100": 21.7,
+       "doubled": 3
+      }
+     },
+     "FAV_WR1": {
+      "cpt": {
+       "k": 17,
+       "pct": 14.2,
+       "ci90": [
+        9.7,
+        20.2
+       ]
+      },
+      "flex": {
+       "k": 46,
+       "pct": 38.3,
+       "ci90": [
+        31.4,
+        45.8
+       ]
+      }
+     },
+     "FAV_WR2": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.5,
+       "ci90": [
+        1.0,
+        6.1
+       ]
+      },
+      "flex": {
+       "k": 26,
+       "pct": 21.7,
+       "ci90": [
+        16.1,
+        28.4
+       ]
+      }
+     },
+     "FAV_WR3+": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.5,
+       "ci90": [
+        1.0,
+        6.1
+       ]
+      },
+      "flex": {
+       "k": 23,
+       "pct": 19.2,
+       "ci90": [
+        14.0,
+        25.7
+       ],
+       "per100": 20.0,
+       "doubled": 1
+      }
+     },
+     "FAV_TE1": {
+      "cpt": {
+       "k": 10,
+       "pct": 8.3,
+       "ci90": [
+        5.0,
+        13.5
+       ]
+      },
+      "flex": {
+       "k": 28,
+       "pct": 23.3,
+       "ci90": [
+        17.6,
+        30.2
+       ]
+      }
+     },
+     "FAV_TE2+": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.8,
+       "ci90": [
+        0.2,
+        3.6
+       ]
+      },
+      "flex": {
+       "k": 14,
+       "pct": 11.7,
+       "ci90": [
+        7.7,
+        17.4
+       ],
+       "per100": 11.7,
+       "doubled": 0
+      }
+     },
+     "FAV_K": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.8,
+       "ci90": [
+        0.2,
+        3.6
+       ]
+      },
+      "flex": {
+       "k": 27,
+       "pct": 22.5,
+       "ci90": [
+        16.9,
+        29.3
+       ],
+       "per100": 22.5,
+       "doubled": 0
+      }
+     },
+     "FAV_DST": {
+      "cpt": {
+       "k": 4,
+       "pct": 3.3,
+       "ci90": [
+        1.5,
+        7.2
+       ]
+      },
+      "flex": {
+       "k": 26,
+       "pct": 21.7,
+       "ci90": [
+        16.1,
+        28.4
+       ],
+       "per100": 21.7,
+       "doubled": 0
+      }
+     },
+     "DOG_QB1": {
+      "cpt": {
+       "k": 9,
+       "pct": 7.5,
+       "ci90": [
+        4.4,
+        12.5
+       ]
+      },
+      "flex": {
+       "k": 61,
+       "pct": 50.8,
+       "ci90": [
+        43.4,
+        58.2
+       ]
+      }
+     },
+     "DOG_QB2+": {
+      "cpt": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.2
+       ]
+      },
+      "flex": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.2
+       ],
+       "per100": 0.0,
+       "doubled": 0
+      }
+     },
+     "DOG_RB1": {
+      "cpt": {
+       "k": 8,
+       "pct": 6.7,
+       "ci90": [
+        3.8,
+        11.4
+       ]
+      },
+      "flex": {
+       "k": 35,
+       "pct": 29.2,
+       "ci90": [
+        22.9,
+        36.4
+       ]
+      }
+     },
+     "DOG_RB2+": {
+      "cpt": {
+       "k": 3,
+       "pct": 2.5,
+       "ci90": [
+        1.0,
+        6.1
+       ]
+      },
+      "flex": {
+       "k": 22,
+       "pct": 18.3,
+       "ci90": [
+        13.2,
+        24.8
+       ],
+       "per100": 20.0,
+       "doubled": 2
+      }
+     },
+     "DOG_WR1": {
+      "cpt": {
+       "k": 11,
+       "pct": 9.2,
+       "ci90": [
+        5.7,
+        14.4
+       ]
+      },
+      "flex": {
+       "k": 33,
+       "pct": 27.5,
+       "ci90": [
+        21.3,
+        34.6
+       ]
+      }
+     },
+     "DOG_WR2": {
+      "cpt": {
+       "k": 11,
+       "pct": 9.2,
+       "ci90": [
+        5.7,
+        14.4
+       ]
+      },
+      "flex": {
+       "k": 20,
+       "pct": 16.7,
+       "ci90": [
+        11.8,
+        23.0
+       ]
+      }
+     },
+     "DOG_WR3+": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.8,
+       "ci90": [
+        0.2,
+        3.6
+       ]
+      },
+      "flex": {
+       "k": 35,
+       "pct": 29.2,
+       "ci90": [
+        22.9,
+        36.4
+       ],
+       "per100": 29.2,
+       "doubled": 0
+      }
+     },
+     "DOG_TE1": {
+      "cpt": {
+       "k": 5,
+       "pct": 4.2,
+       "ci90": [
+        2.0,
+        8.3
+       ]
+      },
+      "flex": {
+       "k": 21,
+       "pct": 17.5,
+       "ci90": [
+        12.5,
+        23.9
+       ]
+      }
+     },
+     "DOG_TE2+": {
+      "cpt": {
+       "k": 2,
+       "pct": 1.7,
+       "ci90": [
+        0.6,
+        4.9
+       ]
+      },
+      "flex": {
+       "k": 11,
+       "pct": 9.2,
+       "ci90": [
+        5.7,
+        14.4
+       ],
+       "per100": 9.2,
+       "doubled": 0
+      }
+     },
+     "DOG_K": {
+      "cpt": {
+       "k": 0,
+       "pct": 0.0,
+       "ci90": [
+        0.0,
+        2.2
+       ]
+      },
+      "flex": {
+       "k": 26,
+       "pct": 21.7,
+       "ci90": [
+        16.1,
+        28.4
+       ],
+       "per100": 21.7,
+       "doubled": 0
+      }
+     },
+     "DOG_DST": {
+      "cpt": {
+       "k": 1,
+       "pct": 0.8,
+       "ci90": [
+        0.2,
+        3.6
+       ]
+      },
+      "flex": {
+       "k": 19,
+       "pct": 15.8,
+       "ci90": [
+        11.1,
+        22.1
+       ],
+       "per100": 15.8,
+       "doubled": 0
+      }
+     }
+    },
+    "by_spread": {
+     "spread_le3": {
+      "n": 48,
+      "roles": {
+       "FAV_QB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 8.3,
+         "ci90": [
+          3.8,
+          17.3
+         ]
+        },
+        "flex": {
+         "k": 24,
+         "pct": 50.0,
+         "ci90": [
+          38.5,
+          61.5
+         ]
+        }
+       },
+       "FAV_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "FAV_RB1": {
+        "cpt": {
+         "k": 6,
+         "pct": 12.5,
+         "ci90": [
+          6.6,
+          22.4
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 22.9,
+         "ci90": [
+          14.5,
+          34.2
+         ]
+        }
+       },
+       "FAV_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.1,
+         "ci90": [
+          0.5,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 22.9,
+         "ci90": [
+          14.5,
+          34.2
+         ],
+         "per100": 22.9,
+         "doubled": 0
+        }
+       },
+       "FAV_WR1": {
+        "cpt": {
+         "k": 7,
+         "pct": 14.6,
+         "ci90": [
+          8.1,
+          24.8
+         ]
+        },
+        "flex": {
+         "k": 21,
+         "pct": 43.8,
+         "ci90": [
+          32.6,
+          55.5
+         ]
+        }
+       },
+       "FAV_WR2": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 18.8,
+         "ci90": [
+          11.2,
+          29.6
+         ]
+        }
+       },
+       "FAV_WR3+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.1,
+         "ci90": [
+          0.5,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 20.8,
+         "ci90": [
+          12.9,
+          31.9
+         ],
+         "per100": 22.9,
+         "doubled": 1
+        }
+       },
+       "FAV_TE1": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.3,
+         "ci90": [
+          2.5,
+          14.6
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 18.8,
+         "ci90": [
+          11.2,
+          29.6
+         ]
+        }
+       },
+       "FAV_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 12.5,
+         "ci90": [
+          6.6,
+          22.4
+         ],
+         "per100": 12.5,
+         "doubled": 0
+        }
+       },
+       "FAV_K": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.1,
+         "ci90": [
+          0.5,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 20.8,
+         "ci90": [
+          12.9,
+          31.9
+         ],
+         "per100": 20.8,
+         "doubled": 0
+        }
+       },
+       "FAV_DST": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.3,
+         "ci90": [
+          2.5,
+          14.6
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 27.1,
+         "ci90": [
+          18.0,
+          38.6
+         ],
+         "per100": 27.1,
+         "doubled": 0
+        }
+       },
+       "DOG_QB1": {
+        "cpt": {
+         "k": 6,
+         "pct": 12.5,
+         "ci90": [
+          6.6,
+          22.4
+         ]
+        },
+        "flex": {
+         "k": 26,
+         "pct": 54.2,
+         "ci90": [
+          42.4,
+          65.5
+         ]
+        }
+       },
+       "DOG_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "DOG_RB1": {
+        "cpt": {
+         "k": 5,
+         "pct": 10.4,
+         "ci90": [
+          5.2,
+          19.9
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 27.1,
+         "ci90": [
+          18.0,
+          38.6
+         ]
+        }
+       },
+       "DOG_RB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 14.6,
+         "ci90": [
+          8.1,
+          24.8
+         ],
+         "per100": 14.6,
+         "doubled": 0
+        }
+       },
+       "DOG_WR1": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.3,
+         "ci90": [
+          2.5,
+          14.6
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 27.1,
+         "ci90": [
+          18.0,
+          38.6
+         ]
+        }
+       },
+       "DOG_WR2": {
+        "cpt": {
+         "k": 3,
+         "pct": 6.3,
+         "ci90": [
+          2.5,
+          14.6
+         ]
+        },
+        "flex": {
+         "k": 12,
+         "pct": 25.0,
+         "ci90": [
+          16.2,
+          36.4
+         ]
+        }
+       },
+       "DOG_WR3+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 14,
+         "pct": 29.2,
+         "ci90": [
+          19.7,
+          40.8
+         ],
+         "per100": 29.2,
+         "doubled": 0
+        }
+       },
+       "DOG_TE1": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.2,
+         "ci90": [
+          1.4,
+          11.8
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 20.8,
+         "ci90": [
+          12.9,
+          31.9
+         ]
+        }
+       },
+       "DOG_TE2+": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.2,
+         "ci90": [
+          1.4,
+          11.8
+         ]
+        },
+        "flex": {
+         "k": 2,
+         "pct": 4.2,
+         "ci90": [
+          1.4,
+          11.8
+         ],
+         "per100": 4.2,
+         "doubled": 0
+        }
+       },
+       "DOG_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          5.3
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 20.8,
+         "ci90": [
+          12.9,
+          31.9
+         ],
+         "per100": 20.8,
+         "doubled": 0
+        }
+       },
+       "DOG_DST": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.1,
+         "ci90": [
+          0.5,
+          8.8
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 16.7,
+         "ci90": [
+          9.7,
+          27.2
+         ],
+         "per100": 16.7,
+         "doubled": 0
+        }
+       }
+      }
+     },
+     "spread_3.5_6.5": {
+      "n": 41,
+      "roles": {
+       "FAV_QB1": {
+        "cpt": {
+         "k": 7,
+         "pct": 17.1,
+         "ci90": [
+          9.5,
+          28.7
+         ]
+        },
+        "flex": {
+         "k": 21,
+         "pct": 51.2,
+         "ci90": [
+          38.7,
+          63.6
+         ]
+        }
+       },
+       "FAV_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "FAV_RB1": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.9,
+         "ci90": [
+          1.6,
+          13.7
+         ]
+        },
+        "flex": {
+         "k": 16,
+         "pct": 39.0,
+         "ci90": [
+          27.5,
+          51.9
+         ]
+        }
+       },
+       "FAV_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 19.5,
+         "ci90": [
+          11.4,
+          31.4
+         ],
+         "per100": 26.8,
+         "doubled": 3
+        }
+       },
+       "FAV_WR1": {
+        "cpt": {
+         "k": 7,
+         "pct": 17.1,
+         "ci90": [
+          9.5,
+          28.7
+         ]
+        },
+        "flex": {
+         "k": 15,
+         "pct": 36.6,
+         "ci90": [
+          25.4,
+          49.4
+         ]
+        }
+       },
+       "FAV_WR2": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 19.5,
+         "ci90": [
+          11.4,
+          31.4
+         ]
+        }
+       },
+       "FAV_WR3+": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.9,
+         "ci90": [
+          1.6,
+          13.7
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.1,
+         "ci90": [
+          9.5,
+          28.7
+         ],
+         "per100": 17.1,
+         "doubled": 0
+        }
+       },
+       "FAV_TE1": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.9,
+         "ci90": [
+          1.6,
+          13.7
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.1,
+         "ci90": [
+          9.5,
+          28.7
+         ]
+        }
+       },
+       "FAV_TE2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 12.2,
+         "ci90": [
+          6.1,
+          23.0
+         ],
+         "per100": 12.2,
+         "doubled": 0
+        }
+       },
+       "FAV_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ]
+        },
+        "flex": {
+         "k": 12,
+         "pct": 29.3,
+         "ci90": [
+          19.2,
+          41.9
+         ],
+         "per100": 29.3,
+         "doubled": 0
+        }
+       },
+       "FAV_DST": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 14.6,
+         "ci90": [
+          7.8,
+          25.9
+         ],
+         "per100": 14.6,
+         "doubled": 0
+        }
+       },
+       "DOG_QB1": {
+        "cpt": {
+         "k": 2,
+         "pct": 4.9,
+         "ci90": [
+          1.6,
+          13.7
+         ]
+        },
+        "flex": {
+         "k": 24,
+         "pct": 58.5,
+         "ci90": [
+          45.7,
+          70.3
+         ]
+        }
+       },
+       "DOG_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "DOG_RB1": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 13,
+         "pct": 31.7,
+         "ci90": [
+          21.2,
+          44.5
+         ]
+        }
+       },
+       "DOG_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 4,
+         "pct": 9.8,
+         "ci90": [
+          4.5,
+          20.0
+         ],
+         "per100": 9.8,
+         "doubled": 0
+        }
+       },
+       "DOG_WR1": {
+        "cpt": {
+         "k": 4,
+         "pct": 9.8,
+         "ci90": [
+          4.5,
+          20.0
+         ]
+        },
+        "flex": {
+         "k": 14,
+         "pct": 34.1,
+         "ci90": [
+          23.3,
+          47.0
+         ]
+        }
+       },
+       "DOG_WR2": {
+        "cpt": {
+         "k": 5,
+         "pct": 12.2,
+         "ci90": [
+          6.1,
+          23.0
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 7.3,
+         "ci90": [
+          3.0,
+          17.0
+         ]
+        }
+       },
+       "DOG_WR3+": {
+        "cpt": {
+         "k": 1,
+         "pct": 2.4,
+         "ci90": [
+          0.5,
+          10.2
+         ]
+        },
+        "flex": {
+         "k": 14,
+         "pct": 34.1,
+         "ci90": [
+          23.3,
+          47.0
+         ],
+         "per100": 34.1,
+         "doubled": 0
+        }
+       },
+       "DOG_TE1": {
+        "cpt": {
+         "k": 3,
+         "pct": 7.3,
+         "ci90": [
+          3.0,
+          17.0
+         ]
+        },
+        "flex": {
+         "k": 8,
+         "pct": 19.5,
+         "ci90": [
+          11.4,
+          31.4
+         ]
+        }
+       },
+       "DOG_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 12.2,
+         "ci90": [
+          6.1,
+          23.0
+         ],
+         "per100": 12.2,
+         "doubled": 0
+        }
+       },
+       "DOG_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 17.1,
+         "ci90": [
+          9.5,
+          28.7
+         ],
+         "per100": 17.1,
+         "doubled": 0
+        }
+       },
+       "DOG_DST": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          6.2
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 12.2,
+         "ci90": [
+          6.1,
+          23.0
+         ],
+         "per100": 12.2,
+         "doubled": 0
+        }
+       }
+      }
+     },
+     "spread_ge7": {
+      "n": 31,
+      "roles": {
+       "FAV_QB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 12.9,
+         "ci90": [
+          5.9,
+          25.8
+         ]
+        },
+        "flex": {
+         "k": 17,
+         "pct": 54.8,
+         "ci90": [
+          40.3,
+          68.6
+         ]
+        }
+       },
+       "FAV_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "FAV_RB1": {
+        "cpt": {
+         "k": 4,
+         "pct": 12.9,
+         "ci90": [
+          5.9,
+          25.8
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 29.0,
+         "ci90": [
+          17.7,
+          43.7
+         ]
+        }
+       },
+       "FAV_RB2+": {
+        "cpt": {
+         "k": 1,
+         "pct": 3.2,
+         "ci90": [
+          0.7,
+          13.2
+         ]
+        },
+        "flex": {
+         "k": 4,
+         "pct": 12.9,
+         "ci90": [
+          5.9,
+          25.8
+         ],
+         "per100": 12.9,
+         "doubled": 0
+        }
+       },
+       "FAV_WR1": {
+        "cpt": {
+         "k": 3,
+         "pct": 9.7,
+         "ci90": [
+          3.9,
+          21.9
+         ]
+        },
+        "flex": {
+         "k": 10,
+         "pct": 32.3,
+         "ci90": [
+          20.4,
+          47.0
+         ]
+        }
+       },
+       "FAV_WR2": {
+        "cpt": {
+         "k": 2,
+         "pct": 6.5,
+         "ci90": [
+          2.2,
+          17.7
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 29.0,
+         "ci90": [
+          17.7,
+          43.7
+         ]
+        }
+       },
+       "FAV_WR3+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 19.4,
+         "ci90": [
+          10.4,
+          33.3
+         ],
+         "per100": 19.4,
+         "doubled": 0
+        }
+       },
+       "FAV_TE1": {
+        "cpt": {
+         "k": 5,
+         "pct": 16.1,
+         "ci90": [
+          8.1,
+          29.6
+         ]
+        },
+        "flex": {
+         "k": 12,
+         "pct": 38.7,
+         "ci90": [
+          25.8,
+          53.4
+         ]
+        }
+       },
+       "FAV_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 9.7,
+         "ci90": [
+          3.9,
+          21.9
+         ],
+         "per100": 9.7,
+         "doubled": 0
+        }
+       },
+       "FAV_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 16.1,
+         "ci90": [
+          8.1,
+          29.6
+         ],
+         "per100": 16.1,
+         "doubled": 0
+        }
+       },
+       "FAV_DST": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 22.6,
+         "ci90": [
+          12.7,
+          36.8
+         ],
+         "per100": 22.6,
+         "doubled": 0
+        }
+       },
+       "DOG_QB1": {
+        "cpt": {
+         "k": 1,
+         "pct": 3.2,
+         "ci90": [
+          0.7,
+          13.2
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 35.5,
+         "ci90": [
+          23.0,
+          50.3
+         ]
+        }
+       },
+       "DOG_QB2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ],
+         "per100": 0.0,
+         "doubled": 0
+        }
+       },
+       "DOG_RB1": {
+        "cpt": {
+         "k": 2,
+         "pct": 6.5,
+         "ci90": [
+          2.2,
+          17.7
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 29.0,
+         "ci90": [
+          17.7,
+          43.7
+         ]
+        }
+       },
+       "DOG_RB2+": {
+        "cpt": {
+         "k": 2,
+         "pct": 6.5,
+         "ci90": [
+          2.2,
+          17.7
+         ]
+        },
+        "flex": {
+         "k": 11,
+         "pct": 35.5,
+         "ci90": [
+          23.0,
+          50.3
+         ],
+         "per100": 41.9,
+         "doubled": 2
+        }
+       },
+       "DOG_WR1": {
+        "cpt": {
+         "k": 4,
+         "pct": 12.9,
+         "ci90": [
+          5.9,
+          25.8
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 19.4,
+         "ci90": [
+          10.4,
+          33.3
+         ]
+        }
+       },
+       "DOG_WR2": {
+        "cpt": {
+         "k": 3,
+         "pct": 9.7,
+         "ci90": [
+          3.9,
+          21.9
+         ]
+        },
+        "flex": {
+         "k": 5,
+         "pct": 16.1,
+         "ci90": [
+          8.1,
+          29.6
+         ]
+        }
+       },
+       "DOG_WR3+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 7,
+         "pct": 22.6,
+         "ci90": [
+          12.7,
+          36.8
+         ],
+         "per100": 22.6,
+         "doubled": 0
+        }
+       },
+       "DOG_TE1": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 3,
+         "pct": 9.7,
+         "ci90": [
+          3.9,
+          21.9
+         ]
+        }
+       },
+       "DOG_TE2+": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 4,
+         "pct": 12.9,
+         "ci90": [
+          5.9,
+          25.8
+         ],
+         "per100": 12.9,
+         "doubled": 0
+        }
+       },
+       "DOG_K": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 9,
+         "pct": 29.0,
+         "ci90": [
+          17.7,
+          43.7
+         ],
+         "per100": 29.0,
+         "doubled": 0
+        }
+       },
+       "DOG_DST": {
+        "cpt": {
+         "k": 0,
+         "pct": 0.0,
+         "ci90": [
+          0.0,
+          8.0
+         ]
+        },
+        "flex": {
+         "k": 6,
+         "pct": 19.4,
+         "ci90": [
+          10.4,
+          33.3
+         ],
+         "per100": 19.4,
+         "doubled": 0
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "field_gap": {
+   "_note": "Field gap per position x side (the 2026 field archive does not split by depth, so every depth role of a family shares its family note). hist = historical primetime winner rate (CPT: captain is that family; FLEX: >= 1 of that family in FLEX). field_2026 / top1_2026 = mean of per-slate rates over the primetime slates (entries pooled across each slate's contests, top 1% cut inside each contest). label: field_gap = field departs >= 5 pts from history AND the top 1% moves >= 3 pts back toward history; field_differs_top1_agrees_with_field = departs, top 1% does not side with history; aligned = within 5 pts. 2026 only annotates; it never changes a rule.",
+   "tier": "primetime",
+   "slates": [
+    "2026-wk1-den-kc",
+    "2026-wk1-dal-nyg",
+    "2026-wk1-sf-lar",
+    "2026-wk1-ne-sea",
+    "2026-wk2-ind-kc",
+    "2026-wk2-det-buf"
+   ],
+   "excluded": [
+    {
+     "slate": "2026-wk2-nyg-lar",
+     "reason": "injury-distorted: NYG QB Jaxson Dart left in the 1st quarter; Jameis Winston finished"
+    }
+   ],
+   "hist_cohort": "primetime",
+   "families": {
+    "FAV_QB": {
+     "cpt": {
+      "hist": 13.3,
+      "field_2026": 12.5,
+      "top1_2026": 10.9,
+      "field_minus_hist": -0.8,
+      "top1_minus_field": -1.6,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     },
+     "flex": {
+      "hist": 50.4,
+      "field_2026": 54.1,
+      "top1_2026": 49.5,
+      "field_minus_hist": 3.7,
+      "top1_minus_field": -4.6,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 4,
+      "slates_top1_below_field": 2
+     }
+    },
+    "FAV_RB": {
+     "cpt": {
+      "hist": 13.3,
+      "field_2026": 16.7,
+      "top1_2026": 19.7,
+      "field_minus_hist": 3.4,
+      "top1_minus_field": 3.0,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 5
+     },
+     "flex": {
+      "hist": 49.6,
+      "field_2026": 49.0,
+      "top1_2026": 59.6,
+      "field_minus_hist": -0.6,
+      "top1_minus_field": 10.6,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 4,
+      "slates_top1_below_field": 2
+     }
+    },
+    "FAV_WR": {
+     "cpt": {
+      "hist": 17.7,
+      "field_2026": 19.3,
+      "top1_2026": 14.9,
+      "field_minus_hist": 1.6,
+      "top1_minus_field": -4.4,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 5
+     },
+     "flex": {
+      "hist": 64.6,
+      "field_2026": 64.7,
+      "top1_2026": 46.4,
+      "field_minus_hist": 0.1,
+      "top1_minus_field": -18.3,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 0,
+      "slates_top1_below_field": 6
+     }
+    },
+    "FAV_TE": {
+     "cpt": {
+      "hist": 8.8,
+      "field_2026": 5.1,
+      "top1_2026": 9.0,
+      "field_minus_hist": -3.7,
+      "top1_minus_field": 3.9,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     },
+     "flex": {
+      "hist": 36.3,
+      "field_2026": 37.2,
+      "top1_2026": 37.3,
+      "field_minus_hist": 0.9,
+      "top1_minus_field": 0.1,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 3
+     }
+    },
+    "FAV_K": {
+     "cpt": {
+      "hist": 0.9,
+      "field_2026": 1.6,
+      "top1_2026": 2.5,
+      "field_minus_hist": 0.7,
+      "top1_minus_field": 0.9,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 5
+     },
+     "flex": {
+      "hist": 22.1,
+      "field_2026": 26.2,
+      "top1_2026": 18.7,
+      "field_minus_hist": 4.1,
+      "top1_minus_field": -7.5,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     }
+    },
+    "FAV_DST": {
+     "cpt": {
+      "hist": 3.5,
+      "field_2026": 2.3,
+      "top1_2026": 0.9,
+      "field_minus_hist": -1.2,
+      "top1_minus_field": -1.4,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 5
+     },
+     "flex": {
+      "hist": 22.1,
+      "field_2026": 17.7,
+      "top1_2026": 21.9,
+      "field_minus_hist": -4.4,
+      "top1_minus_field": 4.2,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     }
+    },
+    "DOG_QB": {
+     "cpt": {
+      "hist": 7.1,
+      "field_2026": 10.2,
+      "top1_2026": 14.0,
+      "field_minus_hist": 3.1,
+      "top1_minus_field": 3.8,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 3
+     },
+     "flex": {
+      "hist": 51.3,
+      "field_2026": 45.7,
+      "top1_2026": 56.5,
+      "field_minus_hist": -5.6,
+      "top1_minus_field": 10.8,
+      "label": "field_gap",
+      "slates_n": 6,
+      "slates_top1_above_field": 4,
+      "slates_top1_below_field": 2
+     }
+    },
+    "DOG_RB": {
+     "cpt": {
+      "hist": 8.8,
+      "field_2026": 13.9,
+      "top1_2026": 5.9,
+      "field_minus_hist": 5.1,
+      "top1_minus_field": -8.0,
+      "label": "field_gap",
+      "slates_n": 6,
+      "slates_top1_above_field": 0,
+      "slates_top1_below_field": 6
+     },
+     "flex": {
+      "hist": 46.0,
+      "field_2026": 48.3,
+      "top1_2026": 60.1,
+      "field_minus_hist": 2.3,
+      "top1_minus_field": 11.8,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 4,
+      "slates_top1_below_field": 2
+     }
+    },
+    "DOG_WR": {
+     "cpt": {
+      "hist": 19.5,
+      "field_2026": 12.6,
+      "top1_2026": 11.7,
+      "field_minus_hist": -6.9,
+      "top1_minus_field": -0.9,
+      "label": "field_differs_top1_agrees_with_field",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     },
+     "flex": {
+      "hist": 60.2,
+      "field_2026": 55.9,
+      "top1_2026": 46.7,
+      "field_minus_hist": -4.3,
+      "top1_minus_field": -9.2,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     }
+    },
+    "DOG_TE": {
+     "cpt": {
+      "hist": 6.2,
+      "field_2026": 3.9,
+      "top1_2026": 9.6,
+      "field_minus_hist": -2.3,
+      "top1_minus_field": 5.7,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     },
+     "flex": {
+      "hist": 26.5,
+      "field_2026": 31.5,
+      "top1_2026": 41.0,
+      "field_minus_hist": 5.0,
+      "top1_minus_field": 9.5,
+      "label": "field_differs_top1_agrees_with_field",
+      "slates_n": 6,
+      "slates_top1_above_field": 4,
+      "slates_top1_below_field": 2
+     }
+    },
+    "DOG_K": {
+     "cpt": {
+      "hist": 0.0,
+      "field_2026": 0.6,
+      "top1_2026": 0.8,
+      "field_minus_hist": 0.6,
+      "top1_minus_field": 0.2,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 5
+     },
+     "flex": {
+      "hist": 21.2,
+      "field_2026": 18.0,
+      "top1_2026": 18.9,
+      "field_minus_hist": -3.2,
+      "top1_minus_field": 0.9,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 3
+     }
+    },
+    "DOG_DST": {
+     "cpt": {
+      "hist": 0.9,
+      "field_2026": 1.1,
+      "top1_2026": 0.2,
+      "field_minus_hist": 0.2,
+      "top1_minus_field": -0.9,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 5
+     },
+     "flex": {
+      "hist": 15.0,
+      "field_2026": 11.2,
+      "top1_2026": 10.4,
+      "field_minus_hist": -3.8,
+      "top1_minus_field": -0.8,
+      "label": "aligned",
+      "slates_n": 6,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 4
+     }
+    }
+   }
+  },
+  "leverage": {
+   "definition": "leverage (pts) = historical role rate - projected ownership of that seat, CPT and FLEX separately",
+   "cpt": "cohorts.primetime[.by_spread[bucket]].roles[role].cpt.pct - sum of projected CPT own % of the pool players in that role",
+   "flex": "cohorts.primetime[.by_spread[bucket]].roles[role].flex.(per100 if multi else pct) - sum of projected FLEX own % of the pool players in that role",
+   "bucket": "use the slate's spread bucket (spread_le3 / spread_3.5_6.5 / spread_ge7 by the favorite's spread) when its n >= min_bucket_n, else the cohort row",
+   "thin_match": "flag a player whose FLEX salary is outside depth.salary_by_role[role] p5-p95 (or whose role has < 5 historical salaries): his depth matches the role but his price does not - grey the number, do not headline it",
+   "role_of_player": "side = FAV if team == favorite else DOG; depth = salary rank within team+position among players not ruled OUT/IR (QB: 1 -> QB1, 2+ -> QB2+; RB: 1 -> RB1, 2+ -> RB2+; WR: 1, 2, 3+ ; TE: 1 -> TE1, 2+ -> TE2+; K; DST)",
+   "reading": "positive = winners used this role more often than the field is projected to; negative = the field is projected to play it more than winners ever did. The historical rate is how often the role is in winning lineups, not a projection. Show the role n and the ci90; when a CI is wider than the leverage, say so.",
+   "ownership_source": "public: BirdieBuddy model ownership (pool own / cpt_own). Licensed projections never feed a site number."
+  }
  }
 }

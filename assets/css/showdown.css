@@ -1276,3 +1276,145 @@ body[data-section="nfl"] .sd-auto-cards :focus-visible, body[data-section="nfl"]
   .sd-sure-gaps > div { grid-template-columns: minmax(0, 1fr); }
   .sd-sure-gaps small { grid-column: 1; }
 }
+
+/* ===================== 2026-09-23 · v0.5: corrected ownership + role leverage (Lab pool, Step 3 board) ===================== */
+.sd-corr-opt { max-width: 340px; }
+.sd-corr { display: flex; align-items: flex-start; gap: 8px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-primary); cursor: pointer; }
+.sd-corr input { width: 16px; height: 16px; margin-top: 1px; accent-color: var(--gold-500); flex: none; }
+.sd-corr small { display: block; font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 400; color: var(--text-dimmed); line-height: 1.4; }
+/* Lev column: player | proj·own | Lev | salary | add */
+.sd-lab-pool.has-lev .sd-pool-cols, .sd-lab-pool.has-lev .sd-p { grid-template-columns: 38px minmax(0, 1fr) 58px 54px 82px 64px; }
+.sd-lab-pool.has-lev .sd-pool-cols span:nth-child(3) { grid-column: 4; text-align: right; cursor: help; }
+.sd-lab-pool.has-lev .sd-pool-cols span:nth-child(4) { grid-column: 5; text-align: right; }
+.sd-lab-pool.has-lev .sd-pool-cols span:nth-child(5) { grid-column: 6; text-align: center; }
+.sd-p-lev { display: flex; flex-direction: column; align-items: flex-end; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.3; color: var(--text-muted); cursor: help; }
+.sd-p-lev i, .sd-p-x em { font-style: normal; font-size: 9px; color: var(--text-dimmed); margin-right: 3px; }
+.sd-p-lev .up { color: var(--gold-300); }
+.sd-p-lev.thin, .sd-p-xlev.thin { opacity: 0.45; }
+.sd-p-x { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: -2px; font-family: var(--font-mono); font-size: 9.5px; color: var(--text-dimmed); line-height: 1.35; min-width: 0; }
+.sd-p-x b { font-weight: 600; color: var(--text-body); }
+.sd-p-x i { font-style: normal; color: var(--text-muted); }
+.sd-p-x .rough { color: var(--text-dimmed); text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: 8.5px; }
+.sd-p-xlev { display: none; }
+/* Step 3 leverage board */
+.sd-levb-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-top: 6px; }
+.sd-levb-col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.sd-levb-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) 84px 58px 104px; gap: 8px; align-items: center; padding: 7px 9px; border-radius: var(--radius-md); background: var(--surface-2); border: 1px solid var(--border-soft); }
+.sd-levb-row.thin { opacity: 0.5; }
+.sd-levb-slot { font-family: var(--font-mono); font-size: 9.5px; font-weight: 700; letter-spacing: var(--tracking-wider); color: var(--text-muted); }
+.sd-levb-role { min-width: 0; font-size: var(--fs-xs); }
+.sd-levb-role b { color: var(--text-primary); }
+.sd-levb-role small, .sd-levb-num small, .sd-levb-lev small { display: block; font-family: var(--font-mono); font-size: 9.5px; color: var(--text-dimmed); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sd-levb-num, .sd-levb-lev { text-align: right; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-body); min-width: 0; }
+.sd-levb-lev b { font-size: var(--fs-sm); color: var(--text-primary); }
+.sd-levb-col:first-child .sd-levb-lev b { color: var(--gold-300); }
+.sd-levb-lev small.warn { color: var(--warning); }
+.sd-levb-chk { font-size: 8.5px; letter-spacing: var(--tracking-wider); text-transform: uppercase; color: var(--gold-200); border: 1px solid var(--border-gold); border-radius: var(--radius-full); padding: 0 5px; cursor: help; }
+.sd-levb .sd-sure-gaps { margin-top: 6px; }
+.sd-levb .sd-lab-k { display: block; }
+.sd-levb .sd-lab-k small { display: block; margin-top: 2px; }
+.sd-p-x.stok > span:not(.sd-p-xlev) { flex-basis: 100%; }
+@media (max-width: 960px) { .sd-levb-grid { grid-template-columns: minmax(0, 1fr); } .sd-laws { grid-template-columns: minmax(0, 1fr); } }   /* laws: a 1fr track let one law's min-content push the card past 375 px on spread ≥ 7 slates */
+.sd-law summary .sd-law-chk .sd-vb:not(.mini) { white-space: normal; max-width: 100%; }   /* a long multi-verdict check line wraps instead of widening the law */
+@media (max-width: 767px) {
+  .sd-lab-pool.has-lev .sd-pool-cols, .sd-lab-pool.has-lev .sd-p { grid-template-columns: 36px minmax(0, 1fr) 70px 62px; }
+  .sd-lab-pool.has-lev .sd-p-lev, .sd-lab-pool.has-lev .sd-pool-cols span:nth-child(3) { display: none; }
+  .sd-lab-pool.has-lev .sd-pool-cols span:nth-child(4) { grid-column: 3; }
+  .sd-lab-pool.has-lev .sd-pool-cols span:nth-child(5) { grid-column: 4; }
+  .sd-p-xlev { display: inline; }
+  .sd-levb-row { grid-template-columns: 34px minmax(0, 1fr) auto; gap: 3px 8px; padding: 7px 8px; }
+  .sd-levb-slot { grid-row: 1 / 3; }
+  .sd-levb-role { grid-column: 2; grid-row: 1; }
+  .sd-levb-lev { grid-column: 3; grid-row: 1; }
+  .sd-levb-num { grid-row: 2; display: flex; gap: 5px; align-items: baseline; }
+  .sd-levb-num:nth-child(3) { grid-column: 2; text-align: left; }
+  .sd-levb-num:nth-child(4) { grid-column: 3; justify-content: flex-end; }
+  .sd-levb-num small { display: inline; }
+  .sd-levb-role small { white-space: normal; }
+  .sd-corr-opt { max-width: none; flex-basis: 100%; }
+}
+/* ===================== 2026-09-23 · v0.5: top-1% sim in Build it for me (rank by codex fit · top-1% chance · blend) ===================== */
+.sd-rank-by { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 100%; }
+.sd-rank-by .seg { flex-wrap: wrap; justify-content: flex-end; max-width: 100%; }
+.sd-rank-by .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
+.sd-sim-need { margin: 8px 0 0; font-size: var(--fs-xs); color: var(--text-muted); max-width: 72ch; }
+.sd-sim-need b { color: var(--text-body); }
+.sd-sim { display: flex; flex-direction: column; gap: 6px; margin: 4px 0 12px; min-width: 0; }
+.sd-sim.updating .sd-sim-sum { opacity: 0.55; }
+.sd-sim-sum small span { font-size: inherit; letter-spacing: normal; text-transform: none; color: inherit; }
+.sd-sim-sum div:last-child b { font-size: var(--fs-xl); line-height: normal; color: var(--gold-300); }
+.sd-sim-sum small .warn, .sd-sim .sd-lab-k .warn { color: var(--warning); }
+.sd-sim .sd-fold .sd-own-note { margin-top: 6px; }
+.sd-sim-line { display: flex; flex-wrap: wrap; gap: 4px 12px; font-family: var(--font-mono); font-size: 9.5px; color: var(--text-dimmed); }
+.sd-sim-line > span { display: inline-flex; align-items: baseline; gap: 4px; white-space: nowrap; }
+.sd-sim-line em { font-style: normal; text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: 8.5px; }
+.sd-sim-line b { color: var(--text-body); font-weight: 600; font-size: 10.5px; }
+.sd-sim-line > span:first-child b { color: var(--gold-300); }
+.sd-auto-card .sd-sim-line { padding-top: 5px; border-top: 1px solid var(--border-soft); }
+.sd-sim-line.lab { margin-top: 2px; font-size: var(--fs-3xs); }
+.sd-sim-line.lab b { font-size: var(--fs-sm); }
+@media (max-width: 767px) {
+  .sd-rank-by { align-items: stretch; width: 100%; }
+  .sd-rank-by .seg { width: 100%; justify-content: stretch; }
+  .sd-rank-by .seg button { flex: 1 1 auto; white-space: nowrap; padding: 8px 6px; }
+  .sd-sim-sum { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* ===================== 2026-09-23 · v0.5: Where to enter (Step 5) + This week's routine (Step 4) ===================== */
+.sd-field-link { display: block; margin-top: 3px; font-family: var(--font-mono); font-size: var(--fs-3xs); color: var(--text-dimmed); max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sd-where { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.sd-where .sd-lab-k { display: block; margin-top: 4px; }
+.sd-where .sd-lab-k small { display: block; margin-top: 2px; }
+.sd-wh-sum small .warn, .sd-wh-x .warn, .sd-wh-rec p.small { color: var(--warning); }
+.sd-wh-sum small i { font-style: normal; }
+.sd-wh-rec { padding: 10px 12px; border-radius: var(--radius-md); background: var(--surface-2); border: 1px solid var(--border-gold); font-size: var(--fs-xs); color: var(--text-body); min-width: 0; }
+.sd-wh-rec b { display: block; color: var(--gold-200); font-size: var(--fs-sm); margin-bottom: 4px; }
+.sd-wh-rec p { margin: 4px 0 0; max-width: 90ch; }
+.sd-wh-list { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.sd-wh-row { display: grid; grid-template-columns: 42px minmax(0, 1fr) 140px auto; gap: 4px 10px; align-items: center; padding: 8px 10px; border-radius: var(--radius-md); background: var(--surface-2); border: 1px solid var(--border-soft); min-width: 0; }
+.sd-wh-row.fit { border-color: var(--border-gold); }
+.sd-wh-row.on { border-color: var(--gold-400); box-shadow: 0 0 0 1px var(--gold-400) inset; }
+.sd-wh-rank { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--text-muted); }
+.sd-wh-name { min-width: 0; font-size: var(--fs-xs); }
+.sd-wh-name b { color: var(--text-primary); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sd-wh-name small, .sd-wh-eq small { display: block; font-family: var(--font-mono); font-size: 9.5px; color: var(--text-dimmed); }
+.sd-wh-eq { text-align: right; font-family: var(--font-mono); }
+.sd-wh-eq b { font-size: var(--fs-sm); color: var(--gold-300); }
+.sd-wh-row .btn { white-space: nowrap; }
+.sd-wh-x { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 2px 14px; font-family: var(--font-mono); font-size: 9.5px; color: var(--text-dimmed); min-width: 0; }
+.sd-wh-x em { font-style: normal; text-transform: uppercase; letter-spacing: var(--tracking-wider); font-size: 8.5px; margin-right: 4px; }
+.sd-wh-x b { color: var(--text-body); font-weight: 600; }
+.sd-wh-x i { font-style: normal; color: var(--text-muted); }
+.sd-where .sd-caption button.sd-link, .sd-where .sd-unlock button.sd-link { background: none; border: 0; padding: 0; cursor: pointer; }
+/* This week's routine */
+.sd-routine { display: flex; flex-direction: column; gap: 8px; }
+.sd-routine-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.sd-routine-n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--text-muted); }
+.sd-routine-n b { color: var(--gold-300); font-size: var(--fs-md); }
+.sd-routine-bar { height: 4px; border-radius: 2px; background: var(--surface-3, var(--border-soft)); overflow: hidden; }
+.sd-routine-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-600), var(--gold-400)); transition: width 0.3s ease; }
+.sd-routine-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 14px; }
+.sd-routine-list li { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 7px 9px; border-radius: var(--radius-md); background: var(--surface-2); border: 1px solid var(--border-soft); min-width: 0; }
+.sd-routine-list li.done { border-color: var(--border-gold); }
+.sd-routine-list label { display: flex; align-items: flex-start; gap: 8px; min-width: 0; cursor: pointer; flex: 1; }
+.sd-routine-list input { width: 16px; height: 16px; margin-top: 1px; accent-color: var(--gold-500); flex: none; }
+.sd-routine-i { font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--text-dimmed); min-width: 12px; margin-top: 1px; }
+.sd-routine-t { font-size: var(--fs-xs); font-weight: 600; color: var(--text-primary); min-width: 0; }
+.sd-routine-list li.done .sd-routine-t { color: var(--text-muted); }
+.sd-routine-t small { display: block; font-family: var(--font-mono); font-size: 9.5px; font-weight: 400; color: var(--text-dimmed); overflow-wrap: anywhere; }
+.sd-routine-t small.ok { color: var(--positive); }
+.sd-routine-t small.warn { color: var(--warning); }
+.sd-routine-list .sd-link { font-size: var(--fs-3xs); flex: none; margin-top: 2px; }
+.sd-routine .sd-caption button.sd-link { background: none; border: 0; padding: 0; cursor: pointer; }
+#sdWhere, #sdRoutine, #sdLevBoard, #sdAuto, #sdReview { scroll-margin-top: calc(var(--sd-nav-h) + var(--sd-dock-h) + 20px); }   /* the routine's Go links land below the sticky dock */
+@media (prefers-reduced-motion: reduce) { .sd-routine-bar i { transition: none; } }
+@media (max-width: 767px) {
+  .sd-wh-row { grid-template-columns: minmax(0, 1fr) auto; padding: 8px; }
+  .sd-wh-rank { grid-column: 1 / -1; }
+  .sd-wh-name { grid-column: 1 / -1; }
+  .sd-wh-eq { grid-column: 1; text-align: left; }
+  .sd-wh-row .btn { grid-column: 2; align-self: center; }
+  .sd-wh-x { grid-column: 1 / -1; }
+  .sd-wh-name b { white-space: normal; }
+  .sd-routine-list { grid-template-columns: minmax(0, 1fr); }
+  .sd-field-link { max-width: none; white-space: normal; }
+}
