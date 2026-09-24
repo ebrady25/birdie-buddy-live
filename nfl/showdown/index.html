@@ -22,8 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.0" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.0" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.1" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.1" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
   </style>
@@ -83,7 +83,7 @@
             <button type="button" data-fold-mode="game" aria-pressed="true">Game day</button>
             <button type="button" data-fold-mode="study" aria-pressed="false">Study</button>
           </div>
-          <span class="sd-mode-note" id="sdModeNote">Game day opens the answers and tools. Evidence and reference stay one click away.</span>
+          <span class="sd-mode-note" id="sdModeNote">Everything starts closed. Game day opens the answers and tools; Study opens everything.</span>
           <button type="button" class="sd-link sd-mode-all" data-fold-all="close">Collapse all</button>
         </div>
 
@@ -268,6 +268,7 @@
             <details class="sd-sec" id="dials" data-tier="tool">
               <summary><span class="sd-sec-title">Contest Generator dials</span><span class="sd-sec-end"><button type="button" class="sd-sec-btn" data-copy="stokastic" title="Copy the dials as Contest Generator settings">Copy dials</button><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="dials"></span></summary>
               <div class="sd-sec-body">
+                <p class="sd-dials-note">The settings to copy into Stokastic's Contest Generator when you simulate showdown contests and build your own lineups.</p>
                 <div class="card sd-panel" id="sdDials"></div>
               </div>
             </details>
@@ -385,15 +386,15 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.6.0"></script>
-  <script src="assets/js/track.js?v=0.6.0"></script>
+  <script src="assets/js/nfl.js?v=0.6.1"></script>
+  <script src="assets/js/track.js?v=0.6.1"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
-  <script src="assets/js/showdown_fx.js?v=0.6.0"></script>
-  <script src="assets/js/showdown_engine.js?v=0.6.0"></script>
-  <script src="assets/js/showdown_folds.js?v=0.6.0"></script>
-  <script src="assets/js/showdown.js?v=0.6.0"></script>
-  <script src="assets/js/showdown_build.js?v=0.6.0"></script>
-  <script src="assets/js/showdown_lab.js?v=0.6.0"></script>
-  <script src="assets/js/showdown_review.js?v=0.6.0"></script>
+  <script src="assets/js/showdown_fx.js?v=0.6.1"></script>
+  <script src="assets/js/showdown_engine.js?v=0.6.1"></script>
+  <script src="assets/js/showdown_folds.js?v=0.6.1"></script>
+  <script src="assets/js/showdown.js?v=0.6.1"></script>
+  <script src="assets/js/showdown_build.js?v=0.6.1"></script>
+  <script src="assets/js/showdown_lab.js?v=0.6.1"></script>
+  <script src="assets/js/showdown_review.js?v=0.6.1"></script>
 </body>
 </html>

@@ -3,8 +3,9 @@
    Every step and every section in it is a native <details> fold.
      • Game day (default) opens the Answer and Tool sections of Steps 3–5;
        Study opens everything. Evidence and Reference stay one click away.
-     • What the reader opens or closes is remembered on this device, per
-       fold, until they pick a mode again (which resets to that mode).
+     • The page always opens with every fold shut (Ethan, 2026-09-24); the
+       picked mode is remembered on this device and applies when clicked.
+       What the reader opens or closes holds for the visit, not across loads.
      • openTo(el) opens every fold around an element, for jumps and deep
        links; a closed fold's summary line (data-ans) carries its answer.
      • Phones: one step open at a time (Game day); open step headers stick.
@@ -20,8 +21,9 @@ window.BBI = window.BBI || {};
   const phone = () => window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
 
   const load = () => { try { const j = JSON.parse(localStorage.getItem(LS)); return j && typeof j === 'object' && j.v === 1 ? j : null; } catch { return null; } };
-  let st = load() || { v: 1, mode: 'game', open: {} };
-  const save = () => { try { localStorage.setItem(LS, JSON.stringify(st)); } catch {} };
+  // Only the mode is stored; open/closed state lives for this visit.
+  let st = { v: 1, mode: (load() || {}).mode === 'study' ? 'study' : 'game', open: {} };
+  const save = () => { try { localStorage.setItem(LS, JSON.stringify({ v: 1, mode: st.mode })); } catch {} };
   const firstVisit = (() => { try { return !localStorage.getItem(INPUTS); } catch { return true; } })();
 
   const idOf = d => d.id || d.dataset.foldId || '';
@@ -43,6 +45,7 @@ window.BBI = window.BBI || {};
   };
   const folds = () => [...document.querySelectorAll('.sd-main details.sd-step, .sd-main details.sd-sec')];
   const apply = () => folds().forEach(d => { const id = idOf(d); d.open = id in st.open ? !!st.open[id] : modeDefault(d); });
+  const closeAll = () => folds().forEach(d => { d.open = false; });
 
   const paintMode = () => {
     document.querySelectorAll('[data-fold-mode]').forEach(b => {
@@ -51,8 +54,8 @@ window.BBI = window.BBI || {};
     });
     const n = document.getElementById('sdModeNote');
     if (n) n.textContent = st.mode === 'study'
-      ? 'Study opens every section: the evidence, the reference and the tools.'
-      : 'Game day opens the answers and tools. Evidence and reference stay one click away.';
+      ? 'Everything starts closed. Study opens every section: the evidence, the reference and the tools.'
+      : 'Everything starts closed. Game day opens the answers and tools; Study opens everything.';
   };
   const setMode = mode => {
     st = { v: 1, mode, open: {} }; save(); apply(); paintMode();
@@ -111,7 +114,8 @@ window.BBI = window.BBI || {};
   // Summary lines: renderers hand over the answer for a fold.
   const ans = (key, html) => document.querySelectorAll(`[data-ans="${key}"]`).forEach(el => { if (el.innerHTML !== html) el.innerHTML = html; });
 
-  const init = () => { apply(); paintMode(); bind(); };
+  // Every fold starts shut; a deep link (#dials, #step4 …) opens its own target via showdown.js.
+  const init = () => { closeAll(); paintMode(); bind(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 

@@ -904,7 +904,7 @@ window.BBI = window.BBI || {};
   const renderCheat = d => {
     const c = data.captain_by_spread_x_total, e = data.captain_by_environment, rw = data.roof_weather_winners;
     const rowLabel = { le3: 'Spread ≤3', '3.5_6.5': '3.5–6.5', ge7: '≥7' };
-    const heat = (v, max) => { const lvl = v <= 0 ? 0 : Math.min(5, Math.max(1, Math.ceil(v / max * 5))); return `<span class="sd-heat" data-level="${lvl}"><b>${v}</b></span>`; };
+    const heat = (v, max) => { const lvl = v <= 0 ? 0 : Math.min(5, Math.max(1, Math.ceil(v / max * 5))); return `<span class="sd-heat" data-level="${lvl}"><b>${v}%</b></span>`; };
     // one intensity scale per table so cells compare across the whole grid
     const maxPos = Math.max(...Object.values(c).flatMap(r => Object.values(r).flatMap(v => POS.map(k => v[k]))));
     const cell = (r, col) => { const v = c[r][col]; const on = r === d.cell.row && col === d.cell.col;
@@ -1012,7 +1012,7 @@ window.BBI = window.BBI || {};
       const open = FOLDS() ? FOLDS().isOpen('recipe-' + k, counts[k] > 0) : true;
       return `<details class="card sd-recipe" data-script="${k}" data-fold-id="recipe-${k}"${open ? ' open' : ''}>
         <summary class="sd-recipe-head">
-          <span class="sd-script-badge">${k}</span>
+          <span class="sd-script-badge sd-script-badge-lbl" aria-label="Script ${k}"><small>Script</small>${k}</span>
           <div class="sd-recipe-title"><div class="sd-recipe-name">${esc(a.name)}</div><div class="sd-recipe-trig">fires: ${esc(a.trigger)}</div></div>
           <div class="sd-recipe-count">${FX.num('rc.' + k, counts[k], 0)}<small>of ${state.entries} lineup${state.entries === 1 ? '' : 's'}</small></div>
           <span class="sd-fold-chev" aria-hidden="true"></span>

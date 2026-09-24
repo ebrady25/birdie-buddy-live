@@ -1475,7 +1475,9 @@ details.sd-sec > summary .sd-fold-chev { width: 24px; height: 24px; }
 .sd-sec-body > .card::before { display: none; }
 .sd-sec-body > .card + .card { border-top: 1px solid var(--border-soft); padding-top: var(--space-4); border-radius: 0; }
 .sd-sec-body > .card:first-child > .card-title:first-child,
-.sd-sec-body > .card:first-child > :first-child > .card-title:first-child { display: none; }
+.sd-sec-body > .card:first-child > :first-child > .card-title:first-child,
+.sd-sec-body > .sd-dials-note + .card > .card-title:first-child { display: none; }
+.sd-sec-body > .sd-dials-note + .card { border-top: 0; padding-top: 0; }
 .sd-sec-body > .sd-routine .sd-routine-head { justify-content: flex-end; }
 
 /* recipe cards fold on their own header */
@@ -1483,6 +1485,9 @@ details.sd-sec > summary .sd-fold-chev { width: 24px; height: 24px; }
 details.sd-recipe { display: block; }
 details.sd-recipe > summary.sd-recipe-head { grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; }
 details.sd-recipe > summary .sd-fold-chev { width: 24px; height: 24px; }
+.sd-script-badge-lbl { width: 50px; height: 46px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; line-height: 1; font-size: var(--fs-xl); }
+.sd-script-badge-lbl small { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; }
+.sd-dials-note { margin: 0; font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.5; max-width: 70ch; }
 .sd-recipe-body { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-4); }
 /* shut recipes line up as full-width rows after the open ones; a lone open recipe takes the full width */
 .sd-recipes > details.sd-recipe:not([open]) { grid-column: 1 / -1; order: 2; padding-block: var(--space-3); }
