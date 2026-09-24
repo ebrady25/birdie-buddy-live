@@ -4,26 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <base href="/" />
-  <title>Showdown Playbook — BirdieBuddy</title>
+  <title>Showdown Playbook · BirdieBuddy</title>
 <!-- bb-favicon-og -->
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BirdieBuddy">
-<meta property="og:title" content="Showdown Playbook — BirdieBuddy NFL">
-<meta property="og:description" content="Set the game — spread, total, roof, contest — and get the codex's answer: this is the game you're in, this is who wins it, this is how the lineup is built. Every number is a winner rate with an n.">
+<meta property="og:title" content="Showdown Playbook · BirdieBuddy NFL">
+<meta property="og:description" content="Set the game (spread, total, roof, contest) and get the codex's answer: the game you're in, who wins it, and how the lineup is built. Built from 120 DraftKings showdown winners and 2,761 games.">
 <meta property="og:image" content="https://birdiebuddy.io/assets/img/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://birdiebuddy.io/assets/img/og-image.png">
-<meta name="description" content="NFL DraftKings Showdown playbook and Lineup Lab: script distribution, what winners looked like, captain shortlist, allocation, recipes, and a live lineup scorer running the same rules engine — from 120 showdown winners and 2,761 games.">
+<meta name="description" content="NFL DraftKings Showdown playbook and Lineup Lab: script distribution, what winners looked like, captain shortlist, allocation, recipes, and a live lineup scorer running the same rules engine, built from 120 showdown winners and 2,761 games.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.1" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.1" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.2" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.2" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
   </style>
@@ -41,7 +41,7 @@
     <header class="page-head sd-hero">
       <div class="eyebrow">DraftKings Showdown · the codex as a control center</div>
       <h1>Showdown Playbook</h1>
-      <p>Set the game, read what it does, build to the distribution — then <strong>score your lineup against the same engine we play with</strong>. Every number on this page is a winner rate with an n, not an opinion.</p>
+      <p>Set the game, read what it does, build to the distribution, then <strong>score your lineup against the same engine we play with</strong>.</p>
       <div class="sd-console" id="sdConsole"></div>
       <div class="page-head-meta sd-provenance">
         <span><strong>120</strong> DK showdown winners 2018–25</span>
@@ -104,7 +104,7 @@
             <span class="sd-ans sd-step-ans" data-ans="step1"></span>
           </summary>
           <div class="sd-step-body">
-            <p class="sd-step-intro">Pick this week's game or dial in any line. Everything below recomputes live as you move a slider. <span class="sd-gate-tag">free</span></p>
+            <p class="sd-step-intro">Pick this week's game or dial in any line. Everything below recomputes live as you move a slider.</p>
           <div class="card sd-panel sd-set-presets fx-reveal">
             <div class="sd-field">
               <div class="sd-field-label"><span>This week</span><span class="sd-val" id="sdPresetVal"></span></div>
@@ -182,7 +182,7 @@
             <span class="sd-ans sd-step-ans" data-ans="step2"></span>
           </summary>
           <div class="sd-step-body">
-            <p class="sd-step-intro">What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite. <span class="sd-gate-tag">free</span></p>
+            <p class="sd-step-intro">What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite.</p>
             <details class="sd-sec" id="read" data-tier="answer">
               <summary><span class="sd-sec-title">The game · one line</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="read"></span></summary>
               <div class="sd-sec-body">
@@ -386,15 +386,15 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.6.1"></script>
-  <script src="assets/js/track.js?v=0.6.1"></script>
+  <script src="assets/js/nfl.js?v=0.6.2"></script>
+  <script src="assets/js/track.js?v=0.6.2"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
-  <script src="assets/js/showdown_fx.js?v=0.6.1"></script>
-  <script src="assets/js/showdown_engine.js?v=0.6.1"></script>
-  <script src="assets/js/showdown_folds.js?v=0.6.1"></script>
-  <script src="assets/js/showdown.js?v=0.6.1"></script>
-  <script src="assets/js/showdown_build.js?v=0.6.1"></script>
-  <script src="assets/js/showdown_lab.js?v=0.6.1"></script>
-  <script src="assets/js/showdown_review.js?v=0.6.1"></script>
+  <script src="assets/js/showdown_fx.js?v=0.6.2"></script>
+  <script src="assets/js/showdown_engine.js?v=0.6.2"></script>
+  <script src="assets/js/showdown_folds.js?v=0.6.2"></script>
+  <script src="assets/js/showdown.js?v=0.6.2"></script>
+  <script src="assets/js/showdown_build.js?v=0.6.2"></script>
+  <script src="assets/js/showdown_lab.js?v=0.6.2"></script>
+  <script src="assets/js/showdown_review.js?v=0.6.2"></script>
 </body>
 </html>

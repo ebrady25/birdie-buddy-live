@@ -1515,3 +1515,8 @@ details.sd-recipe > summary .sd-fold-chev { width: 24px; height: 24px; }
   details.sd-step, details.sd-sec { border: 0; background: none; }
   .sd-modebar, .sd-fold-chev, .sd-sec-btn, .sd-tier { display: none !important; }
 }
+
+/* v0.6.2: the hero line runs the full width; room between the provenance line and the step dock */
+.sd-hero > p { max-width: none; }
+.sd-hero { margin-bottom: var(--space-8); }
+@media (max-width: 767px) { .sd-hero { margin-bottom: var(--space-6); } }
