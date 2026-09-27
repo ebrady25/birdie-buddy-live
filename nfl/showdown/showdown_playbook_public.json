@@ -8786,23 +8786,23 @@
     ]
    },
    "calibration_2026": {
-    "slates": 14,
+    "slates": 20,
     "note": "share of 2026 DK pool players (FLEX salary >= $1,000) whose salary class equals their true salary rank class; thresholds were fit on the 2026 pools weighted by BB-model ownership",
     "QB": {
-     "players": 92,
-     "match_pct": 91.3
+     "players": 134,
+     "match_pct": 91.8
     },
     "RB": {
-     "players": 84,
-     "match_pct": 97.6
+     "players": 120,
+     "match_pct": 97.5
     },
     "WR": {
-     "players": 134,
-     "match_pct": 87.3
+     "players": 195,
+     "match_pct": 86.7
     },
     "TE": {
-     "players": 66,
-     "match_pct": 97.0
+     "players": 93,
+     "match_pct": 94.6
     }
    },
    "primetime_player_slots_by_role": {
