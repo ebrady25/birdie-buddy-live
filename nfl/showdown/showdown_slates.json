@@ -1,58 +1,20 @@
 {
   "week": "2026 Week 3",
-  "generated_at": "2026-09-27T16:54:44-04:00",
+  "generated_at": "2026-09-28T19:05:08-04:00",
   "sources": {
     "players": "DraftKings public lobby + draftables API",
-    "lines": "nflverse games.csv (downloaded 2026-09-27)",
+    "lines": "nflverse games.csv (downloaded 2026-09-28)",
     "weather": "Open-Meteo (free, no key) for open-air venues",
     "own": "BirdieBuddy model v1 (trained on DK standings) — rough; never Stokastic"
   },
   "slates": [
     {
-      "id": "w3_lar_den",
-      "label": "LAR @ DEN · SNF",
-      "fav": "LAR",
-      "dog": "DEN",
-      "spread": 2.5,
-      "total": 44.0,
-      "env": "wind_10_14",
-      "players": {
-        "fav": {
-          "QB": "Stafford",
-          "RB": "Williams",
-          "WR1": "Adams",
-          "TE1": "Parkinson",
-          "K": "Mevis",
-          "DST": "Rams"
-        },
-        "dog": {
-          "QB": "Nix",
-          "RB": "Dobbins",
-          "WR1": "Waddle",
-          "TE1": "Engram",
-          "K": "Lutz",
-          "DST": "Broncos"
-        }
-      },
-      "week": "2026 W3",
-      "kickoff": "2026-09-27T20:20:00",
-      "roof": "outdoors",
-      "wind": 10.2,
-      "temp": 69,
-      "line_source": "lines_override.csv",
-      "roof_source": "nflverse",
-      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
-      "dk_draft_group": 153789,
-      "players_source": "DraftKings draftables API · draft group 153789",
-      "tier": "primetime"
-    },
-    {
       "id": "w3_phi_chi",
       "label": "PHI @ CHI · MNF",
       "fav": "PHI",
       "dog": "CHI",
-      "spread": 4.5,
-      "total": 41.5,
+      "spread": 3.5,
+      "total": 42.0,
       "env": "outdoor_mild",
       "players": {
         "fav": {
@@ -75,9 +37,9 @@
       "week": "2026 W3",
       "kickoff": "2026-09-28T20:15:00",
       "roof": "outdoors",
-      "wind": 4.0,
-      "temp": 60,
-      "line_source": "nflverse",
+      "wind": 5.4,
+      "temp": 61,
+      "line_source": "lines_override.csv",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
       "dk_draft_group": 153790,
