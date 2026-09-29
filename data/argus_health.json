@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-09-29T16:39:02Z",
-  "phase_checked": "phase15",
-  "next_phase": "phase15_aeolus_zeus",
+  "timestamp": "2026-09-29T18:15:50Z",
+  "phase_checked": "preview",
+  "next_phase": "phase2_preview",
   "status": "red",
   "checks": {
     "current_event": {
@@ -22,6 +22,7 @@
     "prior_outputs": {
       "status": "pass",
       "checked": [
+        "themis.json (0.0h)",
         "bbi_rankings.json (0.0h)"
       ]
     }
