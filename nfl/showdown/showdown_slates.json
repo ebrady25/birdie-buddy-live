@@ -1,49 +1,678 @@
 {
-  "week": "2026 Week 3",
-  "generated_at": "2026-09-28T19:05:08-04:00",
+  "week": "2026 Week 4",
+  "generated_at": "2026-10-01T14:58:52-04:00",
   "sources": {
     "players": "DraftKings public lobby + draftables API",
-    "lines": "nflverse games.csv (downloaded 2026-09-28)",
+    "lines": "nflverse games.csv (downloaded 2026-10-01)",
     "weather": "Open-Meteo (free, no key) for open-air venues",
     "own": "BirdieBuddy model v1 (trained on DK standings) — rough; never Stokastic"
   },
   "slates": [
     {
-      "id": "w3_phi_chi",
-      "label": "PHI @ CHI · MNF",
-      "fav": "PHI",
-      "dog": "CHI",
+      "id": "w4_pit_cle",
+      "label": "PIT @ CLE · TNF",
+      "fav": "PIT",
+      "dog": "CLE",
+      "spread": 2.5,
+      "total": 38.5,
+      "env": "wind_10_14",
+      "players": {
+        "fav": {
+          "QB": "Rodgers",
+          "RB": "Warren",
+          "WR1": "Metcalf",
+          "TE1": "Freiermuth",
+          "K": "Boswell",
+          "DST": "Steelers"
+        },
+        "dog": {
+          "QB": "Watson",
+          "RB": "Judkins",
+          "WR1": "Boston",
+          "TE1": "Fannin",
+          "K": "Szmyt",
+          "DST": "Browns"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-01T20:15:00",
+      "roof": "outdoors",
+      "wind": 10.9,
+      "temp": 76,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154084,
+      "players_source": "DraftKings draftables API · draft group 154084",
+      "tier": "primetime"
+    },
+    {
+      "id": "w4_ind_was",
+      "label": "IND @ WAS · Sun early",
+      "fav": "IND",
+      "dog": "WAS",
       "spread": 3.5,
-      "total": 42.0,
+      "total": 47.5,
       "env": "outdoor_mild",
       "players": {
         "fav": {
-          "QB": "Hurts",
-          "RB": "Barkley",
-          "WR1": "Smith",
-          "TE1": "Ertz",
-          "K": "Elliott",
-          "DST": "Eagles"
+          "QB": "Jones",
+          "RB": "Taylor",
+          "WR1": "Downs",
+          "TE1": "Warren",
+          "K": "Shrader",
+          "DST": "Colts"
         },
         "dog": {
+          "QB": "Daniels",
+          "RB": "White",
+          "WR1": "Diggs",
+          "TE1": "Okonkwo",
+          "K": "Stevens",
+          "DST": "Commanders"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T09:30:00",
+      "roof": "outdoors",
+      "wind": 0,
+      "temp": null,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "none (no stadium coordinates / outside forecast range)",
+      "dk_draft_group": 154085,
+      "players_source": "DraftKings draftables API · draft group 154085",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_ari_nyg",
+      "label": "ARI @ NYG · Sun 1pm",
+      "fav": "ARI",
+      "dog": "NYG",
+      "spread": 2.5,
+      "total": 44.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Brissett",
+          "RB": "Love",
+          "WR1": "Wilson",
+          "TE1": "McBride",
+          "K": "Ryland",
+          "DST": "Cardinals"
+        },
+        "dog": {
+          "QB": "Winston",
+          "RB": "Skattebo",
+          "WR1": "Nabers",
+          "TE1": "Likely",
+          "K": "Zvada",
+          "DST": "Giants"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 8.3,
+      "temp": 66,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154090,
+      "players_source": "DraftKings draftables API · draft group 154090",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_ten_bal",
+      "label": "TEN @ BAL · Sun 1pm",
+      "fav": "BAL",
+      "dog": "TEN",
+      "spread": 11.5,
+      "total": 42.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "L. Jackson",
+          "RB": "Henry",
+          "WR1": "Flowers",
+          "TE1": "Andrews",
+          "K": "Loop",
+          "DST": "Ravens"
+        },
+        "dog": {
+          "QB": "C. Ward",
+          "RB": "Pollard",
+          "WR1": "Tate",
+          "TE1": "Helm",
+          "K": "Slye",
+          "DST": "Titans"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 6.8,
+      "temp": 62,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154087,
+      "players_source": "DraftKings draftables API · draft group 154087",
+      "tier": "sunday",
+      "attack": {
+        "on": true,
+        "reasons": [
+          "BAL -11.5: a 10+ favorite blows it out 48% of the time (n = 343 games)"
+        ]
+      }
+    },
+    {
+      "id": "w4_ne_buf",
+      "label": "NE @ BUF · Sun 1pm",
+      "fav": "BUF",
+      "dog": "NE",
+      "spread": 6.5,
+      "total": 48.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "J. Allen",
+          "RB": "Cook",
+          "WR1": "Moore",
+          "TE1": "Kincaid",
+          "K": "Bass",
+          "DST": "Bills"
+        },
+        "dog": {
+          "QB": "Maye",
+          "RB": "Henderson",
+          "WR1": "Doubs",
+          "TE1": "Henry",
+          "K": "Borregales",
+          "DST": "Patriots"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 6.7,
+      "temp": 69,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154091,
+      "players_source": "DraftKings draftables API · draft group 154091",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_nyj_chi",
+      "label": "NYJ @ CHI · Sun 1pm",
+      "fav": "CHI",
+      "dog": "NYJ",
+      "spread": 3.5,
+      "total": 43.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
           "QB": "Keenum",
           "RB": "Swift",
           "WR1": "Burden",
           "TE1": "Loveland",
           "K": "Santos",
           "DST": "Bears"
+        },
+        "dog": {
+          "QB": "Smith",
+          "RB": "Allen",
+          "WR1": "Wilson",
+          "TE1": "Sadiq",
+          "K": "Grupe",
+          "DST": "Jets"
         }
       },
-      "week": "2026 W3",
-      "kickoff": "2026-09-28T20:15:00",
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
       "roof": "outdoors",
-      "wind": 5.4,
-      "temp": 61,
-      "line_source": "lines_override.csv",
+      "wind": 5.0,
+      "temp": 71,
+      "line_source": "nflverse",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
-      "dk_draft_group": 153790,
-      "players_source": "DraftKings draftables API · draft group 153790",
+      "dk_draft_group": 154088,
+      "players_source": "DraftKings draftables API · draft group 154088",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_jax_cin",
+      "label": "JAX @ CIN · Sun 1pm",
+      "fav": "CIN",
+      "dog": "JAX",
+      "spread": 2.5,
+      "total": 51.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Burrow",
+          "RB": "Brown",
+          "WR1": "Chase",
+          "TE1": "Gesicki",
+          "K": "McPherson",
+          "DST": "Bengals"
+        },
+        "dog": {
+          "QB": "Lawrence",
+          "RB": "Tuten",
+          "WR1": "Washington",
+          "TE1": "Strange",
+          "K": "Little",
+          "DST": "Jaguars"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 3.9,
+      "temp": 72,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154089,
+      "players_source": "DraftKings draftables API · draft group 154089",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_dal_hou",
+      "label": "DAL @ HOU · Sun 1pm",
+      "fav": "HOU",
+      "dog": "DAL",
+      "spread": 3.0,
+      "total": 48.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Stroud",
+          "RB": "Montgomery",
+          "WR1": "Collins",
+          "TE1": "Schultz",
+          "K": "Fairbairn",
+          "DST": "Texans"
+        },
+        "dog": {
+          "QB": "Prescott",
+          "RB": "Williams",
+          "WR1": "Lamb",
+          "TE1": "Ferguson",
+          "K": "Aubrey",
+          "DST": "Cowboys"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 9.2,
+      "temp": 80,
+      "line_source": "nflverse",
+      "roof_source": "DraftKings (retractable roof, nflverse undecided)",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154086,
+      "players_source": "DraftKings draftables API · draft group 154086",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_gb_tb",
+      "label": "GB @ TB · Sun 1pm",
+      "fav": "GB",
+      "dog": "TB",
+      "spread": 3.5,
+      "total": 38.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Love",
+          "RB": "Lloyd",
+          "WR1": "Watson",
+          "TE1": "Kraft",
+          "K": "Krieg",
+          "DST": "Packers"
+        },
+        "dog": {
+          "QB": "Daniels",
+          "RB": "Irving",
+          "WR1": "Egbuka",
+          "TE1": "Otton",
+          "K": "McLaughlin",
+          "DST": "Buccaneers"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 9.5,
+      "temp": 91,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154092,
+      "players_source": "DraftKings draftables API · draft group 154092",
+      "tier": "sunday",
+      "attack": {
+        "on": true,
+        "reasons": [
+          "total 38.5: grind — 45% of these games finish at 37 or less (n = 484)"
+        ]
+      }
+    },
+    {
+      "id": "w4_lar_phi",
+      "label": "LAR @ PHI · Sun 1pm",
+      "fav": "LAR",
+      "dog": "PHI",
+      "spread": 3.0,
+      "total": 43.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Stafford",
+          "RB": "Williams",
+          "WR1": "Nacua",
+          "TE1": "Higbee",
+          "K": "Mevis",
+          "DST": "Rams"
+        },
+        "dog": {
+          "QB": "Hurts",
+          "RB": "Barkley",
+          "WR1": "D. Smith",
+          "TE1": "Ertz",
+          "K": "Elliott",
+          "DST": "Eagles"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T13:00:00",
+      "roof": "outdoors",
+      "wind": 6.4,
+      "temp": 64,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154093,
+      "players_source": "DraftKings draftables API · draft group 154093",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_mia_min",
+      "label": "MIA @ MIN · Sun 4pm",
+      "fav": "MIN",
+      "dog": "MIA",
+      "spread": 10.5,
+      "total": 38.5,
+      "env": "dome",
+      "players": {
+        "fav": {
+          "QB": "Murray",
+          "RB": "A. Jones",
+          "WR1": "Jefferson",
+          "TE1": "Hockenson",
+          "K": "Reichard",
+          "DST": "Vikings"
+        },
+        "dog": {
+          "QB": "Willis",
+          "RB": "Gordon",
+          "WR1": "M. Washington",
+          "TE1": "Dulcich",
+          "K": "Patterson",
+          "DST": "Dolphins"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T16:05:00",
+      "roof": "dome",
+      "wind": 0,
+      "temp": null,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "none (dome)",
+      "dk_draft_group": 154094,
+      "players_source": "DraftKings draftables API · draft group 154094",
+      "tier": "sunday",
+      "attack": {
+        "on": true,
+        "reasons": [
+          "MIN -10.5: a 10+ favorite blows it out 48% of the time (n = 343 games)",
+          "total 38.5: grind — 45% of these games finish at 37 or less (n = 484)"
+        ]
+      }
+    },
+    {
+      "id": "w4_den_sf",
+      "label": "DEN @ SF · Sun 4pm",
+      "fav": "SF",
+      "dog": "DEN",
+      "spread": 3.0,
+      "total": 47.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Purdy",
+          "RB": "McCaffrey",
+          "WR1": "Evans",
+          "TE1": "Kittle",
+          "K": "Pineiro",
+          "DST": "49ers"
+        },
+        "dog": {
+          "QB": "Nix",
+          "RB": "Harvey",
+          "WR1": "Waddle",
+          "TE1": "Engram",
+          "K": "Lutz",
+          "DST": "Broncos"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T16:25:00",
+      "roof": "outdoors",
+      "wind": 5.7,
+      "temp": 89,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154095,
+      "players_source": "DraftKings draftables API · draft group 154095",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_kc_lv",
+      "label": "KC @ LV · Sun 4pm",
+      "fav": "KC",
+      "dog": "LV",
+      "spread": 4.5,
+      "total": 47.5,
+      "env": "dome",
+      "players": {
+        "fav": {
+          "QB": "Mahomes",
+          "RB": "Walker",
+          "WR1": "Rice",
+          "TE1": "Kelce",
+          "K": "Butker",
+          "DST": "Chiefs"
+        },
+        "dog": {
+          "QB": "Cousins",
+          "RB": "Jeanty",
+          "WR1": "Tucker",
+          "TE1": "Bowers",
+          "K": "Matsuzawa",
+          "DST": "Raiders"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T16:25:00",
+      "roof": "dome",
+      "wind": 0,
+      "temp": null,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "none (dome)",
+      "dk_draft_group": 154097,
+      "players_source": "DraftKings draftables API · draft group 154097",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_lac_sea",
+      "label": "LAC @ SEA · Sun 4pm",
+      "fav": "SEA",
+      "dog": "LAC",
+      "spread": 7.0,
+      "total": 42.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Darnold",
+          "RB": "Price",
+          "WR1": "Smith-Njigba",
+          "TE1": "Barner",
+          "K": "Myers",
+          "DST": "Seahawks"
+        },
+        "dog": {
+          "QB": "J. Herbert",
+          "RB": "Hampton",
+          "WR1": "McConkey",
+          "TE1": "Gadsden",
+          "K": "Dicker",
+          "DST": "Chargers"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T16:25:00",
+      "roof": "outdoors",
+      "wind": 6.7,
+      "temp": 72,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154096,
+      "players_source": "DraftKings draftables API · draft group 154096",
+      "tier": "sunday",
+      "attack": {
+        "on": false,
+        "reasons": []
+      }
+    },
+    {
+      "id": "w4_det_car",
+      "label": "DET @ CAR · SNF",
+      "fav": "DET",
+      "dog": "CAR",
+      "spread": 3.5,
+      "total": 51.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Goff",
+          "RB": "Gibbs",
+          "WR1": "St. Brown",
+          "TE1": "LaPorta",
+          "K": "Bates",
+          "DST": "Lions"
+        },
+        "dog": {
+          "QB": "Young",
+          "RB": "Hubbard",
+          "WR1": "McMillan",
+          "TE1": "Waller",
+          "K": "Fitzgerald",
+          "DST": "Panthers"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-04T20:20:00",
+      "roof": "outdoors",
+      "wind": 2.6,
+      "temp": 63,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 154098,
+      "players_source": "DraftKings draftables API · draft group 154098",
+      "tier": "primetime"
+    },
+    {
+      "id": "w4_atl_no",
+      "label": "ATL @ NO · MNF",
+      "fav": "NO",
+      "dog": "ATL",
+      "spread": 2.5,
+      "total": 47.5,
+      "env": "dome",
+      "players": {
+        "fav": {
+          "QB": "Shough",
+          "RB": "Kamara",
+          "WR1": "Olave",
+          "TE1": "Johnson",
+          "K": "Smyth",
+          "DST": "Saints"
+        },
+        "dog": {
+          "QB": "Penix",
+          "RB": "B. Robinson",
+          "WR1": "London",
+          "TE1": "Pitts",
+          "K": "Folk",
+          "DST": "Falcons"
+        }
+      },
+      "week": "2026 W4",
+      "kickoff": "2026-10-05T20:15:00",
+      "roof": "dome",
+      "wind": 0,
+      "temp": null,
+      "line_source": "nflverse",
+      "roof_source": "nflverse",
+      "weather_source": "none (dome)",
+      "dk_draft_group": 154099,
+      "players_source": "DraftKings draftables API · draft group 154099",
       "tier": "primetime"
     },
     {
