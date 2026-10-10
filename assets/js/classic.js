@@ -156,7 +156,7 @@ window.BBI = window.BBI || {};
     const chk = !res ? 'paste a lineup' : !res.roster.ok ? 'incomplete' : res.hard.some(h => h.status === 'fail') ? `${res.hard.filter(h => h.status === 'fail').length} hard fail` : `hard ✓ · ${res.soft.filter(s => s.status === 'flag').length} flags`;
     $id('clDock').innerHTML = `
       <div class="cl-dock-inner">
-        ${[['step1', '1', 'Slate'], ['step2', '2', 'Games'], ['step3', '3', 'Rules'], ['step4', '4', 'Check']].map(([id, n, l]) => `<a href="nfl/classic/#${id}" data-jump="${id}" class="cl-dock-step"><b>${n}</b>${l}</a>`).join('')}
+        ${[...($id('step0') ? [['step0', '★', 'Book']] : []), ['step1', '1', 'Slate'], ['step2', '2', 'Games'], ['step3', '3', 'Rules'], ['step4', '4', 'Check']].map(([id, n, l]) => `<a href="nfl/classic/#${id}" data-jump="${id}" class="cl-dock-step"><b>${n}</b>${l}</a>`).join('')}
         <span class="cl-dock-read"><span>${games.length} games</span>${top ? `<span>top stack <b class="gold">${esc(top.team)}</b></span>` : ''}<span class="${res && res.roster.ok && !res.hard.some(h => h.status === 'fail') ? 'gold' : ''}">${esc(chk)}</span></span>
       </div>`;
   };

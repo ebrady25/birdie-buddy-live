@@ -1,0 +1,1613 @@
+{
+ "season": 2026,
+ "week": 5,
+ "slate": "DraftKings Classic \u00b7 Sunday main",
+ "updated": "2026-10-10T09:34-04:00",
+ "note": {
+  "headline": "Week 5: ten lineups built around the chalk game, not inside it",
+  "lede": "DET @ ARI (DET \u22125.5, 54.5) is the slate's top total by eight points, and the field knows it: five of the six most popular players on the slate (Gibbs, McBride, Michael Wilson, Amon-Ra, Brissett) play in it, and about three in ten field lineups carry three or more players from that game. If it shoots out, those lineups crowd the top of the standings, so ignoring it is a losing bet. Playing it the way everyone else does just makes you a duplicate. These ten take a different route into ARI/DET: Goff stacks (not Brissett), the low-owned side of each offense as the bring-back, and the chalk pieces used one at a time as a second-game pair. The rest of the set stacks the 45+ totals the field is skipping (LV\u2013NE, CHI\u2013GB, SF\u2013SEA).",
+  "concepts": [
+   {
+    "k": "Stack the QB",
+    "stat": "QB + 2 pass-catchers: 28.5% of the field \u2192 33.5% of top-1% lineups; QB + 2 WR + TE: 1.5% \u2192 7.4% of top-3",
+    "body": "When a QB throws for 300 yards and three touchdowns, the points land on his receivers too. You collect them twice. Every lineup here pairs the QB with at least two of his own pass-catchers. A naked QB is what the field builds, and it under-performs in winning lineups."
+   },
+   {
+    "k": "Bring it back",
+    "stat": "Any bring-back 43% \u2192 51% of top-1%; an RB bring-back 10.5% \u2192 22.2% of top-3",
+    "body": "A big game needs both teams scoring. One player from the QB's opponent turns the stack into a bet on the game going over, not on one team. The opponent's running back is the bring-back the field skips: he scores when his team is chasing points or salting the game away."
+   },
+   {
+    "k": "Play a second game",
+    "stat": "\u22651 opposing pair outside the QB game: 49.5% of the field \u2192 66.7% of top-3",
+    "body": "The field scatters its other six players across six or seven games. Winners cluster: two players on opposite sides of a second game (RB vs WR is the best version), and never two teammates outside the QB stack, since they split one offense's points."
+   },
+   {
+    "k": "Ownership is the edge",
+    "stat": "Milly winners: ~113% total ownership, 4\u20135 players under 10%, ~2 over 20% (169 winners)",
+    "body": "You don't win a big field by fading every popular player. You win it by owning the one or two chalk pieces that actually hit, and by being different everywhere else. Each player below carries an ownership tier. Every lineup keeps chalk to two pieces at most, and we estimate each one is unique in a 160,000-entry field."
+   }
+  ],
+  "method": "Ranked by BirdieBuddy's copula sim: 20,000 simulated slates on nflverse role correlations, projections blended with sportsbook player props. Each lineup is scored against a 20,000-lineup field model calibrated to projected ownership. A lineup's top-1% rate is how often it beat 99% of that field; an average field lineup does it 1% of the time. Lineups were cross-checked in a second, independent field sim, and all ten finished in its top 15%. Ownership is shown as a tier only."
+ },
+ "games": [
+  {
+   "away": "DET",
+   "home": "ARI",
+   "fav": "DET",
+   "spread": 5.5,
+   "total": 54.5,
+   "implied": {
+    "ARI": 24.5,
+    "DET": 30.0
+   },
+   "kickoff": "2026-10-11T20:25:00Z",
+   "key": "ARI\u2013DET"
+  },
+  {
+   "away": "CHI",
+   "home": "GB",
+   "fav": "CHI",
+   "spread": 1.5,
+   "total": 45.5,
+   "implied": {
+    "GB": 22.0,
+    "CHI": 23.5
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "CHI\u2013GB"
+  },
+  {
+   "away": "CIN",
+   "home": "MIA",
+   "fav": "CIN",
+   "spread": 7.0,
+   "total": 43.5,
+   "implied": {
+    "MIA": 18.25,
+    "CIN": 25.25
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "CIN\u2013MIA"
+  },
+  {
+   "away": "CLE",
+   "home": "NYJ",
+   "fav": "NYJ",
+   "spread": 2.25,
+   "total": 39.5,
+   "implied": {
+    "NYJ": 20.88,
+    "CLE": 18.62
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "CLE\u2013NYJ"
+  },
+  {
+   "away": "DEN",
+   "home": "LAC",
+   "fav": "DEN",
+   "spread": 3.5,
+   "total": 42.0,
+   "implied": {
+    "LAC": 19.25,
+    "DEN": 22.75
+   },
+   "kickoff": "2026-10-11T20:05:00Z",
+   "key": "DEN\u2013LAC"
+  },
+  {
+   "away": "HOU",
+   "home": "TEN",
+   "fav": "HOU",
+   "spread": 7.0,
+   "total": 38.0,
+   "implied": {
+    "TEN": 15.5,
+    "HOU": 22.5
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "HOU\u2013TEN"
+  },
+  {
+   "away": "IND",
+   "home": "PIT",
+   "fav": "PIT",
+   "spread": 2.5,
+   "total": 43.5,
+   "implied": {
+    "PIT": 23.0,
+    "IND": 20.5
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "IND\u2013PIT"
+  },
+  {
+   "away": "LV",
+   "home": "NE",
+   "fav": "NE",
+   "spread": 3.5,
+   "total": 45.0,
+   "implied": {
+    "NE": 24.25,
+    "LV": 20.75
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "LV\u2013NE"
+  },
+  {
+   "away": "MIN",
+   "home": "NO",
+   "fav": "MIN",
+   "spread": 2.5,
+   "total": 41.5,
+   "implied": {
+    "NO": 19.5,
+    "MIN": 22.0
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "MIN\u2013NO"
+  },
+  {
+   "away": "NYG",
+   "home": "WAS",
+   "fav": "WAS",
+   "spread": 3.5,
+   "total": 41.5,
+   "implied": {
+    "WAS": 22.5,
+    "NYG": 19.0
+   },
+   "kickoff": "2026-10-11T17:00:00Z",
+   "key": "NYG\u2013WAS"
+  },
+  {
+   "away": "SF",
+   "home": "SEA",
+   "fav": "SEA",
+   "spread": 3.0,
+   "total": 46.0,
+   "implied": {
+    "SEA": 24.5,
+    "SF": 21.5
+   },
+   "kickoff": "2026-10-11T20:25:00Z",
+   "key": "SEA\u2013SF"
+  }
+ ],
+ "set": {
+  "n": 10,
+  "p_top1": 19.5,
+  "p_top01": 3.1,
+  "p_top5": 55.5,
+  "scenarios": [
+   {
+    "name": "busts",
+    "p_top1": 21.9
+   },
+   {
+    "name": "middle",
+    "p_top1": 19.2
+   },
+   {
+    "name": "booms",
+    "p_top1": 18.2
+   }
+  ],
+  "watch_game": "ARI\u2013DET",
+  "watch_exposure": {
+   "0": 2,
+   "1": 4,
+   "2": 1,
+   "3+": 3
+  }
+ },
+ "method": {
+  "sims": 20000,
+  "field": "ownership-calibrated field model, 20,000 lineups",
+  "top1_line": 188.5,
+  "top01_line": 207.3
+ },
+ "lineups": [
+  {
+   "rank": 1,
+   "book_no": 3,
+   "tier": "Large-field GPP",
+   "qb": "Justin Herbert",
+   "team": "LAC",
+   "opp": "DEN",
+   "title": "Herbert's cheap pass game buys three RBs",
+   "story": "LAC is down Quentin Johnston and Brenen Thompson, and McConkey missed practice all week, so the targets narrow to Tre' Harris and Oronde Gadsden. Herbert plus those two cost $12,800, which pays for Gibbs, Taylor and Jones together. Sutton brings it back if Denver has to answer. Taylor vs Metcalf is the second game, and Jones pairs with his own Vikings defense for the MIN control script. LAC +3.5 in a 42 total is the one QB game here under 45; the sim rated this stack the best in our pool.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Justin Herbert",
+     "pos": "QB",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 5100,
+     "role": "QB",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Jonathan Taylor",
+     "pos": "RB",
+     "team": "IND",
+     "opp": "PIT",
+     "salary": 7800,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Aaron Jones Sr.",
+     "pos": "RB",
+     "team": "MIN",
+     "opp": "NO",
+     "salary": 6500,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "DK Metcalf",
+     "pos": "WR",
+     "team": "PIT",
+     "opp": "IND",
+     "salary": 5400,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Courtland Sutton",
+     "pos": "WR",
+     "team": "DEN",
+     "opp": "LAC",
+     "salary": 4600,
+     "role": "Bring-back",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 4100,
+     "role": "Stack",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Oronde Gadsden II",
+     "pos": "TE",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 3600,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Jahmyr Gibbs",
+     "pos": "RB",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 9800,
+     "role": "One-off",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Vikings",
+     "pos": "DST",
+     "team": "MIN",
+     "opp": "NO",
+     "salary": 3100,
+     "role": "DST",
+     "own": "mid",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Tre' Harris",
+     "Oronde Gadsden II"
+    ],
+    "bring_back": [
+     "Courtland Sutton (WR)"
+    ],
+    "second_game": [
+     "IND\u2013PIT"
+    ],
+    "games": 4,
+    "watch_game_players": 1,
+    "chalk": 1,
+    "low": 2,
+    "qb_game": "DEN\u2013LAC"
+   },
+   "sim": {
+    "top1": 2.98,
+    "top01": 0.43,
+    "top5": 10.1,
+    "dupes": "~0"
+   },
+   "swaps": []
+  },
+  {
+   "rank": 2,
+   "book_no": 5,
+   "tier": "Large-field GPP",
+   "qb": "Drake Maye",
+   "team": "NE",
+   "opp": "LV",
+   "title": "Maye + Doubs + Henry, Bowers back",
+   "story": "NE is a 3.5-point home favorite with 24.5 implied, and Maye is coming off a 26-point week. With three LV receivers out, Bowers is the Raiders' passing game, which makes him the natural bring-back if this turns into a back-and-forth. Swift is the one chalk piece. Allen vs Concepcion in CLE\u2013NYJ is the second game nobody stacks, and JSN is the ceiling WR.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Drake Maye",
+     "pos": "QB",
+     "team": "NE",
+     "opp": "LV",
+     "salary": 6300,
+     "role": "QB",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "D'Andre Swift",
+     "pos": "RB",
+     "team": "CHI",
+     "opp": "GB",
+     "salary": 6200,
+     "role": "One-off",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Braelon Allen",
+     "pos": "RB",
+     "team": "NYJ",
+     "opp": "CLE",
+     "salary": 5400,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Jaxon Smith-Njigba",
+     "pos": "WR",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 8800,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Romeo Doubs",
+     "pos": "WR",
+     "team": "NE",
+     "opp": "LV",
+     "salary": 5000,
+     "role": "Stack",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "KC Concepcion",
+     "pos": "WR",
+     "team": "CLE",
+     "opp": "NYJ",
+     "salary": 4200,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Brock Bowers",
+     "pos": "TE",
+     "team": "LV",
+     "opp": "NE",
+     "salary": 7000,
+     "role": "Bring-back",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Hunter Henry",
+     "pos": "TE",
+     "team": "NE",
+     "opp": "LV",
+     "salary": 3700,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Broncos",
+     "pos": "DST",
+     "team": "DEN",
+     "opp": "LAC",
+     "salary": 3200,
+     "role": "DST",
+     "own": "low",
+     "status": ""
+    }
+   ],
+   "salary": 49800,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Romeo Doubs",
+     "Hunter Henry"
+    ],
+    "bring_back": [
+     "Brock Bowers (TE)"
+    ],
+    "second_game": [
+     "CLE\u2013NYJ"
+    ],
+    "games": 4,
+    "watch_game_players": 0,
+    "chalk": 1,
+    "low": 1,
+    "qb_game": "LV\u2013NE"
+   },
+   "sim": {
+    "top1": 2.73,
+    "top01": 0.41,
+    "top5": 10.2,
+    "dupes": "~0"
+   },
+   "swaps": []
+  },
+  {
+   "rank": 3,
+   "book_no": 8,
+   "tier": "Large-field GPP",
+   "qb": "Jordan Love",
+   "team": "GB",
+   "opp": "CHI",
+   "title": "Love's two WRs, with chalk Swift as the bring-back",
+   "story": "Swift is the most popular player on the slate, but here he's correlated instead of a one-off. If Green Bay scores, Chicago keeps feeding its only healthy back against a defense that allows the third-most RB points. An RB bring-back is the single biggest over-index in winning lineups. Watson and Golden carry the GB side. Chase is questionable (concussion protocol); if he sits, the swap is Amon-Ra.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Jordan Love",
+     "pos": "QB",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 5700,
+     "role": "QB",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "D'Andre Swift",
+     "pos": "RB",
+     "team": "CHI",
+     "opp": "GB",
+     "salary": 6200,
+     "role": "Bring-back",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Braelon Allen",
+     "pos": "RB",
+     "team": "NYJ",
+     "opp": "CLE",
+     "salary": 5400,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Ja'Marr Chase",
+     "pos": "WR",
+     "team": "CIN",
+     "opp": "MIA",
+     "salary": 8100,
+     "role": "One-off",
+     "own": "popular",
+     "status": "Q"
+    },
+    {
+     "slot": "WR",
+     "name": "Christian Watson",
+     "pos": "WR",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 6400,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Matthew Golden",
+     "pos": "WR",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 5700,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Harold Fannin Jr.",
+     "pos": "TE",
+     "team": "CLE",
+     "opp": "NYJ",
+     "salary": 4400,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Sam LaPorta",
+     "pos": "TE",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 4900,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Broncos",
+     "pos": "DST",
+     "team": "DEN",
+     "opp": "LAC",
+     "salary": 3200,
+     "role": "DST",
+     "own": "low",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Christian Watson",
+     "Matthew Golden"
+    ],
+    "bring_back": [
+     "D'Andre Swift (RB)"
+    ],
+    "second_game": [
+     "CLE\u2013NYJ"
+    ],
+    "games": 4,
+    "watch_game_players": 1,
+    "chalk": 1,
+    "low": 2,
+    "qb_game": "CHI\u2013GB"
+   },
+   "sim": {
+    "top1": 2.15,
+    "top01": 0.35,
+    "top5": 7.8,
+    "dupes": "~0"
+   },
+   "swaps": [
+    {
+     "out": "Ja'Marr Chase",
+     "swap_in": "Amon-Ra St. Brown"
+    }
+   ]
+  },
+  {
+   "rank": 4,
+   "book_no": 14,
+   "tier": "Small-field GPP",
+   "qb": "Jordan Love",
+   "team": "GB",
+   "opp": "CHI",
+   "title": "Same GB stack, MIN\u2013NO dome game as the second",
+   "story": "Love + Watson + Kraft with Swift brought back, but this time the second game is Jefferson vs Olave indoors in New Orleans, where NO throws from behind. It's the same thesis as #8 with a different secondary, so the two don't share a bust.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Jordan Love",
+     "pos": "QB",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 5700,
+     "role": "QB",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "D'Andre Swift",
+     "pos": "RB",
+     "team": "CHI",
+     "opp": "GB",
+     "salary": 6200,
+     "role": "Bring-back",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Braelon Allen",
+     "pos": "RB",
+     "team": "NYJ",
+     "opp": "CLE",
+     "salary": 5400,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Chris Olave",
+     "pos": "WR",
+     "team": "NO",
+     "opp": "MIN",
+     "salary": 7700,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Justin Jefferson",
+     "pos": "WR",
+     "team": "MIN",
+     "opp": "NO",
+     "salary": 7300,
+     "role": "2nd game",
+     "own": "popular",
+     "status": "Q"
+    },
+    {
+     "slot": "WR",
+     "name": "Christian Watson",
+     "pos": "WR",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 6400,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Tucker Kraft",
+     "pos": "TE",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 4700,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 4100,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Raiders",
+     "pos": "DST",
+     "team": "LV",
+     "opp": "NE",
+     "salary": 2500,
+     "role": "DST",
+     "own": "mid",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Christian Watson",
+     "Tucker Kraft"
+    ],
+    "bring_back": [
+     "D'Andre Swift (RB)"
+    ],
+    "second_game": [
+     "MIN\u2013NO"
+    ],
+    "games": 4,
+    "watch_game_players": 0,
+    "chalk": 1,
+    "low": 1,
+    "qb_game": "CHI\u2013GB"
+   },
+   "sim": {
+    "top1": 2.29,
+    "top01": 0.3,
+    "top5": 8.5,
+    "dupes": "~0"
+   },
+   "swaps": []
+  },
+  {
+   "rank": 5,
+   "book_no": 18,
+   "tier": "Small-field GPP",
+   "qb": "Tyson Bagent",
+   "team": "CHI",
+   "opp": "GB",
+   "title": "The cheap side of CHI\u2013GB",
+   "story": "The field plays Chicago through Swift; this plays it through the passing game. Bagent at $4,700 with Burden and Odunze, Golden back for Green Bay. The savings buy Gibbs, so this lineup still eats if DET\u2013ARI goes off. SEA\u2013SF is the second game (Emanuel Wilson vs Kittle).",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Tyson Bagent",
+     "pos": "QB",
+     "team": "CHI",
+     "opp": "GB",
+     "salary": 4700,
+     "role": "QB",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Jahmyr Gibbs",
+     "pos": "RB",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 9800,
+     "role": "One-off",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Emanuel Wilson",
+     "pos": "RB",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 5300,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Garrett Wilson",
+     "pos": "WR",
+     "team": "NYJ",
+     "opp": "CLE",
+     "salary": 6600,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Matthew Golden",
+     "pos": "WR",
+     "team": "GB",
+     "opp": "CHI",
+     "salary": 5700,
+     "role": "Bring-back",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Luther Burden III",
+     "pos": "WR",
+     "team": "CHI",
+     "opp": "GB",
+     "salary": 4900,
+     "role": "Stack",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "George Kittle",
+     "pos": "TE",
+     "team": "SF",
+     "opp": "SEA",
+     "salary": 5200,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Rome Odunze",
+     "pos": "WR",
+     "team": "CHI",
+     "opp": "GB",
+     "salary": 4700,
+     "role": "Stack",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Vikings",
+     "pos": "DST",
+     "team": "MIN",
+     "opp": "NO",
+     "salary": 3100,
+     "role": "DST",
+     "own": "mid",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Luther Burden III",
+     "Rome Odunze"
+    ],
+    "bring_back": [
+     "Matthew Golden (WR)"
+    ],
+    "second_game": [
+     "SEA\u2013SF"
+    ],
+    "games": 4,
+    "watch_game_players": 1,
+    "chalk": 1,
+    "low": 1,
+    "qb_game": "CHI\u2013GB"
+   },
+   "sim": {
+    "top1": 1.84,
+    "top01": 0.28,
+    "top5": 7.1,
+    "dupes": "~0"
+   },
+   "swaps": []
+  },
+  {
+   "rank": 6,
+   "book_no": 1,
+   "tier": "Large-field GPP",
+   "qb": "Jared Goff",
+   "team": "DET",
+   "opp": "ARI",
+   "title": "Goff stack, ARI's RB as the bring-back",
+   "story": "Our way into the chalk game: Goff + Amon-Ra + LaPorta (13 targets last week), with Jeremiyah Love, ARI's low-owned back, as the bring-back instead of McBride or Michael Wilson. No Gibbs, because if Goff throws the touchdowns, Gibbs doesn't score them. NYG\u2013WAS is the second game; McLaurin is questionable (hamstring), and if he sits the swap is Metcalf.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Jared Goff",
+     "pos": "QB",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 6600,
+     "role": "QB",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Jonathan Taylor",
+     "pos": "RB",
+     "team": "IND",
+     "opp": "PIT",
+     "salary": 7800,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Jeremiyah Love",
+     "pos": "RB",
+     "team": "ARI",
+     "opp": "DET",
+     "salary": 6100,
+     "role": "Bring-back",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Amon-Ra St. Brown",
+     "pos": "WR",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 7900,
+     "role": "Stack",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Terry McLaurin",
+     "pos": "WR",
+     "team": "WAS",
+     "opp": "NYG",
+     "salary": 5300,
+     "role": "2nd game",
+     "own": "low",
+     "status": "Q"
+    },
+    {
+     "slot": "WR",
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 4100,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Isaiah Likely",
+     "pos": "TE",
+     "team": "NYG",
+     "opp": "WAS",
+     "salary": 4300,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Sam LaPorta",
+     "pos": "TE",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 4900,
+     "role": "Stack",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Saints",
+     "pos": "DST",
+     "team": "NO",
+     "opp": "MIN",
+     "salary": 2600,
+     "role": "DST",
+     "own": "mid",
+     "status": ""
+    }
+   ],
+   "salary": 49600,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Amon-Ra St. Brown",
+     "Sam LaPorta"
+    ],
+    "bring_back": [
+     "Jeremiyah Love (RB)"
+    ],
+    "second_game": [
+     "NYG\u2013WAS"
+    ],
+    "games": 4,
+    "watch_game_players": 4,
+    "chalk": 1,
+    "low": 2,
+    "qb_game": "ARI\u2013DET"
+   },
+   "sim": {
+    "top1": 1.97,
+    "top01": 0.29,
+    "top5": 8.2,
+    "dupes": "~0"
+   },
+   "swaps": [
+    {
+     "out": "Terry McLaurin",
+     "swap_in": "DK Metcalf"
+    }
+   ]
+  },
+  {
+   "rank": 7,
+   "book_no": 22,
+   "tier": "Satellite / cash",
+   "qb": "Brock Purdy",
+   "team": "SF",
+   "opp": "SEA",
+   "title": "Purdy + Evans + Kittle, and ARI/DET as the second game",
+   "story": "SF at SEA is the next-best total (46). Purdy stacks Evans and Kittle, and SEA's 24-touch back Emanuel Wilson brings it back. The second game is DET\u2013ARI itself, Michael Wilson vs LaPorta, so the chalk game pays this lineup too if it shoots out, without paying for Brissett.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Brock Purdy",
+     "pos": "QB",
+     "team": "SF",
+     "opp": "SEA",
+     "salary": 6500,
+     "role": "QB",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Aaron Jones Sr.",
+     "pos": "RB",
+     "team": "MIN",
+     "opp": "NO",
+     "salary": 6500,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Emanuel Wilson",
+     "pos": "RB",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 5300,
+     "role": "Bring-back",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Mike Evans",
+     "pos": "WR",
+     "team": "SF",
+     "opp": "SEA",
+     "salary": 6500,
+     "role": "Stack",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Michael Wilson",
+     "pos": "WR",
+     "team": "ARI",
+     "opp": "DET",
+     "salary": 6200,
+     "role": "2nd game",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Josh Downs",
+     "pos": "WR",
+     "team": "IND",
+     "opp": "PIT",
+     "salary": 6000,
+     "role": "One-off",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "George Kittle",
+     "pos": "TE",
+     "team": "SF",
+     "opp": "SEA",
+     "salary": 5200,
+     "role": "Stack",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Sam LaPorta",
+     "pos": "TE",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 4900,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Commanders",
+     "pos": "DST",
+     "team": "WAS",
+     "opp": "NYG",
+     "salary": 2900,
+     "role": "DST",
+     "own": "mid",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Mike Evans",
+     "George Kittle"
+    ],
+    "bring_back": [
+     "Emanuel Wilson (RB)"
+    ],
+    "second_game": [
+     "ARI\u2013DET"
+    ],
+    "games": 4,
+    "watch_game_players": 2,
+    "chalk": 1,
+    "low": 3,
+    "qb_game": "SEA\u2013SF"
+   },
+   "sim": {
+    "top1": 1.85,
+    "top01": 0.24,
+    "top5": 6.4,
+    "dupes": "~0"
+   },
+   "swaps": []
+  },
+  {
+   "rank": 8,
+   "book_no": 7,
+   "tier": "Large-field GPP",
+   "qb": "Jared Goff",
+   "team": "DET",
+   "opp": "ARI",
+   "title": "Goff + Jameson Williams + LaPorta, McBride back",
+   "story": "A second way into DET\u2013ARI: Jameson Williams (99% of snaps, low-owned) instead of Amon-Ra, with McBride, the field's favorite TE, as the bring-back, the one chalk piece we keep here. Judkins pairs with his own Browns defense. Chase is questionable; if he sits, the swap is Jefferson.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Jared Goff",
+     "pos": "QB",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 6600,
+     "role": "QB",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Quinshon Judkins",
+     "pos": "RB",
+     "team": "CLE",
+     "opp": "NYJ",
+     "salary": 5700,
+     "role": "One-off",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "RJ Harvey",
+     "pos": "RB",
+     "team": "DEN",
+     "opp": "LAC",
+     "salary": 5200,
+     "role": "2nd game",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Ja'Marr Chase",
+     "pos": "WR",
+     "team": "CIN",
+     "opp": "MIA",
+     "salary": 8100,
+     "role": "One-off",
+     "own": "popular",
+     "status": "Q"
+    },
+    {
+     "slot": "WR",
+     "name": "Jameson Williams",
+     "pos": "WR",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 5900,
+     "role": "Stack",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 4100,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Trey McBride",
+     "pos": "TE",
+     "team": "ARI",
+     "opp": "DET",
+     "salary": 6700,
+     "role": "Bring-back",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Sam LaPorta",
+     "pos": "TE",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 4900,
+     "role": "Stack",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Browns",
+     "pos": "DST",
+     "team": "CLE",
+     "opp": "NYJ",
+     "salary": 2800,
+     "role": "DST",
+     "own": "low",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Jameson Williams",
+     "Sam LaPorta"
+    ],
+    "bring_back": [
+     "Trey McBride (TE)"
+    ],
+    "second_game": [
+     "DEN\u2013LAC"
+    ],
+    "games": 4,
+    "watch_game_players": 4,
+    "chalk": 1,
+    "low": 4,
+    "qb_game": "ARI\u2013DET"
+   },
+   "sim": {
+    "top1": 1.78,
+    "top01": 0.24,
+    "top5": 7.2,
+    "dupes": "~0"
+   },
+   "swaps": [
+    {
+     "out": "Ja'Marr Chase",
+     "swap_in": "Justin Jefferson"
+    }
+   ]
+  },
+  {
+   "rank": 9,
+   "book_no": 2,
+   "tier": "Large-field GPP",
+   "qb": "Sam Darnold",
+   "team": "SEA",
+   "opp": "SF",
+   "title": "Darnold + JSN + Kupp, Kittle back",
+   "story": "SEA is the 3-point home favorite in the 46 total. JSN and Kupp carry the stack with Kittle back the other way. McBride rides as a one-off from the chalk game. NYG\u2013WAS is the second game (Skattebo vs McLaurin, an RB vs WR pair); McLaurin is questionable, and if he sits the swap is Tre' Harris.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Sam Darnold",
+     "pos": "QB",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 5800,
+     "role": "QB",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Cam Skattebo",
+     "pos": "RB",
+     "team": "NYG",
+     "opp": "WAS",
+     "salary": 6000,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Braelon Allen",
+     "pos": "RB",
+     "team": "NYJ",
+     "opp": "CLE",
+     "salary": 5400,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Jaxon Smith-Njigba",
+     "pos": "WR",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 8800,
+     "role": "Stack",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Terry McLaurin",
+     "pos": "WR",
+     "team": "WAS",
+     "opp": "NYG",
+     "salary": 5300,
+     "role": "2nd game",
+     "own": "low",
+     "status": "Q"
+    },
+    {
+     "slot": "WR",
+     "name": "Cooper Kupp",
+     "pos": "WR",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 3800,
+     "role": "Stack",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "Trey McBride",
+     "pos": "TE",
+     "team": "ARI",
+     "opp": "DET",
+     "salary": 6700,
+     "role": "One-off",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "George Kittle",
+     "pos": "TE",
+     "team": "SF",
+     "opp": "SEA",
+     "salary": 5200,
+     "role": "Bring-back",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Patriots",
+     "pos": "DST",
+     "team": "NE",
+     "opp": "LV",
+     "salary": 3000,
+     "role": "DST",
+     "own": "mid",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Jaxon Smith-Njigba",
+     "Cooper Kupp"
+    ],
+    "bring_back": [
+     "George Kittle (TE)"
+    ],
+    "second_game": [
+     "NYG\u2013WAS"
+    ],
+    "games": 4,
+    "watch_game_players": 1,
+    "chalk": 1,
+    "low": 3,
+    "qb_game": "SEA\u2013SF"
+   },
+   "sim": {
+    "top1": 2.12,
+    "top01": 0.35,
+    "top5": 7.3,
+    "dupes": "~0"
+   },
+   "swaps": [
+    {
+     "out": "Terry McLaurin",
+     "swap_in": "Tre' Harris"
+    }
+   ]
+  },
+  {
+   "rank": 10,
+   "book_no": 10,
+   "tier": "Large-field GPP",
+   "qb": "Jared Goff",
+   "team": "DET",
+   "opp": "ARI",
+   "title": "Goff + Amon-Ra + Jameson, Harrison Jr. back",
+   "story": "The third Goff build brings it back with Marvin Harrison Jr.: demoted (65% of snaps), so almost nobody plays him, but still a first-round talent in a 54.5 total. Taylor and Tre' Harris are the one-offs, and Emanuel Wilson vs Kittle is the second game.",
+   "why": [],
+   "players": [
+    {
+     "slot": "QB",
+     "name": "Jared Goff",
+     "pos": "QB",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 6600,
+     "role": "QB",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Jonathan Taylor",
+     "pos": "RB",
+     "team": "IND",
+     "opp": "PIT",
+     "salary": 7800,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "RB",
+     "name": "Emanuel Wilson",
+     "pos": "RB",
+     "team": "SEA",
+     "opp": "SF",
+     "salary": 5300,
+     "role": "2nd game",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Amon-Ra St. Brown",
+     "pos": "WR",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 7900,
+     "role": "Stack",
+     "own": "chalk",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Jameson Williams",
+     "pos": "WR",
+     "team": "DET",
+     "opp": "ARI",
+     "salary": 5900,
+     "role": "Stack",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "WR",
+     "name": "Tre' Harris",
+     "pos": "WR",
+     "team": "LAC",
+     "opp": "DEN",
+     "salary": 4100,
+     "role": "One-off",
+     "own": "popular",
+     "status": ""
+    },
+    {
+     "slot": "TE",
+     "name": "George Kittle",
+     "pos": "TE",
+     "team": "SF",
+     "opp": "SEA",
+     "salary": 5200,
+     "role": "2nd game",
+     "own": "mid",
+     "status": ""
+    },
+    {
+     "slot": "FLEX",
+     "name": "Marvin Harrison Jr.",
+     "pos": "WR",
+     "team": "ARI",
+     "opp": "DET",
+     "salary": 4400,
+     "role": "Bring-back",
+     "own": "low",
+     "status": ""
+    },
+    {
+     "slot": "DST",
+     "name": "Browns",
+     "pos": "DST",
+     "team": "CLE",
+     "opp": "NYJ",
+     "salary": 2800,
+     "role": "DST",
+     "own": "low",
+     "status": ""
+    }
+   ],
+   "salary": 50000,
+   "shape": {
+    "stack": "QB + 2",
+    "stack_players": [
+     "Amon-Ra St. Brown",
+     "Jameson Williams"
+    ],
+    "bring_back": [
+     "Marvin Harrison Jr. (WR)"
+    ],
+    "second_game": [
+     "SEA\u2013SF"
+    ],
+    "games": 4,
+    "watch_game_players": 4,
+    "chalk": 1,
+    "low": 3,
+    "qb_game": "ARI\u2013DET"
+   },
+   "sim": {
+    "top1": 1.81,
+    "top01": 0.22,
+    "top5": 7.4,
+    "dupes": "~0"
+   },
+   "swaps": []
+  }
+ ]
+}

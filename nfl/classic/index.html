@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.3" />
   <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.3" />
   <link rel="stylesheet" href="assets/css/classic.css?v=0.6.3" />
+  <link rel="stylesheet" href="assets/css/classic_book.css?v=0.7.0" />
 </head>
 <body>
   <!-- OPEN PREVIEW (2026-09-22): open to every visitor, free included, while we iterate — no data-gate on this page.
@@ -45,6 +46,17 @@
 
     <div class="sd-layout" id="clPage">
       <div class="sd-main">
+        <!-- ===================== STEP 0 · THIS WEEK'S BOOK ===================== -->
+        <section class="sd-step" id="step0" aria-labelledby="clBookTitle">
+          <div class="sd-step-head">
+            <span class="sd-step-num">This week</span>
+            <h2 id="clBookTitle">This week's book</h2>
+            <span class="sd-gate-tag">open preview</span>
+            <p>Our ten best lineups for Sunday's main slate. Each card shows why it is built the way it is: the QB stack, the bring-back, the second game and the ownership mix. The four ideas in the cards below are what separate winning lineups from the field.</p>
+          </div>
+          <div id="clBook"><div class="card sd-panel"><p class="sd-lede">Loading this week's lineups…</p></div></div>
+        </section>
+
         <!-- ===================== STEP 1 · SET THE SLATE ===================== -->
         <section class="sd-step" id="step1" aria-labelledby="step1h">
           <div class="sd-step-head">
@@ -122,6 +134,7 @@
   <script src="assets/js/showdown_fx.js?v=0.6.3"></script>
   <script src="assets/js/showdown_engine.js?v=0.6.3"></script>
   <script src="assets/js/classic_engine.js?v=0.6.3"></script>
-  <script src="assets/js/classic.js?v=0.6.3"></script>
+  <script src="assets/js/classic.js?v=0.7.0"></script>
+  <script src="assets/js/classic_book.js?v=0.7.0"></script>
 </body>
 </html>
