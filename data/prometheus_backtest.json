@@ -1,28 +1,28 @@
 {
-  "run_at_utc": "2026-10-05T10:15:31Z",
+  "run_at_utc": "2026-10-12T10:33:56Z",
   "reference_season": 2025,
   "seasons_included": [
     2025,
     2026
   ],
   "model_source": "DataGolf pre-tournament baseline. Reference benchmark for shadow-variant promotion decisions.",
-  "n_events_attempted": 84,
-  "n_events_scored": 84,
+  "n_events_attempted": 86,
+  "n_events_scored": 86,
   "aborted_after_429s": false,
   "aggregate": {
-    "n_events": 84,
-    "mean_spearman": 0.3971,
-    "median_spearman": 0.4025,
+    "n_events": 86,
+    "mean_spearman": 0.3935,
+    "median_spearman": 0.3991,
     "mean_brier_win": 0.0122,
-    "median_brier_win": 0.0079,
-    "mean_brier_top_5": 0.0526,
-    "median_brier_top_5": 0.0401,
-    "mean_brier_top_10": 0.0895,
-    "median_brier_top_10": 0.0742,
-    "mean_brier_top_20": 0.1423,
-    "median_brier_top_20": 0.1317,
-    "mean_brier_make_cut": 0.1714,
-    "median_brier_make_cut": 0.216
+    "median_brier_win": 0.008,
+    "mean_brier_top_5": 0.053,
+    "median_brier_top_5": 0.0402,
+    "mean_brier_top_10": 0.0899,
+    "median_brier_top_10": 0.0752,
+    "mean_brier_top_20": 0.1426,
+    "median_brier_top_20": 0.1328,
+    "mean_brier_make_cut": 0.1697,
+    "median_brier_make_cut": 0.2155
   },
   "per_event": [
     {
@@ -19283,6 +19283,448 @@
         }
       },
       "event_name_input": "Biltmore Championship Asheville"
+    },
+    {
+      "event_id": 527,
+      "year": 2026,
+      "event_name": "Baycurrent Classic",
+      "field_size": 72,
+      "made_cut": 72,
+      "spearman_dg_baseline": 0.3151,
+      "calibration": {
+        "win": {
+          "n": 72,
+          "scale_detected": "unit",
+          "brier": 0.0136,
+          "log_loss": 0.0649,
+          "mean_pred": 0.0139,
+          "mean_actual": 0.0139,
+          "naive_brier": 0.0137,
+          "skill_pct": 0.64,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 72,
+              "mean_pred": 0.0139,
+              "actual_rate": 0.0139
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_10": {
+          "n": 72,
+          "scale_detected": "unit",
+          "brier": 0.1278,
+          "log_loss": 0.4212,
+          "mean_pred": 0.1389,
+          "mean_actual": 0.1667,
+          "naive_brier": 0.1389,
+          "skill_pct": 7.97,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 28,
+              "mean_pred": 0.0577,
+              "actual_rate": 0.0357
+            },
+            {
+              "bin": "10-20%",
+              "n": 28,
+              "mean_pred": 0.1398,
+              "actual_rate": 0.1786
+            },
+            {
+              "bin": "20-30%",
+              "n": 10,
+              "mean_pred": 0.2462,
+              "actual_rate": 0.5
+            },
+            {
+              "bin": "30-40%",
+              "n": 5,
+              "mean_pred": 0.3178,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "40-50%",
+              "n": 1,
+              "mean_pred": 0.4184,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_5": {
+          "n": 72,
+          "scale_detected": "unit",
+          "brier": 0.0931,
+          "log_loss": 0.3169,
+          "mean_pred": 0.0694,
+          "mean_actual": 0.1111,
+          "naive_brier": 0.0988,
+          "skill_pct": 5.7,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 56,
+              "mean_pred": 0.0444,
+              "actual_rate": 0.0714
+            },
+            {
+              "bin": "10-20%",
+              "n": 14,
+              "mean_pred": 0.1456,
+              "actual_rate": 0.2143
+            },
+            {
+              "bin": "20-30%",
+              "n": 2,
+              "mean_pred": 0.238,
+              "actual_rate": 0.5
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_20": {
+          "n": 72,
+          "scale_detected": "unit",
+          "brier": 0.179,
+          "log_loss": 0.5369,
+          "mean_pred": 0.2777,
+          "mean_actual": 0.2778,
+          "naive_brier": 0.2006,
+          "skill_pct": 10.76,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 6,
+              "mean_pred": 0.0525,
+              "actual_rate": 0.1667
+            },
+            {
+              "bin": "10-20%",
+              "n": 14,
+              "mean_pred": 0.1453,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "20-30%",
+              "n": 23,
+              "mean_pred": 0.2485,
+              "actual_rate": 0.3043
+            },
+            {
+              "bin": "30-40%",
+              "n": 15,
+              "mean_pred": 0.3397,
+              "actual_rate": 0.2667
+            },
+            {
+              "bin": "40-50%",
+              "n": 8,
+              "mean_pred": 0.4501,
+              "actual_rate": 0.75
+            },
+            {
+              "bin": "50-60%",
+              "n": 5,
+              "mean_pred": 0.522,
+              "actual_rate": 0.2
+            },
+            {
+              "bin": "60-70%",
+              "n": 1,
+              "mean_pred": 0.625,
+              "actual_rate": 1.0
+            },
+            null,
+            null,
+            null
+          ]
+        },
+        "make_cut": {
+          "n": 72,
+          "scale_detected": "unit",
+          "brier": 0.0,
+          "log_loss": 0.001,
+          "mean_pred": 1.0,
+          "mean_actual": 1.0,
+          "naive_brier": 0.0,
+          "skill_pct": 0,
+          "bins": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+              "bin": "90-100%",
+              "n": 72,
+              "mean_pred": 1.0,
+              "actual_rate": 1.0
+            }
+          ]
+        }
+      },
+      "event_name_input": "Baycurrent Classic"
+    },
+    {
+      "event_id": 554,
+      "year": 2026,
+      "event_name": "Bank of Utah Championship",
+      "field_size": 120,
+      "made_cut": 70,
+      "spearman_dg_baseline": 0.1669,
+      "calibration": {
+        "win": {
+          "n": 118,
+          "scale_detected": "unit",
+          "brier": 0.0085,
+          "log_loss": 0.0498,
+          "mean_pred": 0.0084,
+          "mean_actual": 0.0085,
+          "naive_brier": 0.0084,
+          "skill_pct": -1.44,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 118,
+              "mean_pred": 0.0084,
+              "actual_rate": 0.0085
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_10": {
+          "n": 118,
+          "scale_detected": "unit",
+          "brier": 0.0894,
+          "log_loss": 0.3148,
+          "mean_pred": 0.0835,
+          "mean_actual": 0.1017,
+          "naive_brier": 0.0914,
+          "skill_pct": 2.16,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 78,
+              "mean_pred": 0.0443,
+              "actual_rate": 0.0769
+            },
+            {
+              "bin": "10-20%",
+              "n": 34,
+              "mean_pred": 0.1394,
+              "actual_rate": 0.1176
+            },
+            {
+              "bin": "20-30%",
+              "n": 5,
+              "mean_pred": 0.2634,
+              "actual_rate": 0.4
+            },
+            {
+              "bin": "30-40%",
+              "n": 1,
+              "mean_pred": 0.3378,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_5": {
+          "n": 118,
+          "scale_detected": "unit",
+          "brier": 0.0467,
+          "log_loss": 0.1898,
+          "mean_pred": 0.0418,
+          "mean_actual": 0.0508,
+          "naive_brier": 0.0483,
+          "skill_pct": 3.17,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 110,
+              "mean_pred": 0.0338,
+              "actual_rate": 0.0364
+            },
+            {
+              "bin": "10-20%",
+              "n": 7,
+              "mean_pred": 0.1418,
+              "actual_rate": 0.2857
+            },
+            {
+              "bin": "20-30%",
+              "n": 1,
+              "mean_pred": 0.2123,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "top_20": {
+          "n": 118,
+          "scale_detected": "unit",
+          "brier": 0.1328,
+          "log_loss": 0.4198,
+          "mean_pred": 0.1669,
+          "mean_actual": 0.1695,
+          "naive_brier": 0.1408,
+          "skill_pct": 5.65,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 38,
+              "mean_pred": 0.0547,
+              "actual_rate": 0.0789
+            },
+            {
+              "bin": "10-20%",
+              "n": 39,
+              "mean_pred": 0.1467,
+              "actual_rate": 0.1538
+            },
+            {
+              "bin": "20-30%",
+              "n": 28,
+              "mean_pred": 0.2489,
+              "actual_rate": 0.2857
+            },
+            {
+              "bin": "30-40%",
+              "n": 7,
+              "mean_pred": 0.3255,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "40-50%",
+              "n": 5,
+              "mean_pred": 0.427,
+              "actual_rate": 0.6
+            },
+            {
+              "bin": "50-60%",
+              "n": 1,
+              "mean_pred": 0.5102,
+              "actual_rate": 0.0
+            },
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "make_cut": {
+          "n": 118,
+          "scale_detected": "unit",
+          "brier": 0.1976,
+          "log_loss": 0.5811,
+          "mean_pred": 0.5855,
+          "mean_actual": 0.5932,
+          "naive_brier": 0.2413,
+          "skill_pct": 18.13,
+          "bins": [
+            {
+              "bin": "0-10%",
+              "n": 1,
+              "mean_pred": 0.0895,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "10-20%",
+              "n": 5,
+              "mean_pred": 0.1394,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "20-30%",
+              "n": 3,
+              "mean_pred": 0.2299,
+              "actual_rate": 0.3333
+            },
+            {
+              "bin": "30-40%",
+              "n": 5,
+              "mean_pred": 0.3685,
+              "actual_rate": 0.0
+            },
+            {
+              "bin": "40-50%",
+              "n": 10,
+              "mean_pred": 0.4575,
+              "actual_rate": 0.5
+            },
+            {
+              "bin": "50-60%",
+              "n": 33,
+              "mean_pred": 0.5508,
+              "actual_rate": 0.5152
+            },
+            {
+              "bin": "60-70%",
+              "n": 28,
+              "mean_pred": 0.6521,
+              "actual_rate": 0.7857
+            },
+            {
+              "bin": "70-80%",
+              "n": 27,
+              "mean_pred": 0.7339,
+              "actual_rate": 0.7778
+            },
+            {
+              "bin": "80-90%",
+              "n": 6,
+              "mean_pred": 0.8245,
+              "actual_rate": 0.6667
+            },
+            null
+          ]
+        }
+      },
+      "event_name_input": "Bank of Utah Championship"
     }
   ],
   "failed_events": [],
