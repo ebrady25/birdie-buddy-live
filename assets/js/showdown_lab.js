@@ -1457,6 +1457,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
     }
     const html = `${head}
       <p class="sd-lede">This week's DraftKings showdown GPPs for the Lab's slate, set against what 2026 primetime contests paid: the top-1% cut, how often top-1% lineups were duplicated, and the money a top-1% finish brings per $1 entered. <b>Use in Lab</b> sets the Lab's field size (and the Step 1 contest size) to that contest.</p>
+      ${TW && TW.week ? `<div class="sd-caption">Contest list last updated Week ${esc(String(TW.week))}${pulled ? ` (${pulled})` : ''}</div>` : ''}
       ${posted && others.length ? `<div class="sd-caption">Also this week: ${others.join(' · ')}</div>` : ''}
       ${body}
       <div class="sd-caption">contests_this_week.json (public DK lobby + contest payout tables${pulled ? `, ${pulled}` : ''}) · contest_economics.json (2026 primetime archive: ${o ? `${fmtN(o.n_contests)} contests, ${o.n_slates} slates` : 'not loaded'}; n per cell, amber = under 3 contests) · $ per $1 = prizes paid to the top 1% of places ÷ entry fees, the return of a player who finishes top 1% exactly 1% of the time, × the dupe haircut for that field × entry max · a cut in points needs the game: load projections and the sim shows it · not advice to enter any contest</div>`;

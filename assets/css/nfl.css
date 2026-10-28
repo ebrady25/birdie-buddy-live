@@ -46,4 +46,6 @@ body[data-section="nfl"] { --status-h: 0px; }
   .nfl-footer-inner { grid-template-columns: 1fr; gap: var(--space-6); }
   .nfl-cards { grid-template-columns: 1fr; }
   .nfl-hero { padding: var(--space-10) 0 var(--space-6); }
+  /* showdown dock: the steps row kept its children's min-content width (1px past a 375px screen) */
+  .sd-dock-steps { min-width: 0; }
 }

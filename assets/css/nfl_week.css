@@ -1,0 +1,21 @@
+/* =====================================================================
+   BIRDIEBUDDY NFL HUB: "This week" card (#nfl-week, filled by
+   assets/js/nfl_week.js). Loads after nfl.css on nfl/index.html only.
+   ===================================================================== */
+.nfl-week { display: flex; flex-direction: column; gap: var(--space-3); margin: 0 0 var(--space-6); border-color: var(--border-gold-strong); }
+.nfl-week-top { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.nfl-week-stamp { font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--text-muted); }
+.nfl-week-h { font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; color: var(--text-primary); }
+.nfl-week-sub { font-size: var(--fs-md); color: var(--text-body); line-height: 1.5; max-width: 70ch; }
+.nfl-week-btns { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.nfl-week-note { font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.5; }
+
+@media (max-width: 767px) {
+  .nfl-week { padding: var(--space-4); }
+  .nfl-week-h { font-size: var(--fs-xl); }
+  .nfl-week-btns .btn { flex: 1 1 100%; min-height: 44px; }
+  /* answer first on phones: a tighter hero so the card shows on the first screen */
+  .nfl-hero { padding: var(--space-6) 0 var(--space-5); }
+  .nfl-hero h1 { font-size: 2rem; }
+  .nfl-hero p { margin-top: var(--space-3); font-size: var(--fs-md); }
+}

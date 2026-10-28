@@ -174,7 +174,8 @@
 @media (max-width: 767px) {
   .cl-dock-read { display: none; }
   .cl-dock-inner { justify-content: space-between; }
-  .cl-dock-step { padding: 6px 6px; }
+  .cl-dock-step { padding: 6px 4px; gap: 4px; }
+  .cl-dock-inner { gap: 2px; }   /* 5 steps fit 343px (375px phone); were 364px */
   .cl-game { position: relative; grid-template-columns: repeat(6, minmax(0, 1fr)); padding-right: 44px; row-gap: 6px; }
   .cl-game .cl-at { display: none; }
   .cl-game .cl-f-team { grid-column: span 3; }
