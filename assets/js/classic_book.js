@@ -126,6 +126,12 @@ window.BBI = window.BBI || {};
     try {
       const idx = await (await fetch(DIR + 'index.json', { cache: 'no-cache' })).json();
       const b = await (await fetch(DIR + idx.latest, { cache: 'no-cache' })).json();
+      let cur = null; try { cur = await (await fetch('nfl/slate/slate.json', { cache: 'no-cache' })).json(); } catch (e) {}
+      if (cur && cur.week && (b.season < cur.season || (b.season === cur.season && b.week < cur.week))) {
+        const h = $id('clBookTitle'); if (h) h.textContent = `This week's builds · Week ${cur.week}`;
+        host.innerHTML = `<div class="card"><p class="sd-lede">This week's model lineups live on the slate page now, with ownership, stacks and leverage.</p><a class="btn btn-primary" href="nfl/slate/#builds">Open Week ${cur.week} builds →</a><p class="sd-caption">Our last hand-annotated book was Week ${b.week}.</p></div>`;
+        return;
+      }
       render(b);
     } catch (err) {
       host.innerHTML = `<div class="card sd-error"><p class="sd-lede">This week's lineups didn't load (${esc(err.message)}). Refresh to try again.</p></div>`;

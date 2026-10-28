@@ -13,6 +13,9 @@ window.BBI = window.BBI || {};
 
   const NAV = [
     { href: 'nfl/',          key: 'nfl',      label: 'Overview' },
+    { href: 'nfl/slate/',    key: 'slate',    label: 'This week', sub: 'DK main slate in our numbers' },
+    { href: 'nfl/articles/', key: 'articles', label: 'Articles' },
+    { href: 'nfl/results/',  key: 'results',  label: 'Results' },
     { href: 'nfl/showdown/', key: 'showdown', label: 'Showdown', sub: 'DK captain-mode playbook' },
     { href: 'nfl/showdown/#step4', key: 'lab', label: 'Lineup Lab', sub: 'score a lineup with the rules engine' },
     { href: 'nfl/classic/',  key: 'classic',  label: 'Classic', sub: 'DK main-slate playbook' }
@@ -75,7 +78,7 @@ window.BBI = window.BBI || {};
             <a class="footer-link" href="account.html">My account</a>
           </div>
         </div>
-        <div class="footer-credit"><span>© 2026 BirdieBuddy · Built by Ethan Brady</span><span>${note ? note : 'NFL · Private preview'}</span></div>
+        <div class="footer-credit"><span>© 2026 BirdieBuddy · Built by Ethan Brady</span><span>${note ? note : 'NFL'}</span></div>
       </footer>`;
   };
 })();
