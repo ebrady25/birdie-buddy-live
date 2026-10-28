@@ -8,7 +8,7 @@
    "2026-wk2-ind-kc",
    "2026-wk2-nyg-lar"
   ],
-  "exports": "latest Data Hub export per slate (T-1.3h to T-5.2h)",
+  "exports": "latest projections export per slate (T-1.3h to T-5.2h)",
   "source": "codex/ownership/own_tracking.csv",
   "players": {
    "2026-wk2-det-buf": 47,

@@ -43,7 +43,7 @@
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
       "dk_draft_group": 154947,
-      "players_source": "DKSalaries CSV · DKSalaries_SEA_DEN_from_DKEntries17.csv",
+      "players_source": "DKSalaries CSV",
       "tier": "primetime"
     },
     {
