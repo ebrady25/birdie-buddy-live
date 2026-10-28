@@ -37,6 +37,24 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://birdiebuddy.io/nfl/results/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://birdiebuddy.io/nfl/results/2026-w6/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://birdiebuddy.io/nfl/results/2026-w7/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://birdiebuddy.io/nfl/showdown/</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
