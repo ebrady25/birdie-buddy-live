@@ -179,7 +179,7 @@
     if (!base) return extra; if (!extra) return base;
     const P = new Map(base.P);
     // Field by field: a numeric field only comes from a file that actually has it,
-    // so DK salaries dropped after a Data Hub export can't zero out ownership.
+    // so DK salaries dropped after a projections export can't zero out ownership.
     const SRC = { proj: 'proj', own: 'own', opt: 'own', cpt_own: 'cpt_own', cpt_opt: 'cpt_opt' };
     for (const [n, p] of extra.P) {
       const q = P.get(n); if (!q) { P.set(n, p); continue; }

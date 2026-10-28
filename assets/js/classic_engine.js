@@ -4,7 +4,7 @@
    soft flags, driven by rules.json["classic"] as copied into the page
    JSON (classic_playbook.json → rules.hard / rules.soft / rules.portfolio).
 
-   Parity contract: given the same Data Hub file, pool file and lines
+   Parity contract: given the same projections file, pool file and lines
    file, `auditText` reproduces classic_engine.py --audit byte for byte
    (tools/classic_parity.py runs both and diffs them). The portfolio
    selection half of classic_engine.py (default mode) is NOT ported —
@@ -70,14 +70,14 @@
     if (!rows.length) throw new Error('empty file');
     const H = rows[0].map(h => h.trim());
     if (H.includes('Player') && H.includes('Salary') && H.includes('Position') && H.includes('Team')) {
-      if (H.includes('CPT Ownership %')) throw new Error('that is a showdown Data Hub export — the classic checker needs the MAIN slate export');
+      if (H.includes('CPT Ownership %')) throw new Error('that is a showdown projections export — the classic checker needs the MAIN slate export');
       return readDataHub(rows);
     }
     const dk = readDraftKings(rows); if (dk && dk.P.size) return dk;
     throw new Error('unrecognised file — expected a DraftKings classic salary CSV (DKSalaries.csv) or a projections main-slate export');
   };
 
-  // DK salaries (ids, opponents) + Data Hub (own / opt / proj), merged by name. Numeric fields only come from a file that has them.
+  // DK salaries (ids, opponents) + projections file (own / opt / proj), merged by name. Numeric fields only come from a file that has them.
   const mergePlayers = (base, extra) => {
     if (!base) return extra; if (!extra) return base;
     const P = new Map(base.P);

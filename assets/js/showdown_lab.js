@@ -329,7 +329,7 @@ window.BBI = window.BBI || {};
     let own = '';
     if (o && o.kind === 'stok') {
       const useC = useCorr() && o.corr;
-      const part = (k, f) => `<span><em>${k}</em>${useC ? '' : '<b>'}Stok ${o1(o.raw[f])}${useC ? '' : '</b>'} · ${o.corr ? `${useC ? '<b>' : ''}corr ${o1(o.corr[f])}${useC ? '</b>' : ''} ${bandT(o.corr[f + 'b'])}` : 'corr —'} · BB ${o.bb ? o1(o.bb[f]) : '—'}</span>`;
+      const part = (k, f) => `<span><em>${k}</em>${useC ? '' : '<b>'}File ${o1(o.raw[f])}${useC ? '' : '</b>'} · ${o.corr ? `${useC ? '<b>' : ''}corr ${o1(o.corr[f])}${useC ? '</b>' : ''} ${bandT(o.corr[f + 'b'])}` : 'corr —'} · BB ${o.bb ? o1(o.bb[f]) : '—'}</span>`;
       own = part('FLEX', 'f') + part('CPT', 'c');
     } else if (o && o.kind === 'bb') {
       own = `<span><em>FLEX</em><b>BB ${o1(o.used.f)}</b> ${bandT(o.used.fb)}</span><span><em>CPT</em><b>BB ${o1(o.used.c)}</b> ${bandT(o.used.cb)}</span><span class="rough">rough</span>`;
@@ -367,7 +367,7 @@ window.BBI = window.BBI || {};
     if (focusKey) { const attr = { row: 'data-lab-add', cpt: 'data-lab-cpt', flex: 'data-lab-flex' }[focusKey[0]]; const el = [...list.querySelectorAll(`[${attr}]`)].find(x => x.getAttribute(attr) === focusKey[1]); if (el) el.focus({ preventScroll: true }); }
     const src = lab.source === 'mine' ? lab.mine.label : `${curPool().label} · ${curPool().week} · ${curPool().source}`;
     const gone = lab.source === 'sample' && curPool() ? curPool().players.length - engine.P.size : 0;
-    $('sdPoolCap').innerHTML = `${ps.length} of ${engine.P.size} players${gone > 0 ? ` (${gone} out / IR hidden)` : ''} · ${esc(src)}${bb ? ` · ownership: <b>BB proj</b> — ${esc(bb.own_source)}, ${esc(bb.own_quality || 'rough')}${bb.own_note ? ` (${esc(bb.own_note)})` : ''}${OC && OC.bands.flex.bb_model ? ' · range = its held-out 80% band' : ''}` : stokOwn() ? ` · ownership: <b>${useCorr() ? 'corrected' : 'raw from your file'}</b> drives the engine · line under each player: FLEX / CPT = Stok (your file) · corr (BirdieBuddy-corrected, 80% band) · BB (our model${lab.mineBB && lab.mineBB.own ? `, ${esc(lab.mineBB.label)}` : ': no sample pool for this game'})` : has.own ? '' : ' · no ownership in this file'}${lev ? ` · <b>Lev</b> = historical role rate − projected ownership (${esc(SD().LEV_BUCKET_LABEL[lev.bucket])} row, n = ${lev.n} primetime winners); greyed = thin match` : ''}`;
+    $('sdPoolCap').innerHTML = `${ps.length} of ${engine.P.size} players${gone > 0 ? ` (${gone} out / IR hidden)` : ''} · ${esc(src)}${bb ? ` · ownership: <b>BB proj</b> — ${esc(bb.own_source)}, ${esc(bb.own_quality || 'rough')}${bb.own_note ? ` (${esc(bb.own_note)})` : ''}${OC && OC.bands.flex.bb_model ? ' · range = its held-out 80% band' : ''}` : stokOwn() ? ` · ownership: <b>${useCorr() ? 'corrected' : 'raw from your file'}</b> drives the engine · line under each player: FLEX / CPT = your file · corr (BirdieBuddy-corrected, 80% band) · BB (our model${lab.mineBB && lab.mineBB.own ? `, ${esc(lab.mineBB.label)}` : ': no sample pool for this game'})` : has.own ? '' : ' · no ownership in this file'}${lev ? ` · <b>Lev</b> = historical role rate − projected ownership (${esc(SD().LEV_BUCKET_LABEL[lev.bucket])} row, n = ${lev.n} primetime winners); greyed = thin match` : ''}`;
   };
 
   /* ---------------- render: lineup + verdict ---------------- */
@@ -1123,7 +1123,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
           <b>Drop files here</b><span>or click to choose · DK salaries · projections export · lineup CSVs (DK upload, DKEntries, sim/generator exports)</span>
           <small>🔒 Read in your browser — nothing is uploaded.</small>
         </div>
-        <div class="sd-files">${pro.files.length ? pro.files.map(f => `<div class="sd-file ${f.kind}"><b>${esc(f.name)}</b><span>${esc(f.desc)}</span></div>`).join('') : '<div class="sd-file empty"><span>No files yet. Tip: DK salaries give you DK ids for uploads; the Data Hub export adds projections, ownership and optimal % so every rule can be checked.</span></div>'}</div>
+        <div class="sd-files">${pro.files.length ? pro.files.map(f => `<div class="sd-file ${f.kind}"><b>${esc(f.name)}</b><span>${esc(f.desc)}</span></div>`).join('') : '<div class="sd-file empty"><span>No files yet. Tip: DK salaries give you DK ids for uploads; a projections export adds projections, ownership and optimal % so every rule can be checked.</span></div>'}</div>
       </div>
       <div class="sd-batch-in">
         <label class="sd-lab-k" for="sdBatchText">Lineups to score <small>paste rows (CPT first) or drop a lineup CSV</small></label>
@@ -1519,7 +1519,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
     if (m && m.players.has.proj) {
       const age = m.at ? now - m.at : null, stale = age != null && age > 12 * 3600e3, late = lock != null && lock > 0 && age != null && age > lock;
       H.proj = { t: `${m.at ? `export ${dur(age)} old` : 'loaded'}${lock != null && lock > 0 ? ` · ${dur(lock)} to lock` : ''}${stale || late ? ' · re-export closer to lock' : ''}`, ok: !(stale || late) };
-    } else H.proj = { t: m ? 'your file has no projections: the Data Hub export has them' : 'drop your projections export in Your slate', ok: null };
+    } else H.proj = { t: m ? 'your file has no projections: a projections export has them' : 'drop your projections export in Your slate', ok: null };
     const top = lev && Object.values(lev.roles).filter(r => !r.thin && !r.split && r.players.length).map(r => [r, Math.max(r.cpt.lev, r.flex.lev)]).sort((a, b) => b[1] - a[1])[0];
     H.lev = lev ? { t: top ? `top seat: ${top[0].label} ${sgn(top[1])}` : 'no leverage seat on this slate', ok: true } : { t: 'needs ownership: a sample slate or your projections file', ok: null };
     const A = lab.auto;
@@ -1555,7 +1555,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
       F.ans('leverage', esc(cap(H.lev.t)));
       const n = (lab.cpt ? 1 : 0) + lab.flex.filter(Boolean).length, pool = lab.source === 'mine' ? 'your slate' : curPool() ? curPool().label : '';
       F.ans('lab', `${n ? `<b>${n} of 6</b> picked` : 'Build a lineup and the engine grades it live, or let <b>Build it for me</b> search the pool'}${pool ? ` · pool ${esc(pool)}` : ''}`);
-      F.ans('files', lab.mine ? `Your slate loaded · ${esc(H.proj.t)}${lab.batch ? ` · ${esc(H.port.t)}` : ''}` : 'No files yet · DK salaries, Data Hub export, lineup CSVs · read in your browser, nothing uploaded');
+      F.ans('files', lab.mine ? `Your slate loaded · ${esc(H.proj.t)}${lab.batch ? ` · ${esc(H.port.t)}` : ''}` : 'No files yet · DK salaries, projections export, lineup CSVs · read in your browser, nothing uploaded');
       const q = whereQuery(), ct = S.data.inputs.contest_types.find(c => c.key === S.state.contest);
       F.ans('where', linkOn() ? `Entering <b>${esc(shortName(lab.link.name))}</b> · ${lab.link.field.toLocaleString('en-US')} field` : `This week's DK showdown GPPs${q ? ` for ${esc(q.label)}` : ''}${ct ? ` · fit: own <b>${esc(ct.own_target)}</b>, dupes <b>≤ ${ct.dupe_cap}</b>` : ''}`);
     } catch (err) { /* a summary line is a hint; never let it break the Lab */ }

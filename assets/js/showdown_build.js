@@ -228,7 +228,7 @@
     const v = rand(), r = Math.sqrt(-2 * Math.log(u)); spare = r * Math.sin(2 * Math.PI * v); return r * Math.cos(2 * Math.PI * v); }; };
   const fnv = str => { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; };
 
-  // The Std Dev column of a Stokastic Data Hub export (the engine reads the rest): Map name → sd. rows = parseCSV output.
+  // The Std Dev column of a projections export (the engine reads the rest): Map name → sd. rows = parseCSV output.
   // In memory only, like every number from the reader's file.
   const readStd = rows => {
     const out = new Map(); if (!rows || !rows.length) return out;
