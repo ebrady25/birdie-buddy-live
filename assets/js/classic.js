@@ -347,9 +347,9 @@ window.BBI = window.BBI || {};
         <div class="card sd-panel cl-lab-in">
           <div class="card-title">Your lineup</div>
           <div class="cl-src-row" id="clSrc"></div>
-          <div class="sd-drop cl-drop" id="clDrop" tabindex="0" role="button" aria-label="Load files: DraftKings classic salary CSV or a Stokastic Data Hub main-slate export">
+          <div class="sd-drop cl-drop" id="clDrop" tabindex="0" role="button" aria-label="Load files: DraftKings classic salary CSV or a projections main-slate export">
             <input type="file" id="clFiles" accept=".csv,.txt" multiple hidden>
-            <b>Drop your DK salary CSV</b><span>DKSalaries.csv for your slate · optional: a Stokastic Data Hub main export to check the chalk and ownership rules</span>
+            <b>Drop your DK salary CSV</b><span>DKSalaries.csv for your slate · optional: a projections main-slate export to check the chalk and ownership rules</span>
             <small>🔒 Read in your browser — nothing is uploaded.</small>
           </div>
           <label class="sd-lab-k" for="clText">Paste 9 players <small>one per line, comma-separated, or a DK upload row</small></label>

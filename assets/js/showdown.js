@@ -1188,7 +1188,7 @@ window.BBI = window.BBI || {};
     return L.join('\n');
   };
   const stokasticText = d => {
-    const L = [`# Stokastic Contest Generator — ${spreadLabel(state.spread, d.preset && d.preset.fav)} · ${num(state.total)} · ${ENV_LABEL[state.env]} · ${state.entries} lineups`];
+    const L = [`# Contest generator — ${spreadLabel(state.spread, d.preset && d.preset.fav)} · ${num(state.total)} · ${ENV_LABEL[state.env]} · ${state.entries} lineups`];
     d.dials.rows.forEach(r => L.push(`${r.k.padEnd(30)} ${r.v}`));
     const counts = largestRemainder(d.alloc, state.entries);
     L.push(`${'Script counts'.padEnd(30)} ${['A', 'B', 'C', 'D'].map(k => `${k}:${counts[k]}`).join(' ')}`);
@@ -1350,7 +1350,7 @@ window.BBI = window.BBI || {};
       <div class="card-title">Export</div>
       <div class="sd-export">
         <button type="button" class="btn btn-primary" data-copy="playbook">Copy playbook</button>
-        <button type="button" class="btn" data-copy="stokastic">Copy Stokastic settings</button>
+        <button type="button" class="btn" data-copy="sim">Copy sim settings</button>
         <button type="button" class="btn" data-share="download">Download play card (PNG)</button>
         <button type="button" class="btn" data-share="copy">Copy play card image</button>
         <button type="button" class="btn btn-ghost" data-print>Print</button>
@@ -1399,7 +1399,7 @@ window.BBI = window.BBI || {};
     ANS('laws', pinned.length ? `Pinned for this game: ${pinned.map(l => `<b>${l.n}</b> ${lawShort(l.law)}`).join(' · ')}` : 'The ten laws from the 120 winners');
     const nh = Object.keys(data.hard_rules).filter(k => !k.startsWith('_')).length, ns = Object.keys(data.soft_penalties).filter(k => !k.startsWith('_')).length;
     ANS('rules', `${nh} hard · ${ns} soft · rules.json ${esc((data.engine && data.engine.rules_version || '').split(' ')[0] || '')} · the Lab runs all of them`);
-    ANS('export', 'Copy the playbook or the Stokastic settings · play card image for Discord');
+    ANS('export', 'Copy the playbook or the sim settings · play card image for Discord');
     ANS('lessons', (data.lessons_2026 || []).map(l => esc(l.slate.split(' (')[0])).join(' · '));
     ANS('step6', 'After the slate: drop DK contest standings · what 2026 taught us');
     ANS('review', 'Drop a DK contest-standings export: the winner graded, the cut ladder, where your entries finished');

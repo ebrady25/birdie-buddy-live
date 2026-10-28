@@ -29,7 +29,7 @@
   /* =================================================================
      1. PLAYER FILES
      ================================================================= */
-  // Stokastic Data Hub MAIN export (classic_engine.py --proj): Player,Salary,Position,Team,Opponent,Projection,Ownership %,Optimal %
+  // Projections MAIN export (classic_engine.py --proj): Player,Salary,Position,Team,Opponent,Projection,Ownership %,Optimal %
   // g(k) = float(r.get(k) or 0): exact header name, missing/empty → 0.
   const readDataHub = rows => {
     const hdr = rows[0], P = new Map();
@@ -74,7 +74,7 @@
       return readDataHub(rows);
     }
     const dk = readDraftKings(rows); if (dk && dk.P.size) return dk;
-    throw new Error('unrecognised file — expected a DraftKings classic salary CSV (DKSalaries.csv) or a Stokastic Data Hub main-slate export');
+    throw new Error('unrecognised file — expected a DraftKings classic salary CSV (DKSalaries.csv) or a projections main-slate export');
   };
 
   // DK salaries (ids, opponents) + Data Hub (own / opt / proj), merged by name. Numeric fields only come from a file that has them.

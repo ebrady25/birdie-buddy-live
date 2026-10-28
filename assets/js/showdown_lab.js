@@ -4,7 +4,7 @@
    parity-tested against rules_engine.py) grades it live: hard rules,
    soft penalties + overlay adjustments, captain-template story fit, the
    script it plays, ownership/dupes when a projections file is loaded.
-   Pro panel: load your own DK salary + Stokastic files, score a whole
+   Pro panel: load your own DK salary + projections files, score a whole
    book, portfolio report, and let the engine pick a book from a pool.
    Files are read in the browser; nothing is uploaded.
    ===================================================================== */
@@ -48,7 +48,7 @@ window.BBI = window.BBI || {};
   const stash = () => { if (lineupKey()) lab.saved[lineupKey()] = { cpt: lab.cpt, flex: lab.flex.slice() }; };
   const unstash = () => { const s = lab.saved[lineupKey()]; lab.cpt = s ? s.cpt : null; lab.flex = s && Array.isArray(s.flex) && s.flex.length === 5 ? s.flex.slice() : [null, null, null, null, null]; };
   // What the Lab remembers: pool id, lineups (player names only), field, sort, the corrected-ownership switch.
-  // Never an ownership / projection number: the reader's Stokastic file stays in memory for this visit only.
+  // Never an ownership / projection number: the reader's projections file stays in memory for this visit only.
   const persistBlob = () => JSON.stringify({ poolId: lab.poolId, saved: lab.saved, field: lab.field, sort: lab.sort, corr: lab.corr });
   // Every localStorage write in the Lab goes through here, to one of three keys: the Lab blob (names + settings),
   // the Step 5 contest link (public DK contest id / field / name) and the routine ticks (step ids per slate).
@@ -84,7 +84,7 @@ window.BBI = window.BBI || {};
     return teams[0];
   };
   /* ---------------- ownership sources ---------------- */
-  // Your slate from a Stokastic Data Hub export → three numbers per player: Stokastic raw · BirdieBuddy-corrected
+  // Your slate from a projections export → three numbers per player: raw from your file · BirdieBuddy-corrected
   // (ownership_correction.json: our role-cell coefficients, applied here in the browser) · our BB model (from the
   // sample pool of the same game, when there is one). With "Use corrected ownership" on (the default) the engine's
   // dupes, cum own and ownership rules run on the corrected number. Sample pools carry the BB model only, shown
@@ -112,7 +112,7 @@ window.BBI = window.BBI || {};
     const s = (SD().slates || []).find(x => [x.fav, x.dog].sort().join() === teams); if (!s) return;
     try { const p = await fetchPool(s.id); lab.mineBB = { id: s.id, label: p.label, own: !!(p.has && p.has.own), own_source: p.own_source || '', map: new Map(p.players.map(x => [normName(x.name), x])) }; } catch {}
   };
-  // 'stok' (Your slate, Stokastic ownership) | 'bb' (sample pool, BB model) | null (no ownership)
+  // 'stok' (Your slate, file ownership) | 'bb' (sample pool, BB model) | null (no ownership)
   const ownKind = () => stokOwn() ? 'stok' : bbOwn() ? 'bb' : null;
   const band = (kind, v, which) => OC ? SD().ownBand(OC, kind, v, which) : null;
   // Per player: the numbers the row shows + the band of the number the engine uses (for the dupes range).
@@ -126,7 +126,7 @@ window.BBI = window.BBI || {};
     const rawV = { f: raw.own, c: raw.cpt_own, fb: band('flex', raw.own, 'raw'), cb: band('cpt', raw.cpt_own, 'raw') };
     return { kind: k, raw: rawV, corr, bb: m ? { f: +m.own || 0, c: +m.cpt_own || 0 } : null, used: useCorr() && corr ? corr : rawV };
   };
-  const ownLabel = () => { const k = ownKind(); return k === 'stok' ? (useCorr() ? 'BirdieBuddy-corrected Stokastic' : 'Stokastic raw') : k === 'bb' ? 'BB model (rough)' : ''; };
+  const ownLabel = () => { const k = ownKind(); return k === 'stok' ? (useCorr() ? 'BirdieBuddy-corrected ownership' : 'raw from your file') : k === 'bb' ? 'BB model (rough)' : ''; };
   // Leverage (role_rates): the active pool's roles vs the historical winners, with the engine's ownership.
   let lev = null;
   const levPlayers = () => {
@@ -261,7 +261,7 @@ window.BBI = window.BBI || {};
           <div class="sd-lab-src"><span class="sd-lab-k">Slate pool</span><div class="sd-srcs">${srcChips || '<span class="sd-num-hint">loading…</span>'}</div></div>
           <div class="sd-lab-opts">
             ${lab.source === 'mine' && teams.length === 2 ? `<label class="sd-lab-opt"><span class="sd-lab-k">Favorite</span><span class="seg">${teams.map(t => `<button type="button" class="${t === fav ? 'active' : ''}" aria-pressed="${t === fav}" data-lab-fav="${esc(t)}">${esc(t)}</button>`).join('')}</span></label>` : ''}
-            ${stok ? `<label class="sd-lab-opt sd-corr-opt"><span class="sd-lab-k">Ownership</span><span class="sd-corr"><input type="checkbox" id="sdLabCorr" ${lab.corr && OC ? 'checked' : ''} ${OC ? '' : 'disabled'}><span>Use corrected ownership<small>${OC ? 'on: the engine grades with BirdieBuddy-corrected Stokastic · off: Stokastic raw' : 'correction file not loaded: the engine uses Stokastic raw'}</small></span></span></label>` : ''}
+            ${stok ? `<label class="sd-lab-opt sd-corr-opt"><span class="sd-lab-k">Ownership</span><span class="sd-corr"><input type="checkbox" id="sdLabCorr" ${lab.corr && OC ? 'checked' : ''} ${OC ? '' : 'disabled'}><span>Use corrected ownership<small>${OC ? 'on: the engine grades with BirdieBuddy-corrected ownership · off: raw from your file' : 'correction file not loaded: the engine uses raw from your file'}</small></span></span></label>` : ''}
             <label class="sd-lab-opt"><span class="sd-lab-k">Field size</span><input class="sd-num" id="sdLabField" type="number" min="100" max="2000000" step="100" value="${fieldSize()}" aria-label="Contest field size" aria-describedby="sdLabFieldLink"><small class="sd-field-link" id="sdLabFieldLink"></small></label>
           </div>
         </div>
@@ -320,7 +320,7 @@ window.BBI = window.BBI || {};
     const n = (v, k) => `<span class="${Math.round(v * 10) > 0 ? 'up' : ''}"><i>${k}</i>${sgn(v)}</span>`;
     return `<span class="sd-p-lev${b.thin || r.split ? ' thin' : ''}" title="${esc(levTip(r, b, p))}">${n(r.flex.lev, 'F')}${n(r.cpt.lev, 'C')}</span>`;
   };
-  // The line under a player: ownership (three numbers on a Stokastic slate; BB model + band on a sample pool) and,
+  // The line under a player: ownership (three numbers on a projections-file slate; BB model + band on a sample pool) and,
   // on phones, his leverage (the Lev column is hidden there).
   const ownLine = p => {
     const o = ownOf(p.name), b = lev && lev.byPlayer.get(p.name), r = b && lev.roles[b.role];
@@ -367,7 +367,7 @@ window.BBI = window.BBI || {};
     if (focusKey) { const attr = { row: 'data-lab-add', cpt: 'data-lab-cpt', flex: 'data-lab-flex' }[focusKey[0]]; const el = [...list.querySelectorAll(`[${attr}]`)].find(x => x.getAttribute(attr) === focusKey[1]); if (el) el.focus({ preventScroll: true }); }
     const src = lab.source === 'mine' ? lab.mine.label : `${curPool().label} · ${curPool().week} · ${curPool().source}`;
     const gone = lab.source === 'sample' && curPool() ? curPool().players.length - engine.P.size : 0;
-    $('sdPoolCap').innerHTML = `${ps.length} of ${engine.P.size} players${gone > 0 ? ` (${gone} out / IR hidden)` : ''} · ${esc(src)}${bb ? ` · ownership: <b>BB proj</b> — ${esc(bb.own_source)}, ${esc(bb.own_quality || 'rough')}${bb.own_note ? ` (${esc(bb.own_note)})` : ''}${OC && OC.bands.flex.bb_model ? ' · range = its held-out 80% band' : ''}` : stokOwn() ? ` · ownership: <b>${useCorr() ? 'corrected' : 'Stokastic raw'}</b> drives the engine · line under each player: FLEX / CPT = Stok (your file) · corr (BirdieBuddy-corrected, 80% band) · BB (our model${lab.mineBB && lab.mineBB.own ? `, ${esc(lab.mineBB.label)}` : ': no sample pool for this game'})` : has.own ? '' : ' · no ownership in this file'}${lev ? ` · <b>Lev</b> = historical role rate − projected ownership (${esc(SD().LEV_BUCKET_LABEL[lev.bucket])} row, n = ${lev.n} primetime winners); greyed = thin match` : ''}`;
+    $('sdPoolCap').innerHTML = `${ps.length} of ${engine.P.size} players${gone > 0 ? ` (${gone} out / IR hidden)` : ''} · ${esc(src)}${bb ? ` · ownership: <b>BB proj</b> — ${esc(bb.own_source)}, ${esc(bb.own_quality || 'rough')}${bb.own_note ? ` (${esc(bb.own_note)})` : ''}${OC && OC.bands.flex.bb_model ? ' · range = its held-out 80% band' : ''}` : stokOwn() ? ` · ownership: <b>${useCorr() ? 'corrected' : 'raw from your file'}</b> drives the engine · line under each player: FLEX / CPT = Stok (your file) · corr (BirdieBuddy-corrected, 80% band) · BB (our model${lab.mineBB && lab.mineBB.own ? `, ${esc(lab.mineBB.label)}` : ': no sample pool for this game'})` : has.own ? '' : ' · no ownership in this file'}${lev ? ` · <b>Lev</b> = historical role rate − projected ownership (${esc(SD().LEV_BUCKET_LABEL[lev.bucket])} row, n = ${lev.n} primetime winners); greyed = thin match` : ''}`;
   };
 
   /* ---------------- render: lineup + verdict ---------------- */
@@ -516,12 +516,12 @@ window.BBI = window.BBI || {};
   };
   const dupeFmt = v => v < 10 ? v.toFixed(1) : Math.round(v).toLocaleString('en-US');
   const ownNote = () => {
-    if (!OC) return 'Ownership here is <b>Stokastic raw</b> from your file (the correction file did not load).';
+    if (!OC) return 'Ownership here is <b>raw from your file</b> from your file (the correction file did not load).';
     const cv = OC.cv || {}, f = cv.flex && cv.flex.nested_loso, c = cv.cpt && cv.cpt.nested_loso, n = (OC.training && OC.training.slates || []).length;
     const fit = f && c ? ` Held-out (nested leave-one-slate-out) error on ${n} slates: CPT ${c.mae_raw} → ${c.mae_corr}, FLEX ${f.mae_raw} → ${f.mae_corr} pts (FLEX is marginal): a first read, with n = ${n} slates.` : '';
     return useCorr()
-      ? `Ownership here is <b>BirdieBuddy-corrected</b>: your Stokastic file with our role correction (v${esc(OC.version)}: small shrunken fixes for kickers, the dog DST and a few chalk cells, FLEX rescaled to 500%, CPT to 100%).${fit} Switch it off above to grade on Stokastic raw.`
-      : `Ownership here is <b>Stokastic raw</b> from your file. Switch on <b>Use corrected ownership</b> above for BirdieBuddy's role correction.${fit}`;
+      ? `Ownership here is <b>BirdieBuddy-corrected</b>: your projections file with our role correction (v${esc(OC.version)}: small shrunken fixes for kickers, the dog DST and a few chalk cells, FLEX rescaled to 500%, CPT to 100%).${fit} Switch it off above to grade on raw from your file.`
+      : `Ownership here is <b>raw from your file</b> from your file. Switch on <b>Use corrected ownership</b> above for BirdieBuddy's role correction.${fit}`;
   };
 
   const STATUS_ICON = { pass: '✓', fail: '✗', pending: '…', unknown: '?', na: '·' };
@@ -567,15 +567,15 @@ window.BBI = window.BBI || {};
             <div><span>DST</span><b>${X.dst_n}</b><small>${X.dst_n ? 'in' : 'none'}</small></div>
             <div><span>Both QBs</span><b>${X.feats.both_qbs ? 'yes' : 'no'}</b><small>dog QB ${X.dog_qb ? 'in' : 'out'}</small></div>
           </div>
-          <span class="sd-lab-k" style="margin-top:10px">Ownership &amp; dupes${bb ? ` <small>BB proj · ${esc(bb.own_quality || 'rough')}</small>` : stokOwn() ? ` <small>${useCorr() ? 'BirdieBuddy-corrected' : 'Stokastic raw'}</small>` : ''}</span>
+          <span class="sd-lab-k" style="margin-top:10px">Ownership &amp; dupes${bb ? ` <small>BB proj · ${esc(bb.own_quality || 'rough')}</small>` : stokOwn() ? ` <small>${useCorr() ? 'BirdieBuddy-corrected' : 'raw from your file'}</small>` : ''}</span>
           ${has.own ? `<div class="sd-facts">
             <div><span>Cum own</span><b>${FX.num('lab.cum', X.cum, 0, { post: '%' })}</b><small>target ${esc(ct ? ct.own_target : '')}${own ? (X.cum >= +own[1] && X.cum <= +own[2] ? ' ✓' : ' ✗') : ''}</small></div>
             <div><span>Est. dupes</span><b>${FX.num('lab.dupes', X.est_dupes, X.est_dupes < 10 ? 1 : 0)}</b><small>gate ≤ ${r.dupes.gate}${r.dupes.ok ? ' ✓' : ' ✗'}${dr ? ` · range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}` : ''}</small></div>
             <div><span>CPT own</span><b>${X.cpt.cpt_own.toFixed(1)}%</b><small>${has.cpt_opt ? `opt ${X.cpt.cpt_opt.toFixed(1)}%` : bb ? 'BB proj' : 'no optimal %'}</small></div>
             <div><span>Field</span><b>${(engine.A.field / 1000).toFixed(engine.A.field < 10000 ? 1 : 0)}k</b><small>dupes = field × Π own × 6</small></div></div>
             ${stokOwn() ? `<div class="sd-own-note">${ownNote()}${dr ? ` Dupes range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}: all six at the low / high end of their 80% ownership band, an outer bound.` : ''} Computed in your browser; nothing from your file is saved or put in a link.</div>` : ''}
-            ${bb ? `<div class="sd-own-note">Ownership here is <b>BB proj</b>: ${esc(bb.own_source)} — rough, good for chalk / mid / under-3% tiers and a dupe warning, not precise CPT ownership.${dr ? ` Dupes range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}: all six at the low / high end of the model's held-out 80% band (${OC ? esc(String(OC.bands.bb_model_note || '').split(':')[0]) : ''}), an outer bound.` : ''} Drop your Stokastic Data Hub export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a> for projections, CPT-optimal and the punt rule.</div>` : ''}`
-          : `<div class="sd-unlock">This pool has public DraftKings fields only. Drop your Stokastic Data Hub export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a> to check ownership, dupes, CPT-optimal and the punt rule.</div>`}
+            ${bb ? `<div class="sd-own-note">Ownership here is <b>BB proj</b>: ${esc(bb.own_source)} — rough, good for chalk / mid / under-3% tiers and a dupe warning, not precise CPT ownership.${dr ? ` Dupes range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}: all six at the low / high end of the model's held-out 80% band (${OC ? esc(String(OC.bands.bb_model_note || '').split(':')[0]) : ''}), an outer bound.` : ''} Drop your projections export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a> for projections, CPT-optimal and the punt rule.</div>` : ''}`
+          : `<div class="sd-unlock">This pool has public DraftKings fields only. Drop your projections export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a> to check ownership, dupes, CPT-optimal and the punt rule.</div>`}
           ${cutBlock(X, n, has)}
         </div>
       </div>
@@ -614,7 +614,7 @@ window.BBI = window.BBI || {};
     const poolName = lab.source === 'mine' && lab.mine ? `your slate · ${lab.mine.label}` : curPool() ? curPool().label : 'the Lab pool';
     const head = `<div class="card-title">Leverage board · <span class="card-title-accent">${esc(poolName)}</span></div>`;
     if (!engine) { host.innerHTML = `${head}<p class="sd-lede">${esc(lab.err || 'Loading the Lab pool…')}</p>`; return; }
-    if (!lev) { host.innerHTML = `${head}<div class="sd-unlock">This pool has no ownership, so there is nothing to set against the winners' role rates. Pick a sample slate in the <a href="nfl/showdown/#step4" data-jump="step4" class="sd-link">Lab</a> (BB model ownership) or drop your Stokastic Data Hub export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a>.</div>`; return; }
+    if (!lev) { host.innerHTML = `${head}<div class="sd-unlock">This pool has no ownership, so there is nothing to set against the winners' role rates. Pick a sample slate in the <a href="nfl/showdown/#step4" data-jump="step4" class="sd-link">Lab</a> (BB model ownership) or drop your projections export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a>.</div>`; return; }
     const C = RR.cohorts[lev.cohort], rows = [];
     for (const r of Object.values(lev.roles)) if (r.players.length) for (const slot of ['cpt', 'flex']) rows.push({ r, slot, x: r[slot] });
     const ranked = rows.filter(o => !o.r.thin && !o.r.split);
@@ -694,7 +694,7 @@ window.BBI = window.BBI || {};
     const f = $('sdLabField');
     f.addEventListener('change', () => { const v = Math.round(+f.value); lab.field = v >= 100 ? v : null; if (lab.link && +lab.link.field !== lab.field) { lab.link = null; saveLink(null); } render(); });
     const cr = $('sdLabCorr');
-    if (cr) cr.addEventListener('change', () => { lab.corr = cr.checked; SD().toast(cr.checked ? '<b>Corrected ownership on</b>: the engine grades with BirdieBuddy-corrected Stokastic' : '<b>Corrected ownership off</b>: the engine grades with Stokastic raw'); render(); save(); });
+    if (cr) cr.addEventListener('change', () => { lab.corr = cr.checked; SD().toast(cr.checked ? '<b>Corrected ownership on</b>: the engine grades with BirdieBuddy-corrected ownership' : '<b>Corrected ownership off</b>: the engine grades with raw from your file'); render(); save(); });
   };
   const switchPool = async id => {
     stash(); lab.source = 'sample'; lab.poolId = id; unstash();
@@ -992,7 +992,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
   // Without projections the sim can't run: say so, and what unlocks it. Codex ranking stays.
   const simNeed = has => {
     if (!SB || !SB.simPrepare) return '';
-    if (!has.proj) return `<p class="sd-sim-need"><b>Top-1% chance</b> needs a projections file: the sim draws every player's points from Projection + Std Dev. Load your Stokastic Data Hub export in <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a>; until then lineups rank by codex fit.</p>`;
+    if (!has.proj) return `<p class="sd-sim-need"><b>Top-1% chance</b> needs a projections file: the sim draws every player's points from Projection + Std Dev. Load your projections export in <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a>; until then lineups rank by codex fit.</p>`;
     if (simDataDone && !RC) return '<p class="sd-sim-need">The top-1% sim is unavailable: the role correlations file did not load. Lineups rank by codex fit.</p>';
     return '';
   };
@@ -1118,9 +1118,9 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
     host.innerHTML = `
       <div class="card-title">Your slate · <span class="card-title-accent">score your own files</span></div>
       <div class="sd-pro-grid">
-        <div class="sd-drop" id="sdDrop" tabindex="0" role="button" aria-label="Load files: DraftKings salary CSV, Stokastic Data Hub export, or a lineup CSV">
+        <div class="sd-drop" id="sdDrop" tabindex="0" role="button" aria-label="Load files: DraftKings salary CSV, projections export, or a lineup CSV">
           <input type="file" id="sdFiles" accept=".csv,.psv,.txt" multiple hidden>
-          <b>Drop files here</b><span>or click to choose · DK salaries · Stokastic Data Hub export · lineup CSVs (DK upload, DKEntries, Stokastic sim/generator)</span>
+          <b>Drop files here</b><span>or click to choose · DK salaries · projections export · lineup CSVs (DK upload, DKEntries, sim/generator exports)</span>
           <small>🔒 Read in your browser — nothing is uploaded.</small>
         </div>
         <div class="sd-files">${pro.files.length ? pro.files.map(f => `<div class="sd-file ${f.kind}"><b>${esc(f.name)}</b><span>${esc(f.desc)}</span></div>`).join('') : '<div class="sd-file empty"><span>No files yet. Tip: DK salaries give you DK ids for uploads; the Data Hub export adds projections, ownership and optimal % so every rule can be checked.</span></div>'}</div>
@@ -1145,7 +1145,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
   };
   const readFiles = async files => {
     let base = lab.mine ? lab.mine.players : null, gotPlayers = false;
-    let sd = lab.mine && lab.mine.sd ? new Map(lab.mine.sd) : new Map();   // Std Dev (Stokastic) for the sim: memory only
+    let sd = lab.mine && lab.mine.sd ? new Map(lab.mine.sd) : new Map();   // Std Dev for the sim: memory only
     let at = lab.mine ? lab.mine.at || null : null;   // when the projections were exported (the routine's "fresh?"): memory only
     for (const f of files) {
       const text = await f.text();
@@ -1168,7 +1168,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
         if (sdf && sdf.size) for (const [k, v] of sdf) sd.set(k, v);
         if (pl.has.proj) { const t = /_(\d{4}-\d{2}-\d{2})_(\d{4})ET/.exec(f.name); at = (t && etMs(`${t[1]}T${t[2].slice(0, 2)}:${t[2].slice(2)}`)) || f.lastModified || null; }
         track('file_load', { type: pl.source === 'stokastic' ? 'stokastic' : 'dk_salaries', card: 'lab', own: !!pl.has.own, proj: !!pl.has.proj });
-        pro.files = pro.files.filter(x => x.name !== f.name).concat({ name: f.name, kind: 'players', desc: `${pl.source === 'stokastic' ? 'Stokastic Data Hub' : 'DraftKings salaries'} · ${pl.P.size} players${pl.ids.size ? ' · DK ids ✓' : ''}${pl.has.own ? ' · ownership ✓' : ''}${pl.has.proj ? ' · projections ✓' : ''}${sdf && sdf.size ? ' · Std Dev ✓' : ''}` });
+        pro.files = pro.files.filter(x => x.name !== f.name).concat({ name: f.name, kind: 'players', desc: `${pl.source === 'stokastic' ? 'Projections export' : 'DraftKings salaries'} · ${pl.P.size} players${pl.ids.size ? ' · DK ids ✓' : ''}${pl.has.own ? ' · ownership ✓' : ''}${pl.has.proj ? ' · projections ✓' : ''}${sdf && sdf.size ? ' · Std Dev ✓' : ''}` });
       } else {
         pro.lineupsText = text; pro.lineupsName = f.name;
         pro.files = pro.files.filter(x => x.name !== f.name).concat({ name: f.name, kind: 'lineups', desc: `${Math.max(0, text.trim().split(/\r?\n/).length - 1)} lineup rows` });
@@ -1519,9 +1519,9 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
     if (m && m.players.has.proj) {
       const age = m.at ? now - m.at : null, stale = age != null && age > 12 * 3600e3, late = lock != null && lock > 0 && age != null && age > lock;
       H.proj = { t: `${m.at ? `export ${dur(age)} old` : 'loaded'}${lock != null && lock > 0 ? ` · ${dur(lock)} to lock` : ''}${stale || late ? ' · re-export closer to lock' : ''}`, ok: !(stale || late) };
-    } else H.proj = { t: m ? 'your file has no projections: the Data Hub export has them' : 'drop your Stokastic Data Hub export in Your slate', ok: null };
+    } else H.proj = { t: m ? 'your file has no projections: the Data Hub export has them' : 'drop your projections export in Your slate', ok: null };
     const top = lev && Object.values(lev.roles).filter(r => !r.thin && !r.split && r.players.length).map(r => [r, Math.max(r.cpt.lev, r.flex.lev)]).sort((a, b) => b[1] - a[1])[0];
-    H.lev = lev ? { t: top ? `top seat: ${top[0].label} ${sgn(top[1])}` : 'no leverage seat on this slate', ok: true } : { t: 'needs ownership: a sample slate or your Stokastic file', ok: null };
+    H.lev = lev ? { t: top ? `top seat: ${top[0].label} ${sgn(top[1])}` : 'no leverage seat on this slate', ok: true } : { t: 'needs ownership: a sample slate or your projections file', ok: null };
     const A = lab.auto;
     H.build = A && A.st && A.status !== 'running' ? { t: `${A.st.legal.toLocaleString('en-US')} legal lineups graded${A.pick && A.pick.chosen ? ` · batch ${A.pick.chosen.length} of ${S.state.entries}` : ''}`, ok: true } : { t: A && A.status === 'running' ? 'searching…' : 'Build it for me in the Lab', ok: null };
     const B = lab.batch;

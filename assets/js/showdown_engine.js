@@ -119,7 +119,7 @@
      ================================================================= */
   const SKILL = new Set(['QB', 'RB', 'WR', 'TE']);
 
-  // Stokastic Data Hub SHOWDOWN export (the engine's --proj file). Mirrors
+  // Projections SHOWDOWN export (the engine's --proj file). Mirrors
   // rules_engine.py: g(k) matches the first header whose stripped lower
   // name equals k; unparseable/missing → 0.0; later duplicate names win.
   const readStokastic = rows => {
@@ -171,7 +171,7 @@
     const H = rows[0].map(h => h.trim().toLowerCase());
     if (H.includes('player') && H.includes('salary') && H.includes('position') && H.includes('team')) return readStokastic(rows);
     const dk = readDraftKings(rows); if (dk && dk.P.size) return dk;
-    throw new Error('unrecognised player file — expected a Stokastic Data Hub showdown export or a DraftKings salary CSV');
+    throw new Error('unrecognised player file — expected a projections showdown export or a DraftKings salary CSV');
   };
 
   // Merge a DK salary pool (ids) with a projections pool (own/opt/proj) by name.
@@ -241,7 +241,7 @@
       return cand.length === 1 ? cand[0] : null;
     };
 
-    // --pool: Stokastic "Name (id)" CSV, generator .psv, DK id upload, DK entries export, pasted names.
+    // --pool: "Name (id)" CSV, generator .psv, DK id upload, DK entries export, pasted names.
     const loadPool = (text, psv = false) => {
       const rd = parseCSV(text, psv ? '|' : ','), rows = [];
       if (!rd.length) return rows;
