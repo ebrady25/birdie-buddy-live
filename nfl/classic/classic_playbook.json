@@ -22,13 +22,13 @@
    },
    {
     "key": "V",
-    "label": "fantasy.vip 2025",
+    "label": "Public 2025 study",
     "text": "Milly field-composition cohorts: field 3.46M → top-1% 34,767 → top-3 54",
     "derived": false
    },
    {
     "key": "E",
-    "label": "ETR / Levitan",
+    "label": "Industry Milly studies",
     "text": "Milly studies 2017–22",
     "derived": false
    }
@@ -51,7 +51,7 @@
  },
  "rules": {
   "source": "rules",
-  "version": "1.4 (2026-09-23) — history re-check: v1.2 single-slate edits reverted, two-K config = never",
+  "version": "1.6 (2026-10-27) — showdown rules re-tuned to the best-users study (both QBs up, kickers down, QB captain up, RB captain down, spend the cap); classic v1.3 (2026-10-27) — best-users re-tune",
   "hard": {
    "qb_min_same_team_catchers": 1,
    "max_secondary_same_team_pairs": 0,
@@ -65,21 +65,30 @@
   "soft": {
    "qb_catchers_default": 2,
    "bring_back_lean": "RB",
-   "secondary_opposing_pair_required": true,
+   "secondary_opposing_pair_required": false,
    "games_represented": [
     4,
     6
    ],
    "flex_default": "RB",
    "qb_salary_max": 6800,
-   "qb_own_max": 15,
+   "qb_own_max": 10,
    "qb_game_total_min": 46,
    "qb_team_dog_max": 6.5,
    "sub5_ceiling_plays": [
-    1,
-    2
+    0,
+    1
    ],
-   "dst_salary_max": 3500
+   "dst_salary_max": 3500,
+   "cum_own_target": [
+    100,
+    160
+   ],
+   "chalk_20pct_players": [
+    2,
+    3
+   ],
+   "_v1.3": "CLASSIC_BIBLE v1.3 (2026-10-27, best-users study, top-1% pool W1/W5-W7): sub-5% plays 1-2→0-1 (3+ = 0.81x, 0 = 1.32x); 2-3 players >=20% owned and lineup own 100-160 (160+ = 0.80x); QB own <10% preferred (1.27x); secondary opposing pair no longer required (0.90x, top users 48% vs field 49%); RB bring-back (1.27x) and FLEX=RB (1.22x, 4/4 weeks) re-confirmed."
   },
   "portfolio": {
    "exposure_max_non_qb": 0.35,
@@ -793,8 +802,8 @@
     "n": 169
    },
    "own_le_max": {
-    "pct": 88,
-    "k": 148,
+    "pct": 68,
+    "k": 115,
     "n": 169
    },
    "own_ge20": {
@@ -918,13 +927,13 @@
     "n": 169
    },
    "qb_own_max": {
-    "pct": 88,
-    "k": 148,
+    "pct": 68,
+    "k": 115,
     "n": 169
    },
    "sub5_ceiling_plays": {
-    "pct": 50,
-    "k": 85,
+    "pct": 38,
+    "k": 64,
     "n": 169
    },
    "dst_salary_max": {
@@ -949,6 +958,505 @@
   "about": "nflverse closing lines for each 2026 Sunday main slate (13:00–16:25 ET kickoffs). Primetime games are not on the DK main slate.",
   "slates": [
    {
+    "id": "2026-w9-main",
+    "label": "Week 9 main",
+    "week": 9,
+    "date": "2026-11-08",
+    "games": [
+     {
+      "away": "DEN",
+      "home": "CAR",
+      "fav": "DEN",
+      "spread": 2.5,
+      "total": 43.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYJ",
+      "home": "KC",
+      "fav": "KC",
+      "spread": 8.5,
+      "total": 44.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "DET",
+      "home": "MIA",
+      "fav": "DET",
+      "spread": 8.5,
+      "total": 48.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CLE",
+      "home": "NO",
+      "fav": "NO",
+      "spread": 2.5,
+      "total": 42.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "NYG",
+      "home": "PHI",
+      "fav": "PHI",
+      "spread": 1.5,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LAR",
+      "home": "WAS",
+      "fav": "LAR",
+      "spread": 4.5,
+      "total": 48.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LV",
+      "home": "SF",
+      "fav": "SF",
+      "spread": 9.5,
+      "total": 48.5,
+      "kick": "16:05",
+      "roof": "outdoor"
+     },
+     {
+      "away": "GB",
+      "home": "NE",
+      "fav": "NE",
+      "spread": 2.5,
+      "total": 46.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ARI",
+      "home": "SEA",
+      "fav": "SEA",
+      "spread": 12.5,
+      "total": 44.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     }
+    ]
+   },
+   {
+    "id": "2026-w8-main",
+    "label": "Week 8 main",
+    "week": 8,
+    "date": "2026-11-01",
+    "games": [
+     {
+      "away": "BAL",
+      "home": "BUF",
+      "fav": "BUF",
+      "spread": 3.5,
+      "total": 53.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "TEN",
+      "home": "CIN",
+      "fav": "CIN",
+      "spread": 10.0,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ARI",
+      "home": "DAL",
+      "fav": "DAL",
+      "spread": 6.5,
+      "total": 54.5,
+      "kick": "13:00",
+      "roof": ""
+     },
+     {
+      "away": "MIN",
+      "home": "DET",
+      "fav": "DET",
+      "spread": 3.0,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "IND",
+      "home": "JAX",
+      "fav": "JAX",
+      "spread": 8.5,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LV",
+      "home": "NYJ",
+      "fav": "NYJ",
+      "spread": 1.5,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CLE",
+      "home": "PIT",
+      "fav": "PIT",
+      "spread": 3.5,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ATL",
+      "home": "TB",
+      "fav": "TB",
+      "spread": 2.5,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LAC",
+      "home": "LAR",
+      "fav": "LAR",
+      "spread": 6.5,
+      "total": 44.5,
+      "kick": "16:05",
+      "roof": "dome"
+     },
+     {
+      "away": "KC",
+      "home": "DEN",
+      "fav": "KC",
+      "spread": 1.5,
+      "total": 41.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NE",
+      "home": "MIA",
+      "fav": "NE",
+      "spread": 7.5,
+      "total": 44.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     }
+    ]
+   },
+   {
+    "id": "2026-w7-main",
+    "label": "Week 7 main",
+    "week": 7,
+    "date": "2026-10-25",
+    "games": [
+     {
+      "away": "SF",
+      "home": "ATL",
+      "fav": "SF",
+      "spread": 2.5,
+      "total": 49.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CIN",
+      "home": "BAL",
+      "fav": "CIN",
+      "spread": 3.0,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "TB",
+      "home": "CAR",
+      "fav": "CAR",
+      "spread": 3.0,
+      "total": 44.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYG",
+      "home": "HOU",
+      "fav": "HOU",
+      "spread": 10.0,
+      "total": 42.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "IND",
+      "home": "MIN",
+      "fav": "MIN",
+      "spread": 6.5,
+      "total": 41.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "MIA",
+      "home": "NYJ",
+      "fav": "NYJ",
+      "spread": 3.5,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CLE",
+      "home": "TEN",
+      "fav": "CLE",
+      "spread": 1.5,
+      "total": 36.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "DEN",
+      "home": "ARI",
+      "fav": "DEN",
+      "spread": 4.5,
+      "total": 44.5,
+      "kick": "16:05",
+      "roof": "dome"
+     },
+     {
+      "away": "GB",
+      "home": "DET",
+      "fav": "DET",
+      "spread": 3.5,
+      "total": 55.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "LAR",
+      "home": "LV",
+      "fav": "LAR",
+      "spread": 3.5,
+      "total": 49.5,
+      "kick": "16:25",
+      "roof": "dome"
+     }
+    ]
+   },
+   {
+    "id": "2026-w6-main",
+    "label": "Week 6 main",
+    "week": 6,
+    "date": "2026-10-18",
+    "games": [
+     {
+      "away": "CHI",
+      "home": "ATL",
+      "fav": "CHI",
+      "spread": 1.5,
+      "total": 51.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "BAL",
+      "home": "CLE",
+      "fav": "BAL",
+      "spread": 3.0,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "TEN",
+      "home": "IND",
+      "fav": "IND",
+      "spread": 6.5,
+      "total": 43.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYJ",
+      "home": "NE",
+      "fav": "NE",
+      "spread": 7.5,
+      "total": 43.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NO",
+      "home": "NYG",
+      "fav": "NO",
+      "spread": 1.5,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CAR",
+      "home": "PHI",
+      "fav": "CAR",
+      "spread": 3.0,
+      "total": 39.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "PIT",
+      "home": "TB",
+      "fav": "PIT",
+      "spread": 2.5,
+      "total": 38.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "ARI",
+      "home": "LAR",
+      "fav": "LAR",
+      "spread": 12.5,
+      "total": 51.5,
+      "kick": "16:05",
+      "roof": "dome"
+     },
+     {
+      "away": "LAC",
+      "home": "KC",
+      "fav": "KC",
+      "spread": 7.5,
+      "total": 41.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     },
+     {
+      "away": "BUF",
+      "home": "LV",
+      "fav": "BUF",
+      "spread": 5.5,
+      "total": 53.5,
+      "kick": "16:25",
+      "roof": "dome"
+     }
+    ]
+   },
+   {
+    "id": "2026-w5-main",
+    "label": "Week 5 main",
+    "week": 5,
+    "date": "2026-10-11",
+    "games": [
+     {
+      "away": "CHI",
+      "home": "GB",
+      "fav": "CHI",
+      "spread": 1.5,
+      "total": 46.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "CIN",
+      "home": "MIA",
+      "fav": "CIN",
+      "spread": 7.0,
+      "total": 44.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "LV",
+      "home": "NE",
+      "fav": "NE",
+      "spread": 3.5,
+      "total": 45.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "MIN",
+      "home": "NO",
+      "fav": "MIN",
+      "spread": 2.5,
+      "total": 41.5,
+      "kick": "13:00",
+      "roof": "dome"
+     },
+     {
+      "away": "CLE",
+      "home": "NYJ",
+      "fav": "NYJ",
+      "spread": 2.5,
+      "total": 38.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "IND",
+      "home": "PIT",
+      "fav": "PIT",
+      "spread": 3.0,
+      "total": 41.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "HOU",
+      "home": "TEN",
+      "fav": "HOU",
+      "spread": 6.5,
+      "total": 37.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "NYG",
+      "home": "WAS",
+      "fav": "WAS",
+      "spread": 3.5,
+      "total": 41.5,
+      "kick": "13:00",
+      "roof": "outdoor"
+     },
+     {
+      "away": "DEN",
+      "home": "LAC",
+      "fav": "DEN",
+      "spread": 3.5,
+      "total": 42.5,
+      "kick": "16:05",
+      "roof": "dome"
+     },
+     {
+      "away": "DET",
+      "home": "ARI",
+      "fav": "DET",
+      "spread": 5.5,
+      "total": 55.5,
+      "kick": "16:25",
+      "roof": "dome"
+     },
+     {
+      "away": "SF",
+      "home": "SEA",
+      "fav": "SEA",
+      "spread": 3.0,
+      "total": 46.5,
+      "kick": "16:25",
+      "roof": "outdoor"
+     }
+    ]
+   },
+   {
     "id": "2026-w4-main",
     "label": "Week 4 main",
     "week": 4,
@@ -958,8 +1466,8 @@
       "away": "TEN",
       "home": "BAL",
       "fav": "BAL",
-      "spread": 10.5,
-      "total": 44.5,
+      "spread": 11.5,
+      "total": 42.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -967,7 +1475,7 @@
       "away": "NE",
       "home": "BUF",
       "fav": "BUF",
-      "spread": 5.5,
+      "spread": 7.0,
       "total": 49.5,
       "kick": "13:00",
       "roof": "outdoor"
@@ -976,7 +1484,7 @@
       "away": "NYJ",
       "home": "CHI",
       "fav": "CHI",
-      "spread": 3.0,
+      "spread": 3.5,
       "total": 43.5,
       "kick": "13:00",
       "roof": "outdoor"
@@ -985,8 +1493,8 @@
       "away": "JAX",
       "home": "CIN",
       "fav": "CIN",
-      "spread": 3.0,
-      "total": 49.5,
+      "spread": 2.5,
+      "total": 51.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -995,16 +1503,16 @@
       "home": "HOU",
       "fav": "HOU",
       "spread": 3.0,
-      "total": 47.5,
+      "total": 48.5,
       "kick": "13:00",
-      "roof": ""
+      "roof": "dome"
      },
      {
       "away": "ARI",
       "home": "NYG",
-      "fav": "NYG",
+      "fav": "ARI",
       "spread": 2.5,
-      "total": 43.5,
+      "total": 44.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1012,8 +1520,8 @@
       "away": "LAR",
       "home": "PHI",
       "fav": "LAR",
-      "spread": 2.5,
-      "total": 45.5,
+      "spread": 3.5,
+      "total": 42.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1021,8 +1529,8 @@
       "away": "GB",
       "home": "TB",
       "fav": "GB",
-      "spread": 1.5,
-      "total": 45.5,
+      "spread": 3.0,
+      "total": 38.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1030,8 +1538,8 @@
       "away": "MIA",
       "home": "MIN",
       "fav": "MIN",
-      "spread": 10.5,
-      "total": 42.5,
+      "spread": 10.0,
+      "total": 38.5,
       "kick": "16:05",
       "roof": "dome"
      },
@@ -1039,8 +1547,8 @@
       "away": "KC",
       "home": "LV",
       "fav": "KC",
-      "spread": 6.0,
-      "total": 45.5,
+      "spread": 4.5,
+      "total": 47.5,
       "kick": "16:25",
       "roof": "dome"
      },
@@ -1048,7 +1556,7 @@
       "away": "LAC",
       "home": "SEA",
       "fav": "SEA",
-      "spread": 6.5,
+      "spread": 7.0,
       "total": 42.5,
       "kick": "16:25",
       "roof": "outdoor"
@@ -1057,8 +1565,8 @@
       "away": "DEN",
       "home": "SF",
       "fav": "SF",
-      "spread": 4.5,
-      "total": 45.5,
+      "spread": 3.0,
+      "total": 48.5,
       "kick": "16:25",
       "roof": "outdoor"
      }
@@ -1084,7 +1592,7 @@
       "home": "CLE",
       "fav": "CAR",
       "spread": 2.5,
-      "total": 42.5,
+      "total": 41.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1092,8 +1600,8 @@
       "away": "NYJ",
       "home": "DET",
       "fav": "DET",
-      "spread": 6.5,
-      "total": 47.5,
+      "spread": 7.0,
+      "total": 49.5,
       "kick": "13:00",
       "roof": "dome"
      },
@@ -1101,17 +1609,17 @@
       "away": "HOU",
       "home": "IND",
       "fav": "HOU",
-      "spread": 3.0,
-      "total": 42.5,
+      "spread": 1.5,
+      "total": 41.5,
       "kick": "13:00",
-      "roof": ""
+      "roof": "outdoor"
      },
      {
       "away": "NE",
       "home": "JAX",
       "fav": "JAX",
       "spread": 3.0,
-      "total": 45.5,
+      "total": 46.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1119,8 +1627,8 @@
       "away": "KC",
       "home": "MIA",
       "fav": "KC",
-      "spread": 11.5,
-      "total": 46.5,
+      "spread": 10.0,
+      "total": 45.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1129,7 +1637,7 @@
       "home": "NYG",
       "fav": "NYG",
       "spread": 2.5,
-      "total": 39.5,
+      "total": 37.5,
       "kick": "13:00",
       "roof": "outdoor"
      },
@@ -1146,7 +1654,7 @@
       "away": "SEA",
       "home": "WAS",
       "fav": "SEA",
-      "spread": 7.0,
+      "spread": 8.5,
       "total": 40.5,
       "kick": "13:00",
       "roof": "outdoor"
@@ -1155,8 +1663,8 @@
       "away": "ARI",
       "home": "SF",
       "fav": "SF",
-      "spread": 8.5,
-      "total": 47.5,
+      "spread": 7.5,
+      "total": 48.5,
       "kick": "16:05",
       "roof": "outdoor"
      },
@@ -1173,16 +1681,16 @@
       "away": "BAL",
       "home": "DAL",
       "fav": "BAL",
-      "spread": 3.5,
-      "total": 52.5,
+      "spread": 3.0,
+      "total": 53.5,
       "kick": "16:25",
-      "roof": ""
+      "roof": "outdoor"
      },
      {
       "away": "LV",
       "home": "NO",
       "fav": "NO",
-      "spread": 3.0,
+      "spread": 3.5,
       "total": 43.5,
       "kick": "16:25",
       "roof": "dome"
@@ -1434,7 +1942,7 @@
  },
  "cohort": {
   "source": "curated",
-  "about": "Direction only: whether each shape shows up more (over), less (under) or about as often (neutral) in the top 1% and top 3 than in the field, from the fantasy.vip 2025 Milly Maker field-composition study quoted in CLASSIC_BIBLE.md Part C. External study, not recomputed from our data; its rates are not republished here.",
+  "about": "Direction only: whether each shape shows up more (over), less (under) or about as often (neutral) in the top 1% and top 3 than in the field, from a public 2025 Milly Maker field-composition study quoted in CLASSIC_BIBLE.md Part C. External study, not recomputed from our data; its rates are not republished here.",
   "cohorts": [
    {
     "key": "field",
@@ -1718,7 +2226,7 @@
    "why": "\"Fade chalk\" is wrong — winners carry one or two chalk pieces. The rule is never two the sim rates negative-leverage: either bust kills the lineup.",
    "stat": "winners.ownership.has_ge30",
    "stat_label": "winners carried a 30%+ player",
-   "needs": "ownership + Optimal % (a Stokastic Data Hub file)"
+   "needs": "ownership + Optimal % (a projections file with both)"
   },
   {
    "group": "chalk",
@@ -1737,7 +2245,7 @@
    "fmt": "share",
    "title": "Cap chalk exposure",
    "rule": "≤ {v} of the batch on any negative-leverage chalk player",
-   "why": "One chalk bust shouldn't sink half the batch. (Ethan, W1 2026: four players at 44–61% exposure put two busts in 14 of 18 lineups.)"
+   "why": "One chalk bust shouldn't sink half the batch."
   },
   {
    "group": "chalk",
@@ -1914,9 +2422,9 @@
  "small_field_study": {
   "source": "curated",
   "title": "Power Sweep & Spy classic study",
-  "about": "Stokastic's study of the winners of two DraftKings CLASSIC main-slate small-field contests — Power Sweep (3-max) and The Spy (single entry) — 55 Sundays, 2023–25 plus 2026 Week 1. Winners vs the field.",
+  "about": "A study of the winners of two DraftKings CLASSIC main-slate small-field contests — Power Sweep (3-max) and The Spy (single entry) — 55 Sundays, 2023–25 plus 2026 Week 1. Winners vs the field.",
   "study": {
-   "source": "Stokastic Power Sweep (3-max) & Spy (SE), 55 Sundays",
+   "source": "Power Sweep (3-max) & Spy (SE), 55 Sundays",
    "qb_under_10pct": {
     "winners": "71-73%",
     "field": "54-59%"

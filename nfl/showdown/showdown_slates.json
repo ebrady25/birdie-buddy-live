@@ -2,10 +2,10 @@
   "week": "2026 Week 6",
   "generated_at": "2026-10-15T19:05:50-04:00",
   "sources": {
-    "players": "DKSalaries CSVs in /Users/buddy/Documents/OBSIDIAN/TARS-CLAUDE/Clap Capital/Projects/NFL/DFS/data/dk_salaries/2026-wk6",
+    "players": "DraftKings salary files (DKSalaries.csv)",
     "lines": "The Odds API (median of US books)",
     "weather": "Open-Meteo (free, no key) for open-air venues",
-    "own": "BirdieBuddy model v1 (trained on DK standings) — rough; never Stokastic"
+    "own": "BirdieBuddy model v1 (trained on DK standings) — rough; our own model only"
   },
   "slates": [
     {

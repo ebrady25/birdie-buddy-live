@@ -6,13 +6,13 @@
    "codex/CODEX.md v1.0 (120 DK showdown winners 2018-25; 2,761 games 2016-25)",
    "codex/rules.json v1.2",
    "LINEUP_BIBLE.md v1.2",
-   "Stokastic Power Sweep/Spy study (55 Sundays 2023-26)",
-   "fantasy.vip Milly Maker almanac 2025",
+   "Power Sweep/Spy winners study (55 Sundays 2023-26)",
+   "Public Milly Maker almanac 2025",
    "MMT 169 classic winners 2016-25"
   ],
   "lift_note": "lift = winners-with-trait minus all-winners rate; |lift|<12 noise, >=15 with n>=15 signal",
   "generated_by": "codex/build_playbook_data.py",
-  "rules_version": "1.4 (2026-09-23) \u2014 history re-check: v1.2 single-slate edits reverted, two-K config = never",
+  "rules_version": "1.6 (2026-10-27) \u2014 showdown rules re-tuned to the best-users study (both QBs up, kickers down, QB captain up, RB captain down, spend the cap); classic v1.3 (2026-10-27) \u2014 best-users re-tune",
   "n_winners": 120,
   "n_games": 2761
  },
@@ -897,7 +897,7 @@
    },
    "k_share": "shootout",
    "dst_share": "shootout",
-   "both_qbs_share_max": 0.5,
+   "both_qbs_share_max": 0.6,
    "te_cpt_bonus": 0.3,
    "rb_cpt_penalty": 0.2
   },
@@ -908,7 +908,7 @@
    },
    "k_share": "grind",
    "dst_share": "grind",
-   "both_qbs_share_max": 0.2,
+   "both_qbs_share_max": 0.35,
    "rb_cpt_bonus": 0.3,
    "qb_cpt_penalty": 0.2
   },
@@ -1128,7 +1128,7 @@
    "K"
   ],
   "captain_dst_max_per_batch": 1,
-  "min_salary_used": 44000,
+  "min_salary_used": 47000,
   "max_sub_1k_players": 1,
   "max_sub3pct_owned_players": 1,
   "wr_cpt_max_other_own_catchers": 1,
@@ -1179,19 +1179,19 @@
   "max_per_captain_share": 0.25,
   "max_per_captain_abs": 3,
   "max_overlap_players": 4,
-  "both_qbs_share_max": 0.35,
+  "both_qbs_share_max": 0.55,
   "k_share": {
    "default": [
-    0.4,
-    0.5
-   ],
-   "shootout": [
-    0.25,
+    0.3,
     0.35
    ],
+   "shootout": [
+    0.2,
+    0.3
+   ],
    "grind": [
-    0.45,
-    0.55
+    0.35,
+    0.45
    ]
   },
   "dst_share": {
@@ -1217,6 +1217,10 @@
   "dog_qb_in_lineup_share_max_over_dog_winprob": 0.15,
   "nonchalk_flex_share_max": 0.5,
   "nonchalk_own_threshold": 25,
+  "any_flex_share_max": 0.65,
+  "any_flex_share_min_batch": 5,
+  "same_team_rb_pair_min_count": 1,
+  "same_team_rb_pair_min_batch": 5,
   "captain_shortlist_min_coverage": [
    "FAV_WR1",
    "FAV_RB1",
@@ -1241,21 +1245,23 @@
   "dst_captain_per_20": 1,
   "captain_position_share_max": {
    "WR": 0.5,
-   "RB": 0.4,
-   "QB": 0.4,
+   "RB": 0.2,
+   "QB": 0.45,
    "TE": 0.25,
    "DST": 0.05,
    "K": 0.0
   },
   "sim_override_pctl": 0.1,
   "share_ceilings": {
-   "k": 0.5,
+   "k": 0.4,
    "dst": 0.65,
-   "both_qbs": 0.6,
-   "_v1.2": "k 0.65\u21920.5: sim wanted K in ~90% of W2 DET@BUF lineups; our batch ended at 76% K; K was in 7% of the top-1%. Codex K rate never exceeds 50% in any total bucket."
+   "both_qbs": 0.65,
+   "_v1.2": "k 0.65\u21920.5: sim wanted K in ~90% of W2 DET@BUF lineups; our batch ended at 76% K; K was in 7% of the top-1%. Codex K rate never exceeds 50% in any total bucket.",
+   "_v1.6": "k 0.5\u21920.4, both_qbs 0.6\u21920.65 (best-users study 10/27: K in lineup 0.70x top-1% rate; both QBs 2.07x)"
   },
   "sub_1k_share_max": 0.25,
-  "two_dst_max_per_batch": 1
+  "two_dst_max_per_batch": 1,
+  "_v1.6": "best-users study (reviews/2026-10-27-best-users-study.md, 59 showdown contests / 10 slates): both QBs 2.07x top-1% (14/15 top users) -> both_qbs_share_max 0.35\u21920.55 (shootout 0.6, grind 0.35); K 0.70x -> k_share default 0.40-0.50\u21920.30-0.35; QB CPT 1.12x / RB CPT 0.47x -> QB cap 0.40\u21920.45, RB cap 0.40\u21920.20; >=$3k left 0.57x -> hard min_salary_used 44000\u219247000 (soft target <=$1k left). Captain own 10-30% preferred; sub-6% captains only in the 1-2 'DFS Pro' lineups (manual)."
  },
  "ten_laws": [
   {
@@ -1324,7 +1330,7 @@
   }
  ],
  "contest_fit_small_field": {
-  "source": "Stokastic Power Sweep (3-max) & Spy (SE), 55 Sundays",
+  "source": "Power Sweep (3-max) & Spy (SE), 55 Sundays",
   "qb_under_10pct": {
    "winners": "71-73%",
    "field": "54-59%"
@@ -1348,7 +1354,7 @@
  },
  "engine": {
   "_note": "Inputs for assets/js/showdown_engine.js (the browser port of codex/rules_engine.py) that are not elsewhere in this file. rushing_qbs is parsed from the RUSHING_QBS literal in rules_engine.py; shape_off_template_penalty is the constant in soft_score().",
-  "rules_version": "1.4 (2026-09-23) \u2014 history re-check: v1.2 single-slate edits reverted, two-K config = never",
+  "rules_version": "1.6 (2026-10-27) \u2014 showdown rules re-tuned to the best-users study (both QBs up, kickers down, QB captain up, RB captain down, spend the cap); classic v1.3 (2026-10-27) \u2014 best-users re-tune",
   "dog_win_prob_by_spread": {
    "pk_3": 0.44,
    "3.5_6.5": 0.34,
@@ -1356,7 +1362,7 @@
    "10_plus": 0.13
   },
   "user_leans": {
-   "_note": "Ethan's game read as a tilt, applied with --lean. Logged per slate so Tuesday can score the lean vs the no-lean build. v1.2: a lean may shift allocation/shares but may NOT disable a total-based overlay (W2 DET@BUF: 54.5 total, fav_under lean switched the shootout overlay off; game went 41-31, top-1% was 84% both-QB / 7% K).",
+   "_note": "A manual game read as a tilt, applied with --lean. Logged per slate so Tuesday can score the lean vs the no-lean build. v1.2: a lean may shift allocation/shares but may NOT disable a total-based overlay (W2 DET@BUF: 54.5 total, fav_under lean switched the shootout overlay off; game went 41-31, top-1% was 84% both-QB / 7% K).",
    "fav_under": {
     "allocation": {
      "A": 0.35,
@@ -1412,77 +1418,102 @@
  },
  "top1pct_by_expected_script": {
   "spread_le3": {
-   "n": 3,
-   "cpt_fav": 66,
+   "n": 4,
+   "cpt_fav": 67,
    "cpt_pos": {
-    "WR": 28,
-    "RB": 37,
-    "QB": 16,
-    "TE": 17
-   },
-   "five_one_fav": 13,
-   "four_two": 27,
-   "three_three": 43,
-   "K": 22,
-   "DST": 49,
-   "both_qb": 35,
-   "dog_qb_in_lineup": 78,
-   "slates_n": 3,
-   "lineups_n": 12613,
-   "slates": [
-    "2026-wk1-den-kc",
-    "2026-wk1-dal-nyg",
-    "2026-wk1-ne-sea"
-   ]
-  },
-  "spread_3.5_6.5": {
-   "n": 3,
-   "cpt_fav": 50,
-   "cpt_pos": {
-    "WR": 25,
-    "RB": 14,
-    "QB": 34,
-    "TE": 20
-   },
-   "five_one_fav": 13,
-   "four_two": 35,
-   "three_three": 26,
-   "K": 50,
-   "DST": 12,
-   "both_qb": 29,
-   "dog_qb_in_lineup": 63,
-   "slates_n": 3,
-   "lineups_n": 12659,
-   "slates": [
-    "2026-wk1-sf-lar",
-    "2026-wk2-ind-kc",
-    "2026-wk2-det-buf"
-   ]
-  },
-  "total_42.5_47.5": {
-   "n": 5,
-   "cpt_fav": 59,
-   "cpt_pos": {
-    "WR": 23,
-    "RB": 31,
-    "QB": 23,
-    "TE": 18
+    "WR": 30,
+    "RB": 34,
+    "QB": 20,
+    "TE": 13
    },
    "five_one_fav": 16,
    "four_two": 32,
-   "three_three": 29,
+   "three_three": 34,
+   "K": 21,
+   "DST": 40,
+   "both_qb": 50,
+   "dog_qb_in_lineup": 83,
+   "slates_n": 4,
+   "lineups_n": 13477,
+   "slates": [
+    "2026-wk1-den-kc",
+    "2026-wk1-dal-nyg",
+    "2026-wk1-ne-sea",
+    "2026-wk3-lar-den"
+   ]
+  },
+  "spread_3.5_6.5": {
+   "n": 4,
+   "cpt_fav": 42,
+   "cpt_pos": {
+    "WR": 29,
+    "RB": 14,
+    "QB": 36,
+    "TE": 15
+   },
+   "five_one_fav": 10,
+   "four_two": 34,
+   "three_three": 28,
    "K": 42,
-   "DST": 37,
-   "both_qb": 21,
-   "dog_qb_in_lineup": 67,
-   "slates_n": 5,
-   "lineups_n": 19696,
+   "DST": 13,
+   "both_qb": 42,
+   "dog_qb_in_lineup": 72,
+   "slates_n": 4,
+   "lineups_n": 14372,
+   "slates": [
+    "2026-wk1-sf-lar",
+    "2026-wk2-ind-kc",
+    "2026-wk2-det-buf",
+    "2026-wk3-phi-chi"
+   ]
+  },
+  "total_le42": {
+   "n": 1,
+   "cpt_fav": 17,
+   "cpt_pos": {
+    "WR": 42,
+    "RB": 15,
+    "QB": 42,
+    "TE": 0
+   },
+   "five_one_fav": 0,
+   "four_two": 30,
+   "three_three": 36,
+   "K": 18,
+   "DST": 16,
+   "both_qb": 81,
+   "dog_qb_in_lineup": 100,
+   "slates_n": 1,
+   "lineups_n": 1713,
+   "slates": [
+    "2026-wk3-phi-chi"
+   ]
+  },
+  "total_42.5_47.5": {
+   "n": 6,
+   "cpt_fav": 61,
+   "cpt_pos": {
+    "WR": 26,
+    "RB": 30,
+    "QB": 25,
+    "TE": 15
+   },
+   "five_one_fav": 17,
+   "four_two": 34,
+   "three_three": 26,
+   "K": 38,
+   "DST": 32,
+   "both_qb": 34,
+   "dog_qb_in_lineup": 72,
+   "slates_n": 6,
+   "lineups_n": 20560,
    "slates": [
     "2026-wk1-den-kc",
     "2026-wk1-dal-nyg",
     "2026-wk1-sf-lar",
     "2026-wk1-ne-sea",
-    "2026-wk2-ind-kc"
+    "2026-wk2-ind-kc",
+    "2026-wk3-lar-den"
    ]
   },
   "total_ge52": {
@@ -1510,77 +1541,102 @@
  },
  "field_by_expected_script": {
   "spread_le3": {
-   "n": 3,
-   "cpt_fav": 54,
+   "n": 4,
+   "cpt_fav": 57,
    "cpt_pos": {
-    "WR": 34,
+    "WR": 35,
     "RB": 26,
-    "QB": 26,
-    "TE": 7
+    "QB": 24,
+    "TE": 9
    },
-   "five_one_fav": 9,
-   "four_two": 36,
+   "five_one_fav": 10,
+   "four_two": 37,
    "three_three": 36,
-   "K": 41,
-   "DST": 29,
-   "both_qb": 41,
-   "dog_qb_in_lineup": 72,
-   "slates_n": 3,
-   "lineups_n": 1226866,
+   "K": 40,
+   "DST": 28,
+   "both_qb": 40,
+   "dog_qb_in_lineup": 70,
+   "slates_n": 4,
+   "lineups_n": 1312477,
    "slates": [
     "2026-wk1-den-kc",
     "2026-wk1-dal-nyg",
-    "2026-wk1-ne-sea"
+    "2026-wk1-ne-sea",
+    "2026-wk3-lar-den"
    ]
   },
   "spread_3.5_6.5": {
-   "n": 3,
-   "cpt_fav": 62,
+   "n": 4,
+   "cpt_fav": 64,
    "cpt_pos": {
     "WR": 29,
     "RB": 35,
-    "QB": 20,
-    "TE": 11
+    "QB": 22,
+    "TE": 10
    },
-   "five_one_fav": 15,
+   "five_one_fav": 16,
    "four_two": 36,
    "three_three": 30,
-   "K": 42,
+   "K": 41,
    "DST": 32,
    "both_qb": 21,
-   "dog_qb_in_lineup": 40,
-   "slates_n": 3,
-   "lineups_n": 1200818,
+   "dog_qb_in_lineup": 36,
+   "slates_n": 4,
+   "lineups_n": 1371273,
    "slates": [
     "2026-wk1-sf-lar",
     "2026-wk2-ind-kc",
-    "2026-wk2-det-buf"
+    "2026-wk2-det-buf",
+    "2026-wk3-phi-chi"
+   ]
+  },
+  "total_le42": {
+   "n": 1,
+   "cpt_fav": 70,
+   "cpt_pos": {
+    "WR": 26,
+    "RB": 34,
+    "QB": 28,
+    "TE": 5
+   },
+   "five_one_fav": 20,
+   "four_two": 37,
+   "three_three": 29,
+   "K": 37,
+   "DST": 35,
+   "both_qb": 20,
+   "dog_qb_in_lineup": 26,
+   "slates_n": 1,
+   "lineups_n": 170455,
+   "slates": [
+    "2026-wk3-phi-chi"
    ]
   },
   "total_42.5_47.5": {
-   "n": 5,
-   "cpt_fav": 58,
+   "n": 6,
+   "cpt_fav": 59,
    "cpt_pos": {
-    "WR": 32,
-    "RB": 31,
-    "QB": 23,
-    "TE": 8
+    "WR": 33,
+    "RB": 30,
+    "QB": 22,
+    "TE": 9
    },
    "five_one_fav": 13,
    "four_two": 36,
-   "three_three": 33,
-   "K": 42,
-   "DST": 32,
+   "three_three": 34,
+   "K": 41,
+   "DST": 30,
    "both_qb": 34,
    "dog_qb_in_lineup": 61,
-   "slates_n": 5,
-   "lineups_n": 1892634,
+   "slates_n": 6,
+   "lineups_n": 1978245,
    "slates": [
     "2026-wk1-den-kc",
     "2026-wk1-dal-nyg",
     "2026-wk1-sf-lar",
     "2026-wk1-ne-sea",
-    "2026-wk2-ind-kc"
+    "2026-wk2-ind-kc",
+    "2026-wk3-lar-den"
    ]
   },
   "total_ge52": {
@@ -1944,7 +2000,7 @@
   }
  },
  "field_archive": {
-  "_note": "Field data = the unified 2026 archive (codex/field_unified.py): complete contest fields from the Stokastic Post-Contest Simulator plus our own DK contest standings, deduped. PRIMETIME slates are the primary cohort; Sunday single-game slates are a separate supporting tier. In the cohort tables the row n IS the number of slates (every lineup in a slate shares one game outcome); rates are the unweighted mean of per-slate rates. Anomalous slates (a QB knocked out early, etc.) are listed but excluded from every table and check. Rules come from the 120 historical winners; this archive only checks them.",
+  "_note": "Field data = the unified 2026 archive (codex/field_unified.py): complete contest fields from the third-party post-contest exports plus our own DK contest standings, deduped. PRIMETIME slates are the primary cohort; Sunday single-game slates are a separate supporting tier. In the cohort tables the row n IS the number of slates (every lineup in a slate shares one game outcome); rates are the unweighted mean of per-slate rates. Anomalous slates (a QB knocked out early, etc.) are listed but excluded from every table and check. Rules come from the 120 historical winners; this archive only checks them.",
   "tier": "primetime",
   "slates": [
    {
@@ -2052,11 +2108,41 @@
     "contests": 10,
     "entries": 549023,
     "line_source": "slate card / showdown_slates.json (lock line)"
+   },
+   {
+    "id": "2026-wk3-lar-den",
+    "label": "LAR @ DEN",
+    "tier": "primetime",
+    "week": 3,
+    "weekday": "Sunday",
+    "fav": "LAR",
+    "spread": 2.5,
+    "total": 44.0,
+    "final": null,
+    "realized_script": null,
+    "contests": 4,
+    "entries": 85609,
+    "line_source": "data/lines_override.csv (market lock line)"
+   },
+   {
+    "id": "2026-wk3-phi-chi",
+    "label": "PHI @ CHI",
+    "tier": "primetime",
+    "week": 3,
+    "weekday": "Monday",
+    "fav": "PHI",
+    "spread": 3.5,
+    "total": 42.0,
+    "final": null,
+    "realized_script": null,
+    "contests": 7,
+    "entries": 170454,
+    "line_source": "data/lines_override.csv (market lock line)"
    }
   ],
-  "n_slates": 6,
-  "n_contests": 38,
-  "n_entries": 2485105,
+  "n_slates": 8,
+  "n_contests": 49,
+  "n_entries": 2741168,
   "anomalies": [
    {
     "slate": "2026-wk2-nyg-lar",
@@ -3883,6 +3969,259 @@
    "spread": 7.5,
    "total": 48.5,
    "anomaly": "injury-distorted: NYG QB Jaxson Dart left in the 1st quarter; Jameis Winston finished"
+  },
+  {
+   "contest": "dk_196036153",
+   "slate": "2026-wk3-lar-den",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $200K Play-Action [20 Entry Max] (LAR @ DEN)",
+   "field_size": 78932,
+   "entry_fee": 3.0,
+   "prize_pool": 200000.0,
+   "places_paid": 19175,
+   "winner_score": 148.99,
+   "cut_top0_1": 132.79,
+   "cut_top1": 125.44,
+   "cut_top5": 115.39,
+   "cut_top20": 103.15,
+   "min_cash_score": 101.19,
+   "min_cash_pct": 24.3,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-27",
+   "fav": "LAR",
+   "spread": 2.5,
+   "total": 44.0
+  },
+  {
+   "contest": "dk_196036163",
+   "slate": "2026-wk3-lar-den",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $8K Cover Four [5 Entry Max] (LAR @ DEN)",
+   "field_size": 2373,
+   "entry_fee": 4.0,
+   "prize_pool": 8000.0,
+   "places_paid": 615,
+   "winner_score": 133.09,
+   "cut_top0_1": 131.79,
+   "cut_top1": 127.69,
+   "cut_top5": 115.54,
+   "cut_top20": 104.89,
+   "min_cash_score": 101.39,
+   "min_cash_pct": 25.9,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-27",
+   "fav": "LAR",
+   "spread": 2.5,
+   "total": 44.0
+  },
+  {
+   "contest": "dk_196036171",
+   "slate": "2026-wk3-lar-den",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $30K Bubble Screen [Single Entry, $5K to 1st] (LAR @ DEN)",
+   "field_size": 2348,
+   "entry_fee": 15.0,
+   "prize_pool": 30000.0,
+   "places_paid": 536,
+   "winner_score": 142.79,
+   "cut_top0_1": 141.64,
+   "cut_top1": 124.91,
+   "cut_top5": 115.39,
+   "cut_top20": 101.39,
+   "min_cash_score": 100.79,
+   "min_cash_pct": 22.8,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-27",
+   "fav": "LAR",
+   "spread": 2.5,
+   "total": 44.0
+  },
+  {
+   "contest": "dk_196036173",
+   "slate": "2026-wk3-lar-den",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $10K Dimeback [Single Entry] (LAR @ DEN)",
+   "field_size": 1956,
+   "entry_fee": 6.0,
+   "prize_pool": 10000.0,
+   "places_paid": 447,
+   "winner_score": 142.79,
+   "cut_top0_1": 142.79,
+   "cut_top1": 127.69,
+   "cut_top5": 115.39,
+   "cut_top20": 103.0,
+   "min_cash_score": 101.39,
+   "min_cash_pct": 22.9,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-27",
+   "fav": "LAR",
+   "spread": 2.5,
+   "total": 44.0
+  },
+  {
+   "contest": "dk_196036240",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $300K Play-Action [20 Entry Max] (PHI @ CHI)",
+   "field_size": 118418,
+   "entry_fee": 3.0,
+   "prize_pool": 300000.0,
+   "places_paid": 27401,
+   "winner_score": 113.64,
+   "cut_top0_1": 108.84,
+   "cut_top1": 100.11,
+   "cut_top5": 89.18,
+   "cut_top20": 74.17,
+   "min_cash_score": 72.02,
+   "min_cash_pct": 23.1,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
+  },
+  {
+   "contest": "dk_196036255",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $35K Bubble Screen [$10K to 1st, Single Entry] (PHI @ CHI)",
+   "field_size": 2732,
+   "entry_fee": 15.0,
+   "prize_pool": 35000.0,
+   "places_paid": 581,
+   "winner_score": 113.3,
+   "cut_top0_1": 108.84,
+   "cut_top1": 100.94,
+   "cut_top5": 87.78,
+   "cut_top20": 72.55,
+   "min_cash_score": 71.62,
+   "min_cash_pct": 21.3,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
+  },
+  {
+   "contest": "dk_196036257",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $80K Huddle [$10K to 1st, Single Entry] (PHI @ CHI)",
+   "field_size": 18947,
+   "entry_fee": 5.0,
+   "prize_pool": 80000.0,
+   "places_paid": 4826,
+   "winner_score": 111.3,
+   "cut_top0_1": 106.5,
+   "cut_top1": 96.48,
+   "cut_top5": 85.52,
+   "cut_top20": 71.05,
+   "min_cash_score": 69.53,
+   "min_cash_pct": 25.5,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
+  },
+  {
+   "contest": "dk_196178278",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $10K Huddle [Single Entry] (PHI @ CHI)",
+   "field_size": 2366,
+   "entry_fee": 5.0,
+   "prize_pool": 10000.0,
+   "places_paid": 544,
+   "winner_score": 111.3,
+   "cut_top0_1": 111.3,
+   "cut_top1": 97.44,
+   "cut_top5": 86.24,
+   "cut_top20": 71.62,
+   "min_cash_score": 70.52,
+   "min_cash_pct": 23.0,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
+  },
+  {
+   "contest": "dk_196180013",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $4K Quarter Jukebox [Just $0.25!] (PHI @ CHI)",
+   "field_size": 18905,
+   "entry_fee": 0.25,
+   "prize_pool": 4000.0,
+   "places_paid": 4556,
+   "winner_score": 115.64,
+   "cut_top0_1": 108.84,
+   "cut_top1": 100.4,
+   "cut_top5": 89.42,
+   "cut_top20": 74.67,
+   "min_cash_score": 71.98,
+   "min_cash_pct": 24.1,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
+  },
+  {
+   "contest": "dk_196181035",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $20K Play-Action [$5K to 1st] (PHI @ CHI)",
+   "field_size": 7900,
+   "entry_fee": 3.0,
+   "prize_pool": 20000.0,
+   "places_paid": 1655,
+   "winner_score": 111.94,
+   "cut_top0_1": 109.54,
+   "cut_top1": 100.9,
+   "cut_top5": 90.2,
+   "cut_top20": 74.92,
+   "min_cash_score": 74.03,
+   "min_cash_pct": 20.9,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
+  },
+  {
+   "contest": "dk_196186312",
+   "slate": "2026-wk3-phi-chi",
+   "tier": "primetime",
+   "contest_name": "NFL Showdown $3K Play-Action [20 Entry Max] (PHI @ CHI)",
+   "field_size": 1186,
+   "entry_fee": 3.0,
+   "prize_pool": 3000.0,
+   "places_paid": 305,
+   "winner_score": 113.64,
+   "cut_top0_1": 113.64,
+   "cut_top1": 100.73,
+   "cut_top5": 90.2,
+   "cut_top20": 74.03,
+   "min_cash_score": 70.93,
+   "min_cash_pct": 25.7,
+   "winner_dupes": null,
+   "note": "",
+   "date": "2026-09-28",
+   "fav": "PHI",
+   "spread": 3.5,
+   "total": 42.0
   }
  ],
  "rule_verdicts": {
@@ -3960,16 +4299,32 @@
     "spread": 5.5,
     "total": 54.5,
     "realized_script": "B"
+   },
+   {
+    "id": "2026-wk3-lar-den",
+    "label": "LAR @ DEN",
+    "fav": "LAR",
+    "spread": 2.5,
+    "total": 44.0,
+    "realized_script": null
+   },
+   {
+    "id": "2026-wk3-phi-chi",
+    "label": "PHI @ CHI",
+    "fav": "PHI",
+    "spread": 3.5,
+    "total": 42.0,
+    "realized_script": null
    }
   ],
   "sunday_slates_n": 19,
   "counts": {
-   "agrees": 0,
+   "agrees": 5,
    "aligned": 3,
-   "split": 25,
-   "mixed": 7,
-   "not_enough": 49,
-   "watch": 7
+   "split": 29,
+   "mixed": 6,
+   "not_enough": 35,
+   "watch": 12
   },
   "rules": [
    {
@@ -3988,12 +4343,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "split",
-    "slates_n": 6,
-    "slates_with": 3,
-    "slates_against": 3,
-    "pooled_lift": 0.2,
-    "field_2026": 57.6,
-    "top1_2026": 57.8,
+    "slates_n": 8,
+    "slates_with": 4,
+    "slates_against": 4,
+    "pooled_lift": -5.9,
+    "field_2026": 60.3,
+    "top1_2026": 54.4,
     "lift": [
      48.9,
      -52.1,
@@ -4001,7 +4356,9 @@
      39.0,
      null,
      17.9,
-     -8.6
+     -8.6,
+     4.0,
+     -52.4
     ],
     "field": [
      51.1,
@@ -4010,7 +4367,9 @@
      49.9,
      null,
      69.5,
-     58.1
+     58.1,
+     67.3,
+     69.7
     ],
     "top1": [
      100.0,
@@ -4019,7 +4378,9 @@
      88.9,
      null,
      87.3,
-     49.4
+     49.4,
+     71.3,
+     17.3
     ],
     "by_realized_script": {
      "A": {
@@ -4063,13 +4424,13 @@
      "n_all": 120,
      "basis": "113 primetime winners (of 120)"
     },
-    "check": "watch",
-    "slates_n": 6,
-    "slates_with": 2,
+    "check": "split",
+    "slates_n": 8,
+    "slates_with": 4,
     "slates_against": 4,
-    "pooled_lift": -5.4,
-    "field_2026": 31.9,
-    "top1_2026": 26.5,
+    "pooled_lift": -1.8,
+    "field_2026": 31.7,
+    "top1_2026": 29.9,
     "lift": [
      -33.0,
      -31.5,
@@ -4077,7 +4438,9 @@
      45.6,
      null,
      -21.8,
-     12.9
+     12.9,
+     1.9,
+     16.1
     ],
     "field": [
      33.0,
@@ -4086,7 +4449,9 @@
      38.0,
      null,
      22.4,
-     29.5
+     29.5,
+     36.2,
+     25.9
     ],
     "top1": [
      0.0,
@@ -4095,7 +4460,9 @@
      83.6,
      null,
      0.6,
-     42.4
+     42.4,
+     38.1,
+     42.0
     ],
     "by_realized_script": {
      "A": {
@@ -4140,12 +4507,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "watch",
-    "slates_n": 6,
+    "slates_n": 8,
     "slates_with": 1,
-    "slates_against": 5,
-    "pooled_lift": -5.0,
-    "field_2026": 30.6,
-    "top1_2026": 25.6,
+    "slates_against": 7,
+    "pooled_lift": -6.3,
+    "field_2026": 30.4,
+    "top1_2026": 24.2,
     "lift": [
      65.7,
      -14.9,
@@ -4153,7 +4520,9 @@
      -18.4,
      null,
      -24.4,
-     -28.4
+     -28.4,
+     -1.0,
+     -19.1
     ],
     "field": [
      24.2,
@@ -4162,7 +4531,9 @@
      28.0,
      null,
      42.3,
-     28.4
+     28.4,
+     25.4,
+     34.1
     ],
     "top1": [
      89.9,
@@ -4171,7 +4542,9 @@
      9.6,
      null,
      17.9,
-     0.0
+     0.0,
+     24.3,
+     15.1
     ],
     "by_realized_script": {
      "A": {
@@ -4215,13 +4588,13 @@
      "n_all": 120,
      "basis": "113 primetime winners (of 120)"
     },
-    "check": "split",
-    "slates_n": 6,
+    "check": "watch",
+    "slates_n": 8,
     "slates_with": 2,
-    "slates_against": 4,
-    "pooled_lift": 2.1,
-    "field_2026": 22.7,
-    "top1_2026": 24.8,
+    "slates_against": 6,
+    "pooled_lift": 5.2,
+    "field_2026": 22.9,
+    "top1_2026": 28.0,
     "lift": [
      -18.4,
      8.3,
@@ -4229,7 +4602,9 @@
      -19.5,
      null,
      6.2,
-     10.8
+     10.8,
+     14.5,
+     13.9
     ],
     "field": [
      28.5,
@@ -4238,7 +4613,9 @@
      21.0,
      null,
      19.1,
-     23.8
+     23.8,
+     18.6,
+     27.8
     ],
     "top1": [
      10.1,
@@ -4247,7 +4624,9 @@
      1.5,
      null,
      25.2,
-     34.5
+     34.5,
+     33.1,
+     41.7
     ],
     "by_realized_script": {
      "A": {
@@ -4292,12 +4671,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "mixed",
-    "slates_n": 6,
+    "slates_n": 8,
     "slates_with": 3,
-    "slates_against": 3,
-    "pooled_lift": 9.6,
-    "field_2026": 9.0,
-    "top1_2026": 18.7,
+    "slates_against": 5,
+    "pooled_lift": 4.9,
+    "field_2026": 9.3,
+    "top1_2026": 14.2,
     "lift": [
      -7.4,
      44.0,
@@ -4305,7 +4684,9 @@
      -6.0,
      null,
      26.3,
-     8.5
+     8.5,
+     -13.5,
+     -5.0
     ],
     "field": [
      7.4,
@@ -4314,7 +4695,9 @@
      6.0,
      null,
      10.9,
-     14.6
+     14.6,
+     15.0,
+     5.0
     ],
     "top1": [
      0.0,
@@ -4323,7 +4706,9 @@
      0.0,
      null,
      37.2,
-     23.1
+     23.1,
+     1.5,
+     0.0
     ],
     "by_realized_script": {
      "A": {
@@ -4368,12 +4753,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "mixed",
-    "slates_n": 6,
-    "slates_with": 5,
+    "slates_n": 8,
+    "slates_with": 7,
     "slates_against": 1,
-    "pooled_lift": 1.0,
-    "field_2026": 2.3,
-    "top1_2026": 3.3,
+    "pooled_lift": 0.5,
+    "field_2026": 2.0,
+    "top1_2026": 2.5,
     "lift": [
      -2.5,
      -3.2,
@@ -4381,7 +4766,9 @@
      -2.5,
      null,
      17.5,
-     -1.8
+     -1.8,
+     -1.2,
+     -0.9
     ],
     "field": [
      2.5,
@@ -4390,7 +4777,9 @@
      2.5,
      null,
      1.6,
-     1.8
+     1.8,
+     1.4,
+     1.0
     ],
     "top1": [
      0.0,
@@ -4399,7 +4788,9 @@
      0.0,
      null,
      19.0,
-     0.0
+     0.0,
+     0.2,
+     0.1
     ],
     "by_realized_script": {
      "A": {
@@ -4443,13 +4834,13 @@
      "n_all": 120,
      "basis": "113 primetime winners (of 120)"
     },
-    "check": "split",
-    "slates_n": 6,
+    "check": "watch",
+    "slates_n": 8,
     "slates_with": 3,
-    "slates_against": 3,
-    "pooled_lift": 3.8,
-    "field_2026": 10.2,
-    "top1_2026": 14.0,
+    "slates_against": 5,
+    "pooled_lift": 7.8,
+    "field_2026": 9.4,
+    "top1_2026": 17.2,
     "lift": [
      -16.4,
      20.2,
@@ -4457,7 +4848,9 @@
      -13.4,
      null,
      -3.7,
-     1.9
+     1.9,
+     12.4,
+     27.1
     ],
     "field": [
      16.4,
@@ -4466,7 +4859,9 @@
      14.9,
      null,
      3.7,
-     2.9
+     2.9,
+     10.8,
+     3.1
     ],
     "top1": [
      0.0,
@@ -4475,7 +4870,9 @@
      1.5,
      null,
      0.0,
-     4.7
+     4.7,
+     23.3,
+     30.2
     ],
     "by_realized_script": {
      "A": {
@@ -4519,13 +4916,13 @@
      "n_all": 120,
      "basis": "113 primetime winners (of 120)"
     },
-    "check": "watch",
-    "slates_n": 6,
-    "slates_with": 2,
-    "slates_against": 4,
-    "pooled_lift": -5.0,
-    "field_2026": 36.1,
-    "top1_2026": 31.0,
+    "check": "mixed",
+    "slates_n": 8,
+    "slates_with": 3,
+    "slates_against": 5,
+    "pooled_lift": -3.8,
+    "field_2026": 36.5,
+    "top1_2026": 32.7,
     "lift": [
      4.8,
      -7.1,
@@ -4533,7 +4930,9 @@
      -23.5,
      null,
      6.8,
-     -11.0
+     -11.0,
+     6.3,
+     -6.3
     ],
     "field": [
      35.9,
@@ -4542,7 +4941,9 @@
      36.2,
      null,
      36.7,
-     36.6
+     36.6,
+     38.8,
+     36.8
     ],
     "top1": [
      40.7,
@@ -4551,7 +4952,9 @@
      12.8,
      null,
      43.5,
-     25.5
+     25.5,
+     45.0,
+     30.5
     ],
     "by_realized_script": {
      "A": {
@@ -4596,12 +4999,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "split",
-    "slates_n": 6,
-    "slates_with": 3,
-    "slates_against": 3,
-    "pooled_lift": 0.8,
-    "field_2026": 33.4,
-    "top1_2026": 34.1,
+    "slates_n": 8,
+    "slates_with": 4,
+    "slates_against": 4,
+    "pooled_lift": -1.8,
+    "field_2026": 33.1,
+    "top1_2026": 31.3,
     "lift": [
      -19.7,
      17.4,
@@ -4609,7 +5012,9 @@
      20.9,
      null,
      -16.4,
-     25.6
+     25.6,
+     -25.8,
+     6.5
     ],
     "field": [
      36.7,
@@ -4618,7 +5023,9 @@
      37.3,
      null,
      26.0,
-     32.9
+     32.9,
+     35.8,
+     29.1
     ],
     "top1": [
      17.0,
@@ -4627,7 +5034,9 @@
      58.2,
      null,
      9.6,
-     58.4
+     58.4,
+     10.0,
+     35.7
     ],
     "by_realized_script": {
      "A": {
@@ -4672,12 +5081,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "mixed",
-    "slates_n": 6,
-    "slates_with": 5,
+    "slates_n": 8,
+    "slates_with": 7,
     "slates_against": 1,
-    "pooled_lift": -0.1,
-    "field_2026": 5.0,
-    "top1_2026": 4.9,
+    "pooled_lift": -1.0,
+    "field_2026": 4.7,
+    "top1_2026": 3.7,
     "lift": [
      -5.2,
      -4.0,
@@ -4685,7 +5094,9 @@
      -1.2,
      null,
      16.4,
-     -5.1
+     -5.1,
+     -3.6,
+     -4.0
     ],
     "field": [
      6.0,
@@ -4694,7 +5105,9 @@
      3.8,
      null,
      5.0,
-     5.1
+     5.1,
+     3.6,
+     4.0
     ],
     "top1": [
      0.8,
@@ -4703,6 +5116,8 @@
      2.6,
      null,
      21.5,
+     0.0,
+     0.0,
      0.0
     ],
     "by_realized_script": {
@@ -4748,12 +5163,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "watch",
-    "slates_n": 6,
+    "slates_n": 8,
     "slates_with": 2,
-    "slates_against": 4,
-    "pooled_lift": 14.6,
-    "field_2026": 55.9,
-    "top1_2026": 70.5,
+    "slates_against": 6,
+    "pooled_lift": 24.3,
+    "field_2026": 53.1,
+    "top1_2026": 77.4,
     "lift": [
      -33.0,
      31.6,
@@ -4761,7 +5176,9 @@
      19.2,
      null,
      -35.0,
-     57.2
+     57.2,
+     33.3,
+     73.6
     ],
     "field": [
      74.2,
@@ -4770,7 +5187,9 @@
      74.5,
      null,
      35.0,
-     31.9
+     31.9,
+     62.6,
+     26.3
     ],
     "top1": [
      41.2,
@@ -4779,7 +5198,9 @@
      93.7,
      null,
      0.0,
-     89.1
+     89.1,
+     95.9,
+     99.9
     ],
     "by_realized_script": {
      "A": {
@@ -4817,36 +5238,40 @@
     "direction": 1,
     "source": "captain_templates.*.shapes",
     "hist": {
-     "rate": 77.0,
+     "rate": 75.2,
      "n": 113,
-     "rate_all": 77.5,
+     "rate_all": 75.8,
      "n_all": 120,
      "basis": "113 primetime winners (of 120)"
     },
     "check": "watch",
-    "slates_n": 6,
-    "slates_with": 2,
-    "slates_against": 4,
-    "pooled_lift": -8.3,
-    "field_2026": 73.7,
-    "top1_2026": 65.4,
+    "slates_n": 8,
+    "slates_with": 1,
+    "slates_against": 7,
+    "pooled_lift": -7.2,
+    "field_2026": 71.0,
+    "top1_2026": 63.8,
     "lift": [
-     17.9,
-     -12.5,
-     -30.0,
-     -4.8,
+     22.0,
+     -9.1,
+     -28.2,
+     -3.2,
      null,
-     -33.3,
-     12.9
+     -31.7,
+     -2.4,
+     -0.6,
+     -4.5
     ],
     "field": [
+     70.3,
+     71.8,
+     72.3,
      74.4,
-     75.2,
-     74.1,
-     76.1,
      null,
-     72.2,
-     70.3
+     69.4,
+     65.1,
+     75.3,
+     69.1
     ],
     "top1": [
      92.3,
@@ -4854,24 +5279,26 @@
      44.1,
      71.3,
      null,
-     38.9,
-     83.2
+     37.6,
+     62.8,
+     74.7,
+     64.6
     ],
     "by_realized_script": {
      "A": {
-      "pooled_lift": 17.9,
+      "pooled_lift": 22.0,
       "slates_n": 1
      },
      "B": {
-      "pooled_lift": 12.9,
+      "pooled_lift": -2.4,
       "slates_n": 1
      },
      "C": {
-      "pooled_lift": -19.0,
+      "pooled_lift": -17.4,
       "slates_n": 2
      },
      "D": {
-      "pooled_lift": -21.2,
+      "pooled_lift": -18.6,
       "slates_n": 2
      }
     },
@@ -4880,8 +5307,8 @@
      "slates_n": 19,
      "slates_with": 10,
      "slates_against": 9,
-     "pooled_lift": -1.2,
-     "top1_2026": 70.2
+     "pooled_lift": 0.0,
+     "top1_2026": 67.2
     }
    },
    {
@@ -4897,13 +5324,13 @@
      "n": 23,
      "basis": "23 historical WR_FAV winners"
     },
-    "check": "mixed",
-    "slates_n": 4,
-    "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": -27.5,
-    "field_2026": 78.8,
-    "top1_2026": 51.3,
+    "check": "split",
+    "slates_n": 6,
+    "slates_with": 3,
+    "slates_against": 3,
+    "pooled_lift": -26.6,
+    "field_2026": 81.4,
+    "top1_2026": 54.8,
     "lift": [
      null,
      null,
@@ -4911,7 +5338,9 @@
      -64.3,
      null,
      13.7,
-     12.5
+     12.5,
+     18.1,
+     -67.5
     ],
     "field": [
      null,
@@ -4920,7 +5349,9 @@
      69.5,
      null,
      86.3,
-     87.5
+     87.5,
+     81.3,
+     91.9
     ],
     "top1": [
      null,
@@ -4929,7 +5360,9 @@
      5.1,
      null,
      100.0,
-     100.0
+     100.0,
+     99.3,
+     24.4
     ],
     "by_realized_script": {
      "B": {
@@ -4968,12 +5401,12 @@
      "basis": "23 historical WR_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": 11.6,
-    "field_2026": 54.8,
-    "top1_2026": 66.5,
+    "slates_n": 6,
+    "slates_with": 4,
+    "slates_against": 2,
+    "pooled_lift": 2.9,
+    "field_2026": 55.9,
+    "top1_2026": 58.9,
     "lift": [
      null,
      null,
@@ -4981,7 +5414,9 @@
      18.5,
      null,
      29.9,
-     -17.4
+     -17.4,
+     8.8,
+     -37.8
     ],
     "field": [
      null,
@@ -4990,7 +5425,9 @@
      49.8,
      null,
      70.1,
-     44.6
+     44.6,
+     62.9,
+     53.3
     ],
     "top1": [
      null,
@@ -4999,7 +5436,9 @@
      68.3,
      null,
      100.0,
-     27.2
+     27.2,
+     71.7,
+     15.6
     ],
     "by_realized_script": {
      "B": {
@@ -5037,13 +5476,13 @@
      "n": 23,
      "basis": "23 historical WR_FAV winners"
     },
-    "check": "split",
-    "slates_n": 4,
+    "check": "watch",
+    "slates_n": 6,
     "slates_with": 1,
-    "slates_against": 3,
-    "pooled_lift": -10.7,
-    "field_2026": 23.2,
-    "top1_2026": 12.6,
+    "slates_against": 5,
+    "pooled_lift": -13.7,
+    "field_2026": 22.1,
+    "top1_2026": 8.4,
     "lift": [
      null,
      null,
@@ -5051,7 +5490,9 @@
      23.8,
      null,
      -24.3,
-     -14.4
+     -14.4,
+     -16.2,
+     -23.3
     ],
     "field": [
      null,
@@ -5060,7 +5501,9 @@
      26.4,
      null,
      24.3,
-     14.4
+     14.4,
+     16.5,
+     23.3
     ],
     "top1": [
      null,
@@ -5069,6 +5512,8 @@
      50.2,
      null,
      0.0,
+     0.0,
+     0.3,
      0.0
     ],
     "by_realized_script": {
@@ -5108,12 +5553,12 @@
      "basis": "23 historical WR_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": 5.9,
-    "field_2026": 57.1,
-    "top1_2026": 63.0,
+    "slates_n": 6,
+    "slates_with": 3,
+    "slates_against": 3,
+    "pooled_lift": 8.0,
+    "field_2026": 56.7,
+    "top1_2026": 64.8,
     "lift": [
      null,
      null,
@@ -5121,7 +5566,9 @@
      -11.8,
      null,
      -57.0,
-     37.7
+     37.7,
+     -25.4,
+     49.9
     ],
     "field": [
      null,
@@ -5130,7 +5577,9 @@
      63.7,
      null,
      57.0,
-     62.3
+     62.3,
+     61.8,
+     50.1
     ],
     "top1": [
      null,
@@ -5139,6 +5588,8 @@
      52.0,
      null,
      0.0,
+     100.0,
+     36.5,
      100.0
     ],
     "by_realized_script": {
@@ -5178,12 +5629,12 @@
      "basis": "23 historical WR_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": -11.4,
-    "field_2026": 66.3,
-    "top1_2026": 54.9,
+    "slates_n": 6,
+    "slates_with": 3,
+    "slates_against": 3,
+    "pooled_lift": -12.9,
+    "field_2026": 68.7,
+    "top1_2026": 55.8,
     "lift": [
      null,
      null,
@@ -5191,7 +5642,9 @@
      -40.1,
      null,
      38.8,
-     28.7
+     28.7,
+     21.6,
+     -53.2
     ],
     "field": [
      null,
@@ -5200,7 +5653,9 @@
      59.7,
      null,
      61.2,
-     71.3
+     71.3,
+     73.5,
+     73.2
     ],
     "top1": [
      null,
@@ -5209,7 +5664,9 @@
      19.7,
      null,
      100.0,
-     100.0
+     100.0,
+     95.1,
+     20.0
     ],
     "by_realized_script": {
      "B": {
@@ -5248,12 +5705,12 @@
      "basis": "23 historical WR_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
+    "slates_n": 6,
     "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": 0.7,
-    "field_2026": 25.6,
-    "top1_2026": 26.3,
+    "slates_against": 3,
+    "pooled_lift": 11.1,
+    "field_2026": 25.9,
+    "top1_2026": 37.0,
     "lift": [
      null,
      null,
@@ -5261,7 +5718,9 @@
      -30.8,
      null,
      -23.6,
-     81.8
+     81.8,
+     58.7,
+     5.2
     ],
     "field": [
      null,
@@ -5270,7 +5729,9 @@
      35.9,
      null,
      23.6,
-     18.2
+     18.2,
+     33.9,
+     19.3
     ],
     "top1": [
      null,
@@ -5279,7 +5740,9 @@
      5.1,
      null,
      0.0,
-     100.0
+     100.0,
+     92.5,
+     24.4
     ],
     "by_realized_script": {
      "B": {
@@ -5317,13 +5780,13 @@
      "n": 23,
      "basis": "23 historical WR_DOG winners"
     },
-    "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 2,
+    "check": "agrees",
+    "slates_n": 4,
+    "slates_with": 4,
     "slates_against": 0,
-    "pooled_lift": 32.5,
-    "field_2026": 65.8,
-    "top1_2026": 98.3,
+    "pooled_lift": 28.3,
+    "field_2026": 70.8,
+    "top1_2026": 99.1,
     "lift": [
      null,
      null,
@@ -5331,7 +5794,9 @@
      null,
      null,
      null,
-     37.6
+     37.6,
+     16.8,
+     31.4
     ],
     "field": [
      null,
@@ -5340,7 +5805,9 @@
      null,
      null,
      null,
-     60.2
+     60.2,
+     83.2,
+     68.3
     ],
     "top1": [
      null,
@@ -5349,7 +5816,9 @@
      null,
      null,
      null,
-     97.8
+     97.8,
+     100.0,
+     99.7
     ],
     "by_realized_script": {
      "B": {
@@ -5383,13 +5852,13 @@
      "n": 23,
      "basis": "23 historical WR_DOG winners"
     },
-    "check": "not_enough",
-    "slates_n": 2,
+    "check": "split",
+    "slates_n": 4,
     "slates_with": 1,
-    "slates_against": 1,
-    "pooled_lift": 16.7,
-    "field_2026": 19.6,
-    "top1_2026": 36.2,
+    "slates_against": 2,
+    "pooled_lift": 2.5,
+    "field_2026": 19.3,
+    "top1_2026": 21.8,
     "lift": [
      null,
      null,
@@ -5397,7 +5866,9 @@
      null,
      null,
      null,
-     -3.6
+     -3.6,
+     -23.3,
+     0.0
     ],
     "field": [
      null,
@@ -5406,7 +5877,9 @@
      null,
      null,
      null,
-     19.3
+     19.3,
+     23.3,
+     14.7
     ],
     "top1": [
      null,
@@ -5415,7 +5888,9 @@
      null,
      null,
      null,
-     15.7
+     15.7,
+     0.0,
+     14.7
     ],
     "by_realized_script": {
      "B": {
@@ -5449,13 +5924,13 @@
      "n": 23,
      "basis": "23 historical WR_DOG winners"
     },
-    "check": "not_enough",
-    "slates_n": 2,
+    "check": "split",
+    "slates_n": 4,
     "slates_with": 1,
-    "slates_against": 1,
-    "pooled_lift": -7.8,
-    "field_2026": 47.5,
-    "top1_2026": 39.7,
+    "slates_against": 3,
+    "pooled_lift": -21.7,
+    "field_2026": 41.9,
+    "top1_2026": 20.3,
     "lift": [
      null,
      null,
@@ -5463,7 +5938,9 @@
      null,
      null,
      null,
-     22.0
+     22.0,
+     -58.3,
+     -12.8
     ],
     "field": [
      null,
@@ -5472,7 +5949,9 @@
      null,
      null,
      null,
-     47.4
+     47.4,
+     58.3,
+     14.6
     ],
     "top1": [
      null,
@@ -5481,7 +5960,9 @@
      null,
      null,
      null,
-     69.4
+     69.4,
+     0.0,
+     1.8
     ],
     "by_realized_script": {
      "B": {
@@ -5515,13 +5996,13 @@
      "n": 23,
      "basis": "23 historical WR_DOG winners"
     },
-    "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 1,
-    "slates_against": 1,
-    "pooled_lift": -5.6,
-    "field_2026": 70.6,
-    "top1_2026": 64.9,
+    "check": "split",
+    "slates_n": 4,
+    "slates_with": 2,
+    "slates_against": 2,
+    "pooled_lift": 5.8,
+    "field_2026": 70.8,
+    "top1_2026": 76.5,
     "lift": [
      null,
      null,
@@ -5529,7 +6010,9 @@
      null,
      null,
      null,
-     4.4
+     4.4,
+     37.7,
+     -3.3
     ],
     "field": [
      null,
@@ -5538,7 +6021,9 @@
      null,
      null,
      null,
-     63.2
+     63.2,
+     62.3,
+     79.5
     ],
     "top1": [
      null,
@@ -5547,7 +6032,9 @@
      null,
      null,
      null,
-     67.6
+     67.6,
+     100.0,
+     76.3
     ],
     "by_realized_script": {
      "B": {
@@ -5581,13 +6068,13 @@
      "n": 23,
      "basis": "23 historical WR_DOG winners"
     },
-    "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 0,
-    "slates_against": 2,
-    "pooled_lift": 13.6,
-    "field_2026": 52.1,
-    "top1_2026": 65.7,
+    "check": "split",
+    "slates_n": 4,
+    "slates_with": 1,
+    "slates_against": 3,
+    "pooled_lift": 8.3,
+    "field_2026": 52.4,
+    "top1_2026": 60.7,
     "lift": [
      null,
      null,
@@ -5595,7 +6082,9 @@
      null,
      null,
      null,
-     10.1
+     10.1,
+     -28.1,
+     34.1
     ],
     "field": [
      null,
@@ -5604,7 +6093,9 @@
      null,
      null,
      null,
-     63.4
+     63.4,
+     59.9,
+     45.6
     ],
     "top1": [
      null,
@@ -5613,7 +6104,9 @@
      null,
      null,
      null,
-     73.5
+     73.5,
+     31.8,
+     79.7
     ],
     "by_realized_script": {
      "B": {
@@ -5647,13 +6140,13 @@
      "n": 23,
      "basis": "23 historical WR_DOG winners"
     },
-    "check": "not_enough",
-    "slates_n": 2,
+    "check": "split",
+    "slates_n": 4,
     "slates_with": 1,
-    "slates_against": 1,
-    "pooled_lift": 17.9,
-    "field_2026": 28.1,
-    "top1_2026": 45.9,
+    "slates_against": 3,
+    "pooled_lift": 36.6,
+    "field_2026": 33.2,
+    "top1_2026": 69.8,
     "lift": [
      null,
      null,
@@ -5661,7 +6154,9 @@
      null,
      null,
      null,
-     60.4
+     60.4,
+     72.1,
+     38.5
     ],
     "field": [
      null,
@@ -5670,7 +6165,9 @@
      null,
      null,
      null,
-     29.1
+     29.1,
+     27.9,
+     48.9
     ],
     "top1": [
      null,
@@ -5679,7 +6176,9 @@
      null,
      null,
      null,
-     89.5
+     89.5,
+     100.0,
+     87.4
     ],
     "by_realized_script": {
      "B": {
@@ -5714,12 +6213,12 @@
      "basis": "15 historical RB_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 1,
+    "slates_n": 6,
+    "slates_with": 3,
     "slates_against": 3,
-    "pooled_lift": -17.8,
-    "field_2026": 68.0,
-    "top1_2026": 50.3,
+    "pooled_lift": -4.6,
+    "field_2026": 70.4,
+    "top1_2026": 65.7,
     "lift": [
      -5.5,
      -49.8,
@@ -5727,7 +6226,9 @@
      null,
      null,
      15.1,
-     null
+     null,
+     28.6,
+     14.5
     ],
     "field": [
      56.1,
@@ -5736,7 +6237,9 @@
      null,
      null,
      57.5,
-     null
+     null,
+     70.0,
+     79.9
     ],
     "top1": [
      50.6,
@@ -5745,7 +6248,9 @@
      null,
      null,
      72.6,
-     null
+     null,
+     98.6,
+     94.3
     ],
     "by_realized_script": {
      "A": {
@@ -5783,13 +6288,13 @@
      "n": 15,
      "basis": "15 historical RB_FAV winners"
     },
-    "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": 11.7,
-    "field_2026": 37.6,
-    "top1_2026": 49.3,
+    "check": "agrees",
+    "slates_n": 6,
+    "slates_with": 4,
+    "slates_against": 2,
+    "pooled_lift": 7.1,
+    "field_2026": 39.1,
+    "top1_2026": 46.2,
     "lift": [
      21.1,
      13.9,
@@ -5797,7 +6302,9 @@
      null,
      null,
      52.6,
-     null
+     null,
+     19.6,
+     -23.6
     ],
     "field": [
      35.9,
@@ -5806,7 +6313,9 @@
      null,
      null,
      47.4,
-     null
+     null,
+     60.3,
+     23.6
     ],
     "top1": [
      57.0,
@@ -5815,7 +6324,9 @@
      null,
      null,
      100.0,
-     null
+     null,
+     79.9,
+     0.0
     ],
     "by_realized_script": {
      "A": {
@@ -5854,12 +6365,12 @@
      "basis": "15 historical RB_FAV winners"
     },
     "check": "watch",
-    "slates_n": 4,
-    "slates_with": 0,
-    "slates_against": 4,
-    "pooled_lift": -19.3,
-    "field_2026": 33.2,
-    "top1_2026": 13.8,
+    "slates_n": 6,
+    "slates_with": 1,
+    "slates_against": 5,
+    "pooled_lift": -17.1,
+    "field_2026": 29.2,
+    "top1_2026": 12.1,
     "lift": [
      -13.6,
      -35.4,
@@ -5867,7 +6378,9 @@
      null,
      null,
      -7.3,
-     null
+     null,
+     1.7,
+     -27.2
     ],
     "field": [
      35.7,
@@ -5876,7 +6389,9 @@
      null,
      null,
      36.4,
-     null
+     null,
+     15.5,
+     27.2
     ],
     "top1": [
      22.1,
@@ -5885,7 +6400,9 @@
      null,
      null,
      29.1,
-     null
+     null,
+     17.2,
+     0.0
     ],
     "by_realized_script": {
      "A": {
@@ -5923,13 +6440,13 @@
      "n": 15,
      "basis": "15 historical RB_FAV winners"
     },
-    "check": "split",
-    "slates_n": 4,
+    "check": "watch",
+    "slates_n": 6,
     "slates_with": 1,
-    "slates_against": 3,
-    "pooled_lift": -10.8,
-    "field_2026": 29.8,
-    "top1_2026": 19.1,
+    "slates_against": 5,
+    "pooled_lift": -17.8,
+    "field_2026": 30.5,
+    "top1_2026": 12.7,
     "lift": [
      46.8,
      -21.9,
@@ -5937,7 +6454,9 @@
      null,
      null,
      -41.9,
-     null
+     null,
+     -22.0,
+     -42.0
     ],
     "field": [
      25.9,
@@ -5946,7 +6465,9 @@
      null,
      null,
      41.9,
-     null
+     null,
+     22.0,
+     42.0
     ],
     "top1": [
      72.7,
@@ -5955,7 +6476,9 @@
      null,
      null,
      0.0,
-     null
+     null,
+     0.0,
+     0.0
     ],
     "by_realized_script": {
      "A": {
@@ -5994,12 +6517,12 @@
      "basis": "15 historical RB_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
+    "slates_n": 6,
     "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": 16.7,
-    "field_2026": 52.7,
-    "top1_2026": 69.4,
+    "slates_against": 4,
+    "pooled_lift": -4.4,
+    "field_2026": 51.6,
+    "top1_2026": 47.2,
     "lift": [
      -18.8,
      52.1,
@@ -6007,7 +6530,9 @@
      null,
      null,
      50.4,
-     null
+     null,
+     -30.7,
+     -62.4
     ],
     "field": [
      44.1,
@@ -6016,7 +6541,9 @@
      null,
      null,
      49.6,
-     null
+     null,
+     32.7,
+     66.2
     ],
     "top1": [
      25.3,
@@ -6025,7 +6552,9 @@
      null,
      null,
      100.0,
-     null
+     null,
+     1.9,
+     3.8
     ],
     "by_realized_script": {
      "A": {
@@ -6063,13 +6592,13 @@
      "n": 15,
      "basis": "15 historical RB_FAV winners"
     },
-    "check": "mixed",
-    "slates_n": 4,
-    "slates_with": 3,
+    "check": "agrees",
+    "slates_n": 6,
+    "slates_with": 5,
     "slates_against": 1,
-    "pooled_lift": -11.2,
-    "field_2026": 20.5,
-    "top1_2026": 9.2,
+    "pooled_lift": -13.6,
+    "field_2026": 19.8,
+    "top1_2026": 6.1,
     "lift": [
      -6.7,
      -15.4,
@@ -6077,7 +6606,9 @@
      null,
      null,
      -27.4,
-     null
+     null,
+     -28.4,
+     -8.4
     ],
     "field": [
      11.9,
@@ -6086,7 +6617,9 @@
      null,
      null,
      27.4,
-     null
+     null,
+     28.4,
+     8.4
     ],
     "top1": [
      5.1,
@@ -6095,7 +6628,9 @@
      null,
      null,
      0.0,
-     null
+     null,
+     0.0,
+     0.0
     ],
     "by_realized_script": {
      "A": {
@@ -6134,12 +6669,12 @@
      "basis": "15 historical RB_FAV winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": 5.5,
-    "field_2026": 60.6,
-    "top1_2026": 66.1,
+    "slates_n": 6,
+    "slates_with": 3,
+    "slates_against": 3,
+    "pooled_lift": 4.0,
+    "field_2026": 64.2,
+    "top1_2026": 68.2,
     "lift": [
      41.5,
      -0.1,
@@ -6147,7 +6682,9 @@
      null,
      null,
      32.5,
-     null
+     null,
+     36.4,
+     -34.2
     ],
     "field": [
      58.5,
@@ -6156,7 +6693,9 @@
      null,
      null,
      67.5,
-     null
+     null,
+     63.1,
+     79.5
     ],
     "top1": [
      100.0,
@@ -6165,7 +6704,9 @@
      null,
      null,
      100.0,
-     null
+     null,
+     99.5,
+     45.3
     ],
     "by_realized_script": {
      "A": {
@@ -6203,13 +6744,13 @@
      "n": 15,
      "basis": "15 historical RB_FAV winners"
     },
-    "check": "split",
-    "slates_n": 4,
+    "check": "watch",
+    "slates_n": 6,
     "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": 3.8,
-    "field_2026": 22.8,
-    "top1_2026": 26.6,
+    "slates_against": 4,
+    "pooled_lift": 21.1,
+    "field_2026": 20.7,
+    "top1_2026": 41.9,
     "lift": [
      13.3,
      29.9,
@@ -6217,7 +6758,9 @@
      null,
      null,
      -9.7,
-     null
+     null,
+     77.0,
+     34.5
     ],
     "field": [
      28.7,
@@ -6226,7 +6769,9 @@
      null,
      null,
      9.7,
-     null
+     null,
+     22.5,
+     10.8
     ],
     "top1": [
      42.0,
@@ -6235,7 +6780,9 @@
      null,
      null,
      0.0,
-     null
+     null,
+     99.5,
+     45.3
     ],
     "by_realized_script": {
      "A": {
@@ -6273,13 +6820,13 @@
      "n": 15,
      "basis": "15 historical RB_FAV winners"
     },
-    "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": -9.9,
-    "field_2026": 57.9,
-    "top1_2026": 47.9,
+    "check": "agrees",
+    "slates_n": 6,
+    "slates_with": 4,
+    "slates_against": 2,
+    "pooled_lift": -9.7,
+    "field_2026": 59.4,
+    "top1_2026": 49.8,
     "lift": [
      -23.7,
      -38.4,
@@ -6287,7 +6834,9 @@
      null,
      null,
      -22.0,
-     null
+     null,
+     -69.8,
+     51.3
     ],
     "field": [
      72.0,
@@ -6296,7 +6845,9 @@
      null,
      null,
      55.1,
-     null
+     null,
+     76.5,
+     48.7
     ],
     "top1": [
      48.4,
@@ -6305,7 +6856,9 @@
      null,
      null,
      33.1,
-     null
+     null,
+     6.7,
+     100.0
     ],
     "by_realized_script": {
      "A": {
@@ -6344,12 +6897,12 @@
      "basis": "11 historical RB_DOG winners"
     },
     "check": "split",
-    "slates_n": 4,
+    "slates_n": 5,
     "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": 19.7,
-    "field_2026": 23.6,
-    "top1_2026": 43.3,
+    "slates_against": 2,
+    "pooled_lift": 15.0,
+    "field_2026": 23.7,
+    "top1_2026": 38.6,
     "lift": [
      null,
      -18.2,
@@ -6357,7 +6910,9 @@
      30.9,
      null,
      22.6,
-     null
+     null,
+     null,
+     -4.1
     ],
     "field": [
      null,
@@ -6366,7 +6921,9 @@
      17.2,
      null,
      30.2,
-     null
+     null,
+     null,
+     24.1
     ],
     "top1": [
      null,
@@ -6375,7 +6932,9 @@
      48.1,
      null,
      52.8,
-     null
+     null,
+     null,
+     20.0
     ],
     "by_realized_script": {
      "C": {
@@ -6410,12 +6969,12 @@
      "basis": "11 historical RB_DOG winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 2,
+    "slates_n": 5,
+    "slates_with": 3,
     "slates_against": 2,
-    "pooled_lift": -4.7,
-    "field_2026": 21.0,
-    "top1_2026": 16.3,
+    "pooled_lift": -1.6,
+    "field_2026": 20.3,
+    "top1_2026": 18.6,
     "lift": [
      null,
      -17.5,
@@ -6423,7 +6982,9 @@
      12.0,
      null,
      -31.5,
-     null
+     null,
+     null,
+     10.7
     ],
     "field": [
      null,
@@ -6432,7 +6993,9 @@
      17.7,
      null,
      31.5,
-     null
+     null,
+     null,
+     17.2
     ],
     "top1": [
      null,
@@ -6441,7 +7004,9 @@
      29.7,
      null,
      0.0,
-     null
+     null,
+     null,
+     27.8
     ],
     "by_realized_script": {
      "C": {
@@ -6475,13 +7040,13 @@
      "n": 11,
      "basis": "11 historical RB_DOG winners"
     },
-    "check": "split",
-    "slates_n": 4,
+    "check": "watch",
+    "slates_n": 5,
     "slates_with": 1,
-    "slates_against": 3,
-    "pooled_lift": -9.9,
-    "field_2026": 48.1,
-    "top1_2026": 38.2,
+    "slates_against": 4,
+    "pooled_lift": -10.2,
+    "field_2026": 54.3,
+    "top1_2026": 44.1,
     "lift": [
      null,
      -3.8,
@@ -6489,7 +7054,9 @@
      -43.1,
      null,
      51.5,
-     null
+     null,
+     null,
+     -11.1
     ],
     "field": [
      null,
@@ -6498,7 +7065,9 @@
      43.3,
      null,
      48.5,
-     null
+     null,
+     null,
+     78.9
     ],
     "top1": [
      null,
@@ -6507,7 +7076,9 @@
      0.2,
      null,
      100.0,
-     null
+     null,
+     null,
+     67.8
     ],
     "by_realized_script": {
      "C": {
@@ -6541,13 +7112,13 @@
      "n": 11,
      "basis": "11 historical RB_DOG winners"
     },
-    "check": "split",
-    "slates_n": 4,
+    "check": "watch",
+    "slates_n": 5,
     "slates_with": 1,
-    "slates_against": 3,
-    "pooled_lift": -19.4,
-    "field_2026": 74.8,
-    "top1_2026": 55.4,
+    "slates_against": 4,
+    "pooled_lift": -18.0,
+    "field_2026": 76.2,
+    "top1_2026": 58.3,
     "lift": [
      null,
      -14.5,
@@ -6555,7 +7126,9 @@
      18.0,
      null,
      -11.9,
-     null
+     null,
+     null,
+     -12.3
     ],
     "field": [
      null,
@@ -6564,7 +7137,9 @@
      82.0,
      null,
      60.6,
-     null
+     null,
+     null,
+     82.1
     ],
     "top1": [
      null,
@@ -6573,7 +7148,9 @@
      100.0,
      null,
      48.7,
-     null
+     null,
+     null,
+     69.8
     ],
     "by_realized_script": {
      "C": {
@@ -6607,13 +7184,13 @@
      "n": 11,
      "basis": "11 historical RB_DOG winners"
     },
-    "check": "mixed",
-    "slates_n": 4,
-    "slates_with": 3,
+    "check": "split",
+    "slates_n": 5,
+    "slates_with": 4,
     "slates_against": 1,
-    "pooled_lift": 12.1,
-    "field_2026": 9.4,
-    "top1_2026": 21.5,
+    "pooled_lift": 0.2,
+    "field_2026": 17.0,
+    "top1_2026": 17.2,
     "lift": [
      null,
      56.6,
@@ -6621,7 +7198,9 @@
      -5.0,
      null,
      -1.8,
-     null
+     null,
+     null,
+     -47.3
     ],
     "field": [
      null,
@@ -6630,7 +7209,9 @@
      5.0,
      null,
      1.8,
-     null
+     null,
+     null,
+     47.3
     ],
     "top1": [
      null,
@@ -6639,7 +7220,9 @@
      0.0,
      null,
      0.0,
-     null
+     null,
+     null,
+     0.0
     ],
     "by_realized_script": {
      "C": {
@@ -6674,12 +7257,12 @@
      "basis": "11 historical RB_DOG winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
+    "slates_n": 5,
+    "slates_with": 4,
     "slates_against": 1,
-    "pooled_lift": 2.4,
-    "field_2026": 30.9,
-    "top1_2026": 33.3,
+    "pooled_lift": -3.3,
+    "field_2026": 29.9,
+    "top1_2026": 26.6,
     "lift": [
      null,
      61.0,
@@ -6687,7 +7270,9 @@
      -21.5,
      null,
      -9.3,
-     null
+     null,
+     null,
+     -26.1
     ],
     "field": [
      null,
@@ -6696,7 +7281,9 @@
      27.6,
      null,
      36.1,
-     null
+     null,
+     null,
+     26.1
     ],
     "top1": [
      null,
@@ -6705,7 +7292,9 @@
      6.1,
      null,
      26.8,
-     null
+     null,
+     null,
+     0.0
     ],
     "by_realized_script": {
      "C": {
@@ -6739,13 +7328,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
+    "check": "split",
+    "slates_n": 5,
     "slates_with": 3,
-    "slates_against": 0,
-    "pooled_lift": 34.4,
-    "field_2026": 58.2,
-    "top1_2026": 92.6,
+    "slates_against": 2,
+    "pooled_lift": 9.1,
+    "field_2026": 54.9,
+    "top1_2026": 63.9,
     "lift": [
      35.2,
      null,
@@ -6753,7 +7342,9 @@
      null,
      null,
      43.6,
-     24.5
+     24.5,
+     -41.6,
+     -16.3
     ],
     "field": [
      54.1,
@@ -6762,7 +7353,9 @@
      null,
      null,
      56.4,
-     64.2
+     64.2,
+     72.2,
+     27.4
     ],
     "top1": [
      89.3,
@@ -6771,7 +7364,9 @@
      null,
      null,
      100.0,
-     88.6
+     88.6,
+     30.6,
+     11.1
     ],
     "by_realized_script": {
      "A": {
@@ -6809,13 +7404,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 1,
+    "check": "mixed",
+    "slates_n": 5,
+    "slates_with": 3,
     "slates_against": 2,
-    "pooled_lift": -14.8,
-    "field_2026": 78.4,
-    "top1_2026": 63.7,
+    "pooled_lift": -5.6,
+    "field_2026": 82.2,
+    "top1_2026": 76.6,
     "lift": [
      -12.7,
      null,
@@ -6823,7 +7418,9 @@
      null,
      null,
      7.4,
-     -39.0
+     -39.0,
+     13.5,
+     2.8
     ],
     "field": [
      78.1,
@@ -6832,7 +7429,9 @@
      null,
      null,
      78.7,
-     78.4
+     78.4,
+     83.0,
+     92.6
     ],
     "top1": [
      65.5,
@@ -6841,7 +7440,9 @@
      null,
      null,
      86.1,
-     39.4
+     39.4,
+     96.5,
+     95.5
     ],
     "by_realized_script": {
      "A": {
@@ -6879,13 +7480,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 1,
-    "slates_against": 2,
-    "pooled_lift": -3.0,
-    "field_2026": 58.5,
-    "top1_2026": 55.5,
+    "check": "split",
+    "slates_n": 5,
+    "slates_with": 2,
+    "slates_against": 3,
+    "pooled_lift": -7.3,
+    "field_2026": 60.5,
+    "top1_2026": 53.1,
     "lift": [
      45.2,
      null,
@@ -6893,7 +7494,9 @@
      null,
      null,
      -52.3,
-     -2.0
+     -2.0,
+     28.5,
+     -55.9
     ],
     "field": [
      54.8,
@@ -6902,7 +7505,9 @@
      null,
      null,
      72.0,
-     48.7
+     48.7,
+     66.8,
+     60.0
     ],
     "top1": [
      100.0,
@@ -6911,7 +7516,9 @@
      null,
      null,
      19.7,
-     46.7
+     46.7,
+     95.3,
+     4.0
     ],
     "by_realized_script": {
      "A": {
@@ -6949,13 +7556,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 1,
+    "check": "split",
+    "slates_n": 5,
+    "slates_with": 3,
     "slates_against": 2,
-    "pooled_lift": 8.2,
-    "field_2026": 33.9,
-    "top1_2026": 42.0,
+    "pooled_lift": 29.2,
+    "field_2026": 32.8,
+    "top1_2026": 61.9,
     "lift": [
      -25.6,
      null,
@@ -6963,7 +7570,9 @@
      null,
      null,
      -24.7,
-     74.8
+     74.8,
+     37.7,
+     83.8
     ],
     "field": [
      59.2,
@@ -6972,7 +7581,9 @@
      null,
      null,
      24.7,
-     17.8
+     17.8,
+     45.9,
+     16.2
     ],
     "top1": [
      33.6,
@@ -6981,7 +7592,9 @@
      null,
      null,
      0.0,
-     92.5
+     92.5,
+     83.5,
+     100.0
     ],
     "by_realized_script": {
      "A": {
@@ -7019,13 +7632,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 1,
-    "slates_against": 2,
-    "pooled_lift": -8.2,
-    "field_2026": 46.2,
-    "top1_2026": 38.1,
+    "check": "split",
+    "slates_n": 5,
+    "slates_with": 2,
+    "slates_against": 3,
+    "pooled_lift": -5.5,
+    "field_2026": 48.0,
+    "top1_2026": 42.5,
     "lift": [
      -29.5,
      null,
@@ -7033,7 +7646,9 @@
      null,
      null,
      55.3,
-     -50.3
+     -50.3,
+     -17.3,
+     14.3
     ],
     "field": [
      39.1,
@@ -7042,7 +7657,9 @@
      null,
      null,
      44.7,
-     54.8
+     54.8,
+     33.7,
+     67.5
     ],
     "top1": [
      9.6,
@@ -7051,7 +7668,9 @@
      null,
      null,
      100.0,
-     4.6
+     4.6,
+     16.5,
+     81.8
     ],
     "by_realized_script": {
      "A": {
@@ -7077,76 +7696,6 @@
     }
    },
    {
-    "id": "QB_FAV|+opp_WR",
-    "type": "directional",
-    "label": "QB captain (fav): include opp WR",
-    "group": "template",
-    "cond": "QB_FAV",
-    "direction": 1,
-    "source": "captain_templates.QB_FAV.include",
-    "hist": {
-     "rate": 53.3,
-     "n": 15,
-     "basis": "15 historical QB_FAV winners"
-    },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 1,
-    "slates_against": 2,
-    "pooled_lift": -15.5,
-    "field_2026": 56.5,
-    "top1_2026": 41.0,
-    "lift": [
-     -63.6,
-     null,
-     null,
-     null,
-     null,
-     -29.2,
-     46.3
-    ],
-    "field": [
-     65.8,
-     null,
-     null,
-     null,
-     null,
-     50.0,
-     53.7
-    ],
-    "top1": [
-     2.2,
-     null,
-     null,
-     null,
-     null,
-     20.8,
-     100.0
-    ],
-    "by_realized_script": {
-     "A": {
-      "pooled_lift": -63.6,
-      "slates_n": 1
-     },
-     "B": {
-      "pooled_lift": 46.3,
-      "slates_n": 1
-     },
-     "C": {
-      "pooled_lift": -29.2,
-      "slates_n": 1
-     }
-    },
-    "sunday": {
-     "check": "not_enough",
-     "slates_n": 3,
-     "slates_with": 3,
-     "slates_against": 0,
-     "pooled_lift": 25.8,
-     "top1_2026": 88.6
-    }
-   },
-   {
     "id": "QB_FAV|-own_DST",
     "type": "directional",
     "label": "QB captain (fav): avoid own DST",
@@ -7159,13 +7708,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 2,
+    "check": "split",
+    "slates_n": 5,
+    "slates_with": 4,
     "slates_against": 1,
-    "pooled_lift": 10.2,
-    "field_2026": 22.3,
-    "top1_2026": 32.5,
+    "pooled_lift": -2.5,
+    "field_2026": 22.0,
+    "top1_2026": 19.5,
     "lift": [
      82.4,
      null,
@@ -7173,7 +7722,9 @@
      null,
      null,
      -32.8,
-     -19.0
+     -19.0,
+     -15.5,
+     -27.5
     ],
     "field": [
      15.2,
@@ -7182,7 +7733,9 @@
      null,
      null,
      32.8,
-     19.0
+     19.0,
+     15.5,
+     27.5
     ],
     "top1": [
      97.6,
@@ -7190,6 +7743,8 @@
      null,
      null,
      null,
+     0.0,
+     0.0,
      0.0,
      0.0
     ],
@@ -7229,13 +7784,13 @@
      "n": 15,
      "basis": "15 historical QB_FAV winners"
     },
-    "check": "not_enough",
-    "slates_n": 3,
-    "slates_with": 2,
-    "slates_against": 1,
-    "pooled_lift": 4.2,
-    "field_2026": 26.5,
-    "top1_2026": 30.7,
+    "check": "split",
+    "slates_n": 5,
+    "slates_with": 3,
+    "slates_against": 2,
+    "pooled_lift": -0.7,
+    "field_2026": 23.6,
+    "top1_2026": 22.9,
     "lift": [
      -27.3,
      null,
@@ -7243,7 +7798,9 @@
      null,
      null,
      66.2,
-     -26.4
+     -26.4,
+     8.5,
+     -24.6
     ],
     "field": [
      28.8,
@@ -7252,7 +7809,9 @@
      null,
      null,
      24.3,
-     26.4
+     26.4,
+     13.8,
+     24.6
     ],
     "top1": [
      1.6,
@@ -7261,6 +7820,8 @@
      null,
      null,
      90.5,
+     0.0,
+     22.4,
      0.0
     ],
     "by_realized_script": {
@@ -7300,12 +7861,12 @@
      "basis": "9 historical QB_DOG winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": 1.9,
-    "field_2026": 74.3,
-    "top1_2026": 76.2,
+    "slates_n": 6,
+    "slates_with": 4,
+    "slates_against": 2,
+    "pooled_lift": -5.8,
+    "field_2026": 76.1,
+    "top1_2026": 70.3,
     "lift": [
      null,
      -61.0,
@@ -7313,7 +7874,9 @@
      17.3,
      null,
      null,
-     19.2
+     19.2,
+     -67.2,
+     24.6
     ],
     "field": [
      null,
@@ -7322,7 +7885,9 @@
      81.3,
      null,
      null,
-     80.8
+     80.8,
+     84.1,
+     75.4
     ],
     "top1": [
      null,
@@ -7331,6 +7896,8 @@
      98.6,
      null,
      null,
+     100.0,
+     16.9,
      100.0
     ],
     "by_realized_script": {
@@ -7370,12 +7937,12 @@
      "basis": "9 historical QB_DOG winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 2,
-    "slates_against": 2,
-    "pooled_lift": -12.3,
-    "field_2026": 50.7,
-    "top1_2026": 38.4,
+    "slates_n": 6,
+    "slates_with": 3,
+    "slates_against": 3,
+    "pooled_lift": -9.7,
+    "field_2026": 51.9,
+    "top1_2026": 42.2,
     "lift": [
      null,
      -39.0,
@@ -7383,7 +7950,9 @@
      -55.0,
      null,
      null,
-     13.3
+     13.3,
+     -53.4,
+     44.1
     ],
     "field": [
      null,
@@ -7392,7 +7961,9 @@
      57.7,
      null,
      null,
-     63.9
+     63.9,
+     57.4,
+     51.3
     ],
     "top1": [
      null,
@@ -7401,7 +7972,9 @@
      2.7,
      null,
      null,
-     77.2
+     77.2,
+     4.0,
+     95.4
     ],
     "by_realized_script": {
      "B": {
@@ -7439,13 +8012,13 @@
      "n": 9,
      "basis": "9 historical QB_DOG winners"
     },
-    "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": 20.1,
-    "field_2026": 48.8,
-    "top1_2026": 68.9,
+    "check": "agrees",
+    "slates_n": 6,
+    "slates_with": 4,
+    "slates_against": 2,
+    "pooled_lift": 16.0,
+    "field_2026": 50.2,
+    "top1_2026": 66.1,
     "lift": [
      null,
      43.0,
@@ -7453,7 +8026,9 @@
      40.8,
      null,
      null,
-     -27.4
+     -27.4,
+     34.9,
+     -19.4
     ],
     "field": [
      null,
@@ -7462,7 +8037,9 @@
      47.1,
      null,
      null,
-     39.6
+     39.6,
+     61.2,
+     44.6
     ],
     "top1": [
      null,
@@ -7471,7 +8048,9 @@
      87.8,
      null,
      null,
-     12.2
+     12.2,
+     96.0,
+     25.1
     ],
     "by_realized_script": {
      "B": {
@@ -7510,12 +8089,12 @@
      "basis": "9 historical QB_DOG winners"
     },
     "check": "watch",
-    "slates_n": 4,
+    "slates_n": 6,
     "slates_with": 0,
-    "slates_against": 4,
-    "pooled_lift": -19.3,
-    "field_2026": 24.3,
-    "top1_2026": 5.0,
+    "slates_against": 6,
+    "pooled_lift": -16.4,
+    "field_2026": 21.2,
+    "top1_2026": 4.8,
     "lift": [
      null,
      -27.4,
@@ -7523,7 +8102,9 @@
      -16.3,
      null,
      null,
-     -21.3
+     -21.3,
+     -11.7,
+     -9.6
     ],
     "field": [
      null,
@@ -7532,7 +8113,9 @@
      24.4,
      null,
      null,
-     21.3
+     21.3,
+     16.7,
+     13.5
     ],
     "top1": [
      null,
@@ -7541,7 +8124,9 @@
      8.1,
      null,
      null,
-     0.0
+     0.0,
+     5.0,
+     3.9
     ],
     "by_realized_script": {
      "B": {
@@ -7580,12 +8165,12 @@
      "basis": "9 historical QB_DOG winners"
     },
     "check": "mixed",
-    "slates_n": 4,
+    "slates_n": 6,
     "slates_with": 1,
-    "slates_against": 3,
-    "pooled_lift": 18.8,
-    "field_2026": 8.0,
-    "top1_2026": 26.8,
+    "slates_against": 5,
+    "pooled_lift": 11.4,
+    "field_2026": 6.9,
+    "top1_2026": 18.2,
     "lift": [
      null,
      -4.5,
@@ -7593,7 +8178,9 @@
      89.7,
      null,
      null,
-     -1.7
+     -1.7,
+     -3.3,
+     -3.7
     ],
     "field": [
      null,
@@ -7602,7 +8189,9 @@
      10.3,
      null,
      null,
-     6.7
+     6.7,
+     3.3,
+     6.2
     ],
     "top1": [
      null,
@@ -7611,7 +8200,9 @@
      100.0,
      null,
      null,
-     4.9
+     4.9,
+     0.0,
+     2.5
     ],
     "by_realized_script": {
      "B": {
@@ -7650,12 +8241,12 @@
      "basis": "9 historical QB_DOG winners"
     },
     "check": "split",
-    "slates_n": 4,
-    "slates_with": 3,
-    "slates_against": 1,
-    "pooled_lift": -6.6,
-    "field_2026": 35.5,
-    "top1_2026": 28.8,
+    "slates_n": 6,
+    "slates_with": 4,
+    "slates_against": 2,
+    "pooled_lift": -3.5,
+    "field_2026": 37.3,
+    "top1_2026": 33.7,
     "lift": [
      null,
      -17.9,
@@ -7663,7 +8254,9 @@
      -30.7,
      null,
      null,
-     51.0
+     51.0,
+     23.3,
+     -17.9
     ],
     "field": [
      null,
@@ -7672,7 +8265,9 @@
      30.7,
      null,
      null,
-     41.8
+     41.8,
+     60.8,
+     21.0
     ],
     "top1": [
      null,
@@ -7681,7 +8276,9 @@
      0.0,
      null,
      null,
-     92.8
+     92.8,
+     84.1,
+     3.1
     ],
     "by_realized_script": {
      "B": {
@@ -7720,11 +8317,11 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 2,
+    "slates_n": 3,
+    "slates_with": 3,
     "slates_against": 0,
-    "pooled_lift": 11.3,
-    "field_2026": 88.7,
+    "pooled_lift": 10.4,
+    "field_2026": 89.6,
     "top1_2026": 100.0,
     "lift": [
      null,
@@ -7733,7 +8330,9 @@
      null,
      null,
      12.0,
-     10.6
+     10.6,
+     8.6,
+     null
     ],
     "field": [
      null,
@@ -7742,7 +8341,9 @@
      null,
      null,
      88.0,
-     89.4
+     89.4,
+     91.4,
+     null
     ],
     "top1": [
      null,
@@ -7751,7 +8352,9 @@
      null,
      null,
      100.0,
-     100.0
+     100.0,
+     100.0,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -7786,12 +8389,12 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 1,
+    "slates_n": 3,
+    "slates_with": 2,
     "slates_against": 1,
-    "pooled_lift": -7.4,
-    "field_2026": 60.5,
-    "top1_2026": 53.1,
+    "pooled_lift": 3.5,
+    "field_2026": 65.2,
+    "top1_2026": 68.7,
     "lift": [
      null,
      null,
@@ -7799,7 +8402,9 @@
      null,
      null,
      4.5,
-     -19.4
+     -19.4,
+     25.5,
+     null
     ],
     "field": [
      null,
@@ -7808,7 +8413,9 @@
      null,
      null,
      53.9,
-     67.2
+     67.2,
+     74.5,
+     null
     ],
     "top1": [
      null,
@@ -7817,7 +8424,9 @@
      null,
      null,
      58.4,
-     47.8
+     47.8,
+     100.0,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -7852,12 +8461,12 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
+    "slates_n": 3,
     "slates_with": 1,
-    "slates_against": 1,
-    "pooled_lift": -4.2,
-    "field_2026": 57.0,
-    "top1_2026": 52.9,
+    "slates_against": 2,
+    "pooled_lift": -5.8,
+    "field_2026": 61.6,
+    "top1_2026": 55.7,
     "lift": [
      null,
      null,
@@ -7865,7 +8474,9 @@
      null,
      null,
      -45.9,
-     37.5
+     37.5,
+     -9.1,
+     null
     ],
     "field": [
      null,
@@ -7874,7 +8485,9 @@
      null,
      null,
      51.6,
-     62.5
+     62.5,
+     70.6,
+     null
     ],
     "top1": [
      null,
@@ -7883,7 +8496,9 @@
      null,
      null,
      5.7,
-     100.0
+     100.0,
+     61.5,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -7918,12 +8533,12 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
+    "slates_n": 3,
     "slates_with": 1,
-    "slates_against": 1,
-    "pooled_lift": 6.0,
-    "field_2026": 21.8,
-    "top1_2026": 27.8,
+    "slates_against": 2,
+    "pooled_lift": 4.3,
+    "field_2026": 19.4,
+    "top1_2026": 23.7,
     "lift": [
      null,
      null,
@@ -7931,7 +8546,9 @@
      null,
      null,
      33.8,
-     -21.8
+     -21.8,
+     0.8,
+     null
     ],
     "field": [
      null,
@@ -7940,7 +8557,9 @@
      null,
      null,
      21.8,
-     21.8
+     21.8,
+     14.6,
+     null
     ],
     "top1": [
      null,
@@ -7949,7 +8568,9 @@
      null,
      null,
      55.6,
-     0.0
+     0.0,
+     15.4,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -7984,11 +8605,11 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 2,
+    "slates_n": 3,
+    "slates_with": 3,
     "slates_against": 0,
-    "pooled_lift": -17.1,
-    "field_2026": 17.1,
+    "pooled_lift": -14.9,
+    "field_2026": 14.9,
     "top1_2026": 0.0,
     "lift": [
      null,
@@ -7997,7 +8618,9 @@
      null,
      null,
      -21.6,
-     -12.7
+     -12.7,
+     -10.5,
+     null
     ],
     "field": [
      null,
@@ -8006,7 +8629,9 @@
      null,
      null,
      21.6,
-     12.7
+     12.7,
+     10.5,
+     null
     ],
     "top1": [
      null,
@@ -8015,7 +8640,9 @@
      null,
      null,
      0.0,
-     0.0
+     0.0,
+     0.0,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8050,11 +8677,11 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 2,
+    "slates_n": 3,
+    "slates_with": 3,
     "slates_against": 0,
-    "pooled_lift": -5.2,
-    "field_2026": 5.2,
+    "pooled_lift": -4.9,
+    "field_2026": 4.9,
     "top1_2026": 0.0,
     "lift": [
      null,
@@ -8063,7 +8690,9 @@
      null,
      null,
      -6.3,
-     -4.0
+     -4.0,
+     -4.3,
+     null
     ],
     "field": [
      null,
@@ -8072,7 +8701,9 @@
      null,
      null,
      6.3,
-     4.0
+     4.0,
+     4.3,
+     null
     ],
     "top1": [
      null,
@@ -8081,7 +8712,9 @@
      null,
      null,
      0.0,
-     0.0
+     0.0,
+     0.0,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8116,12 +8749,12 @@
      "basis": "11 historical TE_FAV winners"
     },
     "check": "not_enough",
-    "slates_n": 2,
-    "slates_with": 1,
+    "slates_n": 3,
+    "slates_with": 2,
     "slates_against": 1,
-    "pooled_lift": 2.3,
-    "field_2026": 11.4,
-    "top1_2026": 13.7,
+    "pooled_lift": 0.5,
+    "field_2026": 8.7,
+    "top1_2026": 9.1,
     "lift": [
      null,
      null,
@@ -8129,7 +8762,9 @@
      null,
      null,
      -7.5,
-     12.1
+     12.1,
+     -3.2,
+     null
     ],
     "field": [
      null,
@@ -8138,7 +8773,9 @@
      null,
      null,
      7.5,
-     15.3
+     15.3,
+     3.2,
+     null
     ],
     "top1": [
      null,
@@ -8147,7 +8784,9 @@
      null,
      null,
      0.0,
-     27.3
+     27.3,
+     0.0,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8195,7 +8834,9 @@
      null,
      null,
      null,
-     45.3
+     45.3,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8204,7 +8845,9 @@
      null,
      null,
      null,
-     54.7
+     54.7,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8213,7 +8856,9 @@
      null,
      null,
      null,
-     100.0
+     100.0,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8261,7 +8906,9 @@
      null,
      null,
      null,
-     36.9
+     36.9,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8270,7 +8917,9 @@
      null,
      null,
      null,
-     63.1
+     63.1,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8279,7 +8928,9 @@
      null,
      null,
      null,
-     100.0
+     100.0,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8327,7 +8978,9 @@
      null,
      null,
      null,
-     11.2
+     11.2,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8336,7 +8989,9 @@
      null,
      null,
      null,
-     67.4
+     67.4,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8345,7 +9000,9 @@
      null,
      null,
      null,
-     78.5
+     78.5,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8393,7 +9050,9 @@
      null,
      null,
      null,
-     -15.0
+     -15.0,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8402,7 +9061,9 @@
      null,
      null,
      null,
-     15.0
+     15.0,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8411,7 +9072,9 @@
      null,
      null,
      null,
-     0.0
+     0.0,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8459,7 +9122,9 @@
      null,
      null,
      null,
-     -5.1
+     -5.1,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8468,7 +9133,9 @@
      null,
      null,
      null,
-     5.1
+     5.1,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8477,7 +9144,9 @@
      null,
      null,
      null,
-     0.0
+     0.0,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8525,7 +9194,9 @@
      null,
      null,
      null,
-     -6.1
+     -6.1,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8534,7 +9205,9 @@
      null,
      null,
      null,
-     7.3
+     7.3,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8543,7 +9216,9 @@
      null,
      null,
      null,
-     1.2
+     1.2,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8591,7 +9266,9 @@
      null,
      null,
      null,
-     -4.2
+     -4.2,
+     null,
+     null
     ],
     "field": [
      null,
@@ -8600,7 +9277,9 @@
      null,
      null,
      null,
-     4.2
+     4.2,
+     null,
+     null
     ],
     "top1": [
      null,
@@ -8609,7 +9288,9 @@
      null,
      null,
      null,
-     0.0
+     0.0,
+     null,
+     null
     ],
     "by_realized_script": {
      "B": {
@@ -8657,6 +9338,8 @@
      9.5,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -8666,6 +9349,8 @@
      90.5,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
@@ -8673,6 +9358,8 @@
      null,
      null,
      100.0,
+     null,
+     null,
      null,
      null,
      null
@@ -8719,6 +9406,8 @@
      -55.3,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -8728,6 +9417,8 @@
      65.4,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
@@ -8735,6 +9426,8 @@
      null,
      null,
      10.1,
+     null,
+     null,
      null,
      null,
      null
@@ -8781,6 +9474,8 @@
      -63.2,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -8790,6 +9485,8 @@
      63.6,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
@@ -8797,6 +9494,8 @@
      null,
      null,
      0.4,
+     null,
+     null,
      null,
      null,
      null
@@ -8843,6 +9542,8 @@
      -14.8,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -8852,6 +9553,8 @@
      15.6,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
@@ -8859,6 +9562,8 @@
      null,
      null,
      0.7,
+     null,
+     null,
      null,
      null,
      null
@@ -8905,6 +9610,8 @@
      59.5,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -8914,6 +9621,8 @@
      33.4,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
@@ -8921,6 +9630,8 @@
      null,
      null,
      92.9,
+     null,
+     null,
      null,
      null,
      null
@@ -8954,12 +9665,12 @@
      "basis": "1 historical DST_DOG winners"
     },
     "check": "not_enough",
-    "slates_n": 1,
-    "slates_with": 1,
-    "slates_against": 0,
-    "pooled_lift": 44.9,
-    "field_2026": 55.1,
-    "top1_2026": 100.0,
+    "slates_n": 3,
+    "slates_with": 2,
+    "slates_against": 1,
+    "pooled_lift": 29.6,
+    "field_2026": 64.9,
+    "top1_2026": 94.4,
     "lift": [
      null,
      null,
@@ -8967,7 +9678,9 @@
      null,
      null,
      null,
-     null
+     null,
+     -0.6,
+     44.4
     ],
     "field": [
      null,
@@ -8976,7 +9689,9 @@
      null,
      null,
      null,
-     null
+     null,
+     83.9,
+     55.6
     ],
     "top1": [
      null,
@@ -8985,7 +9700,9 @@
      null,
      null,
      null,
-     null
+     null,
+     83.3,
+     100.0
     ],
     "by_realized_script": {
      "D": {
@@ -9016,12 +9733,12 @@
      "basis": "1 historical DST_DOG winners"
     },
     "check": "not_enough",
-    "slates_n": 1,
-    "slates_with": 0,
+    "slates_n": 3,
+    "slates_with": 2,
     "slates_against": 1,
-    "pooled_lift": -70.5,
-    "field_2026": 85.8,
-    "top1_2026": 15.2,
+    "pooled_lift": -8.9,
+    "field_2026": 73.3,
+    "top1_2026": 64.3,
     "lift": [
      null,
      null,
@@ -9029,7 +9746,9 @@
      null,
      null,
      null,
-     null
+     null,
+     31.9,
+     11.8
     ],
     "field": [
      null,
@@ -9038,7 +9757,9 @@
      null,
      null,
      null,
-     null
+     null,
+     68.1,
+     66.0
     ],
     "top1": [
      null,
@@ -9047,7 +9768,9 @@
      null,
      null,
      null,
-     null
+     null,
+     100.0,
+     77.8
     ],
     "by_realized_script": {
      "D": {
@@ -9078,11 +9801,11 @@
      "basis": "1 historical DST_DOG winners"
     },
     "check": "not_enough",
-    "slates_n": 1,
-    "slates_with": 1,
+    "slates_n": 3,
+    "slates_with": 3,
     "slates_against": 0,
-    "pooled_lift": 30.5,
-    "field_2026": 69.5,
+    "pooled_lift": 34.7,
+    "field_2026": 65.3,
     "top1_2026": 100.0,
     "lift": [
      null,
@@ -9091,7 +9814,9 @@
      null,
      null,
      null,
-     null
+     null,
+     18.9,
+     54.7
     ],
     "field": [
      null,
@@ -9100,7 +9825,9 @@
      null,
      null,
      null,
-     null
+     null,
+     81.1,
+     45.3
     ],
     "top1": [
      null,
@@ -9109,7 +9836,9 @@
      null,
      null,
      null,
-     null
+     null,
+     100.0,
+     100.0
     ],
     "by_realized_script": {
      "D": {
@@ -9140,11 +9869,11 @@
      "basis": "1 historical DST_DOG winners"
     },
     "check": "not_enough",
-    "slates_n": 1,
-    "slates_with": 1,
+    "slates_n": 3,
+    "slates_with": 3,
     "slates_against": 0,
-    "pooled_lift": -25.6,
-    "field_2026": 25.6,
+    "pooled_lift": -29.2,
+    "field_2026": 29.2,
     "top1_2026": 0.0,
     "lift": [
      null,
@@ -9153,7 +9882,9 @@
      null,
      null,
      null,
-     null
+     null,
+     -29.0,
+     -33.1
     ],
     "field": [
      null,
@@ -9162,7 +9893,9 @@
      null,
      null,
      null,
-     null
+     null,
+     29.0,
+     33.1
     ],
     "top1": [
      null,
@@ -9171,7 +9904,9 @@
      null,
      null,
      null,
-     null
+     null,
+     0.0,
+     0.0
     ],
     "by_realized_script": {
      "D": {
@@ -9202,12 +9937,12 @@
      "basis": "1 historical DST_DOG winners"
     },
     "check": "not_enough",
-    "slates_n": 1,
-    "slates_with": 1,
+    "slates_n": 3,
+    "slates_with": 3,
     "slates_against": 0,
-    "pooled_lift": -17.4,
-    "field_2026": 19.6,
-    "top1_2026": 2.2,
+    "pooled_lift": -18.1,
+    "field_2026": 18.8,
+    "top1_2026": 0.7,
     "lift": [
      null,
      null,
@@ -9215,7 +9950,9 @@
      null,
      null,
      null,
-     null
+     null,
+     -19.6,
+     -17.3
     ],
     "field": [
      null,
@@ -9224,7 +9961,9 @@
      null,
      null,
      null,
-     null
+     null,
+     19.6,
+     17.3
     ],
     "top1": [
      null,
@@ -9233,7 +9972,9 @@
      null,
      null,
      null,
-     null
+     null,
+     0.0,
+     0.0
     ],
     "by_realized_script": {
      "D": {
@@ -9268,12 +10009,12 @@
      "n_2025": 46
     },
     "check": "aligned",
-    "slates_n": 6,
+    "slates_n": 8,
     "slates_with": 1,
     "slates_against": null,
     "pooled_lift": null,
-    "field_2026": 41.5,
-    "top1_2026": 36.1,
+    "field_2026": 40.2,
+    "top1_2026": 31.7,
     "lift": [
      -21.4,
      -42.3,
@@ -9281,7 +10022,9 @@
      6.3,
      null,
      37.5,
-     -33.6
+     -33.6,
+     -16.5,
+     -19.5
     ],
     "field": [
      42.9,
@@ -9290,7 +10033,9 @@
      37.7,
      null,
      43.5,
-     39.9
+     39.9,
+     35.9,
+     37.2
     ],
     "top1": [
      21.5,
@@ -9299,7 +10044,9 @@
      44.1,
      null,
      81.1,
-     6.3
+     6.3,
+     19.4,
+     17.7
     ],
     "band": [
      40.0,
@@ -9307,7 +10054,7 @@
     ],
     "top1_min": 0.4,
     "top1_max": 81.1,
-    "top1_stdev": 29.4,
+    "top1_stdev": 26.6,
     "sunday": {
      "check": "aligned",
      "slates_n": 19,
@@ -9333,12 +10080,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "aligned",
-    "slates_n": 6,
+    "slates_n": 8,
     "slates_with": 1,
     "slates_against": null,
     "pooled_lift": null,
-    "field_2026": 30.3,
-    "top1_2026": 30.8,
+    "field_2026": 30.1,
+    "top1_2026": 26.4,
     "lift": [
      44.7,
      -19.6,
@@ -9346,7 +10093,9 @@
      35.9,
      null,
      -39.9,
-     -22.4
+     -22.4,
+     -14.2,
+     -18.9
     ],
     "field": [
      30.4,
@@ -9355,7 +10104,9 @@
      32.3,
      null,
      39.9,
-     23.5
+     23.5,
+     24.7,
+     34.7
     ],
     "top1": [
      75.2,
@@ -9364,7 +10115,9 @@
      68.3,
      null,
      0.0,
-     1.1
+     1.1,
+     10.4,
+     15.8
     ],
     "band": [
      30.0,
@@ -9372,7 +10125,7 @@
     ],
     "top1_min": 0.0,
     "top1_max": 75.2,
-    "top1_stdev": 31.4,
+    "top1_stdev": 28.3,
     "sunday": {
      "check": "aligned",
      "slates_n": 19,
@@ -9398,12 +10151,12 @@
      "basis": "113 primetime winners (of 120)"
     },
     "check": "aligned",
-    "slates_n": 6,
+    "slates_n": 8,
     "slates_with": 3,
     "slates_against": null,
     "pooled_lift": null,
-    "field_2026": 31.2,
-    "top1_2026": 32.0,
+    "field_2026": 30.5,
+    "top1_2026": 46.1,
     "lift": [
      -4.9,
      16.4,
@@ -9411,7 +10164,9 @@
      -30.3,
      null,
      -19.5,
-     67.2
+     67.2,
+     58.2,
+     61.9
     ],
     "field": [
      46.1,
@@ -9420,7 +10175,9 @@
      34.6,
      null,
      19.5,
-     18.6
+     18.6,
+     37.1,
+     19.5
     ],
     "top1": [
      41.2,
@@ -9429,15 +10186,17 @@
      4.3,
      null,
      0.0,
-     85.8
+     85.8,
+     95.3,
+     81.4
     ],
     "band": [
      0,
      35.0
     ],
     "top1_min": 0.0,
-    "top1_max": 85.8,
-    "top1_stdev": 32.9,
+    "top1_max": 95.3,
+    "top1_stdev": 37.7,
     "sunday": {
      "check": "watch",
      "slates_n": 19,
@@ -9476,6 +10235,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9485,9 +10246,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9539,6 +10304,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9548,9 +10315,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9591,6 +10362,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9600,9 +10373,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9643,6 +10420,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9652,9 +10431,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9695,6 +10478,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9704,9 +10489,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9747,6 +10536,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9756,9 +10547,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9799,6 +10594,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9808,9 +10605,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9851,6 +10652,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9860,9 +10663,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9903,6 +10710,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9912,9 +10721,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -9955,6 +10768,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -9964,9 +10779,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -10007,6 +10826,8 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "field": [
@@ -10016,9 +10837,13 @@
      null,
      null,
      null,
+     null,
+     null,
      null
     ],
     "top1": [
+     null,
+     null,
      null,
      null,
      null,
@@ -10037,176 +10862,176 @@
    {
     "feature": "K",
     "hist": 40.7,
-    "field_2026": 41.5,
-    "top1_2026": 36.1,
-    "field_minus_hist": 0.8,
-    "top1_minus_field": -5.4,
-    "slates_n": 6,
+    "field_2026": 40.2,
+    "top1_2026": 31.7,
+    "field_minus_hist": -0.5,
+    "top1_minus_field": -8.5,
+    "slates_n": 8,
     "leverage": false,
-    "direction": "over"
+    "direction": "under"
    },
    {
     "feature": "DST",
     "hist": 33.6,
-    "field_2026": 30.3,
-    "top1_2026": 30.8,
-    "field_minus_hist": -3.3,
-    "top1_minus_field": 0.5,
-    "slates_n": 6,
+    "field_2026": 30.1,
+    "top1_2026": 26.4,
+    "field_minus_hist": -3.5,
+    "top1_minus_field": -3.7,
+    "slates_n": 8,
     "leverage": false,
     "direction": "under"
    },
    {
     "feature": "both_qb",
     "hist": 33.6,
-    "field_2026": 31.2,
-    "top1_2026": 32.0,
-    "field_minus_hist": -2.4,
-    "top1_minus_field": 0.8,
-    "slates_n": 6,
+    "field_2026": 30.5,
+    "top1_2026": 46.1,
+    "field_minus_hist": -3.1,
+    "top1_minus_field": 15.6,
+    "slates_n": 8,
     "leverage": false,
     "direction": "under"
    },
    {
     "feature": "two_K",
     "hist": 2.7,
-    "field_2026": 5.0,
-    "top1_2026": 4.9,
-    "field_minus_hist": 2.3,
-    "top1_minus_field": -0.1,
-    "slates_n": 6,
+    "field_2026": 4.7,
+    "top1_2026": 3.7,
+    "field_minus_hist": 2.0,
+    "top1_minus_field": -1.0,
+    "slates_n": 8,
     "leverage": false,
     "direction": "over"
    },
    {
     "feature": "no_K_no_DST",
     "hist": 40.7,
-    "field_2026": 39.8,
-    "top1_2026": 44.9,
-    "field_minus_hist": -0.9,
-    "top1_minus_field": 5.1,
-    "slates_n": 6,
+    "field_2026": 40.8,
+    "top1_2026": 51.2,
+    "field_minus_hist": 0.1,
+    "top1_minus_field": 10.4,
+    "slates_n": 8,
     "leverage": false,
-    "direction": "under"
+    "direction": "over"
    },
    {
     "feature": "cpt_fav",
     "hist": 57.5,
-    "field_2026": 57.6,
-    "top1_2026": 57.8,
-    "field_minus_hist": 0.1,
-    "top1_minus_field": 0.2,
-    "slates_n": 6,
+    "field_2026": 60.3,
+    "top1_2026": 54.4,
+    "field_minus_hist": 2.8,
+    "top1_minus_field": -5.9,
+    "slates_n": 8,
     "leverage": false,
     "direction": "over"
    },
    {
     "feature": "five_one_fav",
     "hist": 8.0,
-    "field_2026": 12.5,
-    "top1_2026": 13.5,
-    "field_minus_hist": 4.5,
-    "top1_minus_field": 1.0,
-    "slates_n": 6,
+    "field_2026": 13.4,
+    "top1_2026": 12.9,
+    "field_minus_hist": 5.4,
+    "top1_minus_field": -0.5,
+    "slates_n": 8,
     "leverage": false,
     "direction": "over"
    },
    {
     "feature": "four_two",
     "hist": 38.1,
-    "field_2026": 36.1,
-    "top1_2026": 31.0,
-    "field_minus_hist": -2.0,
-    "top1_minus_field": -5.1,
-    "slates_n": 6,
+    "field_2026": 36.5,
+    "top1_2026": 32.7,
+    "field_minus_hist": -1.6,
+    "top1_minus_field": -3.8,
+    "slates_n": 8,
     "leverage": false,
     "direction": "under"
    },
    {
     "feature": "three_three",
     "hist": 36.3,
-    "field_2026": 33.4,
-    "top1_2026": 34.1,
-    "field_minus_hist": -2.9,
-    "top1_minus_field": 0.7,
-    "slates_n": 6,
+    "field_2026": 33.1,
+    "top1_2026": 31.3,
+    "field_minus_hist": -3.2,
+    "top1_minus_field": -1.8,
+    "slates_n": 8,
     "leverage": false,
     "direction": "under"
    },
    {
     "feature": "dog_qb_in_lineup",
     "hist": 58.4,
-    "field_2026": 55.9,
-    "top1_2026": 70.5,
-    "field_minus_hist": -2.5,
-    "top1_minus_field": 14.6,
-    "slates_n": 6,
-    "leverage": false,
+    "field_2026": 53.1,
+    "top1_2026": 77.4,
+    "field_minus_hist": -5.3,
+    "top1_minus_field": 24.3,
+    "slates_n": 8,
+    "leverage": true,
     "direction": "under"
    },
    {
     "feature": "cpt_pos_QB",
     "hist": 20.4,
-    "field_2026": 22.7,
-    "top1_2026": 24.8,
-    "field_minus_hist": 2.3,
-    "top1_minus_field": 2.1,
-    "slates_n": 6,
+    "field_2026": 22.9,
+    "top1_2026": 28.0,
+    "field_minus_hist": 2.5,
+    "top1_minus_field": 5.1,
+    "slates_n": 8,
     "leverage": false,
     "direction": "over"
    },
    {
     "feature": "cpt_pos_RB",
     "hist": 22.1,
-    "field_2026": 30.6,
-    "top1_2026": 25.6,
-    "field_minus_hist": 8.5,
-    "top1_minus_field": -5.0,
-    "slates_n": 6,
+    "field_2026": 30.4,
+    "top1_2026": 24.2,
+    "field_minus_hist": 8.3,
+    "top1_minus_field": -6.2,
+    "slates_n": 8,
     "leverage": true,
     "direction": "over"
    },
    {
     "feature": "cpt_pos_WR",
     "hist": 37.2,
-    "field_2026": 31.9,
-    "top1_2026": 26.5,
-    "field_minus_hist": -5.3,
-    "top1_minus_field": -5.4,
-    "slates_n": 6,
+    "field_2026": 31.7,
+    "top1_2026": 29.9,
+    "field_minus_hist": -5.5,
+    "top1_minus_field": -1.8,
+    "slates_n": 8,
     "leverage": false,
     "direction": "under"
    },
    {
     "feature": "cpt_pos_TE",
     "hist": 15.0,
-    "field_2026": 9.0,
-    "top1_2026": 18.7,
-    "field_minus_hist": -6.0,
-    "top1_minus_field": 9.7,
-    "slates_n": 6,
+    "field_2026": 9.3,
+    "top1_2026": 14.2,
+    "field_minus_hist": -5.7,
+    "top1_minus_field": 4.9,
+    "slates_n": 8,
     "leverage": true,
     "direction": "under"
    },
    {
     "feature": "cpt_pos_K",
     "hist": 0.9,
-    "field_2026": 2.3,
-    "top1_2026": 3.3,
-    "field_minus_hist": 1.4,
-    "top1_minus_field": 1.0,
-    "slates_n": 6,
+    "field_2026": 2.0,
+    "top1_2026": 2.5,
+    "field_minus_hist": 1.1,
+    "top1_minus_field": 0.5,
+    "slates_n": 8,
     "leverage": false,
     "direction": "over"
    },
    {
     "feature": "cpt_pos_DST",
     "hist": 4.4,
-    "field_2026": 3.5,
-    "top1_2026": 1.1,
-    "field_minus_hist": -0.9,
-    "top1_minus_field": -2.4,
-    "slates_n": 6,
+    "field_2026": 3.8,
+    "top1_2026": 1.3,
+    "field_minus_hist": -0.6,
+    "top1_minus_field": -2.5,
+    "slates_n": 8,
     "leverage": false,
     "direction": "under"
    }
@@ -10414,23 +11239,23 @@
     ]
    },
    "calibration_2026": {
-    "slates": 20,
+    "slates": 37,
     "note": "share of 2026 DK pool players (FLEX salary >= $1,000) whose salary class equals their true salary rank class; thresholds were fit on the 2026 pools weighted by BB-model ownership",
     "QB": {
-     "players": 134,
-     "match_pct": 91.8
+     "players": 249,
+     "match_pct": 93.2
     },
     "RB": {
-     "players": 120,
-     "match_pct": 97.5
+     "players": 218,
+     "match_pct": 96.3
     },
     "WR": {
-     "players": 195,
-     "match_pct": 86.7
+     "players": 358,
+     "match_pct": 85.8
     },
     "TE": {
-     "players": 93,
-     "match_pct": 94.6
+     "players": 170,
+     "match_pct": 92.9
     }
    },
    "primetime_player_slots_by_role": {
@@ -14014,7 +14839,9 @@
     "2026-wk1-sf-lar",
     "2026-wk1-ne-sea",
     "2026-wk2-ind-kc",
-    "2026-wk2-det-buf"
+    "2026-wk2-det-buf",
+    "2026-wk3-lar-den",
+    "2026-wk3-phi-chi"
    ],
    "excluded": [
     {
@@ -14027,289 +14854,289 @@
     "FAV_QB": {
      "cpt": {
       "hist": 13.3,
-      "field_2026": 12.5,
-      "top1_2026": 10.9,
-      "field_minus_hist": -0.8,
-      "top1_minus_field": -1.6,
+      "field_2026": 13.4,
+      "top1_2026": 10.8,
+      "field_minus_hist": 0.1,
+      "top1_minus_field": -2.6,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_n": 8,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 5
      },
      "flex": {
       "hist": 50.4,
-      "field_2026": 54.1,
-      "top1_2026": 49.5,
-      "field_minus_hist": 3.7,
-      "top1_minus_field": -4.6,
-      "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 4,
+      "field_2026": 55.9,
+      "top1_2026": 57.1,
+      "field_minus_hist": 5.5,
+      "top1_minus_field": 1.2,
+      "label": "field_differs_top1_agrees_with_field",
+      "slates_n": 8,
+      "slates_top1_above_field": 6,
       "slates_top1_below_field": 2
      }
     },
     "FAV_RB": {
      "cpt": {
       "hist": 13.3,
-      "field_2026": 16.7,
-      "top1_2026": 19.7,
-      "field_minus_hist": 3.4,
-      "top1_minus_field": 3.0,
+      "field_2026": 17.3,
+      "top1_2026": 18.2,
+      "field_minus_hist": 4.0,
+      "top1_minus_field": 0.9,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 1,
-      "slates_top1_below_field": 5
+      "slates_n": 8,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 6
      },
      "flex": {
       "hist": 49.6,
-      "field_2026": 49.0,
-      "top1_2026": 59.6,
-      "field_minus_hist": -0.6,
-      "top1_minus_field": 10.6,
+      "field_2026": 50.2,
+      "top1_2026": 55.6,
+      "field_minus_hist": 0.6,
+      "top1_minus_field": 5.4,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 4,
-      "slates_top1_below_field": 2
+      "slates_n": 8,
+      "slates_top1_above_field": 5,
+      "slates_top1_below_field": 3
      }
     },
     "FAV_WR": {
      "cpt": {
       "hist": 17.7,
-      "field_2026": 19.3,
-      "top1_2026": 14.9,
-      "field_minus_hist": 1.6,
-      "top1_minus_field": -4.4,
+      "field_2026": 19.8,
+      "top1_2026": 15.9,
+      "field_minus_hist": 2.1,
+      "top1_minus_field": -3.9,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 1,
-      "slates_top1_below_field": 5
+      "slates_n": 8,
+      "slates_top1_above_field": 2,
+      "slates_top1_below_field": 6
      },
      "flex": {
       "hist": 64.6,
-      "field_2026": 64.7,
-      "top1_2026": 46.4,
-      "field_minus_hist": 0.1,
-      "top1_minus_field": -18.3,
+      "field_2026": 65.6,
+      "top1_2026": 55.7,
+      "field_minus_hist": 1.0,
+      "top1_minus_field": -9.9,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 0,
-      "slates_top1_below_field": 6
+      "slates_n": 8,
+      "slates_top1_above_field": 1,
+      "slates_top1_below_field": 7
      }
     },
     "FAV_TE": {
      "cpt": {
       "hist": 8.8,
-      "field_2026": 5.1,
-      "top1_2026": 9.0,
-      "field_minus_hist": -3.7,
-      "top1_minus_field": 3.9,
+      "field_2026": 5.8,
+      "top1_2026": 7.0,
+      "field_minus_hist": -3.0,
+      "top1_minus_field": 1.2,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_top1_below_field": 6
      },
      "flex": {
       "hist": 36.3,
-      "field_2026": 37.2,
-      "top1_2026": 37.3,
-      "field_minus_hist": 0.9,
-      "top1_minus_field": 0.1,
+      "field_2026": 36.9,
+      "top1_2026": 34.2,
+      "field_minus_hist": 0.6,
+      "top1_minus_field": -2.7,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 3,
-      "slates_top1_below_field": 3
+      "slates_top1_below_field": 5
      }
     },
     "FAV_K": {
      "cpt": {
       "hist": 0.9,
-      "field_2026": 1.6,
-      "top1_2026": 2.5,
-      "field_minus_hist": 0.7,
-      "top1_minus_field": 0.9,
+      "field_2026": 1.4,
+      "top1_2026": 1.9,
+      "field_minus_hist": 0.5,
+      "top1_minus_field": 0.5,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 1,
-      "slates_top1_below_field": 5
+      "slates_top1_below_field": 7
      },
      "flex": {
       "hist": 22.1,
-      "field_2026": 26.2,
-      "top1_2026": 18.7,
-      "field_minus_hist": 4.1,
-      "top1_minus_field": -7.5,
+      "field_2026": 24.3,
+      "top1_2026": 17.0,
+      "field_minus_hist": 2.2,
+      "top1_minus_field": -7.3,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_n": 8,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 5
      }
     },
     "FAV_DST": {
      "cpt": {
       "hist": 3.5,
-      "field_2026": 2.3,
-      "top1_2026": 0.9,
-      "field_minus_hist": -1.2,
-      "top1_minus_field": -1.4,
+      "field_2026": 2.7,
+      "top1_2026": 0.7,
+      "field_minus_hist": -0.8,
+      "top1_minus_field": -2.0,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 1,
-      "slates_top1_below_field": 5
+      "slates_top1_below_field": 7
      },
      "flex": {
       "hist": 22.1,
       "field_2026": 17.7,
-      "top1_2026": 21.9,
+      "top1_2026": 16.5,
       "field_minus_hist": -4.4,
-      "top1_minus_field": 4.2,
+      "top1_minus_field": -1.2,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_top1_below_field": 6
      }
     },
     "DOG_QB": {
      "cpt": {
       "hist": 7.1,
-      "field_2026": 10.2,
-      "top1_2026": 14.0,
-      "field_minus_hist": 3.1,
-      "top1_minus_field": 3.8,
+      "field_2026": 9.4,
+      "top1_2026": 17.2,
+      "field_minus_hist": 2.3,
+      "top1_minus_field": 7.8,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 3,
+      "slates_n": 8,
+      "slates_top1_above_field": 5,
       "slates_top1_below_field": 3
      },
      "flex": {
       "hist": 51.3,
-      "field_2026": 45.7,
-      "top1_2026": 56.5,
-      "field_minus_hist": -5.6,
-      "top1_minus_field": 10.8,
+      "field_2026": 43.7,
+      "top1_2026": 60.2,
+      "field_minus_hist": -7.6,
+      "top1_minus_field": 16.5,
       "label": "field_gap",
-      "slates_n": 6,
-      "slates_top1_above_field": 4,
+      "slates_n": 8,
+      "slates_top1_above_field": 6,
       "slates_top1_below_field": 2
      }
     },
     "DOG_RB": {
      "cpt": {
       "hist": 8.8,
-      "field_2026": 13.9,
-      "top1_2026": 5.9,
-      "field_minus_hist": 5.1,
-      "top1_minus_field": -8.0,
-      "label": "field_gap",
-      "slates_n": 6,
+      "field_2026": 13.1,
+      "top1_2026": 6.0,
+      "field_minus_hist": 4.3,
+      "top1_minus_field": -7.1,
+      "label": "aligned",
+      "slates_n": 8,
       "slates_top1_above_field": 0,
-      "slates_top1_below_field": 6
+      "slates_top1_below_field": 8
      },
      "flex": {
       "hist": 46.0,
-      "field_2026": 48.3,
-      "top1_2026": 60.1,
-      "field_minus_hist": 2.3,
-      "top1_minus_field": 11.8,
+      "field_2026": 48.5,
+      "top1_2026": 51.0,
+      "field_minus_hist": 2.5,
+      "top1_minus_field": 2.5,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 4,
-      "slates_top1_below_field": 2
+      "slates_top1_below_field": 4
      }
     },
     "DOG_WR": {
      "cpt": {
       "hist": 19.5,
-      "field_2026": 12.6,
-      "top1_2026": 11.7,
-      "field_minus_hist": -6.9,
-      "top1_minus_field": -0.9,
+      "field_2026": 11.9,
+      "top1_2026": 14.0,
+      "field_minus_hist": -7.6,
+      "top1_minus_field": 2.1,
       "label": "field_differs_top1_agrees_with_field",
-      "slates_n": 6,
-      "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_n": 8,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 5
      },
      "flex": {
       "hist": 60.2,
-      "field_2026": 55.9,
-      "top1_2026": 46.7,
-      "field_minus_hist": -4.3,
-      "top1_minus_field": -9.2,
+      "field_2026": 56.0,
+      "top1_2026": 49.5,
+      "field_minus_hist": -4.2,
+      "top1_minus_field": -6.5,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_n": 8,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 5
      }
     },
     "DOG_TE": {
      "cpt": {
       "hist": 6.2,
-      "field_2026": 3.9,
-      "top1_2026": 9.6,
-      "field_minus_hist": -2.3,
-      "top1_minus_field": 5.7,
+      "field_2026": 3.5,
+      "top1_2026": 7.2,
+      "field_minus_hist": -2.7,
+      "top1_minus_field": 3.7,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_top1_below_field": 6
      },
      "flex": {
       "hist": 26.5,
-      "field_2026": 31.5,
-      "top1_2026": 41.0,
-      "field_minus_hist": 5.0,
-      "top1_minus_field": 9.5,
-      "label": "field_differs_top1_agrees_with_field",
-      "slates_n": 6,
+      "field_2026": 30.6,
+      "top1_2026": 35.3,
+      "field_minus_hist": 4.1,
+      "top1_minus_field": 4.7,
+      "label": "aligned",
+      "slates_n": 8,
       "slates_top1_above_field": 4,
-      "slates_top1_below_field": 2
+      "slates_top1_below_field": 4
      }
     },
     "DOG_K": {
      "cpt": {
       "hist": 0.0,
       "field_2026": 0.6,
-      "top1_2026": 0.8,
+      "top1_2026": 0.6,
       "field_minus_hist": 0.6,
-      "top1_minus_field": 0.2,
+      "top1_minus_field": 0.0,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 1,
-      "slates_top1_below_field": 5
+      "slates_top1_below_field": 7
      },
      "flex": {
       "hist": 21.2,
-      "field_2026": 18.0,
-      "top1_2026": 18.9,
-      "field_minus_hist": -3.2,
-      "top1_minus_field": 0.9,
+      "field_2026": 18.7,
+      "top1_2026": 15.9,
+      "field_minus_hist": -2.5,
+      "top1_minus_field": -2.8,
       "label": "aligned",
-      "slates_n": 6,
+      "slates_n": 8,
       "slates_top1_above_field": 3,
-      "slates_top1_below_field": 3
+      "slates_top1_below_field": 5
      }
     },
     "DOG_DST": {
      "cpt": {
       "hist": 0.9,
       "field_2026": 1.1,
-      "top1_2026": 0.2,
+      "top1_2026": 0.6,
       "field_minus_hist": 0.2,
-      "top1_minus_field": -0.9,
+      "top1_minus_field": -0.5,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 1,
+      "slates_n": 8,
+      "slates_top1_above_field": 3,
       "slates_top1_below_field": 5
      },
      "flex": {
       "hist": 15.0,
-      "field_2026": 11.2,
+      "field_2026": 10.8,
       "top1_2026": 10.4,
-      "field_minus_hist": -3.8,
-      "top1_minus_field": -0.8,
+      "field_minus_hist": -4.2,
+      "top1_minus_field": -0.4,
       "label": "aligned",
-      "slates_n": 6,
-      "slates_top1_above_field": 2,
-      "slates_top1_below_field": 4
+      "slates_n": 8,
+      "slates_top1_above_field": 3,
+      "slates_top1_below_field": 5
      }
     }
    }

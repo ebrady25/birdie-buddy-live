@@ -74,7 +74,7 @@
   "any_top1_pct": "chance of at least one top-1% finish on a slate with k independent entries at a 1% rate each",
   "win_given_top1_pct": "chance a top-1% finish is 1st place = 1 / top-1% places",
   "payout_structure": "payout ratios over every distinct primetime DK showdown contest with a public payout table in the field archive plus contests from our own entry history (2020-26), each counted once — structure only, no results",
-  "sources": "field archive (codex/field_unified.py): Stokastic post-contest exports + DK standings, 2026 W1-W2; payouts: DraftKings public contest detail (api.draftkings.com/contests/v1/contests/<id>)"
+  "sources": "field archive (codex/field_unified.py): third-party post-contest exports + DK standings, 2026 W1-W2; payouts: DraftKings public contest detail (api.draftkings.com/contests/v1/contests/<id>)"
  },
  "anomalous_slates_included": [
   "2026-wk2-nyg-lar"
@@ -1761,7 +1761,7 @@
   "n_slates": 19,
   "n_contests": 20,
   "entries": 52638,
-  "note": "Sunday single-game showdowns (supporting tier, never pooled with primetime). Stokastic exports carry no DK contest id, so fee, entry max and payout are unknown here; cut lines and dupes only.",
+  "note": "Sunday single-game showdowns (supporting tier, never pooled with primetime). Those exports carry no DK contest id, so fee, entry max and payout are unknown here; cut lines and dupes only.",
   "overall": {
    "n_contests": 20,
    "n_slates": 19,
