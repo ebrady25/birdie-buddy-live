@@ -494,7 +494,7 @@ window.BBI = window.BBI || {};
           </div>
         </div>
         <div class="footer-credit">
-          <span>© 2026 BirdieBuddy · Built by Ethan Brady</span>
+          <span>© 2026 BirdieBuddy</span>
           <span>BBI v8.5 · Pantheon Pro · Private preview</span>
         </div>
       </footer>

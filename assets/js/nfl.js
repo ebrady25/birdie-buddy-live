@@ -78,7 +78,7 @@ window.BBI = window.BBI || {};
             <a class="footer-link" href="account.html">My account</a>
           </div>
         </div>
-        <div class="footer-credit"><span>© 2026 BirdieBuddy · Built by Ethan Brady</span><span>${note ? note : 'NFL'}</span></div>
+        <div class="footer-credit"><span>© 2026 BirdieBuddy</span><span>${note ? note : 'NFL'}</span></div>
       </footer>`;
   };
 })();
