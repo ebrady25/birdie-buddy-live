@@ -89,9 +89,9 @@ window.BBI = window.BBI || {};
   // sample pool of the same game, when there is one). With "Use corrected ownership" on (the default) the engine's
   // dupes, cum own and ownership rules run on the corrected number. Sample pools carry the BB model only, shown
   // with its own (wider) held-out band.
-  const OC_PATH = 'nfl/showdown/ownership_correction.json';
   let OC = null;
-  const loadOC = async () => { try { const r = await fetch(OC_PATH, { cache: 'no-cache' }); if (r.ok) { const j = await r.json(); if (j && j.flex && j.cpt && j.bands) OC = j; } } catch {} };
+  // The correction layer was pulled from the site (10/28): OC stays null, the Lab grades on the reader's own file as-is.
+  const loadOC = async () => {};
   const stokOwn = () => !!(lab.source === 'mine' && lab.mine && lab.mine.players.has.own && /stokastic/.test(lab.mine.players.source || ''));
   const useCorr = () => !!(lab.corr && OC && stokOwn());
   let corrCache = { key: '', pl: null, C: null };
@@ -261,7 +261,7 @@ window.BBI = window.BBI || {};
           <div class="sd-lab-src"><span class="sd-lab-k">Slate pool</span><div class="sd-srcs">${srcChips || '<span class="sd-num-hint">loading…</span>'}</div></div>
           <div class="sd-lab-opts">
             ${lab.source === 'mine' && teams.length === 2 ? `<label class="sd-lab-opt"><span class="sd-lab-k">Favorite</span><span class="seg">${teams.map(t => `<button type="button" class="${t === fav ? 'active' : ''}" aria-pressed="${t === fav}" data-lab-fav="${esc(t)}">${esc(t)}</button>`).join('')}</span></label>` : ''}
-            ${stok ? `<label class="sd-lab-opt sd-corr-opt"><span class="sd-lab-k">Ownership</span><span class="sd-corr"><input type="checkbox" id="sdLabCorr" ${lab.corr && OC ? 'checked' : ''} ${OC ? '' : 'disabled'}><span>Use corrected ownership<small>${OC ? 'on: the engine grades with BirdieBuddy-corrected ownership · off: raw from your file' : 'correction file not loaded: the engine uses raw from your file'}</small></span></span></label>` : ''}
+            ${stok && OC ? `<label class="sd-lab-opt sd-corr-opt"><span class="sd-lab-k">Ownership</span><span class="sd-corr"><input type="checkbox" id="sdLabCorr" ${lab.corr && OC ? 'checked' : ''} ${OC ? '' : 'disabled'}><span>Use corrected ownership<small>${OC ? 'on: the engine grades with BirdieBuddy-corrected ownership · off: raw from your file' : 'correction file not loaded: the engine uses raw from your file'}</small></span></span></label>` : ''}
             <label class="sd-lab-opt"><span class="sd-lab-k">Field size</span><input class="sd-num" id="sdLabField" type="number" min="100" max="2000000" step="100" value="${fieldSize()}" aria-label="Contest field size" aria-describedby="sdLabFieldLink"><small class="sd-field-link" id="sdLabFieldLink"></small></label>
           </div>
         </div>
@@ -516,7 +516,7 @@ window.BBI = window.BBI || {};
   };
   const dupeFmt = v => v < 10 ? v.toFixed(1) : Math.round(v).toLocaleString('en-US');
   const ownNote = () => {
-    if (!OC) return 'Ownership here is <b>raw from your file</b> from your file (the correction file did not load).';
+    if (!OC) return 'Ownership here is <b>from your file</b>, as-is.';
     const cv = OC.cv || {}, f = cv.flex && cv.flex.nested_loso, c = cv.cpt && cv.cpt.nested_loso, n = (OC.training && OC.training.slates || []).length;
     const fit = f && c ? ` Held-out (nested leave-one-slate-out) error on ${n} slates: CPT ${c.mae_raw} → ${c.mae_corr}, FLEX ${f.mae_raw} → ${f.mae_corr} pts (FLEX is marginal): a first read, with n = ${n} slates.` : '';
     return useCorr()
