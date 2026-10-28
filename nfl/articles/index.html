@@ -10,10 +10,10 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="BirdieBuddy">
   <meta property="og:title" content="BirdieBuddy NFL Articles">
-  <meta property="og:description" content="Wednesday first look and Saturday final read for the DraftKings main slate: stacks, games, matchups and chalk, using only our own numbers.">
+  <meta property="og:description" content="Wednesday first look and Friday final call for the DraftKings main slate: stacks, games, matchups and chalk, using only our own numbers.">
   <meta property="og:image" content="https://birdiebuddy.io/assets/img/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="description" content="Wednesday first look and Saturday final read for the DraftKings main slate: stacks, games, matchups and chalk, using only our own numbers.">
+  <meta name="description" content="Wednesday first look and Friday final call for the DraftKings main slate: stacks, games, matchups and chalk, using only our own numbers.">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -28,9 +28,21 @@
     <section class="art-hero">
       <div class="eyebrow">BirdieBuddy · NFL · Articles</div>
       <h1>The week, in our numbers.</h1>
-      <p>Wednesday is the first look at the Sunday main slate and the primetime games. Saturday is the final read, after the week's news. Every number comes from our own market snaps, simulator and ownership model.</p>
+      <p>Wednesday is the first look at the Sunday main slate and the primetime games. Friday is the final call, after the week's news, with the late-swap notes. Every number comes from our own market snaps, simulator and ownership model.</p>
     </section>
     <section class="art-list">
+      <a class="card card-hover art-card" href="nfl/articles/2026-week-8-wednesday.html">
+        <div class="art-card-top"><span class="badge badge-gold">Wednesday</span><span class="art-card-date">Week 8 · Wed Oct 28</span></div>
+        <h3>Week 8 first look: Dallas is the stack, and everyone knows it</h3>
+        <p>Dallas owns the slate&#x27;s best stack and its highest team total. We build there, then get different in Cincinnati and Jacksonville.</p>
+        <p class="art-card-tl">Build through Dallas: Prescott, Lamb and Pickens clear 75 DK points in 20% of our sims, the best rate on the slate.</p>
+      </a>
+      <a class="card card-hover art-card" href="nfl/articles/2026-week-6-saturday.html">
+        <div class="art-card-top"><span class="badge badge-gold">Saturday</span><span class="art-card-date">Week 6 · Sat Oct 17</span></div>
+        <h3>Week 6 final read: Stafford&#x27;s stack and the Bears&#x27; QB question</h3>
+        <p>LAR&#x27;s 32-point team total still leads the main slate; Chicago&#x27;s QB status is the news most likely to move builds before lock.</p>
+        <p class="art-card-tl">Build around Matthew Stafford + Puka Nacua + Davante Adams: 24% of our 10,000 sims clear 75 DK points, the best rate on the slate.</p>
+      </a>
       <a class="card card-hover art-card" href="nfl/articles/2026-week-6-wednesday.html">
         <div class="art-card-top"><span class="badge badge-gold">Wednesday</span><span class="art-card-date">Week 6 · Wed Oct 14</span></div>
         <h3>Week 6 first look: Rams at 32.5 and Cousins over Allen</h3>
@@ -42,9 +54,9 @@
     <section class="art-method" id="how-we-build">
       <h2>How we build these numbers</h2>
       <ul>
-        <li><strong>Lines and scripts</strong>: de-vigged prediction-market prices (Polymarket + Kalshi), fit to spread, total and team-total ladders. Script A–D probabilities come from the market's ±3.5 / ±13.5 lines where they trade.</li>
-        <li><strong>Projections and ceilings</strong>: our drive-by-drive game simulator, built on nflverse play-by-play 2016–26, anchored to the market totals and player props, with injury and role news from nflverse and Sleeper. 10,000 simulated games per matchup. A stack's numbers come from the same simulated games, so the correlation is built in.</li>
-        <li><strong>Ownership</strong>: our own model, trained on DraftKings contest results. Tiers only. It ranks players well, but its levels are rough, and it under-calls late, news-driven value.</li>
+        <li><strong>Lines and game flows</strong>: de-vigged prediction-market prices (Polymarket + Kalshi), fit to spread, total and team-total ladders. Game-flow chances come from the market's ±3.5 / ±13.5 lines where they trade.</li>
+        <li><strong>Projections and ceilings</strong>: our drive-by-drive game simulator, built on nflverse play-by-play 2016–26, anchored to the market totals and player props, with public injury and role news. 10,000 simulated games per matchup. A stack's numbers come from the same simulated games, so the correlation is built in.</li>
+        <li><strong>Ownership</strong>: our own model, trained on DraftKings contest results, shown as projected % for large-field GPPs (and single-entry contests where they differ) plus tiers by rank within position. It ranks players well, but its levels are rough, and it under-calls late, news-driven value.</li>
         <li><strong>Matchups</strong>: points allowed to each role by each defense, opponent-adjusted and shrunk toward zero. One season of this is mostly noise, so it only breaks ties.</li>
         <li><strong>The codex</strong>: 169 DraftKings Milly Maker winning lineups (2016–25) against 2,639 games. Winner rates are shown with k and n.</li>
       </ul>

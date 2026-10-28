@@ -1,6 +1,40 @@
 {
  "articles": [
   {
+   "slug": "2026-week-8-wednesday",
+   "href": "2026-week-8-wednesday.html",
+   "title": "Week 8 first look: Dallas is the stack, and everyone knows it",
+   "dek": "Dallas owns the slate's best stack and its highest team total. We build there, then get different in Cincinnati and Jacksonville.",
+   "slot": "wed",
+   "week": 8,
+   "season": 2026,
+   "date": "2026-10-28",
+   "tldr": [
+    "Build through Dallas: Prescott, Lamb and Pickens clear 75 DK points in 20% of our sims, the best rate on the slate.",
+    "Get different with Burrow, Chase and Higgins; Burrow projects at only 5% owned.",
+    "Eat the Bijan Robinson chalk: he lands in our sims' best lineup about as often as his 21% projected ownership.",
+    "Fade Jahmyr Gibbs and pivot to Jaylen Warren, projected at 9% owned."
+   ],
+   "published_utc": "2026-10-28T20:05:01+00:00"
+  },
+  {
+   "slug": "2026-week-6-saturday",
+   "href": "2026-week-6-saturday.html",
+   "title": "Week 6 final read: Stafford's stack and the Bears' QB question",
+   "dek": "LAR's 32-point team total still leads the main slate; Chicago's QB status is the news most likely to move builds before lock.",
+   "slot": "sat",
+   "week": 6,
+   "season": 2026,
+   "date": "2026-10-17",
+   "tldr": [
+    "Build around Matthew Stafford + Puka Nacua + Davante Adams: 24% of our 10,000 sims clear 75 DK points, the best rate on the slate.",
+    "Use Kirk Cousins (mid projected ownership, $5,400) with Brock Bowers and Tre Tucker as the leverage stack, p90 77.9.",
+    "Fade Patrick Mahomes at chalk: his p90 of 28.6 is eighth among QBs and costs $1,100 more than Cousins.",
+    "Caleb Williams needs news: our p_play is 35% and Sleeper lists him Out, so hold CHI exposure until it resolves."
+   ],
+   "published_utc": "2026-10-17T14:02:44+00:00"
+  },
+  {
    "slug": "2026-week-6-wednesday",
    "href": "2026-week-6-wednesday.html",
    "title": "Week 6 first look: Rams at 32.5 and Cousins over Allen",
@@ -19,5 +53,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-10-14T14:51:20+00:00"
+ "updated_utc": "2026-10-28T20:05:01+00:00"
 }
