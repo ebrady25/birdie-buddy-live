@@ -237,7 +237,7 @@
       $('#pj-eyebrow').textContent = `${D.season || ''} · Week ${D.week} · DraftKings main slate`;
     }
     const stage = STAGE[D.stage] ? `${STAGE[D.stage]} numbers` : 'Our numbers';
-    $('#pj-asof').innerHTML = `<span><strong>${esc(stage)}</strong>, as of ${esc(asOfText(D.as_of))}. New numbers Wednesday and Friday evening, plus a Sunday morning update.</span>`;
+    $('#pj-asof').innerHTML = `<span><strong>${esc(stage)}</strong>, as of ${esc(asOfText(D.as_of))}.</span>`;
   }
 
   function fillCounts() {
