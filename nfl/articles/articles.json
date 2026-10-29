@@ -1,8 +1,46 @@
 {
  "articles": [
   {
+   "slug": "2026-week-8-tnf-car-gb",
+   "href": "2026-week-8-tnf-car-gb.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-tnf-car-gb",
+   "title": "TNF showdown: the field captains Green Bay; Carolina's upset is 26%",
+   "dek": "The three most popular captains are all Packers, but the market gives Carolina a 26% chance to win by 4+. McMillan and Hubbard are the way in.",
+   "slot": "TNF",
+   "week": 8,
+   "season": 2026,
+   "date": "2026-10-29",
+   "tldr": [
+    "Start with Tetairoa McMillan at captain: a projected 9% captain ownership, and Carolina wins by 4+ in 26% of outcomes.",
+    "Eat Jordan Love at FLEX: he projects at 68% owned, the top projection on the board at 17.8.",
+    "Fade Josh Jacobs at captain (projected 14%) for Chuba Hubbard, a 14.9-point projection at 9%."
+   ],
+   "game": "CAR@GB",
+   "kickoff_et": "2026-10-29T20:15:00-04:00",
+   "published_utc": "2026-10-29T19:17:20+00:00",
+   "card_stats": [
+    [
+     "GB −4.0",
+     "Favorite"
+    ],
+    [
+     "47",
+     "Game total"
+    ],
+    [
+     "25.5–21.6",
+     "Team totals GB–CAR"
+    ],
+    [
+     "Thu 8:15",
+     "Kickoff ET"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-8-wednesday",
    "href": "2026-week-8-wednesday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-wednesday",
    "title": "Week 8 first look: Dallas's 30.9-point total and the crowd chasing it",
    "dek": "Dallas is the slate's best stack and the field knows it; Burrow and Lawrence offer quieter, cheaper ways to win Week 8.",
    "slot": "wed",
@@ -20,6 +58,7 @@
   {
    "slug": "2026-week-6-saturday",
    "href": "2026-week-6-saturday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-6-saturday",
    "title": "Week 6 final read: Stafford's stack and the Bears' QB question",
    "dek": "LAR's 32-point team total still leads the main slate; Chicago's QB status is the news most likely to move builds before lock.",
    "slot": "sat",
@@ -37,6 +76,7 @@
   {
    "slug": "2026-week-6-wednesday",
    "href": "2026-week-6-wednesday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-6-wednesday",
    "title": "Week 6 first look: Rams at 32.5 and Cousins over Allen",
    "dek": "The Rams' 32.5 team total anchors the slate, and the mid-owned Cousins stack clears 75 as often as the second-best Stafford build.",
    "slot": "wed",
@@ -53,5 +93,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-10-28T23:33:14+00:00"
+ "updated_utc": "2026-10-29T19:17:20+00:00"
 }
