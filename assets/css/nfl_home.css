@@ -414,3 +414,8 @@ body.nh-page .nfl-footer { margin-top: 0; }
   .nh *, .nh *::before, .nh *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .nh .hero h1 .char { transform: none; opacity: 1; filter: none; }
 }
+
+/* Home cleanup 10/29: phrase values instead of counts; tighter gap into the final block */
+.nh .edge-card .edge-value.edge-phrase { font-size: 24px; line-height: 1.15; }
+.nh .section.section-tools { padding-bottom: var(--s-12); }
+.nh .section-tools + .final-lock { padding-top: var(--s-16); }

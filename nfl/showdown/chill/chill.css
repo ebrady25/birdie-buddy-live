@@ -14,8 +14,8 @@
 /* head */
 .ch-head { padding: var(--space-4) 0 var(--space-2); }
 .ch-eyebrow { font-family: var(--font-mono); font-size: var(--fs-2xs); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-300); }
-.ch-head h1 { margin-top: var(--space-2); font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 8vw, 3rem); letter-spacing: -0.03em; line-height: 1.05; color: var(--text-primary); text-wrap: balance; }
-.ch-dek { margin-top: var(--space-3); font-size: var(--fs-lg); line-height: 1.5; color: var(--text-body); max-width: 60ch; text-wrap: pretty; }
+.ch-head h1 { margin-top: var(--space-4); font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 8vw, 3rem); letter-spacing: -0.03em; line-height: 1.05; color: var(--text-primary); text-wrap: balance; }
+.ch-dek { margin-top: var(--space-5); font-size: var(--fs-lg); line-height: 1.5; color: var(--text-body); max-width: 60ch; text-wrap: pretty; }
 .ch-byline { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--text-dimmed); }
 .ch-byline span + span::before { content: '\00b7'; margin-right: 14px; color: var(--text-faint); }
 .ch-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--space-5); }

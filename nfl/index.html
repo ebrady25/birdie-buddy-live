@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <base href="/" />
-  <title>BirdieBuddy NFL: DraftKings DFS, made simple</title>
+  <title>BirdieBuddy NFL: DFS for the rest of us</title>
   <!-- DRAFT at a temporary URL: keep out of search until it replaces /nfl/ -->
   <link rel="canonical" href="https://birdiebuddy.io/nfl/">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
@@ -14,13 +14,13 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="BirdieBuddy">
   <meta property="og:url" content="https://birdiebuddy.io/nfl/">
-  <meta property="og:title" content="BirdieBuddy NFL: DraftKings DFS, made simple">
+  <meta property="og:title" content="BirdieBuddy NFL: DFS for the rest of us">
   <meta property="og:description" content="Our own projections, ownership and stack picks for every DraftKings NFL slate, in plain English. Graded in public every Monday.">
   <meta property="og:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BirdieBuddy NFL: DraftKings DFS, made simple">
+  <meta name="twitter:title" content="BirdieBuddy NFL: DFS for the rest of us">
   <meta name="twitter:description" content="Our own projections, ownership and stack picks for every DraftKings NFL slate, in plain English. Graded in public every Monday.">
   <meta name="twitter:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,8 +28,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.3" />
-  <link rel="stylesheet" href="assets/css/nfl_home.css?v=1" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=797ecb881d" />
+  <link rel="stylesheet" href="assets/css/nfl_home.css?v=2" />
 </head>
 <body class="nh-page">
   <div id="site-header"></div>
@@ -42,16 +42,19 @@
       <canvas id="heroCanvas"></canvas>
       <div class="grain"></div>
       <div class="badge" id="weekBadge"><span class="live-dot"></span><span id="weekBadgeText">Live · NFL DFS · DraftKings</span></div>
-      <h1 id="heroTitle" aria-label="NFL DFS, made simple.">
+      <h1 id="heroTitle" aria-label="NFL DFS for the rest of us.">
         <span class="line">
           <span class="word" data-word="NFL"></span>
-          <span class="word" data-word="DFS,"></span>
-          <span class="word" data-word="made"></span>
+          <span class="word" data-word="DFS"></span>
+          <span class="word" data-word="for"></span>
+          <span class="word" data-word="the"></span>
         </span>
         <br>
-        <span class="word gold" data-word="simple."></span>
+        <span class="word gold" data-word="rest"></span>
+        <span class="word gold" data-word="of"></span>
+        <span class="word gold" data-word="us."></span>
       </h1>
-      <p>BirdieBuddy NFL gives you our own projections, ownership and stack picks for every DraftKings slate, explained in plain English. Then we grade them in public every Monday, misses included.</p>
+      <p>BirdieBuddy NFL gives you our own projections, ownership and stack picks for every DraftKings slate, explained in plain English.</p>
       <div class="lock-ring" aria-hidden="true">
         <img class="lock-mark" src="assets/img/mark-gold.svg" alt="" />
       </div>
@@ -130,7 +133,7 @@
     </section>
 
     <!-- PLAYBOOKS + TOOLS -->
-    <section class="section">
+    <section class="section section-tools">
       <div class="container">
         <div class="section-head" data-reveal="">
           <div class="eyebrow">Playbooks &amp; tools</div>
@@ -141,31 +144,31 @@
           <a class="edge-card" href="nfl/classic/" data-reveal="" data-reveal-delay="1">
             <div class="rank">Sunday main slate</div>
             <div class="name">Classic playbook</div>
-            <div class="edge-value" data-count="169" data-decimals="0">0</div>
-            <div class="edge-label">winning lineups studied</div>
+            <div class="edge-value edge-phrase">Winning builds</div>
+            <div class="edge-label">from real DraftKings winners</div>
             <div class="edge-desc">Which games the winners stacked, how they paired players and how much chalk they played, plus a checker for your 9-player lineup.</div>
             <div class="comparison"><span>9 players · $50K</span><span>Open →</span></div>
           </a>
-          <a class="edge-card" href="nfl/showdown/" data-reveal="" data-reveal-delay="2">
-            <div class="rank">Single-game slates</div>
-            <div class="name">Showdown playbook</div>
-            <div class="edge-value" data-count="120" data-decimals="0">0</div>
-            <div class="edge-label">winning lineups studied</div>
-            <div class="edge-desc">Set the spread and total with sliders and get a simple play card: how the game goes, who to captain and how to build around it.</div>
+          <a class="edge-card" href="nfl/showdown/chill/" data-reveal="" data-reveal-delay="2">
+            <div class="rank">Primetime showdown</div>
+            <div class="name">Showdown</div>
+            <div class="edge-value edge-phrase">Chill or Grind</div>
+            <div class="edge-label">5-min read or full playbook</div>
+            <div class="edge-desc">Short on time? Chill gives you the game script, three captains and three lineups in five minutes. Grind is the full playbook with sliders and play cards.</div>
             <div class="comparison"><span>Captain + 5</span><span>Open →</span></div>
           </a>
           <a class="edge-card" href="nfl/showdown/#step4" data-reveal="" data-reveal-delay="3">
             <div class="rank">Score your lineup</div>
             <div class="name">Lineup Lab</div>
-            <div class="edge-value">0–100</div>
-            <div class="edge-label">lineup score, live</div>
+            <div class="edge-value edge-phrase">Instant score</div>
+            <div class="edge-label">what helps, what hurts</div>
             <div class="edge-desc">Build or paste a Showdown lineup and get an instant score, with what's helping it and what's holding it back.</div>
             <div class="comparison"><span>Showdown</span><span>Try it →</span></div>
           </a>
           <a class="edge-card" href="nfl/results/" id="resultsCard" data-reveal="" data-reveal-delay="4">
             <div class="rank">Every Monday</div>
             <div class="name">Results</div>
-            <div class="edge-value" id="resultsValue">Weekly</div>
+            <div class="edge-value edge-phrase" id="resultsValue">Weekly</div>
             <div class="edge-label" id="resultsLabel">grades every Monday</div>
             <div class="edge-desc">Our projections and ownership graded against what really happened: the chalk that hit, the chalk that busted and how our stacks scored.</div>
             <div class="comparison"><span>Misses included</span><span>See →</span></div>
@@ -188,7 +191,7 @@
 
   <div id="site-footer"></div>
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.6.3"></script>
+  <script src="assets/js/nfl.js?v=797ecb881d"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
   <script>BBI.renderNflHeader('home'); BBI.renderNflFooter();</script>
   <script src="assets/js/nfl_home.js?v=1"></script>
