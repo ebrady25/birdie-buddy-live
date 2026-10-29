@@ -119,3 +119,7 @@
   .ch-stats { gap: var(--space-2); }
 }
 .ch-stat-score { display: flex; flex-direction: column; font-size: clamp(1rem, 4vw, 1.25rem); line-height: 1.25; }
+
+/* Chill archive (10/29): the "Past Chill reads" list + the archived-read note link out */
+.ch-past a, .ch-archived a { color: var(--gold-300); font-weight: 650; text-decoration: underline; text-decoration-color: rgba(212,168,67,0.45); text-underline-offset: 3px; }
+.ch-past a:hover, .ch-archived a:hover { text-decoration-color: currentColor; }
