@@ -47,7 +47,7 @@ window.BBI = window.BBI || {};
     '/golf/',           // golf homepage
     '/nfl/',            // NFL homepage
     '/pricing', '/login', '/account', '/404',
-    '/terms', '/privacy'   // legal (pages not built yet)
+    '/terms', '/privacy', '/responsible-play'   // legal
   ];
   // The pages that lock today. Used only in 'legacy' mode.
   const LEGACY_PAGES = ['/rankings', '/lineups', '/live', '/compare', '/simulator', '/market'];
@@ -65,6 +65,8 @@ window.BBI = window.BBI || {};
     ? `${PRICES.month.label}${PRICES.month.per} or ${PRICES.year.label}${PRICES.year.per}`
     : `${PRICES[k].label}${PRICES[k].per}`;
   // Founding-member pricing: honest, open-ended (no end date set, no seat limit).
+  // Version of the Terms a member agrees to at checkout (the date on /terms).
+  const TERMS_VERSION = '2026-10-29';
   const FOUNDING = {
     label: 'Founding member',
     note: 'Founding member pricing: join now and your rate is locked for as long as you stay a member.'
@@ -396,13 +398,16 @@ window.BBI = window.BBI || {};
     },
 
     /** Start checkout for the membership, billed 'month' or 'year'.
-        Demo grants immediately; prod → Stripe. */
-    async subscribe(cycle = 'month') {
+        Demo grants immediately; prod → Stripe. Refuses unless the caller passes
+        { agreed: true } from the pricing page's Terms + auto-renewal checkbox. */
+    async subscribe(cycle = 'month', { agreed = false } = {}) {
       if (!PRICES[cycle]) cycle = 'month';
-      if (!current) { openModal('signup', { intentTier: 'member', intentCycle: cycle }); return; }
       if (this.isMember()) { location.href = 'account.html'; return; }
+      if (agreed !== true) { toast('Tick the box to agree to the Terms and automatic renewal first.'); return; }
+      if (!current) { openModal('signup', { intentTier: 'member', intentCycle: cycle, agreed }); return; }
       try {
-        const r = await this.backend.checkout({ email: current.email, tier: 'member', cycle });
+        const consent = { terms: TERMS_VERSION, cycle, at: new Date().toISOString() };   // for the Stripe session metadata
+        const r = await this.backend.checkout({ email: current.email, tier: 'member', cycle, consent });
         if (r?.url) { location.href = r.url; return r; }          // real Stripe redirect (later)
         if (r?.tier) {                                            // demo immediate grant
           current = { ...current, tier: toTier(r.tier) }; store.set(LS_SESSION, current);
@@ -660,7 +665,7 @@ window.BBI = window.BBI || {};
         }
         closeModal();
         if (modalIntent.intentTier) {
-          await auth.subscribe(modalIntent.intentCycle);
+          await auth.subscribe(modalIntent.intentCycle, { agreed: modalIntent.agreed });
         }
         modalIntent = {};
       } catch (ex) {

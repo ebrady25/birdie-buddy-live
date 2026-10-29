@@ -344,6 +344,14 @@
     .one-card .cta{max-width:360px;margin:0 auto}
     .one-note{font-size:var(--fs-xs);color:var(--text-dimmed);margin-top:var(--space-3)}
     .one-card.feat{margin-top:0}
+    /* Checkout consent (2026-10-29): unchecked Terms + auto-renewal box, required before checkout starts */
+    .consent{display:flex;gap:10px;align-items:flex-start;text-align:left;margin:0 0 var(--space-2);
+      font-size:var(--fs-xs);line-height:1.5;color:var(--text-body);cursor:pointer}
+    .consent input{flex:none;width:18px;height:18px;margin:1px 0 0;accent-color:var(--gold-500);cursor:pointer}
+    .consent a,.renew-note a{color:var(--gold-300);text-decoration:underline;text-underline-offset:2px}
+    .consent-err{min-height:1.2em;margin-bottom:var(--space-2);font-size:var(--fs-xs);color:var(--negative);text-align:left}
+    .consent-err:empty{min-height:0;margin:0}
+    .renew-note{margin-top:var(--space-3);font-size:var(--fs-3xs);line-height:1.55;color:var(--text-muted)}
     @media(max-width:620px){
       .one-card{padding:var(--space-6) var(--space-5) var(--space-5)}
       .one-incl{grid-template-columns:1fr;gap:var(--space-5)}
@@ -527,7 +535,15 @@
           <div><h4>Golf</h4><ul id="inclGolf"></ul></div>
         </div>
         <div class="cta">
+          <div id="consentWrap">
+            <label class="consent" for="agreeTerms">
+              <input type="checkbox" id="agreeTerms" name="agreeTerms" required aria-describedby="agreeErr">
+              <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms</a> and understand my membership renews automatically at <b id="agreePrice">$29/month</b> until I cancel. Cancel anytime in Account.</span>
+            </label>
+            <div class="consent-err" id="agreeErr" role="alert"></div>
+          </div>
           <button class="btn btn-primary btn-block btn-lg" id="joinBtn" type="button">Get BirdieBuddy</button>
+          <p class="renew-note" id="renewNote">Automatic renewal: <span id="renewText">$29 every month</span> until you cancel. Cancel anytime in Account and keep access through the period you've paid for. Plus applicable tax. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
           <div class="one-note" id="joinNote">Have a discount code? Add it when you create your account.</div>
         </div>
       </div>
@@ -638,11 +654,15 @@
 
       // Billing toggle: same membership, monthly or annual (prices from BBI.auth.PRICES).
       const P = A.PRICES;
-      window.BBI_PRICE_CYCLE = 'month';
+      window.BBI_PRICE_CYCLE = '';
       const mBtn = document.getElementById('cycMonth'), yBtn = document.getElementById('cycYear');
       document.getElementById('cycSave').textContent = P.year.save.replace(' monthly', '');
+      const agree = document.getElementById('agreeTerms'), agreeErr = document.getElementById('agreeErr');
       const setCycle = c => {
+        if (window.BBI_PRICE_CYCLE && window.BBI_PRICE_CYCLE !== c) agree.checked = false;
         window.BBI_PRICE_CYCLE = c;
+        document.getElementById('agreePrice').textContent = P[c].label + P[c].per;
+        document.getElementById('renewText').textContent = `${P[c].label} every ${c === 'year' ? 'year' : 'month'}`;
         mBtn.classList.toggle('on', c === 'month'); mBtn.setAttribute('aria-pressed', c === 'month');
         yBtn.classList.toggle('on', c === 'year');  yBtn.setAttribute('aria-pressed', c === 'year');
         document.getElementById('amtNum').textContent = P[c].label;
@@ -656,14 +676,26 @@
       setCycle('month');
       document.getElementById('foundingNote').textContent = A.FOUNDING.note;
 
+      // Checkout consent: nothing starts until the (unchecked by default) Terms + auto-renewal box is ticked.
+      const consentOk = () => {
+        if (agree.checked) { agreeErr.textContent = ''; return true; }
+        agreeErr.textContent = 'Please tick the box above to agree to the Terms and automatic renewal.';
+        agree.focus({ preventScroll: true });
+        return false;
+      };
+      agree.addEventListener('change', () => { if (agree.checked) agreeErr.textContent = ''; });
+      window.BBI_PRICE_CONSENT = consentOk;   // the final CTA below uses the same check
+
       // One button: join at the chosen cycle, or (already a member) go to the account page.
       const btn = document.getElementById('joinBtn'), note = document.getElementById('joinNote');
       const paint = () => {
         const member = A.isMember();
         btn.textContent = member ? "You're a member · Go to my account" : 'Get BirdieBuddy';
         note.hidden = member;
+        document.getElementById('consentWrap').hidden = member;
+        document.getElementById('renewNote').hidden = member;
       };
-      btn.addEventListener('click', () => A.isMember() ? (location.href = 'account.html') : A.subscribe(window.BBI_PRICE_CYCLE));
+      btn.addEventListener('click', () => A.isMember() ? (location.href = 'account.html') : (consentOk() && A.subscribe(window.BBI_PRICE_CYCLE, { agreed: true })));
       A.onChange(paint);
       paint();
     });
@@ -759,7 +791,17 @@
     /* ---- Final CTA → the same join flow as the membership card ---- */
     var fcta = document.getElementById('priceFinalCta');
     if (fcta) fcta.addEventListener('click', function () {
-      try { if (window.BBI && BBI.auth) return BBI.auth.isMember() ? (location.href = 'account.html') : BBI.auth.subscribe(window.BBI_PRICE_CYCLE || 'month'); } catch (e) {}
+      try {
+        if (window.BBI && BBI.auth) {
+          if (BBI.auth.isMember()) return (location.href = 'account.html');
+          if (!(window.BBI_PRICE_CONSENT && window.BBI_PRICE_CONSENT())) {
+            var card = document.getElementById('consentWrap') || document.getElementById('oneCard');
+            if (card) card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+            return;
+          }
+          return BBI.auth.subscribe(window.BBI_PRICE_CYCLE || 'month', { agreed: true });
+        }
+      } catch (e) {}
       location.href = 'pricing.html';
     });
 

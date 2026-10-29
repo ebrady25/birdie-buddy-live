@@ -75,6 +75,7 @@ window.BBI = window.BBI || {};
           </div>
         </div>
         <div class="footer-credit"><span>© 2026 BirdieBuddy</span><span>NFL · Golf</span></div>
+        <div class="footer-legal"><nav class="footer-legal-links" aria-label="Legal"><a href="terms.html">Terms</a><span aria-hidden="true">·</span><a href="privacy.html">Privacy</a><span aria-hidden="true">·</span><a href="responsible-play.html">Responsible play</a></nav><p class="footer-legal-note">18+ (21+ where required). For information and entertainment only; not wagering advice. Not affiliated with DraftKings, the NFL or the PGA TOUR. Gambling problem? Call <a href="tel:+18004262537">1-800-GAMBLER</a>.</p></div>
       </footer>`;
   };
 

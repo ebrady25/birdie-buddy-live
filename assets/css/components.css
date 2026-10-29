@@ -911,6 +911,21 @@
   font-size: var(--fs-3xs);
   color: var(--text-dimmed);
 }
+/* Legal row under every footer (data.js / nfl.js / brand.js): Terms · Privacy · Responsible play + the notice */
+.footer-legal {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-3) var(--container-pad) var(--space-4);
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  font-size: var(--fs-3xs);
+  line-height: 1.6;
+  color: var(--text-dimmed);
+}
+.footer-legal-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-family: var(--font-mono); }
+.footer-legal a { color: var(--text-muted); transition: color var(--dur-fast); }
+.footer-legal a:hover { color: var(--gold-300); }
+.footer-legal-note { margin: 0; max-width: 92ch; }
 
 /* ---------- SEARCH / KBD ---------- */
 .kbd {
