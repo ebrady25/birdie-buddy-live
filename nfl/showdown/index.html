@@ -19,6 +19,19 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://birdiebuddy.io/nfl/og/showdown.png">
 <meta name="description" content="NFL DraftKings Showdown playbook and Lineup Lab: script distribution, what winners looked like, captain shortlist, allocation, recipes, and a live lineup scorer running the same rules engine, built from 120 showdown winners and 2,761 games.">
+  <script>
+    /* perf (2026-10-29): start the playbook + slates fetches now, alongside the CSS/JS, instead of after every
+       script has run. showdown.js takes each one once (window.__sdPrefetch) with the same fetch options; a path it
+       doesn't ask for is never read. The playbook path mirrors showdown.js gatingMode() for GATING_MODE 'open'
+       (?gating=server off birdiebuddy.io reads the public file): at go-live flip the default too (docs/GATING_GO_LIVE.md). */
+    window.__sdPrefetch = {};
+    (function () {
+      var server = /[?&]gating=server\b/.test(location.search) && !/(^|\.)birdiebuddy\.io$/i.test(location.hostname);
+      [server ? 'nfl/showdown/showdown_playbook_public.json' : 'nfl/showdown/showdown_playbook.json', 'nfl/showdown/showdown_slates.json'].forEach(function (u) {
+        try { var p = fetch(u, { cache: 'no-cache' }); p.catch(function () {}); window.__sdPrefetch[u] = p; } catch (e) {}
+      });
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
@@ -321,7 +334,7 @@
           </summary>
           <div class="sd-step-body">
             <p class="sd-step-intro">Where to enter this week's contests with the ownership target and dupe gate for your field, the playbook as text or a play card, the score each finishing tier took in past contests of that size, and the engine's rules as a reference. <span class="sd-gate-tag">open preview</span></p>
-            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are a Pro feature.">
+            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are included with BirdieBuddy membership.">
             <details class="sd-sec" id="where" data-tier="answer">
               <summary><span class="sd-sec-title">Where to enter</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="where"></span></summary>
               <div class="sd-sec-body">
@@ -361,7 +374,7 @@
           </summary>
           <div class="sd-step-body">
             <p class="sd-step-intro">After the slate: grade a contest you played from its DraftKings standings, and what each 2026 primetime slate taught us. <span class="sd-gate-tag">open preview</span></p>
-            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The Tuesday review and the 2026 notes are a Pro feature.">
+            <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The Tuesday review and the 2026 notes are included with BirdieBuddy membership.">
             <details class="sd-sec" id="review" data-tier="tool">
               <summary><span class="sd-sec-title">Tuesday review</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="review"></span></summary>
               <div class="sd-sec-body">
@@ -392,11 +405,22 @@
   <script src="assets/js/track.js?v=0.6.3"></script>
   <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
   <script src="assets/js/showdown_fx.js?v=0.6.3"></script>
-  <script src="assets/js/showdown_engine.js?v=0.6.3"></script>
   <script src="assets/js/showdown_folds.js?v=0.6.3"></script>
-  <script src="assets/js/showdown.js?v=0.6.3"></script>
-  <script src="assets/js/showdown_build.js?v=0.6.3"></script>
-  <script src="assets/js/showdown_lab.js?v=0.6.4"></script>
-  <script src="assets/js/showdown_review.js?v=0.6.3"></script>
+  <script src="assets/js/showdown.js?v=0.6.4"></script>
+  <script>
+    /* perf (2026-10-29): the engine, builder, Lineup Lab and Tuesday review (~270 KB) load once the playbook has
+       drawn (sd:ready), in their old order; each one boots itself when it finds BBI.showdown.data already set.
+       A deep link into the Lab (#step4 / #lab / #files / #sdLabPro, or ?lu=) starts their download right away. */
+    (function () {
+      var L = ['assets/js/showdown_engine.js?v=0.6.3', 'assets/js/showdown_build.js?v=0.6.3', 'assets/js/showdown_lab.js?v=0.6.4', 'assets/js/showdown_review.js?v=0.6.3'];
+      if (/[?&]lu=/.test(location.search) || /^#(step4|lab|files|sdLabPro)\b/.test(location.hash)) L.forEach(function (src) {
+        var l = document.createElement('link'); l.rel = 'preload'; l.as = 'script'; l.href = src; document.head.appendChild(l);
+      });
+      var go = function () {
+        L.forEach(function (src) { var s = document.createElement('script'); s.src = src; s.async = false; document.body.appendChild(s); });
+      };
+      if (window.BBI && BBI.showdown && BBI.showdown.data) go(); else document.addEventListener('sd:ready', go, { once: true });
+    })();
+  </script>
 </body>
 </html>

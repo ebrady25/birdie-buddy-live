@@ -1594,16 +1594,25 @@ window.BBI = window.BBI || {};
     const page = $id('sdPage'); if (page) page.hidden = true;
   };
 
+  // The page starts the playbook + slates fetches in <head> (window.__sdPrefetch, same options); each is taken once.
+  const getJSON = path => {
+    const pre = window.__sdPrefetch && window.__sdPrefetch[path];
+    if (pre) { delete window.__sdPrefetch[path]; return pre; }
+    return fetch(path, { cache: 'no-cache' });
+  };
   const init = async () => {
+    // Slates load alongside the playbook, not after it.
+    const slatesP = getJSON(SLATES_PATH).then(r => (r.ok ? r.json() : null));
+    slatesP.catch(() => {});
     try {
       gating = gatingMode();
-      const res = await fetch(gating === 'server' ? PUBLIC_PATH : DATA_PATH, { cache: 'no-cache' });
+      const res = await getJSON(gating === 'server' ? PUBLIC_PATH : DATA_PATH);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       data = await res.json();
       if (!data || !data.base_rates || !data.archetypes) throw new Error('unexpected JSON shape');
       if (gating === 'server') { pub = data; data = mergePro(pub, null); proState = 'pending'; }
     } catch (e) { showError(e.message || String(e)); return; }
-    try { const r = await fetch(SLATES_PATH, { cache: 'no-cache' }); if (r.ok) slates = (await r.json()).slates || []; } catch {}
+    try { const j = await slatesP; if (j) slates = j.slates || []; } catch {}
     const saved = store.load();
     if (saved && typeof saved === 'object') {
       for (const k of ['spread', 'total', 'env', 'contest', 'entries', 'lean', 'preset']) if (saved[k] != null) state[k] = saved[k];
