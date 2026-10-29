@@ -115,7 +115,12 @@ window.BBI = window.BBI || {};
     'simulator.html': 'The THEMIS DFS simulator — build leverage-tilted lineup portfolios against live projections — is a Pro feature.',
     'market.html':  'Market edges, devig, and Kelly staking are an All-Access feature.'
   };
-  const currentPageName = () => (location.pathname.split('/').pop() || '') || 'index.html';
+  // Clean URLs (Cloudflare Pages serves /rankings.html as /rankings): an extensionless
+  // last segment maps back to its .html key; a trailing slash is a directory index.
+  const currentPageName = () => {
+    const seg = location.pathname.split('/').pop() || 'index.html';
+    return seg.includes('.') ? seg : seg + '.html';
+  };
 
   /* ---------------- STORAGE ---------------- */
   const LS_USERS = 'bbi_auth_users_v1';

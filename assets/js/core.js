@@ -86,7 +86,8 @@
 
   // ---------- nav active-state ----------
   const initNav = () => {
-    const path = location.pathname.split('/').pop() || 'index.html';
+    const seg = location.pathname.split('/').pop() || 'index.html';
+    const path = seg.includes('.') ? seg : seg + '.html';   // clean URLs: /rankings → rankings.html
     $$('.nav-link').forEach(link => {
       const href = link.getAttribute('href') || '';
       if (href === path || (path === 'index.html' && href === './') || (path === '' && href === 'index.html')) {

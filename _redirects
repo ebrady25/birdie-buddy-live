@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects (GitHub Pages ignores this file).
+# www -> apex is NOT here: Pages _redirects only accepts relative paths and skips
+# "https://www.birdiebuddy.io/* https://birdiebuddy.io/:splat 301" as invalid.
+# It lives in the zone instead: Rules > Redirect Rules, "Redirect from WWW to root" template
+# (hostname eq www.birdiebuddy.io -> https://birdiebuddy.io${path}, 301, preserve query string).

@@ -61,7 +61,8 @@ window.BBI = window.BBI || {};
   // Codex score band (the Lab's verdict tiers).
   const band = (score, legal) => legal === false ? 'illegal' : score == null ? 'none' : score >= 85 ? '85+' : score >= 70 ? '70-84' : score >= 50 ? '50-69' : '<50';
   const vpBucket = w => w < 400 ? 'xs' : w < 768 ? 'sm' : w < 1100 ? 'md' : 'lg';
-  const pageOf = p => String(p || '/').replace(/index\.html$/, '').replace(/^\/+|\/+$/g, '').slice(0, 64) || 'home';
+  // clean URLs (/rankings, /nfl/articles/x) key the same as their .html form; a trailing slash stays a directory
+  const pageOf = p => String(p || '/').replace(/(^|\/)([^/.]+)$/, '$1$2.html').replace(/index\.html$/, '').replace(/^\/+|\/+$/g, '').slice(0, 64) || 'home';
 
   const api = (event, props) => { try { push(event, props); } catch {} };
   Object.assign(api, { clean, dntOn, size, band, vpBucket, pageOf, EVENTS, log: [], enabled: false, sending: false });

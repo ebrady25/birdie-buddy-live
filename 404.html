@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- served for any missing path at any depth: resolve every relative URL from the site root -->
+  <base href="/" />
+  <meta name="robots" content="noindex" />
+  <title>Page not found — BirdieBuddy</title>
+<!-- bb-favicon-og -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .nf-wrap{max-width:520px;margin:var(--space-12) auto;text-align:center;padding:0 var(--space-4)}
+    .nf-wrap h1{font-size:var(--fs-2xl);color:var(--text-primary);font-weight:700;margin-bottom:var(--space-3)}
+    .nf-wrap p{color:var(--text-muted);font-size:var(--fs-sm);line-height:1.6;margin-bottom:var(--space-6)}
+    .nf-links{display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+
+  <main class="container">
+    <div class="nf-wrap">
+      <div class="eyebrow" style="margin-bottom:var(--space-3)">404</div>
+      <h1>Page not found</h1>
+      <p>That page moved or never existed.</p>
+      <div class="nf-links">
+        <a class="btn btn-primary btn-lg" href="./">Golf home</a>
+        <a class="btn btn-ghost btn-lg" href="nfl/">NFL home</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await BBI.renderHeader('404.html');
+      await BBI.renderFooter();
+    });
+  </script>
+</body>
+</html>

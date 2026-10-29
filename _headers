@@ -1,0 +1,15 @@
+# Cloudflare Pages response headers (GitHub Pages ignores this file).
+# Matching rules are additive, so /assets/* detaches the site-wide Cache-Control
+# ("! Cache-Control") before setting its own.
+
+# Site-wide. Covers HTML (incl. clean URLs like /rankings and directory indexes) and *.json data.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: frame-ancestors 'self'
+  Cache-Control: public, max-age=300
+
+# Static assets: golf assets carry no ?v=, so keep this short (1h) so fixes reach returning browsers.
+/assets/*
+  ! Cache-Control
+  Cache-Control: public, max-age=3600
