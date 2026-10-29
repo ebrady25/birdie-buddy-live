@@ -1,8 +1,9 @@
 name: Daily Odds Refresh
 
 on:
-  schedule:
-    - cron: '0 12 * * 2-6'   # Tue–Sat at noon UTC (8am EDT)
+  # OFF-SEASON 2026-10-29: schedule paused (golf frozen since July). Restore before the 2027 season; manual runs still work.
+  # schedule:
+  #  - cron: '0 12 * * 2-6'   # Tue–Sat at noon UTC (8am EDT)
   workflow_dispatch:           # Manual "Run workflow" button in GitHub Actions UI
 
 permissions:

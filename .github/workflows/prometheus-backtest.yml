@@ -1,11 +1,12 @@
 name: PROMETHEUS Backtest
 
 on:
-  schedule:
-    # Sunday 23:04 ET = Monday 03:04 UTC during EDT, 04:04 UTC during EST.
-    # GH cron is UTC; we pick 03:04 UTC Mon (works year-round, fires ~1h
-    # earlier in winter — close enough for an offline backtest).
-    - cron: '4 3 * * 1'
+  # OFF-SEASON 2026-10-29: schedule paused (golf frozen since July). Restore before the 2027 season; manual runs still work.
+  # schedule:
+  #  # Sunday 23:04 ET = Monday 03:04 UTC during EDT, 04:04 UTC during EST.
+  #  # GH cron is UTC; we pick 03:04 UTC Mon (works year-round, fires ~1h
+  #  # earlier in winter — close enough for an offline backtest).
+  #  - cron: '4 3 * * 1'
   workflow_dispatch:           # Manual "Run workflow" button
 
 permissions:

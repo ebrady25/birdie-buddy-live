@@ -8,12 +8,13 @@ name: ARGUS Preflight
 # fire ~1 hour earlier in EST. Acceptable: ARGUS is a check, not the gate.
 
 on:
-  schedule:
-    - cron: '30 10 * * 1'   # Mon 06:30 ET → before MNEMOSYNE 09:05 (2hr buffer absorbs GH cron drift)
-    - cron: '52 15 * * 1'   # Mon 11:52 ET → before Phase 1  12:02
-    - cron: '53 10 * * 2'   # Tue 06:53 ET → before Phase 1.5 07:00
-    - cron: '49 12 * * 2'   # Tue 08:49 ET → before Preview   09:09
-    - cron: '54 8 * * 3'    # Wed 04:54 ET → before Lock      05:08
+  # OFF-SEASON 2026-10-29: schedule paused (golf frozen since July). Restore before the 2027 season; manual runs still work.
+  # schedule:
+  #  - cron: '30 10 * * 1'   # Mon 06:30 ET → before MNEMOSYNE 09:05 (2hr buffer absorbs GH cron drift)
+  #  - cron: '52 15 * * 1'   # Mon 11:52 ET → before Phase 1  12:02
+  #  - cron: '53 10 * * 2'   # Tue 06:53 ET → before Phase 1.5 07:00
+  #  - cron: '49 12 * * 2'   # Tue 08:49 ET → before Preview   09:09
+  #  - cron: '54 8 * * 3'    # Wed 04:54 ET → before Lock      05:08
   workflow_dispatch:
     inputs:
       phase:

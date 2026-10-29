@@ -8,8 +8,9 @@ name: THEMIS Monte Carlo
 # THEMIS only writes data/themis.json, so it cannot loop on its own commits.
 
 on:
-  schedule:
-    - cron: '33 11 * * 2'   # Tue 07:33 ET (EDT) — cron backstop
+  # OFF-SEASON 2026-10-29: schedule paused (golf frozen since July). Restore before the 2027 season; manual runs still work.
+  # schedule:
+  #  - cron: '33 11 * * 2'   # Tue 07:33 ET (EDT) — cron backstop
   push:
     branches: [main]
     paths:
