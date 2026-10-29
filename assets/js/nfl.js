@@ -110,7 +110,7 @@ window.BBI = window.BBI || {};
             ${NAV.map(n => n.menu ? ddHtml(n, top, sub) : `<a class="nfl-link ${n.key === top ? 'active' : ''}" href="${n.href}" ${n.key === top ? 'aria-current="page"' : ''}>${n.label}</a>`).join('')}
           </div>
           <div class="nfl-right">
-            <a class="nfl-link nfl-link-golf" href="./" title="Back to the golf model">Golf ↗</a>
+            <a class="nfl-link nfl-link-golf" href="golf/" title="Back to the golf model">Golf ↗</a>
             <span id="authControl" class="bbi-auth-ctl"></span>
           </div>
         </div>
@@ -156,8 +156,8 @@ window.BBI = window.BBI || {};
           </div>
           <div class="nfl-footer-links">
             <div class="footer-heading">BirdieBuddy</div>
-            <a class="footer-link" href="./">Golf model</a>
-            <a class="footer-link" href="pricing.html">Pricing &amp; plans</a>
+            <a class="footer-link" href="golf/">Golf model</a>
+            <a class="footer-link" href="pricing.html">Membership</a>
             <a class="footer-link" href="account.html">My account</a>
           </div>
         </div>

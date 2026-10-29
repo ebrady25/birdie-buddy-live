@@ -51,7 +51,7 @@
     <header class="page-head">
       <div class="eyebrow">Account</div>
       <h1>Your BirdieBuddy account</h1>
-      <p>Manage your plan, billing, and sign-in. Upgrades take effect immediately.</p>
+      <p>Your membership, billing and sign-in, all in one place.</p>
     </header>
 
     <div id="acctMount"></div>
@@ -69,7 +69,7 @@
       await BBI.renderHeader('account.html');
       await BBI.renderFooter();
       const mount = document.getElementById('acctMount');
-      const T = BBI.auth.TIERS;
+      const M = BBI.auth.MEMBERSHIP;
 
       const esc = s => String(s ?? '').replace(/[&<>"]/g,
         c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -80,7 +80,7 @@
           mount.innerHTML = `
             <div class="signed-out">
               <h2 class="h-3" style="margin-bottom:var(--space-3)">You're not signed in</h2>
-              <p class="muted" style="margin-bottom:var(--space-6)">Sign in to manage your plan, or create a free account to get started.</p>
+              <p class="muted" style="margin-bottom:var(--space-6)">Sign in to see your membership, or create an account to get started.</p>
               <button class="btn btn-primary btn-lg" id="soLogin">Sign in</button>
               <button class="btn btn-ghost btn-lg" id="soSignup">Create account</button>
             </div>`;
@@ -88,25 +88,24 @@
           document.getElementById('soSignup').onclick = () => BBI.auth.openSignup();
           return;
         }
-        const t = T[u.tier] || T.free;
-        const nextTier = { free:'pro', pro:'all_access', all_access:'sharp', sharp:null }[u.tier];
+        const member = BBI.auth.isMember();
+        const incl = [...M.nfl.map(f => 'NFL · ' + f), ...M.golf.map(f => 'Golf · ' + f)];
         mount.innerHTML = `
           <div class="acct-grid">
             <div class="acct-card">
-              <h2>Plan</h2>
+              <h2>Membership</h2>
               <div class="plan-row">
-                <span class="plan-badge" style="color:${t.accent}">${t.name}</span>
-                <span class="muted" style="font-size:var(--fs-xs);align-self:center">${t.tagline}</span>
+                <span class="plan-badge" style="color:${member ? 'var(--gold-500)' : 'var(--text-muted)'}">${member ? 'Member' : 'Not a member yet'}</span>
               </div>
               <div class="plan-row">
-                ${nextTier ? `<button class="btn btn-primary" id="upgrade">Upgrade to ${T[nextTier].name}</button>` : `<span class="badge badge-gold">Top tier — thank you</span>`}
-                ${u.tier!=='free' ? `<button class="btn btn-ghost" id="billing">Manage billing</button>` : ''}
-                <a class="btn btn-ghost" href="pricing.html">Compare all plans</a>
+                ${member
+                  ? `<button class="btn btn-ghost" id="billing">Manage billing</button>`
+                  : `<a class="btn btn-primary" href="pricing.html">Get BirdieBuddy · <span data-price="month">${esc(BBI.auth.priceText('month'))}</span></a>`}
               </div>
-              ${nextTier ? `<div class="upsell"><strong>${T[nextTier].name}</strong> adds: ${T[nextTier].features[1] || T[nextTier].features[0]}.</div>` : ''}
+              ${member ? '' : `<div class="upsell">One membership opens every page: NFL and golf, all season long. ${esc(BBI.auth.FOUNDING.note)}</div>`}
               <div style="margin-top:var(--space-6)">
-                <h2>What you get on ${t.name}</h2>
-                <div class="stack-sm">${t.features.map(f=>`<div class="kv"><span>✓</span><strong style="font-weight:500">${f}</strong></div>`).join('')}</div>
+                <h2>${member ? 'Your membership includes' : 'Membership includes'}</h2>
+                <div class="stack-sm">${incl.map(f=>`<div class="kv"><span>✓</span><strong style="font-weight:500">${f}</strong></div>`).join('')}</div>
               </div>
             </div>
 
@@ -115,35 +114,25 @@
                 <h2>Profile</h2>
                 <div class="kv"><span>Name</span><strong>${esc(u.name||'—')}</strong></div>
                 <div class="kv"><span>Email</span><strong>${esc(u.email)}</strong></div>
-                <div class="kv"><span>Current plan</span><strong style="color:${t.accent}">${t.name}</strong></div>
-                <div class="kv"><span>Status</span><strong class="positive">Active</strong></div>
+                <div class="kv"><span>Membership</span><strong style="color:${member ? 'var(--gold-500)' : 'var(--text-muted)'}">${member ? 'Active' : 'None yet'}</strong></div>
               </div>
-              <div class="acct-card" style="margin-top:var(--space-5)">
+              ${member ? `<div class="acct-card" style="margin-top:var(--space-5)">
                 <h2>Discord</h2>
                 <p class="muted" style="font-size:var(--fs-xs);margin-bottom:var(--space-4)">
-                  Link your Discord to unlock the member server — you'll get the ${t.name} channels automatically.</p>
+                  Link your Discord to join the BirdieBuddy members' server. Your member role is set automatically.</p>
                 <button class="btn btn-primary btn-block" id="linkDiscord">Connect Discord</button>
                 <div id="discordMsg" style="margin-top:10px;font-size:var(--fs-xs)"></div>
-              </div>
+              </div>` : ''}
               <div class="acct-card" style="margin-top:var(--space-5)">
                 <h2>Session</h2>
-                <p class="muted" style="font-size:var(--fs-xs);margin-bottom:var(--space-4)">
-                  Demo mode: your account lives in this browser only. Connect the backend for real auth + billing.</p>
                 <button class="btn btn-ghost btn-block" id="signout">Sign out</button>
-                <button class="btn btn-block danger" id="downgrade"
-                  style="margin-top:10px;border:1px solid var(--border-soft)">Cancel &amp; return to Free</button>
               </div>
             </div>
           </div>`;
 
-        const up = document.getElementById('upgrade');
-        if (up) up.onclick = () => BBI.auth.subscribe(nextTier, 'year');
         const bl = document.getElementById('billing');
         if (bl) bl.onclick = () => BBI.auth.manageBilling();
         document.getElementById('signout').onclick = () => BBI.auth.logout();
-        document.getElementById('downgrade').onclick = () => {
-          if (confirm('Cancel your plan and return to Free?')) BBI.auth.subscribe('free', 'year');
-        };
 
         // --- Discord link ---
         const ld = document.getElementById('linkDiscord');

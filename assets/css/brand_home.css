@@ -1,0 +1,63 @@
+/* =====================================================================
+   BIRDIEBUDDY BRAND HOME (/)
+   Loads AFTER nfl_home.css, which supplies the golf homepage design
+   (scoped under main.nh). Everything here is scoped under main.bh, the
+   brand home only: a shorter hero, two product cards and the membership
+   strip. Dark only, like the rest of the home pages.
+   ===================================================================== */
+
+/* hero: shorter than the NFL home so the product cards peek in on load */
+.bh .hero { min-height: min(84vh, 760px); padding-top: var(--s-12); padding-bottom: var(--s-12); }
+.bh .hero h1 { max-width: 13ch; }
+.bh .hero .lock-ring { margin-top: var(--s-6); width: 56px; height: 56px; }
+.bh .hero .lock-ring .lock-mark { width: 44px; }
+.bh .hero .vault-form { margin-top: var(--s-6); }
+
+/* ---------- product cards ---------- */
+.bh .bh-products { padding: var(--s-6) var(--s-5) var(--s-16); }
+.bh .bh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); max-width: 1040px; margin: 0 auto; }
+@media (max-width: 760px) { .bh .bh-grid { grid-template-columns: 1fr; gap: var(--s-5); } }
+
+.bh .bh-card { display: flex; flex-direction: column; padding: var(--s-8); min-width: 0; }
+.bh .bh-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: var(--s-5); }
+.bh .bh-card-top .rank { margin: 0; }
+.bh .bh-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-2); padding: 5px 10px; border-radius: 999px;
+  border: 1px solid var(--border-2); background: rgba(20,20,24,0.55);
+}
+.bh .bh-pill.live { color: var(--gold-2); border-color: var(--border-gold); }
+.bh .bh-pill .live-dot { width: 6px; height: 6px; }
+.bh .bh-card-title { font-size: clamp(1.9rem, 3.4vw, 2.5rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1; margin: 0; color: var(--text); }
+.bh .bh-card-title a:hover { color: var(--gold-2); }
+.bh .bh-card .edge-desc { font-size: 15px; line-height: 1.55; margin: var(--s-4) 0 var(--s-5); color: var(--text-3); }
+
+.bh .bh-links { list-style: none; margin: 0 0 var(--s-6); padding: 0; border-top: 1px solid var(--border); }
+.bh .bh-links li { border-bottom: 1px solid var(--border); }
+.bh .bh-links a {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding: 12px 2px; min-height: 44px; box-sizing: border-box;
+  font-weight: 600; font-size: 15px; color: var(--text);
+  transition: color .2s ease;
+}
+.bh .bh-links a small { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text-4); text-align: right; }
+.bh .bh-links a::after { content: '→'; color: var(--text-4); flex: none; transition: transform .2s ease, color .2s ease; }
+.bh .bh-links a span { flex: 1; min-width: 0; }
+.bh .bh-links a:hover { color: var(--gold-2); }
+.bh .bh-links a:hover::after { color: var(--gold-2); transform: translateX(3px); }
+.bh .bh-card-cta { margin-top: auto; align-self: flex-start; }
+@media (max-width: 420px) {
+  .bh .bh-card { padding: var(--s-6) var(--s-5); }
+  .bh .bh-links a small { display: none; }
+  .bh .bh-card-cta { align-self: stretch; }
+}
+
+/* ---------- membership strip ---------- */
+.bh .bh-join { padding: var(--s-16) var(--s-5) var(--s-20); }
+.bh .bh-join .eyebrow {
+  display: inline-block; font-family: var(--mono); font-size: 11px; color: var(--gold);
+  letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: var(--s-4);
+}
+.bh .bh-join p { max-width: 44ch; }
+.bh .bh-join .vault-form { margin: 0 auto; justify-content: center; }

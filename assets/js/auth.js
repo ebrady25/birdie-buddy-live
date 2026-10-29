@@ -1,25 +1,23 @@
 /* =====================================================================
-   BIRDIEBUDDY — AUTH + TIERED ENTITLEMENTS
+   BIRDIEBUDDY — AUTH + ONE MEMBERSHIP
    ---------------------------------------------------------------------
-   Complete client-side user/login system with three paid tiers
-   (Pro · All-Access · Sharp) plus Free. Provides:
+   Client-side account system for one BirdieBuddy membership: you are a
+   member or you are not. One price gets everything (NFL + golf). Provides:
 
      • account model + session (localStorage)
-     • signup / login / logout, SHA-256 password hashing
+     • signup / login / logout, SHA-256 password hashing (demo backend)
      • header auth control (Sign in  ↔  account chip + menu)
      • login/signup modal (injected once, global)
-     • declarative content gating via [data-gate="pro|all_access|sharp"]
+     • page gating behind ONE switch, GATE_MODE (see below), plus
+       declarative section gating via [data-gate]
      • a clean BACKEND SEAM so a real auth API + Stripe Checkout can be
        dropped in without touching pages (see BBI.auth.backend below)
 
    ⚠️  SECURITY — READ THIS
-   This is a front-end entitlement layer. localStorage tier flags are
-   PRESENTATIONAL and trivially editable by the user — they are NOT a
-   security boundary. Real enforcement must live behind the backend
-   (signed session + server-side entitlement checks + Stripe webhooks).
-   The whole module is written against BBI.auth.backend so flipping to
-   production = implement those 5 async methods. Until then it runs in
-   "demo mode" and says so in the UI.
+   This is a front-end layer. Anything it hides is still downloadable, and
+   localStorage flags are trivially editable. The real lock is the
+   Cloudflare Pages Functions middleware (GATE_MODE 'server'): it checks the
+   Supabase JWT before serving members-only HTML and JSON.
    ===================================================================== */
 
 window.BBI = window.BBI || {};
@@ -28,99 +26,107 @@ window.BBI = window.BBI || {};
   'use strict';
   if (window.BBI.auth) return; // idempotent
 
-  /* ---------------- TIER MODEL ---------------- */
-  // rank is the entitlement ordering used by hasTier()/gating.
-  const TIERS = {
-    free: {
-      key: 'free', rank: 0, name: 'Free', tagline: 'The honest scorecard',
-      priceM: 0, priceY: 0, accent: 'var(--text-muted)',
-      features: [
-        'Public BBI Scorecard (full track record)',
-        '3 sample DFS lineups each week',
-        'Top-20 rankings preview',
-        'Weekly email'
-      ]
-    },
-    pro: {
-      key: 'pro', rank: 1, name: 'Pro', tagline: 'One sport, fully coached',
-      priceM: 29, priceY: 199, accent: 'var(--info)',
-      features: [
-        'Everything in Free',
-        'Full field rankings + factor decomposition',
-        'All 12 DFS lineups + the "why" on every pick',
-        'NIKE bankroll & contest plan',
-        'Member community'
-      ]
-    },
-    all_access: {
-      key: 'all_access', rank: 2, name: 'All-Access', tagline: 'PGA + NFL, every tool',
-      priceM: 39, priceY: 399, accent: 'var(--gold-500)', popular: true,
-      features: [
-        'Everything in Pro',
-        'Both sports: PGA + NFL DFS',
-        'Lineup optimizer + late-swap assistant',
-        'THEMIS simulator access',
-        'VIP community room'
-      ]
-    },
-    sharp: {
-      key: 'sharp', rank: 3, name: 'Sharp', tagline: 'The edge, unfiltered',
-      priceM: 79, priceY: 699, accent: 'var(--positive)',
-      features: [
-        'Everything in All-Access',
-        'Earliest model release (Mon AM)',
-        'Calibrated-leverage tools + raw model/data exports',
-        'Private Sharp room + priority support',
-        'Founding-member pricing locked for life'
-      ]
-    }
+  /* ---------------- THE GATE SWITCH ----------------
+     'legacy'  today's behaviour (default until the server gate ships). Only the
+               six golf tool pages that already lock (LEGACY_PAGES) plus the
+               in-page [data-gate] sections lock for non-members. Every NFL page,
+               Results included, stays open to everyone.
+     'client'  every page NOT in PUBLIC_PAGES locks for non-members (blur +
+               upgrade card). Cosmetic only: the data files stay downloadable.
+     'server'  the Cloudflare middleware already refused non-members before the
+               page loaded, so the browser shows no locks of its own.
+     Members (any paid tier in the database, a comp code, or member = true)
+     see everything in every mode. */
+  const GATE_MODE = 'legacy';
+
+  // Open to everyone in 'client' and 'server' modes. Paths are normalized by
+  // pagePath(): no ".html", directory indexes end in "/". Keep in sync with
+  // PUBLIC_PAGES in cf_functions_draft/functions/_middleware.js.
+  const PUBLIC_PAGES = [
+    '/',                // brand homepage
+    '/golf/',           // golf homepage
+    '/nfl/',            // NFL homepage
+    '/pricing', '/login', '/account', '/404',
+    '/terms', '/privacy'   // legal (pages not built yet)
+  ];
+  // The pages that lock today. Used only in 'legacy' mode.
+  const LEGACY_PAGES = ['/rankings', '/lineups', '/live', '/compare', '/simulator', '/market'];
+
+  /* ---------------- THE MEMBERSHIP ----------------
+     PRICES is the ONE place the price lives (set 2026-10-29: $29/month or $249/year,
+     founding-member pricing). Every [data-price="month|year|both"] element on the
+     site is filled from it at boot, and the upgrade card prints it.
+     $249/year = $20.75/month, 28.4% under 12 × $29 ($348), so "about 28% off". */
+  const PRICES = {
+    month: { amount: 29,  label: '$29',  per: '/month', name: 'Monthly' },
+    year:  { amount: 249, label: '$249', per: '/year',  name: 'Annual', perMonth: '$20.75', save: 'about 28% off monthly' }
   };
-  const PAID = ['pro', 'all_access', 'sharp'];
-  const tierOf = k => TIERS[k] || TIERS.free;
+  const priceText = k => k === 'both'
+    ? `${PRICES.month.label}${PRICES.month.per} or ${PRICES.year.label}${PRICES.year.per}`
+    : `${PRICES[k].label}${PRICES[k].per}`;
+  // Founding-member pricing: honest, open-ended (no end date set, no seat limit).
+  const FOUNDING = {
+    label: 'Founding member',
+    note: 'Founding member pricing: join now and your rate is locked for as long as you stay a member.'
+  };
+  const MEMBERSHIP = {
+    name: 'BirdieBuddy membership',
+    nfl: [
+      'This week’s slate in our numbers',
+      'Projections for every player',
+      'Projected ownership',
+      'Classic Playbook',
+      'Showdown Playbook: Chill and Grind',
+      'Lineup Lab',
+      'Weekly articles',
+      'Weekly results'
+    ],
+    golf: [
+      'Full-field rankings',
+      'DFS lineups',
+      'THEMIS simulator',
+      'Market edges',
+      'Live tournament pivots'
+    ]
+  };
+  // Back-compat shape for pages that read TIERS[user.tier].name (login, account).
+  const TIERS = {
+    none:   { key: 'none',   rank: 0, name: 'Not a member yet', accent: 'var(--text-muted)' },
+    member: { key: 'member', rank: 1, name: 'Member',           accent: 'var(--gold-500)' }
+  };
+  // Database tiers that count as a member until profiles.member replaces them.
+  const MEMBER_TIERS = ['member', 'pro', 'all_access', 'sharp'];
+  const toTier = t => (MEMBER_TIERS.includes(t) ? 'member' : 'none');
+  const tierOf = k => TIERS[toTier(k)];
 
   /* ---------------- DISCOUNT / COMP CODES ----------------
      Codes match case- and whitespace-insensitively ("Lock City" == "LOCKCITY");
-     `label` is the canonical display form. A code with `grantsTier` is a 100%-off
-     comp that unlocks that tier permanently at signup — granted server-side by the
-     redeem_promo() Supabase function (the client can't set its own tier). A code
-     without grantsTier is a percentage/Stripe discount applied at checkout (billing
-     not live yet). The grant map is mirrored server-side in redeem_promo; keep them
-     in sync when adding codes. */
+     `label` is the canonical display form. A code with `grantsMember` is a 100%-off
+     comp that makes the account a member at signup — granted server-side by the
+     redeem_promo() Supabase function (the client can't grant itself membership).
+     A code without it would be a percentage discount applied at checkout (billing
+     not live yet). Keep this map in sync with redeem_promo when adding codes. */
   const PROMO_CODES = {
-    LOCKCITY: { label: 'LockCity', kind: 'Friends & Family', grantsTier: 'sharp',
-                note: "Full access unlocked — free, forever. Welcome in." }
+    LOCKCITY: { label: 'LockCity', kind: 'Friends & Family', grantsMember: true,
+                note: 'Full membership, on us. Welcome in.' }
   };
   const normalizePromo = c => (c || '').trim().toUpperCase().replace(/\s+/g, '');
   const lookupPromo = c => PROMO_CODES[normalizePromo(c)] || null;
 
-  /* ---------------- PAGE ENTITLEMENTS ----------------
-     SINGLE SOURCE OF TRUTH for which pages require which tier. The router
-     (applyPageGate) reads this and gates the page's [data-gate-region] —
-     or its <main> if no region is marked — by stamping data-gate, which
-     applyGates() then renders (blur + upgrade overlay). Pages NOT listed
-     are free. simulator.html is Pro-gated at the page level; paid tiers also get
-     the in-page contest-bucket gating (Large/Mass=All-Access). */
-  const PAGE_TIERS = {
-    'rankings.html': 'pro',
-    'lineups.html':  'pro',
-    'live.html':     'pro',
-    'compare.html':  'pro',
-    'simulator.html':'pro',
-    'market.html':   'all_access'
+  /* ---------------- PAGE GATING ----------------
+     pagePath() turns the URL into the form PUBLIC_PAGES / LEGACY_PAGES use:
+     /rankings.html → /rankings, /nfl/results/index.html → /nfl/results/.
+     Clean URLs (Cloudflare Pages) already arrive without ".html". */
+  const pagePath = (p = location.pathname) => {
+    p = p.replace(/\/index(\.html)?$/, '/').replace(/\.html$/, '');
+    return p || '/';
   };
-  const PAGE_GATE_MSG = {
-    'lineups.html': 'The 12 optimized DFS lineups — with the reasoning on every pick — are a Pro feature.',
-    'live.html':    'Live Thursday–Sunday pivots and late-swap calls are a Pro feature.',
-    'compare.html': 'Head-to-head player comparison is a Pro feature.',
-    'simulator.html': 'The THEMIS DFS simulator — build leverage-tilted lineup portfolios against live projections — is a Pro feature.',
-    'market.html':  'Market edges, devig, and Kelly staking are an All-Access feature.'
+  const pageNeedsMember = (p = pagePath()) => {
+    if (GATE_MODE === 'legacy') return LEGACY_PAGES.includes(p);
+    if (GATE_MODE === 'client') return !PUBLIC_PAGES.includes(p);
+    return false;   // 'server': the middleware already decided
   };
-  // Clean URLs (Cloudflare Pages serves /rankings.html as /rankings): an extensionless
-  // last segment maps back to its .html key; a trailing slash is a directory index.
-  const currentPageName = () => {
-    const seg = location.pathname.split('/').pop() || 'index.html';
-    return seg.includes('.') ? seg : seg + '.html';
-  };
+  const GATE_MSG = 'One membership opens every page: NFL and golf, all season long.';
 
   /* ---------------- STORAGE ---------------- */
   const LS_USERS = 'bbi_auth_users_v1';
@@ -145,16 +151,31 @@ window.BBI = window.BBI || {};
 
   /* ---------------- SUPABASE BACKEND (LIVE) ----------------
      Real auth against Supabase. Implements the same 5-method seam the demo
-     does, so flipping `backend` below is the only switch. Identity + tier are
-     server-truth: tier lives in public.profiles (RLS: a user reads only their
-     own row) and is set by the Stripe webhook, never by the client.
+     does, so flipping `backend` below is the only switch. Identity + membership
+     are server-truth: they live in public.profiles (RLS: a user reads only their
+     own row) and are set by the Stripe webhook / redeem_promo, never by the client.
      Public config only — the anon/publishable key is safe in the browser;
      the service-role key lives ONLY in the Vercel /api functions.            */
   const SUPABASE_URL      = 'https://mooqbndhgsuatxlkmlrq.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_zVvQoQNxnStWCeRgqg9Dlg_LhTcengq';
   const API_BASE          = 'https://vercel-app-beige-psi.vercel.app';
   const SUPABASE_JS_CDN   = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-  const VALID_TIERS       = ['free', 'pro', 'all_access', 'sharp'];
+
+  // GATE_MODE 'server' only: mirror the Supabase access token into a first-party cookie so the
+  // Cloudflare middleware can read it on page loads (supabase-js keeps the session in localStorage,
+  // which the server never sees). Not HttpOnly (JS writes it): same exposure as localStorage.
+  // The cookie lives exactly as long as the token; supabase-js refreshes it in the background.
+  const GATE_COOKIE = 'bb-access';
+  function syncGateCookie(session) {
+    if (GATE_MODE !== 'server') return;
+    try {
+      const secure = location.protocol === 'https:' ? '; Secure' : '';
+      const ttl = session?.expires_at ? Math.max(0, session.expires_at - Math.floor(Date.now() / 1000)) : 0;
+      document.cookie = session?.access_token && ttl
+        ? `${GATE_COOKIE}=${session.access_token}; Path=/; Max-Age=${ttl}; SameSite=Lax${secure}`
+        : `${GATE_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax${secure}`;
+    } catch {}
+  }
 
   // Lazy-load supabase-js once and memoize a single client (avoids the
   // multiple-GoTrueClient warning). Resolves to the client.
@@ -163,9 +184,11 @@ window.BBI = window.BBI || {};
     if (_sbPromise) return _sbPromise;
     _sbPromise = new Promise((resolve, reject) => {
       const make = () => {
-        if (window.supabase?.createClient)
-          resolve(window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
-        else reject(new Error('Auth library failed to initialize.'));
+        if (!window.supabase?.createClient) return reject(new Error('Auth library failed to initialize.'));
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Keep the server-gate cookie in step with every sign-in, refresh and sign-out.
+        sb.auth.onAuthStateChange((_event, session) => syncGateCookie(session));
+        resolve(sb);
       };
       if (window.supabase?.createClient) return make();
       const s = document.createElement('script');
@@ -177,9 +200,11 @@ window.BBI = window.BBI || {};
     return _sbPromise;
   }
 
+  // 'member' | 'none'. Reads the whole own row so it works before AND after the
+  // migration that adds profiles.member (draft: cf_functions_draft/supabase/).
   async function fetchTier(sb, userId) {
-    const { data } = await sb.from('profiles').select('tier').eq('id', userId).single();
-    return VALID_TIERS.includes(data?.tier) ? data.tier : 'free';
+    const { data } = await sb.from('profiles').select('*').eq('id', userId).single();
+    return data?.member === true ? 'member' : toTier(data?.tier);
   }
   const friendlyAuthErr = m =>
     /invalid login credentials/i.test(m) ? 'Invalid email or password.' : m;
@@ -198,7 +223,7 @@ window.BBI = window.BBI || {};
       if (error) throw new Error(error.message);
       // With email confirmation ON, no session is returned until the user
       // confirms. Signal that so the UI prompts "check your email".
-      if (!data.session) return { email, name: fallbackName, tier: 'free', needsConfirmation: true };
+      if (!data.session) return { email, name: fallbackName, tier: 'none', needsConfirmation: true };
       return { email, name: fallbackName, tier: await fetchTier(sb, data.user.id) };
     },
     async login({ email, password }) {
@@ -219,17 +244,18 @@ window.BBI = window.BBI || {};
     async session() {
       const sb = await getSupabase();
       const { data: { session } } = await sb.auth.getSession();
+      syncGateCookie(session);
       if (!session?.user) return null;
       const email = session.user.email;
       const name = session.user.user_metadata?.name || email?.split('@')[0] || email;
-      let tier = 'free';
+      let tier = 'none';
       try { tier = await fetchTier(sb, session.user.id); }
-      catch { tier = store.get(LS_SESSION, {})?.tier || 'free'; } // keep last-known on transient failure
+      catch { tier = toTier(store.get(LS_SESSION, {})?.tier); } // keep last-known on transient failure
       return { email, name, tier };
     },
-    async signOut() { try { (await getSupabase()).auth.signOut(); } catch {} },
-    // Redeem a comp code server-side (SECURITY DEFINER fn). Returns the granted
-    // tier (e.g. 'sharp') or null for a non-granting/unknown code. Requires a session.
+    async signOut() { syncGateCookie(null); try { (await getSupabase()).auth.signOut(); } catch {} },
+    // Redeem a comp code server-side (SECURITY DEFINER fn). Returns what it granted
+    // (today 'sharp', which counts as member) or null for an unknown code. Needs a session.
     async redeemPromo(code) {
       const sb = await getSupabase();
       const { data, error } = await sb.rpc('redeem_promo', { p_code: code });
@@ -255,23 +281,23 @@ window.BBI = window.BBI || {};
       if (!email || !password) throw new Error('Email and password are required.');
       if (users[email]) throw new Error('An account with that email already exists.');
       users[email] = { name: name || email.split('@')[0], hash: await sha256(password),
-                        tier: 'free', promo: promo || null, created: new Date().toISOString() };
+                        tier: 'none', promo: promo || null, created: new Date().toISOString() };
       store.set(LS_USERS, users);
-      return { email, name: users[email].name, tier: 'free' };
+      return { email, name: users[email].name, tier: 'none' };
     },
     async login({ email, password }) {
       const users = store.get(LS_USERS, {});
       email = email.trim().toLowerCase();
       const u = users[email];
       if (!u || u.hash !== await sha256(password)) throw new Error('Invalid email or password.');
-      return { email, name: u.name, tier: u.tier || 'free' };
+      return { email, name: u.name, tier: toTier(u.tier) };
     },
-    async checkout({ email, tier, cycle }) {
-      // PRODUCTION: redirect to Stripe Checkout for {tier, cycle}; entitlement
-      // is set by the Stripe webhook server-side. DEMO: grant immediately.
+    async checkout({ email, cycle }) {
+      // PRODUCTION: redirect to Stripe Checkout for the membership at the chosen cycle;
+      // membership is set by the Stripe webhook server-side. DEMO: grant immediately.
       const users = store.get(LS_USERS, {});
-      if (users[email]) { users[email].tier = tier; store.set(LS_USERS, users); }
-      return { email, tier, cycle, simulated: true };
+      if (users[email]) { users[email].tier = 'member'; store.set(LS_USERS, users); }
+      return { email, tier: 'member', cycle, simulated: true };
     },
     async portal({ email }) {            // PRODUCTION: Stripe billing portal URL
       return { url: null, simulated: true };
@@ -279,32 +305,35 @@ window.BBI = window.BBI || {};
     async session() {                    // PRODUCTION: verify signed cookie/JWT
       return store.get(LS_SESSION, null);
     },
-    async redeemPromo(code) {            // DEMO: grant the comp tier locally
+    async redeemPromo(code) {            // DEMO: grant membership locally
       const p = lookupPromo(code);
-      if (!p?.grantsTier) return null;
+      if (!p?.grantsMember) return null;
       const email = (current?.email || '').trim().toLowerCase();
       const users = store.get(LS_USERS, {});
-      if (users[email]) { users[email].tier = p.grantsTier; store.set(LS_USERS, users); }
-      return p.grantsTier;
+      if (users[email]) { users[email].tier = 'member'; store.set(LS_USERS, users); }
+      return 'member';
     }
   };
 
   /* ---------------- CORE STATE ---------------- */
   const listeners = new Set();
-  let current = null; // {email,name,tier}
+  let current = null; // {email,name,tier: 'member'|'none'}
 
   const emit = () => { listeners.forEach(fn => { try { fn(current); } catch {} });
                        applyPageGate(); applyGates(); renderHeaderControl(); };
 
   const auth = {
-    TIERS, PAID, PROMO_CODES, backend: supabaseBackend, API_BASE,
+    GATE_MODE, PRICES, FOUNDING, priceText, MEMBERSHIP, TIERS, PROMO_CODES, backend: supabaseBackend, API_BASE,
     // The shared Supabase client + its public config (track.js batches events through it).
     client: getSupabase, supabaseConfig: { url: SUPABASE_URL, key: SUPABASE_ANON_KEY },
     validatePromo: lookupPromo,
     user: () => current,
-    tier: () => tierOf(current?.tier).key,
+    tier: () => tierOf(current?.tier).key,          // 'member' | 'none'
+    isMember: () => tierOf(current?.tier).key === 'member',
     isLoggedIn: () => !!current,
-    hasTier(min) { return tierOf(current?.tier).rank >= tierOf(min).rank; },
+    // One membership: any requirement ('member', or a legacy 'pro'/'all_access'/'sharp')
+    // is met by being a member. Kept for data.js / index.html / full_rankings.html.
+    hasTier() { return this.isMember(); },
     onChange(fn) { listeners.add(fn); return () => listeners.delete(fn); },
 
     async init() {
@@ -313,7 +342,7 @@ window.BBI = window.BBI || {};
         // refresh tier from the user record so demo upgrades persist
         const users = store.get(LS_USERS, {});
         current = { email: s.email, name: s.name || s.email,
-                    tier: users[s.email]?.tier || s.tier || 'free' };
+                    tier: toTier(users[s.email]?.tier || s.tier) };
         store.set(LS_SESSION, current);
       } else {
         // No valid backend session — drop any stale synchronously-seeded state.
@@ -331,26 +360,26 @@ window.BBI = window.BBI || {};
       if (promo) { store.set(LS_PROMO, { code: normalizePromo(raw), label: promo.label, kind: promo.kind }); u.promo = promo.label; }
       if (u && u.needsConfirmation) return u;  // grant applied on first login (see init)
       current = u; store.set(LS_SESSION, u); emit();
-      await this.applyPromoGrant();            // 100%-off comp codes unlock their tier now
+      await this.applyPromoGrant();            // 100%-off comp codes unlock membership now
       return current;
     },
-    // Redeem a comp code that grants a tier, if it would upgrade the user.
+    // Redeem a comp code that grants membership, if the user isn't a member yet.
     // Idempotent + self-healing; the grant is server-enforced (redeem_promo) so it
     // persists across devices and sessions. Uses the code stored on THIS browser
-    // (LS_PROMO) when present; on explicit login (useMetadata) a free user also lets
+    // (LS_PROMO) when present; on explicit login (useMetadata) a non-member also lets
     // the server check the code saved in their signup metadata — covers the case of
     // confirming/logging in on a different device than they signed up on.
     async applyPromoGrant({ useMetadata = false } = {}) {
       if (!current) return;
       const stored = store.get(LS_PROMO, null);
-      const localCode = (stored && lookupPromo(stored.code)?.grantsTier) ? stored.code : null;
+      const localCode = (stored && lookupPromo(stored.code)?.grantsMember) ? stored.code : null;
       const code = localCode != null ? localCode
-                 : (useMetadata && tierOf(current.tier).key === 'free') ? '' : null;
+                 : (useMetadata && !this.isMember()) ? '' : null;
       if (code === null) return;
       try {
         const granted = await this.backend.redeemPromo(code);
-        if (granted && tierOf(granted).rank > tierOf(current.tier).rank) {
-          current = { ...current, tier: granted };
+        if (toTier(granted) === 'member' && !this.isMember()) {
+          current = { ...current, tier: 'member' };
           store.set(LS_SESSION, current); emit();
         }
       } catch (e) { /* keep LS_PROMO and retry next session; never block auth */ }
@@ -366,15 +395,18 @@ window.BBI = window.BBI || {};
       current = null; store.del(LS_SESSION); emit();
     },
 
-    /** Start checkout for a tier. Demo grants immediately; prod → Stripe. */
-    async subscribe(tier, cycle = 'year') {
-      if (!current) { openModal('signup', { intentTier: tier, intentCycle: cycle }); return; }
+    /** Start checkout for the membership, billed 'month' or 'year'.
+        Demo grants immediately; prod → Stripe. */
+    async subscribe(cycle = 'month') {
+      if (!PRICES[cycle]) cycle = 'month';
+      if (!current) { openModal('signup', { intentTier: 'member', intentCycle: cycle }); return; }
+      if (this.isMember()) { location.href = 'account.html'; return; }
       try {
-        const r = await this.backend.checkout({ email: current.email, tier, cycle });
+        const r = await this.backend.checkout({ email: current.email, tier: 'member', cycle });
         if (r?.url) { location.href = r.url; return r; }          // real Stripe redirect (later)
         if (r?.tier) {                                            // demo immediate grant
-          current = { ...current, tier: r.tier }; store.set(LS_SESSION, current);
-          emit(); toast(`You're on ${tierOf(r.tier).name}${r.simulated ? ' (demo)' : ''}.`);
+          current = { ...current, tier: toTier(r.tier) }; store.set(LS_SESSION, current);
+          emit(); toast(`Welcome to BirdieBuddy${r.simulated ? ' (demo)' : ''}.`);
         }
         return r;
       } catch (e) {
@@ -384,7 +416,7 @@ window.BBI = window.BBI || {};
     },
 
     /** Authenticated read of the gated rankings backend. Sends the user's
-        Supabase token so Pro+ callers get full_json; free/anon get the teaser.
+        Supabase token so members get full_json; everyone else gets the teaser.
         Returns the /api/rankings JSON envelope { event, tier, gated, data }. */
     async fetchRankings(eventSlug) {
       const token = await this.backend.accessToken?.();
@@ -427,7 +459,7 @@ window.BBI = window.BBI || {};
     },
     openModal, openLogin: () => openModal('login'), openSignup: () => openModal('signup'),
     mountHeaderControl: renderHeaderControl,
-    applyGates, lockCard: lockCardHTML
+    applyGates, lockCard: lockCardHTML, fillPrices
   };
   window.BBI.auth = auth;
 
@@ -512,7 +544,12 @@ window.BBI = window.BBI || {};
       padding:var(--space-6);box-shadow:var(--shadow-gold-md)}
     .bbi-lock-card .eyebrow{margin-bottom:8px}
     .bbi-lock-card h4{font-size:var(--fs-lg);color:var(--text-primary);margin-bottom:6px}
-    .bbi-lock-card p{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-4)}
+    .bbi-lock-card p{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-3)}
+    .bbi-lock-price{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-4)}
+    .bbi-lock-price b{font-size:var(--fs-lg);color:var(--text-primary);font-weight:800}
+    .bbi-lock-signin{display:block;margin:var(--space-3) auto 0;font-size:var(--fs-2xs,11px);
+      color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+    .bbi-lock-signin:hover{color:var(--gold-300,#e8c878)}
     .bbi-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
       background:var(--surface-5);border:1px solid var(--border-gold);
       color:var(--text-primary);font-size:var(--fs-xs);padding:10px 18px;
@@ -580,7 +617,7 @@ window.BBI = window.BBI || {};
       q('[data-el="submit"]').textContent = m === 'login' ? 'Sign in' : 'Create account';
       q('[data-el="err"]').textContent = '';
       q('[data-el="note"]').innerHTML = auth.backend.mode === 'demo'
-        ? `Demo mode — accounts are stored only in this browser. No payment is taken; tier upgrades are simulated until the billing backend is connected.`
+        ? `Demo mode — accounts are stored only in this browser. No payment is taken until the billing backend is connected.`
         : '';
     };
     modalEl.querySelectorAll('.bbi-tab').forEach(t =>
@@ -623,7 +660,7 @@ window.BBI = window.BBI || {};
         }
         closeModal();
         if (modalIntent.intentTier) {
-          await auth.subscribe(modalIntent.intentTier, modalIntent.intentCycle || 'year');
+          await auth.subscribe(modalIntent.intentCycle);
         }
         modalIntent = {};
       } catch (ex) {
@@ -669,13 +706,13 @@ window.BBI = window.BBI || {};
            .addEventListener('click', () => openModal('login'));
       return;
     }
-    const t = tierOf(current.tier);
+    const member = auth.isMember();
     const initials = (current.name || current.email).trim()[0]?.toUpperCase() || 'B';
     mount.innerHTML = `
       <div class="bbi-auth-ctl" style="position:relative">
         <div class="bbi-chip" data-auth="menu" tabindex="0" role="button" aria-haspopup="true">
           <span class="bbi-ava">${initials}</span>
-          <span class="bbi-chip-tier" style="color:${t.accent}">${t.name}</span>
+          <span class="bbi-chip-tier" style="color:${member ? 'var(--gold-500)' : 'var(--text-muted)'}">${member ? 'Member' : 'Account'}</span>
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none"
                stroke="currentColor" stroke-width="1.6" style="color:var(--text-muted)">
             <path d="M3 5l3 3 3-3" stroke-linecap="round"/></svg>
@@ -683,10 +720,10 @@ window.BBI = window.BBI || {};
         <div class="bbi-menu" data-el="menu" hidden>
           <div class="bbi-menu-head">
             <b>${escapeHtml(current.name || current.email)}</b>
-            <span>${escapeHtml(current.email)} · ${t.name} plan</span>
+            <span>${escapeHtml(current.email)}${member ? ' · Member' : ''}</span>
           </div>
-          <a href="account.html">⚙ Account &amp; billing</a>
-          ${t.rank < 3 ? `<a href="pricing.html">★ Upgrade plan</a>` : ''}
+          <a href="account.html">⚙ Account${member ? ' &amp; billing' : ''}</a>
+          ${member ? '' : `<a href="pricing.html">★ Get BirdieBuddy</a>`}
           <button data-auth="logout">⎋ Sign out</button>
         </div>
       </div>`;
@@ -705,30 +742,28 @@ window.BBI = window.BBI || {};
   }
 
   /* ---------------- PAGE ROUTER ----------------
-     Stamps data-gate on the current page's gated region straight from the
-     PAGE_TIERS map, so all gating flows through one config instead of
-     hand-placed attributes. Region = [data-gate-region] if marked, else
-     <main>. Idempotent; the visual is handled by applyGates(). */
+     Stamps data-gate="member" on the current page's gated region when
+     pageNeedsMember() says so (GATE_MODE + PUBLIC_PAGES / LEGACY_PAGES), so all
+     page gating flows through one config. Region = [data-gate-region] if
+     marked, else <main>. Idempotent; the visual is handled by applyGates(). */
   function applyPageGate() {
-    const page = currentPageName();
-    const need = PAGE_TIERS[page];
-    if (!need) return;
+    if (!pageNeedsMember()) return;
     const region = document.querySelector('[data-gate-region]') || document.querySelector('main');
     if (!region) return;
-    if (!region.getAttribute('data-gate')) region.setAttribute('data-gate', need);
-    if (!region.getAttribute('data-gate-msg') && PAGE_GATE_MSG[page])
-      region.setAttribute('data-gate-msg', PAGE_GATE_MSG[page]);
+    if (!region.getAttribute('data-gate')) region.setAttribute('data-gate', 'member');
   }
 
   /* ---------------- CONTENT GATING ----------------
-     Any element: <section data-gate="all_access"> … </section>
-     If the user's tier rank < required, the content is blurred and an
-     upgrade card is overlaid. Idempotent + re-applied on auth change. */
+     Any element: <section data-gate="member"> … </section> (older values like
+     "pro" mean the same thing now). For a non-member the content is blurred
+     and the upgrade card is overlaid. Idempotent + re-applied on auth change.
+     GATE_MODE 'server': no client locks at all (the server already decided). */
   function applyGates() {
     injectCSS();
+    if (current) document.querySelectorAll('[data-auth="lock-login"]').forEach(b => b.remove());
     document.querySelectorAll('[data-gate]').forEach(node => {
       const need = node.getAttribute('data-gate');
-      const ok = auth.hasTier(need);
+      const ok = GATE_MODE === 'server' || auth.hasTier(need);
       const already = node.classList.contains('bbi-locked');
       if (ok) {
         if (already) { // unlock
@@ -740,6 +775,7 @@ window.BBI = window.BBI || {};
         return;
       }
       if (already) return;
+      if (node.parentElement?.closest('[data-gate]')) return;   // already inside a locked region
       const wrap = document.createElement('div');
       wrap.className = 'bbi-lock-content';
       while (node.firstChild) wrap.appendChild(node.firstChild);
@@ -752,33 +788,47 @@ window.BBI = window.BBI || {};
     });
   }
 
-  // The upgrade card. applyGates overlays it on a locked [data-gate] region; pages that gate server-side
-  // (showdown.js, GATING_MODE 'server') render it in place of the sections they didn't receive.
+  // The upgrade card: one message for the whole site. applyGates overlays it on a locked [data-gate]
+  // region; pages that gate server-side (showdown.js, GATING_MODE 'server') render it in place of the
+  // sections they didn't receive. `need` is ignored (one membership); `msg` is the page's own line.
   function lockCardHTML(need, msg) {
     injectCSS();
-    const t = tierOf(need);
     return `
         <div class="bbi-lock-card">
-          <div class="eyebrow">${t.name} feature</div>
-          <h4>Unlock this with ${t.name}</h4>
-          <p>${escapeHtml(msg ||
-              (t.name + ' members get ' + t.tagline.toLowerCase() + '.'))}</p>
-          <a class="bbi-auth-btn" href="pricing.html">See plans — from $${t.priceM}/mo</a>
+          <div class="eyebrow">Members only</div>
+          <h4>This is part of BirdieBuddy</h4>
+          <p>${escapeHtml(msg || GATE_MSG)}</p>
+          <div class="bbi-lock-price"><b>${escapeHtml(PRICES.month.label)}</b>/month or <b>${escapeHtml(PRICES.year.label)}</b>/year · everything included</div>
+          <a class="bbi-auth-btn" href="pricing.html">Get BirdieBuddy</a>
+          ${current ? '' : `<button type="button" class="bbi-lock-signin" data-auth="lock-login">Already a member? Sign in</button>`}
         </div>`;
+  }
+  // Sign-in link on the upgrade card (delegated: cards are re-rendered by applyGates and showdown.js).
+  document.addEventListener('click', e => {
+    if (e.target.closest && e.target.closest('[data-auth="lock-login"]')) openModal('login');
+  });
+
+  // Every [data-price="month|year|both"] on the page shows the price from PRICES.
+  function fillPrices() {
+    document.querySelectorAll('[data-price]').forEach(el => {
+      const k = el.getAttribute('data-price');
+      const t = priceText(PRICES[k] || k === 'both' ? k : 'month');
+      if (el.textContent !== t) el.textContent = t;
+    });
   }
 
   function escapeHtml(s) { return String(s ?? '').replace(/[&<>"]/g,
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
   /* ---------------- BOOT ----------------
-     Resolve-window: seed tier synchronously from the stored session BEFORE
-     the async init() confirms it, then gate immediately. This gates-by-
-     default for free/logged-out users (no content flash) while preventing
-     the paywall from flashing to an already-entitled member. */
+     Resolve-window: seed membership synchronously from the stored session
+     BEFORE the async init() confirms it, then gate immediately. This gates-by-
+     default for non-members/logged-out users (no content flash) while
+     preventing the paywall from flashing to an already-signed-in member. */
   function boot() {
     injectCSS();
     try { current = store.get(LS_SESSION, null) || null; } catch {}
-    applyPageGate(); applyGates();
+    applyPageGate(); applyGates(); fillPrices();
     auth.init();
   }
   if (document.readyState === 'loading')

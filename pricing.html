@@ -72,92 +72,8 @@
     [data-reveal][data-delay="4"].revealed { transition-delay: 200ms; }
     [data-reveal][data-delay="5"].revealed { transition-delay: 260ms; }
     [data-reveal][data-delay="6"].revealed { transition-delay: 320ms; }
-  </style><style id="bbi-auth-css">
-    .bbi-auth-ctl{display:flex;align-items:center;gap:var(--space-2)}
-    .bbi-auth-btn{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2xs);
-      font-weight:600;padding:6px 12px;border-radius:var(--radius-full);
-      border:1px solid var(--border-gold);color:var(--gold-500);
-      background:rgba(212,168,67,.06);transition:all var(--dur-fast) var(--ease-out)}
-    .bbi-auth-btn:hover{background:rgba(212,168,67,.14);border-color:var(--border-gold-strong)}
-    .bbi-auth-btn.ghost{border-color:var(--border-base);color:var(--text-body);background:transparent}
-    .bbi-auth-btn.ghost:hover{color:var(--text-primary);border-color:var(--border-strong)}
-    .bbi-chip{display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-      padding:5px 10px 5px 6px;border-radius:var(--radius-full);
-      border:1px solid var(--border-base);background:var(--surface-3)}
-    .bbi-chip:hover{border-color:var(--border-gold)}
-    .bbi-ava{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
-      font-size:var(--fs-3xs);font-weight:700;color:var(--text-on-gold);
-      background:linear-gradient(135deg,var(--gold-300),var(--gold-600))}
-    .bbi-chip-tier{font-size:var(--fs-3xs);font-weight:700;text-transform:uppercase;
-      letter-spacing:var(--tracking-wide)}
-    .bbi-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:220px;
-      background:var(--surface-4);border:1px solid var(--border-strong);
-      border-radius:var(--radius-lg);box-shadow:var(--shadow-xl);padding:6px;
-      z-index:var(--z-modal);animation:fadeDown var(--dur-fast) var(--ease-out)}
-    .bbi-menu[hidden]{display:none}
-    .bbi-menu a,.bbi-menu button{display:flex;width:100%;align-items:center;gap:8px;
-      justify-content:flex-start;padding:9px 10px;border-radius:var(--radius-md);
-      font-size:var(--fs-xs);color:var(--text-body);text-align:left}
-    .bbi-menu a:hover,.bbi-menu button:hover{background:var(--surface-5);color:var(--text-primary)}
-    .bbi-menu-head{padding:10px;border-bottom:1px solid var(--border-soft);margin-bottom:4px}
-    .bbi-menu-head b{display:block;color:var(--text-primary);font-size:var(--fs-sm)}
-    .bbi-menu-head span{font-size:var(--fs-3xs);color:var(--text-muted)}
-    .bbi-ovl{position:fixed;inset:0;background:rgba(4,4,8,.78);backdrop-filter:blur(4px);
-      z-index:var(--z-modal);display:grid;place-items:center;padding:var(--space-4);
-      animation:fadeIn var(--dur-fast) var(--ease-out)}
-    .bbi-ovl[hidden]{display:none}
-    .bbi-modal{width:100%;max-width:420px;background:var(--surface-3);
-      border:1px solid var(--border-strong);border-radius:var(--radius-2xl);
-      box-shadow:var(--shadow-xl);overflow:hidden;animation:scaleIn var(--dur-base) var(--ease-spring)}
-    .bbi-modal-h{padding:var(--space-6) var(--space-6) var(--space-4)}
-    .bbi-modal-h .eyebrow{margin-bottom:6px}
-    .bbi-modal-h h3{font-size:var(--fs-xl);font-weight:700;color:var(--text-primary)}
-    .bbi-tabs{display:flex;gap:4px;padding:0 var(--space-6)}
-    .bbi-tab{flex:1;padding:9px;font-size:var(--fs-xs);font-weight:600;
-      color:var(--text-muted);border-bottom:2px solid transparent}
-    .bbi-tab.on{color:var(--gold-500);border-color:var(--gold-500)}
-    .bbi-form{padding:var(--space-5) var(--space-6) var(--space-6);display:grid;gap:var(--space-3)}
-    .bbi-field label{display:block;font-size:var(--fs-3xs);font-weight:600;
-      text-transform:uppercase;letter-spacing:var(--tracking-wide);
-      color:var(--text-muted);margin-bottom:5px}
-    .bbi-field input{width:100%;padding:10px 12px;background:var(--surface-1);
-      border:1px solid var(--border-base);border-radius:var(--radius-md);
-      color:var(--text-primary);font-size:var(--fs-sm)}
-    .bbi-field input:focus{outline:none;border-color:var(--gold-500)}
-    .bbi-submit{margin-top:4px;padding:11px;border-radius:var(--radius-md);
-      background:linear-gradient(135deg,var(--gold-400),var(--gold-600));
-      color:var(--text-on-gold);font-weight:700;font-size:var(--fs-sm);
-      transition:filter var(--dur-fast)}
-    .bbi-submit:hover{filter:brightness(1.08)}
-    .bbi-submit[disabled]{opacity:.6;cursor:wait}
-    .bbi-err{color:var(--negative);font-size:var(--fs-xs);min-height:1em}
-    .bbi-demo-note{font-size:var(--fs-3xs);color:var(--text-dimmed);
-      padding:0 var(--space-6) var(--space-5);line-height:1.5}
-    .bbi-x{position:absolute;top:14px;right:14px;width:28px;height:28px;
-      display:grid;place-items:center;border-radius:var(--radius-md);
-      color:var(--text-muted)}
-    .bbi-x:hover{background:var(--surface-5);color:var(--text-primary)}
-    .bbi-locked{position:relative}
-    .bbi-locked > .bbi-lock-content{filter:blur(7px);pointer-events:none;user-select:none}
-    /* Overlay spans the whole gated region; the card sticks just below the
-       nav so the upgrade CTA stays in view on tall, async-loading regions. */
-    .bbi-lock-ovl{position:absolute;inset:0;display:flex;justify-content:center;
-      align-items:flex-start;text-align:center;padding:var(--space-8) var(--space-6);
-      pointer-events:none;z-index:2}
-    .bbi-lock-card{position:sticky;top:calc(var(--nav-h, 64px) + 24px);
-      pointer-events:auto;max-width:340px;background:var(--surface-4);
-      border:1px solid var(--border-gold);border-radius:var(--radius-xl);
-      padding:var(--space-6);box-shadow:var(--shadow-gold-md)}
-    .bbi-lock-card .eyebrow{margin-bottom:8px}
-    .bbi-lock-card h4{font-size:var(--fs-lg);color:var(--text-primary);margin-bottom:6px}
-    .bbi-lock-card p{font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--space-4)}
-    .bbi-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-      background:var(--surface-5);border:1px solid var(--border-gold);
-      color:var(--text-primary);font-size:var(--fs-xs);padding:10px 18px;
-      border-radius:var(--radius-full);box-shadow:var(--shadow-lg);
-      z-index:var(--z-tooltip);animation:fadeUp var(--dur-base) var(--ease-out)}
-    .bbi-toast[hidden]{display:none}
-    </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" async=""></script>
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" async=""></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- =========================================================
@@ -342,20 +258,6 @@
     .tier .btn-ghost { border: 1px solid var(--border-base); color: var(--text-body); transition: all var(--dur-base) var(--ease-out); }
     .tier .btn-ghost:hover { border-color: var(--border-gold); color: var(--gold-200); background: rgba(212,168,67,0.06); }
 
-    /* ---------- 9 · COMPARE TABLE ---------- */
-    .cmp { border-radius: var(--radius-lg); overflow: hidden; }
-    .cmp th, .cmp td { border-bottom: 1px solid var(--border-soft); }
-    .cmp thead th { color: var(--text-muted); }
-    /* highlight the All-Access (4th col, featured) column */
-    .cmp th:nth-child(4), .cmp td:nth-child(4) {
-      background: linear-gradient(180deg, rgba(212,168,67,0.07), rgba(212,168,67,0.03));
-    }
-    .cmp thead th:nth-child(4) { color: var(--gold-300); }
-    .cmp tbody tr { transition: background var(--dur-fast); }
-    .cmp tbody tr:hover { background: rgba(212,168,67,0.05); }
-    .cmp .yes { color: var(--positive); }
-    .cmp td:first-child { color: var(--text-body); }
-
     /* ---------- 10 · FAQ ---------- */
     .faq details {
       background: linear-gradient(180deg, rgba(22,22,28,0.55), rgba(13,13,17,0.5));
@@ -421,6 +323,30 @@
     @media (prefers-reduced-motion: reduce) {
       .tier, .tier.feat { animation: none !important; }
       .tier.feat::after { animation: none; }
+    }
+  </style>
+  <!-- ONE PRICE (2026-10-29): one membership card replaces the four tier cards + compare table. -->
+  <style id="one-price">
+    .one-card{max-width:760px;margin:0 auto;padding:var(--space-8) var(--space-8) var(--space-6);text-align:center}
+    .one-card h3{font-size:var(--fs-xl)}
+    .one-card .amt{margin-top:var(--space-4)}
+    .one-card .billed{font-size:var(--fs-xs);color:var(--text-muted);margin-top:var(--space-3)}
+    .one-card h3{margin-top:var(--space-3)}
+    .one-card > .tier-flag{position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:auto;white-space:nowrap}
+    .one-founding{display:block;margin:var(--space-4) auto 0;padding:8px 14px;border:1px solid var(--border-gold);
+      border-radius:var(--radius-md);background:rgba(212,168,67,0.06);color:var(--gold-200);font-size:var(--fs-xs);line-height:1.5;max-width:46ch}
+    .price-toggle{margin:var(--space-2) 0 var(--space-8)}
+    .one-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6);
+      text-align:left;margin:var(--space-6) 0 var(--space-6);padding-top:var(--space-6);border-top:1px solid var(--border-soft)}
+    .one-incl h4{font-family:var(--font-mono);font-size:var(--fs-3xs);letter-spacing:.18em;text-transform:uppercase;
+      color:var(--gold-500);margin-bottom:var(--space-3);font-weight:600}
+    .one-incl ul{margin:0}
+    .one-card .cta{max-width:360px;margin:0 auto}
+    .one-note{font-size:var(--fs-xs);color:var(--text-dimmed);margin-top:var(--space-3)}
+    .one-card.feat{margin-top:0}
+    @media(max-width:620px){
+      .one-card{padding:var(--space-6) var(--space-5) var(--space-5)}
+      .one-incl{grid-template-columns:1fr;gap:var(--space-5)}
     }
   </style>
 </head>
@@ -571,135 +497,69 @@
   <main class="container">
     <div class="price-aura" aria-hidden="true"><canvas id="priceHeroCanvas"></canvas></div>
     <header class="page-head">
-      <div class="eyebrow">Plans &amp; pricing</div>
-      <h1>Pick a plan. Cancel anytime.</h1>
-      <p>One honest scorecard, twelve coached lineups, no homework. Every paid plan is
-         backed by the public track record — judge us on results, not features.
-         Annual billing saves the most and locks your price.</p>
+      <div class="eyebrow">Membership</div>
+      <h1>One membership. Everything in it.</h1>
+      <p>NFL and golf, every page and every tool, in one membership. No tiers, no add-ons, nothing to compare.</p>
     </header>
 
-    <div style="text-align:center">
-      <div class="price-toggle" role="tablist" aria-label="Billing cycle">
-        <button id="cycMonth" role="tab">Monthly</button>
-        <button id="cycYear" class="on" role="tab">Annual<span class="save">save up to 30%</span></button>
-      </div>
-    </div>
-
     <div class="trust-row">
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>One membership</span>
+      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>NFL + golf</span>
       <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Cancel anytime</span>
-      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 17l5-6 4 3 6-8" stroke-linecap="round" stroke-linejoin="round"/></svg>Backed by the public track record</span>
-      <span class="trust-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>No card stored in demo</span>
     </div>
 
-    <div class="tier-grid" id="tierGrid">
-            <div class="tier ">
-              
-              <h3 style="color:var(--text-muted)">Free</h3>
-              <div class="tag">The honest scorecard</div>
-              <div class="amt">$0<small></small></div>
-              <div class="billed">Free forever</div>
-              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Public BBI Scorecard (full track record)</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>3 sample DFS lineups each week</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Top-20 rankings preview</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Weekly email</span></li></ul>
-              <div class="cta">
-                <button class="btn btn-ghost btn-block btn-lg" data-buy="free">Create free account</button>
-              </div>
-            </div>
-            <div class="tier ">
-              
-              <h3 style="color:var(--info)">Pro</h3>
-              <div class="tag">One sport, fully coached</div>
-              <div class="amt">$17<small>/mo</small></div>
-              <div class="billed">$199 billed annually · save $149/yr</div>
-              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Free</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Full field rankings + factor decomposition</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>All 12 DFS lineups + the "why" on every pick</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>NIKE bankroll &amp; contest plan</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Member community</span></li></ul>
-              <div class="cta">
-                <button class="btn btn-ghost btn-block btn-lg" data-buy="pro">Choose Pro</button>
-              </div>
-            </div>
-            <div class="tier feat">
-              <span class="tier-flag">Most popular</span>
-              <h3 style="color:var(--gold-500)">All-Access</h3>
-              <div class="tag">PGA + NFL, every tool</div>
-              <div class="amt">$33<small>/mo</small></div>
-              <div class="billed">$399 billed annually · save $69/yr</div>
-              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Pro</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Both sports: PGA + NFL DFS</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Lineup optimizer + late-swap assistant</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>THEMIS simulator access</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>VIP community room</span></li></ul>
-              <div class="cta">
-                <button class="btn btn-primary btn-block btn-lg" data-buy="all_access">Choose All-Access</button>
-              </div>
-            </div>
-            <div class="tier ">
-              
-              <h3 style="color:var(--positive)">Sharp</h3>
-              <div class="tag">The edge, unfiltered</div>
-              <div class="amt">$58<small>/mo</small></div>
-              <div class="billed">$699 billed annually · save $249/yr</div>
-              <ul><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in All-Access</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Earliest model release (Mon AM)</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Calibrated-leverage tools + raw model/data exports</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Private Sharp room + priority support</span></li><li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Founding-member pricing locked for life</span></li></ul>
-              <div class="cta">
-                <button class="btn btn-ghost btn-block btn-lg" data-buy="sharp">Choose Sharp</button>
-              </div>
-            </div></div>
-
-    <section class="section">
-      <header class="page-head" style="border:0;padding-bottom:0">
-        <div class="eyebrow">Compare</div>
-        <h1 style="font-size:var(--fs-2xl)">What's in each plan</h1>
-      </header>
-      <div style="overflow-x:auto">
-        <table class="cmp">
-          <thead><tr><th>Feature</th><th>Free</th><th>Pro</th><th>All-Access</th><th>Sharp</th></tr></thead>
-          <tbody id="cmpBody">
-        <tr><td>Public Scorecard (full track record)</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Sample weekly lineups</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Full field rankings + factor decomposition</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>All 12 DFS lineups + the "why"</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>NIKE bankroll &amp; contest plan</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Member community</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>NFL DFS (added for the season)</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Lineup optimizer + late-swap assistant</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>THEMIS simulator</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Earliest release + raw data/model exports</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Private Sharp room + priority support</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
-      
-        <tr><td>Founding price locked for life</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td></tr>
-      </tbody>
-        </table>
+    <div style="text-align:center">
+      <div class="price-toggle" role="group" aria-label="Billing">
+        <button id="cycMonth" type="button" class="on" aria-pressed="true">Monthly</button>
+        <button id="cycYear" type="button" aria-pressed="false">Annual<span class="save" id="cycSave">about 28% off</span></button>
       </div>
-    </section>
+    </div>
 
-    <section class="section" style="padding-top:0">
+    <div class="tier-grid" style="display:block">
+      <div class="tier feat one-card" id="oneCard">
+        <span class="tier-flag" id="foundingFlag">Founding member</span>
+        <h3>BirdieBuddy membership</h3>
+        <div class="amt"><span id="amtNum">$29</span><small id="amtPer">/month</small></div>
+        <div class="billed" id="amtBilled">Billed monthly. Cancel anytime.</div>
+        <div class="one-founding" id="foundingNote">Founding member pricing: join now and your rate is locked for as long as you stay a member.</div>
+        <div class="one-incl">
+          <div><h4>NFL</h4><ul id="inclNfl"></ul></div>
+          <div><h4>Golf</h4><ul id="inclGolf"></ul></div>
+        </div>
+        <div class="cta">
+          <button class="btn btn-primary btn-block btn-lg" id="joinBtn" type="button">Get BirdieBuddy</button>
+          <div class="one-note" id="joinNote">Have a discount code? Add it when you create your account.</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top:var(--space-12)">
       <header class="page-head" style="border:0;padding-bottom:0">
         <div class="eyebrow">Questions</div>
         <h1 style="font-size:var(--fs-2xl)">Good to know</h1>
       </header>
       <div class="faq">
-        <details><summary>Can I cancel anytime?</summary><p>Yes. Monthly plans stop at the end of the cycle; annual plans don't auto-trap you — you keep access through the term you paid for. No retention mazes.</p></details>
-        <details><summary>What's the difference between Pro and All-Access?</summary><p>Pro covers one sport (PGA) fully. All-Access adds NFL DFS, the lineup optimizer, the late-swap assistant, and the THEMIS simulator. Sharp adds earliest model release, raw data/model exports, and the private room.</p></details>
-        <details><summary>Do you really publish your losing weeks?</summary><p>Yes — the public Scorecard shows the full record, wins and misses. That's the entire point of the product.</p></details>
-        <details><summary>Is my payment secure?</summary><p>Billing runs through the payment processor once connected — we never store card details. <strong>Note:</strong> this preview runs in demo mode; account creation and upgrades are simulated locally until the billing backend is live.</p></details>
+        <details><summary>What do I get?</summary><p>Everything on BirdieBuddy. Every NFL page and tool, every golf page and tool, all season. There's one membership, so there's nothing to upgrade later.</p></details>
+        <details><summary>What is founding member pricing?</summary><p>Join now at $29 a month or $249 a year and that rate stays yours for as long as your membership stays active. If the price goes up later, it goes up for new members, not for you. If you cancel and come back, you join at the price at that time.</p></details>
+        <details><summary>Monthly or annual?</summary><p>Same membership, same everything. Annual is $249 a year, which works out to about $20.75 a month, about 28% less than paying monthly.</p></details>
+        <details><summary>Can I cancel anytime?</summary><p>Yes. Cancel from your account page and you keep access through the time you've paid for. No hoops.</p></details>
+        <details><summary>I have a discount code. Where does it go?</summary><p>Enter it when you create your account. If it covers the whole membership, you're in as soon as you sign in.</p></details>
+        <details><summary>Is my payment secure?</summary><p>Checkout runs through our payment processor. We never see or store your card details.</p></details>
       </div>
     </section>
 
     <section class="final-cta">
       <canvas id="priceFinalCanvas" aria-hidden="true"></canvas>
       <div class="eyebrow">Ready when you are</div>
-      <h2>Pick your edge. Cancel anytime.</h2>
-      <p>Every plan is backed by the public track record — wins and misses, in the open. Start today and judge us on results, not features.</p>
+      <h2>Get BirdieBuddy.</h2>
+      <p>One membership for NFL and golf. Lock in founding member pricing and cancel anytime.</p>
       <button class="final-btn" id="priceFinalCta" type="button">
-        Get All-Access
+        Get BirdieBuddy
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <div class="final-meta">Most popular · $33/mo billed annually · cancel anytime</div>
+      <div class="final-meta"><span data-price="both">$29/month or $249/year</span> · founding member pricing · cancel anytime</div>
     </section>
   </main>
-
   <div id="site-footer">
       <footer class="site-footer">
         <div class="site-footer-inner">
@@ -769,81 +629,43 @@
       await BBI.renderHeader('pricing.html');
       await BBI.renderFooter();
 
-      const T = BBI.auth.TIERS;
-      const order = ['free', 'pro', 'all_access', 'sharp'];
+      const A = BBI.auth, M = A.MEMBERSHIP;
       const check = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-      let cycle = 'year';
+      const list = items => items.map(f => `<li>${check}<span>${f}</span></li>`).join('');
+      document.getElementById('inclNfl').innerHTML = list(M.nfl);
+      document.getElementById('inclGolf').innerHTML = list(M.golf);
+      A.fillPrices();
 
-      const grid = document.getElementById('tierGrid');
-      const renderTiers = () => {
-        grid.innerHTML = order.map(k => {
-          const t = T[k];
-          const isPaid = t.priceM > 0;
-          const amount = !isPaid ? 0 : (cycle === 'year' ? Math.round(t.priceY / 12) : t.priceM);
-          const billed = !isPaid ? 'Free forever'
-            : cycle === 'year'
-              ? `$${t.priceY} billed annually · save $${t.priceM * 12 - t.priceY}/yr`
-              : 'Billed monthly';
-          const ctaLabel = !isPaid ? 'Create free account' : `Choose ${t.name}`;
-          return `
-            <div class="tier ${t.popular ? 'feat' : ''}">
-              ${t.popular ? '<span class="tier-flag">Most popular</span>' : ''}
-              <h3 style="color:${t.accent}">${t.name}</h3>
-              <div class="tag">${t.tagline}</div>
-              <div class="amt">$${amount}<small>${isPaid ? '/mo' : ''}</small></div>
-              <div class="billed">${billed}</div>
-              <ul>${t.features.map(f => `<li>${check}<span>${f}</span></li>`).join('')}</ul>
-              <div class="cta">
-                <button class="btn ${t.popular ? 'btn-primary' : 'btn-ghost'} btn-block btn-lg"
-                        data-buy="${k}">${ctaLabel}</button>
-              </div>
-            </div>`;
-        }).join('');
-        grid.querySelectorAll('[data-buy]').forEach(b => {
-          b.addEventListener('click', () => {
-            const k = b.dataset.buy;
-            if (k === 'free') {
-              if (BBI.auth.isLoggedIn()) location.href = 'account.html';
-              else BBI.auth.openSignup();
-            } else {
-              BBI.auth.subscribe(k, cycle);
-            }
-          });
-        });
-      };
-
-      const mBtn = document.getElementById('cycMonth');
-      const yBtn = document.getElementById('cycYear');
+      // Billing toggle: same membership, monthly or annual (prices from BBI.auth.PRICES).
+      const P = A.PRICES;
+      window.BBI_PRICE_CYCLE = 'month';
+      const mBtn = document.getElementById('cycMonth'), yBtn = document.getElementById('cycYear');
+      document.getElementById('cycSave').textContent = P.year.save.replace(' monthly', '');
       const setCycle = c => {
-        cycle = c;
-        mBtn.classList.toggle('on', c === 'month');
-        yBtn.classList.toggle('on', c === 'year');
-        renderTiers();
+        window.BBI_PRICE_CYCLE = c;
+        mBtn.classList.toggle('on', c === 'month'); mBtn.setAttribute('aria-pressed', c === 'month');
+        yBtn.classList.toggle('on', c === 'year');  yBtn.setAttribute('aria-pressed', c === 'year');
+        document.getElementById('amtNum').textContent = P[c].label;
+        document.getElementById('amtPer').textContent = P[c].per;
+        document.getElementById('amtBilled').textContent = c === 'year'
+          ? `Billed yearly. That's ${P.year.perMonth} a month, ${P.year.save}.`
+          : 'Billed monthly. Cancel anytime.';
       };
       mBtn.addEventListener('click', () => setCycle('month'));
       yBtn.addEventListener('click', () => setCycle('year'));
-      renderTiers();
+      setCycle('month');
+      document.getElementById('foundingNote').textContent = A.FOUNDING.note;
 
-      // Comparison matrix
-      const rank = { free: 0, pro: 1, all_access: 2, sharp: 3 };
-      const rows = [
-        ['Public Scorecard (full track record)', 0],
-        ['Sample weekly lineups', 0],
-        ['Full field rankings + factor decomposition', 1],
-        ['All 12 DFS lineups + the "why"', 1],
-        ['NIKE bankroll & contest plan', 1],
-        ['Member community', 1],
-        ['NFL DFS (added for the season)', 2],
-        ['Lineup optimizer + late-swap assistant', 2],
-        ['THEMIS simulator', 2],
-        ['Earliest release + raw data/model exports', 3],
-        ['Private Sharp room + priority support', 3],
-        ['Founding price locked for life', 3]
-      ];
-      document.getElementById('cmpBody').innerHTML = rows.map(([label, need]) => `
-        <tr><td>${label}</td>${order.map(k =>
-          rank[k] >= need ? '<td class="yes">✓</td>' : '<td class="no">—</td>').join('')}</tr>
-      `).join('');
+      // One button: join at the chosen cycle, or (already a member) go to the account page.
+      const btn = document.getElementById('joinBtn'), note = document.getElementById('joinNote');
+      const paint = () => {
+        const member = A.isMember();
+        btn.textContent = member ? "You're a member · Go to my account" : 'Get BirdieBuddy';
+        note.hidden = member;
+      };
+      btn.addEventListener('click', () => A.isMember() ? (location.href = 'account.html') : A.subscribe(window.BBI_PRICE_CYCLE));
+      A.onChange(paint);
+      paint();
     });
   </script>
 
@@ -934,37 +756,10 @@
       tier.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
     });
 
-    /* ---- Price count-up on every (re)render ---- */
-    var grid = document.getElementById('tierGrid');
-    var easeOut = function (x) { return 1 - Math.pow(1 - x, 4); };
-    function countAmounts() {
-      if (reduce || !grid) return;
-      grid.querySelectorAll('.amt').forEach(function (amt) {
-        var node = null;
-        amt.childNodes.forEach(function (c) { if (!node && c.nodeType === 3 && c.textContent.indexOf('$') > -1) node = c; });
-        if (!node) return;
-        var target = parseInt(node.textContent.replace(/[^0-9]/g, ''), 10);
-        if (isNaN(target) || target === 0) return;
-        var dur = 650, start = performance.now();
-        (function tick(now) {
-          var p = Math.min(1, (now - start) / dur);
-          node.textContent = '$' + Math.round(target * easeOut(p));
-          if (p < 1) requestAnimationFrame(tick); else node.textContent = '$' + target;
-        })(start);
-      });
-    }
-    if (grid) {
-      var mo = new MutationObserver(function () { countAmounts(); });
-      mo.observe(grid, { childList: true });
-      countAmounts();
-    }
-
-    /* ---- Final CTA → same purchase flow as the featured card ---- */
+    /* ---- Final CTA → the same join flow as the membership card ---- */
     var fcta = document.getElementById('priceFinalCta');
     if (fcta) fcta.addEventListener('click', function () {
-      var y = document.getElementById('cycYear');
-      var cyc = (y && y.classList.contains('on')) ? 'year' : 'month';
-      try { if (window.BBI && BBI.auth && BBI.auth.subscribe) return BBI.auth.subscribe('all_access', cyc); } catch (e) {}
+      try { if (window.BBI && BBI.auth) return BBI.auth.isMember() ? (location.href = 'account.html') : BBI.auth.subscribe(window.BBI_PRICE_CYCLE || 'month'); } catch (e) {}
       location.href = 'pricing.html';
     });
 

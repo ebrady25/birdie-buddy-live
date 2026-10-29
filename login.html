@@ -62,6 +62,12 @@
       await BBI.renderFooter();
       const mount = document.getElementById('loginMount');
 
+      // Server gate (auth.js GATE_MODE 'server'): the middleware sends a member whose page cookie
+      // expired here with ?next=/path. Once auth.js has refreshed the session (and the cookie), go back.
+      const next = new URLSearchParams(location.search).get('next');
+      const safeNext = next && /^\/(?!\/)/.test(next) ? next : null;
+      if (safeNext) BBI.auth.onChange(u => { if (u && BBI.auth.isMember()) location.replace(safeNext); });
+
       if (BBI.auth.isLoggedIn()) {
         const u = BBI.auth.user();
         mount.innerHTML = `
@@ -69,7 +75,7 @@
             <div class="eyebrow" style="margin-bottom:var(--space-3)">Signed in</div>
             <h1 class="h-3" style="margin-bottom:var(--space-2)">Hi, ${(u.name||u.email)}</h1>
             <p class="muted" style="font-size:var(--fs-sm);margin-bottom:var(--space-6)">
-              You're on the ${BBI.auth.TIERS[u.tier].name} plan.</p>
+              ${BBI.auth.isMember() ? "You're a BirdieBuddy member." : 'You can join BirdieBuddy from your account page.'}</p>
             <a class="btn btn-primary btn-lg" href="account.html">Go to my account</a>
           </div>`;
         return;
@@ -96,8 +102,7 @@
               <button class="btn btn-primary btn-block btn-lg" type="submit" id="s">
                 ${mode==='login'?'Sign in':'Create account'}</button>
             </form>
-            <div class="auth-note">Demo mode — accounts are stored only in this browser and
-              upgrades are simulated until the billing backend is connected. Don't reuse a real password.</div>
+            <div class="auth-note">One BirdieBuddy membership gets you everything: NFL and golf.</div>
           </div>`;
         mount.querySelectorAll('[data-m]').forEach(b =>
           b.onclick = () => { mode = b.dataset.m; draw(); });
@@ -119,7 +124,7 @@
             const data = { email: fd.get('email'), password: fd.get('password'), name: fd.get('name'), promo: fd.get('promo') };
             if (mode === 'signup') await BBI.auth.signup(data);
             else await BBI.auth.login(data);
-            location.href = 'account.html';
+            location.href = safeNext || 'account.html';
           } catch (ex) {
             err.textContent = ex.message || 'Something went wrong.';
             btn.disabled = false;

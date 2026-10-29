@@ -30,13 +30,13 @@
   <link rel="stylesheet" href="assets/css/classic_book.css?v=0.7.0" />
 </head>
 <body>
-  <!-- OPEN PREVIEW (2026-09-22): open to every visitor, free included, while we iterate — no data-gate on this page.
-       To gate later, wrap Step 3 / Step 4 in data-gate="pro" the way the showdown page does. -->
+  <!-- ONE MEMBERSHIP (2026-10-29): the whole page is members-only. auth.js locks it for non-members when
+       GATE_MODE is 'client'; the Cloudflare middleware locks it in 'server'. No per-step gates on this page. -->
   <div id="site-header"></div>
 
   <main class="container sd-page cl-page">
     <header class="page-head sd-hero">
-      <div class="eyebrow">DraftKings Classic · main slate · open preview</div>
+      <div class="eyebrow">DraftKings Classic · main slate</div>
       <h1>Classic Playbook</h1>
       <p>Set the slate, see which games the winning stacks came from, build to the stack rules — then <strong>check your lineup against the same engine we build with</strong>. Every number is a winner rate with an n.</p>
       <div class="page-head-meta sd-provenance" id="clProv"></div>
@@ -53,7 +53,6 @@
           <div class="sd-step-head">
             <span class="sd-step-num">This week</span>
             <h2 id="clBookTitle">This week's book</h2>
-            <span class="sd-gate-tag">open preview</span>
             <p>Our ten best lineups for Sunday's main slate. Each card shows why it is built the way it is: the QB stack, the bring-back, the second game and the ownership mix. The four ideas in the cards below are what separate winning lineups from the field.</p>
           </div>
           <div id="clBook"><div class="card sd-panel"><p class="sd-lede">Loading this week's lineups…</p></div></div>
@@ -64,7 +63,6 @@
           <div class="sd-step-head">
             <span class="sd-step-num">Step 1</span>
             <h2 id="step1h">Set the slate</h2>
-            <span class="sd-gate-tag">free</span>
             <p>Load a week's main slate or type your own games. The stack ranking and the checker's QB-game rules read these lines.</p>
           </div>
           <div class="card sd-panel fx-reveal">
@@ -86,7 +84,6 @@
           <div class="sd-step-head">
             <span class="sd-step-num">Step 2</span>
             <h2 id="step2h">Where the winning stacks came from</h2>
-            <span class="sd-gate-tag">free</span>
             <p>Every Milly Maker winner's QB game, joined to its closing line and final score, against every game since 2016. High totals and favorites — and games that went over.</p>
           </div>
           <div class="card sd-panel fx-reveal" id="clWhere"></div>
@@ -101,7 +98,6 @@
           <div class="sd-step-head">
             <span class="sd-step-num">Step 3</span>
             <h2 id="step3h">The stack rules</h2>
-            <span class="sd-gate-tag">open preview</span>
             <p>QB + catchers, the bring-back, one-offs, chalk and the portfolio limits — straight from rules.json, each with the share of winners that pass it.</p>
           </div>
           <div class="card sd-panel card-premium fx-reveal" id="clRulesHead"></div>
@@ -114,7 +110,6 @@
           <div class="sd-step-head">
             <span class="sd-step-num">Step 4</span>
             <h2 id="step4h">Check a lineup</h2>
-            <span class="sd-gate-tag">open preview</span>
             <p>Paste 9 players. The engine runs every classic hard rule and soft rule — the same code path as classic_engine.py, byte-for-byte parity-tested — using your DK salary file or the sample pool.</p>
           </div>
           <div id="clLab"></div>
@@ -132,7 +127,7 @@
   <script src="assets/js/core.js"></script>
   <script src="assets/js/nfl.js?v=0.6.3"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
-  <script>BBI.renderNflHeader('classic'); BBI.renderNflFooter('Classic Playbook · open preview');</script>
+  <script>BBI.renderNflHeader('classic'); BBI.renderNflFooter('Classic Playbook');</script>
   <script src="assets/js/showdown_fx.js?v=0.6.3"></script>
   <script src="assets/js/showdown_engine.js?v=0.6.3"></script>
   <script src="assets/js/classic_engine.js?v=0.6.3"></script>

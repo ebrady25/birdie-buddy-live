@@ -134,7 +134,7 @@ window.BBI = window.BBI || {};
     mount.innerHTML = `
       <nav class="site-nav">
         <div class="site-nav-inner">
-          <a href="index.html" class="brand">
+          <a href="golf/" class="brand">
             <img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />
             <span class="brand-lockup">
               BirdieBuddy
@@ -247,7 +247,7 @@ window.BBI = window.BBI || {};
       // free/logged-out → full_rankings teaser, Pro+ → the full board. Both
       // page keys light the tab.
       const tabs = [
-        { href: 'index.html', key: 'index', label: 'Home', icon: I.home },
+        { href: 'golf/', key: 'index', label: 'Home', icon: I.home },
         { href: 'full_rankings.html', key: 'rankings', altKey: 'full_rankings', label: 'Rankings', icon: I.rank, smart: true },
         { href: 'lineups.html', key: 'lineups', label: 'Lineups', icon: I.cards },
         { href: 'simulator.html', key: 'simulator', label: 'Simulator', icon: I.dial },
@@ -287,7 +287,7 @@ window.BBI = window.BBI || {};
         </div>
         <div class="m-sheet-label">Account</div>
         <div class="m-sheet-grid">
-          ${link('pricing.html', 'Pricing', 'Free · Pro · All-Access')}
+          ${link('pricing.html', 'Membership', 'One membership, everything included')}
           ${link('account.html', 'My account', '')}
         </div>`;
       document.body.append(bar, backdrop, sheet);
@@ -310,7 +310,7 @@ window.BBI = window.BBI || {};
     })();
 
     // ---------- Auth + tiered entitlements (site-wide, zero per-page edits) ----------
-    // auth.js powers the login system and the 3 paid tiers. Loaded lazily once
+    // auth.js powers the login system and membership. Loaded lazily once
     // so every page that renders this shared header gets the account control,
     // the login/signup modal, and [data-gate] content gating automatically.
     (function ensureAuth() {
@@ -445,7 +445,7 @@ window.BBI = window.BBI || {};
       <footer class="site-footer">
         <div class="site-footer-inner">
           <div>
-            <a href="index.html" class="brand">
+            <a href="golf/" class="brand">
               <img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />
               <span class="brand-lockup">BirdieBuddy</span>
             </a>
@@ -478,7 +478,7 @@ window.BBI = window.BBI || {};
           <div>
             <div class="footer-heading">Account</div>
             <div class="footer-links">
-              <a class="footer-link" href="pricing.html">Pricing &amp; plans</a>
+              <a class="footer-link" href="pricing.html">Membership</a>
               <a class="footer-link" href="account.html">My account</a>
               <a class="footer-link" href="login.html">Sign in</a>
             </div>
@@ -495,7 +495,7 @@ window.BBI = window.BBI || {};
         </div>
         <div class="footer-credit">
           <span>© 2026 BirdieBuddy</span>
-          <span>BBI v8.5 · Pantheon Pro · Private preview</span>
+          <span>BBI v8.5</span>
         </div>
       </footer>
     `;

@@ -117,8 +117,8 @@
       <p>Every player in the field, ranked by the BirdieBuddy composite score. Click any row to expand the 10-factor decomposition, course history, recent form, and market positioning. Sort any column. Filter by tier.</p>
     </header>
 
-    <!-- GATED: tier supplied centrally by PAGE_TIERS (rankings.html → pro) -->
-    <div data-gate-region data-gate-msg="Full field rankings, every factor decomposition, and DFS value are a Pro feature. Free members get this week's top 3 on the Full Rankings preview.">
+    <!-- GATED: members-only, set centrally by auth.js (GATE_MODE + LEGACY_PAGES / PUBLIC_PAGES) -->
+    <div data-gate-region data-gate-msg="The full field, every factor and DFS value are included with BirdieBuddy membership.">
 
     <!-- TOOLBAR -->
     <div class="page-toolbar">
@@ -175,7 +175,7 @@
         <tbody id="rankBody"></tbody>
       </table>
     </div>
-    </div><!-- /data-gate pro -->
+    </div><!-- /data-gate member -->
 
     <!-- METHODOLOGY STRIP -->
     <section class="section">
@@ -216,7 +216,7 @@
       $('#rankEvent').textContent = ev?.event_name || '—';
 
       // Data source: static file by default; opt into the gated API with ?src=api.
-      // Pro+ callers get full_json server-side; falls back to static on error.
+      // Members get full_json server-side (/api/rankings); falls back to static on error.
       // auth.js is lazy-loaded by renderHeader, so wait (briefly) for BBI.auth
       // before deciding — otherwise the API path would race and fall back to static.
       const _useApi = new URLSearchParams(location.search).get('src') === 'api';

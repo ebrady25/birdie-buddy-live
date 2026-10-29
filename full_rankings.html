@@ -233,7 +233,7 @@
 </head>
 <body>
 <nav class="vault-nav">
-  <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+  <a href="golf/" class="brand">Birdie<span>Buddy</span></a>
   <div class="links">
     <a href="full_rankings.html" class="active" data-rankings-link>Rankings</a>
     <a href="performance.html">Performance</a>
@@ -246,15 +246,15 @@
 
 <main class="container">
   <div style="text-align:center;padding:var(--s-3) 0;border-bottom:1px solid var(--border-gold);background: linear-gradient(90deg, transparent, rgba(212,168,67,0.08), transparent);">
-    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Free preview · Top of the field · Updated weekly</span>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;">Preview · Top of the field · Updated weekly</span>
   </div>
   <header class="page-head">
     <div class="eyebrow">Live rankings · <span id="eventName">—</span></div>
     <h1>This week's top of the field.</h1>
-    <p>A free look at the BirdieBuddy composite — the top three ranked players this week. Unlock the full field, every factor, and DFS value inside.</p>
+    <p>A quick look at the BirdieBuddy composite: the top three ranked players this week. The full field, every factor and DFS value come with membership.</p>
   </header>
 
-  <!-- Toolbar (hidden on free preview) -->
+  <!-- Toolbar (hidden on the preview) -->
   <div class="toolbar" style="display:none;">
     <div class="chip-row" id="tierChips">
       <button class="chip" data-filter="all" aria-pressed="true">All</button>
@@ -294,7 +294,7 @@
       <strong>Seeing 3 of <span id="fieldSize">—</span> ranked players.</strong>
       Unlock the full field, every factor decomposition, and DFS value with a BirdieBuddy membership.
     </div>
-    <a href="pricing.html" class="unlock-btn">Unlock full rankings →</a>
+    <a href="pricing.html" class="unlock-btn">Get BirdieBuddy →</a>
   </div>
 
   <!-- Weights -->
@@ -414,7 +414,7 @@
     // DFS value proxy = composite points per $1k salary
     players.forEach(p => { p._value = (p.bbi_dfs && p.dk_salary) ? p.bbi_dfs / (p.dk_salary / 1000) : 0; });
 
-    // Free preview: only the top 5, with the bottom 2 blurred (3 visible)
+    // Preview: only the top 5, with the bottom 2 blurred (3 visible)
     const PREVIEW_ROWS = 5, VISIBLE_ROWS = 3;
     const preview = players.slice(0, PREVIEW_ROWS);
 
@@ -707,7 +707,7 @@
   <script>window.BBI && BBI.renderMobileShell && BBI.renderMobileShell('full_rankings.html');</script>
   <script src="assets/js/auth.js"></script>
   <script>
-    /* Smart Rankings link: free/logged-out → teaser; Pro+ → full field. */
+    /* Smart Rankings link: non-member/logged-out → teaser; member → full field. */
     (function routeRankingsLink() {
       function apply() {
         const paid = window.BBI && window.BBI.auth && window.BBI.auth.hasTier

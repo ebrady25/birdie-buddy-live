@@ -1450,7 +1450,7 @@
        vault nav is a graceful fallback so the page reads correctly on its own. -->
   <div id="site-header">
     <nav class="vault-nav">
-      <a href="index.html" class="brand">Birdie<span>Buddy</span></a>
+      <a href="golf/" class="brand">Birdie<span>Buddy</span></a>
       <div class="links">
         <a href="full_rankings.html">Rankings</a>
         <a href="performance.html">Performance</a>
@@ -1509,7 +1509,7 @@
               </div>
             </div>
 
-            <!-- Contest field-size buckets (v2). Local is free; larger fields gate up. -->
+            <!-- Contest field-size buckets (v2). Local is open; larger fields are members-only. -->
             <div class="bbscore-buckets" id="bbBuckets" role="radiogroup" aria-label="Contest field size">
               <button class="active" type="button" data-bb-bucket="local"><span>Local</span><small>100–999</small></button>
               <button type="button" data-bb-bucket="mid"><span>Mid</span><small>1k–10k</small></button>
@@ -2294,13 +2294,13 @@
       return arr;
     }
 
-    // Contest field-size buckets + tier gating (Phase 3)
+    // Contest field-size buckets + membership gating (one membership: 'member' unlocks every bucket)
     const BBV2_BUCKETS = ['local', 'mid', 'large', 'mass'];
-    const BBV2_BUCKET_TIER = { local: 'free', mid: 'pro', large: 'all_access', mass: 'all_access' };
-    const BBV2_TIER_RANK = { free: 0, pro: 1, all_access: 2, sharp: 3 };
-    const BBV2_TIER_LABEL = { pro: 'Pro', all_access: 'All-Access' };
+    const BBV2_BUCKET_TIER = { local: 'none', mid: 'member', large: 'member', mass: 'member' };
+    const BBV2_TIER_RANK = { none: 0, member: 1 };
+    const BBV2_TIER_LABEL = { member: 'Members' };
     function bbv2UserRank() {
-      try { if (window.BBI && BBI.auth && typeof BBI.auth.tier === 'function') return BBV2_TIER_RANK[BBI.auth.tier()] ?? 0; } catch (e) {}
+      try { if (window.BBI && BBI.auth && typeof BBI.auth.isMember === 'function') return BBI.auth.isMember() ? 1 : 0; } catch (e) {}
       return 0;
     }
     function bbv2BucketUnlocked(b) { return bbv2UserRank() >= (BBV2_TIER_RANK[BBV2_BUCKET_TIER[b]] || 0); }
@@ -2597,9 +2597,8 @@
         if (!bbv2BucketUnlocked(b)) {
           const tip = document.getElementById('bbTip');
           if (tip) {
-            tip.innerHTML = 'Scoring against <strong>' + b + '</strong>-field contests is a ' +
-              (BBV2_TIER_LABEL[BBV2_BUCKET_TIER[b]] || 'paid') +
-              ' feature. <a href="pricing.html" style="color:var(--gold-300)">Upgrade →</a>';
+            tip.innerHTML = 'Scoring against <strong>' + b + '</strong>-field contests is included with BirdieBuddy membership. ' +
+              '<a href="pricing.html" style="color:var(--gold-300)">Get BirdieBuddy →</a>';
             tip.hidden = false;
           }
           return;
