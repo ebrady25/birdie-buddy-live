@@ -7,6 +7,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://birdiebuddy.io/nfl/overview/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://birdiebuddy.io/nfl/articles/</loc>
     <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -39,6 +45,12 @@
   <url>
     <loc>https://birdiebuddy.io/nfl/classic/</loc>
     <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://birdiebuddy.io/nfl/projections/</loc>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -12,13 +12,14 @@ window.BBI = window.BBI || {};
   'use strict';
 
   const NAV = [
-    { href: 'nfl/',          key: 'nfl',      label: 'Overview' },
+    { href: 'nfl/overview/', key: 'nfl',     label: 'Overview' },
     { href: 'nfl/slate/',    key: 'slate',    label: 'This week', sub: 'DK main slate in our numbers' },
-    { href: 'nfl/articles/', key: 'articles', label: 'Articles' },
-    { href: 'nfl/results/',  key: 'results',  label: 'Results' },
+    { href: 'nfl/projections/', key: 'projections', label: 'Projections', sub: 'every player, one sortable table' },
+    { href: 'nfl/classic/',  key: 'classic',  label: 'Classic', sub: 'DK main-slate playbook' },
     { href: 'nfl/showdown/', key: 'showdown', label: 'Showdown', sub: 'DK captain-mode playbook' },
     { href: 'nfl/showdown/#step4', key: 'lab', label: 'Lineup Lab', sub: 'score a lineup with the rules engine' },
-    { href: 'nfl/classic/',  key: 'classic',  label: 'Classic', sub: 'DK main-slate playbook' }
+    { href: 'nfl/articles/', key: 'articles', label: 'Articles' },
+    { href: 'nfl/results/',  key: 'results',  label: 'Results' }
   ];
 
   window.BBI.renderNflHeader = (activeKey) => {
@@ -42,6 +43,14 @@ window.BBI = window.BBI || {};
           </div>
         </div>
       </nav>`;
+
+    // phones: the tab row scrolls sideways; bring the current page's tab into view (Results / Articles sit past the edge)
+    const links = mount.querySelector('.nfl-links');
+    const act = links && links.querySelector('.nfl-link.active');
+    if (act && links.scrollWidth > links.clientWidth) {
+      const x = act.getBoundingClientRect().left - links.getBoundingClientRect().left + links.scrollLeft;
+      if (x + act.offsetWidth > links.clientWidth) links.scrollLeft = Math.max(0, x - (links.clientWidth - act.offsetWidth) / 2);
+    }
 
     // auth.js: same lazy-load pattern as data.js so the account control,
     // login modal and [data-gate] gating work here without a golf header.

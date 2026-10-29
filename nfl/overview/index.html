@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>BirdieBuddy NFL</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BirdieBuddy">
+<meta property="og:title" content="BirdieBuddy NFL">
+<meta property="og:description" content="DraftKings Showdown, decoded from 120 winning lineups and 2,761 games. Every number is a winner rate with an n.">
+<meta property="og:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
+<meta name="description" content="BirdieBuddy NFL — the Showdown Playbook and Lineup Lab: DFS tools built on winner data, not opinions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.3" />
+  <link rel="stylesheet" href="assets/css/nfl_week.css?v=1" />
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="container">
+    <section class="nfl-hero">
+      <div class="eyebrow">BirdieBuddy · NFL</div>
+      <h1>The codex, as a page you can use before lock.</h1>
+      <p>Radical transparency applied to NFL DFS. Every call on these pages traces to a winner rate with an n — 120 DraftKings showdown winners, 2,761 games, 55 Sundays of small-field contests — not to a take.</p>
+    </section>
+    <section class="card nfl-week" id="nfl-week" aria-label="This week">
+      <div class="nfl-week-top"><span class="badge badge-gold">This week</span></div>
+      <h2 class="nfl-week-h">This week's NFL numbers</h2>
+      <p class="nfl-week-sub">New numbers Wednesday and Friday evening, a Sunday morning update, and results every Monday.</p>
+      <div class="nfl-week-btns"><a class="btn btn-primary" href="nfl/slate/">This week's slate →</a><a class="btn" href="nfl/articles/">Articles →</a><a class="btn" href="nfl/results/">Results →</a></div>
+    </section>
+    <section class="nfl-cards">
+      <a class="card card-hover nfl-card" href="nfl/showdown/">
+        <span class="badge badge-gold">Live · v0.3</span>
+        <h3>Showdown Playbook</h3>
+        <p>Set the game — spread, total, roof, contest, entries — with live sliders, and get the answer as a play card: the game you're in, who wins it, how the lineup is built.</p>
+        <span class="btn btn-primary nfl-card-cta">Open the playbook →</span>
+      </a>
+      <a class="card card-hover nfl-card" href="nfl/showdown/#step4">
+        <span class="badge badge-gold">New · Lineup Lab</span>
+        <h3>Score my lineup</h3>
+        <p>Build or paste a DraftKings showdown lineup and the rules engine grades it live — hard rules, penalties, the script it plays, template fit. Score a whole book and let the engine pick your batch from a pool — open to everyone, free included, while we iterate.</p>
+        <span class="btn nfl-card-cta">Open the Lab →</span>
+      </a>
+      <a class="card card-hover nfl-card" href="nfl/classic/">
+        <span class="badge badge-gold">New · Classic v1.0</span>
+        <h3>Classic Playbook</h3>
+        <p>The Sunday main slate: which games the 169 Milly Maker winning stacks came from, the stack, bring-back and chalk rules with winner pass rates, and a checker for your 9-man lineup.</p>
+        <span class="btn nfl-card-cta">Open Classic →</span>
+      </a>
+      <a class="card card-hover nfl-card" href="nfl/slate/">
+        <span class="badge badge-gold">New · This week</span>
+        <h3>This week's slate</h3>
+        <p>The DraftKings Sunday main slate in our numbers: game environments, projections with ranges, projected ownership for GPPs and single entry, optimal % and leverage, QB + 2 stacks and our model lineups. Updated Wednesday, Friday and Sunday morning.</p>
+        <span class="btn nfl-card-cta">Open the slate →</span>
+      </a>
+      <a class="card card-hover nfl-card" href="nfl/results/">
+        <span class="badge badge-gold">New · Results</span>
+        <h3>How our numbers did</h3>
+        <p>Every Monday: our projections and ownership graded against what happened, the chalk that hit and busted, and how our stacks and model builds scored. No hiding the misses.</p>
+        <span class="btn nfl-card-cta">See the results →</span>
+      </a>
+      <a class="card card-hover nfl-card" href="nfl/articles/">
+        <span class="badge badge-gold">New · Articles</span>
+        <h3>This week's articles</h3>
+        <p>Wednesday first look and Friday final call for the Sunday main slate: stacks, games, matchups, ownership and late-swap notes, in our own numbers.</p>
+        <span class="btn nfl-card-cta">Read the articles →</span>
+      </a>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/nfl.js?v=0.6.3"></script>
+  <script src="assets/js/track.js?v=0.6.3"></script>
+  <script>BBI.renderNflHeader('nfl'); BBI.renderNflFooter();</script>
+  <script src="assets/js/nfl_week.js?v=1"></script>
+</body>
+</html>
