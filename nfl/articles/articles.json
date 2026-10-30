@@ -1,6 +1,24 @@
 {
  "articles": [
   {
+   "slug": "2026-week-8-friday",
+   "href": "2026-week-8-friday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-friday",
+   "title": "Week 8 final call: Dallas' 31-point total and a crowded stack",
+   "dek": "Dallas has the slate's best stack and the field knows it. We play it, then get different in Cincinnati and the late Rams game.",
+   "slot": "fri",
+   "week": 8,
+   "season": 2026,
+   "date": "2026-10-30",
+   "tldr": [
+    "Stack Prescott, Lamb and Pickens: the slate's best ceiling at 85.9 points together in our sims.",
+    "Get different with Burrow, Chase and Higgins; the market gives Cincinnati a 47% chance to win by 14+.",
+    "Fade Zay Flowers at a slate-high 28% projected ownership and move the salary to Puka Nacua.",
+    "Keep a 4 PM player in FLEX; A.J. Brown is Questionable with an 80% chance to play."
+   ],
+   "published_utc": "2026-10-30T20:04:38+00:00"
+  },
+  {
    "slug": "2026-week-8-tnf-car-gb",
    "href": "2026-week-8-tnf-car-gb.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-tnf-car-gb",
@@ -93,5 +111,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-10-29T19:17:20+00:00"
+ "updated_utc": "2026-10-30T20:04:38+00:00"
 }
