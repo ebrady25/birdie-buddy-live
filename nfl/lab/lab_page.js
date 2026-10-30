@@ -445,10 +445,14 @@
   const drawClBar = () => {
     const html = `
       <div class="lb-field lb-field-wide"><span>Slate</span><b class="lb-bar-slate">${esc(C.pool.label)} · ${C.pool.n_games || C.games.length} games</b></div>
-      <div class="lb-field"><span>Contest</span><span class="seg" role="group" aria-label="Ownership for">${[['own', 'Big contests'], ['own_se', 'One-entry contests']].map(([k, l]) => `<button type="button" class="${C.ownCol === k ? 'active' : ''}" aria-pressed="${C.ownCol === k}" data-cl-own="${k}"${k === 'own_se' && !(C.pool.has && C.pool.has.own_se) ? ' disabled' : ''}>${l}</button>`).join('')}</span></div>
-      <div class="lb-bar-note">The share of lineups we expect to pick each player in ${C.ownCol === 'own_se' ? 'one-entry contests' : 'big contests (thousands of entries)'}${C.pool.as_of ? `, updated ${esc(C.pool.as_of)}` : ''}. Game lines from ${C.preset ? 'the Classic playbook' : 'this week\'s slate'}.${C.dk ? ` DraftKings IDs from ${esc(C.dkName)}.` : ''}</div>`;
+      <div class="lb-field"><span>Contest</span><span class="seg" role="group" aria-label="Ownership for">${[['own', 'Big contests'], ['own_se', 'One-entry contests']].map(([k, l]) => `<button type="button" class="${C.ownCol === k ? 'active' : ''}" aria-pressed="${C.ownCol === k}" data-cl-own="${k}"${k === 'own_se' && !(C.pool.has && C.pool.has.own_se) ? ' disabled' : ''}>${l}</button>`).join('')}</span></div>`;
     const h = $('lbClBar'); if (h.dataset.drawn !== html) { h.innerHTML = html; h.dataset.drawn = html; }
   };
+  // The pool's ⓘ: how to read the rows + where the numbers come from.
+  const clInfoHtml = () => `<p>Tap a player to add or remove him. Tap a column name to sort by it; tap again to flip. Faded = no open slot, or he doesn't leave room to fill the rest; <b>Affordable only</b> hides them.</p>
+    ${C.proj.size ? '<p><b>Proj</b> = our mean DraftKings points · <b>Ceil</b> = 90th percentile · <b>Own</b> = expected pick rate · <b>lev</b> = how often he is in our optimal lineups minus how often the field picks him · <b>x</b> = points per $1,000.</p>' : ''}
+    <p>Pick rates are for ${C.ownCol === 'own_se' ? 'one-entry contests' : 'big contests (thousands of entries)'}${C.pool.as_of ? `, updated ${esc(C.pool.as_of)}` : ''}. Game lines from ${C.preset ? 'the Classic playbook' : 'this week\'s slate'}.${C.dk ? ` DraftKings IDs from ${esc(C.dkName)}.` : ''}</p>
+    <p><b>Fill lineup</b> completes your open slots with the most projected points (tilted a little toward ceiling) that pass every must-follow rule in our <a href="nfl/classic/" class="sd-link">Classic playbook</a> and follow its habits where it can.</p>`;
   const salUsed = () => lineupNames().reduce((a, n) => a + (C.pl.P.get(n)?.sal || 0), 0);
   const f1 = v => (Math.round(v * 10) / 10).toFixed(1);
   const sgn1 = v => `${v > 0 ? '+' : v < 0 ? '−' : ''}${f1(Math.abs(v))}`;
@@ -467,21 +471,121 @@
     return s;
   };
   const fits = p => { const i = slotFor(p.pos); return i >= 0 && salUsed() + p.sal + minFill(i) <= CAP; };
-  // The next open slot's best adds by projection that still leave room to fill the rest.
+  /* ---------------- Fill lineup: our optimizer ----------------
+     Completes the open slots: most projected points (with a small ceiling tilt) that pass every must-follow rule,
+     minus the playbook's habit penalties (the engine's own hard() / soft()). Greedy starts + 1- and 2-player swaps
+     over each position's top candidates; the players you picked stay locked. */
+  const OUT_RE = /^(o|out|ir|d|doubtful|sus)/i;
+  const pv = p => { const r = PJ(p); return r ? +r.proj + 0.15 * (+r.p90 - +r.proj) : 0; };
+  const optScore = names => {
+    const H = C.pb.rules.hard, X = C.eng.classify(names);
+    // chalk with negative leverage needs Optimal %, which lives in our projections, not the pool: count it here
+    const chalkNeg = X.ps.filter(p => (+p.own || 0) >= (H.chalk_own_threshold || 20) && PJ(p) && PJ(p).opt != null && +PJ(p).opt < +p.own).length;
+    const nHard = C.eng.hard(X).filter(h => !/negative-leverage/.test(h)).length + Math.max(0, chalkNeg - (H.max_negative_leverage_chalk_per_lineup ?? 1));
+    const pen = C.eng.soft(X).reduce((a, p) => a + p[1], 0);
+    return { v: X.ps.reduce((a, p) => a + pv(p), 0) - 4 * pen - 30 * nHard, nHard, pen };
+  };
+  const optCands = () => {
+    const by = {}, stat = C.pool.players.reduce((m, p) => (p.status ? m.set(p.name, p.status) : m), new Map());
+    for (const p of C.pl.P.values()) { const r = PJ(p); if (!r || !(+r.proj > 0) || OUT_RE.test(stat.get(p.name) || r.status || '')) continue; (by[p.pos] = by[p.pos] || []).push(p); }
+    const N = { QB: 10, RB: 14, WR: 18, TE: 8, DST: 8 };
+    for (const k in by) { const a = by[k]; by[k] = [...new Set([...a.slice().sort((x, y) => pv(y) - pv(x)).slice(0, N[k] || 10), ...a.slice().sort((x, y) => pv(y) / y.sal - pv(x) / x.sal).slice(0, Math.ceil((N[k] || 10) / 2))])]; }
+    return by;
+  };
+  const optFill = (slots = C.slots) => {
+    const t0 = performance.now(), by = optCands(), open = slots.map((n, i) => n ? -1 : i).filter(i => i >= 0);
+    if (!open.length) return { F: slots.slice(), s: optScore(slots) };
+    const flex = [...(by.RB || []).slice(0, 10), ...(by.WR || []).slice(0, 12), ...(by.TE || []).slice(0, 4)];
+    const cands = open.map(i => SLOTS[i] === 'FLEX' ? flex : (by[SLOTS[i]] || []));
+    if (cands.some(c => !c.length)) return null;
+    const salOf = n => C.pl.P.get(n).sal, sal = t => t.reduce((a, n) => a + (n ? salOf(n) : 0), 0);
+    const minSal = cands.map(c => Math.min(...c.map(p => p.sal)));
+    const greedy = (key, seed) => {
+      const t = slots.slice();
+      if (seed) { const k = open.findIndex(i => SLOTS[i] === seed.pos); if (k < 0) return null; t[open[k]] = seed.name; }
+      for (let k = 0; k < open.length; k++) {
+        const i = open[k]; if (t[i]) continue;
+        const rest = open.slice(k + 1).reduce((a, j, m) => a + (t[j] ? 0 : minSal[k + 1 + m]), 0), room = CAP - sal(t) - rest;
+        const ok = cands[k].filter(p => !t.includes(p.name) && p.sal <= room);
+        const pick = ok.sort((x, y) => key(y) - key(x))[0] || cands[k].filter(p => !t.includes(p.name)).sort((x, y) => x.sal - y.sal)[0];
+        if (!pick) return null; t[i] = pick.name;
+      }
+      return t;
+    };
+    const climb = t => {
+      let cur = optScore(t);
+      for (let pass = 0; pass < 8 && performance.now() - t0 < 700; pass++) {
+        let moved = false;
+        for (let a = 0; a < open.length; a++) for (const p of cands[a]) {   // one-player swaps
+          if (t.includes(p.name)) continue;
+          const u = t.slice(); u[open[a]] = p.name; if (sal(u) > CAP) continue;
+          const sc = optScore(u); if (sc.v > cur.v + 1e-9) { t = u; cur = sc; moved = true; }
+        }
+        if (moved) continue;
+        for (let a = 0; a < open.length && !moved; a++) for (let b = a + 1; b < open.length && !moved; b++) {   // two-player swaps move salary between slots
+          const ia = open[a], ib = open[b], others = t.filter((n, j) => j !== ia && j !== ib), base = sal(t) - salOf(t[ia]) - salOf(t[ib]);
+          const pvOld = pv(C.pl.P.get(t[ia])) + pv(C.pl.P.get(t[ib])), slack = cur.nHard ? Infinity : 4 * cur.pen;
+          for (const p of cands[a]) { if (others.includes(p.name)) continue;
+            for (const q of cands[b]) {
+              if (q === p || others.includes(q.name) || base + p.sal + q.sal > CAP) continue;
+              if (pv(p) + pv(q) - pvOld + slack <= 1e-9) continue;   // can't beat the current lineup even with every habit fixed
+              const u = t.slice(); u[ia] = p.name; u[ib] = q.name;
+              const sc = optScore(u); if (sc.v > cur.v + 1e-9) { t = u; cur = sc; moved = true; break; }
+            }
+            if (moved) break;
+          }
+        }
+        if (!moved) break;
+      }
+      return { F: t, s: cur };
+    };
+    const starts = [greedy(p => pv(p)), greedy(p => pv(p) / p.sal)];
+    if (!slots[0]) for (const q of (by.QB || []).slice().sort((x, y) => pv(y) - pv(x)).slice(0, 4)) starts.push(greedy(p => pv(p), q));
+    let best = null;
+    for (const t of starts.filter(Boolean)) { if (performance.now() - t0 > 900) break; const r = climb(t); if (!best || r.s.v > best.s.v) best = r; }
+    return best;
+  };
+  // Cached per lineup: still valid while every pick so far matches the fill (taking our suggestion keeps it).
+  const optFor = () => {
+    const key = `${C.pool.id}|${C.ownCol}`, o = C.opt;
+    if (o && o.key === key && (o.F ? C.slots.every((n, i) => !n || o.F[i] === n) : o.at === C.slots.join('|'))) return o;
+    return null;
+  };
+  // The next open slot's best options: our fill's pick, then the players who fit best in its place with the rest of the fill.
   const bestAdds = () => {
     if (!C.proj.size) return [];
     const i = C.slots.findIndex(n => !n); if (i < 0) return [];
-    const inL = new Set(lineupNames()), want = SLOTS[i];
-    return [...C.pl.P.values()].filter(p => !inL.has(p.name) && (want === 'FLEX' ? FLEXABLE.has(p.pos) : p.pos === want) && slotFor(p.pos) === i && fits(p) && PJ(p))
-      .sort((a, b) => PJ(b).proj - PJ(a).proj).slice(0, 3).map(p => ({ p, slot: SLOTS[i] }));
+    const o = optFor(); if (!o) return null;   // null = still working
+    if (!o.F) return [];
+    const k = SLOTS[i], pool = optCands(), cands = k === 'FLEX' ? [...(pool.RB || []), ...(pool.WR || []), ...(pool.TE || [])] : (pool[k] || []);
+    const rest = o.F.filter((n, j) => j !== i), restSal = rest.reduce((a, n) => a + C.pl.P.get(n).sal, 0);
+    const alts = cands.filter(p => p.name !== o.F[i] && !rest.includes(p.name) && restSal + p.sal <= CAP)
+      .map(p => { const u = o.F.slice(); u[i] = p.name; return { p, v: optScore(u).v }; }).sort((a, b) => b.v - a.v);
+    return [{ p: C.pl.P.get(o.F[i]), slot: k }, ...alts.slice(0, 2).map(a => ({ p: a.p, slot: k }))];
+  };
+  let optT = 0;
+  const optSchedule = () => {   // fill in the background after a pick, then redraw the lineup card
+    clearTimeout(optT);
+    optT = setTimeout(() => { if (optFor() || !C.slots.some(n => !n)) return; const r = optFill(); C.opt = { key: `${C.pool.id}|${C.ownCol}`, F: r ? r.F : null, at: C.slots.join('|') }; drawClLineup(); }, 60);
+  };
+  const clFillLineup = () => {
+    let o = optFor();
+    if (!o) { const r = optFill(); if (r) { C.opt = { key: `${C.pool.id}|${C.ownCol}`, F: r.F }; o = C.opt; } }
+    if (!o || !o.F) { toast("Couldn't find a lineup that fits these picks: try removing one", 'warn'); return; }
+    const n0 = C.slots.filter(n => !n).length;
+    C.undo = { slots: C.slots.slice(), editing: C.editing }; C.slots = o.F.slice(); C.undoKey = luKey(C.slots);
+    clDraw(); showGrade('lbClGrade');
+    toast(`<b>Filled ${n0} slot${n0 === 1 ? '' : 's'}</b> · swap anyone you don't like`, 'good');
   };
   const clActs = n => {
     const done = n === 9 && C.res && C.res.roster.ok;
+    const fill = n < 9 ? `<button type="button" class="btn btn-sm btn-primary" data-cl="fill"${C.proj.size ? '' : ' disabled title="Needs this week\'s projections"'}>${n ? 'Fill lineup' : 'Build me a lineup'}</button>` : '';
+    const undo = C.undo && C.undoKey === luKey(C.slots) ? '<button type="button" class="btn btn-sm" data-cl="undo-fill">Undo fill</button>' : '';
     const at = n === 9 ? svFind(C.slots) : -1, ed = svIdx(C.editing), dis = done ? '' : 'disabled';
     const save = at >= 0 ? `<button type="button" class="btn btn-sm" disabled>Saved as #${at + 1} ✓</button>`
       : ed >= 0 ? `<button type="button" class="btn btn-sm btn-primary" data-cl="save" ${dis}>Update #${ed + 1}</button><button type="button" class="btn btn-sm" data-cl="save-new" ${dis}>Save as new</button>`
       : `<button type="button" class="btn btn-sm btn-primary" data-cl="save" ${dis}>Save lineup</button>`;
-    return `${save}
+    return `${n < 9 ? fill : save}${undo}
       <button type="button" class="btn btn-sm" data-cl="paste">${C.pasteOpen ? 'Hide paste box' : 'Paste a lineup'}</button>
       <button type="button" class="btn btn-sm" data-cl="names" ${n === 9 ? '' : 'disabled'}>Copy lineup</button>
       ${done && hasIds() ? '<button type="button" class="btn btn-sm" data-cl="csv">Download DraftKings file</button>' : `<button type="button" class="btn btn-sm" data-cl="ids" ${done ? '' : 'disabled'} title="Needs your DraftKings salary file for the player IDs">Get a DraftKings file</button>`}
@@ -499,11 +603,11 @@
       <div class="lb-h">Your lineup <small>${svIdx(C.editing) >= 0 ? `editing #${svIdx(C.editing) + 1} · ` : ''}${n}/9</small></div>
       ${C.proj.size || own ? `<div class="lb-tot">${C.proj.size ? `<span><em>Projection</em><b>${n ? f1(proj) : '—'}</b><small>pts</small></span><span><em>Ceiling</em><b>${n ? f1(ceil) : '—'}</b><small>90th pct</small></span>` : ''}${own ? `<span><em>Picked by</em><b>${n ? pct0(cum) : '—'}</b><small>added up</small></span>` : ''}</div>` : ''}
       <ol class="lb-slots">${C.slots.map((nm, i) => { const p = nm && C.pl.P.get(nm), r = PJ(p);
-        return p ? `<li class="lb-slot"><span class="lb-slot-k">${SLOTS[i]}</span><span class="lb-slot-n">${esc(p.name)}<small>${esc(p.pos)} · ${esc(p.team)} vs ${esc(p.opp)} · ${money(p.sal)}${own ? ` · ${pct0(p.own)}` : ''}</small>${roles && roles.get(p.name) ? `<span class="lb-tags">${roles.get(p.name).map(([c, l]) => `<em class="cl-tag ${c}">${esc(l)}</em>`).join('')}</span>` : ''}</span><span class="lb-slot-pj">${r ? f1(r.proj) : ''}</span><button type="button" class="lb-x" data-cl-rm="${i}" aria-label="Remove ${esc(p.name)}">×</button></li>`
-          : `<li class="lb-slot empty"><span class="lb-slot-k">${SLOTS[i]}</span><span class="lb-slot-n">${SLOTS[i] === 'FLEX' ? 'RB, WR or TE' : `Add a ${SLOTS[i]}`}</span><span></span><span></span></li>`; }).join('')}</ol>
+        return p ? `<li class="lb-slot"><span class="lb-slot-k">${SLOTS[i]}</span><span class="lb-slot-n"><b>${esc(p.name)}</b><small>${SLOTS[i] === 'FLEX' ? `${esc(p.pos)} · ` : ''}${esc(p.team)} vs ${esc(p.opp)} · ${money(p.sal)}${own ? ` · ${pct0(p.own)}` : ''}</small></span><span class="lb-tags">${roles && roles.get(p.name) ? roles.get(p.name).map(([c, l]) => `<em class="cl-tag ${c}">${esc(l)}</em>`).join('') : ''}</span><span class="lb-slot-pj">${r ? f1(r.proj) : ''}</span><button type="button" class="lb-x" data-cl-rm="${i}" aria-label="Remove ${esc(p.name)}">×</button></li>`
+          : `<li class="lb-slot empty"><span class="lb-slot-k">${SLOTS[i]}</span><span class="lb-slot-n">${SLOTS[i] === 'FLEX' ? 'RB, WR or TE' : `Add a ${SLOTS[i]}`}</span><span></span><span></span><span></span></li>`; }).join('')}</ol>
       <div class="lb-sal"><span>Salary <b>${money(sal)}</b> of $50,000</span><span class="${sal > CAP ? 'neg' : ''}">${sal > CAP ? `over by ${money(sal - CAP)}` : `${money(CAP - sal)} left${open ? ` · ${money((CAP - sal) / open)} a slot` : ''}`}</span></div>
       <div class="lb-salbar${sal > CAP ? ' over' : ''}"><i style="width:${Math.min(100, sal / CAP * 100).toFixed(1)}%"></i></div>
-      ${sug.length ? `<div class="lb-sug"><span class="lb-sug-k">Best ${esc(sug[0].slot)} that fits</span><div class="lb-sug-row">${sug.map(({ p }) => `<button type="button" class="lb-sug-btn" data-cl-add="${esc(p.name)}"><span class="sd-pos pos-${esc(p.pos)}">${esc(p.pos)}</span>${esc(p.name)}<em>${f1(PJ(p).proj)} · ${money(p.sal)}</em></button>`).join('')}</div></div>` : ''}
+      ${sug === null ? '<div class="lb-sug"><span class="lb-sug-k">Finding the best fits…</span></div>' : sug.length ? `<div class="lb-sug"><span class="lb-sug-k">Best ${esc(sug[0].slot)} for the rest of this lineup</span><div class="lb-sug-row">${sug.map(({ p }) => `<button type="button" class="lb-sug-btn" data-cl-add="${esc(p.name)}"><span class="sd-pos pos-${esc(p.pos)}">${esc(p.pos)}</span>${esc(p.name)}<em>${f1(PJ(p).proj)} · ${money(p.sal)}</em></button>`).join('')}</div></div>` : ''}
       <div class="lb-acts lb-cl-acts">${clActs(n)}</div>
       <div class="lb-paste" id="lbClPaste"${C.pasteOpen ? '' : ' hidden'}>
         <label class="sd-lab-k" for="lbClText">Paste 9 players <small>one per line, comma-separated, or a DraftKings upload row</small></label>
@@ -511,6 +615,7 @@
         <div class="lb-acts"><button type="button" class="btn btn-sm btn-primary" data-cl="paste-go">Grade it</button></div>
       </div>`;
     drawClMini(n, sal, proj);
+    if (sug === null) optSchedule();
   };
   // Phone: a pinned one-liner while the lineup card is off screen; tap jumps back to it.
   const drawClMini = (n, sal, proj) => {
@@ -532,7 +637,8 @@
     if (C.game !== 'ALL' && !games.includes(C.game)) C.game = 'ALL';
     if (!host.dataset.shell) {
       const pf = PF.filter(([k]) => (k !== 'own' || own) && (k !== 'proj' || hasPj));
-      host.innerHTML = `<div class="lb-h">Player pool <small id="lbClPoolN"></small></div>
+      host.innerHTML = `<div class="lb-h">Player pool <span class="lb-h-r"><small id="lbClPoolN"></small><button type="button" class="lb-info-btn" data-cl="info" aria-expanded="false" aria-controls="lbClInfo" aria-label="How to read the player pool">i</button></span></div>
+        <div class="lb-info" id="lbClInfo" role="note" hidden></div>
         <div class="sd-pool-head"><input class="sd-pool-q" id="lbClQ" type="search" placeholder="Search a name or team  /" aria-label="Search players" autocomplete="off">
           <select class="sd-pool-sort" id="lbClSort" aria-label="Sort players"></select></div>
         <div class="sd-pool-filters"><div class="sd-pool-pos" role="group" aria-label="Position" id="lbClPos"></div>
@@ -544,7 +650,7 @@
             <div class="lb-pf-foot"><small>Salary in thousands: 5.5 = $5,500.</small><button type="button" class="btn btn-sm btn-ghost" data-cl="filt-reset">Reset filters</button></div>
           </div></div>
         <div class="lb-pcols" id="lbClCols"></div>
-        <div class="lb-plist" id="lbClList" role="list" aria-label="Player pool"></div><p class="lb-list-note" id="lbClListNote"></p>`;
+        <div class="lb-plist" id="lbClList" role="list" aria-label="Player pool"></div>`;
       host.dataset.shell = '1';
       $('lbClQ').addEventListener('input', e => { C.q = e.target.value; drawClPool(); });
       $('lbClSort').addEventListener('change', e => { C.sort = e.target.value; C.dir = 1; saveUi(); drawClPool(); });
@@ -590,7 +696,8 @@
     list.scrollTop = top;
     if (focusName) { const el = [...list.querySelectorAll('[data-cl-add]')].find(x => x.dataset.clAdd === focusName); if (el) el.focus({ preventScroll: true }); }
     $('lbClPoolN').textContent = `${ps.length} of ${C.pl.P.size}${nHid ? ` · ${nHid} you can't afford hidden` : ''}`;
-    $('lbClListNote').innerHTML = `Tap a player to add or remove him. Tap a column name to sort by it; tap again to flip. Faded = no open slot or he doesn't leave room to fill the rest; <b>Affordable only</b> hides them.${hasPj ? ' Proj = our mean DraftKings points; ceil = 90th percentile; lev = how often he is in our optimal lineups minus how often the field picks him; x = points per $1,000.' : ''}`;
+    list.dataset.sort = C.sort === 'ceil' || C.sort === 'value' || C.sort === 'lev' ? 'x' : C.sort;
+    if (!$('lbClInfo').hidden) $('lbClInfo').innerHTML = clInfoHtml();
   };
   /* ---------------- saved lineups (this browser, per week's pool) ---------------- */
   const luKey = slots => slots.filter(Boolean).slice().sort().join('|');
@@ -753,6 +860,9 @@
         return;
       }
       if (act === 'clear') { C.slots = Array(9).fill(null); C.editing = null; clDraw(); return; }
+      if (act === 'fill') { clFillLineup(); return; }
+      if (act === 'undo-fill') { if (C.undo) { C.slots = C.undo.slots; C.editing = C.undo.editing; C.undo = null; clDraw(); } return; }
+      if (act === 'info') { const box = $('lbClInfo'), open = box.hidden; box.innerHTML = clInfoHtml(); box.hidden = !open; a.setAttribute('aria-expanded', open); return; }
       if (act === 'filt') { C.filtOpen = !C.filtOpen; drawClPool(); if (C.filtOpen) $('lbClFilt').querySelector('input')?.focus({ preventScroll: true }); return; }
       if (act === 'filt-reset') { C.f = {}; $('lbClFilt').querySelectorAll('input').forEach(i => { i.value = ''; }); drawClPool(); return; }
       if (act === 'save' || act === 'save-new') { svSave(act === 'save-new'); return; }
@@ -769,6 +879,9 @@
       if (row && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); row.click(); return; }
       if (row && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); const nx = e.key === 'ArrowDown' ? row.nextElementSibling : row.previousElementSibling; if (nx) nx.focus(); return; }
     });
+    const infoClose = () => { const box = $('lbClInfo'); if (box && !box.hidden) { box.hidden = true; document.querySelector('[data-cl="info"]')?.setAttribute('aria-expanded', 'false'); } };
+    document.addEventListener('click', e => { if (!e.target.closest('#lbClInfo, [data-cl="info"]')) infoClose(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') infoClose(); });
     // Phone: the pinned summary shows while the lineup card is scrolled away.
     const mini = $('lbClMini'), card = $('lbClLineup');
     if (mini && card && 'IntersectionObserver' in window) {
@@ -788,6 +901,6 @@
     const other = tab === 'classic' ? 'showdown' : 'classic';
     (window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => { if (other === 'classic') loadSet('classic').catch(() => {}); });
   };
-  BBI.lab = { get tab() { return tab; }, setTab, sdGrade, clGrade: () => clGrade(), C, clFill, clDraw, clCsv, nameSlug, svSave };
+  BBI.lab = { get tab() { return tab; }, setTab, sdGrade, clGrade: () => clGrade(), C, clFill, clDraw, clCsv, nameSlug, svSave, optFill, optScore };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
