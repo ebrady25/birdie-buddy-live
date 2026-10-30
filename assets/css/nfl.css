@@ -17,7 +17,7 @@
 .nfl-link-golf:hover { color: var(--gold-300); }
 body[data-section="nfl"] { --status-h: 0px; }
 
-/* Showdown dropdown (Chill / Grind). The trigger is a <button> styled as a tab; the menu is position:fixed (placed by nfl.js
+/* Playbooks dropdown (Classic + Showdown, Chill / Grind). The trigger is a <button> styled as a tab; the menu is position:fixed (placed by nfl.js
    from the button's rect) so the phone tab row's overflow-x never clips it. */
 .nfl-dd { position: relative; display: inline-flex; flex: 0 0 auto; }
 .nfl-dd-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; margin: 0; font: inherit; font-size: var(--fs-sm); font-weight: 500; line-height: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -35,8 +35,26 @@ body[data-section="nfl"] { --status-h: 0px; }
 .nfl-dd-item.active .nfl-dd-label, .nfl-dd-item:hover .nfl-dd-label { color: var(--gold-300); }
 .nfl-dd-sub { font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--text-muted); letter-spacing: .02em; }
 
+.nfl-dd-group { padding: 10px 14px 4px; font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-600, var(--text-dimmed)); }
+.nfl-dd-group:not(:first-child) { margin-top: 4px; border-top: 1px solid var(--border-soft); padding-top: 12px; }
+
+/* Right-hand area (round 2): player search, Sunday-only Before You Lock chip, Results, Golf, account */
+.nfl-search-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border: 1px solid var(--border-base); border-radius: var(--radius-full); background: var(--surface-3); color: var(--text-body); font: 600 var(--fs-sm)/1 var(--font-body); cursor: pointer; }
+.nfl-search-btn:hover { border-color: var(--border-gold); color: var(--gold-300); }
+.nfl-search-btn:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
+.nfl-link-sm { padding: 6px 8px; font-size: var(--fs-xs); }
+.nfl-link-sm.active::after { left: 8px; right: 8px; }
+.nfl-lock-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 0 12px; border-radius: var(--radius-full); border: 1px solid var(--border-gold); background: rgba(212,168,67,0.12); color: var(--gold-300); font-size: var(--fs-xs); font-weight: 700; white-space: nowrap; }
+.nfl-lock-chip:hover, .nfl-lock-chip.active { background: rgba(212,168,67,0.22); color: var(--gold-200, var(--gold-300)); }
+.nfl-lock-chip:focus-visible, .nfl-lockbar:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
+.nfl-lock-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--gold-400, var(--gold-300)); box-shadow: 0 0 0 3px rgba(212,168,67,0.22); }
+.nfl-lockbar { display: none; }
+
+/* Phone bottom bar + sheet (nfl.js renderNflMobileBar). Hidden at 768px and up. */
+.nfl-mbar, .nfl-msheet, .nfl-msheet-backdrop { display: none; }
+
 .nfl-footer { margin-top: var(--space-16); border-top: 1px solid var(--border-soft); background: var(--surface-0); }
-.nfl-footer-inner { max-width: var(--container-max); margin: 0 auto; padding: var(--space-10) var(--container-pad); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-8); }
+.nfl-footer-inner { max-width: var(--container-max); margin: 0 auto; padding: var(--space-10) var(--container-pad); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-8); }
 .nfl-footer-brand .brand { display: inline-flex; align-items: center; gap: var(--space-2); }
 .nfl-footer-brand p { margin-top: var(--space-3); font-size: var(--fs-xs); line-height: 1.6; max-width: 40ch; }
 .nfl-footer-links { display: flex; flex-direction: column; gap: var(--space-2); }
@@ -54,6 +72,22 @@ body[data-section="nfl"] { --status-h: 0px; }
 .nfl-card.soon { opacity: 0.6; }
 .nfl-card .badge { align-self: flex-start; }
 
+/* Narrow desktops: give the 5 tabs room (search becomes an icon; on Sundays the chip replaces the Golf link) */
+@media (min-width: 768px) and (max-width: 1365px) {
+  .nfl-nav-main .nfl-search-btn { width: 36px; padding: 0; justify-content: center; }
+  .nfl-nav-main .nfl-search-lbl { display: none; }
+  .nfl-nav-main.has-lock .nfl-link-golf { display: none; }
+}
+
+/* Tablets: the 5 tabs wrap onto their own row under the brand (scrolls sideways if it must) */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .nfl-nav-main .nfl-nav-inner { height: auto; min-height: var(--nav-h); padding-top: 6px; padding-bottom: 6px; flex-wrap: wrap; gap: var(--space-3); }
+  .nfl-nav-main .nfl-links { order: 3; flex-basis: 100%; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .nfl-nav-main .nfl-links::-webkit-scrollbar { display: none; }
+  .nfl-footer-inner { grid-template-columns: 1fr 1fr 1fr; }
+  .nfl-footer-brand { grid-column: 1 / -1; }
+}
+
 @media (max-width: 767px) {
   .nfl-nav-inner { gap: var(--space-3); height: auto; min-height: 52px; padding-top: 6px; padding-bottom: 6px; flex-wrap: wrap; }
   .nfl-brand .brand-lockup { font-size: 1rem; }
@@ -62,9 +96,58 @@ body[data-section="nfl"] { --status-h: 0px; }
   .nfl-link { padding: 6px 10px; font-size: var(--fs-xs); }
   .nfl-dd-btn { font-size: var(--fs-xs); gap: 4px; }
   .nfl-right { margin-left: auto; }
-  .nfl-footer-inner { grid-template-columns: 1fr; gap: var(--space-6); }
+  .nfl-footer-inner { grid-template-columns: 1fr 1fr; gap: var(--space-6) var(--space-4); }
+  .nfl-footer-brand { grid-column: 1 / -1; }
   .nfl-cards { grid-template-columns: 1fr; }
   .nfl-hero { padding: var(--space-10) 0 var(--space-6); }
   /* showdown dock: the steps row kept its children's min-content width (1px past a 375px screen) */
   .sd-dock-steps { min-width: 0; }
+  /* round 2: the 5 sections move to the bottom bar; the header keeps brand + search + account */
+  .nfl-nav-main .nfl-nav-inner { flex-wrap: nowrap; gap: var(--space-2); }
+  .nfl-nav-main .nfl-links { display: none; }
+  .nfl-nav-main .nfl-right { gap: var(--space-2); min-width: 0; }
+  .nfl-nav.nfl-nav-main .nfl-right :is(.nfl-link-sm, .nfl-link-golf, .nfl-lock-chip) { display: none; }   /* beats showdown.css's phone tap-size rule */
+  .nfl-search-btn { width: 36px; padding: 0; justify-content: center; flex: 0 0 auto; }
+  .nfl-search-lbl { display: none; }
+  /* the membership CTA moves into the More sheet on phones (brand + search + Sign in fill a 375px bar) */
+  .nfl-nav-main #authControl a.bbi-auth-btn[href="pricing.html"] { display: none; }
+  .nfl-lockbar { display: flex; align-items: center; gap: 8px; padding: 9px var(--container-pad); border-top: 1px solid var(--border-gold); background: rgba(212,168,67,0.10); color: var(--gold-300); font-size: var(--fs-xs); line-height: 1.35; }
+  .nfl-lockbar > span:nth-child(2) { flex: 1; min-width: 0; color: var(--text-body); }
+  .nfl-lockbar b { color: var(--gold-300); }
+
+  body.nfl-has-mbar { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+  /* core.js's .page-enter fadeUp leaves an identity transform on <body>, which makes body the containing block of every
+     position:fixed child (the bar would sit at the end of the page). Fade only on phones: no transform, bar stays put. */
+  body.nfl-has-mbar.page-enter { animation-name: fadeIn; }
+  body.nfl-has-mbar .sd-toast { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .nfl-mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; height: calc(60px + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: rgba(10,10,15,0.94); -webkit-backdrop-filter: saturate(160%) blur(14px); backdrop-filter: saturate(160%) blur(14px); border-top: 1px solid rgba(212,168,67,0.18); }
+  .nfl-mtab { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; margin: 0; padding: 0 2px; border: 0; background: none;
+    color: var(--text-muted); font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .nfl-mtab svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .nfl-mtab.active, .nfl-mtab[aria-expanded="true"] { color: var(--gold-300); }
+  .nfl-mtab.active svg { filter: drop-shadow(0 0 6px rgba(212,168,67,0.45)); }
+  .nfl-mtab:focus-visible { outline: 2px solid var(--gold-300); outline-offset: -4px; border-radius: 10px; }
+  .nfl-mtab:active { transform: scale(0.94); }
+  .nfl-mtab-dot { position: absolute; top: 9px; left: calc(50% + 9px); width: 8px; height: 8px; border-radius: 50%; background: var(--gold-400, var(--gold-300)); box-shadow: 0 0 0 2px rgba(10,10,15,0.94); }
+
+  .nfl-msheet-backdrop { display: block; position: fixed; inset: 0; z-index: 950; background: rgba(0,0,0,0.55); opacity: 0; pointer-events: none; transition: opacity 200ms; }
+  .nfl-msheet { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 960; max-height: 80vh; overflow-y: auto; overscroll-behavior: contain;
+    padding: 10px 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--surface-2); border-top: 1px solid rgba(212,168,67,0.28); border-radius: 18px 18px 0 0;
+    transform: translateY(105%); transition: transform 240ms cubic-bezier(0.32, 0.72, 0.22, 1); }
+  .nfl-msheet[hidden] { display: none; }
+  body.nfl-msheet-open .nfl-msheet { transform: translateY(0); }
+  body.nfl-msheet-open .nfl-msheet-backdrop { opacity: 1; pointer-events: auto; }
+  .nfl-msheet-grab { width: 38px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.18); margin: 2px auto 10px; }
+  .nfl-msheet-title { margin: 0 2px 4px; font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); }
+  .nfl-msheet-label { margin: 12px 2px 6px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-600, var(--text-dimmed)); }
+  .nfl-msheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nfl-msheet-title + .nfl-msheet-grid { margin-top: 10px; }
+  .nfl-msheet-link { display: flex; flex-direction: column; gap: 2px; min-height: 56px; padding: 12px 14px; border-radius: 12px; background: var(--surface-3); border: 1px solid rgba(255,255,255,0.06); color: var(--text-primary); font-size: 14px; font-weight: 600; }
+  .nfl-msheet-link small { font-size: 11px; font-weight: 400; color: var(--text-muted); }
+  .nfl-msheet-link.active { border-color: var(--border-gold); color: var(--gold-300); }
+  .nfl-msheet-link.hot { border-color: var(--border-gold); background: rgba(212,168,67,0.12); }
+  .nfl-msheet-link.hot small { color: var(--gold-300); }
+  .nfl-msheet-link:focus-visible, .nfl-msheet-close:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; }
+  .nfl-msheet-close { display: block; width: 100%; margin-top: 12px; min-height: 44px; border-radius: 12px; border: 1px solid var(--border-base); background: none; color: var(--text-muted); font: 600 var(--fs-sm)/1 var(--font-body); cursor: pointer; }
 }

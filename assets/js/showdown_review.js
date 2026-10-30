@@ -372,7 +372,7 @@
         if (R.isStandings(text)) { standings = { name, text, zip }; track('file_load', { type: zip ? 'standings_zip' : 'standings_csv', card: 'review' }); continue; }
         const pl = SE.readPlayers(text);
         rv.extra = pl; rv.extraName = `${name} · ${pl.P.size} players`;
-        track('file_load', { type: pl.source === 'stokastic' ? 'stokastic' : 'dk_salaries', card: 'review' });
+        track('file_load', { type: pl.source === 'export' ? 'proj_export' : 'dk_salaries', card: 'review' });
       } catch (e) { rv.err = `${f.name}: ${e.message}`; }
     }
     if (!standings && !rv.S) { rv.err = rv.err || 'That isn\'t a DK contest-standings export (it starts "Rank,EntryId,EntryName,…").'; renderBody(); return; }

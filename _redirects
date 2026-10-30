@@ -3,3 +3,10 @@
 # "https://www.birdiebuddy.io/* https://birdiebuddy.io/:splat 301" as invalid.
 # It lives in the zone instead: Rules > Redirect Rules, "Redirect from WWW to root" template
 # (hostname eq www.birdiebuddy.io -> https://birdiebuddy.io${path}, 301, preserve query string).
+
+# Round 2 (10/30): the NFL Overview page was folded into the NFL home.
+/nfl/overview /nfl/ 301
+/nfl/overview/* /nfl/ 301
+# Golf: the old hyphenated duplicate of the rankings teaser.
+/full-rankings.html /full_rankings 301
+/full-rankings /full_rankings 301

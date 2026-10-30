@@ -383,7 +383,7 @@ window.BBI = window.BBI || {};
       try {
         const pl = CE.readPlayers(await f.text());
         base = CE.mergePlayers(base, pl);
-        track('file_load', { type: pl.source === 'stokastic' ? 'stokastic_classic' : 'dk_salaries_classic', card: 'classic' });
+        track('file_load', { type: pl.source === 'export' ? 'proj_export_classic' : 'dk_salaries_classic', card: 'classic' });
         lab.files = lab.files.filter(x => x !== f.name).concat(f.name);
       } catch (e) { lab.err = `${f.name}: ${e.message || e}`; }
     }
@@ -537,6 +537,9 @@ window.BBI = window.BBI || {};
   // Public surface (tests + verification harness).
   window.BBI.classic = { currentPresetId, bandFor, gameRead, rankSides, validGame, splitLineup, parseLineup, slotOrder, rolesFor, getPath, fmtRule, cardText, state, get data() { return data; }, get lab() { return lab; }, init, renderAll };
 
+  // The standalone Lineup Lab (nfl/lab/) sets BBI.classicHeadless before loading this file: it uses the pure logic above
+  // and draws its own Classic tab, so the playbook page's renderer never starts there.
+  if (window.BBI.classicHeadless) return;
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();

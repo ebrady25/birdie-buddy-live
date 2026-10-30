@@ -1304,7 +1304,7 @@ body[data-section="nfl"] .sd-auto-cards :focus-visible, body[data-section="nfl"]
 .sd-levb .sd-sure-gaps { margin-top: 6px; }
 .sd-levb .sd-lab-k { display: block; }
 .sd-levb .sd-lab-k small { display: block; margin-top: 2px; }
-.sd-p-x.stok > span:not(.sd-p-xlev) { flex-basis: 100%; }
+.sd-p-x.fileown > span:not(.sd-p-xlev) { flex-basis: 100%; }
 @media (max-width: 960px) { .sd-levb-grid { grid-template-columns: minmax(0, 1fr); } .sd-laws { grid-template-columns: minmax(0, 1fr); } }   /* laws: a 1fr track let one law's min-content push the card past 375 px on spread ≥ 7 slates */
 .sd-law summary .sd-law-chk .sd-vb:not(.mini) { white-space: normal; max-width: 100%; }   /* a long multi-verdict check line wraps instead of widening the law */
 @media (max-width: 767px) {
@@ -1520,3 +1520,28 @@ details.sd-recipe > summary .sd-fold-chev { width: 24px; height: 24px; }
 .sd-hero > p { max-width: none; }
 .sd-hero { margin-bottom: var(--space-8); }
 @media (max-width: 767px) { .sd-hero { margin-bottom: var(--space-6); } }
+
+/* round 2 · 2026-10-30: plain-English summary lines in every fold header (Grind + Classic), and the
+   Step 4 card that sends the Lab to its own page (nfl/lab/). */
+.sd-sum { font-size: var(--fs-sm); line-height: 1.45; color: var(--text-body); min-width: 0; }
+details.sd-step > summary .sd-sum { grid-column: 2; grid-row: 2; }
+details.sd-step > summary .sd-step-ans { grid-row: 3; }
+details.sd-step > summary .sd-fold-chev { grid-row: 1 / span 3; }
+details.sd-sec > summary .sd-sum { order: 3; flex-basis: 100%; font-size: var(--fs-xs); color: var(--text-muted); }
+details.sd-sec > summary .sd-ans { order: 4; }
+.sd-labcard { display: flex; flex-direction: column; gap: 6px; padding: var(--space-5); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); background: linear-gradient(135deg, rgba(212, 168, 67, 0.08) 0%, transparent 55%), var(--surface-3); color: inherit; text-decoration: none; transition: border-color var(--dur-fast), background var(--dur-fast); }
+.sd-labcard:hover { border-color: var(--border-gold-strong); background: linear-gradient(135deg, rgba(212, 168, 67, 0.14) 0%, transparent 55%), var(--surface-3); }
+.sd-labcard-k { font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--gold-400); }
+.sd-labcard-t { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 700; color: var(--gold-300); }
+.sd-labcard-d { font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); max-width: 70ch; }
+.cl-lablink { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); font-weight: 600; color: var(--gold-300); }
+.cl-lablink:hover { color: var(--gold-200); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 767px) {
+  details.sd-step > summary .sd-sum { grid-column: 1 / 3; font-size: var(--fs-xs); }
+  details.sd-step[open] > summary .sd-sum { display: none; }
+  details.sd-step[open] > summary .sd-fold-chev { grid-row: 1; }
+  .sd-labcard { padding: var(--space-4); }
+  .sd-labcard-t { font-size: var(--fs-lg); }
+}
+/* Classic reuses the folds: its open step header sticks under the Classic dock, not the Showdown one */
+.cl-page { --sd-dock-h: var(--cl-dock-h); }

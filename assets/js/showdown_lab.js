@@ -13,6 +13,7 @@ window.BBI = window.BBI || {};
   'use strict';
   const SE = window.BBI.showdownEngine, FX = window.BBI.fx, SB = window.BBI.showdownBuild;
   const SD = () => window.BBI.showdown;
+  const SA = () => !!(SD() && SD().headless);   // standalone Lab (nfl/lab/): showdown.js runs headless, there is no Step 1–5 around the Lab
   const POOL_DIR = 'nfl/showdown/pools/';
   const LS_KEY = 'bbi_showdown_lab';
   const CAP = 50000;
@@ -92,8 +93,8 @@ window.BBI = window.BBI || {};
   let OC = null;
   // The correction layer was pulled from the site (10/28): OC stays null, the Lab grades on the reader's own file as-is.
   const loadOC = async () => {};
-  const stokOwn = () => !!(lab.source === 'mine' && lab.mine && lab.mine.players.has.own && /stokastic/.test(lab.mine.players.source || ''));
-  const useCorr = () => !!(lab.corr && OC && stokOwn());
+  const exportOwn = () => !!(lab.source === 'mine' && lab.mine && lab.mine.players.has.own && /export/.test(lab.mine.players.source || ''));
+  const useCorr = () => !!(lab.corr && OC && exportOwn());
   let corrCache = { key: '', pl: null, C: null };
   const mineCorr = () => {
     const base = lab.mine.players, fav = favTeam(base), key = `${lab.mine.stamp}|${fav}|${OC ? OC.generated : ''}`;
@@ -112,8 +113,8 @@ window.BBI = window.BBI || {};
     const s = (SD().slates || []).find(x => [x.fav, x.dog].sort().join() === teams); if (!s) return;
     try { const p = await fetchPool(s.id); lab.mineBB = { id: s.id, label: p.label, own: !!(p.has && p.has.own), own_source: p.own_source || '', map: new Map(p.players.map(x => [normName(x.name), x])) }; } catch {}
   };
-  // 'stok' (Your slate, file ownership) | 'bb' (sample pool, BB model) | null (no ownership)
-  const ownKind = () => stokOwn() ? 'stok' : bbOwn() ? 'bb' : null;
+  // 'file' (Your slate, file ownership) | 'bb' (sample pool, BB model) | null (no ownership)
+  const ownKind = () => exportOwn() ? 'file' : bbOwn() ? 'bb' : null;
   const band = (kind, v, which) => OC ? SD().ownBand(OC, kind, v, which) : null;
   // Per player: the numbers the row shows + the band of the number the engine uses (for the dupes range).
   const ownOf = name => {
@@ -126,7 +127,7 @@ window.BBI = window.BBI || {};
     const rawV = { f: raw.own, c: raw.cpt_own, fb: band('flex', raw.own, 'raw'), cb: band('cpt', raw.cpt_own, 'raw') };
     return { kind: k, raw: rawV, corr, bb: m ? { f: +m.own || 0, c: +m.cpt_own || 0 } : null, used: useCorr() && corr ? corr : rawV };
   };
-  const ownLabel = () => { const k = ownKind(); return k === 'stok' ? (useCorr() ? 'BirdieBuddy-corrected ownership' : 'raw from your file') : k === 'bb' ? 'BB model (rough)' : ''; };
+  const ownLabel = () => { const k = ownKind(); return k === 'file' ? (useCorr() ? 'BirdieBuddy-corrected ownership' : 'raw from your file') : k === 'bb' ? 'BB model (rough)' : ''; };
   // Leverage (role_rates): the active pool's roles vs the historical winners, with the engine's ownership.
   let lev = null;
   const levPlayers = () => {
@@ -253,7 +254,7 @@ window.BBI = window.BBI || {};
       + (lab.mine ? `<button type="button" class="sd-src mine${lab.source === 'mine' ? ' on' : ''}" aria-pressed="${lab.source === 'mine'}" data-lab-mine><b>Your slate</b><small>${esc(lab.mine.label)}</small></button>` : '');
     const teams = pl ? [...new Set([...pl.P.values()].map(p => p.team))].sort() : [];
     const fav = pl ? favTeam(pl) : '';
-    const levOk = !!(pl && pl.has.own && SD().data.role_rates), stok = stokOwn();
+    const levOk = !!(pl && pl.has.own && SD().data.role_rates), expOwn = exportOwn();
     if (lab.team !== 'ALL' && !teams.includes(lab.team)) lab.team = 'ALL';
     $('sdLab').innerHTML = `
       <div class="card sd-lab-bar fx-reveal">
@@ -261,7 +262,7 @@ window.BBI = window.BBI || {};
           <div class="sd-lab-src"><span class="sd-lab-k">Slate pool</span><div class="sd-srcs">${srcChips || '<span class="sd-num-hint">loading…</span>'}</div></div>
           <div class="sd-lab-opts">
             ${lab.source === 'mine' && teams.length === 2 ? `<label class="sd-lab-opt"><span class="sd-lab-k">Favorite</span><span class="seg">${teams.map(t => `<button type="button" class="${t === fav ? 'active' : ''}" aria-pressed="${t === fav}" data-lab-fav="${esc(t)}">${esc(t)}</button>`).join('')}</span></label>` : ''}
-            ${stok && OC ? `<label class="sd-lab-opt sd-corr-opt"><span class="sd-lab-k">Ownership</span><span class="sd-corr"><input type="checkbox" id="sdLabCorr" ${lab.corr && OC ? 'checked' : ''} ${OC ? '' : 'disabled'}><span>Use corrected ownership<small>${OC ? 'on: the engine grades with BirdieBuddy-corrected ownership · off: raw from your file' : 'correction file not loaded: the engine uses raw from your file'}</small></span></span></label>` : ''}
+            ${expOwn && OC ? `<label class="sd-lab-opt sd-corr-opt"><span class="sd-lab-k">Ownership</span><span class="sd-corr"><input type="checkbox" id="sdLabCorr" ${lab.corr && OC ? 'checked' : ''} ${OC ? '' : 'disabled'}><span>Use corrected ownership<small>${OC ? 'on: the engine grades with BirdieBuddy-corrected ownership · off: raw from your file' : 'correction file not loaded: the engine uses raw from your file'}</small></span></span></label>` : ''}
             <label class="sd-lab-opt"><span class="sd-lab-k">Field size</span><input class="sd-num" id="sdLabField" type="number" min="100" max="2000000" step="100" value="${fieldSize()}" aria-label="Contest field size" aria-describedby="sdLabFieldLink"><small class="sd-field-link" id="sdLabFieldLink"></small></label>
           </div>
         </div>
@@ -290,7 +291,7 @@ window.BBI = window.BBI || {};
         </div>
       </div>
       <div class="card sd-auto fx-reveal" id="sdAuto"></div>`;
-    lab.built = `${lab.source}|${lab.poolId}|${lab.mine ? lab.mine.stamp : ''}|${pl ? pl.has.own : ''}|${fav}|${teams.join()}|${ids.join()}|${stok}|${!!OC}`;
+    lab.built = `${lab.source}|${lab.poolId}|${lab.mine ? lab.mine.stamp : ''}|${pl ? pl.has.own : ''}|${fav}|${teams.join()}|${ids.join()}|${expOwn}|${!!OC}`;
     bindSkeleton();
   };
 
@@ -327,7 +328,7 @@ window.BBI = window.BBI || {};
     if (!o && !r) return '';
     const bandT = x => x ? `<i>${o0(x.lo)}–${o0(x.hi)}</i>` : '';
     let own = '';
-    if (o && o.kind === 'stok') {
+    if (o && o.kind === 'file') {
       const useC = useCorr() && o.corr;
       const part = (k, f) => `<span><em>${k}</em>${useC ? '' : '<b>'}File ${o1(o.raw[f])}${useC ? '' : '</b>'} · ${o.corr ? `${useC ? '<b>' : ''}corr ${o1(o.corr[f])}${useC ? '</b>' : ''} ${bandT(o.corr[f + 'b'])}` : 'corr —'} · BB ${o.bb ? o1(o.bb[f]) : '—'}</span>`;
       own = part('FLEX', 'f') + part('CPT', 'c');
@@ -335,7 +336,7 @@ window.BBI = window.BBI || {};
       own = `<span><em>FLEX</em><b>BB ${o1(o.used.f)}</b> ${bandT(o.used.fb)}</span><span><em>CPT</em><b>BB ${o1(o.used.c)}</b> ${bandT(o.used.cb)}</span><span class="rough">rough</span>`;
     }
     const lv = r ? `<span class="sd-p-xlev${b.thin || r.split ? ' thin' : ''}"><em>Lev</em>F ${sgn(r.flex.lev)} · C ${sgn(r.cpt.lev)}</span>` : '';
-    return `<span class="sd-p-x${o && o.kind === 'stok' ? ' stok' : ''}">${own}${lv}</span>`;
+    return `<span class="sd-p-x${o && o.kind === 'file' ? ' fileown' : ''}">${own}${lv}</span>`;
   };
   const renderPool = () => {
     const list = $('sdPoolList'); if (!list) return;
@@ -367,7 +368,7 @@ window.BBI = window.BBI || {};
     if (focusKey) { const attr = { row: 'data-lab-add', cpt: 'data-lab-cpt', flex: 'data-lab-flex' }[focusKey[0]]; const el = [...list.querySelectorAll(`[${attr}]`)].find(x => x.getAttribute(attr) === focusKey[1]); if (el) el.focus({ preventScroll: true }); }
     const src = lab.source === 'mine' ? lab.mine.label : `${curPool().label} · ${curPool().week} · ${curPool().source}`;
     const gone = lab.source === 'sample' && curPool() ? curPool().players.length - engine.P.size : 0;
-    $('sdPoolCap').innerHTML = `${ps.length} of ${engine.P.size} players${gone > 0 ? ` (${gone} out / IR hidden)` : ''} · ${esc(src)}${bb ? ` · ownership: <b>BB proj</b> — ${esc(bb.own_source)}, ${esc(bb.own_quality || 'rough')}${bb.own_note ? ` (${esc(bb.own_note)})` : ''}${OC && OC.bands.flex.bb_model ? ' · range = its held-out 80% band' : ''}` : stokOwn() ? ` · ownership: <b>${useCorr() ? 'corrected' : 'raw from your file'}</b> drives the engine · line under each player: FLEX / CPT = your file · corr (BirdieBuddy-corrected, 80% band) · BB (our model${lab.mineBB && lab.mineBB.own ? `, ${esc(lab.mineBB.label)}` : ': no sample pool for this game'})` : has.own ? '' : ' · no ownership in this file'}${lev ? ` · <b>Lev</b> = historical role rate − projected ownership (${esc(SD().LEV_BUCKET_LABEL[lev.bucket])} row, n = ${lev.n} primetime winners); greyed = thin match` : ''}`;
+    $('sdPoolCap').innerHTML = `${ps.length} of ${engine.P.size} players${gone > 0 ? ` (${gone} out / IR hidden)` : ''} · ${esc(src)}${bb ? ` · ownership: <b>BB proj</b> — ${esc(bb.own_source)}, ${esc(bb.own_quality || 'rough')}${bb.own_note ? ` (${esc(bb.own_note)})` : ''}${OC && OC.bands.flex.bb_model ? ' · range = its held-out 80% band' : ''}` : exportOwn() ? ` · ownership: <b>${useCorr() ? 'corrected' : 'raw from your file'}</b> drives the engine · line under each player: FLEX / CPT = your file · corr (BirdieBuddy-corrected, 80% band) · BB (our model${lab.mineBB && lab.mineBB.own ? `, ${esc(lab.mineBB.label)}` : ': no sample pool for this game'})` : has.own ? '' : ' · no ownership in this file'}${lev ? ` · <b>Lev</b> = historical role rate − projected ownership (${esc(SD().LEV_BUCKET_LABEL[lev.bucket])} row, n = ${lev.n} primetime winners); greyed = thin match` : ''}`;
   };
 
   /* ---------------- render: lineup + verdict ---------------- */
@@ -424,7 +425,7 @@ window.BBI = window.BBI || {};
         <button type="button" class="btn btn-sm" data-copy-link="#step4" title="A link that opens this slate with this lineup graded in the Lab">Copy link</button>
         <button type="button" class="btn btn-sm btn-ghost" data-lab-act="clear" ${n ? '' : 'disabled'}>Clear</button>
       </div>
-      <div class="sd-paste" id="sdPaste" hidden><input class="sd-pool-q" id="sdPasteIn" placeholder="CPT first: 6 names or DK ids, comma-separated" aria-label="Paste a lineup"><button type="button" class="btn btn-sm btn-primary" data-lab-act="paste-go">Score it</button></div>`;
+      <div class="sd-paste" id="sdPaste" hidden><input class="sd-pool-q" id="sdPasteIn" placeholder="Captain first: 6 names or DK IDs, comma-separated" aria-label="Paste a lineup"><button type="button" class="btn btn-sm btn-primary" data-lab-act="paste-go">Score it</button></div>`;
     FX.morph(prev, host);
     lab.prevSlots = { cpt: lab.cpt, ...Object.fromEntries(lab.flex.map((nm, i) => ['f' + i, nm])) };
     renderReport(r, n);
@@ -433,7 +434,7 @@ window.BBI = window.BBI || {};
     // lab_lineup_complete: once per six-man lineup the reader built (a lineup restored at load doesn't count).
     const done = n === 6 && r ? `${lab.source}|${lab.poolId}|${lab.cpt}|${[...lab.flex].sort().join(',')}` : '';
     if (done && lab.completed !== done) {
-      if (urlReady) track('lab_lineup_complete', { band: T().band(sc, !r.hard.length), legal: !r.hard.length, script: tag || '', pool: lab.source, hard_fails: r.hard.length, own: ownKind() === 'stok' ? (useCorr() ? 'corrected' : 'raw') : ownKind() || 'none' });
+      if (urlReady) track('lab_lineup_complete', { band: T().band(sc, !r.hard.length), legal: !r.hard.length, script: tag || '', pool: lab.source, hard_fails: r.hard.length, own: ownKind() === 'file' ? (useCorr() ? 'corrected' : 'raw') : ownKind() || 'none' });
       lab.completed = done;
     }
     // Celebrate a newly completed, legal, strong lineup (once per lineup + slate).
@@ -567,13 +568,13 @@ window.BBI = window.BBI || {};
             <div><span>DST</span><b>${X.dst_n}</b><small>${X.dst_n ? 'in' : 'none'}</small></div>
             <div><span>Both QBs</span><b>${X.feats.both_qbs ? 'yes' : 'no'}</b><small>dog QB ${X.dog_qb ? 'in' : 'out'}</small></div>
           </div>
-          <span class="sd-lab-k" style="margin-top:10px">Ownership &amp; dupes${bb ? ` <small>BB proj · ${esc(bb.own_quality || 'rough')}</small>` : stokOwn() ? ` <small>${useCorr() ? 'BirdieBuddy-corrected' : 'raw from your file'}</small>` : ''}</span>
+          <span class="sd-lab-k" style="margin-top:10px">Ownership &amp; dupes${bb ? ` <small>BB proj · ${esc(bb.own_quality || 'rough')}</small>` : exportOwn() ? ` <small>${useCorr() ? 'BirdieBuddy-corrected' : 'raw from your file'}</small>` : ''}</span>
           ${has.own ? `<div class="sd-facts">
             <div><span>Cum own</span><b>${FX.num('lab.cum', X.cum, 0, { post: '%' })}</b><small>target ${esc(ct ? ct.own_target : '')}${own ? (X.cum >= +own[1] && X.cum <= +own[2] ? ' ✓' : ' ✗') : ''}</small></div>
             <div><span>Est. dupes</span><b>${FX.num('lab.dupes', X.est_dupes, X.est_dupes < 10 ? 1 : 0)}</b><small>gate ≤ ${r.dupes.gate}${r.dupes.ok ? ' ✓' : ' ✗'}${dr ? ` · range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}` : ''}</small></div>
             <div><span>CPT own</span><b>${X.cpt.cpt_own.toFixed(1)}%</b><small>${has.cpt_opt ? `opt ${X.cpt.cpt_opt.toFixed(1)}%` : bb ? 'BB proj' : 'no optimal %'}</small></div>
             <div><span>Field</span><b>${(engine.A.field / 1000).toFixed(engine.A.field < 10000 ? 1 : 0)}k</b><small>dupes = field × Π own × 6</small></div></div>
-            ${stokOwn() ? `<div class="sd-own-note">${ownNote()}${dr ? ` Dupes range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}: all six at the low / high end of their 80% ownership band, an outer bound.` : ''} Computed in your browser; nothing from your file is saved or put in a link.</div>` : ''}
+            ${exportOwn() ? `<div class="sd-own-note">${ownNote()}${dr ? ` Dupes range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}: all six at the low / high end of their 80% ownership band, an outer bound.` : ''} Computed in your browser; nothing from your file is saved or put in a link.</div>` : ''}
             ${bb ? `<div class="sd-own-note">Ownership here is <b>BB proj</b>: ${esc(bb.own_source)} — rough, good for chalk / mid / under-3% tiers and a dupe warning, not precise CPT ownership.${dr ? ` Dupes range ${dupeFmt(dr.lo)}–${dupeFmt(dr.hi)}: all six at the low / high end of the model's held-out 80% band (${OC ? esc(String(OC.bands.bb_model_note || '').split(':')[0]) : ''}), an outer bound.` : ''} Drop your projections export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a> for projections, CPT-optimal and the punt rule.</div>` : ''}`
           : `<div class="sd-unlock">This pool has public DraftKings fields only. Drop your projections export into <a href="nfl/showdown/#sdLabPro" data-jump="sdLabPro" class="sd-link">Your slate</a> to check ownership, dupes, CPT-optimal and the punt rule.</div>`}
           ${cutBlock(X, n, has)}
@@ -590,11 +591,11 @@ window.BBI = window.BBI || {};
     const pool = curPool();
     const d = SD().derive();
     const ov = Object.keys(d.ov).filter(k => d.ov[k]);
-    let msg = `Grading against <b>${esc(engine ? engine.A.fav : '')} −${s.spread} · total ${s.total} · ${esc(SD().ENV_LABEL[s.env])}</b>${ov.length ? ` · <span class="gold">${ov.map(k => k.toUpperCase()).join(' + ')}</span> overlay` : ''} — from Step 1.`;
+    let msg = `Grading against <b>${esc(engine ? engine.A.fav : '')} −${s.spread} · total ${s.total} · ${esc(SD().ENV_LABEL[s.env])}</b>${ov.length ? ` · <span class="gold">${ov.map(k => k.toUpperCase()).join(' + ')}</span> overlay` : ''}${SA() ? ' · the slate picked above.' : ' — from Step 1.'}`;
     const slate = (SD().slates || []).find(x => pool && x.id === pool.id);
     const same = slate && +slate.spread === +s.spread && +slate.total === +s.total && slate.env === s.env;
     if (lab.source === 'sample' && pool && !same) msg += ` <span class="warn">What-if: the rail isn't set to ${esc(pool.label)}'s line.</span> <button type="button" class="sd-link" data-lab-sync>Load its line</button>`;
-    else msg += ' Move the sliders and watch the grade react.';
+    else if (!SA()) msg += ' Move the sliders and watch the grade react.';
     el.innerHTML = msg;
   };
 
@@ -659,14 +660,14 @@ window.BBI = window.BBI || {};
     const restore = FX.keepFocus();
     buildEngine();
     const pl = players();
-    const key = `${lab.source}|${lab.poolId}|${lab.mine ? lab.mine.stamp : ''}|${pl ? pl.has.own : ''}|${pl ? favTeam(pl) : ''}|${pl ? [...new Set([...pl.P.values()].map(p => p.team))].sort().join() : ''}|${stokOwn()}|${!!OC}`;
+    const key = `${lab.source}|${lab.poolId}|${lab.mine ? lab.mine.stamp : ''}|${pl ? pl.has.own : ''}|${pl ? favTeam(pl) : ''}|${pl ? [...new Set([...pl.P.values()].map(p => p.team))].sort().join() : ''}|${exportOwn()}|${!!OC}`;
     if (lab.built !== key) skeleton();
     // drop names that aren't in this pool
     if (engine) { if (lab.cpt && !engine.P.has(lab.cpt)) lab.cpt = null; lab.flex = lab.flex.map(n => n && engine.P.has(n) ? n : null); }
     renderNote(); renderPool(); renderLineup(); renderAuto(); renderLevBoard();
     simStep();   // draws for this player set when projections are loaded (cached; a no-op otherwise)
     const fld = $('sdLabField'); if (fld && document.activeElement !== fld) fld.value = fieldSize();
-    const fl = $('sdLabFieldLink'); if (fl) { const t = linkOn() ? `from Step 5: ${shortName(lab.link.name)}` : lab.field ? 'set by hand' : `Step 1 default (${SD().CONTEST_SHORT[SD().state.contest] || ''})`; if (fl.textContent !== t) fl.textContent = t; }
+    const fl = $('sdLabFieldLink'); if (fl) { const t = linkOn() ? `from Step 5: ${shortName(lab.link.name)}` : lab.field ? 'set by hand' : SA() ? `default for ${SD().CONTEST_SHORT[SD().state.contest] || 'this contest'}` : `Step 1 default (${SD().CONTEST_SHORT[SD().state.contest] || ''})`; if (fl.textContent !== t) fl.textContent = t; }
     renderWhere(); renderRoutine(); foldAns();
     const go = $('sdBatchGo'); if (go) go.disabled = !engine;
     const lbl = $('sdBatchLabel'); if (lbl) lbl.textContent = `${pro.lineupsName ? pro.lineupsName + ' · ' : ''}scored against ${lab.source === 'mine' && lab.mine ? 'your slate' : curPool() ? curPool().label : 'the selected pool'} and the Step 1 line`;
@@ -734,24 +735,55 @@ window.BBI = window.BBI || {};
     if (!ok) { try { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); ok = document.execCommand('copy'); ta.remove(); } catch {} }
     SD().toast(ok ? okMsg : 'Copy failed — your browser blocked the clipboard', ok ? '' : 'warn');
   };
-  // Paste is forgiving (the engine's resolve stays strict for parity):
-  // exact / "Name (id)" / DK id → unique last name → unique substring.
-  const looseResolve = x => {
-    const hit = engine.resolve(x); if (hit) return hit;
-    const q = x.trim().toLowerCase().replace(/\s*\(\d+\)$/, ''); if (!q) return null;
-    const names = [...engine.P.keys()];
-    const last = names.filter(n => n.toLowerCase().split(/\s+/).includes(q.split(/\s+/).pop()) && (q.split(/\s+/).length === 1 || n.toLowerCase()[0] === q[0]));
-    if (last.length === 1) return last[0];
-    const sub = names.filter(n => n.toLowerCase().includes(q));
-    return sub.length === 1 ? sub[0] : null;
+  // Paste is forgiving (the engine's resolve stays strict for parity). Same matcher as nfl/lab/lab_page.js:
+  // exact / "Name (id)" / DK id → accents, case and . ' ’ - ignored, Jr./Sr./II/III/IV dropped → a DST by
+  // team code, city, full name or nickname ("CIN", "CIN DST", "Cincinnati Bengals", "Bengals D/ST") →
+  // a few common nicknames → unique last name (first initial when given) → unique word or substring.
+  const NFL_TEAMS = { ARI: 'Arizona Cardinals', ATL: 'Atlanta Falcons', BAL: 'Baltimore Ravens', BUF: 'Buffalo Bills', CAR: 'Carolina Panthers', CHI: 'Chicago Bears', CIN: 'Cincinnati Bengals', CLE: 'Cleveland Browns', DAL: 'Dallas Cowboys', DEN: 'Denver Broncos', DET: 'Detroit Lions', GB: 'Green Bay Packers', HOU: 'Houston Texans', IND: 'Indianapolis Colts', JAX: 'Jacksonville Jaguars', KC: 'Kansas City Chiefs', LV: 'Las Vegas Raiders', LAC: 'Los Angeles Chargers', LAR: 'Los Angeles Rams', MIA: 'Miami Dolphins', MIN: 'Minnesota Vikings', NE: 'New England Patriots', NO: 'New Orleans Saints', NYG: 'New York Giants', NYJ: 'New York Jets', PHI: 'Philadelphia Eagles', PIT: 'Pittsburgh Steelers', SF: 'San Francisco 49ers', SEA: 'Seattle Seahawks', TB: 'Tampa Bay Buccaneers', TEN: 'Tennessee Titans', WAS: 'Washington Commanders' };
+  const TEAM_ALIAS = { jac: 'JAX', jags: 'JAX', wsh: 'WAS', lvr: 'LV', niners: 'SF', bucs: 'TB', pats: 'NE', bolts: 'LAC' };
+  const NICKNAMES = { cmc: 'christian mccaffrey', arsb: 'amon ra st brown', 'amon ra': 'amon ra st brown', puka: 'puka nacua', bijan: 'bijan robinson', jsn: 'jaxon smith njigba', jj: 'justin jefferson', jjettas: 'justin jefferson', mhj: 'marvin harrison', btj: 'brian thomas', kw3: 'kenneth walker', 'ken walker': 'kenneth walker', 'kenny walker': 'kenneth walker', jt: 'jonathan taylor', jamo: 'jameson williams', tlaw: 'trevor lawrence', ajb: 'aj brown', dk: 'dk metcalf', cd: 'ceedee lamb', 'hollywood brown': 'marquise brown', 'tank dell': 'nathaniel dell', jjm: 'jj mccarthy' };
+  const SUFFIX = new Set(['jr', 'sr', 'ii', 'iii', 'iv', 'v']);
+  const foldName = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[.'’`]/g, '').replace(/[^a-z0-9]+/g, ' ').trim().split(' ').filter(w => w && !SUFFIX.has(w)).join(' ');
+  const TEAM_KEYS = (() => {
+    const m = new Map(), city = new Map();
+    for (const [c, full] of Object.entries(NFL_TEAMS)) {
+      const w = foldName(full).split(' '), nick = w.pop(), ct = w.join(' ');
+      m.set(c.toLowerCase(), c); m.set(`${ct} ${nick}`, c); m.set(nick, c); city.set(ct, city.has(ct) ? null : c);
+    }
+    for (const [ct, c] of city) if (c && !m.has(ct)) m.set(ct, c);   // "new york" / "los angeles" stay ambiguous
+    for (const [a, c] of Object.entries(TEAM_ALIAS)) m.set(a, c);
+    return m;
+  })();
+  const looseMatcher = (P, strict) => {
+    const rows = [...P.keys()].map(n => { const k = foldName(n), w = k.split(' '); return { n, k, t: k.replace(/ /g, ''), first: w[0] || '', last: w[w.length - 1] || '' }; });
+    const one = a => (a.length === 1 ? a[0].n : null);
+    const dstOf = code => { const d = [...P].filter(([, p]) => p && p.pos === 'DST' && p.team === code); return d.length === 1 ? d[0][0] : null; };
+    return cell => {
+      const hit = strict(cell); if (hit) return hit;
+      const raw = String(cell ?? '').trim().replace(/^"+|"+$/g, '').replace(/\s*\((\d+|cpt|captain)\)\s*$/i, '').replace(/^(CPT|CAPTAIN|FLEX|UTIL|QB|RB|WR|TE|DST|DEF|D\/ST)\s*[:\-–]?\s+(?=\S)/i, '');
+      if (raw !== String(cell ?? '').trim()) { const h = strict(raw); if (h) return h; }
+      const q = foldName(raw); if (!q) return null;
+      const qt = q.replace(/ /g, ''), qw = q.split(' ');
+      // a defense: team code, city, nickname or full name, with or without DST / D/ST / Defense
+      const code = TEAM_KEYS.get(q.replace(/\b(dst|d st|def|defen[cs]e)\b/g, ' ').replace(/\s+d$/, '').replace(/\s+/g, ' ').trim());
+      let m = code && dstOf(code); if (m) return m;
+      if ((m = one(rows.filter(r => r.t === qt)))) return m;
+      const nk = NICKNAMES[q] || NICKNAMES[qt]; if (nk && (m = one(rows.filter(r => r.k === nk)))) return m;
+      const last = qw[qw.length - 1];
+      if ((m = one(rows.filter(r => r.last === last && (qw.length === 1 || r.first[0] === qw[0][0]))))) return m;
+      if ((m = one(rows.filter(r => ` ${r.k} `.includes(` ${q} `))))) return m;
+      return qt.length >= 3 ? one(rows.filter(r => r.t.includes(qt))) : null;
+    };
   };
   const labAction = (a, btn) => {
     if (a === 'clear') { clearLineup(); render(); return; }
     if (a === 'paste') { const p = $('sdPaste'); p.hidden = !p.hidden; if (!p.hidden) $('sdPasteIn').focus(); return; }
     if (a === 'paste-go') {
-      const raw = $('sdPasteIn').value.split(/[,\t\n;]+/).map(x => x.trim()).filter(Boolean);
+      // A DK header row (CPT,FLEX,…) is dropped; a cell tagged CPT / Captain goes first wherever it was pasted.
+      const raw = $('sdPasteIn').value.split(/[,\t\n;]+/).map(x => x.trim()).filter(x => x && !/^(cpt|captain|flex|util)$/i.test(x));
       if (!engine) return;
-      const names = raw.map(looseResolve);
+      const ci = raw.findIndex(x => /^(cpt|captain)\b|\((cpt|captain)\)$/i.test(x)); if (ci > 0) raw.unshift(raw.splice(ci, 1)[0]);
+      const names = raw.map(looseMatcher(engine.P, engine.resolve));
       const bad = raw.filter((x, i) => !names[i]);
       if (bad.length || names.length < 1) { SD().toast(`Couldn't match: ${esc(bad.join(', ') || 'nothing pasted')}`, 'warn'); return; }
       const dup = names.filter((n, i) => names.indexOf(n) !== i);
@@ -1164,11 +1196,11 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
       }
       if (pl) {
         base = SE.mergePlayers(base, pl); gotPlayers = true;
-        const sdf = pl.source === 'stokastic' && SB && SB.readStd ? SB.readStd(SE.parseCSV(text)) : null;
+        const sdf = pl.source === 'export' && SB && SB.readStd ? SB.readStd(SE.parseCSV(text)) : null;
         if (sdf && sdf.size) for (const [k, v] of sdf) sd.set(k, v);
         if (pl.has.proj) { const t = /_(\d{4}-\d{2}-\d{2})_(\d{4})ET/.exec(f.name); at = (t && etMs(`${t[1]}T${t[2].slice(0, 2)}:${t[2].slice(2)}`)) || f.lastModified || null; }
-        track('file_load', { type: pl.source === 'stokastic' ? 'stokastic' : 'dk_salaries', card: 'lab', own: !!pl.has.own, proj: !!pl.has.proj });
-        pro.files = pro.files.filter(x => x.name !== f.name).concat({ name: f.name, kind: 'players', desc: `${pl.source === 'stokastic' ? 'Projections export' : 'DraftKings salaries'} · ${pl.P.size} players${pl.ids.size ? ' · DK ids ✓' : ''}${pl.has.own ? ' · ownership ✓' : ''}${pl.has.proj ? ' · projections ✓' : ''}${sdf && sdf.size ? ' · Std Dev ✓' : ''}` });
+        track('file_load', { type: pl.source === 'export' ? 'proj_export' : 'dk_salaries', card: 'lab', own: !!pl.has.own, proj: !!pl.has.proj });
+        pro.files = pro.files.filter(x => x.name !== f.name).concat({ name: f.name, kind: 'players', desc: `${pl.source === 'export' ? 'Projections export' : 'DraftKings salaries'} · ${pl.P.size} players${pl.ids.size ? ' · DK ids ✓' : ''}${pl.has.own ? ' · ownership ✓' : ''}${pl.has.proj ? ' · projections ✓' : ''}${sdf && sdf.size ? ' · Std Dev ✓' : ''}` });
       } else {
         pro.lineupsText = text; pro.lineupsName = f.name;
         pro.files = pro.files.filter(x => x.name !== f.name).concat({ name: f.name, kind: 'lineups', desc: `${Math.max(0, text.trim().split(/\r?\n/).length - 1)} lineup rows` });
@@ -1602,7 +1634,10 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
   });
   if (SD() && SD().data) boot();
 
+  // The standalone Lab page (nfl/lab/lab_page.js) reads these for its plain-English grade line and the one-lineup DK CSV.
+  const dkCsv = () => filled() === 6 && hasIds() ? `CPT,FLEX,FLEX,FLEX,FLEX,FLEX\n${[idsOf(lab.cpt)[1], ...lab.flex.map(n => idsOf(n)[0])].join(',')}\n` : null;
   window.BBI.showdownLab = { lab, render, codexScore, levSortKey, cmpKey, get engine() { return engine; }, readFiles, scoreBatch, pickBook, cardData, urlInfo, reportLines, fetchPool, openLineup, startAuto, stopAuto, verdictFor,
+    FEAT_LABEL, SCRIPT_NAME, scoreCurrent, filled, hasIds, dkCsv, curPool, ownKind,
     get lev() { return lev; }, ownOf, useCorr, persistBlob, get oc() { return OC; }, _test: { save, buildEngine, players, setOC: j => { OC = j; }, dupesRange,
       setSim: (rc, econ) => { RC = rc; ECON = econ; simDataDone = true; }, sim: () => ({ world, spec: getSpec(), cuts: simCutsNow(), mode: autoMode(), ready: simReady(), running: simRun }), simStep,
       setTW: j => { TW = j; twDone = true; }, whereQuery, useContest, linkOn, routineHints, tick, ticksFor, routineKey },

@@ -122,7 +122,7 @@
   // Projections SHOWDOWN export (the engine's --proj file). Mirrors
   // rules_engine.py: g(k) matches the first header whose stripped lower
   // name equals k; unparseable/missing → 0.0; later duplicate names win.
-  const readStokastic = rows => {
+  const readProjExport = rows => {
     const hdr = rows[0], P = new Map();
     for (const raw of rows.slice(1)) {
       if (!raw.length) continue;                                   // DictReader skips blank rows
@@ -133,7 +133,7 @@
         own: g('Ownership %'), opt: g('Optimal %'), cpt_own: g('CPT Ownership %'), cpt_opt: g('CPT Optimal %') });
     }
     const H = hdr.map(h => h.trim().toLowerCase());
-    return { P, source: 'stokastic', has: { proj: H.includes('projection'), own: H.includes('ownership %'), cpt_own: H.includes('cpt ownership %'), cpt_opt: H.includes('cpt optimal %') }, ids: new Map() };
+    return { P, source: 'export', has: { proj: H.includes('projection'), own: H.includes('ownership %'), cpt_own: H.includes('cpt ownership %'), cpt_opt: H.includes('cpt optimal %') }, ids: new Map() };
   };
 
   // DraftKings salary file (DKSalaries.csv) — or the DK upload template,
@@ -169,7 +169,7 @@
     const rows = parseCSV(text);
     if (!rows.length) throw new Error('empty player file');
     const H = rows[0].map(h => h.trim().toLowerCase());
-    if (H.includes('player') && H.includes('salary') && H.includes('position') && H.includes('team')) return readStokastic(rows);
+    if (H.includes('player') && H.includes('salary') && H.includes('position') && H.includes('team')) return readProjExport(rows);
     const dk = readDraftKings(rows); if (dk && dk.P.size) return dk;
     throw new Error('unrecognised player file — expected a projections showdown export or a DraftKings salary CSV');
   };
@@ -635,5 +635,5 @@
     return { A, P, has, teams, DOG, SB, DOG_WP, rank, settings, resolve, loadPool, classify, hardCheck, hardRules, softScore, evaluate, select, scoreOne, portfolioReport, fmt, text };
   };
 
-  return { parseCSV, pyFloat, pyFixed, pyPct, pyFloatRepr, pyRepr, readPlayers, readStokastic, readDraftKings, readIdMap, mergePlayers, playersFromList, bucket, createEngine };
+  return { parseCSV, pyFloat, pyFixed, pyPct, pyFloatRepr, pyRepr, readPlayers, readProjExport, readDraftKings, readIdMap, mergePlayers, playersFromList, bucket, createEngine };
 });

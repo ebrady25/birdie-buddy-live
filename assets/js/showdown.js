@@ -510,6 +510,13 @@ window.BBI = window.BBI || {};
   const POS = ['WR', 'RB', 'QB', 'TE'];
 
   let data = null, slates = [], urlIn = {};   // urlIn: what the page was opened with (urlParse)
+  /* ---------- headless mode (round 2, 2026-10-30: the standalone Lineup Lab at nfl/lab/) ----------
+     A page that sets window.BBI.sdHeadless = { urlPrefix, urlActive } before this script loads gets data, slates,
+     state and urlIn built exactly as Grind builds them, then sd:ready, but none of Grind's DOM is drawn or bound:
+     render() saves state, syncs the URL and dispatches sd:render (the Lab listens), setLabScore() only remembers.
+     Without the flag (Grind) nothing below changes. */
+  const HL = () => (window.BBI && window.BBI.sdHeadless) || null;
+  let headless = false;
   /* ---------- gating (see GATING_MODE) ---------- */
   // ?gating=open|server previews either mode anywhere but birdiebuddy.io (the route still decides entitlement).
   const gatingMode = (loc = window.location) => {
@@ -1187,7 +1194,7 @@ window.BBI = window.BBI || {};
     L.push(`  Laws pinned: ${[...d.laws].sort((a, b) => a - b).map(n => `${n}. ${data.ten_laws[n - 1].law} [field: ${VERDICT[lawVerdict(data, n).verdict].word}]`).join(' | ')}`);
     return L.join('\n');
   };
-  const stokasticText = d => {
+  const exportText = d => {
     const L = [`# Contest generator — ${spreadLabel(state.spread, d.preset && d.preset.fav)} · ${num(state.total)} · ${ENV_LABEL[state.env]} · ${state.entries} lineups`];
     d.dials.rows.forEach(r => L.push(`${r.k.padEnd(30)} ${r.v}`));
     const counts = largestRemainder(d.alloc, state.entries);
@@ -1214,12 +1221,13 @@ window.BBI = window.BBI || {};
     return { slate: li ? li.slate || state.preset : state.preset || urlIn.slate, spread: state.spread, total: state.total, env: state.env, contest: state.contest, entries: state.entries, lu: li ? li.lu : urlIn.lu };
   };
   const cleanHash = () => (location.hash || '').replace(/\?.*$/, '');
-  const shareUrl = hash => `${location.origin}${location.pathname}?${urlSerialize(urlState())}${hash == null ? cleanHash() : hash}`;
+  const shareUrl = hash => `${location.origin}${location.pathname}?${headless && HL().urlPrefix ? HL().urlPrefix + '&' : ''}${urlSerialize(urlState())}${hash == null ? cleanHash() : hash}`;
   // Written only once the reader has touched something (or arrived on a link), so a
   // plain visit keeps a plain URL. Debounced: sliders re-render every frame.
   let urlArmed = false, urlT = 0;
   const syncUrl = () => {
     if (!urlArmed || !data) return;
+    if (headless && HL().urlActive && !HL().urlActive()) return;   // the standalone Lab's other tab owns the URL
     clearTimeout(urlT);
     urlT = setTimeout(() => { try { history.replaceState(history.state, '', shareUrl()); } catch {} }, 300);
   };
@@ -1409,6 +1417,7 @@ window.BBI = window.BBI || {};
   // Snapshot keyed elements → re-render → morph from the old values.
   const render = () => {
     if (!data) return;
+    if (headless) { const d = derive(), counts = largestRemainder(d.alloc, state.entries); store.save(state); syncUrl(); document.dispatchEvent(new CustomEvent('sd:render', { detail: { d, state, counts } })); return; }
     const prev = FX.snapshot(), restore = FX.keepFocus();
     const d = derive();
     renderInputs(); renderConsole(d); renderDock(d);
@@ -1435,6 +1444,7 @@ window.BBI = window.BBI || {};
   // The Lab reports its live score here; only the console + dock re-render.
   const setLabScore = s => {
     labScore = s; if (!data) return;
+    if (headless) { document.dispatchEvent(new CustomEvent('sd:labscore', { detail: s })); return; }   // the standalone Lab draws its own grade line
     const prev = FX.snapshot($id('sdConsole')), prevDock = FX.snapshot($id('sdDock')), d = derive(), restore = FX.keepFocus();
     renderConsole(d); renderDock(d); restore(); FX.morph(prev, $id('sdConsole')); FX.morph(prevDock, $id('sdDock'));
     stepFourAns();
@@ -1481,7 +1491,7 @@ window.BBI = window.BBI || {};
       const cl = e.target.closest('[data-copy-link]'); if (cl) { copyLink(cl.dataset.copyLink || '', cl); return; }
       if (e.target.closest('[data-print]')) { window.print(); return; }
       if (e.target.closest('[data-pro-retry]')) { loadPro(); return; }
-      const c = e.target.closest('[data-copy]'); if (c && hasPro()) { const d = derive(); copy(c.dataset.copy === 'playbook' ? playbookText(d) : stokasticText(d), c); return; }
+      const c = e.target.closest('[data-copy]'); if (c && hasPro()) { const d = derive(); copy(c.dataset.copy === 'playbook' ? playbookText(d) : exportText(d), c); return; }
       if (e.target.closest('[data-tune-toggle]')) { setTune($id('sdTune').hidden); return; }
       const j = e.target.closest('[data-jump]'); if (j) { e.preventDefault(); jump(j.dataset.jump); return; }
       if (e.target.closest('[data-edit]')) { e.preventDefault(); jump('step1'); return; }
@@ -1642,6 +1652,12 @@ window.BBI = window.BBI || {};
       if (fresh && data.inputs.environment.includes(fresh.env)) Object.assign(state, { spread: fresh.spread, total: fresh.total, env: fresh.env, preset: fresh.id });
     }
     ['pointerdown', 'keydown', 'input'].forEach(ev => document.addEventListener(ev, () => { urlArmed = true; }, { once: true, capture: true, passive: true }));
+    if (HL()) {   // headless: no Grind DOM to draw or bind; the Lab boots on sd:ready
+      headless = true;
+      document.dispatchEvent(new CustomEvent('sd:ready', { detail: { data, slates, headless: true } }));
+      if (gating === 'server') watchPro();
+      return;
+    }
     const v = $id('sdVersion'); if (v) v.textContent = data.meta.version;
     const rv = $id('sdRulesVersion'); if (rv && data.engine && data.engine.rules_version) rv.textContent = 'v' + data.engine.rules_version.split(' ')[0];
     bind();
@@ -1755,9 +1771,9 @@ window.BBI = window.BBI || {};
     derive: () => derive(), slateTier, attackFor, nextPrimetime, visibleSlates, histText, checkText, checkLegend, CHECK, setLabScore, toast, scriptOdds, ENV_LABEL, ENV_SHORT, CONTEST_SHORT, SCRIPT_META,
     VERDICT, LAW_RULES, ruleById, tmplRuleId, lawVerdict, verdictTip, vBadge, vIcon, lawBadge, cohortRows, fieldBucket, cutLadder, lineupProj, projVsCuts, median,
     urlParse, urlSerialize, nameSlug, lineupTokens, lineupFromTokens, get urlIn() { return urlIn; }, syncUrl, copyLink, sharePng,
-    playbookText: () => playbookText(derive()), stokasticText: () => stokasticText(derive()), playCardPng: () => playCardPng(derive()),
+    playbookText: () => playbookText(derive()), exportText: () => exportText(derive()), playCardPng: () => playCardPng(derive()),
     GATING_MODE, PUBLIC_PATH, PRO_ROUTE, gatingMode, mergePro, proFrom, hasPro, get gating() { return gating; }, get proState() { return proState; },
-    ownBucket, ownCell, ownBand, correctOwn, estDupes, roleMap, levBucket, LEV_BUCKET_LABEL, leverageFor, fieldGapFor };
+    ownBucket, ownCell, ownBand, correctOwn, estDupes, roleMap, levBucket, LEV_BUCKET_LABEL, leverageFor, fieldGapFor, get headless() { return headless; } };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

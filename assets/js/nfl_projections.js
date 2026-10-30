@@ -4,6 +4,9 @@
    step, codex/dashboard/slate_page.py) and renders one sortable table:
    position tabs (All, QB, RB, WR, TE, FLEX, DST), player/team search,
    big-GPP vs single-entry ownership, header tooltips. No libraries.
+   Simple / Advanced (round 2, 2026-10-30): Simple hides Ceiling, Optimal %
+   and Leverage (COLS adv:1); the choice is remembered on this device.
+   ?q=<name> pre-fills the search (player-card links land on the row).
    ===================================================================== */
 (() => {
   'use strict';
@@ -15,6 +18,7 @@
   const LEV_HI = 2;          // leverage of +2 or better gets the gold pill
   const LEV_LO = -5;         // -5 or worse is shown in muted red
   const VALUE_TOP = 0.15;    // top 15% value at the position is gold
+  const LS_VIEW = 'bbi_nfl_proj_view';   // 'simple' | 'adv'
 
   const OWN_TIP = {
     gpp: 'The share of lineups we expect to play him in big tournaments (large-field GPPs). Our own ownership model.',
@@ -27,10 +31,10 @@
     { k: 'opp', l: 'Opp', t: 1, cx: 1, tip: 'The team he plays this week.' },
     { k: 'salary', l: 'Salary', s: 'Salary', tip: 'His DraftKings salary. You get $50,000 for nine players.' },
     { k: 'proj', l: 'Projection', s: 'Proj', tip: 'Our average DraftKings points for him across 10,000 simulated games.' },
-    { k: 'p90', l: 'Ceiling', s: 'Ceiling', tip: 'His big-game score: he beats this in only 1 of every 10 simulated games. Tournaments are won by ceilings.' },
+    { k: 'p90', l: 'Ceiling', s: 'Ceiling', adv: 1, tip: 'His big-game score: he beats this in only 1 of every 10 simulated games. Tournaments are won by ceilings.' },
     { k: 'own', l: 'Ownership %', s: 'Own %', tip: OWN_TIP.gpp },
-    { k: 'opt', l: 'Optimal %', s: 'Opt %', tip: 'How often he is in the best possible lineup across our simulated slates.' },
-    { k: 'lev', l: 'Leverage', s: 'Lev', tip: 'Optimal % minus Ownership %. Positive means he lands in winning lineups more often than the field plays him.' },
+    { k: 'opt', l: 'Optimal %', s: 'Opt %', adv: 1, tip: 'How often he is in the best possible lineup across our simulated slates.' },
+    { k: 'lev', l: 'Leverage', s: 'Lev', adv: 1, tip: 'Optimal % minus Ownership %. Positive means he lands in winning lineups more often than the field plays him.' },
     { k: 'value', l: 'Value', s: 'Value', tip: 'Projected points per $1,000 of salary. Higher means more points for the money.' }
   ];
 
@@ -41,14 +45,19 @@
   const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const track = (ev, props) => { try { window.BBI && BBI.track && BBI.track(ev, props); } catch (e) { /* never break the page */ } };
 
-  const state = { rows: [], pos: 'ALL', q: '', own: 'gpp', key: 'proj', dir: -1 };
+  const loadView = () => { try { return localStorage.getItem(LS_VIEW) === 'adv' ? 'adv' : 'simple'; } catch (e) { return 'simple'; } };
+  const saveView = (v) => { try { localStorage.setItem(LS_VIEW, v); } catch (e) { /* private mode: still works for this visit */ } };
+
+  const state = { rows: [], pos: 'ALL', q: '', own: 'gpp', key: 'proj', dir: -1, view: loadView(), hit: '' };
+  // The columns on screen: Simple drops the adv ones. Head, cells, definitions and colspans all read this.
+  const cols = () => (state.view === 'adv' ? COLS : COLS.filter((c) => !c.adv));
   let valueCut = {};
   let teams = new Set();
 
   // ---------------------------------------------------------------- header + tooltips
   function buildHead() {
     const tr = $('#pj-head-row');
-    tr.innerHTML = COLS.map((c) => {
+    tr.innerHTML = cols().map((c) => {
       const cls = [c.t ? 't' : '', c.c1 ? 'c1' : '', c.cx ? 'cx' : ''].filter(Boolean).join(' ');
       const label = c.s ? `<span class="l">${c.l}</span><span class="s">${c.s}</span>` : c.l;
       return `<th scope="col" class="${cls}" data-k="${c.k}"><button type="button" aria-label="${esc(c.l)}: sort">${label}<span class="pj-arrow" aria-hidden="true"></span></button></th>`;
@@ -83,10 +92,10 @@
   function buildDefs() {
     const dl = $('#pj-defs');
     if (!dl) return;
-    dl.innerHTML = COLS.filter((c) => !['pos', 'team', 'opp'].includes(c.k)).map((c) => {
+    dl.innerHTML = cols().filter((c) => !['pos', 'team', 'opp'].includes(c.k)).map((c) => {
       const tip = c.k === 'own' ? `${OWN_TIP.gpp} Switch to "Single entry" for single-entry contests.` : c.tip;
       return `<div><dt>${esc(c.l)}</dt><dd>${esc(tip)}</dd></div>`;
-    }).join('');
+    }).join('') + (state.view === 'adv' ? '' : '<div><dt>More columns</dt><dd>Switch the view to Advanced for Ceiling, Optimal % and Leverage.</dd></div>');
   }
 
   // ---------------------------------------------------------------- data shaping
@@ -178,9 +187,10 @@
     const body = $('#pj-body');
     if (!L.length) {
       const what = state.q ? `No ${state.pos === 'ALL' ? '' : state.pos + ' '}players match “${esc(state.q)}”.` : 'No players at this position yet.';
-      body.innerHTML = `<tr><td class="pj-empty" colspan="${COLS.length}">${what}</td></tr>`;
+      body.innerHTML = `<tr><td class="pj-empty" colspan="${cols().length}">${what}</td></tr>`;
     } else {
-      body.innerHTML = L.map((r) => `<tr>${COLS.map((c) => cell(r, c)).join('')}</tr>`).join('');
+      const C = cols();
+      body.innerHTML = L.map((r) => `<tr${state.hit && norm(r.player) === state.hit ? ' class="pj-hit"' : ''}>${C.map((c) => cell(r, c)).join('')}</tr>`).join('');
     }
     document.querySelectorAll('#pj-head-row th').forEach((th) => {
       const on = th.dataset.k === state.key;
@@ -207,17 +217,36 @@
     render();
     if (push) {
       // <base href="/"> would resolve a bare '#qb' against the site root: keep the page path explicit
-      try { history.replaceState(null, '', location.pathname + (p === 'ALL' ? '' : `#${p.toLowerCase()}`)); } catch (e) { /* file:// */ }
+      try { history.replaceState(null, '', location.pathname + location.search + (p === 'ALL' ? '' : `#${p.toLowerCase()}`)); } catch (e) { /* file:// */ }
       track('proj_tab', { pos: p });
     }
   }
 
   function setOwn(mode) {
     state.own = mode === 'se' ? 'se' : 'gpp';
-    document.querySelectorAll('.pj-seg-b').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.own === state.own)));
+    document.querySelectorAll('.pj-seg-b[data-own]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.own === state.own)));
     COLS.find((c) => c.k === 'own').tip = OWN_TIP[state.own];
     render();
     track('proj_own', { mode: state.own });
+  }
+
+  // Simple / Advanced: rebuild the head + definitions for the new column set; a sort on a hidden column falls back to Projection.
+  function paintView() {
+    document.querySelectorAll('.pj-seg-b[data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
+    const panel = $('.pj-panel');
+    if (panel) panel.classList.toggle('pj-simple', state.view !== 'adv');
+    const sw = $('#pj-swipe');
+    if (sw) sw.textContent = state.view === 'adv' ? 'Swipe the table sideways for ownership, optimal %, leverage and value →' : 'Swipe the table sideways for ownership and value →';
+  }
+  function setView(v, user) {
+    state.view = v === 'adv' ? 'adv' : 'simple';
+    if (!cols().some((c) => c.k === state.key)) { state.key = 'proj'; state.dir = -1; }
+    hideTip();
+    paintView();
+    buildHead();
+    buildDefs();
+    render();
+    if (user) { saveView(state.view); track('proj_view', { view: state.view }); }
   }
 
   // ---------------------------------------------------------------- header text
@@ -256,10 +285,11 @@
       setPos(p, true);
       document.querySelector(`.pj-tab[data-pos="${p}"]`).focus();
     });
-    document.querySelectorAll('.pj-seg-b').forEach((b) => b.addEventListener('click', () => setOwn(b.dataset.own)));
+    document.querySelectorAll('.pj-seg-b[data-own]').forEach((b) => b.addEventListener('click', () => setOwn(b.dataset.own)));
+    document.querySelectorAll('.pj-seg-b[data-view]').forEach((b) => b.addEventListener('click', () => setView(b.dataset.view, true)));
     const q = $('#pj-q');
     let t = null;
-    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { state.q = q.value; render(); }, 80); });
+    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { state.q = q.value; state.hit = ''; render(); syncQ(); }, 80); });
     const sc = $('#pj-scroll');
     sc.addEventListener('scroll', () => {
       sc.classList.toggle('is-scrolled', sc.scrollLeft > 2);
@@ -270,7 +300,32 @@
     window.addEventListener('hashchange', () => setPos((location.hash || '').slice(1).toUpperCase() || 'ALL', false));
   }
 
+  // ?q= from a player-card link: pre-fill the search and mark that player's row.
+  let qFromUrl = false;
+  function readQ() {
+    let v = '';
+    try { v = (new URLSearchParams(location.search).get('q') || '').trim().slice(0, 60); } catch (e) { /* old browsers */ }
+    if (!v) return;
+    qFromUrl = true;
+    state.q = v;
+    state.hit = norm(v).trim();
+    const q = $('#pj-q');
+    if (q) q.value = v;
+  }
+  // Only a page opened with ?q= keeps the URL in step with the box (a plain visit keeps a plain URL).
+  function syncQ() {
+    if (!qFromUrl) return;
+    try {
+      const u = new URLSearchParams(location.search);
+      if (state.q.trim()) u.set('q', state.q.trim()); else u.delete('q');
+      const s = u.toString();
+      history.replaceState(null, '', location.pathname + (s ? `?${s}` : '') + location.hash);
+    } catch (e) { /* file:// */ }
+  }
+
   async function boot() {
+    readQ();
+    paintView();
     buildHead();
     buildDefs();
     wire();
@@ -286,7 +341,7 @@
       setPos((location.hash || '').slice(1).toUpperCase() || 'ALL', false);
     } catch (e) {
       $('#pj-asof').textContent = 'Our numbers could not load right now.';
-      $('#pj-body').innerHTML = `<tr><td class="pj-empty" colspan="${COLS.length}">The projections did not load. Refresh the page to try again.</td></tr>`;
+      $('#pj-body').innerHTML = `<tr><td class="pj-empty" colspan="${cols().length}">The projections did not load. Refresh the page to try again.</td></tr>`;
     }
   }
 

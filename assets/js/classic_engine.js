@@ -31,7 +31,7 @@
      ================================================================= */
   // Projections MAIN export (classic_engine.py --proj): Player,Salary,Position,Team,Opponent,Projection,Ownership %,Optimal %
   // g(k) = float(r.get(k) or 0): exact header name, missing/empty → 0.
-  const readDataHub = rows => {
+  const readProjExport = rows => {
     const hdr = rows[0], P = new Map();
     for (const raw of rows.slice(1)) {
       if (!raw.length) continue;
@@ -42,7 +42,7 @@
         proj: g('Projection'), own: g('Ownership %'), opt: g('Optimal %') });
     }
     const H = hdr.map(h => h.trim());
-    return { P, source: 'stokastic', has: { proj: H.includes('Projection'), own: H.includes('Ownership %'), opt: H.includes('Optimal %') }, ids: new Map() };
+    return { P, source: 'export', has: { proj: H.includes('Projection'), own: H.includes('Ownership %'), opt: H.includes('Optimal %') }, ids: new Map() };
   };
 
   // DraftKings classic salary file (DKSalaries.csv) or a DK upload/entries template with the player list on the right.
@@ -71,7 +71,7 @@
     const H = rows[0].map(h => h.trim());
     if (H.includes('Player') && H.includes('Salary') && H.includes('Position') && H.includes('Team')) {
       if (H.includes('CPT Ownership %')) throw new Error('that is a showdown projections export — the classic checker needs the MAIN slate export');
-      return readDataHub(rows);
+      return readProjExport(rows);
     }
     const dk = readDraftKings(rows); if (dk && dk.P.size) return dk;
     throw new Error('unrecognised file — expected a DraftKings classic salary CSV (DKSalaries.csv) or a projections main-slate export');
@@ -307,5 +307,5 @@
     return { resolve, classify, hard, soft, loadPool, evaluate, fmt, auditText, roster, check };
   };
 
-  return { readPlayers, readDataHub, readDraftKings, mergePlayers, playersFromList, linesFromCsv, linesFromGames, createEngine };
+  return { readPlayers, readProjExport, readDraftKings, mergePlayers, playersFromList, linesFromCsv, linesFromGames, createEngine };
 });

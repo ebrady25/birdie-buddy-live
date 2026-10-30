@@ -3,13 +3,17 @@
    Every step and every section in it is a native <details> fold.
      • Game day (default) opens the Answer and Tool sections of Steps 3–5;
        Study opens everything. Evidence and Reference stay one click away.
-     • The page always opens with every fold shut (Ethan, 2026-09-24); the
+     • The page always opens with every fold shut (2026-09-24); the
        picked mode is remembered on this device and applies when clicked.
        What the reader opens or closes holds for the visit, not across loads.
      • openTo(el) opens every fold around an element, for jumps and deep
        links; a closed fold's summary line (data-ans) carries its answer.
      • Phones: one step open at a time (Game day); open step headers stick.
    Native <details>, so Chrome's find-in-page opens a fold that holds a match.
+   Round 2 (2026-10-30): the Classic playbook reuses these folds. A fold
+   marked data-default="open" starts open (Classic's book); a [data-jump]
+   click or a #hash on load opens the folds around its target first, for
+   pages whose own jump only scrolls.
    ===================================================================== */
 window.BBI = window.BBI || {};
 (() => {
@@ -30,6 +34,7 @@ window.BBI = window.BBI || {};
   // The mode's default for one fold. Recipe cards pass their own default (in the batch or not).
   const modeDefault = (d, own) => {
     if (st.mode === 'study') return true;
+    if (d.dataset.default === 'open') return true;
     if (d.classList.contains('sd-step')) {
       if (d.id === 'step1') return firstVisit;
       return phone() ? d.id === 'step3' : GAME_STEPS.includes(d.id);
@@ -45,7 +50,7 @@ window.BBI = window.BBI || {};
   };
   const folds = () => [...document.querySelectorAll('.sd-main details.sd-step, .sd-main details.sd-sec')];
   const apply = () => folds().forEach(d => { const id = idOf(d); d.open = id in st.open ? !!st.open[id] : modeDefault(d); });
-  const closeAll = () => folds().forEach(d => { d.open = false; });
+  const closeAll = () => folds().forEach(d => { d.open = d.dataset.default === 'open'; });
 
   const paintMode = () => {
     document.querySelectorAll('[data-fold-mode]').forEach(b => {
@@ -82,6 +87,8 @@ window.BBI = window.BBI || {};
 
   const bind = () => {
     document.addEventListener('click', e => {
+      const j = e.target.closest('[data-jump]');
+      if (j) { const t = document.getElementById(j.dataset.jump); if (t && t.closest('.sd-main')) openTo(t); }
       const m = e.target.closest('[data-fold-mode]'); if (m) { setMode(m.dataset.foldMode); return; }
       const all = e.target.closest('[data-fold-all]');
       if (all) { const open = all.dataset.foldAll === 'open'; folds().forEach(d => { d.open = open; const id = idOf(d); if (id) st.open[id] = open; }); save(); return; }
@@ -115,7 +122,14 @@ window.BBI = window.BBI || {};
   const ans = (key, html) => document.querySelectorAll(`[data-ans="${key}"]`).forEach(el => { if (el.innerHTML !== html) el.innerHTML = html; });
 
   // Every fold starts shut; a deep link (#dials, #step4 …) opens its own target via showdown.js.
-  const init = () => { closeAll(); paintMode(); bind(); };
+  const openHash = () => {
+    try {
+      const id = (location.hash || '').replace(/\?.*$/, '').slice(1);
+      const t = id && document.getElementById(id);
+      if (t && t.closest && t.closest('.sd-main')) openTo(t);
+    } catch { /* no location (tests) */ }
+  };
+  const init = () => { closeAll(); paintMode(); bind(); openHash(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
