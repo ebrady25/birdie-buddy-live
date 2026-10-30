@@ -2,32 +2,26 @@
  "generated_by": "codex/classic/chill_classic.py",
  "season": 2026,
  "week": 8,
- "stage": "wed",
- "stamp": "2026-10-29T20:10-04:00",
+ "stage": "fri",
+ "stamp": "2026-10-30T15:13-04:00",
  "page": "nfl/classic/chill/",
  "players": {
   "Dak Prescott": {
    "verdict": "play",
    "label": "Stack 1: the Dak Prescott stack",
-   "why": "Our sims have the three combining for 75+ DraftKings points 21% of the time, the best on the slate. The catch: together they're about 70% owned, so plenty of lineups will look like yours.",
+   "why": "Our sims have the three combining for 75+ DraftKings points 20.8% of the time, the best on the slate. The catch: together they're about 54% owned, so plenty of lineups will look like yours.",
    "section": "stacks"
   },
   "CeeDee Lamb": {
    "verdict": "play",
    "label": "Stack 1: the Dak Prescott stack",
-   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 21% of the time, the best on the slate. The catch: together they're about 70% owned, so plenty of lineups will look like yours.",
+   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 20.8% of the time, the best on the slate. The catch: together they're about 54% owned, so plenty of lineups will look like yours.",
    "section": "stacks"
   },
   "George Pickens": {
    "verdict": "play",
    "label": "Stack 1: the Dak Prescott stack",
-   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 21% of the time, the best on the slate. The catch: together they're about 70% owned, so plenty of lineups will look like yours.",
-   "section": "stacks"
-  },
-  "Tyler Allgeier": {
-   "verdict": "play",
-   "label": "Run-it-back RB",
-   "why": "The other team’s running back for the Dak Prescott stack, about 1% owned.",
+   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 20.8% of the time, the best on the slate. The catch: together they're about 54% owned, so plenty of lineups will look like yours.",
    "section": "stacks"
   },
   "Trey McBride": {
@@ -36,89 +30,95 @@
    "why": "The higher-ceiling way to run back the Dak Prescott stack.",
    "section": "stacks"
   },
-  "Trevor Lawrence": {
+  "Jacoby Brissett": {
    "verdict": "play",
-   "label": "Stack 2: the Trevor Lawrence stack",
-   "why": "Our sims have the three combining for 75+ DraftKings points 9.3% of the time. Lawrence should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "label": "Stack 2: the Jacoby Brissett stack",
+   "why": "Our sims have the three combining for 75+ DraftKings points 13.1% of the time. Brissett should be under 10% owned, which is where winning quarterbacks usually come from.",
    "section": "stacks"
   },
-  "Parker Washington": {
+  "Michael Wilson": {
    "verdict": "play",
-   "label": "Stack 2: the Trevor Lawrence stack",
-   "why": "One of Trevor Lawrence’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 9.3% of the time. Lawrence should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "label": "Stack 2: the Jacoby Brissett stack",
+   "why": "One of Jacoby Brissett’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 13.1% of the time. Brissett should be under 10% owned, which is where winning quarterbacks usually come from.",
    "section": "stacks"
   },
-  "Brenton Strange": {
-   "verdict": "play",
-   "label": "Stack 2: the Trevor Lawrence stack",
-   "why": "One of Trevor Lawrence’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 9.3% of the time. Lawrence should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Jonathan Taylor": {
+  "Javonte Williams": {
    "verdict": "play",
    "label": "Run-it-back RB",
-   "why": "The other team’s running back for the Trevor Lawrence stack, about 4% owned.",
-   "section": "stacks"
-  },
-  "Jared Goff": {
-   "verdict": "play",
-   "label": "Stack 3: the Jared Goff stack",
-   "why": "Our sims have the three combining for 75+ DraftKings points 6.4% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Jameson Williams": {
-   "verdict": "play",
-   "label": "Stack 3: the Jared Goff stack",
-   "why": "One of Jared Goff’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 6.4% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Sam LaPorta": {
-   "verdict": "play",
-   "label": "Stack 3: the Jared Goff stack",
-   "why": "One of Jared Goff’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 6.4% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Justin Jefferson": {
-   "verdict": "play",
-   "label": "Run-it-back, more ceiling",
-   "why": "The higher-ceiling way to run back the Jared Goff stack.",
+   "why": "The other team’s running back for the Jacoby Brissett stack, about 20% owned.",
    "section": "stacks"
   },
   "Bijan Robinson": {
    "verdict": "play",
    "label": "One of two RBs to own",
-   "why": "In our sims' best lineup 20% of the time, at about 9% owned. 20.7 projected, ceiling 34.2.",
+   "why": "In our sims' best lineup 16% of the time, at about 13% owned. 20.2 projected, ceiling 33.5.",
    "section": "rbs"
   },
-  "Chase Brown": {
+  "Jaylen Warren": {
    "verdict": "play",
    "label": "One of two RBs to own",
-   "why": "In our sims' best lineup 18% of the time, at about 13% owned. 15.0 projected, ceiling 25.7.",
+   "why": "In our sims' best lineup 13% of the time, at about 8% owned. 16.1 projected, ceiling 27.8.",
    "section": "rbs"
   },
-  "Chris Godwin Jr.": {
+  "Wan'Dale Robinson": {
    "verdict": "play",
    "label": "The value play",
-   "why": "11.3 projected for $4,800 (2.35 points per $1,000). In our sims’ best lineup 8% of the time at about 3% owned.",
+   "why": "9.9 projected for $4,200 (2.35 points per $1,000). In our sims’ best lineup 6% of the time at about 3% owned.",
+   "section": "value"
+  },
+  "Brenton Strange": {
+   "verdict": "ok",
+   "label": "The crowd’s cheap play",
+   "why": "Fine to use, just not unique: about 14% owned.",
    "section": "value"
   },
   "Zay Flowers": {
    "verdict": "skip",
    "label": "One to skip",
-   "why": "About 26% of big-contest lineups will have him, but he is in our sims’ best lineup only 13% of the time. Let the crowd have him.",
+   "why": "About 28% of big-contest lineups will have him, but he is in our sims’ best lineup only 15% of the time. Let the crowd have him.",
    "section": "fade"
-  },
-  "Javonte Williams": {
-   "verdict": "popular",
-   "label": "Chalk to know",
-   "why": "About 24% of big-contest lineups will have him (25% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
-   "section": "chalk"
   },
   "Bhayshul Tuten": {
    "verdict": "popular",
    "label": "Chalk to know",
-   "why": "About 20% of big-contest lineups will have him (20% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
+   "why": "About 21% of big-contest lineups will have him (21% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
    "section": "chalk"
+  },
+  "Chase Brown": {
+   "verdict": "popular",
+   "label": "Chalk to know",
+   "why": "About 20% of big-contest lineups will have him (19% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
+   "section": "chalk"
+  },
+  "Derrick Henry": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Top projection” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Ashton Jeanty": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Top projection” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Tez Johnson": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Top projection” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Charlie Kolar": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Top projection” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Browns": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Top projection” sample single-entry lineup.",
+   "section": "lineups"
   }
  }
 }

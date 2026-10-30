@@ -1,6 +1,6 @@
 {
  "generated_by": "codex/classic/chill_classic.py",
- "updated_et": "2026-10-29T20:10-04:00",
+ "updated_et": "2026-10-30T15:13-04:00",
  "reads": [
   {
    "slug": "2026-w8-main",
@@ -8,8 +8,8 @@
    "season": 2026,
    "week": 8,
    "sunday": "2026-11-01",
-   "stage": "wed",
-   "updated_et": "2026-10-29T20:10-04:00"
+   "stage": "fri",
+   "updated_et": "2026-10-30T15:13-04:00"
   }
  ]
 }
