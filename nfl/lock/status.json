@@ -1,18 +1,18 @@
 {
  "mode": "preview",
- "stamp": "8-wed_20261028-1730",
+ "stamp": "8-fri_20261030-1400",
  "week": 8,
  "season": 2026,
  "sunday": "2026-11-01",
- "stage": "wed",
- "updated": "2026-10-28T17:59-04:00",
+ "stage": "fri",
+ "updated": "2026-10-30T15:12-04:00",
  "next_update": "Live updates start Sunday at 9 AM ET.",
  "counts": {
-  "n_out": 0,
-  "n_q": 12,
+  "n_out": 1,
+  "n_q": 11,
   "n_roles": 10,
   "n_moves": 24,
-  "n_lines": 0,
-  "n": 46
+  "n_lines": 2,
+  "n": 48
  }
 }
