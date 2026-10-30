@@ -12,8 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.3" />
-  <link rel="stylesheet" href="assets/css/nfl_projections.css?v=1" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=a655a34a36" />
+  <link rel="stylesheet" href="assets/css/nfl_projections.css?v=3" />
   <!-- bbi-seo -->
   <link rel="canonical" href="https://birdiebuddy.io/nfl/projections/">
   <meta name="description" content="Our DraftKings NFL main-slate projections for every player: projection, ceiling, projected ownership, optimal %, leverage and value, in one sortable table.">
@@ -43,7 +43,7 @@
       <p class="pj-asof"><span class="pj-dot" aria-hidden="true"></span><span id="pj-asof">Loading our latest numbers…</span></p>
     </header>
 
-    <section class="pj-panel" aria-label="Player projections">
+    <section class="pj-panel pj-simple" aria-label="Player projections">
       <div class="pj-toolbar">
         <div class="pj-tabs" role="tablist" aria-label="Position" id="pj-tabs">
           <button type="button" role="tab" class="pj-tab" data-pos="ALL" aria-selected="true">All<span class="pj-n"></span></button>
@@ -59,6 +59,11 @@
             <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
             <input type="search" id="pj-q" placeholder="Search player or team" autocomplete="off" spellcheck="false" aria-label="Search player or team" />
           </label>
+          <div class="pj-seg pj-seg-view" role="group" aria-label="Columns to show">
+            <span class="pj-seg-l">View</span>
+            <button type="button" class="pj-seg-b" data-view="simple" aria-pressed="true" title="Salary, projection, ownership and value">Simple</button>
+            <button type="button" class="pj-seg-b" data-view="adv" aria-pressed="false" title="Adds ceiling, optimal % and leverage">Advanced</button>
+          </div>
           <div class="pj-seg" role="group" aria-label="Ownership for">
             <span class="pj-seg-l">Ownership for</span>
             <button type="button" class="pj-seg-b" data-own="gpp" aria-pressed="true" title="Projected ownership in large-field tournaments">Big GPPs</button>
@@ -67,16 +72,16 @@
         </div>
       </div>
 
-      <div class="pj-swipe" id="pj-swipe" aria-hidden="true">Swipe the table sideways for ownership, optimal %, leverage and value →</div>
+      <div class="pj-swipe" id="pj-swipe" aria-hidden="true">Swipe the table sideways for ownership and value →</div>
       <div class="pj-scroll" id="pj-scroll" tabindex="0" aria-label="Projections table, scrolls sideways on small screens">
         <table class="pj-table" id="pj-table">
           <thead><tr id="pj-head-row"></tr></thead>
-          <tbody id="pj-body"><tr><td class="pj-empty" colspan="11">Loading projections…</td></tr></tbody>
+          <tbody id="pj-body"><tr><td class="pj-empty" colspan="8">Loading projections…</td></tr></tbody>
         </table>
       </div>
       <div class="pj-foot">
         <span id="pj-count"></span>
-        <span class="pj-legend"><span class="pj-lev-pos">+4.2</span> leverage of +2 or more <span class="pj-sep">·</span> <span class="pj-val-hi">3.10</span> top-15% value at the position <span class="pj-sep">·</span> <span class="pj-q">Q</span> questionable</span>
+        <span class="pj-legend"><span class="pj-adv-only"><span class="pj-lev-pos">+4.2</span> leverage of +2 or more <span class="pj-sep">·</span></span> <span class="pj-val-hi">3.10</span> top-15% value at the position <span class="pj-sep">·</span> <span class="pj-q">Q</span> questionable</span>
       </div>
     </section>
 
@@ -91,9 +96,9 @@
   </main>
   <div id="site-footer"></div>
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.6.4"></script>
+  <script src="assets/js/nfl.js?v=a655a34a36"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
   <script>BBI.renderNflHeader('projections'); BBI.renderNflFooter('NFL · Projections');</script>
-  <script src="assets/js/nfl_projections.js?v=2"></script>
+  <script src="assets/js/nfl_projections.js?v=3"></script>
 </body>
 </html>

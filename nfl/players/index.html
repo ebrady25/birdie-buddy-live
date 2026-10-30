@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>NFL Player Search: DraftKings player cards · BirdieBuddy NFL</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=a655a34a36" />
+  <link rel="stylesheet" href="assets/css/nfl_search.css?v=3" />
+  <link rel="canonical" href="https://birdiebuddy.io/nfl/players/">
+  <meta name="description" content="Search any player on this week's DraftKings NFL main slate or primetime showdowns: our projection, ownership, the game and a one-line take.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BirdieBuddy">
+  <meta property="og:title" content="NFL Player Search: DraftKings player cards">
+  <meta property="og:description" content="Search any player on this week's DraftKings NFL main slate or primetime showdowns: our projection, ownership, the game and a one-line take.">
+  <meta property="og:url" content="https://birdiebuddy.io/nfl/players/">
+  <meta property="og:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
+</head>
+<body class="nfls-body">
+  <div id="site-header"></div>
+  <main class="container nfls-page">
+    <nav class="nfls-crumbs" aria-label="Breadcrumb"><a href="nfl/">NFL</a><span aria-hidden="true">/</span><span>Players</span></nav>
+
+    <header class="nfls-head">
+      <div class="nfls-eyebrow" id="nfls-eyebrow">DraftKings · NFL main slate</div>
+      <h1>Find a player</h1>
+      <p class="nfls-dek">Type a name or a team. Each card shows our projection, a bad-day to big-day range, how many people will play him, the game, and a one-line take. Thursday, Sunday and Monday night showdown players are in the search too, marked with their slate, until their game ends.</p>
+      <div class="nfls-search">
+        <label class="nfls-sr" for="nfls-page-q">Search a player or team</label>
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13 13l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <input type="search" id="nfls-page-q" class="nfls-page-input" data-nfl-search placeholder="Try Allen, Bijan or DAL" enterkeyhint="search" />
+      </div>
+      <p class="nfls-tip">Arrow keys to move, Enter to open. Press <kbd>/</kbd> on any NFL page to search.</p>
+    </header>
+
+    <section aria-labelledby="nfls-browse-h">
+      <h2 class="nfls-browse-h" id="nfls-browse-h">Browse this week's players</h2>
+      <p class="nfls-browse-sub" id="nfls-browse-sub">Best projection first. Tap a player for his card.</p>
+      <div data-nfl-browse></div>
+    </section>
+
+    <p class="nfls-note">Our own numbers: projections and scoring ranges from our game simulator (10,000 simulated games per matchup), ownership from our own model. A questionable player's projection already includes the chance he sits. The full sortable table is on <a href="nfl/projections/">Projections</a>. For entertainment, not betting or financial advice. Play only what you can afford to lose, and only where it's legal (18+/21+ by state). Gambling problem? Call <a href="tel:18004262537">1-800-GAMBLER</a>.</p>
+    <noscript><p class="nfls-note">Player search needs JavaScript. The full table is on <a href="nfl/projections/">Projections</a>.</p></noscript>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/nfl.js?v=a655a34a36"></script>
+  <script src="assets/js/track.js?v=0.6.3"></script>
+  <script>BBI.renderNflHeader('players'); BBI.renderNflFooter('NFL · Players');</script>
+  <script src="assets/js/nfl_search.js?v=3"></script>
+  <script>
+    document.addEventListener('nfls:ready', function (e) {
+      var d = e.detail || {}, S = { tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun_am: 'Sunday morning', sun_check: 'Sunday', sun_late: 'Sunday' };
+      if (d.week) document.getElementById('nfls-eyebrow').textContent = 'Week ' + d.week + ' · DraftKings main slate';
+      document.getElementById('nfls-browse-sub').textContent = d.n + ' players, best projection first. Tap a player for his card.' + (S[d.stage] ? ' ' + S[d.stage] + ' numbers.' : '');
+    });
+  </script>
+</body>
+</html>

@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <base href="/" />
   <title>Showdown Grind · BirdieBuddy</title>
+  <script>
+    /* round 2 (2026-10-30): the Lineup Lab moved to nfl/lab/. An old link into Step 4 (#step4 / #lab / #files /
+       #sdLabPro) or a shared lineup (?lu=) goes there with the same slate + lineup params. */
+    (function () {
+      var h = (location.hash || '').replace(/\?.*$/, '');
+      if (!/[?&]lu=/.test(location.search) && !/^#(step4|lab|files|sdLabPro)$/.test(h)) return;
+      var q = (location.search || '').replace(/^\?/, '').replace(/(^|&)mode=[^&]*/g, '').replace(/^&/, '');
+      location.replace('/nfl/lab/?mode=showdown' + (q ? '&' + q : ''));
+    })();
+  </script>
 <!-- bb-favicon-og -->
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
@@ -37,8 +47,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=797ecb881d" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.3" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=a655a34a36" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.6" />
   <style>
     :root { --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif; }
     .sd-chill-link { display: inline-flex; align-items: center; gap: 6px; margin-top: var(--space-3); padding: 6px 12px; border: 1px solid var(--border-gold); border-radius: var(--radius-full); background: rgba(212,168,67,0.08); color: var(--gold-300); font-size: var(--fs-sm); font-weight: 600; }
@@ -107,7 +117,7 @@
 
         <!-- This week's routine: the spine of the week; each Go opens its section. -->
         <details class="sd-sec" id="routine" data-tier="tool" data-default="closed">
-              <summary><span class="sd-sec-title">This week's routine</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="routine"></span></summary>
+              <summary><span class="sd-sec-title">This week's routine</span><span class="sd-sum">A checklist for the week, from setting the slate to Tuesday's review.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="routine"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel sd-routine" id="sdRoutine"></div>
               </div>
@@ -118,6 +128,7 @@
           <summary class="sd-step-head">
             <span class="sd-step-num">Step 1</span>
             <h2 id="step1h">Set the slate</h2>
+            <span class="sd-sum">Pick the game, or set any spread and total.</span>
             <span class="sd-fold-chev" aria-hidden="true"></span>
             <span class="sd-ans sd-step-ans" data-ans="step1"></span>
           </summary>
@@ -196,25 +207,26 @@
           <summary class="sd-step-head">
             <span class="sd-step-num">Step 2</span>
             <h2 id="step2h">Read the game</h2>
+            <span class="sd-sum">What this kind of game usually does, and who won it.</span>
             <span class="sd-fold-chev" aria-hidden="true"></span>
             <span class="sd-ans sd-step-ans" data-ans="step2"></span>
           </summary>
           <div class="sd-step-body">
             <p class="sd-step-intro">What this kind of game actually does, and what the lineups that won it looked like. Build for the distribution, not the favorite.</p>
             <details class="sd-sec" id="read" data-tier="answer">
-              <summary><span class="sd-sec-title">The game · one line</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="read"></span></summary>
+              <summary><span class="sd-sec-title">The game · one line</span><span class="sd-sum">The most likely way this game plays out, in one sentence.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="read"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel card-premium fx-reveal" id="sdRead"></div>
               </div>
             </details>
             <details class="sd-sec" id="overlay" data-tier="answer">
-              <summary><span class="sd-sec-title">Overlay</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="overlay"></span></summary>
+              <summary><span class="sd-sec-title">Game adjustments</span><span class="sd-sum">Extra rules that switch on for shootouts, low totals, domes and wind.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="overlay"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel fx-reveal" id="sdOverlays"></div>
               </div>
             </details>
             <details class="sd-sec" id="script" data-tier="evidence">
-              <summary><span class="sd-sec-title">Script distribution · Total reality</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="script"></span></summary>
+              <summary><span class="sd-sec-title">How the game could go</span><span class="sd-sum">How often games like this end in a blowout, a close win or an upset, and how many points they really score.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="script"></span></summary>
               <div class="sd-sec-body">
                 <div class="sd-grid-2">
                   <div class="card sd-panel fx-reveal" id="sdScript"></div>
@@ -223,13 +235,13 @@
               </div>
             </details>
             <details class="sd-sec" id="winners" data-tier="evidence">
-              <summary><span class="sd-sec-title">What winners looked like here</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="winners"></span></summary>
+              <summary><span class="sd-sec-title">What winners looked like here</span><span class="sd-sum">How the winning lineups in games like this were built.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="winners"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel fx-reveal" id="sdWinners"></div>
               </div>
             </details>
             <details class="sd-sec" id="cheat" data-tier="reference">
-              <summary><span class="sd-sec-title">Captain cheat-sheet</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="cheat"></span></summary>
+              <summary><span class="sd-sec-title">Captain cheat-sheet</span><span class="sd-sum">Which positions won at captain, by spread and total.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="cheat"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel fx-reveal" id="sdCheat"></div>
               </div>
@@ -242,53 +254,54 @@
           <summary class="sd-step-head">
             <span class="sd-step-num">Step 3</span>
             <h2 id="step3h">Build it</h2>
+            <span class="sd-sum">Who to captain, how many lineups of each kind, and how to build them.</span>
             <span class="sd-fold-chev" aria-hidden="true"></span>
             <span class="sd-ans sd-step-ans" data-ans="step3"></span>
           </summary>
           <div class="sd-step-body">
-            <p class="sd-step-intro">Who sits at captain, how many lineups go to each script, and the recipe for each one, with the dials to type into the Contest Generator. <span class="sd-gate-tag">open preview</span></p>
+            <p class="sd-step-intro">Who sits at captain, how many lineups go to each script, and the recipe for each one, with the sim settings if you build your own. <span class="sd-gate-tag">open preview</span></p>
             <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The one-glance play for this slate is included with BirdieBuddy membership.">
             <details class="sd-sec" id="play" data-tier="answer">
-              <summary><span class="sd-sec-title">The play · one glance</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="play"></span></summary>
+              <summary><span class="sd-sec-title">The play · one glance</span><span class="sd-sum">Our whole plan for this game on one line.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="play"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel card-premium" id="sdVerdict"></div>
               </div>
             </details>
             </div>
             <details class="sd-sec" id="shortlist" data-tier="answer">
-              <summary><span class="sd-sec-title">Captain shortlist</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="shortlist"></span></summary>
+              <summary><span class="sd-sec-title">Captain shortlist</span><span class="sd-sum">The players most worth putting at captain.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="shortlist"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel card-premium fx-reveal" id="sdShortlist"></div>
               </div>
             </details>
             <details class="sd-sec" id="leverage" data-tier="tool">
-              <summary><span class="sd-sec-title">Leverage board</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="leverage"></span></summary>
+              <summary><span class="sd-sec-title">Who the field is missing</span><span class="sd-sum">Players who win more often than people play them.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="leverage"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel sd-levb fx-reveal" id="sdLevBoard"></div>
               </div>
             </details>
             <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The allocation, lineup recipes, portfolio dials and contest fit for this slate are included with BirdieBuddy membership.">
             <details class="sd-sec" id="alloc" data-tier="answer">
-              <summary><span class="sd-sec-title">Allocation</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="alloc"></span></summary>
+              <summary><span class="sd-sec-title">Allocation</span><span class="sd-sum">How to split your lineups across the ways the game can go.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="alloc"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel" id="sdAlloc"></div>
               </div>
             </details>
             <details class="sd-sec" id="recipes" data-tier="answer">
-              <summary><span class="sd-sec-title">Lineup recipes</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="recipes"></span></summary>
+              <summary><span class="sd-sec-title">Lineup recipes</span><span class="sd-sum">What each kind of lineup looks like, one recipe per game script.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="recipes"></span></summary>
               <div class="sd-sec-body">
                 <div id="sdRecipes"></div>
               </div>
             </details>
             <details class="sd-sec" id="dials" data-tier="tool">
-              <summary><span class="sd-sec-title">Contest Generator dials</span><span class="sd-sec-end"><button type="button" class="sd-sec-btn" data-copy="sim" title="Copy the dials as Contest Generator settings">Copy dials</button><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="dials"></span></summary>
+              <summary><span class="sd-sec-title">Sim settings</span><span class="sd-sum">The settings to use if you simulate contests and build your own lineups.</span><span class="sd-sec-end"><button type="button" class="sd-sec-btn" data-copy="sim" title="Copy these sim settings">Copy settings</button><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="dials"></span></summary>
               <div class="sd-sec-body">
-                <p class="sd-dials-note">The settings to copy into a contest generator when you simulate showdown contests and build your own lineups.</p>
+                <p class="sd-dials-note">If you simulate showdown contests and build your own lineups, these are the settings to type in: kicker and defense share, how often to play both quarterbacks, captain limits, overlap and duplicates.</p>
                 <div class="card sd-panel" id="sdDials"></div>
               </div>
             </details>
             <details class="sd-sec" id="laws" data-tier="reference">
-              <summary><span class="sd-sec-title">Ten laws</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="laws"></span></summary>
+              <summary><span class="sd-sec-title">Ten laws</span><span class="sd-sum">The ten rules every winning showdown lineup tends to follow.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="laws"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel" id="sdLaws"></div>
               </div>
@@ -298,29 +311,22 @@
         </details>
 
         <!-- ===================== STEP 4 · SCORE IT · LINEUP LAB ===================== -->
+        <!-- round 2 (2026-10-30): the Lab lives at nfl/lab/. #sdLab / #sdLabPro stay as hidden mounts because
+             showdown_lab.js still draws the leverage board, the routine and Where to enter on this page. -->
         <details class="sd-step" id="step4">
           <summary class="sd-step-head">
             <span class="sd-step-num">Step 4</span>
             <h2 id="step4h">Score it · Lineup Lab</h2>
+            <span class="sd-sum">Build or check a lineup in the Lineup Lab.</span>
             <span class="sd-fold-chev" aria-hidden="true"></span>
-            <span class="sd-ans sd-step-ans" data-ans="step4"></span>
           </summary>
           <div class="sd-step-body">
-            <p class="sd-step-intro">Build a lineup and watch the engine grade it live: the hard rules it would reject, the penalties it would charge, the script it plays and how well it fits the winning template. Or let it search the pool and build them for you. Same rules, same math as the engine we build our books with. <span class="sd-gate-tag">open preview</span></p>
-            <details class="sd-sec" id="lab" data-tier="tool">
-              <summary><span class="sd-sec-title">Lineup Lab</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="lab"></span></summary>
-              <div class="sd-sec-body">
-                <div class="sd-lab" id="sdLab"></div>
-              </div>
-            </details>
-            <div class="sd-stack" data-gate-paused="pro" data-gate-msg="Score your own slate: drop your DraftKings salary file and projections export, paste or upload a whole book, get the portfolio report and let the engine pick your batch from a pool. Included with BirdieBuddy membership.">
-            <details class="sd-sec" id="files" data-tier="tool">
-              <summary><span class="sd-sec-title">Score your own files</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="files"></span></summary>
-              <div class="sd-sec-body">
-                <div class="card sd-panel" id="sdLabPro"></div>
-              </div>
-            </details>
-            </div>
+            <a class="card sd-panel sd-labcard" href="nfl/lab/?mode=showdown" data-lab-link>
+              <span class="sd-labcard-k">Lineup Lab</span>
+              <span class="sd-labcard-t">Open the Lineup Lab <span aria-hidden="true">→</span></span>
+              <span class="sd-labcard-d">Pick six players and get a plain-English grade: does it break a rule, how chalky is it, how likely is it to be duplicated. Or let it build lineups for you. It opens on this slate.</span>
+            </a>
+            <div hidden aria-hidden="true"><div class="sd-lab" id="sdLab"></div><div id="sdLabPro"></div></div>
           </div>
         </details>
 
@@ -329,6 +335,7 @@
           <summary class="sd-step-head">
             <span class="sd-step-num">Step 5</span>
             <h2 id="step5h">Ship it</h2>
+            <span class="sd-sum">Where to enter, the score you need, and copying the plan.</span>
             <span class="sd-fold-chev" aria-hidden="true"></span>
             <span class="sd-ans sd-step-ans" data-ans="step5"></span>
           </summary>
@@ -336,26 +343,26 @@
             <p class="sd-step-intro">Where to enter this week's contests with the ownership target and dupe gate for your field, the playbook as text or a play card, the score each finishing tier took in past contests of that size, and the engine's rules as a reference. <span class="sd-gate-tag">open preview</span></p>
             <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="Contest fit, the rule reference and the copy-to-clipboard playbook are included with BirdieBuddy membership.">
             <details class="sd-sec" id="where" data-tier="answer">
-              <summary><span class="sd-sec-title">Where to enter</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="where"></span></summary>
+              <summary><span class="sd-sec-title">Where to enter</span><span class="sd-sum">This week's contests and which ones fit your plan.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-answer">Answer</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="where"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel sd-where" id="sdWhere"></div>
                 <div class="card sd-panel sd-fit" id="sdFit"></div>
               </div>
             </details>
             <details class="sd-sec" id="export" data-tier="tool">
-              <summary><span class="sd-sec-title">Export</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="export"></span></summary>
+              <summary><span class="sd-sec-title">Export</span><span class="sd-sum">Copy the plan as text or a picture to share.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="export"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel" id="sdExport"></div>
               </div>
             </details>
             <details class="sd-sec" id="cuts" data-tier="evidence">
-              <summary><span class="sd-sec-title">Score you need</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="cuts"></span></summary>
+              <summary><span class="sd-sec-title">Score you need</span><span class="sd-sum">How many points it took to cash or win in past contests this size.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-evidence">Evidence</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="cuts"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel" id="sdCuts"></div>
               </div>
             </details>
             <details class="sd-sec" id="rules" data-tier="reference">
-              <summary><span class="sd-sec-title">The engine's rules</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="rules"></span></summary>
+              <summary><span class="sd-sec-title">The engine's rules</span><span class="sd-sum">Every rule our lineup checker uses, for reference.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="rules"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel" id="sdCheck"></div>
               </div>
@@ -369,6 +376,7 @@
           <summary class="sd-step-head">
             <span class="sd-step-num">Step 6</span>
             <h2 id="step6h">Review it · Tuesday</h2>
+            <span class="sd-sum">After the game: see how the winner was built.</span>
             <span class="sd-fold-chev" aria-hidden="true"></span>
             <span class="sd-ans sd-step-ans" data-ans="step6"></span>
           </summary>
@@ -376,13 +384,13 @@
             <p class="sd-step-intro">After the slate: grade a contest you played from its DraftKings standings, and what each 2026 primetime slate taught us. <span class="sd-gate-tag">open preview</span></p>
             <div class="sd-stack" data-gate-paused="pro" data-pro-data data-gate-msg="The Tuesday review and the 2026 notes are included with BirdieBuddy membership.">
             <details class="sd-sec" id="review" data-tier="tool">
-              <summary><span class="sd-sec-title">Tuesday review</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="review"></span></summary>
+              <summary><span class="sd-sec-title">Tuesday review</span><span class="sd-sum">Drop in your contest results to see how the winner was built and where you finished.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-tool">Tool</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="review"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel sd-review" id="sdReview"></div>
               </div>
             </details>
             <details class="sd-sec" id="lessons" data-tier="reference">
-              <summary><span class="sd-sec-title">What 2026 taught us</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="lessons"></span></summary>
+              <summary><span class="sd-sec-title">What 2026 taught us</span><span class="sd-sum">Short notes from each primetime game this season.</span><span class="sd-sec-end"><span class="sd-tier sd-tier-reference">Reference</span><span class="sd-fold-chev" aria-hidden="true"></span></span><span class="sd-ans" data-ans="lessons"></span></summary>
               <div class="sd-sec-body">
                 <div class="card sd-panel" id="sdLessons"></div>
               </div>
@@ -401,21 +409,38 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=797ecb881d"></script>
+  <script src="assets/js/nfl.js?v=a655a34a36"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
-  <script>BBI.renderNflHeader('showdown'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
+  <script>BBI.renderNflHeader('playbooks:showdown-grind'); BBI.renderNflFooter('Showdown Playbook data <span id="sdVersion">—</span>');</script>
+  <script>
+    /* round 2 (2026-10-30): the Lab card and any jump into the old Lab tools (routine Go, leverage-board links)
+       open nfl/lab/ with this page's slate params (showdown.js keeps them in the URL once you touch a control). */
+    (function () {
+      var LAB = /^(sdLab|sdLabPro|sdAuto|lab|files)$/;
+      var labUrl = function () {
+        var S = window.BBI && BBI.showdown, q = '';
+        try { if (S && S.state && S.urlSerialize) var li = BBI.showdownLab && BBI.showdownLab.urlInfo ? BBI.showdownLab.urlInfo() : null; q = S.urlSerialize({ slate: (li && li.slate) || S.state.preset, spread: S.state.spread, total: S.state.total, env: S.state.env, contest: S.state.contest, entries: S.state.entries }); } catch (err) { q = ''; }
+        if (!q) q = (location.search || '').replace(/^\?/, '').replace(/(^|&)mode=[^&]*/g, '').replace(/^&/, '');
+        return '/nfl/lab/?mode=showdown' + (q ? '&' + q : '');
+      };
+      window.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('[data-lab-link], [data-jump]');
+        if (!a || (a.hasAttribute('data-jump') && !LAB.test(a.getAttribute('data-jump')))) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) { a.setAttribute('href', labUrl()); return; }
+        e.preventDefault(); e.stopImmediatePropagation();
+        location.href = labUrl();
+      }, true);
+    })();
+  </script>
   <script src="assets/js/showdown_fx.js?v=0.6.3"></script>
-  <script src="assets/js/showdown_folds.js?v=0.6.3"></script>
-  <script src="assets/js/showdown.js?v=0.6.4"></script>
+  <script src="assets/js/showdown_folds.js?v=0.6.4"></script>
+  <script src="assets/js/showdown.js?v=r2a"></script>
   <script>
     /* perf (2026-10-29): the engine, builder, Lineup Lab and Tuesday review (~270 KB) load once the playbook has
        drawn (sd:ready), in their old order; each one boots itself when it finds BBI.showdown.data already set.
-       A deep link into the Lab (#step4 / #lab / #files / #sdLabPro, or ?lu=) starts their download right away. */
+       (Round 2: the Lab itself moved to nfl/lab/; these still draw the leverage board, routine, Where to enter and the review.) */
     (function () {
-      var L = ['assets/js/showdown_engine.js?v=0.6.3', 'assets/js/showdown_build.js?v=0.6.3', 'assets/js/showdown_lab.js?v=0.6.4', 'assets/js/showdown_review.js?v=0.6.3'];
-      if (/[?&]lu=/.test(location.search) || /^#(step4|lab|files|sdLabPro)\b/.test(location.hash)) L.forEach(function (src) {
-        var l = document.createElement('link'); l.rel = 'preload'; l.as = 'script'; l.href = src; document.head.appendChild(l);
-      });
+      var L = ['assets/js/showdown_engine.js?v=0.6.5', 'assets/js/showdown_build.js?v=0.6.3', 'assets/js/showdown_lab.js?v=r2b', 'assets/js/showdown_review.js?v=0.6.5'];
       var go = function () {
         L.forEach(function (src) { var s = document.createElement('script'); s.src = src; s.async = false; document.body.appendChild(s); });
       };

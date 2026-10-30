@@ -24,8 +24,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=0.6.3" />
-  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.3" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=a655a34a36" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.6" />
   <link rel="stylesheet" href="assets/css/classic.css?v=0.6.4" />
   <link rel="stylesheet" href="assets/css/classic_book.css?v=0.7.0" />
 </head>
@@ -48,72 +48,94 @@
 
     <div class="sd-layout" id="clPage">
       <div class="sd-main">
+        <!-- round 2 (2026-10-30): every step is a fold (showdown_folds.js); This week's book starts open, the rest start closed. -->
         <!-- ===================== STEP 0 · THIS WEEK'S BOOK ===================== -->
-        <section class="sd-step" id="step0" aria-labelledby="clBookTitle">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step0" data-default="open">
+          <summary class="sd-step-head">
             <span class="sd-step-num">This week</span>
             <h2 id="clBookTitle">This week's book</h2>
-            <p>Our ten best lineups for Sunday's main slate. Each card shows why it is built the way it is: the QB stack, the bring-back, the second game and the ownership mix. The four ideas in the cards below are what separate winning lineups from the field.</p>
+            <span class="sd-sum">Our ten best lineups for Sunday's main slate, and why each one is built that way.</span>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Our ten best lineups for Sunday's main slate. Each card shows why it is built the way it is: the QB stack, the bring-back, the second game and the ownership mix. The four ideas in the cards below are what separate winning lineups from the field.</p>
+            <div id="clBook"><div class="card sd-panel"><p class="sd-lede">Loading this week's lineups…</p></div></div>
           </div>
-          <div id="clBook"><div class="card sd-panel"><p class="sd-lede">Loading this week's lineups…</p></div></div>
-        </section>
+        </details>
 
         <!-- ===================== STEP 1 · SET THE SLATE ===================== -->
-        <section class="sd-step" id="step1" aria-labelledby="step1h">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step1">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 1</span>
             <h2 id="step1h">Set the slate</h2>
-            <p>Load a week's main slate or type your own games. The stack ranking and the checker's QB-game rules read these lines.</p>
+            <span class="sd-sum">Pick this week's main slate, or type in your own games.</span>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Load a week's main slate or type your own games. The stack ranking and the checker's QB-game rules read these lines.</p>
+            <div class="card sd-panel fx-reveal">
+              <div class="sd-field-label"><span>Main slate</span></div>
+              <div class="sd-pills cl-presets" id="clPresets" role="group" aria-label="Load a slate"></div>
+              <div class="cl-chips" id="clChips"></div>
+              <details class="sd-fold cl-edit" id="clEdit">
+                <summary><span id="clEditSum">Edit games</span><span class="sd-fold-arrow">›</span></summary>
+                <div class="cl-games" id="clGames"></div>
+                <div class="cl-games-foot"><button type="button" class="btn btn-sm" id="clAdd">+ Add game</button><span class="sd-num-hint">spread = points the favorite gives · preset lines: nflverse closing lines</span></div>
+              </details>
+            </div>
+            <div class="card sd-panel card-premium fx-reveal" id="clRead"></div>
+            <div class="sd-rail-foot"><span>Your slate and lineup are remembered on this device.</span><button type="button" id="clReset">Reset</button></div>
           </div>
-          <div class="card sd-panel fx-reveal">
-            <div class="sd-field-label"><span>Main slate</span></div>
-            <div class="sd-pills cl-presets" id="clPresets" role="group" aria-label="Load a slate"></div>
-            <div class="cl-chips" id="clChips"></div>
-            <details class="sd-fold cl-edit" id="clEdit">
-              <summary><span id="clEditSum">Edit games</span><span class="sd-fold-arrow">›</span></summary>
-              <div class="cl-games" id="clGames"></div>
-              <div class="cl-games-foot"><button type="button" class="btn btn-sm" id="clAdd">+ Add game</button><span class="sd-num-hint">spread = points the favorite gives · preset lines: nflverse closing lines</span></div>
-            </details>
-          </div>
-          <div class="card sd-panel card-premium fx-reveal" id="clRead"></div>
-          <div class="sd-rail-foot"><span>Your slate and lineup are remembered on this device.</span><button type="button" id="clReset">Reset</button></div>
-        </section>
+        </details>
 
         <!-- ===================== STEP 2 · WHICH GAMES ===================== -->
-        <section class="sd-step" id="step2" aria-labelledby="step2h">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step2">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 2</span>
             <h2 id="step2h">Where the winning stacks came from</h2>
-            <p>Every Milly Maker winner's QB game, joined to its closing line and final score, against every game since 2016. High totals and favorites — and games that went over.</p>
+            <span class="sd-sum">Which games the winning lineups stacked: high totals, favorites, games that went over.</span>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Every Milly Maker winner's QB game, joined to its closing line and final score, against every game since 2016. High totals and favorites — and games that went over.</p>
+            <div class="card sd-panel fx-reveal" id="clWhere"></div>
+            <div class="sd-grid-2">
+              <div class="card sd-panel fx-reveal" id="clTotals"></div>
+              <div class="card sd-panel fx-reveal" id="clSides"></div>
+            </div>
           </div>
-          <div class="card sd-panel fx-reveal" id="clWhere"></div>
-          <div class="sd-grid-2">
-            <div class="card sd-panel fx-reveal" id="clTotals"></div>
-            <div class="card sd-panel fx-reveal" id="clSides"></div>
-          </div>
-        </section>
+        </details>
 
         <!-- ===================== STEP 3 · THE RULES ===================== -->
-        <section class="sd-step" id="step3" aria-labelledby="step3h">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step3">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 3</span>
             <h2 id="step3h">The stack rules</h2>
-            <p>QB + catchers, the bring-back, one-offs, chalk and the portfolio limits — straight from rules.json, each with the share of winners that pass it.</p>
+            <span class="sd-sum">The building rules winners follow, and how often they pass each one.</span>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">QB + catchers, the bring-back, one-offs, chalk and the portfolio limits — straight from rules.json, each with the share of winners that pass it.</p>
+            <div class="card sd-panel card-premium fx-reveal" id="clRulesHead"></div>
+            <div id="clRules"></div>
+            <div class="card sd-panel fx-reveal" id="clSmallField" hidden></div>
           </div>
-          <div class="card sd-panel card-premium fx-reveal" id="clRulesHead"></div>
-          <div id="clRules"></div>
-          <div class="card sd-panel fx-reveal" id="clSmallField" hidden></div>
-        </section>
+        </details>
 
         <!-- ===================== STEP 4 · CHECK A LINEUP ===================== -->
-        <section class="sd-step" id="step4" aria-labelledby="step4h">
-          <div class="sd-step-head">
+        <details class="sd-step" id="step4">
+          <summary class="sd-step-head">
             <span class="sd-step-num">Step 4</span>
             <h2 id="step4h">Check a lineup</h2>
-            <p>Paste 9 players. The engine runs every classic hard rule and soft rule — the same code path as classic_engine.py, byte-for-byte parity-tested — using your DK salary file or the sample pool.</p>
+            <span class="sd-sum">Paste nine players and see which rules your lineup passes or breaks.</span>
+            <span class="sd-fold-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="sd-step-body">
+            <p class="sd-step-intro">Paste 9 players. The engine runs every classic hard rule and soft rule — the same code path as classic_engine.py, byte-for-byte parity-tested — using your DK salary file or the sample pool.</p>
+            <div id="clLab"></div>
+            <p class="cl-lab-more"><a class="cl-lablink" href="nfl/lab/?mode=classic">Open the full Lineup Lab <span aria-hidden="true">→</span></a> <span class="sd-num-hint">grades, build ideas and a DraftKings upload file</span></p>
           </div>
-          <div id="clLab"></div>
-        </section>
+        </details>
 
         <div class="sd-caption" style="text-align:right">Sources: CLASSIC_BIBLE v1.1 · CODEX Part 3 · rules.json classic · Milly Maker Tracker × nflverse · data <span id="clVersion">—</span></div>
       </div>
@@ -125,13 +147,14 @@
   <div id="site-footer"></div>
 
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=0.6.3"></script>
+  <script src="assets/js/nfl.js?v=a655a34a36"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
-  <script>BBI.renderNflHeader('classic'); BBI.renderNflFooter('Classic Playbook');</script>
+  <script>BBI.renderNflHeader('playbooks:classic-grind'); BBI.renderNflFooter('Classic Playbook');</script>
   <script src="assets/js/showdown_fx.js?v=0.6.3"></script>
-  <script src="assets/js/showdown_engine.js?v=0.6.3"></script>
-  <script src="assets/js/classic_engine.js?v=0.6.3"></script>
-  <script src="assets/js/classic.js?v=0.7.0"></script>
+  <script src="assets/js/showdown_folds.js?v=0.6.4"></script>
+  <script src="assets/js/showdown_engine.js?v=0.6.5"></script>
+  <script src="assets/js/classic_engine.js?v=0.6.5"></script>
+  <script src="assets/js/classic.js?v=r2a"></script>
   <script src="assets/js/classic_book.js?v=0.7.0"></script>
 </body>
 </html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Lineup Lab · BirdieBuddy</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BirdieBuddy">
+  <meta property="og:title" content="Lineup Lab · BirdieBuddy NFL">
+  <meta property="og:description" content="Check a DraftKings NFL lineup before you enter it. Classic or Showdown: build or paste a lineup and get a plain-English grade, then download the DraftKings upload file.">
+  <meta property="og:image" content="https://birdiebuddy.io/nfl/og/showdown.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://birdiebuddy.io/nfl/og/showdown.png">
+  <meta name="description" content="Check a DraftKings NFL lineup before you enter it. Classic or Showdown: build or paste a lineup and get a plain-English grade, then download the DraftKings upload file.">
+  <link rel="canonical" href="https://birdiebuddy.io/nfl/lab/">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=a655a34a36" />
+  <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.6" />
+  <link rel="stylesheet" href="assets/css/classic.css?v=0.6.4" />
+  <link rel="stylesheet" href="nfl/lab/lab.css?v=r2b" />
+</head>
+<body class="lb-body">
+  <div id="site-header"></div>
+
+  <main class="container lb-page" id="lbPage">
+    <nav class="lb-crumbs" aria-label="Breadcrumb"><a href="nfl/">NFL</a><span aria-hidden="true">/</span><span>Lineup Lab</span></nav>
+    <header class="lb-head">
+      <div class="lb-eyebrow">Lineup Lab</div>
+      <h1>Check a lineup before you enter it</h1>
+      <p class="lb-dek">Paste or build a DraftKings lineup and get a one-line grade: is it built like past winners, how many other people will have the same players, and what to change. Then download the file to upload it to DraftKings.</p>
+    </header>
+
+    <div class="lb-tabs" role="tablist" aria-label="Contest type">
+      <button type="button" class="lb-tab" role="tab" id="lbTabClassic" aria-controls="lbClassic" aria-selected="false" data-tab="classic"><b>Classic</b><small>Sunday main slate · 9 players</small></button>
+      <button type="button" class="lb-tab" role="tab" id="lbTabShowdown" aria-controls="lbShowdown" aria-selected="false" data-tab="showdown"><b>Showdown</b><small>One game · captain + 5</small></button>
+    </div>
+
+    <!-- ===================== CLASSIC ===================== -->
+    <section class="lb-panel" id="lbClassic" role="tabpanel" aria-labelledby="lbTabClassic" hidden>
+      <!-- Phone only (lab.css): paste comes first; opens by default while the lineup is empty. -->
+      <details class="card lb-fold lb-quick" id="lbClQuick">
+        <summary><span id="lbClQuickT">Paste your lineup</span><span class="lb-fold-ans">copy it from DraftKings or a note, paste, grade</span></summary>
+        <div class="lb-paste">
+          <label class="sd-lab-k" for="lbClQuickText">9 players <small>one per line or comma-separated; nicknames and team names work</small></label>
+          <textarea class="lb-text" id="lbClQuickText" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Josh Allen&#10;Bijan Robinson&#10;…&#10;Bills DST"></textarea>
+          <div class="lb-acts"><button type="button" class="btn btn-primary" data-cl="paste-go">Grade it</button></div>
+        </div>
+      </details>
+      <div class="lb-bar card" id="lbClBar"><p class="lb-muted">Loading this week's player pool…</p></div>
+      <div class="lb-grade" id="lbClGrade" aria-live="polite"></div>
+      <div class="lb-cl-grid">
+        <div class="card lb-cl-lineup" id="lbClLineup"></div>
+        <div class="card lb-cl-pool" id="lbClPool"></div>
+      </div>
+      <details class="card lb-fold" id="lbClRules">
+        <summary><span>Every rule we checked</span><span class="lb-fold-ans" id="lbClRulesAns"></span></summary>
+        <div id="lbClRulesBody"></div>
+      </details>
+      <details class="card lb-fold" id="lbClFiles">
+        <summary><span>Make a DraftKings upload file</span><span class="lb-fold-ans" id="lbClFilesAns">needs your DraftKings salary file</span></summary>
+        <div id="lbClFilesBody"></div>
+      </details>
+    </section>
+
+    <!-- ===================== SHOWDOWN ===================== -->
+    <section class="lb-panel" id="lbShowdown" role="tabpanel" aria-labelledby="lbTabShowdown" hidden>
+      <div class="lb-bar card" id="lbSdBar"><p class="lb-muted">Loading the slates…</p></div>
+      <!-- Phone only (lab.css): under the game picker, since the names have to be from that game. -->
+      <details class="card lb-fold lb-quick" id="lbSdQuick">
+        <summary><span id="lbSdQuickT">Paste your lineup</span><span class="lb-fold-ans">captain first, then five more</span></summary>
+        <div class="lb-paste">
+          <label class="sd-lab-k" for="lbSdQuickText">6 players from this game <small>captain first; one per line or comma-separated</small></label>
+          <textarea class="lb-text lb-text-sd" id="lbSdQuickText" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Josh Allen&#10;James Cook&#10;…"></textarea>
+          <div class="lb-acts"><button type="button" class="btn btn-primary" data-lb-sd="paste-go">Grade it</button></div>
+        </div>
+      </details>
+      <div class="lb-grade" id="lbSdGrade" aria-live="polite"></div>
+      <div id="sdError" hidden></div>
+      <div class="sd-lab lb-sd-lab" id="sdLab"></div>
+      <details class="card lb-fold" id="lbSdFiles">
+        <summary><span>Grade your own files</span><span class="lb-fold-ans">your DraftKings salary file, a projections file, or a batch of lineups</span></summary>
+        <div class="sd-panel lb-sd-pro" id="sdLabPro"></div>
+      </details>
+    </section>
+
+    <p class="lb-foot">Files you drop are read in your browser; nothing is uploaded. Grades come from rules we built by studying past DraftKings winners. Our numbers only. <a href="nfl/showdown/">Showdown playbook</a> · <a href="nfl/classic/">Classic playbook</a></p>
+
+    <div class="sd-toast" id="sdToast" role="status" aria-live="polite"></div>
+    <div class="sr-only" id="sdStatus" role="status" aria-live="polite"></div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/nfl.js?v=a655a34a36"></script>
+  <script src="assets/js/track.js?v=0.6.3"></script>
+  <script>BBI.renderNflHeader('lab'); BBI.renderNflFooter('Lineup Lab');</script>
+  <script src="nfl/lab/lab_page.js?v=r2b"></script>
+</body>
+</html>

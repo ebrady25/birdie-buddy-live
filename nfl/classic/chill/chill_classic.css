@@ -1,0 +1,47 @@
+/* =====================================================================
+   BIRDIEBUDDY — CLASSIC CHILL (/nfl/classic/chill/)
+   "Sunday in 5 minutes" for the DK classic main slate. Loads AFTER the
+   shared Chill sheet (nfl/showdown/chill/chill.css): only the pieces the
+   showdown read does not have (game list, stack tags, run-back line,
+   pick cards, waiting card). Site tokens only, mobile-first.
+   Page markup is rendered by codex/classic/chill_classic.py.
+   ===================================================================== */
+
+/* 1. highest totals */
+.cc-games { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cc-game { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "n t" "s s"; gap: 2px 12px; padding: 10px 12px; border-radius: var(--radius-lg); background: var(--surface-3); border: 1px solid var(--border-soft); }
+.cc-game-n { grid-area: n; font-weight: 650; color: var(--text-primary); }
+.cc-game-t { grid-area: t; font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 600; color: var(--gold-300); font-variant-numeric: tabular-nums; }
+.cc-game-s { grid-area: s; font-family: var(--font-mono); font-size: var(--fs-2xs); color: var(--text-muted); }
+
+/* 2. stacks */
+.cc-tags { display: inline-flex; flex-wrap: wrap; gap: 6px; }
+.cc-tag { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: var(--radius-full); font-family: var(--font-mono); font-size: var(--fs-3xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--border-base); color: var(--text-muted); background: var(--surface-3); }
+.cc-tag-crowd { color: var(--gold-200); border-color: var(--border-gold); }
+.cc-tag-low, .cc-tag-fit { color: var(--text-primary); border-color: var(--border-strong); }
+.cc-plus { display: block; margin-top: 2px; font-size: .72em; font-weight: 700; color: var(--text-body); letter-spacing: -0.01em; }
+.cc-pieces { margin-top: 6px; font-family: var(--font-mono); font-size: var(--fs-2xs); line-height: 1.6; color: var(--text-dimmed); }
+.cc-bb { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-soft); font-size: var(--fs-base); font-weight: 600; color: var(--text-primary); line-height: 1.5; }
+.cc-bb .ch-dim { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 400; }
+.cc-bb-k { display: inline-block; margin-right: 6px; font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-300); }
+.cc-bb-alt { display: block; margin-top: 2px; font-size: var(--fs-sm); font-weight: 400; color: var(--text-muted); }
+
+/* 3-5. single picks */
+.cc-pair { display: grid; gap: var(--space-3); }
+.cc-pick-top { display: flex; flex-direction: column; gap: 2px; }
+.cc-pick-n { font-family: var(--font-display); font-size: clamp(1.25rem, 5vw, 1.5rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: var(--text-primary); }
+.cc-pick-top .ch-dim { font-family: var(--font-mono); font-size: var(--fs-xs); }
+.cc-pick-why { margin-top: var(--space-3); font-size: var(--fs-base); line-height: 1.55; color: var(--text-body); }
+.cc-fade { border-left: 3px solid var(--border-strong); }
+
+/* 6. chalk: SE ownership next to big-field */
+.cc-se { color: var(--text-muted); }
+
+/* 7. lineups not out yet */
+.cc-wait { border-style: dashed; }
+.cc-wait-h { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 750; color: var(--gold-300); }
+
+@media (min-width: 768px) {
+  .cc-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cc-games { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
