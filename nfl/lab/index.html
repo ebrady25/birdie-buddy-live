@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="assets/css/nfl.css?v=a655a34a36" />
   <link rel="stylesheet" href="assets/css/showdown.css?v=0.6.6" />
   <link rel="stylesheet" href="assets/css/classic.css?v=0.6.4" />
-  <link rel="stylesheet" href="nfl/lab/lab.css?v=r2b" />
+  <link rel="stylesheet" href="nfl/lab/lab.css?v=r3" />
 </head>
 <body class="lb-body">
   <div id="site-header"></div>
@@ -57,11 +57,16 @@
         </div>
       </details>
       <div class="lb-bar card" id="lbClBar"><p class="lb-muted">Loading this week's player pool…</p></div>
-      <div class="lb-grade" id="lbClGrade" aria-live="polite"></div>
+      <!-- Pool left, lineup right (the Showdown Lab's layout); the grade sits under the lineup it grades. -->
       <div class="lb-cl-grid">
-        <div class="card lb-cl-lineup" id="lbClLineup"></div>
         <div class="card lb-cl-pool" id="lbClPool"></div>
+        <div class="lb-cl-build">
+          <div class="card card-premium lb-cl-lineup" id="lbClLineup"></div>
+          <div class="lb-grade" id="lbClGrade" aria-live="polite"></div>
+        </div>
       </div>
+      <!-- Phone only (lab.css): a one-line summary pinned to the bottom while the lineup card is off screen. -->
+      <button type="button" class="lb-mini" id="lbClMini" hidden></button>
       <details class="card lb-fold" id="lbClRules">
         <summary><span>Every rule we checked</span><span class="lb-fold-ans" id="lbClRulesAns"></span></summary>
         <div id="lbClRulesBody"></div>
@@ -105,6 +110,6 @@
   <script src="assets/js/nfl.js?v=a655a34a36"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
   <script>BBI.renderNflHeader('lab'); BBI.renderNflFooter('Lineup Lab');</script>
-  <script src="nfl/lab/lab_page.js?v=r2b"></script>
+  <script src="nfl/lab/lab_page.js?v=r3"></script>
 </body>
 </html>
