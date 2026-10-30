@@ -316,10 +316,11 @@
   const FLEXABLE = new Set(['RB', 'WR', 'TE']);
   const CAP = 50000;
   const C = { pb: null, pool: null, dk: null, dkName: '', err: '', lines: null, preset: null, ownCol: 'own', slots: Array(9).fill(null), pos: 'ALL', q: '', eng: null, pl: null, res: null, pasteOpen: false, prevN: null,
-    proj: new Map(), sort: 'proj', game: 'ALL' };
+    proj: new Map(), sort: 'proj', dir: 1, game: 'ALL', afford: false, f: {}, filtOpen: false, saved: [], editing: null };
   // Our public projections (nfl/projections/projections.json, same week): proj, ceiling, value, optimal %, leverage, status.
   const PJ = p => (p && C.proj.get(`${p.name}|${p.team}`)) || null;
-  const LS_CL_UI = 'bbi_lab_classic_ui';
+  const LS_CL_UI = 'bbi_lab_classic_ui', LS_CL_SAVED = 'bbi_lab_classic_saved';
+  const saveUi = () => lsSet(LS_CL_UI, JSON.stringify({ sort: C.sort, dir: C.dir, afford: C.afford }));
   const CE = () => BBI.classicEngine, CL = () => BBI.classic;
 
   const startClassic = () => {
@@ -344,7 +345,7 @@
       const pj = await getJSON('nfl/projections/projections.json');
       if (+pj.week === +C.pool.week) for (const r of pj.players || []) C.proj.set(`${r.player}|${r.team}`, r);
     } catch {}   // the builder still works without projections (salary / ownership only)
-    try { const u = JSON.parse(lsGet(LS_CL_UI)); if (u) { if (u.sort) C.sort = u.sort; } } catch {}
+    try { const u = JSON.parse(lsGet(LS_CL_UI)); if (u) { if (u.sort) C.sort = u.sort; if (u.dir === -1) C.dir = -1; C.afford = !!u.afford; } } catch {}
     if (!C.proj.size && C.sort !== 'sal' && C.sort !== 'own' && C.sort !== 'name') C.sort = 'sal';
   };
   // Pool → engine players; ownership column per contest type; a DK salary file adds IDs (and any player we don't list).
@@ -433,7 +434,7 @@
   const clDraw = () => {
     const names = lineupNames();
     C.res = names.length ? C.eng.check(names) : null;
-    drawClBar(); drawClLineup(); drawClPool(); drawClRules(); drawClFiles();
+    drawClBar(); drawClLineup(); drawClPool(); drawClSaved(); drawClRules(); drawClFiles();
     const g = clGrade(); setGrade($('lbClGrade'), g.tone, g.html);
     const n = names.length, qt = $('lbClQuickT'); if (qt) qt.textContent = n ? 'Paste a different lineup' : 'Paste your lineup';
     if (C.prevN != null && C.prevN < 9 && n === 9) showGrade('lbClGrade');   // just filled (a paste or the last tap)
@@ -476,9 +477,14 @@
   };
   const clActs = n => {
     const done = n === 9 && C.res && C.res.roster.ok;
-    return `<button type="button" class="btn btn-sm" data-cl="paste">${C.pasteOpen ? 'Hide paste box' : 'Paste a lineup'}</button>
+    const at = n === 9 ? svFind(C.slots) : -1, ed = svIdx(C.editing), dis = done ? '' : 'disabled';
+    const save = at >= 0 ? `<button type="button" class="btn btn-sm" disabled>Saved as #${at + 1} ✓</button>`
+      : ed >= 0 ? `<button type="button" class="btn btn-sm btn-primary" data-cl="save" ${dis}>Update #${ed + 1}</button><button type="button" class="btn btn-sm" data-cl="save-new" ${dis}>Save as new</button>`
+      : `<button type="button" class="btn btn-sm btn-primary" data-cl="save" ${dis}>Save lineup</button>`;
+    return `${save}
+      <button type="button" class="btn btn-sm" data-cl="paste">${C.pasteOpen ? 'Hide paste box' : 'Paste a lineup'}</button>
       <button type="button" class="btn btn-sm" data-cl="names" ${n === 9 ? '' : 'disabled'}>Copy lineup</button>
-      ${done && hasIds() ? '<button type="button" class="btn btn-sm btn-primary" data-cl="csv">Download DraftKings file</button>' : `<button type="button" class="btn btn-sm${done ? ' btn-primary' : ''}" data-cl="ids" ${done ? '' : 'disabled'} title="Needs your DraftKings salary file for the player IDs">Get a DraftKings file</button>`}
+      ${done && hasIds() ? '<button type="button" class="btn btn-sm" data-cl="csv">Download DraftKings file</button>' : `<button type="button" class="btn btn-sm" data-cl="ids" ${done ? '' : 'disabled'} title="Needs your DraftKings salary file for the player IDs">Get a DraftKings file</button>`}
       <button type="button" class="btn btn-sm" data-cl="link" ${n ? '' : 'disabled'}>Copy link</button>
       <button type="button" class="btn btn-sm btn-ghost" data-cl="clear" ${n ? '' : 'disabled'}>Clear</button>`;
   };
@@ -490,7 +496,7 @@
     const cum = ps.reduce((a, p) => a + (own ? +p.own || 0 : 0), 0);
     const sug = bestAdds();
     $('lbClLineup').innerHTML = `
-      <div class="lb-h">Your lineup <small>${n}/9</small></div>
+      <div class="lb-h">Your lineup <small>${svIdx(C.editing) >= 0 ? `editing #${svIdx(C.editing) + 1} · ` : ''}${n}/9</small></div>
       ${C.proj.size || own ? `<div class="lb-tot">${C.proj.size ? `<span><em>Projection</em><b>${n ? f1(proj) : '—'}</b><small>pts</small></span><span><em>Ceiling</em><b>${n ? f1(ceil) : '—'}</b><small>90th pct</small></span>` : ''}${own ? `<span><em>Picked by</em><b>${n ? pct0(cum) : '—'}</b><small>added up</small></span>` : ''}</div>` : ''}
       <ol class="lb-slots">${C.slots.map((nm, i) => { const p = nm && C.pl.P.get(nm), r = PJ(p);
         return p ? `<li class="lb-slot"><span class="lb-slot-k">${SLOTS[i]}</span><span class="lb-slot-n">${esc(p.name)}<small>${esc(p.pos)} · ${esc(p.team)} vs ${esc(p.opp)} · ${money(p.sal)}${own ? ` · ${pct0(p.own)}` : ''}</small>${roles && roles.get(p.name) ? `<span class="lb-tags">${roles.get(p.name).map(([c, l]) => `<em class="cl-tag ${c}">${esc(l)}</em>`).join('')}</span>` : ''}</span><span class="lb-slot-pj">${r ? f1(r.proj) : ''}</span><button type="button" class="lb-x" data-cl-rm="${i}" aria-label="Remove ${esc(p.name)}">×</button></li>`
@@ -514,47 +520,133 @@
     m.innerHTML = `<b>${n}/9</b><span>${money(CAP - sal)} left</span>${C.proj.size && n ? `<span>${f1(proj)} pts</span>` : ''}<em>${n === 9 ? 'See grade' : 'Lineup'} ↑</em>`;
   };
   const POOL_SORT = [['proj', 'Projection'], ['value', 'Pts per $1k'], ['ceil', 'Ceiling'], ['lev', 'Leverage'], ['own', 'Ownership'], ['sal', 'Salary'], ['name', 'Name']];
+  // The 4th stat column follows the sort: Ceiling unless you sort by Pts per $1k or Leverage.
+  const XCOL = { ceil: ['Ceil', r => f1(r.p90)], value: ['Pts/$1k', r => `${(+r.value).toFixed(2)}x`], lev: ['Lev', r => sgn1(r.lev)] };
+  const PF = [['sal', 'Salary', '$k'], ['own', 'Ownership', '%'], ['proj', 'Projection', 'pts']];
+  const fNum = k => { const v = parseFloat(C.f[k]); return Number.isFinite(v) ? v : null; };
+  const salK = v => v != null && v < 100 ? v * 1000 : v;   // "5.5" = $5,500; "5500" also works
+  const inRng = (x, lo, hi) => (lo == null || x >= lo) && (hi == null || x <= hi);
   const drawClPool = () => {
     const host = $('lbClPool'), inL = new Set(lineupNames()), q = C.q.trim().toLowerCase(), own = C.pl.has.own, hasPj = C.proj.size > 0;
     const games = [...new Set([...C.pl.P.values()].filter(p => p.team && p.opp).map(p => [p.team, p.opp].sort().join(' / ')))].sort();
     if (C.game !== 'ALL' && !games.includes(C.game)) C.game = 'ALL';
     if (!host.dataset.shell) {
+      const pf = PF.filter(([k]) => (k !== 'own' || own) && (k !== 'proj' || hasPj));
       host.innerHTML = `<div class="lb-h">Player pool <small id="lbClPoolN"></small></div>
         <div class="sd-pool-head"><input class="sd-pool-q" id="lbClQ" type="search" placeholder="Search a name or team  /" aria-label="Search players" autocomplete="off">
           <select class="sd-pool-sort" id="lbClSort" aria-label="Sort players"></select></div>
         <div class="sd-pool-filters"><div class="sd-pool-pos" role="group" aria-label="Position" id="lbClPos"></div>
-          <select class="sd-pool-sort lb-gamef" id="lbClGame" aria-label="Game"></select></div>
-        <div class="lb-pcols${hasPj ? '' : ' nopj'}"><span>Player</span>${hasPj ? '<span>Proj</span>' : ''}<span>${own ? 'Own' : ''}</span><span>Salary</span><span></span></div>
+          <div class="lb-pf-row"><select class="sd-pool-sort lb-gamef" id="lbClGame" aria-label="Game"></select>
+            <label class="lb-tgl"><input type="checkbox" id="lbClAfford"><span>Affordable only</span></label>
+            <button type="button" class="lb-tgl" id="lbClFiltBtn" data-cl="filt" aria-expanded="false" aria-controls="lbClFilt">Filters</button></div>
+          <div class="lb-pf" id="lbClFilt" hidden>
+            ${pf.map(([k, l, u]) => `<div class="lb-pf-f"><span>${l} <small>(${u})</small></span><input type="number" inputmode="decimal" step="any" min="0" id="lbClF_${k}_min" placeholder="min" aria-label="${l} at least"><i>to</i><input type="number" inputmode="decimal" step="any" min="0" id="lbClF_${k}_max" placeholder="max" aria-label="${l} at most"></div>`).join('')}
+            <div class="lb-pf-foot"><small>Salary in thousands: 5.5 = $5,500.</small><button type="button" class="btn btn-sm btn-ghost" data-cl="filt-reset">Reset filters</button></div>
+          </div></div>
+        <div class="lb-pcols" id="lbClCols"></div>
         <div class="lb-plist" id="lbClList" role="list" aria-label="Player pool"></div><p class="lb-list-note" id="lbClListNote"></p>`;
       host.dataset.shell = '1';
       $('lbClQ').addEventListener('input', e => { C.q = e.target.value; drawClPool(); });
-      $('lbClSort').addEventListener('change', e => { C.sort = e.target.value; lsSet(LS_CL_UI, JSON.stringify({ sort: C.sort })); drawClPool(); });
+      $('lbClSort').addEventListener('change', e => { C.sort = e.target.value; C.dir = 1; saveUi(); drawClPool(); });
       $('lbClGame').addEventListener('change', e => { C.game = e.target.value; drawClPool(); });
+      $('lbClAfford').addEventListener('change', e => { C.afford = e.target.checked; saveUi(); drawClPool(); });
+      $('lbClFilt').addEventListener('input', e => { const m = /^lbClF_(\w+_(?:min|max))$/.exec(e.target.id); if (m) { C.f[m[1]] = e.target.value; drawClPool(); } });
     }
     $('lbClSort').innerHTML = POOL_SORT.filter(([k]) => hasPj || !['proj', 'value', 'ceil', 'lev'].includes(k)).filter(([k]) => own || k !== 'own').map(([k, l]) => `<option value="${k}"${C.sort === k ? ' selected' : ''}>${l}</option>`).join('');
     $('lbClGame').innerHTML = `<option value="ALL">All games</option>${games.map(g => `<option value="${esc(g)}"${C.game === g ? ' selected' : ''}>${esc(g.replace(' / ', ' – '))}</option>`).join('')}`;
     $('lbClPos').innerHTML = ['ALL', 'QB', 'RB', 'WR', 'TE', 'FLEX', 'DST'].map(k => `<button type="button" class="${C.pos === k ? 'on' : ''}" aria-pressed="${C.pos === k}" data-cl-pos="${k}">${k === 'ALL' ? 'All' : k}</button>`).join('');
+    $('lbClAfford').checked = C.afford;
+    // filters
+    const sLo = salK(fNum('sal_min')), sHi = salK(fNum('sal_max')), oLo = fNum('own_min'), oHi = fNum('own_max'), pLo = fNum('proj_min'), pHi = fNum('proj_max');
+    const nF = [sLo, sHi, oLo, oHi, pLo, pHi].filter(v => v != null).length, pjOn = pLo != null || pHi != null;
+    const fb = $('lbClFiltBtn'); fb.textContent = nF ? `Filters · ${nF}` : 'Filters'; fb.classList.toggle('on', !!nF || C.filtOpen); fb.setAttribute('aria-expanded', C.filtOpen); $('lbClFilt').hidden = !C.filtOpen;
     let ps = [...C.pl.P.values()].filter(p => (C.pos === 'ALL' || (C.pos === 'FLEX' ? FLEXABLE.has(p.pos) : p.pos === C.pos))
-      && (C.game === 'ALL' || [p.team, p.opp].sort().join(' / ') === C.game) && (!q || p.name.toLowerCase().includes(q) || p.team.toLowerCase() === q));
+      && (C.game === 'ALL' || [p.team, p.opp].sort().join(' / ') === C.game) && (!q || p.name.toLowerCase().includes(q) || p.team.toLowerCase() === q)
+      && inRng(p.sal, sLo, sHi) && (!own || inRng(+p.own || 0, oLo, oHi)) && (!pjOn || (PJ(p) && inRng(+PJ(p).proj, pLo, pHi))));
+    const ok = new Map(ps.map(p => [p.name, inL.has(p.name) || fits(p)]));
+    const nHid = C.afford ? ps.filter(p => !ok.get(p.name)).length : 0;
+    if (C.afford) ps = ps.filter(p => ok.get(p.name));
     const v = p => PJ(p) || {}, key = { proj: p => -(v(p).proj ?? -1), value: p => -(v(p).value ?? -1), ceil: p => -(v(p).p90 ?? -1), lev: p => -(v(p).lev ?? -99), own: p => -(+p.own || 0), sal: p => -p.sal, name: p => p.name }[C.sort] || (p => -p.sal);
-    ps.sort((a, b) => { const x = key(a), y = key(b); return (typeof x === 'string' ? x.localeCompare(y) : x - y) || b.sal - a.sal; });
+    ps.sort((a, b) => { const x = key(a), y = key(b); return C.dir * (typeof x === 'string' ? x.localeCompare(y) : x - y) || b.sal - a.sal; });
+    // column heads sort too: tap to sort by it, tap again to flip
+    const xk = XCOL[C.sort] ? C.sort : 'ceil', XC = XCOL[xk];
+    const head = (k, l) => `<button type="button" class="${C.sort === k ? 'on' : ''}" data-cl-sort="${k}" aria-label="Sort by ${l}${C.sort === k ? (C.dir > 0 ? ', sorted' : ', reversed') : ''}">${l}${C.sort === k ? (C.dir > 0 ? ' ↓' : ' ↑') : ''}</button>`;
+    const cols = $('lbClCols'); cols.className = `lb-pcols${hasPj ? '' : ' nopj'}`;
+    cols.innerHTML = `${head('name', 'Player')}${hasPj ? head('proj', 'Proj') + head(xk, XC[0]) : ''}${own ? head('own', 'Own') : '<span></span>'}${head('sal', 'Salary')}<span></span>`;
     const stat = C.pool.players.reduce((m, p) => (p.status ? m.set(p.name, p.status) : m), new Map());
     const list = $('lbClList'), top = list.scrollTop, ae = document.activeElement, focusName = ae && list.contains(ae) ? ae.closest('[data-cl-add]')?.dataset.clAdd : null;
     list.innerHTML = ps.map(p => {
-      const r = PJ(p), inl = inL.has(p.name), st = stat.get(p.name) || (r && r.status) || '', ok = inl || fits(p);
-      return `<div class="lb-p${inl ? ' in' : ''}${ok ? '' : ' over'}${hasPj ? '' : ' nopj'}" role="listitem" tabindex="0" data-cl-add="${esc(p.name)}" aria-label="${esc(p.name)}, ${esc(p.pos)} ${esc(p.team)}, ${money(p.sal)}${r ? `, projected ${f1(r.proj)}` : ''}${inl ? ', in lineup' : ok ? '' : ', does not fit'}">
+      const r = PJ(p), inl = inL.has(p.name), st = stat.get(p.name) || (r && r.status) || '', fit = ok.get(p.name);
+      return `<div class="lb-p${inl ? ' in' : ''}${fit ? '' : ' over'}${hasPj ? '' : ' nopj'}" role="listitem" tabindex="0" data-cl-add="${esc(p.name)}" aria-label="${esc(p.name)}, ${esc(p.pos)} ${esc(p.team)}, ${money(p.sal)}${r ? `, projected ${f1(r.proj)}` : ''}${inl ? ', in lineup' : fit ? '' : ', does not fit'}">
         <span class="sd-pos pos-${esc(p.pos)}">${esc(p.pos)}</span>
         <span class="lb-p-n">${esc(p.name)}${st ? `<span class="lb-q" title="Injury status">${esc(st)}</span>` : ''}<small>${esc(p.team)} vs ${esc(p.opp)}${r && r.opt != null ? `<span class="lb-p-opt"> · optimal ${f1(r.opt)}%</span>` : ''}</small></span>
-        ${hasPj ? `<span class="lb-p-pj">${r ? f1(r.proj) : '—'}<small>${r ? `ceil ${f1(r.p90)}` : ''}</small></span>` : ''}
-        <span class="lb-p-own">${own ? pct0(p.own) : ''}<small>${r && r.lev != null ? `lev ${sgn1(r.lev)}` : ''}</small></span>
-        <span class="lb-p-sal">${money(p.sal)}<small>${r && r.value != null ? `${(+r.value).toFixed(2)}x` : ''}</small></span>
+        ${hasPj ? `<span class="lb-p-pj">${r ? f1(r.proj) : '—'}<small${xk === 'ceil' ? ' class="lb-dup"' : ''}>${r ? `ceil ${f1(r.p90)}` : ''}</small></span>
+        <span class="lb-p-x">${r && r[xk === 'ceil' ? 'p90' : xk] != null ? XC[1](r) : '—'}</span>` : ''}
+        <span class="lb-p-own">${own ? pct0(p.own) : ''}<small${xk === 'lev' ? ' class="lb-dup"' : ''}>${r && r.lev != null ? `lev ${sgn1(r.lev)}` : ''}</small></span>
+        <span class="lb-p-sal">${money(p.sal)}<small${xk === 'value' ? ' class="lb-dup"' : ''}>${r && r.value != null ? `${(+r.value).toFixed(2)}x` : ''}</small></span>
         <span class="lb-p-btn${inl ? ' on' : ''}" aria-hidden="true">${inl ? '−' : '+'}</span>
       </div>`;
-    }).join('') || '<div class="sd-pool-empty">No player matches.</div>';
+    }).join('') || `<div class="sd-pool-empty">No player matches${nF ? ' these filters' : ''}${C.afford ? ' that you can still afford' : ''}.</div>`;
     list.scrollTop = top;
     if (focusName) { const el = [...list.querySelectorAll('[data-cl-add]')].find(x => x.dataset.clAdd === focusName); if (el) el.focus({ preventScroll: true }); }
-    $('lbClPoolN').textContent = `${ps.length} of ${C.pl.P.size}`;
-    $('lbClListNote').innerHTML = `Tap a player to add or remove him. Faded = no open slot or he doesn't leave room to fill the rest.${hasPj ? ' Proj = our mean DraftKings points; ceil = 90th percentile; lev = how often he is in our optimal lineups minus how often the field picks him; x = points per $1,000.' : ''}`;
+    $('lbClPoolN').textContent = `${ps.length} of ${C.pl.P.size}${nHid ? ` · ${nHid} you can't afford hidden` : ''}`;
+    $('lbClListNote').innerHTML = `Tap a player to add or remove him. Tap a column name to sort by it; tap again to flip. Faded = no open slot or he doesn't leave room to fill the rest; <b>Affordable only</b> hides them.${hasPj ? ' Proj = our mean DraftKings points; ceil = 90th percentile; lev = how often he is in our optimal lineups minus how often the field picks him; x = points per $1,000.' : ''}`;
+  };
+  /* ---------------- saved lineups (this browser, per week's pool) ---------------- */
+  const luKey = slots => slots.filter(Boolean).slice().sort().join('|');
+  const svFind = slots => { const k = luKey(slots); return C.saved.findIndex(s => luKey(s.slots) === k); };
+  const svIdx = id => id == null ? -1 : C.saved.findIndex(s => s.id === id);
+  const svRead = () => { try { const s = JSON.parse(lsGet(LS_CL_SAVED)); return s && typeof s === 'object' && !Array.isArray(s) ? s : {}; } catch { return {}; } };
+  const svLoad = () => { const l = svRead()[C.pool.id]; C.saved = Array.isArray(l) ? l.filter(x => x && Array.isArray(x.slots) && x.slots.length === 9 && x.id != null) : []; };
+  const svStore = () => {
+    const s = svRead(); s[C.pool.id] = C.saved;
+    const wk = Object.keys(s).sort((a, b) => Math.max(0, ...(s[b] || []).map(x => x.t || 0)) - Math.max(0, ...(s[a] || []).map(x => x.t || 0)));
+    for (const k of wk.slice(4)) if (k !== C.pool.id) delete s[k];   // keep the last few slates
+    lsSet(LS_CL_SAVED, JSON.stringify(s));
+  };
+  const svSave = asNew => {
+    if (lineupNames().length !== 9 || !C.res || !C.res.roster.ok) return;
+    const dup = svFind(C.slots); if (dup >= 0) { toast(`Already saved as #${dup + 1}`, 'warn'); return; }
+    const ed = svIdx(C.editing);
+    if (ed >= 0 && !asNew) { C.saved[ed] = { ...C.saved[ed], slots: C.slots.slice(), t: Date.now() }; C.editing = null; svStore(); clDraw(); toast(`<b>Lineup #${ed + 1} updated</b>`, 'good'); return; }
+    if (C.saved.length >= 150) { toast('150 lineups is the DraftKings limit per contest', 'warn'); return; }
+    C.saved.push({ id: Math.max(0, ...C.saved.map(s => +s.id || 0)) + 1, slots: C.slots.slice(), t: Date.now() });
+    C.editing = null; svStore(); clDraw();
+    toast(`<b>Saved as #${C.saved.length}</b> · swap a player or two to build the next one`, 'good');
+  };
+  const shortName = p => p.pos === 'DST' ? p.name : (p.name.split(' ').slice(1).join(' ') || p.name);
+  const drawClSaved = () => {
+    const host = $('lbClSaved'); if (!host) return;
+    const N = C.saved.length, own = C.pl.has.own;
+    if (!N) { host.innerHTML = `<div class="lb-h">Saved lineups <small>0</small></div><p class="lb-muted">Save as many lineups as you want. They stay in this browser for this week's slate, and you can download them all in one DraftKings upload file.</p>`; return; }
+    const cur = lineupNames().length === 9 ? luKey(C.slots) : '', expo = new Map();
+    let allIds = !!C.dk;
+    const rows = C.saved.map((s, i) => {
+      const ps = s.slots.map(n => n && C.pl.P.get(n)).filter(Boolean), miss = 9 - ps.length;
+      for (const p of ps) expo.set(p.name, (expo.get(p.name) || 0) + 1);
+      if (miss || !ps.every(p => C.pl.ids.get(p.name))) allIds = false;
+      const sal = ps.reduce((a, p) => a + p.sal, 0), proj = ps.reduce((a, p) => a + (PJ(p) ? +PJ(p).proj : 0), 0), cum = ps.reduce((a, p) => a + (+p.own || 0), 0);
+      let tone = 'good', why = '';
+      if (miss) { tone = 'bad'; why = `${miss} player${miss > 1 ? 's' : ''} not in this week's pool`; }
+      else { const r = C.eng.check(s.slots); const f = r.hard.filter(h => h.status === 'fail').length; if (!r.roster.ok) { tone = 'bad'; why = 'roster problem'; } else if (f) { tone = 'bad'; why = `breaks ${f} rule${f > 1 ? 's' : ''}`; } }
+      const qb = ps.find(p => p.pos === 'QB'), stack = qb ? ps.filter(p => p !== qb && p.team === qb.team && p.pos !== 'DST') : [];
+      return `<li class="lb-sv ${tone}${s.id === C.editing ? ' on' : ''}${luKey(s.slots) === cur ? ' cur' : ''}">
+        <button type="button" class="lb-sv-main" data-cl-sv-load="${s.id}" aria-label="Lineup ${i + 1}: load it into the builder to edit">
+          <span class="lb-sv-k">#${i + 1}</span>
+          <span class="lb-sv-n"><b>${qb ? esc(qb.name) : 'No QB'}${stack.length ? ` + ${esc(stack.map(shortName).join(', '))}` : ''}</b><small>${ps.map(p => esc(shortName(p))).join(' · ')}</small>${why ? `<em>${esc(why)}</em>` : ''}</span>
+          <span class="lb-sv-st">${C.proj.size ? `${f1(proj)}<small>pts</small>` : ''}<small>${money(sal)}${own ? ` · ${pct0(cum)}` : ''}</small></span>
+        </button>
+        <button type="button" class="lb-x" data-cl-sv-rm="${s.id}" aria-label="Delete lineup ${i + 1}">×</button></li>`;
+    }).join('');
+    const ex = [...expo].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 14);
+    host.innerHTML = `<div class="lb-h">Saved lineups <small>${N} · tap one to edit it</small></div>
+      <ol class="lb-svs">${rows}</ol>
+      ${N >= 2 ? `<div class="lb-exp"><span class="lb-sug-k">Exposure · share of your saved lineups</span><div class="lb-exp-row">${ex.map(([n, c]) => `<span>${esc(shortName(C.pl.P.get(n) || { name: n, pos: '' }))} <b>${pct0(c / N * 100)}</b></span>`).join('')}</div></div>` : ''}
+      <div class="lb-acts lb-sv-acts">
+        ${allIds ? `<button type="button" class="btn btn-sm btn-primary" data-cl="sv-csv">Download all ${N} for DraftKings</button>` : '<button type="button" class="btn btn-sm btn-primary" data-cl="ids" title="Needs your DraftKings salary file for the player IDs">Get a DraftKings file for all</button>'}
+        <button type="button" class="btn btn-sm" data-cl="sv-copy">Copy all</button>
+        <button type="button" class="btn btn-sm btn-ghost" data-cl="sv-clear">Delete all</button>
+      </div>`;
   };
   const drawClRules = () => {
     const res = C.res, body = $('lbClRulesBody'), ans = $('lbClRulesAns');
@@ -619,6 +711,7 @@
     if (bad.length) toast(`Linked lineup loaded · ${bad.length} player${bad.length > 1 ? 's' : ''} not in this week's pool`, 'warn');
   };
   const clRestore = () => {
+    svLoad();
     const q = new URLSearchParams(location.search);
     if (q.get('mode') === 'classic' && q.get('lu')) { const t = q.get('lu').split('-').slice(0, 9); if (t.every(x => /^[a-z0-9_]{0,60}$/i.test(x))) { clFromTokens(t); return; } }
     try { const s = JSON.parse(lsGet(LS_CL)); if (s && s.week === C.pool.id && Array.isArray(s.slots)) { if (s.own === 'own_se' && C.pool.has && C.pool.has.own_se) { C.ownCol = 'own_se'; clBuild(); } C.slots = SLOTS.map((_, i) => s.slots[i] && C.pl.P.has(s.slots[i]) ? s.slots[i] : null); } } catch {}
@@ -630,6 +723,14 @@
       const add = t.closest('[data-cl-add]'); if (add) { clAdd(add.dataset.clAdd); clDraw(); const r = $('lbClList').querySelector(`[data-cl-add="${CSS.escape(add.dataset.clAdd)}"]`); if (r) r.focus({ preventScroll: true }); return; }
       const rm = t.closest('[data-cl-rm]'); if (rm) { C.slots[+rm.dataset.clRm] = null; clDraw(); return; }
       const ps = t.closest('[data-cl-pos]'); if (ps) { C.pos = ps.dataset.clPos; drawClPool(); return; }
+      const so = t.closest('[data-cl-sort]'); if (so) { const k = so.dataset.clSort; if (C.sort === k) C.dir = -C.dir; else { C.sort = k; C.dir = 1; } saveUi(); drawClPool(); return; }
+      const ld = t.closest('[data-cl-sv-load]'); if (ld) {
+        const s = C.saved[svIdx(+ld.dataset.clSvLoad)]; if (!s) return;
+        C.slots = s.slots.map(n => n && C.pl.P.has(n) ? n : null); C.editing = s.id; clDraw();
+        $('lbClLineup').scrollIntoView({ behavior: media('(prefers-reduced-motion: reduce)') ? 'auto' : 'smooth', block: 'nearest' });
+        toast(`Editing <b>#${svIdx(s.id) + 1}</b>: swap players, then Update or Save as new`); return;
+      }
+      const sr = t.closest('[data-cl-sv-rm]'); if (sr) { const i = svIdx(+sr.dataset.clSvRm); if (i < 0) return; if (C.saved[i].id === C.editing) C.editing = null; C.saved.splice(i, 1); svStore(); clDraw(); toast(`Lineup #${i + 1} deleted`); return; }
       const ow = t.closest('[data-cl-own]'); if (ow && !ow.disabled) { C.ownCol = ow.dataset.clOwn; clBuild(); clDraw(); return; }
       const a = t.closest('[data-cl]'); if (!a) return;
       const act = a.dataset.cl;
@@ -651,7 +752,13 @@
         else { box().value = ''; if (lineupNames().length < 9) showGrade('lbClGrade'); toast(`<b>Lineup loaded</b> · ${lineupNames().length} of 9`, 'good'); }
         return;
       }
-      if (act === 'clear') { C.slots = Array(9).fill(null); clDraw(); return; }
+      if (act === 'clear') { C.slots = Array(9).fill(null); C.editing = null; clDraw(); return; }
+      if (act === 'filt') { C.filtOpen = !C.filtOpen; drawClPool(); if (C.filtOpen) $('lbClFilt').querySelector('input')?.focus({ preventScroll: true }); return; }
+      if (act === 'filt-reset') { C.f = {}; $('lbClFilt').querySelectorAll('input').forEach(i => { i.value = ''; }); drawClPool(); return; }
+      if (act === 'save' || act === 'save-new') { svSave(act === 'save-new'); return; }
+      if (act === 'sv-copy') { copyText(C.saved.map((s, i) => `#${i + 1}: ${s.slots.map((n, j) => `${SLOTS[j]} ${n}`).join(', ')}`).join('\n'), `${C.saved.length} lineups copied`); return; }
+      if (act === 'sv-csv') { const rows = C.saved.map(s => s.slots.map(n => C.pl.ids.get(n))).filter(r => r.every(Boolean)); if (rows.length) download(`${SLOTS.join(',')}\n${rows.map(r => r.join(',')).join('\n')}\n`, `DK_upload_classic_${C.pool.id}_${rows.length}.csv`); if (rows.length < C.saved.length) toast(`${C.saved.length - rows.length} lineup(s) left out: players without DraftKings IDs`, 'warn'); return; }
+      if (act === 'sv-clear') { if (!confirm(`Delete all ${C.saved.length} saved lineups?`)) return; C.saved = []; C.editing = null; svStore(); clDraw(); return; }
       if (act === 'csv') { if (hasIds()) download(clCsv(), `DK_upload_classic_${C.pool.id}.csv`); return; }
       if (act === 'ids') { const f = $('lbClFiles'); f.open = true; f.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
       if (act === 'names') { copyText(C.slots.map((n, i) => `${SLOTS[i]} ${n}`).join('\n'), 'Lineup copied: enter it on DraftKings'); return; }
@@ -681,6 +788,6 @@
     const other = tab === 'classic' ? 'showdown' : 'classic';
     (window.requestIdleCallback || (f => setTimeout(f, 1500)))(() => { if (other === 'classic') loadSet('classic').catch(() => {}); });
   };
-  BBI.lab = { get tab() { return tab; }, setTab, sdGrade, clGrade: () => clGrade(), C, clFill, clDraw, clCsv, nameSlug };
+  BBI.lab = { get tab() { return tab; }, setTab, sdGrade, clGrade: () => clGrade(), C, clFill, clDraw, clCsv, nameSlug, svSave };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
