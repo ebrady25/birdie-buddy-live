@@ -530,6 +530,10 @@ window.BBI = window.BBI || {};
     .bbi-submit:hover{filter:brightness(1.08)}
     .bbi-submit[disabled]{opacity:.6;cursor:wait}
     .bbi-err{color:var(--negative);font-size:var(--fs-xs);min-height:1em}
+    .bbi-terms{margin:0;font-size:var(--fs-3xs);color:var(--text-muted);line-height:1.5;text-align:center}
+    .bbi-terms a{color:inherit;text-decoration:underline}
+    .bbi-terms a:hover{color:var(--gold-300)}
+    .bbi-terms[hidden]{display:none}
     .bbi-demo-note{font-size:var(--fs-3xs);color:var(--text-dimmed);
       padding:0 var(--space-6) var(--space-5);line-height:1.5}
     .bbi-x{position:absolute;top:14px;right:14px;width:28px;height:28px;
@@ -603,6 +607,7 @@ window.BBI = window.BBI || {};
           </div>
           <div class="bbi-err" data-el="err" role="alert"></div>
           <button class="bbi-submit" type="submit" data-el="submit">Sign in</button>
+          <p class="bbi-terms" data-el="terms" hidden>By creating an account, you agree to our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
         </form>
         <div class="bbi-demo-note" data-el="note"></div>
       </div>`;
@@ -619,6 +624,7 @@ window.BBI = window.BBI || {};
       q('[data-el="title"]').textContent = m === 'login' ? 'Welcome back' : 'Create your account';
       q('[data-el="nameField"]').hidden = m === 'login';
       q('[data-el="promoField"]').hidden = m === 'login';
+      q('[data-el="terms"]').hidden = m === 'login';
       q('[data-el="submit"]').textContent = m === 'login' ? 'Sign in' : 'Create account';
       q('[data-el="err"]').textContent = '';
       q('[data-el="note"]').innerHTML = auth.backend.mode === 'demo'

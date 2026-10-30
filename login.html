@@ -38,6 +38,9 @@
       color:var(--text-primary);font-size:var(--fs-sm)}
     .auth-form input:focus{outline:none;border-color:var(--gold-500)}
     .auth-err{color:var(--negative);font-size:var(--fs-xs);min-height:1em}
+    .auth-terms{margin:0;font-size:var(--fs-3xs);color:var(--text-muted);line-height:1.5;text-align:center}
+    .auth-terms a{color:inherit;text-decoration:underline}
+    .auth-terms a:hover{color:var(--gold-300)}
     .auth-note{font-size:var(--fs-3xs);color:var(--text-dimmed);
       padding:0 var(--space-6) var(--space-6);line-height:1.5}
   </style>
@@ -101,6 +104,7 @@
               <div class="auth-err" id="e" role="alert"></div>
               <button class="btn btn-primary btn-block btn-lg" type="submit" id="s">
                 ${mode==='login'?'Sign in':'Create account'}</button>
+              ${mode==='signup'?`<p class="auth-terms">By creating an account, you agree to our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>`:''}
             </form>
             <div class="auth-note">One BirdieBuddy membership gets you everything: NFL and golf.</div>
           </div>`;

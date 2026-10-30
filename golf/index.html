@@ -440,6 +440,30 @@
     opacity: 0;
   }
 
+  /* Off-season (model paused until the 2027 PGA TOUR season) */
+  .offseason-banner {
+    position: relative; z-index: 5;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: 6px 18px; padding: 12px var(--s-5);
+    background: linear-gradient(90deg, rgba(212,168,67,0.04), rgba(212,168,67,0.10), rgba(212,168,67,0.04));
+    border-bottom: 1px solid var(--border-gold);
+    font-size: 13px; line-height: 1.5; color: var(--text-2); text-align: center;
+  }
+  .offseason-banner strong { color: var(--gold); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .offseason-banner .links { display: inline-flex; gap: 16px; }
+  .offseason-banner .links a { color: var(--gold-2); border-bottom: 1px solid var(--border-gold); }
+  .offseason-banner .links a:hover { color: var(--gold-3); border-color: var(--gold); }
+  .off-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-4); }
+  a.btn-gold { display: inline-flex; align-items: center; }
+  .btn-ghost {
+    display: inline-flex; align-items: center;
+    padding: 12px 20px; border-radius: 10px; border: 1px solid var(--border-2);
+    color: var(--text-2); font-weight: 600; font-size: 14px;
+    background: rgba(20,20,24,0.5); transition: border-color .2s, color .2s;
+  }
+  .btn-ghost:hover { border-color: var(--border-gold); color: var(--gold-2); }
+  .vault-form { flex-wrap: wrap; justify-content: center; }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -510,13 +534,18 @@
   </script>
 </nav>
 
+<div class="offseason-banner" role="status">
+  <span><strong>Off-season</strong> · The golf model is resting for football season and returns for the 2027 PGA TOUR season.</span>
+  <span class="links"><a href="performance.html">2026 report card →</a><a href="methodology.html">How it works →</a></span>
+</div>
+
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- HERO -->
 <header class="hero" id="hero">
   <canvas id="heroCanvas"></canvas>
   <div class="grain"></div>
-  <div class="badge" id="eventBadge"><span class="live-dot"></span>Live · PGA Championship · Week 15 · MAJOR</div>
+  <div class="badge" id="eventBadge"><span class="off-dot"></span>Off-season · Back for 2027</div>
   <h1 id="heroTitle" aria-label="Golf's best-kept secret.">
     <span class="line">
       <span class="word" data-word="Golf's"></span>
@@ -530,8 +559,8 @@
     <img class="lock-mark" src="assets/img/mark-gold.svg" alt="" />
   </div>
   <div class="vault-form">
-    <input type="email" placeholder="you@example.com" id="emailInput">
-    <button class="btn-gold" onclick="alert('Coming soon — private preview list')">Request key</button>
+    <a class="btn-gold" href="pricing.html">Get BirdieBuddy</a>
+    <a class="btn-ghost" href="nfl/">NFL is live now →</a>
   </div>
 </header>
 
@@ -613,9 +642,9 @@
 <section class="section">
   <div class="container">
     <div class="section-head" data-reveal="">
-      <div class="eyebrow">This week</div>
-      <h2>Four live edges the market hasn't priced in.</h2>
-      <p>De-vigged consensus across fourteen books, compared to BBI's simulated win probability. Positive pp means BBI sees a bigger chance than the books do.</p>
+      <div class="eyebrow">In season</div>
+      <h2>Edges the market hadn't priced in.</h2>
+      <p>Every tournament week, BBI compares its simulated win probability to a de-vigged consensus across fourteen books. Positive pp means BBI sees a bigger chance than the books do. <span id="edgeSource">Shown: an edge board from the 2026 season.</span></p>
     </div>
     <div class="edge-grid" id="edgeGrid">
       <div class="edge-card" data-reveal="" data-reveal-delay="1">
@@ -653,15 +682,15 @@
 <!-- FINAL LOCK -->
 <div class="final-lock">
   <canvas id="finalCanvas"></canvas>
-  <h2 data-reveal="">The door closes<br>Thursday at 6 AM.</h2>
-  <p data-reveal="" data-reveal-delay="1">Every week's edge list is sent before Thursday's 6 AM lock. Miss it, and you're betting blind until next Monday.</p>
-  <div class="countdown" id="countdown" data-reveal="" data-reveal-delay="2">Next lock: Thursday 6:00 AM ET · PGA Championship</div>
+  <h2 data-reveal="">Back for the<br>2027 season.</h2>
+  <p data-reveal="" data-reveal-delay="1">In season, every week's rankings and edge board publish before Thursday's first tee time. The golf model is resting until then. The 2026 report card stays open, and NFL is live now.</p>
+  <div class="countdown" id="countdown" data-reveal="" data-reveal-delay="2">Off-season · Returns for the 2027 PGA TOUR season</div>
   <div class="vault-form" style="margin: 0 auto; max-width: 480px; justify-content: center;" data-reveal="" data-reveal-delay="3">
-    <input type="email" placeholder="you@example.com">
-    <button class="btn-gold">Request access</button>
+    <a class="btn-gold" href="pricing.html">Get BirdieBuddy</a>
+    <a class="btn-ghost" href="performance.html">2026 report card</a>
   </div>
   <div class="meta" style="justify-content: center; margin-top: var(--s-4); display:flex; gap: var(--s-5); font-family: var(--mono); font-size: 10px; color: var(--text-4); letter-spacing: 0.15em; text-transform: uppercase;" data-reveal="" data-reveal-delay="4">
-    <span>Private preview · Limited seats</span>
+    <span>One membership · NFL + golf</span>
   </div>
 </div>
 
@@ -1160,21 +1189,9 @@
   function fmtNum(v, d=2) { return v == null ? '—' : v.toFixed(d); }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    const [ev, rank, omnia] = await Promise.all([
-      loadJSON('current_event.json'),
-      loadJSON('bbi_rankings.json'),
-      loadJSON('omnia.json')
-    ]);
+    const [rank, omnia] = await loadJSON('home_teaser.json').then(t => t ? [t, t] : Promise.all([loadJSON('bbi_rankings.json'), loadJSON('omnia.json')]));
 
-    if (ev) {
-      const badge = document.getElementById('eventBadge');
-      const week = ev.week_num || '';
-      const name = ev.event_name || 'Upcoming Event';
-      const major = ev.is_major ? ' · MAJOR' : '';
-      badge.innerHTML = '<span class="live-dot"></span>Live · ' + name + ' · Week ' + week + major;
-      const countdown = document.getElementById('countdown');
-      if (countdown) countdown.textContent = 'Next lock: Thursday 6:00 AM ET · ' + name;
-    }
+    // Off-season: the hero badge + closing copy stay static (no "Live · event" badge or Thursday countdown).
 
     if (rank && rank.rankings) {
       const players = rank.rankings.slice(0, 3);
@@ -1191,6 +1208,9 @@
         .filter(e => e.edge_consensus_pp > 0)
         .sort((a,b) => b.edge_consensus_pp - a.edge_consensus_pp)
         .slice(0, 3);
+      const src = document.getElementById('edgeSource');
+      const evName = omnia.event_name || omnia.event;
+      if (src && evName) src.textContent = 'Shown: the last edge board of 2026 (' + evName + ').';
       const preview = document.getElementById('edgePreview');
       preview.innerHTML = edges.map((e, i) => {
         const name = fmtName(e.name);

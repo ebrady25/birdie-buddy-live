@@ -1,0 +1,25 @@
+{
+ "season": 2026,
+ "week": 8,
+ "week_label": "Week 8",
+ "stage": "wed",
+ "stage_label": "Wednesday numbers",
+ "as_of": "2026-10-28 17:59 ET",
+ "counts": {
+  "games": 11,
+  "players": 94,
+  "stacks": 10,
+  "chalk": 12
+ },
+ "article": {
+  "title": "TNF showdown: the field captains Green Bay; Carolina's upset is 26%",
+  "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-tnf-car-gb",
+  "date": "2026-10-29",
+  "slot": "TNF",
+  "week": 8
+ },
+ "results": {
+  "week": 7,
+  "href": "nfl/results/2026-w7/"
+ }
+}

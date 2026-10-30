@@ -2,8 +2,13 @@
    BIRDIEBUDDY NFL HOMEPAGE (nfl/)
    Motion comes from the shared include assets/js/home_fx.js (load it
    first). This file fills this week's numbers, read client-side from
-   nfl/slate/slate.json, nfl/articles/articles.json and the results weeks
-   that exist (same fetch pattern + Eastern-time lock math as
+   nfl/home.json, the small public teaser (week, stage, slate counts,
+   latest article, newest graded week) that codex/site/home_teaser.py
+   writes with every slate / article / results push. The two preview cards
+   (top stacks, top projections) still read nfl/slate/slate.json, which goes
+   members-only with the server gate (see SLATE_PUBLIC). No nfl/home.json →
+   the old reads: nfl/slate/slate.json, nfl/articles/articles.json and the
+   results weeks that exist (same fetch pattern + Eastern-time lock math as
    assets/js/nfl_week.js). If a file is missing, the static copy in the
    page stays as it is. No external scripts.
    ===================================================================== */
@@ -20,6 +25,15 @@
 
   /* =================== THIS WEEK'S NUMBERS =================== */
   if (!window.fetch) return;
+  // slate.json is public today. Set false in the deploy that turns the server gate on (auth.js GATE_MODE 'server'):
+  // then only signed-in visitors (the bb-access cookie) fetch it, and everyone else keeps the cards' static copy.
+  const SLATE_PUBLIC = true;
+  const canReadSlate = () => SLATE_PUBLIC || /(?:^|;\s*)bb-access=/.test(document.cookie || '');
+  // clean article URL (Cloudflare 308s /x.html -> /x): the path of articles.json 'url', else nfl/articles/<href>
+  const artLink = a => {
+    if (a && a.url) { try { const p = new URL(a.url, document.baseURI).pathname.replace(/^\/+/, ''); if (p) return p; } catch (e) {} }
+    return 'nfl/articles/' + String((a && a.href) || '');
+  };
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const getJSON = url => fetch(url, { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)).catch(() => null);
   const DAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -51,10 +65,11 @@
   };
   const row = (a, b, cls) => `<div class="data-row${cls ? ' ' + cls : ''}"><span>${a}</span><span>${b}</span></div>`;
 
-  function renderSlate(slate) {
-    const S = +slate.season, W = +slate.week;
+  // hero badge + closing countdown. t = home.json or slate.json (season, week, as_of, stage[, stage_label])
+  function renderWeek(t) {
+    const S = +t.season, W = +t.week;
     if (!S || !W) return;
-    const asof = parseET(slate.as_of), now = etNow();
+    const asof = parseET(t.as_of), now = etNow();
     const lock = asof ? lockOf(asof) : null;
     const phase = !lock || !now ? 'live' : now < lock ? 'live' : now < new Date(lock.getTime() + 12 * H) ? 'in_play' : 'final';
 
@@ -62,7 +77,7 @@
     const badge = document.getElementById('weekBadgeText');
     if (badge) {
       badge.textContent = phase === 'live'
-        ? `Live · Week ${W} · ${STAGE[slate.stage] || 'New numbers'}`
+        ? `Live · Week ${W} · ${t.stage_label || STAGE[t.stage] || 'New numbers'}`
         : phase === 'in_play' ? `Week ${W} · Locked · Results Monday`
         : `Week ${W} final · Week ${W + 1} on Wednesday`;
     }
@@ -74,6 +89,13 @@
         : phase === 'in_play' ? `Week ${W} is underway · We grade it Monday`
         : `Week ${W + 1} numbers land Wednesday evening`;
     }
+    return { S, W };
+  }
+
+  // the two preview cards (members' numbers: top stacks, top projections)
+  function renderPreviews(slate) {
+    const W = +slate.week;
+    if (!W) return;
 
     // This week card: best stack per QB, by how often it clears the stack line
     const line = +slate.stack_line || 0;
@@ -100,23 +122,31 @@
         + tops.map(x => row(`${x.pos} · ${esc(x.p.player)}`, (+x.p.proj).toFixed(1))).join('');
     }
 
-    // proof strip
-    setCount('numGames', (slate.games || []).length);
-    setCount('numPlayers', Object.values(players).reduce((n, l) => n + (Array.isArray(l) ? l.length : 0), 0));
-    setCount('numStacks', (slate.stacks || []).length);
-    setCount('numChalk', ((slate.ownership || {}).chalk || []).length);
-
-    return { S, W };
   }
 
-  function renderArticle(artsJson) {
-    const arts = ((artsJson && artsJson.articles) || []).filter(a => a && a.href && a.title)
-      .sort((a, b) => String(b.published_utc || b.date || '').localeCompare(String(a.published_utc || a.date || '')));
-    const a = arts[0];
+  // proof strip (counts only)
+  function renderCounts(c) {
+    if (!c) return;
+    setCount('numGames', +c.games);
+    setCount('numPlayers', +c.players);
+    setCount('numStacks', +c.stacks);
+    setCount('numChalk', +c.chalk);
+  }
+  const slateCounts = slate => ({
+    games: (slate.games || []).length,
+    players: Object.values(slate.players || {}).reduce((n, l) => n + (Array.isArray(l) ? l.length : 0), 0),
+    stacks: (slate.stacks || []).length,
+    chalk: ((slate.ownership || {}).chalk || []).length
+  });
+
+  const latestArticle = artsJson => ((artsJson && artsJson.articles) || []).filter(a => a && a.href && a.title)
+    .sort((a, b) => String(b.published_utc || b.date || '').localeCompare(String(a.published_utc || a.date || '')))[0];
+
+  function renderArticle(a) {
     const box = document.getElementById('articlePreview');
-    if (!a || !box) return;
+    if (!a || !a.title || !box) return;
     const card = document.getElementById('articleCard');
-    if (card) card.setAttribute('href', 'nfl/articles/' + a.href);
+    if (card) card.setAttribute('href', artLink(a));
     const d = parseET((a.date || '') + ' 12:00');
     box.innerHTML = row('Latest article', d ? shortDate(d) : '', 'data-head')
       + row(esc(a.title), '→', 'wrap')
@@ -131,13 +161,25 @@
     if (c) c.setAttribute('href', found.href);
   }
 
-  Promise.all([getJSON('nfl/slate/slate.json'), getJSON('nfl/articles/articles.json')]).then(([slate, arts]) => {
-    renderArticle(arts);
-    const sw = slate ? renderSlate(slate) : null;
+  // the old reads, used when nfl/home.json is missing
+  const legacy = () => Promise.all([getJSON('nfl/slate/slate.json'), getJSON('nfl/articles/articles.json')]).then(([slate, arts]) => {
+    renderArticle(latestArticle(arts));
+    const sw = slate ? renderWeek(slate) : null;
     if (!sw) return;
+    renderPreviews(slate);
+    renderCounts(slateCounts(slate));
     // newest results week that exists: this week, then last week
     const weeks = [sw.W, sw.W - 1].filter(n => n > 0);
     return Promise.all(weeks.map(n => getJSON(`nfl/results/${sw.S}-w${n}/results.json`).then(j => (j ? { week: n, href: `nfl/results/${sw.S}-w${n}/` } : null))))
       .then(res => renderResults(res.find(Boolean)));
+  });
+
+  getJSON('nfl/home.json').then(home => {
+    if (!home || !+home.week) return legacy();
+    renderArticle(home.article);
+    if (!renderWeek(home)) return;
+    renderCounts(home.counts);
+    renderResults(home.results);
+    if (canReadSlate()) return getJSON('nfl/slate/slate.json').then(slate => { if (slate && +slate.week === +home.week) renderPreviews(slate); });
   }).catch(() => {});
 })();

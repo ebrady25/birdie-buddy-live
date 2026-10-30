@@ -74,10 +74,16 @@ window.BBI = window.BBI || {};
     const eventName = current?.event_name || current?.event || 'Live Event';
     const week = current?.week_num ? `Week ${current.week_num}` : '';
     const lastUpdated = current?.last_updated || current?.generated_at;
+    // Off-season: the pipeline is paused, so current_event.json still points at an event that started
+    // weeks ago. Past a 2-week grace window, show an honest "Off-season" pill and no live market ticker.
+    // Clears itself once the pipeline rolls current_event.json forward again.
+    const evStart = current?.start_date ? Date.parse(current.start_date) : NaN;
+    const offSeason = Number.isFinite(evStart) && Date.now() - evStart > 14 * 864e5;
+    const nextSeason = (Number(current?.year) || new Date(evStart).getFullYear()) + 1;
 
     // Marquee ticker content — only use live market/pivot feeds if they're for the CURRENT event
     // (omnia/persephone can lag a stale event; don't show last month's players in the ticker).
-    const curEv = current?.event_name;
+    const curEv = offSeason ? null : current?.event_name;
     const omniaData = await load(BBI.data.paths.omnia);
     const edges = ((omniaData?.event_name || omniaData?.event) === curEv ? omniaData?.markets?.win?.top_10_edges : null) || [];
     const persephone = await load(BBI.data.paths.persephone);
@@ -182,10 +188,14 @@ window.BBI = window.BBI || {};
               <input type="text" placeholder="Search players…" data-search aria-label="Search"/>
               <span class="kbd">⌘K</span>
             </label>
+            ${offSeason ? `
+            <span class="event-pill" title="The golf model is resting for football season">
+              <strong>Off-season</strong> · Back for ${nextSeason}
+            </span>` : `
             <span class="event-pill">
               <span class="pulse-dot"></span>
               <strong>${eventName}</strong>${week ? ` · ${week}` : ''}
-            </span>
+            </span>`}
             <span id="authControl" class="bbi-auth-ctl"></span>
           </div>
         </div>

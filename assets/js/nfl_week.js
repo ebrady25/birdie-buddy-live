@@ -57,6 +57,11 @@
   const dueOf = (lock, e) => new Date(Date.UTC(lock.getUTCFullYear(), lock.getUTCMonth(), lock.getUTCDate() - e[0], e[1], e[2]));
 
   const getJSON = url => fetch(url, { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+  // clean article URL (Cloudflare 308s /x.html -> /x): the path of articles.json 'url', else nfl/articles/<href>
+  const artLink = a => {
+    if (a && a.url) { try { const p = new URL(a.url, document.baseURI).pathname.replace(/^\/+/, ''); if (p) return p; } catch (e) {} }
+    return 'nfl/articles/' + String((a && a.href) || '');
+  };
   const exists = url => fetch(url, { method: 'HEAD', cache: 'no-cache' }).then(r => r.ok).catch(() => false);
 
   const render = (slate, artsJson, results) => {
@@ -73,7 +78,7 @@
     let head, sub, note = '';
     const btns = [];
     const slateBtn = primary => btns.push(`<a class="btn${primary ? ' btn-primary' : ''}" href="nfl/slate/">${phase === 'final' ? `Week ${W} slate` : 'This week\'s slate'} →</a>`);
-    const artBtn = () => { if (art) btns.push(`<a class="btn" href="nfl/articles/${esc(art.href)}">Read the Week ${esc(art.week)} ${esc(ART_NAME[art.slot] || 'article')} →</a>`); };
+    const artBtn = () => { if (art) btns.push(`<a class="btn" href="${esc(artLink(art))}">Read the Week ${esc(art.week)} ${esc(ART_NAME[art.slot] || 'article')} →</a>`); };
     const resBtn = r => { if (r) btns.push(`<a class="btn${r.primary ? ' btn-primary' : ''}" href="${esc(r.href)}">${esc(r.label)} →</a>`); };
     const lastRes = results.find(r => r.week === W - 1) || null, thisRes = results.find(r => r.week === W) || null;
     const allRes = results.find(r => r.index) || null;

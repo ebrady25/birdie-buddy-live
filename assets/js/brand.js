@@ -5,7 +5,9 @@
    look matches, with brand links instead of the NFL menu. auth.js loads
    lazily, same pattern as nfl.js, for the account control.
    Also: BBI.brandHome() fills the live NFL week on the brand home from
-   nfl/slate/slate.json (Eastern-time lock math as in nfl_home.js).
+   nfl/home.json, the public homepage teaser (codex/site/home_teaser.py),
+   falling back to nfl/slate/slate.json when the teaser is missing
+   (Eastern-time lock math as in nfl_home.js).
    Pages set <base href="/">.
    ===================================================================== */
 
@@ -108,13 +110,14 @@ window.BBI = window.BBI || {};
     }));
 
     if (!window.fetch) return;
-    fetch('nfl/slate/slate.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)).then(slate => {
+    const getJSON = url => fetch(url, { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)).catch(() => null);
+    getJSON('nfl/home.json').then(home => (home && +home.week ? home : getJSON('nfl/slate/slate.json'))).then(slate => {
       const W = slate && +slate.week;
       if (!W) return;
       const asof = parseET(slate.as_of), now = etNow();
       const lock = asof ? lockOf(asof) : null;
       const phase = !lock || !now ? 'live' : now < lock ? 'live' : now < new Date(lock.getTime() + 12 * H) ? 'in_play' : 'final';
-      const card = phase === 'live' ? `Week ${W} · ${STAGE[slate.stage] || 'New numbers'}`
+      const card = phase === 'live' ? `Week ${W} · ${slate.stage_label || STAGE[slate.stage] || 'New numbers'}`
         : phase === 'in_play' ? `Week ${W} · Locked · Results Monday`
         : `Week ${W + 1} numbers Wednesday`;
       setText('heroBadgeText', phase === 'live' ? `Live · NFL Week ${W} · DraftKings` : `NFL ${card}`);

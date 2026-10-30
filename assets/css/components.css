@@ -573,6 +573,15 @@
 }
 .brand-mark-img { height: 26px; width: auto; display: block; flex: none; }
 .brand-lockup { display: flex; flex-direction: column; line-height: 1; }
+/* Phone header: wordmark + "Sign in" + "Get BirdieBuddy" don't fit under ~420px (the wordmark
+   ran under Sign in). Keep the bird mark, drop the wordmark text; same when the watchlist pill shows. */
+@media (max-width: 420px) {
+  .site-nav .brand-lockup { display: none; }
+}
+@media (max-width: 480px) {
+  .site-nav .row-tight { margin-left: auto; }
+  .site-nav-inner:has(.nav-watch-pill[style*="inline-flex"]) .brand-lockup { display: none; }
+}
 .brand-lockup small {
   font-family: var(--font-mono);
   font-size: 9px;
