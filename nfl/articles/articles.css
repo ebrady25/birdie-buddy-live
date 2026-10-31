@@ -182,6 +182,10 @@
 .art-page .art-hero-img.is-card { max-width: var(--art-measure); }
 .art-hero-img.has-img.is-card { aspect-ratio: 1200 / 630; }
 .art-hero-img.is-card > img { object-fit: contain; }
+/* 10/31: the card is the header; the byline sits just under it */
+.art-page .art-head.is-card-head { padding: 0; }
+.art-page .art-hero-img.is-card + .art-byline { max-width: var(--art-measure); margin: calc(-1 * var(--space-5)) auto var(--space-6); }
+@media (max-width: 767px) { .art-page .art-hero-img.is-card + .art-byline { margin-top: calc(-1 * var(--space-3)); } }
 @media (min-width: 900px) {
   .art-index .art-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
