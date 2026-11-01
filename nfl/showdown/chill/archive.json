@@ -1,7 +1,19 @@
 {
  "generated_by": "codex/showdown/chill_page.py",
- "updated_et": "2026-10-29T19:15-04:00",
+ "updated_et": "2026-11-01T09:01-05:00",
  "reads": [
+  {
+   "slug": "2026-w8-snf-phi-was",
+   "path": "nfl/showdown/chill/2026-w8-snf-phi-was/",
+   "season": 2026,
+   "week": 8,
+   "window": "SNF",
+   "game": "PHI@WAS",
+   "away": "PHI",
+   "home": "WAS",
+   "kickoff_et": "2026-11-01T20:20:00-05:00",
+   "updated_et": "2026-11-01T09:01-05:00"
+  },
   {
    "slug": "2026-w8-tnf-car-gb",
    "path": "nfl/showdown/chill/2026-w8-tnf-car-gb/",
