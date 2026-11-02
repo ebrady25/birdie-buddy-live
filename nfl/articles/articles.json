@@ -1,6 +1,43 @@
 {
  "articles": [
   {
+   "slug": "2026-week-8-mnf-chi-sea",
+   "href": "2026-week-8-mnf-chi-sea.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-mnf-chi-sea",
+   "title": "MNF showdown: Smith-Njigba is the chalk captain and still underowned",
+   "dek": "Jaxon Smith-Njigba is the field's top captain at 21%, but our sim makes him the optimal captain 28% of the time.",
+   "slot": "MNF",
+   "week": 8,
+   "season": 2026,
+   "date": "2026-11-02",
+   "tldr": [
+    "Start with Jaxon Smith-Njigba at captain: 28% captain optimal against 21% projected captain ownership.",
+    "Eat Sam Darnold in FLEX: a projected 47% owned, but he's in 53% of optimal lineups.",
+    "Fade Colston Loveland at a projected 36% FLEX ownership; AJ Barner at 24% is the cheaper pivot."
+   ],
+   "game": "CHI@SEA",
+   "kickoff_et": "2026-11-02T20:15:00-05:00",
+   "published_utc": "2026-11-02T22:01:59+00:00",
+   "card_stats": [
+    [
+     "SEA −3.0",
+     "Favorite"
+    ],
+    [
+     "46.5",
+     "Game total"
+    ],
+    [
+     "24.8–21.6",
+     "Team totals SEA–CHI"
+    ],
+    [
+     "Mon 8:15",
+     "Kickoff ET"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-8-friday",
    "href": "2026-week-8-friday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-friday",
@@ -111,5 +148,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-10-30T20:04:38+00:00"
+ "updated_utc": "2026-11-02T22:01:59+00:00"
 }
