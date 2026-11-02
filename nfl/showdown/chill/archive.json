@@ -1,7 +1,19 @@
 {
  "generated_by": "codex/showdown/chill_page.py",
- "updated_et": "2026-11-01T19:06-05:00",
+ "updated_et": "2026-11-02T16:59-05:00",
  "reads": [
+  {
+   "slug": "2026-w8-mnf-chi-sea",
+   "path": "nfl/showdown/chill/2026-w8-mnf-chi-sea/",
+   "season": 2026,
+   "week": 8,
+   "window": "MNF",
+   "game": "CHI@SEA",
+   "away": "CHI",
+   "home": "SEA",
+   "kickoff_et": "2026-11-02T20:15:00-05:00",
+   "updated_et": "2026-11-02T16:59-05:00"
+  },
   {
    "slug": "2026-w8-snf-phi-was",
    "path": "nfl/showdown/chill/2026-w8-snf-phi-was/",
