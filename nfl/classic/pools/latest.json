@@ -1,9 +1,9 @@
 {
- "id": "2026-w8-main",
- "file": "2026-w8-main.json",
- "label": "Week 8 main",
+ "id": "2026-w9-main",
+ "file": "2026-w9-main.json",
+ "label": "Week 9 main",
  "season": 2026,
- "week": 8,
- "as_of": "2026-11-01 09:25 ET",
- "n_players": 321
+ "week": 9,
+ "as_of": "2026-11-03 10:00 ET",
+ "n_players": 295
 }
