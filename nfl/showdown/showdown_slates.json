@@ -1,6 +1,6 @@
 {
   "week": "2026 Week 8",
-  "generated_at": "2026-10-29T11:00:34-04:00",
+  "generated_at": "2026-10-30T15:15:16-04:00",
   "sources": {
     "players": "DraftKings public lobby + draftables API",
     "lines": "The Odds API (median of US books)",
@@ -8,44 +8,6 @@
     "own": "BirdieBuddy model v1 (trained on DK standings) — rough; our own model only"
   },
   "slates": [
-    {
-      "id": "w8_car_gb",
-      "label": "CAR @ GB · TNF",
-      "fav": "GB",
-      "dog": "CAR",
-      "spread": 3.5,
-      "total": 47.0,
-      "env": "outdoor_mild",
-      "players": {
-        "fav": {
-          "QB": "Love",
-          "RB": "Jacobs",
-          "WR1": "Watson",
-          "TE1": "Kraft",
-          "K": "Smack",
-          "DST": "Packers"
-        },
-        "dog": {
-          "QB": "Young",
-          "RB": "Hubbard",
-          "WR1": "McMillan",
-          "TE1": "Waller",
-          "K": "Fitzgerald",
-          "DST": "Panthers"
-        }
-      },
-      "week": "2026 W8",
-      "kickoff": "2026-10-29T20:15:00",
-      "roof": "outdoors",
-      "wind": 6.4,
-      "temp": 47,
-      "line_source": "The Odds API",
-      "roof_source": "nflverse",
-      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
-      "dk_draft_group": 155596,
-      "players_source": "DraftKings draftables API · draft group 155596",
-      "tier": "primetime"
-    },
     {
       "id": "w8_ari_dal",
       "label": "ARI @ DAL · Sun 1pm",
@@ -75,8 +37,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 5.1,
-      "temp": 77,
+      "wind": 4.8,
+      "temp": 75,
       "line_source": "The Odds API",
       "roof_source": "DraftKings (retractable roof, nflverse undecided)",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -94,20 +56,20 @@
       "fav": "TB",
       "dog": "ATL",
       "spread": 2.5,
-      "total": 44.5,
+      "total": 43.5,
       "env": "wind_10_14",
       "players": {
         "fav": {
           "QB": "Mayfield",
           "RB": "Irving",
-          "WR1": "Egbuka",
+          "WR1": "Godwin",
           "TE1": "Otton",
           "K": "McLaughlin",
           "DST": "Buccaneers"
         },
         "dog": {
           "QB": "Penix",
-          "RB": "B. Robinson",
+          "RB": "Robinson",
           "WR1": "London",
           "TE1": "Pitts",
           "K": "Folk",
@@ -117,8 +79,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 14.2,
-      "temp": 83,
+      "wind": 11.8,
+      "temp": 81,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -159,8 +121,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 2.8,
-      "temp": 59,
+      "wind": 4.9,
+      "temp": 63,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -177,7 +139,7 @@
       "label": "TEN @ CIN · Sun 1pm",
       "fav": "CIN",
       "dog": "TEN",
-      "spread": 11.0,
+      "spread": 12.5,
       "total": 46.5,
       "env": "outdoor_mild",
       "players": {
@@ -201,8 +163,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 2.3,
-      "temp": 65,
+      "wind": 6.9,
+      "temp": 61,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -212,7 +174,7 @@
       "attack": {
         "on": true,
         "reasons": [
-          "CIN -11: a 10+ favorite blows it out 48% of the time (n = 343 games)"
+          "CIN -12.5: a 10+ favorite blows it out 48% of the time (n = 343 games)"
         ]
       }
     },
@@ -245,8 +207,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 5.1,
-      "temp": 63,
+      "wind": 6.2,
+      "temp": 65,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -331,8 +293,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 13.7,
-      "temp": 80,
+      "wind": 13.3,
+      "temp": 77,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -351,7 +313,7 @@
       "label": "LV @ NYJ · Sun 1pm",
       "fav": "NYJ",
       "dog": "LV",
-      "spread": 1.5,
+      "spread": 1.0,
       "total": 45.5,
       "env": "outdoor_mild",
       "players": {
@@ -375,7 +337,7 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T13:00:00",
       "roof": "outdoors",
-      "wind": 3.7,
+      "wind": 3.9,
       "temp": 59,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
@@ -459,8 +421,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T16:25:00",
       "roof": "outdoors",
-      "wind": 7.2,
-      "temp": 61,
+      "wind": 2.9,
+      "temp": 65,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -480,8 +442,8 @@
       "fav": "NE",
       "dog": "MIA",
       "spread": 7.0,
-      "total": 43.5,
-      "env": "wind_10_14",
+      "total": 43.0,
+      "env": "wind_15_plus",
       "players": {
         "fav": {
           "QB": "Maye",
@@ -503,8 +465,8 @@
       "week": "2026 W8",
       "kickoff": "2026-11-01T16:25:00",
       "roof": "outdoors",
-      "wind": 13.6,
-      "temp": 80,
+      "wind": 17.8,
+      "temp": 81,
       "line_source": "The Odds API",
       "roof_source": "nflverse",
       "weather_source": "Open-Meteo forecast (3 h from kickoff)",
@@ -512,9 +474,87 @@
       "players_source": "DraftKings draftables API · draft group 155606",
       "tier": "sunday",
       "attack": {
-        "on": false,
-        "reasons": []
+        "on": true,
+        "reasons": [
+          "wind 15+: over rate 44% (n = 204)"
+        ]
       }
+    },
+    {
+      "id": "w8_phi_was",
+      "label": "PHI @ WAS · SNF",
+      "fav": "WAS",
+      "dog": "PHI",
+      "spread": 6.0,
+      "total": 40.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Daniels",
+          "RB": "White",
+          "WR1": "Diggs",
+          "TE1": "Okonkwo",
+          "K": "Stevens",
+          "DST": "Commanders"
+        },
+        "dog": {
+          "QB": "McKee",
+          "RB": "Barkley",
+          "WR1": "Smith",
+          "TE1": "Goedert",
+          "K": "Elliott",
+          "DST": "Eagles"
+        }
+      },
+      "week": "2026 W8",
+      "kickoff": "2026-11-01T20:20:00",
+      "roof": "outdoors",
+      "wind": 4.0,
+      "temp": 52,
+      "line_source": "The Odds API",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 155951,
+      "players_source": "DraftKings draftables API · draft group 155951",
+      "tier": "primetime"
+    },
+    {
+      "id": "w8_chi_sea",
+      "label": "CHI @ SEA · MNF",
+      "fav": "SEA",
+      "dog": "CHI",
+      "spread": 3.0,
+      "total": 46.5,
+      "env": "outdoor_mild",
+      "players": {
+        "fav": {
+          "QB": "Darnold",
+          "RB": "Wilson",
+          "WR1": "Smith-Njigba",
+          "TE1": "Barner",
+          "K": "Myers",
+          "DST": "Seahawks"
+        },
+        "dog": {
+          "QB": "Williams",
+          "RB": "Swift",
+          "WR1": "Burden",
+          "TE1": "Loveland",
+          "K": "Santos",
+          "DST": "Bears"
+        }
+      },
+      "week": "2026 W8",
+      "kickoff": "2026-11-02T20:15:00",
+      "roof": "outdoors",
+      "wind": 1.8,
+      "temp": 49,
+      "line_source": "The Odds API",
+      "roof_source": "nflverse",
+      "weather_source": "Open-Meteo forecast (3 h from kickoff)",
+      "dk_draft_group": 155609,
+      "players_source": "DraftKings draftables API · draft group 155609",
+      "tier": "primetime"
     },
     {
       "id": "det_buf",
