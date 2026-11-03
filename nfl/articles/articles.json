@@ -1,6 +1,42 @@
 {
  "articles": [
   {
+   "slug": "2026-week-8-what-we-learned",
+   "href": "2026-week-8-what-we-learned.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-what-we-learned",
+   "title": "Week 8 what we learned: the Burrow stack we called won the slate",
+   "dek": "Joe Burrow, Ja'Marr Chase and Tee Higgins, our get-different stack all week, were in 79% of top-1% lineups and under 3% of the field. Our top fade, Zay Flowers, scored zero.",
+   "slot": "Recap",
+   "week": 8,
+   "season": 2026,
+   "date": "2026-11-03",
+   "tldr": [
+    "Burrow, Chase and Higgins scored 120.1 points together. The stack was in 79% of top-1% lineups in the biggest GPPs, against 2.8% of the field.",
+    "Our full Friday build, Burrow, Chase, Higgins and Tony Pollard, won a 118,758-entry GPP outright and was in 34% of the top 0.1%, from 0.3% of the field.",
+    "The Zay Flowers fade was right: the slate's most popular player (34% owned) scored 0.0. The Puka Nacua pivot scored 25.0.",
+    "Wan'Dale Robinson, our $4,200 pivot off Omar Cooper Jr. (0.0 points), was in 45% of top-1% lineups."
+   ],
+   "published_utc": "2026-11-03T18:48:44+00:00",
+   "card_stats": [
+    [
+     "79%",
+     "Top-1% lineups with Burrow, Chase, Higgins"
+    ],
+    [
+     "2.8%",
+     "Field lineups with that stack"
+    ],
+    [
+     "120.1",
+     "DK points from the three"
+    ],
+    [
+     "0.0",
+     "Zay Flowers at 34% owned"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-8-mnf-chi-sea",
    "href": "2026-week-8-mnf-chi-sea.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-mnf-chi-sea",
@@ -148,5 +184,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-02T22:01:59+00:00"
+ "updated_utc": "2026-11-03T18:48:44+00:00"
 }

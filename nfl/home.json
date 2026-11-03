@@ -1,10 +1,10 @@
 {
  "season": 2026,
- "week": 8,
- "week_label": "Week 8",
- "stage": "sun_am",
- "stage_label": "Sunday AM update",
- "as_of": "2026-11-01 09:25 ET",
+ "week": 9,
+ "week_label": "Week 9",
+ "stage": "tue",
+ "stage_label": "Early numbers",
+ "as_of": "2026-11-03 10:00 ET",
  "counts": {
   "games": 11,
   "players": 94,
@@ -12,14 +12,11 @@
   "chalk": 12
  },
  "article": {
-  "title": "MNF showdown: Smith-Njigba is the chalk captain and still underowned",
-  "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-mnf-chi-sea",
-  "date": "2026-11-02",
-  "slot": "MNF",
+  "title": "Week 8 what we learned: the Burrow stack we called won the slate",
+  "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-what-we-learned",
+  "date": "2026-11-03",
+  "slot": "Recap",
   "week": 8
  },
- "results": {
-  "week": 7,
-  "href": "nfl/results/2026-w7/"
- }
+ "results": null
 }
