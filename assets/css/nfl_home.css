@@ -387,10 +387,10 @@ body.nh-page .nfl-footer { margin-top: 0; }
 }
 
 /* Scroll reveal */
-.nh [data-reveal] {
-  opacity: 0; transform: translateY(36px);
-  transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1), filter 1s ease;
-  filter: blur(6px);
+.nh [data-reveal] {   /* 11/04: shorter + lighter so a fast scroll never lands on blank sections */
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .5s cubic-bezier(0.16,1,0.3,1), transform .5s cubic-bezier(0.16,1,0.3,1), filter .5s ease;
+  filter: blur(2px);
 }
 .nh [data-reveal].revealed { opacity: 1; transform: translateY(0); filter: blur(0); }
 .nh [data-reveal-delay="1"] { transition-delay: 0.08s; }
@@ -413,9 +413,30 @@ body.nh-page .nfl-footer { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) {
   .nh *, .nh *::before, .nh *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .nh .hero h1 .char { transform: none; opacity: 1; filter: none; }
+  .nh [data-reveal] { opacity: 1; transform: none; filter: none; }
 }
 
 /* Home cleanup 10/29: phrase values instead of counts; tighter gap into the final block */
 .nh .edge-card .edge-value.edge-phrase { font-size: 24px; line-height: 1.15; }
 .nh .section.section-tools { padding-bottom: var(--s-12); }
 .nh .section-tools + .final-lock { padding-top: var(--s-16); }
+
+/* next primetime game card (2026-11-04) */
+.nextup { position: relative; z-index: 2; display: inline-flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 6px 12px; margin: 22px auto 0; padding: 12px 18px; max-width: min(560px, 92vw);
+  border-radius: 14px; border: 1px solid rgba(212,168,67,.45); background: rgba(12,14,18,.72); backdrop-filter: blur(6px); color: #e8e6df; text-decoration: none; font-size: 14px; }
+.nextup:hover { border-color: rgba(212,168,67,.8); }
+.nextup-tag { font: 600 11px var(--font-mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: #e2b54e; }
+.nextup-game { font-weight: 800; font-size: 17px; color: #fff; }
+.nextup-meta { color: #a3aab6; font-size: 13px; }
+.nextup-cta { color: #f2d488; font-weight: 600; flex-basis: 100%; text-align: center; }
+
+/* proof strip (2026-11-04) */
+.trust { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; max-width: 1100px; margin: 0 auto 8px; padding: 14px 20px; border-radius: 16px;
+  border: 1px solid rgba(95,208,143,.35); background: rgba(95,208,143,.06); color: #dfe7e2; text-decoration: none; }
+.trust[hidden] { display: none; }
+.trust:hover { border-color: rgba(95,208,143,.6); }
+.trust-tag { font: 600 11px var(--font-mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: #5fd08f; }
+.trust-head { font-weight: 700; color: #fff; font-size: 16px; }
+.trust-bits { color: #a3aab6; font-size: 14px; }
+.trust-cta { color: #9fe3bb; font-size: 14px; font-weight: 600; margin-left: auto; }
+@media (max-width: 700px) { .trust { margin: 0 16px 8px; } .trust-cta { margin-left: 0; } }

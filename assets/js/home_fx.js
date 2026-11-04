@@ -290,7 +290,7 @@
       el.querySelectorAll('[data-count]').forEach(animateCount);
       observer.unobserve(el);
     });
-  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+  }, { threshold: 0.02, rootMargin: '0px 0px 12% 0px' });   // 11/04: reveal just before a block enters the screen
   document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
   // live number arriving after (or before) its block is revealed

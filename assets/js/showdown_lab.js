@@ -400,7 +400,7 @@ window.BBI = window.BBI || {};
       <div class="sd-gauge-row">
         <div class="sd-gauge ${v ? v.cls : 'idle'}" id="sdGauge">
           <svg viewBox="0 0 128 128" aria-hidden="true"><g transform="rotate(-90 64 64)"><circle class="trk" cx="64" cy="64" r="52"/><circle class="val" data-m="lab.gauge" cx="64" cy="64" r="52" style="stroke-dasharray:${((sc || 0) / 100 * C).toFixed(2)} ${C.toFixed(2)}"/></g></svg>
-          <div class="sd-gauge-num">${sc != null ? FX.num('lab.score', sc, 0, { from: 0 }) : '—'}<small>codex score</small></div>
+          <div class="sd-gauge-num">${sc != null ? FX.num('lab.score', sc, 0, { from: 0 }) : '—'}<small>BirdieBuild score</small></div>
         </div>
         <div class="sd-gauge-txt">
           <span class="sd-lab-k">Verdict</span>
@@ -416,7 +416,7 @@ window.BBI = window.BBI || {};
         <div class="sd-sal-cap"><span>engine min ${money(minSal)}</span><span>cap $50,000</span></div>
         ${stuck ? `<div class="sd-sal-warn">No one left fits: the ${6 - n} cheapest remaining player${6 - n > 1 ? 's' : ''} cost ${money(cheapest.slice(0, 6 - n).reduce((a, b) => a + b, 0))} and you have ${money(CAP - used)}. Swap someone down.</div>` : ''}
       </div>
-      ${sug.length ? `<div class="sd-sug"><span class="sd-lab-k">${lab.cpt ? 'Best next add' : 'Codex captains for this slate'}</span><div class="sd-sug-row">${sug.map(s => `<button type="button" class="sd-sug-btn" data-lab-sug="${esc(s.name)}" data-as="${s.as}" title="${esc(s.tip)}"><span class="sd-pos pos-${esc(engine.P.get(s.name).pos)}">${esc(engine.P.get(s.name).pos)}</span>${esc(s.name)}<em>${esc(s.val)}</em></button>`).join('')}</div></div>` : ''}
+      ${sug.length ? `<div class="sd-sug"><span class="sd-lab-k">${lab.cpt ? 'Best next add' : 'BirdieBuild captains for this slate'}</span><div class="sd-sug-row">${sug.map(s => `<button type="button" class="sd-sug-btn" data-lab-sug="${esc(s.name)}" data-as="${s.as}" title="${esc(s.tip)}"><span class="sd-pos pos-${esc(engine.P.get(s.name).pos)}">${esc(engine.P.get(s.name).pos)}</span>${esc(s.name)}<em>${esc(s.val)}</em></button>`).join('')}</div></div>` : ''}
       <div class="sd-lab-actions">
         <button type="button" class="btn btn-sm" data-lab-act="paste">Paste a lineup</button>
         <button type="button" class="btn btn-sm" data-lab-act="copy" ${n === 6 ? '' : 'disabled'}>Copy lineup</button>
@@ -430,7 +430,7 @@ window.BBI = window.BBI || {};
     lab.prevSlots = { cpt: lab.cpt, ...Object.fromEntries(lab.flex.map((nm, i) => ['f' + i, nm])) };
     renderReport(r, n);
     SD().setLabScore(r ? { score: sc, verdict: v.title, legal: !r.hard.length, partial: n < 6 } : null);
-    announce(r ? `Lineup ${n} of 6 · codex score ${sc} · ${v.title}${tag ? ` · plays script ${tag}` : ''}` : n ? `Lineup ${n} of 6` : '');
+    announce(r ? `Lineup ${n} of 6 · BirdieBuild score ${sc} · ${v.title}${tag ? ` · plays script ${tag}` : ''}` : n ? `Lineup ${n} of 6` : '');
     // lab_lineup_complete: once per six-man lineup the reader built (a lineup restored at load doesn't count).
     const done = n === 6 && r ? `${lab.source}|${lab.poolId}|${lab.cpt}|${[...lab.flex].sort().join(',')}` : '';
     if (done && lab.completed !== done) {
@@ -580,8 +580,8 @@ window.BBI = window.BBI || {};
           ${cutBlock(X, n, has)}
         </div>
       </div>
-      <details class="sd-fold"><summary>How the codex score works <span class="sd-fold-arrow">▸</span></summary>
-        <p class="sd-lede" style="margin-top:6px">Codex score = 50 + 50 × (story fit − penalties), held to 0–100. Story fit = share of the captain template's <em>include</em> items present − ½ × share of its <em>avoid</em> items present; penalties are the soft rules and overlay adjustments above, straight from rules.json. These are the same lineup terms <code>rules_engine.py</code> adds to its sim ranking (the JS engine is parity-tested against it on 38k lineups). A hard-rule break rejects the lineup whatever the score.</p></details>`;
+      <details class="sd-fold"><summary>How the BirdieBuild score works <span class="sd-fold-arrow">▸</span></summary>
+        <p class="sd-lede" style="margin-top:6px">BirdieBuild score = 50 + 50 × (story fit − penalties), held to 0–100. Story fit = share of the captain template's <em>include</em> items present − ½ × share of its <em>avoid</em> items present; penalties are the soft rules and overlay adjustments above, straight from rules.json. These are the same lineup terms <code>rules_engine.py</code> adds to its sim ranking (the JS engine is parity-tested against it on 38k lineups). A hard-rule break rejects the lineup whatever the score.</p></details>`;
     FX.morph(prev, host);
   };
 
@@ -1071,7 +1071,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
           <p class="sd-lede">Every legal captain + five flex from ${esc(pool)}'s top ${SB.TOP} players (by ${has.proj ? 'projection' : 'salary'}, plus each team's K and DST), ${money(H.min_salary_used)}–${money(H.max_salary ?? CAP)}, every hard rule, graded by the same engine as the Lab and ranked by ${RANK_LABEL[mode]}. ${N > 1 ? `Then the engine picks your ${N}-lineup batch with its portfolio rules and your Step 3 plan (${plan}).` : 'Tap a result to load it into the Lab.'}</p>
           ${simNeed(has)}</div>
         <div class="sd-auto-go">
-          ${has.proj ? `<span class="sd-rank-by"><span class="sd-lab-k">Rank by</span><span class="seg" role="group" aria-label="Rank by">${[['codex', 'Codex fit'], ['top1', 'Top-1% chance'], ['blend', 'Blend'], ['proj', 'Projection']].map(([k, l]) => { const off = (k === 'top1' || k === 'blend') && !simReady();
+          ${has.proj ? `<span class="sd-rank-by"><span class="sd-lab-k">Rank by</span><span class="seg" role="group" aria-label="Rank by">${[['codex', 'BirdieBuild'], ['top1', 'Top-1% chance'], ['blend', 'Blend'], ['proj', 'Projection']].map(([k, l]) => { const off = (k === 'top1' || k === 'blend') && !simReady();
             return `<button type="button" class="${mode === k ? 'active' : ''}" aria-pressed="${mode === k}" data-auto="mode" data-mode="${k}"${off ? ` disabled title="${simOk() ? 'The sim runs right after the search' : 'Needs the sim: a projections file and the role correlations'}"` : ''}>${l}</button>`; }).join('')}</span></span>` : ''}
           <button type="button" class="btn btn-primary btn-sm" data-auto="go" ${engine && !running ? '' : 'disabled'}>${A && A.st && !running ? 'Search again' : N > 1 ? `Build ${N} lineups` : 'Build it'}</button>
         </div>
@@ -1110,7 +1110,7 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
       </div>` : ''}
       <span class="sd-lab-k">Top lineups <small>by ${esc(RANK_LABEL[mode])} · tap one to load it into the Lab · at most 3 per captain</small></span>
       <div class="sd-auto-cards">${top.map(autoCard).join('') || '<div class="sd-unlock">No legal lineup in this pool at this line.</div>'}</div>
-      <div class="sd-caption">n = ${st.legal.toLocaleString('en-US')} legal lineups, each graded by the Lab's engine (codex score = 50 + 50 × (story fit − penalties))${simReady() ? ` · blend = the mean of each lineup's percentile rank on codex fit (unclamped fit − penalties) and on top-1% chance among the ${(lab.auto.sim.n || 0).toLocaleString('en-US')} kept lineups, 0–100` : ''} · ties: unclamped fit − penalties, ${has.proj ? 'projection, ' : ''}salary used · kept ${(st.kept || 0).toLocaleString('en-US')} (best ${SB.PER_BUCKET} per script × captain) for the batch · players outside the top ${SB.TOP} never enter a build${skipped.length ? ` · ${skipped.length} captain${skipped.length > 1 ? 's' : ''} ruled out up front (${esc(skipped.map(x => `${x[0]}: ${x[1]}`).join('; '))})` : ''}</div>`;
+      <div class="sd-caption">n = ${st.legal.toLocaleString('en-US')} legal lineups, each graded by the Lab's engine (BirdieBuild score = 50 + 50 × (story fit − penalties))${simReady() ? ` · blend = the mean of each lineup's percentile rank on codex fit (unclamped fit − penalties) and on top-1% chance among the ${(lab.auto.sim.n || 0).toLocaleString('en-US')} kept lineups, 0–100` : ''} · ties: unclamped fit − penalties, ${has.proj ? 'projection, ' : ''}salary used · kept ${(st.kept || 0).toLocaleString('en-US')} (best ${SB.PER_BUCKET} per script × captain) for the batch · players outside the top ${SB.TOP} never enter a build${skipped.length ? ` · ${skipped.length} captain${skipped.length > 1 ? 's' : ''} ruled out up front (${esc(skipped.map(x => `${x[0]}: ${x[1]}`).join('; '))})` : ''}</div>`;
     if (fresh) setTimeout(simStep, 0);   // the sim follows the search (a no-op once it has run for this pool × cut)
     if (autoDrawn.get(host) === html) return;   // every Lab click re-renders: keep the DOM (and an open selection log) when nothing changed
     const open = host.querySelector('.sd-auto-batch details[open]'), openSim = host.querySelector('.sd-sim details[open]');
@@ -1260,12 +1260,12 @@ onmessage = e => { const m = e.data; if (m.data) D = m.data;
       <div class="sd-batch-sum">
         <div><span>Lineups</span><b>${FX.num('b.n', rows.length, 0, { from: 0 })}</b><small>${B.bad ? `${B.bad} rows unmatched` : 'all matched'}</small></div>
         <div><span>Legal</span><b class="${legal.length === rows.length ? 'pos' : 'neg'}">${FX.num('b.legal', legal.length, 0, { from: 0 })}</b><small>${rows.length - legal.length} rejected</small></div>
-        <div><span>Avg codex score</span><b>${FX.num('b.avg', avg, 0, { from: 0 })}</b><small>of 100</small></div>
+        <div><span>Avg BirdieBuild score</span><b>${FX.num('b.avg', avg, 0, { from: 0 })}</b><small>of 100</small></div>
         <div><span>Script mix</span><b>${Object.entries(tags).map(([k, v]) => `${v}${k}`).join(' ')}</b><small>plan ${['A', 'B', 'C', 'D'].map(k => Math.round(SD().derive().alloc[k])).join('/')}</small></div>
       </div>
-      <span class="sd-lab-k">Portfolio report <small>every cap in rules.json, for this batch${bbOwn() && engine && engine.has.own ? ' · ownership: BB proj (rough)' : ''}</small></span>
+      <span class="sd-lab-k">Portfolio report <small>every cap in our playbook, for this batch${bbOwn() && engine && engine.has.own ? ' · ownership: BB proj (rough)' : ''}</small></span>
       <div class="sd-port">${B.report.map(c => `<div class="sd-port-row ${c.status}"><i>${c.status === 'pass' ? '✓' : c.status === 'warn' ? '!' : '✗'}</i><span>${esc(c.label)}<small>${esc(c.detail)}</small></span><b>${esc(c.value)}</b><em>${esc(c.target)}</em></div>`).join('')}</div>
-      ${isPool ? `<div class="sd-bookcta"><div><b>${rows.length} lineups is a pool, not a book.</b><span>Let the engine pick your ${entries}-lineup book the way <code>rules_engine.py</code> does: legal only, top half of the pool, dupe gate, captain caps, K/DST/both-QB shares, script quotas, forced 5-1s, captain coverage.</span></div><button type="button" class="btn btn-primary btn-sm" data-pro="book">Pick my ${entries}-lineup book</button></div>` : ''}
+      ${isPool ? `<div class="sd-bookcta"><div><b>${rows.length} lineups is a pool, not a book.</b><span>Let the engine pick your ${entries}-lineup book the way our engine does: legal only, top half of the pool, dupe gate, captain caps, K/DST/both-QB shares, script quotas, forced 5-1s, captain coverage.</span></div><button type="button" class="btn btn-primary btn-sm" data-pro="book">Pick my ${entries}-lineup book</button></div>` : ''}
       ${book ? renderBook(book) : ''}
       <span class="sd-lab-k">Lineups <small>tap one to open it in the Lab</small></span>
       <div class="sd-blist">${rows.slice(0, 300).map(r => `<button type="button" class="sd-bl ${r.hard.length ? 'bad' : ''}" data-pro-load="${r.L.idx}">

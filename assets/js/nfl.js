@@ -29,7 +29,8 @@ window.BBI = window.BBI || {};
   const EXTRA = {
     results: { href: 'nfl/results/', label: 'Results', sub: 'how our numbers did' },
     lock:    { href: 'nfl/lock/',    label: 'Before You Lock', sub: 'Sunday outs + late news' },
-    players: { href: 'nfl/players/', label: 'Find a player', sub: 'search any name' }
+    players: { href: 'nfl/players/', label: 'Find a player', sub: 'search any name' },
+    learn:   { href: 'nfl/learn/',   label: 'How it works', sub: '5-minute guide + glossary' }
   };
   // older page keys (generated pages, archives) -> the new ones, so nothing needs regenerating to highlight right
   const ALIAS = {
@@ -117,6 +118,80 @@ window.BBI = window.BBI || {};
     });
   };
 
+  // ---------- WEEK STRIP (2026-11-04): the week's publishing rhythm, ticked only once each piece is actually live ----------
+  // Reads two small public files: nfl/home.json (week + stage of the live slate page) and nfl/articles/articles.json (what's
+  // published). Times are the usual ET slots; a step without its file yet shows as next/upcoming, never as done.
+  const STAGE_RANK = { tue: 0, wed: 1, fri: 2, sat: 2, sun_am: 3, sun_check: 4, sun_late: 5 };
+  window.BBI.renderNflWeekStrip = async (nav) => {
+    if (!nav || nav.querySelector('.nfl-week')) return;
+    try {
+      const get = (u) => fetch(u + '?v=' + Math.floor(Date.now() / 300000)).then(r => r.ok ? r.json() : null).catch(() => null);
+      const [home, arts] = await Promise.all([get('nfl/home.json'), get('nfl/articles/articles.json')]);
+      if (!home || !home.week) return;
+      const wk = home.week, L = (arts && arts.articles) || [];
+      const art = (slot, w = wk) => L.find(a => a.week === w && String(a.slot).toLowerCase() === slot);
+      const rank = STAGE_RANK[home.stage] ?? -1;
+      const steps = [
+        { lbl: 'Early numbers', when: 'Tue', done: rank >= 0, href: 'nfl/slate/' },
+        { lbl: 'First look', when: 'Wed ~7 pm', a: art('wed') },
+        { lbl: 'Primetime Chill', when: 'game day 10 am', href: 'nfl/showdown/next/', soft: true },
+        { lbl: 'Final call', when: 'Fri ~4 pm', a: art('fri') },
+        { lbl: 'Sunday update', when: 'Sun 9:30 am', a: art('sun') },
+        { lbl: 'Before You Lock', when: 'Sun 12 pm', done: rank >= 4, href: 'nfl/lock/' },
+        { lbl: 'What we learned', when: 'Mon', a: art('recap') }
+      ].map(s => s.a ? { ...s, done: true, href: 'nfl/articles/' + (s.a.href || (s.a.slug + '.html')) } : s);
+      const next = steps.findIndex(s => !s.done && !s.soft);
+      const esc = (x) => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      const item = (s, i) => {
+        const cls = s.done ? 'is-done' : i === next ? 'is-next' : 'is-later';
+        const body = `<span class="nfl-week-dot" aria-hidden="true">${s.done ? '✓' : ''}</span><span class="nfl-week-lbl">${esc(s.lbl)}</span><span class="nfl-week-when">${s.done ? 'live' : esc(s.when)}</span>`;
+        return s.href && (s.done || s.soft) ? `<a class="nfl-week-step ${cls}" href="${s.href}">${body}</a>` : `<span class="nfl-week-step ${cls}">${body}</span>`;
+      };
+      const strip = document.createElement('div');
+      strip.className = 'nfl-week';
+      strip.setAttribute('aria-label', `${home.week_label || 'Week ' + wk} schedule`);
+      strip.innerHTML = `<div class="nfl-week-inner"><span class="nfl-week-wk">${esc(home.week_label || 'Week ' + wk)}</span>${steps.map(item).join('')}</div>`;
+      nav.appendChild(strip);
+      const nx = strip.querySelector('.is-next'), row = strip.querySelector('.nfl-week-inner');
+      if (nx && row.scrollWidth > row.clientWidth) row.scrollLeft = Math.max(0, nx.offsetLeft - 80);
+    } catch (e) { /* the strip is optional: never break the header */ }
+  };
+
+  // ---------- NEXT PRIMETIME GAME (2026-11-04): one source for the home "Next up" card, /nfl/showdown/next/ and the
+  // "this was last game" note on an older Chill page. showdown_slates.json kickoffs are naive ET strings.
+  const etNow = () => { const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hourCycle: 'h23',
+    year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date()).map(x => [x.type, x.value]));
+    return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}:00`; };
+  const SLOT_OF = { 4: 'tnf', 0: 'snf', 1: 'mnf' };   // JS getDay() of the kickoff date
+  window.BBI.nflNextGame = window.BBI.nflNextGame || (() => {
+    let memo = null;
+    return () => memo || (memo = fetch('nfl/showdown/showdown_slates.json?v=' + Math.floor(Date.now() / 300000)).then(r => r.ok ? r.json() : null).then(async d => {
+      if (!d || !d.slates) return null;
+      const cut = new Date(new Date(etNow() + 'Z').getTime() - 3.5 * 3600e3).toISOString().slice(0, 19);   // still "next" until ~3.5 h after kick
+      const g = d.slates.filter(s => s.tier === 'primetime' && s.kickoff && !s.replay && s.kickoff >= cut).sort((a, b) => a.kickoff.localeCompare(b.kickoff))[0];
+      if (!g) return null;
+      const [a, h] = g.label.split(' · ')[0].split(' @ ').map(x => x.trim());
+      const kd = new Date(g.kickoff + 'Z'), slot = SLOT_OF[kd.getUTCDay()] || 'pt';
+      const season = Number((g.week || '').slice(0, 4)) || kd.getUTCFullYear(), wk = Number(String(g.week || '').split('W')[1]) || null;
+      const chill = `nfl/showdown/chill/${season}-w${wk}-${slot}-${a.toLowerCase()}-${h.toLowerCase()}/`;
+      let chillLive = false;
+      try { chillLive = (await fetch(chill, { method: 'HEAD' })).ok; } catch (e) {}
+      const kick = kd.toLocaleString('en-US', { timeZone: 'UTC', weekday: 'short', hour: 'numeric', minute: '2-digit' });
+      return { id: g.id, a, h, fav: g.fav, spread: g.spread, total: g.total, slot: slot.toUpperCase(), kickoff: g.kickoff, kickLabel: kick + ' ET', chill, chillLive,
+               grind: `nfl/showdown/?slate=${encodeURIComponent(g.id)}`, lab: 'nfl/lab/?mode=showdown' };
+    }).catch(() => null));
+  })();
+  const chillNotice = async () => {
+    const g = await window.BBI.nflNextGame(); if (!g) return;
+    const here = (document.title || '').split(' Showdown')[0].trim();   // "CHI @ SEA Showdown in 5 minutes · ..."
+    if (!here || here === `${g.a} @ ${g.h}`) return;
+    const main = document.querySelector('main'); if (!main || main.querySelector('.nfl-nextnote')) return;
+    const n = document.createElement('a');
+    n.className = 'nfl-nextnote'; n.href = g.chillLive ? g.chill : 'nfl/showdown/next/';
+    n.innerHTML = `<b>This was ${here}.</b> Next up: ${g.a} @ ${g.h}, ${g.kickLabel}. ${g.chillLive ? 'Read the 5-minute Chill →' : 'Its Chill posts game day ~10 am ET →'}`;
+    main.prepend(n);
+  };
+
   // activeKey: a NAV key ('slate', 'lab', ...), 'parent:child' for a dropdown page ('playbooks:classic-chill'), or an
   // EXTRA key ('results', 'lock', 'players'). Old keys ('showdown', 'classic:chill', ...) still work through ALIAS.
   window.BBI.renderNflHeader = (activeKey) => {
@@ -156,6 +231,8 @@ window.BBI = window.BBI || {};
       </nav>`;
 
     wireDropdowns(mount);
+    window.BBI.renderNflWeekStrip(mount.querySelector('.nfl-nav-main'));
+    if (/^nfl\/showdown\/chill\//.test(here)) chillNotice();
 
     // player search (round 2): nfl_search.js + players.json load on first use only; once loaded, nfl_search.js
     // handles [data-nfl-search-open] clicks and the "/" key itself
@@ -242,6 +319,7 @@ window.BBI = window.BBI || {};
         link('nfl/articles/', 'Articles', 'The week in plain English', top === 'articles') +
         link(EXTRA.results.href, EXTRA.results.label, 'How our numbers did', top === 'results') +
         link(EXTRA.players.href, EXTRA.players.label, 'Search any name', top === 'players') +
+        link(EXTRA.learn.href, EXTRA.learn.label, '5-minute guide + glossary', top === 'learn') +
         link('golf/', 'Golf', 'The golf model') +
         link('nfl/', 'NFL home', '') + `</div>` +
         `<div class="nfl-msheet-label">Account</div><div class="nfl-msheet-grid">` +
@@ -292,7 +370,17 @@ window.BBI = window.BBI || {};
   window.BBI.renderNflFooter = (note) => {
     const mount = document.getElementById('site-footer');
     if (!mount) return;
-    mount.innerHTML = `
+    setTimeout(() => { if (window.BBI.signup) return window.BBI.signup.init();
+      if (document.getElementById('bbi-signup-js')) return; const s = document.createElement('script'); s.id = 'bbi-signup-js'; s.src = 'assets/js/signup.js?v=1'; s.async = true; document.head.appendChild(s); }, 0);
+    // free newsletter signup (2026-11-04): hidden until signup.js says the Supabase table is live (SIGNUP_LIVE)
+    const signupBox = `
+      <form class="nfl-news" data-bb-signup="newsletter" hidden>
+        <div class="nfl-news-copy"><b>Get the Wednesday first look free.</b><span>Our stacks, values and fades for Sunday, in your inbox. No spam, unsubscribe anytime.</span></div>
+        <div class="nfl-news-row"><label class="nfl-sr" for="nflNewsEmail">Email</label><input id="nflNewsEmail" type="email" required placeholder="you@email.com" autocomplete="email"><button class="btn btn-primary" type="submit">Send it to me</button></div>
+        <input name="website" tabindex="-1" autocomplete="off" class="bb-hp" aria-hidden="true">
+        <div class="nfl-news-msg" data-bb-signup-msg role="status"></div>
+      </form>`;
+    mount.innerHTML = signupBox + `
       <footer class="nfl-footer">
         <div class="nfl-footer-inner">
           <div class="nfl-footer-brand">
@@ -306,6 +394,7 @@ window.BBI = window.BBI || {};
             <a class="footer-link" href="nfl/lab/">Lineup Lab</a>
             <a class="footer-link" href="${EXTRA.players.href}">Find a player</a>
             <a class="footer-link" href="${EXTRA.lock.href}">Before You Lock</a>
+            <a class="footer-link" href="${EXTRA.learn.href}">How it works</a>
           </div>
           <div class="nfl-footer-links">
             <div class="footer-heading">Playbooks</div>

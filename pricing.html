@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0034)http://localhost:8137/pricing.html -->
+<!-- saved from url=(0034)pricing.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,6 +62,13 @@
       border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5)}
     .faq summary{cursor:pointer;font-weight:600;color:var(--text-primary);font-size:var(--fs-sm)}
     .faq p{margin-top:var(--space-3);font-size:var(--fs-xs);color:var(--text-muted);line-height:1.6}
+    .bb-signup{margin-top:14px;text-align:left}.bb-signup label{display:block;font-size:var(--fs-sm);color:var(--text-secondary,#a3aab6);margin-bottom:8px}
+    .bb-signup-row{display:flex;gap:8px;flex-wrap:wrap}.bb-signup-row input{flex:1 1 200px;min-width:0;padding:11px 14px;border-radius:10px;border:1px solid var(--border-strong,#333);background:var(--bg-elevated,#14171d);color:inherit;font-size:16px}
+    .bb-signup-msg{margin-top:8px;font-size:var(--fs-sm)}.bb-signup-msg[data-state=ok]{color:var(--green-400,#5fd08f)}.bb-signup-msg[data-state=err]{color:var(--red-400,#ff7b72)}
+    .bb-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+    #oneCard [hidden],.mcp-card [hidden],.final-cta [hidden]{display:none!important}
+    .mcp-card{max-width:760px;margin:var(--space-12,48px) auto 0;padding:28px;border-radius:18px;border:1px solid var(--gold-700,#7a5c12);background:linear-gradient(160deg,rgba(212,168,67,.10),rgba(212,168,67,.02))}
+    .mcp-card h2{font-size:var(--fs-2xl,28px);margin:6px 0 10px}.mcp-list{margin:12px 0;padding-left:18px;line-height:1.7}.mcp-price{color:var(--gold-400,#e2b54e);font-weight:600}
   </style>
 <style>
     [data-reveal] { opacity: 0; transform: translateY(10px); transition: opacity 500ms cubic-bezier(0.22,1,0.36,1), transform 500ms cubic-bezier(0.22,1,0.36,1); }
@@ -362,7 +369,7 @@
   <div id="site-header">
       <nav class="site-nav">
         <div class="site-nav-inner">
-          <a href="http://localhost:8137/index.html" class="brand">
+          <a href="index.html" class="brand">
             <span class="brand-mark">B</span>
             <span class="brand-lockup">
               BirdieBuddy
@@ -378,37 +385,37 @@
                   </button>
                   <div class="nav-group-menu" role="menu">
                     
-                        <a class="nav-group-item " href="http://localhost:8137/rankings.html" role="menuitem">
+                        <a class="nav-group-item " href="rankings.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Rankings</span>
                             <span class="item-sub">Full field</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/compare.html" role="menuitem">
+                        <a class="nav-group-item " href="compare.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Compare</span>
                             <span class="item-sub">Head-to-head</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/watchlist.html" role="menuitem">
+                        <a class="nav-group-item " href="watchlist.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Watchlist</span>
                             <span class="item-sub">Your starred players</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/lineups.html" role="menuitem">
+                        <a class="nav-group-item " href="lineups.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>DFS Lineups</span>
                             <span class="item-sub">12 optimized</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/live.html" role="menuitem">
+                        <a class="nav-group-item " href="live.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Live pivots</span>
                             <span class="item-sub">Thu–Sun</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/simulator.html" role="menuitem">
+                        <a class="nav-group-item " href="simulator.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Simulator</span>
                             <span class="item-sub">10k Monte Carlo</span>
@@ -423,25 +430,25 @@
                   </button>
                   <div class="nav-group-menu" role="menu">
                     
-                        <a class="nav-group-item " href="http://localhost:8137/performance.html" role="menuitem">
+                        <a class="nav-group-item " href="performance.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Performance</span>
                             <span class="item-sub">Season report card</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/recap.html" role="menuitem">
+                        <a class="nav-group-item " href="recap.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Event recaps</span>
                             <span class="item-sub">Weekly grade</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/archive.html" role="menuitem">
+                        <a class="nav-group-item " href="archive.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Archive</span>
                             <span class="item-sub">47 scored events</span>
                           </span>
                         </a>
-                        <a class="nav-group-item " href="http://localhost:8137/methodology.html" role="menuitem">
+                        <a class="nav-group-item " href="methodology.html" role="menuitem">
                           <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
                             <span>Methodology</span>
                             <span class="item-sub">How BBI scores</span>
@@ -449,18 +456,18 @@
                         </a>
                   </div>
                 </div>
-                  <a class="nav-link " href="http://localhost:8137/courses.html">
+                  <a class="nav-link " href="courses.html">
                     Courses
                   </a>
-                  <a class="nav-link " href="http://localhost:8137/market.html">
+                  <a class="nav-link " href="market.html">
                     Market
                   </a>
-                  <a class="nav-link active" href="http://localhost:8137/pricing.html">
+                  <a class="nav-link active" href="pricing.html">
                     Pricing
                   </a>
           </div>
           <div class="row-tight">
-            <a href="http://localhost:8137/watchlist.html" class="nav-watch-pill" id="navWatchPill" title="Your watchlist" aria-label="Open watchlist" style="display: none;">
+            <a href="watchlist.html" class="nav-watch-pill" id="navWatchPill" title="Your watchlist" aria-label="Open watchlist" style="display: none;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.3l-6.16 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63L22 9.24l-5.48 4.76 1.64 7.03z"></path></svg>
               <span id="navWatchBadge">0</span>
             </a>
@@ -476,7 +483,7 @@
             <span id="authControl" class="bbi-auth-ctl">
         <div class="bbi-auth-ctl">
           <button class="bbi-auth-btn ghost" data-auth="login">Sign in</button>
-          <a class="bbi-auth-btn" href="http://localhost:8137/pricing.html">Get BirdieBuddy</a>
+          <a class="bbi-auth-btn" href="pricing.html">Get BirdieBuddy</a>
         </div></span>
           </div>
         </div>
@@ -545,10 +552,32 @@
           <button class="btn btn-primary btn-block btn-lg" id="joinBtn" type="button">Get BirdieBuddy</button>
           <p class="renew-note" id="renewNote">Automatic renewal: <span id="renewText">$29 every month</span> until you cancel. Cancel anytime in Account and keep access through the period you've paid for. Plus applicable tax. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
           <div class="one-note" id="joinNote">Have a discount code? Add it when you create your account.</div>
+          <form class="bb-signup" id="foundingForm" data-bb-signup="founding" hidden>
+            <label for="foundEmail">Payments open soon. Join the founding list: we'll email you first, with founding pricing locked in.</label>
+            <div class="bb-signup-row"><input id="foundEmail" type="email" required placeholder="you@email.com" autocomplete="email"><button class="btn btn-primary" type="submit">Join the founding list</button></div>
+            <input name="website" tabindex="-1" autocomplete="off" class="bb-hp" aria-hidden="true">
+            <div class="bb-signup-msg" data-bb-signup-msg role="status"></div>
+          </form>
+          <p class="one-note" id="foundingSoon" data-bb-signup-off hidden>Memberships open soon, with founding pricing for early members.</p>
         </div>
       </div>
     </div>
 
+
+    <section class="mcp-card" id="mcp" aria-labelledby="mcpTitle">
+      <div class="eyebrow">For power users · coming soon</div>
+      <h2 id="mcpTitle">BirdieBuddy for your own AI</h2>
+      <p>Want all of our data and research inside your own AI? The BirdieBuddy connector plugs our projections, ownership, simulations, lineup grades and articles straight into Claude or ChatGPT, so you can just ask: <em>"Build me three showdown lineups with low duplication"</em> or <em>"Grade these lineups."</em></p>
+      <ul class="mcp-list"><li>Every number we publish, live each week</li><li>Lineup building and grading on request</li><li>Works with the AI you already pay for</li></ul>
+      <p class="mcp-price">A separate yearly plan, billed once a year.</p>
+      <form class="bb-signup" data-bb-signup="mcp" hidden>
+        <label for="mcpEmail">Join the waitlist and we'll tell you the day it opens.</label>
+        <div class="bb-signup-row"><input id="mcpEmail" type="email" required placeholder="you@email.com" autocomplete="email"><button class="btn btn-secondary" type="submit">Join the waitlist</button></div>
+        <input name="website" tabindex="-1" autocomplete="off" class="bb-hp" aria-hidden="true">
+        <div class="bb-signup-msg" data-bb-signup-msg role="status"></div>
+      </form>
+      <p class="one-note" data-bb-signup-off hidden>Waitlist opens soon.</p>
+    </section>
     <section class="section" style="padding-top:var(--space-12)">
       <header class="page-head" style="border:0;padding-bottom:0">
         <div class="eyebrow">Questions</div>
@@ -580,7 +609,7 @@
       <footer class="site-footer">
         <div class="site-footer-inner">
           <div>
-            <a href="http://localhost:8137/index.html" class="brand">
+            <a href="index.html" class="brand">
               <span class="brand-mark">B</span>
               <span class="brand-lockup">BirdieBuddy<small>PANTHEON · v8.5</small></span>
             </a>
@@ -593,29 +622,29 @@
           <div>
             <div class="footer-heading">Predictions</div>
             <div class="footer-links">
-              <a class="footer-link" href="http://localhost:8137/rankings.html">Live Rankings</a>
-              <a class="footer-link" href="http://localhost:8137/lineups.html">DFS Lineups</a>
-              <a class="footer-link" href="http://localhost:8137/simulator.html">THEMIS Simulator</a>
-              <a class="footer-link" href="http://localhost:8137/market.html">Market Edges</a>
-              <a class="footer-link" href="http://localhost:8137/live.html">Live Pivot</a>
+              <a class="footer-link" href="rankings.html">Live Rankings</a>
+              <a class="footer-link" href="lineups.html">DFS Lineups</a>
+              <a class="footer-link" href="simulator.html">THEMIS Simulator</a>
+              <a class="footer-link" href="market.html">Market Edges</a>
+              <a class="footer-link" href="live.html">Live Pivot</a>
             </div>
           </div>
           <div>
             <div class="footer-heading">Model</div>
             <div class="footer-links">
-              <a class="footer-link" href="http://localhost:8137/performance.html">Performance</a>
-              <a class="footer-link" href="http://localhost:8137/performance.html#shadow">Shadow Models</a>
-              <a class="footer-link" href="http://localhost:8137/performance.html#calibration">Calibration</a>
-              <a class="footer-link" href="http://localhost:8137/methodology.html">Methodology</a>
-              <a class="footer-link" href="http://localhost:8137/archive.html">Archive</a>
+              <a class="footer-link" href="performance.html">Performance</a>
+              <a class="footer-link" href="performance.html#shadow">Shadow Models</a>
+              <a class="footer-link" href="performance.html#calibration">Calibration</a>
+              <a class="footer-link" href="methodology.html">Methodology</a>
+              <a class="footer-link" href="archive.html">Archive</a>
             </div>
           </div>
           <div>
             <div class="footer-heading">Account</div>
             <div class="footer-links">
-              <a class="footer-link" href="http://localhost:8137/pricing.html">Pricing &amp; plans</a>
-              <a class="footer-link" href="http://localhost:8137/account.html">My account</a>
-              <a class="footer-link" href="http://localhost:8137/login.html">Sign in</a>
+              <a class="footer-link" href="pricing.html">Pricing &amp; plans</a>
+              <a class="footer-link" href="account.html">My account</a>
+              <a class="footer-link" href="login.html">Sign in</a>
             </div>
           </div>
           <div>
@@ -640,6 +669,7 @@
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/auth.js"></script>
+  <script src="assets/js/signup.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       await BBI.renderHeader('pricing.html');
@@ -688,13 +718,28 @@
 
       // One button: join at the chosen cycle, or (already a member) go to the account page.
       const btn = document.getElementById('joinBtn'), note = document.getElementById('joinNote');
+      // CHECKOUT_LIVE: flip to true the day Stripe checkout is wired (cf_functions_draft/PLAN.md). Until then a visitor sees the
+      // founding-list signup (assets/js/signup.js) instead of a checkout that can only say 'coming soon'.
+      const CHECKOUT_LIVE = false;
       const paint = () => {
-        const member = A.isMember();
+        const member = A.isMember(), soon = !CHECKOUT_LIVE && !member;
         btn.textContent = member ? "You're a member · Go to my account" : 'Get BirdieBuddy';
-        note.hidden = member;
-        document.getElementById('consentWrap').hidden = member;
-        document.getElementById('renewNote').hidden = member;
+        btn.hidden = soon;
+        note.hidden = member || soon;
+        document.getElementById('consentWrap').hidden = member || soon;
+        document.getElementById('renewNote').hidden = member || soon;
+        const ff = document.getElementById('foundingForm'), fs = document.getElementById('foundingSoon');
+        if (!soon) { ff.hidden = true; fs.hidden = true; } else if (window.BBI && BBI.signup) { ff.hidden = !BBI.signup.live; fs.hidden = BBI.signup.live; }
+        const fc = document.getElementById('priceFinalCta');
+        if (fc && soon) { fc.firstChild.textContent = 'Join the founding list '; fc.dataset.soon = '1'; }
       };
+      document.getElementById('priceFinalCta').addEventListener('click', (e) => {
+        if (e.currentTarget.dataset.soon !== '1') return;
+        e.stopImmediatePropagation(); e.preventDefault();
+        const ff = document.getElementById('foundingForm');
+        (ff.hidden ? document.getElementById('oneCard') : ff).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const inp = document.getElementById('foundEmail'); if (inp && !ff.hidden) setTimeout(() => inp.focus({ preventScroll: true }), 400);
+      }, true);
       btn.addEventListener('click', () => A.isMember() ? (location.href = 'account.html') : (consentOk() && A.subscribe(window.BBI_PRICE_CYCLE, { agreed: true })));
       A.onChange(paint);
       paint();

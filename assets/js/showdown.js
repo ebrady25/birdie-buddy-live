@@ -1061,7 +1061,7 @@ window.BBI = window.BBI || {};
       <table class="sd-dials"><thead><tr><th>Dial</th><th>Target</th><th>Why</th></tr></thead><tbody>
         ${d.dials.rows.map(r => `<tr><td>${esc(r.k)}</td><td class="v${r.adj ? ' adj' : ''}">${esc(r.v)}${bar(r)}</td><td>${esc(r.note || '')}</td></tr>`).join('')}
       </tbody></table>
-      <div class="sd-caption">portfolio dials from rules.json v1.2 · gold = overlay-adjusted for this slate · bars show the target band on a 0–100% scale</div>`;
+      <div class="sd-caption">portfolio dials from our study of past winners · gold = overlay-adjusted for this slate · bars show the target band on a 0–100% scale</div>`;
   };
 
   const renderVerdict = (d, counts) => {
@@ -1149,7 +1149,7 @@ window.BBI = window.BBI || {};
       <div class="sd-ref" style="margin-top:8px">${items.map(i => `<div><span>${esc(i.label)}</span><small>${esc(i.k)}</small></div>`).join('')}</div></details>
       <details class="sd-fold"><summary>The engine would frown at · ${soft.length} soft penalties <span class="sd-fold-arrow">▸</span></summary>
       <div class="sd-frown" style="margin-top:8px">${soft.join('')}</div></details>
-      <div class="sd-caption">hard_rules + soft_penalties from rules.json ${esc((data.engine && data.engine.rules_version || 'v1.2').split(' ')[0])} · a soft penalty is subtracted from the lineup score (1.0 ≈ one sim-rank bucket)</div>`;
+      <div class="sd-caption">hard rules and soft penalties from our study of past winners · a soft penalty is subtracted from the lineup score (1.0 ≈ one sim-rank bucket)</div>`;
   };
 
   const renderLessons = () => {
@@ -1305,7 +1305,7 @@ window.BBI = window.BBI || {};
     if (lu.score > 0) { g.beginPath(); g.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.min(100, lu.score) / 100); g.strokeStyle = lu.legal ? gold : red; g.stroke(); }
     g.lineCap = 'butt';
     txt(lu.score, cx, cy + 10, { font: mono, size: 34, weight: 700, align: 'center', color: lu.legal ? ink : red });
-    txt('codex score', cx, cy + 30, { font: mono, size: 9.5, color: dim, align: 'center' });
+    txt('BirdieBuild', cx, cy + 30, { font: mono, size: 9.5, color: dim, align: 'center' });
     // verdict + script
     const x0 = pad + 176;
     txt('VERDICT', x0, y + 72, { font: mono, size: 10, color: dim });
@@ -1406,7 +1406,7 @@ window.BBI = window.BBI || {};
     const pinned = data.ten_laws.filter(l => d.laws.has(l.n));
     ANS('laws', pinned.length ? `Pinned for this game: ${pinned.map(l => `<b>${l.n}</b> ${lawShort(l.law)}`).join(' · ')}` : 'The ten laws from the 120 winners');
     const nh = Object.keys(data.hard_rules).filter(k => !k.startsWith('_')).length, ns = Object.keys(data.soft_penalties).filter(k => !k.startsWith('_')).length;
-    ANS('rules', `${nh} hard · ${ns} soft · rules.json ${esc((data.engine && data.engine.rules_version || '').split(' ')[0] || '')} · the Lab runs all of them`);
+    ANS('rules', `${nh} hard · ${ns} soft · the Lab runs all of them`);
     ANS('export', 'Copy the playbook or the sim settings · play card image for Discord');
     ANS('lessons', (data.lessons_2026 || []).map(l => esc(l.slate.split(' (')[0])).join(' · '));
     ANS('step6', 'After the slate: drop DK contest standings · what 2026 taught us');

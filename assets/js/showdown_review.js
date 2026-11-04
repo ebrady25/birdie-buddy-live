@@ -540,7 +540,7 @@
             <span class="sd-rv-v x">Top 0.1%<small class="n${n01 < MIN_TOP1 ? ' small' : ''}">${fmtN(n01)}</small></span><span class="sd-rv-v x w">Win<small class="n">${fmtN(nW)}</small></span></div>
           ${rowsHtml || '<div class="sd-unlock">No lineups in this tier.</div>'}
         </div>
-        <div class="sd-caption">Numbers under the headers = lineups in each cohort (amber under ${MIN_TOP1}) · cohorts cut inside this contest, as in codex/field_composition.py (parity-tested: tools/showdown_review_parity.py) · lift = top-1% rate − field rate · ✓ / – / ✗ = did the codex's direction hold here (±${LIFT} pts) · <b>one contest is one game</b>: this describes what happened, it is not evidence (the archive verdicts in Step 2 pool slates).</div>
+        <div class="sd-caption">Numbers under the headers = lineups in each cohort (amber under ${MIN_TOP1}) · cohorts cut inside this contest · lift = top-1% rate − field rate · ✓ / – / ✗ = did the playbook's direction hold here (±${LIFT} pts) · <b>one contest is one game</b>: this describes what happened, it is not evidence (the archive verdicts in Step 2 pool slates).</div>
       </div>`;
     // ---- your entries
     let you = '';

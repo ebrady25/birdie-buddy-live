@@ -147,7 +147,7 @@ window.BBI = window.BBI || {};
     $id('clProv').innerHTML = `
       <span><strong>${data.winners.n}</strong> Milly Maker winners 2016–25</span>
       <span><strong>${wg.baseline_games.toLocaleString('en-US')}</strong> games 2016–25</span>
-      <span>rules.json <strong>v${esc(String(data.rules.version).split(' ')[0])}</strong></span>
+      <span>BirdieBuild <strong>v${esc(String(data.rules.version).split(' ')[0])}</strong></span>
       <span>Winners the hard rules allow: <strong class="gold">${ch.pct}%</strong> (${ch.k}/${ch.n})</span>`;
   };
   const renderDock = () => {
@@ -300,11 +300,11 @@ window.BBI = window.BBI || {};
         <div class="sd-kpi"><b>${W.salary.full_cap.pct}%</b><span>used the full $50k</span></div>
       </div>
       <p class="sd-lede">The hard rules below would have let through <strong>${all.pct}%</strong> of historical winners (${all.k}/${all.n}, every rule the winner export can check). The strictest is the no-teammate one-off rule — ${data.winner_checks.hard.max_secondary_same_team_pairs.pct}% pass. Rules are a filter on a sim-ranked pool, not a lineup generator.</p>
-      <div class="sd-caption">${nTag(W.n)} · derived from the Milly Maker Tracker export · rule values from rules.json v${esc(String(data.rules.version).split(' ')[0])}</div>`;
+      <div class="sd-caption">${nTag(W.n)} · from 169 Milly Maker winning lineups · BirdieBuild v${esc(String(data.rules.version).split(' ')[0])}</div>`;
     $id('clRules').innerHTML = data.rule_groups.map(g => {
       const cards = data.rule_cards.filter(c => c.group === g.key);
       return `<section class="cl-group"><div class="cl-group-head"><h3>${esc(g.title)}</h3><span>${esc(g.sub)}</span></div><div class="cl-rules">${cards.map(ruleCard).join('')}</div></section>`;
-    }).join('') + `<details class="sd-fold cl-laws"><summary>The ten laws · CLASSIC_BIBLE Part A <span class="sd-fold-arrow">›</span></summary>
+    }).join('') + `<details class="sd-fold cl-laws"><summary>The ten laws of BirdieBuild <span class="sd-fold-arrow">›</span></summary>
       <ol>${data.laws.map(l => `<li><b>${esc(l.title)}.</b> ${esc(l.text)}</li>`).join('')}</ol><div class="sd-caption">curated</div></details>`;
   };
 
