@@ -62,9 +62,11 @@
         <a class="btn-gold" href="nfl/classic/chill/">Who to play Sunday →</a>
         <a class="btn-ghost" href="nfl/projections/">Projections</a>
       </div>
+      <a class="nextup" id="nextUp" href="nfl/showdown/next/" hidden></a>
     </header>
 
     <div class="divider"></div>
+    <a class="trust" id="trustStrip" href="nfl/results/" hidden></a>
 
     <!-- WHAT'S INSIDE: the weekly pages -->
     <section class="section">
@@ -196,5 +198,38 @@
   <script>BBI.renderNflHeader('home'); BBI.renderNflFooter();</script>
   <script src="assets/js/home_fx.js?v=1"></script>
   <script src="assets/js/nfl_home.js?v=3"></script>
+  <script>
+    // Proof strip (2026-11-04): the newest graded week (nfl/home.json results -> its results.json) + the latest recap headline
+    (function () {
+      var j = function (u) { return fetch(u + (u.indexOf('?') < 0 ? '?' : '&') + 'v=' + Math.floor(Date.now() / 300000)).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); };
+      Promise.all([j('nfl/home.json'), j('nfl/articles/articles.json')]).then(function (x) {
+        var home = x[0], arts = (x[1] && x[1].articles) || [], res = home && home.results; if (!res || !res.href) return;
+        return j(res.href + 'results.json').then(function (r) {
+          var h = (r && r.headline) || {}, el = document.getElementById('trustStrip'); if (!el) return;
+          var rec = arts.filter(function (a) { return String(a.slot).toLowerCase() === 'recap' && a.week === res.week; })[0];
+          var bits = [];
+          if (h.proj_mae != null) bits.push('projections missed by ' + h.proj_mae.toFixed(1) + ' pts per player');
+          if (h.own_mae_big != null) bits.push('big-tournament ownership off by ' + h.own_mae_big.toFixed(1) + ' pts');
+          if (h.best_stack != null) bits.push('best published stack ' + h.best_stack.toFixed(1) + ' DK pts');
+          if (!bits.length) return;
+          var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+          el.href = res.href;
+          el.innerHTML = '<span class="trust-tag">Week ' + res.week + ' · graded</span>' +
+            (rec ? '<span class="trust-head">' + esc(rec.title.replace(/^Week \d+ what we learned: /i, '')) + '</span>' : '') +
+            '<span class="trust-bits">' + esc(bits.join(' · ')) + '</span><span class="trust-cta">Every week graded, misses included →</span>';
+          el.hidden = false;
+        });
+      });
+    })();
+    // Next primetime game card (2026-11-04): BBI.nflNextGame lives in nfl.js
+    (function () { var go = function () { if (!window.BBI || !BBI.nflNextGame) return; BBI.nflNextGame().then(function (g) {
+      var el = document.getElementById('nextUp'); if (!g || !el) return;
+      el.href = g.chillLive ? g.chill : 'nfl/showdown/next/';
+      el.innerHTML = '<span class="nextup-tag">' + g.slot + ' · next up</span><span class="nextup-game">' + g.a + ' @ ' + g.h + '</span>' +
+        '<span class="nextup-meta">' + g.kickLabel + ' · ' + g.fav + ' −' + g.spread + ' · total ' + g.total + '</span>' +
+        '<span class="nextup-cta">' + (g.chillLive ? 'Read the 5-minute Chill →' : 'Chill posts game day ~10 am · build it now →') + '</span>';
+      el.hidden = false; }); };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go(); })();
+  </script>
 </body>
 </html>

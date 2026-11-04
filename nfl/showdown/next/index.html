@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Next primetime showdown · BirdieBuddy NFL</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=20261104" />
+  <link rel="canonical" href="https://birdiebuddy.io/nfl/showdown/next/">
+  <meta name="description" content="The next primetime DraftKings showdown (Thursday, Sunday or Monday night): the line, when our 5-minute read posts, and where to build your lineup.">
+  <style>
+    .nx-page { max-width: 760px; padding-top: 28px; padding-bottom: 64px; }
+    .nx-eyebrow { font: 600 12px var(--font-mono, monospace); letter-spacing: .1em; text-transform: uppercase; color: var(--gold-300, #e2b54e); }
+    .nx-page h1 { font-size: clamp(30px, 6vw, 44px); margin: 8px 0 6px; }
+    .nx-meta { color: var(--text-secondary, #a3aab6); font-size: 16px; }
+    .nx-count { margin: 18px 0; font: 600 22px var(--font-mono, monospace); color: var(--text-primary, #fff); }
+    .nx-card { border: 1px solid var(--border-gold, rgba(212,168,67,.35)); background: rgba(212,168,67,.06); border-radius: 16px; padding: 18px 20px; margin: 18px 0; }
+    .nx-card p { margin: 0 0 12px; line-height: 1.5; }
+    .nx-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .nx-page [hidden] { display: none !important; }
+    .nx-empty { color: var(--text-secondary, #a3aab6); }
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main class="container nx-page">
+    <div class="nx-eyebrow" id="nxEyebrow">Next primetime showdown</div>
+    <h1 id="nxTitle">Finding the next game…</h1>
+    <div class="nx-meta" id="nxMeta"></div>
+    <div class="nx-count" id="nxCount" aria-live="polite"></div>
+    <div class="nx-card" id="nxCard" hidden>
+      <p id="nxChill"></p>
+      <div class="nx-btns">
+        <a class="btn btn-primary" id="nxChillBtn" href="nfl/showdown/chill/">5-minute read</a>
+        <a class="btn btn-secondary" id="nxGrind" href="nfl/showdown/">Full playbook</a>
+        <a class="btn btn-secondary" id="nxLab" href="nfl/lab/?mode=showdown">Build or check a lineup</a>
+      </div>
+    </div>
+    <p class="nx-empty" id="nxEmpty" hidden>No primetime game is on the board right now. The next one shows up here as soon as DraftKings posts it, usually Tuesday.</p>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/nfl.js?v=20261104"></script>
+  <script src="assets/js/track.js?v=0.6.3"></script>
+  <script>BBI.renderNflHeader('playbooks'); BBI.renderNflFooter('NFL · Next showdown');</script>
+  <script>
+    (async function () {
+      const g = await BBI.nflNextGame();
+      const $ = (id) => document.getElementById(id);
+      if (!g) { $('nxTitle').textContent = 'No game on the board yet'; $('nxEmpty').hidden = false; return; }
+      if (g.chillLive && !/[?&]stay\b/.test(location.search)) { location.replace(g.chill); return; }   // the read is up: go straight to it
+      $('nxEyebrow').textContent = g.slot + ' · next primetime showdown';
+      $('nxTitle').textContent = `${g.a} @ ${g.h}`;
+      $('nxMeta').textContent = `${g.kickLabel} · ${g.fav} favored by ${g.spread} · total ${g.total}`;
+      $('nxChill').textContent = g.chillLive ? 'Our 5-minute read is up: game script, three captains, the chalk and three lineups.'
+        : 'Our 5-minute read (game script, three captains, the chalk and three lineups) posts game day around 10 am ET. Until then, the full playbook and the Lineup Lab already have this game.';
+      $('nxChillBtn').href = g.chillLive ? g.chill : 'nfl/showdown/chill/';
+      $('nxChillBtn').hidden = !g.chillLive;
+      $('nxGrind').href = g.grind; $('nxCard').hidden = false;
+      const tick = () => {
+        const ms = new Date(g.kickoff + 'Z') - new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' }) + ' UTC');
+        if (ms <= 0) { $('nxCount').textContent = 'Locked: the game has started.'; return; }
+        const h = Math.floor(ms / 3600e3), m = Math.floor(ms % 3600e3 / 60e3);
+        $('nxCount').textContent = `Locks in ${h >= 24 ? Math.floor(h / 24) + 'd ' + (h % 24) + 'h' : h + 'h ' + m + 'm'}`;
+      };
+      tick(); setInterval(tick, 30000);
+    })();
+  </script>
+</body>
+</html>

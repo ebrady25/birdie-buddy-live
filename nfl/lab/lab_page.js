@@ -722,10 +722,41 @@
     toast(`<b>Saved as #${C.saved.length}</b> · swap a player or two to build the next one`, 'good');
   };
   const shortName = p => p.pos === 'DST' ? p.name : (p.name.split(' ').slice(1).join(' ') || p.name);
+  // Import (2026-11-04): a DraftKings entries export (contest columns, then QB, RB, RB, WR, WR, WR, TE, FLEX, DST) or a DK upload file. Every lineup
+  // whose 9 players are in this week's pool is added to Saved lineups, where each gets its grade. Read in the browser only.
+  const csvCells = line => { const out = []; let cur = '', q = false;
+    for (let i = 0; i < line.length; i++) { const c = line[i];
+      if (q) { if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+      else if (c === '"') q = true; else if (c === ',') { out.push(cur); cur = ''; } else cur += c; }
+    out.push(cur); return out.map(x => x.trim()); };
+  const importLineups = text => {
+    const rows = String(text || '').split(/\r?\n/).map(csvCells);
+    const hi = rows.findIndex(r => r.includes('QB') && r.includes('DST') && r.filter(x => x === 'WR').length >= 3);
+    if (hi < 0) { toast('That file has no QB … DST columns. Use your DraftKings entries export or a DraftKings upload file.', 'warn'); return; }
+    const H = rows[hi], start = H.indexOf('QB'), cols = H.slice(start, start + 9);
+    if (cols.join() !== SLOTS.join()) { toast('Those columns are not a Classic lineup (QB, RB, RB, WR, WR, WR, TE, FLEX, DST).', 'warn'); return; }
+    let added = 0, dup = 0, miss = 0, full = 0;
+    for (const r of rows.slice(hi + 1)) {
+      const names = r.slice(start, start + 9).map(x => x.replace(/\s*\(\d+\)\s*$/, '').trim());
+      if (names.length < 9 || names.some(n => !n)) continue;
+      if (names.some(n => !C.pl.P.has(n))) { miss++; continue; }
+      if (svFind(names) >= 0) { dup++; continue; }
+      if (C.saved.length >= 150) { full++; continue; }
+      C.saved.push({ id: Math.max(0, ...C.saved.map(s => +s.id || 0)) + 1, slots: names.slice(), t: Date.now() }); added++;
+    }
+    svStore(); clDraw();
+    const bits = [dup && `${dup} already saved`, miss && `${miss} with players not in this week's pool`, full && `${full} over the 150 limit`].filter(Boolean);
+    toast(added ? `<b>Imported ${added} lineup${added > 1 ? 's' : ''}</b>${bits.length ? ' · ' + bits.join(' · ') : ''}. Each one is graded in Saved lineups.` :
+      `Nothing new to import${bits.length ? ': ' + bits.join(' · ') : ''}.`, added ? 'good' : 'warn');
+  };
+  document.addEventListener('change', e => {
+    if (!e.target || e.target.id !== 'lbClImport' || !e.target.files || !e.target.files[0]) return;
+    const fr = new FileReader(); fr.onload = () => importLineups(fr.result); fr.readAsText(e.target.files[0]);
+  });
   const drawClSaved = () => {
     const host = $('lbClSaved'); if (!host) return;
     const N = C.saved.length, own = C.pl.has.own;
-    if (!N) { host.innerHTML = `<div class="lb-h">Saved lineups <small>0</small></div><p class="lb-muted">Save as many lineups as you want. They stay in this browser for this week's slate, and you can download them all in one DraftKings upload file.</p>`; return; }
+    if (!N) { host.innerHTML = `<div class="lb-h">Saved lineups <small>0</small></div><p class="lb-muted">Save as many lineups as you want. They stay in this browser for this week's slate, and you can download them all in one DraftKings upload file. Already built them on DraftKings? Import the file and every lineup gets graded.</p><div class="lb-acts lb-sv-acts"><button type="button" class="btn btn-sm" data-cl="sv-import" title="Your DraftKings entries export or a DraftKings upload file: every lineup in it gets graded here. Read in your browser only.">Import my DraftKings lineups</button><input type="file" id="lbClImport" accept=".csv,.txt" hidden></div>`; return; }
     const cur = lineupNames().length === 9 ? luKey(C.slots) : '', expo = new Map();
     let allIds = !!C.dk;
     const rows = C.saved.map((s, i) => {
@@ -752,6 +783,7 @@
       <div class="lb-acts lb-sv-acts">
         ${allIds ? `<button type="button" class="btn btn-sm btn-primary" data-cl="sv-csv">Download all ${N} for DraftKings</button>` : '<button type="button" class="btn btn-sm btn-primary" data-cl="ids" title="Needs your DraftKings salary file for the player IDs">Get a DraftKings file for all</button>'}
         <button type="button" class="btn btn-sm" data-cl="sv-copy">Copy all</button>
+        <button type="button" class="btn btn-sm" data-cl="sv-import" title="Your DraftKings entries export or a DraftKings upload file: every lineup in it gets graded here. Read in your browser only.">Import my DraftKings lineups</button><input type="file" id="lbClImport" accept=".csv,.txt" hidden>
         <button type="button" class="btn btn-sm btn-ghost" data-cl="sv-clear">Delete all</button>
       </div>`;
   };
@@ -866,6 +898,7 @@
       if (act === 'filt') { C.filtOpen = !C.filtOpen; drawClPool(); if (C.filtOpen) $('lbClFilt').querySelector('input')?.focus({ preventScroll: true }); return; }
       if (act === 'filt-reset') { C.f = {}; $('lbClFilt').querySelectorAll('input').forEach(i => { i.value = ''; }); drawClPool(); return; }
       if (act === 'save' || act === 'save-new') { svSave(act === 'save-new'); return; }
+      if (act === 'sv-import') { const f = $('lbClImport'); if (f) { f.value = ''; f.click(); } return; }
       if (act === 'sv-copy') { copyText(C.saved.map((s, i) => `#${i + 1}: ${s.slots.map((n, j) => `${SLOTS[j]} ${n}`).join(', ')}`).join('\n'), `${C.saved.length} lineups copied`); return; }
       if (act === 'sv-csv') { const rows = C.saved.map(s => s.slots.map(n => C.pl.ids.get(n))).filter(r => r.every(Boolean)); if (rows.length) download(`${SLOTS.join(',')}\n${rows.map(r => r.join(',')).join('\n')}\n`, `DK_upload_classic_${C.pool.id}_${rows.length}.csv`); if (rows.length < C.saved.length) toast(`${C.saved.length - rows.length} lineup(s) left out: players without DraftKings IDs`, 'warn'); return; }
       if (act === 'sv-clear') { if (!confirm(`Delete all ${C.saved.length} saved lineups?`)) return; C.saved = []; C.editing = null; svStore(); clDraw(); return; }
