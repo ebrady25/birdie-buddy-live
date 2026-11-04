@@ -18,5 +18,8 @@
   "slot": "Recap",
   "week": 8
  },
- "results": null
+ "results": {
+  "week": 8,
+  "href": "nfl/results/2026-w8/"
+ }
 }
