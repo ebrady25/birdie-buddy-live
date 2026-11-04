@@ -60,6 +60,19 @@
       <li><span class="lrn-when">Monday</span><b>See how we did.</b> We grade our numbers against what happened, good weeks and bad. <a href="nfl/results/">Results →</a></li>
     </ol>
 
+    <h2 id="numbers">How we build our numbers</h2>
+    <p>Every number on BirdieBuddy comes from our own models. Here's what goes into each one.</p>
+    <dl>
+      <dt>Lines and game flows</dt><dd>De-vigged prediction-market prices (Polymarket and Kalshi), fit to the spread, total and team-total ladders, with a consensus line where no market trades yet. For showdowns we split each game into four flows: the favorite wins by 14+, by 4–13, a game within 3, or an underdog win by 4+, each weighted by its market chance.</dd>
+      <dt>Projections and ranges</dt><dd>Our drive-by-drive game simulator, built on NFL play-by-play from 2016 on, anchored to the market totals and player props and blended with recent form and public injury and role news. We play each game 10,000 times. The likely range (p10–p90) is the middle 80% of those games; the ceiling is about a 90th-percentile game. Injury tags are hedged until the official report.</dd>
+      <dt>Ownership</dt><dd>Our own model, trained on DraftKings contest results, with a weekly read of where the crowd is leaning. We show big-tournament ownership and, where it differs, single-entry ownership, which runs chalkier. It ranks players well; its exact levels are rougher, and it can under-call late, news-driven value. We grade it against real ownership every week on <a href="nfl/results/">Results</a>.</dd>
+      <dt>In best lineup and edge</dt><dd>How often a player lands in the highest-scoring possible lineup across our simulations (optimal %). Edge vs the crowd is that rate minus his projected ownership.</dd>
+      <dt>Stacks</dt><dd>A quarterback and his pass catchers scored together inside the same simulated games, so the way their points rise and fall together is built in. Boom rate is how often the group clears 75 DraftKings points.</dd>
+      <dt>Matchups</dt><dd>Points each defense allows to each role, adjusted for opponents and shrunk toward average. One season of this is mostly noise, so it only breaks ties.</dd>
+      <dt>Builds</dt><dd>Model lineups come from our rules-first builder. The simulator's top builds are candidate lineups played against a simulated contest field built from our ownership; their ROI, top-1% and cash rates are simulated, not results.</dd>
+      <dt>BirdieBuild</dt><dd>Our study of past winners: 169 DraftKings Milly Maker winning lineups (2016–25) against 2,639 games for the main slate, and DraftKings showdown winning lineups (2018–25) for single games. Winner rates are always shown with how many winners they come from.</dd>
+    </dl>
+
     <h2>Glossary</h2>
     <dl>
       <dt>Projection</dt><dd>How many DraftKings points we expect a player to score.<small>Our average outcome across thousands of simulated games.</small></dd>
