@@ -1,6 +1,24 @@
 {
  "articles": [
   {
+   "slug": "2026-week-9-wednesday",
+   "href": "2026-week-9-wednesday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-wednesday",
+   "title": "Week 9 first look: Dallas leads, and the field already knows it",
+   "dek": "Dallas and San Francisco tie for the slate's best game. We stack the Cowboys, get cheap in the Rams game and save a low-owned Saints stack.",
+   "slot": "wed",
+   "week": 9,
+   "season": 2026,
+   "date": "2026-11-04",
+   "tldr": [
+    "Stack Dak Prescott with CeeDee Lamb and George Pickens: the slate's best trio, clearing 75 points in 15% of our sims.",
+    "Eat George Kittle chalk: he's in our optimal lineup 27% of the time, the highest rate on the slate.",
+    "Fade Greg Dulcich at 20% projected owned and pivot to Dalton Schultz or Evan Engram, both nearly unowned.",
+    "Get different with Tyler Shough, Chris Olave and Devaughn Vele: a 2%-owned QB on a New Orleans favorite."
+   ],
+   "published_utc": "2026-11-05T01:35:47+00:00"
+  },
+  {
    "slug": "2026-week-8-what-we-learned",
    "href": "2026-week-8-what-we-learned.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-8-what-we-learned",
@@ -201,5 +219,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-01T15:15:00+00:00"
+ "updated_utc": "2026-11-05T01:35:47+00:00"
 }
