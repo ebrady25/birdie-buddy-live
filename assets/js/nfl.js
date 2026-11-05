@@ -23,9 +23,12 @@ window.BBI = window.BBI || {};
       { href: 'nfl/showdown/chill/', key: 'showdown-chill', label: 'Showdown Chill', sub: '5-min read', group: 'Showdown · one game' },
       { href: 'nfl/showdown/',       key: 'showdown-grind', label: 'Showdown Grind', sub: 'full playbook', group: 'Showdown · one game' }
     ] },
-    { href: 'nfl/lab/',      key: 'lab',      label: 'Lab',      sub: 'build or check a lineup' },
     { href: 'nfl/articles/', key: 'articles', label: 'Articles', sub: 'the week in plain English' },
-    { href: 'dna/',          key: 'dna',      label: 'DFS DNA',  sub: 'your player type, from your DK history' }
+    // Tools = a dropdown trigger with NO href (11/05): the Lab + DFS DNA, so the top row stays short
+    { key: 'tools', label: 'Tools', sub: 'grade a lineup, read your DNA', menu: [
+      { href: 'nfl/lab/', key: 'lab', label: 'Lineup Lab', sub: 'build or check a lineup', group: 'Tools' },
+      { href: 'dna/',     key: 'dna', label: 'DFS DNA',    sub: 'your player type, from your DK history', group: 'Tools' }
+    ] }
   ];
   const EXTRA = {
     results: { href: 'nfl/results/', label: 'Results', sub: 'how our numbers did' },
@@ -36,7 +39,8 @@ window.BBI = window.BBI || {};
   // older page keys (generated pages, archives) -> the new ones, so nothing needs regenerating to highlight right
   const ALIAS = {
     nfl: 'home', classic: 'playbooks:classic-grind', 'classic:grind': 'playbooks:classic-grind', 'classic:chill': 'playbooks:classic-chill',
-    showdown: 'playbooks:showdown-grind', 'showdown:grind': 'playbooks:showdown-grind', 'showdown:chill': 'playbooks:showdown-chill'
+    showdown: 'playbooks:showdown-grind', 'showdown:grind': 'playbooks:showdown-grind', 'showdown:chill': 'playbooks:showdown-chill',
+    lab: 'tools:lab', dna: 'tools:dna'
   };
   const normKey = (k) => { k = String(k || ''); return ALIAS[k] || k; };
 
@@ -219,7 +223,7 @@ window.BBI = window.BBI || {};
       if (!d || !d.show || !Array.isArray(d.rows) || !d.rows.length) return null;
       const t = Date.parse(d.updated_iso || ''); if (!t || Date.now() - t > 8 * 864e5) return null;
       const rows = d.rows.slice(0, 2), locked = Array.isArray(d.locked) ? d.locked.slice(0, 3) : [];
-      const cta = (d.cta && d.cta.href === 'pricing.html') ? d.cta : { href: 'pricing.html', label: 'See all 5 · Members' };
+      const cta = (d.cta && d.cta.href === 'pricing.html') ? d.cta : { href: 'pricing.html', label: 'See all players · Members' };
       const set = (sel, html) => { const el = box.querySelector(sel); if (el) el.innerHTML = html; };
       set('[data-cm=week]', esc(d.week));
       set('[data-cm=updated]', `Updated ${esc(d.updated || '')}` + (d.own_status === 'ok' && STAGE[d.own_stage] ? ` · ${STAGE[d.own_stage]} ownership` : ''));
@@ -230,11 +234,11 @@ window.BBI = window.BBI || {};
         if (locked.length) {
           lk.innerHTML = `<ol class="cm-list cm-blur" aria-hidden="true" start="${rows.length + 1}">${locked.map(x => filler(+x.rank || 0)).join('')}</ol>
             <div class="cm-gate"><a class="cm-cta" href="${esc(cta.href)}">${esc(cta.label)}</a>
-            <span class="cm-gate-note">${locked.length} more player${locked.length > 1 ? 's' : ''} on the meter for members</span></div>`;
+            <span class="cm-gate-note">All players available for members</span></div>`;
           lk.hidden = false;
         } else lk.hidden = true;
       }
-      if (d.own_status !== 'ok') set('[data-cm=note]', 'Ownership comes Wednesday: until then the meter shows media buzz only.');
+      if (d.own_status !== 'ok') set('[data-cm=note]', 'Ownership comes Wednesday: until then the meter shows the Hype Index only.');
       box.hidden = false;
       return d;
     }).catch(() => null);
@@ -348,7 +352,7 @@ window.BBI = window.BBI || {};
       tab('nfl/slate/', 'slate', 'This Week', ICON.week, top === 'slate') +
       tab('nfl/projections/', 'projections', 'Projections', ICON.proj, top === 'projections') +
       btn('playbooks', 'Playbooks', ICON.book, top === 'playbooks', false) +
-      tab('nfl/lab/', 'lab', 'Lab', ICON.lab, top === 'lab') +
+      tab('nfl/lab/', 'lab', 'Lab', ICON.lab, top === 'tools' && sub === 'lab') +
       btn('more', 'More', ICON.more, moreKeys.includes(top), sunday && top !== 'lock');
 
     const link = (href, label, small, on, hot) =>
@@ -364,6 +368,7 @@ window.BBI = window.BBI || {};
       },
       more: () => `<h2 class="nfl-msheet-title" id="nflMsheetTitle">More</h2><div class="nfl-msheet-grid">` +
         link(EXTRA.lock.href, EXTRA.lock.label, sunday ? 'Live today' : 'Updates Sunday 9 AM ET', top === 'lock', sunday) +
+        link('dna/', 'DFS DNA', 'Your player type, from your DK history', top === 'tools' && sub === 'dna') +
         link('nfl/articles/', 'Articles', 'The week in plain English', top === 'articles') +
         link(EXTRA.results.href, EXTRA.results.label, 'How our numbers did', top === 'results') +
         link(EXTRA.players.href, EXTRA.players.label, 'Search any name', top === 'players') +

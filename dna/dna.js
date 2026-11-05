@@ -896,6 +896,8 @@
   BBI.dnaPage = { state: S, redrawMember: drawMember, memberHtml: () => S.a && !S.a.tooFew ? memberHtml(S.a) : '' };
 
   const boot = () => {
+    const peek = $('dnaPeek'), sampleBtn = $('dnaSample');
+    if (peek && sampleBtn) peek.addEventListener('click', () => sampleBtn.click());   // the peeking sample card runs the sample
     bind();
     watchAuth();
     if (Q.get('selftest') === 'dna') { setTimeout(selfTest, 0); return; }

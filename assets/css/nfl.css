@@ -187,7 +187,7 @@ a.nfl-week-step:hover { color: var(--text-primary, #fff); border-color: var(--bo
 .nfl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .bb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
-/* ---------- Chalk Meter on the NFL home (2026-11-05): media buzz vs our projected ownership ----------
+/* ---------- Chalk Meter on the NFL home (2026-11-05): hype index vs our projected ownership ----------
    Filled by BBI.renderNflChalkMeter (nfl.js). Rows 3-5 are generic filler under a blur + one members CTA. */
 .cm-section[hidden], .cm-locked[hidden] { display: none !important; }
 .nh .section.cm-section { padding: 28px 20px 8px; }

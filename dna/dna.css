@@ -196,6 +196,29 @@
   .dna-leaks td[data-k]::before { content: attr(data-k) ' '; font-family: var(--font-mono); font-size: var(--fs-3xs); letter-spacing: .06em; text-transform: uppercase; color: var(--text-dimmed); }
   .dna-leaks td.dna-fix-c { grid-column: 1 / -1; min-width: 0; }
 }
+/* 11/05: sample card peeking out from behind the drop box (the drop box is opaque and sits on top) */
+.dna-drop-wrap { position: relative; padding-top: 118px; }
+.dna-drop-wrap .dna-drop { z-index: 1; }
+.dna-peek {
+  --tilt: 6deg; --lift: 0px;
+  position: absolute; top: 0; right: 9%; z-index: 0; width: 200px; padding: 0; border: 0; background: none; cursor: pointer;
+  transform: translateY(var(--lift)) rotate(var(--tilt)); transform-origin: 50% 100%;
+  filter: drop-shadow(0 18px 32px rgba(0, 0, 0, .55)); transition: transform .28s var(--ease-out, ease);
+}
+.dna-peek img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid rgba(212, 168, 67, .35); }
+.dna-peek:hover, .dna-peek:focus-visible { --tilt: 2deg; --lift: -16px; }
+.dna-peek:focus-visible { outline: 2px solid var(--gold-300, #e6c36a); outline-offset: 4px; border-radius: 16px; }
+.dna-peek-tag {
+  position: absolute; top: 10px; left: -12px; padding: 4px 10px; border-radius: var(--radius-full, 999px);
+  background: var(--gold-400, #D4A843); color: #17130a; font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; transform: rotate(-6deg); box-shadow: 0 6px 16px rgba(0, 0, 0, .4);
+}
+@media (max-width: 640px) {
+  .dna-drop-wrap { padding-top: 96px; }
+  .dna-peek { width: 158px; right: 50%; --tilt: 5deg; transform: translateX(50%) translateY(var(--lift)) rotate(var(--tilt)); }
+}
+@media (prefers-reduced-motion: reduce) { .dna-peek { transition: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   .dna-drop, .dna-drop.is-over { transition: none; transform: none; }
 }

@@ -2,7 +2,7 @@
  "season": 2026,
  "week": 9,
  "slate": "DraftKings main slate",
- "method": "Hype is media buzz this week (100 = the most-talked-about player on the slate). We line it up with our projected ownership at his position: hype well ahead of ownership is chalk that may still be building.",
+ "method": "The Hype Index is our read on where the DFS crowd's attention is heading before lock (100 = the hottest name on the slate). When hype runs ahead of our ownership projection, the chalk is still forming.",
  "rows": [
   {
    "rank": 1,
@@ -39,7 +39,7 @@
   }
  ],
  "cta": {
-  "label": "See all 5 · Members",
+  "label": "See all players · Members",
   "href": "pricing.html"
  },
  "show": true,
