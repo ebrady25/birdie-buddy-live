@@ -1,6 +1,43 @@
 {
  "articles": [
   {
+   "slug": "2026-week-9-tnf-jax-bal",
+   "href": "2026-week-9-tnf-jax-bal.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-tnf-jax-bal",
+   "title": "TNF showdown: Jacksonville's 40% blowout chance runs through Lawrence",
+   "dek": "Jacksonville wins by 14+ in 40% of outcomes and the crowd is on Lawrence; Washington is our captain and Henry the low-owned pivot.",
+   "slot": "TNF",
+   "week": 9,
+   "season": 2026,
+   "date": "2026-11-05",
+   "tldr": [
+    "Jacksonville wins by 14+ in 40% of market outcomes, so build around Jaguars with Trevor Lawrence in FLEX.",
+    "Bhayshul Tuten is Doubtful with a 35% chance to play; check news before lock and pivot to Chris Rodriguez Jr. if he sits.",
+    "Fade Zay Flowers at a projected 41% FLEX ownership: Lamar Jackson is out and Baltimore's team total is low."
+   ],
+   "game": "JAX@BAL",
+   "kickoff_et": "2026-11-05T20:15:00-05:00",
+   "published_utc": "2026-11-05T19:21:00+00:00",
+   "card_stats": [
+    [
+     "JAX −10.0",
+     "Favorite"
+    ],
+    [
+     "39.5",
+     "Game total"
+    ],
+    [
+     "24.9–14.8",
+     "Team totals JAX–BAL"
+    ],
+    [
+     "Thu 8:15",
+     "Kickoff ET"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-9-wednesday",
    "href": "2026-week-9-wednesday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-wednesday",
@@ -219,5 +256,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-05T01:35:47+00:00"
+ "updated_utc": "2026-11-05T19:21:00+00:00"
 }
