@@ -1,0 +1,442 @@
+{
+ "version": "2026-11-05",
+ "count": 36,
+ "rarities": [
+  {
+   "id": "legendary",
+   "label": "Legendary",
+   "color": "#D4A843",
+   "rank": 4
+  },
+  {
+   "id": "epic",
+   "label": "Epic",
+   "color": "#B98CFF",
+   "rank": 3
+  },
+  {
+   "id": "rare",
+   "label": "Rare",
+   "color": "#4FB8FF",
+   "rank": 2
+  },
+  {
+   "id": "uncommon",
+   "label": "Uncommon",
+   "color": "#3DD68C",
+   "rank": 1
+  },
+  {
+   "id": "common",
+   "label": "Common",
+   "color": "#8A8A98",
+   "rank": 0
+  }
+ ],
+ "categories": [
+  {
+   "id": "learn",
+   "label": "Learn",
+   "icon": "book",
+   "blurb": "Read the guide, learn the words, pass the quizzes."
+  },
+  {
+   "id": "build",
+   "label": "Build",
+   "icon": "flask",
+   "blurb": "Build and grade lineups in the Lineup Lab."
+  },
+  {
+   "id": "win",
+   "label": "Win",
+   "icon": "trophy",
+   "blurb": "What your own contest history says, from DFS DNA."
+  },
+  {
+   "id": "community",
+   "label": "Community",
+   "icon": "chat",
+   "blurb": "Share your cards and join the locker room."
+  },
+  {
+   "id": "habit",
+   "label": "Habit",
+   "icon": "calendar",
+   "blurb": "Show up week after week."
+  },
+  {
+   "id": "member",
+   "label": "Member",
+   "icon": "star",
+   "blurb": "Account badges, checked on our side."
+  },
+  {
+   "id": "compete",
+   "label": "Compete",
+   "icon": "flag",
+   "blurb": "The weekly BirdieBuddy Challenge. Coming soon."
+  }
+ ],
+ "badges": [
+  {
+   "id": "orientation",
+   "name": "Rookie Orientation",
+   "category": "learn",
+   "rarity": "common",
+   "how": "Read the How it works guide to the end",
+   "verified": false,
+   "coming_soon": false,
+   "order": 1
+  },
+  {
+   "id": "glossary_grad",
+   "name": "Glossary Grad",
+   "category": "learn",
+   "rarity": "common",
+   "how": "Open the glossary and read 10 terms",
+   "verified": false,
+   "coming_soon": false,
+   "order": 2
+  },
+  {
+   "id": "quiz_stacks",
+   "name": "Stack School",
+   "category": "learn",
+   "rarity": "uncommon",
+   "how": "Pass the stacking quiz",
+   "verified": true,
+   "coming_soon": false,
+   "order": 3
+  },
+  {
+   "id": "quiz_ownership",
+   "name": "Ownership 101",
+   "category": "learn",
+   "rarity": "uncommon",
+   "how": "Pass the ownership & leverage quiz",
+   "verified": true,
+   "coming_soon": false,
+   "order": 4
+  },
+  {
+   "id": "quiz_captain",
+   "name": "Captain's Chair",
+   "category": "learn",
+   "rarity": "uncommon",
+   "how": "Pass the showdown captain quiz",
+   "verified": true,
+   "coming_soon": false,
+   "order": 5
+  },
+  {
+   "id": "quiz_fields",
+   "name": "Field Sense",
+   "category": "learn",
+   "rarity": "uncommon",
+   "how": "Pass the contest & field-size quiz",
+   "verified": true,
+   "coming_soon": false,
+   "order": 6
+  },
+  {
+   "id": "film_study",
+   "name": "Film Study",
+   "category": "learn",
+   "rarity": "rare",
+   "how": "Pass all four quizzes",
+   "verified": true,
+   "coming_soon": false,
+   "order": 7
+  },
+  {
+   "id": "bookworm",
+   "name": "Bookworm",
+   "category": "learn",
+   "rarity": "uncommon",
+   "how": "Read 5 BirdieBuddy articles",
+   "verified": false,
+   "coming_soon": false,
+   "order": 8
+  },
+  {
+   "id": "scholar",
+   "name": "Scholar",
+   "category": "learn",
+   "rarity": "rare",
+   "how": "Read 20 BirdieBuddy articles",
+   "verified": false,
+   "coming_soon": false,
+   "order": 9
+  },
+  {
+   "id": "first_build",
+   "name": "First Build",
+   "category": "build",
+   "rarity": "common",
+   "how": "Grade your first lineup in the Lab",
+   "verified": false,
+   "coming_soon": false,
+   "order": 10
+  },
+  {
+   "id": "by_the_book",
+   "name": "By the Book",
+   "category": "build",
+   "rarity": "uncommon",
+   "how": "A classic lineup that passes every must-follow rule",
+   "verified": false,
+   "coming_soon": false,
+   "order": 11
+  },
+  {
+   "id": "showdown_ace",
+   "name": "Showdown Ace",
+   "category": "build",
+   "rarity": "uncommon",
+   "how": "A showdown lineup with a BirdieBuild score of 70+",
+   "verified": false,
+   "coming_soon": false,
+   "order": 12
+  },
+  {
+   "id": "low_owned",
+   "name": "Off the Beaten Path",
+   "category": "build",
+   "rarity": "rare",
+   "how": "A rule-passing classic lineup under 100% total ownership",
+   "verified": false,
+   "coming_soon": false,
+   "order": 13
+  },
+  {
+   "id": "import_pro",
+   "name": "Import Pro",
+   "category": "build",
+   "rarity": "uncommon",
+   "how": "Import your contest entries file into the Lab",
+   "verified": false,
+   "coming_soon": false,
+   "order": 14
+  },
+  {
+   "id": "lab_rat",
+   "name": "Lab Rat",
+   "category": "build",
+   "rarity": "rare",
+   "how": "Grade 25 lineups",
+   "verified": false,
+   "coming_soon": false,
+   "order": 15
+  },
+  {
+   "id": "dna_taken",
+   "name": "DNA Taken",
+   "category": "win",
+   "rarity": "common",
+   "how": "Check your DFS DNA",
+   "verified": false,
+   "coming_soon": false,
+   "order": 16
+  },
+  {
+   "id": "two_sport",
+   "name": "Two-Sport Athlete",
+   "category": "win",
+   "rarity": "uncommon",
+   "how": "DFS DNA for two sports",
+   "verified": false,
+   "coming_soon": false,
+   "order": 17
+  },
+  {
+   "id": "finish_rare",
+   "name": "Rare Finish",
+   "category": "win",
+   "rarity": "rare",
+   "how": "Best tournament finish in the top 5% (DNA)",
+   "verified": false,
+   "coming_soon": false,
+   "order": 18
+  },
+  {
+   "id": "finish_epic",
+   "name": "Epic Finish",
+   "category": "win",
+   "rarity": "epic",
+   "how": "Best finish in the top 1% (DNA)",
+   "verified": false,
+   "coming_soon": false,
+   "order": 19
+  },
+  {
+   "id": "finish_legendary",
+   "name": "Legendary Finish",
+   "category": "win",
+   "rarity": "legendary",
+   "how": "Best finish in the top 0.1% (DNA)",
+   "verified": false,
+   "coming_soon": false,
+   "order": 20
+  },
+  {
+   "id": "sniper",
+   "name": "Sniper",
+   "category": "win",
+   "rarity": "rare",
+   "how": "A top-1% finish in a single-entry contest (DNA)",
+   "verified": false,
+   "coming_soon": false,
+   "order": 21
+  },
+  {
+   "id": "ticket_punched",
+   "name": "Ticket Punched",
+   "category": "win",
+   "rarity": "uncommon",
+   "how": "Won a satellite (DNA)",
+   "verified": false,
+   "coming_soon": false,
+   "order": 22
+  },
+  {
+   "id": "hype_man",
+   "name": "Hype Man",
+   "category": "community",
+   "rarity": "common",
+   "how": "Download or share your DNA card",
+   "verified": false,
+   "coming_soon": false,
+   "order": 23
+  },
+  {
+   "id": "show_off",
+   "name": "Show-Off",
+   "category": "community",
+   "rarity": "uncommon",
+   "how": "Share your Badge Case card",
+   "verified": false,
+   "coming_soon": false,
+   "order": 24
+  },
+  {
+   "id": "card_shark",
+   "name": "Card Shark",
+   "category": "community",
+   "rarity": "uncommon",
+   "how": "Make a Lab share card",
+   "verified": false,
+   "coming_soon": false,
+   "order": 25
+  },
+  {
+   "id": "discord_linked",
+   "name": "Locker Room",
+   "category": "community",
+   "rarity": "uncommon",
+   "how": "Link your Discord",
+   "verified": true,
+   "coming_soon": false,
+   "order": 26
+  },
+  {
+   "id": "regular",
+   "name": "Regular",
+   "category": "habit",
+   "rarity": "uncommon",
+   "how": "Visit in 4 different weeks",
+   "verified": false,
+   "coming_soon": false,
+   "order": 27
+  },
+  {
+   "id": "iron_man",
+   "name": "Iron Man",
+   "category": "habit",
+   "rarity": "rare",
+   "how": "Visit in 10 different weeks",
+   "verified": false,
+   "coming_soon": false,
+   "order": 28
+  },
+  {
+   "id": "chalk_watcher",
+   "name": "Chalk Watcher",
+   "category": "habit",
+   "rarity": "uncommon",
+   "how": "Check the Chalk Meter in 3 different weeks",
+   "verified": false,
+   "coming_soon": false,
+   "order": 29
+  },
+  {
+   "id": "sunday_ritual",
+   "name": "Sunday Ritual",
+   "category": "habit",
+   "rarity": "uncommon",
+   "how": "Open Before You Lock on a Sunday",
+   "verified": false,
+   "coming_soon": false,
+   "order": 30
+  },
+  {
+   "id": "day_one",
+   "name": "Day One",
+   "category": "member",
+   "rarity": "epic",
+   "how": "Account created before Dec 1, 2026",
+   "verified": true,
+   "coming_soon": false,
+   "order": 31
+  },
+  {
+   "id": "member",
+   "name": "Member",
+   "category": "member",
+   "rarity": "rare",
+   "how": "BirdieBuddy member",
+   "verified": true,
+   "coming_soon": false,
+   "order": 32
+  },
+  {
+   "id": "founding_member",
+   "name": "Founding Member",
+   "category": "member",
+   "rarity": "legendary",
+   "how": "Member before 2027",
+   "verified": true,
+   "coming_soon": false,
+   "order": 33
+  },
+  {
+   "id": "challenge_entered",
+   "name": "In the Arena",
+   "category": "compete",
+   "rarity": "uncommon",
+   "how": "Enter the weekly BirdieBuddy Challenge",
+   "verified": true,
+   "coming_soon": true,
+   "order": 34
+  },
+  {
+   "id": "challenge_top10",
+   "name": "Top 10%",
+   "category": "compete",
+   "rarity": "rare",
+   "how": "Top 10% in a weekly Challenge",
+   "verified": true,
+   "coming_soon": true,
+   "order": 35
+  },
+  {
+   "id": "challenge_winner",
+   "name": "Champion",
+   "category": "compete",
+   "rarity": "legendary",
+   "how": "Win a weekly Challenge",
+   "verified": true,
+   "coming_soon": true,
+   "order": 36
+  }
+ ]
+}

@@ -446,6 +446,7 @@
     // badges: stored + this file
     S.badges = mergeBadges(lsJson(LS_BADGES, {}), a.badges);
     if (!S.selftest) lsSet(LS_BADGES, JSON.stringify(S.badges));
+    if (!S.selftest && BBI.badges) BBI.badges.fromDna(a);   // Badge Case: DNA Taken, Two-Sport, finishes, Sniper, Ticket Punched
     $('dnaEarly').hidden = !a.early;
     drawReport(a); drawBadges(); drawMember();
     drawCardPreview();
@@ -782,20 +783,21 @@
     share.hidden = !canShareFile(r.file); copy.hidden = !canCopyImg();
     acts.forEach(b => { b.disabled = false; });
   };
+  const hypeMan = () => { if (BBI.badges) BBI.badges.earn('hype_man'); };   // Badge Case: Hype Man
   const cardAct = async act => {
     const r = S.a && S.cards[`${S.a.sport}|${S.fmt}`]; if (!r || !r.blob) return;
     if (act === 'download') {
       const a = document.createElement('a'); a.href = URL.createObjectURL(r.blob); a.download = r.name;
       document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-      cardStatus('Downloaded.'); return;
+      cardStatus('Downloaded.'); hypeMan(); return;
     }
     if (act === 'copy') {
-      try { await navigator.clipboard.write([new root.ClipboardItem({ 'image/png': r.blob })]); cardStatus('Image copied: paste it into a post or a message.'); }
+      try { await navigator.clipboard.write([new root.ClipboardItem({ 'image/png': r.blob })]); cardStatus('Image copied: paste it into a post or a message.'); hypeMan(); }
       catch { cardStatus('Your browser blocked the copy: use Download PNG instead.'); }
       return;
     }
     if (act === 'share') {
-      try { await navigator.share({ files: [r.file], title: 'My DFS DNA', text: 'Check your DFS DNA · birdiebuddy.io/dna' }); cardStatus('Shared.'); }
+      try { await navigator.share({ files: [r.file], title: 'My DFS DNA', text: 'Check your DFS DNA · birdiebuddy.io/dna' }); cardStatus('Shared.'); hypeMan(); }
       catch (e) { cardStatus(e && e.name === 'AbortError' ? '' : "Sharing didn't work here: use Download PNG instead."); }
     }
   };

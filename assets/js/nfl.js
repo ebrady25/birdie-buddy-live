@@ -24,10 +24,11 @@ window.BBI = window.BBI || {};
       { href: 'nfl/showdown/',       key: 'showdown-grind', label: 'Showdown Grind', sub: 'full playbook', group: 'Showdown · one game' }
     ] },
     { href: 'nfl/articles/', key: 'articles', label: 'Articles', sub: 'the week in plain English' },
-    // Tools = a dropdown trigger with NO href (11/05): the Lab + DFS DNA, so the top row stays short
+    // Tools = a dropdown trigger with NO href (11/05): the Lab + DFS DNA + Badges, so the top row stays short
     { key: 'tools', label: 'Tools', sub: 'grade a lineup, read your DNA', menu: [
       { href: 'nfl/lab/', key: 'lab', label: 'Lineup Lab', sub: 'build or check a lineup', group: 'Tools' },
-      { href: 'dna/',     key: 'dna', label: 'DFS DNA',    sub: 'your player type, from your DK history', group: 'Tools' }
+      { href: 'dna/',     key: 'dna', label: 'DFS DNA',    sub: 'your player type, from your DK history', group: 'Tools' },
+      { href: 'badges/',  key: 'badges', label: 'Badges',  sub: 'collect them all', group: 'Tools' }
     ] }
   ];
   const EXTRA = {
@@ -40,9 +41,18 @@ window.BBI = window.BBI || {};
   const ALIAS = {
     nfl: 'home', classic: 'playbooks:classic-grind', 'classic:grind': 'playbooks:classic-grind', 'classic:chill': 'playbooks:classic-chill',
     showdown: 'playbooks:showdown-grind', 'showdown:grind': 'playbooks:showdown-grind', 'showdown:chill': 'playbooks:showdown-chill',
-    lab: 'tools:lab', dna: 'tools:dna'
+    lab: 'tools:lab', dna: 'tools:dna', badges: 'tools:badges'
   };
   const normKey = (k) => { k = String(k || ''); return ALIAS[k] || k; };
+
+  // Badges (2026-11-05): every NFL page loads assets/js/badges.js once, so generated pages need no edits. Until it lands,
+  // page hooks call BBI.badgeQ('earn' | 'count' | 'seen', ...) and the calls queue; badges.js drains the queue on load.
+  const BADGES_JS = 'assets/js/badges.js?v=20261105d';
+  window.BBI.badgeQ = window.BBI.badgeQ || ((...a) => { const B = window.BBI.badges; if (B && B.call) return B.call(...a); (window.BBI._badgeQ = window.BBI._badgeQ || []).push(a); });
+  const loadBadges = () => {
+    if (window.BBI.badges || document.getElementById('bbi-badges-js')) return;
+    const s = document.createElement('script'); s.id = 'bbi-badges-js'; s.src = BADGES_JS; s.async = true; document.head.appendChild(s);
+  };
 
   // Sunday in New York (the page shows the Before You Lock chip all day Sunday ET)
   const isSundayET = () => {
@@ -240,6 +250,7 @@ window.BBI = window.BBI || {};
       }
       if (d.own_status !== 'ok') set('[data-cm=note]', 'Ownership comes Wednesday: until then the meter shows the Hype Index only.');
       box.hidden = false;
+      window.BBI.badgeQ('seen', box, 'chalk_weeks', `${+d.season || 0}-w${+d.week || 0}`);   // badge: Chalk Watcher (3 weeks)
       return d;
     }).catch(() => null);
   };
@@ -316,6 +327,7 @@ window.BBI = window.BBI || {};
     }
 
     window.BBI.renderNflMobileBar(key, { sunday });
+    loadBadges();
 
     // auth.js: same lazy-load pattern as data.js so the account control,
     // login modal and [data-gate] gating work here without a golf header.
@@ -369,6 +381,7 @@ window.BBI = window.BBI || {};
       more: () => `<h2 class="nfl-msheet-title" id="nflMsheetTitle">More</h2><div class="nfl-msheet-grid">` +
         link(EXTRA.lock.href, EXTRA.lock.label, sunday ? 'Live today' : 'Updates Sunday 9 AM ET', top === 'lock', sunday) +
         link('dna/', 'DFS DNA', 'Your player type, from your DK history', top === 'tools' && sub === 'dna') +
+        link('badges/', 'Badges', 'Collect them all', top === 'tools' && sub === 'badges') +
         link('nfl/articles/', 'Articles', 'The week in plain English', top === 'articles') +
         link(EXTRA.results.href, EXTRA.results.label, 'How our numbers did', top === 'results') +
         link(EXTRA.players.href, EXTRA.players.label, 'Search any name', top === 'players') +

@@ -120,6 +120,13 @@
 .dna-badge-t b { font-size: var(--fs-md); color: var(--text-primary); }
 .dna-badge-t small { font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.4; }
 
+/* 11/05: link to the site-wide Badge Case beside the heading */
+.dna-badges-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: var(--space-4); }
+.dna-badges-head .dna-h3 { margin-bottom: 0; }
+.dna-bc-link { font-size: var(--fs-sm); font-weight: 600; color: var(--gold-300); text-decoration: underline; text-underline-offset: 3px; }
+.dna-bc-link:hover { color: var(--gold-200); }
+.dna-bc-link:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 2px; border-radius: 4px; }
+
 /* ---------- members ---------- */
 .dna-member-wrap { margin-top: var(--space-12); }
 .dna-member-wrap .dna-h3 { margin: 6px 0 4px; }

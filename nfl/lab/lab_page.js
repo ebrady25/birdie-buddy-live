@@ -24,6 +24,8 @@
   const lsGet = k => { try { return localStorage.getItem(k); } catch { return null; } };
   const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
   const LS_TAB = 'bbi_lab_tab', LS_CL = 'bbi_lab_classic';
+  // Badges (2026-11-05): badges.js (nfl.js loads it) counts graded lineups by a short hash of the names, never the names.
+  const badge = (...a) => { try { if (BBI.badgeQ) BBI.badgeQ(...a); } catch {} };
 
   /* ---------------- tab + flags (before any engine script loads) ---------------- */
   const Q = new URLSearchParams(location.search);
@@ -321,6 +323,7 @@
     const g = sdGrade(); setGrade(sdGradeEl || $('lbSdGrade'), g.tone, g.html); lastCard.showdown = g.card || null;
     const L = SL(); if (!L || !L.engine) return;
     const n = L.filled(), qt = $('lbSdQuickT'); if (qt) qt.textContent = n ? 'Paste a different lineup' : 'Paste your lineup';
+    if (n === 6) { const cd = L.cardData ? L.cardData() : null; badge('count', 'graded', 's' + sdKey(L)); if (cd && +cd.score >= 70) badge('earn', 'showdown_ace'); }   // badges: First Build, Lab Rat, Showdown Ace
     // The lineup just reached 6 from the reader's own tap or paste (not a link or a game switch restoring one).
     if (sdPrevN != null && sdPrevN < 6 && n === 6 && Date.now() - sdUserAt < 2000) showGrade('lbSdGrade');
     sdPrevN = n;
@@ -463,6 +466,7 @@
     C.res = names.length ? C.eng.check(names) : null;
     drawClBar(); drawClLineup(); drawClPool(); drawClSaved(); drawClRules(); drawClFiles();
     const g = clGrade(); setGrade($('lbClGrade'), g.tone, g.html); lastCard.classic = g.card || null;
+    if (C.res && C.res.roster.ok && C.res.X) { const pass = !C.res.hard.some(h => h.status === 'fail'); badge('count', 'graded', 'c' + names.join('|')); if (pass) badge('earn', 'by_the_book'); if (pass && C.pl.has.own && C.res.X.cum < 100) badge('earn', 'low_owned'); }   // badges: First Build, Lab Rat, By the Book (no must-follow rule broken, as the Lab says it), Off the Beaten Path
     const n = names.length, qt = $('lbClQuickT'); if (qt) qt.textContent = n ? 'Paste a different lineup' : 'Paste your lineup';
     if (C.prevN != null && C.prevN < 9 && n === 9) showGrade('lbClGrade');   // just filled (a paste or the last tap)
     C.prevN = n;
@@ -770,8 +774,10 @@
       if (svFind(names) >= 0) { dup++; continue; }
       if (C.saved.length >= 150) { full++; continue; }
       C.saved.push({ id: Math.max(0, ...C.saved.map(s => +s.id || 0)) + 1, slots: names.slice(), t: Date.now() }); added++;
+      badge('count', 'graded', 'c' + names.join('|'));   // each imported lineup is graded in Saved lineups
     }
     svStore(); clDraw();
+    if (added) badge('earn', 'import_pro');   // badge: Import Pro
     const bits = [dup && `${dup} already saved`, miss && `${miss} with players not in this week's pool`, full && `${full} over the 150 limit`].filter(Boolean);
     toast(added ? `<b>Imported ${added} lineup${added > 1 ? 's' : ''}</b>${bits.length ? ' · ' + bits.join(' · ') : ''}. Each one is graded in Saved lineups.` :
       `Nothing new to import${bits.length ? ': ' + bits.join(' · ') : ''}.`, added ? 'good' : 'warn');
@@ -1101,15 +1107,15 @@
     if (act === 'download') {
       const a = document.createElement('a'); a.href = URL.createObjectURL(c.blob); a.download = c.name;
       document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-      cardStatus('Downloaded.'); return;
+      cardStatus('Downloaded.'); badge('earn', 'card_shark'); return;
     }
     if (act === 'copy') {
-      try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': c.blob })]); cardStatus('Image copied: paste it into a post or a message.'); }
+      try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': c.blob })]); cardStatus('Image copied: paste it into a post or a message.'); badge('earn', 'card_shark'); }
       catch { cardStatus("Your browser blocked the copy: use Download PNG instead."); }
       return;
     }
     if (act === 'share') {
-      try { await navigator.share({ files: [c.file], title: 'My Lineup Lab grade', text: 'Graded at birdiebuddy.io/nfl/lab' }); cardStatus('Shared.'); }
+      try { await navigator.share({ files: [c.file], title: 'My Lineup Lab grade', text: 'Graded at birdiebuddy.io/nfl/lab' }); cardStatus('Shared.'); badge('earn', 'card_shark'); }
       catch (e) { cardStatus(e && e.name === 'AbortError' ? '' : "Sharing didn't work here: use Download PNG instead."); }
     }
   };

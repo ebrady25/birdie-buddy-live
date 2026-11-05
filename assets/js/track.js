@@ -27,7 +27,8 @@ window.BBI = window.BBI || {};
 
   const TABLE = 'nfl_events';
   const EVENTS = new Set(['page_view', 'preset_select', 'slider_commit', 'lab_player_add', 'lab_lineup_complete', 'celebrate',
-    'file_load', 'batch_score', 'book_pick', 'build_for_me', 'share_link_copy', 'review_load', 'gate_view', 'attack_toggle', 'dna_generated']);
+    'file_load', 'batch_score', 'book_pick', 'build_for_me', 'share_link_copy', 'review_load', 'gate_view', 'attack_toggle', 'dna_generated',
+    'badge_earned']);   // badge_earned: {badge, rarity} only (badges.js)
   const SEND_HOST = /(^|\.)birdiebuddy\.io$/i;
   const FLUSH_MS = 5000, BATCH = 25, MAX_QUEUE = 200, MAX_PER_PAGE = 400, AUTH_WAIT_MS = 20000;
   const LS_OFF = 'bbi_track_off', LS_PAUSE = 'bbi_track_refused_until', SS_OFF = 'bbi_track_dead', SS_SID = 'bbi_track_sid';

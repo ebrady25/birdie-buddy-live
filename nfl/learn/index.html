@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
   <link rel="stylesheet" href="assets/css/nfl.css?v=20261105a" />
+  <link rel="stylesheet" href="badges/badges.css?v=20261105d" />
   <link rel="canonical" href="https://birdiebuddy.io/nfl/learn/">
   <meta name="description" content="New to DraftKings NFL DFS or to BirdieBuddy? A 5-minute guide to using our weekly numbers, plus plain-English definitions of ownership, leverage, stacks, captains and more.">
   <meta property="og:type" content="article">
@@ -74,7 +75,7 @@
     </dl>
 
     <h2>Glossary</h2>
-    <dl>
+    <dl id="glossary">
       <dt>Projection</dt><dd>How many DraftKings points we expect a player to score.<small>Our average outcome across thousands of simulated games.</small></dd>
       <dt>Range</dt><dd>A bad day to a big day: the low and high end of what he usually scores. Shown as P10–P90 on some tables (1-in-10 bad, 1-in-10 great).</dd>
       <dt>Ceiling</dt><dd>His big-day score. Tournaments are won by ceilings, not averages.</dd>
@@ -98,12 +99,27 @@
       <dt>Top 1%</dt><dd>Finishing in the top 1 of every 100 entries: where most tournament prize money is.</dd>
       <dt>BirdieBuild</dt><dd>Our study of past winning DraftKings lineups, and the rules we built from it. The BirdieBuild score (0–100) in the Lab says how closely your lineup is built like past winners.</dd>
     </dl>
+    <div id="lrnEnd" style="height:1px" aria-hidden="true"></div>
+
+    <section class="qz-wrap" id="test-yourself" aria-labelledby="qzH">
+      <h2 id="qzH">Test yourself</h2>
+      <p class="qz-dek">Four short quizzes on how we play, from this guide and our playbooks. Get 3 of 4 right and the badge goes in your <a href="badges/">Badge Case</a>, checked on our side. Pass all four for Film Study.</p>
+      <div class="qz-grid" id="qzGrid"><p class="qz-state">Loading the quizzes…</p></div>
+    </section>
     <p style="margin-top:28px;color:var(--text-tertiary,#8a909c);font-size:13px">For entertainment. Not betting or financial advice. DFS involves real money and real risk. Play only what you can afford to lose, and only where it's legal (18+/21+ by state). Gambling problem? Call or text 1-800-GAMBLER.</p>
   </main>
   <div id="site-footer"></div>
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=20261105b"></script>
+  <script src="assets/js/nfl.js?v=20261105d"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
+  <script src="assets/js/badges.js?v=20261105d"></script>
   <script>BBI.renderNflHeader('learn'); BBI.renderNflFooter('NFL · How it works');</script>
+  <script src="badges/quiz.js?v=20261105d"></script>
+  <script>
+    // Badges (2026-11-05): Rookie Orientation at the end of the guide, Glossary Grad after 10 terms, the quizzes
+    BBI.badges.seen(document.getElementById('lrnEnd'), function () { BBI.badges.earn('orientation'); });
+    BBI.badges.watchTerms(document.getElementById('glossary'));
+    BBI.badgesQuiz.mount(document.getElementById('qzGrid'));
+  </script>
 </body>
 </html>

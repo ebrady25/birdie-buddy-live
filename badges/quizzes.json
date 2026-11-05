@@ -1,0 +1,185 @@
+{
+  "version": "2026-11-05",
+  "pass_at": 3,
+  "note": "Questions only. Answers are graded on our server. The one-line explanations are returned by the grader after each attempt (not stored here).",
+  "quizzes": [
+    {
+      "id": "quiz_stacks",
+      "badge": "quiz_stacks",
+      "title": "Stacking",
+      "badge_name": "Stack School",
+      "blurb": "QB stacks, bring-backs and what not to pair.",
+      "questions": [
+        {
+          "q": "In a classic lineup, what is a stack?",
+          "choices": [
+            "Two running backs from the same team",
+            "A quarterback plus his own pass catchers",
+            "Your three most expensive players",
+            "One player from every game on the slate"
+          ]
+        },
+        {
+          "q": "What's our default stack in a classic lineup?",
+          "choices": [
+            "The QB with two of his pass catchers",
+            "The QB on his own, with none of his receivers",
+            "The QB with his own running back",
+            "Two quarterbacks from the same game"
+          ]
+        },
+        {
+          "q": "What is a bring-back?",
+          "choices": [
+            "Re-entering last week's winning lineup",
+            "A player coming back from injury",
+            "A second quarterback in the same lineup",
+            "A player from the other team in your stack's game"
+          ]
+        },
+        {
+          "q": "Outside your QB stack, should you pair two teammates from another team, like that team's RB and WR?",
+          "choices": [
+            "Yes, always: more teammates means more correlation",
+            "No: two teammates outside the stack split one offense's points",
+            "Only if they both cost under $5,000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quiz_ownership",
+      "badge": "quiz_ownership",
+      "title": "Ownership & leverage",
+      "badge_name": "Ownership 101",
+      "blurb": "Ownership, chalk, leverage and duplicate lineups.",
+      "questions": [
+        {
+          "q": "A player is projected at 30% ownership. What does that mean?",
+          "choices": [
+            "He'll score about 30% of his team's points",
+            "About 3 in every 10 lineups in the contest will have him",
+            "He has a 30% chance to hit his projection",
+            "He costs 30% of the salary cap"
+          ]
+        },
+        {
+          "q": "What do we mean by leverage, or edge vs the crowd?",
+          "choices": [
+            "Points per $1,000 of salary",
+            "His salary minus his projection",
+            "How often he lands in the best lineup in our simulations, minus his ownership",
+            "How many contests he's in this week"
+          ]
+        },
+        {
+          "q": "How do we treat chalk, the week's most popular players?",
+          "choices": [
+            "Fade every chalk player, every week",
+            "Play as much chalk as you can",
+            "Ownership doesn't matter, only projections do",
+            "Carry the right chalk, but never two overrated chalk players in one lineup"
+          ]
+        },
+        {
+          "q": "You win a tournament with a lineup that nine other people also built. What happens?",
+          "choices": [
+            "You split the prize money with them",
+            "You each get the full first-place prize",
+            "The earliest entry takes it all",
+            "Nothing changes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quiz_captain",
+      "badge": "quiz_captain",
+      "title": "Showdown captains",
+      "badge_name": "Captain's Chair",
+      "blurb": "Who to captain in a one-game showdown, and why.",
+      "questions": [
+        {
+          "q": "In a showdown, what does the captain slot do?",
+          "choices": [
+            "Doubles his points at the same salary",
+            "1.5x his points at the same salary",
+            "1.5x his points, and he costs 1.5x his salary",
+            "Nothing: it's just the first slot"
+          ]
+        },
+        {
+          "q": "Who's the best kind of captain?",
+          "choices": [
+            "A player who can be the game's highest scorer",
+            "The cheapest player, to save salary",
+            "The kicker, for a safe floor",
+            "Whoever the most people are captaining"
+          ]
+        },
+        {
+          "q": "Where does leverage live in a showdown?",
+          "choices": [
+            "In a cheap flex player nobody else plays",
+            "At captain, while the popular players sit in the flex",
+            "In leaving salary unspent",
+            "In playing both kickers"
+          ]
+        },
+        {
+          "q": "The favorite is giving more than 7 points. Where do winning captains usually come from?",
+          "choices": [
+            "The underdog's pocket quarterback",
+            "The kicker",
+            "An even split between the two teams",
+            "The favorite"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quiz_fields",
+      "badge": "quiz_fields",
+      "title": "Contests & field size",
+      "badge_name": "Field Sense",
+      "blurb": "Which contests to play, how many, and how much.",
+      "questions": [
+        {
+          "q": "Why do we lean toward smaller fields and single-entry contests?",
+          "choices": [
+            "The top prizes are bigger",
+            "There are fewer lineups to beat, so a good read is worth more",
+            "Projections are more accurate in them",
+            "Nobody else plays them"
+          ]
+        },
+        {
+          "q": "Over a season, which usually works better?",
+          "choices": [
+            "One or two contests per slate, built around a game you believe in",
+            "Ten contests with the same five lineups in each",
+            "Every contest in the lobby, one lineup each"
+          ]
+        },
+        {
+          "q": "A satellite pays the top 15% a seat in a bigger contest. How should that lineup look?",
+          "choices": [
+            "As risky as possible, with several players under 5% owned",
+            "Leave a lot of salary unspent so it's unique",
+            "Solid and steady: a strong floor, and chalk is fine",
+            "Two quarterbacks and no running backs"
+          ]
+        },
+        {
+          "q": "What should your weekly DFS budget look like?",
+          "choices": [
+            "Double it after a losing week to win it back",
+            "Bigger whenever you feel confident",
+            "Whatever it takes to enter every contest",
+            "The same amount every week, one you can afford to lose"
+          ]
+        }
+      ]
+    }
+  ]
+}
