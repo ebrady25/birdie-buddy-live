@@ -446,7 +446,7 @@
     // badges: stored + this file
     S.badges = mergeBadges(lsJson(LS_BADGES, {}), a.badges);
     if (!S.selftest) lsSet(LS_BADGES, JSON.stringify(S.badges));
-    if (!S.selftest && BBI.badges) BBI.badges.fromDna(a);   // Badge Case: DNA Taken, Two-Sport, finishes, Sniper, Ticket Punched
+    if (!S.selftest && BBI.badges) BBI.badges.fromDna(a);   // Trophy Room: DNA Taken, Two-Sport, finishes, Sniper, Ticket Punched
     $('dnaEarly').hidden = !a.early;
     drawReport(a); drawBadges(); drawMember();
     drawCardPreview();
@@ -783,7 +783,7 @@
     share.hidden = !canShareFile(r.file); copy.hidden = !canCopyImg();
     acts.forEach(b => { b.disabled = false; });
   };
-  const hypeMan = () => { if (BBI.badges) BBI.badges.earn('hype_man'); };   // Badge Case: Hype Man
+  const hypeMan = () => { if (BBI.badges) BBI.badges.earn('hype_man'); };   // Trophy Room: Hype Man
   const cardAct = async act => {
     const r = S.a && S.cards[`${S.a.sport}|${S.fmt}`]; if (!r || !r.blob) return;
     if (act === 'download') {

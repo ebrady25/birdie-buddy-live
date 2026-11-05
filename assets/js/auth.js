@@ -734,7 +734,7 @@ window.BBI = window.BBI || {};
             <span>${escapeHtml(current.email)}${member ? ' · Member' : ''}</span>
           </div>
           <a href="account.html">⚙ Account${member ? ' &amp; billing' : ''}</a>
-          <a href="badges/">◆ Badge Case</a>
+          <a href="badges/">◆ Trophy Room</a>
           ${member ? '' : `<a href="pricing.html">★ Get BirdieBuddy</a>`}
           <button data-auth="logout">⎋ Sign out</button>
         </div>

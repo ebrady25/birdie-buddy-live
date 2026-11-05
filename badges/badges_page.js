@@ -1,5 +1,5 @@
 /* =====================================================================
-   BIRDIEBUDDY — BADGE CASE (/badges/)
+   BIRDIEBUDDY — TROPHY ROOM (/badges/)
    Every visitor sees their own case (BBI.badges in assets/js/badges.js):
    header (N of 36, progress ring, tally by rarity), the rarest three,
    the collection by category, and a share card in the DFS DNA card's
@@ -154,14 +154,14 @@
     let bx = PD;
     if (mark && mark.naturalWidth) { const h = hdr.mh, w = h * mark.naturalWidth / mark.naturalHeight; g.drawImage(mark, PD, hdr.my, w, h); bx = PD + w + 14; }
     txt('BirdieBuddy', bx, hdr.ny, { size: hdr.name, weight: 800 });
-    txt('BADGE CASE', bx, hdr.sy, { mono: true, size: hdr.sub, weight: 600, color: CK.gold, ls: '2px' });
+    txt('TROPHY ROOM', bx, hdr.sy, { mono: true, size: hdr.sub, weight: 600, color: CK.gold, ls: '2px' });
     txt('NFL · DFS', W - PD, hdr.ry, { mono: true, size: hdr.rs, weight: 600, color: CK.gold, align: 'right', ls: '2px' });
     txt(`${Math.round(n / M.total * 100)}% complete`, W - PD, hdr.rvy, { size: hdr.rv, weight: 700, align: 'right' });
     g.fillStyle = 'rgba(255,255,255,0.08)'; g.fillRect(PD, hdr.div, IW, 1);
 
     // the count
     const L = port ? { ey: 220, cy: 404, cs: 200, ss: 76, ly: 452, by: 486, bh: 18, tw: IW } : { ey: 152, cy: 262, cs: 124, ss: 46, ly: 296, by: 314, bh: 12, tw: 500 };
-    txt('MY BADGE CASE', PD, L.ey, { mono: true, size: port ? 20 : 14, weight: 700, color: acc, ls: '2px' });
+    txt('MY TROPHY ROOM', PD, L.ey, { mono: true, size: port ? 20 : 14, weight: 700, color: acc, ls: '2px' });
     txt(String(n), PD - L.cs * 0.03, L.cy, { size: L.cs, weight: 800 });
     const cw = measure(String(n), { size: L.cs, weight: 800 });
     txt(`/ ${M.total}`, PD + cw + (port ? 18 : 12), L.cy, { size: L.ss, weight: 600, color: CK.muted });
@@ -227,10 +227,10 @@
     const M = model(), key = `${P.sig}|${fmt}`;
     if (P.cards[key]) return P.cards[key];
     const canvas = await drawCard(M, fmt), blob = await cardBlob(canvas);
-    const name = `birdiebuddy-badge-case-${fmt}.png`;
+    const name = `birdiebuddy-trophy-room-${fmt}.png`;
     let file = null; try { file = blob ? new File([blob], name, { type: 'image/png' }) : null; } catch {}
     const top = M.rarest.slice(0, 3);
-    const alt = `Badge Case card: ${M.earned.length} of ${M.total} badges collected.${top.length ? ` Rarest: ${top.map(b => `${b.name} (${RAR[b.rarity].label})`).join(', ')}.` : ''}`;
+    const alt = `Trophy Room card: ${M.earned.length} of ${M.total} badges collected.${top.length ? ` Rarest: ${top.map(b => `${b.name} (${RAR[b.rarity].label})`).join(', ')}.` : ''}`;
     return (P.cards[key] = { canvas, blob, file, name, alt, url: blob ? URL.createObjectURL(blob) : '' });
   };
   const cardStatus = t => { const s = $('bcCardSt'); if (s) s.textContent = t; };
@@ -263,7 +263,7 @@
       return;
     }
     if (act === 'share') {
-      try { await navigator.share({ files: [r.file], title: 'My Badge Case', text: 'Collect yours · birdiebuddy.io/badges' }); cardStatus('Shared.'); B.earn('show_off'); }
+      try { await navigator.share({ files: [r.file], title: 'My Trophy Room', text: 'Collect yours · birdiebuddy.io/badges' }); cardStatus('Shared.'); B.earn('show_off'); }
       catch (e) { cardStatus(e && e.name === 'AbortError' ? '' : "Sharing didn't work here: use Download PNG instead."); }
     }
   };

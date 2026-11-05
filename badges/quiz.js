@@ -54,7 +54,7 @@
     const id = card.dataset.quiz, open = card.classList.contains('is-open'), passed = have(id), acts = card.querySelector('[data-qz="acts"]');
     const toggle = `<button type="button" class="btn ${signedIn() && !passed ? 'btn-primary' : ''}" data-qz="toggle" aria-expanded="${open}" aria-controls="${id}-form">${open ? 'Hide the questions' : passed ? 'Take it again' : signedIn() ? 'Take the quiz' : 'See the questions'}</button>`;
     acts.innerHTML = passed
-      ? `${toggle}<span class="qz-state"><b>Passed.</b> The badge is in your <a href="badges/">Badge Case</a>.</span>`
+      ? `${toggle}<span class="qz-state"><b>Passed.</b> The badge is in your <a href="badges/">Trophy Room</a>.</span>`
       : signedIn()
         ? toggle
         : `<button type="button" class="btn btn-primary" data-qz="signin">Sign in</button>${toggle}<span class="qz-state">Sign in to take the quiz and keep the badge.</span>`;
@@ -90,7 +90,7 @@
     lock(card, true); showWhy(card, true, r.whys);
     btn.hidden = true; card.querySelector('[data-qz="retry"]').hidden = false;
     const tot = r.total || q.questions.length, ok = r.correct == null ? '' : `${r.correct} of ${tot} right. `;
-    if (r.passed) setResult(card, `<b>${ok}Passed.</b> ${esc(badge.name)} is in your <a href="badges/">Badge Case</a>.`, 'is-pass');
+    if (r.passed) setResult(card, `<b>${ok}Passed.</b> ${esc(badge.name)} is in your <a href="badges/">Trophy Room</a>.`, 'is-pass');
     else setResult(card, `<b>${ok}You need ${data.pass_at} to pass.</b> Read the why under each question, then try again (up to 5 tries a day).`, '');
     drawActs(card);
   };

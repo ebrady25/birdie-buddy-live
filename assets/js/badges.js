@@ -1,7 +1,7 @@
 /* =====================================================================
    BIRDIEBUDDY — BADGES v1 (BBI.badges)
    Spec: Projects/NFL/DFS/automation/BADGES_SPEC_2026-11-05.md
-   Catalog: badges/catalog.json (36 badges). Badge Case: badges/.
+   Catalog: badges/catalog.json (36 badges). Trophy Room: badges/.
 
    Two kinds of badge:
    - self:     earned by what you do in this browser (reading, the Lab,
@@ -478,7 +478,7 @@ window.BBI = window.BBI || {};
       <span class="bbi-bt-medal">${medalSvg(b, { earned: true, size: 56 })}</span>
       <span class="bbi-bt-t"><span class="bbi-bt-k">Badge unlocked</span>
         <span class="bbi-bt-n">${esc(b.name)} <span>· ${esc(r.label)}</span></span>
-        ${onCase ? '' : '<a class="bbi-bt-a" href="badges/">See your Badge Case</a>'}</span>
+        ${onCase ? '' : '<a class="bbi-bt-a" href="badges/">See your Trophy Room</a>'}</span>
       <button type="button" class="bbi-bt-x" aria-label="Dismiss">×</button></div>`;
     try { if (el.showPopover && !el.matches(':popover-open')) el.showPopover(); } catch {}
     void el.offsetWidth;
