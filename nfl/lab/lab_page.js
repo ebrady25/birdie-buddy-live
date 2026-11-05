@@ -82,6 +82,9 @@
     if (r.top >= top && r.bottom <= innerHeight) return;
     try { el.scrollIntoView({ behavior: media('(prefers-reduced-motion: reduce)') ? 'auto' : 'smooth', block: 'start' }); } catch {}
   };
+  // Share card (the SHARE CARD section below): each tab's last complete grade, and the button the grade line carries.
+  const lastCard = { showdown: null, classic: null };
+  const CARD_BTN = mode => `<button type="button" class="btn btn-sm" data-lb-card="${mode}" aria-haspopup="dialog" title="A picture of this grade to post or send: made in your browser, nothing is uploaded">Share card</button>`;
 
   /* ---------------- forgiving paste match ----------------
      The engines' resolve() stays strict (the parity tests pin it); pasted names go through this instead.
@@ -226,7 +229,8 @@
     const j = e.target.closest('[data-jump]');
     if (j) { const el = $(j.dataset.jump); if (el) { e.preventDefault(); const f = el.closest('details'); if (f) f.open = true; el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } return; }
     const cl = e.target.closest('[data-copy-link]'); if (cl) { e.preventDefault(); S.copyLink('', cl); return; }
-    const sh = e.target.closest('[data-share]'); if (sh) { e.preventDefault(); S.sharePng(sh.dataset.share, sh); return; }
+    const sh = e.target.closest('[data-share]');
+    if (sh) { e.preventDefault(); if (sh.dataset.share === 'lineup') openCard('showdown', sh); else S.sharePng(sh.dataset.share, sh); return; }   // the Lab's own lineup card = the share card
     const a = e.target.closest('[data-lb-sd]'); if (!a) return;
     const L = SL(); if (!L) return;
     if (a.dataset.lbSd === 'csv') { const csv = L.dkCsv(); if (csv) download(csv, `DK_upload_showdown_${(L.curPool() || {}).id || 'lineup'}.csv`); else toast('This game has no DraftKings player IDs yet: add your DraftKings salary file under Grade your own files', 'warn'); return; }
@@ -292,7 +296,20 @@
     if (con) parts.push({ t: con, c: 'lb-con' });
     const sp = /^(\d+)-(\d+)$/.exec(X.split || '');
     const sub = n === 6 ? `${esc(X.cpt.name)} captain · ${sp ? `${sp[1]} from his team, ${sp[2]} from the other` : esc(X.split)} · our score ${L.codexScore(r)}/100${has.own ? ` · pick rates add up to ${pct0(X.cum)} (past winners: ${esc(ct ? ct.own_target : '')} in contests of ${esc((SD_CONTEST[S.state.contest] || S.CONTEST_SHORT[S.state.contest] || '').toLowerCase())})` : ''} · <a href="nfl/lab/#sdLabReport" data-jump="sdLabReport" class="sd-link">full report</a>` : '';
-    return { tone, html: gradeHtml(tone, parts, sub, acts) };
+    // The share card carries the same headline numbers (a complete lineup only).
+    const cd = n === 6 && L.cardData ? L.cardData() : null;
+    let card = null;
+    if (cd) {
+      const pre = (S.slates || []).find(x => x.id === S.state.preset), dp = X.est_dupes;
+      const tiles = [['BirdieBuild score', String(cd.score), 'out of 100'], ['Salary', money(cd.salary), 'of $50,000']];
+      if (has.own) tiles.push(['Pick rates', pct0(X.cum), `past winners ${ct ? ct.own_target : ''}`], ['Same lineup', dp < 0.5 ? '~0' : `~${dp < 10 ? dp.toFixed(1) : Math.round(dp).toLocaleString('en-US')}`, 'others, estimated']);
+      else tiles.push(['Captain', X.cpt.name, `${X.cpt.pos} · 1.5× points`], ['Split', sp ? `${sp[1]}–${sp[2]}` : String(X.split || ''), "his team – the other"]);
+      card = { mode: 'showdown', tone, kind: 'Showdown', title: parts[0].t, lines: n === 6 && has.own ? [parts[1].t] : [],
+        slate: pre ? pre.label : (cd.pool ? `${cd.pool} · custom line` : 'Custom line'), slateSub: `${pre ? `${pre.fav} −${pre.spread}` : `spread ${S.state.spread}`} · total ${pre ? pre.total : S.state.total} · ${SD_CONTEST[S.state.contest] || S.CONTEST_SHORT[S.state.contest] || ''}`,
+        tiles, salary: cd.salary, file: pre ? pre.id : 'custom',
+        slots: cd.slots.map(p => ({ k: p.cpt ? 'CPT' : 'FLEX', name: p.name, pos: p.pos, sub: `${p.team} · ${p.side}`, sal: p.sal, hi: p.cpt })) };
+    }
+    return { tone, html: gradeHtml(tone, parts, sub, acts + (card ? CARD_BTN('showdown') : '')), card };
   };
   let sdGradeEl = null;
   const placeSdGrade = () => {
@@ -301,7 +318,7 @@
   };
   const drawSdGrade = () => {
     placeSdGrade();
-    const g = sdGrade(); setGrade(sdGradeEl || $('lbSdGrade'), g.tone, g.html);
+    const g = sdGrade(); setGrade(sdGradeEl || $('lbSdGrade'), g.tone, g.html); lastCard.showdown = g.card || null;
     const L = SL(); if (!L || !L.engine) return;
     const n = L.filled(), qt = $('lbSdQuickT'); if (qt) qt.textContent = n ? 'Paste a different lineup' : 'Paste your lineup';
     // The lineup just reached 6 from the reader's own tap or paste (not a link or a game switch restoring one).
@@ -397,8 +414,18 @@
     // one thing to consider
     parts.push({ t: clConsider(X, res, fails, flags, chalkN), c: 'lb-con' });
     const left = CAP - X.sal;
-    const sub = `Built around ${esc(X.qb.name)} · players from ${X.games} games · ${money(X.sal)} used${left > 0 ? ` (${money(left)} left)` : ''}${hasOwn ? ` · pick rates add up to ${pct0(X.cum)} (past winners: ${tgt[0]}–${tgt[1]}%) · ${chalkN} player${chalkN === 1 ? '' : 's'} picked by ${R.hard.chalk_own_threshold || 20}%+ of lineups` : ''} · ${res.hard.length - fails.length - res.hard.filter(h => h.status === 'unknown').length} of ${res.hard.length} must-follow rules pass${flags.length ? ` · ${flags.length} habit${flags.length > 1 ? 's' : ''} of past winners missed` : ''} · pick rates for ${C.ownCol === 'own_se' ? 'one-entry' : 'big'} contests`;
-    return { tone, html: gradeHtml(tone, parts, sub, acts) };
+    const nPass = res.hard.length - fails.length - res.hard.filter(h => h.status === 'unknown').length;
+    const sub = `Built around ${esc(X.qb.name)} · players from ${X.games} games · ${money(X.sal)} used${left > 0 ? ` (${money(left)} left)` : ''}${hasOwn ? ` · pick rates add up to ${pct0(X.cum)} (past winners: ${tgt[0]}–${tgt[1]}%) · ${chalkN} player${chalkN === 1 ? '' : 's'} picked by ${R.hard.chalk_own_threshold || 20}%+ of lineups` : ''} · ${nPass} of ${res.hard.length} must-follow rules pass${flags.length ? ` · ${flags.length} habit${flags.length > 1 ? 's' : ''} of past winners missed` : ''} · pick rates for ${C.ownCol === 'own_se' ? 'one-entry' : 'big'} contests`;
+    // The share card: the same headline numbers, the 9 slots and their salaries.
+    const tiles = [['Must-follow rules', `${nPass} of ${res.hard.length}`, 'pass'], ['Salary', money(X.sal), left > 0 ? `${money(left)} left` : 'of $50,000']];
+    if (hasOwn) tiles.push(['Pick rates', pct0(X.cum), `past winners ${tgt[0]}–${tgt[1]}%`]);
+    tiles.push(['Built around', X.qb.name, `QB + ${X.n_catch} of his pass-catchers`]);
+    if (!hasOwn) tiles.push(['Games', String(X.games), 'players from']);
+    const card = { mode: 'classic', tone, kind: 'Classic', title: parts[0].t, lines: parts.slice(1, fails.length ? 3 : 2).filter(p => p.c !== 'lb-con').map(p => p.t),
+      slate: `${C.pool.label} · ${C.pool.n_games || C.games.length} games`, slateSub: `pick rates for ${C.ownCol === 'own_se' ? 'one-entry' : 'big'} contests`,
+      tiles, salary: X.sal, file: C.pool.id,
+      slots: C.slots.map((nm, i) => { const p = C.pl.P.get(nm) || {}; return { k: SLOTS[i], name: p.name || nm, pos: p.pos || '', sub: p.team || '', sal: p.sal || 0, hi: i === 0 }; }) };
+    return { tone, html: gradeHtml(tone, parts, sub, CARD_BTN('classic')), card };
   };
   const ruleTitle = (tier, key) => {
     const k = key === 'bring_back' ? 'bring_back_lean' : key, card = C.pb.rule_cards.find(c => c.path === `${tier}.${k}`);
@@ -435,7 +462,7 @@
     const names = lineupNames();
     C.res = names.length ? C.eng.check(names) : null;
     drawClBar(); drawClLineup(); drawClPool(); drawClSaved(); drawClRules(); drawClFiles();
-    const g = clGrade(); setGrade($('lbClGrade'), g.tone, g.html);
+    const g = clGrade(); setGrade($('lbClGrade'), g.tone, g.html); lastCard.classic = g.card || null;
     const n = names.length, qt = $('lbClQuickT'); if (qt) qt.textContent = n ? 'Paste a different lineup' : 'Paste your lineup';
     if (C.prevN != null && C.prevN < 9 && n === 9) showGrade('lbClGrade');   // just filled (a paste or the last tap)
     C.prevN = n;
@@ -925,10 +952,225 @@
   };
 
   /* =================================================================
+     SHARE CARD
+     A 1200×630 PNG of the grade the Lab just showed (showdown: CPT + 5,
+     classic: the 9 slots), drawn on an offscreen canvas in the browser:
+     nothing is uploaded and nothing is fetched beyond the site's own mark.
+     The dialog offers Download, Share (Web Share with a file) and Copy
+     image, each only where the browser can do it.
+     ================================================================= */
+  const CARD_W = 1200, CARD_H = 630;
+  const CK = { bg: '#0a0a0f', card: '#141419', sunk: '#101017', chip: '#1c1c24', gold: '#d4a843', ink: '#f4f4f8', body: '#c0c0cc', muted: '#8a8a98', dim: '#5a5a68', good: '#4ade80', bad: '#f87171' };
+  const C_SANS = "'Inter', -apple-system, 'Segoe UI', Helvetica, sans-serif", C_MONO = "'JetBrains Mono', Menlo, monospace";
+  const CARD_FONTS = ['800 38px Inter', '700 20px Inter', '500 18px Inter', '600 13px "JetBrains Mono"', '400 12px "JetBrains Mono"'];
+  let markP = null;
+  // The brand mark is the site's own file (assets/img/mark-gold.svg), never redrawn; no mark if it can't load.
+  const cardMark = () => markP || (markP = new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = 'assets/img/mark-gold.svg'; }));
+  const drawCard = async d => {
+    try { await Promise.all(CARD_FONTS.map(f => document.fonts.load(f))); } catch {}
+    try { await document.fonts.ready; } catch {}
+    const mark = await cardMark();
+    const cv = document.createElement('canvas'); cv.width = CARD_W; cv.height = CARD_H;
+    const g = cv.getContext('2d');
+    const font = (o = {}) => `${o.weight || 400} ${o.size || 14}px ${o.mono ? C_MONO : C_SANS}`;
+    const fit = (t, maxW, o) => { t = String(t ?? ''); g.font = font(o); if (g.measureText(t).width <= maxW) return t; while (t.length > 1 && g.measureText(t + '…').width > maxW) t = t.slice(0, -1); return t + '…'; };
+    const txt = (t, x, y, o = {}) => { g.font = font(o); g.fillStyle = o.color || CK.ink; g.textAlign = o.align || 'left'; g.textBaseline = 'alphabetic'; g.fillText(o.maxW ? fit(t, o.maxW, o) : String(t ?? ''), x, y); };
+    const wrap = (t, x, y, maxW, lh, o = {}) => {   // -> the y after the last line drawn; the last allowed line ends in … when cut
+      g.font = font(o); const words = String(t ?? '').split(' ').filter(Boolean); let line = '', n = 0;
+      for (let i = 0; i < words.length; i++) {
+        const test = line ? `${line} ${words[i]}` : words[i];
+        if (g.measureText(test).width <= maxW || !line) { line = test; continue; }
+        if (o.max && n === o.max - 1) { txt(words.slice(i).reduce((a, w) => `${a} ${w}`, line), x, y, { ...o, maxW }); return y + lh; }
+        txt(line, x, y, o); line = words[i]; y += lh; n++; g.font = font(o);
+      }
+      if (line) txt(line, x, y, { ...o, maxW }); return y + lh;
+    };
+    const rr = (x, y, w, h, r, fill, stroke) => { g.beginPath(); if (g.roundRect) g.roundRect(x, y, w, h, r); else g.rect(x, y, w, h); if (fill) { g.fillStyle = fill; g.fill(); } if (stroke) { g.strokeStyle = stroke; g.lineWidth = 1; g.stroke(); } };
+    const toneC = d.tone === 'good' ? CK.good : d.tone === 'bad' ? CK.bad : CK.gold;
+    // background: the site's page color, a soft gold glow, a gold rule on top
+    g.fillStyle = CK.bg; g.fillRect(0, 0, CARD_W, CARD_H);
+    const glow = g.createRadialGradient(140, 0, 0, 140, 0, 760); glow.addColorStop(0, 'rgba(212,168,67,0.13)'); glow.addColorStop(1, 'rgba(212,168,67,0)');
+    g.fillStyle = glow; g.fillRect(0, 0, CARD_W, CARD_H);
+    g.fillStyle = CK.gold; g.fillRect(0, 0, CARD_W, 6);
+    // header: mark + name (left), contest + slate (right)
+    const pad = 56; let bx = pad;
+    if (mark && mark.naturalWidth) { const h = 40, w = h * mark.naturalWidth / mark.naturalHeight; g.drawImage(mark, pad, 38, w, h); bx = pad + w + 14; }
+    txt('BirdieBuddy', bx, 68, { size: 30, weight: 800 });
+    txt('NFL · LINEUP LAB', bx, 92, { mono: true, size: 13, weight: 600, color: CK.gold });
+    txt(d.kind.toUpperCase(), CARD_W - pad, 56, { mono: true, size: 13, weight: 600, color: CK.gold, align: 'right' });
+    txt(d.slate, CARD_W - pad, 84, { size: 22, weight: 700, align: 'right', maxW: 560 });
+    txt(d.slateSub, CARD_W - pad, 108, { mono: true, size: 13, color: CK.muted, align: 'right', maxW: 560 });
+    g.fillStyle = 'rgba(255,255,255,0.08)'; g.fillRect(pad, 130, CARD_W - pad * 2, 1);
+    // left: the grade line's headline, then the numbers
+    const LW = 480;
+    txt('GRADE', pad, 170, { mono: true, size: 12, weight: 600, color: CK.dim });
+    const long = String(d.title).length > 34, ts = long ? 30 : 38;   // a long headline gets a third line at a smaller size
+    let y = wrap(d.title, pad, 212, LW, ts + 6, { size: ts, weight: 800, color: toneC, max: long ? 3 : 2 });
+    for (const l of d.lines || []) { if (y > 330) break; y = wrap(l, pad, y + 2, LW, 26, { size: 19, weight: 500, color: CK.body, max: 2 }); }
+    const tw = (LW - 14) / 2, th = 92;
+    d.tiles.slice(0, 4).forEach((t, i) => {
+      const x = pad + (i % 2) * (tw + 14), ty = 362 + Math.floor(i / 2) * (th + 14);
+      rr(x, ty, tw, th, 12, CK.card, 'rgba(212,168,67,0.28)');
+      txt(t[0].toUpperCase(), x + 16, ty + 26, { mono: true, size: 11, weight: 600, color: CK.dim, maxW: tw - 32 });
+      txt(t[1], x + 16, ty + 62, { size: t[1].length > 9 ? 22 : 30, weight: 800, maxW: tw - 32 });
+      txt(t[2], x + 16, ty + 81, { mono: true, size: 11.5, color: CK.muted, maxW: tw - 32 });
+    });
+    // right: the lineup with salaries
+    const RX = 580, RW = CARD_W - pad - RX, n = d.slots.length;
+    txt('LINEUP', RX, 170, { mono: true, size: 12, weight: 600, color: CK.dim });
+    txt(`${money(d.salary)} of $50,000`, RX + RW, 170, { mono: true, size: 12, color: CK.muted, align: 'right' });
+    const top = 186, avail = 558 - top, gap = n > 6 ? 6 : 8, rh = Math.floor((avail - gap * (n - 1)) / n), big = rh >= 50;
+    d.slots.forEach((p, i) => {
+      const ry = top + i * (rh + gap), mid = ry + rh / 2;
+      rr(RX, ry, RW, rh, 10, CK.sunk, p.hi && d.mode === 'showdown' ? 'rgba(212,168,67,0.6)' : 'rgba(255,255,255,0.07)');
+      txt(p.k, RX + 16, mid + 4.5, { mono: true, size: 12, weight: 600, color: p.k === 'FLEX' && d.mode === 'showdown' ? CK.dim : CK.gold });
+      if (p.pos && p.pos !== p.k) { rr(RX + 70, mid - 10, 42, 20, 5, CK.chip); txt(p.pos, RX + 91, mid + 4, { mono: true, size: 11, weight: 600, color: CK.muted, align: 'center' }); }   // classic QB/RB/... slots already say it
+      const nx = RX + 126, nw = RW - 126 - 120;
+      if (big) { txt(p.name, nx, mid - 2, { size: 19, weight: 700, maxW: nw }); txt(p.sub, nx, mid + 17, { mono: true, size: 11, color: CK.dim, maxW: nw }); }
+      else { txt(p.name, nx, mid + 5.5, { size: 16, weight: 700, maxW: nw - 54 }); txt(p.sub, RX + RW - 112, mid + 4.5, { mono: true, size: 11, color: CK.dim, align: 'right' }); }
+      txt(money(p.sal), RX + RW - 16, mid + (big && p.hi && d.mode === 'showdown' ? 0 : 5), { mono: true, size: 15, weight: 600, color: p.hi && d.mode === 'showdown' ? CK.gold : CK.ink, align: 'right' });
+      if (big && p.hi && d.mode === 'showdown') txt('1.5×', RX + RW - 16, mid + 17, { mono: true, size: 10.5, color: CK.dim, align: 'right' });
+    });
+    // footer
+    g.fillStyle = 'rgba(255,255,255,0.08)'; g.fillRect(pad, 580, CARD_W - pad * 2, 1);
+    txt('Graded at birdiebuddy.io/nfl/lab', pad, 610, { mono: true, size: 15, weight: 600, color: CK.gold });
+    txt(new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }), CARD_W - pad, 610, { mono: true, size: 13, color: CK.dim, align: 'right' });
+    return cv;
+  };
+  const cardBlob = cv => new Promise(res => { try { cv.toBlob(res, 'image/png'); } catch { res(null); } });
+  const canCopyImg = () => !!(navigator.clipboard && navigator.clipboard.write && window.ClipboardItem);
+  const canShareFile = f => { try { return !!(f && navigator.share && navigator.canShare && navigator.canShare({ files: [f] })); } catch { return false; } };
+
+  let cardDlg = null, cardCur = null, cardUrl = '', cardOpener = null;
+  const cardDialog = () => {
+    if (cardDlg) return cardDlg;
+    const d = document.createElement('dialog');
+    d.className = 'lb-card-dlg'; d.id = 'lbCardDlg'; d.setAttribute('aria-labelledby', 'lbCardDlgT');
+    d.innerHTML = `<div class="lb-card-in"><div class="lb-card-head"><h2 id="lbCardDlgT">Share card</h2><button type="button" class="lb-card-x" data-card-act="close" aria-label="Close">×</button></div>
+      <div class="lb-card-prev"><img id="lbCardImg" alt="" width="1200" height="630" hidden><p class="lb-card-wait" id="lbCardWait">Drawing the card…</p></div>
+      <div class="lb-card-acts">
+        <button type="button" class="btn btn-primary" data-card-act="download" disabled>Download PNG</button>
+        <button type="button" class="btn" data-card-act="share" hidden>Share</button>
+        <button type="button" class="btn" data-card-act="copy" hidden>Copy image</button>
+      </div>
+      <p class="lb-card-note">Made in your browser from this grade; nothing is uploaded.</p>
+      <p class="lb-card-st" id="lbCardSt" role="status" aria-live="polite"></p></div>`;
+    document.body.appendChild(d);
+    d.addEventListener('click', e => {
+      if (e.target === d) { closeCard(); return; }   // a click on the backdrop (the content sits in .lb-card-in)
+      const b = e.target.closest('[data-card-act]'); if (b) cardAct(b.dataset.cardAct);
+    });
+    d.addEventListener('close', () => { if (cardOpener && document.contains(cardOpener)) try { cardOpener.focus({ preventScroll: true }); } catch {} });
+    d.addEventListener('keydown', e => { if (e.key === 'Escape' && !d.showModal) closeCard(); });
+    return (cardDlg = d);
+  };
+  const cardStatus = t => { const s = $('lbCardSt'); if (s) s.textContent = t; };
+  const closeCard = () => { const d = cardDlg; if (!d) return; if (d.close) d.close(); else { d.removeAttribute('open'); d.dispatchEvent(new Event('close')); } };
+  // -> {canvas, blob, file} for a tab's last grade, or null when that tab has no complete grade yet.
+  const renderCard = async mode => {
+    const d = lastCard[mode]; if (!d) return null;
+    const canvas = await drawCard(d), blob = await cardBlob(canvas);
+    const name = `birdiebuddy-lab-${mode}-${String(d.file || 'lineup').replace(/[^a-z0-9_-]+/gi, '-').toLowerCase()}.png`;
+    let file = null; try { file = blob ? new File([blob], name, { type: 'image/png' }) : null; } catch {}
+    return { canvas, blob, file, name, alt: `Lineup Lab grade: ${d.title}. ${d.slots.map(p => `${p.k} ${p.name}`).join(', ')}.` };
+  };
+  const openCard = async (mode, opener) => {
+    if (!lastCard[mode]) { toast(mode === 'classic' ? 'Fill all 9 slots to get a share card' : 'Pick a captain and five more to get a share card', 'warn'); return; }
+    const d = cardDialog(); cardOpener = opener || document.activeElement;
+    const img = $('lbCardImg'), wait = $('lbCardWait');
+    img.hidden = true; wait.hidden = false; wait.textContent = 'Drawing the card…'; cardStatus('');
+    d.querySelectorAll('[data-card-act="download"], [data-card-act="share"], [data-card-act="copy"]').forEach(b => { b.disabled = true; });
+    if (!d.open) { if (d.showModal) d.showModal(); else { d.setAttribute('open', ''); d.classList.add('lb-card-fb'); } }
+    const want = mode + '|' + JSON.stringify(lastCard[mode]);
+    cardCur = { want };
+    const r = await renderCard(mode);
+    if (!cardCur || cardCur.want !== want) return;   // closed or reopened while drawing
+    if (!r || !r.blob) { wait.textContent = "Your browser couldn't draw the card."; return; }
+    if (cardUrl) URL.revokeObjectURL(cardUrl);
+    cardUrl = URL.createObjectURL(r.blob);
+    Object.assign(cardCur, r);
+    img.src = cardUrl; img.alt = r.alt; img.hidden = false; wait.hidden = true;
+    const share = d.querySelector('[data-card-act="share"]'), copy = d.querySelector('[data-card-act="copy"]'), dl = d.querySelector('[data-card-act="download"]');
+    share.hidden = !canShareFile(r.file); copy.hidden = !canCopyImg();
+    [dl, share, copy].forEach(b => { b.disabled = false; });
+    const fo = document.activeElement; if (!d.contains(fo) || fo === d || fo.dataset.cardAct === 'close') dl.focus();   // ready: Download takes focus unless the reader moved it
+  };
+  const cardAct = async act => {
+    if (act === 'close') { closeCard(); return; }
+    const c = cardCur; if (!c || !c.blob) return;
+    if (act === 'download') {
+      const a = document.createElement('a'); a.href = URL.createObjectURL(c.blob); a.download = c.name;
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      cardStatus('Downloaded.'); return;
+    }
+    if (act === 'copy') {
+      try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': c.blob })]); cardStatus('Image copied: paste it into a post or a message.'); }
+      catch { cardStatus("Your browser blocked the copy: use Download PNG instead."); }
+      return;
+    }
+    if (act === 'share') {
+      try { await navigator.share({ files: [c.file], title: 'My Lineup Lab grade', text: 'Graded at birdiebuddy.io/nfl/lab' }); cardStatus('Shared.'); }
+      catch (e) { cardStatus(e && e.name === 'AbortError' ? '' : "Sharing didn't work here: use Download PNG instead."); }
+    }
+  };
+  const bindCard = () => {
+    document.addEventListener('click', e => { const b = e.target.closest('[data-lb-card]'); if (b) { e.preventDefault(); openCard(b.dataset.lbCard, b); } });
+  };
+
+  /* ?selftest=card (a check, not a feature): grades a sample lineup on each tab, draws both cards and writes
+     {classic, showdown: PNG data-URL lengths, button: {classic, showdown}} to <html data-card-selftest>, then
+     opens the dialog (?card=classic|showdown) for a screenshot. The visitor's saved Lab state is put back. */
+  const cardSelfTest = async () => {
+    const out = { classic: 0, showdown: 0, button: {}, size: {} };
+    const keep = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (/^bbi_/.test(k)) keep[k] = localStorage.getItem(k); } } catch {}
+    const wait = async (f, ms = 20000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { try { const v = f(); if (v) return v; } catch {} await new Promise(r => setTimeout(r, 100)); } return null; };
+    const measure = async mode => {   // the PNG itself goes on <html data-card-png-classic|showdown> so a headless check can save it
+      const r = await renderCard(mode); if (!r) return;
+      const url = r.canvas.toDataURL('image/png'); out[mode] = url.length; out.size[mode] = `${r.canvas.width}x${r.canvas.height}`;
+      document.documentElement.setAttribute(`data-card-png-${mode}`, url);
+    };
+    try {
+      setTab('classic');
+      if (await wait(() => C.eng)) {
+        const o = C.proj.size ? optFill(Array(9).fill(null)) : null;
+        let t = o && o.F && o.F.every(Boolean) ? o.F : null;
+        if (!t) { const ps = [...C.pl.P.values()].filter(p => p.sal > 0).sort((a, b) => a.sal - b.sal); t = []; for (const k of SLOTS) { const p = ps.find(q => !t.includes(q.name) && (k === 'FLEX' ? FLEXABLE.has(q.pos) : q.pos === k)); t.push(p ? p.name : null); } }
+        C.slots = t.slice(); clDraw();
+        out.button.classic = !!$('lbClGrade').querySelector('[data-lb-card="classic"]');
+        await measure('classic');
+      }
+      setTab('showdown');
+      const L = await wait(() => SL() && SL().engine && SD() && SD().data && SL());
+      if (L) {
+        const ps = [...L.engine.P.values()].filter(p => p.sal > 0).sort((a, b) => b.sal - a.sal), cheap = ps.slice().reverse(), t = [];
+        let used = 0;
+        for (let i = 0; i < 6; i++) {
+          const m = i ? 1 : 1.5, rest = q => cheap.filter(x => x !== q && !t.includes(x.name)).slice(0, 5 - i).reduce((a, x) => a + x.sal, 0);
+          const p = ps.find(q => !t.includes(q.name) && used + q.sal * m + rest(q) <= CAP); if (!p) break; t.push(p.name); used += p.sal * m;
+        }
+        if (t.length === 6) { L.lab.cpt = t[0]; L.lab.flex = t.slice(1); L.render(); drawSdGrade(); }
+        out.button.showdown = !!$('lbShowdown').querySelector('[data-lb-card="showdown"]');
+        await measure('showdown');
+      }
+    } catch (e) { out.error = String(e && e.message || e); }
+    try {
+      const now = []; for (let i = 0; i < localStorage.length; i++) now.push(localStorage.key(i));
+      for (const k of now) if (/^bbi_/.test(k) && !(k in keep)) localStorage.removeItem(k);
+      for (const k of Object.keys(keep)) localStorage.setItem(k, keep[k]);
+    } catch {}
+    document.documentElement.dataset.cardSelftest = JSON.stringify(out);
+    const show = Q.get('card') === 'classic' ? 'classic' : 'showdown';
+    if (show !== tab) setTab(show);
+    await openCard(show);
+  };
+
+  /* =================================================================
      BOOT
      ================================================================= */
   const boot = () => {
     bindTabs();
+    bindCard();
+    if (Q.get('selftest') === 'card') { cardSelfTest(); return; }
     setTab(tab);
     // Warm the other tab's scripts once the page is idle so switching is quick.
     const other = tab === 'classic' ? 'showdown' : 'classic';

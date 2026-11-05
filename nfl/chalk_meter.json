@@ -1,0 +1,50 @@
+{
+ "season": 2026,
+ "week": 9,
+ "slate": "DraftKings main slate",
+ "method": "Hype is media buzz this week (100 = the most-talked-about player on the slate). We line it up with our projected ownership at his position: hype well ahead of ownership is chalk that may still be building.",
+ "rows": [
+  {
+   "rank": 1,
+   "player": "Quinshon Judkins",
+   "team": "CLE",
+   "pos": "RB",
+   "salary": 5400,
+   "hype": 100,
+   "own": 8.2,
+   "verdict": "Hype ahead of ownership: chalk building",
+   "tone": "hot"
+  },
+  {
+   "rank": 2,
+   "player": "Kyren Williams",
+   "team": "LAR",
+   "pos": "RB",
+   "salary": 7600,
+   "hype": 93,
+   "own": 11.7,
+   "verdict": "Hype ahead of ownership: chalk building",
+   "tone": "hot"
+  }
+ ],
+ "locked": [
+  {
+   "rank": 3
+  },
+  {
+   "rank": 4
+  },
+  {
+   "rank": 5
+  }
+ ],
+ "cta": {
+  "label": "See all 5 · Members",
+  "href": "pricing.html"
+ },
+ "show": true,
+ "updated": "Thu Nov 5, 12:16 AM ET",
+ "updated_iso": "2026-11-05T00:16-05:00",
+ "own_status": "ok",
+ "own_stage": "wed"
+}

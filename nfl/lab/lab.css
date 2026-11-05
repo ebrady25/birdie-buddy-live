@@ -281,3 +281,37 @@
   .lb-slot > .lb-tags { grid-column: 2; grid-row: 2; }
   #lbClBar .lb-field { flex-wrap: wrap; }
 }
+
+/* share card dialog (lab_page.js SHARE CARD): the card itself is always the dark brand card;
+   the dialog uses the site's own (dark-only, color-scheme: dark) surfaces in light and dark OS mode alike. */
+.lb-card-dlg {
+  --cd-bg: var(--surface-3); --cd-ink: var(--text-primary); --cd-muted: var(--text-muted); --cd-border: var(--border-gold);
+  --cd-btn: var(--surface-4); --cd-btn-ink: var(--text-primary); --cd-btn-border: var(--border-base); --cd-well: var(--surface-1);
+  width: min(720px, calc(100vw - 32px)); max-width: none; max-height: calc(100dvh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--cd-border); border-radius: 16px; background: var(--cd-bg); color: var(--cd-ink);
+  box-shadow: 0 24px 64px rgba(0,0,0,.55); overflow: auto; overscroll-behavior: contain;
+}
+.lb-card-dlg:not([open]) { display: none; }
+.lb-card-dlg.lb-card-fb { position: fixed; inset: 0; z-index: var(--z-modal); }   /* browsers without showModal */
+.lb-card-dlg::backdrop { background: rgba(4,4,8,0.72); backdrop-filter: blur(3px); }
+.lb-card-in { padding: 16px; display: grid; gap: 12px; }
+.lb-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.lb-card-head h2 { margin: 0; font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 750; color: var(--cd-ink); }
+.lb-card-x { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--cd-btn-border); background: var(--cd-btn); color: var(--cd-muted); font-size: 22px; line-height: 1; cursor: pointer; flex: none; }
+.lb-card-x:hover { color: var(--cd-ink); }
+.lb-card-prev { position: relative; border-radius: 10px; overflow: hidden; background: var(--cd-well); border: 1px solid var(--cd-btn-border); aspect-ratio: 1200 / 630; display: grid; place-items: center; }
+.lb-card-prev img { display: block; width: 100%; height: auto; }
+.lb-card-prev img[hidden], .lb-card-wait[hidden] { display: none; }
+.lb-card-wait { margin: 0; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--cd-muted); }
+.lb-card-acts { display: flex; flex-wrap: wrap; gap: 8px; }
+.lb-card-acts .btn { flex: 1 1 140px; min-height: 44px; }
+.lb-card-acts .btn[hidden] { display: none; }
+.lb-card-dlg .btn:not(.btn-primary) { background: var(--cd-btn); color: var(--cd-btn-ink); border-color: var(--cd-btn-border); }
+.lb-card-dlg .btn:focus-visible, .lb-card-x:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 2px; }
+.lb-card-note { margin: 0; font-size: var(--fs-xs); color: var(--cd-muted); line-height: 1.5; }
+.lb-card-st { margin: 0; min-height: 1.2em; font-size: var(--fs-sm); color: var(--cd-ink); }
+.lb-card-st:empty { min-height: 0; }
+@media (max-width: 520px) {
+  .lb-card-in { padding: 12px; }
+  .lb-card-acts .btn { flex: 1 1 100%; }
+}

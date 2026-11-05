@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <base href="/" />
+  <title>Have you checked your DFS DNA? · BirdieBuddy</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+  <meta name="description" content="Drop your DraftKings contest history and get an ancestry-style read on how you play: your mix of eight player types, your rarest finish and your biggest leak. Runs in your browser; your file never leaves your device.">
+  <link rel="canonical" href="https://birdiebuddy.io/dna/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BirdieBuddy">
+  <meta property="og:title" content="Have you checked your DFS DNA?">
+  <meta property="og:description" content="Your mix of eight DFS player types, your rarest finish and your biggest leak, from your own DraftKings history. Runs in your browser.">
+  <meta property="og:url" content="https://birdiebuddy.io/dna/">
+  <meta property="og:image" content="https://birdiebuddy.io/nfl/og/nfl.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=20261105a" />
+  <link rel="stylesheet" href="dna/dna.css?v=20261105b" />
+</head>
+<body class="dna-body">
+  <div id="site-header"></div>
+
+  <main class="container dna-page" id="dnaPage">
+    <!-- 1. Hero + drop zone -->
+    <section class="dna-hero" id="dnaHero" aria-labelledby="dnaH1">
+      <div class="dna-hero-copy">
+        <div class="dna-eyebrow">DFS DNA · free</div>
+        <h1 id="dnaH1">Have you checked your DFS DNA?</h1>
+        <p class="dna-dek">Drop your DraftKings contest history and get an ancestry-style read on how you play: your mix of eight player types, your rarest finish, and the leak costing you the most. It takes about ten seconds.</p>
+        <p class="dna-privacy"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="M10 2l6 2.5v4.6c0 4-2.6 7.2-6 8.9-3.4-1.7-6-4.9-6-8.9V4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7.2 10.2l2 2 3.8-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Runs in your browser. Your file never leaves your device.</p>
+      </div>
+
+      <div class="dna-drop" id="dnaDrop">
+        <svg class="dna-drop-ic" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><path d="M16 6c0 9 16 9 16 18s-16 9-16 18M32 6c0 9-16 9-16 18s16 9 16 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M18.5 12h11M17 24h14M18.5 36h11" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/></svg>
+        <p class="dna-drop-t" id="dnaDropT">Drop your contest history CSV here</p>
+        <p class="dna-drop-s">or pick it from your device</p>
+        <div class="dna-drop-acts">
+          <!-- The real file input stays focusable (keyboard: Tab to it, Enter or Space opens the picker); the label is its visible face. -->
+          <input type="file" id="dnaFile" class="dna-file" accept=".csv,text/csv" aria-describedby="dnaDropHelp" />
+          <label for="dnaFile" class="btn btn-primary btn-lg dna-pick">Choose your CSV</label>
+          <button type="button" class="btn btn-lg" id="dnaSample">Try with a sample</button>
+        </div>
+        <p class="dna-drop-help" id="dnaDropHelp">The DraftKings contest history file (.csv). The sample is made-up data, so you can see how it works.</p>
+        <p class="dna-error" id="dnaError" role="alert" hidden></p>
+      </div>
+    </section>
+
+    <!-- 2. Three steps to get the file -->
+    <section class="dna-steps-wrap" aria-labelledby="dnaStepsH">
+      <h2 id="dnaStepsH" class="dna-h2">Get your file in three steps</h2>
+      <ol class="dna-steps">
+        <li><b>Open your history.</b> On DraftKings, on a computer: <span class="dna-path">DraftKings → My Contests → History</span>.</li>
+        <li><b>Download it.</b> Download your entry history (CSV). It lists every contest you've entered: no lineups, no account details.</li>
+        <li><b>Drop it here.</b> Drag the file onto the box above, or tap Choose your CSV. Everything is worked out on your device.</li>
+      </ol>
+    </section>
+
+    <!-- 3. The result -->
+    <section class="dna-result" id="dnaResult" aria-labelledby="dnaResH" hidden>
+      <div class="dna-res-head">
+        <div>
+          <div class="dna-eyebrow">Your result</div>
+          <h2 id="dnaResH" class="dna-h2">Your DFS DNA</h2>
+        </div>
+        <div class="dna-res-tools">
+          <div class="chip-row dna-sports" id="dnaSports" role="group" aria-label="Sport"></div>
+          <button type="button" class="btn btn-sm" data-dna="again">Check another file</button>
+        </div>
+      </div>
+      <p class="dna-early" id="dnaEarly" hidden><b>Early read.</b> Under 100 entries, so your mix can still move a lot. Check again after a few more slates.</p>
+      <div class="dna-thin card" id="dnaThin" hidden></div>
+
+      <div id="dnaBody">
+        <div class="dna-res-grid">
+          <!-- the card -->
+          <div class="dna-card-col">
+            <div class="dna-fmt" role="group" aria-label="Card size">
+              <button type="button" class="chip" data-fmt="portrait" aria-pressed="true">Portrait<span class="count">1080×1350</span></button>
+              <button type="button" class="chip" data-fmt="landscape" aria-pressed="false">Landscape<span class="count">1200×630</span></button>
+            </div>
+            <div class="dna-card-prev" id="dnaCardPrev" data-fmt="portrait">
+              <img id="dnaCardImg" alt="" width="1080" height="1350" hidden>
+              <p class="dna-card-wait" id="dnaCardWait">Drawing your card…</p>
+            </div>
+            <div class="dna-card-acts">
+              <button type="button" class="btn btn-primary" data-card-act="download" disabled>Download PNG</button>
+              <button type="button" class="btn" data-card-act="share" hidden>Share</button>
+              <button type="button" class="btn" data-card-act="copy" hidden>Copy image</button>
+            </div>
+            <p class="dna-card-note">Made in your browser. No money, dates or contest details go on the card.</p>
+            <p class="dna-card-st" id="dnaCardSt" role="status" aria-live="polite"></p>
+          </div>
+
+          <!-- the free report -->
+          <div class="dna-report">
+            <div class="card dna-block">
+              <h3>Your mix, explained</h3>
+              <ul class="dna-mix-list" id="dnaMixList"></ul>
+            </div>
+            <div class="card dna-block">
+              <h3>Top finishes vs the field</h3>
+              <div id="dnaFinish"></div>
+            </div>
+            <div class="card dna-block dna-leak">
+              <div class="dna-leak-k">Your #1 leak <span>free</span></div>
+              <div id="dnaLeak"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- badges -->
+        <section class="dna-badges-wrap" aria-labelledby="dnaBadgesH">
+          <h3 id="dnaBadgesH" class="dna-h3">Badges <small>kept on this device</small></h3>
+          <ul class="dna-badges" id="dnaBadges"></ul>
+        </section>
+
+        <!-- members -->
+        <section class="dna-member-wrap" aria-labelledby="dnaMemberH">
+          <div class="dna-eyebrow">Members</div>
+          <h3 id="dnaMemberH" class="dna-h3">The full leak report</h3>
+          <p class="dna-muted dna-member-dek">Every leak with its fix, your contest-type breakdown, your finishes against the field, and how your DNA shifts month to month.</p>
+          <div class="dna-member card" id="dnaMember" data-gate="member" data-gate-msg="Members get every leak with the fix, a contest-type breakdown, finish distribution vs the field, and a month-to-month DNA shift.">
+            <div id="dnaMemberBody"></div>
+          </div>
+          <p class="dna-gate-fb" id="dnaGateFallback" hidden>The full leak report is part of the BirdieBuddy membership. <a href="pricing.html">See membership</a></p>
+        </section>
+
+        <p class="dna-foot">How we read it: eight player types, each scored from how you enter (contest type, field size, buy-in, how many lineups, when the contest locks), shown as a share of the total. Rarity is your best tournament finish in a field of 1,000 or more. Your file isn't uploaded or stored; this device keeps only the computed read and your badges, for next month's re-check. <button type="button" class="dna-linkbtn" data-dna="forget">Clear what this device saved</button> <span id="dnaForgetSt" role="status" aria-live="polite"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/brand.js?v=3"></script>
+  <script src="assets/js/track.js?v=0.6.4"></script>
+  <script>BBI.renderBrandHeader(); BBI.renderBrandFooter();</script>
+  <script src="dna/dna.js?v=20261105b"></script>
+</body>
+</html>

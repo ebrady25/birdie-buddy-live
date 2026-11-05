@@ -19,6 +19,7 @@ window.BBI = window.BBI || {};
   const LINKS = [
     { href: 'nfl/', label: 'NFL' },
     { href: 'golf/', label: 'Golf' },
+    { href: 'dna/', label: 'DFS DNA' },
     { href: 'pricing.html', label: 'Membership' }
   ];
   const MARK = '<img class="brand-mark-img" src="assets/img/mark-gold.svg" alt="" width="52" height="26" />';
@@ -71,6 +72,7 @@ window.BBI = window.BBI || {};
           <div class="nfl-footer-links">
             <div class="footer-heading">BirdieBuddy</div>
             <a class="footer-link" href="golf/">Golf model</a>
+            <a class="footer-link" href="dna/">DFS DNA</a>
             <a class="footer-link" href="pricing.html">Membership</a>
             <a class="footer-link" href="account.html">My account</a>
             <a class="footer-link" href="login.html">Sign in</a>

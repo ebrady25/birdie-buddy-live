@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/design-system.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/nfl.css?v=20261104b" />
+  <link rel="stylesheet" href="assets/css/nfl.css?v=20261105a" />
   <link rel="stylesheet" href="assets/css/nfl_home.css?v=3" />
 </head>
 <body class="nh-page">
@@ -67,6 +67,27 @@
 
     <div class="divider"></div>
     <a class="trust" id="trustStrip" href="nfl/results/" hidden></a>
+
+    <!-- CHALK METER (2026-11-05): media buzz vs our projected ownership, filled by BBI.renderNflChalkMeter (nfl.js) from
+         nfl/chalk_meter.json. Top 2 shown; rows 3-5 are generic blurred filler (the public file carries no names for them). -->
+    <section class="section cm-section" id="chalkMeter" aria-labelledby="cmTitle" hidden>
+      <div class="container">
+        <div class="cm-card">
+          <div class="cm-head">
+            <div>
+              <div class="cm-eyebrow">Chalk Meter · Week <span data-cm="week"></span></div>
+              <h2 id="cmTitle">Who's the most hyped this week</h2>
+            </div>
+            <div class="cm-updated" data-cm="updated"></div>
+          </div>
+          <p class="cm-method" data-cm="method"></p>
+          <div class="cm-cols" aria-hidden="true"><span>#</span><span>Player</span><span>Hype · media buzz this week</span><span>Our own</span><span>Verdict</span></div>
+          <ol class="cm-list" data-cm="rows"></ol>
+          <div class="cm-locked" data-cm="locked" hidden></div>
+          <p class="cm-note" data-cm="note"></p>
+        </div>
+      </div>
+    </section>
 
     <!-- WHAT'S INSIDE: the weekly pages -->
     <section class="section">
@@ -193,7 +214,7 @@
 
   <div id="site-footer"></div>
   <script src="assets/js/core.js"></script>
-  <script src="assets/js/nfl.js?v=20261104b"></script>
+  <script src="assets/js/nfl.js?v=20261105a"></script>
   <script src="assets/js/track.js?v=0.6.3"></script>
   <script>BBI.renderNflHeader('home'); BBI.renderNflFooter();</script>
   <script src="assets/js/home_fx.js?v=2"></script>
@@ -221,6 +242,9 @@
         });
       });
     })();
+    // Chalk Meter (2026-11-05): BBI.renderNflChalkMeter lives in nfl.js
+    (function () { var go = function () { if (window.BBI && BBI.renderNflChalkMeter) BBI.renderNflChalkMeter('chalkMeter'); };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go(); })();
     // Next primetime game card (2026-11-04): BBI.nflNextGame lives in nfl.js
     (function () { var go = function () { if (!window.BBI || !BBI.nflNextGame) return; BBI.nflNextGame().then(function (g) {
       var el = document.getElementById('nextUp'); if (!g || !el) return;

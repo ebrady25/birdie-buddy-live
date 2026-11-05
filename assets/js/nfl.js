@@ -24,7 +24,8 @@ window.BBI = window.BBI || {};
       { href: 'nfl/showdown/',       key: 'showdown-grind', label: 'Showdown Grind', sub: 'full playbook', group: 'Showdown · one game' }
     ] },
     { href: 'nfl/lab/',      key: 'lab',      label: 'Lab',      sub: 'build or check a lineup' },
-    { href: 'nfl/articles/', key: 'articles', label: 'Articles', sub: 'the week in plain English' }
+    { href: 'nfl/articles/', key: 'articles', label: 'Articles', sub: 'the week in plain English' },
+    { href: 'dna/',          key: 'dna',      label: 'DFS DNA',  sub: 'your player type, from your DK history' }
   ];
   const EXTRA = {
     results: { href: 'nfl/results/', label: 'Results', sub: 'how our numbers did' },
@@ -190,6 +191,53 @@ window.BBI = window.BBI || {};
     n.className = 'nfl-nextnote'; n.href = g.chillLive ? g.chill : 'nfl/showdown/next/';
     n.innerHTML = `<b>This was ${here}.</b> Next up: ${g.a} @ ${g.h}, ${g.kickLabel}. ${g.chillLive ? 'Read the 5-minute Chill →' : 'Its Chill posts game day ~10 am ET →'}`;
     main.prepend(n);
+  };
+
+  // ---------- CHALK METER (2026-11-05): NFL home. nfl/chalk_meter.json (DFS codex/site/chalk_meter.py) carries the top 2
+  // rows only; rows 3-5 arrive as bare {rank} placeholders, so the blurred rows below are generic filler, never real names.
+  // show:false, a stale file (> 8 days) or a missing file -> the section stays hidden.
+  window.BBI.renderNflChalkMeter = (id) => {
+    const box = document.getElementById(id || 'chalkMeter'); if (!box) return Promise.resolve(null);
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const TONES = { hot: 1, even: 1, quiet: 1, pending: 1 };
+    const STAGE = { tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun_am: 'Sunday AM', sun_check: 'Sunday inactives', sun_late: 'Sunday late' };
+    const bar = (h, label) => `<span class="cm-bar" role="img" aria-label="${esc(label)}"><span class="cm-fill" style="width:${Math.max(4, Math.min(100, h))}%"></span></span>`;
+    const row = r => {
+      const h = Math.round(+r.hype || 0), own = r.own == null ? null : +r.own, tone = TONES[r.tone] ? r.tone : 'even';
+      return `<li class="cm-row">
+        <span class="cm-rank">${esc(r.rank)}</span>
+        <span class="cm-who"><b>${esc(r.player)}</b><small>${esc(r.team)} · ${esc(r.pos)} · $${(+r.salary || 0).toLocaleString('en-US')}</small></span>
+        <span class="cm-hype"><span class="cm-k">Hype</span>${bar(h, `Hype ${h} out of 100`)}<span class="cm-num">${h}</span></span>
+        <span class="cm-own"><span class="cm-k">Our own</span><span class="cm-num">${own == null ? '—' : own.toFixed(1) + '%'}</span></span>
+        <span class="cm-verdict cm-${tone}">${esc(r.verdict)}</span>
+      </li>`;
+    };
+    const filler = n => `<li class="cm-row"><span class="cm-rank">${n}</span><span class="cm-who"><b>Member pick</b><small>TEAM · POS · $0,000</small></span>
+        <span class="cm-hype"><span class="cm-k">Hype</span><span class="cm-bar"><span class="cm-fill" style="width:${[78, 64, 52][n % 3]}%"></span></span><span class="cm-num">00</span></span>
+        <span class="cm-own"><span class="cm-k">Our own</span><span class="cm-num">0.0%</span></span><span class="cm-verdict cm-even">Verdict for members</span></li>`;
+    return fetch('nfl/chalk_meter.json?v=' + Math.floor(Date.now() / 300000)).then(r => (r.ok ? r.json() : null)).then(d => {
+      if (!d || !d.show || !Array.isArray(d.rows) || !d.rows.length) return null;
+      const t = Date.parse(d.updated_iso || ''); if (!t || Date.now() - t > 8 * 864e5) return null;
+      const rows = d.rows.slice(0, 2), locked = Array.isArray(d.locked) ? d.locked.slice(0, 3) : [];
+      const cta = (d.cta && d.cta.href === 'pricing.html') ? d.cta : { href: 'pricing.html', label: 'See all 5 · Members' };
+      const set = (sel, html) => { const el = box.querySelector(sel); if (el) el.innerHTML = html; };
+      set('[data-cm=week]', esc(d.week));
+      set('[data-cm=updated]', `Updated ${esc(d.updated || '')}` + (d.own_status === 'ok' && STAGE[d.own_stage] ? ` · ${STAGE[d.own_stage]} ownership` : ''));
+      set('[data-cm=method]', esc(d.method || ''));
+      set('[data-cm=rows]', rows.map(row).join(''));
+      const lk = box.querySelector('[data-cm=locked]');
+      if (lk) {
+        if (locked.length) {
+          lk.innerHTML = `<ol class="cm-list cm-blur" aria-hidden="true" start="${rows.length + 1}">${locked.map(x => filler(+x.rank || 0)).join('')}</ol>
+            <div class="cm-gate"><a class="cm-cta" href="${esc(cta.href)}">${esc(cta.label)}</a>
+            <span class="cm-gate-note">${locked.length} more player${locked.length > 1 ? 's' : ''} on the meter for members</span></div>`;
+          lk.hidden = false;
+        } else lk.hidden = true;
+      }
+      if (d.own_status !== 'ok') set('[data-cm=note]', 'Ownership comes Wednesday: until then the meter shows media buzz only.');
+      box.hidden = false;
+      return d;
+    }).catch(() => null);
   };
 
   // activeKey: a NAV key ('slate', 'lab', ...), 'parent:child' for a dropdown page ('playbooks:classic-chill'), or an
