@@ -11,7 +11,7 @@
    "pos": "RB",
    "salary": 5400,
    "hype": 100,
-   "own": 8.2,
+   "own": 5.9,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   },
@@ -22,7 +22,7 @@
    "pos": "RB",
    "salary": 7600,
    "hype": 93,
-   "own": 11.7,
+   "own": 11.1,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   }
@@ -43,8 +43,8 @@
   "href": "pricing.html"
  },
  "show": true,
- "updated": "Thu Nov 5, 12:16 AM ET",
- "updated_iso": "2026-11-05T00:16-05:00",
+ "updated": "Fri Nov 6, 4:20 PM ET",
+ "updated_iso": "2026-11-06T16:20-05:00",
  "own_status": "ok",
- "own_stage": "wed"
+ "own_stage": "fri"
 }
