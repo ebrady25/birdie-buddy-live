@@ -1,6 +1,24 @@
 {
  "articles": [
   {
+   "slug": "2026-week-9-friday",
+   "href": "2026-week-9-friday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-friday",
+   "title": "Week 9 final call: Dallas is the best stack, and the field knows it",
+   "dek": "Prescott, Lamb and Pickens top our sims in the 51.9-point game; we build it, bring back Jonathan Taylor and get different in Detroit and Green Bay.",
+   "slot": "fri",
+   "week": 9,
+   "season": 2026,
+   "date": "2026-11-06",
+   "tldr": [
+    "Stack Prescott with Lamb and Pickens: they clear 75 DK points together in 15% of our sims, the best rate on the slate.",
+    "Bring the Dallas stack back with Jonathan Taylor, projected at just 4% owned.",
+    "Eat Jonah Coleman, whose projection jumped to 14.4 points since Wednesday; his price still earns the chalk.",
+    "Fade Malik Willis at 16% projected ownership and take Bo Nix, who has the same ceiling at a fraction of the crowd."
+   ],
+   "published_utc": "2026-11-06T22:28:35+00:00"
+  },
+  {
    "slug": "2026-week-9-tnf-jax-bal",
    "href": "2026-week-9-tnf-jax-bal.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-tnf-jax-bal",
@@ -256,5 +274,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-05T19:21:00+00:00"
+ "updated_utc": "2026-11-06T22:28:35+00:00"
 }
