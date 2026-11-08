@@ -2,50 +2,80 @@
  "generated_by": "codex/classic/chill_classic.py",
  "season": 2026,
  "week": 9,
- "stage": "fri",
- "stamp": "2026-11-06T17:32-05:00",
+ "stage": "sun_am",
+ "stamp": "2026-11-08T09:16-05:00",
  "page": "nfl/classic/chill/",
  "players": {
   "Dak Prescott": {
    "verdict": "play",
    "label": "Stack 1: the Dak Prescott stack",
-   "why": "Our sims have the three combining for 75+ DraftKings points 12.1% of the time, the best on the slate.",
+   "why": "Our sims have the three combining for 75+ DraftKings points 15.5% of the time, the best on the slate.",
    "section": "stacks"
   },
   "CeeDee Lamb": {
    "verdict": "play",
    "label": "Stack 1: the Dak Prescott stack",
-   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 12.1% of the time, the best on the slate.",
+   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 15.5% of the time, the best on the slate.",
    "section": "stacks"
   },
   "Ryan Flournoy": {
    "verdict": "play",
    "label": "Stack 1: the Dak Prescott stack",
-   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 12.1% of the time, the best on the slate.",
+   "why": "One of Dak Prescott’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 15.5% of the time, the best on the slate.",
    "section": "stacks"
   },
   "Jonathan Taylor": {
    "verdict": "play",
    "label": "Run-it-back RB",
-   "why": "The other team’s running back for the Dak Prescott stack, about 4% owned.",
+   "why": "The other team’s running back for the Dak Prescott stack, about 5% owned.",
+   "section": "stacks"
+  },
+  "Brock Purdy": {
+   "verdict": "play",
+   "label": "Stack 2: the Brock Purdy stack",
+   "why": "Our sims have the three combining for 75+ DraftKings points 9.3% of the time. Purdy should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "section": "stacks"
+  },
+  "George Kittle": {
+   "verdict": "play",
+   "label": "Stack 2: the Brock Purdy stack",
+   "why": "One of Brock Purdy’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 9.3% of the time. Purdy should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "section": "stacks"
+  },
+  "Jordan Watkins": {
+   "verdict": "play",
+   "label": "Stack 2: the Brock Purdy stack",
+   "why": "One of Brock Purdy’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 9.3% of the time. Purdy should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "section": "stacks"
+  },
+  "Ashton Jeanty": {
+   "verdict": "play",
+   "label": "Run-it-back RB",
+   "why": "The other team’s running back for the Brock Purdy stack, about 6% owned.",
+   "section": "stacks"
+  },
+  "Brock Bowers": {
+   "verdict": "play",
+   "label": "Run-it-back, more ceiling",
+   "why": "The higher-ceiling way to run back the Brock Purdy stack.",
    "section": "stacks"
   },
   "Jared Goff": {
    "verdict": "play",
-   "label": "Stack 2: the Jared Goff stack",
-   "why": "Our sims have the three combining for 75+ DraftKings points 10.1% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Amon-Ra St. Brown": {
-   "verdict": "play",
-   "label": "Stack 2: the Jared Goff stack",
-   "why": "One of Jared Goff’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 10.1% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "label": "Stack 3: the Jared Goff stack",
+   "why": "Our sims have the three combining for 75+ DraftKings points 8.1% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
    "section": "stacks"
   },
   "Jameson Williams": {
    "verdict": "play",
-   "label": "Stack 2: the Jared Goff stack",
-   "why": "One of Jared Goff’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 10.1% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "label": "Stack 3: the Jared Goff stack",
+   "why": "One of Jared Goff’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 8.1% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
+   "section": "stacks"
+  },
+  "Sam LaPorta": {
+   "verdict": "play",
+   "label": "Stack 3: the Jared Goff stack",
+   "why": "One of Jared Goff’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 8.1% of the time. Goff should be under 10% owned, which is where winning quarterbacks usually come from.",
    "section": "stacks"
   },
   "Ollie Gordon II": {
@@ -54,157 +84,79 @@
    "why": "The other team’s running back for the Jared Goff stack, about 6% owned.",
    "section": "stacks"
   },
-  "Matthew Stafford": {
-   "verdict": "play",
-   "label": "Stack 3: the Matthew Stafford stack",
-   "why": "Our sims have the three combining for 75+ DraftKings points 8.1% of the time. Stafford should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Puka Nacua": {
-   "verdict": "play",
-   "label": "Stack 3: the Matthew Stafford stack",
-   "why": "One of Matthew Stafford’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 8.1% of the time. Stafford should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Tyler Higbee": {
-   "verdict": "play",
-   "label": "Stack 3: the Matthew Stafford stack",
-   "why": "One of Matthew Stafford’s two pass-catchers in this stack. Our sims have the three combining for 75+ DraftKings points 8.1% of the time. Stafford should be under 10% owned, which is where winning quarterbacks usually come from.",
-   "section": "stacks"
-  },
-  "Rachaad White": {
-   "verdict": "play",
-   "label": "Run-it-back RB",
-   "why": "The other team’s running back for the Matthew Stafford stack, about 6% owned.",
-   "section": "stacks"
-  },
-  "Christian McCaffrey": {
+  "Chuba Hubbard": {
    "verdict": "play",
    "label": "One of two RBs to own",
-   "why": "In our sims' best lineup 14% of the time, about as often as the field plays him (19%). 18.9 projected, ceiling 31.1.",
+   "why": "In our sims' best lineup 12% of the time, at about 6% owned. 16.1 projected, ceiling 28.0.",
    "section": "rbs"
   },
-  "Javonte Williams": {
+  "Rhamondre Stevenson": {
    "verdict": "play",
    "label": "One of two RBs to own",
-   "why": "In our sims' best lineup 12% of the time, about as often as the field plays him (14%). 16.4 projected, ceiling 28.4.",
+   "why": "In our sims' best lineup 11% of the time, at about 8% owned. 15.8 projected, ceiling 26.3.",
    "section": "rbs"
   },
-  "Isaiah Likely": {
+  "Eli Raridon": {
    "verdict": "play",
    "label": "The value play",
-   "why": "11.6 projected for $5,000 (2.31 points per $1,000). In our sims’ best lineup 8% of the time at about 4% owned.",
+   "why": "10.6 projected for $3,500 (3.04 points per $1,000). In our sims’ best lineup 9% of the time at about 4% owned.",
    "section": "value"
   },
   "Greg Dulcich": {
    "verdict": "ok",
    "label": "The crowd’s cheap play",
-   "why": "Fine to use, just not unique: about 21% owned.",
+   "why": "Fine to use, just not unique: about 18% owned.",
    "section": "value"
+  },
+  "Jonah Coleman": {
+   "verdict": "skip",
+   "label": "One to skip",
+   "why": "About 22% of big-contest lineups will have him, but he is in our sims’ best lineup only 11% of the time. Let the crowd have him.",
+   "section": "fade"
+  },
+  "Christian McCaffrey": {
+   "verdict": "popular",
+   "label": "Chalk to know",
+   "why": "About 34% of big-contest lineups will have him (37% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
+   "section": "chalk"
   },
   "Jahmyr Gibbs": {
    "verdict": "popular",
    "label": "Chalk to know",
-   "why": "About 28% of big-contest lineups will have him (24% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
+   "why": "About 25% of big-contest lineups will have him (22% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
    "section": "chalk"
   },
-  "Kenneth Walker III": {
+  "Puka Nacua": {
    "verdict": "popular",
    "label": "Chalk to know",
-   "why": "About 23% of big-contest lineups will have him (19% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
+   "why": "About 24% of big-contest lineups will have him (26% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
    "section": "chalk"
-  },
-  "Jonah Coleman": {
-   "verdict": "popular",
-   "label": "Chalk to know",
-   "why": "About 23% of big-contest lineups will have him (38% in single-entry). Not one of our picks or fades this week: fine to play, just not unique.",
-   "section": "chalk"
-  },
-  "Patrick Mahomes": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Breece Hall": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Rashee Rice": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Xavier Worthy": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Caleb Douglas": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Tyler Warren": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Rhamondre Stevenson": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Cardinals": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Top projection” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Jayden Daniels": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Different stack” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Ashton Jeanty": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Different stack” sample single-entry lineup.",
-   "section": "lineups"
   },
   "Antonio Williams": {
    "verdict": "play",
    "label": "In a sample lineup",
-   "why": "In our “Different stack” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Treylon Burks": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Different stack” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "George Kittle": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Different stack” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Tyler Allgeier": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Different stack” sample single-entry lineup.",
+   "why": "In our “Top projection” sample single-entry lineup.",
    "section": "lineups"
   },
   "Saints": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Top projection” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Rachaad White": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Different stack” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Devin Singletary": {
+   "verdict": "play",
+   "label": "In a sample lineup",
+   "why": "In our “Different stack” sample single-entry lineup.",
+   "section": "lineups"
+  },
+  "Caleb Douglas": {
    "verdict": "play",
    "label": "In a sample lineup",
    "why": "In our “Different stack” sample single-entry lineup.",
@@ -213,31 +165,13 @@
   "Kyren Williams": {
    "verdict": "play",
    "label": "In a sample lineup",
-   "why": "In our “Lower-owned” sample single-entry lineup.",
+   "why": "In our “Different stack” sample single-entry lineup.",
    "section": "lineups"
   },
-  "Jaylen Waddle": {
+  "Packers": {
    "verdict": "play",
    "label": "In a sample lineup",
-   "why": "In our “Lower-owned” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Malik Washington": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Lower-owned” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Sam LaPorta": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Lower-owned” sample single-entry lineup.",
-   "section": "lineups"
-  },
-  "Eagles": {
-   "verdict": "play",
-   "label": "In a sample lineup",
-   "why": "In our “Lower-owned” sample single-entry lineup.",
+   "why": "In our “Different stack” sample single-entry lineup.",
    "section": "lineups"
   }
  }
