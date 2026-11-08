@@ -2,9 +2,9 @@
  "season": 2026,
  "week": 9,
  "week_label": "Week 9",
- "stage": "fri",
- "stage_label": "Friday final numbers",
- "as_of": "2026-11-06 16:26 ET",
+ "stage": "sun_am",
+ "stage_label": "Sunday AM update",
+ "as_of": "2026-11-08 08:41 ET",
  "counts": {
   "games": 11,
   "players": 94,

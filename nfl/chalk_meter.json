@@ -6,23 +6,23 @@
  "rows": [
   {
    "rank": 1,
-   "player": "Quinshon Judkins",
-   "team": "CLE",
-   "pos": "RB",
-   "salary": 5400,
+   "player": "Drew Lock",
+   "team": "SEA",
+   "pos": "QB",
+   "salary": 4000,
    "hype": 100,
-   "own": 5.9,
-   "verdict": "Hype ahead of ownership: chalk building",
-   "tone": "hot"
+   "own": 12.0,
+   "verdict": "Ownership already priced in",
+   "tone": "even"
   },
   {
    "rank": 2,
-   "player": "Kyren Williams",
-   "team": "LAR",
+   "player": "Jonathan Taylor",
+   "team": "IND",
    "pos": "RB",
-   "salary": 7600,
-   "hype": 93,
-   "own": 11.1,
+   "salary": 7500,
+   "hype": 90,
+   "own": 5.0,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   }
@@ -43,8 +43,8 @@
   "href": "pricing.html"
  },
  "show": true,
- "updated": "Fri Nov 6, 4:20 PM ET",
- "updated_iso": "2026-11-06T16:20-05:00",
+ "updated": "Sun Nov 8, 8:35 AM ET",
+ "updated_iso": "2026-11-08T08:35-05:00",
  "own_status": "ok",
- "own_stage": "fri"
+ "own_stage": "sun_am"
 }
