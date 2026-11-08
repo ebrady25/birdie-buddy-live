@@ -18,6 +18,43 @@
    "published_utc": "2026-11-08T14:32:41+00:00"
   },
   {
+   "slug": "2026-week-9-snf-tb-chi",
+   "href": "2026-week-9-snf-tb-chi.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-snf-tb-chi",
+   "title": "SNF showdown: a 29% Chicago blowout chance puts Williams at captain",
+   "dek": "Chicago is a 6-point favorite with a 27-point team total. Caleb Williams is the chalk captain worth eating, and Swift at FLEX is the chalk to fade.",
+   "slot": "SNF",
+   "week": 9,
+   "season": 2026,
+   "date": "2026-11-08",
+   "tldr": [
+    "Captain Caleb Williams: his 23% captain optimal rate beats his 18% projected captain ownership.",
+    "Fade D'Andre Swift at FLEX: 47% projected owned but in only 35% of our sims' optimal teams.",
+    "Bucky Irving is the Tampa Bay captain for the 20% Upset path, at 11% projected captain ownership."
+   ],
+   "game": "TB@CHI",
+   "kickoff_et": "2026-11-08T20:20:00-05:00",
+   "published_utc": "2026-11-08T19:21:27+00:00",
+   "card_stats": [
+    [
+     "CHI −6.0",
+     "Favorite"
+    ],
+    [
+     "48",
+     "Game total"
+    ],
+    [
+     "27–20.9",
+     "Team totals CHI–TB"
+    ],
+    [
+     "Sun 8:20",
+     "Kickoff ET"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-9-friday",
    "href": "2026-week-9-friday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-friday",
@@ -291,5 +328,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-08T14:32:41+00:00"
+ "updated_utc": "2026-11-08T19:21:27+00:00"
 }
