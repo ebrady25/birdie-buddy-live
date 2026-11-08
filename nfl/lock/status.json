@@ -1,18 +1,18 @@
 {
  "mode": "live",
- "stamp": "8-sun_am_20261101-0814",
- "week": 8,
+ "stamp": "9-sun_am_20261108-0800",
+ "week": 9,
  "season": 2026,
- "sunday": "2026-11-01",
+ "sunday": "2026-11-08",
  "stage": "sun_am",
- "updated": "2026-11-01T09:25-05:00",
+ "updated": "2026-11-08T08:41-05:00",
  "next_update": "Next update around 12:05 PM ET, when inactives for the 1 PM games are in.",
  "counts": {
-  "n_out": 7,
-  "n_q": 6,
+  "n_out": 10,
+  "n_q": 8,
   "n_roles": 10,
   "n_moves": 24,
   "n_lines": 0,
-  "n": 47
+  "n": 52
  }
 }
