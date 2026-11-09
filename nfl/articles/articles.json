@@ -37,6 +37,43 @@
    ]
   },
   {
+   "slug": "2026-week-9-mnf-buf-min",
+   "href": "2026-week-9-mnf-buf-min.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-mnf-buf-min",
+   "title": "MNF showdown: Josh Allen is chalk at captain and still underowned",
+   "dek": "Our sims put Josh Allen in the optimal captain spot 31% of the time against 21% projected ownership; we fade Carson Wentz and Justin Jefferson.",
+   "slot": "MNF",
+   "week": 9,
+   "season": 2026,
+   "date": "2026-11-09",
+   "tldr": [
+    "Captain Josh Allen: 21% projected captain ownership against a 31% optimal rate, the best captain leverage in the game.",
+    "Fade Carson Wentz at a projected 52% FLEX ownership; his 38% optimal rate trails the crowd.",
+    "Jordan Mason projects 19% owned in FLEX with a 27% optimal rate and gains most in a Minnesota upset."
+   ],
+   "game": "BUF@MIN",
+   "kickoff_et": "2026-11-09T20:15:00-05:00",
+   "published_utc": "2026-11-09T19:17:29+00:00",
+   "card_stats": [
+    [
+     "BUF −3.5",
+     "Favorite"
+    ],
+    [
+     "45",
+     "Game total"
+    ],
+    [
+     "24.3–20.9",
+     "Team totals BUF–MIN"
+    ],
+    [
+     "Mon 8:15",
+     "Kickoff ET"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-9-sunday",
    "href": "2026-week-9-sunday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-sunday",
@@ -364,5 +401,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-09T17:34:28+00:00"
+ "updated_utc": "2026-11-09T19:17:29+00:00"
 }
