@@ -1,6 +1,42 @@
 {
  "articles": [
   {
+   "slug": "2026-week-9-what-we-learned",
+   "href": "2026-week-9-what-we-learned.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-what-we-learned",
+   "title": "Week 9 what we learned: our Green Bay stack carried the top 1%",
+   "dek": "Jordan Love, Matthew Golden and Christian Watson, our Friday get-different stack, scored 107.7 points and were in 31% of top-1% lineups in the biggest GPP, from 0.8% of the field. Malik Willis, our top QB fade, scored 4.8 at 13% owned.",
+   "slot": "Recap",
+   "week": 9,
+   "season": 2026,
+   "date": "2026-11-09",
+   "tldr": [
+    "Love, Golden and Watson scored 107.7 points together. The stack was in 31% of top-1% lineups in the 198,012-entry GPP, against 0.8% of the field.",
+    "Two of the three biggest GPP winners started the Green Bay trio, and Love was the quarterback in 73% of that GPP's top 0.1%.",
+    "The chalk we ate paid: CeeDee Lamb (37.5) and Puka Nacua (39.0) were both in the biggest GPP's winning lineup. Kenneth Walker III, our Kansas City one-off, scored 39.3.",
+    "The QB fade was right: Malik Willis scored 4.8 at 13% owned, and Bo Nix, our pivot, scored 16.7 at 1.9%. Jahmyr Gibbs, our RB fade, scored 13.4 at 28%."
+   ],
+   "published_utc": "2026-11-09T17:34:28+00:00",
+   "card_stats": [
+    [
+     "107.7",
+     "GB trio DK points"
+    ],
+    [
+     "31%",
+     "Top 1% had it"
+    ],
+    [
+     "0.8%",
+     "Field had it"
+    ],
+    [
+     "4.8",
+     "Willis, 13% owned"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-9-sunday",
    "href": "2026-week-9-sunday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-sunday",
@@ -328,5 +364,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-08T19:21:27+00:00"
+ "updated_utc": "2026-11-09T17:34:28+00:00"
 }

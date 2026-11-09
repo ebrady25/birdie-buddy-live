@@ -12,14 +12,14 @@
   "chalk": 12
  },
  "article": {
-  "title": "SNF showdown: a 29% Chicago blowout chance puts Williams at captain",
-  "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-snf-tb-chi",
-  "date": "2026-11-08",
-  "slot": "SNF",
+  "title": "Week 9 what we learned: our Green Bay stack carried the top 1%",
+  "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-what-we-learned",
+  "date": "2026-11-09",
+  "slot": "Recap",
   "week": 9
  },
  "results": {
-  "week": 8,
-  "href": "nfl/results/2026-w8/"
+  "week": 9,
+  "href": "nfl/results/2026-w9/"
  }
 }
