@@ -1,12 +1,12 @@
 {
  "season": 2026,
- "week": 9,
- "week_label": "Week 9",
- "stage": "sun_am",
- "stage_label": "Sunday AM update",
- "as_of": "2026-11-08 08:41 ET",
+ "week": 10,
+ "week_label": "Week 10",
+ "stage": "tue",
+ "stage_label": "Early numbers",
+ "as_of": "2026-11-10 15:10 ET",
  "counts": {
-  "games": 11,
+  "games": 10,
   "players": 94,
   "stacks": 10,
   "chalk": 12

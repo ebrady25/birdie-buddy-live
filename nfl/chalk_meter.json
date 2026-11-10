@@ -1,50 +1,15 @@
 {
  "season": 2026,
- "week": 9,
+ "week": 10,
  "slate": "DraftKings main slate",
  "method": "The Hype Index is our read on where the DFS crowd's attention is heading before lock (100 = the hottest name on the slate). When hype runs ahead of our ownership projection, the chalk is still forming.",
- "rows": [
-  {
-   "rank": 1,
-   "player": "Drew Lock",
-   "team": "SEA",
-   "pos": "QB",
-   "salary": 4000,
-   "hype": 100,
-   "own": 12.0,
-   "verdict": "Ownership already priced in",
-   "tone": "even"
-  },
-  {
-   "rank": 2,
-   "player": "Jonathan Taylor",
-   "team": "IND",
-   "pos": "RB",
-   "salary": 7500,
-   "hype": 90,
-   "own": 5.0,
-   "verdict": "Hype ahead of ownership: chalk building",
-   "tone": "hot"
-  }
- ],
- "locked": [
-  {
-   "rank": 3
-  },
-  {
-   "rank": 4
-  },
-  {
-   "rank": 5
-  }
- ],
+ "rows": [],
+ "locked": [],
  "cta": {
   "label": "See all players · Members",
   "href": "pricing.html"
  },
- "show": true,
- "updated": "Sun Nov 8, 8:35 AM ET",
- "updated_iso": "2026-11-08T08:35-05:00",
- "own_status": "ok",
- "own_stage": "sun_check"
+ "show": false,
+ "own_status": "none",
+ "note": "The Hype Index for this week posts Tuesday."
 }

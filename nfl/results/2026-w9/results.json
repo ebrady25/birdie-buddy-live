@@ -1,0 +1,1658 @@
+{
+ "season": 2026,
+ "week": 9,
+ "slug": "2026-w9",
+ "url": "https://birdiebuddy.io/nfl/results/2026-w9/",
+ "as_of": "2026-11-10 18:06 ET",
+ "generated_by": "BirdieBuddy NFL results page",
+ "status": "final",
+ "note": "",
+ "snapshot": "published slate page (archive)",
+ "published": true,
+ "actuals": "official play-by-play converted to DraftKings scoring",
+ "headline": {
+  "proj_mae": 3.92,
+  "proj_in_range": 83.8,
+  "own_mae_big": 2.69,
+  "own_mae_se": 2.77,
+  "best_build": 154.8,
+  "best_stack": 68.3
+ },
+ "projections": {
+  "available": true,
+  "n": 289,
+  "mae": 3.92,
+  "bias": -0.15,
+  "n_relevant": 100,
+  "mae_relevant": 5.65,
+  "in_range": 83.8,
+  "by_pos": [
+   {
+    "pos": "QB",
+    "n": 29,
+    "mae": 5.43,
+    "bias": -0.25,
+    "in_range": 72.7
+   },
+   {
+    "pos": "RB",
+    "n": 65,
+    "mae": 3.62,
+    "bias": 0.72,
+    "in_range": 92.0
+   },
+   {
+    "pos": "WR",
+    "n": 103,
+    "mae": 4.58,
+    "bias": -1.04,
+    "in_range": 78.1
+   },
+   {
+    "pos": "TE",
+    "n": 70,
+    "mae": 2.76,
+    "bias": 0.56,
+    "in_range": 93.8
+   },
+   {
+    "pos": "DST",
+    "n": 22,
+    "mae": 3.47,
+    "bias": -0.73,
+    "in_range": 100.0
+   }
+  ],
+  "top_scorers": [
+   {
+    "player": "C.J. Stroud",
+    "team": "HOU",
+    "opp": "LAC",
+    "pos": "QB",
+    "salary": 5900,
+    "proj": 17.1,
+    "actual": 39.4,
+    "err": 22.2,
+    "p10": 8.4,
+    "p90": 27.1,
+    "hit_range": false,
+    "own": 1.9
+   },
+   {
+    "player": "Kenneth Walker III",
+    "team": "KC",
+    "opp": "NYJ",
+    "pos": "RB",
+    "salary": 9000,
+    "proj": 20.7,
+    "actual": 39.3,
+    "err": 18.6,
+    "p10": 8.5,
+    "p90": 34.1,
+    "hit_range": false,
+    "own": 21.6
+   },
+   {
+    "player": "Jordan Love",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "QB",
+    "salary": 6300,
+    "proj": 17.3,
+    "actual": 39.2,
+    "err": 21.9,
+    "p10": 7.8,
+    "p90": 27.9,
+    "hit_range": false,
+    "own": 1.7
+   },
+   {
+    "player": "Puka Nacua",
+    "team": "LAR",
+    "opp": "WAS",
+    "pos": "WR",
+    "salary": 8800,
+    "proj": 23.8,
+    "actual": 39.0,
+    "err": 15.2,
+    "p10": 9.7,
+    "p90": 38.8,
+    "hit_range": false,
+    "own": 23.5
+   },
+   {
+    "player": "CeeDee Lamb",
+    "team": "DAL",
+    "opp": "IND",
+    "pos": "WR",
+    "salary": 8300,
+    "proj": 21.1,
+    "actual": 37.5,
+    "err": 16.4,
+    "p10": 8.0,
+    "p90": 36.1,
+    "hit_range": false,
+    "own": 23.0
+   },
+   {
+    "player": "Matthew Golden",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "WR",
+    "salary": 7000,
+    "proj": 14.1,
+    "actual": 35.4,
+    "err": 21.3,
+    "p10": 3.9,
+    "p90": 27.4,
+    "hit_range": false,
+    "own": 5.6
+   },
+   {
+    "player": "Christian Watson",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "WR",
+    "salary": 7500,
+    "proj": 13.7,
+    "actual": 33.1,
+    "err": 19.4,
+    "p10": 3.7,
+    "p90": 26.8,
+    "hit_range": false,
+    "own": 8.0
+   },
+   {
+    "player": "Kayshon Boutte",
+    "team": "HOU",
+    "opp": "LAC",
+    "pos": "WR",
+    "salary": 3400,
+    "proj": 4.6,
+    "actual": 31.5,
+    "err": 26.9,
+    "p10": 0.0,
+    "p90": 11.1,
+    "hit_range": false,
+    "own": 0.6
+   },
+   {
+    "player": "Brock Bowers",
+    "team": "LV",
+    "opp": "SF",
+    "pos": "TE",
+    "salary": 7900,
+    "proj": 18.4,
+    "actual": 26.3,
+    "err": 7.9,
+    "p10": 6.8,
+    "p90": 33.0,
+    "hit_range": true,
+    "own": 5.7
+   },
+   {
+    "player": "Brock Purdy",
+    "team": "SF",
+    "opp": "LV",
+    "pos": "QB",
+    "salary": 6800,
+    "proj": 22.7,
+    "actual": 26.3,
+    "err": 3.6,
+    "p10": 12.6,
+    "p90": 33.7,
+    "hit_range": true,
+    "own": 9.7
+   },
+   {
+    "player": "Javonte Williams",
+    "team": "DAL",
+    "opp": "IND",
+    "pos": "RB",
+    "salary": 7300,
+    "proj": 15.8,
+    "actual": 25.4,
+    "err": 9.6,
+    "p10": 5.5,
+    "p90": 28.1,
+    "hit_range": true,
+    "own": 12.2
+   },
+   {
+    "player": "Tank Dell",
+    "team": "HOU",
+    "opp": "LAC",
+    "pos": "WR",
+    "salary": 3500,
+    "proj": 4.2,
+    "actual": 23.5,
+    "err": 19.3,
+    "p10": 0.0,
+    "p90": 10.0,
+    "hit_range": false,
+    "own": 0.5
+   }
+  ],
+  "beat": [
+   {
+    "player": "Kayshon Boutte",
+    "team": "HOU",
+    "opp": "LAC",
+    "pos": "WR",
+    "salary": 3400,
+    "proj": 4.6,
+    "actual": 31.5,
+    "err": 26.9,
+    "p10": 0.0,
+    "p90": 11.1,
+    "hit_range": false
+   },
+   {
+    "player": "C.J. Stroud",
+    "team": "HOU",
+    "opp": "LAC",
+    "pos": "QB",
+    "salary": 5900,
+    "proj": 17.1,
+    "actual": 39.4,
+    "err": 22.2,
+    "p10": 8.4,
+    "p90": 27.1,
+    "hit_range": false
+   },
+   {
+    "player": "Jordan Love",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "QB",
+    "salary": 6300,
+    "proj": 17.3,
+    "actual": 39.2,
+    "err": 21.9,
+    "p10": 7.8,
+    "p90": 27.9,
+    "hit_range": false
+   },
+   {
+    "player": "Matthew Golden",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "WR",
+    "salary": 7000,
+    "proj": 14.1,
+    "actual": 35.4,
+    "err": 21.3,
+    "p10": 3.9,
+    "p90": 27.4,
+    "hit_range": false
+   },
+   {
+    "player": "Christian Watson",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "WR",
+    "salary": 7500,
+    "proj": 13.7,
+    "actual": 33.1,
+    "err": 19.4,
+    "p10": 3.7,
+    "p90": 26.8,
+    "hit_range": false
+   },
+   {
+    "player": "Tank Dell",
+    "team": "HOU",
+    "opp": "LAC",
+    "pos": "WR",
+    "salary": 3500,
+    "proj": 4.2,
+    "actual": 23.5,
+    "err": 19.3,
+    "p10": 0.0,
+    "p90": 10.0,
+    "hit_range": false
+   },
+   {
+    "player": "Kenneth Walker III",
+    "team": "KC",
+    "opp": "NYJ",
+    "pos": "RB",
+    "salary": 9000,
+    "proj": 20.7,
+    "actual": 39.3,
+    "err": 18.6,
+    "p10": 8.5,
+    "p90": 34.1,
+    "hit_range": false
+   },
+   {
+    "player": "Darren Waller",
+    "team": "CAR",
+    "opp": "DEN",
+    "pos": "TE",
+    "salary": 3300,
+    "proj": 4.9,
+    "actual": 23.0,
+    "err": 18.1,
+    "p10": 0.0,
+    "p90": 11.1,
+    "hit_range": false
+   }
+  ],
+  "short": [
+   {
+    "player": "Jared Goff",
+    "team": "DET",
+    "opp": "MIA",
+    "pos": "QB",
+    "salary": 6600,
+    "proj": 21.0,
+    "actual": 6.3,
+    "err": -14.7,
+    "p10": 11.2,
+    "p90": 31.6,
+    "hit_range": false
+   },
+   {
+    "player": "Josh Jacobs",
+    "team": "GB",
+    "opp": "NE",
+    "pos": "RB",
+    "salary": 6800,
+    "proj": 13.6,
+    "actual": 0.5,
+    "err": -13.1,
+    "p10": 5.2,
+    "p90": 23.8,
+    "hit_range": false
+   },
+   {
+    "player": "Malik Willis",
+    "team": "MIA",
+    "opp": "DET",
+    "pos": "QB",
+    "salary": 5100,
+    "proj": 17.9,
+    "actual": 4.8,
+    "err": -13.1,
+    "p10": 8.7,
+    "p90": 28.4,
+    "hit_range": false
+   },
+   {
+    "player": "Jahmyr Gibbs",
+    "team": "DET",
+    "opp": "MIA",
+    "pos": "RB",
+    "salary": 10000,
+    "proj": 24.9,
+    "actual": 13.4,
+    "err": -11.5,
+    "p10": 11.4,
+    "p90": 39.6,
+    "hit_range": true
+   },
+   {
+    "player": "George Kittle",
+    "team": "SF",
+    "opp": "LV",
+    "pos": "TE",
+    "salary": 6000,
+    "proj": 20.4,
+    "actual": 9.8,
+    "err": -10.6,
+    "p10": 7.6,
+    "p90": 35.1,
+    "hit_range": true
+   },
+   {
+    "player": "Adonai Mitchell",
+    "team": "NYJ",
+    "opp": "KC",
+    "pos": "WR",
+    "salary": 4500,
+    "proj": 9.6,
+    "actual": 0.0,
+    "err": -9.6,
+    "p10": 2.1,
+    "p90": 19.2,
+    "hit_range": false
+   },
+   {
+    "player": "Jaylen Waddle",
+    "team": "DEN",
+    "opp": "CAR",
+    "pos": "WR",
+    "salary": 5700,
+    "proj": 12.0,
+    "actual": 3.2,
+    "err": -8.8,
+    "p10": 3.6,
+    "p90": 23.0,
+    "hit_range": false
+   },
+   {
+    "player": "J.J. McCarthy",
+    "team": "NYG",
+    "opp": "PHI",
+    "pos": "QB",
+    "salary": 4800,
+    "proj": 15.8,
+    "actual": 7.3,
+    "err": -8.5,
+    "p10": 7.3,
+    "p90": 25.0,
+    "hit_range": false
+   }
+  ],
+  "closest": [
+   {
+    "player": "Drake Maye",
+    "team": "NE",
+    "opp": "GB",
+    "pos": "QB",
+    "salary": 7000,
+    "proj": 21.2,
+    "actual": 21.3,
+    "err": 0.0
+   },
+   {
+    "player": "Rhamondre Stevenson",
+    "team": "NE",
+    "opp": "GB",
+    "pos": "RB",
+    "salary": 6100,
+    "proj": 15.8,
+    "actual": 15.2,
+    "err": -0.6
+   },
+   {
+    "player": "Christian McCaffrey",
+    "team": "SF",
+    "opp": "LV",
+    "pos": "RB",
+    "salary": 8000,
+    "proj": 23.5,
+    "actual": 22.7,
+    "err": -0.8
+   },
+   {
+    "player": "Bo Nix",
+    "team": "DEN",
+    "opp": "CAR",
+    "pos": "QB",
+    "salary": 5400,
+    "proj": 17.8,
+    "actual": 16.7,
+    "err": -1.1
+   },
+   {
+    "player": "Kirk Cousins",
+    "team": "LV",
+    "opp": "SF",
+    "pos": "QB",
+    "salary": 5300,
+    "proj": 17.1,
+    "actual": 15.6,
+    "err": -1.5
+   },
+   {
+    "player": "Chris Olave",
+    "team": "NO",
+    "opp": "CLE",
+    "pos": "WR",
+    "salary": 7400,
+    "proj": 15.2,
+    "actual": 16.8,
+    "err": 1.6
+   },
+   {
+    "player": "Dak Prescott",
+    "team": "DAL",
+    "opp": "IND",
+    "pos": "QB",
+    "salary": 6500,
+    "proj": 21.6,
+    "actual": 23.5,
+    "err": 1.9
+   },
+   {
+    "player": "Tyler Shough",
+    "team": "NO",
+    "opp": "CLE",
+    "pos": "QB",
+    "salary": 5700,
+    "proj": 17.4,
+    "actual": 19.7,
+    "err": 2.3
+   }
+  ]
+ },
+ "ownership": {
+  "available": true,
+  "fields": [
+   {
+    "field": "big",
+    "label": "Large-field GPPs",
+    "n": 149,
+    "mae": 2.69,
+    "rho": 0.72,
+    "bias": -0.11,
+    "mae_chalk": 5.3,
+    "n_chalk": 25
+   },
+   {
+    "field": "se",
+    "label": "Single entry",
+    "n": 148,
+    "mae": 2.77,
+    "rho": 0.69,
+    "bias": -0.05,
+    "mae_chalk": 5.4,
+    "n_chalk": 29
+   }
+  ],
+  "field": "big",
+  "calls": [
+   {
+    "player": "Christian McCaffrey",
+    "team": "SF",
+    "pos": "RB",
+    "salary": 8000,
+    "own": 34.0,
+    "own_se": 37.0,
+    "act_own": 30.4,
+    "act_own_se": 31.4,
+    "proj": 23.5,
+    "actual": 22.7
+   },
+   {
+    "player": "Jahmyr Gibbs",
+    "team": "DET",
+    "pos": "RB",
+    "salary": 10000,
+    "own": 25.4,
+    "own_se": 21.7,
+    "act_own": 27.9,
+    "act_own_se": 27.0,
+    "proj": 24.9,
+    "actual": 13.4
+   },
+   {
+    "player": "George Kittle",
+    "team": "SF",
+    "pos": "TE",
+    "salary": 6000,
+    "own": 25.0,
+    "own_se": 26.7,
+    "act_own": 26.8,
+    "act_own_se": 28.7,
+    "proj": 20.4,
+    "actual": 9.8
+   },
+   {
+    "player": "Puka Nacua",
+    "team": "LAR",
+    "pos": "WR",
+    "salary": 8800,
+    "own": 23.5,
+    "own_se": 26.3,
+    "act_own": 27.9,
+    "act_own_se": 30.2,
+    "proj": 23.8,
+    "actual": 39.0
+   },
+   {
+    "player": "CeeDee Lamb",
+    "team": "DAL",
+    "pos": "WR",
+    "salary": 8300,
+    "own": 23.0,
+    "own_se": 26.5,
+    "act_own": 20.4,
+    "act_own_se": 19.4,
+    "proj": 21.1,
+    "actual": 37.5
+   },
+   {
+    "player": "Jonah Coleman",
+    "team": "DEN",
+    "pos": "RB",
+    "salary": 5300,
+    "own": 21.9,
+    "own_se": 37.0,
+    "act_own": 35.7,
+    "act_own_se": 45.6,
+    "proj": 14.1,
+    "actual": 18.8
+   },
+   {
+    "player": "Kenneth Walker III",
+    "team": "KC",
+    "pos": "RB",
+    "salary": 9000,
+    "own": 21.6,
+    "own_se": 18.3,
+    "act_own": 12.4,
+    "act_own_se": 11.7,
+    "proj": 20.7,
+    "actual": 39.3
+   },
+   {
+    "player": "Greg Dulcich",
+    "team": "MIA",
+    "pos": "TE",
+    "salary": 3100,
+    "own": 18.0,
+    "own_se": 20.4,
+    "act_own": 22.0,
+    "act_own_se": 27.0,
+    "proj": 8.3,
+    "actual": 3.4
+   },
+   {
+    "player": "Devin Singletary",
+    "team": "NYG",
+    "pos": "RB",
+    "salary": 4600,
+    "own": 17.4,
+    "own_se": 23.9,
+    "act_own": 27.4,
+    "act_own_se": 29.8,
+    "proj": 12.0,
+    "actual": 5.9
+   },
+   {
+    "player": "Amon-Ra St. Brown",
+    "team": "DET",
+    "pos": "WR",
+    "salary": 8100,
+    "own": 17.2,
+    "own_se": 21.4,
+    "act_own": 7.2,
+    "act_own_se": 4.8,
+    "proj": 20.0,
+    "actual": 16.6
+   },
+   {
+    "player": "Malik Willis",
+    "team": "MIA",
+    "pos": "QB",
+    "salary": 5100,
+    "own": 15.0,
+    "own_se": 21.0,
+    "act_own": 13.0,
+    "act_own_se": 16.8,
+    "proj": 17.9,
+    "actual": 4.8
+   },
+   {
+    "player": "Jaxon Smith-Njigba",
+    "team": "SEA",
+    "pos": "WR",
+    "salary": 9300,
+    "own": 14.9,
+    "own_se": 15.7,
+    "act_own": 20.0,
+    "act_own_se": 23.3,
+    "proj": 20.3,
+    "actual": 12.1
+   }
+  ],
+  "missed": [
+   {
+    "player": "Jonah Coleman",
+    "team": "DEN",
+    "pos": "RB",
+    "salary": 5300,
+    "own": 21.9,
+    "own_se": 37.0,
+    "act_own": 35.7,
+    "act_own_se": 45.6,
+    "proj": 14.1,
+    "actual": 18.8
+   },
+   {
+    "player": "Ryan Flournoy",
+    "team": "DAL",
+    "pos": "WR",
+    "salary": 4800,
+    "own": 5.5,
+    "own_se": 5.2,
+    "act_own": 18.7,
+    "act_own_se": 19.8,
+    "proj": 11.7,
+    "actual": 7.3
+   },
+   {
+    "player": "Devin Singletary",
+    "team": "NYG",
+    "pos": "RB",
+    "salary": 4600,
+    "own": 17.4,
+    "own_se": 23.9,
+    "act_own": 27.4,
+    "act_own_se": 29.8,
+    "proj": 12.0,
+    "actual": 5.9
+   },
+   {
+    "player": "Adonai Mitchell",
+    "team": "NYJ",
+    "pos": "WR",
+    "salary": 4500,
+    "own": 5.2,
+    "own_se": 4.8,
+    "act_own": 14.6,
+    "act_own_se": 14.1,
+    "proj": 9.6,
+    "actual": 0.0
+   },
+   {
+    "player": "Chuba Hubbard",
+    "team": "CAR",
+    "pos": "RB",
+    "salary": 6500,
+    "own": 5.8,
+    "own_se": 4.7,
+    "act_own": 14.4,
+    "act_own_se": 12.1,
+    "proj": 16.1,
+    "actual": 13.6
+   },
+   {
+    "player": "Antonio Williams",
+    "team": "WAS",
+    "pos": "WR",
+    "salary": 4100,
+    "own": 14.0,
+    "own_se": 19.0,
+    "act_own": 22.5,
+    "act_own_se": 24.4,
+    "proj": 10.1,
+    "actual": 5.5
+   },
+   {
+    "player": "Saints",
+    "team": "NO",
+    "pos": "DST",
+    "salary": 2900,
+    "own": 8.0,
+    "own_se": 8.1,
+    "act_own": 15.8,
+    "act_own_se": 15.0,
+    "proj": 8.4,
+    "actual": 5.0
+   },
+   {
+    "player": "Malik Nabers",
+    "team": "NYG",
+    "pos": "WR",
+    "salary": 7300,
+    "own": 7.1,
+    "own_se": 7.6,
+    "act_own": 14.5,
+    "act_own_se": 17.9,
+    "proj": 16.2,
+    "actual": 9.3
+   }
+  ],
+  "faded": [
+   {
+    "player": "George Pickens",
+    "team": "DAL",
+    "pos": "WR",
+    "salary": 6300,
+    "own": 10.2,
+    "own_se": 11.2,
+    "act_own": 0.2,
+    "act_own_se": 0.2,
+    "proj": 15.3,
+    "actual": null
+   },
+   {
+    "player": "Amon-Ra St. Brown",
+    "team": "DET",
+    "pos": "WR",
+    "salary": 8100,
+    "own": 17.2,
+    "own_se": 21.4,
+    "act_own": 7.2,
+    "act_own_se": 4.8,
+    "proj": 20.0,
+    "actual": 16.6
+   },
+   {
+    "player": "Kyren Williams",
+    "team": "LAR",
+    "pos": "RB",
+    "salary": 7600,
+    "own": 11.8,
+    "own_se": 9.8,
+    "act_own": 1.8,
+    "act_own_se": 1.6,
+    "proj": 17.3,
+    "actual": 9.1
+   },
+   {
+    "player": "Kenneth Walker III",
+    "team": "KC",
+    "pos": "RB",
+    "salary": 9000,
+    "own": 21.6,
+    "own_se": 18.3,
+    "act_own": 12.4,
+    "act_own_se": 11.7,
+    "proj": 20.7,
+    "actual": 39.3
+   },
+   {
+    "player": "Tetairoa McMillan",
+    "team": "CAR",
+    "pos": "WR",
+    "salary": 6900,
+    "own": 9.9,
+    "own_se": 10.1,
+    "act_own": 2.4,
+    "act_own_se": 1.0,
+    "proj": 13.7,
+    "actual": 15.6
+   },
+   {
+    "player": "Seahawks",
+    "team": "SEA",
+    "pos": "DST",
+    "salary": 3800,
+    "own": 12.6,
+    "own_se": 13.4,
+    "act_own": 6.1,
+    "act_own_se": 5.8,
+    "proj": 10.6,
+    "actual": 10.0
+   },
+   {
+    "player": "Tre Tucker",
+    "team": "LV",
+    "pos": "WR",
+    "salary": 5400,
+    "own": 9.0,
+    "own_se": 9.1,
+    "act_own": 3.5,
+    "act_own_se": 4.2,
+    "proj": 8.7,
+    "actual": 9.5
+   },
+   {
+    "player": "Brevyn Spann-Ford",
+    "team": "DAL",
+    "pos": "TE",
+    "salary": 2900,
+    "own": 7.3,
+    "own_se": 10.3,
+    "act_own": 2.1,
+    "act_own_se": 2.3,
+    "proj": 5.5,
+    "actual": 4.0
+   }
+  ],
+  "calls_se": [
+   {
+    "player": "Christian McCaffrey",
+    "team": "SF",
+    "pos": "RB",
+    "salary": 8000,
+    "own": 34.0,
+    "own_se": 37.0,
+    "act_own": 30.4,
+    "act_own_se": 31.4,
+    "proj": 23.5,
+    "actual": 22.7
+   },
+   {
+    "player": "Jonah Coleman",
+    "team": "DEN",
+    "pos": "RB",
+    "salary": 5300,
+    "own": 21.9,
+    "own_se": 37.0,
+    "act_own": 35.7,
+    "act_own_se": 45.6,
+    "proj": 14.1,
+    "actual": 18.8
+   },
+   {
+    "player": "George Kittle",
+    "team": "SF",
+    "pos": "TE",
+    "salary": 6000,
+    "own": 25.0,
+    "own_se": 26.7,
+    "act_own": 26.8,
+    "act_own_se": 28.7,
+    "proj": 20.4,
+    "actual": 9.8
+   },
+   {
+    "player": "CeeDee Lamb",
+    "team": "DAL",
+    "pos": "WR",
+    "salary": 8300,
+    "own": 23.0,
+    "own_se": 26.5,
+    "act_own": 20.4,
+    "act_own_se": 19.4,
+    "proj": 21.1,
+    "actual": 37.5
+   },
+   {
+    "player": "Puka Nacua",
+    "team": "LAR",
+    "pos": "WR",
+    "salary": 8800,
+    "own": 23.5,
+    "own_se": 26.3,
+    "act_own": 27.9,
+    "act_own_se": 30.2,
+    "proj": 23.8,
+    "actual": 39.0
+   },
+   {
+    "player": "Devin Singletary",
+    "team": "NYG",
+    "pos": "RB",
+    "salary": 4600,
+    "own": 17.4,
+    "own_se": 23.9,
+    "act_own": 27.4,
+    "act_own_se": 29.8,
+    "proj": 12.0,
+    "actual": 5.9
+   },
+   {
+    "player": "Jahmyr Gibbs",
+    "team": "DET",
+    "pos": "RB",
+    "salary": 10000,
+    "own": 25.4,
+    "own_se": 21.7,
+    "act_own": 27.9,
+    "act_own_se": 27.0,
+    "proj": 24.9,
+    "actual": 13.4
+   },
+   {
+    "player": "Amon-Ra St. Brown",
+    "team": "DET",
+    "pos": "WR",
+    "salary": 8100,
+    "own": 17.2,
+    "own_se": 21.4,
+    "act_own": 7.2,
+    "act_own_se": 4.8,
+    "proj": 20.0,
+    "actual": 16.6
+   },
+   {
+    "player": "Malik Willis",
+    "team": "MIA",
+    "pos": "QB",
+    "salary": 5100,
+    "own": 15.0,
+    "own_se": 21.0,
+    "act_own": 13.0,
+    "act_own_se": 16.8,
+    "proj": 17.9,
+    "actual": 4.8
+   },
+   {
+    "player": "Greg Dulcich",
+    "team": "MIA",
+    "pos": "TE",
+    "salary": 3100,
+    "own": 18.0,
+    "own_se": 20.4,
+    "act_own": 22.0,
+    "act_own_se": 27.0,
+    "proj": 8.3,
+    "actual": 3.4
+   }
+  ],
+  "chalk_hit": 3,
+  "chalk_n": 10
+ },
+ "lines": {
+  "big": {
+   "top1_line": 174.2,
+   "median_score": 119.6
+  },
+  "se": {
+   "top1_line": 173.4,
+   "median_score": 119.4
+  }
+ },
+ "qbs": [
+  {
+   "player": "Brock Purdy",
+   "team": "SF",
+   "opp": "LV",
+   "salary": 6800,
+   "proj": 22.7,
+   "p10": 12.6,
+   "p90": 33.7,
+   "actual": 26.3,
+   "hit_range": true,
+   "own": 9.7,
+   "act_own": 8.3,
+   "fits_rules": true,
+   "rank_actual": 3
+  },
+  {
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "opp": "NYJ",
+   "salary": 6100,
+   "proj": 21.4,
+   "p10": 11.5,
+   "p90": 32.5,
+   "actual": 17.5,
+   "hit_range": true,
+   "own": 7.3,
+   "act_own": 6.6,
+   "fits_rules": true,
+   "rank_actual": 9
+  },
+  {
+   "player": "Jared Goff",
+   "team": "DET",
+   "opp": "MIA",
+   "salary": 6600,
+   "proj": 21.0,
+   "p10": 11.2,
+   "p90": 31.6,
+   "actual": 6.3,
+   "hit_range": false,
+   "own": 6.5,
+   "act_own": 4.9,
+   "fits_rules": true,
+   "rank_actual": 22
+  },
+  {
+   "player": "Jayden Daniels",
+   "team": "WAS",
+   "opp": "LAR",
+   "salary": 6000,
+   "proj": 19.4,
+   "p10": 9.7,
+   "p90": 30.0,
+   "actual": 15.5,
+   "hit_range": true,
+   "own": 2.3,
+   "act_own": 5.8,
+   "fits_rules": true,
+   "rank_actual": 12
+  },
+  {
+   "player": "Matthew Stafford",
+   "team": "LAR",
+   "opp": "WAS",
+   "salary": 6200,
+   "proj": 18.9,
+   "p10": 9.6,
+   "p90": 29.2,
+   "actual": 12.2,
+   "hit_range": true,
+   "own": 5.3,
+   "act_own": 3.2,
+   "fits_rules": true,
+   "rank_actual": 15
+  },
+  {
+   "player": "Daniel Jones",
+   "team": "IND",
+   "opp": "DAL",
+   "salary": 4700,
+   "proj": 15.8,
+   "p10": 7.5,
+   "p90": 25.1,
+   "actual": 11.3,
+   "hit_range": true,
+   "own": 6.4,
+   "act_own": 3.0,
+   "fits_rules": true,
+   "rank_actual": 17
+  },
+  {
+   "player": "Dak Prescott",
+   "team": "DAL",
+   "opp": "IND",
+   "salary": 6500,
+   "proj": 21.6,
+   "p10": 11.5,
+   "p90": 32.5,
+   "actual": 23.5,
+   "hit_range": true,
+   "own": 10.3,
+   "act_own": 7.5,
+   "fits_rules": false,
+   "rank_actual": 4
+  },
+  {
+   "player": "Bo Nix",
+   "team": "DEN",
+   "opp": "CAR",
+   "salary": 5400,
+   "proj": 17.8,
+   "p10": 9.1,
+   "p90": 27.8,
+   "actual": 16.7,
+   "hit_range": true,
+   "own": 3.5,
+   "act_own": 1.9,
+   "fits_rules": false,
+   "rank_actual": 10
+  }
+ ],
+ "best_qb": {
+  "player": "C.J. Stroud",
+  "team": "HOU",
+  "proj": 17.1,
+  "actual": 39.4,
+  "in_list": false
+ },
+ "stacks": [
+  {
+   "qb": "Dak Prescott",
+   "catchers": [
+    "CeeDee Lamb",
+    "Ryan Flournoy"
+   ],
+   "team": "DAL",
+   "game": "DAL@IND",
+   "salary": 19600,
+   "mean": 54.4,
+   "p90_proj": 80.8,
+   "actual": 68.3,
+   "cleared_line": false,
+   "own_sum": 38.8,
+   "bring_back": {
+    "player": "Jonathan Taylor",
+    "pos": "RB",
+    "team": "IND",
+    "actual": 10.4
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Dak Prescott",
+   "catchers": [
+    "CeeDee Lamb",
+    "George Pickens"
+   ],
+   "team": "DAL",
+   "game": "DAL@IND",
+   "salary": 21100,
+   "mean": 53.5,
+   "p90_proj": 79.8,
+   "actual": 61.0,
+   "cleared_line": false,
+   "own_sum": 43.5,
+   "bring_back": {
+    "player": "Jonathan Taylor",
+    "pos": "RB",
+    "team": "IND",
+    "actual": 10.4
+   },
+   "missing_players": 1
+  },
+  {
+   "qb": "Jared Goff",
+   "catchers": [
+    "Amon-Ra St. Brown",
+    "Jameson Williams"
+   ],
+   "team": "DET",
+   "game": "DET@MIA",
+   "salary": 20800,
+   "mean": 48.1,
+   "p90_proj": 73.9,
+   "actual": 27.9,
+   "cleared_line": false,
+   "own_sum": 31.1,
+   "bring_back": {
+    "player": "Ollie Gordon II",
+    "pos": "RB",
+    "team": "MIA",
+    "actual": 7.4
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Brock Purdy",
+   "catchers": [
+    "George Kittle",
+    "Jordan Watkins"
+   ],
+   "team": "SF",
+   "game": "LV@SF",
+   "salary": 16100,
+   "mean": 49.7,
+   "p90_proj": 74.3,
+   "actual": 54.7,
+   "cleared_line": false,
+   "own_sum": 37.2,
+   "bring_back": {
+    "player": "Brock Bowers",
+    "pos": "TE",
+    "team": "LV",
+    "actual": 26.3
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Jared Goff",
+   "catchers": [
+    "Amon-Ra St. Brown",
+    "Sam LaPorta"
+   ],
+   "team": "DET",
+   "game": "DET@MIA",
+   "salary": 19800,
+   "mean": 47.9,
+   "p90_proj": 73.3,
+   "actual": 30.1,
+   "cleared_line": false,
+   "own_sum": 30.0,
+   "bring_back": {
+    "player": "Ollie Gordon II",
+    "pos": "RB",
+    "team": "MIA",
+    "actual": 7.4
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Brock Purdy",
+   "catchers": [
+    "George Kittle",
+    "Brandin Cooks"
+   ],
+   "team": "SF",
+   "game": "LV@SF",
+   "salary": 16700,
+   "mean": 48.9,
+   "p90_proj": 73.1,
+   "actual": 40.6,
+   "cleared_line": false,
+   "own_sum": 38.1,
+   "bring_back": {
+    "player": "Brock Bowers",
+    "pos": "TE",
+    "team": "LV",
+    "actual": 26.3
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Matthew Stafford",
+   "catchers": [
+    "Puka Nacua",
+    "Tyler Higbee"
+   ],
+   "team": "LAR",
+   "game": "LAR@WAS",
+   "salary": 18700,
+   "mean": 47.4,
+   "p90_proj": 72.9,
+   "actual": 53.5,
+   "cleared_line": false,
+   "own_sum": 31.3,
+   "bring_back": {
+    "player": "Rachaad White",
+    "pos": "RB",
+    "team": "WAS",
+    "actual": 8.9
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Jared Goff",
+   "catchers": [
+    "Jameson Williams",
+    "Sam LaPorta"
+   ],
+   "team": "DET",
+   "game": "DET@MIA",
+   "salary": 17800,
+   "mean": 46.6,
+   "p90_proj": 71.9,
+   "actual": 18.5,
+   "cleared_line": false,
+   "own_sum": 20.3,
+   "bring_back": {
+    "player": "Ollie Gordon II",
+    "pos": "RB",
+    "team": "MIA",
+    "actual": 7.4
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Brock Purdy",
+   "catchers": [
+    "George Kittle",
+    "Jacob Cowing"
+   ],
+   "team": "SF",
+   "game": "LV@SF",
+   "salary": 16400,
+   "mean": 48.0,
+   "p90_proj": 72.2,
+   "actual": 37.6,
+   "cleared_line": false,
+   "own_sum": 37.5,
+   "bring_back": {
+    "player": "Brock Bowers",
+    "pos": "TE",
+    "team": "LV",
+    "actual": 26.3
+   },
+   "missing_players": 0
+  },
+  {
+   "qb": "Dak Prescott",
+   "catchers": [
+    "CeeDee Lamb",
+    "Brevyn Spann-Ford"
+   ],
+   "team": "DAL",
+   "game": "DAL@IND",
+   "salary": 17700,
+   "mean": 48.2,
+   "p90_proj": 72.3,
+   "actual": 65.0,
+   "cleared_line": false,
+   "own_sum": 40.6,
+   "bring_back": {
+    "player": "Jonathan Taylor",
+    "pos": "RB",
+    "team": "IND",
+    "actual": 10.4
+   },
+   "missing_players": 0
+  }
+ ],
+ "best_stacks": [
+  {
+   "team": "GB",
+   "game": "GB@NE",
+   "qb": "Jordan Love",
+   "catchers": [
+    "Matthew Golden",
+    "Christian Watson"
+   ],
+   "actual": 107.7,
+   "in_list": false
+  },
+  {
+   "team": "HOU",
+   "game": "HOU@LAC",
+   "qb": "C.J. Stroud",
+   "catchers": [
+    "Kayshon Boutte",
+    "Tank Dell"
+   ],
+   "actual": 94.4,
+   "in_list": false
+  },
+  {
+   "team": "DAL",
+   "game": "DAL@IND",
+   "qb": "Dak Prescott",
+   "catchers": [
+    "CeeDee Lamb",
+    "Jake Ferguson"
+   ],
+   "actual": 71.1,
+   "in_list": false
+  },
+  {
+   "team": "CAR",
+   "game": "DEN@CAR",
+   "qb": "Bryce Young",
+   "catchers": [
+    "Darren Waller",
+    "Tetairoa McMillan"
+   ],
+   "actual": 60.9,
+   "in_list": false
+  },
+  {
+   "team": "CLE",
+   "game": "CLE@NO",
+   "qb": "Shedeur Sanders",
+   "catchers": [
+    "KC Concepcion Jr.",
+    "Denzel Boston"
+   ],
+   "actual": 57.3,
+   "in_list": false
+  }
+ ],
+ "stack_line": 75.0,
+ "builds": [
+  {
+   "kind": "model",
+   "lineup": [
+    "Brock Purdy",
+    "Jahmyr Gibbs",
+    "Ashton Jeanty",
+    "Ryan Flournoy",
+    "Antonio Williams",
+    "Jordan Watkins",
+    "George Kittle",
+    "Rhamondre Stevenson",
+    "Saints"
+   ],
+   "qb": "Brock Purdy",
+   "stack": "Brock Purdy QB+2 (George Kittle, Jordan Watkins); bring-back Ashton Jeanty RB",
+   "salary": 49900,
+   "proj": 133.1,
+   "own_sum": 105.4,
+   "actual": 108.1,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false
+  },
+  {
+   "kind": "model",
+   "lineup": [
+    "Patrick Mahomes",
+    "Christian McCaffrey",
+    "Breece Hall",
+    "Malik Nabers",
+    "Rashee Rice",
+    "Malik Washington",
+    "Sam LaPorta",
+    "Xavier Worthy",
+    "Cardinals"
+   ],
+   "qb": "Patrick Mahomes",
+   "stack": "Patrick Mahomes QB+2 (Rashee Rice, Xavier Worthy); bring-back Breece Hall RB",
+   "salary": 50000,
+   "proj": 122.3,
+   "own_sum": 92.7,
+   "actual": 94.2,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false
+  },
+  {
+   "kind": "model",
+   "lineup": [
+    "Jared Goff",
+    "Kyren Williams",
+    "Rachaad White",
+    "CeeDee Lamb",
+    "Jameson Williams",
+    "Caleb Douglas",
+    "Sam LaPorta",
+    "Devin Singletary",
+    "Packers"
+   ],
+   "qb": "Jared Goff",
+   "stack": "Jared Goff QB+2 (Jameson Williams, Sam LaPorta); bring-back Caleb Douglas WR",
+   "salary": 50000,
+   "proj": 124.2,
+   "own_sum": 95.9,
+   "actual": 104.9,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false
+  },
+  {
+   "kind": "model",
+   "lineup": [
+    "Jayden Daniels",
+    "Javonte Williams",
+    "Woody Marks",
+    "Puka Nacua",
+    "Stefon Diggs",
+    "Omar Cooper Jr.",
+    "Tyler Warren",
+    "Antonio Williams",
+    "Giants"
+   ],
+   "qb": "Jayden Daniels",
+   "stack": "Jayden Daniels QB+2 (Stefon Diggs, Antonio Williams); bring-back Puka Nacua WR",
+   "salary": 49800,
+   "proj": 120.3,
+   "own_sum": 103.5,
+   "actual": 137.1,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false
+  }
+ ],
+ "sim_builds": [
+  {
+   "kind": "sim",
+   "lineup": [
+    "Brock Purdy",
+    "Chuba Hubbard",
+    "Rhamondre Stevenson",
+    "Omar Cooper Jr.",
+    "Ryan Flournoy",
+    "Antonio Williams",
+    "Brock Bowers",
+    "George Kittle",
+    "Giants"
+   ],
+   "qb": "Brock Purdy",
+   "stack": "Brock Purdy QB+1 (+George Kittle TE); bring-back Brock Bowers TE; DST Giants",
+   "salary": 49900,
+   "proj": 134.4,
+   "own_sum": 96.0,
+   "actual": 130.8,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false,
+   "rank": 1
+  },
+  {
+   "kind": "sim",
+   "lineup": [
+    "Bo Nix",
+    "Christian McCaffrey",
+    "Woody Marks",
+    "Malik Nabers",
+    "Matthew Golden",
+    "Jaylen Waddle",
+    "Sam LaPorta",
+    "Eli Raridon",
+    "Cardinals"
+   ],
+   "qb": "Bo Nix",
+   "stack": "Bo Nix QB+1 (+Jaylen Waddle WR); no bring-back; mini-stack Matthew Golden/Eli Raridon; DST Cardinals",
+   "salary": 49700,
+   "proj": 125.5,
+   "own_sum": 87.2,
+   "actual": 112.1,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false,
+   "rank": 2
+  },
+  {
+   "kind": "sim",
+   "lineup": [
+    "Patrick Mahomes",
+    "Saquon Barkley",
+    "Ollie Gordon II",
+    "Puka Nacua",
+    "DeMario Douglas",
+    "Xavier Worthy",
+    "Isaiah Likely",
+    "Travis Kelce",
+    "Seahawks"
+   ],
+   "qb": "Patrick Mahomes",
+   "stack": "Patrick Mahomes QB+2 (+Travis Kelce TE, Xavier Worthy WR); no bring-back; mini-stack Saquon Barkley/Isaiah Likely; DST Seahawks",
+   "salary": 49600,
+   "proj": 120.0,
+   "own_sum": 73.6,
+   "actual": 144.7,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false,
+   "rank": 3
+  },
+  {
+   "kind": "sim",
+   "lineup": [
+    "Jared Goff",
+    "Jahmyr Gibbs",
+    "Quinshon Judkins",
+    "Rashee Rice",
+    "Jameson Williams",
+    "Malik Washington",
+    "Hunter Henry",
+    "Cooper Kupp",
+    "Eagles"
+   ],
+   "qb": "Jared Goff",
+   "stack": "Jared Goff QB+1 (+Jahmyr Gibbs RB, Jameson Williams WR); bring-back Malik Washington WR; DST Eagles",
+   "salary": 50000,
+   "proj": 119.3,
+   "own_sum": 75.5,
+   "actual": 63.9,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false,
+   "rank": 4
+  },
+  {
+   "kind": "sim",
+   "lineup": [
+    "Dak Prescott",
+    "Kenneth Walker III",
+    "Blake Corum",
+    "CeeDee Lamb",
+    "Keenan Allen",
+    "Makai Lemon",
+    "Tyler Warren",
+    "Chig Okonkwo",
+    "Saints"
+   ],
+   "qb": "Dak Prescott",
+   "stack": "Dak Prescott QB+1 (+CeeDee Lamb WR); bring-back Tyler Warren TE, Keenan Allen WR; mini-stack Chig Okonkwo/Blake Corum; DST Saints",
+   "salary": 49600,
+   "proj": 120.5,
+   "own_sum": 83.7,
+   "actual": 154.8,
+   "missing_players": 0,
+   "beat_top1_big": false,
+   "beat_top1_se": false,
+   "rank": 5
+  }
+ ]
+}
