@@ -1,6 +1,24 @@
 {
  "articles": [
   {
+   "slug": "2026-week-10-wednesday",
+   "href": "2026-week-10-wednesday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-10-wednesday",
+   "title": "Week 10 first look: Dallas holds the slate's best stack",
+   "dek": "SF@DAL's 55.8 total makes Dallas the stack to beat; the edge comes from Green Bay, KC@ATL and fading McCaffrey.",
+   "slot": "wed",
+   "week": 10,
+   "season": 2026,
+   "date": "2026-11-11",
+   "tldr": [
+    "Stack Dak Prescott, CeeDee Lamb and Ryan Flournoy: 23% of our sims clear 75 points, the slate's best, but expect a crowd.",
+    "For leverage, stack Jordan Love with Matthew Golden and Christian Watson; Love projects at just 2% owned.",
+    "Fade Christian McCaffrey at 28% projected ownership and play Javonte Williams, who lands in the optimal lineup more often in our sims.",
+    "Kyle Pitts Sr. costs $3,800 with a 19.9-point ceiling in KC@ATL, a shootout candidate the field underowns."
+   ],
+   "published_utc": "2026-11-12T00:35:22+00:00"
+  },
+  {
    "slug": "2026-week-9-what-we-learned",
    "href": "2026-week-9-what-we-learned.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-9-what-we-learned",
@@ -401,5 +419,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-09T19:17:29+00:00"
+ "updated_utc": "2026-11-12T00:35:22+00:00"
 }
