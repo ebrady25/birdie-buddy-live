@@ -3,13 +3,48 @@
  "week": 10,
  "slate": "DraftKings main slate",
  "method": "The Hype Index is our read on where the DFS crowd's attention is heading before lock (100 = the hottest name on the slate). When hype runs ahead of our ownership projection, the chalk is still forming.",
- "rows": [],
- "locked": [],
+ "rows": [
+  {
+   "rank": 1,
+   "player": "Josh Allen",
+   "team": "BUF",
+   "pos": "QB",
+   "salary": 7500,
+   "hype": 100,
+   "own": 7.6,
+   "verdict": "Hype ahead of ownership: chalk building",
+   "tone": "hot"
+  },
+  {
+   "rank": 2,
+   "player": "Bryce Young",
+   "team": "CAR",
+   "pos": "QB",
+   "salary": 5800,
+   "hype": 75,
+   "own": 8.9,
+   "verdict": "Hype ahead of ownership: chalk building",
+   "tone": "hot"
+  }
+ ],
+ "locked": [
+  {
+   "rank": 3
+  },
+  {
+   "rank": 4
+  },
+  {
+   "rank": 5
+  }
+ ],
  "cta": {
   "label": "See all players · Members",
   "href": "pricing.html"
  },
- "show": false,
- "own_status": "none",
- "note": "The Hype Index for this week posts Tuesday."
+ "show": true,
+ "updated": "Wed Nov 11, 6:22 PM ET",
+ "updated_iso": "2026-11-11T18:22-05:00",
+ "own_status": "ok",
+ "own_stage": "wed"
 }

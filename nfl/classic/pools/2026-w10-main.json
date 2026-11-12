@@ -4,8 +4,8 @@
  "season": 2026,
  "week": 10,
  "source": "birdiebuddy",
- "as_of": "2026-11-10 15:10 ET",
- "stage": "tue",
+ "as_of": "2026-11-11 18:22 ET",
+ "stage": "wed",
  "about": "DraftKings Week 10 Sunday main slate: name, position, team, opponent and salary, with our projected ownership (own = large-field GPP %, own_se = single-entry %). No DK ids: drop your DKSalaries.csv in the Lab for upload ids.",
  "has": {
   "own": true,
@@ -20,8 +20,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 9300,
-   "own": 11.8,
-   "own_se": 12.2
+   "own": 16.1,
+   "own_se": 17.1
   },
   {
    "name": "Kenneth Walker III",
@@ -29,17 +29,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 9200,
-   "own": 19.3,
-   "own_se": 19.8
-  },
-  {
-   "name": "Puka Nacua",
-   "pos": "WR",
-   "team": "LAR",
-   "opp": "ARI",
-   "sal": 9000,
-   "own": 14.9,
-   "own_se": 16.0
+   "own": 27.0,
+   "own_se": 27.5
   },
   {
    "name": "CeeDee Lamb",
@@ -47,8 +38,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 8800,
-   "own": 41.9,
-   "own_se": 52.1
+   "own": 36.6,
+   "own_se": 43.6
   },
   {
    "name": "Christian McCaffrey",
@@ -56,8 +47,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 8500,
-   "own": 25.4,
-   "own_se": 26.2
+   "own": 28.0,
+   "own_se": 28.6
   },
   {
    "name": "Bijan Robinson",
@@ -65,8 +56,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 8200,
-   "own": 12.2,
-   "own_se": 12.2
+   "own": 8.9,
+   "own_se": 6.8
   },
   {
    "name": "Jonathan Taylor",
@@ -74,8 +65,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 7800,
-   "own": 15.3,
-   "own_se": 15.5
+   "own": 12.8,
+   "own_se": 13.0
   },
   {
    "name": "Christian Watson",
@@ -83,8 +74,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 7700,
-   "own": 11.5,
-   "own_se": 11.9
+   "own": 7.9,
+   "own_se": 8.4
   },
   {
    "name": "Brock Bowers",
@@ -92,8 +83,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 7600,
-   "own": 6.3,
-   "own_se": 6.2
+   "own": 5.1,
+   "own_se": 4.5
   },
   {
    "name": "Javonte Williams",
@@ -101,8 +92,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 7500,
-   "own": 21.1,
-   "own_se": 21.7
+   "own": 12.2,
+   "own_se": 9.4
   },
   {
    "name": "Josh Allen",
@@ -110,8 +101,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 7500,
-   "own": 11.1,
-   "own_se": 12.7
+   "own": 7.6,
+   "own_se": 8.1
   },
   {
    "name": "James Cook III",
@@ -119,8 +110,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 7400,
-   "own": 21.3,
-   "own_se": 21.8
+   "own": 20.8,
+   "own_se": 16.5
   },
   {
    "name": "Matthew Golden",
@@ -128,8 +119,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 7300,
-   "own": 10.1,
-   "own_se": 10.3
+   "own": 8.1,
+   "own_se": 8.3
   },
   {
    "name": "Chuba Hubbard",
@@ -137,8 +128,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 7200,
-   "own": 11.0,
-   "own_se": 11.0
+   "own": 13.2,
+   "own_se": 13.2
   },
   {
    "name": "Kyren Williams",
@@ -146,8 +137,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 7100,
-   "own": 18.6,
-   "own_se": 18.9
+   "own": 20.5,
+   "own_se": 21.3
   },
   {
    "name": "Trey McBride",
@@ -155,8 +146,8 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 7100,
-   "own": 7.5,
-   "own_se": 7.5
+   "own": 6.4,
+   "own_se": 6.5
   },
   {
    "name": "Brock Purdy",
@@ -164,8 +155,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 7000,
-   "own": 14.6,
-   "own_se": 17.9
+   "own": 18.2,
+   "own_se": 21.7
   },
   {
    "name": "Chris Olave",
@@ -173,8 +164,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 7000,
-   "own": 20.8,
-   "own_se": 23.4
+   "own": 18.3,
+   "own_se": 19.2
   },
   {
    "name": "Nico Collins",
@@ -182,8 +173,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 6900,
-   "own": 6.5,
-   "own_se": 6.2
+   "own": 5.9,
+   "own_se": 5.3
   },
   {
    "name": "Justin Jefferson",
@@ -191,8 +182,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 6800,
-   "own": 6.8,
-   "own_se": 6.5
+   "own": 7.9,
+   "own_se": 7.4
   },
   {
    "name": "Tetairoa McMillan",
@@ -200,8 +191,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 6700,
-   "own": 13.8,
-   "own_se": 14.6
+   "own": 11.6,
+   "own_se": 11.4
   },
   {
    "name": "Bhayshul Tuten",
@@ -209,8 +200,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 6600,
-   "own": 18.8,
-   "own_se": 19.2,
+   "own": 22.5,
+   "own_se": 31.9,
    "status": "Q"
   },
   {
@@ -219,8 +210,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 6600,
-   "own": 9.3,
-   "own_se": 9.4
+   "own": 9.6,
+   "own_se": 9.2
   },
   {
    "name": "Trevor Lawrence",
@@ -228,8 +219,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 6600,
-   "own": 6.8,
-   "own_se": 6.9
+   "own": 9.4,
+   "own_se": 9.4
   },
   {
    "name": "George Kittle",
@@ -237,8 +228,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 6500,
-   "own": 30.1,
-   "own_se": 33.8
+   "own": 19.8,
+   "own_se": 19.4
   },
   {
    "name": "Jordan Love",
@@ -246,8 +237,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 6500,
-   "own": 2.2,
-   "own_se": 1.7
+   "own": 1.8,
+   "own_se": 1.3
   },
   {
    "name": "Dak Prescott",
@@ -255,8 +246,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 6400,
-   "own": 10.9,
-   "own_se": 12.5
+   "own": 10.1,
+   "own_se": 11.5
   },
   {
    "name": "Matthew Stafford",
@@ -264,8 +255,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 6200,
-   "own": 4.2,
-   "own_se": 3.7
+   "own": 2.5,
+   "own_se": 2.0
   },
   {
    "name": "Parker Washington",
@@ -273,8 +264,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 6200,
-   "own": 16.6,
-   "own_se": 18.1
+   "own": 17.3,
+   "own_se": 18.8
   },
   {
    "name": "Rashee Rice",
@@ -282,8 +273,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 6100,
-   "own": 7.5,
-   "own_se": 7.4
+   "own": 12.1,
+   "own_se": 12.3
   },
   {
    "name": "Patrick Mahomes",
@@ -291,8 +282,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 6000,
-   "own": 3.8,
-   "own_se": 3.3
+   "own": 4.2,
+   "own_se": 3.9
   },
   {
    "name": "Tony Pollard",
@@ -300,8 +291,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 6000,
-   "own": 4.3,
-   "own_se": 4.2
+   "own": 2.1,
+   "own_se": 1.5
   },
   {
    "name": "Breece Hall",
@@ -309,8 +300,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 5900,
-   "own": 3.2,
-   "own_se": 3.1
+   "own": 3.8,
+   "own_se": 2.8
   },
   {
    "name": "C.J. Stroud",
@@ -318,8 +309,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 5900,
-   "own": 2.6,
-   "own_se": 2.0
+   "own": 1.8,
+   "own_se": 1.4
   },
   {
    "name": "Bryce Young",
@@ -327,8 +318,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 5800,
-   "own": 6.6,
-   "own_se": 6.7
+   "own": 8.9,
+   "own_se": 8.5
   },
   {
    "name": "DJ Moore",
@@ -336,8 +327,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 5800,
-   "own": 9.8,
-   "own_se": 9.9
+   "own": 8.4,
+   "own_se": 7.9
   },
   {
    "name": "Ollie Gordon II",
@@ -345,8 +336,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 5800,
-   "own": 7.9,
-   "own_se": 7.8
+   "own": 16.0,
+   "own_se": 24.0
   },
   {
    "name": "Jalen Coker",
@@ -354,8 +345,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 5700,
-   "own": 6.8,
-   "own_se": 6.5
+   "own": 8.3,
+   "own_se": 8.1
   },
   {
    "name": "Woody Marks",
@@ -363,8 +354,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 5700,
-   "own": 9.1,
-   "own_se": 9.0
+   "own": 7.2,
+   "own_se": 5.5
   },
   {
    "name": "Aaron Jones Sr.",
@@ -372,8 +363,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 5600,
-   "own": 2.8,
-   "own_se": 2.7
+   "own": 2.0,
+   "own_se": 1.5
   },
   {
    "name": "Tyler Shough",
@@ -381,8 +372,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 5600,
-   "own": 8.1,
-   "own_se": 8.6
+   "own": 12.4,
+   "own_se": 13.5
   },
   {
    "name": "Zach Charbonnet",
@@ -390,8 +381,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 5600,
-   "own": 4.8,
-   "own_se": 4.6
+   "own": 5.5,
+   "own_se": 4.1
   },
   {
    "name": "Quinshon Judkins",
@@ -399,8 +390,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 5500,
-   "own": 2.9,
-   "own_se": 2.7
+   "own": 2.0,
+   "own_se": 1.4
   },
   {
    "name": "Ashton Jeanty",
@@ -408,8 +399,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 5400,
-   "own": 3.6,
-   "own_se": 3.5
+   "own": 3.2,
+   "own_se": 2.3
   },
   {
    "name": "Braelon Allen",
@@ -417,8 +408,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 5400,
-   "own": 2.1,
-   "own_se": 1.9
+   "own": 1.1,
+   "own_se": 0.8
   },
   {
    "name": "Omar Cooper Jr.",
@@ -426,8 +417,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 5400,
-   "own": 7.0,
-   "own_se": 6.8
+   "own": 4.2,
+   "own_se": 3.6
   },
   {
    "name": "Jordan Mason",
@@ -435,8 +426,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 5300,
-   "own": 1.1,
-   "own_se": 1.0
+   "own": 0.9,
+   "own_se": 0.6
   },
   {
    "name": "Khalil Shakir",
@@ -444,17 +435,17 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 5300,
-   "own": 6.8,
-   "own_se": 6.6
+   "own": 5.4,
+   "own_se": 4.8
   },
   {
    "name": "Kirk Cousins",
    "pos": "QB",
-   "team": "LV",
-   "opp": "SEA",
+   "team": "MIN",
+   "opp": "GB",
    "sal": 5300,
-   "own": 1.0,
-   "own_se": 0.6
+   "own": 1.4,
+   "own_se": 1.0
   },
   {
    "name": "Ryan Flournoy",
@@ -462,8 +453,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 5300,
-   "own": 8.6,
-   "own_se": 8.5
+   "own": 12.0,
+   "own_se": 12.2
   },
   {
    "name": "Seth McGowan",
@@ -471,8 +462,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 5300,
-   "own": 0.6,
-   "own_se": 0.5
+   "own": 1.0,
+   "own_se": 0.7
   },
   {
    "name": "Denzel Boston",
@@ -480,17 +471,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 5200,
-   "own": 3.7,
-   "own_se": 3.3
-  },
-  {
-   "name": "Malik Willis",
-   "pos": "QB",
-   "team": "MIA",
-   "opp": "IND",
-   "sal": 5200,
-   "own": 2.0,
-   "own_se": 1.5
+   "own": 4.4,
+   "own_se": 3.8
   },
   {
    "name": "Tyler Allgeier",
@@ -498,8 +480,8 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 5200,
-   "own": 3.6,
-   "own_se": 3.4
+   "own": 1.7,
+   "own_se": 1.2
   },
   {
    "name": "Blake Corum",
@@ -507,8 +489,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 5100,
-   "own": 2.3,
-   "own_se": 2.2
+   "own": 1.5,
+   "own_se": 1.1
   },
   {
    "name": "Chris Rodriguez Jr.",
@@ -516,8 +498,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 5100,
-   "own": 2.1,
-   "own_se": 2.0
+   "own": 1.3,
+   "own_se": 0.9
   },
   {
    "name": "Dalton Kincaid",
@@ -525,8 +507,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 5100,
-   "own": 9.4,
-   "own_se": 9.6
+   "own": 8.1,
+   "own_se": 7.4
   },
   {
    "name": "Jadarian Price",
@@ -534,17 +516,17 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 5100,
-   "own": 1.7,
-   "own_se": 1.5
+   "own": 1.0,
+   "own_se": 0.7
   },
   {
    "name": "Keenan Allen",
    "pos": "WR",
-   "team": "IND",
-   "opp": "MIA",
+   "team": "SF",
+   "opp": "DAL",
    "sal": 5100,
-   "own": 6.4,
-   "own_se": 6.1
+   "own": 6.3,
+   "own_se": 5.7
   },
   {
    "name": "Tre Tucker",
@@ -552,8 +534,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 5100,
-   "own": 5.0,
-   "own_se": 4.6
+   "own": 3.8,
+   "own_se": 3.2
   },
   {
    "name": "Alvin Kamara",
@@ -561,8 +543,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 5000,
-   "own": 5.8,
-   "own_se": 5.7
+   "own": 4.2,
+   "own_se": 3.2
   },
   {
    "name": "Drew Lock",
@@ -570,8 +552,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 5000,
-   "own": 3.3,
-   "own_se": 2.8
+   "own": 6.0,
+   "own_se": 5.4
   },
   {
    "name": "Dylan Sampson",
@@ -579,8 +561,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 5000,
-   "own": 0.5,
-   "own_se": 0.5
+   "own": 0.3,
+   "own_se": 0.2
   },
   {
    "name": "Jordyn Tyson",
@@ -588,8 +570,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 5000,
-   "own": 6.1,
-   "own_se": 5.8,
+   "own": 7.8,
+   "own_se": 7.2,
    "status": "Q"
   },
   {
@@ -598,8 +580,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 5000,
-   "own": 2.1,
-   "own_se": 1.9
+   "own": 1.4,
+   "own_se": 1.0
   },
   {
    "name": "Tucker Kraft",
@@ -607,8 +589,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 5000,
-   "own": 6.0,
-   "own_se": 5.9
+   "own": 5.0,
+   "own_se": 4.4
   },
   {
    "name": "Adonai Mitchell",
@@ -616,8 +598,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 4900,
-   "own": 3.8,
-   "own_se": 3.4
+   "own": 5.9,
+   "own_se": 5.5
   },
   {
    "name": "Daniel Jones",
@@ -625,8 +607,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 4900,
-   "own": 2.4,
-   "own_se": 1.9
+   "own": 1.6,
+   "own_se": 1.2
   },
   {
    "name": "Devaughn Vele",
@@ -634,8 +616,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 4900,
-   "own": 4.2,
-   "own_se": 3.7
+   "own": 3.6,
+   "own_se": 3.0
   },
   {
    "name": "Harold Fannin Jr.",
@@ -643,8 +625,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 4900,
-   "own": 2.6,
-   "own_se": 2.4
+   "own": 2.5,
+   "own_se": 2.1
   },
   {
    "name": "Michael Penix Jr.",
@@ -652,8 +634,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 4900,
-   "own": 2.9,
-   "own_se": 2.4
+   "own": 2.8,
+   "own_se": 2.3
   },
   {
    "name": "Mike Washington Jr.",
@@ -661,8 +643,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 4900,
-   "own": 0.3,
-   "own_se": 0.2
+   "own": 0.2,
+   "own_se": 0.1
   },
   {
    "name": "Ty Johnson",
@@ -670,8 +652,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 4900,
-   "own": 1.4,
-   "own_se": 1.3
+   "own": 0.9,
+   "own_se": 0.6
   },
   {
    "name": "Cam Ward",
@@ -679,8 +661,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 4800,
-   "own": 1.8,
-   "own_se": 1.3
+   "own": 1.4,
+   "own_se": 0.9
   },
   {
    "name": "DJ Giddens",
@@ -688,8 +670,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 4800,
-   "own": 0.3,
-   "own_se": 0.3
+   "own": 0.2,
+   "own_se": 0.2
   },
   {
    "name": "Geno Smith",
@@ -697,8 +679,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 4800,
-   "own": 7.0,
-   "own_se": 7.1
+   "own": 5.8,
+   "own_se": 5.3
   },
   {
    "name": "Jordan Addison",
@@ -706,7 +688,7 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 4800,
-   "own": 2.5,
+   "own": 2.6,
    "own_se": 2.1
   },
   {
@@ -715,17 +697,18 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 4800,
-   "own": 2.7,
-   "own_se": 2.3
+   "own": 2.9,
+   "own_se": 2.4
   },
   {
-   "name": "Carson Wentz",
-   "pos": "QB",
-   "team": "MIN",
-   "opp": "GB",
-   "sal": 4700,
-   "own": 2.6,
-   "own_se": 2.1
+   "name": "MarShawn Lloyd",
+   "pos": "RB",
+   "team": "GB",
+   "opp": "MIN",
+   "sal": 4800,
+   "own": 2.4,
+   "own_se": 1.8,
+   "status": "Q"
   },
   {
    "name": "Emmett Johnson",
@@ -733,26 +716,17 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 4700,
-   "own": 0.9,
-   "own_se": 0.8
-  },
-  {
-   "name": "Gardner Minshew II",
-   "pos": "QB",
-   "team": "ARI",
-   "opp": "LAR",
-   "sal": 4700,
-   "own": 1.3,
-   "own_se": 0.9
+   "own": 0.5,
+   "own_se": 0.4
   },
   {
    "name": "Josh Downs",
    "pos": "WR",
-   "team": "IND",
-   "opp": "MIA",
+   "team": "KC",
+   "opp": "ATL",
    "sal": 4700,
-   "own": 3.1,
-   "own_se": 2.7
+   "own": 3.3,
+   "own_se": 2.8
   },
   {
    "name": "Malik Washington",
@@ -760,8 +734,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 4700,
-   "own": 5.0,
-   "own_se": 4.6
+   "own": 3.2,
+   "own_se": 2.6
   },
   {
    "name": "Travis Kelce",
@@ -769,8 +743,17 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 4700,
-   "own": 5.8,
-   "own_se": 5.7
+   "own": 4.9,
+   "own_se": 4.3
+  },
+  {
+   "name": "Fernando Mendoza",
+   "pos": "QB",
+   "team": "LV",
+   "opp": "SEA",
+   "sal": 4600,
+   "own": 0.9,
+   "own_se": 0.6
   },
   {
    "name": "Kaleb Johnson",
@@ -778,8 +761,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 4600,
-   "own": 2.4,
-   "own_se": 2.2
+   "own": 0.5,
+   "own_se": 0.3
   },
   {
    "name": "Keon Coleman",
@@ -787,8 +770,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 4600,
-   "own": 3.7,
-   "own_se": 3.3
+   "own": 2.7,
+   "own_se": 2.2
   },
   {
    "name": "Shedeur Sanders",
@@ -796,8 +779,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 4600,
-   "own": 1.9,
-   "own_se": 1.4
+   "own": 1.6,
+   "own_se": 1.2
   },
   {
    "name": "Audric Estime",
@@ -805,8 +788,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 4500,
-   "own": 2.4,
-   "own_se": 2.3
+   "own": 5.1,
+   "own_se": 8.8
   },
   {
    "name": "Demarcus Robinson",
@@ -814,8 +797,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 4500,
-   "own": 9.3,
-   "own_se": 9.4,
+   "own": 2.7,
+   "own_se": 2.2,
    "status": "Q"
   },
   {
@@ -824,8 +807,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 4500,
-   "own": 5.3,
-   "own_se": 4.9
+   "own": 3.2,
+   "own_se": 2.7
   },
   {
    "name": "Caleb Douglas",
@@ -833,8 +816,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 4400,
-   "own": 3.0,
-   "own_se": 2.5
+   "own": 2.4,
+   "own_se": 1.9
   },
   {
    "name": "Ray Davis",
@@ -842,8 +825,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 4400,
-   "own": 0.4,
-   "own_se": 0.4
+   "own": 0.3,
+   "own_se": 0.2
   },
   {
    "name": "Tyler Warren",
@@ -851,8 +834,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 4400,
-   "own": 4.6,
-   "own_se": 4.4
+   "own": 5.8,
+   "own_se": 5.2
   },
   {
    "name": "Kaytron Allen",
@@ -860,8 +843,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 4300,
-   "own": 0.2,
-   "own_se": 0.2,
+   "own": 0.1,
+   "own_se": 0.1,
    "status": "Q"
   },
   {
@@ -870,8 +853,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 4300,
-   "own": 1.9,
-   "own_se": 1.8
+   "own": 1.1,
+   "own_se": 0.8
   },
   {
    "name": "T.J. Hockenson",
@@ -879,8 +862,26 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 4300,
-   "own": 4.8,
-   "own_se": 4.7
+   "own": 5.2,
+   "own_se": 4.6
+  },
+  {
+   "name": "Xavier Worthy",
+   "pos": "WR",
+   "team": "KC",
+   "opp": "ATL",
+   "sal": 4300,
+   "own": 2.3,
+   "own_se": 1.8
+  },
+  {
+   "name": "Carson Beck",
+   "pos": "QB",
+   "team": "ARI",
+   "opp": "LAR",
+   "sal": 4200,
+   "own": 0.6,
+   "own_se": 0.3
   },
   {
    "name": "Emari Demercado",
@@ -888,8 +889,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 4200,
-   "own": 0.4,
-   "own_se": 0.3
+   "own": 0.3,
+   "own_se": 0.2
   },
   {
    "name": "Jakobi Meyers",
@@ -897,8 +898,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 4200,
-   "own": 7.1,
-   "own_se": 6.8
+   "own": 6.9,
+   "own_se": 6.4
   },
   {
    "name": "Khalil Herbert",
@@ -906,8 +907,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 4200,
-   "own": 0.7,
-   "own_se": 0.6
+   "own": 0.2,
+   "own_se": 0.2
   },
   {
    "name": "Marvin Harrison Jr.",
@@ -915,8 +916,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 4200,
-   "own": 1.6,
-   "own_se": 1.2
+   "own": 1.4,
+   "own_se": 1.0
   },
   {
    "name": "Tyler Higbee",
@@ -924,8 +925,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 4200,
-   "own": 2.6,
-   "own_se": 2.5
+   "own": 7.0,
+   "own_se": 6.8
   },
   {
    "name": "Brenton Strange",
@@ -933,8 +934,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 4100,
-   "own": 5.5,
-   "own_se": 5.4
+   "own": 4.8,
+   "own_se": 4.2
   },
   {
    "name": "Emanuel Wilson",
@@ -942,8 +943,18 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 4100,
-   "own": 1.7,
-   "own_se": 1.5
+   "own": 1.1,
+   "own_se": 0.8
+  },
+  {
+   "name": "Jaylen Wright",
+   "pos": "RB",
+   "team": "MIA",
+   "opp": "IND",
+   "sal": 4100,
+   "own": 0.1,
+   "own_se": 0.0,
+   "status": "Q"
   },
   {
    "name": "AJ Dillon",
@@ -952,7 +963,7 @@
    "opp": "NO",
    "sal": 4000,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Ameer Abdullah",
@@ -969,7 +980,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Anthony Tyus III",
@@ -977,7 +989,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Ben VanSumeren",
@@ -985,7 +998,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Brady Russell",
@@ -993,7 +1007,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Connor Heyward",
@@ -1001,7 +1016,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "DJ Herman",
@@ -1009,7 +1025,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Dare Ogunbowale",
@@ -1018,7 +1035,7 @@
    "opp": "CLE",
    "sal": 4000,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "DeeJay Dallas",
@@ -1026,7 +1043,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Dylan Laube",
@@ -1034,7 +1052,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Evan Hull",
@@ -1042,8 +1061,8 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 4000,
-   "own": 0.1,
-   "own_se": 0.1
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "George Holani",
@@ -1052,7 +1071,7 @@
    "opp": "LV",
    "sal": 4000,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Hunter Luepke",
@@ -1060,7 +1079,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Isaiah Davis",
@@ -1068,8 +1088,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 4000,
-   "own": 0.1,
-   "own_se": 0.1
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jaguars",
@@ -1077,8 +1097,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 4000,
-   "own": 6.1,
-   "own_se": 6.1
+   "own": 6.0,
+   "own_se": 6.0
   },
   {
    "name": "Jaleel McLaughlin",
@@ -1086,7 +1106,7 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 4000,
-   "own": 0.1,
+   "own": 0.0,
    "own_se": 0.0
   },
   {
@@ -1096,7 +1116,7 @@
    "opp": "ATL",
    "sal": 4000,
    "own": 0.2,
-   "own_se": 0.2
+   "own_se": 0.1
   },
   {
    "name": "Jordan James",
@@ -1113,7 +1133,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Juwan Johnson",
@@ -1121,8 +1142,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 4000,
-   "own": 4.9,
-   "own_se": 4.7
+   "own": 4.1,
+   "own_se": 3.5
   },
   {
    "name": "Kene Nwangwu",
@@ -1131,7 +1152,7 @@
    "opp": "BUF",
    "sal": 4000,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Konata Mumpfield",
@@ -1139,8 +1160,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 4000,
-   "own": 4.1,
-   "own_se": 3.7
+   "own": 6.9,
+   "own_se": 10.7
   },
   {
    "name": "Kyle Juszczyk",
@@ -1150,6 +1171,15 @@
    "sal": 4000,
    "own": 0.1,
    "own_se": 0.1
+  },
+  {
+   "name": "Kyle McCord",
+   "pos": "QB",
+   "team": "MIA",
+   "opp": "IND",
+   "sal": 4000,
+   "own": 0.1,
+   "own_se": 0.0
   },
   {
    "name": "LeQuint Allen Jr.",
@@ -1166,7 +1196,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Michael Burton",
@@ -1174,7 +1205,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Michael Carter",
@@ -1182,8 +1214,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 4000,
-   "own": 0.1,
-   "own_se": 0.1
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Nick Singleton",
@@ -1191,7 +1223,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 4000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Trevor Etienne",
@@ -1200,7 +1233,7 @@
    "opp": "NO",
    "sal": 4000,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Xavier Hutchinson",
@@ -1208,8 +1241,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 4000,
-   "own": 1.8,
-   "own_se": 1.4
+   "own": 1.9,
+   "own_se": 1.5
   },
   {
    "name": "AJ Barner",
@@ -1217,8 +1250,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 3900,
-   "own": 3.7,
-   "own_se": 3.6
+   "own": 2.7,
+   "own_se": 2.3
   },
   {
    "name": "Savion Williams",
@@ -1226,8 +1259,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 3900,
-   "own": 1.4,
-   "own_se": 1.0
+   "own": 1.1,
+   "own_se": 0.8
   },
   {
    "name": "Tank Dell",
@@ -1235,8 +1268,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 3900,
-   "own": 1.7,
-   "own_se": 1.3
+   "own": 12.0,
+   "own_se": 16.0
   },
   {
    "name": "Jordan Watkins",
@@ -1245,7 +1278,7 @@
    "opp": "DAL",
    "sal": 3800,
    "own": 4.9,
-   "own_se": 4.5
+   "own_se": 8.7
   },
   {
    "name": "Kayshon Boutte",
@@ -1253,8 +1286,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 3800,
-   "own": 1.2,
-   "own_se": 0.9
+   "own": 1.1,
+   "own_se": 0.8
   },
   {
    "name": "Kyle Pitts Sr.",
@@ -1262,8 +1295,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 3800,
-   "own": 5.2,
-   "own_se": 5.0
+   "own": 4.9,
+   "own_se": 4.3
   },
   {
    "name": "Rams",
@@ -1271,8 +1304,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 3800,
-   "own": 11.7,
-   "own_se": 12.5
+   "own": 12.3,
+   "own_se": 13.0
   },
   {
    "name": "Brian Thomas Jr.",
@@ -1280,8 +1313,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 3700,
-   "own": 1.6,
-   "own_se": 1.2
+   "own": 1.3,
+   "own_se": 0.9
   },
   {
    "name": "Tutu Atwell",
@@ -1289,8 +1322,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 3700,
-   "own": 4.3,
-   "own_se": 3.8
+   "own": 2.1,
+   "own_se": 1.6
   },
   {
    "name": "49ers",
@@ -1307,8 +1340,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 3600,
-   "own": 2.1,
-   "own_se": 1.7
+   "own": 0.9,
+   "own_se": 0.6
   },
   {
    "name": "Darren Waller",
@@ -1316,8 +1349,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 3600,
-   "own": 4.0,
-   "own_se": 3.9
+   "own": 6.1,
+   "own_se": 6.0
   },
   {
    "name": "Jahan Dotson",
@@ -1325,8 +1358,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 3600,
-   "own": 2.4,
-   "own_se": 2.0
+   "own": 2.3,
+   "own_se": 1.8
   },
   {
    "name": "Bills",
@@ -1334,8 +1367,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 3500,
-   "own": 2.8,
-   "own_se": 2.5
+   "own": 2.6,
+   "own_se": 2.4
   },
   {
    "name": "Brandin Cooks",
@@ -1343,8 +1376,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 3500,
-   "own": 2.3,
-   "own_se": 1.9
+   "own": 1.2,
+   "own_se": 0.9
   },
   {
    "name": "Calvin Ridley",
@@ -1352,8 +1385,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 3500,
-   "own": 1.7,
-   "own_se": 1.3,
+   "own": 0.5,
+   "own_se": 0.3,
    "status": "Q"
   },
   {
@@ -1362,8 +1395,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 3500,
-   "own": 1.8,
-   "own_se": 1.4
+   "own": 0.7,
+   "own_se": 0.4
   },
   {
    "name": "Dalton Schultz",
@@ -1371,8 +1404,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 3400,
-   "own": 3.2,
-   "own_se": 3.0
+   "own": 2.7,
+   "own_se": 2.2
   },
   {
    "name": "Jacob Cowing",
@@ -1380,8 +1413,8 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 3400,
-   "own": 2.1,
-   "own_se": 1.7
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Reggie Virgil",
@@ -1389,7 +1422,7 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 3400,
-   "own": 2.4,
+   "own": 2.5,
    "own_se": 2.0
   },
   {
@@ -1398,8 +1431,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 3400,
-   "own": 8.6,
-   "own_se": 8.9
+   "own": 7.0,
+   "own_se": 6.9
   },
   {
    "name": "Greg Dulcich",
@@ -1407,8 +1440,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 3300,
-   "own": 2.9,
-   "own_se": 2.7
+   "own": 1.6,
+   "own_se": 1.3
   },
   {
    "name": "Josh Cameron",
@@ -1426,7 +1459,7 @@
    "opp": "LV",
    "sal": 3300,
    "own": 11.7,
-   "own_se": 12.4
+   "own_se": 12.3
   },
   {
    "name": "Brevyn Spann-Ford",
@@ -1434,8 +1467,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 3200,
-   "own": 5.8,
-   "own_se": 5.7
+   "own": 20.0,
+   "own_se": 30.0
   },
   {
    "name": "Chiefs",
@@ -1443,8 +1476,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 3200,
-   "own": 2.8,
-   "own_se": 2.6
+   "own": 2.6,
+   "own_se": 2.3
   },
   {
    "name": "Chris Bell",
@@ -1452,8 +1485,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 3200,
-   "own": 0.9,
-   "own_se": 0.7
+   "own": 0.8,
+   "own_se": 0.5
   },
   {
    "name": "Elic Ayomanor",
@@ -1461,8 +1494,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 3200,
-   "own": 1.8,
-   "own_se": 1.4
+   "own": 1.0,
+   "own_se": 0.7
   },
   {
    "name": "John Metchie III",
@@ -1470,17 +1503,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 3200,
-   "own": 1.1,
-   "own_se": 0.8
-  },
-  {
-   "name": "Jordan Whittington",
-   "pos": "WR",
-   "team": "LAR",
-   "opp": "ARI",
-   "sal": 3200,
-   "own": 0.0,
-   "status": "Q"
+   "own": 0.9,
+   "own_se": 0.7
   },
   {
    "name": "Ashton Dulin",
@@ -1488,8 +1512,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 3100,
-   "own": 0.5,
-   "own_se": 0.3
+   "own": 1.2,
+   "own_se": 0.9
   },
   {
    "name": "Jalen Nailor",
@@ -1497,8 +1521,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 3100,
-   "own": 1.3,
-   "own_se": 1.0
+   "own": 0.8,
+   "own_se": 0.5
   },
   {
    "name": "Michael Mayer",
@@ -1506,8 +1530,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 3100,
-   "own": 1.0,
-   "own_se": 0.9
+   "own": 0.7,
+   "own_se": 0.5
   },
   {
    "name": "Panthers",
@@ -1515,8 +1539,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 3100,
-   "own": 1.4,
-   "own_se": 1.2
+   "own": 1.1,
+   "own_se": 0.9
   },
   {
    "name": "Tory Horton",
@@ -1524,8 +1548,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 3100,
-   "own": 0.7,
-   "own_se": 0.5
+   "own": 0.4,
+   "own_se": 0.3
   },
   {
    "name": "Travis Hunter",
@@ -1533,8 +1557,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 3100,
-   "own": 1.0,
-   "own_se": 0.7
+   "own": 0.9,
+   "own_se": 0.6
   },
   {
    "name": "Andrew Armstrong",
@@ -1542,8 +1566,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 3000,
-   "own": 0.4,
-   "own_se": 0.3
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Anthony Gould",
@@ -1551,7 +1575,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.2,
+   "own_se": 0.1
   },
   {
    "name": "Barion Brown",
@@ -1578,7 +1603,7 @@
    "opp": "CAR",
    "sal": 3000,
    "own": 0.3,
-   "own_se": 0.2
+   "own_se": 0.1
   },
   {
    "name": "Brycen Tremayne",
@@ -1595,7 +1620,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "CJ Williams",
@@ -1603,7 +1629,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Camden Brown",
@@ -1611,7 +1638,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Chimere Dike",
@@ -1619,8 +1647,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 3000,
-   "own": 0.3,
-   "own_se": 0.2
+   "own": 0.1,
+   "own_se": 0.1
   },
   {
    "name": "Chris Blair",
@@ -1628,7 +1656,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Cody White",
@@ -1636,7 +1665,7 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 3000,
-   "own": 0.2,
+   "own": 0.1,
    "own_se": 0.1
   },
   {
@@ -1645,7 +1674,7 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 3000,
-   "own": 1.5,
+   "own": 1.6,
    "own_se": 1.3,
    "status": "Q"
   },
@@ -1655,7 +1684,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Colts",
@@ -1663,8 +1693,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 3000,
-   "own": 8.5,
-   "own_se": 8.8
+   "own": 16.3,
+   "own_se": 17.7
   },
   {
    "name": "Cyrus Allen",
@@ -1672,8 +1702,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 3000,
-   "own": 0.3,
-   "own_se": 0.2
+   "own": 0.2,
+   "own_se": 0.1
   },
   {
    "name": "Dareke Young",
@@ -1681,7 +1711,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "David Moore",
@@ -1689,7 +1720,7 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 3000,
-   "own": 0.2,
+   "own": 0.1,
    "own_se": 0.1
   },
   {
@@ -1698,7 +1729,7 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 3000,
-   "own": 0.1,
+   "own": 0.2,
    "own_se": 0.1
   },
   {
@@ -1708,7 +1739,7 @@
    "opp": "LAR",
    "sal": 3000,
    "own": 0.7,
-   "own_se": 0.5
+   "own_se": 0.4
   },
   {
    "name": "Greg Dortch",
@@ -1716,8 +1747,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 3000,
-   "own": 0.3,
-   "own_se": 0.2
+   "own": 0.2,
+   "own_se": 0.1
   },
   {
    "name": "Gunnar Helm",
@@ -1725,8 +1756,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 3000,
-   "own": 1.3,
-   "own_se": 1.1
+   "own": 1.1,
+   "own_se": 0.8
   },
   {
    "name": "Harrison Wallace III",
@@ -1734,7 +1765,8 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Irvin Charles",
@@ -1742,7 +1774,7 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 3000,
-   "own": 0.2,
+   "own": 0.1,
    "own_se": 0.1
   },
   {
@@ -1760,8 +1792,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 3000,
-   "own": 0.3,
-   "own_se": 0.2
+   "own": 0.2,
+   "own_se": 0.1
   },
   {
    "name": "J. Michael Sturdivant",
@@ -1769,7 +1801,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jalen Tolbert",
@@ -1804,8 +1837,8 @@
    "team": "DAL",
    "opp": "SF",
    "sal": 3000,
-   "own": 1.9,
-   "own_se": 1.5
+   "own": 1.3,
+   "own_se": 0.9
   },
   {
    "name": "Kevin Coleman Jr.",
@@ -1822,8 +1855,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 3000,
-   "own": 0.2,
-   "own_se": 0.2
+   "own": 0.8,
+   "own_se": 0.5
   },
   {
    "name": "Malachi Corley",
@@ -1831,7 +1864,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Malik Benson",
@@ -1839,7 +1873,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Myles Price",
@@ -1847,7 +1882,7 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 3000,
-   "own": 0.2,
+   "own": 0.1,
    "own_se": 0.1
   },
   {
@@ -1856,8 +1891,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 3000,
-   "own": 0.3,
-   "own_se": 0.2,
+   "own": 0.2,
+   "own_se": 0.1,
    "status": "Q"
   },
   {
@@ -1866,7 +1901,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.1,
+   "own_se": 0.1
   },
   {
    "name": "Olamide Zaccheaus",
@@ -1883,7 +1919,7 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 3000,
-   "own": 0.5,
+   "own": 0.4,
    "own_se": 0.3
   },
   {
@@ -1910,8 +1946,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 3000,
-   "own": 0.4,
-   "own_se": 0.3
+   "own": 0.2,
+   "own_se": 0.1
   },
   {
    "name": "Trent Sherfield Sr.",
@@ -1919,7 +1955,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Tylan Wallace",
@@ -1927,7 +1964,17 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 3000,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
+  },
+  {
+   "name": "Xavier Smith",
+   "pos": "WR",
+   "team": "LAR",
+   "opp": "ARI",
+   "sal": 3000,
+   "own": 0.4,
+   "own_se": 0.2
   },
   {
    "name": "Mason Taylor",
@@ -1935,8 +1982,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 2900,
-   "own": 2.2,
-   "own_se": 2.1
+   "own": 1.9,
+   "own_se": 1.6
   },
   {
    "name": "Packers",
@@ -1944,8 +1991,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 2900,
-   "own": 9.9,
-   "own_se": 10.3
+   "own": 8.4,
+   "own_se": 8.6
   },
   {
    "name": "Tommy Tremble",
@@ -1953,8 +2000,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 2900,
-   "own": 1.2,
-   "own_se": 1.1
+   "own": 1.0,
+   "own_se": 0.8
   },
   {
    "name": "Kenyon Sadiq",
@@ -1962,8 +2009,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 2800,
-   "own": 1.0,
-   "own_se": 0.8
+   "own": 0.7,
+   "own_se": 0.6
   },
   {
    "name": "Noah Fant",
@@ -1972,7 +2019,7 @@
    "opp": "CAR",
    "sal": 2800,
    "own": 0.4,
-   "own_se": 0.4
+   "own_se": 0.3
   },
   {
    "name": "Vikings",
@@ -1980,8 +2027,8 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 2800,
-   "own": 3.5,
-   "own_se": 3.3
+   "own": 3.8,
+   "own_se": 3.6
   },
   {
    "name": "Davis Allen",
@@ -1989,8 +2036,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 2700,
-   "own": 0.3,
-   "own_se": 0.2
+   "own": 0.5,
+   "own_se": 0.3
   },
   {
    "name": "Noah Gray",
@@ -1998,8 +2045,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 2700,
-   "own": 0.6,
-   "own_se": 0.5
+   "own": 0.4,
+   "own_se": 0.3
   },
   {
    "name": "Saints",
@@ -2007,8 +2054,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 2700,
-   "own": 3.1,
-   "own_se": 2.9
+   "own": 3.0,
+   "own_se": 2.8
   },
   {
    "name": "Dawson Knox",
@@ -2016,8 +2063,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 2600,
-   "own": 1.0,
-   "own_se": 0.9
+   "own": 0.7,
+   "own_se": 0.5
   },
   {
    "name": "Dolphins",
@@ -2025,8 +2072,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 2600,
-   "own": 6.9,
-   "own_se": 6.9
+   "own": 6.2,
+   "own_se": 6.2
   },
   {
    "name": "Nate Boerkircher",
@@ -2034,8 +2081,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 2600,
-   "own": 0.5,
-   "own_se": 0.4
+   "own": 0.4,
+   "own_se": 0.3
   },
   {
    "name": "Austin Hooper",
@@ -2052,7 +2099,7 @@
    "team": "MIN",
    "opp": "GB",
    "sal": 2500,
-   "own": 0.1,
+   "own": 0.0,
    "own_se": 0.0
   },
   {
@@ -2061,7 +2108,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Brevin Jordan",
@@ -2069,7 +2117,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Browns",
@@ -2077,8 +2126,8 @@
    "team": "CLE",
    "opp": "HOU",
    "sal": 2500,
-   "own": 5.8,
-   "own_se": 5.7
+   "own": 3.8,
+   "own_se": 3.6
   },
   {
    "name": "Cade Stover",
@@ -2086,7 +2135,8 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Charlie Woerner",
@@ -2112,7 +2162,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Drew Ogletree",
@@ -2120,7 +2171,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Elijah Higgins",
@@ -2137,7 +2189,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Falcons",
@@ -2145,8 +2198,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 2500,
-   "own": 4.5,
-   "own_se": 4.3
+   "own": 2.2,
+   "own_se": 1.9
   },
   {
    "name": "Feleipe Franks",
@@ -2154,7 +2207,8 @@
    "team": "CAR",
    "opp": "NO",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Foster Moreau",
@@ -2163,7 +2217,7 @@
    "opp": "CLE",
    "sal": 2500,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Gavin Bartholomew",
@@ -2172,7 +2226,7 @@
    "opp": "GB",
    "sal": 2500,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Ian Thomas",
@@ -2180,7 +2234,8 @@
    "team": "LV",
    "opp": "SEA",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Ja'Tavion Sanders",
@@ -2189,7 +2244,7 @@
    "opp": "NO",
    "sal": 2500,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Jackson Hawes",
@@ -2197,7 +2252,8 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jake Briningstool",
@@ -2205,7 +2261,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jared Wiley",
@@ -2213,7 +2270,8 @@
    "team": "KC",
    "opp": "ATL",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jelani Woods",
@@ -2221,7 +2279,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jeremy Ruckert",
@@ -2229,7 +2288,8 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Jonnu Smith",
@@ -2237,7 +2297,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Justin Joly",
@@ -2245,7 +2306,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Keleki Latu",
@@ -2253,7 +2315,17 @@
    "team": "BUF",
    "opp": "NYJ",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
+  },
+  {
+   "name": "Kenny Fletcher Jr.",
+   "pos": "TE",
+   "team": "GB",
+   "opp": "MIN",
+   "sal": 2500,
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Kylen Granson",
@@ -2262,7 +2334,7 @@
    "opp": "JAX",
    "sal": 2500,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Luke Farrell",
@@ -2270,8 +2342,18 @@
    "team": "SF",
    "opp": "DAL",
    "sal": 2500,
-   "own": 0.1,
-   "own_se": 0.1
+   "own": 0.0,
+   "own_se": 0.0
+  },
+  {
+   "name": "Luke Schoonmaker",
+   "pos": "TE",
+   "team": "DAL",
+   "opp": "SF",
+   "sal": 2500,
+   "own": 0.0,
+   "own_se": 0.0,
+   "status": "Q"
   },
   {
    "name": "Mark Redman",
@@ -2279,7 +2361,8 @@
    "team": "GB",
    "opp": "MIN",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Marlin Klein",
@@ -2287,7 +2370,17 @@
    "team": "HOU",
    "opp": "CLE",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
+  },
+  {
+   "name": "Matt Lauter",
+   "pos": "TE",
+   "team": "NO",
+   "opp": "CAR",
+   "sal": 2500,
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Max Klare",
@@ -2295,7 +2388,8 @@
    "team": "LAR",
    "opp": "ARI",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Mitchell Evans",
@@ -2304,7 +2398,7 @@
    "opp": "NO",
    "sal": 2500,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Mo Alie-Cox",
@@ -2312,7 +2406,8 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Nick Kallerup",
@@ -2320,7 +2415,8 @@
    "team": "SEA",
    "opp": "LV",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Nick Muse",
@@ -2328,7 +2424,8 @@
    "team": "ATL",
    "opp": "KC",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Oscar Delp",
@@ -2336,7 +2433,8 @@
    "team": "NO",
    "opp": "CAR",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Pharaoh Brown",
@@ -2344,7 +2442,7 @@
    "team": "IND",
    "opp": "MIA",
    "sal": 2500,
-   "own": 0.1,
+   "own": 0.0,
    "own_se": 0.0
   },
   {
@@ -2353,7 +2451,8 @@
    "team": "JAX",
    "opp": "TEN",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Seydou Traore",
@@ -2361,7 +2460,8 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 2500,
-   "own": 0.0
+   "own": 0.0,
+   "own_se": 0.0
   },
   {
    "name": "Tanner Koziol",
@@ -2370,7 +2470,7 @@
    "opp": "TEN",
    "sal": 2500,
    "own": 0.1,
-   "own_se": 0.1
+   "own_se": 0.0
   },
   {
    "name": "Teagan Quitoriano",
@@ -2378,7 +2478,7 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 2500,
-   "own": 0.1,
+   "own": 0.0,
    "own_se": 0.0
   },
   {
@@ -2387,7 +2487,7 @@
    "team": "MIA",
    "opp": "IND",
    "sal": 2500,
-   "own": 0.1,
+   "own": 0.0,
    "own_se": 0.0
   },
   {
@@ -2400,13 +2500,22 @@
    "own_se": 0.1
   },
   {
+   "name": "Zaire Mitchell-Paden",
+   "pos": "TE",
+   "team": "CLE",
+   "opp": "HOU",
+   "sal": 2500,
+   "own": 0.0,
+   "own_se": 0.0
+  },
+  {
    "name": "Raiders",
    "pos": "DST",
    "team": "LV",
    "opp": "SEA",
    "sal": 2400,
    "own": 3.8,
-   "own_se": 3.6
+   "own_se": 3.5
   },
   {
    "name": "Cowboys",
@@ -2423,8 +2532,8 @@
    "team": "ARI",
    "opp": "LAR",
    "sal": 2200,
-   "own": 4.8,
-   "own_se": 4.6
+   "own": 5.2,
+   "own_se": 5.1
   },
   {
    "name": "Jets",
@@ -2432,7 +2541,7 @@
    "team": "NYJ",
    "opp": "BUF",
    "sal": 2100,
-   "own": 1.0,
+   "own": 0.9,
    "own_se": 0.8
   },
   {
@@ -2441,8 +2550,8 @@
    "team": "TEN",
    "opp": "JAX",
    "sal": 2000,
-   "own": 1.7,
-   "own_se": 1.5
+   "own": 1.6,
+   "own_se": 1.4
   }
  ]
 }
