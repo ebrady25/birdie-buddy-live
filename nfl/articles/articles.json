@@ -1,6 +1,24 @@
 {
  "articles": [
   {
+   "slug": "2026-week-10-friday",
+   "href": "2026-week-10-friday.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-10-friday",
+   "title": "Week 10 final call: Dallas, Lamb and the 56-point crowd",
+   "dek": "The 49ers-Cowboys game is the slate's obvious stack. We build through it with the right third piece and separate in Green Bay and Buffalo.",
+   "slot": "fri",
+   "week": 10,
+   "season": 2026,
+   "date": "2026-11-13",
+   "tldr": [
+    "Stack Dallas: Prescott, Lamb and Flournoy carry the slate's best stack ceiling, 82.8 points in our sims.",
+    "Get different in Green Bay: Jordan Love projects at 2% owned, and his stack with Watson and Golden ranks second in our sims.",
+    "Fade Kenneth Walker III at 30% projected ownership; Bijan Robinson in the same game has the same ceiling with half the crowd.",
+    "Bhayshul Tuten is questionable at 80% to play; Chris Rodriguez Jr. takes the Jacksonville backfield if he sits."
+   ],
+   "published_utc": "2026-11-13T21:05:21+00:00"
+  },
+  {
    "slug": "2026-week-10-wednesday",
    "href": "2026-week-10-wednesday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-10-wednesday",
@@ -419,5 +437,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-12T00:35:22+00:00"
+ "updated_utc": "2026-11-13T21:05:21+00:00"
 }
