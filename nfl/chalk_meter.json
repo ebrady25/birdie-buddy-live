@@ -11,7 +11,7 @@
    "pos": "QB",
    "salary": 7500,
    "hype": 100,
-   "own": 7.6,
+   "own": 8.5,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   },
@@ -22,7 +22,7 @@
    "pos": "QB",
    "salary": 5800,
    "hype": 75,
-   "own": 8.9,
+   "own": 8.0,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   }
@@ -43,8 +43,8 @@
   "href": "pricing.html"
  },
  "show": true,
- "updated": "Wed Nov 11, 6:22 PM ET",
- "updated_iso": "2026-11-11T18:22-05:00",
+ "updated": "Fri Nov 13, 2:30 PM ET",
+ "updated_iso": "2026-11-13T14:30-05:00",
  "own_status": "ok",
- "own_stage": "wed"
+ "own_stage": "fri"
 }
