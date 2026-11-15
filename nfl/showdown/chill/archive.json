@@ -1,7 +1,31 @@
 {
  "generated_by": "codex/showdown/chill_page.py",
- "updated_et": "2026-11-09T19:00-05:00",
+ "updated_et": "2026-11-15T11:02-05:00",
  "reads": [
+  {
+   "slug": "2026-w10-snf-pit-cin",
+   "path": "nfl/showdown/chill/2026-w10-snf-pit-cin/",
+   "season": 2026,
+   "week": 10,
+   "window": "SNF",
+   "game": "PIT@CIN",
+   "away": "PIT",
+   "home": "CIN",
+   "kickoff_et": "2026-11-15T20:20:00-05:00",
+   "updated_et": "2026-11-15T11:02-05:00"
+  },
+  {
+   "slug": "2026-w10-tnf-was-nyg",
+   "path": "nfl/showdown/chill/2026-w10-tnf-was-nyg/",
+   "season": 2026,
+   "week": 10,
+   "window": "TNF",
+   "game": "WAS@NYG",
+   "away": "WAS",
+   "home": "NYG",
+   "kickoff_et": "2026-11-12T20:15:00-05:00",
+   "updated_et": "2026-11-12T11:19-05:00"
+  },
   {
    "slug": "2026-w9-mnf-buf-min",
    "path": "nfl/showdown/chill/2026-w9-mnf-buf-min/",
