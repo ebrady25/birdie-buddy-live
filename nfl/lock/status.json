@@ -1,18 +1,18 @@
 {
  "mode": "live",
- "stamp": "9-sun_check_20261108-1145",
- "week": 9,
+ "stamp": "10-sun_check_20261115-0910",
+ "week": 10,
  "season": 2026,
- "sunday": "2026-11-08",
+ "sunday": "2026-11-15",
  "stage": "sun_check",
- "updated": "2026-11-08T11:47-05:00",
+ "updated": "2026-11-15T09:12-05:00",
  "next_update": "Next update around 12:20 PM ET.",
  "counts": {
-  "n_out": 10,
-  "n_q": 6,
+  "n_out": 9,
+  "n_q": 4,
   "n_roles": 10,
-  "n_moves": 23,
+  "n_moves": 17,
   "n_lines": 0,
-  "n": 49
+  "n": 40
  }
 }
