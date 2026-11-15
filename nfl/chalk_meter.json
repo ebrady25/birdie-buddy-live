@@ -6,23 +6,23 @@
  "rows": [
   {
    "rank": 1,
-   "player": "Josh Allen",
-   "team": "BUF",
+   "player": "Kirk Cousins",
+   "team": "MIN",
    "pos": "QB",
-   "salary": 7500,
+   "salary": 5300,
    "hype": 100,
-   "own": 8.5,
+   "own": 3.5,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   },
   {
    "rank": 2,
-   "player": "Bryce Young",
-   "team": "CAR",
-   "pos": "QB",
-   "salary": 5800,
-   "hype": 75,
-   "own": 8.0,
+   "player": "Jordyn Tyson",
+   "team": "NO",
+   "pos": "WR",
+   "salary": 5000,
+   "hype": 92,
+   "own": 8.6,
    "verdict": "Hype ahead of ownership: chalk building",
    "tone": "hot"
   }
@@ -43,8 +43,8 @@
   "href": "pricing.html"
  },
  "show": true,
- "updated": "Fri Nov 13, 2:30 PM ET",
- "updated_iso": "2026-11-13T14:30-05:00",
+ "updated": "Sun Nov 15, 9:12 AM ET",
+ "updated_iso": "2026-11-15T09:12-05:00",
  "own_status": "ok",
- "own_stage": "fri"
+ "own_stage": "sun_check"
 }
