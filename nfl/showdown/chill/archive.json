@@ -1,7 +1,19 @@
 {
  "generated_by": "codex/showdown/chill_page.py",
- "updated_et": "2026-11-16T10:13-05:00",
+ "updated_et": "2026-11-19T10:01-05:00",
  "reads": [
+  {
+   "slug": "2026-w11-tnf-ind-hou",
+   "path": "nfl/showdown/chill/2026-w11-tnf-ind-hou/",
+   "season": 2026,
+   "week": 11,
+   "window": "TNF",
+   "game": "IND@HOU",
+   "away": "IND",
+   "home": "HOU",
+   "kickoff_et": "2026-11-19T20:15:00-05:00",
+   "updated_et": "2026-11-19T10:01-05:00"
+  },
   {
    "slug": "2026-w10-mnf-lac-bal",
    "path": "nfl/showdown/chill/2026-w10-mnf-lac-bal/",
