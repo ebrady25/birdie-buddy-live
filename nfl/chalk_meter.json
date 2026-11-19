@@ -1,50 +1,15 @@
 {
  "season": 2026,
- "week": 10,
+ "week": 11,
  "slate": "DraftKings main slate",
  "method": "The Hype Index is our read on where the DFS crowd's attention is heading before lock (100 = the hottest name on the slate). When hype runs ahead of our ownership projection, the chalk is still forming.",
- "rows": [
-  {
-   "rank": 1,
-   "player": "Kirk Cousins",
-   "team": "MIN",
-   "pos": "QB",
-   "salary": 5300,
-   "hype": 100,
-   "own": 3.5,
-   "verdict": "Hype ahead of ownership: chalk building",
-   "tone": "hot"
-  },
-  {
-   "rank": 2,
-   "player": "Jordyn Tyson",
-   "team": "NO",
-   "pos": "WR",
-   "salary": 5000,
-   "hype": 92,
-   "own": 8.6,
-   "verdict": "Hype ahead of ownership: chalk building",
-   "tone": "hot"
-  }
- ],
- "locked": [
-  {
-   "rank": 3
-  },
-  {
-   "rank": 4
-  },
-  {
-   "rank": 5
-  }
- ],
+ "rows": [],
+ "locked": [],
  "cta": {
   "label": "See all players · Members",
   "href": "pricing.html"
  },
- "show": true,
- "updated": "Sun Nov 15, 11:51 AM ET",
- "updated_iso": "2026-11-15T11:51-05:00",
- "own_status": "ok",
- "own_stage": "sun_check"
+ "show": false,
+ "own_status": "none",
+ "note": "The Hype Index for this week posts Tuesday."
 }

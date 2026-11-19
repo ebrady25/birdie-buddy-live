@@ -1,10 +1,10 @@
 {
  "season": 2026,
- "week": 10,
- "week_label": "Week 10",
- "stage": "sun_am",
- "stage_label": "Sunday AM update",
- "as_of": "2026-11-15 08:22 ET",
+ "week": 11,
+ "week_label": "Week 11",
+ "stage": "tue",
+ "stage_label": "Early numbers",
+ "as_of": "2026-11-18 13:21 ET",
  "counts": {
   "games": 10,
   "players": 94,
@@ -19,7 +19,7 @@
   "week": 10
  },
  "results": {
-  "week": 9,
-  "href": "nfl/results/2026-w9/"
+  "week": 10,
+  "href": "nfl/results/2026-w10/"
  }
 }
