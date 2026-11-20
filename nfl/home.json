@@ -2,9 +2,9 @@
  "season": 2026,
  "week": 11,
  "week_label": "Week 11",
- "stage": "tue",
- "stage_label": "Early numbers",
- "as_of": "2026-11-18 13:21 ET",
+ "stage": "wed",
+ "stage_label": "Wednesday numbers",
+ "as_of": "2026-11-19 09:47 ET",
  "counts": {
   "games": 10,
   "players": 94,
@@ -12,11 +12,11 @@
   "chalk": 12
  },
  "article": {
-  "title": "Week 10 final call: Dallas, Lamb and the 56-point crowd",
-  "url": "https://birdiebuddy.io/nfl/articles/2026-week-10-friday",
-  "date": "2026-11-13",
-  "slot": "fri",
-  "week": 10
+  "title": "TNF showdown: Houston's 46% blowout path runs through Demercado",
+  "url": "https://birdiebuddy.io/nfl/articles/2026-week-11-tnf-ind-hou",
+  "date": "2026-11-19",
+  "slot": "TNF",
+  "week": 11
  },
  "results": {
   "week": 10,

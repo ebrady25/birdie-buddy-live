@@ -1,6 +1,43 @@
 {
  "articles": [
   {
+   "slug": "2026-week-11-tnf-ind-hou",
+   "href": "2026-week-11-tnf-ind-hou.html",
+   "url": "https://birdiebuddy.io/nfl/articles/2026-week-11-tnf-ind-hou",
+   "title": "TNF showdown: Houston's 46% blowout path runs through Demercado",
+   "dek": "Houston is the likeliest blowout of the week, and the field captains Stroud while the back with the biggest ceiling sits near 5% owned.",
+   "slot": "TNF",
+   "week": 11,
+   "season": 2026,
+   "date": "2026-11-19",
+   "tldr": [
+    "Emari Demercado is our leverage captain, with the highest captain ceiling in the game at 52.0 points.",
+    "David Montgomery is the FLEX chalk worth eating, with the best value in the game at 2.3 points per $1K.",
+    "Skip C.J. Stroud at captain; he is the field's favorite captain at a projected 16%, above his optimal rate."
+   ],
+   "game": "IND@HOU",
+   "kickoff_et": "2026-11-19T20:15:00-05:00",
+   "published_utc": "2026-11-20T01:19:14+00:00",
+   "card_stats": [
+    [
+     "HOU −12.5",
+     "Favorite"
+    ],
+    [
+     "44.5",
+     "Game total"
+    ],
+    [
+     "28.3–16",
+     "Team totals HOU–IND"
+    ],
+    [
+     "Thu 8:15",
+     "Kickoff ET"
+    ]
+   ]
+  },
+  {
    "slug": "2026-week-10-friday",
    "href": "2026-week-10-friday.html",
    "url": "https://birdiebuddy.io/nfl/articles/2026-week-10-friday",
@@ -437,5 +474,5 @@
    "published_utc": "2026-10-14T14:51:20+00:00"
   }
  ],
- "updated_utc": "2026-11-13T21:05:21+00:00"
+ "updated_utc": "2026-11-20T01:19:14+00:00"
 }
